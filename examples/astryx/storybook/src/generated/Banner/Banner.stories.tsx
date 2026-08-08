@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/banner.contract.json (astryx.banner v0.1.0)
+ * Source of truth: contracts/banner.contract.json (astryx.banner v0.2.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,7 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Astryx Banner — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Banner/Banner.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). status + container axes and the dismissable/expanded flags are verbatim; the banner message is a materialized text slot (Astryx types it as ReactNode children). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).',
+          'Astryx Banner — promoted from @astryxdesign/core@0.1.6 (src/Banner/Banner.tsx). Two-part structure: a status header (muted background, status icon, semibold title, supporting description) and an optional collapsible content area (out of scope for the default exhibit). Status backgrounds use accent/warning/error/success *-muted tokens; icons use the vendor defaultIconNames mapping at md (20px).',
       },
     },
   },
@@ -22,7 +22,7 @@ const meta = {
     status: {
       control: 'select',
       options: ['info', 'warning', 'error', 'success'],
-      description: 'The banner tone.',
+      description: 'Status type controlling the icon and color scheme.',
     },
     container: {
       control: 'select',
@@ -30,13 +30,18 @@ const meta = {
       description: 'How the banner is contained.',
     },
     isDismissable: { control: 'boolean', description: 'Whether the banner can be dismissed.' },
-    children: { control: 'text', description: 'Banner message (materialized slot).' },
+    title: { control: 'text', description: 'Title text displayed prominently in the header area.' },
+    description: {
+      control: 'text',
+      description: 'Optional supporting text below the title in the header area.',
+    },
   },
   args: {
     status: 'info',
     container: 'card',
     isDismissable: false,
-    children: 'Banner message',
+    title: 'A new software update is available.',
+    description: 'See what changed in this version.',
   },
 } satisfies Meta<typeof Banner>;
 
@@ -73,30 +78,14 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <Banner status="info" container="card">
-        Banner message
-      </Banner>
-      <Banner status="info" container="section">
-        Banner message
-      </Banner>
-      <Banner status="warning" container="card">
-        Banner message
-      </Banner>
-      <Banner status="warning" container="section">
-        Banner message
-      </Banner>
-      <Banner status="error" container="card">
-        Banner message
-      </Banner>
-      <Banner status="error" container="section">
-        Banner message
-      </Banner>
-      <Banner status="success" container="card">
-        Banner message
-      </Banner>
-      <Banner status="success" container="section">
-        Banner message
-      </Banner>
+      <Banner status="info" container="card" />
+      <Banner status="info" container="section" />
+      <Banner status="warning" container="card" />
+      <Banner status="warning" container="section" />
+      <Banner status="error" container="card" />
+      <Banner status="error" container="section" />
+      <Banner status="success" container="card" />
+      <Banner status="success" container="section" />
     </div>
   ),
 };

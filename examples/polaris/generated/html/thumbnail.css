@@ -45,6 +45,7 @@
 }
 
 .thumbnail__part-0 {
+  border-radius: var(--p-border-radius-200);
   bottom: var(--imported-shared-size-0);
   color: var(--imported-thumbnail-part-0-color);
   left: var(--imported-shared-size-0);
@@ -64,6 +65,7 @@
 }
 
 .thumbnail--size-extraSmall .thumbnail__part-0 {
+  border-radius: var(--p-border-radius-150);
   height: var(--imported-thumbnail-part-0-height-extraSmall);
   width: var(--imported-thumbnail-part-0-width-extraSmall);
 }

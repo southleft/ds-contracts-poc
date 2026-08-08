@@ -601,7 +601,12 @@ export function promote(
    *  still drive the code surface and declaredStates). */
   const statePreviewProbe = (contract: Record<string, unknown>): void => {
     const states = (contract.states ?? []) as string[];
-    if (states.length === 0 || contract.figmaStatePreviews) return;
+    // An EXPLICIT `figmaStatePreviews` in the source artifact — true or
+    // false — is a reviewed decision and passes through untouched. The probe
+    // only fills the ABSENT case; without the `in` check an explicit
+    // reviewed `false` (altitude chip, exact-conversion wave) was silently
+    // flipped back to true on every re-promotion.
+    if (states.length === 0 || "figmaStatePreviews" in contract) return;
     const probe = structuredClone(contract) as Record<string, unknown>;
     probe.figmaStatePreviews = true;
     const probeErrors: string[] = [];

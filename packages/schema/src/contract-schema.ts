@@ -350,13 +350,16 @@ const kw = (...words: string[]) => new RegExp(`^(${words.join("|")})$`);
 export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
   // -- absolute-position round (MUI Slider/Switch): overlay-anatomy facts ---
   transform: {
-    // IDENTITY-TRANSLATE matrices only — matrix(1, 0, 0, 1, tx, ty), the
-    // shape Chromium computes for translate()/translate(-50%,-50%) on a
-    // sized box. Scales/rotations/skews stay outside the grammar (named
-    // residue) — the canvas lowering folds tx/ty into absolute offsets.
-    value: /^matrix\(1, 0, 0, 1, -?[\d.]+, -?[\d.]+\)$/,
+    // Identity-translate matrices — matrix(1, 0, 0, 1, tx, ty), the shape
+    // Chromium computes for translate()/translate(-50%,-50%) on a sized
+    // box — fold tx/ty into absolute offsets.
+    // FC-SVG-ROTATION: also `rotate(<n>deg)` (CSS-clockwise) for icon parts
+    // whose capture path orientation differs from the developed receipt
+    // (Polaris Spinner gap 12 o'clock → 3 o'clock). Scales/skews stay
+    // outside the grammar (named residue).
+    value: /^(?:matrix\(1, 0, 0, 1, -?[\d.]+, -?[\d.]+\)$|rotate\(-?[\d.]+deg\))$/,
     canvas: "draw",
-    note: "Identity-translate transform on an absolute part — folded into the canvas absolute offsets (tx/ty).",
+    note: "Identity-translate (absolute offset fold) or rotate(<n>deg) for icon/shape orientation (FC-SVG-ROTATION).",
   },
   // PSEUDO-DECOR v2 ROUND: the INDEPENDENT `translate` longhand — what
   // Tailwind v4's translate-x-full actually compiles to (the toggle knob),

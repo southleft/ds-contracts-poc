@@ -68,7 +68,10 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Regular",
                   "textFill": "imported/text-input/label/color",
-                  "lineHeight": 16,
+                  "lineHeight": {
+                    "value": 16,
+                    "unit": "PIXELS"
+                  },
                   "letterSpacing": 0.32
                 }
               ]
@@ -121,6 +124,9 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -136,10 +142,13 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "Placeholder",
                           "fontSize": 14,
                           "fontStyle": "Medium",
-                          "lineHeight": 18.0001,
+                          "lineHeight": {
+                            "value": 18.0001,
+                            "unit": "PIXELS"
+                          },
                           "letterSpacing": 0.16
                         }
                       ]
@@ -203,7 +212,10 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Regular",
                   "textFill": "imported/text-input/label/color",
-                  "lineHeight": 16,
+                  "lineHeight": {
+                    "value": 16,
+                    "unit": "PIXELS"
+                  },
                   "letterSpacing": 0.32
                 }
               ]
@@ -256,6 +268,9 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -271,10 +286,13 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "Placeholder",
                           "fontSize": 14,
                           "fontStyle": "Medium",
-                          "lineHeight": 18.0001,
+                          "lineHeight": {
+                            "value": 18.0001,
+                            "unit": "PIXELS"
+                          },
                           "letterSpacing": 0.16
                         }
                       ]
@@ -338,7 +356,10 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Regular",
                   "textFill": "imported/text-input/label/color",
-                  "lineHeight": 16,
+                  "lineHeight": {
+                    "value": 16,
+                    "unit": "PIXELS"
+                  },
                   "letterSpacing": 0.32
                 }
               ]
@@ -391,6 +412,9 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -406,10 +430,13 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "Placeholder",
                           "fontSize": 14,
                           "fontStyle": "Medium",
-                          "lineHeight": 18.0001,
+                          "lineHeight": {
+                            "value": 18.0001,
+                            "unit": "PIXELS"
+                          },
                           "letterSpacing": 0.16
                         }
                       ]
@@ -473,7 +500,10 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Regular",
                   "textFill": "imported/text-input/label/color",
-                  "lineHeight": 16,
+                  "lineHeight": {
+                    "value": 16,
+                    "unit": "PIXELS"
+                  },
                   "letterSpacing": 0.32
                 }
               ]
@@ -526,6 +556,9 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -541,10 +574,13 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "Placeholder",
                           "fontSize": 14,
                           "fontStyle": "Medium",
-                          "lineHeight": 18.0001,
+                          "lineHeight": {
+                            "value": 18.0001,
+                            "unit": "PIXELS"
+                          },
                           "letterSpacing": 0.16
                         }
                       ]
@@ -610,7 +646,10 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Regular",
                   "textFill": "imported/shared/color-16161640",
-                  "lineHeight": 16,
+                  "lineHeight": {
+                    "value": 16,
+                    "unit": "PIXELS"
+                  },
                   "letterSpacing": 0.32
                 }
               ]
@@ -663,6 +702,9 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -678,10 +720,13 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "Placeholder",
                           "fontSize": 14,
                           "fontStyle": "Medium",
-                          "lineHeight": 18.0001,
+                          "lineHeight": {
+                            "value": 18.0001,
+                            "unit": "PIXELS"
+                          },
                           "letterSpacing": 0.16,
                           "textFill": "imported/shared/color-16161640"
                         }
@@ -746,7 +791,10 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Regular",
                   "textFill": "imported/shared/color-16161640",
-                  "lineHeight": 16,
+                  "lineHeight": {
+                    "value": 16,
+                    "unit": "PIXELS"
+                  },
                   "letterSpacing": 0.32
                 }
               ]
@@ -799,6 +847,9 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -814,10 +865,13 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "Placeholder",
                           "fontSize": 14,
                           "fontStyle": "Medium",
-                          "lineHeight": 18.0001,
+                          "lineHeight": {
+                            "value": 18.0001,
+                            "unit": "PIXELS"
+                          },
                           "letterSpacing": 0.16,
                           "textFill": "imported/shared/color-16161640"
                         }
@@ -882,7 +936,10 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Regular",
                   "textFill": "imported/shared/color-16161640",
-                  "lineHeight": 16,
+                  "lineHeight": {
+                    "value": 16,
+                    "unit": "PIXELS"
+                  },
                   "letterSpacing": 0.32
                 }
               ]
@@ -935,6 +992,9 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -950,10 +1010,13 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "Placeholder",
                           "fontSize": 14,
                           "fontStyle": "Medium",
-                          "lineHeight": 18.0001,
+                          "lineHeight": {
+                            "value": 18.0001,
+                            "unit": "PIXELS"
+                          },
                           "letterSpacing": 0.16,
                           "textFill": "imported/shared/color-16161640"
                         }
@@ -1018,7 +1081,10 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Regular",
                   "textFill": "imported/shared/color-16161640",
-                  "lineHeight": 16,
+                  "lineHeight": {
+                    "value": 16,
+                    "unit": "PIXELS"
+                  },
                   "letterSpacing": 0.32
                 }
               ]
@@ -1071,6 +1137,9 @@ const COMPONENTS = [
                       "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "strokeTopWeight": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/shared/size-16"
                       },
@@ -1086,10 +1155,13 @@ const COMPONENTS = [
                         {
                           "type": "text",
                           "name": "placeholder",
-                          "characters": "",
+                          "characters": "Placeholder",
                           "fontSize": 14,
                           "fontStyle": "Medium",
-                          "lineHeight": 18.0001,
+                          "lineHeight": {
+                            "value": 18.0001,
+                            "unit": "PIXELS"
+                          },
                           "letterSpacing": 0.16,
                           "textFill": "imported/shared/color-16161640"
                         }
@@ -1420,6 +1492,11 @@ function applyFrameSpec(node, spec) {
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
+  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
+  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
+  // Unclip unless the contract explicitly asks for canvas clip.
+  node.clipsContent = spec.clipsContent === true;
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -1472,7 +1549,7 @@ function applyOverlay(parent, childNode, childSpec) {
 // -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
 // (overlay / inset / absolute) and FILL-sized children keep their own
 // lowering.
-function applyMarginBox(parent, childNode, childSpec) {
+function applyMarginBox(parent, childNode, childSpec, registry) {
   const m = childSpec.margins;
   if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
   try {
@@ -1491,6 +1568,15 @@ function applyMarginBox(parent, childNode, childSpec) {
   box.appendChild(childNode);
   childNode.x = l;
   childNode.y = t;
+  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
+  // must transfer the visible binding to the WRAPPER — hiding only the
+  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
+  if (childSpec.visibleProp && registry && registry.visibles) {
+    for (const vis of registry.visibles) {
+      if (vis.node === childNode) vis.node = box;
+    }
+    childNode.visible = true;
+  }
 }
 
 async function buildNode(spec, registry) {
@@ -1500,12 +1586,17 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
+    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
     if (spec.fontFamily) {
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
@@ -1565,6 +1656,8 @@ async function buildNode(spec, registry) {
       wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
+      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
+      wrap.clipsContent = false;
       wrap.fills = [];
       for (const [field, varName] of Object.entries(spec.bindings || {})) {
         wrap.setBoundVariable(field, need(varName));
@@ -1660,10 +1753,10 @@ async function buildNode(spec, registry) {
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
-    applyMarginBox(node, childNode, child);
+    applyMarginBox(node, childNode, child, registry);
   }
   return node;
 }
@@ -1864,8 +1957,12 @@ function dsStampFingerprints(node) {
   }
 }
 
+// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
+// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
+// skips as "unchanged" and canvas keeps the old runtime behavior.
+const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C);
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -1877,7 +1974,8 @@ function specHash(C) {
 // rebuilt from spec (manual interior edits are drift by definition);
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
-// REPORTED, never deleted — a human retires those.
+// REPORTED, never deleted — except State preview leftovers when
+// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
@@ -1935,6 +2033,25 @@ async function amendSet(set, C) {
       report.extraVariants.push(ch.name);
     }
   }
+  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
+  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // sync must be removed — otherwise amend leaves a doubled showcase grid.
+  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
+  if (!expectedHasState && report.extraVariants.length) {
+    const removed = [];
+    for (const name of [...report.extraVariants]) {
+      if (!/, State=/.test(name)) continue;
+      const ch = set.children.find((c) => c.name === name);
+      if (ch) {
+        ch.remove();
+        removed.push(name);
+      }
+    }
+    if (removed.length) {
+      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
+      report.removedVariants = removed;
+    }
+  }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
   for (const v of EV) {
@@ -1964,10 +2081,10 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
-    applyMarginBox(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec, registry);
       }
       report.rebuiltVariants++;
     }
@@ -2001,8 +2118,11 @@ async function amendSet(set, C) {
       sl.instance.componentPropertyReferences = { mainComponent: k };
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        // Optional slots default hidden — dashed "Slot" chrome must not be the
+        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
         sl.wrapper.componentPropertyReferences = { visible: vk };
+        sl.wrapper.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -2118,7 +2238,7 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
@@ -2152,8 +2272,9 @@ async function amendComponent(comp, C) {
     sl.instance.componentPropertyReferences = { mainComponent: k };
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
-      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
       sl.wrapper.componentPropertyReferences = { visible: vk };
+      sl.wrapper.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -2271,7 +2392,8 @@ async function syncOne(C) {
       }
       s.instance.componentPropertyReferences = { mainComponent: key };
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', true) };
+        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
+        s.wrapper.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {

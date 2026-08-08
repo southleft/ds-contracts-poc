@@ -91,6 +91,81 @@
             "position": "relative",
             "text-align": "center"
           },
+          "parts": {
+            "part-0-after": {
+              "shape": {
+                "kind": "ellipse",
+                "width": 20,
+                "height": 20
+              },
+              "declared": {
+                "position": "absolute"
+              },
+              "literals": {
+                "background-color": "rgba(255, 255, 255, 1)",
+                "border-top-width": "1px",
+                "border-right-width": "1px",
+                "border-bottom-width": "1px",
+                "border-left-width": "1px",
+                "border-top-color": "rgba(209, 213, 219, 1)",
+                "border-right-color": "rgba(209, 213, 219, 1)",
+                "border-bottom-color": "rgba(209, 213, 219, 1)",
+                "border-left-color": "rgba(209, 213, 219, 1)",
+                "top": "2px",
+                "width": "20px",
+                "height": "20px"
+              },
+              "literalsByProp": [
+                {
+                  "prop": "sizing",
+                  "map": {
+                    "sm": {
+                      "width": "16px",
+                      "height": "16px"
+                    },
+                    "md": {
+                      "width": "20px",
+                      "height": "20px"
+                    },
+                    "lg": {
+                      "width": "24px",
+                      "height": "24px"
+                    }
+                  }
+                },
+                {
+                  "prop": "checked",
+                  "map": {
+                    "unchecked": {
+                      "background-color": "rgba(255, 255, 255, 1)",
+                      "border-top-width": "1px",
+                      "border-right-width": "1px",
+                      "border-bottom-width": "1px",
+                      "border-left-width": "1px",
+                      "border-top-color": "rgba(209, 213, 219, 1)",
+                      "border-right-color": "rgba(209, 213, 219, 1)",
+                      "border-bottom-color": "rgba(209, 213, 219, 1)",
+                      "border-left-color": "rgba(209, 213, 219, 1)",
+                      "left": "2px"
+                    },
+                    "checked": {
+                      "background-color": "rgba(255, 255, 255, 1)",
+                      "border-top-width": "1px",
+                      "border-right-width": "1px",
+                      "border-bottom-width": "1px",
+                      "border-left-width": "1px",
+                      "border-top-color": "rgba(0, 0, 0, 0)",
+                      "border-right-color": "rgba(0, 0, 0, 0)",
+                      "border-bottom-color": "rgba(0, 0, 0, 0)",
+                      "border-left-color": "rgba(0, 0, 0, 0)",
+                      "right": "2px"
+                    }
+                  }
+                }
+              ],
+              "description": "Drawn ::after pseudo decor (pseudo-decor v2): ellipse thumb, absolute. Unchecked left:2px; Checked right:2px (PROVENANCE right-anchor — translate:100% ≡ right-pad 2 across sm/md/lg). Per-size width/height via sizing literalsByProp."
+            }
+          },
           "tokens": {
             "border-bottom-left-radius": "{imported.shared.size-9999}",
             "border-bottom-right-radius": "{imported.shared.size-9999}",

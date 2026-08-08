@@ -262,10 +262,18 @@ for (const cell of cells) {
   const dumpText = (dv.children ?? []).find((c) => c.type === "TEXT") as
     | (DumpNode & { text?: { fontSize?: number; lineHeight?: number } })
     | undefined;
+  // The engine's lineHeight discipline compiles to the native unit-carrying
+  // shape ({ value, unit: "PIXELS" }); the dump carries the bare pixel
+  // number. Compare the PIXEL value exactly — a PERCENT unit must never
+  // silently equal a pixel count.
+  const lh = text?.lineHeight;
+  const cellLineHeightPx =
+    typeof lh === "number" ? lh : lh?.unit === "PIXELS" ? lh.value : undefined;
   check(
-    `cell "${cell.name}" text ${text?.fontSize}px/${text?.lineHeight}px == captured ${dumpText?.text?.fontSize}px/${dumpText?.text?.lineHeight}px`,
+    `cell "${cell.name}" text ${text?.fontSize}px/${cellLineHeightPx}px == captured ${dumpText?.text?.fontSize}px/${dumpText?.text?.lineHeight}px`,
     text?.fontSize === dumpText?.text?.fontSize &&
-      text?.lineHeight === dumpText?.text?.lineHeight,
+      cellLineHeightPx !== undefined &&
+      cellLineHeightPx === dumpText?.text?.lineHeight,
   );
 }
 

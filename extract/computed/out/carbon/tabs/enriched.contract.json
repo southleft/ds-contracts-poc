@@ -81,7 +81,6 @@
                 "overflow-y": "hidden",
                 "position": "relative",
                 "text-align": "start",
-                "text-overflow": "ellipsis",
                 "text-wrap-mode": "nowrap",
                 "transition-duration": "0.07s",
                 "transition-property": "color",
@@ -102,9 +101,6 @@
                         "cursor": "pointer",
                         "text-rendering": "auto",
                         "text-wrap-mode": "nowrap"
-                      },
-                      "layout": {
-                        "grow": true
                       },
                       "tokens": {
                         "font-size": "{imported.shared.size-14}",
@@ -131,14 +127,14 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-1}",
-                    "width": "{imported.tabs.tabs-nav-item-label-wrapper.width}"
+                    "top": "{imported.shared.size-1}"
                   }
                 }
               },
               "tokens": {
                 "background-color": "{imported.shared.color-00000000}",
                 "border-bottom-color": "{imported.tabs.tabs-nav-item.border-bottom-color}",
+                "border-bottom-width": "{imported.shared.size-2}",
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
@@ -160,8 +156,7 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "top": "{imported.shared.size-0}",
-                "width": "{imported.tabs.tabs-nav-item.width}"
+                "top": "{imported.shared.size-0}"
               }
             },
             "part-1-1": {
@@ -200,7 +195,6 @@
                 "overflow-y": "hidden",
                 "position": "relative",
                 "text-align": "start",
-                "text-overflow": "ellipsis",
                 "text-wrap-mode": "nowrap",
                 "transition-delay": "0s, 0s",
                 "transition-duration": "0.07s, 0.07s",
@@ -222,9 +216,6 @@
                         "cursor": "pointer",
                         "text-rendering": "auto",
                         "text-wrap-mode": "nowrap"
-                      },
-                      "layout": {
-                        "grow": true
                       },
                       "tokens": {
                         "color": "{imported.shared.color-525252}",
@@ -260,8 +251,7 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-1}",
-                    "width": "{imported.tabs.tabs-nav-item-label-wrapper-2.width}"
+                    "top": "{imported.shared.size-1}"
                   },
                   "states": {
                     "active": {
@@ -276,6 +266,7 @@
               "tokens": {
                 "background-color": "{imported.shared.color-00000000}",
                 "border-bottom-color": "{imported.tabs.tabs-nav-item-2.border-bottom-color}",
+                "border-bottom-width": "{imported.shared.size-1}",
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
@@ -296,8 +287,7 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "top": "{imported.shared.size-0}",
-                "width": "{imported.tabs.tabs-nav-item-2.width}"
+                "top": "{imported.shared.size-0}"
               },
               "states": {
                 "active": {
@@ -344,7 +334,6 @@
                 "overflow-y": "hidden",
                 "position": "relative",
                 "text-align": "start",
-                "text-overflow": "ellipsis",
                 "text-wrap-mode": "nowrap",
                 "transition-delay": "0s, 0s",
                 "transition-duration": "0.07s, 0.07s",
@@ -366,9 +355,6 @@
                         "cursor": "pointer",
                         "text-rendering": "auto",
                         "text-wrap-mode": "nowrap"
-                      },
-                      "layout": {
-                        "grow": true
                       },
                       "tokens": {
                         "color": "{imported.shared.color-525252}",
@@ -396,14 +382,14 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-1}",
-                    "width": "{imported.tabs.tabs-nav-item-label-wrapper-3.width}"
+                    "top": "{imported.shared.size-1}"
                   }
                 }
               },
               "tokens": {
                 "background-color": "{imported.shared.color-00000000}",
                 "border-bottom-color": "{imported.tabs.tabs-nav-item-3.border-bottom-color}",
+                "border-bottom-width": "{imported.shared.size-1}",
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
@@ -424,8 +410,7 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "top": "{imported.shared.size-0}",
-                "width": "{imported.tabs.tabs-nav-item-3.width}"
+                "top": "{imported.shared.size-0}"
               }
             },
             "part-1-5": {

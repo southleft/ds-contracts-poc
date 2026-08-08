@@ -8,12 +8,12 @@
     },
     {
       "library": "astryx",
-      "leaves": 408,
-      "unreferenced": 42
+      "leaves": 320,
+      "unreferenced": 8
     },
     {
       "library": "carbon",
-      "leaves": 868,
+      "leaves": 876,
       "unreferenced": 92
     },
     {
@@ -28,8 +28,8 @@
     },
     {
       "library": "polaris",
-      "leaves": 1317,
-      "unreferenced": 635
+      "leaves": 1298,
+      "unreferenced": 619
     },
     {
       "library": "tailwind",

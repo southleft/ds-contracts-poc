@@ -1,38 +1,113 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/banner.contract.json (astryx.banner v0.1.0)
+ * Source of truth: contracts/banner.contract.json (astryx.banner v0.2.0)
  * Regenerate with: npm run generate
  */
 
 .root {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   border: 0;
-  color: var(--color-text-primary);
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
   gap: var(--spacing-2);
   padding-block: var(--spacing-3);
   padding-inline: var(--spacing-4);
-  border-radius: var(--radius-container);
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
 }
 
-.status-info {
-  background-color: var(--color-background-blue);
-  color: var(--color-text-blue);
+.status-info .header {
+  background-color: var(--color-accent-muted);
 }
 
-.status-warning {
+.status-warning .header {
   background-color: var(--color-warning-muted);
-  color: var(--color-text-primary);
 }
 
-.status-error {
+.status-error .header {
   background-color: var(--color-error-muted);
-  color: var(--color-text-primary);
 }
 
-.status-success {
+.status-success .header {
   background-color: var(--color-success-muted);
+}
+
+.container-card .header {
+  border-radius: 12px;
+}
+
+.container-section .header {
+  border-radius: 0;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.iconInfo svg {
+  width: 20px;
+  height: 20px;
+}
+
+.iconInfo {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.iconWarning svg {
+  width: 20px;
+  height: 20px;
+}
+
+.iconWarning {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-warning);
+}
+
+.iconError svg {
+  width: 20px;
+  height: 20px;
+}
+
+.iconError {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-error);
+}
+
+.iconSuccess svg {
+  width: 20px;
+  height: 20px;
+}
+
+.iconSuccess {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-success);
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.title {
   color: var(--color-text-primary);
+  font-size: var(--text-label-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--text-label-leading);
+}
+
+.description {
+  color: var(--color-text-secondary);
+  font-size: var(--text-supporting-size);
+  font-weight: var(--text-supporting-weight);
+  line-height: var(--text-supporting-leading);
 }

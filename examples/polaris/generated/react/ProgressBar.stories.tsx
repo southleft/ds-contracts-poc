@@ -21,7 +21,7 @@ const meta = {
     tone: { control: 'select', options: ['highlight', 'primary', 'success', 'critical'], description: 'Color of progressbar' },
   },
   args: {
-    progress: 0,
+    progress: 40,
     size: 'medium',
     animated: false,
     tone: 'highlight',

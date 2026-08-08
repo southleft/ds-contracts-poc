@@ -249,14 +249,6 @@
         "$value": "1",
         "$type": "number"
       },
-      "color-0064e0": {
-        "$value": "{color-accent}",
-        "$type": "color"
-      },
-      "size-20": {
-        "$value": "20px",
-        "$type": "dimension"
-      },
       "size-40": {
         "$value": "40px",
         "$type": "dimension"
@@ -264,6 +256,10 @@
       "size-16": {
         "$value": "16px",
         "$type": "dimension"
+      },
+      "color-0064e0": {
+        "$value": "{color-accent}",
+        "$type": "color"
       }
     },
     "badge": {
@@ -274,19 +270,19 @@
             "$type": "color"
           },
           "info": {
-            "$value": "#0064e0",
+            "$value": "{color-accent}",
             "$type": "color"
           },
           "success": {
-            "$value": "#0d8626",
+            "$value": "{color-success}",
             "$type": "color"
           },
           "warning": {
-            "$value": "#e9af08",
+            "$value": "{color-warning}",
             "$type": "color"
           },
           "error": {
-            "$value": "#e3193b",
+            "$value": "{color-error}",
             "$type": "color"
           },
           "blue": {
@@ -327,24 +323,20 @@
           }
         },
         "color": {
-          "neutral": {
-            "$value": "{color-text-primary}",
-            "$type": "color"
-          },
           "info": {
-            "$value": "#ffffff",
+            "$value": "{color-on-accent}",
             "$type": "color"
           },
           "success": {
-            "$value": "#ffffff",
+            "$value": "{color-on-success}",
             "$type": "color"
           },
           "warning": {
-            "$value": "#0a1317",
+            "$value": "{color-on-warning}",
             "$type": "color"
           },
           "error": {
-            "$value": "#ffffff",
+            "$value": "{color-on-error}",
             "$type": "color"
           },
           "blue": {
@@ -381,6 +373,10 @@
           },
           "yellow": {
             "$value": "{color-text-yellow}",
+            "$type": "color"
+          },
+          "neutral": {
+            "$value": "{color-text-primary}",
             "$type": "color"
           }
         },
@@ -1137,42 +1133,6 @@
       }
     },
     "slider": {
-      "root": {
-        "height": {
-          "horizontal": {
-            "tooltip": {
-              "$value": "44px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "45px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "44px",
-              "$type": "dimension"
-            }
-          },
-          "vertical": {
-            "tooltip": {
-              "$value": "184px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "184px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "184px",
-              "$type": "dimension"
-            }
-          }
-        },
-        "width": {
-          "$value": "49.1562px",
-          "$type": "dimension"
-        }
-      },
       "label": {
         "color": {
           "$value": "{color-text-secondary}",
@@ -1213,416 +1173,12 @@
               "$type": "dimension"
             }
           }
-        },
-        "width": {
-          "$value": "49.1562px",
-          "$type": "dimension"
-        }
-      },
-      "part-1-0": {
-        "height": {
-          "horizontal": {
-            "$value": "20px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "160px",
-            "$type": "dimension"
-          }
-        },
-        "width": {
-          "tooltip": {
-            "$value": "49.1562px",
-            "$type": "dimension"
-          },
-          "text": {
-            "$value": "23.625px",
-            "$type": "dimension"
-          },
-          "none": {
-            "$value": "49.1562px",
-            "$type": "dimension"
-          }
         }
       },
       "slider-track": {
         "background-color": {
           "$value": "{color-track}",
           "$type": "color"
-        },
-        "bottom": {
-          "horizontal": {
-            "$value": "6px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "0px",
-            "$type": "dimension"
-          }
-        },
-        "height": {
-          "horizontal": {
-            "$value": "4px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "160px",
-            "$type": "dimension"
-          }
-        },
-        "left": {
-          "horizontal": {
-            "tooltip": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "vertical": {
-            "tooltip": {
-              "$value": "24.5781px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "11.8125px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "24.5781px",
-              "$type": "dimension"
-            }
-          }
-        },
-        "right": {
-          "horizontal": {
-            "tooltip": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "vertical": {
-            "tooltip": {
-              "$value": "20.5781px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "7.8125px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "20.5781px",
-              "$type": "dimension"
-            }
-          }
-        },
-        "top": {
-          "horizontal": {
-            "$value": "10px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "0px",
-            "$type": "dimension"
-          }
-        },
-        "translate-x": {
-          "horizontal": {
-            "$value": "0px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "-2px",
-            "$type": "dimension"
-          }
-        },
-        "translate-y": {
-          "horizontal": {
-            "$value": "-2px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "0px",
-            "$type": "dimension"
-          }
-        },
-        "width": {
-          "horizontal": {
-            "tooltip": {
-              "$value": "49.1562px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "23.625px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "49.1562px",
-              "$type": "dimension"
-            }
-          },
-          "vertical": {
-            "tooltip": {
-              "$value": "4px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "4px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "4px",
-              "$type": "dimension"
-            }
-          }
-        }
-      },
-      "part-1-0-1": {
-        "bottom": {
-          "horizontal": {
-            "$value": "6px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "0px",
-            "$type": "dimension"
-          }
-        },
-        "height": {
-          "horizontal": {
-            "$value": "4px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "64px",
-            "$type": "dimension"
-          }
-        },
-        "left": {
-          "horizontal": {
-            "tooltip": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "vertical": {
-            "tooltip": {
-              "$value": "24.5781px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "11.8125px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "24.5781px",
-              "$type": "dimension"
-            }
-          }
-        },
-        "right": {
-          "horizontal": {
-            "tooltip": {
-              "$value": "29.5px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "14.1875px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "29.5px",
-              "$type": "dimension"
-            }
-          },
-          "vertical": {
-            "tooltip": {
-              "$value": "20.5781px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "7.8125px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "20.5781px",
-              "$type": "dimension"
-            }
-          }
-        },
-        "top": {
-          "horizontal": {
-            "$value": "10px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "96px",
-            "$type": "dimension"
-          }
-        },
-        "translate-x": {
-          "horizontal": {
-            "$value": "0px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "-2px",
-            "$type": "dimension"
-          }
-        },
-        "translate-y": {
-          "horizontal": {
-            "$value": "-2px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "0px",
-            "$type": "dimension"
-          }
-        },
-        "width": {
-          "horizontal": {
-            "tooltip": {
-              "$value": "19.6562px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "9.4375px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "19.6562px",
-              "$type": "dimension"
-            }
-          },
-          "vertical": {
-            "tooltip": {
-              "$value": "4px",
-              "$type": "dimension"
-            },
-            "text": {
-              "$value": "4px",
-              "$type": "dimension"
-            },
-            "none": {
-              "$value": "4px",
-              "$type": "dimension"
-            }
-          }
-        }
-      },
-      "slider-thumb-2": {
-        "bottom": {
-          "horizontal": {
-            "$value": "-10px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "64px",
-            "$type": "dimension"
-          }
-        },
-        "top": {
-          "horizontal": {
-            "$value": "10px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "76px",
-            "$type": "dimension"
-          }
-        },
-        "translate-x": {
-          "$value": "-10px",
-          "$type": "dimension"
-        },
-        "translate-y": {
-          "horizontal": {
-            "$value": "-10px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "10px",
-            "$type": "dimension"
-          }
-        }
-      },
-      "slider-thumb": {
-        "bottom": {
-          "horizontal": {
-            "$value": "-10px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "64px",
-            "$type": "dimension"
-          }
-        },
-        "left": {
-          "horizontal": {
-            "$value": "19.6562px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "24.5781px",
-            "$type": "dimension"
-          }
-        },
-        "right": {
-          "horizontal": {
-            "$value": "9.5px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "4.57812px",
-            "$type": "dimension"
-          }
-        },
-        "top": {
-          "horizontal": {
-            "$value": "10px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "76px",
-            "$type": "dimension"
-          }
-        },
-        "translate-x": {
-          "$value": "-10px",
-          "$type": "dimension"
-        },
-        "translate-y": {
-          "horizontal": {
-            "$value": "-10px",
-            "$type": "dimension"
-          },
-          "vertical": {
-            "$value": "10px",
-            "$type": "dimension"
-          }
         }
       },
       "tooltip": {
@@ -1753,7 +1309,7 @@
       },
       "label-2": {
         "color": {
-          "$value": "#4e606f",
+          "$value": "{color-text-secondary}",
           "$type": "color"
         },
         "font-size": {
@@ -1787,7 +1343,7 @@
       },
       "switch-thumb": {
         "background-color": {
-          "$value": "#ffffff",
+          "$value": "{color-background-surface}",
           "$type": "color"
         }
       },
@@ -1831,13 +1387,13 @@
       },
       "switch-thumb-2": {
         "background-color": {
-          "$value": "#ffffff",
+          "$value": "{color-background-surface}",
           "$type": "color"
         }
       },
       "label": {
         "color": {
-          "$value": "#4e606f",
+          "$value": "{color-text-secondary}",
           "$type": "color"
         },
         "font-size": {

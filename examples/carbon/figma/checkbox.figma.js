@@ -66,7 +66,7 @@ const COMPONENTS = [
                   "type": "frame",
                   "name": "label",
                   "layout": {
-                    "mode": "HORIZONTAL",
+                    "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
                     "stretchChildren": true
@@ -79,7 +79,10 @@ const COMPONENTS = [
                       "characters": "Checkbox",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "lineHeight": 18.0001,
+                      "lineHeight": {
+                        "value": 18.0001,
+                        "unit": "PIXELS"
+                      },
                       "letterSpacing": 0.16
                     }
                   ],
@@ -174,7 +177,7 @@ const COMPONENTS = [
                   "type": "frame",
                   "name": "label",
                   "layout": {
-                    "mode": "HORIZONTAL",
+                    "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
                     "stretchChildren": true
@@ -187,7 +190,10 @@ const COMPONENTS = [
                       "characters": "Checkbox",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "lineHeight": 18.0001,
+                      "lineHeight": {
+                        "value": 18.0001,
+                        "unit": "PIXELS"
+                      },
                       "letterSpacing": 0.16
                     }
                   ],
@@ -212,10 +218,10 @@ const COMPONENTS = [
                       "a": 1
                     },
                     "strokeSides": {
-                      "top": 1,
-                      "right": 1,
-                      "bottom": 1,
-                      "left": 1
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0,
+                      "left": 0
                     },
                     "strokeColor": {
                       "r": 0.08627450980392157,
@@ -230,6 +236,27 @@ const COMPONENTS = [
                     "v": "MIN",
                     "left": 0,
                     "top": 2
+                  }
+                },
+                {
+                  "type": "shape",
+                  "name": "checkbox-label-after",
+                  "shape": {
+                    "kind": "rect",
+                    "width": 9,
+                    "height": 5,
+                    "rotation": -45
+                  },
+                  "lits": {
+                    "width": 9,
+                    "height": 5
+                  },
+                  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"9\" height=\"5\" viewBox=\"0 0 9 5\" fill=\"none\"><polyline points=\"0.5,0.5 0.5,4.5 8.5,4.5\" stroke=\"rgb(255,255,255)\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                  "absolute": {
+                    "h": "MIN",
+                    "v": "MIN",
+                    "left": 3.5,
+                    "top": 6.5
                   }
                 }
               ]
@@ -287,7 +314,7 @@ const COMPONENTS = [
                   "type": "frame",
                   "name": "label",
                   "layout": {
-                    "mode": "HORIZONTAL",
+                    "mode": "VERTICAL",
                     "primary": "MIN",
                     "counter": "MIN",
                     "stretchChildren": true
@@ -300,7 +327,10 @@ const COMPONENTS = [
                       "characters": "Checkbox",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "lineHeight": 18.0001,
+                      "lineHeight": {
+                        "value": 18.0001,
+                        "unit": "PIXELS"
+                      },
                       "letterSpacing": 0.16
                     }
                   ],
@@ -325,10 +355,10 @@ const COMPONENTS = [
                       "a": 1
                     },
                     "strokeSides": {
-                      "top": 1,
-                      "right": 1,
-                      "bottom": 1,
-                      "left": 1
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0,
+                      "left": 0
                     },
                     "strokeColor": {
                       "r": 0.08627450980392157,
@@ -343,6 +373,44 @@ const COMPONENTS = [
                     "v": "MIN",
                     "left": 0,
                     "top": 2
+                  }
+                },
+                {
+                  "type": "shape",
+                  "name": "checkbox-label-after",
+                  "shape": {
+                    "kind": "rect",
+                    "width": 8,
+                    "height": 2,
+                    "rotation": 0
+                  },
+                  "lits": {
+                    "fillColor": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "strokeSides": {
+                      "top": 0,
+                      "right": 0,
+                      "bottom": 0,
+                      "left": 0
+                    },
+                    "strokeColor": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "width": 8,
+                    "height": 2
+                  },
+                  "absolute": {
+                    "h": "MIN",
+                    "v": "MIN",
+                    "left": 4,
+                    "top": 9
                   }
                 }
               ]
@@ -668,6 +736,11 @@ function applyFrameSpec(node, spec) {
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
+  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
+  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
+  // Unclip unless the contract explicitly asks for canvas clip.
+  node.clipsContent = spec.clipsContent === true;
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -722,10 +795,18 @@ function applyFrameSpec(node, spec) {
     if (li.strokeColor) node.strokes = [{ type: 'SOLID', color: { r: li.strokeColor.r, g: li.strokeColor.g, b: li.strokeColor.b }, opacity: li.strokeColor.a === undefined ? 1 : li.strokeColor.a }];
     if (li.strokeSides) {
       const sw = li.strokeSides;
-      if (sw.top !== undefined) node.strokeTopWeight = sw.top;
-      if (sw.right !== undefined) node.strokeRightWeight = sw.right;
-      if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
-      if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
     }
     if (li.width !== undefined || li.height !== undefined) {
       node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
@@ -762,6 +843,13 @@ function applyOverlay(parent, childNode, childSpec) {
 function applyShapeAbsolute(parent, childNode, childSpec) {
   if (!childSpec.absolute) return;
   try {
+    // CSS overflow:visible — unclip parent AND FRAME/COMPONENT ancestors so
+    // overhanging absolute thumbs (Slider left:-10) aren't half-cut by a
+    // grandparent track that still defaults to clipsContent:true.
+    for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
+      if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+      n.clipsContent = false;
+    }
     childNode.layoutPositioning = 'ABSOLUTE';
     const a = childSpec.absolute;
     // absolute-position round: STRETCH pins BOTH sides — size derives from
@@ -811,10 +899,19 @@ function resizeOutOfFlow(parent, built) {
         const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
         childNode.x = o.left || 0;
         childNode.y = o.top || 0;
-        childNode.resize(
-          Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
-          Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
-        );
+        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
+        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+        if (fw != null || fh != null) {
+          childNode.resize(
+            Math.max(1, fw != null ? fw : (parent.width - (o.left || 0) - (o.right || 0))),
+            Math.max(1, fh != null ? fh : (parent.height - (o.top || 0) - (o.bottom || 0))),
+          );
+        } else {
+          childNode.resize(
+            Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
+            Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
+          );
+        }
       } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
         const a = childSpec.absolute;
         childNode.resize(
@@ -828,6 +925,14 @@ function resizeOutOfFlow(parent, built) {
   }
 }
 
+function propagateOverflowVisible(childNode, parent) {
+  if (!childNode || !('clipsContent' in childNode) || childNode.clipsContent !== false) return;
+  for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
+    if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+    n.clipsContent = false;
+  }
+}
+
 // Round 5d: auto-layout has no per-child margin — a child carrying residual
 // margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
 // false), the child placed at (left, top). Negative margins shrink the flow
@@ -835,7 +940,7 @@ function resizeOutOfFlow(parent, built) {
 // -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
 // (overlay / inset / absolute) and FILL-sized children keep their own
 // lowering.
-function applyMarginBox(parent, childNode, childSpec) {
+function applyMarginBox(parent, childNode, childSpec, registry) {
   const m = childSpec.margins;
   if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
   try {
@@ -854,6 +959,15 @@ function applyMarginBox(parent, childNode, childSpec) {
   box.appendChild(childNode);
   childNode.x = l;
   childNode.y = t;
+  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
+  // must transfer the visible binding to the WRAPPER — hiding only the
+  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
+  if (childSpec.visibleProp && registry && registry.visibles) {
+    for (const vis of registry.visibles) {
+      if (vis.node === childNode) vis.node = box;
+    }
+    childNode.visible = true;
+  }
 }
 
 async function buildNode(spec, registry) {
@@ -863,12 +977,17 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
+    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
     if (spec.fontFamily) {
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
@@ -928,6 +1047,8 @@ async function buildNode(spec, registry) {
       wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
+      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
+      wrap.clipsContent = false;
       wrap.fills = [];
       for (const [field, varName] of Object.entries(spec.bindings || {})) {
         wrap.setBoundVariable(field, need(varName));
@@ -983,6 +1104,16 @@ async function buildNode(spec, registry) {
       }
     }
   } else if (spec.type === 'shape') {
+    // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
+    // ROUND-cap polyline SVG (see collapseTwoSideStrokeGlyph). Keep type
+    // 'shape' so absolute/rotation placement still uses shape.width/height.
+    if (spec.svg) {
+      node = figma.createNodeFromSvg(spec.svg);
+      node.fills = [];
+      node.clipsContent = false;
+      try { node.resize(spec.shape.width, spec.shape.height); } catch (e) { /* svg intrinsic */ }
+      if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+    } else {
     // v9 shape (#42): a REAL parametric node with native rotation.
     node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
       : spec.shape.kind === 'rect' ? figma.createRectangle()
@@ -1019,16 +1150,24 @@ async function buildNode(spec, registry) {
     if (spec.lits && spec.lits.strokeWeight !== undefined) node.strokeWeight = spec.lits.strokeWeight;
     if (spec.lits && spec.lits.strokeSides) {
       const sw = spec.lits.strokeSides;
-      if (sw.top !== undefined) node.strokeTopWeight = sw.top;
-      if (sw.right !== undefined) node.strokeRightWeight = sw.right;
-      if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
-      if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      // ELLIPSE/LINE/etc. expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible".
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
     }
     if (spec.lits && spec.lits.radius !== undefined) node.cornerRadius = spec.lits.radius;
     for (const [field, varName] of Object.entries(spec.bindings || {})) {
       node.setBoundVariable(field, need(varName));
     }
     if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+    }
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -1041,6 +1180,7 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    propagateOverflowVisible(childNode, node);
     built.push([child, childNode]);
     applyOverlay(node, childNode, child);
     applyShapeAbsolute(node, childNode, child);
@@ -1071,10 +1211,10 @@ async function buildNode(spec, registry) {
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
-    applyMarginBox(node, childNode, child);
+    applyMarginBox(node, childNode, child, registry);
   }
   resizeOutOfFlow(node, built);
   return node;
@@ -1276,8 +1416,12 @@ function dsStampFingerprints(node) {
   }
 }
 
+// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
+// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
+// skips as "unchanged" and canvas keeps the old runtime behavior.
+const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C);
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -1289,7 +1433,8 @@ function specHash(C) {
 // rebuilt from spec (manual interior edits are drift by definition);
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
-// REPORTED, never deleted — a human retires those.
+// REPORTED, never deleted — except State preview leftovers when
+// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
@@ -1347,6 +1492,25 @@ async function amendSet(set, C) {
       report.extraVariants.push(ch.name);
     }
   }
+  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
+  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // sync must be removed — otherwise amend leaves a doubled showcase grid.
+  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
+  if (!expectedHasState && report.extraVariants.length) {
+    const removed = [];
+    for (const name of [...report.extraVariants]) {
+      if (!/, State=/.test(name)) continue;
+      const ch = set.children.find((c) => c.name === name);
+      if (ch) {
+        ch.remove();
+        removed.push(name);
+      }
+    }
+    if (removed.length) {
+      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
+      report.removedVariants = removed;
+    }
+  }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
   for (const v of EV) {
@@ -1363,6 +1527,7 @@ async function amendSet(set, C) {
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+    propagateOverflowVisible(childNode, comp);
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
     applyShapeAbsolute(comp, childNode, childSpec);
@@ -1377,10 +1542,10 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
-    applyMarginBox(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec, registry);
       }
   resizeOutOfFlow(comp, built);
       report.rebuiltVariants++;
@@ -1415,8 +1580,11 @@ async function amendSet(set, C) {
       sl.instance.componentPropertyReferences = { mainComponent: k };
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        // Optional slots default hidden — dashed "Slot" chrome must not be the
+        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
         sl.wrapper.componentPropertyReferences = { visible: vk };
+        sl.wrapper.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -1519,6 +1687,7 @@ async function amendComponent(comp, C) {
   for (const childSpec of v.spec.children || []) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
+    propagateOverflowVisible(childNode, comp);
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     applyShapeAbsolute(comp, childNode, childSpec);
@@ -1533,7 +1702,7 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
@@ -1568,8 +1737,9 @@ async function amendComponent(comp, C) {
     sl.instance.componentPropertyReferences = { mainComponent: k };
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
-      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
       sl.wrapper.componentPropertyReferences = { visible: vk };
+      sl.wrapper.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -1687,7 +1857,8 @@ async function syncOne(C) {
       }
       s.instance.componentPropertyReferences = { mainComponent: key };
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', true) };
+        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
+        s.wrapper.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {

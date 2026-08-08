@@ -82,9 +82,6 @@
         "align": "center",
         "justify": "center"
       },
-      "content": {
-        "prop": "children"
-      },
       "declared": {
         "box-sizing": "border-box"
       },
@@ -96,6 +93,19 @@
         "font-weight": "{imported.badge.root.font-weight}",
         "line-height": "{imported.badge.root.line-height}",
         "row-gap": "{imported.badge.root.row-gap}"
+      },
+      "parts": {
+        "label": {
+          "description": "Label text for default badges. Dot mode is an 8px status pip — CSS hides the label via text-indent; Figma has no text-indent twin, so the label is compile-dropped when Dot=Dot (visibleWhen).",
+          "element": "span",
+          "content": {
+            "prop": "children"
+          },
+          "visibleWhen": {
+            "prop": "dot",
+            "equals": "default"
+          }
+        }
       },
       "tokensByProp": [
         {

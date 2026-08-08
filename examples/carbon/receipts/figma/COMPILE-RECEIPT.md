@@ -7,19 +7,19 @@ examples/carbon/tokens/carbon.dtcg.json,examples/carbon/tokens/carbon-minted.dtc
 
 | script | contract | variant axes | variants | headless execute | text-caused overflows |
 |---|---|---|---|---|---|
-| accordion.figma.js | carbon.accordion | align(2)×size(3) | 6 | tokens 1207 (96 aliased) · 1 set(s) built | 8 |
-| button.figma.js | carbon.button | kind(8)×size(6) | 48 | tokens 1207 (96 aliased) · 1 set(s) built | 0 |
-| checkbox.figma.js | carbon.checkbox | checked(3) | 3 | tokens 1207 (96 aliased) · 1 set(s) built | 0 |
-| icon-button.figma.js | carbon.iconbutton | kind(4)×size(4) | 16 | tokens 1207 (96 aliased) · 1 set(s) built | 0 |
-| inline-notification.figma.js | carbon.inlinenotification | kind(6)×contrast(2) | 12 | tokens 1207 (96 aliased) · 1 set(s) built | 0 |
-| modal.figma.js | carbon.modal | size(4) | 4 | tokens 1207 (96 aliased) · 1 set(s) built | 0 |
-| tabs.figma.js | carbon.tabs | standalone | 1 | tokens 1207 (96 aliased) · 1 set(s) built | 0 |
-| tag.figma.js | carbon.tag | type(12)×size(3) | 36 | tokens 1207 (96 aliased) · 1 set(s) built | 0 |
-| text-input.figma.js | carbon.textinput | size(4) | 4 | tokens 1207 (96 aliased) · 1 set(s) built | 0 |
-| toggle.figma.js | carbon.toggle | toggled(2) | 2 | tokens 1207 (96 aliased) · 1 set(s) built | 0 |
+| accordion.figma.js | carbon.accordion | align(2)×size(3) | 6 | tokens 1215 (96 aliased) · 1 set(s) built | 8 |
+| button.figma.js | carbon.button | kind(8)×size(6) | 48 | tokens 1215 (96 aliased) · 1 set(s) built | 0 |
+| checkbox.figma.js | carbon.checkbox | checked(3) | 3 | tokens 1215 (96 aliased) · 1 set(s) built | 0 |
+| icon-button.figma.js | carbon.iconbutton | kind(4)×size(4) | 16 | tokens 1215 (96 aliased) · 1 set(s) built | 0 |
+| inline-notification.figma.js | carbon.inlinenotification | kind(6)×contrast(2) | 12 | tokens 1215 (96 aliased) · 1 set(s) built | 0 |
+| modal.figma.js | carbon.modal | size(4) | 4 | tokens 1215 (96 aliased) · 1 set(s) built | 0 |
+| tabs.figma.js | carbon.tabs | standalone | 1 | tokens 1215 (96 aliased) · 1 set(s) built | 0 |
+| tag.figma.js | carbon.tag | type(12)×size(3) | 36 | tokens 1215 (96 aliased) · 1 set(s) built | 0 |
+| text-input.figma.js | carbon.textinput | size(4) | 4 | tokens 1215 (96 aliased) · 1 set(s) built | 0 |
+| toggle.figma.js | carbon.toggle | toggled(2) | 2 | tokens 1215 (96 aliased) · 1 set(s) built | 0 |
 
 **10 scripts · 132 variants total.** Each script ran to completion
-against the mocked Figma (00-tokens.figma.js first — 1207 variables
+against the mocked Figma (00-tokens.figma.js first — 1215 variables
 including the Figma-native ALIAS pass for source-aliased minted leaves).
 
 **0 failures.**

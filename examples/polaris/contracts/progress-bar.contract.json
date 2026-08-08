@@ -13,7 +13,7 @@
       "name": "progress",
       "description": "The progression of certain tasks",
       "type": "number",
-      "default": 0,
+      "default": 40,
       "bindings": {
         "figma": {
           "kind": "TEXT",
@@ -180,6 +180,10 @@
         },
         "indicator": {
           "element": "div",
+          "meter": {
+            "valueProp": "progress",
+            "maxProp": "max"
+          },
           "tokensByProp": [
             {
               "prop": "tone",
@@ -259,8 +263,7 @@
           },
           "tokens": {
             "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}",
-            "width": "{imported.progress-bar.indicator.width}"
+            "min-width": "{imported.shared.size-0}"
           }
         }
       }

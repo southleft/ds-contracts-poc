@@ -500,23 +500,23 @@
       "root": {
         "background-color": {
           "unset": {
-            "$value": "#f4f3f1",
+            "$value": "{theme-color-background-default-stronger}",
             "$type": "color"
           },
           "info": {
-            "$value": "#4375ff",
+            "$value": "{theme-color-background-info-default}",
             "$type": "color"
           },
           "success": {
-            "$value": "#3ee48c",
+            "$value": "{theme-color-background-success-default}",
             "$type": "color"
           },
           "warning": {
-            "$value": "#ffab00",
+            "$value": "{theme-color-background-warning-default}",
             "$type": "color"
           },
           "danger": {
-            "$value": "#f05735",
+            "$value": "{theme-color-background-danger-default}",
             "$type": "color"
           }
         },

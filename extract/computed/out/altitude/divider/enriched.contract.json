@@ -11,16 +11,20 @@
   "props": [
     {
       "name": "variant",
+      "description": "FC-ENUM-HOLE: capture seed only listed vertical; the absent-attribute (horizontal rule) rendering is the developed default — spelled `default` because altitude forbids the capture-side `unset` pseudo-value as a real enum member.",
       "type": {
         "enum": [
+          "default",
           "vertical"
         ]
       },
+      "default": "default",
       "bindings": {
         "figma": {
           "kind": "VARIANT",
           "property": "Variant",
           "values": {
+            "default": "Default",
             "vertical": "Vertical"
           }
         },
@@ -46,12 +50,28 @@
         "min-width": "{imported.divider.root.min-width}",
         "width": "{imported.divider.root.width.unset}"
       },
+      "literalsByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "default": {
+              "height": "1px"
+            },
+            "vertical": {
+              "height": "100px"
+            }
+          }
+        }
+      ],
       "tokensByProp": [
         {
           "prop": "variant",
           "map": {
             "vertical": {
               "width": "{imported.divider.root.width.vertical}"
+            },
+            "default": {
+              "width": "{imported.divider.root.width.unset}"
             }
           }
         }

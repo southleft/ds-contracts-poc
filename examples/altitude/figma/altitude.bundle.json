@@ -5183,23 +5183,23 @@
           "root": {
             "background-color": {
               "unset": {
-                "$value": "#f4f3f1",
+                "$value": "{theme-color-background-default-stronger}",
                 "$type": "color"
               },
               "info": {
-                "$value": "#4375ff",
+                "$value": "{theme-color-background-info-default}",
                 "$type": "color"
               },
               "success": {
-                "$value": "#3ee48c",
+                "$value": "{theme-color-background-success-default}",
                 "$type": "color"
               },
               "warning": {
-                "$value": "#ffab00",
+                "$value": "{theme-color-background-warning-default}",
                 "$type": "color"
               },
               "danger": {
-                "$value": "#f05735",
+                "$value": "{theme-color-background-danger-default}",
                 "$type": "color"
               }
             },
@@ -6435,9 +6435,6 @@
             "align": "center",
             "justify": "center"
           },
-          "content": {
-            "prop": "children"
-          },
           "declared": {
             "box-sizing": "border-box"
           },
@@ -6449,6 +6446,19 @@
             "font-weight": "{imported.badge.root.font-weight}",
             "line-height": "{imported.badge.root.line-height}",
             "row-gap": "{imported.badge.root.row-gap}"
+          },
+          "parts": {
+            "label": {
+              "description": "Label text for default badges. Dot mode is an 8px status pip — CSS hides the label via text-indent; Figma has no text-indent twin, so the label is compile-dropped when Dot=Dot (visibleWhen).",
+              "element": "span",
+              "content": {
+                "prop": "children"
+              },
+              "visibleWhen": {
+                "prop": "dot",
+                "equals": "default"
+              }
+            }
           },
           "tokensByProp": [
             {
@@ -6770,8 +6780,10 @@
         },
         {
           "name": "type",
+          "description": "FC-ENUM-HOLE: capture seed only listed squared; the absent-attribute (pill) rendering is the developed default — spelled `default` here because altitude forbids the capture-side `unset` pseudo-value as a real enum member.",
           "type": {
             "enum": [
+              "default",
               "squared"
             ]
           },
@@ -6780,6 +6792,7 @@
               "kind": "VARIANT",
               "property": "Type",
               "values": {
+                "default": "Default",
                 "squared": "Squared"
               }
             },
@@ -6957,7 +6970,7 @@
           "export": "al-chip"
         }
       },
-      "figmaStatePreviews": true
+      "figmaStatePreviews": false
     },
     {
       "$schema": "./contract.schema.json",
@@ -6972,16 +6985,20 @@
       "props": [
         {
           "name": "variant",
+          "description": "FC-ENUM-HOLE: capture seed only listed vertical; the absent-attribute (horizontal rule) rendering is the developed default — spelled `default` because altitude forbids the capture-side `unset` pseudo-value as a real enum member.",
           "type": {
             "enum": [
+              "default",
               "vertical"
             ]
           },
+          "default": "default",
           "bindings": {
             "figma": {
               "kind": "VARIANT",
               "property": "Variant",
               "values": {
+                "default": "Default",
                 "vertical": "Vertical"
               }
             },
@@ -7007,12 +7024,28 @@
             "min-width": "{imported.divider.root.min-width}",
             "width": "{imported.divider.root.width.unset}"
           },
+          "literalsByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "default": {
+                  "height": "1px"
+                },
+                "vertical": {
+                  "height": "100px"
+                }
+              }
+            }
+          ],
           "tokensByProp": [
             {
               "prop": "variant",
               "map": {
                 "vertical": {
                   "width": "{imported.divider.root.width.vertical}"
+                },
+                "default": {
+                  "width": "{imported.divider.root.width.unset}"
                 }
               }
             }

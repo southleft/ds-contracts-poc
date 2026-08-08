@@ -104,6 +104,27 @@ const COMPONENTS = [
               },
               "children": [
                 {
+                  "type": "frame",
+                  "name": "alert-icon",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "lits": {
+                    "paddingRight": 12
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "alert-icon-info",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z\" clip-rule=\"evenodd\" fill=\"#007595\"/></svg>",
+                      "svgPaintVar": "imported/alert/label/color/info",
+                      "iconSize": 20
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "name": "label",
                   "grow": true,
@@ -111,8 +132,44 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "textFill": "imported/alert/label/color/info",
-                  "lineHeight": 20,
+                  "lineHeight": {
+                    "value": 20,
+                    "unit": "PIXELS"
+                  },
                   "contentProp": "Content"
+                },
+                {
+                  "type": "frame",
+                  "name": "dismiss",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "dismiss-icon",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z\" clip-rule=\"evenodd\" fill=\"#007595\"/></svg>",
+                      "svgPaintVar": "imported/alert/label/color/info",
+                      "iconSize": 20
+                    }
+                  ],
+                  "bindings": {
+                    "bottomLeftRadius": "imported/shared/size-8",
+                    "bottomRightRadius": "imported/shared/size-8",
+                    "topLeftRadius": "imported/shared/size-8",
+                    "topRightRadius": "imported/shared/size-8"
+                  },
+                  "fill": "imported/alert/root/background-color/info",
+                  "lits": {
+                    "height": 32,
+                    "width": 32,
+                    "paddingTop": 6,
+                    "paddingBottom": 6,
+                    "paddingLeft": 6,
+                    "paddingRight": 6
+                  }
                 }
               ]
             }
@@ -155,6 +212,27 @@ const COMPONENTS = [
               },
               "children": [
                 {
+                  "type": "frame",
+                  "name": "alert-icon",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "lits": {
+                    "paddingRight": 12
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "alert-icon-failure",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z\" clip-rule=\"evenodd\" fill=\"#c81e1e\"/></svg>",
+                      "svgPaintVar": "imported/alert/label/color/failure",
+                      "iconSize": 20
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "name": "label",
                   "grow": true,
@@ -162,8 +240,44 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "textFill": "imported/alert/label/color/failure",
-                  "lineHeight": 20,
+                  "lineHeight": {
+                    "value": 20,
+                    "unit": "PIXELS"
+                  },
                   "contentProp": "Content"
+                },
+                {
+                  "type": "frame",
+                  "name": "dismiss",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "dismiss-icon",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z\" clip-rule=\"evenodd\" fill=\"#c81e1e\"/></svg>",
+                      "svgPaintVar": "imported/alert/label/color/failure",
+                      "iconSize": 20
+                    }
+                  ],
+                  "bindings": {
+                    "bottomLeftRadius": "imported/shared/size-8",
+                    "bottomRightRadius": "imported/shared/size-8",
+                    "topLeftRadius": "imported/shared/size-8",
+                    "topRightRadius": "imported/shared/size-8"
+                  },
+                  "fill": "imported/alert/root/background-color/failure",
+                  "lits": {
+                    "height": 32,
+                    "width": 32,
+                    "paddingTop": 6,
+                    "paddingBottom": 6,
+                    "paddingLeft": 6,
+                    "paddingRight": 6
+                  }
                 }
               ]
             }
@@ -206,6 +320,27 @@ const COMPONENTS = [
               },
               "children": [
                 {
+                  "type": "frame",
+                  "name": "alert-icon",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "lits": {
+                    "paddingRight": 12
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "alert-icon-success",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z\" clip-rule=\"evenodd\" fill=\"#046c4e\"/></svg>",
+                      "svgPaintVar": "imported/alert/label/color/success",
+                      "iconSize": 20
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "name": "label",
                   "grow": true,
@@ -213,8 +348,44 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "textFill": "imported/alert/label/color/success",
-                  "lineHeight": 20,
+                  "lineHeight": {
+                    "value": 20,
+                    "unit": "PIXELS"
+                  },
                   "contentProp": "Content"
+                },
+                {
+                  "type": "frame",
+                  "name": "dismiss",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "dismiss-icon",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z\" clip-rule=\"evenodd\" fill=\"#046c4e\"/></svg>",
+                      "svgPaintVar": "imported/alert/label/color/success",
+                      "iconSize": 20
+                    }
+                  ],
+                  "bindings": {
+                    "bottomLeftRadius": "imported/shared/size-8",
+                    "bottomRightRadius": "imported/shared/size-8",
+                    "topLeftRadius": "imported/shared/size-8",
+                    "topRightRadius": "imported/shared/size-8"
+                  },
+                  "fill": "imported/alert/root/background-color/success",
+                  "lits": {
+                    "height": 32,
+                    "width": 32,
+                    "paddingTop": 6,
+                    "paddingBottom": 6,
+                    "paddingLeft": 6,
+                    "paddingRight": 6
+                  }
                 }
               ]
             }
@@ -257,6 +428,27 @@ const COMPONENTS = [
               },
               "children": [
                 {
+                  "type": "frame",
+                  "name": "alert-icon",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "lits": {
+                    "paddingRight": 12
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "alert-icon-warning",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z\" clip-rule=\"evenodd\" fill=\"#8e4b10\"/></svg>",
+                      "svgPaintVar": "imported/alert/label/color/warning",
+                      "iconSize": 20
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "name": "label",
                   "grow": true,
@@ -264,8 +456,44 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "textFill": "imported/alert/label/color/warning",
-                  "lineHeight": 20,
+                  "lineHeight": {
+                    "value": 20,
+                    "unit": "PIXELS"
+                  },
                   "contentProp": "Content"
+                },
+                {
+                  "type": "frame",
+                  "name": "dismiss",
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "dismiss-icon",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z\" clip-rule=\"evenodd\" fill=\"#8e4b10\"/></svg>",
+                      "svgPaintVar": "imported/alert/label/color/warning",
+                      "iconSize": 20
+                    }
+                  ],
+                  "bindings": {
+                    "bottomLeftRadius": "imported/shared/size-8",
+                    "bottomRightRadius": "imported/shared/size-8",
+                    "topLeftRadius": "imported/shared/size-8",
+                    "topRightRadius": "imported/shared/size-8"
+                  },
+                  "fill": "imported/alert/root/background-color/warning",
+                  "lits": {
+                    "height": 32,
+                    "width": 32,
+                    "paddingTop": 6,
+                    "paddingBottom": 6,
+                    "paddingLeft": 6,
+                    "paddingRight": 6
+                  }
                 }
               ]
             }
@@ -590,6 +818,11 @@ function applyFrameSpec(node, spec) {
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
+  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
+  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
+  // Unclip unless the contract explicitly asks for canvas clip.
+  node.clipsContent = spec.clipsContent === true;
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -613,6 +846,58 @@ function applyFrameSpec(node, spec) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
+    }
+  }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
     }
   }
 }
@@ -642,12 +927,26 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    if (spec.svgPaintVar) {
+      const glyphPaint = boundPaint(spec.svgPaintVar, node);
+      const rebind = (n) => {
+        if (Array.isArray(n.fills) && n.fills.length > 0) n.fills = [glyphPaint];
+        if (Array.isArray(n.strokes) && n.strokes.length > 0) n.strokes = [glyphPaint];
+        if (n.children) for (const c of n.children) rebind(c);
+      };
+      for (const c of node.children) rebind(c);
+    }
+    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
+    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -696,6 +995,8 @@ async function buildNode(spec, registry) {
       wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
+      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
+      wrap.clipsContent = false;
       wrap.fills = [];
       for (const [field, varName] of Object.entries(spec.bindings || {})) {
         wrap.setBoundVariable(field, need(varName));
@@ -791,7 +1092,7 @@ async function buildNode(spec, registry) {
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
   }
@@ -994,8 +1295,12 @@ function dsStampFingerprints(node) {
   }
 }
 
+// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
+// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
+// skips as "unchanged" and canvas keeps the old runtime behavior.
+const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C);
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -1007,7 +1312,8 @@ function specHash(C) {
 // rebuilt from spec (manual interior edits are drift by definition);
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
-// REPORTED, never deleted — a human retires those.
+// REPORTED, never deleted — except State preview leftovers when
+// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
@@ -1065,6 +1371,25 @@ async function amendSet(set, C) {
       report.extraVariants.push(ch.name);
     }
   }
+  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
+  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // sync must be removed — otherwise amend leaves a doubled showcase grid.
+  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
+  if (!expectedHasState && report.extraVariants.length) {
+    const removed = [];
+    for (const name of [...report.extraVariants]) {
+      if (!/, State=/.test(name)) continue;
+      const ch = set.children.find((c) => c.name === name);
+      if (ch) {
+        ch.remove();
+        removed.push(name);
+      }
+    }
+    if (removed.length) {
+      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
+      report.removedVariants = removed;
+    }
+  }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
   for (const v of EV) {
@@ -1094,7 +1419,7 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
       }
@@ -1130,8 +1455,11 @@ async function amendSet(set, C) {
       sl.instance.componentPropertyReferences = { mainComponent: k };
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        // Optional slots default hidden — dashed "Slot" chrome must not be the
+        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
         sl.wrapper.componentPropertyReferences = { visible: vk };
+        sl.wrapper.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -1247,7 +1575,7 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
@@ -1281,8 +1609,9 @@ async function amendComponent(comp, C) {
     sl.instance.componentPropertyReferences = { mainComponent: k };
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
-      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
       sl.wrapper.componentPropertyReferences = { visible: vk };
+      sl.wrapper.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -1400,7 +1729,8 @@ async function syncOne(C) {
       }
       s.instance.componentPropertyReferences = { mainComponent: key };
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', true) };
+        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
+        s.wrapper.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -1518,7 +1848,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/info",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1557,7 +1890,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/info",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1596,7 +1932,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/failure",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1635,7 +1974,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/failure",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1674,7 +2016,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/success",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1713,7 +2058,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/success",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1752,7 +2100,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/warning",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1791,7 +2142,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/warning",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1830,7 +2184,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/indigo",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1869,7 +2226,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/indigo",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1908,7 +2268,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/pink",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1947,7 +2310,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/pink",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1988,7 +2354,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/info",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2027,7 +2396,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/failure",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2066,7 +2438,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/success",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2105,7 +2480,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/warning",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2144,7 +2522,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/indigo",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2183,7 +2564,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/pink",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2222,7 +2606,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/info",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2261,7 +2648,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/failure",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2300,7 +2690,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/success",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2339,7 +2732,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/warning",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2378,7 +2774,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/indigo",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2417,7 +2816,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Semi Bold",
               "textFill": "imported/badge/label/color/pink",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2803,6 +3205,11 @@ function applyFrameSpec(node, spec) {
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
+  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
+  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
+  // Unclip unless the contract explicitly asks for canvas clip.
+  node.clipsContent = spec.clipsContent === true;
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -2855,12 +3262,17 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
+    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -2909,6 +3321,8 @@ async function buildNode(spec, registry) {
       wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
+      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
+      wrap.clipsContent = false;
       wrap.fills = [];
       for (const [field, varName] of Object.entries(spec.bindings || {})) {
         wrap.setBoundVariable(field, need(varName));
@@ -3004,7 +3418,7 @@ async function buildNode(spec, registry) {
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
   }
@@ -3207,8 +3621,12 @@ function dsStampFingerprints(node) {
   }
 }
 
+// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
+// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
+// skips as "unchanged" and canvas keeps the old runtime behavior.
+const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C);
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -3220,7 +3638,8 @@ function specHash(C) {
 // rebuilt from spec (manual interior edits are drift by definition);
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
-// REPORTED, never deleted — a human retires those.
+// REPORTED, never deleted — except State preview leftovers when
+// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
@@ -3278,6 +3697,25 @@ async function amendSet(set, C) {
       report.extraVariants.push(ch.name);
     }
   }
+  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
+  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // sync must be removed — otherwise amend leaves a doubled showcase grid.
+  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
+  if (!expectedHasState && report.extraVariants.length) {
+    const removed = [];
+    for (const name of [...report.extraVariants]) {
+      if (!/, State=/.test(name)) continue;
+      const ch = set.children.find((c) => c.name === name);
+      if (ch) {
+        ch.remove();
+        removed.push(name);
+      }
+    }
+    if (removed.length) {
+      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
+      report.removedVariants = removed;
+    }
+  }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
   for (const v of EV) {
@@ -3307,7 +3745,7 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
       }
@@ -3343,8 +3781,11 @@ async function amendSet(set, C) {
       sl.instance.componentPropertyReferences = { mainComponent: k };
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        // Optional slots default hidden — dashed "Slot" chrome must not be the
+        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
         sl.wrapper.componentPropertyReferences = { visible: vk };
+        sl.wrapper.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -3460,7 +3901,7 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
@@ -3494,8 +3935,9 @@ async function amendComponent(comp, C) {
     sl.instance.componentPropertyReferences = { mainComponent: k };
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
-      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
       sl.wrapper.componentPropertyReferences = { visible: vk };
+      sl.wrapper.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -3613,7 +4055,8 @@ async function syncOne(C) {
       }
       s.instance.componentPropertyReferences = { mainComponent: key };
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', true) };
+        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
+        s.wrapper.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -3723,6 +4166,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -3731,7 +4177,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -3763,6 +4212,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 32
+          },
           "children": [
             {
               "type": "text",
@@ -3771,7 +4223,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -3803,6 +4258,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 36
+          },
           "children": [
             {
               "type": "text",
@@ -3811,7 +4269,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -3843,6 +4304,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 48
+          },
           "children": [
             {
               "type": "text",
@@ -3851,7 +4315,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -3883,6 +4350,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 52
+          },
           "children": [
             {
               "type": "text",
@@ -3891,7 +4361,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -3923,6 +4396,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -3931,7 +4407,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -3963,6 +4442,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 32
+          },
           "children": [
             {
               "type": "text",
@@ -3971,7 +4453,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4003,6 +4488,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 36
+          },
           "children": [
             {
               "type": "text",
@@ -4011,7 +4499,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4043,6 +4534,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 48
+          },
           "children": [
             {
               "type": "text",
@@ -4051,7 +4545,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4083,6 +4580,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 52
+          },
           "children": [
             {
               "type": "text",
@@ -4091,7 +4591,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4123,6 +4626,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -4131,7 +4637,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4163,6 +4672,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 32
+          },
           "children": [
             {
               "type": "text",
@@ -4171,7 +4683,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4203,6 +4718,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 36
+          },
           "children": [
             {
               "type": "text",
@@ -4211,7 +4729,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4243,6 +4764,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 48
+          },
           "children": [
             {
               "type": "text",
@@ -4251,7 +4775,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4283,6 +4810,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 52
+          },
           "children": [
             {
               "type": "text",
@@ -4291,7 +4821,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4323,6 +4856,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -4331,7 +4867,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4363,6 +4902,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 32
+          },
           "children": [
             {
               "type": "text",
@@ -4371,7 +4913,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4403,6 +4948,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 36
+          },
           "children": [
             {
               "type": "text",
@@ -4411,7 +4959,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4443,6 +4994,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 48
+          },
           "children": [
             {
               "type": "text",
@@ -4451,7 +5005,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4483,6 +5040,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 52
+          },
           "children": [
             {
               "type": "text",
@@ -4491,7 +5051,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4523,6 +5086,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -4531,7 +5097,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4563,6 +5132,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 32
+          },
           "children": [
             {
               "type": "text",
@@ -4571,7 +5143,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4603,6 +5178,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 36
+          },
           "children": [
             {
               "type": "text",
@@ -4611,7 +5189,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4643,6 +5224,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 48
+          },
           "children": [
             {
               "type": "text",
@@ -4651,7 +5235,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4683,6 +5270,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 52
+          },
           "children": [
             {
               "type": "text",
@@ -4691,7 +5281,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4725,6 +5318,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 40
+          },
           "opacity": 0.5,
           "children": [
             {
@@ -4734,7 +5330,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4766,6 +5365,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 40
+          },
           "opacity": 0.5,
           "children": [
             {
@@ -4775,7 +5377,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4807,6 +5412,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 40
+          },
           "opacity": 0.5,
           "children": [
             {
@@ -4816,7 +5424,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4848,6 +5459,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 40
+          },
           "opacity": 0.5,
           "children": [
             {
@@ -4857,7 +5471,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4889,6 +5506,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 40
+          },
           "opacity": 0.5,
           "children": [
             {
@@ -4898,7 +5518,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -4930,6 +5553,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -4996,7 +5622,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-active/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5028,6 +5657,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -5094,7 +5726,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-active/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5126,6 +5761,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -5192,7 +5830,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-active/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5224,6 +5865,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -5290,7 +5934,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-active/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5322,6 +5969,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -5388,7 +6038,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-active/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5421,6 +6074,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -5488,7 +6144,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5521,6 +6180,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -5588,7 +6250,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5621,6 +6286,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -5688,7 +6356,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5721,6 +6392,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -5788,7 +6462,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5821,6 +6498,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -5888,7 +6568,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5920,6 +6603,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -5928,7 +6614,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-hover/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -5960,6 +6649,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -5968,7 +6660,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-hover/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -6000,6 +6695,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -6008,7 +6706,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-hover/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -6040,6 +6741,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -6048,7 +6752,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-hover/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -6080,6 +6787,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -6088,7 +6798,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-hover/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -6464,6 +7177,11 @@ function applyFrameSpec(node, spec) {
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
+  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
+  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
+  // Unclip unless the contract explicitly asks for canvas clip.
+  node.clipsContent = spec.clipsContent === true;
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -6501,6 +7219,58 @@ function applyFrameSpec(node, spec) {
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -6528,12 +7298,17 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
+    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -6582,6 +7357,8 @@ async function buildNode(spec, registry) {
       wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
+      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
+      wrap.clipsContent = false;
       wrap.fills = [];
       for (const [field, varName] of Object.entries(spec.bindings || {})) {
         wrap.setBoundVariable(field, need(varName));
@@ -6679,7 +7456,7 @@ async function buildNode(spec, registry) {
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
   }
@@ -6882,8 +7659,12 @@ function dsStampFingerprints(node) {
   }
 }
 
+// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
+// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
+// skips as "unchanged" and canvas keeps the old runtime behavior.
+const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C);
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -6895,7 +7676,8 @@ function specHash(C) {
 // rebuilt from spec (manual interior edits are drift by definition);
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
-// REPORTED, never deleted — a human retires those.
+// REPORTED, never deleted — except State preview leftovers when
+// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
@@ -6953,6 +7735,25 @@ async function amendSet(set, C) {
       report.extraVariants.push(ch.name);
     }
   }
+  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
+  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // sync must be removed — otherwise amend leaves a doubled showcase grid.
+  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
+  if (!expectedHasState && report.extraVariants.length) {
+    const removed = [];
+    for (const name of [...report.extraVariants]) {
+      if (!/, State=/.test(name)) continue;
+      const ch = set.children.find((c) => c.name === name);
+      if (ch) {
+        ch.remove();
+        removed.push(name);
+      }
+    }
+    if (removed.length) {
+      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
+      report.removedVariants = removed;
+    }
+  }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
   for (const v of EV) {
@@ -6982,7 +7783,7 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
       }
@@ -7018,8 +7819,11 @@ async function amendSet(set, C) {
       sl.instance.componentPropertyReferences = { mainComponent: k };
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        // Optional slots default hidden — dashed "Slot" chrome must not be the
+        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
         sl.wrapper.componentPropertyReferences = { visible: vk };
+        sl.wrapper.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -7135,7 +7939,7 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
@@ -7169,8 +7973,9 @@ async function amendComponent(comp, C) {
     sl.instance.componentPropertyReferences = { mainComponent: k };
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
-      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
       sl.wrapper.componentPropertyReferences = { visible: vk };
+      sl.wrapper.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -7288,7 +8093,8 @@ async function syncOne(C) {
       }
       s.instance.componentPropertyReferences = { mainComponent: key };
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', true) };
+        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
+        s.wrapper.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -7486,7 +8292,10 @@ const COMPONENTS = [
                   "contentProp": "Content",
                   "fontSize": 16,
                   "fontStyle": "Regular",
-                  "lineHeight": 24
+                  "lineHeight": {
+                    "value": 24,
+                    "unit": "PIXELS"
+                  }
                 }
               ],
               "bindings": {
@@ -7818,6 +8627,11 @@ function applyFrameSpec(node, spec) {
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
+  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
+  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
+  // Unclip unless the contract explicitly asks for canvas clip.
+  node.clipsContent = spec.clipsContent === true;
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -7882,12 +8696,17 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
+    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -7936,6 +8755,8 @@ async function buildNode(spec, registry) {
       wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
+      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
+      wrap.clipsContent = false;
       wrap.fills = [];
       for (const [field, varName] of Object.entries(spec.bindings || {})) {
         wrap.setBoundVariable(field, need(varName));
@@ -8031,7 +8852,7 @@ async function buildNode(spec, registry) {
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
   }
@@ -8234,8 +9055,12 @@ function dsStampFingerprints(node) {
   }
 }
 
+// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
+// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
+// skips as "unchanged" and canvas keeps the old runtime behavior.
+const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C);
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -8247,7 +9072,8 @@ function specHash(C) {
 // rebuilt from spec (manual interior edits are drift by definition);
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
-// REPORTED, never deleted — a human retires those.
+// REPORTED, never deleted — except State preview leftovers when
+// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
@@ -8305,6 +9131,25 @@ async function amendSet(set, C) {
       report.extraVariants.push(ch.name);
     }
   }
+  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
+  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // sync must be removed — otherwise amend leaves a doubled showcase grid.
+  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
+  if (!expectedHasState && report.extraVariants.length) {
+    const removed = [];
+    for (const name of [...report.extraVariants]) {
+      if (!/, State=/.test(name)) continue;
+      const ch = set.children.find((c) => c.name === name);
+      if (ch) {
+        ch.remove();
+        removed.push(name);
+      }
+    }
+    if (removed.length) {
+      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
+      report.removedVariants = removed;
+    }
+  }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
   for (const v of EV) {
@@ -8334,7 +9179,7 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
       }
@@ -8370,8 +9215,11 @@ async function amendSet(set, C) {
       sl.instance.componentPropertyReferences = { mainComponent: k };
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        // Optional slots default hidden — dashed "Slot" chrome must not be the
+        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
         sl.wrapper.componentPropertyReferences = { visible: vk };
+        sl.wrapper.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -8487,7 +9335,7 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
@@ -8521,8 +9369,9 @@ async function amendComponent(comp, C) {
     sl.instance.componentPropertyReferences = { mainComponent: k };
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
-      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
       sl.wrapper.componentPropertyReferences = { visible: vk };
+      sl.wrapper.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -8640,7 +9489,8 @@ async function syncOne(C) {
       }
       s.instance.componentPropertyReferences = { mainComponent: key };
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', true) };
+        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
+        s.wrapper.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -8777,7 +9627,45 @@ const COMPONENTS = [
                 "px": 44,
                 "varName": "imported/toggle-switch/part-0/width/md"
               },
-              "children": []
+              "children": [
+                {
+                  "type": "shape",
+                  "name": "part-0-after",
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 20,
+                    "height": 20
+                  },
+                  "lits": {
+                    "fillColor": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "strokeSides": {
+                      "top": 1,
+                      "right": 1,
+                      "bottom": 1,
+                      "left": 1
+                    },
+                    "strokeColor": {
+                      "r": 0.8196078431372549,
+                      "g": 0.8352941176470589,
+                      "b": 0.8588235294117647,
+                      "a": 1
+                    },
+                    "width": 20,
+                    "height": 20
+                  },
+                  "absolute": {
+                    "h": "MIN",
+                    "v": "MIN",
+                    "left": 2,
+                    "top": 2
+                  }
+                }
+              ]
             },
             {
               "type": "text",
@@ -8789,7 +9677,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Label"
             }
           ]
@@ -8848,7 +9739,45 @@ const COMPONENTS = [
                 "px": 44,
                 "varName": "imported/toggle-switch/part-0/width/md"
               },
-              "children": []
+              "children": [
+                {
+                  "type": "shape",
+                  "name": "part-0-after",
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 20,
+                    "height": 20
+                  },
+                  "lits": {
+                    "fillColor": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "strokeSides": {
+                      "top": 1,
+                      "right": 1,
+                      "bottom": 1,
+                      "left": 1
+                    },
+                    "strokeColor": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0
+                    },
+                    "width": 20,
+                    "height": 20
+                  },
+                  "absolute": {
+                    "h": "MAX",
+                    "v": "MIN",
+                    "right": 2,
+                    "top": 2
+                  }
+                }
+              ]
             },
             {
               "type": "text",
@@ -8860,7 +9789,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Label"
             }
           ]
@@ -8919,7 +9851,45 @@ const COMPONENTS = [
                 "px": 36,
                 "varName": "imported/toggle-switch/part-0/width/sm"
               },
-              "children": []
+              "children": [
+                {
+                  "type": "shape",
+                  "name": "part-0-after",
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 16,
+                    "height": 16
+                  },
+                  "lits": {
+                    "fillColor": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "strokeSides": {
+                      "top": 1,
+                      "right": 1,
+                      "bottom": 1,
+                      "left": 1
+                    },
+                    "strokeColor": {
+                      "r": 0.8196078431372549,
+                      "g": 0.8352941176470589,
+                      "b": 0.8588235294117647,
+                      "a": 1
+                    },
+                    "width": 16,
+                    "height": 16
+                  },
+                  "absolute": {
+                    "h": "MIN",
+                    "v": "MIN",
+                    "left": 2,
+                    "top": 2
+                  }
+                }
+              ]
             },
             {
               "type": "text",
@@ -8931,7 +9901,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Label"
             }
           ]
@@ -8990,7 +9963,45 @@ const COMPONENTS = [
                 "px": 36,
                 "varName": "imported/toggle-switch/part-0/width/sm"
               },
-              "children": []
+              "children": [
+                {
+                  "type": "shape",
+                  "name": "part-0-after",
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 16,
+                    "height": 16
+                  },
+                  "lits": {
+                    "fillColor": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "strokeSides": {
+                      "top": 1,
+                      "right": 1,
+                      "bottom": 1,
+                      "left": 1
+                    },
+                    "strokeColor": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0
+                    },
+                    "width": 16,
+                    "height": 16
+                  },
+                  "absolute": {
+                    "h": "MAX",
+                    "v": "MIN",
+                    "right": 2,
+                    "top": 2
+                  }
+                }
+              ]
             },
             {
               "type": "text",
@@ -9002,7 +10013,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Label"
             }
           ]
@@ -9061,7 +10075,45 @@ const COMPONENTS = [
                 "px": 52,
                 "varName": "imported/toggle-switch/part-0/width/lg"
               },
-              "children": []
+              "children": [
+                {
+                  "type": "shape",
+                  "name": "part-0-after",
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 24,
+                    "height": 24
+                  },
+                  "lits": {
+                    "fillColor": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "strokeSides": {
+                      "top": 1,
+                      "right": 1,
+                      "bottom": 1,
+                      "left": 1
+                    },
+                    "strokeColor": {
+                      "r": 0.8196078431372549,
+                      "g": 0.8352941176470589,
+                      "b": 0.8588235294117647,
+                      "a": 1
+                    },
+                    "width": 24,
+                    "height": 24
+                  },
+                  "absolute": {
+                    "h": "MIN",
+                    "v": "MIN",
+                    "left": 2,
+                    "top": 2
+                  }
+                }
+              ]
             },
             {
               "type": "text",
@@ -9073,7 +10125,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Label"
             }
           ]
@@ -9132,7 +10187,45 @@ const COMPONENTS = [
                 "px": 52,
                 "varName": "imported/toggle-switch/part-0/width/lg"
               },
-              "children": []
+              "children": [
+                {
+                  "type": "shape",
+                  "name": "part-0-after",
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 24,
+                    "height": 24
+                  },
+                  "lits": {
+                    "fillColor": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "strokeSides": {
+                      "top": 1,
+                      "right": 1,
+                      "bottom": 1,
+                      "left": 1
+                    },
+                    "strokeColor": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0
+                    },
+                    "width": 24,
+                    "height": 24
+                  },
+                  "absolute": {
+                    "h": "MAX",
+                    "v": "MIN",
+                    "right": 2,
+                    "top": 2
+                  }
+                }
+              ]
             },
             {
               "type": "text",
@@ -9144,7 +10237,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/toggle-switch/label/color",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Label"
             }
           ]
@@ -9468,6 +10564,11 @@ function applyFrameSpec(node, spec) {
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
+  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
+  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
+  // Unclip unless the contract explicitly asks for canvas clip.
+  node.clipsContent = spec.clipsContent === true;
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -9493,6 +10594,59 @@ function applyFrameSpec(node, spec) {
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeColor) node.strokes = [{ type: 'SOLID', color: { r: li.strokeColor.r, g: li.strokeColor.g, b: li.strokeColor.b }, opacity: li.strokeColor.a === undefined ? 1 : li.strokeColor.a }];
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -9513,6 +10667,100 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
+// v9 shape placement: exact offsets vs the parent box, after append.
+function applyShapeAbsolute(parent, childNode, childSpec) {
+  if (!childSpec.absolute) return;
+  try {
+    // CSS overflow:visible — unclip parent AND FRAME/COMPONENT ancestors so
+    // overhanging absolute thumbs (Slider left:-10) aren't half-cut by a
+    // grandparent track that still defaults to clipsContent:true.
+    for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
+      if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+      n.clipsContent = false;
+    }
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const a = childSpec.absolute;
+    // absolute-position round: STRETCH pins BOTH sides — size derives from
+    // the parent box minus the offsets (rail: left 0 + right 0, fixed height).
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      const w2 = a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width;
+      const h2 = a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height;
+      childNode.resize(w2, h2);
+    }
+    childNode.constraints = {
+      horizontal: a.h === 'STRETCH' ? 'STRETCH' : a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'STRETCH' ? 'STRETCH' : a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+    };
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      childNode.x = a.h === 'STRETCH' ? (a.left || 0) : childNode.x;
+      childNode.y = a.v === 'STRETCH' ? (a.top || 0) : childNode.y;
+      if (a.h !== 'STRETCH' && a.left !== undefined) childNode.x = a.left;
+      if (a.h !== 'STRETCH' && a.right !== undefined) childNode.x = parent.width - a.right - childNode.width;
+      if (a.v !== 'STRETCH' && a.top !== undefined) childNode.y = a.top;
+      if (a.v !== 'STRETCH' && a.bottom !== undefined) childNode.y = parent.height - a.bottom - childNode.height;
+      return;
+    }
+    const w = childSpec.shape ? childSpec.shape.width : childNode.width;
+    const h = childSpec.shape ? childSpec.shape.height : childNode.height;
+    // Center of the intrinsic box in parent coordinates (MIN pins left/top,
+    // MAX pins right/bottom, CENTER centers):
+    const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
+    const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Rotation moves the measured box — correct against the actual bounds.
+    const bb = childNode.absoluteBoundingBox;
+    const pb = parent.absoluteBoundingBox;
+    if (bb && pb) {
+      childNode.x += cx - bb.width / 2 - (bb.x - pb.x);
+      childNode.y += cy - bb.height / 2 - (bb.y - pb.y);
+    } else {
+      childNode.x = cx - w / 2;
+      childNode.y = cy - h / 2;
+    }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
+function resizeOutOfFlow(parent, built) {
+  for (const pair of built) {
+    const childSpec = pair[0], childNode = pair[1];
+    try {
+      if (childSpec.insetOverlay) {
+        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+        childNode.x = o.left || 0;
+        childNode.y = o.top || 0;
+        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
+        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+        if (fw != null || fh != null) {
+          childNode.resize(
+            Math.max(1, fw != null ? fw : (parent.width - (o.left || 0) - (o.right || 0))),
+            Math.max(1, fh != null ? fh : (parent.height - (o.top || 0) - (o.bottom || 0))),
+          );
+        } else {
+          childNode.resize(
+            Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
+            Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
+          );
+        }
+      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
+        const a = childSpec.absolute;
+        childNode.resize(
+          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
+          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
+        );
+        if (a.h === 'STRETCH') childNode.x = a.left || 0;
+        if (a.v === 'STRETCH') childNode.y = a.top || 0;
+      }
+    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
+  }
+}
+
+function propagateOverflowVisible(childNode, parent) {
+  if (!childNode || !('clipsContent' in childNode) || childNode.clipsContent !== false) return;
+  for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
+    if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+    n.clipsContent = false;
+  }
+}
+
 // Round 5d: auto-layout has no per-child margin — a child carrying residual
 // margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
 // false), the child placed at (left, top). Negative margins shrink the flow
@@ -9520,7 +10768,7 @@ function applyOverlay(parent, childNode, childSpec) {
 // -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
 // (overlay / inset / absolute) and FILL-sized children keep their own
 // lowering.
-function applyMarginBox(parent, childNode, childSpec) {
+function applyMarginBox(parent, childNode, childSpec, registry) {
   const m = childSpec.margins;
   if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
   try {
@@ -9539,6 +10787,15 @@ function applyMarginBox(parent, childNode, childSpec) {
   box.appendChild(childNode);
   childNode.x = l;
   childNode.y = t;
+  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
+  // must transfer the visible binding to the WRAPPER — hiding only the
+  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
+  if (childSpec.visibleProp && registry && registry.visibles) {
+    for (const vis of registry.visibles) {
+      if (vis.node === childNode) vis.node = box;
+    }
+    childNode.visible = true;
+  }
 }
 
 async function buildNode(spec, registry) {
@@ -9548,12 +10805,17 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
+    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -9602,6 +10864,8 @@ async function buildNode(spec, registry) {
       wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
+      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
+      wrap.clipsContent = false;
       wrap.fills = [];
       for (const [field, varName] of Object.entries(spec.bindings || {})) {
         wrap.setBoundVariable(field, need(varName));
@@ -9656,6 +10920,71 @@ async function buildNode(spec, registry) {
         registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
       }
     }
+  } else if (spec.type === 'shape') {
+    // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
+    // ROUND-cap polyline SVG (see collapseTwoSideStrokeGlyph). Keep type
+    // 'shape' so absolute/rotation placement still uses shape.width/height.
+    if (spec.svg) {
+      node = figma.createNodeFromSvg(spec.svg);
+      node.fills = [];
+      node.clipsContent = false;
+      try { node.resize(spec.shape.width, spec.shape.height); } catch (e) { /* svg intrinsic */ }
+      if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+    } else {
+    // v9 shape (#42): a REAL parametric node with native rotation.
+    node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
+      : spec.shape.kind === 'rect' ? figma.createRectangle()
+      : figma.createPolygon();
+    if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
+    node.resize(spec.shape.width, spec.shape.height);
+    // Shape nodes ship a default gray paint — a spec with NO fill channel
+    // clears it (a canvas artifact is not contract data; Phase B deviation 3).
+    // Round 5f (B5E finding 2): a shape's LITERAL fill (lits.fillColor — the
+    // RadioButton checked dot's white, compiled from the decor's
+    // background-color literal) was DROPPED here (the shape branch never runs
+    // applyFrameSpec's litsRuntime), so the dot landed with no fill and had to
+    // be hand-corrected on canvas each re-amend. Apply it at the SOURCE:
+    // bound fill wins; else a literal fill; else clear.
+    node.fills = spec.fill
+      ? [boundPaint(spec.fill, node)]
+      : (spec.lits && spec.lits.fillColor)
+        ? [{ type: 'SOLID', color: { r: spec.lits.fillColor.r, g: spec.lits.fillColor.g, b: spec.lits.fillColor.b }, opacity: spec.lits.fillColor.a === undefined ? 1 : spec.lits.fillColor.a }]
+        : [];
+    // spec.stroke + spec.bindings apply exactly as on frames (Phase B
+    // deviation 2: the emitted shape branch silently dropped the checkbox /
+    // radio backdrop strokes and radii — the shim now lives at the source).
+    if (spec.stroke) {
+      node.strokes = [boundPaint(spec.stroke, node)];
+      node.strokeAlign = 'INSIDE';
+    }
+    // CARBON LIVE-DEFECT ROUND (D2): a shape's LITERAL RING. An unchecked
+    // Carbon checkbox box is a transparent square with a 1px border — a ring
+    // with no paint, no weight and no radius is not a box.
+    else if (spec.lits && spec.lits.strokeColor) {
+      node.strokes = [{ type: 'SOLID', color: { r: spec.lits.strokeColor.r, g: spec.lits.strokeColor.g, b: spec.lits.strokeColor.b }, opacity: spec.lits.strokeColor.a === undefined ? 1 : spec.lits.strokeColor.a }];
+      node.strokeAlign = 'INSIDE';
+    }
+    if (spec.lits && spec.lits.strokeWeight !== undefined) node.strokeWeight = spec.lits.strokeWeight;
+    if (spec.lits && spec.lits.strokeSides) {
+      const sw = spec.lits.strokeSides;
+      // ELLIPSE/LINE/etc. expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible".
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (spec.lits && spec.lits.radius !== undefined) node.cornerRadius = spec.lits.radius;
+    for (const [field, varName] of Object.entries(spec.bindings || {})) {
+      node.setBoundVariable(field, need(varName));
+    }
+    if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+    }
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -9668,8 +10997,10 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    propagateOverflowVisible(childNode, node);
     built.push([child, childNode]);
     applyOverlay(node, childNode, child);
+    applyShapeAbsolute(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -9697,11 +11028,12 @@ async function buildNode(spec, registry) {
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
-    applyMarginBox(node, childNode, child);
+    applyMarginBox(node, childNode, child, registry);
   }
+  resizeOutOfFlow(node, built);
   return node;
 }
 
@@ -9901,8 +11233,12 @@ function dsStampFingerprints(node) {
   }
 }
 
+// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
+// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
+// skips as "unchanged" and canvas keeps the old runtime behavior.
+const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C);
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -9914,7 +11250,8 @@ function specHash(C) {
 // rebuilt from spec (manual interior edits are drift by definition);
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
-// REPORTED, never deleted — a human retires those.
+// REPORTED, never deleted — except State preview leftovers when
+// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
@@ -9972,6 +11309,25 @@ async function amendSet(set, C) {
       report.extraVariants.push(ch.name);
     }
   }
+  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
+  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // sync must be removed — otherwise amend leaves a doubled showcase grid.
+  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
+  if (!expectedHasState && report.extraVariants.length) {
+    const removed = [];
+    for (const name of [...report.extraVariants]) {
+      if (!/, State=/.test(name)) continue;
+      const ch = set.children.find((c) => c.name === name);
+      if (ch) {
+        ch.remove();
+        removed.push(name);
+      }
+    }
+    if (removed.length) {
+      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
+      report.removedVariants = removed;
+    }
+  }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
   for (const v of EV) {
@@ -9988,8 +11344,10 @@ async function amendSet(set, C) {
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+    propagateOverflowVisible(childNode, comp);
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
@@ -10001,11 +11359,12 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
-    applyMarginBox(comp, childNode, childSpec);
+    applyMarginBox(comp, childNode, childSpec, registry);
       }
+  resizeOutOfFlow(comp, built);
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -10038,8 +11397,11 @@ async function amendSet(set, C) {
       sl.instance.componentPropertyReferences = { mainComponent: k };
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        // Optional slots default hidden — dashed "Slot" chrome must not be the
+        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
         sl.wrapper.componentPropertyReferences = { visible: vk };
+        sl.wrapper.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -10142,8 +11504,10 @@ async function amendComponent(comp, C) {
   for (const childSpec of v.spec.children || []) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
+    propagateOverflowVisible(childNode, comp);
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }
@@ -10155,10 +11519,11 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
+  resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -10189,8 +11554,9 @@ async function amendComponent(comp, C) {
     sl.instance.componentPropertyReferences = { mainComponent: k };
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
-      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
       sl.wrapper.componentPropertyReferences = { visible: vk };
+      sl.wrapper.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -10308,7 +11674,8 @@ async function syncOne(C) {
       }
       s.instance.componentPropertyReferences = { mainComponent: key };
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', true) };
+        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
+        s.wrapper.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {

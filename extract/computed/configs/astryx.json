@@ -83,6 +83,7 @@
       "contract": "examples/astryx/contracts-seed/switch.contract.json",
       "sampleText": "Enable notifications",
       "axes": [
+        "value",
         "labelPosition"
       ],
       "stateProps": [
@@ -93,7 +94,8 @@
       ],
       "fixedProps": {
         "label": "Enable notifications"
-      }
+      },
+      "__note:valueAxis": "Wave B.3 FC-MISSING-AXIS — value is a VARIANT axis (off/on). Code prop is boolean; harness maps enum via prop adapter / sample casting in capture."
     },
     {
       "name": "Slider",

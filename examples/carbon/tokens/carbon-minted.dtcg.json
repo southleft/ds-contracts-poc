@@ -2483,6 +2483,70 @@
         "min-width": {
           "$value": "288px",
           "$type": "dimension"
+        },
+        "border-top-color": {
+          "high": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "low": {
+            "$value": "#161616",
+            "$type": "color"
+          }
+        },
+        "border-top-width": {
+          "high": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "low": {
+            "$value": "1px",
+            "$type": "dimension"
+          }
+        },
+        "border-right-color": {
+          "high": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "low": {
+            "$value": "#161616",
+            "$type": "color"
+          }
+        },
+        "border-right-width": {
+          "high": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "low": {
+            "$value": "1px",
+            "$type": "dimension"
+          }
+        },
+        "border-bottom-color": {
+          "high": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "low": {
+            "$value": "#161616",
+            "$type": "color"
+          }
+        },
+        "border-bottom-width": {
+          "high": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "low": {
+            "$value": "1px",
+            "$type": "dimension"
+          }
+        },
+        "showcase-width": {
+          "$value": "428px",
+          "$type": "dimension"
         }
       },
       "inline-notification-details": {
@@ -2669,8 +2733,14 @@
           "$type": "color"
         },
         "color": {
-          "$value": "#000000",
-          "$type": "color"
+          "high": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "low": {
+            "$value": "#000000",
+            "$type": "color"
+          }
         },
         "outline-color": {
           "$value": "#00000000",
@@ -2898,29 +2968,16 @@
           "$value": "{text-primary}",
           "$type": "color"
         },
-        "width": {
-          "$value": "94.3125px",
-          "$type": "dimension"
-        },
         "outline-color-state-focus-visible": {
           "$value": "#0f62fe",
           "$type": "color"
         }
       },
-      "tabs-nav-item-label-wrapper": {
-        "width": {
-          "$value": "62.3125px",
-          "$type": "dimension"
-        }
-      },
+      "tabs-nav-item-label-wrapper": {},
       "tabs-nav-item-2": {
         "border-bottom-color": {
           "$value": "#e0e0e0",
           "$type": "color"
-        },
-        "width": {
-          "$value": "80px",
-          "$type": "dimension"
         },
         "border-bottom-color-state-active": {
           "$value": "#8d8d8d",
@@ -2935,12 +2992,7 @@
           "$type": "color"
         }
       },
-      "tabs-nav-item-label-wrapper-2": {
-        "width": {
-          "$value": "48px",
-          "$type": "dimension"
-        }
-      },
+      "tabs-nav-item-label-wrapper-2": {},
       "label-2": {
         "font-weight": {
           "$value": "400",
@@ -2951,18 +3003,9 @@
         "border-bottom-color": {
           "$value": "#e0e0e0",
           "$type": "color"
-        },
-        "width": {
-          "$value": "84.4688px",
-          "$type": "dimension"
         }
       },
-      "tabs-nav-item-label-wrapper-3": {
-        "width": {
-          "$value": "52.4688px",
-          "$type": "dimension"
-        }
-      },
+      "tabs-nav-item-label-wrapper-3": {},
       "label-3": {
         "font-weight": {
           "$value": "400",

@@ -150,6 +150,7 @@ export {
 export {
   createFigmaEngine,
   emitFigmaScript,
+  RUNTIME_EMIT_REV,
   type ComponentData,
   type FigmaEngine,
   type FigmaEngineInput,

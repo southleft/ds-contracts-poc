@@ -171,6 +171,23 @@
       "declared": {
         "cursor": "default"
       },
+      "literalsByProp": [
+        {
+          "prop": "type",
+          "map": {
+            "outline": {
+              "border-top-width": "1px",
+              "border-right-width": "1px",
+              "border-bottom-width": "1px",
+              "border-left-width": "1px",
+              "border-top-color": "rgba(57, 57, 57, 1)",
+              "border-right-color": "rgba(57, 57, 57, 1)",
+              "border-bottom-color": "rgba(57, 57, 57, 1)",
+              "border-left-color": "rgba(57, 57, 57, 1)"
+            }
+          }
+        }
+      ],
       "tokens": {
         "background-color": "{imported.tag.root.background-color.unset}",
         "border-bottom-left-radius": "{imported.shared.size-16}",

@@ -1149,6 +1149,11 @@ export function byteGate(mintedPath: string): { checked: number } {
         tmp,
         '--tokens',
         `${path.join(EX, 'tokens', 'astryx.dtcg.json')},${mintedPath}`,
+        // Wave B.3 gave banner/text-input real icon parts whose SVGs live in
+        // the example's own assets dir; without --icons the emit refuses on
+        // "asset does not exist" and the byte-gate can never run.
+        '--icons',
+        path.join(EX, 'assets', 'icons'),
       ],
       { cwd: REPO, stdio: 'pipe' },
     );

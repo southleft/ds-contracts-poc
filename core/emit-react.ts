@@ -184,6 +184,11 @@ const JUSTIFY_CSS: Record<string, string> = {
 export const isEnum = (p: Prop): p is Prop & { type: { enum: string[] } } =>
   typeof p.type === 'object' && 'enum' in p.type;
 
+/** VARIANT-bound boolean — a true variant axis (subst keys 'true'|'false').
+ *  literalsByProp / tokensByProp may drive it the same way as an enum. */
+export const isVariantBool = (p: Prop): boolean =>
+  p.type === 'boolean' && p.bindings.figma.kind === 'VARIANT';
+
 /** v7: structured/array prop — code-only (bindings.figma.kind 'NONE'). */
 export const isArrayType = (
   p: Prop,
@@ -612,11 +617,14 @@ export function validateContract(
       const lbpProp = contract.props.find((pr) => pr.name === entry.prop);
       if (!lbpProp) {
         errors.push(`${contract.id}: part "${name}" literalsByProp references unknown prop "${entry.prop}"`);
-      } else if (!isEnum(lbpProp)) {
-        errors.push(`${contract.id}: part "${name}" literalsByProp prop "${entry.prop}" must be an enum prop`);
+      } else if (!isEnum(lbpProp) && !isVariantBool(lbpProp)) {
+        errors.push(
+          `${contract.id}: part "${name}" literalsByProp prop "${entry.prop}" must be an enum prop or VARIANT-bound boolean`,
+        );
       } else {
+        const allowed = isEnum(lbpProp) ? lbpProp.type.enum : ['true', 'false'];
         for (const [k, overrides] of Object.entries(entry.map)) {
-          if (!lbpProp.type.enum.includes(k)) {
+          if (!allowed.includes(k)) {
             errors.push(`${contract.id}: part "${name}" literalsByProp map key "${k}" is not a value of prop "${entry.prop}"`);
           }
           for (const ch of Object.keys(overrides)) {
@@ -1500,8 +1508,12 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     'height' in rootTokens &&
     Object.keys(root.parts ?? {}).length > 0 &&
     Object.values(root.parts ?? {}).every((p) => p.slot !== undefined);
+  // FC-HUG-CEILING-HTML: hug-below-max is a ceiling, not a fluid stretch.
+  // Mirrors core/emit-html.ts (Carbon Tag gate was 208px vs Figma ~46px).
   if ('max-width' in rootTokens) {
-    rootDecls.push('width: 100%');
+    if (root.hugsBelowMaxWidth !== true) {
+      rootDecls.push('width: 100%');
+    }
     if (!slotWrapperFloor) rootDecls.push('min-width: fit-content');
   }
   // v15: a declared cursor fact is authoritative — the emitter's own button

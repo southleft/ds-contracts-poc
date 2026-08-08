@@ -166,16 +166,103 @@
                     },
                     "checked": {
                       "background-color": "rgba(22, 22, 22, 1)",
+                      "border-top-width": "0px",
+                      "border-right-width": "0px",
+                      "border-bottom-width": "0px",
+                      "border-left-width": "0px",
                       "border-radius": "2px"
                     },
                     "indeterminate": {
                       "background-color": "rgba(22, 22, 22, 1)",
+                      "border-top-width": "0px",
+                      "border-right-width": "0px",
+                      "border-bottom-width": "0px",
+                      "border-left-width": "0px",
                       "border-radius": "2px"
                     }
                   }
                 }
               ],
-              "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round): an UNCONDITIONAL 16×16 rect at 0,2 inside checkbox-label — position:absolute with literal offsets, per-value checked overrides; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+              "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round + Wave B.2): an UNCONDITIONAL 16×16 rect at 0,2 inside checkbox-label — position:absolute with literal offsets, per-value checked overrides; rotation 0; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+            },
+            "checkbox-label-after": {
+              "shape": {
+                "kind": "rect",
+                "width": 9,
+                "height": 5
+              },
+              "literals": {
+                "background-color": "transparent",
+                "border-top-width": "0px",
+                "border-right-width": "0px",
+                "border-bottom-width": "1px",
+                "border-left-width": "1px",
+                "border-bottom-color": "rgba(255, 255, 255, 1)",
+                "border-left-color": "rgba(255, 255, 255, 1)",
+                "width": "9px",
+                "height": "5px"
+              },
+              "literalsByProp": [
+                {
+                  "prop": "checked",
+                  "map": {
+                    "checked": {
+                      "width": "9px",
+                      "height": "5px",
+                      "background-color": "transparent",
+                      "border-top-width": "0px",
+                      "border-right-width": "0px",
+                      "border-bottom-width": "1px",
+                      "border-left-width": "1px",
+                      "border-bottom-color": "rgba(255, 255, 255, 1)",
+                      "border-left-color": "rgba(255, 255, 255, 1)",
+                      "top": "6.5px",
+                      "left": "7px"
+                    },
+                    "indeterminate": {
+                      "width": "8px",
+                      "height": "2px",
+                      "background-color": "rgba(255, 255, 255, 1)",
+                      "border-top-width": "0px",
+                      "border-right-width": "0px",
+                      "border-bottom-width": "0px",
+                      "border-left-width": "0px",
+                      "top": "9px",
+                      "left": "4px"
+                    }
+                  }
+                }
+              ],
+              "stylesWhen": [
+                {
+                  "prop": "checked",
+                  "equals": "unchecked",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "checked",
+                  "equals": "checked",
+                  "styles": {
+                    "position": "absolute",
+                    "top": "6.5px",
+                    "left": "7px",
+                    "transform": "rotate(-45deg)"
+                  }
+                },
+                {
+                  "prop": "checked",
+                  "equals": "indeterminate",
+                  "styles": {
+                    "position": "absolute",
+                    "top": "9px",
+                    "left": "4px",
+                    "transform": "rotate(0deg)"
+                  }
+                }
+              ],
+              "description": "Drawn ::after pseudo-element decor promoted from the computed floor (round 5c S5 + Wave B.2 rotate): a 9×5 rect at 7,6.5 inside checkbox-label, fill rgba(0, 0, 0, 0) — background+box+radius; translate folded; rotation per checked (receipted)."
             }
           },
           "declared": {

@@ -3725,7 +3725,12 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // Shape branch: stroke + bindings + default-paint clear (checkbox).
       const checkbox = readFileSync(path.join(ROOT, 'examples/polaris/figma/checkbox.figma.js'), 'utf8');
       const shapeBranch = checkbox.slice(checkbox.indexOf("spec.type === 'shape'"));
-      const shapeBody = shapeBranch.slice(0, shapeBranch.indexOf('} else {'));
+      // FC-PSEUDO-STROKE-GLYPH added an INNER `if (spec.svg) { … } else {`
+      // split inside the shape branch, so slicing at the first '} else {'
+      // truncated the branch before the parametric body this pin asserts on
+      // (the instrument, not the emitter, went stale). The branch's real end
+      // is the OUTER two-space-indented `} else {` (the frame default arm).
+      const shapeBody = shapeBranch.slice(0, shapeBranch.indexOf('\n  } else {'));
       if (!shapeBody.includes('spec.stroke')) throw new Error('shape branch must apply spec.stroke');
       if (!shapeBody.includes('spec.bindings')) throw new Error('shape branch must apply spec.bindings');
       // Round 5f (B5E finding 2): the shape branch applies a LITERAL fill
@@ -6682,6 +6687,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         'scripts/generate-components.ts',
         '--contracts', 'examples/astryx/contracts',
         '--tokens', 'examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json',
+        // Exact-conversion wave: banner's four status icons and text-input's
+        // three type glyphs are real SVG assets in the example's own icons
+        // dir — same flag the MUI genesis eval already passes.
+        '--icons', 'examples/astryx/assets/icons',
         '--out', out,
         '--stories',
       ];
@@ -6792,18 +6801,23 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const proposals = JSON.parse(readFileSync(T(OUTPUTS[0]), 'utf8'));
       const disp = (d: string) => proposals.rows.filter((r: any) => r.disposition === d);
       const refsOf = (d: string) => disp(d).reduce((a: number, r: any) => a + r.refs, 0);
-      // POST-REVIEW STATE: the queue is RESOLVED — 70 refs applied, 0 ambiguous.
+      // POST-REVIEW STATE: the queue is RESOLVED — 78 refs applied, 0 ambiguous.
       //
-      // Was 63/0 against the FROZEN capture. The 2026-07-29 recapture (task
-      // #43, the first after the capture stopped reading its own promote
-      // output) reads more of the library — the minted tree goes 237 -> 408
-      // leaves, of which the COLOUR leaves (the only anchorable kind) go
-      // 113 -> 134 — and the re-anchoring review was re-run against it. Both
-      // numbers moved the right way: aliased colour leaves 54 -> 68, i.e.
-      // 47.8% -> 50.7% of the anchorable denominator, with the review queue
-      // still empty at the end.
-      if (refsOf('applied') !== 70 || refsOf('ambiguous') !== 0) {
-        throw new Error(`join moved: expected 70 applied / 0 ambiguous refs, got ${refsOf('applied')} / ${refsOf('ambiguous')}`);
+      // Was 63/0 against the FROZEN capture, then 70/0 after the 2026-07-29
+      // recapture (task #43) review. The 2026-08 exact-conversion wave rebound
+      // the badge and switch contracts, minting new colour leaves that
+      // reopened the queue at 34 applied / 43 ambiguous; the 2026-08-08
+      // continuation review round (executed by automation under the owner
+      // delegation of TJ 2026-07-26, flagged for owner review) resolved it:
+      // five rows extended mechanically as same-value/same-target
+      // continuations, five new arms decided on the committed source bindings
+      // in the sandbox @astryxdesign/core (Badge.tsx names color-accent /
+      // color-error / color-success / color-warning and their color-on-*
+      // content partners per variant; Switch.tsx names color-text-secondary
+      // for labels and color-background-surface for the thumb), and one new
+      // kept-literal receipt for badge-neutral's alpha-serialisation near-miss.
+      if (refsOf('applied') !== 78 || refsOf('ambiguous') !== 0) {
+        throw new Error(`join moved: expected 78 applied / 0 ambiguous refs, got ${refsOf('applied')} / ${refsOf('ambiguous')}`);
       }
       // THE KEPT-LITERAL RECEIPTS TURNED OVER COMPLETELY, and both halves of
       // that are the point.
@@ -6822,9 +6836,17 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // token for the ABSENCE of paint, and re-anchoring either would make a
       // deliberately transparent surface start painting on a re-theme. Kept
       // literal on purpose, so the pair is DECIDED rather than pending.
+      //
+      // 2026-08-08 continuation round: a SECOND receipt (1 row / 1 leaf).
+      // badge.root.background-color.neutral is #0536591A in the wave's fresh
+      // mint; the source names {color-neutral} outright, but the anchor
+      // authors that token as rgba(5, 54, 89, 0.1) — alpha 25.5/255 vs the
+      // capture's 26/255 — and the join refuses near-miss tuple equality BY
+      // DESIGN. Receipted with the unblocking condition named (re-author the
+      // anchor's alpha so it round-trips), not silently pending.
       const lit = proposals.summary.literalReceipts;
-      if (!lit || lit.rows !== 1 || lit.leaves !== 2 || lit.refs !== 2) {
-        throw new Error(`the decided-literal receipts moved: expected 1 row / 2 leaves / 2 refs (the transparent pair), got ${JSON.stringify(lit)}`);
+      if (!lit || lit.rows !== 2 || lit.leaves !== 3 || lit.refs !== 3) {
+        throw new Error(`the decided-literal receipts moved: expected 2 rows / 3 leaves / 3 refs (the transparent pair + badge-neutral alpha near-miss), got ${JSON.stringify(lit)}`);
       }
       const cardBorder = proposals.rows.find((r: any) => r.exclusion === 'card-border-degraded-capture');
       if (!cardBorder || cardBorder.refs !== 48) {
@@ -6891,7 +6913,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // rows were authored against the fresh mint, 17 of whose leaves carry the
       // SAME target the previous round reviewed and are continuations rather
       // than new judgements.
-      if (ledger.length !== 31) throw new Error(`expected 31 ledger rows (the row-rule-color prune left 7; the post-recapture review authored 28; rows sharing an id AND a target were merged, so no leaf is anchored twice), got ${ledger.length}`);
+      // 36 rows after the 2026-08-08 continuation round (was 31): the wave's
+      // badge/switch rebinding reopened the queue and the round authored 5 new
+      // arms (badge warning content, badge success content, switch thumb
+      // surface, badge success background, badge warning background) while
+      // extending 5 existing rows in place — rows sharing an id AND a target
+      // stay merged, so no leaf is anchored twice.
+      if (ledger.length !== 36) throw new Error(`expected 36 ledger rows (31 post-recapture + 5 arms from the 2026-08-08 continuation round; rows sharing an id AND a target were merged, so no leaf is anchored twice), got ${ledger.length}`);
       let aliasedLeaves = 0;
       for (const d of ledger) {
         if (d.ack !== 'explicit CLI --apply') throw new Error(`ledger row ${d.ids} carries the wrong ack`);
@@ -6909,8 +6937,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           aliasedLeaves++;
         }
       }
-      // 68 leaves carry an alias after the post-recapture review (was 54), and
-      // every one is anchored exactly ONCE — rows sharing an id and a target
+      // 78 leaves carry an alias after the 2026-08-08 continuation round (was
+      // 68 post-recapture, 54 before that): +12 new badge/switch leaves
+      // decided this round, -2 pruned mechanically because the wave's
+      // rebinding left them with zero contract refs (shared.color-0064e0 and
+      // badge.root.color.neutral now sit in the unreferenced-leaf exclusion;
+      // their tree aliases are untouched, see _prunedByWaveUnbind). Every
+      // leaf is anchored exactly ONCE — rows sharing an id and a target
       // are merged, so the ledger cannot say the same leaf twice.
       //
       // THE NUMBER THAT SAYS WHETHER THE ROUND HELPED is the anchorable
@@ -6921,7 +6954,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // Measured against the whole tree the share appears to FALL (22.8% ->
       // 16.7%) purely because those 150 dimension leaves join the denominator
       // and no colour token can address them.
-      if (aliasedLeaves !== 68) throw new Error(`expected 68 re-anchored leaves, got ${aliasedLeaves}`);
+      if (aliasedLeaves !== 78) throw new Error(`expected 78 re-anchored leaves, got ${aliasedLeaves}`);
 
       // PER-LEAF GRAIN. One value group splits into several decisions under one
       // id, and the applier must land EVERY row that names the id — the
@@ -6939,23 +6972,29 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // and the post-recapture review names that surface
       // (color-background-inverted), so the text became decidable.
       const ffffff = ledger.filter((d: any) => d.ids.includes('RA-ffffff'));
-      if (ffffff.length !== 4) throw new Error(`RA-ffffff should split into 4 per-leaf decisions, got ${ffffff.length}`);
-      if (new Set(ffffff.map((d: any) => d.to)).size !== 4) throw new Error('the RA-ffffff split does not reach 4 distinct targets — the per-leaf grain is not exercised');
-      // 13 leaves, down from 19: six of the group's leaves were `row-rule-color`
-      // mirrors that the currentcolor fold (task #35) stopped minting, so there
-      // is nothing left to anchor there. The remaining 13 are the real ones —
-      // button content on two surfaces, card's default background, and the two
-      // slider tooltip leaves the previous round had to decline.
-      if (ffffff.reduce((a: number, d: any) => a + d.leaves.length, 0) !== 13) throw new Error('RA-ffffff does not cover its 13 re-anchored leaves');
+      // SIX arms after the 2026-08-08 continuation round (was 4): the wave's
+      // badge/switch rebinding minted new #ffffff leaves and the round added
+      // (5) badge success content -> color-on-success (the role-over-hue
+      // rubric, corroborated by Badge.tsx variantStyles.success) and (6) the
+      // switch thumb surface -> color-background-surface (a COMMITTED source
+      // binding in Switch.tsx styles.thumb outranks the mode-safe prediction;
+      // the row carries a `deviation` field saying so).
+      if (ffffff.length !== 6) throw new Error(`RA-ffffff should split into 6 per-leaf decisions, got ${ffffff.length}`);
+      if (new Set(ffffff.map((d: any) => d.to)).size !== 6) throw new Error('the RA-ffffff split does not reach 6 distinct targets — the per-leaf grain is not exercised');
+      // 18 leaves (was 13): +1 badge info content, +1 badge error content,
+      // +1 badge success content, +2 switch thumbs — all minted by the wave's
+      // rebinding and decided in the 2026-08-08 continuation round.
+      if (ffffff.reduce((a: number, d: any) => a + d.leaves.length, 0) !== 18) throw new Error('RA-ffffff does not cover its 18 re-anchored leaves');
 
       // THE OTHER HALF OF THE REVIEW: kept-literal receipts.
       const literals = JSON.parse(readFileSync(T(LEDGER), 'utf8')).literals;
-      // ONE receipt now, covering the transparent pair. The two it replaces
-      // both explained why a value-named SHARED leaf stayed anonymous, and both
-      // leaves existed only to back `row-rule-color` refs the currentcolor fold
-      // stopped minting — a receipt for a leaf that no longer exists explains
-      // nothing.
-      if (!Array.isArray(literals) || literals.length !== 1) throw new Error(`expected 1 decided-literal receipt (the transparent pair), got ${literals?.length}`);
+      // TWO receipts after the 2026-08-08 continuation round: the transparent
+      // pair (unchanged), plus badge-neutral's background — the source names
+      // {color-neutral} but the anchor's rgba(5, 54, 89, 0.1) does not
+      // tuple-equal the captured #0536591A (alpha 25.5 vs 26), and the join
+      // refuses near-miss equality by design, so the leaf is receipted with
+      // its unblocking condition rather than left pending.
+      if (!Array.isArray(literals) || literals.length !== 2) throw new Error(`expected 2 decided-literal receipts (the transparent pair + badge-neutral alpha near-miss), got ${literals?.length}`);
       for (const d of literals) {
         if (d.ack !== 'decided-literal') throw new Error(`literal receipt ${d.ids} carries the wrong ack`);
         if (!/ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26/.test(d.cause)) {
@@ -7015,10 +7054,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
 
       console.log(
         `astryx-reanchor-minted: value-identity join over the minted tree — --propose byte-stable ×2 AND byte-equal to the committed artifacts ` +
-          `(${proposals.rows.length} rows, queue RESOLVED: 63 applied refs across 19 ledger rows / 54 leaves, 0 ambiguous, 7 refs on 2 leaves REVIEWED AND KEPT LITERAL with receipts, 48 card-border refs REFUSED by name for a degraded capture; no live leaf is pending without a decision or a receipt); ` +
-          `every reviewed row carries the delegation provenance (orchestrator-reviewed under owner delegation, TJ 2026-07-26); PER-LEAF GRAIN pinned — RA-ffffff splits into 3 decisions / 2 targets / 19 leaves under one id; ` +
+          `(${proposals.rows.length} rows, queue RESOLVED: 78 applied refs across 36 ledger rows / 78 leaves, 0 ambiguous, 3 refs on 3 leaves REVIEWED AND KEPT LITERAL with receipts, 48 card-border refs REFUSED by name for a degraded capture; no live leaf is pending without a decision or a receipt); ` +
+          `every reviewed row carries the delegation provenance (orchestrator-reviewed under owner delegation, TJ 2026-07-26; the 2026-08-08 continuation round is additionally labelled executed-by-automation and flagged for owner review); PER-LEAF GRAIN pinned — RA-ffffff splits into 6 decisions / 6 targets / 18 leaves under one id; ` +
           `a docs-plane anchor is refused BY NAME (the silent-no-op trap); --apply refuses an un-acked id AND an excluded row, and is idempotent on an acked one; ` +
-          `the 54 aliases resolve to the UNCHANGED neutral light values and the 13 neutral component scripts re-emit byte-identical. ` +
+          `the 78 aliases resolve to the UNCHANGED neutral light values and the 13 neutral component scripts re-emit byte-identical. ` +
           `Falsified: tampered script → BYTE-GATE refusal; drifted DTCG → STALE LEDGER refusal + moved proposals; drifted kept-literal leaf → STALE LITERAL RECEIPT refusal`,
       );
     },
@@ -7273,6 +7312,9 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         'packages/cli/src/cli.ts', 'figma', 'bundle', 'examples/tailwind/contracts',
         '--tokens', 'examples/tailwind/tokens/tailwind.dtcg.json,examples/tailwind/tokens/tailwind-minted.dtcg.json',
         '--name', 'Tailwind',
+        // Exact-conversion wave: alert's status/dismiss icons are real SVG
+        // assets that ride the bundle (the MUI bundle's --icons precedent).
+        '--icons', 'examples/tailwind/assets/icons',
         '--out', 'examples/tailwind/figma/bundle-run.json',
       ]);
       if (twBundle.status !== 0) throw new Error(`figma bundle (tailwind) failed:\n${twBundle.out.slice(0, 1200)}`);
@@ -7333,7 +7375,18 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // as ink / D2 checkbox box + toggle knob / D3 no child wider than its
       // parent / D5 modal not a viewport rectangle / D6 no inert part + the
       // icon button keeps its box), so this eval fails if any of them regress.
-      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1207 variables\)/.test(batch.out)) {
+      // EXACT-CONVERSION WAVE — REPINNED 1207 → 1215 variables, after review,
+      // not silently: inline-notification's exact pass minted 15 new leaves
+      // (per-contrast root border widths+colors high/low — the D2-class ring
+      // facts —, the per-contrast close-button color the FC-CONTRAST-ICON pin
+      // requires, and root/showcase-width) and retired the single
+      // un-substituted close-button color leaf. The landing round corrected
+      // the wave's first repin (1221): it had not counted the SIX tabs width
+      // leaves the same wave retired (tabs-nav-item{,-2,-3} and their
+      // label-wrapper widths — FC-CARBON-TABS-LABEL demands the wrappers HUG,
+      // so their minted fixed widths left the tree): 1207 + 15 − 1 − 6 = 1215.
+      // Variant cells (132) and source aliases (96) are unchanged.
+      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1215 variables\)/.test(batch.out)) {
         throw new Error(`carbon genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // The token wrap is a PURE function of the pinned compiled stylesheet, so
@@ -7387,7 +7440,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const committed = readFileSync(path.join(ROOT, 'examples/carbon/figma/carbon.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/carbon/figma/carbon.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
       console.log(
-        `carbon-figma-genesis: 10/10 scripts referee+execute headless (132 variant cells, 1207 variables incl. 94 Figma-native source aliases; live-defect round: the six canvas defects are pinned by the compile receipt this eval runs); ` +
+        `carbon-figma-genesis: 10/10 scripts referee+execute headless (132 variant cells, 1215 variables incl. 96 Figma-native source aliases; live-defect round: the six canvas defects are pinned by the compile receipt this eval runs); ` +
           `Light/Dark = .cds--white/.cds--g100 differ on ${differing.length} tokens; no "unset" pseudo-value reached a contract enum; ` +
           `one-paste batch mock-proven; committed carbon.bundle.json fresh and byte-deterministic; ${tokenNote} — the generality control case`,
       );
@@ -7424,12 +7477,20 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       });
       const receipt = run(process.execPath, ['examples/altitude/scripts/figma-compile-receipt.mjs']);
       if (receipt.status !== 0) throw new Error(`altitude figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
-      if (!receipt.out.includes('8 scripts, 41 variants')) {
-        throw new Error(`altitude compile receipt missing the 8-scripts/41-variants line:\n${receipt.out.slice(0, 800)}`);
+      // Exact-conversion wave: 41 → 47 variant cells. The FC-ENUM-HOLE pin
+      // (code-to-canvas-wave-a-emit-pins) REQUIRES chip Type to carry the
+      // developed `default` (pill) alongside `squared` — 5×2=10 cells, +5 —
+      // and divider's contract documents the same enum-hole class (`default`
+      // horizontal rule alongside `vertical`) — 2 cells, +1, which also makes
+      // Divider a SET, not a standalone. 41 could only hold with chip
+      // Type(1), which the enum-hole pin forbids; the receipt derives every
+      // count from the contracts' own axes.
+      if (!receipt.out.includes('8 scripts, 47 variants')) {
+        throw new Error(`altitude compile receipt missing the 8-scripts/47-variants line:\n${receipt.out.slice(0, 800)}`);
       }
       const batch = run(process.execPath, ['examples/altitude/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`altitude genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(6 sets: Badge\(8\), Button\(12\), Chip\(10\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar, Divider; 638 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(7 sets: Badge\(8\), Button\(12\), Chip\(10\), Divider\(2\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar; 638 variables\)/.test(batch.out)) {
         throw new Error(`altitude genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // THE SHADOW-DOM ANATOMY PINS, read off the COMMITTED promoted contracts.
@@ -7509,7 +7570,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const committed = readFileSync(path.join(ROOT, 'examples/altitude/figma/altitude.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/altitude/figma/altitude.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
       console.log(
-        `altitude-shadow-dom-genesis: 8/8 shadow-DOM scripts referee+execute headless (41 variant cells, 638 variables incl. 41 Figma-native source aliases); ` +
+        `altitude-shadow-dom-genesis: 8/8 shadow-DOM scripts referee+execute headless (47 variant cells, 638 variables incl. 46 Figma-native source aliases); ` +
           `slotted text, depth-2 nested shadow (avatar → al-badge) and an svg inside a shadow root all reached the canvas; ` +
           `${defaultlessAxes} defaultless axes and no "unset" pseudo-value in any contract enum; Light/Dark differ on ${differing.length} tokens (thin by Altitude's own choice); ` +
           `one-paste batch mock-proven; committed altitude.bundle.json fresh and byte-deterministic; ${tokenNote} — the first shadow-DOM subject`,
@@ -8346,7 +8407,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error(`polaris lost its freshness row (task #26 added it via generate.ts --check):\n${fresh.out.slice(0, 1200)}`);
       }
       const total = baseline.rows.reduce((n, r) => n + r.overflows, 0);
-      console.log(`child-wider-ratchet-and-script-freshness: ${baseline.rows.length} libraries carry a committed child-wider baseline (${total} real overflows repo-wide, all astryx ProgressBar percent-width; text-caused and margin-box counted SEPARATELY so neither can flatter the first number), the ratchet is two-sided and names an unrecorded improvement, and every library's sync scripts are BYTE-FRESH vs a fresh emission (polaris via generate.ts --check since task #26 — zero named holes remain) — the gap that let MUI's scripts sit three engine fixes stale while the suite stayed green`);
+      console.log(`child-wider-ratchet-and-script-freshness: ${baseline.rows.length} libraries carry a committed child-wider baseline (${total} real overflows repo-wide, the MUI hug-cell label pair — the astryx ProgressBar percent-width class was FIXED by the exact-conversion wave and re-recorded; text-caused and margin-box counted SEPARATELY so neither can flatter the first number), the ratchet is two-sided and names an unrecorded improvement, and every library's sync scripts are BYTE-FRESH vs a fresh emission (polaris via generate.ts --check since task #26 — zero named holes remain) — the gap that let MUI's scripts sit three engine fixes stale while the suite stayed green`);
     },
   },
   {
@@ -9009,6 +9070,9 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // Console MCP live loop: contract → chunked figma_execute → screenshot →
     // audit → v6 fingerprint → zero-mismatch light round-trip, receipted under
     // parity/receipts/console-loop/components/ on DS-Contracts-Testing.
+    // Evidence semantics: first-party visual claims have no pixel scorecards
+    // yet — the gate must exit 0 but print them loudly as ATTESTED-ONLY, and
+    // the "first-party" ratchet floor must hold.
     id: 'console-loop-evidence-receipt',
     claim: 'C3-detection',
     run: () => {
@@ -9023,14 +9087,23 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (!out.includes('required ok')) {
         throw new Error('console-loop-evidence-check did not report required ok');
       }
+      if (!out.includes('ATTESTED-ONLY')) {
+        throw new Error(
+          'console-loop-evidence-check must print unscored visual claims as ATTESTED-ONLY (first-party lane has no pixel scorecards yet)',
+        );
+      }
+      if (!out.includes('ratchet floor')) {
+        throw new Error('console-loop-evidence-check did not report the ratchet floor check');
+      }
       console.log(
-        'console-loop-evidence-receipt: Console MCP generate→screenshot→audit→round-trip receipts pinned for required Testing-file components',
+        'console-loop-evidence-receipt: first-party receipts pinned; visual claims surfaced as attested-only (no scorecards yet); ratchet floor holds',
       );
     },
   },
 
   {
-    // MUI denominator (31) on MUI Test 1 — same Console MCP loop, foreign corpus.
+    // MUI denominator (31) on MUI Test 1 — same Console MCP loop, foreign corpus,
+    // but like first-party it has no pixel scorecards yet: attested-only lane.
     id: 'console-loop-mui-evidence-receipt',
     claim: 'C3-detection',
     run: () => {
@@ -9045,13 +9118,25 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (!out.includes('31/31')) {
         throw new Error('console-loop-mui-evidence-check did not report 31/31');
       }
+      if (!out.includes('ATTESTED-ONLY')) {
+        throw new Error(
+          'console-loop-mui-evidence-check must print unscored visual claims as ATTESTED-ONLY',
+        );
+      }
       console.log(
-        'console-loop-mui-evidence-receipt: MUI DENOMINATOR-50 stems receipted via Console MCP on MUI Test 1',
+        'console-loop-mui-evidence-receipt: MUI DENOMINATOR-50 stems receipted; visual claims surfaced as attested-only; ratchet floor holds',
       );
     },
   },
 
   ...(['tailwind', 'altitude', 'astryx', 'carbon', 'polaris'] as const).map((lib) => ({
+    // Foreign lanes are STRICT: the gate reads pixel scorecards
+    // (scores/<stem>.json, bar pctAAMasked<=5 AND compositionOk), never
+    // receipt booleans. Green means: every pass-claim is scorecard-backed and
+    // hash-pinned, honest fail-closed receipts (named defects, no claims) are
+    // counted without failing CI, and the RATCHET.json floor holds.
+    // Red-test: a synthetic receipt claiming a visual pass against a failing
+    // scorecard must fail the gate, naming the stem.
     id: `console-loop-${lib}-evidence-receipt`,
     claim: 'C3-detection' as const,
     run: () => {
@@ -9067,8 +9152,88 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (!out.includes('stems ok')) {
         throw new Error(`console-loop-${lib}-evidence-check did not report stems ok`);
       }
+      if (!/\d+ scored-pass/.test(out) || !/\d+ fail-closed/.test(out)) {
+        throw new Error(
+          `console-loop-${lib}-evidence-check did not report scored-pass / fail-closed counts`,
+        );
+      }
+      if (!out.includes('ratchet floor')) {
+        throw new Error(`console-loop-${lib}-evidence-check did not report the ratchet floor check`);
+      }
+
+      // Red-test: false pass-claim (matchDeveloped:true, scorecard fail) must be refused.
+      const dir = path.join(SCRATCH, `console-loop-red-${lib}`);
+      rmSync(dir, { recursive: true, force: true });
+      const base = path.join(dir, 'parity', 'receipts', 'console-loop');
+      mkdirSync(path.join(base, lib, 'components'), { recursive: true });
+      mkdirSync(path.join(base, lib, 'scores'), { recursive: true });
+      mkdirSync(path.join(dir, 'scripts'), { recursive: true });
+      for (const f of ['console-loop-lib-evidence-check.mjs', 'console-loop-scorecard-lib.mjs']) {
+        cpSync(path.join(ROOT, 'scripts', f), path.join(dir, 'scripts', f));
+      }
+      writeFileSync(
+        path.join(base, 'RATCHET.json'),
+        `${JSON.stringify({ version: 1, floors: { [lib]: 0 } }, null, 2)}\n`,
+      );
+      writeFileSync(
+        path.join(base, lib, 'manifest.json'),
+        `${JSON.stringify({ fileKey: 'FAKEKEY', kind: `console-loop-${lib}-component`, required: ['widget'] }, null, 2)}\n`,
+      );
+      writeFileSync(
+        path.join(base, lib, 'components', 'widget.json'),
+        `${JSON.stringify(
+          {
+            version: 1,
+            kind: `console-loop-${lib}-component`,
+            status: 'completed',
+            component: 'widget',
+            fileKey: 'FAKEKEY',
+            visual: { ok: true, matchDeveloped: true, defects: [] },
+            fingerprint: { v6: 'v6:12345' },
+            roundtrip: { mismatches: [] },
+            acceptance: { screenshotReviewed: true, zeroMismatch: true, visualMatchDeveloped: true },
+          },
+          null,
+          2,
+        )}\n`,
+      );
+      writeFileSync(
+        path.join(base, lib, 'components', 'widget.md'),
+        '# widget\nFAKEKEY\nv6:12345\n',
+      );
+      writeFileSync(
+        path.join(base, lib, 'scores', 'widget.json'),
+        `${JSON.stringify(
+          {
+            version: 3,
+            status: 'fail',
+            passBar: { pctAAMaskedMax: 5, compositionOk: true },
+            metrics: { pctAAMasked: 42.5 },
+            compositionOk: false,
+          },
+          null,
+          2,
+        )}\n`,
+      );
+      const red = spawnSync(
+        process.execPath,
+        [path.join(dir, 'scripts', 'console-loop-lib-evidence-check.mjs'), lib],
+        { cwd: dir, encoding: 'utf8' },
+      );
+      const redOut = `${red.stdout ?? ''}${red.stderr ?? ''}`;
+      if ((red.status ?? 0) === 0) {
+        throw new Error(
+          `console-loop-${lib}-evidence-check accepted a false pass-claim (receipt matchDeveloped:true, scorecard fail):\n${redOut}`,
+        );
+      }
+      if (!redOut.includes('widget') || !redOut.includes('contradicts')) {
+        throw new Error(
+          `console-loop-${lib}-evidence-check refusal did not name the contradicting stem:\n${redOut}`,
+        );
+      }
+      rmSync(dir, { recursive: true, force: true });
       console.log(
-        `console-loop-${lib}-evidence-receipt: ${lib} Console MCP loop receipts pinned on DS-Contracts-Testing`,
+        `console-loop-${lib}-evidence-receipt: scorecard-backed passes + honest fail-closed receipts green; false pass-claim refused by name`,
       );
     },
   })),
@@ -9808,7 +9973,11 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           new Map([[spinnerContract.id, spinnerContract]]),
           undefined,
         );
-        if (!spinnerScript.includes('spec.rotation') || !spinnerScript.includes('rt4-svg-rotation')) {
+        // The rev moved rt4-svg-rotation → rt5-text-fill-alignment at the
+        // landing round (FC-TEXT-FILL-ALIGNMENT runtime guard change); the
+        // rotation lowering itself is still pinned by spec.rotation above,
+        // and the salt requirement is pinned against the CURRENT rev.
+        if (!spinnerScript.includes('spec.rotation') || !spinnerScript.includes('rt5-text-fill-alignment')) {
           throw new Error('FC-SVG-ROTATION: runtime must apply spec.rotation and salt RUNTIME_EMIT_REV');
         }
       }
@@ -9933,7 +10102,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const chipScriptPath = path.join(ROOT, 'examples/altitude/figma/chip.figma.js');
         if (existsSync(chipScriptPath)) {
           const chipScript = readFileSync(chipScriptPath, 'utf8');
-          if (/State=Focus Visible/.test(chipScript)) {
+          // Measure the payload, not the runtime prose: every emitted script
+          // carries the amend-cleanup runtime whose COMMENT names the
+          // "State=Focus Visible" leftovers it removes — that string is not a
+          // variant. A real preview variant lands as a quoted node NAME in the
+          // COMPONENTS payload ("Variant=…, State=Focus Visible"), which is
+          // what this pin forbids when figmaStatePreviews is off.
+          if (/"name": "[^"]*State=Focus Visible/.test(chipScript)) {
             throw new Error('FC-STATE-PREVIEW-NOISE: chip emit must not include Focus Visible variants');
           }
         }

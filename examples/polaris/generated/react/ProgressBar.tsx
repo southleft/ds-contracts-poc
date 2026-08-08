@@ -22,7 +22,7 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
 
 /** PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/ProgressBar/ProgressBar.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow. */
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function ProgressBar(
-  { size = 'medium', tone = 'highlight', animated = false, progress = 0, ariaLabelledBy, className, children, ...rest },
+  { size = 'medium', tone = 'highlight', animated = false, progress = 40, ariaLabelledBy, className, children, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`size-${size}`], styles[`tone-${tone}`], className].filter(Boolean).join(' ');
@@ -31,9 +31,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
       <progress className={styles.progress}>
 
 </progress>
-<div className={styles.indicator}>
-<span className={styles.label}>25%</span>
-</div>
+<div className={styles.indicator} style={{ width: `${Math.min(100, Math.max(0, (progress / max) * 100))}%` }} />
     </div>
   );
 });

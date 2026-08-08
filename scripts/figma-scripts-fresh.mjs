@@ -42,8 +42,13 @@ const LIBRARIES = {
   mui: ['--icons', 'examples/mui/assets/icons', '--tokens', 'examples/mui/tokens/mui.dtcg.json,examples/mui/tokens/mui-minted.dtcg.json'],
   carbon: ['--icons', 'examples/carbon/assets/icons', '--tokens', 'examples/carbon/tokens/carbon.dtcg.json,examples/carbon/tokens/carbon-minted.dtcg.json'],
   altitude: ['--icons', 'examples/altitude/assets/icons', '--tokens', 'examples/altitude/tokens/altitude.dtcg.json,examples/altitude/tokens/altitude-minted.dtcg.json'],
-  tailwind: ['--tokens', 'examples/tailwind/tokens/tailwind.dtcg.json,examples/tailwind/tokens/tailwind-minted.dtcg.json'],
-  astryx: ['--tokens', 'examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json'],
+  // Exact-conversion wave: alert grew real icon-asset parts (status glyphs +
+  // dismiss, examples/tailwind/assets/icons) — same reason as astryx below.
+  tailwind: ['--icons', 'examples/tailwind/assets/icons', '--tokens', 'examples/tailwind/tokens/tailwind.dtcg.json,examples/tailwind/tokens/tailwind-minted.dtcg.json'],
+  // Exact-conversion wave: banner promoted its four status icons as real
+  // assets (examples/astryx/assets/icons), so the emit command now needs
+  // --icons — without it the CLI refuses the banner contract by name.
+  astryx: ['--icons', 'examples/astryx/assets/icons', '--tokens', 'examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json'],
 };
 
 /** Libraries whose scripts are rebuilt by a DIFFERENT recorded command than
@@ -142,7 +147,18 @@ for (const lib of figmaDirs) {
   }
   const tmp = mkdtempSync(path.join(os.tmpdir(), `figma-fresh-${lib}-`));
   try {
-    execFileSync(TSX, [CLI, 'figma', `examples/${lib}/contracts`, '--out', tmp, ...args], { cwd: ROOT, stdio: 'pipe' });
+    // An emit REFUSAL is a freshness verdict, not an instrument crash: catch
+    // it and report the library red BY NAME. Before this catch, one refused
+    // contract aborted the whole gate mid-run and every later library went
+    // unmeasured (found when flowbite.alert's icon parts made the tailwind
+    // emit refuse and the polaris/… rows never printed).
+    try {
+      execFileSync(TSX, [CLI, 'figma', `examples/${lib}/contracts`, '--out', tmp, ...args], { cwd: ROOT, stdio: 'pipe' });
+    } catch (err) {
+      failures.push(`${lib}: fresh emission REFUSED — the committed scripts cannot be freshness-checked until the emit runs:\n${String(err.stderr ?? err.message).slice(0, 1200)}`);
+      rows.push([lib, 'EMIT-REFUSED', 'fresh emission failed']);
+      continue;
+    }
     const committedDir = path.join(ROOT, 'examples', lib, 'figma');
     const emitted = readdirSync(tmp).filter((f) => f.endsWith('.figma.js')).sort();
     const committed = readdirSync(committedDir).filter((f) => f.endsWith('.figma.js') && f !== '00-tokens.figma.js' && f !== 'GENESIS-BATCH.figma.js').sort();

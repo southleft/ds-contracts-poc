@@ -343,19 +343,20 @@
               }
             },
             "btn-set": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div|btn-set.modal-footer — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|btn-set.modal-footer — this element exists in the real component's DOM; the static layer had no part for it. justify start + growing children ≈ Carbon 50/50 footer (flex-basis 50% refused).",
               "layout": {
                 "display": "flex",
-                "justify": "end"
+                "justify": "start"
               },
               "parts": {
                 "label-6": {
                   "element": "button",
                   "text": "Cancel",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it. Wave climb: flex-basis 50% was refused (FC-FLEX-BASIS); layout.grow shares the footer strip equally with Save.",
                   "layout": {
                     "display": "flex",
-                    "justify": "space-between"
+                    "justify": "space-between",
+                    "grow": true
                   },
                   "declared": {
                     "border-bottom-style": "solid",
@@ -399,10 +400,11 @@
                 "label-7": {
                   "element": "button",
                   "text": "Save",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it. Wave climb: flex-basis 50% was refused (FC-FLEX-BASIS); layout.grow shares the footer strip equally with Cancel.",
                   "layout": {
                     "display": "flex",
-                    "justify": "space-between"
+                    "justify": "space-between",
+                    "grow": true
                   },
                   "declared": {
                     "border-bottom-style": "solid",

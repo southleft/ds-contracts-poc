@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "astryx.switch",
   "name": "Switch",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "draft",
-  "description": "Astryx Switch \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; value, description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. STRUCTURAL: the track renders as a styled box, not a native role=switch input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "description": "Astryx Switch — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. Wave B.3: `value` is a VARIANT AXIS (off/on) — FC-MISSING-AXIS. On thumb geometry from Switch.tsx source constants (20×20, travel 14px) — not harness-captured. STRUCTURAL: the track renders as a styled box, not a native role=switch input.",
   "semantics": {
     "element": "div"
   },
@@ -24,6 +24,25 @@
       },
       "required": true,
       "default": "Enable notifications"
+    },
+    {
+      "name": "value",
+      "description": "Whether the switch is on or off.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Value",
+          "values": {
+            "false": "Off",
+            "true": "On"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
     },
     {
       "name": "labelPosition",
@@ -83,33 +102,441 @@
   "states": [],
   "anatomy": {
     "root": {
-      "layout": {
-        "display": "inline-flex",
-        "direction": "row",
-        "align": "center"
-      },
-      "tokens": {
-        "color": "{color-text-primary}",
-        "gap": "{spacing-2}",
-        "font-family": "{font-family-body}",
-        "font-size": "{font-size-sm}"
+      "declared": {
+        "display": "block"
       },
       "parts": {
-        "track": {
-          "element": "span",
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "part-0-0": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "parts": {
+                "label-2": {
+                  "element": "label",
+                  "content": {
+                    "prop": "label"
+                  },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy label|field-label — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "labelPosition",
+                      "equals": "end",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "isDisabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "declared": {
+                    "cursor": "pointer",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                  },
+                  "tokens": {
+                    "color": "{imported.switch.label-2.color}",
+                    "column-gap": "{imported.shared.size-4}",
+                    "font-size": "{imported.switch.label-2.font-size}",
+                    "font-weight": "{imported.switch.label-2.font-weight}",
+                    "line-height": "{imported.switch.label-2.line-height}",
+                    "row-gap": "{imported.shared.size-4}"
+                  }
+                },
+                "part-0-0-0": {
+                  "element": "input",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none",
+                    "appearance": "auto",
+                    "border-bottom-style": "none",
+                    "border-left-style": "none",
+                    "border-right-style": "none",
+                    "border-top-style": "none",
+                    "cursor": "pointer",
+                    "position": "absolute"
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-0}",
+                    "left": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "opacity": "{imported.switch.part-0-0-0.opacity}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-40}",
+                    "z-index": "{imported.switch.part-0-0-0.z-index}"
+                  }
+                },
+                "switch": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|switch — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "grow": true,
+                    "align": "center"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "labelPosition",
+                      "equals": "start",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "isDisabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "parts": {
+                    "switch-thumb": {
+                      "description": "Wave B.3: On thumb from @astryxdesign/core Switch.tsx source constants (THUMB_SIZE_ON=20, THUMB_TRAVEL_ON=14) — FC-MISSING-AXIS residual closed without harness re-capture.",
+                      "layout": {
+                        "display": "flex",
+                        "align": "center",
+                        "justify": "center"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "labelPosition",
+                          "equals": "start",
+                          "styles": {
+                            "display": "none"
+                          }
+                        },
+                        {
+                          "prop": "isDisabled",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "declared": {
+                        "position": "absolute",
+                        "transition-duration": "0.175s",
+                        "transition-property": "transform, width, height",
+                        "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+                      },
+                      "literals": {
+                        "width": "16px",
+                        "height": "16px",
+                        "left": "4px",
+                        "top": "4px"
+                      },
+                      "literalsByProp": [
+                        {
+                          "prop": "value",
+                          "map": {
+                            "false": {
+                              "width": "16px",
+                              "height": "16px",
+                              "left": "4px",
+                              "top": "4px"
+                            },
+                            "true": {
+                              "width": "20px",
+                              "height": "20px",
+                              "left": "18px",
+                              "top": "2px"
+                            }
+                          }
+                        }
+                      ],
+                      "tokens": {
+                        "background-color": "{imported.switch.switch-thumb.background-color}",
+                        "border-bottom-left-radius": "{imported.shared.size-9999}",
+                        "border-bottom-right-radius": "{imported.shared.size-9999}",
+                        "border-top-left-radius": "{imported.shared.size-9999}",
+                        "border-top-right-radius": "{imported.shared.size-9999}"
+                      }
+                    }
+                  },
+                  "declared": {
+                    "position": "relative",
+                    "transition-duration": "0.175s",
+                    "transition-property": "background-color",
+                    "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+                  },
+                  "tokens": {
+                    "border-bottom-left-radius": "{imported.shared.size-9999}",
+                    "border-bottom-right-radius": "{imported.shared.size-9999}",
+                    "border-top-left-radius": "{imported.shared.size-9999}",
+                    "border-top-right-radius": "{imported.shared.size-9999}",
+                    "padding-bottom": "{imported.shared.size-4}",
+                    "padding-left": "{imported.shared.size-4}",
+                    "padding-right": "{imported.shared.size-4}",
+                    "padding-top": "{imported.shared.size-4}",
+                    "width": "{imported.shared.size-40}"
+                  },
+                  "literals": {
+                    "height": "24px",
+                    "background-color": "#0a131733"
+                  },
+                  "literalsByProp": [
+                    {
+                      "prop": "value",
+                      "map": {
+                        "false": {
+                          "background-color": "#0a131733"
+                        },
+                        "true": {
+                          "background-color": "#15110C"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "labelPosition",
+                  "map": {
+                    "end": {
+                      "flex-shrink": "{imported.switch.part-0-0.flex-shrink.end}",
+                      "width": "{imported.switch.part-0-0.width.end}"
+                    },
+                    "start": {
+                      "flex-shrink": "{imported.switch.part-0-0.flex-shrink.start}",
+                      "width": "{imported.switch.part-0-0.width.start}"
+                    }
+                  }
+                }
+              ]
+            },
+            "part-0-1": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "parts": {
+                "part-0-1-0": {
+                  "element": "input",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none",
+                    "appearance": "auto",
+                    "border-bottom-style": "none",
+                    "border-left-style": "none",
+                    "border-right-style": "none",
+                    "border-top-style": "none",
+                    "cursor": "pointer",
+                    "position": "absolute"
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-0}",
+                    "left": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "opacity": "{imported.switch.part-0-1-0.opacity}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-40}",
+                    "z-index": "{imported.switch.part-0-1-0.z-index}"
+                  }
+                },
+                "switch-2": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|switch — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "grow": true,
+                    "align": "center"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "labelPosition",
+                      "equals": "end",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "isDisabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "parts": {
+                    "switch-thumb-2": {
+                      "description": "Wave B.3: On thumb from Switch.tsx source (20×20 @ left 18) — mirrors switch-thumb for labelPosition=start.",
+                      "layout": {
+                        "display": "flex",
+                        "align": "center",
+                        "justify": "center"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "labelPosition",
+                          "equals": "end",
+                          "styles": {
+                            "display": "none"
+                          }
+                        },
+                        {
+                          "prop": "isDisabled",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "declared": {
+                        "position": "absolute",
+                        "transition-duration": "0.175s",
+                        "transition-property": "transform, width, height",
+                        "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+                      },
+                      "literals": {
+                        "width": "16px",
+                        "height": "16px",
+                        "left": "4px",
+                        "top": "4px"
+                      },
+                      "literalsByProp": [
+                        {
+                          "prop": "value",
+                          "map": {
+                            "false": {
+                              "width": "16px",
+                              "height": "16px",
+                              "left": "4px",
+                              "top": "4px"
+                            },
+                            "true": {
+                              "width": "20px",
+                              "height": "20px",
+                              "left": "18px",
+                              "top": "2px"
+                            }
+                          }
+                        }
+                      ],
+                      "tokens": {
+                        "background-color": "{imported.switch.switch-thumb-2.background-color}",
+                        "border-bottom-left-radius": "{imported.shared.size-9999}",
+                        "border-bottom-right-radius": "{imported.shared.size-9999}",
+                        "border-top-left-radius": "{imported.shared.size-9999}",
+                        "border-top-right-radius": "{imported.shared.size-9999}"
+                      }
+                    }
+                  },
+                  "declared": {
+                    "position": "relative",
+                    "transition-duration": "0.175s",
+                    "transition-property": "background-color",
+                    "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+                  },
+                  "tokens": {
+                    "border-bottom-left-radius": "{imported.shared.size-9999}",
+                    "border-bottom-right-radius": "{imported.shared.size-9999}",
+                    "border-top-left-radius": "{imported.shared.size-9999}",
+                    "border-top-right-radius": "{imported.shared.size-9999}",
+                    "padding-bottom": "{imported.shared.size-4}",
+                    "padding-left": "{imported.shared.size-4}",
+                    "padding-right": "{imported.shared.size-4}",
+                    "padding-top": "{imported.shared.size-4}",
+                    "width": "{imported.shared.size-40}"
+                  },
+                  "literals": {
+                    "height": "24px",
+                    "background-color": "#0a131733"
+                  },
+                  "literalsByProp": [
+                    {
+                      "prop": "value",
+                      "map": {
+                        "false": {
+                          "background-color": "#0a131733"
+                        },
+                        "true": {
+                          "background-color": "#15110C"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label": {
+                  "element": "label",
+                  "content": {
+                    "prop": "label"
+                  },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy label|field-label — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "labelPosition",
+                      "equals": "start",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "isDisabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "declared": {
+                    "cursor": "pointer",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                  },
+                  "tokens": {
+                    "color": "{imported.switch.label.color}",
+                    "column-gap": "{imported.shared.size-4}",
+                    "font-size": "{imported.switch.label.font-size}",
+                    "font-weight": "{imported.switch.label.font-weight}",
+                    "line-height": "{imported.switch.label.line-height}",
+                    "row-gap": "{imported.shared.size-4}"
+                  }
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "labelPosition",
+                  "map": {
+                    "end": {
+                      "flex-shrink": "{imported.switch.part-0-1.flex-shrink.end}",
+                      "width": "{imported.switch.part-0-1.width.end}"
+                    },
+                    "start": {
+                      "flex-shrink": "{imported.switch.part-0-1.flex-shrink.start}",
+                      "width": "{imported.switch.part-0-1.width.start}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
           "tokens": {
-            "background-color": "{color-background-muted}",
-            "border-radius": "{radius-full}",
-            "width": "{spacing-8}",
-            "height": "{spacing-5}"
-          }
-        },
-        "label": {
-          "element": "span",
-          "content": {
-            "prop": "label"
+            "column-gap": "{imported.switch.part-0.column-gap}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "row-gap": "{imported.switch.part-0.row-gap}",
+            "width": "{imported.switch.part-0.width}"
           }
         }
+      },
+      "tokens": {
+        "width": "{imported.switch.root.width}"
       }
     }
   },

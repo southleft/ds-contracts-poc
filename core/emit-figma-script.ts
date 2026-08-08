@@ -95,6 +95,25 @@ export interface NodeSpec {
    *  dialog collapsed to ~3px live; such candidates now HUG instead. The
    *  runtime applies this flag verbatim (see annotateFillW). */
   fillW?: true;
+  /** D7 hug-ceiling (exact-conversion wave): this box carries the MEASURED
+   *  `hugsBelowMaxWidth` fact — it HUGS beneath a bound maxWidth ceiling.
+   *  A FILL child inside a hugging box contributes no intrinsic width (real
+   *  Figma and the mock agree), so filling would collapse the measurement:
+   *  inline-notification's grow:true details row shrank its own hug root to
+   *  min-width 288 while its text-wrapper measured 331 (the D3 overflow).
+   *  Children of such a box therefore never become fillW candidates. */
+  hugCeiling?: true;
+  /** FC-TEXT-FILL-ALIGNMENT (landing round for the exact-conversion wave):
+   *  the compiler PROVED hugging displaces this text — the parent's
+   *  horizontal alignment (primary on rows, counter on stacks) does not
+   *  match the text's own textAlignH, so a hugged box is packed somewhere
+   *  the CSS grow-box's glyphs never sit (MUI accordion title: grow:1 text
+   *  in a justify-center summary paints LEFT in CSS, but a hugged 120px box
+   *  centers in the 288px row — Live Defect 5a resurfaced). Only text
+   *  carrying this flag may take layoutSizingHorizontal FILL; alignment-safe
+   *  text keeps the Carbon Tabs HUG rule (FILL in a snug box truncates
+   *  glyph overhang under font substitution). */
+  fillText?: true;
   /** FC-FIGMA-CLIP-DEFAULT: opt into Figma clipsContent. Default false —
    *  createFrame clips by default but CSS overflow is visible; clipping HUG
    *  text truncates Semi Bold overhang (Carbon Tabs "Settings"). */
@@ -431,6 +450,16 @@ export interface FigmaScriptCtx extends FigmaEngineInput {
    *  (evals/golden.json safety: repo contracts mint nothing). */
   mintedTokens?: Record<string, unknown>;
 }
+
+/** Runtime template revision — the emitted runtime salts specHash with this
+ *  value (bump it whenever the RUNTIME template changes without a COMPONENTS
+ *  JSON delta, or amend skips as "unchanged" and canvas keeps the old runtime
+ *  behavior). EXPORTED because the plugin engine's specHash mirror
+ *  (figma-sync/plugin/engine/entry.ts specHashOf) must salt identically:
+ *  the exact-conversion wave introduced the salt in the emitted runtime only,
+ *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
+ *  construction the moment the zip-stale failure in front of it was fixed. */
+export const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
@@ -1603,6 +1632,15 @@ function applyTokens(
       // variable whose value is the string 'fit-content'.
       case 'width': {
         if (isHugKeyword(resolveLiteral(tokenPath))) break;
+        // TASK #37 / D7 (exact-conversion wave): a part carrying the MEASURED
+        // `hugsBelowMaxWidth` fact HUGS beneath its max-width ceiling in every
+        // enumerated combo — so any width channel captured alongside it (the
+        // inline-notification `showcase-width`, the exhibit's used width at
+        // the capture viewport) is a harness fact, not a design width. Baking
+        // it as fixedWidth re-creates the 320-wide-Carbon-Button defect the
+        // hug-ceiling pin exists to catch; the ceiling binds via the
+        // `max-width` case below and the box keeps HUG.
+        if (hugsBelowMaxWidth === true) break;
         spec.fixedWidth = { px: px(resolveLiteral(tokenPath)), varName };
         break;
       }
@@ -1641,6 +1679,11 @@ function applyTokens(
           (spec.type !== 'root' || hugsBelowMaxWidth === true);
         if (ceiling) {
           spec.bindings = { ...spec.bindings, maxWidth: varName };
+          // The MEASURED hug fact also disqualifies this box's children from
+          // horizontal FILL (see NodeSpec.hugCeiling / annotateFillW): a
+          // hugging box has no surplus space for flex-grow to distribute, so
+          // FILL is a no-op in CSS terms and a hug-collapse in Figma terms.
+          if (hugsBelowMaxWidth === true) spec.hugCeiling = true;
         } else {
           spec.fixedWidth = { px: value, varName };
         }
@@ -3498,20 +3541,50 @@ function annotateFillW(rootSpec: NodeSpec): void {
     // then layoutSizingHorizontal FILL inside a fixed-width label wrapper
     // clipped "Overview"/"Activity"/"Settings" on canvas. CSS grow fills
     // remaining space; Figma FILL in a fixed box truncates glyphs unless
-    // textTruncation is explicitly declared — so non-truncating text HUGS.
+    // textTruncation is explicitly declared — so non-truncating text HUGS…
+    //
+    // …WHEN HUGGING IS ALIGNMENT-SAFE (FC-TEXT-FILL-ALIGNMENT, the landing
+    // round's refinement). Hug and fill place the glyphs identically only
+    // when the box's horizontal packing agrees with the text's own
+    // textAlignH (LEFT↔MIN, CENTER↔CENTER, RIGHT↔MAX; the horizontal axis is
+    // primary on rows and counter on stacks). Carbon's tab labels are
+    // MIN-packed LEFT text — hug is the fix and stays. MUI's accordion title
+    // is LEFT text in a justify-CENTER summary: hugging re-centered it and
+    // resurfaced Live Defect 5a, so alignment-displaced text keeps FILL and
+    // carries `fillText` so the runtime can tell the two cases apart.
+    const hugTextSafe = (c: NodeSpec): boolean => {
+      const packed = (s.layout?.mode ?? 'HORIZONTAL') === 'VERTICAL'
+        ? (s.layout?.counter ?? 'MIN')
+        : (s.layout?.primary ?? 'MIN');
+      const glyphs = ({ LEFT: 'MIN', CENTER: 'CENTER', RIGHT: 'MAX' } as const)[
+        (c.textAlignH ?? 'LEFT') as 'LEFT' | 'CENTER' | 'RIGHT'
+      ];
+      // JUSTIFIED (and SPACE_BETWEEN packing) never proves equivalence.
+      return glyphs !== undefined && packed === glyphs;
+    };
     const isCandidate = (c: NodeSpec): boolean =>
       inFlow(c) &&
       !hasOwnWidth(c) &&
-      !(c.type === 'text' && !c.textTruncation) &&
+      !(c.type === 'text' && !c.textTruncation && hugTextSafe(c)) &&
       (c.grow === true ||
         (s.layout?.stretchChildren === true &&
           (s.layout?.mode ?? 'HORIZONTAL') === 'VERTICAL' &&
           c.type !== 'instance'));
     const intrinsic = kids.some((c) => inFlow(c) && !isCandidate(c) && canHug(c));
-    const ready = established || intrinsic;
+    // D7 hug-ceiling: a box MEASURED hugging beneath its maxWidth ceiling
+    // never grants FILL — its width IS its content, so a FILL child would
+    // subtract itself from the very measurement (inline-notification's
+    // grow:true details collapsed the root to min-width 288 under a 331px
+    // text-wrapper — the D3 overflow the compile receipt caught).
+    const ready = (established || intrinsic) && s.hugCeiling !== true;
     for (const c of kids) {
       const fills = ready && isCandidate(c);
-      if (fills) c.fillW = true;
+      if (fills) {
+        c.fillW = true;
+        // FC-TEXT-FILL-ALIGNMENT: a text candidate only reaches here when
+        // hugging displaces it; the flag is the runtime's proof.
+        if (c.type === 'text' && !c.textTruncation) c.fillText = true;
+      }
       walk(c, fills || hasOwnWidth(c));
     }
   };
@@ -5309,7 +5382,7 @@ async function buildNode(spec, registry) {
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && !(child.type === 'text' && !child.textTruncation) && 'layoutSizingHorizontal' in childNode) {
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
   }${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}
@@ -5350,7 +5423,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt4-svg-rotation';
+const RUNTIME_EMIT_REV = '${RUNTIME_EMIT_REV}';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -5471,7 +5544,7 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation) && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
       }${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}
@@ -5627,7 +5700,7 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation) && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
   }${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}

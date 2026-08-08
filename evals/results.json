@@ -1,6 +1,6 @@
 {
-  "passed": 191,
-  "total": 191,
+  "passed": 199,
+  "total": 199,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -954,6 +954,46 @@
     },
     {
       "id": "console-loop-evidence-receipt",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "console-loop-mui-evidence-receipt",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "console-loop-tailwind-evidence-receipt",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "console-loop-altitude-evidence-receipt",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "console-loop-astryx-evidence-receipt",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "console-loop-carbon-evidence-receipt",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "console-loop-polaris-evidence-receipt",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "code-to-canvas-wave-a-emit-pins",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "trap-corpus-check",
       "claim": "C3-detection",
       "pass": true
     }

@@ -115,29 +115,16 @@
             "$value": "#161616",
             "$type": "color"
           },
-          "width": {
-            "$value": "94.3125px",
-            "$type": "dimension"
-          },
           "outline-color-state-focus-visible": {
             "$value": "#0f62fe",
             "$type": "color"
           }
         },
-        "tabs-nav-item-label-wrapper": {
-          "width": {
-            "$value": "62.3125px",
-            "$type": "dimension"
-          }
-        },
+        "tabs-nav-item-label-wrapper": {},
         "tabs-nav-item-2": {
           "border-bottom-color": {
             "$value": "#e0e0e0",
             "$type": "color"
-          },
-          "width": {
-            "$value": "80px",
-            "$type": "dimension"
           },
           "border-bottom-color-state-active": {
             "$value": "#8d8d8d",
@@ -152,12 +139,7 @@
             "$type": "color"
           }
         },
-        "tabs-nav-item-label-wrapper-2": {
-          "width": {
-            "$value": "48px",
-            "$type": "dimension"
-          }
-        },
+        "tabs-nav-item-label-wrapper-2": {},
         "label-2": {
           "font-weight": {
             "$value": "400",
@@ -168,18 +150,9 @@
           "border-bottom-color": {
             "$value": "#e0e0e0",
             "$type": "color"
-          },
-          "width": {
-            "$value": "84.4688px",
-            "$type": "dimension"
           }
         },
-        "tabs-nav-item-label-wrapper-3": {
-          "width": {
-            "$value": "52.4688px",
-            "$type": "dimension"
-          }
-        },
+        "tabs-nav-item-label-wrapper-3": {},
         "label-3": {
           "font-weight": {
             "$value": "400",

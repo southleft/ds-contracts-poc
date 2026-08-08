@@ -357,7 +357,15 @@ check(
     const t = (data.variants[0].spec.children ?? []).find(
       (ch) => ch.type === "text",
     );
-    return t?.fontStyle === "Semi Bold" && t?.lineHeight === 16;
+    // The engine's lineHeight discipline compiles the resolved literal to the
+    // native unit-carrying shape ({ value, unit: "PIXELS" }); the bare-number
+    // form remains only as a legacy input. Assert the exact 16px EITHER way —
+    // and when the object form arrives, the unit must literally be PIXELS.
+    const lh = t?.lineHeight;
+    const is16px =
+      lh === 16 ||
+      (typeof lh === "object" && lh?.value === 16 && lh?.unit === "PIXELS");
+    return t?.fontStyle === "Semi Bold" && is16px;
   })(),
 );
 

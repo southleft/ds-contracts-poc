@@ -230,8 +230,13 @@ function componentCss(contract: Contract): string[] {
     'height' in rootTokens &&
     Object.keys(root.parts ?? {}).length > 0 &&
     Object.values(root.parts ?? {}).every((p) => p.slot !== undefined);
+  // FC-HUG-CEILING-HTML: when capture measured used-width strictly below
+  // max-width, max-width is a ceiling only — do not stretch with width:100%.
+  // Carbon Tag (hugsBelowMaxWidth) was gating at 208px instead of ~46px hug.
   if ('max-width' in rootTokens) {
-    rootDecls.push('width: 100%');
+    if (root.hugsBelowMaxWidth !== true) {
+      rootDecls.push('width: 100%');
+    }
     if (!slotWrapperFloor) rootDecls.push('min-width: fit-content');
   }
   // v15: a declared cursor fact is authoritative — the emitter's own button

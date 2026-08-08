@@ -246,6 +246,11 @@
             },
             "accordion__wrapper": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|accordion__wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "align": "stretch"
+              },
               "declared": {
                 "display": "block",
                 "max-height": "fit-content",
@@ -260,6 +265,7 @@
                     "display": "block"
                   },
                   "tokens": {
+                    "color": "{imported.accordion.accordion-heading.color}",
                     "font-size": "{imported.shared.size-16}",
                     "font-weight": "{imported.accordion.label-2.font-weight}",
                     "line-height": "{imported.shared.size-16}",

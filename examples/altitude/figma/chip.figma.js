@@ -17,9 +17,58 @@ const COMPONENTS = [
     ],
     "variants": [
       {
-        "name": "Variant=Secondary, Type=Squared",
+        "name": "Variant=Secondary, Type=Default",
         "row": 0,
         "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Secondary, Type=Default",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/chip/root/background-color/secondary",
+          "stroke": "imported/chip/root/border-top-color/secondary",
+          "bindings": {
+            "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/unset",
+            "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/unset",
+            "strokeBottomWeight": "imported/chip/root/border-bottom-width/secondary",
+            "strokeLeftWeight": "imported/chip/root/border-left-width/secondary",
+            "strokeRightWeight": "imported/chip/root/border-right-width/secondary",
+            "topLeftRadius": "imported/chip/root/border-top-left-radius/unset",
+            "topRightRadius": "imported/chip/root/border-top-right-radius/unset",
+            "strokeTopWeight": "imported/chip/root/border-top-width/secondary",
+            "itemSpacing": "imported/chip/root/column-gap",
+            "minHeight": "imported/chip/root/min-height",
+            "minWidth": "imported/chip/root/min-width",
+            "paddingBottom": "imported/chip/root/padding-bottom",
+            "paddingLeft": "imported/chip/root/padding-left",
+            "paddingRight": "imported/chip/root/padding-right",
+            "paddingTop": "imported/chip/root/padding-top"
+          },
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Chip",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "textFill": "imported/chip/root/color/secondary",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "IBM Plex Sans",
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Secondary, Type=Squared",
+        "row": 0,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Variant=Secondary, Type=Squared",
@@ -55,7 +104,59 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Regular",
               "textFill": "imported/chip/root/color/secondary",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "IBM Plex Sans",
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Info, Type=Default",
+        "row": 1,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Info, Type=Default",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/chip/root/background-color/info",
+          "stroke": "imported/chip/root/border-top-color/info",
+          "bindings": {
+            "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/unset",
+            "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/unset",
+            "strokeBottomWeight": "imported/chip/root/border-bottom-width/info",
+            "strokeLeftWeight": "imported/chip/root/border-left-width/info",
+            "strokeRightWeight": "imported/chip/root/border-right-width/info",
+            "topLeftRadius": "imported/chip/root/border-top-left-radius/unset",
+            "topRightRadius": "imported/chip/root/border-top-right-radius/unset",
+            "strokeTopWeight": "imported/chip/root/border-top-width/info",
+            "itemSpacing": "imported/chip/root/column-gap",
+            "minHeight": "imported/chip/root/min-height",
+            "minWidth": "imported/chip/root/min-width",
+            "paddingBottom": "imported/chip/root/padding-bottom",
+            "paddingLeft": "imported/chip/root/padding-left",
+            "paddingRight": "imported/chip/root/padding-right",
+            "paddingTop": "imported/chip/root/padding-top"
+          },
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Chip",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "textFill": "imported/chip/root/color/info",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -65,7 +166,7 @@ const COMPONENTS = [
       {
         "name": "Variant=Info, Type=Squared",
         "row": 1,
-        "col": 0,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Variant=Info, Type=Squared",
@@ -101,7 +202,59 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Regular",
               "textFill": "imported/chip/root/color/info",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "IBM Plex Sans",
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Success, Type=Default",
+        "row": 2,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Success, Type=Default",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/chip/root/background-color/success",
+          "stroke": "imported/chip/root/border-top-color/success",
+          "bindings": {
+            "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/unset",
+            "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/unset",
+            "strokeBottomWeight": "imported/chip/root/border-bottom-width/success",
+            "strokeLeftWeight": "imported/chip/root/border-left-width/success",
+            "strokeRightWeight": "imported/chip/root/border-right-width/success",
+            "topLeftRadius": "imported/chip/root/border-top-left-radius/unset",
+            "topRightRadius": "imported/chip/root/border-top-right-radius/unset",
+            "strokeTopWeight": "imported/chip/root/border-top-width/success",
+            "itemSpacing": "imported/chip/root/column-gap",
+            "minHeight": "imported/chip/root/min-height",
+            "minWidth": "imported/chip/root/min-width",
+            "paddingBottom": "imported/chip/root/padding-bottom",
+            "paddingLeft": "imported/chip/root/padding-left",
+            "paddingRight": "imported/chip/root/padding-right",
+            "paddingTop": "imported/chip/root/padding-top"
+          },
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Chip",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "textFill": "imported/chip/root/color/success",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -111,7 +264,7 @@ const COMPONENTS = [
       {
         "name": "Variant=Success, Type=Squared",
         "row": 2,
-        "col": 0,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Variant=Success, Type=Squared",
@@ -147,7 +300,59 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Regular",
               "textFill": "imported/chip/root/color/success",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "IBM Plex Sans",
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Warning, Type=Default",
+        "row": 3,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Warning, Type=Default",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/chip/root/background-color/warning",
+          "stroke": "imported/chip/root/border-top-color/warning",
+          "bindings": {
+            "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/unset",
+            "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/unset",
+            "strokeBottomWeight": "imported/chip/root/border-bottom-width/warning",
+            "strokeLeftWeight": "imported/chip/root/border-left-width/warning",
+            "strokeRightWeight": "imported/chip/root/border-right-width/warning",
+            "topLeftRadius": "imported/chip/root/border-top-left-radius/unset",
+            "topRightRadius": "imported/chip/root/border-top-right-radius/unset",
+            "strokeTopWeight": "imported/chip/root/border-top-width/warning",
+            "itemSpacing": "imported/chip/root/column-gap",
+            "minHeight": "imported/chip/root/min-height",
+            "minWidth": "imported/chip/root/min-width",
+            "paddingBottom": "imported/chip/root/padding-bottom",
+            "paddingLeft": "imported/chip/root/padding-left",
+            "paddingRight": "imported/chip/root/padding-right",
+            "paddingTop": "imported/chip/root/padding-top"
+          },
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Chip",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "textFill": "imported/chip/root/color/warning",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -157,7 +362,7 @@ const COMPONENTS = [
       {
         "name": "Variant=Warning, Type=Squared",
         "row": 3,
-        "col": 0,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Variant=Warning, Type=Squared",
@@ -193,7 +398,59 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Regular",
               "textFill": "imported/chip/root/color/warning",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "IBM Plex Sans",
+              "contentProp": "Content"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Variant=Danger, Type=Default",
+        "row": 4,
+        "col": 0,
+        "spec": {
+          "type": "root",
+          "name": "Variant=Danger, Type=Default",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "CENTER",
+            "counter": "CENTER"
+          },
+          "fill": "imported/chip/root/background-color/danger",
+          "stroke": "imported/chip/root/border-top-color/danger",
+          "bindings": {
+            "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/unset",
+            "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/unset",
+            "strokeBottomWeight": "imported/chip/root/border-bottom-width/danger",
+            "strokeLeftWeight": "imported/chip/root/border-left-width/danger",
+            "strokeRightWeight": "imported/chip/root/border-right-width/danger",
+            "topLeftRadius": "imported/chip/root/border-top-left-radius/unset",
+            "topRightRadius": "imported/chip/root/border-top-right-radius/unset",
+            "strokeTopWeight": "imported/chip/root/border-top-width/danger",
+            "itemSpacing": "imported/chip/root/column-gap",
+            "minHeight": "imported/chip/root/min-height",
+            "minWidth": "imported/chip/root/min-width",
+            "paddingBottom": "imported/chip/root/padding-bottom",
+            "paddingLeft": "imported/chip/root/padding-left",
+            "paddingRight": "imported/chip/root/padding-right",
+            "paddingTop": "imported/chip/root/padding-top"
+          },
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Chip",
+              "fontSize": 14,
+              "fontStyle": "Regular",
+              "textFill": "imported/chip/root/color/danger",
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -203,7 +460,7 @@ const COMPONENTS = [
       {
         "name": "Variant=Danger, Type=Squared",
         "row": 4,
-        "col": 0,
+        "col": 1,
         "spec": {
           "type": "root",
           "name": "Variant=Danger, Type=Squared",
@@ -239,249 +496,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Regular",
               "textFill": "imported/chip/root/color/danger",
-              "lineHeight": 20,
-              "fontFamily": "IBM Plex Sans",
-              "contentProp": "Content"
-            }
-          ]
-        }
-      }
-    ],
-    "stateVariants": [
-      {
-        "name": "Variant=Secondary, Type=Squared, State=Focus Visible",
-        "row": 0,
-        "col": 1,
-        "spec": {
-          "type": "root",
-          "name": "Variant=Secondary, Type=Squared, State=Focus Visible",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "fill": "imported/chip/root/background-color/secondary",
-          "stroke": "imported/chip/root/outline-color-state-focus-visible",
-          "bindings": {
-            "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/squared",
-            "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/squared",
-            "strokeBottomWeight": "imported/chip/root/border-bottom-width/secondary",
-            "strokeLeftWeight": "imported/chip/root/border-left-width/secondary",
-            "strokeRightWeight": "imported/chip/root/border-right-width/secondary",
-            "topLeftRadius": "imported/chip/root/border-top-left-radius/squared",
-            "topRightRadius": "imported/chip/root/border-top-right-radius/squared",
-            "strokeTopWeight": "imported/chip/root/border-top-width/secondary",
-            "itemSpacing": "imported/chip/root/column-gap",
-            "minHeight": "imported/chip/root/min-height",
-            "minWidth": "imported/chip/root/min-width",
-            "paddingBottom": "imported/chip/root/padding-bottom",
-            "paddingLeft": "imported/chip/root/padding-left",
-            "paddingRight": "imported/chip/root/padding-right",
-            "paddingTop": "imported/chip/root/padding-top",
-            "strokeWeight": "imported/chip/root/outline-width-state-focus-visible"
-          },
-          "strokeOutside": true,
-          "children": [
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Chip",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/secondary",
-              "lineHeight": 20,
-              "fontFamily": "IBM Plex Sans",
-              "contentProp": "Content"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Variant=Info, Type=Squared, State=Focus Visible",
-        "row": 1,
-        "col": 1,
-        "spec": {
-          "type": "root",
-          "name": "Variant=Info, Type=Squared, State=Focus Visible",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "fill": "imported/chip/root/background-color/info",
-          "stroke": "imported/chip/root/outline-color-state-focus-visible",
-          "bindings": {
-            "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/squared",
-            "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/squared",
-            "strokeBottomWeight": "imported/chip/root/border-bottom-width/info",
-            "strokeLeftWeight": "imported/chip/root/border-left-width/info",
-            "strokeRightWeight": "imported/chip/root/border-right-width/info",
-            "topLeftRadius": "imported/chip/root/border-top-left-radius/squared",
-            "topRightRadius": "imported/chip/root/border-top-right-radius/squared",
-            "strokeTopWeight": "imported/chip/root/border-top-width/info",
-            "itemSpacing": "imported/chip/root/column-gap",
-            "minHeight": "imported/chip/root/min-height",
-            "minWidth": "imported/chip/root/min-width",
-            "paddingBottom": "imported/chip/root/padding-bottom",
-            "paddingLeft": "imported/chip/root/padding-left",
-            "paddingRight": "imported/chip/root/padding-right",
-            "paddingTop": "imported/chip/root/padding-top",
-            "strokeWeight": "imported/chip/root/outline-width-state-focus-visible"
-          },
-          "strokeOutside": true,
-          "children": [
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Chip",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/info",
-              "lineHeight": 20,
-              "fontFamily": "IBM Plex Sans",
-              "contentProp": "Content"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Variant=Success, Type=Squared, State=Focus Visible",
-        "row": 2,
-        "col": 1,
-        "spec": {
-          "type": "root",
-          "name": "Variant=Success, Type=Squared, State=Focus Visible",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "fill": "imported/chip/root/background-color/success",
-          "stroke": "imported/chip/root/outline-color-state-focus-visible",
-          "bindings": {
-            "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/squared",
-            "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/squared",
-            "strokeBottomWeight": "imported/chip/root/border-bottom-width/success",
-            "strokeLeftWeight": "imported/chip/root/border-left-width/success",
-            "strokeRightWeight": "imported/chip/root/border-right-width/success",
-            "topLeftRadius": "imported/chip/root/border-top-left-radius/squared",
-            "topRightRadius": "imported/chip/root/border-top-right-radius/squared",
-            "strokeTopWeight": "imported/chip/root/border-top-width/success",
-            "itemSpacing": "imported/chip/root/column-gap",
-            "minHeight": "imported/chip/root/min-height",
-            "minWidth": "imported/chip/root/min-width",
-            "paddingBottom": "imported/chip/root/padding-bottom",
-            "paddingLeft": "imported/chip/root/padding-left",
-            "paddingRight": "imported/chip/root/padding-right",
-            "paddingTop": "imported/chip/root/padding-top",
-            "strokeWeight": "imported/chip/root/outline-width-state-focus-visible"
-          },
-          "strokeOutside": true,
-          "children": [
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Chip",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/success",
-              "lineHeight": 20,
-              "fontFamily": "IBM Plex Sans",
-              "contentProp": "Content"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Variant=Warning, Type=Squared, State=Focus Visible",
-        "row": 3,
-        "col": 1,
-        "spec": {
-          "type": "root",
-          "name": "Variant=Warning, Type=Squared, State=Focus Visible",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "fill": "imported/chip/root/background-color/warning",
-          "stroke": "imported/chip/root/outline-color-state-focus-visible",
-          "bindings": {
-            "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/squared",
-            "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/squared",
-            "strokeBottomWeight": "imported/chip/root/border-bottom-width/warning",
-            "strokeLeftWeight": "imported/chip/root/border-left-width/warning",
-            "strokeRightWeight": "imported/chip/root/border-right-width/warning",
-            "topLeftRadius": "imported/chip/root/border-top-left-radius/squared",
-            "topRightRadius": "imported/chip/root/border-top-right-radius/squared",
-            "strokeTopWeight": "imported/chip/root/border-top-width/warning",
-            "itemSpacing": "imported/chip/root/column-gap",
-            "minHeight": "imported/chip/root/min-height",
-            "minWidth": "imported/chip/root/min-width",
-            "paddingBottom": "imported/chip/root/padding-bottom",
-            "paddingLeft": "imported/chip/root/padding-left",
-            "paddingRight": "imported/chip/root/padding-right",
-            "paddingTop": "imported/chip/root/padding-top",
-            "strokeWeight": "imported/chip/root/outline-width-state-focus-visible"
-          },
-          "strokeOutside": true,
-          "children": [
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Chip",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/warning",
-              "lineHeight": 20,
-              "fontFamily": "IBM Plex Sans",
-              "contentProp": "Content"
-            }
-          ]
-        }
-      },
-      {
-        "name": "Variant=Danger, Type=Squared, State=Focus Visible",
-        "row": 4,
-        "col": 1,
-        "spec": {
-          "type": "root",
-          "name": "Variant=Danger, Type=Squared, State=Focus Visible",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "CENTER",
-            "counter": "CENTER"
-          },
-          "fill": "imported/chip/root/background-color/danger",
-          "stroke": "imported/chip/root/outline-color-state-focus-visible",
-          "bindings": {
-            "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/squared",
-            "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/squared",
-            "strokeBottomWeight": "imported/chip/root/border-bottom-width/danger",
-            "strokeLeftWeight": "imported/chip/root/border-left-width/danger",
-            "strokeRightWeight": "imported/chip/root/border-right-width/danger",
-            "topLeftRadius": "imported/chip/root/border-top-left-radius/squared",
-            "topRightRadius": "imported/chip/root/border-top-right-radius/squared",
-            "strokeTopWeight": "imported/chip/root/border-top-width/danger",
-            "itemSpacing": "imported/chip/root/column-gap",
-            "minHeight": "imported/chip/root/min-height",
-            "minWidth": "imported/chip/root/min-width",
-            "paddingBottom": "imported/chip/root/padding-bottom",
-            "paddingLeft": "imported/chip/root/padding-left",
-            "paddingRight": "imported/chip/root/padding-right",
-            "paddingTop": "imported/chip/root/padding-top",
-            "strokeWeight": "imported/chip/root/outline-width-state-focus-visible"
-          },
-          "strokeOutside": true,
-          "children": [
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Chip",
-              "fontSize": 14,
-              "fontStyle": "Regular",
-              "textFill": "imported/chip/root/color/danger",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -806,6 +824,11 @@ function applyFrameSpec(node, spec) {
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
+  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
+  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
+  // Unclip unless the contract explicitly asks for canvas clip.
+  node.clipsContent = spec.clipsContent === true;
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -813,7 +836,7 @@ function applyFrameSpec(node, spec) {
   if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
-    node.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE';
+    node.strokeAlign = 'INSIDE';
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -858,12 +881,17 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
+    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
     if (spec.fontFamily) {
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
@@ -923,12 +951,14 @@ async function buildNode(spec, registry) {
       wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
+      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
+      wrap.clipsContent = false;
       wrap.fills = [];
       for (const [field, varName] of Object.entries(spec.bindings || {})) {
         wrap.setBoundVariable(field, need(varName));
       }
       if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
-      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE'; }
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = 'INSIDE'; }
       if (spec.characters) wrap.appendChild(node); else node.remove();
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);
@@ -1018,7 +1048,7 @@ async function buildNode(spec, registry) {
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
   }
@@ -1221,8 +1251,12 @@ function dsStampFingerprints(node) {
   }
 }
 
+// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
+// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
+// skips as "unchanged" and canvas keeps the old runtime behavior.
+const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C);
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -1234,7 +1268,8 @@ function specHash(C) {
 // rebuilt from spec (manual interior edits are drift by definition);
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
-// REPORTED, never deleted — a human retires those.
+// REPORTED, never deleted — except State preview leftovers when
+// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
@@ -1292,6 +1327,25 @@ async function amendSet(set, C) {
       report.extraVariants.push(ch.name);
     }
   }
+  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
+  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // sync must be removed — otherwise amend leaves a doubled showcase grid.
+  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
+  if (!expectedHasState && report.extraVariants.length) {
+    const removed = [];
+    for (const name of [...report.extraVariants]) {
+      if (!/, State=/.test(name)) continue;
+      const ch = set.children.find((c) => c.name === name);
+      if (ch) {
+        ch.remove();
+        removed.push(name);
+      }
+    }
+    if (removed.length) {
+      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
+      report.removedVariants = removed;
+    }
+  }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
   for (const v of EV) {
@@ -1321,7 +1375,7 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
       }
@@ -1357,8 +1411,11 @@ async function amendSet(set, C) {
       sl.instance.componentPropertyReferences = { mainComponent: k };
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        // Optional slots default hidden — dashed "Slot" chrome must not be the
+        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
         sl.wrapper.componentPropertyReferences = { visible: vk };
+        sl.wrapper.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -1474,7 +1531,7 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
@@ -1508,8 +1565,9 @@ async function amendComponent(comp, C) {
     sl.instance.componentPropertyReferences = { mainComponent: k };
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
-      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
       sl.wrapper.componentPropertyReferences = { visible: vk };
+      sl.wrapper.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -1627,7 +1685,8 @@ async function syncOne(C) {
       }
       s.instance.componentPropertyReferences = { mainComponent: key };
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', true) };
+        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
+        s.wrapper.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {

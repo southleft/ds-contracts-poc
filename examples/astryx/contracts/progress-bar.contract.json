@@ -126,9 +126,11 @@
       "tokens": {
         "color": "{color-text-secondary}",
         "gap": "{spacing-1}",
-        "width": "{spacing-12}",
         "font-family": "{font-family-body}",
         "font-size": "{font-size-xs}"
+      },
+      "literals": {
+        "width": "240px"
       },
       "parts": {
         "label": {
@@ -144,9 +146,16 @@
             "border-radius": "{radius-full}",
             "height": "{spacing-1}"
           },
+          "literals": {
+            "width": "240px"
+          },
           "parts": {
             "fill": {
               "element": "div",
+              "meter": {
+                "valueProp": "value",
+                "maxProp": "max"
+              },
               "tokens": {
                 "background-color": "{color-accent}",
                 "border-radius": "{radius-full}",
