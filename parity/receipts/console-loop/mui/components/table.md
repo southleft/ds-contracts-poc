@@ -33,3 +33,5 @@ Compared canvas axes/prop defs to `examples/mui/contracts/table.contract.json`.
 ## Acceptance
 
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+
+**2026-08-08 pixel scorecard (strict-lane conversion):** scored-pass — pctAAMasked=2.08%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/table.png`; card `parity/receipts/console-loop/mui/scores/table.json`).

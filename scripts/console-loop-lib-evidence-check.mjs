@@ -16,8 +16,9 @@
  *   parity/receipts/console-loop/<libId>/scores/<stem>.json  (pixel scorecards)
  *
  * EVIDENCE SEMANTICS (foreign lanes are STRICT — contrast with the
- * first-party/MUI gates, which allow "attested-only" pass-claims because
- * those corpora have no pixel scorecards yet):
+ * first-party gate, which still allows "attested-only" pass-claims because
+ * that corpus has no pixel scorecards yet; the MUI gate went strict
+ * 2026-08-08 when its 31 stems were pixel-scored):
  *
  *   1. The gate reads scorecards, never receipt booleans. A receipt may claim
  *      a visual pass (visual.ok:true or visual.matchDeveloped:true) ONLY if

@@ -9246,8 +9246,12 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
   },
 
   {
-    // MUI denominator (31) on MUI Test 1 — same Console MCP loop, foreign corpus,
-    // but like first-party it has no pixel scorecards yet: attested-only lane.
+    // MUI denominator (31) on MUI Test 1 — same Console MCP loop, foreign corpus.
+    // STRICT since 2026-08-08: every stem carries a pixel scorecard
+    // (mui/scores/<stem>.json, headless REST cell @1x vs committed developed
+    // refs under mui/refs/), so the gate reads scorecards, never receipt
+    // booleans — a pass-claim without a passing, hash-pinned scorecard fails
+    // the gate by name; honest fail-closed receipts are counted, not failed.
     id: 'console-loop-mui-evidence-receipt',
     claim: 'C3-detection',
     run: () => {
@@ -9262,13 +9266,18 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (!out.includes('31/31')) {
         throw new Error('console-loop-mui-evidence-check did not report 31/31');
       }
-      if (!out.includes('ATTESTED-ONLY')) {
+      if (out.includes('ATTESTED-ONLY')) {
         throw new Error(
-          'console-loop-mui-evidence-check must print unscored visual claims as ATTESTED-ONLY',
+          'console-loop-mui-evidence-check printed ATTESTED-ONLY — the MUI lane is strict; attested claims must be impossible',
+        );
+      }
+      if (!/\d+ scored-pass/.test(out) || !/\d+ fail-closed/.test(out)) {
+        throw new Error(
+          'console-loop-mui-evidence-check must report scored-pass and fail-closed counts',
         );
       }
       console.log(
-        'console-loop-mui-evidence-receipt: MUI DENOMINATOR-50 stems receipted; visual claims surfaced as attested-only; ratchet floor holds',
+        'console-loop-mui-evidence-receipt: MUI DENOMINATOR-50 stems receipted under the STRICT scorecard bar; ratchet floor holds',
       );
     },
   },

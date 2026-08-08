@@ -33,3 +33,5 @@ Compared canvas axes/prop defs to `examples/mui/contracts/input-adornment.contra
 ## Acceptance
 
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+
+**2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=24.22%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/input-adornment.png`; card `parity/receipts/console-loop/mui/scores/input-adornment.json`).

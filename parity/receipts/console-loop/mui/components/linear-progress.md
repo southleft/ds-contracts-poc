@@ -33,3 +33,5 @@ Compared canvas axes/prop defs to `examples/mui/contracts/linear-progress.contra
 ## Acceptance
 
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+
+**2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=56.18%, compositionOk=False (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/linear-progress.png`; card `parity/receipts/console-loop/mui/scores/linear-progress.json`).

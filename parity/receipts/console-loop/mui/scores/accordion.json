@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 13.841379310344829,
+    "pctAAUnmasked": 6.800000000000001,
+    "pctAAMasked": 6.800000000000001,
+    "maskCoveragePct": 0,
+    "canvasPx": "290x50",
+    "realPx": "145x45",
+    "inkCanvasPct": 7.813793103448276,
+    "inkRealPct": 4.772413793103449
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/accordion.png",
+  "referenceSha256": "e81b66772c838c5b0c0a4951bc4c625929ad373d69cc549451d1ffc033c06f55",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/accordion-cell.png",
+  "canvasShotSha256": "d9c1b726aaea7bc0c8023e88fc68fd4a09aba309b0dc1adbabaacdb24545ec14",
+  "diff": "parity/receipts/console-loop/mui/scores/accordion.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/mui/components/accordion.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 2,
+  "inkDelta": 3.0413793103448272,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=2.00, inkDelta=3.0) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T08:30:06.533Z"
+}

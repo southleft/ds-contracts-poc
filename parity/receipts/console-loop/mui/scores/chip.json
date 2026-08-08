@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 26.47058823529412,
+    "pctAAUnmasked": 6.470588235294119,
+    "pctAAMasked": 6.470588235294119,
+    "maskCoveragePct": 0,
+    "canvasPx": "51x20",
+    "realPx": "49x20",
+    "inkCanvasPct": 93.23529411764706,
+    "inkRealPct": 89.41176470588236
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/chip.png",
+  "referenceSha256": "7bad7636a90b2aa1f1079c39eaa35e15a46a658b7baf40a3644befd2be216bcd",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/chip-cell.png",
+  "canvasShotSha256": "f0a1305e19b212531d53dc0131d16dbea0181482ed85271dc552df98e17879be",
+  "diff": "parity/receipts/console-loop/mui/scores/chip.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/mui/components/chip.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0408163265306123,
+  "inkDelta": 3.823529411764696,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "near-pass (pctAAMasked=6.47; likely font-AA) — NOT a pass; tighten emit (near-pass flips are dead)",
+  "recordedAt": "2026-08-08T08:30:05.279Z"
+}

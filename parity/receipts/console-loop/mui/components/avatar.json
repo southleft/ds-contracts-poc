@@ -34,12 +34,20 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Structure/variants reviewed via inspect (83:1638, page Avatar); visual OK \u2014 slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 3 variants on page Avatar)."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=12.14% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/avatar.json",
+      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/avatar.png",
+    "referenceSource": "extract/computed/out/mui/avatar/gate-shots/circular__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/avatar-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:2993664762",
@@ -129,6 +137,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

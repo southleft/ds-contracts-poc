@@ -15,7 +15,7 @@
   "cellNodeId": "83:1617",
   "cellName": "Elevation=0, Variant=Elevation",
   "cellPick": "variant-token-match",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 49.35141509433962,
     "pctAAUnmasked": 25.943396226415093,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 34.964622641509436,
     "inkRealPct": 31.191037735849058
   },
-  "reference": "extract/computed/out/mui/paper/gate-shots/0.elevation__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/paper.png",
   "referenceSha256": "d7161916c56b9221649d9c3b4888b0c338f71046035119afe0cd59d2222389b9",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/paper.png",
   "canvasShotSha256": "27fc6fc0c0ba1630910491f4b25a1b1da49e248c5319c8c5eccc81b479116c58",

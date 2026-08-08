@@ -17,12 +17,19 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:624).",
       "Switch COMPONENT_SET 21:624: 28 variant(s), 5 prop def(s). Structure looks sane; slot placeholders OK."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=49.88% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/switch.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/switch.png",
+    "referenceSource": "extract/computed/out/mui/switch/gate-shots/default.medium.checked.disabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/switch-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:2381775060",
@@ -119,6 +126,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

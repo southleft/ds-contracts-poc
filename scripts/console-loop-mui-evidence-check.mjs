@@ -2,19 +2,31 @@
  * Fail-closed gate for MUI Console MCP loop receipts on MUI Test 1.
  * Requires one completed receipt per DENOMINATOR-50 member (31 stems).
  *
- * EVIDENCE SEMANTICS (MUI lane — attested-only allowed; contrast with the
- * foreign-lib gate console-loop-lib-evidence-check.mjs, which is STRICT):
+ * EVIDENCE SEMANTICS (MUI lane — STRICT, same bar as the foreign-lib gate
+ * console-loop-lib-evidence-check.mjs):
  *
- *   - MUI receipts have NO pixel scorecards yet. A visual pass-claim
- *     (visual.ok:true / visual.matchDeveloped:true) WITHOUT a scorecard is
- *     "attested-only": legal for now, but counted and printed loudly. The
- *     owner will pixel-score these in a later job; once a scorecard exists at
- *     parity/receipts/console-loop/mui/scores/<stem>.json the claim is
- *     enforced strictly against the one bar (pctAAMasked <= 5 AND
- *     compositionOk) plus sha256 pins, exactly like foreign lanes.
- *   - Honest fail-closed (no pass-claims + non-empty named visual.defects)
- *     is legal and does not fail CI.
- *   - RATCHET.json floor for lane "mui" must hold.
+ *   TRANSITION 2026-08-08 — this lane was "attested-only" while MUI had no
+ *   pixel scorecards: a visual pass-claim (visual.ok / visual.matchDeveloped)
+ *   without a scorecard was legal, counted, and printed loudly. That grace
+ *   period is OVER: every DENOMINATOR stem now carries a pixel scorecard at
+ *   parity/receipts/console-loop/mui/scores/<stem>.json (headless REST cell
+ *   render at scale 1 vs the committed developed reference under mui/refs/,
+ *   scored by console-loop-developed-score under the ONE bar), so the gate
+ *   enforces scorecards unconditionally:
+ *
+ *   1. The gate reads scorecards, never receipt booleans. A receipt may claim
+ *      a visual pass ONLY if scores/<stem>.json passes the one bar: status
+ *      "pass" AND metrics.pctAAMasked <= 5 AND compositionOk. A pass-claim
+ *      without a passing scorecard fails the gate, naming the stem.
+ *   2. Honest fail-closed is legal and does NOT fail CI: no pass-claims,
+ *      non-empty visual.defects (named, FC-classified), visual.status
+ *      "fail-closed" when present. Counted and printed.
+ *   3. Scorecard sha256 pins (referenceSha256 / canvasShotSha256) are
+ *      verified against the PNGs on disk for every pass-claim.
+ *   4. Passes that relied on the scorer's framingTolerant relaxation are
+ *      surfaced loudly (scorecard.reliedOnFramingTolerant).
+ *   5. RATCHET.json floor for lane "mui" must hold (seeded from the genuine
+ *      scorecard passes the day the lane went strict).
  */
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
@@ -45,9 +57,9 @@ const REQUIRED = (
   .filter(Boolean);
 
 const errors = [];
-const attestedOnly = [];
 const scoredPass = [];
 const failClosed = [];
+const framingTolerantPasses = [];
 if (!existsSync(DIR)) {
   console.error("✖ console-loop-mui-evidence-check: missing mui/components/");
   process.exit(1);
@@ -83,32 +95,46 @@ for (const stem of REQUIRED) {
   }
   if (!receipt.generate?.ok) errors.push(`${stem}: generate.ok required`);
   // Present-on-canvas receipting may set generated=false but ok=true via inspect
-  // --- visual evidence: scorecard-enforced when present, attested-only otherwise ---
+  // --- visual evidence: the scorecard is the only source of truth (STRICT) ---
   const claims = visualClaimsPass(receipt);
   const defects = Array.isArray(receipt.visual?.defects) ? receipt.visual.defects : [];
   const sc = readScorecard(SCORES_DIR, stem);
   if (claims) {
-    if (defects.length) {
-      errors.push(`${stem}: visual pass-claim with non-empty visual.defects — contradiction`);
-    }
-    if (sc && sc.data) {
-      if (!scorecardPasses(sc.data)) {
-        const aa = sc.data.metrics?.pctAAMasked;
-        errors.push(
-          `${stem}: pass-claim contradicts its scorecard (status=${sc.data.status}, pctAAMasked=${typeof aa === "number" ? aa.toFixed(2) : aa}, compositionOk=${sc.data.compositionOk}; bar is pctAAMasked<=${PASS_AA_MASKED} AND compositionOk)`,
-        );
-      } else {
-        for (const e of verifyScorecardPins(ROOT, sc.data)) errors.push(`${stem}: ${e}`);
-        scoredPass.push(stem);
-      }
-    } else if (sc && !sc.data) {
+    if (!sc) {
+      errors.push(
+        `${stem}: visual pass-claim without pixel scorecard (scores/${stem}.json missing) — the MUI lane is strict since 2026-08-08`,
+      );
+    } else if (!sc.data) {
       errors.push(`${stem}: scorecard unreadable — ${sc.error}`);
+    } else if (!scorecardPasses(sc.data)) {
+      const aa = sc.data.metrics?.pctAAMasked;
+      errors.push(
+        `${stem}: pass-claim contradicts its scorecard (status=${sc.data.status}, pctAAMasked=${typeof aa === "number" ? aa.toFixed(2) : aa}, compositionOk=${sc.data.compositionOk}; bar is pctAAMasked<=${PASS_AA_MASKED} AND compositionOk)`,
+      );
     } else {
-      attestedOnly.push(stem);
+      for (const e of verifyScorecardPins(ROOT, sc.data)) errors.push(`${stem}: ${e}`);
+      if (defects.length) {
+        errors.push(`${stem}: pass-claim with non-empty visual.defects — contradiction`);
+      }
+      if (receipt.visual?.status && receipt.visual.status !== "scored-pass") {
+        errors.push(`${stem}: pass-claim but visual.status=${receipt.visual.status}`);
+      }
+      if (receipt.acceptance?.visualMatchDeveloped !== true) {
+        errors.push(`${stem}: scored pass requires acceptance.visualMatchDeveloped:true`);
+      }
+      scoredPass.push(stem);
+      if (sc.data.reliedOnFramingTolerant === true) framingTolerantPasses.push(stem);
     }
   } else {
+    // Honest fail-closed: legal, counted, printed — never a gate failure.
     if (!defects.length) {
       errors.push(`${stem}: fail-closed receipt must name defects (visual.defects non-empty)`);
+    }
+    if (receipt.visual?.status && receipt.visual.status !== "fail-closed") {
+      errors.push(`${stem}: no pass-claim but visual.status=${receipt.visual.status}`);
+    }
+    if (receipt.acceptance?.visualMatchDeveloped === true) {
+      errors.push(`${stem}: fail-closed receipt claims acceptance.visualMatchDeveloped`);
     }
     failClosed.push(stem);
   }
@@ -147,15 +173,12 @@ if (errors.length) {
   process.exit(1);
 }
 
-if (attestedOnly.length) {
-  console.log(
-    `⚠ ATTESTED-ONLY visual claims (NO pixel scorecard — pending pixel-score job): ${attestedOnly.length}/${REQUIRED.length} stems\n` +
-      `  ${attestedOnly.join(", ")}`,
-  );
-}
 for (const stem of failClosed) {
   console.log(`  fail-closed mui/${stem} (named defects; visual hill-climb open)`);
 }
+for (const stem of framingTolerantPasses) {
+  console.log(`  ⚠ mui/${stem}: pass relied on framingTolerant relaxation (see scorecard)`);
+}
 console.log(
-  `✔ console-loop-mui-evidence-check: ${REQUIRED.length}/${REQUIRED.length} denominator stems ok on ${FILE_KEY} — ${scoredPass.length} scored-pass, ${attestedOnly.length} attested-only, ${failClosed.length} fail-closed; scorecard passes ${genuinePasses.length} hold ratchet floor`,
+  `✔ console-loop-mui-evidence-check: ${REQUIRED.length}/${REQUIRED.length} denominator stems ok on ${FILE_KEY} — ${scoredPass.length} scored-pass${scoredPass.length ? ` (${scoredPass.join(", ")})` : ""}, ${failClosed.length} fail-closed; scorecard passes ${genuinePasses.length} hold ratchet floor`,
 );

@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 32.68242548818088,
+    "pctAAUnmasked": 17.67728674203494,
+    "pctAAMasked": 17.67728674203494,
+    "maskCoveragePct": 0,
+    "canvasPx": "139x7",
+    "realPx": "139x7",
+    "inkCanvasPct": 20.452209660842755,
+    "inkRealPct": 18.396711202466598
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/table-pagination.png",
+  "referenceSha256": "ca1b769694b181d59df1fd4c38a43ec876c1a9549e975437ceec8b740ed75014",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/table-pagination-cell.png",
+  "canvasShotSha256": "f4d8451d9160f247ccc3a18de303ffbbf0de255014ef38743724fa675ad909af",
+  "diff": "parity/receipts/console-loop/mui/scores/table-pagination.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/mui/components/table-pagination.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 2.0554984583761566,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=17.68 > 5)",
+  "recordedAt": "2026-08-08T08:30:08.055Z"
+}

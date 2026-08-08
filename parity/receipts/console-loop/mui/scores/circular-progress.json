@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 38.96490184414039,
+    "pctAAUnmasked": 21.237358715050565,
+    "pctAAMasked": 21.237358715050565,
+    "maskCoveragePct": 0,
+    "canvasPx": "41x41",
+    "realPx": "40x32",
+    "inkCanvasPct": 31.4098750743605,
+    "inkRealPct": 16.240333135038668
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/circular-progress.png",
+  "referenceSha256": "66a1e8b3e05e7849be2a52e0385c1cf8a770f5ec8daf8be42d28e3c0287101f3",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/circular-progress-cell.png",
+  "canvasShotSha256": "1e7a6489e26867f9c78c154c7ed3355b8855b1c927fe630b7856099a6b114a5a",
+  "diff": "parity/receipts/console-loop/mui/scores/circular-progress.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/mui/components/circular-progress.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.28125,
+  "inkDelta": 15.169541939321832,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=21.24 > 5)",
+  "recordedAt": "2026-08-08T08:30:10.106Z"
+}

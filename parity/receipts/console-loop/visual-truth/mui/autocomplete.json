@@ -15,7 +15,7 @@
   "cellNodeId": "21:82",
   "cellName": "Size=Medium",
   "cellPick": "variant-token-match",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 14.732142857142858,
     "pctAAUnmasked": 8.47594246031746,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 29.55109126984127,
     "inkRealPct": 31.287202380952383
   },
-  "reference": "extract/computed/out/mui/autocomplete/gate-shots/medium__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/autocomplete.png",
   "referenceSha256": "139e5d0f74000e348d6e453bbd4e6bb931493daaf891d7973f75a4eae119f79b",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/autocomplete.png",
   "canvasShotSha256": "61919b13f331fafb5587c81db986d6c32a9444eb1085d435444584d76f4d8840",

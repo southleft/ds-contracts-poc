@@ -15,7 +15,7 @@
   "cellNodeId": "83:1632",
   "cellName": "Variant=Circular",
   "cellPick": "variant-token-match",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 52.85714285714286,
     "pctAAUnmasked": 12.142857142857142,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 77.85714285714286,
     "inkRealPct": 71.78571428571429
   },
-  "reference": "extract/computed/out/mui/avatar/gate-shots/circular__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/avatar.png",
   "referenceSha256": "aeee938ac834ae90516ee61e8d029bd36b1e7249fe181e1cfd94d5663eccff54",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/avatar.png",
   "canvasShotSha256": "d46061c9313b2a80410e9da0a969bb31358de289045a02e3a3142e6bb9c2ac26",

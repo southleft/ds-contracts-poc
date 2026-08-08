@@ -35,12 +35,19 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Screenshot reviewed on section/node 83:1630; structure/variants look sane (slot placeholders OK).",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 8 variants on page Paper)."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=25.94% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/paper.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/paper.png",
+    "referenceSource": "extract/computed/out/mui/paper/gate-shots/0.elevation__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/paper-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:4002091254",
@@ -153,6 +160,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

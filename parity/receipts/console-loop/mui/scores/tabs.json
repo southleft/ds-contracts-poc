@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 19.666666666666664,
+    "pctAAUnmasked": 10.19047619047619,
+    "pctAAMasked": 10.19047619047619,
+    "maskCoveragePct": 0,
+    "canvasPx": "140x15",
+    "realPx": "140x15",
+    "inkCanvasPct": 16.61904761904762,
+    "inkRealPct": 13.380952380952383
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/tabs.png",
+  "referenceSha256": "50694d61f5bde8253e69d68d1d744b64800a3bea68ff79843cf908279037a082",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/tabs-cell.png",
+  "canvasShotSha256": "0bca1e2b0fc4105d33e519418da235376d43f6436d302f5e1b7cc6684f162eb5",
+  "diff": "parity/receipts/console-loop/mui/scores/tabs.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/mui/components/tabs.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 3.2380952380952372,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=10.19 > 5)",
+  "recordedAt": "2026-08-08T08:30:06.275Z"
+}

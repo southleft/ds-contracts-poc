@@ -15,7 +15,7 @@
   "cellNodeId": "21:810",
   "cellName": "Tooltip",
   "cellPick": "standalone-node",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 98.68969624776652,
     "pctAAUnmasked": 23.466349017272186,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 88.62418106015485,
     "inkRealPct": 94.28231089934485
   },
-  "reference": "extract/computed/out/mui/tooltip/gate-shots/off__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/tooltip.png",
   "referenceSha256": "cd0e2cfef4db8e868d9cbd6fa5633f84de7e04683ac2ecf5e0f185d72cd34c4a",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/tooltip.png",
   "canvasShotSha256": "d470b9e0898648fbf6bab80f0affe97f2ced431cc94b4244c14b0b3eeb69ba35",

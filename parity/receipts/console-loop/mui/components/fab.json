@@ -19,11 +19,18 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Screenshot reviewed on section/node 84:1744; structure/variants look sane (slot placeholders OK)."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=2.13% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/fab.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/fab.png",
+    "referenceSource": "extract/computed/out/mui/fab/gate-shots/large.default.enabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/fab-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:2082406472",
@@ -147,6 +154,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

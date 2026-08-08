@@ -33,3 +33,5 @@ Compared canvas axes/prop defs to `examples/mui/contracts/circular-progress.cont
 ## Acceptance
 
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+
+**2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=21.24%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/circular-progress.png`; card `parity/receipts/console-loop/mui/scores/circular-progress.json`).

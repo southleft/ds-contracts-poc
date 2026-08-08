@@ -2025,6 +2025,13 @@
 //                      { hex: "rrggbb" } when raw, plus { alpha } when the
 //                      paint's effective opacity < 1 (dump v1.1) — raw paints
 //                      are REPORTED by propose.ts, never silently tokenized
+//   gradient           first visible GRADIENT_LINEAR fill (dump v1.16):
+//                      normalized-object-space handles (start → ramp 0,
+//                      end → ramp 1, gradientTransform inverted) + stops
+//                      (resolved hex/alpha, bound variable NAME per stop when
+//                      one rides it). Carried alone or over a SOLID drawn
+//                      below it (CSS background-color under background-image).
+//                      RADIAL/ANGULAR/DIAMOND stay paint-unsupported receipts.
 //   strokeWeight       literal stroke weight (bound weights appear in `bound`)
 //   strokeAlign        INSIDE | CENTER | OUTSIDE (dump v1.11) — where the
 //                      weight is drawn relative to the node box. Captured on
@@ -2306,6 +2313,82 @@ const dumpPaint = async (paints, nodePath, field, consumer) => {
   return withAlpha({ hex: rgbToHex(p.color) });
 };
 
+const round4 = (v) => Math.round(v * 10000) / 10000;
+
+// dump v1.16: GRADIENT_LINEAR projection. The Plugin API spells a gradient's
+// placement as `gradientTransform` — an affine map from normalized object
+// space to gradient space — while the dump (and the REST surface) speak the
+// two HANDLE POINTS: the object-space points at ramp position 0 and 1, i.e.
+// the transform's INVERSE applied to (0, 0.5) and (1, 0.5) (REST
+// gradientHandlePositions[0]/[1]). Stops carry the resolved color (+ alpha
+// when < 1) and the bound variable's NAME when a stop rides one — the same
+// name-resolution rule every other paint channel uses. A degenerate
+// (non-invertible) transform or a < 2-stop ramp is refused by name.
+const dumpGradient = async (p, nodePath, consumer) => {
+  const t = p.gradientTransform;
+  if (!Array.isArray(t) || t.length !== 2) {
+    degrade('paint-unsupported', nodePath, 'GRADIENT_LINEAR without a gradientTransform — gradient not captured (dump v1.16)');
+    return null;
+  }
+  const a = t[0][0], b = t[0][1], c = t[0][2];
+  const d = t[1][0], e = t[1][1], f = t[1][2];
+  const det = a * e - b * d;
+  if (!isFinite(det) || Math.abs(det) < 1e-9) {
+    degrade('paint-unsupported', nodePath, 'GRADIENT_LINEAR gradientTransform is non-invertible — gradient not captured (dump v1.16)');
+    return null;
+  }
+  const inv = (x, y) => ({
+    x: round4((e * (x - c) - b * (y - f)) / det),
+    y: round4((-d * (x - c) + a * (y - f)) / det),
+  });
+  const stops = [];
+  for (const s of p.gradientStops || []) {
+    const stop = { position: round4(s.position), hex: rgbToHex(s.color) };
+    const sa = typeof s.color.a === 'number' ? s.color.a : 1;
+    if (sa < 1) stop.alpha = round4(sa);
+    const alias = s.boundVariables && s.boundVariables.color;
+    if (alias && alias.id) {
+      const name = await varNameById(alias.id, consumer);
+      if (name) stop.var = name;
+    }
+    stops.push(stop);
+  }
+  if (stops.length < 2) {
+    degrade('paint-unsupported', nodePath, 'GRADIENT_LINEAR with ' + stops.length + ' stop(s) — gradient not captured (dump v1.16)');
+    return null;
+  }
+  const out = { start: inv(0, 0.5), end: inv(1, 0.5), stops };
+  const op = typeof p.opacity === 'number' ? p.opacity : 1;
+  if (op < 1) out.alpha = round4(op);
+  return out;
+};
+
+// dump v1.16: the FILL STACK dumper — the first visible SOLID (dumpPaint's
+// selection rule, spelling parity via dumpPaint itself) PLUS the first
+// visible GRADIENT_LINEAR drawn ABOVE it (Figma paints draw bottom-to-top,
+// so solid-below-gradient is exactly CSS background-color under
+// background-image). A gradient hidden UNDER a solid keeps the truncation
+// receipt; RADIAL/ANGULAR/DIAMOND (and IMAGE — its own channel) keep
+// paint-unsupported. Receipts fire only for what is NOT carried.
+const dumpFillStack = async (node, nodePath) => {
+  const paints = node.fills;
+  if (!Array.isArray(paints)) return { fill: null, gradient: null }; // figma.mixed
+  const visibles = paints.filter((x) => x.visible !== false);
+  const solid = visibles.find((x) => x.type === 'SOLID');
+  const grad = visibles.find((x) => x.type === 'GRADIENT_LINEAR');
+  const gradCarriable = grad && (!solid || visibles.indexOf(grad) > visibles.indexOf(solid));
+  const gradient = gradCarriable ? await dumpGradient(grad, nodePath, node) : null;
+  if (!solid && !gradient && visibles.length > 0 && nodePath) {
+    degrade('paint-unsupported', nodePath, 'first visible fill paint is ' + visibles[0].type + ', not SOLID — dump v1.16 carries SOLID and GRADIENT_LINEAR fills only; paint omitted');
+  }
+  const carried = (solid ? 1 : 0) + (gradient ? 1 : 0);
+  if (carried > 0 && visibles.length > carried && nodePath) {
+    degrade('paint-stack-truncated', nodePath, visibles.length + ' visible fill paints (' + visibles.map((x) => x.type).join(', ') + ') — dump v1.16 carries the first SOLID plus a GRADIENT_LINEAR above it only');
+  }
+  const fill = solid ? await dumpPaint([solid], nodePath, 'fill', node) : null;
+  return { fill, gradient };
+};
+
 async function dumpNode(node, nodePath, parent) {
   const out = { name: node.name, type: node.type };
 
@@ -2521,8 +2604,13 @@ async function dumpNode(node, nodePath, parent) {
   if (Object.keys(bound).length > 0) out.bound = bound;
 
   if (node.type !== 'TEXT') {
-    const fill = 'fills' in node ? await dumpPaint(node.fills, nodePath, 'fill', node) : null;
+    // dump v1.16: the fill STACK — first visible SOLID plus a GRADIENT_LINEAR
+    // above it (see dumpFillStack). Solid-only stacks are byte-identical to
+    // the v1.15 projection.
+    const stack = 'fills' in node ? await dumpFillStack(node, nodePath) : { fill: null, gradient: null };
+    const fill = stack.fill;
     if (fill) out.fill = fill;
+    if (stack.gradient) out.gradient = stack.gradient;
     // dump v1.7: IMAGE-fill marker — photo avatars were pure degradations.
     // dump v1.9: the marker carries the paint's imageHash (the exported
     // asset's name) — ONLY for scaleMode FILL paints, so a hash downstream
@@ -2621,7 +2709,11 @@ async function dumpNode(node, nodePath, parent) {
     if (node.letterSpacing !== figma.mixed && node.letterSpacing && node.letterSpacing.value !== 0) {
       channels.push('letterSpacing ' + node.letterSpacing.value + node.letterSpacing.unit);
     }
-    if (node.textCase !== figma.mixed && node.textCase && node.textCase !== 'ORIGINAL') channels.push('textCase ' + node.textCase);
+    // dump v1.16: UPPER/LOWER/TITLE are CAPTURED (text.textCase below — the
+    // canvas fact behind CSS text-transform); SMALL_CAPS[_FORCED] has no CSS
+    // text-transform twin and stays a receipt.
+    const TEXT_CASE_CAPTURED = { UPPER: true, LOWER: true, TITLE: true };
+    if (node.textCase !== figma.mixed && node.textCase && node.textCase !== 'ORIGINAL' && !TEXT_CASE_CAPTURED[node.textCase]) channels.push('textCase ' + node.textCase);
     if (node.textDecoration !== figma.mixed && node.textDecoration && node.textDecoration !== 'NONE') channels.push('textDecoration ' + node.textDecoration);
     if (node.lineHeight !== figma.mixed && node.lineHeight && node.lineHeight.unit !== 'AUTO' && node.lineHeight.unit !== 'PIXELS') {
       channels.push('lineHeight ' + node.lineHeight.value + node.lineHeight.unit + ' — only PIXELS carries, dump v1.3');
@@ -2651,6 +2743,7 @@ async function dumpNode(node, nodePath, parent) {
       fontStyle: node.fontName === figma.mixed ? null : node.fontName.style,
     };
     if (typeof pxLineHeight === 'number') text.lineHeight = pxLineHeight;
+    if (node.textCase !== figma.mixed && TEXT_CASE_CAPTURED[node.textCase]) text.textCase = node.textCase;
     if (node.textStyleId && node.textStyleId !== figma.mixed) {
       const style = await figma.getStyleByIdAsync(node.textStyleId);
       if (style) {
@@ -2797,8 +2890,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.15) for design→contract proposal.',
-    dumpVersion: '1.15',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.16) for design→contract proposal.',
+    dumpVersion: '1.16',
   },
 };
 dumps._degradations = degradations;

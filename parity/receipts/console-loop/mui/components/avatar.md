@@ -33,3 +33,5 @@ Compared canvas axes/prop defs to `examples/mui/contracts/avatar.contract.json`.
 ## Acceptance
 
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+
+**2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=12.14%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/avatar.png`; card `parity/receipts/console-loop/mui/scores/avatar.json`).

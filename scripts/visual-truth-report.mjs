@@ -87,7 +87,7 @@ const lines = [];
 lines.push("# Visual-truth — headless canvas-vs-code scorecard report");
 lines.push("");
 lines.push(
-  "Source: `rest-images-api` (Figma REST renders at scale 2, no desktop app, no plugin bridge), scored under the one bar (`pctAAMasked <= 5` AND `compositionOk`) with the developed-score normalization policy. Written by `scripts/visual-truth-report.mjs`; regenerate with `npm run visual-truth:report`.",
+  "Source: `rest-images-api` (Figma REST renders at scale 1 — like-for-like with the bridge lane's scale-1 cell exports; no desktop app, no plugin bridge), scored under the one bar (`pctAAMasked <= 5` AND `compositionOk`) with the developed-score normalization policy. Written by `scripts/visual-truth-report.mjs`; regenerate with `npm run visual-truth:report`.",
 );
 lines.push("");
 lines.push(`generatedFrom: sha256:${generatedFrom} (${cards.length} scorecards)`);

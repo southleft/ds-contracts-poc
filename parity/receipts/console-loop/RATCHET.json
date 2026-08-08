@@ -5,7 +5,7 @@
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
-  "note": "Per-lane minimum scorecard-passed counts. The evidence gates fail a lane when its count of genuine pixel-scorecard passes (scores/<stem>.json with status pass, pctAAMasked<=5, compositionOk) drops below its floor — honesty cannot decay. Raise a floor when a new stem genuinely passes; never lower one without owner sign-off. first-party/mui have no pixel scorecards yet (attested-only lanes), so their floors are 0. 2026-08-08: altitude 4→6 (chip, link converted by the FC-FONT-SUBSTRATE font-loading harness — cfg.fonts loads the library's true faces in the gate render; passes hold on BOTH instruments: bridge cell shots and the headless REST lane).",
+  "note": "Per-lane minimum scorecard-passed counts. The evidence gates fail a lane when its count of genuine pixel-scorecard passes (scores/<stem>.json with status pass, pctAAMasked<=5, compositionOk) drops below its floor \u2014 honesty cannot decay. Raise a floor when a new stem genuinely passes; never lower one without owner sign-off. first-party has no pixel scorecards yet (attested-only lane), so its floor is 0. 2026-08-08: altitude 4\u21926 (chip, link converted by the FC-FONT-SUBSTRATE font-loading harness \u2014 cfg.fonts loads the library's true faces in the gate render; passes hold on BOTH instruments: bridge cell shots and the headless REST lane). 2026-08-08: mui lane went STRICT \u2014 31/31 stems pixel-scored headlessly (REST cell @1x vs committed developed refs under mui/refs/); floor seeded at 4 from the both-instrument passes (checkbox, divider, snackbar, table; alert passes the lane scorer only after dpr+size normalization while the headless card fails it 6.49 \u2014 instruments disagree, not seeded, receipt stays fail-closed).",
   "seededAt": "2026-08-07",
   "seededFrom": {
     "altitude": [
@@ -25,11 +25,17 @@
     "tailwind": [
       "badge",
       "button"
+    ],
+    "mui": [
+      "checkbox",
+      "divider",
+      "snackbar",
+      "table"
     ]
   },
   "floors": {
     "first-party": 0,
-    "mui": 0,
+    "mui": 4,
     "tailwind": 3,
     "altitude": 6,
     "astryx": 0,

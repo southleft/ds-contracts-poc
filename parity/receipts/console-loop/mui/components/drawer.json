@@ -34,12 +34,19 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Structure/variants reviewed via inspect (83:1680, page Drawer); visual OK \u2014 slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page Drawer)."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=55.03% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/drawer.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/drawer.png",
+    "referenceSource": "extract/computed/out/mui/drawer/gate-shots/temporary__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/drawer-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:415446264",
@@ -124,6 +131,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

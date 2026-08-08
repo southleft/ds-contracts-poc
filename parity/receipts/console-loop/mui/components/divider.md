@@ -33,3 +33,5 @@ Compared canvas axes/prop defs to `examples/mui/contracts/divider.contract.json`
 ## Acceptance
 
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+
+**2026-08-08 pixel scorecard (strict-lane conversion):** scored-pass — pctAAMasked=0.00%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/divider.png`; card `parity/receipts/console-loop/mui/scores/divider.json`).

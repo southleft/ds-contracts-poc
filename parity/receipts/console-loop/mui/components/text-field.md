@@ -33,3 +33,5 @@ Compared canvas axes/prop defs to `examples/mui/contracts/text-field.contract.js
 ## Acceptance
 
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+
+**2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=6.33%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/text-field.png`; card `parity/receipts/console-loop/mui/scores/text-field.json`).

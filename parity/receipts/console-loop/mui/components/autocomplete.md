@@ -33,3 +33,5 @@ Compared canvas axes/prop defs to `examples/mui/contracts/autocomplete.contract.
 ## Acceptance
 
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+
+**2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=8.48%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/autocomplete.png`; card `parity/receipts/console-loop/mui/scores/autocomplete.json`).

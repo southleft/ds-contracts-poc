@@ -15,7 +15,7 @@
   "cellNodeId": "83:1658",
   "cellName": "Breadcrumbs",
   "cellPick": "standalone-node",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 45.588235294117645,
     "pctAAUnmasked": 20.49486461251167,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 28.618113912231557,
     "inkRealPct": 23.10924369747899
   },
-  "reference": "extract/computed/out/mui/breadcrumbs/gate-shots/__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/breadcrumbs.png",
   "referenceSha256": "e8e17b12301cd7c59c6d8ea73346232717287ebfaa00fb408aee0b620872878a",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/breadcrumbs.png",
   "canvasShotSha256": "2acd097a025ba2f74ecb6b8d72b99ac52462b13948e68c959f7767806c26278f",

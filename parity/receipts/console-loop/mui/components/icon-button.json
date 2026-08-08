@@ -36,12 +36,19 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Structure/variants reviewed via inspect (83:1708, page IconButton); visual OK \u2014 slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 9 variants on page IconButton)."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=25.78% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/icon-button.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/icon-button.png",
+    "referenceSource": "extract/computed/out/mui/iconbutton/gate-shots/large.default.enabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/icon-button-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:1946274529",
@@ -163,6 +170,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

@@ -17,12 +17,19 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:509).",
       "Slider COMPONENT_SET 21:509: 12 variant(s), 3 prop def(s). Structure looks sane; slot placeholders OK."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=48.16% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/slider.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/slider.png",
+    "referenceSource": "extract/computed/out/mui/slider/gate-shots/error.medium__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/slider-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:1845442048",
@@ -102,6 +109,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

@@ -15,7 +15,7 @@
   "cellNodeId": "84:1941",
   "cellName": "Color=Default, Variant=Dot",
   "cellPick": "variant-token-match",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 62,
     "pctAAUnmasked": 54.625,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 95.75,
     "inkRealPct": 50
   },
-  "reference": "extract/computed/out/mui/badge/gate-shots/default.dot__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/badge.png",
   "referenceSha256": "858992e89922a72b05acde916b39989b570e6d4d2431656f6a163eb94021899c",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/badge.png",
   "canvasShotSha256": "360d4c052cece40cbd3dec66d423aef3d1cc1752b922472b5f02aaebe955b737",

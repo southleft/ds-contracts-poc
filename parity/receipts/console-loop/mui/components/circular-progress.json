@@ -33,12 +33,19 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Structure/variants reviewed via inspect (83:1647, page CircularProgress); visual OK \u2014 slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page CircularProgress)."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=21.24% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/circular-progress.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/circular-progress.png",
+    "referenceSource": "extract/computed/out/mui/circularprogress/gate-shots/determinate__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/circular-progress-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:3509931486",
@@ -117,6 +124,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

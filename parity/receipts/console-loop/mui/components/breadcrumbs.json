@@ -31,12 +31,20 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Structure/variants reviewed via inspect (83:1658, page Breadcrumbs); visual OK \u2014 slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT, 1 variants on page Breadcrumbs)."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=20.49% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/breadcrumbs.json",
+      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/breadcrumbs.png",
+    "referenceSource": "extract/computed/out/mui/breadcrumbs/gate-shots/__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/breadcrumbs-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:1233132133",
@@ -104,6 +112,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

@@ -19,11 +19,19 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Screenshot reviewed on section/node 84:2481; structure/variants look sane (slot placeholders OK)."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=6.33% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/text-field.json",
+      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/text-field.png",
+    "referenceSource": "extract/computed/out/mui/textfield/gate-shots/__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/text-field-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:3304990436",
@@ -135,6 +143,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

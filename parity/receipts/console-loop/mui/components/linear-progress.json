@@ -33,12 +33,19 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Structure/variants reviewed via inspect (83:1655, page LinearProgress); visual OK \u2014 slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page LinearProgress)."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=56.18% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/linear-progress.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/linear-progress.png",
+    "referenceSource": "extract/computed/out/mui/linearprogress/gate-shots/determinate__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/linear-progress-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:3801840436",
@@ -119,6 +126,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

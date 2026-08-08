@@ -15,7 +15,7 @@
   "cellNodeId": "21:39",
   "cellName": "Variant=Elevation, Expanded=Collapsed",
   "cellPick": "variant-token-match",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 15.12413793103448,
     "pctAAUnmasked": 7.344827586206897,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 7.813793103448276,
     "inkRealPct": 5.958620689655173
   },
-  "reference": "extract/computed/out/mui/accordion/gate-shots/elevation.collapsed.disabled__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/accordion.png",
   "referenceSha256": "e81b66772c838c5b0c0a4951bc4c625929ad373d69cc549451d1ffc033c06f55",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/accordion.png",
   "canvasShotSha256": "d9c1b726aaea7bc0c8023e88fc68fd4a09aba309b0dc1adbabaacdb24545ec14",

@@ -17,12 +17,19 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:451).",
       "Menu COMPONENT 21:451: 1 variant(s), 0 prop def(s). Structure looks sane; slot placeholders OK."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=10.46% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/menu.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/menu.png",
+    "referenceSource": "extract/computed/out/mui/menu/gate-shots/__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/menu-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:226276784",
@@ -69,6 +76,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

@@ -15,7 +15,7 @@
   "cellNodeId": "83:1607",
   "cellName": "Variant=FullWidth",
   "cellPick": "variant-token-match",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 0,
     "pctAAUnmasked": 0,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 100,
     "inkRealPct": 100
   },
-  "reference": "extract/computed/out/mui/divider/gate-shots/fullWidth__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/divider.png",
   "referenceSha256": "a4c56f8da34db8827368a95de1723ad4bf039e2f12b5860595f1add4b89d5399",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/divider.png",
   "canvasShotSha256": "c579de0a690e8cd9c1dbc63c98f3a93b84a4fb4518e3d59c2afaefadf368a446",

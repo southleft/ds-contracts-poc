@@ -17,12 +17,19 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:448).",
       "Dialog COMPONENT_SET 21:448: 5 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=51.68% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/dialog.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/dialog.png",
+    "referenceSource": "extract/computed/out/mui/dialog/gate-shots/lg__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/dialog-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:915053960",
@@ -94,6 +101,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

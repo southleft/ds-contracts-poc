@@ -33,3 +33,5 @@ Compared canvas axes/prop defs to `examples/mui/contracts/icon-button.contract.j
 ## Acceptance
 
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+
+**2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=25.78%, compositionOk=False (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/icon-button.png`; card `parity/receipts/console-loop/mui/scores/icon-button.json`).

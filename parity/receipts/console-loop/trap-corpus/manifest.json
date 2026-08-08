@@ -1,7 +1,7 @@
 {
   "version": 1,
   "kind": "code-to-canvas-trap-corpus",
-  "description": "Frozen adversarial stems for code\u2192canvas hill-climb (CODE-TO-CANVAS-HILLCLIMB.md \u00a73.2 / \u00a74 Phase M2). Structural CI only until developed scores land.",
+  "description": "Frozen adversarial stems for code\u2192canvas hill-climb (CODE-TO-CANVAS-HILLCLIMB.md \u00a73.2 / \u00a74 Phase M2). Structural CI only until developed scores land. toast/progress-bar refs (2026-08-08): DEVELOPED references rendered offline from their promoted contracts via the gate's own emit pipeline (emit-html + astryx token stylesheet + shipped minted tree, pinned headless Chromium, stage screenshot) \u2014 these stems were never computed-captured, so no gate-shots exist; astryx fonts stay UNCONFIGURED by name (FC-FONT-SUBSTRATE precedent), the refs render the CSS fallback stack.",
   "stems": [
     {
       "lib": "astryx",
@@ -23,8 +23,8 @@
       ],
       "contract": "examples/astryx/contracts/toast.contract.json",
       "script": "examples/astryx/figma/toast.figma.js",
-      "reference": "examples/astryx/receipts/site/Toast.png",
-      "pendingRef": true
+      "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/toast/default__default.png",
+      "pendingRef": false
     },
     {
       "lib": "astryx",
@@ -35,8 +35,8 @@
       ],
       "contract": "examples/astryx/contracts/progress-bar.contract.json",
       "script": "examples/astryx/figma/progress-bar.figma.js",
-      "reference": "examples/astryx/receipts/site/ProgressBar.png",
-      "pendingRef": true
+      "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/progress-bar/accent.value-40__default.png",
+      "pendingRef": false
     },
     {
       "lib": "polaris",

@@ -20,9 +20,15 @@
     "ok": true,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:744).",
-      "Table COMPONENT_SET 21:744: 2 variant(s), 1 prop def(s). Structure looks sane; slot placeholders OK."
+      "Table COMPONENT_SET 21:744: 2 variant(s), 1 prop def(s). Structure looks sane; slot placeholders OK.",
+      "2026-08-08 STRICT-LANE CONVERSION: pixel scorecard PASS on both instruments \u2014 lane scorer pctAAMasked=2.08 (scores/table.json, headless REST cell at scale 1 vs committed developed ref mui/refs/table.png) and headless visual-truth card agrees; bar pctAAMasked<=5 AND compositionOk."
     ],
-    "defects": []
+    "defects": [],
+    "reference": "parity/receipts/console-loop/mui/refs/table.png",
+    "referenceSource": "extract/computed/out/mui/table/gate-shots/medium__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/table-cell.png",
+    "matchDeveloped": true,
+    "status": "scored-pass"
   },
   "fingerprint": {
     "v6": "v6:966664822",
@@ -81,6 +87,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": true
   }
 }

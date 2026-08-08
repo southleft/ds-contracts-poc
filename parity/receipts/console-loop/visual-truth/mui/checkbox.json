@@ -15,7 +15,7 @@
   "cellNodeId": "21:315",
   "cellName": "Checked=Checked",
   "cellPick": "variant-token-match",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 12.345679012345679,
     "pctAAUnmasked": 0,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 92.5925925925926,
     "inkRealPct": 92.5925925925926
   },
-  "reference": "extract/computed/out/mui/checkbox/gate-shots/checked.disabled__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/checkbox.png",
   "referenceSha256": "e2064b98180a8fee8efe3133fae0e9ba9b888ea5e267fdd46564f957a017d3cc",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/checkbox.png",
   "canvasShotSha256": "4bd0e181fbab9843d2bffb3f49329af4233cd228d924599b4101784e05b2c6c9",

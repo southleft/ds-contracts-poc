@@ -17,12 +17,19 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:287).",
       "Button COMPONENT_SET 21:287: 75 variant(s), 6 prop def(s). Structure looks sane; slot placeholders OK."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=88.31% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/button.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/button.png",
+    "referenceSource": "extract/computed/out/mui/button/gate-shots/contained.error.large.disabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/button-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:437388687",
@@ -132,6 +139,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

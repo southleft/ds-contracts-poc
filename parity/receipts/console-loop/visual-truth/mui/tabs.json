@@ -15,7 +15,7 @@
   "cellNodeId": "21:787",
   "cellName": "Text color=Inherit, Indicator color=Primary",
   "cellPick": "variant-token-match",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 23.333333333333332,
     "pctAAUnmasked": 15.476190476190476,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 16.61904761904762,
     "inkRealPct": 18.619047619047617
   },
-  "reference": "extract/computed/out/mui/tabs/gate-shots/inherit.primary__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/tabs.png",
   "referenceSha256": "50694d61f5bde8253e69d68d1d744b64800a3bea68ff79843cf908279037a082",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/tabs.png",
   "canvasShotSha256": "0bca1e2b0fc4105d33e519418da235376d43f6436d302f5e1b7cc6684f162eb5",

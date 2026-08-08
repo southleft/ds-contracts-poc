@@ -15,7 +15,7 @@
   "cellNodeId": "84:2128",
   "cellName": "Position=BottomLeft",
   "cellPick": "first-cell",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 36.9515232803219,
     "pctAAUnmasked": 2.0933128951906497,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 81.85955163824488,
     "inkRealPct": 97.98333013987353
   },
-  "reference": "extract/computed/out/mui/snackbar/gate-shots/__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/snackbar.png",
   "referenceSha256": "d770078c49ae07ddd9553aa06866adc147b61d82ba47d5d99f3b398061b9f2d0",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/snackbar.png",
   "canvasShotSha256": "67293436727f4c5986793411b30b4c369cf45dfaac04bb71f5f0b1b980ed8577",

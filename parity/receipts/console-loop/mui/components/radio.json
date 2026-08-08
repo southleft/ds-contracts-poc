@@ -34,12 +34,19 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Screenshot reviewed on section/node 84:1934; structure/variants look sane (slot placeholders OK).",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 14 variants on page Radio)."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=38.50% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/radio.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/radio.png",
+    "referenceSource": "extract/computed/out/mui/radio/gate-shots/default.checked.enabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/radio-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:4150206674",
@@ -154,6 +161,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

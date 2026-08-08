@@ -33,3 +33,5 @@ Compared canvas axes/prop defs to `examples/mui/contracts/accordion.contract.jso
 ## Acceptance
 
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+
+**2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=6.80%, compositionOk=False (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/accordion.png`; card `parity/receipts/console-loop/mui/scores/accordion.json`).

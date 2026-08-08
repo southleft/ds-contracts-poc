@@ -15,7 +15,7 @@
   "cellNodeId": "21:477",
   "cellName": "Color=Error, Size=Medium",
   "cellPick": "variant-token-match",
-  "referenceResolvedFrom": "gate-shots-probe",
+  "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 50.34722222222222,
     "pctAAUnmasked": 48.15972222222222,
@@ -26,7 +26,7 @@
     "inkCanvasPct": 28.09027777777778,
     "inkRealPct": 28.90625
   },
-  "reference": "extract/computed/out/mui/slider/gate-shots/error.medium__default.png",
+  "reference": "parity/receipts/console-loop/mui/refs/slider.png",
   "referenceSha256": "d257d4b762f589e17af739b3a32ab83529acff30f1370ae733fc6bc87899f8a2",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/slider.png",
   "canvasShotSha256": "55111fd1d62d2e48a5f20e758f66f3c8113fa6d632f2f8e5961979f0982df077",

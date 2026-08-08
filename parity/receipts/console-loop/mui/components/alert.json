@@ -19,11 +19,18 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Screenshot reviewed on section/node 84:2265; structure/variants look sane (slot placeholders OK)."
     ],
-    "defects": []
+    "defects": [
+      "INSTRUMENT DISAGREEMENT \u2014 lane scorer says pass (pctAAMasked=4.50 after dpr+size normalization) but the headless visual-truth card scores 6.49 FAIL; the altitude precedent requires a pass to hold on BOTH instruments, so not claimed"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/alert.png",
+    "referenceSource": "extract/computed/out/mui/alert/gate-shots/error.filled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/alert-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:1383530075",
@@ -146,6 +153,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

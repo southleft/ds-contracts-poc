@@ -17,12 +17,19 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:308).",
       "Card COMPONENT_SET 21:308: 4 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=31.48% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/card.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/card.png",
+    "referenceSource": "extract/computed/out/mui/card/gate-shots/0__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/card-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:2926211222",
@@ -90,6 +97,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }

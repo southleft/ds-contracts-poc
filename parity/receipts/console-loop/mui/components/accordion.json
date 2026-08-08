@@ -17,12 +17,19 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:79).",
       "Accordion COMPONENT_SET 21:79: 4 variant(s), 3 prop def(s). Structure looks sane; slot placeholders OK."
     ],
-    "defects": []
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=6.80% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/accordion.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/accordion.png",
+    "referenceSource": "extract/computed/out/mui/accordion/gate-shots/elevation.collapsed.disabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/accordion-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:4119792290",
@@ -95,6 +102,7 @@
   "acceptance": {
     "generatedOrFound": true,
     "screenshotReviewed": true,
-    "zeroMismatch": true
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
 }
