@@ -1584,6 +1584,109 @@ return { inventory: rows };
   const DIFF_SCOPE_NOTE =
     "Scope: this diff covers the API surface (version, props, slots, variant axes) and names when anatomy/style bytes differ — interior style changes are summarized, not itemized.";
 
+  // ---------------------------------------------------------------------------
+  // G3 STALE-BASE GUARD (partial — docs/18 Flow 7 step 4). The Send tab diffs
+  // the canvas against WHATEVER base contract is in the box, and a canvas N
+  // syncs behind main makes that diff manufacture the engineer's merged
+  // changes as the designer's reverts — a silent revert the PR then blames on
+  // her. The full three-way merge (G3) is out of scope here; this guard is
+  // the freshness HALF: the set's stored sync markers (ds_contracts/
+  // contractId + specHash — what this canvas was LAST SYNCED FROM) are
+  // compared against the provided base's spec fingerprint. Same posture as
+  // G2 and the channel guard: WARN AND NAME, never block.
+  // ---------------------------------------------------------------------------
+
+  interface BaseFreshness {
+    /** 'stale' = the markers say the canvas was last synced from something
+     *  OTHER than the provided base. 'unverifiable' = the set carries no
+     *  readable sync fingerprint (or the base does not compile) — named,
+     *  never silently promoted to 'match'. 'baseless' = no base to check. */
+    verdict: "match" | "stale" | "unverifiable" | "baseless";
+    stale: boolean;
+    /** The named warning (stale) or the named non-verdict (unverifiable);
+     *  null when there is nothing to say. Stale's line ALSO rides
+     *  summaryLines so the PR body and every export door carry it. */
+    line: string | null;
+    baseSpecHash: string | null;
+    canvasSpecHash: string | null;
+  }
+
+  function baseFreshnessOf(
+    baseData: Contract | null,
+    markers:
+      | {
+          contractId?: string | null;
+          specHash?: string | null;
+          version?: string | null;
+        }
+      | null
+      | undefined,
+    tokenSet: TokenSetPayload | null | undefined,
+  ): BaseFreshness {
+    if (!baseData) {
+      return {
+        verdict: "baseless",
+        stale: false,
+        line: null,
+        baseSpecHash: null,
+        canvasSpecHash: null,
+      };
+    }
+    const canvasSpecHash =
+      markers && typeof markers.specHash === "string" && markers.specHash
+        ? markers.specHash
+        : null;
+    const canvasContractId =
+      markers && typeof markers.contractId === "string" && markers.contractId
+        ? markers.contractId
+        : null;
+    let baseSpecHash: string | null = null;
+    try {
+      const eng = tokenSet ? foreignEngineFor(tokenSet) : engine;
+      baseSpecHash = specHashOf(baseData, scopeFor([baseData]), eng);
+    } catch {
+      baseSpecHash = null; // an uncompilable base cannot be fingerprinted — unverifiable, not stale
+    }
+    if (canvasContractId !== null && canvasContractId !== baseData.id) {
+      return {
+        verdict: "stale",
+        stale: true,
+        line: `⚠ Stale base: this set's sync marker records contract "${canvasContractId}" but the base you diffed against is "${baseData.id}" — the proposal may contain reverts. Deliver the current contracts to this file (Build tab) and propose again.`,
+        baseSpecHash,
+        canvasSpecHash,
+      };
+    }
+    if (canvasSpecHash === null || baseSpecHash === null) {
+      return {
+        verdict: "unverifiable",
+        stale: false,
+        line: "Base freshness not verified: this set carries no readable sync fingerprint (or the base does not compile), so the diff cannot confirm the base is what this canvas was last synced from.",
+        baseSpecHash,
+        canvasSpecHash,
+      };
+    }
+    if (canvasSpecHash === baseSpecHash) {
+      return {
+        verdict: "match",
+        stale: false,
+        line: null,
+        baseSpecHash,
+        canvasSpecHash,
+      };
+    }
+    const versionDetail =
+      markers?.version && markers.version !== baseData.version
+        ? ` (this canvas last synced v${markers.version}; the base you provided is v${baseData.version})`
+        : "";
+    return {
+      verdict: "stale",
+      stale: true,
+      line: `⚠ Stale base: this canvas was last synced from a different contract version than the base you diffed against${versionDetail} — the proposal may contain reverts. Deliver the current contract to this file (Build tab, or your team's channel) and propose again; every "-prop"/default line below could be someone else's merged change coming back out.`,
+      baseSpecHash,
+      canvasSpecHash,
+    };
+  }
+
   const BASELESS_SCOPE_NOTE =
     "Scope: this is a proposal READ FROM THE CANVAS, not a diff — there is no base contract to compare against, so nothing here is called a change. Review it, then adopt it into your repo as the contract for this set.";
 
@@ -1634,6 +1737,10 @@ return { inventory: rows };
     /** What this proposal turns into on the code side — shown in Send
      *  BEFORE anything leaves the canvas. */
     codePlan: CodePlanView;
+    /** G3 STALE-BASE GUARD (partial): the base-vs-canvas sync-fingerprint
+     *  verdict. When stale, `line` also rides summaryLines (and therefore
+     *  the PR body and every export door). */
+    baseFreshness: BaseFreshness;
   }
 
   /** The Send tab's "what code does this produce" answer. Names come from
@@ -1708,6 +1815,16 @@ return { inventory: rows };
        *  Omitted/null = the caller genuinely does not know, which is
        *  'unrecorded' — never quietly one of the two real answers. */
       toolGenerated?: boolean | null;
+      /** G3 STALE-BASE GUARD (partial): the set's stored sync markers from
+       *  the SAME inventory row `toolGenerated` reads — the canvas's "what I
+       *  was last synced from" fingerprint (ds_contracts/contractId +
+       *  specHash + version). Omitted/null with a base present = the guard
+       *  reports 'unverifiable' by name, never a silent 'match'. */
+      canvasMarkers?: {
+        contractId?: string | null;
+        specHash?: string | null;
+        version?: string | null;
+      } | null;
     } = {},
   ): ProposeDiffResult | { ok: false; issue: PlainIssue } {
     const baseless = baseRaw === null || baseRaw === undefined;
@@ -1803,6 +1920,17 @@ return { inventory: rows };
     const summaryLines = baseData
       ? boundedContractDiff(baseData, proposedContract)
       : baselessProposalLines(proposal.contract, proposal.unbound, tokenSource);
+    // G3 stale-base guard — a STALE verdict's warning leads the summary, so
+    // the panel, the export envelope, and the PR body all carry it; the
+    // other verdicts ride only the structured field (no manufactured alarm).
+    const baseFreshness = baseFreshnessOf(
+      baseData,
+      opts.canvasMarkers,
+      opts.tokenSet,
+    );
+    if (baseFreshness.stale && baseFreshness.line) {
+      summaryLines.unshift(baseFreshness.line);
+    }
     const canvasProvenance: CanvasProvenance =
       opts.toolGenerated === true
         ? "tool-generated"
@@ -1846,6 +1974,17 @@ return { inventory: rows };
           kind: canvasProvenance,
           note: provenanceSentence(canvasProvenance),
         },
+        // G3 STALE-BASE GUARD (partial): the base-freshness verdict rides
+        // the envelope so `figma receive` / `propose-pr` — and any human
+        // reading the export — see the same warning the panel showed. Old
+        // parsers ignore the unknown field.
+        baseFreshness: {
+          verdict: baseFreshness.verdict,
+          stale: baseFreshness.stale,
+          line: baseFreshness.line,
+          baseSpecHash: baseFreshness.baseSpecHash,
+          canvasSpecHash: baseFreshness.canvasSpecHash,
+        },
       },
       null,
       2,
@@ -1866,6 +2005,7 @@ return { inventory: rows };
       ...(proposal.mintedTokens ? { mintedTokens: proposal.mintedTokens } : {}),
       provenance: canvasProvenance,
       codePlan,
+      baseFreshness,
     };
   }
 

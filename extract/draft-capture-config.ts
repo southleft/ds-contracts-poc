@@ -35,6 +35,14 @@ import type { ExtractedComponent } from './types.js';
 
 export const DRAFT_MARKER_KEY = '__unreviewed-draft';
 
+/** B.16 (docs/23) — the drafted `enumeration.unsetLabel`. This label is the
+ *  pseudo-value a DEFAULTLESS enum axis enumerates, and fusion mints it into
+ *  token paths — so it MUST be token-ref-legal (letters/digits/./-). The old
+ *  default was the sentinel "__unset": its underscores violated the token-ref
+ *  grammar and fusion died with ~40 "must be brace-wrapped" errors that never
+ *  named the underscore. The sentinel never ships again. */
+export const DRAFT_UNSET_LABEL = 'unset';
+
 export const DRAFT_MARKER_MESSAGE =
   'DRAFT capture config, machine-generated from the static extract pass. Review every "__review:*" ' +
   'field (they mark what the tool could NOT infer), fix the values, DELETE each marker you have ' +
@@ -118,6 +126,19 @@ export function draftCaptureConfig(extracted: ExtractedComponent[], opts: DraftO
     if (numericAxes.length > 0) {
       entry['__review:axisValueMap'] = `axis value(s) of ${numericAxes.map((p) => p.name).join(', ')} look numeric — if the library expects numbers (not strings), map them: "axisValueMap": {"${numericAxes[0].name}": {"${numericAxes[0].values![0]}": ${numericAxes[0].values![0]}}}`;
     }
+    // B.16 — DEFAULTLESS ENUM AXES: pick a REAL base value (the first enum
+    // value) and mark it for review, like every other non-inferable pick.
+    // Without a contract default the capture pins the base combo to the
+    // unset pseudo-value, and that label is minted into token paths — the
+    // old "__unset" sentinel shipped underscores straight into the token-ref
+    // grammar and killed fusion two stages later.
+    const defaultlessAxes = enumProps.filter((p) => p.default === undefined);
+    if (defaultlessAxes.length > 0) {
+      entry.baseCombo = Object.fromEntries(
+        defaultlessAxes.map((p) => [p.name, String(p.values![0])]),
+      );
+      entry['__review:baseCombo'] = `enum axis(es) ${defaultlessAxes.map((p) => p.name).join(', ')} declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra "${DRAFT_UNSET_LABEL}" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old "__unset" sentinel broke fusion by name of the brace-wrap rule, never the underscore)`;
+    }
     return entry;
   });
 
@@ -163,7 +184,7 @@ export function draftCaptureConfig(extracted: ExtractedComponent[], opts: DraftO
     },
     browser: { viewport: { width: 900, height: 1000 }, deviceScaleFactor: 1, colorScheme: 'light' },
     stage: { width: 320, height: 96, padding: 16 },
-    enumeration: { cartesianLimit: 512, unsetLabel: '__unset' },
+    enumeration: { cartesianLimit: 512, unsetLabel: DRAFT_UNSET_LABEL },
     components,
   };
   return { config, reviewFields: countReviewFields(config), components: components.length };

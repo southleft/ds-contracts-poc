@@ -25,6 +25,11 @@
  *   5. propose   — the ui.html-embedded dump script runs against the mock
  *                  file; proposeDiff yields a proposal + bounded API diff
  *                  (a mutated base surfaces its +prop/default lines)
+ *   5b. stale-base — G3's guard half (docs/18 Flow 7 step 4): a base that is
+ *                  NOT what the set's stored sync fingerprint says the canvas
+ *                  was last synced from WARNS by name ("may contain reverts")
+ *                  in the summary + envelope; a matching base stays silent;
+ *                  absent markers verdict 'unverifiable', never 'match'
  *   6. pr        — the dry-run PR plan, exact lines, zero network
  *   6b. canvas→code — task #40: a proposal names the files it becomes and
  *                  STAMPS the round-trip fact (tool-generated vs hand-built
@@ -625,6 +630,94 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
   console.log(
     '✔ dump v1.12 wrap: layoutWrap WRAP → layout.wrap, a DISTINCT counterAxisSpacing → rowSpacing, a SYNCED one (a number EQUAL to itemSpacing — null is write-only and never read back) invents nothing, and counterAxisAlignContent SPACE_BETWEEN is refused BY NAME — the return leg the emitter has been writing to since v15',
+  );
+}
+
+// --- 5b. G3 STALE-BASE GUARD (partial) --------------------------------------
+// docs/18 Flow 7 step 4: Propose against a base the canvas was NOT last
+// synced from manufactures the engineer's merged change as the designer's
+// revert. The guard compares the set's stored sync fingerprint (the
+// ds_contracts specHash markers) against the provided base and WARNS — in
+// the summary (→ PR body + export envelope) and as a structured verdict.
+// The mock canvas was amended to Badge v9.9.9 in section 4, so the ORIGINAL
+// v1 badge contract is exactly the stale base of the story.
+{
+  const ui = read('figma-sync/plugin/ui.html');
+  const openTag = '<script type="text/plain" id="dump-source">';
+  const start = ui.indexOf(openTag);
+  const source = ui.slice(start + openTag.length, ui.indexOf('</script>', start)).replace(/^\n/, '');
+  const scoped = source.replace(
+    /^const TARGET_SETS = \[[^\n]*\];$/m,
+    `const TARGET_SETS = ${JSON.stringify(['Badge'])};`,
+  );
+  const dump = await runScript(scoped);
+  const inv = (await runScript(DSC.inventoryScriptSource())).inventory;
+  const row = inv.find((r) => r.contractId === badge.id);
+  assert(row && row.specHash, 'the marked Badge row carries its stored sync fingerprint');
+  const markers = { contractId: row.contractId, specHash: row.specHash, version: row.version };
+
+  // The contract the canvas WAS last synced from (section 4's vNext, rebuilt
+  // byte-identically): a FRESH base — verdict 'match', zero warnings.
+  const vNext = JSON.parse(JSON.stringify(badge));
+  vNext.version = '9.9.9';
+  vNext.props.push({
+    name: 'experimental',
+    description: 'Harness-added boolean prop (update-report fixture).',
+    type: 'boolean',
+    default: false,
+    bindings: { figma: { kind: 'BOOLEAN', property: 'Experimental' }, code: { prop: 'experimental' } },
+  });
+  const fresh = DSC.proposeDiff(dump, 'Badge', vNext, { canvasMarkers: markers });
+  assert(fresh.ok, `fresh-base propose succeeds (${fresh.ok ? '' : fresh.issue.headline})`);
+  assert(
+    fresh.baseFreshness && fresh.baseFreshness.verdict === 'match' && fresh.baseFreshness.stale === false,
+    `a base matching the stored sync fingerprint verdicts 'match' (got ${JSON.stringify(fresh.baseFreshness)})`,
+  );
+  assert(
+    !fresh.summaryLines.some((l) => l.includes('Stale base')),
+    'a fresh base adds NO warning line — the guard never manufactures an alarm',
+  );
+
+  // The ORIGINAL v1 badge: a STALE base — the diff would read the applied
+  // v9.9.9 changes as the designer's edits, and dropping them is a revert.
+  const stale = DSC.proposeDiff(dump, 'Badge', badge, { canvasMarkers: markers });
+  assert(stale.ok, 'stale-base propose still succeeds — warn and name, never block');
+  assert(
+    stale.baseFreshness && stale.baseFreshness.verdict === 'stale' && stale.baseFreshness.stale === true,
+    `a base that is not what the canvas last synced from verdicts 'stale' (got ${JSON.stringify(stale.baseFreshness)})`,
+  );
+  assert(
+    stale.summaryLines[0].includes('last synced from a different contract version') &&
+      stale.summaryLines[0].includes('may contain reverts'),
+    `the warning LEADS the summary and names the revert risk (got "${stale.summaryLines[0]}")`,
+  );
+  assert(
+    stale.summaryLines[0].includes(`v${row.version}`) && stale.summaryLines[0].includes(`v${badge.version}`),
+    'the warning names both versions (canvas-synced vs provided base)',
+  );
+  const staleExport = JSON.parse(stale.exportJson);
+  assert(
+    staleExport.baseFreshness && staleExport.baseFreshness.verdict === 'stale',
+    'the CONTRACT-PROPOSAL envelope carries the structured stale verdict',
+  );
+  assert(
+    staleExport.summary.some((l) => l.includes('may contain reverts')),
+    'the export/PR summary carries the warning line (propose-pr prints summary lines into the PR body)',
+  );
+
+  // No markers passed (every pre-guard caller): 'unverifiable' BY NAME —
+  // never a silent 'match', never a manufactured warning.
+  const unknown = DSC.proposeDiff(dump, 'Badge', badge);
+  assert(
+    unknown.ok && unknown.baseFreshness.verdict === 'unverifiable' && unknown.baseFreshness.stale === false,
+    `no markers → verdict 'unverifiable' by name (got ${JSON.stringify(unknown.ok ? unknown.baseFreshness : unknown.issue)})`,
+  );
+  assert(
+    !unknown.summaryLines.some((l) => l.includes('Stale base')),
+    'an unverifiable base adds no warning line',
+  );
+  console.log(
+    '✔ G3 stale-base guard (partial): a base matching the stored sync fingerprint stays silent; the pre-sync v1 base WARNS by name ("may contain reverts") in summary + envelope; absent markers verdict "unverifiable", never a silent match',
   );
 }
 
@@ -2080,4 +2173,4 @@ return { ok: true };
   );
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles, brownfield-scan, base-less-propose, canvas-code-plan, read-only-enforcement)');
+console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, stale-base-guard, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles, brownfield-scan, base-less-propose, canvas-code-plan, read-only-enforcement)');

@@ -15,9 +15,11 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import {
   DRAFT_MARKER_KEY,
+  DRAFT_UNSET_LABEL,
   draftCaptureConfig,
   draftRefusalMessage,
 } from '../../../extract/draft-capture-config.js';
+import { TokenRefSchema } from '../../../scripts/contract-schema.js';
 import { loadConfig as loadCaptureConfig } from '../../../extract/computed/capture.js';
 import type { ExtractedComponent } from '../../../extract/types.js';
 
@@ -92,6 +94,51 @@ test('every non-inferable field carries an explicit __review marker with guidanc
   const stack = (config.components as Record<string, string>[])[1];
   assert.ok(stack['__review:axisValueMap'].includes('elevation'), 'numeric-looking axis named for review');
   assert.ok(reviewFields >= 9, `all markers counted (got ${reviewFields})`);
+});
+
+test('B.16 — the "__unset" sentinel never ships: unsetLabel is token-ref-legal, defaultless axes get a reviewed baseCombo', () => {
+  const { config } = draftCaptureConfig(EXTRACTION, OPTS);
+  // (1) the drafted unsetLabel survives the token-ref grammar as a path
+  // segment — the old "__unset" default died on the underscore rule and
+  // fusion reported it as ~40 unexplained "must be brace-wrapped" errors.
+  const enumeration = config.enumeration as { unsetLabel: string };
+  assert.equal(enumeration.unsetLabel, DRAFT_UNSET_LABEL);
+  assert.ok(!enumeration.unsetLabel.includes('_'), 'unsetLabel carries no underscore');
+  assert.ok(
+    TokenRefSchema.safeParse(`{color.axis.${enumeration.unsetLabel}.background}`).success,
+    'the drafted unsetLabel is legal as a minted token-path segment',
+  );
+  // (2) every defaultless enum axis is pinned to a REAL first-enum value,
+  // marked __review like its sibling non-inferable fields.
+  const comps = config.components as Record<string, unknown>[];
+  const badge = comps[0];
+  assert.deepEqual(badge.baseCombo, { tone: 'info', size: 'sm' }, 'first enum value pinned per defaultless axis');
+  assert.ok(String(badge['__review:baseCombo']).includes('tone, size'), 'defaultless axes named for review');
+  assert.ok(String(badge['__review:baseCombo']).includes('__unset'), 'the review guidance names the old sentinel trap');
+  assert.deepEqual((comps[1] as { baseCombo: unknown }).baseCombo, { elevation: '0' });
+  // (3) an axis WITH a declared default is not pinned — nothing to review.
+  const withDefault: ExtractedComponent[] = [
+    {
+      name: 'Chip',
+      source: 'src/Chip.tsx',
+      adapter: 'react-tsx',
+      props: [
+        { name: 'tone', kind: 'enum', values: ['neutral', 'info'], default: 'neutral', optional: true, confidence: 'declared' },
+      ],
+    },
+  ];
+  const chip = (draftCaptureConfig(withDefault, OPTS).config.components as Record<string, unknown>[])[0];
+  assert.equal(chip.baseCombo, undefined, 'defaulted axes need no baseCombo pin');
+  assert.equal(chip['__review:baseCombo'], undefined);
+});
+
+test('B.16 — an underscore-bearing token ref is refused BY NAME (the fusion error names the rule)', () => {
+  const refused = TokenRefSchema.safeParse('{color.badge.__unset.background}');
+  assert.equal(refused.success, false);
+  const messages = refused.success ? [] : refused.error.issues.map((i) => i.message).join('\n');
+  assert.ok(messages.includes('may not contain underscores'), 'the underscore rule is named');
+  assert.ok(messages.includes('__unset'), 'the sentinel is named');
+  assert.ok(messages.includes('reviewed default in the capture config'), 'the fix is named');
 });
 
 test('detected package/version still carries a confirm-me marker (detected ≠ confirmed)', () => {

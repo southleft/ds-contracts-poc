@@ -56,7 +56,22 @@ export const TokenRefSchema = z
   .regex(
     /^\{[a-z0-9.{}-]+\}$/i,
     'Token reference must be brace-wrapped, e.g. "{color.action.primary.background}"',
-  );
+  )
+  // B.16 (docs/23) — THE DEFAULTLESS-AXIS WALL, named. The regex above
+  // already forbids "_", but its brace-wrap message never said so: a capture
+  // config whose `enumeration.unsetLabel` was the old drafter default
+  // "__unset" minted that string into every defaultless-axis token path and
+  // fusion died with ~40 "must be brace-wrapped" errors, none mentioning the
+  // underscore. This refine adds the actual rule BY NAME whenever an
+  // underscore-bearing ref is refused; it rejects nothing the regex did not
+  // already reject.
+  .refine((v) => !v.includes("_"), {
+    message:
+      'token refs may not contain underscores (path grammar: letters, digits, ".", "-"); ' +
+      'if this is the "__unset" defaultless-axis sentinel, the axis needs a reviewed default ' +
+      'in the capture config — set enumeration.unsetLabel to a token-ref-legal label ' +
+      '(e.g. "unset") and pin the axis in baseCombo',
+  });
 
 const EnumTypeSchema = z.strictObject({
   enum: z.array(z.string()).min(1),

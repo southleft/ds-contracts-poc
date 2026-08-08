@@ -1574,7 +1574,12 @@
             return;
           }
         }
-        var diff = DSC.proposeDiff(dump, setName, baseRaw, { tokenSet: activeTokenSet, toolGenerated: toolGenerated });
+        // G3 STALE-BASE GUARD (partial): hand the engine the set's stored
+        // sync markers (the same inventory row toolGenerated reads) so a
+        // base that is NOT what this canvas was last synced from warns by
+        // name instead of silently manufacturing reverts.
+        var canvasMarkers = row ? { contractId: row.contractId || null, specHash: row.specHash || null, version: row.version || null } : null;
+        var diff = DSC.proposeDiff(dump, setName, baseRaw, { tokenSet: activeTokenSet, toolGenerated: toolGenerated, canvasMarkers: canvasMarkers });
         if (!diff.ok) {
           $('prop-code-section').hidden = true;
           addIssues(resultBox('prop-result', false, 'No proposal.'), [diff.issue]);
@@ -1585,7 +1590,11 @@
         var box = resultBox('prop-result', true, diff.baseless
           ? 'Proposal from this canvas — ' + diff.setName + ':'
           : 'Proposed change — ' + diff.setName + ':');
-        diff.summaryLines.forEach(function (l) { addLine(box, l); });
+        // G3: the stale-base warning leads summaryLines with a '⚠' prefix —
+        // render it in the warning style so it cannot read as one more diff line.
+        diff.summaryLines.forEach(function (l) {
+          if (l.indexOf('⚠') === 0) { addWarning(box, l.replace(/^⚠\s*/, ''), true); } else { addLine(box, l); }
+        });
         (diff.proposalNotes || []).forEach(function (n) { addWarning(box, n, true); });
         addArtifactActions(box, proposedId + '.proposal.json', diff.exportJson);
         renderCodePlan(diff.codePlan);

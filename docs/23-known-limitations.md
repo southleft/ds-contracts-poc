@@ -648,15 +648,30 @@ because they are "NOT inferable from static source." This is gap **G6** in
 [docs/18](18-user-flows.md) — the Emotion capture-config cliff — and it is
 **PARTIAL**: the CLI halves shipped, the playground routing is open.
 
-**The defaultless-axis trap is named, not closed.** The drafter still writes
-`"__unset"` as a default pseudo-value. That string becomes a segment of every
-minted token path, and the contract's token-ref regex forbids underscores — so
-fusion dies with roughly forty "must be brace-wrapped" errors, **not one of which
-mentions an underscore**. The fix is `"unsetLabel": "unset"` in config. The next
-library with a defaultless enum axis hits the identical wall with the identical
-unhelpful error.
+**The defaultless-axis trap — CLOSED, with the mechanism** (2026-08-08; it was
+"named, not closed" until then). The drafter used to write `"__unset"` as the
+default pseudo-value; that string became a segment of every minted token path,
+and the contract's token-ref regex forbids underscores — so fusion died with
+roughly forty "must be brace-wrapped" errors, not one of which mentioned an
+underscore. The named engine change (one default, one error message) landed as
+both halves:
 
-**What it would take — an engine change** (one default, one error message).
+- **The sentinel never ships.** `extract/draft-capture-config.ts` now drafts
+  `"unsetLabel": "unset"` (`DRAFT_UNSET_LABEL` — legal as a token-path
+  segment), and every defaultless enum axis is additionally pinned in
+  `baseCombo` to its **first enum value** under an explicit
+  `__review:baseCombo` marker — the same ack discipline as its sibling
+  non-inferable fields. Unit-pinned in
+  `packages/cli/test/draft-capture-config.test.ts`.
+- **The error names the rule.** `TokenRefSchema`
+  (packages/schema/src/contract-schema.ts) adds, on any underscore-bearing
+  ref, the actual rule alongside the brace-wrap message: *token refs may not
+  contain underscores; if this is the `"__unset"` defaultless-axis sentinel,
+  the axis needs a reviewed default in the capture config*. Fusion, the
+  generator and every schema surface refuse with that sentence now.
+
+Eval-gated: `refuse-underscore-ref-names-unset-sentinel` (the refusal must
+name the rule, the sentinel and the fix; the drafter unit pins run inside it).
 
 ## B.17 The corpus has not been re-captured through the stylesheet-ceiling instrument
 
