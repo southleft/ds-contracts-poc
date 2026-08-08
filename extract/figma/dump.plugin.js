@@ -69,7 +69,10 @@
 //   fillWidth          layoutSizingHorizontal === 'FILL' — canvas projection of
 //                      grow (row parents) / align:stretch (column parents)
 //   text               characters, fontSize, fontStyle, named TextStyle (token
-//                      identity: "badge" ← font.badge.size), bound fill var
+//                      identity: "badge" ← font.badge.size), bound fill var,
+//                      and (dump v1.19) the bound fontSize VARIABLE — the size
+//                      token's only carrier on a node that overrides its
+//                      group's weight and so cannot ride a style
 //   propRefs           componentPropertyReferences with property-id suffixes
 //                      stripped: characters→TEXT, mainComponent→INSTANCE_SWAP,
 //                      visible→BOOLEAN ("Show X" optional-part convention)
@@ -854,6 +857,22 @@ async function dumpNode(node, nodePath, parent) {
         else if (typeof style.key === 'string' && style.key) text.styleKey = style.key;
       }
     }
+    // dump v1.19 (additive) — FC-WEIGHT-IDENTITY: the SIZE TOKEN's variable,
+    // when the node binds one. A text node that overrides its group's weight
+    // cannot ride a named text style (Figma clears textStyleId on any
+    // fontName write), so the bound variable is the only carrier its size
+    // token has left; without this the inverter sees "14px" and cannot tell
+    // font.control.size.sm from font.avatar.size.md. TextNode reports
+    // fontSize bindings as a PER-RANGE ARRAY, which is exactly why the
+    // generic `bound` sweep above skips arrays — a single uniform entry is
+    // the whole node's token; a mixed run is NAMED, never collapsed to one.
+    const fontSizeAlias = node.boundVariables && node.boundVariables.fontSize;
+    if (Array.isArray(fontSizeAlias) && fontSizeAlias.length === 1 && fontSizeAlias[0] && fontSizeAlias[0].id) {
+      const sizeVar = await varNameById(fontSizeAlias[0].id, node);
+      if (sizeVar) text.fontSizeVar = sizeVar;
+    } else if (Array.isArray(fontSizeAlias) && fontSizeAlias.length > 1) {
+      degrade('text-channel-unsupported', nodePath, 'fontSize is bound to ' + fontSizeAlias.length + ' variables across character ranges — dump v1 carries ONE size token per text node; omitted');
+    }
     const fill = await dumpPaint(node.fills, nodePath, 'fill', node);
     if (fill && fill.var) text.fillVar = fill.var;
     out.text = text;
@@ -1008,8 +1027,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.18) for design→contract proposal.',
-    dumpVersion: '1.18',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.19) for design→contract proposal.',
+    dumpVersion: '1.19',
   },
 };
 dumps._degradations = degradations;

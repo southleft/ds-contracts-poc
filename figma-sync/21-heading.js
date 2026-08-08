@@ -35,6 +35,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 18,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/lg",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -61,6 +62,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/sm",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -87,6 +89,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/md",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -113,6 +116,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 18,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/lg",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -139,6 +143,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/sm",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -165,6 +170,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/md",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -191,6 +197,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 18,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/lg",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -217,6 +224,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/sm",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -243,6 +251,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/md",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -269,6 +278,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 18,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/lg",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -295,6 +305,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/sm",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -321,6 +332,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/md",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -347,6 +359,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 18,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/lg",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -373,6 +386,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/sm",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -399,6 +413,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/md",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -425,6 +440,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 18,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/lg",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -451,6 +467,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/sm",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -477,6 +494,7 @@ const COMPONENTS = [
               "characters": "Heading",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "font/control/size/md",
               "textFill": "color/surface/foreground",
               "fontFamily": "Inter",
               "contentProp": "Text"
@@ -911,6 +929,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

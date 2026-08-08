@@ -54,6 +54,7 @@ const COMPONENTS = [
               "characters": "Email",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -105,6 +106,7 @@ const COMPONENTS = [
                   "characters": "you@example.com",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
                   "fontFamily": "-apple-system",
                   "contentProp": "Placeholder"
@@ -141,6 +143,7 @@ const COMPONENTS = [
               "characters": "Email",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -192,6 +195,7 @@ const COMPONENTS = [
                   "characters": "you@example.com",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
                   "fontFamily": "-apple-system",
                   "contentProp": "Placeholder"
@@ -228,6 +232,7 @@ const COMPONENTS = [
               "characters": "Email",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -279,6 +284,7 @@ const COMPONENTS = [
                   "characters": "you@example.com",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
                   "fontFamily": "-apple-system",
                   "contentProp": "Placeholder"
@@ -315,6 +321,7 @@ const COMPONENTS = [
               "characters": "Email",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -366,6 +373,7 @@ const COMPONENTS = [
                   "characters": "you@example.com",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
                   "fontFamily": "-apple-system",
                   "contentProp": "Placeholder"
@@ -402,6 +410,7 @@ const COMPONENTS = [
               "characters": "Email",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -453,6 +462,7 @@ const COMPONENTS = [
                   "characters": "you@example.com",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
                   "fontFamily": "-apple-system",
                   "contentProp": "Placeholder"
@@ -489,6 +499,7 @@ const COMPONENTS = [
               "characters": "Email",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -540,6 +551,7 @@ const COMPONENTS = [
                   "characters": "you@example.com",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
                   "fontFamily": "-apple-system",
                   "contentProp": "Placeholder"
@@ -576,6 +588,7 @@ const COMPONENTS = [
               "characters": "Email",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -627,6 +640,7 @@ const COMPONENTS = [
                   "characters": "you@example.com",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
                   "fontFamily": "-apple-system",
                   "contentProp": "Placeholder"
@@ -663,6 +677,7 @@ const COMPONENTS = [
               "characters": "Email",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -714,6 +729,7 @@ const COMPONENTS = [
                   "characters": "you@example.com",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
                   "fontFamily": "-apple-system",
                   "contentProp": "Placeholder"
@@ -750,6 +766,7 @@ const COMPONENTS = [
               "characters": "Email",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -801,6 +818,7 @@ const COMPONENTS = [
                   "characters": "you@example.com",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
                   "fontFamily": "-apple-system",
                   "contentProp": "Placeholder"
@@ -1299,6 +1317,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

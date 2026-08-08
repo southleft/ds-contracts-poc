@@ -126,6 +126,13 @@ export interface DumpText {
   /** Published TextStyle key when available (dump v1.15, additive). Local
    *  styles may have no portable key; their exact name remains the identity. */
   styleKey?: string;
+  /** Variable bound to `fontSize`, slash-form (dump v1.19, additive) — the
+   *  size token's identity on a node that rides NO named style. A style and
+   *  this field are mutually exclusive by construction: Figma clears
+   *  textStyleId on any fontName write, so a node whose contract overrides
+   *  the style group's weight keeps its size token here instead. Absence in
+   *  older dumps means not captured, never "no size token". */
+  fontSizeVar?: string;
   /** Variable behind the text fill (slash-form), when bound. */
   fillVar?: string;
   /** Non-ORIGINAL text case (dump v1.16, additive) — the canvas fact behind

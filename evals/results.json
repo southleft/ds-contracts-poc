@@ -1,6 +1,6 @@
 {
-  "passed": 204,
-  "total": 204,
+  "passed": 213,
+  "total": 213,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -210,6 +210,26 @@
     {
       "id": "slot-wrapper-floor",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "native-slots-carriage",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "grid-bento-carriage",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "grid-css-emitters",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "grid-code-proposer",
+      "claim": "C5-extraction",
       "pass": true
     },
     {
@@ -1020,6 +1040,31 @@
     {
       "id": "trap-corpus-check",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "sync-ledger-lockfile",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "sync-spine-drift",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "rollup-only-package-refused-by-name",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "jsdoc-default-carried-and-disagreement-receipted",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "local-var-hop-recovers-token-name",
+      "claim": "C2-refusal",
       "pass": true
     }
   ]

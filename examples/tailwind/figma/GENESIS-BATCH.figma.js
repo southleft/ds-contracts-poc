@@ -142,6 +142,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
                   "textFill": "imported/alert/label/color/info",
                   "lineHeight": {
                     "value": 20,
@@ -254,6 +255,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
                   "textFill": "imported/alert/label/color/failure",
                   "lineHeight": {
                     "value": 20,
@@ -366,6 +368,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
                   "textFill": "imported/alert/label/color/success",
                   "lineHeight": {
                     "value": 20,
@@ -478,6 +481,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
                   "textFill": "imported/alert/label/color/warning",
                   "lineHeight": {
                     "value": 20,
@@ -998,6 +1002,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -1883,6 +1893,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/info",
               "lineHeight": {
                 "value": 16,
@@ -1925,6 +1936,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/sm",
               "textFill": "imported/badge/label/color/info",
               "lineHeight": {
                 "value": 20,
@@ -1967,6 +1979,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/failure",
               "lineHeight": {
                 "value": 16,
@@ -2009,6 +2022,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/sm",
               "textFill": "imported/badge/label/color/failure",
               "lineHeight": {
                 "value": 20,
@@ -2051,6 +2065,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/success",
               "lineHeight": {
                 "value": 16,
@@ -2093,6 +2108,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/sm",
               "textFill": "imported/badge/label/color/success",
               "lineHeight": {
                 "value": 20,
@@ -2135,6 +2151,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/warning",
               "lineHeight": {
                 "value": 16,
@@ -2177,6 +2194,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/sm",
               "textFill": "imported/badge/label/color/warning",
               "lineHeight": {
                 "value": 20,
@@ -2219,6 +2237,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/indigo",
               "lineHeight": {
                 "value": 16,
@@ -2261,6 +2280,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/sm",
               "textFill": "imported/badge/label/color/indigo",
               "lineHeight": {
                 "value": 20,
@@ -2303,6 +2323,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/pink",
               "lineHeight": {
                 "value": 16,
@@ -2345,6 +2366,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 14,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/sm",
               "textFill": "imported/badge/label/color/pink",
               "lineHeight": {
                 "value": 20,
@@ -2389,6 +2411,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/info",
               "lineHeight": {
                 "value": 16,
@@ -2431,6 +2454,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/failure",
               "lineHeight": {
                 "value": 16,
@@ -2473,6 +2497,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/success",
               "lineHeight": {
                 "value": 16,
@@ -2515,6 +2540,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/warning",
               "lineHeight": {
                 "value": 16,
@@ -2557,6 +2583,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/indigo",
               "lineHeight": {
                 "value": 16,
@@ -2599,6 +2626,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/pink",
               "lineHeight": {
                 "value": 16,
@@ -2641,6 +2669,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/info",
               "lineHeight": {
                 "value": 16,
@@ -2683,6 +2712,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/failure",
               "lineHeight": {
                 "value": 16,
@@ -2725,6 +2755,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/success",
               "lineHeight": {
                 "value": 16,
@@ -2767,6 +2798,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/warning",
               "lineHeight": {
                 "value": 16,
@@ -2809,6 +2841,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/indigo",
               "lineHeight": {
                 "value": 16,
@@ -2851,6 +2884,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/badge/label/font-size/xs",
               "textFill": "imported/badge/label/color/pink",
               "lineHeight": {
                 "value": 16,
@@ -3335,6 +3369,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -4223,6 +4263,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -4269,6 +4310,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/xs",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 16,
@@ -4315,6 +4357,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/sm",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -4361,6 +4404,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/lg",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 24,
@@ -4407,6 +4451,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/xl",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 24,
@@ -4453,6 +4498,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 20,
@@ -4499,6 +4545,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/xs",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 16,
@@ -4545,6 +4592,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/sm",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 20,
@@ -4591,6 +4639,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/lg",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 24,
@@ -4637,6 +4686,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/xl",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 24,
@@ -4683,6 +4733,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 20,
@@ -4729,6 +4780,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/xs",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 16,
@@ -4775,6 +4827,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/sm",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 20,
@@ -4821,6 +4874,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/lg",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 24,
@@ -4867,6 +4921,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/xl",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 24,
@@ -4913,6 +4968,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 20,
@@ -4959,6 +5015,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/xs",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 16,
@@ -5005,6 +5062,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/sm",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 20,
@@ -5051,6 +5109,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/lg",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 24,
@@ -5097,6 +5156,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/xl",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 24,
@@ -5143,6 +5203,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 20,
@@ -5189,6 +5250,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/xs",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 16,
@@ -5235,6 +5297,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/sm",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 20,
@@ -5281,6 +5344,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/lg",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 24,
@@ -5327,6 +5391,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/xl",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 24,
@@ -5376,6 +5441,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -5423,6 +5489,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 20,
@@ -5470,6 +5537,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 20,
@@ -5517,6 +5585,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 20,
@@ -5564,6 +5633,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 20,
@@ -5668,6 +5738,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color-state-active/default",
               "lineHeight": {
                 "value": 20,
@@ -5772,6 +5843,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color-state-active/alternative",
               "lineHeight": {
                 "value": 20,
@@ -5876,6 +5948,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color-state-active/dark",
               "lineHeight": {
                 "value": 20,
@@ -5980,6 +6053,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color-state-active/green",
               "lineHeight": {
                 "value": 20,
@@ -6084,6 +6158,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color-state-active/red",
               "lineHeight": {
                 "value": 20,
@@ -6190,6 +6265,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -6296,6 +6372,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 20,
@@ -6402,6 +6479,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 20,
@@ -6508,6 +6586,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 20,
@@ -6614,6 +6693,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 20,
@@ -6660,6 +6740,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color-state-hover/default",
               "lineHeight": {
                 "value": 20,
@@ -6706,6 +6787,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color-state-hover/alternative",
               "lineHeight": {
                 "value": 20,
@@ -6752,6 +6834,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color-state-hover/dark",
               "lineHeight": {
                 "value": 20,
@@ -6798,6 +6881,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color-state-hover/green",
               "lineHeight": {
                 "value": 20,
@@ -6844,6 +6928,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/button/root/font-size/md",
               "textFill": "imported/button/root/color-state-hover/red",
               "lineHeight": {
                 "value": 20,
@@ -7382,6 +7467,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -8350,6 +8441,7 @@ const COMPONENTS = [
                   "contentProp": "Content",
                   "fontSize": 16,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-16",
                   "lineHeight": {
                     "value": 24,
                     "unit": "PIXELS"
@@ -8791,6 +8883,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -9745,6 +9843,7 @@ const COMPONENTS = [
               "characters": "Toggle",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/toggle-switch/label/font-size",
               "textFill": "imported/toggle-switch/label/color",
               "lineHeight": {
                 "value": 20,
@@ -9857,6 +9956,7 @@ const COMPONENTS = [
               "characters": "Toggle",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/toggle-switch/label/font-size",
               "textFill": "imported/toggle-switch/label/color",
               "lineHeight": {
                 "value": 20,
@@ -9969,6 +10069,7 @@ const COMPONENTS = [
               "characters": "Toggle",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/toggle-switch/label/font-size",
               "textFill": "imported/toggle-switch/label/color",
               "lineHeight": {
                 "value": 20,
@@ -10081,6 +10182,7 @@ const COMPONENTS = [
               "characters": "Toggle",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/toggle-switch/label/font-size",
               "textFill": "imported/toggle-switch/label/color",
               "lineHeight": {
                 "value": 20,
@@ -10193,6 +10295,7 @@ const COMPONENTS = [
               "characters": "Toggle",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/toggle-switch/label/font-size",
               "textFill": "imported/toggle-switch/label/color",
               "lineHeight": {
                 "value": 20,
@@ -10305,6 +10408,7 @@ const COMPONENTS = [
               "characters": "Toggle",
               "fontSize": 14,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/toggle-switch/label/font-size",
               "textFill": "imported/toggle-switch/label/color",
               "lineHeight": {
                 "value": 20,
@@ -10911,6 +11015,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

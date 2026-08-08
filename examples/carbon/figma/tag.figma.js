@@ -49,6 +49,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/red",
               "lineHeight": {
                 "value": 16,
@@ -94,6 +95,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/red",
               "lineHeight": {
                 "value": 16,
@@ -139,6 +141,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/red",
               "lineHeight": {
                 "value": 16,
@@ -184,6 +187,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/magenta",
               "lineHeight": {
                 "value": 16,
@@ -229,6 +233,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/magenta",
               "lineHeight": {
                 "value": 16,
@@ -274,6 +279,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/magenta",
               "lineHeight": {
                 "value": 16,
@@ -319,6 +325,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/purple",
               "lineHeight": {
                 "value": 16,
@@ -364,6 +371,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/purple",
               "lineHeight": {
                 "value": 16,
@@ -409,6 +417,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/purple",
               "lineHeight": {
                 "value": 16,
@@ -454,6 +463,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/blue",
               "lineHeight": {
                 "value": 16,
@@ -499,6 +509,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/blue",
               "lineHeight": {
                 "value": 16,
@@ -544,6 +555,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/blue",
               "lineHeight": {
                 "value": 16,
@@ -589,6 +601,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/cyan",
               "lineHeight": {
                 "value": 16,
@@ -634,6 +647,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/cyan",
               "lineHeight": {
                 "value": 16,
@@ -679,6 +693,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/cyan",
               "lineHeight": {
                 "value": 16,
@@ -724,6 +739,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/teal",
               "lineHeight": {
                 "value": 16,
@@ -769,6 +785,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/teal",
               "lineHeight": {
                 "value": 16,
@@ -814,6 +831,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/teal",
               "lineHeight": {
                 "value": 16,
@@ -859,6 +877,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/green",
               "lineHeight": {
                 "value": 16,
@@ -904,6 +923,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/green",
               "lineHeight": {
                 "value": 16,
@@ -949,6 +969,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/green",
               "lineHeight": {
                 "value": 16,
@@ -994,6 +1015,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/gray",
               "lineHeight": {
                 "value": 16,
@@ -1039,6 +1061,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/gray",
               "lineHeight": {
                 "value": 16,
@@ -1084,6 +1107,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/gray",
               "lineHeight": {
                 "value": 16,
@@ -1129,6 +1153,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/cool-gray",
               "lineHeight": {
                 "value": 16,
@@ -1174,6 +1199,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/cool-gray",
               "lineHeight": {
                 "value": 16,
@@ -1219,6 +1245,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/cool-gray",
               "lineHeight": {
                 "value": 16,
@@ -1264,6 +1291,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/warm-gray",
               "lineHeight": {
                 "value": 16,
@@ -1309,6 +1337,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/warm-gray",
               "lineHeight": {
                 "value": 16,
@@ -1354,6 +1383,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/warm-gray",
               "lineHeight": {
                 "value": 16,
@@ -1399,6 +1429,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/high-contrast",
               "lineHeight": {
                 "value": 16,
@@ -1444,6 +1475,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/high-contrast",
               "lineHeight": {
                 "value": 16,
@@ -1489,6 +1521,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/high-contrast",
               "lineHeight": {
                 "value": 16,
@@ -1548,6 +1581,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -1607,6 +1641,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -1666,6 +1701,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/tag/label/font-size",
               "textFill": "imported/tag/label/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -2162,6 +2198,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

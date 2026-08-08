@@ -365,6 +365,21 @@ export interface NodeSpec {
    *  bindings exactly match — the runtime sets textStyleId when the style
    *  exists in the file (raw fontName/fontSize stand as the fallback). */
   textStyle?: string;
+  /** FC-WEIGHT-IDENTITY — the size token's Figma VARIABLE (slash form), bound
+   *  to `fontSize` on text nodes that CANNOT ride a derived text style.
+   *
+   *  A text style is the canvas's carrier of size-token identity, but it is
+   *  all-or-nothing: setting `fontName` after `setTextStyleIdAsync` CLEARS
+   *  `textStyleId` (live-verified against the Plugin API — Figma has no
+   *  text-style weight override). So a contract that binds a group's size
+   *  and overrides that group's weight — `{font.control.size.sm}` +
+   *  `{font.weight.regular}`, which four first-party contracts do since the
+   *  FC-WEIGHT-DEFAULT round — used to draw a bare 14px/Regular node with no
+   *  token identity on the canvas at all: the design→contract inverter could
+   *  see 14px but not WHICH 14px token, and 14 is ambiguous (font.avatar
+   *  .size.md and font.control.size.sm both resolve to it). Binding the
+   *  variable puts the identity back where a reader can see it. */
+  fontSizeVar?: string;
   textFill?: string;
   contentProp?: string;
   // instance
@@ -1005,6 +1020,9 @@ interface TextCtx {
   /** Token dot-path behind fontSize — text nodes whose bindings exactly match
    *  a derived text style's definition carry that style (see matchTextStyle). */
   fontSizePath?: string;
+  /** The same token in Figma's slash spelling — bound to `fontSize` when the
+   *  node cannot ride a style (see NodeSpec.fontSizeVar). */
+  fontSizeVar?: string;
   /** Resolved line height — see NodeSpec.lineHeight. */
   lineHeight?: number | { value: number; unit: 'PIXELS' | 'PERCENT' };
   /** v15: PIXEL letter spacing — resolved literal (lineHeight discipline). */
@@ -1507,6 +1525,7 @@ function applyTokens(
       case 'font-size':
         next.fontSize = px(resolveLiteral(tokenPath));
         next.fontSizePath = tokenPath;
+        next.fontSizeVar = varName;
         break;
       case 'font-weight':
         next.fontStyle = FONT_STYLE_BY_WEIGHT[px(resolveLiteral(tokenPath))] ?? 'Medium';
@@ -2512,6 +2531,26 @@ function matchTextStyle(ctx: TextCtx): string | undefined {
   return t.name;
 }
 
+/** FC-WEIGHT-IDENTITY — put the size token's identity on the canvas by the
+ *  ONE carrier the node can actually hold.
+ *
+ *  Riding a derived text style is the preferred carrier and stays the exact
+ *  bytes it always was. A node that overrides its group's weight cannot ride
+ *  one (Figma clears textStyleId on any fontName write — live-verified), and
+ *  used to fall through to a bare literal size: identity gone. It now binds
+ *  the size VARIABLE, which is a canvas fact the inverter can read back to
+ *  the token it came from. The two carriers are mutually exclusive by
+ *  construction, so nothing double-declares. */
+function textIdentity(ctx: TextCtx): { textStyle?: string; fontSizeVar?: string } {
+  const textStyle = matchTextStyle(ctx);
+  if (textStyle !== undefined) return { textStyle };
+  return ctx.fontSizeVar !== undefined ? { fontSizeVar: ctx.fontSizeVar } : {};
+}
+
+function applyTextIdentity(spec: NodeSpec, ctx: TextCtx): void {
+  Object.assign(spec, textIdentity(ctx));
+}
+
 const isEnum = (p: Prop): p is Prop & { type: { enum: string[] } } =>
   typeof p.type === 'object' && 'enum' in p.type;
 
@@ -2658,7 +2697,7 @@ function formControlSpec(
       fontStyle: childCtx.fontStyle ?? 'Medium',
       ...(childCtx.lineHeight !== undefined ? { lineHeight: childCtx.lineHeight } : {}),
       ...textExtras(childCtx),
-      textStyle: matchTextStyle(childCtx),
+      ...textIdentity(childCtx),
       // B-3 finding 1: the placeholder paint comes from the CONTRACT — the
       // control part's own carried `color` channel (childCtx.textFill), the
       // same paint the coded input's text renders. The previous hardcoded
@@ -3454,7 +3493,7 @@ function partToSpecInner(
     textSpec.name = `${name}-text`;
     textSpec.fontSize = textCtx.fontSize ?? 14;
     textSpec.fontStyle = textCtx.fontStyle ?? 'Medium';
-    textSpec.textStyle = matchTextStyle(textCtx);
+    applyTextIdentity(textSpec, textCtx);
     textSpec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) textSpec.lineHeight = textCtx.lineHeight;
     Object.assign(textSpec, textExtras(textCtx));
@@ -3499,7 +3538,7 @@ function partToSpecInner(
     spec.characters = partText;
     spec.fontSize = textCtx.fontSize ?? 14;
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
-    spec.textStyle = matchTextStyle(textCtx);
+    applyTextIdentity(spec, textCtx);
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
     Object.assign(spec, textExtras(textCtx));
@@ -3547,7 +3586,7 @@ function partToSpecInner(
     spec.characters = characters;
     spec.fontSize = textCtx.fontSize ?? 16;
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
-    spec.textStyle = matchTextStyle(textCtx);
+    applyTextIdentity(spec, textCtx);
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
     Object.assign(spec, textExtras(textCtx));
@@ -3971,7 +4010,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           characters: label,
           fontSize: ctx.fontSize ?? 16,
           fontStyle: ctx.fontStyle ?? 'Medium',
-          textStyle: matchTextStyle(ctx),
+          ...textIdentity(ctx),
           textFill: ctx.textFill,
           ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
           ...textExtras(ctx),
@@ -4075,7 +4114,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
               characters: label,
               fontSize: ctx.fontSize ?? 16,
               fontStyle: ctx.fontStyle ?? 'Medium',
-              textStyle: matchTextStyle(ctx),
+              ...textIdentity(ctx),
               textFill: ctx.textFill,
               ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
               ...textExtras(ctx),
@@ -5762,6 +5801,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

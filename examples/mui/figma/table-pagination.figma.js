@@ -91,6 +91,7 @@ const COMPONENTS = [
                   "characters": "Rows per page:",
                   "fontSize": 14,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 20.02,
@@ -135,6 +136,7 @@ const COMPONENTS = [
                           "characters": "10",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.125,
@@ -174,6 +176,7 @@ const COMPONENTS = [
                   "characters": "1–3 of 3",
                   "fontSize": 14,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 20.02,
@@ -770,6 +773,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

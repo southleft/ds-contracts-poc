@@ -3029,6 +3029,23 @@ export function fontStyleWeight(fontStyle: string): { weight?: number; italic: b
   return { weight: FONT_WEIGHT_BY_STYLE_NAME[key], italic };
 }
 
+/** The corpus token that SPELLS an observed font weight — when exactly one
+ *  does. The weight-name table turns the canvas's Inter style name into a
+ *  number; the corpus's value index turns that number into the token(s) that
+ *  resolve to it, semantic layer first. ONE hit is the token the canvas is
+ *  drawing and carries; anything else is ambiguous and stays NAMED, because
+ *  picking among candidates is exactly the invention this inverter refuses.
+ *  Restricted to paths with a `weight` segment so a bare number cannot match
+ *  an unrelated spacing or size token that happens to share the literal. */
+function weightTokenRef(ctx: Ctx, fontStyle: string): string | undefined {
+  const { weight } = fontStyleWeight(fontStyle);
+  if (weight === undefined) return undefined;
+  const hits = ctx.corpus
+    .suggestFor(weight)
+    .filter((p) => p.split('.').includes('weight'));
+  return hits.length === 1 ? `{${hits[0]}}` : undefined;
+}
+
 /** Mint the text channels that ride OUTSIDE a token-derived style identity:
  *  font-weight through the bounded weight-name table (dump fontStyle), and
  *  line-height when the dump captured a PIXEL value (dump v1.3). Uniformity
@@ -3246,6 +3263,41 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
       varyingStyleKey,
       perOccStyles ? textOcc : undefined,
     );
+    return tokens;
+  }
+  // dump v1.19 — FC-WEIGHT-IDENTITY. A bound fontSize VARIABLE names the size
+  // token OUTRIGHT, so it is read before any value match. It is the carrier
+  // the writer falls back to when a node cannot ride a named text style —
+  // the contract binds a style group's size and overrides that group's
+  // weight, and Figma clears textStyleId on any fontName write, so the style
+  // cannot hold both facts. Reading the variable back is what lets such a
+  // node round-trip at all: a value match provably cannot, because 14px is
+  // BOTH font.control.size.sm and font.avatar.size.md and the reader must
+  // never pick between them.
+  const sizeVars = [...new Set(textOcc.map((o) => o.node.text!.fontSizeVar))];
+  const sizeVar = sizeVars.length === 1 ? sizeVars[0] : undefined;
+  if (sizeVar !== undefined) {
+    tokens['font-size'] = ref(sizeVar);
+    // The weight rode no style either, so it is the node's own fontStyle.
+    // 'Medium' is the runtime text default and stays canvas-indistinguishable
+    // from carrying no weight token — the SAME rule the style path applies,
+    // so a node that merely happens to bind its size proposes exactly what it
+    // used to. A non-default weight is a real canvas fact and carries as the
+    // corpus token that spells it, or mints when the corpus cannot name it.
+    const observed = t.fontStyle ?? 'Medium';
+    let weightRef: string | undefined;
+    if (observed !== 'Medium') {
+      weightRef = weightTokenRef(ctx, observed);
+      if (weightRef) tokens['font-weight'] = weightRef;
+      else {
+        ctx.notes.push(
+          `${where}: font weight "${observed}" is drawn on a node riding no text style and the corpus does not spell it with exactly one weight token — minted rather than bound to a guess (review)`,
+        );
+      }
+    }
+    mintTextChannels(m, tokens, ctx, where, {
+      weight: observed !== 'Medium' && weightRef === undefined,
+    });
     return tokens;
   }
   const styleNames = [...new Set(m.occ.map((o) => o.node.text?.style).filter((s) => s !== undefined))];

@@ -51,6 +51,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -98,6 +99,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -145,6 +147,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -192,6 +195,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -239,6 +243,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -286,6 +291,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -333,6 +339,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 18.0001,
@@ -380,6 +387,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 18.0001,
@@ -427,6 +435,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 18.0001,
@@ -474,6 +483,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 18.0001,
@@ -521,6 +531,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 18.0001,
@@ -568,6 +579,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 18.0001,
@@ -615,6 +627,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -662,6 +675,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -709,6 +723,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -756,6 +771,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -803,6 +819,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -850,6 +867,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -897,6 +915,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -944,6 +963,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -991,6 +1011,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -1038,6 +1059,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -1085,6 +1107,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -1132,6 +1155,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -1179,6 +1203,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger",
               "lineHeight": {
                 "value": 18.0001,
@@ -1226,6 +1251,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger",
               "lineHeight": {
                 "value": 18.0001,
@@ -1273,6 +1299,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger",
               "lineHeight": {
                 "value": 18.0001,
@@ -1320,6 +1347,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger",
               "lineHeight": {
                 "value": 18.0001,
@@ -1367,6 +1395,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger",
               "lineHeight": {
                 "value": 18.0001,
@@ -1414,6 +1443,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger",
               "lineHeight": {
                 "value": 18.0001,
@@ -1461,6 +1491,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -1508,6 +1539,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -1555,6 +1587,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -1602,6 +1635,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -1649,6 +1683,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -1696,6 +1731,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -1743,6 +1779,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -1790,6 +1827,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -1837,6 +1875,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -1884,6 +1923,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -1931,6 +1971,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -1978,6 +2019,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -2025,6 +2067,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2072,6 +2115,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2119,6 +2163,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2166,6 +2211,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2213,6 +2259,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2260,6 +2307,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color/danger--tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2309,6 +2357,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-disabled/primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2356,6 +2405,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-disabled/secondary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2403,6 +2453,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-disabled/tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2450,6 +2501,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-disabled/ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -2497,6 +2549,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-disabled/danger",
               "lineHeight": {
                 "value": 18.0001,
@@ -2544,6 +2597,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-disabled/danger--primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2591,6 +2645,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-disabled/danger--ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -2638,6 +2693,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-disabled/danger--tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2713,6 +2769,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-active/primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2788,6 +2845,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-active/secondary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2863,6 +2921,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-active/tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -2938,6 +2997,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-active/ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -3013,6 +3073,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-active/danger",
               "lineHeight": {
                 "value": 18.0001,
@@ -3061,6 +3122,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-active/danger--primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -3136,6 +3198,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-active/danger--ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -3211,6 +3274,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-active/danger--tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -3286,6 +3350,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-focus-visible/primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -3361,6 +3426,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-focus-visible/secondary",
               "lineHeight": {
                 "value": 18.0001,
@@ -3436,6 +3502,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-focus-visible/tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -3511,6 +3578,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-focus-visible/ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -3586,6 +3654,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-focus-visible/danger",
               "lineHeight": {
                 "value": 18.0001,
@@ -3634,6 +3703,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-focus-visible/danger--primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -3709,6 +3779,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-focus-visible/danger--ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -3784,6 +3855,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-focus-visible/danger--tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -3831,6 +3903,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-hover/primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -3878,6 +3951,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-hover/secondary",
               "lineHeight": {
                 "value": 18.0001,
@@ -3925,6 +3999,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-hover/tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -3972,6 +4047,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-hover/ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -4019,6 +4095,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-hover/danger",
               "lineHeight": {
                 "value": 18.0001,
@@ -4066,6 +4143,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-hover/danger--primary",
               "lineHeight": {
                 "value": 18.0001,
@@ -4113,6 +4191,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-hover/danger--ghost",
               "lineHeight": {
                 "value": 18.0001,
@@ -4160,6 +4239,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/button/root/font-size",
               "textFill": "imported/button/root/color-state-hover/danger--tertiary",
               "lineHeight": {
                 "value": 18.0001,
@@ -4697,6 +4777,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

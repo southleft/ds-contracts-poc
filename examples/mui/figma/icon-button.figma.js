@@ -55,6 +55,7 @@ const COMPONENTS = [
               "characters": "★",
               "fontSize": 24,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/icon-button/root/font-size/medium",
               "textFill": "imported/icon-button/root/color/default",
               "contentProp": "Icon"
             }
@@ -95,6 +96,7 @@ const COMPONENTS = [
               "characters": "★",
               "fontSize": 24,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/icon-button/root/font-size/medium",
               "textFill": "imported/icon-button/root/color/primary",
               "contentProp": "Icon"
             }
@@ -135,6 +137,7 @@ const COMPONENTS = [
               "characters": "★",
               "fontSize": 24,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/icon-button/root/font-size/medium",
               "textFill": "imported/icon-button/root/color/secondary",
               "contentProp": "Icon"
             }
@@ -175,6 +178,7 @@ const COMPONENTS = [
               "characters": "★",
               "fontSize": 18,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/icon-button/root/font-size/small",
               "textFill": "imported/icon-button/root/color/default",
               "contentProp": "Icon"
             }
@@ -215,6 +219,7 @@ const COMPONENTS = [
               "characters": "★",
               "fontSize": 18,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/icon-button/root/font-size/small",
               "textFill": "imported/icon-button/root/color/primary",
               "contentProp": "Icon"
             }
@@ -255,6 +260,7 @@ const COMPONENTS = [
               "characters": "★",
               "fontSize": 18,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/icon-button/root/font-size/small",
               "textFill": "imported/icon-button/root/color/secondary",
               "contentProp": "Icon"
             }
@@ -295,6 +301,7 @@ const COMPONENTS = [
               "characters": "★",
               "fontSize": 28,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/icon-button/root/font-size/large",
               "textFill": "imported/icon-button/root/color/default",
               "contentProp": "Icon"
             }
@@ -335,6 +342,7 @@ const COMPONENTS = [
               "characters": "★",
               "fontSize": 28,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/icon-button/root/font-size/large",
               "textFill": "imported/icon-button/root/color/primary",
               "contentProp": "Icon"
             }
@@ -375,6 +383,7 @@ const COMPONENTS = [
               "characters": "★",
               "fontSize": 28,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/icon-button/root/font-size/large",
               "textFill": "imported/icon-button/root/color/secondary",
               "contentProp": "Icon"
             }
@@ -789,6 +798,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

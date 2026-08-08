@@ -113,6 +113,7 @@ const COMPONENTS = [
                       "characters": "Wholesale",
                       "fontSize": 12,
                       "fontStyle": "Medium",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -155,6 +156,7 @@ const COMPONENTS = [
                   "characters": "Wholesale",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "p/text-body-sm-font-size",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -292,6 +294,7 @@ const COMPONENTS = [
                       "characters": "Wholesale",
                       "fontSize": 12,
                       "fontStyle": "Medium",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -334,6 +337,7 @@ const COMPONENTS = [
                   "characters": "Wholesale",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "p/text-body-sm-font-size",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -439,6 +443,7 @@ const COMPONENTS = [
                       "characters": "Wholesale",
                       "fontSize": 12,
                       "fontStyle": "Medium",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -481,6 +486,7 @@ const COMPONENTS = [
                   "characters": "Wholesale",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "p/text-body-sm-font-size",
                   "textFill": "imported/shared/color-b5b5b5",
                   "lineHeight": {
                     "value": 20,
@@ -618,6 +624,7 @@ const COMPONENTS = [
                       "characters": "Wholesale",
                       "fontSize": 12,
                       "fontStyle": "Medium",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -660,6 +667,7 @@ const COMPONENTS = [
                   "characters": "Wholesale",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "p/text-body-sm-font-size",
                   "textFill": "imported/shared/color-b5b5b5",
                   "lineHeight": {
                     "value": 20,
@@ -766,6 +774,7 @@ const COMPONENTS = [
                       "characters": "Wholesale",
                       "fontSize": 12,
                       "fontStyle": "Medium",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -808,6 +817,7 @@ const COMPONENTS = [
                   "characters": "Wholesale",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "p/text-body-sm-font-size",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -948,6 +958,7 @@ const COMPONENTS = [
                       "characters": "Wholesale",
                       "fontSize": 12,
                       "fontStyle": "Medium",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -990,6 +1001,7 @@ const COMPONENTS = [
                   "characters": "Wholesale",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "p/text-body-sm-font-size",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -1096,6 +1108,7 @@ const COMPONENTS = [
                       "characters": "Wholesale",
                       "fontSize": 12,
                       "fontStyle": "Medium",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -1138,6 +1151,7 @@ const COMPONENTS = [
                   "characters": "Wholesale",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "p/text-body-sm-font-size",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -1278,6 +1292,7 @@ const COMPONENTS = [
                       "characters": "Wholesale",
                       "fontSize": 12,
                       "fontStyle": "Medium",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -1320,6 +1335,7 @@ const COMPONENTS = [
                   "characters": "Wholesale",
                   "fontSize": 12,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "p/text-body-sm-font-size",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -1943,6 +1959,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

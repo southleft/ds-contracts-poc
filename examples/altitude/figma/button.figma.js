@@ -54,6 +54,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 24,
@@ -104,6 +105,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color/tertiary",
               "lineHeight": {
                 "value": 24,
@@ -154,6 +156,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color/bare",
               "lineHeight": {
                 "value": 24,
@@ -204,6 +207,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color/danger",
               "lineHeight": {
                 "value": 24,
@@ -258,6 +262,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 24,
@@ -310,6 +315,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color/tertiary",
               "lineHeight": {
                 "value": 24,
@@ -362,6 +368,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color/bare",
               "lineHeight": {
                 "value": 24,
@@ -414,6 +421,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color/danger",
               "lineHeight": {
                 "value": 24,
@@ -464,6 +472,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color-state-hover/unset",
               "lineHeight": {
                 "value": 24,
@@ -514,6 +523,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color-state-hover/unset",
               "lineHeight": {
                 "value": 24,
@@ -564,6 +574,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color-state-hover/unset",
               "lineHeight": {
                 "value": 24,
@@ -614,6 +625,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 16,
               "fontStyle": "Semi Bold",
+              "fontSizeVar": "imported/shared/size-16",
               "textFill": "imported/button/root/color-state-hover/unset",
               "lineHeight": {
                 "value": 24,
@@ -1079,6 +1091,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

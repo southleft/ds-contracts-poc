@@ -56,6 +56,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color/default",
               "lineHeight": {
                 "value": 16,
@@ -102,6 +103,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color/secondary",
               "lineHeight": {
                 "value": 16,
@@ -148,6 +150,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color/destructive",
               "lineHeight": {
                 "value": 16,
@@ -194,6 +197,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -240,6 +244,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color/ghost",
               "lineHeight": {
                 "value": 16,
@@ -286,6 +291,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color/link",
               "lineHeight": {
                 "value": 16,
@@ -334,6 +340,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-active/default",
               "lineHeight": {
                 "value": 16,
@@ -380,6 +387,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-active/secondary",
               "lineHeight": {
                 "value": 16,
@@ -426,6 +434,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-active/destructive",
               "lineHeight": {
                 "value": 16,
@@ -472,6 +481,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-active/outline",
               "lineHeight": {
                 "value": 16,
@@ -518,6 +528,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-active/ghost",
               "lineHeight": {
                 "value": 16,
@@ -564,6 +575,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-active/link",
               "lineHeight": {
                 "value": 16,
@@ -610,6 +622,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-hover/default",
               "lineHeight": {
                 "value": 16,
@@ -656,6 +669,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-hover/secondary",
               "lineHeight": {
                 "value": 16,
@@ -702,6 +716,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-hover/destructive",
               "lineHeight": {
                 "value": 16,
@@ -748,6 +763,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-hover/outline",
               "lineHeight": {
                 "value": 16,
@@ -794,6 +810,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-hover/ghost",
               "lineHeight": {
                 "value": 16,
@@ -840,6 +857,7 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "imported/badge/root/font-size",
               "textFill": "imported/badge/root/color-state-hover/link",
               "lineHeight": {
                 "value": 16,
@@ -1324,6 +1342,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

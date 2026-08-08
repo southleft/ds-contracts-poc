@@ -168,6 +168,7 @@ const COMPONENTS = [
                               "characters": "Name",
                               "fontSize": 14,
                               "fontStyle": "Medium",
+                              "fontSizeVar": "imported/shared/size-14",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 24,
@@ -207,6 +208,7 @@ const COMPONENTS = [
                           "characters": "Role",
                           "fontSize": 14,
                           "fontStyle": "Medium",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -250,6 +252,7 @@ const COMPONENTS = [
                           "characters": "Team",
                           "fontSize": 14,
                           "fontStyle": "Medium",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -293,6 +296,7 @@ const COMPONENTS = [
                           "characters": "Actions",
                           "fontSize": 14,
                           "fontStyle": "Medium",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -433,6 +437,7 @@ const COMPONENTS = [
                           "characters": "Frozen yoghurt",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -476,6 +481,7 @@ const COMPONENTS = [
                           "characters": "Designer",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -519,6 +525,7 @@ const COMPONENTS = [
                           "characters": "Platform",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -588,6 +595,7 @@ const COMPONENTS = [
                               "characters": "⋮",
                               "fontSize": 18,
                               "fontStyle": "Regular",
+                              "fontSizeVar": "imported/shared/size-18",
                               "textFill": "imported/table/label-8/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -711,6 +719,7 @@ const COMPONENTS = [
                           "characters": "Ice cream sandwich",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -754,6 +763,7 @@ const COMPONENTS = [
                           "characters": "Engineer",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -797,6 +807,7 @@ const COMPONENTS = [
                           "characters": "Contracts",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -866,6 +877,7 @@ const COMPONENTS = [
                               "characters": "⋮",
                               "fontSize": 18,
                               "fontStyle": "Regular",
+                              "fontSizeVar": "imported/shared/size-18",
                               "textFill": "imported/table/label-12/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -1051,6 +1063,7 @@ const COMPONENTS = [
                               "characters": "Name",
                               "fontSize": 14,
                               "fontStyle": "Medium",
+                              "fontSizeVar": "imported/shared/size-14",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 24,
@@ -1090,6 +1103,7 @@ const COMPONENTS = [
                           "characters": "Role",
                           "fontSize": 14,
                           "fontStyle": "Medium",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -1133,6 +1147,7 @@ const COMPONENTS = [
                           "characters": "Team",
                           "fontSize": 14,
                           "fontStyle": "Medium",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -1176,6 +1191,7 @@ const COMPONENTS = [
                           "characters": "Actions",
                           "fontSize": 14,
                           "fontStyle": "Medium",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -1316,6 +1332,7 @@ const COMPONENTS = [
                           "characters": "Frozen yoghurt",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -1359,6 +1376,7 @@ const COMPONENTS = [
                           "characters": "Designer",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -1402,6 +1420,7 @@ const COMPONENTS = [
                           "characters": "Platform",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -1471,6 +1490,7 @@ const COMPONENTS = [
                               "characters": "⋮",
                               "fontSize": 18,
                               "fontStyle": "Regular",
+                              "fontSizeVar": "imported/shared/size-18",
                               "textFill": "imported/table/label-8/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -1594,6 +1614,7 @@ const COMPONENTS = [
                           "characters": "Ice cream sandwich",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -1637,6 +1658,7 @@ const COMPONENTS = [
                           "characters": "Engineer",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -1680,6 +1702,7 @@ const COMPONENTS = [
                           "characters": "Contracts",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -1749,6 +1772,7 @@ const COMPONENTS = [
                               "characters": "⋮",
                               "fontSize": 18,
                               "fontStyle": "Regular",
+                              "fontSizeVar": "imported/shared/size-18",
                               "textFill": "imported/table/label-12/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -2222,6 +2246,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

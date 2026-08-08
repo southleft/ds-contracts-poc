@@ -142,6 +142,7 @@ const COMPONENTS = [
                           "contentProp": "Content",
                           "fontSize": 16,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/dialog/label/font-size",
                           "textFill": "imported/dialog/label/color"
                         }
                       ],
@@ -285,6 +286,7 @@ const COMPONENTS = [
                           "contentProp": "Content",
                           "fontSize": 16,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/dialog/label/font-size",
                           "textFill": "imported/dialog/label/color"
                         }
                       ],
@@ -428,6 +430,7 @@ const COMPONENTS = [
                           "contentProp": "Content",
                           "fontSize": 16,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/dialog/label/font-size",
                           "textFill": "imported/dialog/label/color"
                         }
                       ],
@@ -571,6 +574,7 @@ const COMPONENTS = [
                           "contentProp": "Content",
                           "fontSize": 16,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/dialog/label/font-size",
                           "textFill": "imported/dialog/label/color"
                         }
                       ],
@@ -714,6 +718,7 @@ const COMPONENTS = [
                           "contentProp": "Content",
                           "fontSize": 16,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/dialog/label/font-size",
                           "textFill": "imported/dialog/label/color"
                         }
                       ],
@@ -1287,6 +1292,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

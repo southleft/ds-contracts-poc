@@ -40,6 +40,7 @@ const COMPONENTS = [
               "characters": "Link",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/link/root/font-size/xs",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 20,
@@ -75,6 +76,7 @@ const COMPONENTS = [
               "characters": "Link",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/link/root/font-size/sm",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 20,
@@ -110,6 +112,7 @@ const COMPONENTS = [
               "characters": "Link",
               "fontSize": 18,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/link/root/font-size/lg",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 28,
@@ -147,6 +150,7 @@ const COMPONENTS = [
               "characters": "Link",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/link/root/font-size/xs",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 20,
@@ -182,6 +186,7 @@ const COMPONENTS = [
               "characters": "Link",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/link/root/font-size/sm",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 20,
@@ -217,6 +222,7 @@ const COMPONENTS = [
               "characters": "Link",
               "fontSize": 18,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/link/root/font-size/lg",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 28,
@@ -252,6 +258,7 @@ const COMPONENTS = [
               "characters": "Link",
               "fontSize": 12,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/link/root/font-size/xs",
               "textFill": "imported/link/root/color-state-hover",
               "lineHeight": {
                 "value": 20,
@@ -287,6 +294,7 @@ const COMPONENTS = [
               "characters": "Link",
               "fontSize": 14,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/link/root/font-size/sm",
               "textFill": "imported/link/root/color-state-hover",
               "lineHeight": {
                 "value": 20,
@@ -322,6 +330,7 @@ const COMPONENTS = [
               "characters": "Link",
               "fontSize": 18,
               "fontStyle": "Regular",
+              "fontSizeVar": "imported/link/root/font-size/lg",
               "textFill": "imported/link/root/color-state-hover",
               "lineHeight": {
                 "value": 28,
@@ -781,6 +790,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

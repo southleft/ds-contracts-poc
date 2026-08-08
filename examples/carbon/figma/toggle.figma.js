@@ -63,6 +63,7 @@ const COMPONENTS = [
                   "characters": "Toggle",
                   "fontSize": 12,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-12",
                   "textFill": "imported/toggle/label/color",
                   "lineHeight": {
                     "value": 16,
@@ -146,6 +147,7 @@ const COMPONENTS = [
                       "characters": "Off",
                       "fontSize": 14,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/toggle/label-2/font-size",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -207,6 +209,7 @@ const COMPONENTS = [
                   "characters": "Toggle",
                   "fontSize": 12,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-12",
                   "textFill": "imported/toggle/label/color",
                   "lineHeight": {
                     "value": 16,
@@ -290,6 +293,7 @@ const COMPONENTS = [
                       "characters": "Off",
                       "fontSize": 14,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/toggle/label-2/font-size",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -353,6 +357,7 @@ const COMPONENTS = [
                   "characters": "Toggle",
                   "fontSize": 12,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-12",
                   "textFill": "imported/shared/color-16161640",
                   "lineHeight": {
                     "value": 16,
@@ -436,6 +441,7 @@ const COMPONENTS = [
                       "characters": "Off",
                       "fontSize": 14,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/toggle/label-2/font-size",
                       "textFill": "imported/shared/color-16161640",
                       "lineHeight": {
                         "value": 20,
@@ -498,6 +504,7 @@ const COMPONENTS = [
                   "characters": "Toggle",
                   "fontSize": 12,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-12",
                   "textFill": "imported/shared/color-16161640",
                   "lineHeight": {
                     "value": 16,
@@ -581,6 +588,7 @@ const COMPONENTS = [
                       "characters": "Off",
                       "fontSize": 14,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/toggle/label-2/font-size",
                       "textFill": "imported/shared/color-16161640",
                       "lineHeight": {
                         "value": 20,
@@ -1173,6 +1181,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

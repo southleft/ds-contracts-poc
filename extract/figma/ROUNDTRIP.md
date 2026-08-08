@@ -7,7 +7,7 @@ Each fixture in `extract/figma/fixtures/main-file-dumps.json` is a LIVE node-tre
 | Component | MATCHED | CANVAS-ABSENT | MISMATCH | Verdict |
 |---|---|---|---|---|
 | Badge | 11 | 4 | 0 | ✅ zero mismatch |
-| Switch | 36 | 13 | 0 | ✅ zero mismatch |
+| Switch | 37 | 13 | 0 | ✅ zero mismatch |
 | Card | 35 | 14 | 0 | ✅ zero mismatch |
 
 ## Badge
@@ -25,9 +25,9 @@ Each fixture in `extract/figma/fixtures/main-file-dumps.json` is a LIVE node-tre
 
 ## Switch
 
-### MATCHED (36)
+### MATCHED (37)
 
-`id` · `name` · `prop value` · `prop label` · `prop description` · `part root child order` · `part root layout` · `part root gap` · `part root/track child order` · `part root/track layout` · `part root/track width` · `part root/track height` · `part root/track background-color` · `part root/track border-radius` · `part root/track padding-inline` · `part root/track padding-block` · `part root/track/spacerStart layout` · `part root/track/spacerStart visibleWhen` · `part root/track/thumb layout` · `part root/track/thumb width` · `part root/track/thumb height` · `part root/track/thumb background-color` · `part root/track/thumb border-radius` · `part root/track/spacerEnd layout` · `part root/track/spacerEnd visibleWhen` · `part root/textCol child order` · `part root/textCol layout` · `part root/textCol gap` · `part root/textCol/labelText layout` · `part root/textCol/labelText content` · `part root/textCol/descriptionText layout` · `part root/textCol/descriptionText content` · `text root/textCol/labelText color (effective)` · `text root/textCol/labelText font-size (effective)` · `text root/textCol/descriptionText color (effective)` · `text root/textCol/descriptionText font-size (effective)`
+`id` · `name` · `prop value` · `prop label` · `prop description` · `part root child order` · `part root layout` · `part root gap` · `part root/track child order` · `part root/track layout` · `part root/track width` · `part root/track height` · `part root/track background-color` · `part root/track border-radius` · `part root/track padding-inline` · `part root/track padding-block` · `part root/track/spacerStart layout` · `part root/track/spacerStart visibleWhen` · `part root/track/thumb layout` · `part root/track/thumb width` · `part root/track/thumb height` · `part root/track/thumb background-color` · `part root/track/thumb border-radius` · `part root/track/spacerEnd layout` · `part root/track/spacerEnd visibleWhen` · `part root/textCol child order` · `part root/textCol layout` · `part root/textCol gap` · `part root/textCol/labelText layout` · `part root/textCol/labelText content` · `part root/textCol/descriptionText layout` · `part root/textCol/descriptionText content` · `text root/textCol/labelText color (effective)` · `text root/textCol/labelText font-size (effective)` · `text root/textCol/descriptionText color (effective)` · `text root/textCol/descriptionText font-size (effective)` · `text root/textCol/descriptionText font-weight (effective)`
 
 ### CANVAS-ABSENT (13) — declared fidelity limits
 

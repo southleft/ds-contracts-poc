@@ -63,6 +63,7 @@ const COMPONENTS = [
                   "characters": "Card title",
                   "fontSize": 16,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "imported/card/label/font-size/default",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -74,6 +75,7 @@ const COMPONENTS = [
                   "characters": "Card description",
                   "fontSize": 14,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
                   "textFill": "imported/card/label-2/color",
                   "lineHeight": {
                     "value": 20,
@@ -98,6 +100,7 @@ const COMPONENTS = [
                   "characters": "Card content copy for the shadcn round.",
                   "fontSize": 14,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -160,6 +163,7 @@ const COMPONENTS = [
                   "characters": "Card title",
                   "fontSize": 14,
                   "fontStyle": "Medium",
+                  "fontSizeVar": "imported/card/label/font-size/sm",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -171,6 +175,7 @@ const COMPONENTS = [
                   "characters": "Card description",
                   "fontSize": 14,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
                   "textFill": "imported/card/label-2/color",
                   "lineHeight": {
                     "value": 20,
@@ -195,6 +200,7 @@ const COMPONENTS = [
                   "characters": "Card content copy for the shadcn round.",
                   "fontSize": 14,
                   "fontStyle": "Regular",
+                  "fontSizeVar": "imported/shared/size-14",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -622,6 +628,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

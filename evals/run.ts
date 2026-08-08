@@ -43,7 +43,7 @@ import { buildPlan as proposePrBuildPlan, contentsPutBody, summarize as proposeP
 // generalized libraries now share (was six copies under examples/*/scripts/).
 import { promote as promoteFloor, type PromoteConfig } from '../packages/cli/src/promote.js';
 import { emitReact as coreEmitReact, generateCss as coreGenerateCss, isMultiRoot as coreIsMultiRoot, stripCanvasOnlyChannels as coreStripCanvasOnly, validateContract as coreValidateContract } from '../core/emit-react.js';
-import { createFigmaEngine } from '../core/emit-figma-script.js';
+import { createFigmaEngine, RUNTIME_EMIT_REV } from '../core/emit-figma-script.js';
 import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
 import { tokenInventoryFromJson } from '../core/tokens.js';
 // DEPTH BUILD Stage A+B pins (pure — production capture/anatomy over committed
@@ -6051,10 +6051,22 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     run: () => {
       const check = run(process.execPath, ['scripts/plugin-engine-check.mjs']);
       if (check.status !== 0) throw new Error(`plugin-engine-check failed:\n${check.out}`);
+      // The NEW-component line quotes the contract's own version, and
+      // scripts/plugin-engine-check.mjs already builds its expectation from
+      // `switchContract.version`. Typing the number here a second time
+      // pinned nothing extra and went stale the moment the contract bumped
+      // (2.0.0 → 2.0.1, the FC-WEIGHT-DEFAULT round) — a red that named
+      // "update report" for a change in a contract's version field. What
+      // this case owns is the plain-words SHAPE ("<Name> <version>: new —
+      // will be created (N variants)."), so the version is read from the
+      // same source the report reads.
+      const switchVersion = (
+        JSON.parse(readFileSync(path.join(ROOT, 'contracts/switch.contract.json'), 'utf8')) as { version: string }
+      ).version;
       for (const want of [
         '✔ update report (before anything applies):',
         '• Badge 1.1.0 → 9.9.9: +prop Experimental.',
-        '• Switch 2.0.0: new — will be created (2 variants).',
+        `• Switch ${switchVersion}: new — will be created (2 variants).`,
         '1 to update · 1 new · 0 unchanged.',
         'Nothing has been applied — review the list, then Apply.',
         '• Badge 1.1.0: unchanged — will be skipped.',
@@ -10302,12 +10314,20 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           new Map([[spinnerContract.id, spinnerContract]]),
           undefined,
         );
-        // The rev moved rt4-svg-rotation → rt5-text-fill-alignment at the
-        // landing round (FC-TEXT-FILL-ALIGNMENT runtime guard change); the
-        // rotation lowering itself is still pinned by spec.rotation above,
-        // and the salt requirement is pinned against the CURRENT rev.
-        if (!spinnerScript.includes('spec.rotation') || !spinnerScript.includes('rt5-text-fill-alignment')) {
-          throw new Error('FC-SVG-ROTATION: runtime must apply spec.rotation and salt RUNTIME_EMIT_REV');
+        // The salt requirement is pinned against the LIVE constant, not a
+        // typed-in copy of it. This assertion used to spell the rev as a
+        // literal and went stale every time a runtime-only fix bumped it
+        // (rt4-svg-rotation → rt5-text-fill-alignment → rt6-native-slots),
+        // red-flagging the ROTATION pin for a change that had nothing to do
+        // with rotation. What this case actually owns is (a) the runtime
+        // applies spec.rotation — pinned by the `spec.rotation` lowering
+        // above and the substring below — and (b) the emitted script salts
+        // its specHash with the CURRENT RUNTIME_EMIT_REV so a runtime-only
+        // fix forces an amend. Importing the constant keeps (b) exact and
+        // self-updating; a rev bump that FAILS to reach the emitted script
+        // still fails here, which is the only failure this pin ever meant.
+        if (!spinnerScript.includes('spec.rotation') || !spinnerScript.includes(RUNTIME_EMIT_REV)) {
+          throw new Error(`FC-SVG-ROTATION: runtime must apply spec.rotation and salt RUNTIME_EMIT_REV (${RUNTIME_EMIT_REV})`);
         }
       }
 

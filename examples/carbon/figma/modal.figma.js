@@ -96,6 +96,7 @@ const COMPONENTS = [
                       "characters": "Label",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/modal/label-2/color",
                       "lineHeight": {
                         "value": 16,
@@ -118,6 +119,7 @@ const COMPONENTS = [
                           "characters": "Modal heading",
                           "fontSize": 20,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/modal/label-3/font-size",
                           "lineHeight": {
                             "value": 28,
                             "unit": "PIXELS"
@@ -254,6 +256,7 @@ const COMPONENTS = [
                       "contentProp": "Content",
                       "fontSize": 14,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/shared/size-14",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -304,6 +307,7 @@ const COMPONENTS = [
                           "characters": "Cancel",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -345,6 +349,7 @@ const COMPONENTS = [
                           "characters": "Save",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -469,6 +474,7 @@ const COMPONENTS = [
                       "characters": "Label",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/modal/label-2/color",
                       "lineHeight": {
                         "value": 16,
@@ -491,6 +497,7 @@ const COMPONENTS = [
                           "characters": "Modal heading",
                           "fontSize": 20,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/modal/label-3/font-size",
                           "lineHeight": {
                             "value": 28,
                             "unit": "PIXELS"
@@ -627,6 +634,7 @@ const COMPONENTS = [
                       "contentProp": "Content",
                       "fontSize": 14,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/shared/size-14",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -677,6 +685,7 @@ const COMPONENTS = [
                           "characters": "Cancel",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -718,6 +727,7 @@ const COMPONENTS = [
                           "characters": "Save",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -842,6 +852,7 @@ const COMPONENTS = [
                       "characters": "Label",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/modal/label-2/color",
                       "lineHeight": {
                         "value": 16,
@@ -864,6 +875,7 @@ const COMPONENTS = [
                           "characters": "Modal heading",
                           "fontSize": 20,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/modal/label-3/font-size",
                           "lineHeight": {
                             "value": 28,
                             "unit": "PIXELS"
@@ -1000,6 +1012,7 @@ const COMPONENTS = [
                       "contentProp": "Content",
                       "fontSize": 14,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/shared/size-14",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -1050,6 +1063,7 @@ const COMPONENTS = [
                           "characters": "Cancel",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -1091,6 +1105,7 @@ const COMPONENTS = [
                           "characters": "Save",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -1215,6 +1230,7 @@ const COMPONENTS = [
                       "characters": "Label",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/shared/size-12",
                       "textFill": "imported/modal/label-2/color",
                       "lineHeight": {
                         "value": 16,
@@ -1237,6 +1253,7 @@ const COMPONENTS = [
                           "characters": "Modal heading",
                           "fontSize": 20,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/modal/label-3/font-size",
                           "lineHeight": {
                             "value": 28,
                             "unit": "PIXELS"
@@ -1373,6 +1390,7 @@ const COMPONENTS = [
                       "contentProp": "Content",
                       "fontSize": 14,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "imported/shared/size-14",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -1423,6 +1441,7 @@ const COMPONENTS = [
                           "characters": "Cancel",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -1464,6 +1483,7 @@ const COMPONENTS = [
                           "characters": "Save",
                           "fontSize": 14,
                           "fontStyle": "Regular",
+                          "fontSizeVar": "imported/shared/size-14",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -2096,6 +2116,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

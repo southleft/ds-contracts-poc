@@ -456,7 +456,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 204/204 evals as of `evals/results.json` — by claim family: 33 refusal, 32 determinism, 56 detection, 60 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
+| **Eval suite** | 213/213 evals as of `evals/results.json` — by claim family: 35 refusal, 35 determinism, 58 detection, 62 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |

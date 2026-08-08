@@ -141,6 +141,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -222,6 +223,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -343,6 +345,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -424,6 +427,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -505,6 +509,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -625,6 +630,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -706,6 +712,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -827,6 +834,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -908,6 +916,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -989,6 +998,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -1109,6 +1119,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -1190,6 +1201,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -1311,6 +1323,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -1392,6 +1405,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -1473,6 +1487,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -1593,6 +1608,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -1674,6 +1690,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -1795,6 +1812,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -1876,6 +1894,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -1957,6 +1976,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -2077,6 +2097,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -2158,6 +2179,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -2279,6 +2301,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -2360,6 +2383,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -2441,6 +2465,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -2561,6 +2586,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -2642,6 +2668,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -2763,6 +2790,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -2844,6 +2872,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -2925,6 +2954,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -3045,6 +3075,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -3126,6 +3157,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -3247,6 +3279,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -3328,6 +3361,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -3409,6 +3443,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -3529,6 +3564,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -3610,6 +3646,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -3731,6 +3768,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -3812,6 +3850,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -3893,6 +3932,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -4013,6 +4053,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -4094,6 +4135,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -4215,6 +4257,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -4296,6 +4339,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -4377,6 +4421,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -4497,6 +4542,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -4578,6 +4624,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -4699,6 +4746,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -4780,6 +4828,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -4861,6 +4910,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -4981,6 +5031,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -5062,6 +5113,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -5183,6 +5235,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -5264,6 +5317,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -5345,6 +5399,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -5465,6 +5520,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -5546,6 +5602,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -5667,6 +5724,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -5748,6 +5806,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -5829,6 +5888,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -5949,6 +6009,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -6030,6 +6091,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -6151,6 +6213,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -6232,6 +6295,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -6313,6 +6377,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -6433,6 +6498,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -6514,6 +6580,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -6635,6 +6702,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -6716,6 +6784,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -6797,6 +6866,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -6917,6 +6987,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -6998,6 +7069,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -7119,6 +7191,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -7200,6 +7273,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -7281,6 +7355,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -7401,6 +7476,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -7482,6 +7558,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -7603,6 +7680,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -7684,6 +7762,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -7765,6 +7844,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -7885,6 +7965,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -7966,6 +8047,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -8087,6 +8169,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -8168,6 +8251,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -8249,6 +8333,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -8369,6 +8454,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -8450,6 +8536,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -8571,6 +8658,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -8652,6 +8740,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -8733,6 +8822,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -8853,6 +8943,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -8934,6 +9025,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -9055,6 +9147,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -9136,6 +9229,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -9217,6 +9311,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -9337,6 +9432,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -9418,6 +9514,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -9539,6 +9636,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -9620,6 +9718,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -9701,6 +9800,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -9821,6 +9921,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -9902,6 +10003,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -10023,6 +10125,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -10104,6 +10207,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -10185,6 +10289,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -10305,6 +10410,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -10386,6 +10492,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -10507,6 +10614,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -10588,6 +10696,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -10669,6 +10778,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -10789,6 +10899,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -10870,6 +10981,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -10991,6 +11103,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -11072,6 +11185,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -11153,6 +11267,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -11273,6 +11388,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -11354,6 +11470,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -11475,6 +11592,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -11556,6 +11674,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -11637,6 +11756,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -11757,6 +11877,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -11838,6 +11959,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -11959,6 +12081,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -12040,6 +12163,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -12121,6 +12245,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -12241,6 +12366,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -12322,6 +12448,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -12443,6 +12570,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -12524,6 +12652,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -12605,6 +12734,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -12725,6 +12855,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -12806,6 +12937,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -12927,6 +13059,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -13008,6 +13141,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -13089,6 +13223,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -13209,6 +13344,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -13290,6 +13426,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -13411,6 +13548,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -13492,6 +13630,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -13573,6 +13712,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -13693,6 +13833,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -13774,6 +13915,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -13895,6 +14037,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -13976,6 +14119,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -14057,6 +14201,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -14177,6 +14322,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -14258,6 +14404,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -14379,6 +14526,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -14460,6 +14608,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -14541,6 +14690,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -14661,6 +14811,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -14742,6 +14893,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -14863,6 +15015,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -14944,6 +15097,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -15025,6 +15179,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -15145,6 +15300,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -15226,6 +15382,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -15347,6 +15504,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -15428,6 +15586,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -15509,6 +15668,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -15629,6 +15789,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -15710,6 +15871,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -15831,6 +15993,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -15912,6 +16075,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -15993,6 +16157,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -16113,6 +16278,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -16194,6 +16360,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -16315,6 +16482,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -16396,6 +16564,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -16477,6 +16646,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -16597,6 +16767,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -16678,6 +16849,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -16799,6 +16971,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -16880,6 +17053,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -16961,6 +17135,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -17081,6 +17256,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -17162,6 +17338,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -17283,6 +17460,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -17364,6 +17542,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -17445,6 +17624,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -17565,6 +17745,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -17646,6 +17827,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -17767,6 +17949,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -17848,6 +18031,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -17929,6 +18113,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -18049,6 +18234,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -18130,6 +18316,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -18251,6 +18438,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -18332,6 +18520,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -18413,6 +18602,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -18533,6 +18723,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -18614,6 +18805,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -18735,6 +18927,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -18816,6 +19009,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -18897,6 +19091,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -19017,6 +19212,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -19098,6 +19294,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -19219,6 +19416,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -19300,6 +19498,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -19381,6 +19580,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -19501,6 +19701,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -19582,6 +19783,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -19703,6 +19905,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -19784,6 +19987,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -19865,6 +20069,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -19985,6 +20190,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -20066,6 +20272,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -20187,6 +20394,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -20268,6 +20476,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -20349,6 +20558,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -20469,6 +20679,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -20550,6 +20761,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -20671,6 +20883,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -20752,6 +20965,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -20833,6 +21047,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -20953,6 +21168,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 16,
@@ -21034,6 +21250,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 16,
@@ -21155,6 +21372,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 16,
@@ -21236,6 +21454,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 16,
@@ -21317,6 +21536,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 16,
@@ -21437,6 +21657,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 16,
@@ -21518,6 +21739,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 16,
@@ -21639,6 +21861,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 16,
@@ -21720,6 +21943,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 16,
@@ -21801,6 +22025,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 16,
@@ -21921,6 +22146,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 20,
@@ -22002,6 +22228,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 20,
@@ -22123,6 +22350,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 20,
@@ -22204,6 +22432,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 20,
@@ -22285,6 +22514,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 20,
@@ -22405,6 +22635,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 20,
@@ -22486,6 +22717,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 20,
@@ -22607,6 +22839,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 20,
@@ -22688,6 +22921,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 20,
@@ -22769,6 +23003,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 20,
@@ -22889,6 +23124,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 20,
@@ -22970,6 +23206,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 20,
@@ -23091,6 +23328,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 20,
@@ -23172,6 +23410,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 20,
@@ -23253,6 +23492,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 20,
@@ -23373,6 +23613,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 20,
@@ -23454,6 +23695,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 20,
@@ -23575,6 +23817,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 20,
@@ -23656,6 +23899,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 20,
@@ -23737,6 +23981,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 20,
@@ -23857,6 +24102,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 20,
@@ -23938,6 +24184,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 20,
@@ -24059,6 +24306,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 20,
@@ -24140,6 +24388,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 20,
@@ -24221,6 +24470,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 20,
@@ -24341,6 +24591,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 20,
@@ -24422,6 +24673,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 20,
@@ -24543,6 +24795,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 20,
@@ -24624,6 +24877,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 20,
@@ -24705,6 +24959,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 20,
@@ -24825,6 +25080,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 20,
@@ -24906,6 +25162,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 20,
@@ -25027,6 +25284,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 20,
@@ -25108,6 +25366,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 20,
@@ -25189,6 +25448,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 20,
@@ -25309,6 +25569,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 20,
@@ -25390,6 +25651,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 20,
@@ -25511,6 +25773,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 20,
@@ -25592,6 +25855,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 20,
@@ -25673,6 +25937,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 20,
@@ -25793,6 +26058,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 20,
@@ -25874,6 +26140,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 20,
@@ -25995,6 +26262,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 20,
@@ -26076,6 +26344,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 20,
@@ -26157,6 +26426,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 20,
@@ -26277,6 +26547,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 20,
@@ -26358,6 +26629,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 20,
@@ -26479,6 +26751,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 20,
@@ -26560,6 +26833,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 20,
@@ -26641,6 +26915,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 20,
@@ -26761,6 +27036,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 20,
@@ -26842,6 +27118,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 20,
@@ -26963,6 +27240,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 20,
@@ -27044,6 +27322,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 20,
@@ -27125,6 +27404,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 20,
@@ -27245,6 +27525,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 20,
@@ -27326,6 +27607,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 20,
@@ -27447,6 +27729,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 20,
@@ -27528,6 +27811,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 20,
@@ -27609,6 +27893,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 20,
@@ -27729,6 +28014,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/none",
               "lineHeight": {
                 "value": 20,
@@ -27810,6 +28096,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/none",
               "lineHeight": {
                 "value": 20,
@@ -27931,6 +28218,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/none",
               "lineHeight": {
                 "value": 20,
@@ -28012,6 +28300,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/none",
               "lineHeight": {
                 "value": 20,
@@ -28093,6 +28382,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/none",
               "lineHeight": {
                 "value": 20,
@@ -28213,6 +28503,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/critical",
               "lineHeight": {
                 "value": 20,
@@ -28294,6 +28585,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/critical",
               "lineHeight": {
                 "value": 20,
@@ -28415,6 +28707,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/critical",
               "lineHeight": {
                 "value": 20,
@@ -28496,6 +28789,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/critical",
               "lineHeight": {
                 "value": 20,
@@ -28577,6 +28871,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/critical",
               "lineHeight": {
                 "value": 20,
@@ -28697,6 +28992,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/secondary/success",
               "lineHeight": {
                 "value": 20,
@@ -28778,6 +29074,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/plain/success",
               "lineHeight": {
                 "value": 20,
@@ -28899,6 +29196,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/primary/success",
               "lineHeight": {
                 "value": 20,
@@ -28980,6 +29278,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/tertiary/success",
               "lineHeight": {
                 "value": 20,
@@ -29061,6 +29360,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 13,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-md-font-size",
               "textFill": "imported/button/root/color/monochromePlain/success",
               "lineHeight": {
                 "value": 20,
@@ -29144,6 +29444,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "p/color-text-disabled",
               "lineHeight": {
                 "value": 16,
@@ -29225,6 +29526,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "p/color-text-disabled",
               "lineHeight": {
                 "value": 16,
@@ -29306,6 +29608,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "p/color-text-disabled",
               "lineHeight": {
                 "value": 16,
@@ -29387,6 +29690,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "p/color-text-disabled",
               "lineHeight": {
                 "value": 16,
@@ -29468,6 +29772,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "p/color-text-disabled",
               "lineHeight": {
                 "value": 16,
@@ -29591,6 +29896,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-focus-visible/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -29675,6 +29981,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-focus-visible/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -29799,6 +30106,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-focus-visible/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -29883,6 +30191,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-focus-visible/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -29967,6 +30276,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-focus-visible/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -30085,6 +30395,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-active/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -30166,6 +30477,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-active/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -30260,6 +30572,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-active/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -30341,6 +30654,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-active/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -30422,6 +30736,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-active/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -30542,6 +30857,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-hover/secondary/none",
               "lineHeight": {
                 "value": 16,
@@ -30623,6 +30939,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-hover/plain/none",
               "lineHeight": {
                 "value": 16,
@@ -30744,6 +31061,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-hover/primary/none",
               "lineHeight": {
                 "value": 16,
@@ -30825,6 +31143,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-hover/tertiary/none",
               "lineHeight": {
                 "value": 16,
@@ -30906,6 +31225,7 @@ const COMPONENTS = [
               "characters": "Button",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "p/text-body-sm-font-size",
               "textFill": "imported/button/root/color-state-hover/monochromePlain/none",
               "lineHeight": {
                 "value": 16,
@@ -31509,6 +31829,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

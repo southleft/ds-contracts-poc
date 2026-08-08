@@ -91,6 +91,7 @@ const COMPONENTS = [
                       "characters": "A new software update is available.",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
+                      "fontSizeVar": "text-label-size",
                       "textFill": "color-text-primary",
                       "lineHeight": {
                         "value": 142.86,
@@ -104,6 +105,7 @@ const COMPONENTS = [
                       "characters": "See what changed in this version.",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "text-supporting-size",
                       "textFill": "color-text-secondary",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -188,6 +190,7 @@ const COMPONENTS = [
                       "characters": "A new software update is available.",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
+                      "fontSizeVar": "text-label-size",
                       "textFill": "color-text-primary",
                       "lineHeight": {
                         "value": 142.86,
@@ -201,6 +204,7 @@ const COMPONENTS = [
                       "characters": "See what changed in this version.",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "text-supporting-size",
                       "textFill": "color-text-secondary",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -285,6 +289,7 @@ const COMPONENTS = [
                       "characters": "A new software update is available.",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
+                      "fontSizeVar": "text-label-size",
                       "textFill": "color-text-primary",
                       "lineHeight": {
                         "value": 142.86,
@@ -298,6 +303,7 @@ const COMPONENTS = [
                       "characters": "See what changed in this version.",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "text-supporting-size",
                       "textFill": "color-text-secondary",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -382,6 +388,7 @@ const COMPONENTS = [
                       "characters": "A new software update is available.",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
+                      "fontSizeVar": "text-label-size",
                       "textFill": "color-text-primary",
                       "lineHeight": {
                         "value": 142.86,
@@ -395,6 +402,7 @@ const COMPONENTS = [
                       "characters": "See what changed in this version.",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "text-supporting-size",
                       "textFill": "color-text-secondary",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -479,6 +487,7 @@ const COMPONENTS = [
                       "characters": "A new software update is available.",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
+                      "fontSizeVar": "text-label-size",
                       "textFill": "color-text-primary",
                       "lineHeight": {
                         "value": 142.86,
@@ -492,6 +501,7 @@ const COMPONENTS = [
                       "characters": "See what changed in this version.",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "text-supporting-size",
                       "textFill": "color-text-secondary",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -576,6 +586,7 @@ const COMPONENTS = [
                       "characters": "A new software update is available.",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
+                      "fontSizeVar": "text-label-size",
                       "textFill": "color-text-primary",
                       "lineHeight": {
                         "value": 142.86,
@@ -589,6 +600,7 @@ const COMPONENTS = [
                       "characters": "See what changed in this version.",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "text-supporting-size",
                       "textFill": "color-text-secondary",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -673,6 +685,7 @@ const COMPONENTS = [
                       "characters": "A new software update is available.",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
+                      "fontSizeVar": "text-label-size",
                       "textFill": "color-text-primary",
                       "lineHeight": {
                         "value": 142.86,
@@ -686,6 +699,7 @@ const COMPONENTS = [
                       "characters": "See what changed in this version.",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "text-supporting-size",
                       "textFill": "color-text-secondary",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -770,6 +784,7 @@ const COMPONENTS = [
                       "characters": "A new software update is available.",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
+                      "fontSizeVar": "text-label-size",
                       "textFill": "color-text-primary",
                       "lineHeight": {
                         "value": 142.86,
@@ -783,6 +798,7 @@ const COMPONENTS = [
                       "characters": "See what changed in this version.",
                       "fontSize": 12,
                       "fontStyle": "Regular",
+                      "fontSizeVar": "text-supporting-size",
                       "textFill": "color-text-secondary",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -1271,6 +1287,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {

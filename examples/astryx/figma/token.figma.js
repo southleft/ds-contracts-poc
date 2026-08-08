@@ -51,6 +51,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-primary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -89,6 +90,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-red",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -127,6 +129,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-orange",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -165,6 +168,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-yellow",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -203,6 +207,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-green",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -241,6 +246,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-teal",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -279,6 +285,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-cyan",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -317,6 +324,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-blue",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -355,6 +363,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-purple",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -393,6 +402,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-pink",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -431,6 +441,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 10,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-xs",
               "textFill": "color-text-gray",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -469,6 +480,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-primary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -507,6 +519,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-red",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -545,6 +558,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-orange",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -583,6 +597,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-yellow",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -621,6 +636,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-green",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -659,6 +675,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-teal",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -697,6 +714,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-cyan",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -735,6 +753,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-blue",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -773,6 +792,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-purple",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -811,6 +831,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-pink",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -849,6 +870,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 8,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-gray",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -887,6 +909,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-primary",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -925,6 +948,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-red",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -963,6 +987,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-orange",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -1001,6 +1026,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-yellow",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -1039,6 +1065,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-green",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -1077,6 +1104,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-teal",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -1115,6 +1143,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-cyan",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -1153,6 +1182,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-blue",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -1191,6 +1221,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-purple",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -1229,6 +1260,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-pink",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -1267,6 +1299,7 @@ const COMPONENTS = [
               "characters": "Tag",
               "fontSize": 12,
               "fontStyle": "Medium",
+              "fontSizeVar": "font-size-sm",
               "textFill": "color-text-gray",
               "fontFamily": "-apple-system",
               "contentProp": "Label"
@@ -1701,6 +1734,12 @@ async function buildNode(spec, registry) {
           '": ' + (e && e.message ? e.message : String(e)),
         );
       }
+    } else if (spec.fontSizeVar) {
+      // FC-WEIGHT-IDENTITY: no style could carry this node's size token (it
+      // overrides its group's weight, and Figma clears textStyleId on any
+      // fontName write), so the SIZE VARIABLE carries the identity instead.
+      // Bound AFTER fontName/fontSize so the literal stays the fallback.
+      node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
