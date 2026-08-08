@@ -1,0 +1,37 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.drawer",
+  "name": "Drawer",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — variant temporary|permanent; open pinned via fixedProps; portalCapture. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": ["temporary", "permanent"]
+      },
+      "default": "temporary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "temporary": "Temporary",
+            "permanent": "Permanent"
+          }
+        },
+        "code": { "prop": "variant" }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": { "root": {} },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@mui/material", "export": "Drawer" }
+  }
+}

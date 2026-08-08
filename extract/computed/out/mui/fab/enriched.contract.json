@@ -1,0 +1,220 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.fab",
+  "name": "Fab",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI Wave 5 denominator round — Fab ONLY (not SpeedDial). Bounded size × color cartesian (3×3); variant pinned circular; disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "default",
+          "primary",
+          "secondary"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "default": "Default",
+            "primary": "Primary",
+            "secondary": "Secondary"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "+",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "hover",
+    "focus-visible",
+    "active"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "content": {
+        "prop": "children"
+      },
+      "declared": {
+        "appearance": "none",
+        "border-bottom-style": "none",
+        "border-left-style": "none",
+        "border-right-style": "none",
+        "border-top-style": "none",
+        "cursor": "pointer",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "position": "relative",
+        "text-transform": "uppercase",
+        "transition-delay": "0s, 0s, 0s",
+        "transition-duration": "0.25s, 0.25s, 0.25s",
+        "transition-property": "background-color, box-shadow, border-color",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)",
+        "user-select": "none"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "default",
+          "pointer-events": "none"
+        }
+      },
+      "tokens": {
+        "border-bottom-width": "{imported.shared.size-0}",
+        "border-left-width": "{imported.shared.size-0}",
+        "border-right-width": "{imported.shared.size-0}",
+        "border-top-width": "{imported.shared.size-0}",
+        "bottom": "{imported.shared.size-0}",
+        "box-shadow": "{imported.fab.root.box-shadow}",
+        "font-size": "{imported.fab.root.font-size}",
+        "font-weight": "{imported.fab.root.font-weight}",
+        "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.fab.root.letter-spacing}",
+        "line-height": "{imported.fab.root.line-height}",
+        "min-height": "{imported.fab.root.min-height}",
+        "min-width": "{imported.shared.size-0}",
+        "outline-width": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.shared.size-0}",
+        "padding-left": "{imported.shared.size-0}",
+        "padding-right": "{imported.shared.size-0}",
+        "padding-top": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "z-index": "{imported.fab.root.z-index}"
+      },
+      "states": {
+        "active": {
+          "background-color": "{imported.fab.root.background-color-state-active.{color}}",
+          "box-shadow": "{imported.fab.root.box-shadow-state-active}"
+        },
+        "disabled": {
+          "background-color": "{imported.fab.root.background-color-state-disabled}",
+          "box-shadow": "{imported.fab.root.box-shadow-state-disabled}",
+          "color": "{imported.fab.root.color-state-disabled}"
+        },
+        "hover": {
+          "background-color": "{imported.fab.root.background-color-state-hover.{color}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "default": {
+              "background-color": "{imported.fab.root.background-color.default}",
+              "color": "{imported.fab.root.color.default}"
+            },
+            "primary": {
+              "background-color": "{imported.fab.root.background-color.primary}",
+              "color": "{imported.fab.root.color.primary}"
+            },
+            "secondary": {
+              "background-color": "{imported.fab.root.background-color.secondary}",
+              "color": "{imported.fab.root.color.secondary}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "border-bottom-left-radius": "{imported.fab.root.border-bottom-left-radius.large}",
+              "border-bottom-right-radius": "{imported.fab.root.border-bottom-right-radius.large}",
+              "border-top-left-radius": "{imported.fab.root.border-top-left-radius.large}",
+              "border-top-right-radius": "{imported.fab.root.border-top-right-radius.large}"
+            },
+            "medium": {
+              "border-bottom-left-radius": "{imported.fab.root.border-bottom-left-radius.medium}",
+              "border-bottom-right-radius": "{imported.fab.root.border-bottom-right-radius.medium}",
+              "border-top-left-radius": "{imported.fab.root.border-top-left-radius.medium}",
+              "border-top-right-radius": "{imported.fab.root.border-top-right-radius.medium}"
+            },
+            "small": {
+              "border-bottom-left-radius": "{imported.fab.root.border-bottom-left-radius.small}",
+              "border-bottom-right-radius": "{imported.fab.root.border-bottom-right-radius.small}",
+              "border-top-left-radius": "{imported.fab.root.border-top-left-radius.small}",
+              "border-top-right-radius": "{imported.fab.root.border-top-right-radius.small}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Fab"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "componentId": "mui.checkbox",
+  "stem": "checkbox",
+  "status": "in-pilot",
+  "authoredFrom": [
+    "examples/mui/PROVENANCE.md",
+    "examples/mui/oracle/EXPECTED.md",
+    "accuracy/grammar.json"
+  ],
+  "facts": [
+    {
+      "channel": "variant-space",
+      "expect": "CARRIED",
+      "expectWhere": "Structured axes/tuples when present; exact mode REFUSED with EXACT_* on ragged/ambiguous — no silent invention"
+    },
+    {
+      "channel": "anatomy",
+      "expect": "CARRIED",
+      "expectWhere": "Drawable substance required; hollow parts REFUSED as drawable-empty on apply/bundle"
+    }
+  ]
+}

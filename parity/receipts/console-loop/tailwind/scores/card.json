@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 25.921209033791815,
+    "pctAAUnmasked": 8.014943114280863,
+    "pctAAMasked": 8.014943114280863,
+    "maskCoveragePct": 0,
+    "canvasPx": "151x78",
+    "realPx": "146x70",
+    "inkCanvasPct": 14.807267787400239,
+    "inkRealPct": 13.143148242485992
+  },
+  "reference": "parity/receipts/console-loop/tailwind/refs/card.png",
+  "referenceSha256": "3f11af975ec5bad9561586a9514e2c17affbfad73b20a61aeaa157ae285d6cf4",
+  "canvasShot": "parity/receipts/console-loop/tailwind/shots/card-cell.png",
+  "canvasShotSha256": "2966878bef62b848411f7eb095e101fc180a2c5706690d607af25414ace59ebd",
+  "diff": "parity/receipts/console-loop/tailwind/scores/card.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/tailwind/components/card.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.1142857142857143,
+  "inkDelta": 1.6641195449142465,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=8.01 > 5)",
+  "recordedAt": "2026-08-08T04:31:22.477Z"
+}

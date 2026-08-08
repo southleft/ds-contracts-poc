@@ -56,7 +56,22 @@ export const TokenRefSchema = z
   .regex(
     /^\{[a-z0-9.{}-]+\}$/i,
     'Token reference must be brace-wrapped, e.g. "{color.action.primary.background}"',
-  );
+  )
+  // B.16 (docs/23) — THE DEFAULTLESS-AXIS WALL, named. The regex above
+  // already forbids "_", but its brace-wrap message never said so: a capture
+  // config whose `enumeration.unsetLabel` was the old drafter default
+  // "__unset" minted that string into every defaultless-axis token path and
+  // fusion died with ~40 "must be brace-wrapped" errors, none mentioning the
+  // underscore. This refine adds the actual rule BY NAME whenever an
+  // underscore-bearing ref is refused; it rejects nothing the regex did not
+  // already reject.
+  .refine((v) => !v.includes("_"), {
+    message:
+      'token refs may not contain underscores (path grammar: letters, digits, ".", "-"); ' +
+      'if this is the "__unset" defaultless-axis sentinel, the axis needs a reviewed default ' +
+      'in the capture config — set enumeration.unsetLabel to a token-ref-legal label ' +
+      '(e.g. "unset") and pin the axis in baseCombo',
+  });
 
 const EnumTypeSchema = z.strictObject({
   enum: z.array(z.string()).min(1),
@@ -350,13 +365,16 @@ const kw = (...words: string[]) => new RegExp(`^(${words.join("|")})$`);
 export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
   // -- absolute-position round (MUI Slider/Switch): overlay-anatomy facts ---
   transform: {
-    // IDENTITY-TRANSLATE matrices only — matrix(1, 0, 0, 1, tx, ty), the
-    // shape Chromium computes for translate()/translate(-50%,-50%) on a
-    // sized box. Scales/rotations/skews stay outside the grammar (named
-    // residue) — the canvas lowering folds tx/ty into absolute offsets.
-    value: /^matrix\(1, 0, 0, 1, -?[\d.]+, -?[\d.]+\)$/,
+    // Identity-translate matrices — matrix(1, 0, 0, 1, tx, ty), the shape
+    // Chromium computes for translate()/translate(-50%,-50%) on a sized
+    // box — fold tx/ty into absolute offsets.
+    // FC-SVG-ROTATION: also `rotate(<n>deg)` (CSS-clockwise) for icon parts
+    // whose capture path orientation differs from the developed receipt
+    // (Polaris Spinner gap 12 o'clock → 3 o'clock). Scales/skews stay
+    // outside the grammar (named residue).
+    value: /^(?:matrix\(1, 0, 0, 1, -?[\d.]+, -?[\d.]+\)$|rotate\(-?[\d.]+deg\))$/,
     canvas: "draw",
-    note: "Identity-translate transform on an absolute part — folded into the canvas absolute offsets (tx/ty).",
+    note: "Identity-translate (absolute offset fold) or rotate(<n>deg) for icon/shape orientation (FC-SVG-ROTATION).",
   },
   // PSEUDO-DECOR v2 ROUND: the INDEPENDENT `translate` longhand — what
   // Tailwind v4's translate-x-full actually compiles to (the toggle knob),
@@ -1648,6 +1666,37 @@ export function isNativeCheckablePart(part: Part): boolean {
     (part.attrs?.type === "checkbox" || part.attrs?.type === "radio")
   );
 }
+
+/** HTML VOID elements — no closing tag, no children, EVER. React refuses
+ *  children inside one at MOUNT, at runtime ("<input> is a void element tag
+ *  and must neither have children nor use dangerouslySetInnerHTML"), so a
+ *  contract that mounts anatomy children inside a void element renders
+ *  NOTHING and no build step ever says why (Eventz field case, 2026-08:
+ *  Atoms/Checkbox and Atoms/Input inferred `semantics.element: "input"` over
+ *  drawn children — every one of their 10 default-plane fidelity rows painted
+ *  nothing). ONE shared spelling so both ends of the pipe agree:
+ *    · validateContract (core/emit-react.ts) refuses the shape BY NAME on
+ *      every emit surface (react / html / react-inline / figma-script);
+ *    · proposeFromDump (core/propose-figma.ts) demotes a void element
+ *      inference to a container root with a REVIEW note, so a proposal can
+ *      never carry the shape the emitters refuse.
+ *  A void element with NO mounted children stays legal — that is
+ *  ds.divider's <hr> exactly. */
+export const VOID_ELEMENTS: ReadonlySet<string> = new Set([
+  "area",
+  "base",
+  "br",
+  "col",
+  "embed",
+  "hr",
+  "img",
+  "input",
+  "link",
+  "meta",
+  "source",
+  "track",
+  "wbr",
+]);
 
 // ---------------------------------------------------------------------------
 // Shared composition helpers (used by both generators and the differ)

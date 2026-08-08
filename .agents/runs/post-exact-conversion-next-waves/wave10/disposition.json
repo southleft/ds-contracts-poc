@@ -1,0 +1,29 @@
+{
+  "wave": 10,
+  "name": "v1-release-gates",
+  "disposition": "READY-with-human-gate",
+  "updated": "2026-08-05T20:45:00Z",
+  "automation": {
+    "eval": "190/190",
+    "docsCheck": "pass",
+    "v1DefinitionCheck": "pass",
+    "ciLaneFast": "pass",
+    "ciLaneFull": "pass",
+    "ciLaneCatalogVisual": "pass",
+    "liveFigmaEvidence": "pass — GnQnjSNBXtgtd2Ht0Hs1C8 baseline v6:3552508208 → edit → restore",
+    "humanGatesInventory": "pass — 7 human rows still open",
+    "pr": "https://github.com/southleft/ds-contracts-poc/pull/13",
+    "fullLaneUnblocks": "MCP legacy defs-without-tuples; plugin UI asymmetry; dagger 70→87 — 2026-08-06",
+    "daggerCensus": "87 across 8 corpora (mui 31)",
+    "auditLedger": "wave10/AUDIT-LEDGER.md"
+  },
+  "humanGatesOpen": [
+    "PILOT-ACCEPTANCE (Wave 6)",
+    "Wave 8 team drift confirmation",
+    "security owner secret-scan disposition",
+    "publish/deploy approvals",
+    "Wave 11-C second implementation",
+    "Phase 4"
+  ],
+  "next": "HUMAN-HANDOFF.md — Candidate waits on named second impl; keep RELEASE_CHECKLIST human rows open"
+}

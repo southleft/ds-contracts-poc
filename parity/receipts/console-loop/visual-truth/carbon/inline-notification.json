@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "carbon",
+  "stem": "inline-notification",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/carbon/components/inline-notification.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385245229284424737",
+  "setNodeId": "60:10344",
+  "cellNodeId": "60:10198",
+  "cellName": "Kind=Error, Contrast=High",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 31.264602803738317,
+    "pctAAUnmasked": 25.31152647975078,
+    "pctAAMasked": 25.31152647975078,
+    "maskCoveragePct": 0,
+    "canvasPx": "346x48",
+    "realPx": "428x48",
+    "inkCanvasPct": 79.63882398753894,
+    "inkRealPct": 97.3666277258567
+  },
+  "reference": "extract/computed/out/carbon/inlinenotification/gate-shots/error.high__default.png",
+  "referenceSha256": "5177b3aaee01c0673478a665ed6ee0b4a56eccb307feb16a370b599eeaf11bcd",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/carbon/shots/inline-notification.png",
+  "canvasShotSha256": "af5ca212c823b5b224891291c4996761c42c7aaa8d80e422e81a4769c5f39f76",
+  "diff": "parity/receipts/console-loop/visual-truth/carbon/diffs/inline-notification.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.2369942196531791,
+  "inkDelta": 17.72780373831776,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=25.31 > 5)"
+}

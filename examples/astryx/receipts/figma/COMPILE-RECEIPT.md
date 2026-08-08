@@ -1,8 +1,11 @@
 # Astryx dev-journey — Figma sync-script compile receipt
 
 Genesis prep. `ds-contracts figma examples/astryx/contracts --out
-examples/astryx/figma --tokens examples/astryx/tokens/astryx.dtcg.json` emits
-one Figma Plugin API sync script per flagship contract. A future bridge run
+examples/astryx/figma --icons examples/astryx/assets/icons --tokens
+examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json`
+emits one Figma Plugin API sync script per flagship contract (`--icons`
+since the exact-conversion wave promoted banner's four status glyphs as real
+assets; the freshness gate re-emits with this same command). A future bridge run
 builds these into a **blank Figma file** = the FIRST Astryx Figma library
 (Astryx ships no official kit as of 0.1.6 — see ../../PROVENANCE.md). No live
 canvas is driven here (owner + bridge later).
@@ -28,7 +31,7 @@ Each script is proven two ways, the repo's own patterns:
 > creates these; this receipt seeds them directly). Wiring a literal-token
 > `buildTokensScript` path is a follow-up, not this round.
 
-## 13 scripts · 107 component-set variants compiled
+## 13 scripts · 109 component-set variants compiled
 
 | script | set | variants | axes | headless run |
 |---|---|---|---|---|
@@ -41,9 +44,9 @@ Each script is proven two ways, the repo's own patterns:
 | `dropdown-menu.figma.js` | `DropdownMenu` | 1 | standalone multi-root | ✓ composed pass |
 | `progress-bar.figma.js` | `ProgressBar` | 5 | variant(5) | ✓ ran |
 | `slider.figma.js` | `Slider` | 6 | orientation(2)×valueDisplay(3) | ✓ ran |
-| `switch.figma.js` | `Switch` | 2 | labelPosition(2) | ✓ ran |
+| `switch.figma.js` | `Switch` | 4 | value(2)×labelPosition(2) | ✓ ran |
 | `text-input.figma.js` | `TextInput` | 9 | type(3)×size(3) | ✓ ran |
 | `toast.figma.js` | `Toast` | 1 | standalone | ✓ composed pass |
 | `token.figma.js` | `Token` | 33 | size(3)×color(11) | ✓ ran |
 
-Total: **107 variants across 13 component sets.**
+Total: **109 variants across 13 component sets.**

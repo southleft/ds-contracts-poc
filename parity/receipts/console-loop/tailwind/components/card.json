@@ -1,0 +1,149 @@
+{
+ "version": 1,
+ "kind": "console-loop-tailwind-component",
+ "status": "completed",
+ "component": "card",
+ "contract": "examples/tailwind/contracts/card.contract.json",
+ "script": "examples/tailwind/figma/card.figma.js",
+ "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+ "recordedAt": "2026-08-06T05:42:58.099Z",
+ "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+ "generate": {
+  "ok": true,
+  "nodeId": "1:2267",
+  "mode": "generated",
+  "page": "Card (flowbite.card)",
+  "sectionId": "1:2270",
+  "contractId": "flowbite.card",
+  "result": {
+   "createdNodeIds": [
+    "1:2267"
+   ],
+   "results": [
+    {
+     "name": "Card",
+     "contractId": "flowbite.card",
+     "nodeId": "1:2267",
+     "key": "630d4b6b5841a7cb718c57c1c4c53eeaf55487fa",
+     "variants": 1,
+     "properties": [
+      "Content#1:765"
+     ]
+    }
+   ]
+  }
+ },
+ "visual": {
+  "ok": false,
+  "matchDeveloped": false,
+  "reviewedAt": "2026-08-06T13:32:20.271Z",
+  "notes": [
+   "FC-FONT-SUBSTRATE update 2026-08-08: the harness now supports per-library @font-face loading (extract/computed cfg.fonts — altitude converted with it: chip 0.67 / link 2.01). Tailwind/Flowbite stays UNCONFIGURED by name: the library ships no webfont — its stack IS the platform system stack (-apple-system, Segoe UI, Roboto, ...), so there is no library-true font file to commit, and the canvas renders Inter (Figma fallback for an unloadable system family). Pinning Inter into the reference would be a guessed face (requires __review:fonts ack) and no Inter woff2 exists in any committed/sandboxed source — network fetch at render/check time is forbidden. Still fail-closed on the same cause, now named precisely."
+  ],
+  "defects": [
+   "Not a COMPONENT_SET; border/shadow aesthetic not match to Flowbite card pairs — fail closed.",
+   "FC-FONT-SUBSTRATE: gate-shot reference renders the CSS fallback font (computed-extract harness loads no webfont), so glyph-dominated diffs cannot converge below the 5% bar; pctAAMasked 8.01; plus ~5px stage delta (151x78 vs 146x70)."
+  ],
+  "reference": "parity/receipts/console-loop/tailwind/refs/card.png",
+  "reviewSurface": "cream-#F8F4ED-component-set",
+  "referenceSource": "extract/computed/out/tailwind/card/gate-shots/__default.png",
+  "scorecard": "parity/receipts/console-loop/tailwind/scores/card.json",
+  "status": "fail-closed",
+  "revoked": {
+   "at": "2026-08-08T04:31:03.484Z",
+   "was": {
+    "ok": false,
+    "matchDeveloped": true,
+    "matchDevelopedReason": "near-pass AA=8.01 compositionOk (cropped gate ref)",
+    "matchedAt": "2026-08-08T03:11:12.916Z"
+   },
+   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=8.01, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+  }
+ },
+ "fingerprint": {
+  "v6": "v6:3067143140",
+  "lineCount": 29,
+  "sampleLines": [
+   ":COMPONENT/Card (flowbite.card)|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/card/root/background-color\"}}}]",
+   ":COMPONENT/Card (flowbite.card)|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"imported/shared/color-e5e7eb\"}}}] w1",
+   ":COMPONENT/Card (flowbite.card)|radius|8,8,8,8",
+   ":COMPONENT/Card (flowbite.card)|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+   ":COMPONENT/Card (flowbite.card)|sizing|HUG/HUG AUTO",
+   ":COMPONENT/Card (flowbite.card)|effects|6",
+   ":COMPONENT/Card (flowbite.card)|bound:bottomLeftRadius|imported/shared/size-8",
+   ":COMPONENT/Card (flowbite.card)|bound:bottomRightRadius|imported/shared/size-8",
+   ":COMPONENT/Card (flowbite.card)|bound:strokeBottomWeight|imported/shared/size-1",
+   ":COMPONENT/Card (flowbite.card)|bound:strokeLeftWeight|imported/shared/size-1",
+   ":COMPONENT/Card (flowbite.card)|bound:strokeRightWeight|imported/shared/size-1",
+   ":COMPONENT/Card (flowbite.card)|bound:strokeTopWeight|imported/shared/size-1",
+   ":COMPONENT/Card (flowbite.card)|bound:topLeftRadius|imported/shared/size-8",
+   ":COMPONENT/Card (flowbite.card)|bound:topRightRadius|imported/shared/size-8",
+   ":COMPONENT/Card (flowbite.card)|description|Card â generated from contract flowbite.card v0.2.0 â",
+   ":COMPONENT/Card (flowbite.card)|propdef|Content#1:765:TEXT=Card content",
+   "/0:FRAME/label|fill|[]",
+   "/0:FRAME/label|radius|0,0,0,0",
+   "/0:FRAME/label|layout|VERTICAL CENTER/MIN gap 16 pad 24,24,24,24",
+   "/0:FRAME/label|sizing|HUG/HUG AUTO"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [
+   "canvas-absent: no State axis (contract has empty/absent states)"
+  ],
+  "matchedAxes": [
+   "TEXT Content",
+   "first-variant fill bound: imported/card/root/background-color"
+  ],
+  "observed": {
+   "type": "COMPONENT",
+   "variantNames": [
+    "Card (flowbite.card)"
+   ],
+   "propDefs": [
+    {
+     "name": "Content#1:765",
+     "type": "TEXT",
+     "defaultValue": "Card content",
+     "variantOptions": null
+    }
+   ],
+   "firstRoot": {
+    "name": "Card (flowbite.card)",
+    "type": "COMPONENT",
+    "layoutMode": "VERTICAL",
+    "padding": {
+     "t": 0,
+     "r": 0,
+     "b": 0,
+     "l": 0
+    },
+    "radius": 8,
+    "fillVarName": "imported/card/root/background-color",
+    "padBound": {
+     "topLeftRadius": "imported/shared/size-8",
+     "topRightRadius": "imported/shared/size-8",
+     "bottomLeftRadius": "imported/shared/size-8",
+     "bottomRightRadius": "imported/shared/size-8",
+     "strokeTopWeight": "imported/shared/size-1",
+     "strokeBottomWeight": "imported/shared/size-1",
+     "strokeLeftWeight": "imported/shared/size-1",
+     "strokeRightWeight": "imported/shared/size-1",
+     "fills": "imported/card/root/background-color",
+     "strokes": "imported/shared/color-e5e7eb"
+    },
+    "w": 149,
+    "h": 74,
+    "childTypes": [
+     "FRAME/label"
+    ]
+   }
+  }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": false
+ }
+}

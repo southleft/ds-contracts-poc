@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "polaris",
+  "stem": "button",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/polaris/components/button.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:10006",
+  "cellNodeId": "14:1396",
+  "cellName": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 94.19642857142857,
+    "pctAAUnmasked": 77.82738095238095,
+    "pctAAMasked": 77.82738095238095,
+    "maskCoveragePct": 0,
+    "canvasPx": "63x21",
+    "realPx": "63x32",
+    "inkCanvasPct": 14.285714285714285,
+    "inkRealPct": 92.7579365079365
+  },
+  "reference": "parity/receipts/console-loop/polaris/refs/button.png",
+  "referenceSha256": "431c74133e7af7c0680fbffc9fc226aeeac9f8ed745866fed7ad76e41fe582e3",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/polaris/shots/button.png",
+  "canvasShotSha256": "42a6d88fc62b9c26cdf4fc1b014a8ccde9fc81eeafbad89dda8ae8c972ba4bef",
+  "diff": "parity/receipts/console-loop/visual-truth/polaris/diffs/button.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.5238095238095237,
+  "inkDelta": 78.47222222222223,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.52, inkDelta=78.5)"
+}

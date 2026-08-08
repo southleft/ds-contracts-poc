@@ -1,0 +1,241 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "color-0000001f": {
+          "$value": "#0000001f",
+          "$type": "color"
+        }
+      },
+      "divider": {
+        "root": {
+          "border-bottom-width": {
+            "$value": "1px",
+            "$type": "dimension"
+          },
+          "color": {
+            "$value": "#808080",
+            "$type": "color"
+          },
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "margin-left": {
+            "fullWidth": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "inset": {
+              "$value": "72px",
+              "$type": "dimension"
+            },
+            "middle": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "fullWidth": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "inset": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "middle": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "min-height": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "min-width": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "width": {
+            "fullWidth": {
+              "$value": "288px",
+              "$type": "dimension"
+            },
+            "inset": {
+              "$value": "216px",
+              "$type": "dimension"
+            },
+            "middle": {
+              "$value": "256px",
+              "$type": "dimension"
+            }
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <hr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <hr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "isolate",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [
+    "root-signature-varies: inset__default: hr|Divider-fullWidth.Divider-root → hr|Divider-inset.Divider-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inset__hover: hr|Divider-fullWidth.Divider-root → hr|Divider-inset.Divider-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inset__focus-visible: hr|Divider-fullWidth.Divider-root → hr|Divider-inset.Divider-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inset__active: hr|Divider-fullWidth.Divider-root → hr|Divider-inset.Divider-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle__default: hr|Divider-fullWidth.Divider-root → hr|Divider-middle.Divider-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle__hover: hr|Divider-fullWidth.Divider-root → hr|Divider-middle.Divider-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle__focus-visible: hr|Divider-fullWidth.Divider-root → hr|Divider-middle.Divider-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle__active: hr|Divider-fullWidth.Divider-root → hr|Divider-middle.Divider-root (element-varies receipt; root always aligns)",
+    "signature-drift: inset__default root: hr|Divider-fullWidth.Divider-root → hr|Divider-inset.Divider-root",
+    "signature-drift: inset__hover root: hr|Divider-fullWidth.Divider-root → hr|Divider-inset.Divider-root",
+    "signature-drift: inset__focus-visible root: hr|Divider-fullWidth.Divider-root → hr|Divider-inset.Divider-root",
+    "signature-drift: inset__active root: hr|Divider-fullWidth.Divider-root → hr|Divider-inset.Divider-root",
+    "signature-drift: middle__default root: hr|Divider-fullWidth.Divider-root → hr|Divider-middle.Divider-root",
+    "signature-drift: middle__hover root: hr|Divider-fullWidth.Divider-root → hr|Divider-middle.Divider-root",
+    "signature-drift: middle__focus-visible root: hr|Divider-fullWidth.Divider-root → hr|Divider-middle.Divider-root",
+    "signature-drift: middle__active root: hr|Divider-fullWidth.Divider-root → hr|Divider-middle.Divider-root"
+  ],
+  "styledChannelReceipts": [
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "control-fallback: no control for <hr> — span control used (part root)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [],
+    "receipts": [],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

@@ -1,3 +1,8 @@
+import {
+  diffChannelLines,
+  toSnapshotChanges,
+} from "../core/channel-diff.js";
+
 /**
  * THE CANVAS-VARIANT SURFACE OF THE DIFFER — the Phase 1 exit criterion's
  * machinery, shared by `parity/diff.ts` and `parity/variant-drift-check.ts`.
@@ -128,39 +133,11 @@ export interface SnapshotChange {
  *  collided every fact on a node, so only the last one was ever compared and
  *  fill/description/propdef edits all vanished. */
 export function diffSnapshots(storedLines: string[], freshLines: string[]): SnapshotChange[] {
-  const inA = new Set(storedLines);
-  const inB = new Set(freshLines);
-  const removed = storedLines.filter((l) => !inB.has(l));
-  const added = freshLines.filter((l) => !inA.has(l));
-  const prefixOf = (l: string) => {
-    const i = l.indexOf('|');
-    const j = l.indexOf('|', i + 1);
-    return j > 0 ? l.slice(0, j) : l;
-  };
-  const valOf = (l: string) => l.slice(prefixOf(l).length + 1);
-  const remByPrefix = new Map<string, string[]>();
-  for (const l of removed) {
-    const k = prefixOf(l);
-    const bucket = remByPrefix.get(k);
-    if (bucket) bucket.push(l);
-    else remByPrefix.set(k, [l]);
-  }
-  const out: SnapshotChange[] = [];
-  const usedRem = new Set<string>();
-  for (const l of added) {
-    const k = prefixOf(l);
-    const candidates = (remByPrefix.get(k) ?? []).filter((r) => !usedRem.has(r));
-    if (candidates.length === 1) {
-      usedRem.add(candidates[0]);
-      out.push({ what: k, was: valOf(candidates[0]), now: valOf(l) });
-    } else {
-      out.push({ what: k, was: '(absent)', now: valOf(l) });
-    }
-  }
-  for (const l of removed) {
-    if (!usedRem.has(l)) out.push({ what: prefixOf(l), was: valOf(l), now: '(removed)' });
-  }
-  return out;
+  // Shared Wave 3 pairing vocabulary (`core/channel-diff.ts`). Plugin ES5
+  // twin in code.js stays gate-pinned separately.
+  return toSnapshotChanges(
+    diffChannelLines(storedLines, freshLines, { whatIsPrefix: true }),
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -196,7 +173,12 @@ export interface MockCanvas {
 export async function compileMockCanvas(contractsDir: string): Promise<MockCanvas> {
   const bundle = await buildEngineBundle();
   const { figma, root } = createFigmaMock();
-  const sandbox: Record<string, unknown> = { window: {}, console: { log() {}, warn() {}, error() {} } };
+  const sandbox: Record<string, unknown> = {
+    window: {},
+    TextEncoder,
+    TextDecoder,
+    console: { log() {}, warn() {}, error() {} },
+  };
   vm.createContext(sandbox);
   vm.runInContext(bundle.code, sandbox, { timeout: 120_000 });
   const DSC = (sandbox.window as { DSC?: Record<string, Function> }).DSC;

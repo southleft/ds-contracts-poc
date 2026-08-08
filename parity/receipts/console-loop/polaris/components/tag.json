@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "tag",
+  "contract": "examples/polaris/contracts/tag.contract.json",
+  "script": "examples/polaris/figma/tag.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:34.491Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:10192",
+    "mode": "amended",
+    "page": "Tag (polaris.tag)",
+    "sectionId": "1:10195",
+    "contractId": "polaris.tag",
+    "result": {
+      "createdNodeIds": [
+        "1:10192"
+      ],
+      "results": [
+        {
+          "name": "Tag",
+          "contractId": "polaris.tag",
+          "nodeId": "1:10192",
+          "key": "ef609c266672f2efbf0668e3157e321b8bd729c5",
+          "variants": 8,
+          "properties": [
+            "Disabled#1:2368",
+            "Show Removable#1:2377",
+            "Show Clickable#1:2386",
+            "Show Linked#1:2395",
+            "Accessibility Label#1:2404",
+            "Url#1:2413",
+            "Content#1:2422",
+            "Size",
+            "State"
+          ],
+          "wiredReactions": 2
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-07T16:55:11.994Z",
+    "notes": [
+      "Re-synced n=19 total=110813; amended rebuiltVariants=8. Heavy focus/active borders persist. matchDeveloped left false."
+    ],
+    "defects": [
+      "Active/focus heavy borders atypical of Polaris Tag; size geometry inconsistent with developed tag receipt."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/tag.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "examples/polaris/generated/html/tag.html#first-item-inline-css",
+    "scorecard": "parity/receipts/console-loop/polaris/scores/tag.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "agent AA=9.72 compositionOk vs emit-html first-item",
+        "matchedAt": "2026-08-08T03:21:50.447Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=9.72, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:2986545534",
+    "lineCount": 583,
+    "sampleLines": [
+      ":COMPONENT_SET/Tag (polaris.tag)|fill|[]",
+      ":COMPONENT_SET/Tag (polaris.tag)|radius|5,5,5,5",
+      ":COMPONENT_SET/Tag (polaris.tag)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Tag (polaris.tag)|description|Tag â generated from contract polaris.tag v0.4.0 â",
+      ":COMPONENT_SET/Tag (polaris.tag)|propdef|Accessibility Label#1:2404:TEXT=",
+      ":COMPONENT_SET/Tag (polaris.tag)|propdef|Content#1:2422:TEXT=Wholesale",
+      ":COMPONENT_SET/Tag (polaris.tag)|propdef|Disabled#1:2368:BOOLEAN=false",
+      ":COMPONENT_SET/Tag (polaris.tag)|propdef|Show Clickable#1:2386:BOOLEAN=false",
+      ":COMPONENT_SET/Tag (polaris.tag)|propdef|Show Linked#1:2395:BOOLEAN=false",
+      ":COMPONENT_SET/Tag (polaris.tag)|propdef|Show Removable#1:2377:BOOLEAN=false",
+      ":COMPONENT_SET/Tag (polaris.tag)|propdef|Size:VARIANT=none",
+      ":COMPONENT_SET/Tag (polaris.tag)|propdef|State:VARIANT=Default",
+      ":COMPONENT_SET/Tag (polaris.tag)|propdef|Url#1:2413:TEXT=",
+      "/0:COMPONENT/Size=none, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8901960849761963,\"g\":0.8901960849761963,\"b\":0.8901960849761963},\"boundVariables\":{\"color\":{\"var\":\"p/color-bg-fill-tertiary\"}}}]",
+      "/0:COMPONENT/Size=none, State=Default|radius|8,8,8,8",
+      "/0:COMPONENT/Size=none, State=Default|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,6,0,6",
+      "/0:COMPONENT/Size=none, State=Default|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Size=none, State=Default|bound:bottomLeftRadius|p/border-radius-200",
+      "/0:COMPONENT/Size=none, State=Default|bound:bottomRightRadius|p/border-radius-200",
+      "/0:COMPONENT/Size=none, State=Default|bound:height|imported/tag/root/height/none"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "BOOLEAN Disabled",
+      "TEXT Accessibility Label",
+      "TEXT Url",
+      "Size enum → none/large",
+      "BOOLEAN Show Removable",
+      "BOOLEAN Show Clickable",
+      "BOOLEAN Show Linked",
+      "TEXT Content",
+      "first-variant fill bound: p/color-bg-fill-tertiary"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=none, State=Default",
+        "Size=large, State=Default",
+        "Size=none, State=Disabled",
+        "Size=large, State=Disabled",
+        "Size=none, State=Active",
+        "Size=large, State=Active",
+        "Size=none, State=Focus Visible",
+        "Size=large, State=Focus Visible"
+      ],
+      "propDefs": [
+        {
+          "name": "Disabled#1:2368",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Show Removable#1:2377",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Show Clickable#1:2386",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Show Linked#1:2395",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Accessibility Label#1:2404",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Url#1:2413",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Content#1:2422",
+          "type": "TEXT",
+          "defaultValue": "Wholesale",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "none",
+          "variantOptions": [
+            "none",
+            "large"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Disabled",
+            "Active",
+            "Focus Visible"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=none, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 6,
+          "b": 0,
+          "l": 6
+        },
+        "radius": 8,
+        "fillVarName": "p/color-bg-fill-tertiary",
+        "padBound": {
+          "height": "imported/tag/root/height/none",
+          "topLeftRadius": "p/border-radius-200",
+          "topRightRadius": "p/border-radius-200",
+          "bottomLeftRadius": "p/border-radius-200",
+          "bottomRightRadius": "p/border-radius-200",
+          "fills": "p/color-bg-fill-tertiary"
+        },
+        "w": 71.9218978881836,
+        "h": 20,
+        "childTypes": [
+          "FRAME/link",
+          "FRAME/text",
+          "FRAME/button-2 (margin box)"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T16:55:11.994Z",
+  "nodeId": "1:10192"
+}

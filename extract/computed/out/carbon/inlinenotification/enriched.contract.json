@@ -68,17 +68,25 @@
   "anatomy": {
     "root": {
       "layout": {
-        "display": "flex"
+        "display": "flex",
+        "align": "center"
       },
       "parts": {
         "inline-notification__details": {
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__details — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
-            "display": "flex"
+            "display": "flex",
+            "align": "center",
+            "grow": true
           },
           "parts": {
             "icon": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy svg|inline-notification__icon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "center"
+              },
               "declared": {
                 "display": "block",
                 "overflow-x": "hidden",
@@ -154,8 +162,7 @@
               },
               "tokens": {
                 "flex-shrink": "{imported.inline-notification.icon.flex-shrink}",
-                "margin-right": "{imported.inline-notification.icon.margin-right}",
-                "margin-top": "{imported.shared.size-14}"
+                "margin-right": "{imported.inline-notification.icon.margin-right}"
               },
               "tokensByProp": [
                 {
@@ -302,9 +309,10 @@
             "border-left-width": "{imported.shared.size-0}",
             "border-right-width": "{imported.shared.size-0}",
             "border-top-width": "{imported.shared.size-0}",
-            "color": "{imported.inline-notification.inline-notification-close-button.color}",
+            "color": "{imported.inline-notification.inline-notification-close-button.color.{contrast}}",
             "max-width": "{imported.shared.size-48}",
             "min-width": "{imported.shared.size-48}",
+            "min-height": "{imported.shared.size-48}",
             "outline-color": "{imported.inline-notification.inline-notification-close-button.outline-color}",
             "outline-offset": "{imported.inline-notification.inline-notification-close-button.outline-offset}",
             "outline-width": "{imported.inline-notification.inline-notification-close-button.outline-width}",
@@ -315,57 +323,31 @@
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}"
           }
-        },
-        "root-before": {
-          "shape": {
-            "kind": "rect",
-            "width": 425,
-            "height": 48
-          },
-          "literals": {
-            "background-color": "transparent",
-            "border-top-width": "1px",
-            "border-right-width": "1px",
-            "border-bottom-width": "1px",
-            "border-top-color": "rgba(218, 30, 40, 1)",
-            "border-right-color": "rgba(218, 30, 40, 1)",
-            "border-bottom-color": "rgba(218, 30, 40, 1)",
-            "border-left-color": "rgba(218, 30, 40, 1)"
-          },
-          "stylesWhen": [
-            {
-              "prop": "contrast",
-              "equals": "high",
-              "styles": {
-                "display": "none"
-              }
-            },
-            {
-              "prop": "contrast",
-              "equals": "low",
-              "styles": {
-                "position": "absolute",
-                "top": "0px",
-                "left": "0px"
-              }
-            }
-          ],
-          "description": "Drawn ::before pseudo-element decor promoted from the computed floor (round 5c, S5 v1): a 425×48 rect at 0,0 inside root, fill rgba(0, 0, 0, 0) — background+box+radius only, no content text; translate folded into top/left (receipted)."
         }
       },
       "declared": {
         "border-left-style": "solid",
+        "border-top-style": "solid",
+        "border-right-style": "solid",
+        "border-bottom-style": "solid",
         "position": "relative"
       },
       "tokens": {
         "background-color": "{imported.inline-notification.root.background-color.{kind}.{contrast}}",
         "border-left-color": "{imported.inline-notification.root.border-left-color.{kind}.{contrast}}",
         "border-left-width": "{imported.inline-notification.root.border-left-width}",
+        "border-top-color": "{imported.inline-notification.root.border-top-color.{contrast}}",
+        "border-top-width": "{imported.inline-notification.root.border-top-width.{contrast}}",
+        "border-right-color": "{imported.inline-notification.root.border-right-color.{contrast}}",
+        "border-right-width": "{imported.inline-notification.root.border-right-width.{contrast}}",
+        "border-bottom-color": "{imported.inline-notification.root.border-bottom-color.{contrast}}",
+        "border-bottom-width": "{imported.inline-notification.root.border-bottom-width.{contrast}}",
         "bottom": "{imported.shared.size-0}",
         "left": "{imported.shared.size-0}",
         "max-width": "{imported.inline-notification.root.max-width}",
         "min-height": "{imported.shared.size-48}",
         "min-width": "{imported.inline-notification.root.min-width}",
+        "width": "{imported.inline-notification.root.showcase-width}",
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}"
       },

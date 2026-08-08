@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "tabs",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/tabs.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "21:807",
+  "cellNodeId": "21:787",
+  "cellName": "Text color=Inherit, Indicator color=Primary",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 23.333333333333332,
+    "pctAAUnmasked": 15.476190476190476,
+    "pctAAMasked": 15.476190476190476,
+    "maskCoveragePct": 0,
+    "canvasPx": "140x15",
+    "realPx": "140x15",
+    "inkCanvasPct": 16.61904761904762,
+    "inkRealPct": 18.619047619047617
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/tabs.png",
+  "referenceSha256": "50694d61f5bde8253e69d68d1d744b64800a3bea68ff79843cf908279037a082",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/tabs.png",
+  "canvasShotSha256": "0bca1e2b0fc4105d33e519418da235376d43f6436d302f5e1b7cc6684f162eb5",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/tabs.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 1.9999999999999964,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=15.48 > 5)"
+}

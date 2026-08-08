@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "divider",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/divider.json",
+  "status": "pass",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "83:1610",
+  "cellNodeId": "83:1607",
+  "cellName": "Variant=FullWidth",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 0,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
+    "maskCoveragePct": 0,
+    "canvasPx": "288x1",
+    "realPx": "288x1",
+    "inkCanvasPct": 100,
+    "inkRealPct": 100
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/divider.png",
+  "referenceSha256": "a4c56f8da34db8827368a95de1723ad4bf039e2f12b5860595f1add4b89d5399",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/divider.png",
+  "canvasShotSha256": "c579de0a690e8cd9c1dbc63c98f3a93b84a4fb4518e3d59c2afaefadf368a446",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/divider.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

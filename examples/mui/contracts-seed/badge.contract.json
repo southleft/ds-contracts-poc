@@ -1,0 +1,60 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.badge",
+  "name": "Badge",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": ["default", "primary", "secondary", "error", "info", "success", "warning"]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "default": "Default",
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "error": "Error",
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning"
+          }
+        },
+        "code": { "prop": "color" }
+      }
+    },
+    {
+      "name": "variant",
+      "type": {
+        "enum": ["standard", "dot"]
+      },
+      "default": "standard",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "standard": "Standard",
+            "dot": "Dot"
+          }
+        },
+        "code": { "prop": "variant" }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": { "root": {} },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@mui/material", "export": "Badge" }
+  }
+}

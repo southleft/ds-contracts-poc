@@ -1,0 +1,93 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "TextField",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "inputadornment-positionend",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-1t5wmfw-MuiInputAdornment-root"
+      }
+    },
+    {
+      "part": "inputadornment-positionstart",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-navhnp-MuiInputAdornment-root"
+      }
+    },
+    {
+      "part": "inputbase-adornedend",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-gvkwey-MuiInputBase-root-MuiOutlinedInput-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-6b784p-MuiFormLabel-root-MuiInputLabel-root.Mui-error"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-gsqgev-MuiTypography-root"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-gsqgev-MuiTypography-root"
+      }
+    },
+    {
+      "part": "label-5",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-110d43-MuiFormHelperText-root.Mui-error"
+      }
+    }
+  ],
+  "skips": [],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "outlinedinput-notchedoutline.border-color: SHORTHAND carrying var(--mui-palette-error-main) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

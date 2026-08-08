@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "polaris",
+  "stem": "text-field",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/polaris/components/text-field.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:10365",
+  "cellNodeId": "1:10197",
+  "cellName": "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Default",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 71.26238690219733,
+    "pctAAUnmasked": 9.59931064196467,
+    "pctAAMasked": 9.59931064196467,
+    "maskCoveragePct": 0,
+    "canvasPx": "211x55",
+    "realPx": "69x47",
+    "inkCanvasPct": 11.900043084877208,
+    "inkRealPct": 5.730288668677294
+  },
+  "reference": "parity/receipts/console-loop/polaris/refs/text-field.png",
+  "referenceSha256": "47b5ae79e93669f0792efde2481b91ca9f469b9a10244c5e8dc8960bb434a4ca",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/polaris/shots/text-field.png",
+  "canvasShotSha256": "d0f77e95d1050f0a09e94d7bbc15371558ba02dcffd6edf86108d0b7b9e86007",
+  "diff": "parity/receipts/console-loop/visual-truth/polaris/diffs/text-field.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 3.0579710144927534,
+  "inkDelta": 6.169754416199914,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=3.06, inkDelta=6.2)"
+}

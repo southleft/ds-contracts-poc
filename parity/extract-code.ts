@@ -94,7 +94,7 @@ export function extractCode(root = process.cwd()): CodeExtract[] {
     let cssVars: string[] = [];
     try {
       const css = readFileSync(path.join(dir, name, `${name}.module.css`), 'utf8');
-      cssVars = [...new Set([...css.matchAll(/var\(--([a-z0-9-]+)\)/g)].map((m) => m[1]))];
+      cssVars = [...new Set([...css.matchAll(/var\(--([a-zA-Z0-9-]+)\)/g)].map((m) => m[1]))];
     } catch {
       /* no stylesheet */
     }

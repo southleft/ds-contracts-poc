@@ -1,0 +1,458 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "text-field",
+  "contract": "examples/polaris/contracts/text-field.contract.json",
+  "script": "examples/polaris/figma/text-field.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:35.867Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk append (parts :9228) into ds_loop_script",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:10365",
+    "mode": "amended",
+    "page": "TextField (polaris.text-field)",
+    "sectionId": "1:10368",
+    "contractId": "polaris.text-field",
+    "result": {
+      "createdNodeIds": [
+        "1:10365"
+      ],
+      "results": [
+        {
+          "name": "TextField",
+          "contractId": "polaris.text-field",
+          "amended": true,
+          "nodeId": "1:10365",
+          "key": "8b76f20c5d75210121febe02993ee0630aa94efc",
+          "rebuiltVariants": 8,
+          "wiredReactions": 1
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-07T17:56:00.340Z",
+    "notes": [
+      "Re-synced 2026-08-06 from surgically patched text-field.figma.js via Console MCP (35×8KB clientStorage chunk append). Amended 1:10365; rebuilt 8 variants.",
+      "Canvas observations (not a visual pass): all 8 roots VERTICAL; placeholder text \"Example\" (prop default Example); label \"Store name\" above field (labelled__labelwrapper first child).",
+      "Developed score pending — do not treat as visual pass.",
+      "Re-synced via clientStorage chunks (n=21, total=163475); nodeId=1:10365",
+      "Re-synced via clientStorage chunks (n=28, total=167262); nodeId=1:10365; connected/textfield width=211px",
+      "Re-synced via clientStorage chunks (n=28, total=167262); nodeId=1:10365; connected/textfield width=211px"
+    ],
+    "defects": [
+      "re-synced from patched script; border/radius/padding vs developed receipt not scored — FAIL closed / matchDeveloped false"
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/text-field.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "observations": {
+      "rootVertical": true,
+      "placeholderText": "Example",
+      "labelAboveField": true,
+      "bracePlaceholderGone": true
+    },
+    "cellShot": "parity/receipts/console-loop/polaris/shots/text-field-cell.png",
+    "scorecard": "parity/receipts/console-loop/polaris/scores/text-field.json",
+    "referenceSource": "examples/polaris/generated/html/text-field.html#first-item-inline-css",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "agent visual loop score pass",
+        "matchedAt": "2026-08-08T03:06:48.091Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=9.56, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:3489765104",
+    "lineCount": 1023,
+    "sampleLines": [
+      ":COMPONENT_SET/TextField (polaris.text-field)|fill|[]",
+      ":COMPONENT_SET/TextField (polaris.text-field)|radius|5,5,5,5",
+      ":COMPONENT_SET/TextField (polaris.text-field)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/TextField (polaris.text-field)|description|TextField â generated from contract polaris.text-field v0.4.0 â",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Align:VARIANT=Left",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Aria Active Descendant#1:2683:TEXT=",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Aria Autocomplete#1:2692:TEXT=",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Aria Controls#1:2674:TEXT=",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Aria Expanded#1:2503:BOOLEAN=false",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Aria Owns#1:2665:TEXT=",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Auto Complete#1:2629:TEXT=off",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Auto Focus#1:2476:BOOLEAN=false",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Auto Size#1:2539:BOOLEAN=false",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Clear Button#1:2449:BOOLEAN=false",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Disabled#1:2440:BOOLEAN=false",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Focused#1:2485:BOOLEAN=false",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Input Mode:VARIANT=Text",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Label Hidden#1:2431:BOOLEAN=false",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Large Step#1:2620:TEXT=",
+      ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Loading#1:2548:BOOLEAN=false"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-projection (named curation per examples/polaris/figma/COMPILE-RECEIPT.md): Drawn set is variant×size (4 cells); type/inputMode/align pinned to representative values — full cartesian remains on contract/code surfaces.",
+      "curated-not-drawn: Type missing option Email",
+      "curated-not-drawn: Type missing option Number",
+      "curated-not-drawn: Type missing option Integer",
+      "curated-not-drawn: Type missing option Password",
+      "curated-not-drawn: Type missing option Search",
+      "curated-not-drawn: Type missing option Tel",
+      "curated-not-drawn: Type missing option Url",
+      "curated-not-drawn: Type missing option Date",
+      "curated-not-drawn: Type missing option Datetime Local",
+      "curated-not-drawn: Type missing option Month",
+      "curated-not-drawn: Type missing option Time",
+      "curated-not-drawn: Type missing option Week",
+      "curated-not-drawn: Type missing option Currency",
+      "curated-not-drawn: Input Mode missing option None",
+      "curated-not-drawn: Input Mode missing option Decimal",
+      "curated-not-drawn: Input Mode missing option Numeric",
+      "curated-not-drawn: Input Mode missing option Tel",
+      "curated-not-drawn: Input Mode missing option Search",
+      "curated-not-drawn: Input Mode missing option Email",
+      "curated-not-drawn: Input Mode missing option Url",
+      "curated-not-drawn: Align missing option Center",
+      "curated-not-drawn: Align missing option Right"
+    ],
+    "matchedAxes": [
+      "TEXT Placeholder",
+      "TEXT Value",
+      "BOOLEAN Label Hidden",
+      "BOOLEAN Disabled",
+      "BOOLEAN Clear Button",
+      "BOOLEAN Select Text On Focus",
+      "TEXT Suggestion",
+      "BOOLEAN Read Only",
+      "BOOLEAN Auto Focus",
+      "BOOLEAN Focused",
+      "Type enum → Text",
+      "TEXT Name",
+      "TEXT Role",
+      "TEXT Step",
+      "TEXT Large Step",
+      "TEXT Auto Complete",
+      "TEXT Max Length",
+      "TEXT Min Length",
+      "TEXT Pattern",
+      "Input Mode enum → Text",
+      "BOOLEAN Spell Check",
+      "TEXT Aria Owns",
+      "BOOLEAN Aria Expanded",
+      "TEXT Aria Controls",
+      "TEXT Aria Active Descendant",
+      "TEXT Aria Autocomplete",
+      "BOOLEAN Show Character Count",
+      "Align enum → Left",
+      "BOOLEAN Required Indicator",
+      "BOOLEAN Monospaced",
+      "Variant enum → Inherit/Borderless",
+      "Size enum → Medium/Slim",
+      "BOOLEAN Auto Size",
+      "BOOLEAN Loading",
+      "BOOLEAN Show WithPrefix",
+      "BOOLEAN Show WithSuffix",
+      "canvas projection cell count ~4 (see COMPILE-RECEIPT)"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Default",
+        "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Slim, State=Default",
+        "Type=Text, Input Mode=Text, Align=Left, Variant=Borderless, Size=Medium, State=Default",
+        "Type=Text, Input Mode=Text, Align=Left, Variant=Borderless, Size=Slim, State=Default",
+        "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Disabled",
+        "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Active",
+        "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Focus Visible",
+        "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Hover"
+      ],
+      "propDefs": [
+        {
+          "name": "Label Hidden#1:2431",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Disabled#1:2440",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Clear Button#1:2449",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Select Text On Focus#1:2458",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Read Only#1:2467",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Auto Focus#1:2476",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Focused#1:2485",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Spell Check#1:2494",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Aria Expanded#1:2503",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Show Character Count#1:2512",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Required Indicator#1:2521",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Monospaced#1:2530",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Auto Size#1:2539",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Loading#1:2548",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Show WithPrefix#1:2557",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Show WithSuffix#1:2566",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Value#1:2575",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Suggestion#1:2584",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Name#1:2593",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Role#1:2602",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Step#1:2611",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Large Step#1:2620",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Auto Complete#1:2629",
+          "type": "TEXT",
+          "defaultValue": "off",
+          "variantOptions": null
+        },
+        {
+          "name": "Max Length#1:2638",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Min Length#1:2647",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Pattern#1:2656",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Aria Owns#1:2665",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Aria Controls#1:2674",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Aria Active Descendant#1:2683",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Aria Autocomplete#1:2692",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Placeholder#1:2701",
+          "type": "TEXT",
+          "defaultValue": "Example",
+          "variantOptions": null
+        },
+        {
+          "name": "Type",
+          "type": "VARIANT",
+          "defaultValue": "Text",
+          "variantOptions": [
+            "Text"
+          ]
+        },
+        {
+          "name": "Input Mode",
+          "type": "VARIANT",
+          "defaultValue": "Text",
+          "variantOptions": [
+            "Text"
+          ]
+        },
+        {
+          "name": "Align",
+          "type": "VARIANT",
+          "defaultValue": "Left",
+          "variantOptions": [
+            "Left"
+          ]
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Inherit",
+          "variantOptions": [
+            "Inherit",
+            "Borderless"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Slim"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Disabled",
+            "Active",
+            "Focus Visible",
+            "Hover"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "height": "imported/text-field/root/height/medium"
+        },
+        "w": 267.62493896484375,
+        "h": 60,
+        "childTypes": [
+          "FRAME/labelled__labelwrapper (margin box)",
+          "FRAME/connected"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "canvasProjectionDocumented": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T17:56:00.340Z",
+  "screenshot": "parity/receipts/console-loop/polaris/shots/text-field.png",
+  "screenshotVariant": {
+    "nodeId": "1:10197",
+    "name": "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Default",
+    "bytes": 4506
+  },
+  "reSyncNote": "Re-synced via clientStorage chunks (n=28, total=167262); nodeId=1:10365; connected/textfield width=211px"
+}

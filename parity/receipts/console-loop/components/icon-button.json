@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "icon-button",
+  "contract": "contracts/icon-button.contract.json",
+  "script": "parity/receipts/console-loop/emitted/11-iconbutton.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:38.656Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:739",
+    "page": "IconButton",
+    "sectionId": "1:740",
+    "result": {
+      "createdNodeIds": [
+        "1:739"
+      ],
+      "results": [
+        {
+          "name": "IconButton",
+          "contractId": "ds.icon-button",
+          "nodeId": "1:739",
+          "key": "48f237b0fd332d6bf9e55d74c3117246e710ca42",
+          "variants": 12,
+          "properties": [
+            "Disabled#1:183",
+            "Label#1:196",
+            "Icon#1:209",
+            "Variant",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:740 captured (ok).",
+      "Icon Button: 12 variant(s); type COMPONENT_SET; page IconButton.",
+      "Props: Disabled, Label, Icon, Variant, Size.",
+      "First root fill bound to color/action/secondary/background."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:1073239359",
+    "lineCount": 285,
+    "sampleLines": [
+      ":COMPONENT_SET/IconButton|fill|[]",
+      ":COMPONENT_SET/IconButton|radius|5,5,5,5",
+      ":COMPONENT_SET/IconButton|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/IconButton|description|IconButton — generated from contract ds.icon-button v1.0.0",
+      ":COMPONENT_SET/IconButton|propdef|Disabled#1:183:BOOLEAN=false",
+      ":COMPONENT_SET/IconButton|propdef|Icon#1:209:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/IconButton|propdef|Label#1:196:TEXT=Action",
+      ":COMPONENT_SET/IconButton|propdef|Size:VARIANT=Medium",
+      ":COMPONENT_SET/IconButton|propdef|Variant:VARIANT=Secondary",
+      "/0:COMPONENT/Variant=Secondary, Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/action/secondary/background\"}}}]",
+      "/0:COMPONENT/Variant=Secondary, Size=Medium|radius|8,8,8,8",
+      "/0:COMPONENT/Variant=Secondary, Size=Medium|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Secondary, Size=Medium|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Variant=Secondary, Size=Medium|bound:bottomLeftRadius|radius/control",
+      "/0:COMPONENT/Variant=Secondary, Size=Medium|bound:bottomRightRadius|radius/control",
+      "/0:COMPONENT/Variant=Secondary, Size=Medium|bound:height|size/icon-button/md",
+      "/0:COMPONENT/Variant=Secondary, Size=Medium|bound:topLeftRadius|radius/control",
+      "/0:COMPONENT/Variant=Secondary, Size=Medium|bound:topRightRadius|radius/control",
+      "/0:COMPONENT/Variant=Secondary, Size=Medium|bound:width|size/icon-button/md",
+      "/0/0:FRAME/iconSlot|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant",
+      "Size",
+      "Disabled",
+      "Label"
+    ],
+    "observed": {
+      "variantNames": [
+        "Variant=Secondary, Size=Medium",
+        "Variant=Secondary, Size=Small",
+        "Variant=Secondary, Size=Large",
+        "Variant=Primary, Size=Medium",
+        "Variant=Primary, Size=Small",
+        "Variant=Primary, Size=Large",
+        "Variant=Ghost, Size=Medium",
+        "Variant=Ghost, Size=Small",
+        "Variant=Ghost, Size=Large",
+        "Variant=Destructive, Size=Medium",
+        "Variant=Destructive, Size=Small",
+        "Variant=Destructive, Size=Large"
+      ],
+      "propDefs": [
+        {
+          "name": "Disabled#1:183",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:196",
+          "type": "TEXT",
+          "defaultValue": "Action",
+          "variantOptions": null
+        },
+        {
+          "name": "Icon#1:209",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Secondary",
+          "variantOptions": [
+            "Secondary",
+            "Primary",
+            "Ghost",
+            "Destructive"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Secondary, Size=Medium",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 8,
+        "fillVarName": "color/action/secondary/background",
+        "padBound": {
+          "width": "size/icon-button/md",
+          "height": "size/icon-button/md",
+          "topLeftRadius": "radius/control",
+          "topRightRadius": "radius/control",
+          "bottomLeftRadius": "radius/control",
+          "bottomRightRadius": "radius/control",
+          "fills": "color/action/secondary/background"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 36,
+        "h": 36,
+        "childNames": [
+          "iconSlot:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

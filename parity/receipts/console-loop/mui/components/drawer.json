@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "drawer",
+  "contract": "examples/mui/contracts/drawer.contract.json",
+  "script": "examples/mui/figma/drawer.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:00:36.655Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "83:1680",
+    "mode": "generated",
+    "page": "Drawer",
+    "sectionId": "83:1681",
+    "result": {
+      "createdNodeIds": [
+        "83:1680"
+      ],
+      "results": [
+        {
+          "name": "Drawer",
+          "contractId": "mui.drawer",
+          "nodeId": "83:1680",
+          "key": "3d69c388bed237e636535683298ccf4abd5db343",
+          "variants": 2,
+          "properties": [
+            "Content#83:13",
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Structure/variants reviewed via inspect (83:1680, page Drawer); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page Drawer)."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=55.03% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/drawer.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/drawer.png",
+    "referenceSource": "extract/computed/out/mui/drawer/gate-shots/temporary__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/drawer-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
+  },
+  "fingerprint": {
+    "v6": "v6:415446264",
+    "lineCount": 43,
+    "sampleLines": [
+      ":COMPONENT_SET/Drawer|fill|[]",
+      ":COMPONENT_SET/Drawer|radius|5,5,5,5",
+      ":COMPONENT_SET/Drawer|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Drawer|description|Drawer \u00e2\u0080\u0094 generated from contract mui.drawer v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Drawer|propdef|Content#83:13:TEXT=Drawer content",
+      ":COMPONENT_SET/Drawer|propdef|Variant:VARIANT=Temporary",
+      "/0:COMPONENT/Variant=Temporary|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Variant=Temporary|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=Temporary|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Temporary|sizing|HUG/HUG AUTO",
+      "/0/0:FRAME/backdrop-root|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.501960813999176,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/drawer/backdrop-root/background-color\"}}}]",
+      "/0/0:FRAME/backdrop-root|radius|0,0,0,0",
+      "/0/0:FRAME/backdrop-root|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/backdrop-root|sizing|HUG/FILL AUTO",
+      "/0/0:FRAME/backdrop-root|bound:minHeight|imported/shared/size-0",
+      "/0/0:FRAME/backdrop-root|bound:minWidth|imported/shared/size-0",
+      "/0/1:FRAME/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/drawer/label/background-color\"}}}]",
+      "/0/1:FRAME/label|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.8705882430076599,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/drawer/label/border-right-color/temporary\"}}}] w0",
+      "/0/1:FRAME/label|radius|0,0,0,0",
+      "/0/1:FRAME/label|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Variant enum \u2192 Temporary/Permanent",
+      "TEXT Content"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Temporary",
+        "Variant=Permanent"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#83:13",
+          "type": "TEXT",
+          "defaultValue": "Drawer content",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Temporary",
+          "variantOptions": [
+            "Temporary",
+            "Permanent"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Temporary",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {},
+        "w": 117,
+        "h": 100,
+        "childTypes": [
+          "FRAME/backdrop-root",
+          "FRAME/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

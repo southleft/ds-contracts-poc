@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "checkbox",
+  "contract": "examples/mui/contracts/checkbox.contract.json",
+  "script": "examples/mui/figma/checkbox.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.514Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:323",
+    "mode": "existing",
+    "page": "Checkbox",
+    "sectionId": "21:324",
+    "result": {}
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:323).",
+      "Checkbox COMPONENT_SET 21:323: 3 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK.",
+      "2026-08-08 STRICT-LANE CONVERSION: pixel scorecard PASS on both instruments \u2014 lane scorer pctAAMasked=0.00 (scores/checkbox.json, headless REST cell at scale 1 vs committed developed ref mui/refs/checkbox.png) and headless visual-truth card agrees; bar pctAAMasked<=5 AND compositionOk."
+    ],
+    "defects": [],
+    "reference": "parity/receipts/console-loop/mui/refs/checkbox.png",
+    "referenceSource": "extract/computed/out/mui/checkbox/gate-shots/checked.disabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/checkbox-cell.png",
+    "matchDeveloped": true,
+    "status": "scored-pass"
+  },
+  "fingerprint": {
+    "v6": "v6:820111622",
+    "lineCount": 84,
+    "sampleLines": [
+      ":COMPONENT_SET/Checkbox|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Checked enum \u2192 Unchecked/Checked/Indeterminate",
+      "BOOLEAN Disabled"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Checked=Unchecked",
+        "Checked=Checked",
+        "Checked=Indeterminate"
+      ],
+      "propDefs": [
+        {
+          "name": "Checked",
+          "type": "VARIANT",
+          "defaultValue": "Unchecked",
+          "variantOptions": [
+            "Unchecked",
+            "Checked",
+            "Indeterminate"
+          ]
+        },
+        {
+          "name": "Disabled#21:162",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "Checked=Unchecked",
+        "type": "COMPONENT",
+        "fillVarName": null,
+        "padBound": {},
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 9,
+          "r": 9,
+          "b": 9,
+          "l": 9
+        },
+        "radius": 21,
+        "w": 42,
+        "h": 42,
+        "childTypes": [
+          "FRAME/icon"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": true
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "banner",
+  "contract": "examples/astryx/contracts/banner.contract.json",
+  "script": "examples/astryx/figma/banner.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:07.801Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:3813",
+    "mode": "amended",
+    "page": "Banner (astryx.banner)",
+    "sectionId": "1:3814",
+    "contractId": "astryx.banner",
+    "result": {
+      "createdNodeIds": [
+        "1:3813"
+      ],
+      "results": [
+        {
+          "name": "Banner",
+          "contractId": "astryx.banner",
+          "nodeId": "1:3813",
+          "key": "3fe290ee7c305ddb7ad7cb3c3efc74f0e577aa33",
+          "variants": 8,
+          "properties": [
+            "Is Dismissable#1:912",
+            "Message#1:921",
+            "Status",
+            "Container"
+          ],
+          "amended": true,
+          "rebuiltVariants": 8,
+          "addedVariants": [],
+          "extraVariants": [],
+          "addedProps": [
+            "Title",
+            "Description"
+          ],
+          "editedDefaults": [],
+          "wiredReactions": 0
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Re-synced via clientStorage chunks (n=12, total=89278); nodeId=1:3813; rebuilt 8 variants; added Title/Description props"
+    ],
+    "defects": [
+      "Pastel fills improved on cream, but still dense pill chips without status icons / title+body hierarchy of developed Banner docs.",
+      "Not full-width alert banners as in examples/astryx/receipts/site/Banner.png."
+    ],
+    "reference": "parity/receipts/console-loop/astryx/refs/banner.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "extract/computed/out/banner/gate-shots/info.off.off__default.png"
+  },
+  "fingerprint": {
+    "v6": "v6:3231585800",
+    "lineCount": 144,
+    "sampleLines": [
+      ":COMPONENT_SET/Banner (astryx.banner)|fill|[]",
+      ":COMPONENT_SET/Banner (astryx.banner)|radius|5,5,5,5",
+      ":COMPONENT_SET/Banner (astryx.banner)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Banner (astryx.banner)|description|Banner â generated from contract astryx.banner v0.1.0",
+      ":COMPONENT_SET/Banner (astryx.banner)|propdef|Container:VARIANT=Card",
+      ":COMPONENT_SET/Banner (astryx.banner)|propdef|Is Dismissable#1:912:BOOLEAN=false",
+      ":COMPONENT_SET/Banner (astryx.banner)|propdef|Message#1:921:TEXT=Banner message",
+      ":COMPONENT_SET/Banner (astryx.banner)|propdef|Status:VARIANT=Info",
+      "/0:COMPONENT/Status=Info, Container=Card|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.20000000298023224,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.003921568859368563,\"g\":0.4431372582912445,\"b\":0.8901960849761963},\"boundVariables\":{\"color\":{\"var\":\"color-background-blue\"}}}]",
+      "/0:COMPONENT/Status=Info, Container=Card|radius|12,12,12,12",
+      "/0:COMPONENT/Status=Info, Container=Card|layout|HORIZONTAL MIN/CENTER gap 8 pad 12,16,12,16",
+      "/0:COMPONENT/Status=Info, Container=Card|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Status=Info, Container=Card|bound:bottomLeftRadius|radius-container",
+      "/0:COMPONENT/Status=Info, Container=Card|bound:bottomRightRadius|radius-container",
+      "/0:COMPONENT/Status=Info, Container=Card|bound:itemSpacing|spacing-2",
+      "/0:COMPONENT/Status=Info, Container=Card|bound:paddingBottom|spacing-3",
+      "/0:COMPONENT/Status=Info, Container=Card|bound:paddingLeft|spacing-4",
+      "/0:COMPONENT/Status=Info, Container=Card|bound:paddingRight|spacing-4",
+      "/0:COMPONENT/Status=Info, Container=Card|bound:paddingTop|spacing-3",
+      "/0:COMPONENT/Status=Info, Container=Card|bound:topLeftRadius|radius-container"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Status enum → Info/Warning/Error/Success",
+      "Container enum → Card/Section",
+      "BOOLEAN Is Dismissable",
+      "TEXT Message",
+      "first-variant fill bound: color-background-blue"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Status=Info, Container=Card",
+        "Status=Info, Container=Section",
+        "Status=Warning, Container=Card",
+        "Status=Warning, Container=Section",
+        "Status=Error, Container=Card",
+        "Status=Error, Container=Section",
+        "Status=Success, Container=Card",
+        "Status=Success, Container=Section"
+      ],
+      "propDefs": [
+        {
+          "name": "Is Dismissable#1:912",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Message#1:921",
+          "type": "TEXT",
+          "defaultValue": "Banner message",
+          "variantOptions": null
+        },
+        {
+          "name": "Status",
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Info",
+            "Warning",
+            "Error",
+            "Success"
+          ]
+        },
+        {
+          "name": "Container",
+          "type": "VARIANT",
+          "defaultValue": "Card",
+          "variantOptions": [
+            "Card",
+            "Section"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Status=Info, Container=Card",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 12,
+          "r": 16,
+          "b": 12,
+          "l": 16
+        },
+        "radius": 12,
+        "fillVarName": "color-background-blue",
+        "padBound": {
+          "itemSpacing": "spacing-2",
+          "paddingLeft": "spacing-4",
+          "paddingTop": "spacing-3",
+          "paddingRight": "spacing-4",
+          "paddingBottom": "spacing-3",
+          "topLeftRadius": "radius-container",
+          "topRightRadius": "radius-container",
+          "bottomLeftRadius": "radius-container",
+          "bottomRightRadius": "radius-container",
+          "fills": "color-background-blue"
+        },
+        "w": 128,
+        "h": 39,
+        "childTypes": [
+          "TEXT/message"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T12:09:10.107Z",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=12, total=89278); nodeId=1:3813; rebuilt 8 variants; added Title/Description props"
+}

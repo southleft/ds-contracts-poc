@@ -100,6 +100,21 @@ the canvas; a rotated caret draws unrotated; a sticky header draws in flow.
   `core/propose-figma.ts`; a refused SCALE part renders **in flow** rather
   than as a half-carried absolute box (pinned by
   `npx tsx extract/figma/constraints-check.ts`, 12 assertions).
+- **An OBLIQUE `GRADIENT_LINEAR` fill** — dump v1.16 captures every linear
+  gradient (handles + stops), and **axis-aligned ramps carry exactly**
+  (background-image, normalized to the box's visible segment — pinned by
+  `npm run extract:figma:gradient:check` and the `design-gradient-textcase-carriage`
+  eval; Eventz Badge is the field case, 23.5 → 61.2). An oblique ramp is
+  **refused by name**: Figma's handles live in normalized object space while
+  a CSS gradient angle lives in pixel space, so the equivalent angle and stop
+  scale are functions of the drawn box's **aspect ratio** — no
+  size-independent exact spelling exists (Eventz Molecules/Alert is the field
+  case; the refusal note carries the raw handles). **Unlock condition:** a
+  per-variant carriage that bakes the DRAWN box's angle would be exact at
+  that size and silently skewed at every other — carrying it would need a
+  box-aware gradient channel (angle recomputed from the rendered box), which
+  is an engine change on every emit surface, not a grammar extension.
+  Radial/angular/diamond gradients stay `paint-unsupported` capture receipts.
 - **Figma component-property types** have no CSS counterpart beyond the
   variant/enum lowering the contract already spells.
 
@@ -445,6 +460,19 @@ shadow hosts with no `:host` rules, and eight of Polaris's twelve carry only
 generic stems like `icon` / `label` / `box`). A check that refuses two-thirds of
 a shipped library to catch one absent component is a check people learn to skip.
 
+**The EMIT-side variant of this class is now guarded** (Eventz field case,
+2026-08: Atoms/Checkbox and Atoms/Input inferred `semantics.element: "input"`
+over drawn children, React refused the void-element mount at runtime, and both
+components rendered NOTHING while every build step stayed green).
+`validateContract` (core/emit-react.ts) now refuses children mounted inside a
+void element BY NAME on all four emit surfaces, and `proposeFromDump` demotes a
+void-element inference over drawn children to a container root with a REVIEW
+re-root note, so a proposal can never carry the shape the emitters refuse
+(evals `refuse-void-element-children-mount`, `design-void-element-re-root`).
+The CAPTURE-side net is unchanged and remains exactly what this section says:
+mount-sanity plus the trigger advisory, with the plain-`<button>` gap above
+still open.
+
 ## B.11 Adopting a hand-built Figma set is not a verb this tool has
 
 *Stamping* an existing, hand-drawn Figma component set as contract-backed so
@@ -486,12 +514,12 @@ re-verified against docs/18's own rows today:
 
 | gap | status | what is missing |
 |---|---|---|
-| **G3 — three-way merge** (genesis × incoming × canvas, per-channel resolution) | **OPEN** | there is no screen for "two writers touched the same component this week." Named by all three personas as the decisive moment. |
-| **G4 — silent-revert guard** | **OPEN** | after a design-led merge, the next code-led extract reads unchanged source and re-commits the old value — reverting the approved change **with drift green**. The lead's stated trust-killer. |
-| **G7 — brownfield write-back suggested diffs** | **OPEN** | design-led merges leave hand-written components stale; there is no anchor-derived suggested patch on the PR. |
+| **G3 — three-way merge** (genesis × incoming × canvas, per-channel resolution) | **PARTIAL** | engine + checks shipped (`core/three-way-merge.ts`); designer/engineer **UI screen** still open |
+| **G4 — silent-revert guard** | **PARTIAL** | `awaiting-adoption-check` pins refuse-on-silent-revert; full extract-path wiring coverage still expanding |
+| **G7 — brownfield write-back suggested diffs** | **PARTIAL** | `core/suggested-diff.ts` propose-only stubs (file:line when anchor carries it); PR comment emitter + static `file:line` readers still open |
 | **G5 — org-level GitHub App** | OPEN | designers still paste a fine-grained PAT into a plugin field. |
-| **G10 — PR-first CI defaults** | OPEN | the code-led recipe commits contracts to main rather than opening a PR. |
-| **G11 — contract-diff English summarizer** | OPEN | no `diff --summarize` for PR comments. |
+| **G10 — PR-first CI defaults** | **PARTIAL** | `examples/ci/code-led.yml` is PR-first; confirm every published recipe |
+| **G11 — contract-diff English summarizer** | **PARTIAL** | `ds-contracts diff --summarize` + `contract-summarize:check` shipped |
 | **G13 — audit trail & loop closure** | OPEN (record shape exists) | no viewer tab, no "resolved by PR #N". |
 
 **G2 (drift-aware update warning), G8 (plain-words style diffs), G9 (sample-library
@@ -648,15 +676,30 @@ because they are "NOT inferable from static source." This is gap **G6** in
 [docs/18](18-user-flows.md) — the Emotion capture-config cliff — and it is
 **PARTIAL**: the CLI halves shipped, the playground routing is open.
 
-**The defaultless-axis trap is named, not closed.** The drafter still writes
-`"__unset"` as a default pseudo-value. That string becomes a segment of every
-minted token path, and the contract's token-ref regex forbids underscores — so
-fusion dies with roughly forty "must be brace-wrapped" errors, **not one of which
-mentions an underscore**. The fix is `"unsetLabel": "unset"` in config. The next
-library with a defaultless enum axis hits the identical wall with the identical
-unhelpful error.
+**The defaultless-axis trap — CLOSED, with the mechanism** (2026-08-08; it was
+"named, not closed" until then). The drafter used to write `"__unset"` as the
+default pseudo-value; that string became a segment of every minted token path,
+and the contract's token-ref regex forbids underscores — so fusion died with
+roughly forty "must be brace-wrapped" errors, not one of which mentioned an
+underscore. The named engine change (one default, one error message) landed as
+both halves:
 
-**What it would take — an engine change** (one default, one error message).
+- **The sentinel never ships.** `extract/draft-capture-config.ts` now drafts
+  `"unsetLabel": "unset"` (`DRAFT_UNSET_LABEL` — legal as a token-path
+  segment), and every defaultless enum axis is additionally pinned in
+  `baseCombo` to its **first enum value** under an explicit
+  `__review:baseCombo` marker — the same ack discipline as its sibling
+  non-inferable fields. Unit-pinned in
+  `packages/cli/test/draft-capture-config.test.ts`.
+- **The error names the rule.** `TokenRefSchema`
+  (packages/schema/src/contract-schema.ts) adds, on any underscore-bearing
+  ref, the actual rule alongside the brace-wrap message: *token refs may not
+  contain underscores; if this is the `"__unset"` defaultless-axis sentinel,
+  the axis needs a reviewed default in the capture config*. Fusion, the
+  generator and every schema surface refuse with that sentence now.
+
+Eval-gated: `refuse-underscore-ref-names-unset-sentinel` (the refusal must
+name the rule, the sentinel and the fix; the drafter unit pins run inside it).
 
 ## B.17 The corpus has not been re-captured through the stylesheet-ceiling instrument
 
@@ -1184,10 +1227,11 @@ community kit this project does not own, all **15 sets that were run closed
 the round trip** (canvas dump → contract → the plugin engine's Generate path
 → re-dump → set-level fact diff), and the totals across them are:
 
-> **11,104 matched · 1,857 diverged · 4,088 lost (in the original, not the
-> round trip) · 6,365 invented (in the round trip, not the original)**
+> **11400 matched, 1857 diverged, 7671 one-way loss, 15359 invented**
 
-Quoted byte-exact from `extract/figma/roundtrip-uui/REPORT.md:25`. **No
+Quoted byte-exact from `extract/figma/roundtrip-uui/REPORT.md:25` — "loss" is
+in the original and not the round trip; "invented" is in the round trip and
+not the original. **No
 preservation percentage is quoted here on purpose.** Depending on which
 denominator you pick the same four numbers yield very different headlines, and
 this repo has already published one number ("92.5%") that a later audit
@@ -1197,7 +1241,7 @@ the fact; a ratio over them is an argument.
 Two qualifiers, one in each direction
 ([the full report](../extract/figma/roundtrip-uui/REPORT.md)):
 
-- **940 of the 960 `layout.mode` divergences are `auto-layout-inert`** — a
+- **934 of the 954 `layout.mode` divergences are `auto-layout-inert`** — a
   frame drawn with *no* auto-layout comes back *with* one, but every child is
   absolutely placed (or there are no children), and Figma auto-layout excludes
   absolutely-positioned children — so the tree differs while the drawing does
@@ -1205,9 +1249,10 @@ Two qualifiers, one in each direction
 - **The remaining 20 are a REAL axis flip** — `VERTICAL → HORIZONTAL`, all on
   one part (`slider ▸ progress/leftcontrol/tooltip`), which the dump draws
   VERTICAL in the floating-label variants while the contract carries no layout
-  for that part at all. Reported undifferentiated, the 940 inert rows buried
+  for that part at all. Reported undifferentiated, the 934 inert rows buried
   these 20 real ones — which is why the classes are now separated
-  (`REPORT.md:1416`).
+  (`auto-layout-inert` is its own tag in `report.json`; per-tag table in
+  [docs/24 §6.3](24-what-works.md)).
 
 The loss and invention columns are dominated by named structural classes
 (`restructured`, `text-style-identity`), itemised per set in the report and
@@ -1223,7 +1268,7 @@ on your canvas. The counts are the honest way to see both halves at once.
 |---|---|---|---|
 | CSS / DOM frontier | 53 | CARRIED 22 · LOWERED 2 · REFUSED 11 · UNSUPPORTED 18 | `conformance/MANIFEST.json` (run today) |
 | canvas constructs | 91 | CARRIED 72 · LEDGERED 11 · REFUSED 8 | `extract/figma/conformance/MANIFEST.json` |
-| dropped-fact receipts (`†`) | 70 across 8 corpora | pinned exactly, in both directions | `extract/figma/dagger-census.json` |
+| dropped-fact receipts (`†`) | 87 across 8 corpora | pinned exactly, in both directions | `extract/figma/dagger-census.json` |
 
 **REFUSED and UNSUPPORTED are different facts** and the fixture counts them
 separately on purpose. A refusal appears in a receipt you can grep. An
@@ -1288,22 +1333,44 @@ instance of the class in one file, and it is now a counted, href-named ceiling
 [§B.17](#b17-the-corpus-has-not-been-re-captured-through-the-stylesheet-ceiling-instrument)
 for why the committed corpus does not yet demonstrate it.
 
-## C.5 No webfonts are loaded in any harness
+## C.5 Webfonts load only where a library's capture config declares them
 
-The capture harness is network-free. Carbon's `styles.css` carries 105
-`@font-face` blocks whose every `src` is an Akamai CDN URL
-(`examples/carbon/PROVENANCE.md:168`); Altitude's published dist contains zero
-`@font-face` blocks at all. IBM Plex is not loaded and the metrics come from
-the fallback stack.
+The capture harness is network-free, and **by default no webfonts load**:
+Carbon's `styles.css` carries 105 `@font-face` blocks whose every `src` is an
+Akamai CDN URL (`examples/carbon/PROVENANCE.md:168`); Altitude's published
+dist contains zero `@font-face` blocks at all — its face arrives via a
+Google-Fonts `@import` the harness strips for hermeticity.
+
+Since 2026-08-08 a capture config may declare a **`fonts` field**
+(`extract/computed/capture.ts`): each face names a font file from a
+**committed or sandboxed source**, inlined into every render this config
+drives (capture page, portal page, fidelity-gate page) as a base64 `data:`
+URI — still zero network at render or check time, and a declared file that
+does not exist is refused by name. Same font files + same pinned Chromium →
+same rasters on the recording platform. A guessed face (a system-stack
+library with no webfont of its own) must carry a `"__review:fonts"` marker
+and never renders a reference until acked.
+
+Configured today: **Altitude** loads IBM Plex Sans 400/600 (the library's own
+Google-Fonts declaration; woff2 committed under `extract/computed/fonts/`
+from `@ibm/plex-sans@1.1.0`) — that re-pin converted altitude chip and link
+to genuine scored passes on both instruments. **Everywhere unconfigured the
+fallback-font behavior below remains**: Tailwind/Flowbite and Astryx ship no
+library-true font file any committed/sandboxed source provides (Tailwind's
+stack IS the platform system stack; Astryx's Figtree face is not in its
+sandbox), Carbon's Plex faces are obtainable (`@ibm/plex-sans` in its
+sandbox) but not yet configured, so its references are unmoved.
 
 (`document.fonts.check` returns `true` for fonts that are certainly not
 installed — it reports "can this be rendered", which fallback always satisfies.
-It proves nothing.)
+It proves nothing. The `fonts` field does not rely on it: the bytes ride the
+page and `document.fonts.ready` is awaited.)
 
-**What you'd observe** — **pixel anti-aliasing scores are 0 essentially
-everywhere** in the receipts, and absolute text widths in the contracts are
-fallback-font widths. Both sides of the fidelity gate degrade identically, so
-the *percentages* are unaffected; the *absolute widths* are not (see §B.3).
+**What you'd observe where unconfigured** — **pixel anti-aliasing scores are 0
+essentially everywhere** in the receipts, and absolute text widths in the
+contracts are fallback-font widths. Both sides of the fidelity gate degrade
+identically, so the *percentages* are unaffected; the *absolute widths* are
+not (see §B.3).
 
 ## C.6 Instruments — what the gates do and do not measure
 
@@ -1403,8 +1470,8 @@ fixture's canvas half (§C.6.2) is the part still missing.
   — the size-mismatch convention scores 100 pessimistically, so no pixel number
   is quoted for Dialog, Menu or Tooltip.
 - Masked scores mask text, because cross-renderer font rasterization never
-  flatters a result — but see §C.5: with no webfonts loaded, "masked" is doing
-  more work than usual.
+  flatters a result — but see §C.5: wherever a library's config declares no
+  `fonts`, no webfonts load and "masked" is doing more work than usual.
 - A low percentage against a blank canvas is not a pass; the canvas gate carries
   an explicit blank-canvas guard for that reason.
 
@@ -1971,7 +2038,7 @@ numbers are not reused; this is where they went.
 | §2.5 pseudo-elements | [§B.5](#b5-four-pseudo-element-channels-the-reader-has-never-opened) *(two rows reclassified)* + [§A.1](#a1-css-constructs-with-no-canvas-spelling) |
 | §2.6 shadow DOM | [§A.4](#a4-out-of-scope-by-decision--not-gaps) (closed roots) + [§B.6](#b6-shadow-dom-depth-3-nesting-is-not-exercised) (depth-3) |
 | §2.7 shorthand ceiling | [§C.4.1](#c41-the-shorthand-ceiling) |
-| §2.8 no webfonts | [§C.5](#c5-no-webfonts-are-loaded-in-any-harness) |
+| §2.8 no webfonts | [§C.5](#c5-webfonts-load-only-where-a-librarys-capture-config-declares-them) *(now per-library configurable)* |
 | §2.9 fidelity gate samples mid-transition | **[§D.1 — CLOSED](#d1-the-fidelity-gate-sampled-mid-transition--closed-task-34)** |
 | §2.10 channels with no canvas spelling | [§A.1](#a1-css-constructs-with-no-canvas-spelling) + [§B.7](#b7-flex-basis-is-not-a-carried-channel-anywhere-in-the-pipeline) (`flex-basis`) |
 | §2.11 constructs carried that should not be | [§B.8](#b8-two-constructs-the-engine-carries-that-it-should-not) |

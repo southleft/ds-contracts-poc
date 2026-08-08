@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "pass",
+  "matchDeveloped": true,
+  "recommendMatchDeveloped": true,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 2.170138888888889,
+    "pctAAUnmasked": 0.9548611111111112,
+    "pctAAMasked": 0.9548611111111112,
+    "maskCoveragePct": 0,
+    "canvasPx": "48x48",
+    "realPx": "48x48",
+    "inkCanvasPct": 100,
+    "inkRealPct": 100
+  },
+  "reference": "parity/receipts/console-loop/carbon/refs/icon-button.png",
+  "referenceSha256": "38cca82fdab648263d28b95e984501540d56b34cfeabeac132abde74bb626e19",
+  "canvasShot": "parity/receipts/console-loop/carbon/shots/icon-button-cell.png",
+  "canvasShotSha256": "56832435cfed9e6801537448dca0a420e7b07d94865f6986a5fa7b39c45f74a1",
+  "diff": "parity/receipts/console-loop/carbon/scores/icon-button.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/carbon/components/icon-button.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-08T04:31:16.826Z"
+}

@@ -14,7 +14,7 @@ The contract-as-source-of-truth loop, demonstrated end to end.
 - [x] 282 DTCG tokens compiled to CSS custom properties and design-tool variables (light + dark × Default/Aurora brand modes)
 - [x] Three-way parity differ: every drift classified *ahead / behind / mismatched* with a proposed remedy
 - [x] Promotion loop executed in both directions on live surfaces, with receipts ([docs/06](06-parity-loop.md))
-- [x] 188/188 deterministic machinery evals ([docs/07](07-validation.md))
+- [x] 204/204 deterministic machinery evals ([docs/07](07-validation.md))
 - [x] Governed AI generation measured: 100/100 with the contract catalog vs 69/100 without ([docs/10](10-honest-generation.md))
 - [x] Coverage attributed against a full 93-component industry library ([coverage map](research/astryx-coverage.md))
 
@@ -24,10 +24,10 @@ The contract-as-source-of-truth loop, demonstrated end to end.
 
 Close the honesty gaps the PoC itself documented, so every claim survives adversarial review.
 
-- [ ] **Anatomy-level parity** — extend the differ below the API surface with a per-variant anatomy fingerprint (part tree, layout, bindings), closing the gap described in [docs/07 § What "parity clean" does and doesn't mean](07-validation.md)
-  - **The FINGERPRINT now carries all three (v6, 2026-08-04); wiring it into `parity/diff.ts` is what remains.** `core/canvas-fingerprint.ts` already covered part tree and layout and is stamped on the set and every variant. It could not see **bindings**: `boundVariables` appeared zero times, so a designer who DETACHED a variable and typed the identical literal recomputed the same hash with no diff lines. v6 adds `|bound:<field>|<slash/name>` per field through the resolver `extract/figma/dump.plugin.js` already uses, and stops the fill line leaking a run-scoped `VariableID:` into the hash. Pinned by `npm run canvas:binding:check`.
-  - **The gap is now transport, not signal.** Neither `parity/extract-figma.plugin.js` nor `extract/figma/dump.plugin.js` calls `getSharedPluginData`, so the stamp is written to the canvas and never read back; and `parity/extract-code.ts` computes `cssVars` which `parity/diff.ts` references **zero** times. Editing the extraction plugin is a human-in-Figma act and should be batched with the next snapshot refresh — [docs/HANDOFF.md](HANDOFF.md).
-  - **The negative case is constructed and quotable.** The real extraction plugin projects a four-way part-layout edit inside ONE variant (padding, itemSpacing, counter-axis alignment, a dropped binding) to a BYTE-IDENTICAL snapshot entry, and `parity/diff.ts` reports "✔ Parity clean" over it — as it does with `variantCount` 2→99, a rewritten description and a zeroed nodeId. The wire format cannot carry the change.
+- [x] **Anatomy-level parity** — extend the differ below the API surface with a per-variant anatomy fingerprint (part tree, layout, bindings), closing the gap described in [docs/07 § What "parity clean" does and doesn't mean](07-validation.md)
+  - **Done (instrument):** `core/canvas-fingerprint.ts` v6 + `parity/extract-figma.plugin.js` transport + `parity/diff.ts` §2.5 + `npm run variant-drift:check` (fast lane). Offline fixtures prove a four-way interior edit is caught; absence of `variants` is NOT EXTRACTED.
+  - **Wave 7 (2026-08-05):** `core/anatomy-diff.ts` + `npm run anatomy-diff:check` — contract anatomy channel lines and resolved cssVars floor on the code surface.
+  - **Still honest:** committed `parity/snapshots/figma-components.json` may lag until a human re-extracts; CI trusts the fixture gate, not a stale snapshot's "clean" banner.
 - [x] **Fresh-file rebuild** — executed 2026-07-06 via the Sync Runner dev plugin: blank file → 282 variables + 48 sets + arranged pages in one run, `diagnose` clean across all 50 contracts; caught three generator bugs incremental building had masked (docs/07 live checks) <!-- docs-check:ignore -->
 - [ ] **Live token re-extraction in the loop** — the token snapshot is periodically re-extracted from the design tool, not only derived from `tokens/` (verified manually 264/264 on 2026-07-03; make it automatic)
   - **The COMPARATOR half is automated (2026-08-04).** `npm run tokens:snapshot:check` (fast lane) derives the variable table `tokens/` implies and diffs it against the extracted snapshot on name, every mode value and every alias target: **282/282** today, with two normalization rules that are each falsifiable (`--no-rule=px` → 26 phantom drifts, `--no-rule=alias` → 376). It prints the snapshot's age on every run rather than hiding it.

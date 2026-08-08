@@ -1,0 +1,14 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/inline-hint.contract.json (ds.inline-hint v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-inline-hint-root-width);
+  height: var(--imported-stub-inline-hint-root-height);
+  background-color: var(--color-background-default);
+}

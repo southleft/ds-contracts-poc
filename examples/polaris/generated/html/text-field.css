@@ -6,9 +6,10 @@
 
 .text-field {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   border: 0;
-  color: var(--p-color-text);
+  width: var(--imported-text-field-connected-width-off-off);
   display: block;
 }
 
@@ -84,6 +85,7 @@
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-text-field-connected-width-off-off);
   position: relative;
 }
 
@@ -120,6 +122,8 @@
 .text-field__textfield {
   display: flex;
   align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
   bottom: var(--imported-shared-size-0);
   left: var(--imported-shared-size-0);
   min-height: var(--imported-shared-size-0);
@@ -331,7 +335,6 @@
   min-width: 0;
   background-color: var(--p-color-input-bg-surface);
   border-radius: var(--p-border-radius-200);
-  border-width: var(--p-border-width-0165);
   border-color: var(--p-color-input-border);
   bottom: var(--imported-shared-size-0);
   left: var(--imported-shared-size-0);
@@ -339,7 +342,6 @@
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
   z-index: var(--imported-text-field-backdrop-z-index);
-  border-style: solid;
   display: block;
   position: absolute;
   cursor: text;
@@ -352,10 +354,32 @@
 
 .text-field:disabled .text-field__backdrop {
   cursor: auto;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: none;
+  border-left-style: none;
 }
 
 .text-field:focus-visible .text-field__backdrop {
   outline-style: solid;
+}
+
+.text-field--variant-inherit .text-field__backdrop {
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-top-color: rgba(138, 138, 138, 1);
+  border-right-color: rgba(138, 138, 138, 1);
+  border-bottom-color: rgba(138, 138, 138, 1);
+  border-left-color: rgba(138, 138, 138, 1);
+}
+
+.text-field--variant-borderless .text-field__backdrop {
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
 }
 
 .text-field--variant-borderless .text-field__backdrop {

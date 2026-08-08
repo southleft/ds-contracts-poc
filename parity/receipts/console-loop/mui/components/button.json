@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "button",
+  "contract": "examples/mui/contracts/button.contract.json",
+  "script": "examples/mui/figma/button.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.510Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:287",
+    "mode": "existing",
+    "page": "Button",
+    "sectionId": "21:294",
+    "result": {}
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:287).",
+      "Button COMPONENT_SET 21:287: 75 variant(s), 6 prop def(s). Structure looks sane; slot placeholders OK."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=88.31% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/button.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/button.png",
+    "referenceSource": "extract/computed/out/mui/button/gate-shots/contained.error.large.disabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/button-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
+  },
+  "fingerprint": {
+    "v6": "v6:437388687",
+    "lineCount": 1690,
+    "sampleLines": [
+      ":COMPONENT_SET/Button|fill|[]",
+      ":COMPONENT_SET/Button|propdef|Variant:VARIANT=Text"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant enum \u2192 Text/Contained/Outlined",
+      "Color enum \u2192 Primary/Secondary/Error/Success/Warning/Info/Inherit",
+      "Size enum \u2192 Medium/Small/Large",
+      "BOOLEAN Disabled",
+      "TEXT Label",
+      "first-variant fill bound: imported/button/root/background-color/text/primary"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Text, Color=Primary, Size=Medium, State=Default"
+      ],
+      "propDefs": [
+        {
+          "name": "Color",
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Error",
+            "Success",
+            "Warning",
+            "Info",
+            "Inherit"
+          ]
+        },
+        {
+          "name": "Disabled#21:5",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Label#21:81",
+          "type": "TEXT",
+          "defaultValue": "Button",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Disabled",
+            "Active",
+            "Focus Visible",
+            "Hover"
+          ]
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Text",
+          "variantOptions": [
+            "Text",
+            "Contained",
+            "Outlined"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Text, Color=Primary, Size=Medium, State=Default",
+        "type": "COMPONENT",
+        "fillVarName": "imported/button/root/background-color/text/primary",
+        "padBound": {},
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 6,
+          "r": 8,
+          "b": 6,
+          "l": 8
+        },
+        "radius": 4,
+        "w": 71,
+        "h": 28,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "tab",
+  "contract": "contracts/tab.contract.json",
+  "script": "parity/receipts/console-loop/emitted/19-tab.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:41.057Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:857",
+    "page": "Tab",
+    "sectionId": "1:858",
+    "result": {
+      "createdNodeIds": [
+        "1:857"
+      ],
+      "results": [
+        {
+          "name": "Tab",
+          "contractId": "ds.tab",
+          "nodeId": "1:857",
+          "key": "62a234ec2180eae14d071a5eaa14471ead59eca1",
+          "variants": 2,
+          "properties": [
+            "Label#1:264",
+            "Icon#1:267",
+            "Show Icon#1:270",
+            "EndContent#1:273",
+            "Show EndContent#1:276",
+            "State"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:858 captured (ok).",
+      "Tab: 2 variant(s); type COMPONENT_SET; page Tab.",
+      "Props: Label, Icon, Show Icon, EndContent, Show EndContent, State.",
+      "First root fill bound to color/surface/background."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:2164586031",
+    "lineCount": 96,
+    "sampleLines": [
+      ":COMPONENT_SET/Tab|fill|[]",
+      ":COMPONENT_SET/Tab|radius|5,5,5,5",
+      ":COMPONENT_SET/Tab|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Tab|description|Tab — generated from contract ds.tab v1.0.0",
+      ":COMPONENT_SET/Tab|propdef|EndContent#1:273:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/Tab|propdef|Icon#1:267:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/Tab|propdef|Label#1:264:TEXT=Tab",
+      ":COMPONENT_SET/Tab|propdef|Show EndContent#1:276:BOOLEAN=true",
+      ":COMPONENT_SET/Tab|propdef|Show Icon#1:270:BOOLEAN=true",
+      ":COMPONENT_SET/Tab|propdef|State:VARIANT=Default",
+      "/0:COMPONENT/State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.9764705896377563,\"g\":0.9803921580314636,\"b\":0.9843137264251709},\"boundVariables\":{\"color\":{\"var\":\"color/surface/background\"}}}]",
+      "/0:COMPONENT/State=Default|radius|4,4,4,4",
+      "/0:COMPONENT/State=Default|layout|HORIZONTAL MIN/CENTER gap 4 pad 8,12,8,12",
+      "/0:COMPONENT/State=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/State=Default|bound:bottomLeftRadius|radius/100",
+      "/0:COMPONENT/State=Default|bound:bottomRightRadius|radius/100",
+      "/0:COMPONENT/State=Default|bound:itemSpacing|space/inset-y/sm",
+      "/0:COMPONENT/State=Default|bound:paddingBottom|space/inset-y/md",
+      "/0:COMPONENT/State=Default|bound:paddingLeft|space/inset-x/sm",
+      "/0:COMPONENT/State=Default|bound:paddingRight|space/inset-x/sm"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "State",
+      "Label"
+    ],
+    "observed": {
+      "variantNames": [
+        "State=Default",
+        "State=Selected"
+      ],
+      "propDefs": [
+        {
+          "name": "Label#1:264",
+          "type": "TEXT",
+          "defaultValue": "Tab",
+          "variantOptions": null
+        },
+        {
+          "name": "Icon#1:267",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Icon#1:270",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "EndContent#1:273",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show EndContent#1:276",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Selected"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 12,
+          "b": 8,
+          "l": 12
+        },
+        "radius": 4,
+        "fillVarName": "color/surface/background",
+        "padBound": {
+          "itemSpacing": "space/inset-y/sm",
+          "paddingLeft": "space/inset-x/sm",
+          "paddingTop": "space/inset-y/md",
+          "paddingRight": "space/inset-x/sm",
+          "paddingBottom": "space/inset-y/md",
+          "topLeftRadius": "radius/100",
+          "topRightRadius": "radius/100",
+          "bottomLeftRadius": "radius/100",
+          "bottomRightRadius": "radius/100",
+          "fills": "color/surface/background"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "labelText",
+            "chars": "Tab",
+            "fontSize": 14
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 155,
+        "h": 116,
+        "childNames": [
+          "iconSlot:FRAME",
+          "labelText:TEXT",
+          "endContent:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

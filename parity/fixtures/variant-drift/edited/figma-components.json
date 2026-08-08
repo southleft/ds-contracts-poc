@@ -37,14 +37,14 @@
         "Slot"
       ],
       "contractId": "ds.accordion-item",
-      "setFingerprint": "v6:2339130693",
+      "setFingerprint": "v6:3797426111",
       "setSnapshot": [
         ":COMPONENT_SET/AccordionItem|description|AccordionItem — generated from contract ds.accordion-item v1.1.0 †",
         ":COMPONENT_SET/AccordionItem|propdef|Children#310:311:1:INSTANCE_SWAP=305:306",
         ":COMPONENT_SET/AccordionItem|propdef|State:VARIANT=Closed",
         ":COMPONENT_SET/AccordionItem|propdef|Title#310:311:0:TEXT=Section title"
       ],
-      "setLive": "v6:1343881710",
+      "setLive": "v6:2140050984",
       "setLiveSnapshot": [
         ":COMPONENT_SET/AccordionItem|description|AccordionItem — generated from contract ds.accordion-item v1.1.0 †",
         ":COMPONENT_SET/AccordionItem|propdef|Children#310:311:1:INSTANCE_SWAP=305:306",
@@ -55,7 +55,7 @@
       "variants": [
         {
           "name": "State=Closed",
-          "fingerprint": "v6:4075076956",
+          "fingerprint": "v6:926320793",
           "snapshot": [
             ":COMPONENT/State=Closed|fill|[{\"type\":\"SOLID\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/surface/raised\"}}}]",
             ":COMPONENT/State=Closed|stroke|[{\"type\":\"SOLID\",\"color\":{\"r\":0.8980392156862745,\"g\":0.9058823529411765,\"b\":0.9215686274509803},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
@@ -82,10 +82,10 @@
             "/0/0:FRAME/chevron|sizing|HUG/HUG AUTO",
             "/0/1:TEXT/titleText|fill|[{\"type\":\"SOLID\",\"color\":{\"r\":0.06666666666666667,\"g\":0.09411764705882353,\"b\":0.15294117647058825},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]",
             "/0/1:TEXT/titleText|radius|0,0,0,0",
-            "/0/1:TEXT/titleText|sizing|FILL/HUG AUTO",
+            "/0/1:TEXT/titleText|sizing|HUG/HUG AUTO",
             "/0/1:TEXT/titleText|text|\"Section title\" 14px {\"family\":\"Inter\",\"style\":\"Medium\"}"
           ],
-          "live": "v6:1843825572",
+          "live": "v6:3331567073",
           "liveSnapshot": [
             ":COMPONENT/State=Closed|fill|[{\"type\":\"SOLID\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/surface/raised\"}}}]",
             ":COMPONENT/State=Closed|stroke|[{\"type\":\"SOLID\",\"color\":{\"r\":0.8980392156862745,\"g\":0.9058823529411765,\"b\":0.9215686274509803},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
@@ -111,14 +111,14 @@
             "/0/0:FRAME/chevron|sizing|HUG/HUG AUTO",
             "/0/1:TEXT/titleText|fill|[{\"type\":\"SOLID\",\"color\":{\"r\":0.06666666666666667,\"g\":0.09411764705882353,\"b\":0.15294117647058825},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]",
             "/0/1:TEXT/titleText|radius|0,0,0,0",
-            "/0/1:TEXT/titleText|sizing|FILL/HUG AUTO",
+            "/0/1:TEXT/titleText|sizing|HUG/HUG AUTO",
             "/0/1:TEXT/titleText|text|\"Section title\" 14px {\"family\":\"Inter\",\"style\":\"Medium\"}"
           ],
           "measurementError": null
         },
         {
           "name": "State=Open",
-          "fingerprint": "v6:2046504050",
+          "fingerprint": "v6:1814270159",
           "snapshot": [
             ":COMPONENT/State=Open|fill|[{\"type\":\"SOLID\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/surface/raised\"}}}]",
             ":COMPONENT/State=Open|stroke|[{\"type\":\"SOLID\",\"color\":{\"r\":0.8980392156862745,\"g\":0.9058823529411765,\"b\":0.9215686274509803},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
@@ -145,7 +145,7 @@
             "/0/0:FRAME/chevron|sizing|HUG/HUG AUTO",
             "/0/1:TEXT/titleText|fill|[{\"type\":\"SOLID\",\"color\":{\"r\":0.06666666666666667,\"g\":0.09411764705882353,\"b\":0.15294117647058825},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]",
             "/0/1:TEXT/titleText|radius|0,0,0,0",
-            "/0/1:TEXT/titleText|sizing|FILL/HUG AUTO",
+            "/0/1:TEXT/titleText|sizing|HUG/HUG AUTO",
             "/0/1:TEXT/titleText|text|\"Section title\" 14px {\"family\":\"Inter\",\"style\":\"Medium\"}",
             "/1:FRAME/contentArea|fill|[]",
             "/1:FRAME/contentArea|radius|0,0,0,0",
@@ -165,7 +165,7 @@
             "/1/0/0:TEXT/TEXT|sizing|HUG/HUG AUTO",
             "/1/0/0:TEXT/TEXT|text|\"Slot\" 12px {\"family\":\"Inter\",\"style\":\"Medium\"}"
           ],
-          "live": "v6:2046504050",
+          "live": "v6:1814270159",
           "liveSnapshot": [
             ":COMPONENT/State=Open|fill|[{\"type\":\"SOLID\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/surface/raised\"}}}]",
             ":COMPONENT/State=Open|stroke|[{\"type\":\"SOLID\",\"color\":{\"r\":0.8980392156862745,\"g\":0.9058823529411765,\"b\":0.9215686274509803},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
@@ -192,7 +192,7 @@
             "/0/0:FRAME/chevron|sizing|HUG/HUG AUTO",
             "/0/1:TEXT/titleText|fill|[{\"type\":\"SOLID\",\"color\":{\"r\":0.06666666666666667,\"g\":0.09411764705882353,\"b\":0.15294117647058825},\"opacity\":1,\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]",
             "/0/1:TEXT/titleText|radius|0,0,0,0",
-            "/0/1:TEXT/titleText|sizing|FILL/HUG AUTO",
+            "/0/1:TEXT/titleText|sizing|HUG/HUG AUTO",
             "/0/1:TEXT/titleText|text|\"Section title\" 14px {\"family\":\"Inter\",\"style\":\"Medium\"}",
             "/1:FRAME/contentArea|fill|[]",
             "/1:FRAME/contentArea|radius|0,0,0,0",

@@ -1,0 +1,3279 @@
+{
+  "_provenance": {
+    "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+    "extractedAt": "2026-08-05",
+    "note": "Live fingerprint dump",
+    "dumpVersion": "live-fingerprint-1",
+    "target": "Switch"
+  },
+  "_degradations": [],
+  "_variables": {},
+  "Switch": {
+    "setName": "Switch",
+    "type": "COMPONENT_SET",
+    "nodeId": "21:624",
+    "key": "8a8154c3ffa47f00eddf4cb1d2065f0be8209b8b",
+    "page": "Switch",
+    "variants": [
+      {
+        "name": "Color=Primary, Size=Medium, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:512",
+        "nodePath": "Switch:Color=Primary, Size=Medium, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:513",
+            "nodePath": "Switch:Color=Primary, Size=Medium, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:514",
+            "nodePath": "Switch:Color=Primary, Size=Medium, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:515",
+                "nodePath": "Switch:Color=Primary, Size=Medium, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Primary, Size=Medium, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:516",
+        "nodePath": "Switch:Color=Primary, Size=Medium, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:517",
+            "nodePath": "Switch:Color=Primary, Size=Medium, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:518",
+            "nodePath": "Switch:Color=Primary, Size=Medium, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:519",
+                "nodePath": "Switch:Color=Primary, Size=Medium, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Primary, Size=Small, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:520",
+        "nodePath": "Switch:Color=Primary, Size=Small, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:521",
+            "nodePath": "Switch:Color=Primary, Size=Small, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:522",
+            "nodePath": "Switch:Color=Primary, Size=Small, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:523",
+                "nodePath": "Switch:Color=Primary, Size=Small, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Primary, Size=Small, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:524",
+        "nodePath": "Switch:Color=Primary, Size=Small, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:525",
+            "nodePath": "Switch:Color=Primary, Size=Small, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:526",
+            "nodePath": "Switch:Color=Primary, Size=Small, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:527",
+                "nodePath": "Switch:Color=Primary, Size=Small, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Secondary, Size=Medium, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:528",
+        "nodePath": "Switch:Color=Secondary, Size=Medium, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:529",
+            "nodePath": "Switch:Color=Secondary, Size=Medium, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:530",
+            "nodePath": "Switch:Color=Secondary, Size=Medium, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:531",
+                "nodePath": "Switch:Color=Secondary, Size=Medium, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Secondary, Size=Medium, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:532",
+        "nodePath": "Switch:Color=Secondary, Size=Medium, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:533",
+            "nodePath": "Switch:Color=Secondary, Size=Medium, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:534",
+            "nodePath": "Switch:Color=Secondary, Size=Medium, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:535",
+                "nodePath": "Switch:Color=Secondary, Size=Medium, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Secondary, Size=Small, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:536",
+        "nodePath": "Switch:Color=Secondary, Size=Small, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:537",
+            "nodePath": "Switch:Color=Secondary, Size=Small, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:538",
+            "nodePath": "Switch:Color=Secondary, Size=Small, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:539",
+                "nodePath": "Switch:Color=Secondary, Size=Small, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Secondary, Size=Small, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:540",
+        "nodePath": "Switch:Color=Secondary, Size=Small, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:541",
+            "nodePath": "Switch:Color=Secondary, Size=Small, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:542",
+            "nodePath": "Switch:Color=Secondary, Size=Small, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:543",
+                "nodePath": "Switch:Color=Secondary, Size=Small, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Error, Size=Medium, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:544",
+        "nodePath": "Switch:Color=Error, Size=Medium, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:545",
+            "nodePath": "Switch:Color=Error, Size=Medium, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:546",
+            "nodePath": "Switch:Color=Error, Size=Medium, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:547",
+                "nodePath": "Switch:Color=Error, Size=Medium, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Error, Size=Medium, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:548",
+        "nodePath": "Switch:Color=Error, Size=Medium, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:549",
+            "nodePath": "Switch:Color=Error, Size=Medium, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:550",
+            "nodePath": "Switch:Color=Error, Size=Medium, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:551",
+                "nodePath": "Switch:Color=Error, Size=Medium, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Error, Size=Small, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:552",
+        "nodePath": "Switch:Color=Error, Size=Small, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:553",
+            "nodePath": "Switch:Color=Error, Size=Small, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:554",
+            "nodePath": "Switch:Color=Error, Size=Small, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:555",
+                "nodePath": "Switch:Color=Error, Size=Small, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Error, Size=Small, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:556",
+        "nodePath": "Switch:Color=Error, Size=Small, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:557",
+            "nodePath": "Switch:Color=Error, Size=Small, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:558",
+            "nodePath": "Switch:Color=Error, Size=Small, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:559",
+                "nodePath": "Switch:Color=Error, Size=Small, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Warning, Size=Medium, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:560",
+        "nodePath": "Switch:Color=Warning, Size=Medium, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:561",
+            "nodePath": "Switch:Color=Warning, Size=Medium, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:562",
+            "nodePath": "Switch:Color=Warning, Size=Medium, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:563",
+                "nodePath": "Switch:Color=Warning, Size=Medium, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Warning, Size=Medium, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:564",
+        "nodePath": "Switch:Color=Warning, Size=Medium, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:565",
+            "nodePath": "Switch:Color=Warning, Size=Medium, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:566",
+            "nodePath": "Switch:Color=Warning, Size=Medium, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:567",
+                "nodePath": "Switch:Color=Warning, Size=Medium, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Warning, Size=Small, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:568",
+        "nodePath": "Switch:Color=Warning, Size=Small, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:569",
+            "nodePath": "Switch:Color=Warning, Size=Small, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:570",
+            "nodePath": "Switch:Color=Warning, Size=Small, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:571",
+                "nodePath": "Switch:Color=Warning, Size=Small, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Warning, Size=Small, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:572",
+        "nodePath": "Switch:Color=Warning, Size=Small, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:573",
+            "nodePath": "Switch:Color=Warning, Size=Small, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:574",
+            "nodePath": "Switch:Color=Warning, Size=Small, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:575",
+                "nodePath": "Switch:Color=Warning, Size=Small, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Info, Size=Medium, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:576",
+        "nodePath": "Switch:Color=Info, Size=Medium, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:577",
+            "nodePath": "Switch:Color=Info, Size=Medium, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:578",
+            "nodePath": "Switch:Color=Info, Size=Medium, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:579",
+                "nodePath": "Switch:Color=Info, Size=Medium, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Info, Size=Medium, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:580",
+        "nodePath": "Switch:Color=Info, Size=Medium, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:581",
+            "nodePath": "Switch:Color=Info, Size=Medium, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:582",
+            "nodePath": "Switch:Color=Info, Size=Medium, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:583",
+                "nodePath": "Switch:Color=Info, Size=Medium, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Info, Size=Small, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:584",
+        "nodePath": "Switch:Color=Info, Size=Small, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:585",
+            "nodePath": "Switch:Color=Info, Size=Small, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:586",
+            "nodePath": "Switch:Color=Info, Size=Small, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:587",
+                "nodePath": "Switch:Color=Info, Size=Small, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Info, Size=Small, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:588",
+        "nodePath": "Switch:Color=Info, Size=Small, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:589",
+            "nodePath": "Switch:Color=Info, Size=Small, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:590",
+            "nodePath": "Switch:Color=Info, Size=Small, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:591",
+                "nodePath": "Switch:Color=Info, Size=Small, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Success, Size=Medium, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:592",
+        "nodePath": "Switch:Color=Success, Size=Medium, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:593",
+            "nodePath": "Switch:Color=Success, Size=Medium, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:594",
+            "nodePath": "Switch:Color=Success, Size=Medium, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:595",
+                "nodePath": "Switch:Color=Success, Size=Medium, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Success, Size=Medium, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:596",
+        "nodePath": "Switch:Color=Success, Size=Medium, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:597",
+            "nodePath": "Switch:Color=Success, Size=Medium, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:598",
+            "nodePath": "Switch:Color=Success, Size=Medium, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:599",
+                "nodePath": "Switch:Color=Success, Size=Medium, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Success, Size=Small, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:600",
+        "nodePath": "Switch:Color=Success, Size=Small, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:601",
+            "nodePath": "Switch:Color=Success, Size=Small, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:602",
+            "nodePath": "Switch:Color=Success, Size=Small, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:603",
+                "nodePath": "Switch:Color=Success, Size=Small, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Success, Size=Small, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:604",
+        "nodePath": "Switch:Color=Success, Size=Small, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:605",
+            "nodePath": "Switch:Color=Success, Size=Small, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:606",
+            "nodePath": "Switch:Color=Success, Size=Small, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:607",
+                "nodePath": "Switch:Color=Success, Size=Small, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Medium, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:608",
+        "nodePath": "Switch:Color=Default, Size=Medium, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:609",
+            "nodePath": "Switch:Color=Default, Size=Medium, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:610",
+            "nodePath": "Switch:Color=Default, Size=Medium, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:611",
+                "nodePath": "Switch:Color=Default, Size=Medium, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Medium, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:612",
+        "nodePath": "Switch:Color=Default, Size=Medium, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium",
+          "paddingTop": "imported/switch/root/padding-top/medium",
+          "paddingRight": "imported/switch/root/padding-right/medium",
+          "paddingBottom": "imported/switch/root/padding-bottom/medium",
+          "width": "imported/switch/root/width/medium",
+          "height": "imported/switch/root/height/medium"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:613",
+            "nodePath": "Switch:Color=Default, Size=Medium, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/medium",
+              "height": "imported/switch/switch-track/height/medium",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:614",
+            "nodePath": "Switch:Color=Default, Size=Medium, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/medium",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/medium",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/medium",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/medium",
+              "width": "imported/switch/buttonbase-root/width/medium",
+              "height": "imported/switch/buttonbase-root/height/medium",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/medium",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/medium",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/medium",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/medium",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 19,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:615",
+                "nodePath": "Switch:Color=Default, Size=Medium, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/medium",
+                  "height": "imported/switch/switch-thumb/height/medium",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/medium",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/medium",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/medium",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/medium",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 10,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Small, Checked=Unchecked",
+        "type": "COMPONENT",
+        "nodeId": "21:616",
+        "nodePath": "Switch:Color=Default, Size=Small, Checked=Unchecked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:617",
+            "nodePath": "Switch:Color=Default, Size=Small, Checked=Unchecked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:618",
+            "nodePath": "Switch:Color=Default, Size=Small, Checked=Unchecked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:619",
+                "nodePath": "Switch:Color=Default, Size=Small, Checked=Unchecked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Small, Checked=Checked",
+        "type": "COMPONENT",
+        "nodeId": "21:620",
+        "nodePath": "Switch:Color=Default, Size=Small, Checked=Checked",
+        "layout": {
+          "mode": "row",
+          "gap": 0,
+          "padding": [
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        "bound": {
+          "paddingLeft": "imported/switch/root/padding-left/small",
+          "paddingTop": "imported/switch/root/padding-top/small",
+          "paddingRight": "imported/switch/root/padding-right/small",
+          "paddingBottom": "imported/switch/root/padding-bottom/small",
+          "width": "imported/switch/root/width/small",
+          "height": "imported/switch/root/height/small"
+        },
+        "cornerRadius": 0,
+        "children": [
+          {
+            "name": "switch-track",
+            "type": "FRAME",
+            "nodeId": "21:621",
+            "nodePath": "Switch:Color=Default, Size=Small, Checked=Checked/switch-track",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "bound": {
+              "width": "imported/switch/switch-track/width/small",
+              "height": "imported/switch/switch-track/height/small",
+              "topLeftRadius": "imported/shared/size-7",
+              "topRightRadius": "imported/shared/size-7",
+              "bottomLeftRadius": "imported/shared/size-7",
+              "bottomRightRadius": "imported/shared/size-7"
+            },
+            "cornerRadius": 7,
+            "children": []
+          },
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:622",
+            "nodePath": "Switch:Color=Default, Size=Small, Checked=Checked/buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                4,
+                4,
+                4,
+                4
+              ]
+            },
+            "bound": {
+              "paddingLeft": "imported/switch/buttonbase-root/padding-left/small",
+              "paddingTop": "imported/switch/buttonbase-root/padding-top/small",
+              "paddingRight": "imported/switch/buttonbase-root/padding-right/small",
+              "paddingBottom": "imported/switch/buttonbase-root/padding-bottom/small",
+              "width": "imported/switch/buttonbase-root/width/small",
+              "height": "imported/switch/buttonbase-root/height/small",
+              "topLeftRadius": "imported/switch/buttonbase-root/border-top-left-radius/small",
+              "topRightRadius": "imported/switch/buttonbase-root/border-top-right-radius/small",
+              "bottomLeftRadius": "imported/switch/buttonbase-root/border-bottom-left-radius/small",
+              "bottomRightRadius": "imported/switch/buttonbase-root/border-bottom-right-radius/small",
+              "minWidth": "imported/shared/size-0"
+            },
+            "cornerRadius": 12,
+            "children": [
+              {
+                "name": "switch-thumb",
+                "type": "FRAME",
+                "nodeId": "21:623",
+                "nodePath": "Switch:Color=Default, Size=Small, Checked=Checked/buttonbase-root/switch-thumb",
+                "layout": {
+                  "mode": "row",
+                  "gap": 0,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "bound": {
+                  "width": "imported/switch/switch-thumb/width/small",
+                  "height": "imported/switch/switch-thumb/height/small",
+                  "topLeftRadius": "imported/switch/switch-thumb/border-top-left-radius/small",
+                  "topRightRadius": "imported/switch/switch-thumb/border-top-right-radius/small",
+                  "bottomLeftRadius": "imported/switch/switch-thumb/border-bottom-left-radius/small",
+                  "bottomRightRadius": "imported/switch/switch-thumb/border-bottom-right-radius/small",
+                  "strokeTopWeight": "imported/shared/size-1",
+                  "strokeBottomWeight": "imported/shared/size-1",
+                  "strokeLeftWeight": "imported/shared/size-1",
+                  "strokeRightWeight": "imported/shared/size-1"
+                },
+                "cornerRadius": 8,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "propertyDefinitions": {
+      "Disabled#21:214": {
+        "type": "BOOLEAN",
+        "defaultValue": false
+      },
+      "Is enabled#21:244": {
+        "type": "BOOLEAN",
+        "defaultValue": true
+      },
+      "Color": {
+        "type": "VARIANT",
+        "defaultValue": "Primary",
+        "variantOptions": [
+          "Primary",
+          "Secondary",
+          "Error",
+          "Warning",
+          "Info",
+          "Success",
+          "Default"
+        ]
+      },
+      "Size": {
+        "type": "VARIANT",
+        "defaultValue": "Medium",
+        "variantOptions": [
+          "Medium",
+          "Small"
+        ]
+      },
+      "Checked": {
+        "type": "VARIANT",
+        "defaultValue": "Unchecked",
+        "variantOptions": [
+          "Unchecked",
+          "Checked"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "kind": "console-loop-altitude-component",
+  "status": "completed",
+  "component": "icon-close",
+  "contract": "examples/altitude/contracts/iconclose.contract.json",
+  "script": "examples/altitude/figma/icon-close.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:43:14.336Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:3071",
+    "mode": "generated",
+    "page": "IconClose",
+    "sectionId": "1:3072",
+    "contractId": "altitude.iconclose",
+    "result": {
+      "createdNodeIds": [
+        "1:3071"
+      ],
+      "results": [
+        {
+          "name": "IconClose",
+          "contractId": "altitude.iconclose",
+          "nodeId": "1:3071",
+          "key": "6126a7cc520a484a992ae9980b8aaa6afb275ed7",
+          "variants": 7,
+          "properties": [
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "matchDeveloped": true,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [],
+    "defects": [],
+    "reference": "parity/receipts/console-loop/altitude/refs/icon-close.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "extract/computed/out/altitude/iconclose/gate-shots/lg__default.png",
+    "scorecard": "parity/receipts/console-loop/altitude/scores/icon-close.json",
+    "matchDevelopedReason": "agent AA=4.69 compositionOk (cropped-ref loop)",
+    "matchedAt": "2026-08-08T03:09:53.136Z",
+    "status": "scored-pass",
+    "scoreConfirmed": {
+      "at": "2026-08-08T04:31:56.356Z",
+      "pctAAMasked": 4.6875,
+      "compositionOk": true,
+      "supersededDefects": [],
+      "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:163654327",
+    "lineCount": 96,
+    "sampleLines": [
+      ":COMPONENT_SET/IconClose|fill|[]",
+      ":COMPONENT_SET/IconClose|radius|5,5,5,5",
+      ":COMPONENT_SET/IconClose|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/IconClose|description|IconClose â generated from contract altitude.iconclose v0.2.0 â",
+      ":COMPONENT_SET/IconClose|propdef|Size:VARIANT=Xs",
+      "/0:COMPONENT/Size=Xs|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Size=Xs|radius|0,0,0,0",
+      "/0:COMPONENT/Size=Xs|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Size=Xs|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Size=Xs|bound:minHeight|imported/icon-close/root/min-height",
+      "/0:COMPONENT/Size=Xs|bound:minWidth|imported/icon-close/root/min-width",
+      "/0:COMPONENT/Size=Xs|bound:width|imported/icon-close/root/width/xs",
+      "/0/0:FRAME/root-xs|fill|[]",
+      "/0/0:FRAME/root-xs|radius|0,0,0,0",
+      "/0/0:FRAME/root-xs|sizing|FILL/FIXED AUTO",
+      "/0/0/0:VECTOR/Vector|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.062745101749897,\"g\":0.062745101749897,\"b\":0.062745101749897},\"boundVariables\":{\"color\":{\"var\":\"imported/icon-close/root/color\"}}}]",
+      "/0/0/0:VECTOR/Vector|radius|0,0,0,0",
+      "/0/0/0:VECTOR/Vector|sizing|FIXED/FIXED AUTO",
+      "/1:COMPONENT/Size=Sm|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/1:COMPONENT/Size=Sm|radius|0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Size enum → Xs/Sm/Md/Lg/Xl/Xxl/Xxxl"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Xs",
+        "Size=Sm",
+        "Size=Md",
+        "Size=Lg",
+        "Size=Xl",
+        "Size=Xxl",
+        "Size=Xxxl"
+      ],
+      "propDefs": [
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Xs",
+          "variantOptions": [
+            "Xs",
+            "Sm",
+            "Md",
+            "Lg",
+            "Xl",
+            "Xxl",
+            "Xxxl"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Xs",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/icon-close/root/width/xs",
+          "minWidth": "imported/icon-close/root/min-width",
+          "minHeight": "imported/icon-close/root/min-height"
+        },
+        "w": 8,
+        "h": 8,
+        "childTypes": [
+          "FRAME/root-xs"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": true
+  }
+}

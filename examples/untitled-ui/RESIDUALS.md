@@ -55,7 +55,7 @@ The drawing, the scale rule, the root anchor, the 3×3 escape and the 10-per-cha
 
 | check | result |
 |---|---|
-| the harness reproduces the committed score from the committed bytes | 339 of 537 rows exactly; every disagreement is sub-point (worst 50.88, mean 5.222 over all rows), and the kit mean comes out 92.70 against the committed 87.52 |
+| the harness reproduces the committed score from the committed bytes | 339 of 537 rows exactly against the table committed when the control was shot; every disagreement is sub-point (worst 0.68, mean 0.031 over all rows), and the control's kit mean comes out 87.53 against its contemporaneous committed 87.52. 394 of 537 scores have since moved with the engine (§1 note), so this row validates the instrument, not today's table |
 | a flat-edged drawing should cost nothing to resample | 49 rows return a ceiling of exactly 100.00, including all 16 toggle-base rows; the 80 rows with neither a glyph run nor a vector box average 98.93 — not 100, because a ring or a rounded corner still has an antialiased edge |
 | a ceiling of 100 should be achievable in practice, not only in theory | 11 rows actually score 100.00 |
 | the probe path must not move a score by itself | re-shooting 68 rows with the component untouched and the committed 8px margin moves the set mean by -5.69 (87.59 → 81.90) |
@@ -369,24 +369,34 @@ The largest single block left is **social-button** at 1.498 points — 22.55% of
 
 - **176 of 537 scored variants render at a root box that disagrees with the box the canvas drew** (mean score 90.34 against 93.86 for the 361 that agree). The `size-to-drawn` diagnostic in §4 measures the whole class at once. What is NOT known is which contract mechanism produces each disagreement — hug-vs-fixed, a frozen first observation, or a UA default — so it cannot be split into fixable rounds from this evidence alone.
 
-- **The round trip corroborates the shape of the residue but cannot price it.** Its 12,310 non-matching facts are counted per (variant ▸ node ▸ channel), not per pixel; 1,550 of them carry no class tag at all. There is no committed mapping from a structural fact to a pixel, so no round-trip class can be converted into points here.
+- **The round trip corroborates the shape of the residue but cannot price it.** Its 24,887 non-matching facts are counted per (variant ▸ node ▸ channel), not per pixel; 0 of them carry no class tag at all. There is no committed mapping from a structural fact to a pixel, so no round-trip class can be converted into points here.
 
 | round-trip class | facts | what it would cost in points |
 |---|---|---|
-| `restructured` | 7,041 | not derivable from any committed artifact |
-| `dup-sibling-names` | 1,710 | not derivable from any committed artifact |
-| `auto-layout-inert` | 940 | not derivable from any committed artifact |
-| `text-style-identity` | 338 | not derivable from any committed artifact |
-| `vector-glyph` | 236 | not derivable from any committed artifact |
-| `interaction-states` | 137 | not derivable from any committed artifact |
-| `cartesian-fill` | 80 | not derivable from any committed artifact |
-| `hug-vs-fixed` | 72 | not derivable from any committed artifact |
+| `restructured` | 6,838 | not derivable from any committed artifact |
+| `cartesian-fill` | 5,282 | not derivable from any committed artifact |
+| `layout-mode-derivative` | 3,736 | not derivable from any committed artifact |
+| `structure-wrapper-invention` | 2,156 | not derivable from any committed artifact |
+| `interaction-states` | 1,920 | not derivable from any committed artifact |
+| `geometry-projection-loss` | 1,036 | not derivable from any committed artifact |
+| `auto-layout-inert` | 934 | not derivable from any committed artifact |
+| `paint-effect-projection-loss` | 708 | not derivable from any committed artifact |
+| `duplicate-sibling-expansion` | 492 | not derivable from any committed artifact |
+| `vector-glyph` | 344 | not derivable from any committed artifact |
+| `layout-projection-loss` | 326 | not derivable from any committed artifact |
+| `instance-target-loss` | 214 | not derivable from any committed artifact |
+| `shape-kind-loss` | 190 | not derivable from any committed artifact |
+| `instance-ink-loss` | 189 | not derivable from any committed artifact |
+| `variant-projection-loss` | 148 | not derivable from any committed artifact |
+| `text-style-identity` | 100 | not derivable from any committed artifact |
+| `hug-vs-fixed` | 62 | not derivable from any committed artifact |
 | `zero-stroke` | 60 | not derivable from any committed artifact |
 | `url-image` | 54 | not derivable from any committed artifact |
 | `zero-fill` | 54 | not derivable from any committed artifact |
 | `mixed-stroke-weight` | 32 | not derivable from any committed artifact |
 | `declared-not-drawn` | 6 | not derivable from any committed artifact |
-| `(untagged)` | 1,550 | not derivable, and not even classified |
+| `text-content-projection-loss` | 6 | not derivable from any committed artifact |
+| `(untagged)` | 0 | not derivable, and not even classified |
 
 - **The contracts carry no per-part refusal notes.** The only prose in the 30 proposals is a standing scope line — 1 distinct on the full contracts, 15 per-child variations of one STUB sentence — so there is no per-part source that could name a residual the artifacts do not already show.
 
@@ -442,8 +452,8 @@ None of the three steps rewrites `renders/FIDELITY.md`, `renders/fidelity.json` 
 | `examples/untitled-ui/renders/fidelity-selfscore.json` | `50340fc184c6` | 391,229 | self-score control |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | fidelity table |
 | `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
-| `examples/untitled-ui/storybook/contracts/` | `d1088260bab2` | 129,563 | proposed contracts (30 files) |
+| `examples/untitled-ui/storybook/contracts/` | `63f093f001fb` | 129,887 | proposed contracts (30 files) |
 | `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | conformance denominator |
-| `extract/figma/roundtrip-uui/report.json` | `8280517ef895` | 2,983,543 | round-trip facts |
+| `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering.

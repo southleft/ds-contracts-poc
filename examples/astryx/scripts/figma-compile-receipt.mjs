@@ -41,7 +41,10 @@ const EXPECT = {
   'checkbox-input.figma.js': { set: 'CheckboxInput', id: 'astryx.checkbox-input', variants: 2,  axes: 'size(2)' },
   'progress-bar.figma.js':   { set: 'ProgressBar',   id: 'astryx.progress-bar',   variants: 5,  axes: 'variant(5)' },
   'slider.figma.js':         { set: 'Slider',        id: 'astryx.slider',         variants: 6,  axes: 'orientation(2)×valueDisplay(3)' },
-  'switch.figma.js':         { set: 'Switch',        id: 'astryx.switch',         variants: 2,  axes: 'labelPosition(2)' },
+  // Wave B.3 (FC-MISSING-AXIS / FC-VARIANT-BOOL-LBP, pinned in evals/run.ts
+  // code-to-canvas-wave-a-emit-pins): `value` is a VARIANT-bound BOOLEAN axis
+  // (Off/On), so the grid is value(2)×labelPosition(2)=4, not labelPosition-only.
+  'switch.figma.js':         { set: 'Switch',        id: 'astryx.switch',         variants: 4,  axes: 'value(2)×labelPosition(2)' },
   'text-input.figma.js':     { set: 'TextInput',     id: 'astryx.text-input',     variants: 9,  axes: 'type(3)×size(3)' },
   'token.figma.js':          { set: 'Token',         id: 'astryx.token',          variants: 33, axes: 'size(3)×color(11)' },
   // Phase B — the composition set (extracted round 1–2, promoted 2026-07-22).
@@ -228,8 +231,11 @@ mkdirSync(receiptDir, { recursive: true });
 const receipt = `# Astryx dev-journey — Figma sync-script compile receipt
 
 Genesis prep. \`ds-contracts figma examples/astryx/contracts --out
-examples/astryx/figma --tokens examples/astryx/tokens/astryx.dtcg.json\` emits
-one Figma Plugin API sync script per flagship contract. A future bridge run
+examples/astryx/figma --icons examples/astryx/assets/icons --tokens
+examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json\`
+emits one Figma Plugin API sync script per flagship contract (\`--icons\`
+since the exact-conversion wave promoted banner's four status glyphs as real
+assets; the freshness gate re-emits with this same command). A future bridge run
 builds these into a **blank Figma file** = the FIRST Astryx Figma library
 (Astryx ships no official kit as of 0.1.6 — see ../../PROVENANCE.md). No live
 canvas is driven here (owner + bridge later).

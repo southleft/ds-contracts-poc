@@ -1,0 +1,156 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.drawer",
+  "name": "Drawer",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — variant temporary|permanent; open pinned via fixedProps; portalCapture. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "temporary",
+          "permanent"
+        ]
+      },
+      "default": "temporary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "temporary": "Temporary",
+            "permanent": "Permanent"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Drawer content",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block"
+      },
+      "parts": {
+        "backdrop-root": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Backdrop-root.Modal-backdrop — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "stylesWhen": [
+            {
+              "prop": "variant",
+              "equals": "permanent",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "declared": {
+            "transition-property": "opacity",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "tokens": {
+            "background-color": "{imported.drawer.backdrop-root.background-color}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        },
+        "label": {
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Drawer-paper.Paper-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column"
+          },
+          "declared": {
+            "overflow-x": "auto",
+            "overflow-y": "auto",
+            "transition-duration": "0.3s",
+            "transition-property": "box-shadow",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "tokens": {
+            "background-color": "{imported.drawer.label.background-color}",
+            "color": "{imported.drawer.label.color}",
+            "flex-grow": "{imported.drawer.label.flex-grow}",
+            "flex-shrink": "{imported.drawer.label.flex-shrink}",
+            "font-size": "{imported.drawer.label.font-size}",
+            "font-weight": "{imported.drawer.label.font-weight}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "outline-width": "{imported.shared.size-0}",
+            "z-index": "{imported.drawer.label.z-index}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "permanent": {
+                  "border-right-color": "{imported.drawer.label.border-right-color.permanent}",
+                  "border-right-width": "{imported.drawer.label.border-right-width.permanent}",
+                  "box-shadow": "{imported.drawer.label.box-shadow.permanent}"
+                },
+                "temporary": {
+                  "border-right-color": "{imported.drawer.label.border-right-color.temporary}",
+                  "border-right-width": "{imported.drawer.label.border-right-width.temporary}",
+                  "box-shadow": "{imported.drawer.label.box-shadow.temporary}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "permanent": {
+              "flex-shrink": "{imported.drawer.root.flex-shrink.permanent}"
+            },
+            "temporary": {
+              "flex-shrink": "{imported.drawer.root.flex-shrink.temporary}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Drawer"
+    }
+  }
+}

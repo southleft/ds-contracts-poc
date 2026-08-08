@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "alert",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/alert.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "84:2264",
+  "cellNodeId": "84:2009",
+  "cellName": "Severity=Error, Variant=Filled",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 14.616935483870968,
+    "pctAAUnmasked": 6.485215053763441,
+    "pctAAMasked": 6.485215053763441,
+    "maskCoveragePct": 0,
+    "canvasPx": "124x24",
+    "realPx": "124x24",
+    "inkCanvasPct": 98.52150537634408,
+    "inkRealPct": 100
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/alert.png",
+  "referenceSha256": "98f07f436f6d4d99b2d9d76745c1ccb722926b245f4e85f1fa855d973f313065",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/alert.png",
+  "canvasShotSha256": "9c2460d22357f6e18925a348221214bbbf77947e2633cfe8412efd1ff852f86f",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/alert.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 1.4784946236559193,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=6.49 > 5)"
+}

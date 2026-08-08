@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "tailwind",
+  "stem": "alert",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/tailwind/components/alert.json",
+  "status": "pass",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385245229284424737",
+  "setNodeId": "1:2098",
+  "cellNodeId": "1:2089",
+  "cellName": "Color=Failure",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 99.36899038461539,
+    "pctAAUnmasked": 3.8461538461538463,
+    "pctAAMasked": 3.8461538461538463,
+    "maskCoveragePct": 0,
+    "canvasPx": "128x52",
+    "realPx": "124x52",
+    "inkCanvasPct": 99.2938701923077,
+    "inkRealPct": 96.15384615384616
+  },
+  "reference": "extract/computed/out/tailwind/alert/gate-shots/failure__default.png",
+  "referenceSha256": "f2a7ea65ac65443ede5da3436041843610165d88b05fc639cab0976bc1305e4b",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/tailwind/shots/alert.png",
+  "canvasShotSha256": "20ca5f8e5e72ebb89b4caa6bb1a474f800521c54b98fce7815203079ba78d0d1",
+  "diff": "parity/receipts/console-loop/visual-truth/tailwind/diffs/alert.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.032258064516129,
+  "inkDelta": 3.140024038461533,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

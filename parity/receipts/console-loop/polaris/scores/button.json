@@ -1,0 +1,39 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 53.769841269841265,
+    "pctAAUnmasked": 11.607142857142858,
+    "pctAAMasked": 11.607142857142858,
+    "maskCoveragePct": 0,
+    "canvasPx": "63x32",
+    "realPx": "63x32",
+    "inkCanvasPct": 97.56944444444444,
+    "inkRealPct": 92.7579365079365
+  },
+  "reference": "parity/receipts/console-loop/polaris/refs/button.png",
+  "referenceSha256": "431c74133e7af7c0680fbffc9fc226aeeac9f8ed745866fed7ad76e41fe582e3",
+  "canvasShot": "parity/receipts/console-loop/polaris/shots/button-cell.png",
+  "canvasShotSha256": "541d7d9b8ca329b7245c80d0e6c09649125e40828f982ed9e693bc3c15893e33",
+  "diff": "parity/receipts/console-loop/polaris/scores/button.diff.png",
+  "fc": [
+    "FC-ENUM-HOLE"
+  ],
+  "receipt": "parity/receipts/console-loop/polaris/components/button.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 4.811507936507937,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=11.61 > 5)",
+  "recordedAt": "2026-08-08T04:31:19.412Z"
+}

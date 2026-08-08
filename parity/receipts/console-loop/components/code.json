@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "code",
+  "contract": "contracts/code.contract.json",
+  "script": "parity/receipts/console-loop/emitted/17-code.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:58:58.228Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:954",
+    "page": "Code",
+    "sectionId": "1:956",
+    "result": {
+      "createdNodeIds": [
+        "1:954"
+      ],
+      "results": [
+        {
+          "name": "Code",
+          "contractId": "ds.code",
+          "nodeId": "1:954",
+          "key": "d884e8288857ecdbc11f5c43468ac32a71b2bb9d",
+          "variants": 1,
+          "properties": [
+            "Content#1:305"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:956 captured (ok).",
+      "Code: 1 variant(s); type COMPONENT; page Code.",
+      "Props: Content.",
+      "First root fill bound to color/surface/sunken.",
+      "Sample text: \"npm run build\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:475555880",
+    "lineCount": 18,
+    "sampleLines": [
+      ":COMPONENT/Code|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.9529411792755127,\"g\":0.95686274766922,\"b\":0.9647058844566345},\"boundVariables\":{\"color\":{\"var\":\"color/surface/sunken\"}}}]",
+      ":COMPONENT/Code|radius|4,4,4,4",
+      ":COMPONENT/Code|layout|HORIZONTAL CENTER/CENTER gap 0 pad 2,8,2,8",
+      ":COMPONENT/Code|sizing|HUG/HUG AUTO",
+      ":COMPONENT/Code|bound:bottomLeftRadius|radius/100",
+      ":COMPONENT/Code|bound:bottomRightRadius|radius/100",
+      ":COMPONENT/Code|bound:paddingBottom|space/inset-y/xs",
+      ":COMPONENT/Code|bound:paddingLeft|space/inset-x/xs",
+      ":COMPONENT/Code|bound:paddingRight|space/inset-x/xs",
+      ":COMPONENT/Code|bound:paddingTop|space/inset-y/xs",
+      ":COMPONENT/Code|bound:topLeftRadius|radius/100",
+      ":COMPONENT/Code|bound:topRightRadius|radius/100",
+      ":COMPONENT/Code|description|Code — generated from contract ds.code v1.0.0",
+      ":COMPONENT/Code|propdef|Content#1:305:TEXT=npm run build",
+      "/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.06666667014360428,\"g\":0.0941176488995552,\"b\":0.15294118225574493},\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]",
+      "/0:TEXT/label|radius|0,0,0,0",
+      "/0:TEXT/label|sizing|HUG/HUG AUTO",
+      "/0:TEXT/label|text|\"npm run build\" 14px {\"family\":\"Inter\",\"style\":\"Medium\"}"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Content"
+    ],
+    "observed": {
+      "variantNames": [
+        "Code"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#1:305",
+          "type": "TEXT",
+          "defaultValue": "npm run build",
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "Code",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 2,
+          "r": 8,
+          "b": 2,
+          "l": 8
+        },
+        "radius": 4,
+        "fillVarName": "color/surface/sunken",
+        "padBound": {
+          "paddingLeft": "space/inset-x/xs",
+          "paddingTop": "space/inset-y/xs",
+          "paddingRight": "space/inset-x/xs",
+          "paddingBottom": "space/inset-y/xs",
+          "topLeftRadius": "radius/100",
+          "topRightRadius": "radius/100",
+          "bottomLeftRadius": "radius/100",
+          "bottomRightRadius": "radius/100",
+          "fills": "color/surface/sunken"
+        },
+        "textChild": [
+          {
+            "name": "label",
+            "chars": "npm run build",
+            "fontSize": 14
+          }
+        ],
+        "w": 108,
+        "h": 21,
+        "childNames": [
+          "label:TEXT"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

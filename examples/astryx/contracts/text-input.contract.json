@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "astryx.text-input",
   "name": "TextInput",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "draft",
-  "description": "Astryx TextInput \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/TextInput/TextInput.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). type/label/size/placeholder and the optional/required/disabled/clear/autofocus flags are verbatim (83% facts-carried); description, disabledMessage, labelTooltip, htmlName and isLoading are dropped. value is materialized as a placeholder-backed text field. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "description": "Astryx TextInput — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/TextInput/TextInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). type/label/size/placeholder and the optional/required/disabled/clear/autofocus flags are verbatim (83% facts-carried); description, disabledMessage, labelTooltip, htmlName and isLoading are dropped. value is materialized as a placeholder-backed text field. Wave B.3: showcase width (320px), inputWrapper border (color-border-emphasized), startIcon row (type-mapped 16px glyphs, color-icon-secondary), and placeholder hierarchy (body-size secondary text) from TextInput.tsx + inputStyles.stylex source — not harness-captured.",
   "semantics": {
     "element": "div"
   },
@@ -151,6 +151,9 @@
         "font-family": "{font-family-body}",
         "font-size": "{font-size-sm}"
       },
+      "literals": {
+        "width": "320px"
+      },
       "parts": {
         "label": {
           "element": "span",
@@ -164,12 +167,17 @@
         },
         "field": {
           "element": "div",
+          "layout": {
+            "display": "flex",
+            "direction": "row",
+            "align": "center"
+          },
           "tokens": {
             "background-color": "{color-background-surface}",
-            "border-color": "{color-border}",
+            "border-color": "{color-border-emphasized}",
             "border-width": "{border-width}",
             "border-radius": "{radius-element}",
-            "color": "{color-text-secondary}",
+            "gap": "{spacing-2}",
             "padding-block": "{spacing-2}",
             "padding-inline": "{spacing-3}"
           },
@@ -190,8 +198,64 @@
               }
             }
           },
-          "content": {
-            "prop": "placeholder"
+          "parts": {
+            "start-icon": {
+              "layout": {
+                "display": "flex",
+                "align": "center"
+              },
+              "parts": {
+                "icon-text": {
+                  "icon": {
+                    "asset": "text-input-user",
+                    "size": 16
+                  },
+                  "visibleWhen": {
+                    "prop": "type",
+                    "equals": "text"
+                  },
+                  "tokens": {
+                    "color": "{color-icon-secondary}"
+                  }
+                },
+                "icon-email": {
+                  "icon": {
+                    "asset": "text-input-mail",
+                    "size": 16
+                  },
+                  "visibleWhen": {
+                    "prop": "type",
+                    "equals": "email"
+                  },
+                  "tokens": {
+                    "color": "{color-icon-secondary}"
+                  }
+                },
+                "icon-password": {
+                  "icon": {
+                    "asset": "text-input-lock",
+                    "size": 16
+                  },
+                  "visibleWhen": {
+                    "prop": "type",
+                    "equals": "password"
+                  },
+                  "tokens": {
+                    "color": "{color-icon-secondary}"
+                  }
+                }
+              }
+            },
+            "placeholder-text": {
+              "element": "span",
+              "content": {
+                "prop": "placeholder"
+              },
+              "tokens": {
+                "color": "{color-text-secondary}",
+                "font-size": "{font-size-sm}"
+              }
+            }
           }
         }
       }

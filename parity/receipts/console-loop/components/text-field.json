@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "text-field",
+  "contract": "contracts/text-field.contract.json",
+  "script": "parity/receipts/console-loop/emitted/21-textfield.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:39.748Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:785",
+    "page": "TextField",
+    "sectionId": "1:786",
+    "result": {
+      "createdNodeIds": [
+        "1:785"
+      ],
+      "results": [
+        {
+          "name": "TextField",
+          "contractId": "ds.text-field",
+          "nodeId": "1:785",
+          "key": "0da8889d15586ed26a4f4e3786a3ef1e79b1d5b6",
+          "variants": 3,
+          "properties": [
+            "Required#1:227",
+            "Disabled#1:231",
+            "Label#1:235",
+            "Description#1:239",
+            "Placeholder#1:243",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Section screenshot: three stacked Text Field sizes (sm/md/lg) with Label, helper text, and bordered input showing placeholder \"Enter a value...\".",
+      "Height and placeholder type scale increase with size; alignment consistent.",
+      "No visual defects flagged."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:2130468756",
+    "lineCount": 178,
+    "sampleLines": [
+      ":COMPONENT_SET/TextField|fill|[]",
+      ":COMPONENT_SET/TextField|radius|5,5,5,5",
+      ":COMPONENT_SET/TextField|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/TextField|description|TextField — generated from contract ds.text-field v1.1.0",
+      ":COMPONENT_SET/TextField|propdef|Description#1:239:TEXT=Helper text that explains the expected value.",
+      ":COMPONENT_SET/TextField|propdef|Disabled#1:231:BOOLEAN=false",
+      ":COMPONENT_SET/TextField|propdef|Label#1:235:TEXT=Label",
+      ":COMPONENT_SET/TextField|propdef|Placeholder#1:243:TEXT=Enter a value…",
+      ":COMPONENT_SET/TextField|propdef|Required#1:227:BOOLEAN=false",
+      ":COMPONENT_SET/TextField|propdef|Size:VARIANT=Medium",
+      "/0:COMPONENT/Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Size=Medium|radius|0,0,0,0",
+      "/0:COMPONENT/Size=Medium|layout|VERTICAL MIN/MIN gap 4 pad 0,0,0,0",
+      "/0:COMPONENT/Size=Medium|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Size=Medium|bound:itemSpacing|space/inset-y/sm",
+      "/0:COMPONENT/Size=Medium|bound:width|size/card/width",
+      "/0/0:FRAME/labelRow|fill|[]",
+      "/0/0:FRAME/labelRow|radius|0,0,0,0",
+      "/0/0:FRAME/labelRow|layout|HORIZONTAL MIN/CENTER gap 4 pad 0,0,0,0",
+      "/0/0:FRAME/labelRow|sizing|FILL/HUG AUTO"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Size",
+      "Required",
+      "Disabled",
+      "Label",
+      "Description",
+      "Placeholder"
+    ],
+    "observed": {
+      "variantNames": [
+        "Size=Medium",
+        "Size=Small",
+        "Size=Large"
+      ],
+      "propDefs": [
+        {
+          "name": "Required#1:227",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Disabled#1:231",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:235",
+          "type": "TEXT",
+          "defaultValue": "Label",
+          "variantOptions": null
+        },
+        {
+          "name": "Description#1:239",
+          "type": "TEXT",
+          "defaultValue": "Helper text that explains the expected value.",
+          "variantOptions": null
+        },
+        {
+          "name": "Placeholder#1:243",
+          "type": "TEXT",
+          "defaultValue": "Enter a value…",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Medium",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/inset-y/sm",
+          "width": "size/card/width"
+        },
+        "textChild": [
+          {
+            "name": "labelText",
+            "chars": "Label",
+            "fontSize": 14
+          },
+          {
+            "name": "descriptionText",
+            "chars": "Helper text that explains the expected value.",
+            "fontSize": 14
+          },
+          {
+            "name": "placeholder",
+            "chars": "Enter a value…",
+            "fontSize": 16
+          }
+        ],
+        "w": 320,
+        "h": 79,
+        "childNames": [
+          "labelRow:FRAME",
+          "descriptionText:TEXT",
+          "input:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

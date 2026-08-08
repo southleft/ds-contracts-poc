@@ -130,6 +130,41 @@ export interface CodePlan {
   paths: string[];
 }
 
+// ---------------------------------------------------------------------------
+// Proposal file naming — ONE spelling for both delivery doors.
+//
+// These used to live only in packages/cli/src/commands/figma.ts, so the
+// plugin's GitHub PR door could not name the files `figma receive` /
+// `propose-pr` write without copying the rule (and drifting). They are pure
+// and browser-safe, so they live here now; the CLI re-exports them.
+// ---------------------------------------------------------------------------
+
+/** Flatten an untrusted contract id into one safe filename stem: every
+ *  character outside the schema's own id alphabet is replaced, path separators
+ *  included, so the result is always a single flat filename. */
+export const flatIdStem = (id: string, fallback: string): string =>
+  id
+    .normalize('NFKC')
+    .replace(/[^a-zA-Z0-9._-]+/g, '-')
+    .replace(/\.\.+/g, '.')
+    .replace(/^[.-]+|[.-]+$/g, '') || fallback;
+
+/** id → <name>.contract.json (the prefix segment stripped) — the filename
+ *  `figma receive` and `propose-pr` both give a contract, main or stub. */
+export const contractFileNameForId = (id: string): string =>
+  `${flatIdStem(id.replace(/^[^.]+\./, ''), 'stub')}.contract.json`;
+
+/** Proposal artifacts retain valid ids verbatim for backward-compatible
+ * filenames, while hostile ids collapse to one flat basename. */
+export const proposalFileNameForId = (id: string): string =>
+  `${flatIdStem(id, 'proposal')}.proposal.json`;
+
+/** The minted DTCG sidecar's filename — the same stem propose-pr derives
+ *  (`proposalFileNameForId` minus its suffix) so both doors write the
+ *  provisional token tree to the SAME place. */
+export const mintedTokensFileNameForId = (contractId: string): string =>
+  `${flatIdStem(contractId, 'proposal')}.minted.dtcg.json`;
+
 /** The whole answer to "what code would this proposal produce?" — one entry
  *  per target, plus the sentence. Shared by the plugin panel and the CLI. */
 export function canvasCodePlan(

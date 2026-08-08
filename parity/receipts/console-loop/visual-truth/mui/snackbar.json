@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "snackbar",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/snackbar.json",
+  "status": "pass",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "84:2140",
+  "cellNodeId": "84:2128",
+  "cellName": "Position=BottomLeft",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 36.9515232803219,
+    "pctAAUnmasked": 2.0933128951906497,
+    "pctAAMasked": 2.0933128951906497,
+    "maskCoveragePct": 0,
+    "canvasPx": "296x58",
+    "realPx": "307x68",
+    "inkCanvasPct": 81.85955163824488,
+    "inkRealPct": 97.98333013987353
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/snackbar.png",
+  "referenceSha256": "d770078c49ae07ddd9553aa06866adc147b61d82ba47d5d99f3b398061b9f2d0",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/snackbar.png",
+  "canvasShotSha256": "67293436727f4c5986793411b30b4c369cf45dfaac04bb71f5f0b1b980ed8577",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/snackbar.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.1724137931034482,
+  "inkDelta": 16.12377850162865,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

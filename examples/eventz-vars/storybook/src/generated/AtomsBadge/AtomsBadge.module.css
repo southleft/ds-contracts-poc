@@ -1,0 +1,51 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/atoms-badge.contract.json (ds.atoms-badge v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding-block: var(--spacing-0-5);
+  border-radius: var(--component-border-radius-rounded);
+  gap: var(--spacing-0-5);
+}
+
+.variant-accent {
+  background-image: var(--imported-atoms-badge-root-background-image-accent);
+}
+
+.variant-info {
+  background-image: var(--imported-atoms-badge-root-background-image-info);
+}
+
+.variant-warning {
+  background-image: var(--imported-atoms-badge-root-background-image-warning);
+}
+
+.variant-featured {
+  background-image: var(--imported-atoms-badge-root-background-image-featured);
+}
+
+.variant-brand {
+  background-image: var(--imported-atoms-badge-root-background-image-brand);
+}
+
+.root[data-has-label] {
+  width: var(--imported-atoms-badge-root-width-true);
+  height: var(--imported-atoms-badge-root-height-true);
+}
+
+.root:not([data-has-label]) {
+  width: var(--imported-atoms-badge-root-width-false);
+  height: var(--imported-atoms-badge-root-height-false);
+}
+
+.Label {
+  font-size: var(--imported-text-caption-lg-allcaps-bold-font-size);
+  font-weight: var(--imported-text-caption-lg-allcaps-bold-font-weight);
+  line-height: var(--imported-text-caption-lg-allcaps-bold-line-height);
+  text-transform: uppercase;
+}

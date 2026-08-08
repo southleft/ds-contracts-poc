@@ -742,12 +742,135 @@ const pxNum = (v: string | undefined): number | null => {
   return m ? Number(m[1]) : null;
 };
 
+/** Shared stroke-attribute reconstruction for path/circle children. */
+function svgStrokeAttrs(
+  el: CapturedNode,
+  inheritedColor: string | undefined,
+  receipts: string[],
+  label: string,
+  /** Path draw-on animation (pathLength-relative) drops dashes; progress
+   *  rings bake absolute px dasharray/offset so determinate arcs survive. */
+  dashMode: 'drop-pathlength' | 'bake-absolute',
+): string {
+  const strokeRaw = el.style['stroke'];
+  const stroke = strokeRaw && inheritedColor && strokeRaw === inheritedColor ? 'currentColor' : strokeRaw;
+  const strokeAttrs: string[] = [];
+  if (!stroke || stroke === 'none') return '';
+  strokeAttrs.push(` stroke="${stroke}"`);
+  const sw = el.style['stroke-width'];
+  const swNum = /^(-?\d+(?:\.\d+)?)px$/.exec(sw ?? '');
+  if (swNum && Number(swNum[1]) !== 1) strokeAttrs.push(` stroke-width="${swNum[1]}"`);
+  for (const [ch, attr] of [
+    ['stroke-linecap', 'stroke-linecap'],
+    ['stroke-linejoin', 'stroke-linejoin'],
+  ] as const) {
+    const v = el.style[ch];
+    if (v && v !== 'butt' && v !== 'miter') strokeAttrs.push(` ${attr}="${v}"`);
+  }
+  const dash = el.style['stroke-dasharray'];
+  const dashOffset = el.style['stroke-dashoffset'];
+  if (dashMode === 'drop-pathlength') {
+    // Round 5d (owner finding: the check glyph drew as SEGMENTED
+    // CAPSULES, not a continuous check): dash channels are
+    // pathLength-RELATIVE, and `pathLength` is an ATTRIBUTE — not a
+    // computed style (the viewBox class). Polaris normalizes the
+    // check path to pathLength=1 and drives stroke-dashoffset as a
+    // draw-on animation; the computed 2px dasharray is the ANIMATION
+    // VEHICLE, not resting geometry. Re-basing that pattern onto the
+    // real ~14-user-unit path drew 2px capsules with joints. The
+    // resting truth of a settled draw-on stroke is the CONTINUOUS
+    // stroke — dash channels are dropped with a named receipt
+    // (visibility still rides the captured opacity channel).
+    if ((dash && dash !== 'none') || (dashOffset && dashOffset !== '0px')) {
+      receipts.push(
+        `svg-dash-channels-dropped: ${label} — stroke-dasharray ${dash || 'none'} / stroke-dashoffset ${dashOffset || '0px'} are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)`,
+      );
+    }
+  } else if (dash && dash !== 'none') {
+    // WAVE 5 — MUI CircularProgress: dasharray/offset are absolute px
+    // circumference fractions (determinate arc), not pathLength=1 animation.
+    const dashNum = /^(-?\d+(?:\.\d+)?)px$/.exec(dash.trim());
+    const offNum = /^(-?\d+(?:\.\d+)?)px$/.exec((dashOffset ?? '0px').trim());
+    if (dashNum) {
+      strokeAttrs.push(` stroke-dasharray="${dashNum[1]}"`);
+      if (offNum) strokeAttrs.push(` stroke-dashoffset="${offNum[1]}"`);
+      receipts.push(
+        `svg-circle-dash-baked: ${label} — stroke-dasharray ${dash} / stroke-dashoffset ${dashOffset || '0px'} carried as absolute user units (progress-ring idiom; not pathLength-relative)`,
+      );
+    } else {
+      receipts.push(
+        `svg-circle-dash-unreadable: ${label} — stroke-dasharray ${dash} not px; dashes dropped`,
+      );
+    }
+  }
+  return strokeAttrs.join('');
+}
+
+/** Max |coord| from SVG path `d`, excluding elliptical-arc radii / flags.
+ *  FC-SVG-VIEWBOX — A/a `rx ry x-rot large sweep x y`: only (x,y) count. */
+export function pathDataExtent(d: string): number {
+  let max = 0;
+  const tokens = d.match(/[AaMmLlHhVvCcSsQqTtZz]|-?\d*\.?\d+(?:[eE][-+]?\d+)?/g) ?? [];
+  let i = 0;
+  let cmd = '';
+  const take = (): number | null => {
+    while (i < tokens.length && !/^-?\d/.test(tokens[i]) && tokens[i] !== '.' && !/^\.\d/.test(tokens[i])) {
+      if (/^[AaMmLlHhVvCcSsQqTtZz]$/.test(tokens[i])) return null;
+      i++;
+    }
+    if (i >= tokens.length) return null;
+    const n = Number(tokens[i++]);
+    return Number.isFinite(n) ? n : null;
+  };
+  const note = (n: number | null) => {
+    if (n !== null) max = Math.max(max, Math.abs(n));
+  };
+  while (i < tokens.length) {
+    const t = tokens[i];
+    if (/^[AaMmLlHhVvCcSsQqTtZz]$/.test(t)) {
+      cmd = t;
+      i++;
+    }
+    if (!cmd) {
+      i++;
+      continue;
+    }
+    const c = cmd.toUpperCase();
+    if (c === 'Z') {
+      continue;
+    }
+    if (c === 'A') {
+      take(); // rx
+      take(); // ry
+      take(); // x-axis-rotation
+      take(); // large-arc
+      take(); // sweep
+      note(take()); // x
+      note(take()); // y
+      continue;
+    }
+    if (c === 'H' || c === 'V') {
+      note(take());
+      continue;
+    }
+    // M/L/T: pairs; C: 6; S/Q: 4
+    const pairCount = c === 'C' ? 3 : c === 'S' || c === 'Q' ? 2 : 1;
+    for (let p = 0; p < pairCount; p++) {
+      note(take());
+      note(take());
+    }
+  }
+  return max;
+}
+
 /** Reconstruct inline SVG markup for one captured <svg> subtree. Returns
- *  null with a receipt when a child is not a <path> (bounded v1 grammar).
- *  Round 5c: the result also carries the reconstructed viewBox number, the
- *  path-coordinate extent, and whether the viewBox was BUMPED past the
- *  computed size — the authored-viewBox unification pass (promoteAnatomy)
- *  needs all three to recognize one authored glyph captured at many sizes. */
+ *  null with a receipt when a child is outside the bounded grammar
+ *  (path / g / circle). Round 5c: the result also carries the reconstructed
+ *  viewBox number, the path-coordinate extent, and whether the viewBox was
+ *  BUMPED past the computed size — the authored-viewBox unification pass
+ *  (promoteAnatomy) needs all three to recognize one authored glyph captured
+ *  at many sizes. Wave 5 adds `<circle>` so MUI CircularProgress (and peers)
+ *  promote as assets instead of minting unregistered cx/cy/r/stroke channels. */
 export function reconstructSvg(
   svgEl: CapturedNode,
   receipts: string[],
@@ -773,11 +896,25 @@ export function reconstructSvg(
   }
   const paths: string[] = [];
   let maxCoord = 0;
+  /** When every shape is a circle sharing one center, reconstruct the
+   *  MUI-style offset viewBox (`SIZE/2 SIZE/2 SIZE SIZE`) instead of
+   *  `0 0 vb vb` — otherwise cx=SIZE lands off-center in the display box. */
+  let circleCenter: number | null = null;
+  let circleOnly = true;
+  const resolveFill = (fillRaw: string): string =>
+    preferCurrentColor && fillRaw && inheritedColor && fillRaw === inheritedColor
+      ? 'currentColor'
+      : fillRaw && inheritedFill && fillRaw === inheritedFill
+        ? ''
+        : fillRaw && inheritedColor && fillRaw === inheritedColor
+          ? 'currentColor'
+          : fillRaw;
   const walkPaths = (n: CapturedNode): boolean => {
     for (const c of n.nodes) {
       if (c.t !== 'el') continue;
       const el = c.el;
       if (el.tag === 'path') {
+        circleOnly = false;
         const dRaw = el.style['d'] ?? '';
         const m = /^path\("(.*)"\)$/.exec(dRaw);
         if (!m) {
@@ -785,71 +922,47 @@ export function reconstructSvg(
           return false;
         }
         const d = m[1];
-        for (const num of d.match(/-?\d+(?:\.\d+)?/g) ?? []) {
-          maxCoord = Math.max(maxCoord, Math.abs(Number(num)));
-        }
-        const fillRaw = el.style['fill'] ?? '';
-        // fill equal to the svg's own computed fill is INHERITED (no
-        // attribute — the host part's minted fill channel cascades in CSS);
-        // fill equal to the inherited color is currentColor; else baked.
-        // Round 5c: when the fill==color identity holds across EVERY combo
-        // (preferCurrentColor — Spinner's `svg { fill: currentcolor }`), the
-        // glyph rides the color chain on every surface. Otherwise the round-4
-        // precedence stands: fill equal to the svg's own fill is INHERITED
-        // (host fill channel cascades); fill equal to the color is
-        // currentColor (Badge pip).
-        const fill = preferCurrentColor && fillRaw && inheritedColor && fillRaw === inheritedColor
-          ? 'currentColor'
-          : fillRaw && inheritedFill && fillRaw === inheritedFill
-            ? ''
-            : fillRaw && inheritedColor && fillRaw === inheritedColor
-              ? 'currentColor'
-              : fillRaw;
+        // FC-SVG-VIEWBOX: elliptical-arc radii (A/a rx ry …) can dwarf the
+        // glyph's coordinate space (Polaris Banner warning: 20×20 icon with
+        // A 449 radii → viewBox 450 → invisible at iconSize 20). Extent uses
+        // endpoints / curve points only — not rx/ry.
+        maxCoord = Math.max(maxCoord, pathDataExtent(d));
+        const fill = resolveFill(el.style['fill'] ?? '');
         const fillRule = el.style['fill-rule'];
         const opacity = el.style['opacity'];
         // STROKE channels (round 4 fix: Polaris's checkmark is a STROKED
         // path — fill-only reconstruction rendered it invisible). Computed
         // px lengths convert to user units 1:1 (viewBox == computed size).
-        const strokeRaw = el.style['stroke'];
-        const stroke = strokeRaw && inheritedColor && strokeRaw === inheritedColor ? 'currentColor' : strokeRaw;
-        const strokeAttrs: string[] = [];
-        if (stroke && stroke !== 'none') {
-          strokeAttrs.push(` stroke="${stroke}"`);
-          const sw = el.style['stroke-width'];
-          const swNum = /^(-?\d+(?:\.\d+)?)px$/.exec(sw ?? '');
-          if (swNum && Number(swNum[1]) !== 1) strokeAttrs.push(` stroke-width="${swNum[1]}"`);
-          for (const [ch, attr] of [
-            ['stroke-linecap', 'stroke-linecap'],
-            ['stroke-linejoin', 'stroke-linejoin'],
-          ] as const) {
-            const v = el.style[ch];
-            if (v && v !== 'butt' && v !== 'miter') strokeAttrs.push(` ${attr}="${v}"`);
-          }
-          // Round 5d (owner finding: the check glyph drew as SEGMENTED
-          // CAPSULES, not a continuous check): dash channels are
-          // pathLength-RELATIVE, and `pathLength` is an ATTRIBUTE — not a
-          // computed style (the viewBox class). Polaris normalizes the
-          // check path to pathLength=1 and drives stroke-dashoffset as a
-          // draw-on animation; the computed 2px dasharray is the ANIMATION
-          // VEHICLE, not resting geometry. Re-basing that pattern onto the
-          // real ~14-user-unit path drew 2px capsules with joints. The
-          // resting truth of a settled draw-on stroke is the CONTINUOUS
-          // stroke — dash channels are dropped with a named receipt
-          // (visibility still rides the captured opacity channel).
-          const dash = el.style['stroke-dasharray'];
-          const dashOffset = el.style['stroke-dashoffset'];
-          if ((dash && dash !== 'none') || (dashOffset && dashOffset !== '0px')) {
-            receipts.push(
-              `svg-dash-channels-dropped: ${label} — stroke-dasharray ${dash || 'none'} / stroke-dashoffset ${dashOffset || '0px'} are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)`,
-            );
-          }
-        }
+        const strokeAttrs = svgStrokeAttrs(el, inheritedColor, receipts, label, 'drop-pathlength');
         paths.push(
           `<path d="${d}"` +
             (fill ? ` fill="${fill}"` : '') +
             (fillRule === 'evenodd' ? ' fill-rule="evenodd"' : '') +
             (opacity && opacity !== '1' ? ` opacity="${opacity}"` : '') +
-            strokeAttrs.join('') +
+            strokeAttrs +
+            '/>',
+        );
+      } else if (el.tag === 'circle') {
+        const cx = pxNum(el.style['cx']);
+        const cy = pxNum(el.style['cy']);
+        const r = pxNum(el.style['r']);
+        if (cx === null || cy === null || r === null || r <= 0) {
+          receipts.push(`svg-circle-geometry-unreadable: ${label} — cx/cy/r not positive px; asset refused`);
+          return false;
+        }
+        if (cx !== cy) circleOnly = false;
+        else if (circleCenter === null) circleCenter = cx;
+        else if (circleCenter !== cx) circleOnly = false;
+        maxCoord = Math.max(maxCoord, Math.abs(cx) + r, Math.abs(cy) + r);
+        const fillRaw = el.style['fill'] ?? '';
+        const fill = fillRaw === 'none' ? 'none' : resolveFill(fillRaw);
+        const opacity = el.style['opacity'];
+        const strokeAttrs = svgStrokeAttrs(el, inheritedColor, receipts, label, 'bake-absolute');
+        paths.push(
+          `<circle cx="${cx}" cy="${cy}" r="${r}"` +
+            (fill ? ` fill="${fill}"` : '') +
+            (opacity && opacity !== '1' ? ` opacity="${opacity}"` : '') +
+            strokeAttrs +
             '/>',
         );
       } else if (el.tag === 'g') {
@@ -864,7 +977,7 @@ export function reconstructSvg(
         // captures reconstructible instead of silently refused.
         receipts.push(`svg-metadata-skipped: ${label} — <${el.tag}> is non-painting SVG metadata (SVG 1.1 §5.4), skipped rather than refusing the asset`);
       } else {
-        receipts.push(`svg-child-outside-grammar: ${label} — <${el.tag}> (v1 carries path/g only); asset refused`);
+        receipts.push(`svg-child-outside-grammar: ${label} — <${el.tag}> (v1 carries path/g/circle); asset refused`);
         return false;
       }
     }
@@ -872,13 +985,28 @@ export function reconstructSvg(
   };
   if (!walkPaths(svgEl)) return null;
   if (paths.length === 0) {
-    receipts.push(`svg-empty: ${label} — no path children; asset refused`);
+    receipts.push(`svg-empty: ${label} — no path/circle children; asset refused`);
     return null;
   }
   // viewBox reconstruction (NAMED): the viewBox attribute is not a computed
   // style — reconstructed as 0 0 W H from the svg's computed size, sanity-
   // checked against the path data's coordinate extent (a glyph drawn in a
-  // larger user space than its box would silently crop).
+  // larger user space than its box would silently crop). Circle-only MUI
+  // progress rings use the authored offset form `SIZE/2 SIZE/2 SIZE SIZE`.
+  if (circleOnly && circleCenter !== null && circleCenter > 0) {
+    const size = Math.round(circleCenter);
+    const origin = size / 2;
+    receipts.push(
+      `svg-viewbox-circle-offset: ${label} — ${origin} ${origin} ${size} ${size} from shared circle center ${circleCenter} (MUI CircularProgress idiom; viewBox is not a computed style — named reconstruction)`,
+    );
+    return {
+      markup: `<svg viewBox="${origin} ${origin} ${size} ${size}" xmlns="http://www.w3.org/2000/svg">${paths.join('')}</svg>`,
+      size: Math.round(Math.max(w, h)),
+      vb: size,
+      extent: maxCoord,
+      bumped: false,
+    };
+  }
   let vb = Math.round(Math.max(w, h));
   let bumped = false;
   if (maxCoord > vb * 1.02) {
@@ -1257,7 +1385,40 @@ export function promoteAnatomy(
         const alpha = alphaOf(st['background-color']);
         const t = st['transform'] ?? 'none';
         const mtx = /^matrix\((-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+)\)$/.exec(t);
-        const scaleOk = t === 'none' || (mtx !== null && Number(mtx[2]) === 0 && Number(mtx[3]) === 0 && Math.abs(Number(mtx[1]) - 1) < 0.01 && Math.abs(Number(mtx[4]) - 1) < 0.01);
+        const m = mtx
+          ? {
+              a: Number(mtx[1]),
+              b: Number(mtx[2]),
+              c: Number(mtx[3]),
+              d: Number(mtx[4]),
+              e: Number(mtx[5]),
+              f: Number(mtx[6]),
+            }
+          : null;
+        // Wave B.2 — TRANSFORM CARRIAGE (Carbon checkbox ::after live finding).
+        // v1 allowed translate-only (identity linear part). That refused the
+        // whole pseudo when ANY combo used scale(0) to hide the check, even
+        // though checked/indeterminate draw a readable L-bar / minus with an
+        // orthonormal rotate. Zero-scale is the component's OWN hidden state
+        // (same class as opacity:0); orthonormal rotate is canvas-native
+        // (`shape.rotation` / stylesWhen `rotate(<n>deg)`).
+        const col1 = m ? Math.hypot(m.a, m.b) : 1;
+        const col2 = m ? Math.hypot(m.c, m.d) : 1;
+        const isZeroScale = m !== null && col1 < 0.02 && col2 < 0.02;
+        const isTranslateOnly =
+          t === 'none' ||
+          (m !== null &&
+            Math.abs(m.b) < 0.01 &&
+            Math.abs(m.c) < 0.01 &&
+            Math.abs(m.a - 1) < 0.01 &&
+            Math.abs(m.d - 1) < 0.01);
+        const isOrthonormalRotate =
+          m !== null &&
+          !isZeroScale &&
+          Math.abs(col1 - 1) < 0.03 &&
+          Math.abs(col2 - 1) < 0.03 &&
+          Math.abs(m.a * m.c + m.b * m.d) < 0.03;
+        const transformOk = isTranslateOnly || isOrthonormalRotate;
         // PSEUDO-DECOR v2 (CARBON LIVE-DEFECT ROUND, D2) — DRAWN MEANS PAINTS
         // ANYTHING. v1 required an opaque-ish BACKGROUND, so a box made of a
         // RING was invisible to the grammar: an unchecked Carbon checkbox is
@@ -1267,7 +1428,7 @@ export function promoteAnatomy(
         const borderAlpha = alphaOf(st['border-top-color']);
         const paints = alpha > 0 || (maxBorder > 0 && borderAlpha > 0);
         const drawn = paints && opacity > 0.05 && w !== null && h !== null && w > 0 && h > 0 && st['position'] === 'absolute';
-        if (!drawn) {
+        if (!drawn || isZeroScale) {
           // fix 2: name WHICH of the two it is, and MEASURE it.
           const pos = st['position'] ?? '(unset)';
           const zeroBox = w === null || h === null || w <= 0 || h <= 0;
@@ -1275,11 +1436,15 @@ export function promoteAnatomy(
           const hasShadow = (st['box-shadow'] ?? 'none') !== 'none';
           const outlineW = px(st['outline-width']) ?? 0;
           const hasOutline = outlineW > 0 && (st['outline-style'] ?? 'none') !== 'none';
-          if (opacity === 0 || zeroBox) {
+          if (isZeroScale || opacity === 0 || zeroBox) {
             // the component's OWN hidden state for this combo — expected,
             // and NOT a limit of the grammar. Named separately so it can
-            // never be mistaken for one.
-            notDrawn.set('hidden', `pseudo-decor-hidden-in-combo: ${e.partName}${pe} is not drawn in every combo (opacity ${opacity}, box ${w ?? 'null'}x${h ?? 'null'}) — the component's own hidden state, NOT a grammar limit`);
+            // never be mistaken for one. scale(0) is Carbon's checkbox
+            // unchecked ::after hide (Wave B.2).
+            notDrawn.set(
+              'hidden',
+              `pseudo-decor-hidden-in-combo: ${e.partName}${pe} is not drawn in every combo (${isZeroScale ? `transform ${t} (scale 0)` : `opacity ${opacity}, box ${w ?? 'null'}x${h ?? 'null'}`}) — the component's own hidden state, NOT a grammar limit`,
+            );
           } else if (pos !== 'absolute') {
             notDrawn.set('position', `pseudo-decor-outside-grammar: ${e.partName}${pe} paints at position:${pos} (${w}x${h}, opacity ${opacity}) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas`);
           } else if (!paints && (hasGradient || hasShadow || hasOutline)) {
@@ -1292,8 +1457,8 @@ export function promoteAnatomy(
           }
           continue;
         }
-        if (!scaleOk) {
-          refusals.push(`pseudo-decor-outside-grammar: ${e.partName}${pe} drawn with a non-identity scale transform (${t}) — the bounded v1 decor grammar carries translate-only; named refusal`);
+        if (!transformOk) {
+          refusals.push(`pseudo-decor-outside-grammar: ${e.partName}${pe} drawn with a non-carryable transform (${t}) — the bounded decor grammar carries translate + orthonormal rotate only; named refusal`);
           drawnRows.length = 0;
           break;
         }
@@ -1339,6 +1504,12 @@ export function promoteAnatomy(
         const mtx = /^matrix\((-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+)\)$/.exec(t);
         const tx = mtx ? Number(mtx[5]) : 0;
         const ty = mtx ? Number(mtx[6]) : 0;
+        // CSS matrix(a,b,c,d,e,f): column1=(a,b)= (cosθ, sinθ). Degrees are
+        // what emit's stylesWhen `rotate(<n>deg)` / shape.rotation expect.
+        const rot =
+          mtx && !(Math.abs(Number(mtx[2])) < 0.01 && Math.abs(Number(mtx[3])) < 0.01)
+            ? (Math.atan2(Number(mtx[2]), Number(mtx[1])) * 180) / Math.PI
+            : 0;
         // Bubbled: absolute children position against the host's PADDING box
         // — the host's border widths join the parent-relative offsets.
         const hostSt = hostIsShapeLeaf ? union.alignedByKey.get(`${row.combo.key}__default`)![i]!.node.style : null;
@@ -1353,11 +1524,19 @@ export function promoteAnatomy(
           h,
           top: (px(row.st['top']) ?? 0) + ty + bT,
           left: (px(row.st['left']) ?? 0) + tx + bL,
+          rot: Math.round(rot * 1000) / 1000,
           bg: row.st['background-color'],
           borderW,
-          // ONE Figma stroke paint: disagreeing sides keep the CSS-side truth
-          // (the same rule the token border path applies) — recorded as ''.
-          borderColor: new Set(sideColors).size === 1 && Math.max(...Object.values(borderW)) > 0 ? sideColors[0] : '',
+          // ONE Figma stroke paint. Prefer the color of SIDES THAT INK
+          // (width > 0): Carbon's checkbox ::after check is white on
+          // left+bottom and dark on zero-width top+right — requiring all
+          // four colors to agree dropped the stroke entirely (Wave B.2).
+          borderColor: (() => {
+            const ink = BORDER_SIDES.filter((s) => borderW[s] > 0).map((s) => row.st[`border-${s}-color`] ?? '');
+            if (ink.length > 0 && new Set(ink).size === 1) return ink[0];
+            if (new Set(sideColors).size === 1 && Math.max(...Object.values(borderW)) > 0) return sideColors[0];
+            return '';
+          })(),
           // PSEUDO-DECOR v2 (G3) — SQUARE-THUMB TRAP. `rounded-full` computes
           // to 3.35544e+07px, which the local px() regex does not match, so
           // the radius folded to 0 and the decor shipped as a RECT. Share the
@@ -1420,26 +1599,45 @@ export function promoteAnatomy(
         }
         return null;
       };
-      const geomOf = (f: Folded) => ({ w: f.w, h: f.h, top: f.top, left: f.left });
+      // Wave B.1 — OFFSETS, SIZE, and PAINT factor separately (same
+      // factorByAxis pattern). Offsets used to bundle width/height, so a
+      // thumb that only resized by `sizing` (Tailwind ToggleSwitch ::after
+      // at 16/20/24) was refused as if it needed a multi-axis geometry
+      // product. Size may now factor by exactly ONE enum axis; the base
+      // shape keeps the axis-default intrinsic size and per-value
+      // width/height ride `literalsByProp` (emit syncs those onto shape
+      // before resize). A size that does not factor — or an offset product
+      // across two axes — still refuses by name.
+      const offsetOf = (f: Folded) => ({ top: f.top, left: f.left });
+      const sizeOf = (f: Folded) => ({ w: f.w, h: f.h });
       const paintOf = (f: Folded) => ({ bg: f.bg, borderW: f.borderW, borderColor: f.borderColor, radius: f.radius });
-      const geomFact = factorByAxis(rowsForFactoring, geomOf);
+      const rotOf = (f: Folded) => f.rot;
+      const geomFact = factorByAxis(rowsForFactoring, offsetOf);
       if (!geomFact) {
         refusals.push(
-          `pseudo-decor-geometry-multiaxis: ${e.partName}${pe} drawn geometry varies across the enabled combos and does not factor as a function of ONE enum axis (${[...new Set(rowsForFactoring.map((r) => JSON.stringify(geomOf(r.f))))].join(' vs ')}) — the two-axis geometry product named in examples/tailwind/PROVENANCE.md; named refusal`,
+          `pseudo-decor-geometry-multiaxis: ${e.partName}${pe} drawn offsets vary across the enabled combos and do not factor as a function of ONE enum axis (${[...new Set(rowsForFactoring.map((r) => JSON.stringify(offsetOf(r.f))))].join(' vs ')}) — the two-axis geometry product named in examples/tailwind/PROVENANCE.md; named refusal`,
         );
         continue;
       }
-      // The SIZE must not move even when the offsets do — a shape part has ONE
-      // intrinsic width/height and no per-variant resize spelling.
-      const sizes = new Set(rowsForFactoring.map((r) => `${r.f.w}×${r.f.h}`));
-      if (sizes.size !== 1) {
-        refusals.push(`pseudo-decor-size-varies: ${e.partName}${pe} drawn at ${[...sizes].join(' vs ')} — a shape part carries ONE intrinsic size (per-variant resize has no spelling); named refusal`);
+      const sizeFact = factorByAxis(rowsForFactoring, sizeOf);
+      if (!sizeFact) {
+        refusals.push(
+          `pseudo-decor-size-varies: ${e.partName}${pe} drawn at ${[...new Set(rowsForFactoring.map((r) => `${r.f.w}×${r.f.h}`))].join(' vs ')} — size does not factor as a function of ONE enum axis (per-variant resize spelling is literalsByProp width/height on a single axis); named refusal`,
+        );
         continue;
       }
       const paintFact = factorByAxis(rowsForFactoring, paintOf);
       if (!paintFact) {
         refusals.push(
           `pseudo-decor-paint-multiaxis: ${e.partName}${pe} drawn paint varies across the enabled combos and does not factor as a function of ONE enum axis (${[...new Set(rowsForFactoring.map((r) => JSON.stringify(paintOf(r.f))))].join(' vs ')}); named refusal`,
+        );
+        continue;
+      }
+      // Wave B.2 — rotation factors like paint (Carbon check ≈ −45°, minus = 0°).
+      const rotFact = factorByAxis(rowsForFactoring, rotOf);
+      if (!rotFact) {
+        refusals.push(
+          `pseudo-decor-rotation-multiaxis: ${e.partName}${pe} drawn rotation varies across the enabled combos and does not factor as a function of ONE enum axis (${[...new Set(rowsForFactoring.map((r) => String(rotOf(r.f))))].join(' vs ')}); named refusal`,
         );
         continue;
       }
@@ -1459,11 +1657,25 @@ export function promoteAnatomy(
             `pseudo-decor-state-paint-uncarried: ${e.partName}${pe} at ${r.combo.key} paints ${JSON.stringify(paintOf(r.f))} where the matching enabled combo paints ${JSON.stringify(paintOf(twin.f))} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue`,
           );
         }
-        if (JSON.stringify(geomOf(twin.f)) !== JSON.stringify(geomOf(r.f))) {
-          refusals.push(`pseudo-decor-state-geometry-uncarried: ${e.partName}${pe} at ${r.combo.key} sits at ${JSON.stringify(geomOf(r.f))} vs the enabled ${JSON.stringify(geomOf(twin.f))}; named residue`);
+        if (
+          JSON.stringify(offsetOf(twin.f)) !== JSON.stringify(offsetOf(r.f)) ||
+          JSON.stringify(sizeOf(twin.f)) !== JSON.stringify(sizeOf(r.f))
+        ) {
+          refusals.push(
+            `pseudo-decor-state-geometry-uncarried: ${e.partName}${pe} at ${r.combo.key} sits at ${JSON.stringify({ ...sizeOf(r.f), ...offsetOf(r.f) })} vs the enabled ${JSON.stringify({ ...sizeOf(twin.f), ...offsetOf(twin.f) })}; named residue`,
+          );
         }
       }
       const f = rowsForFactoring[0].f;
+      const baseValueOf = (prop: string): string => {
+        const ax = space.axes.find((a) => a.prop === prop)!;
+        const decl = contract.props.find((p) => p.name === prop)?.default;
+        return decl !== undefined ? String(decl) : (ax.values.find((v) => v !== ax.unset) ?? ax.values[0]);
+      };
+      let baseSize = sizeOf(f);
+      if (sizeFact.kind === 'axis') {
+        baseSize = sizeFact.map.get(baseValueOf(sizeFact.prop)) ?? [...sizeFact.map.values()][0];
+      }
       // presence over the enabled domain: drawn combos only
       const fact = factorPresence(
         drawnRows.map((r) => r.combo),
@@ -1496,38 +1708,109 @@ export function promoteAnatomy(
         }
       }
       const partName = `${e.partName}-${pe.slice(2)}`;
-      const kind: 'ellipse' | 'rect' = f.radius >= Math.min(f.w, f.h) / 2 - 0.5 ? 'ellipse' : 'rect';
+      const kind: 'ellipse' | 'rect' = f.radius >= Math.min(baseSize.w, baseSize.h) / 2 - 0.5 ? 'ellipse' : 'rect';
       /** Paint channels as contract literals. */
       const paintLits = (p: ReturnType<typeof paintOf>): Record<string, string> => {
         const out: Record<string, string> = {
           'background-color': alphaOf(p.bg) === 0 ? 'transparent' : p.bg,
         };
+        // Always write every side's width (incl. 0px) so per-value paint maps
+        // OVERRIDE base literals — Carbon indeterminate must clear the
+        // checked left border or the minus reads as an L (Wave B.2 residual).
         for (const s of BORDER_SIDES) {
-          if (p.borderW[s] > 0) out[`border-${s}-width`] = `${p.borderW[s]}px`;
+          out[`border-${s}-width`] = `${p.borderW[s]}px`;
         }
-        if (p.borderColor) for (const s of BORDER_SIDES) out[`border-${s}-color`] = p.borderColor;
+        if (p.borderColor) {
+          for (const s of BORDER_SIDES) {
+            if (p.borderW[s] > 0) out[`border-${s}-color`] = p.borderColor;
+          }
+        }
         // A rect keeps its corner radius; an ellipse IS the radius.
         if (kind === 'rect' && p.radius > 0) out['border-radius'] = `${p.radius}px`;
         return out;
       };
-      const geomLits = (g: ReturnType<typeof geomOf>): Record<string, string> => ({ top: `${g.top}px`, left: `${g.left}px` });
+      const geomLits = (g: ReturnType<typeof offsetOf>): Record<string, string> => ({ top: `${g.top}px`, left: `${g.left}px` });
+      const sizeLits = (s: ReturnType<typeof sizeOf>): Record<string, string> => ({ width: `${s.w}px`, height: `${s.h}px` });
+      const mergeByProp = (
+        byProp: Array<{ prop: string; map: Record<string, Record<string, string>> }>,
+        prop: string,
+        map: Record<string, Record<string, string>>,
+      ) => {
+        const entry = byProp.find((b) => b.prop === prop);
+        if (entry) for (const [v, m] of Object.entries(map)) entry.map[v] = { ...entry.map[v], ...m };
+        else byProp.push({ prop, map });
+      };
+      const sizeReceipt = sizeFact.kind === 'axis' ? `size per ${sizeFact.prop}` : 'size uniform';
+      const rotReceipt = rotFact.kind === 'axis' ? `rotation per ${rotFact.prop}` : (Math.abs(rotOf(f)) > 0.5 ? `rotation ${rotOf(f)}deg` : 'rotation 0');
+      let baseRot = rotOf(f);
+      if (rotFact.kind === 'axis') {
+        baseRot = rotFact.map.get(baseValueOf(rotFact.prop)) ?? [...rotFact.map.values()][0];
+      }
       if (placementConds.length > 0) {
-        // ENUM-GATED decor (Polaris's RadioButton dot): unchanged v1 spelling
-        // — the placement rides `stylesWhen` on the gating axis's shown
-        // values. Kept byte-identical on purpose; every committed decor part
-        // in the repo is this shape.
+        // ENUM-GATED decor (Polaris's RadioButton dot; Carbon checkbox ✓/minus):
+        // placement rides `stylesWhen` on the gating axis's shown values.
+        // Wave B.1/B.2: per-value size/paint/geom/rotation join literalsByProp
+        // + per-value placement styles (top/left/rotate).
+        const byProp: Array<{ prop: string; map: Record<string, Record<string, string>> }> = [];
+        if (sizeFact.kind === 'axis') {
+          mergeByProp(byProp, sizeFact.prop, Object.fromEntries([...sizeFact.map].map(([v, s]) => [v, sizeLits(s)])));
+        }
+        if (paintFact.kind === 'axis') {
+          mergeByProp(byProp, paintFact.prop, Object.fromEntries([...paintFact.map].map(([v, p]) => [v, paintLits(p)])));
+        }
+        if (geomFact.kind === 'axis') {
+          mergeByProp(byProp, geomFact.prop, Object.fromEntries([...geomFact.map].map(([v, g]) => [v, geomLits(g)])));
+        }
+        let basePaintGated = paintOf(f);
+        let baseGeomGated = offsetOf(f);
+        if (paintFact.kind === 'axis') {
+          basePaintGated = paintFact.map.get(baseValueOf(paintFact.prop)) ?? [...paintFact.map.values()][0];
+        }
+        if (geomFact.kind === 'axis') {
+          baseGeomGated = geomFact.map.get(baseValueOf(geomFact.prop)) ?? [...geomFact.map.values()][0];
+        }
+        const rowFor = (prop: string, equals: string) =>
+          rowsForFactoring.find((r) => r.combo.axisValues[prop] === equals);
         const decor: Part = {
-          shape: { kind, width: f.w, height: f.h },
-          literals: paintLits(paintOf(f)),
+          // When rotation factors by axis, keep it OFF the base shape — each
+          // placement stylesWhen carries rotate(<n>deg) (incl. 0) so emit does
+          // not leak the default-variant angle into indeterminate (Wave B.2).
+          shape: {
+            kind,
+            width: baseSize.w,
+            height: baseSize.h,
+            ...(rotFact.kind === 'uniform' && Math.abs(baseRot) > 0.5 ? { rotation: baseRot } : {}),
+          },
+          literals: {
+            ...paintLits(basePaintGated),
+            ...(sizeFact.kind === 'axis' ? sizeLits(baseSize) : {}),
+          },
+          ...(byProp.length > 0 ? { literalsByProp: byProp } : {}),
           ...(fact.visibleWhen ? { visibleWhen: { prop: fact.visibleWhen.prop } } : {}),
           stylesWhen: [
             ...fact.hiddenWhen.map((hw) => ({ prop: hw.prop, ...(hw.equals !== undefined ? { equals: hw.equals } : {}), styles: { display: 'none' } })),
-            ...placementConds.map((pc) => ({ prop: pc.prop, equals: pc.equals, styles: { position: 'absolute', top: `${f.top}px`, left: `${f.left}px` } })),
+            ...placementConds.map((pc) => {
+              const row = rowFor(pc.prop, pc.equals);
+              const g = row ? offsetOf(row.f) : baseGeomGated;
+              const rot = row ? rotOf(row.f) : baseRot;
+              return {
+                prop: pc.prop,
+                equals: pc.equals,
+                styles: {
+                  position: 'absolute',
+                  top: `${g.top}px`,
+                  left: `${g.left}px`,
+                  ...(rotFact.kind === 'axis' || Math.abs(rot) > 0.5
+                    ? { transform: `rotate(${rot}deg)` }
+                    : {}),
+                },
+              };
+            }),
           ],
-          description: `Drawn ${pe} pseudo-element decor promoted from the computed floor (round 5c, S5 v1): a ${f.w}×${f.h} ${kind} at ${f.left},${f.top} inside ${e.partName}, fill ${f.bg} — background+box+radius only, no content text; translate folded into top/left (receipted).`,
+          description: `Drawn ${pe} pseudo-element decor promoted from the computed floor (round 5c S5 + Wave B.2 rotate): a ${baseSize.w}×${baseSize.h} ${kind} at ${baseGeomGated.left},${baseGeomGated.top} inside ${e.partName}, fill ${basePaintGated.bg} — background+box+radius; translate folded; ${rotReceipt} (receipted).`,
         };
         receipts.push(
-          `pseudo-decor-carried: ${e.partName}${pe} → shape part "${partName}" (${kind} ${f.w}×${f.h} at ${f.left},${f.top}, fill ${f.bg}; drawn in ${drawnRows.length}/${domain.length} default-interaction combos${fact.hiddenWhen.length ? `, hidden-when ${fact.hiddenWhen.map((hw) => (hw.equals ? `${hw.prop}=${hw.equals}` : hw.prop)).join(', ')}` : ''}; translate${hostIsShapeLeaf ? ' + host border' : ''} folded into top/left${hostIsShapeLeaf ? '; BUBBLED to the host parent (shape leaves cannot nest children; parent content box == host border box, asserted)' : ''} — round 5c S5)`,
+          `pseudo-decor-carried: ${e.partName}${pe} → shape part "${partName}" (${kind} ${baseSize.w}×${baseSize.h} at ${baseGeomGated.left},${baseGeomGated.top}, fill ${basePaintGated.bg}; drawn in ${drawnRows.length}/${domain.length} default-interaction combos${fact.hiddenWhen.length ? `, hidden-when ${fact.hiddenWhen.map((hw) => (hw.equals ? `${hw.prop}=${hw.equals}` : hw.prop)).join(', ')}` : ''}; ${sizeReceipt}; ${rotReceipt}; translate${hostIsShapeLeaf ? ' + host border' : ''} folded into top/left${hostIsShapeLeaf ? '; BUBBLED to the host parent (shape leaves cannot nest children; parent content box == host border box, asserted)' : ''} — round 5c S5 + Wave B.2)`,
         );
         out.push([partName, decor]);
         continue;
@@ -1539,42 +1822,59 @@ export function promoteAnatomy(
       // has a gate to hang a condition on. A decor drawn everywhere does not
       // need one — it declares `position: absolute` and carries its offsets
       // as ordinary literals, the same lowering every other absolute part in
-      // the repo uses (absolutePartPlacement). Per-value geometry/paint ride
-      // `literalsByProp`, one ordered entry per driving axis.
+      // the repo uses (absolutePartPlacement). Per-value geometry/paint/size
+      // ride `literalsByProp`, one ordered entry per driving axis.
       const byProp: Array<{ prop: string; map: Record<string, Record<string, string>> }> = [];
-      const baseValueOf = (prop: string): string => {
-        const ax = space.axes.find((a) => a.prop === prop)!;
-        const decl = contract.props.find((p) => p.name === prop)?.default;
-        return decl !== undefined ? String(decl) : (ax.values.find((v) => v !== ax.unset) ?? ax.values[0]);
-      };
-      let baseGeom = geomOf(f);
+      let baseGeom = offsetOf(f);
       let basePaint = paintOf(f);
       if (geomFact.kind === 'axis') {
         const base = geomFact.map.get(baseValueOf(geomFact.prop)) ?? [...geomFact.map.values()][0];
         baseGeom = base;
-        byProp.push({ prop: geomFact.prop, map: Object.fromEntries([...geomFact.map].map(([v, g]) => [v, geomLits(g)])) });
+        mergeByProp(byProp, geomFact.prop, Object.fromEntries([...geomFact.map].map(([v, g]) => [v, geomLits(g)])));
+      }
+      if (sizeFact.kind === 'axis') {
+        mergeByProp(byProp, sizeFact.prop, Object.fromEntries([...sizeFact.map].map(([v, s]) => [v, sizeLits(s)])));
       }
       if (paintFact.kind === 'axis') {
         const base = paintFact.map.get(baseValueOf(paintFact.prop)) ?? [...paintFact.map.values()][0];
         basePaint = base;
-        const entry = byProp.find((b) => b.prop === paintFact.prop);
-        const map = Object.fromEntries([...paintFact.map].map(([v, p]) => [v, paintLits(p)]));
-        if (entry) for (const [v, m] of Object.entries(map)) entry.map[v] = { ...entry.map[v], ...m };
-        else byProp.push({ prop: paintFact.prop, map });
+        mergeByProp(byProp, paintFact.prop, Object.fromEntries([...paintFact.map].map(([v, p]) => [v, paintLits(p)])));
       }
+      const rotStyles: { prop: string; equals: string; styles: Record<string, string> }[] =
+        rotFact.kind === 'axis'
+          ? [...rotFact.map].map(([v, rot]) => ({
+              prop: rotFact.prop,
+              equals: v,
+              styles: (Math.abs(rot) > 0.5 ? { transform: `rotate(${rot}deg)` } : {}) as Record<string, string>,
+            })).filter((sw) => Object.keys(sw.styles).length > 0)
+          : [];
       const decor: Part = {
-        shape: { kind, width: f.w, height: f.h },
+        shape: {
+          kind,
+          width: baseSize.w,
+          height: baseSize.h,
+          ...(Math.abs(baseRot) > 0.5 ? { rotation: baseRot } : {}),
+        },
         declared: { position: 'absolute' },
-        literals: { ...paintLits(basePaint), ...geomLits(baseGeom) },
+        literals: {
+          ...paintLits(basePaint),
+          ...geomLits(baseGeom),
+          ...(sizeFact.kind === 'axis' ? sizeLits(baseSize) : {}),
+        },
         ...(byProp.length > 0 ? { literalsByProp: byProp } : {}),
         ...(fact.visibleWhen ? { visibleWhen: { prop: fact.visibleWhen.prop } } : {}),
-        ...(fact.hiddenWhen.length > 0
-          ? { stylesWhen: fact.hiddenWhen.map((hw) => ({ prop: hw.prop, ...(hw.equals !== undefined ? { equals: hw.equals } : {}), styles: { display: 'none' } })) }
+        ...((fact.hiddenWhen.length > 0 || rotStyles.length > 0)
+          ? {
+              stylesWhen: [
+                ...fact.hiddenWhen.map((hw) => ({ prop: hw.prop, ...(hw.equals !== undefined ? { equals: hw.equals } : {}), styles: { display: 'none' } })),
+                ...rotStyles,
+              ],
+            }
           : {}),
-        description: `Drawn ${pe} pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round): an UNCONDITIONAL ${f.w}×${f.h} ${kind} at ${baseGeom.left},${baseGeom.top} inside ${e.partName} — position:absolute with literal offsets${byProp.length ? `, per-value ${byProp.map((b) => b.prop).join(' + ')} overrides` : ''}; background+border+box+radius only, no content text; translate folded into top/left (receipted).`,
+        description: `Drawn ${pe} pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round + Wave B.2): an UNCONDITIONAL ${baseSize.w}×${baseSize.h} ${kind} at ${baseGeom.left},${baseGeom.top} inside ${e.partName} — position:absolute with literal offsets${byProp.length ? `, per-value ${byProp.map((b) => b.prop).join(' + ')} overrides` : ''}; ${rotReceipt}; background+border+box+radius only, no content text; translate folded into top/left (receipted).`,
       };
       receipts.push(
-        `pseudo-decor-carried: ${e.partName}${pe} → UNCONDITIONAL shape part "${partName}" (${kind} ${f.w}×${f.h} at ${baseGeom.left},${baseGeom.top}, fill ${basePaint.bg}${basePaint.borderColor ? `, ${Math.max(...Object.values(basePaint.borderW))}px ring ${basePaint.borderColor}` : ''}; drawn in ${drawnRows.length}/${domain.length} default-interaction combos; geometry ${geomFact.kind === 'axis' ? `per ${geomFact.prop}` : 'uniform'}, paint ${paintFact.kind === 'axis' ? `per ${paintFact.prop}` : 'uniform'}${hostIsShapeLeaf ? '; BUBBLED to the host parent' : ''} — pseudo-decor v2)`,
+        `pseudo-decor-carried: ${e.partName}${pe} → UNCONDITIONAL shape part "${partName}" (${kind} ${baseSize.w}×${baseSize.h} at ${baseGeom.left},${baseGeom.top}, fill ${basePaint.bg}${basePaint.borderColor ? `, ${Math.max(...Object.values(basePaint.borderW))}px ring ${basePaint.borderColor}` : ''}; drawn in ${drawnRows.length}/${domain.length} default-interaction combos; geometry ${geomFact.kind === 'axis' ? `per ${geomFact.prop}` : 'uniform'}, ${sizeReceipt}, paint ${paintFact.kind === 'axis' ? `per ${paintFact.prop}` : 'uniform'}, ${rotReceipt}${hostIsShapeLeaf ? '; BUBBLED to the host parent' : ''} — pseudo-decor v2)`,
       );
       out.push([partName, decor]);
     }

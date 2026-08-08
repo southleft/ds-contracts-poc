@@ -41,6 +41,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -49,7 +52,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -81,6 +87,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 32
+          },
           "children": [
             {
               "type": "text",
@@ -89,7 +98,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -121,6 +133,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 36
+          },
           "children": [
             {
               "type": "text",
@@ -129,7 +144,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -161,6 +179,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 48
+          },
           "children": [
             {
               "type": "text",
@@ -169,7 +190,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -201,6 +225,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 52
+          },
           "children": [
             {
               "type": "text",
@@ -209,7 +236,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -241,6 +271,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -249,7 +282,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -281,6 +317,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 32
+          },
           "children": [
             {
               "type": "text",
@@ -289,7 +328,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -321,6 +363,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 36
+          },
           "children": [
             {
               "type": "text",
@@ -329,7 +374,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -361,6 +409,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 48
+          },
           "children": [
             {
               "type": "text",
@@ -369,7 +420,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -401,6 +455,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 52
+          },
           "children": [
             {
               "type": "text",
@@ -409,7 +466,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -441,6 +501,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -449,7 +512,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -481,6 +547,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 32
+          },
           "children": [
             {
               "type": "text",
@@ -489,7 +558,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -521,6 +593,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 36
+          },
           "children": [
             {
               "type": "text",
@@ -529,7 +604,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -561,6 +639,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 48
+          },
           "children": [
             {
               "type": "text",
@@ -569,7 +650,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -601,6 +685,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 52
+          },
           "children": [
             {
               "type": "text",
@@ -609,7 +696,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -641,6 +731,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -649,7 +742,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -681,6 +777,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 32
+          },
           "children": [
             {
               "type": "text",
@@ -689,7 +788,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -721,6 +823,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 36
+          },
           "children": [
             {
               "type": "text",
@@ -729,7 +834,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -761,6 +869,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 48
+          },
           "children": [
             {
               "type": "text",
@@ -769,7 +880,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -801,6 +915,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 52
+          },
           "children": [
             {
               "type": "text",
@@ -809,7 +926,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -841,6 +961,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -849,7 +972,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -881,6 +1007,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 32
+          },
           "children": [
             {
               "type": "text",
@@ -889,7 +1018,10 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 16,
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -921,6 +1053,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 36
+          },
           "children": [
             {
               "type": "text",
@@ -929,7 +1064,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -961,6 +1099,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 48
+          },
           "children": [
             {
               "type": "text",
@@ -969,7 +1110,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1001,6 +1145,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 52
+          },
           "children": [
             {
               "type": "text",
@@ -1009,7 +1156,10 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 24,
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1043,6 +1193,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 40
+          },
           "opacity": 0.5,
           "children": [
             {
@@ -1052,7 +1205,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1084,6 +1240,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 40
+          },
           "opacity": 0.5,
           "children": [
             {
@@ -1093,7 +1252,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1125,6 +1287,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 40
+          },
           "opacity": 0.5,
           "children": [
             {
@@ -1134,7 +1299,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1166,6 +1334,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 40
+          },
           "opacity": 0.5,
           "children": [
             {
@@ -1175,7 +1346,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1207,6 +1381,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 40
+          },
           "opacity": 0.5,
           "children": [
             {
@@ -1216,7 +1393,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1248,6 +1428,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -1314,7 +1497,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-active/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1346,6 +1532,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -1412,7 +1601,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-active/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1444,6 +1636,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -1510,7 +1705,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-active/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1542,6 +1740,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -1608,7 +1809,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-active/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1640,6 +1844,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-active/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -1706,7 +1913,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-active/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1739,6 +1949,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/default",
           "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -1806,7 +2019,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1839,6 +2055,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/alternative",
           "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -1906,7 +2125,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -1939,6 +2161,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/dark",
           "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -2006,7 +2231,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2039,6 +2267,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/green",
           "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -2106,7 +2337,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2139,6 +2373,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color/red",
           "stroke": "imported/button/root/outline-color-state-focus-visible",
+          "lits": {
+            "height": 40
+          },
           "effectStack": [
             {
               "x": 0,
@@ -2206,7 +2443,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2238,6 +2478,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/default",
           "stroke": "imported/button/root/border-top-color/default",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -2246,7 +2489,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-hover/default",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2278,6 +2524,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/alternative",
           "stroke": "imported/button/root/border-top-color/alternative",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -2286,7 +2535,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-hover/alternative",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2318,6 +2570,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/dark",
           "stroke": "imported/button/root/border-top-color/dark",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -2326,7 +2581,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-hover/dark",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2358,6 +2616,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/green",
           "stroke": "imported/button/root/border-top-color/green",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -2366,7 +2627,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-hover/green",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2398,6 +2662,9 @@ const COMPONENTS = [
           },
           "fill": "imported/button/root/background-color-state-hover/red",
           "stroke": "imported/button/root/border-top-color/red",
+          "lits": {
+            "height": 40
+          },
           "children": [
             {
               "type": "text",
@@ -2406,7 +2673,10 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textFill": "imported/button/root/color-state-hover/red",
-              "lineHeight": 20,
+              "lineHeight": {
+                "value": 20,
+                "unit": "PIXELS"
+              },
               "contentProp": "Content"
             }
           ]
@@ -2480,6 +2750,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -2510,9 +2821,9 @@ const boundPaint = (varName, consumer) => {
 
 // Named text styles (synced by 01-tokens.js): consumers look up OUR styles
 // only — the ds_contracts/textStyleToken marker is identity, a foreign style
-// sharing a name is never used. Missing style (tokens script not run yet)
-// degrades gracefully: the raw fontName/fontSize already set on the node
-// stand until the next amend after the styles exist.
+// sharing a name is never used. When a compiled spec carries textStyle, the
+// named style MUST bind — missing or failed setTextStyleIdAsync refuses by
+// the stable code text-style-identity-refused (never silently keep raw props).
 let _textStyleMap = null;
 async function ourTextStyle(name) {
   if (!_textStyleMap) {
@@ -2593,14 +2904,73 @@ async function wireStateReactions(setNode, byName, C) {
   return wired;
 }
 
-function findComponentByName(name) {
+function isSyncTarget(n) {
+  return n.type === 'COMPONENT_SET' ||
+    (n.type === 'COMPONENT' && (!n.parent || n.parent.type !== 'COMPONENT_SET'));
+}
+
+function allSyncTargets() {
+  const out = [];
   for (const page of figma.root.children) {
-    const hit = page.findOne(
-      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === name,
-    );
-    if (hit) return hit;
+    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
   }
-  throw new Error('Dependency component not found in file: ' + name + ' (sync it first)');
+  return out;
+}
+
+// One resolver for nested instances, slot defaults/preferred values, and
+// top-level amend targets. Semantic identity wins; names are admitted only
+// for explicit pre-contractId generated nodes.
+function resolveComponentIdentity(ref, purpose, allowMissing) {
+  const targets = allSyncTargets();
+  const exact = targets.filter(
+    (n) => n.getSharedPluginData('ds_contracts', 'contractId') === ref.contractId,
+  );
+  if (exact.length > 1) {
+    throw new Error(
+      purpose + ': duplicate ds_contracts/contractId "' + ref.contractId +
+      '" on ' + exact.length + ' component targets — refusing ambiguous identity',
+    );
+  }
+  if (exact.length === 1) return exact[0];
+
+  if (ref.anchorKey) {
+    const anchored = targets.filter((n) => n.key === ref.anchorKey);
+    if (anchored.length > 1) {
+      throw new Error(
+        purpose + ': duplicate Figma anchor key "' + ref.anchorKey +
+        '" — refusing ambiguous identity',
+      );
+    }
+    if (anchored.length === 1) {
+      const marker = anchored[0].getSharedPluginData('ds_contracts', 'contractId');
+      if (marker && marker !== ref.contractId) {
+        throw new Error(
+          purpose + ': anchor key "' + ref.anchorKey + '" belongs to contractId "' +
+          marker + '", not "' + ref.contractId + '" — refusing contradictory identity',
+        );
+      }
+      return anchored[0];
+    }
+  }
+
+  const legacy = targets.filter(
+    (n) => n.name === ref.name &&
+      n.getSharedPluginData('ds_contracts', 'contractId') === '' &&
+      n.getSharedPluginData('ds_contracts', 'specHash') !== '',
+  );
+  if (legacy.length > 1) {
+    throw new Error(
+      purpose + ': duplicate explicit legacy-generated name "' + ref.name +
+      '" on ' + legacy.length + ' unmarked component targets — refusing ambiguous identity',
+    );
+  }
+  if (legacy.length === 1) return legacy[0];
+  if (allowMissing) return null;
+  throw new Error(
+    purpose + ': component not found for contractId "' + ref.contractId + '"' +
+    (ref.anchorKey ? ', anchor key "' + ref.anchorKey + '"' : '') +
+    ', or unique explicit legacy-generated name "' + ref.name + '" (sync it first)',
+  );
 }
 
 function setInstanceProps(inst, props, owner) {
@@ -2723,6 +3093,11 @@ function applyFrameSpec(node, spec) {
   node.counterAxisAlignItems = l.counter;
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
+  // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
+  // but CSS overflow defaults to visible. Clipping HUG text (Inter vs capture
+  // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
+  // Unclip unless the contract explicitly asks for canvas clip.
+  node.clipsContent = spec.clipsContent === true;
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -2760,6 +3135,58 @@ function applyFrameSpec(node, spec) {
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -2787,17 +3214,36 @@ async function buildNode(spec, registry) {
     node.fills = [];
     node.clipsContent = false;
     if (spec.iconSize) node.resize(spec.iconSize, spec.iconSize);
+    // FC-SVG-ROTATION: CSS-clockwise → Plugin API counterclockwise
+    if (typeof spec.rotation === 'number' && spec.rotation !== 0) node.rotation = -spec.rotation;
   } else if (spec.type === 'text') {
     node = figma.createText();
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
+      // Fail closed: a compiled textStyle that cannot bind is identity loss.
       const st = await ourTextStyle(spec.textStyle);
-      if (st) { try { await node.setTextStyleIdAsync(st.id); } catch (e) { /* raw props stand */ } }
+      if (!st) {
+        throw new Error(
+          'text-style-identity-refused: missing local text style "' + spec.textStyle +
+          '" (run the tokens sync so ds_contracts/textStyleToken styles exist)',
+        );
+      }
+      try {
+        await node.setTextStyleIdAsync(st.id);
+      } catch (e) {
+        throw new Error(
+          'text-style-identity-refused: setTextStyleIdAsync failed for "' + spec.textStyle +
+          '": ' + (e && e.message ? e.message : String(e)),
+        );
+      }
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -2827,6 +3273,8 @@ async function buildNode(spec, registry) {
       wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
+      // FC-FIGMA-CLIP-DEFAULT — text hosts must not clip Semi Bold overhang.
+      wrap.clipsContent = false;
       wrap.fills = [];
       for (const [field, varName] of Object.entries(spec.bindings || {})) {
         wrap.setBoundVariable(field, need(varName));
@@ -2843,7 +3291,11 @@ async function buildNode(spec, registry) {
       node = wrap;
     }
   } else if (spec.type === 'instance') {
-    const target = findComponentByName(spec.dep);
+    const target = resolveComponentIdentity(
+      { contractId: spec.depContractId, anchorKey: spec.depAnchorKey, name: spec.dep },
+      'Instance "' + spec.name + '"',
+      false,
+    );
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
@@ -2859,7 +3311,11 @@ async function buildNode(spec, registry) {
     } else {
       const instances = [];
       for (const item of defaults) {
-        const target = findComponentByName(item.dep);
+        const target = resolveComponentIdentity(
+          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+          'Slot "' + spec.name + '" default',
+          false,
+        );
         const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
         const inst = main.createInstance();
         if (item.props) setInstanceProps(inst, item.props, target);
@@ -2916,7 +3372,7 @@ async function buildNode(spec, registry) {
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
-    if (child.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
   }
@@ -3119,8 +3575,12 @@ function dsStampFingerprints(node) {
   }
 }
 
+// Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
+// delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
+// skips as "unchanged" and canvas keeps the old runtime behavior.
+const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
 function specHash(C) {
-  let h = 5381; const s = JSON.stringify(C);
+  let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return String(h);
 }
@@ -3132,7 +3592,8 @@ function specHash(C) {
 // rebuilt from spec (manual interior edits are drift by definition);
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
-// REPORTED, never deleted — a human retires those.
+// REPORTED, never deleted — except State preview leftovers when
+// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   const hash = specHash(C);
@@ -3145,9 +3606,9 @@ async function amendSet(set, C) {
     if (!fpSkip || fpSkip.indexOf('v6:') !== 0) {
       dsStampFingerprints(set);
     }
-    return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
-  const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
+  const report = { name: C.setName, contractId: C.contractId, amended: true, nodeId: set.id, key: set.key,
     addedVariants: [], rebuiltVariants: 0, extraVariants: [], addedProps: [], editedDefaults: [] };
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
@@ -3190,6 +3651,25 @@ async function amendSet(set, C) {
       report.extraVariants.push(ch.name);
     }
   }
+  // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
+  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // sync must be removed — otherwise amend leaves a doubled showcase grid.
+  const expectedHasState = EV.some((v) => /, State=/.test(v.name));
+  if (!expectedHasState && report.extraVariants.length) {
+    const removed = [];
+    for (const name of [...report.extraVariants]) {
+      if (!/, State=/.test(name)) continue;
+      const ch = set.children.find((c) => c.name === name);
+      if (ch) {
+        ch.remove();
+        removed.push(name);
+      }
+    }
+    if (removed.length) {
+      report.extraVariants = report.extraVariants.filter((n) => !removed.includes(n));
+      report.removedVariants = removed;
+    }
+  }
   const existingByName = new Map(set.children.map((ch) => [ch.name, ch]));
 
   for (const v of EV) {
@@ -3219,7 +3699,7 @@ async function amendSet(set, C) {
           // #60 fix 4 (amend path): same empty-child declared default.
           try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
         }
-        if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+        if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
       }
@@ -3239,8 +3719,12 @@ async function amendSet(set, C) {
       let k = defKey(sl.spec.slotProperty);
       if (!k) {
         const preferred = [];
-        for (const depName of sl.spec.slotAccepts || []) {
-          const target = findComponentByName(depName);
+        for (const depRef of sl.spec.slotAccepts || []) {
+          const target = resolveComponentIdentity(
+            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
+            'Slot "' + sl.spec.slotProperty + '" preferred value',
+            false,
+          );
           preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
         k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
@@ -3251,8 +3735,11 @@ async function amendSet(set, C) {
       sl.instance.componentPropertyReferences = { mainComponent: k };
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+        // Optional slots default hidden — dashed "Slot" chrome must not be the
+        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
         sl.wrapper.componentPropertyReferences = { visible: vk };
+        sl.wrapper.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -3329,9 +3816,9 @@ async function amendComponent(comp, C) {
     if (!fpSkipC || fpSkipC.indexOf('v6:') !== 0) {
       dsStampFingerprints(comp);
     }
-    return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
-  const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
+  const report = { name: C.setName, contractId: C.contractId, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
@@ -3368,7 +3855,7 @@ async function amendComponent(comp, C) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
       try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
     }
-    if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
+    if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
@@ -3386,8 +3873,12 @@ async function amendComponent(comp, C) {
     let k = defKey(sl.spec.slotProperty);
     if (!k) {
       const preferred = [];
-      for (const depName of sl.spec.slotAccepts || []) {
-        const target = findComponentByName(depName);
+      for (const depRef of sl.spec.slotAccepts || []) {
+        const target = resolveComponentIdentity(
+          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
+          'Slot "' + sl.spec.slotProperty + '" preferred value',
+          false,
+        );
         preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
       k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
@@ -3398,8 +3889,9 @@ async function amendComponent(comp, C) {
     sl.instance.componentPropertyReferences = { mainComponent: k };
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
-      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', true); newKeys['Show ' + sl.spec.slotProperty] = vk; }
+      if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
       sl.wrapper.componentPropertyReferences = { visible: vk };
+      sl.wrapper.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -3418,38 +3910,15 @@ async function amendComponent(comp, C) {
 }
 
 async function syncOne(C) {
-  // Identity is the ds_contracts/contractId marker, NOT the set name — in a
-  // brownfield file a name can belong to the host system's own component
-  // (CBDS pilot: native 72-variant "Badge"). Legacy fallback: sets created
-  // before the marker existed carry only specHash under the same namespace.
-  let existing = null;
-  for (const page of figma.root.children) {
-    existing = page.findOne(
-      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') &&
-        n.getSharedPluginData('ds_contracts', 'contractId') === C.contractId,
-    );
-    if (existing) break;
-  }
-  if (!existing) {
-    for (const page of figma.root.children) {
-      existing = page.findOne(
-        (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === C.setName &&
-          n.getSharedPluginData('ds_contracts', 'specHash') !== '',
-      );
-      if (existing) break;
-    }
-  }
-  // An anchored key is ours by definition — the contract records the key the
-  // canvas minted. Covers legacy nodes that predate both plugin-data markers
-  // (main-file finding, 2026-07-08: 17 standalone components duplicated).
-  if (!existing && C.anchorKey) {
-    for (const page of figma.root.children) {
-      existing = page.findOne(
-        (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.key === C.anchorKey,
-      );
-      if (existing) break;
-    }
-    if (existing) existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // Semantic marker → stable anchor → unique explicit legacy-generated name.
+  // A same-name foreign node has neither marker and is never adopted.
+  let existing = resolveComponentIdentity(
+    { contractId: C.contractId, anchorKey: C.anchorKey, name: C.setName },
+    'Sync target "' + C.setName + '"',
+    true,
+  );
+  if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
+    existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
   if (existing && existing.type === 'COMPONENT_SET' && C.isSet) {
     return await amendSet(existing, C);
@@ -3462,7 +3931,7 @@ async function syncOne(C) {
   }
   if (existing) {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
-    return { name: C.setName, skipped: true, reason: 'set/standalone shape mismatch (' + existing.type + ' vs isSet=' + C.isSet + ') — a human retires the old node', nodeId: existing.id, key: existing.key };
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'set/standalone shape mismatch (' + existing.type + ' vs isSet=' + C.isSet + ') — a human retires the old node', nodeId: existing.id, key: existing.key };
   }
 
   // A same-named unmarked set is foreign: leave it alone, disambiguate ours.
@@ -3520,8 +3989,12 @@ async function syncOne(C) {
       let key = keys[s.spec.slotProperty];
       if (!key) {
         const preferred = [];
-        for (const depName of s.spec.slotAccepts || []) {
-          const dep = findComponentByName(depName);
+        for (const depRef of s.spec.slotAccepts || []) {
+          const dep = resolveComponentIdentity(
+            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
+            'Slot "' + s.spec.slotProperty + '" preferred value',
+            false,
+          );
           preferred.push({
             type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
             key: dep.key,
@@ -3536,7 +4009,8 @@ async function syncOne(C) {
       }
       s.instance.componentPropertyReferences = { mainComponent: key };
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', true) };
+        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
+        s.wrapper.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -3584,6 +4058,7 @@ async function syncOne(C) {
 
   return {
     name: C.setName,
+    contractId: C.contractId,
     nodeId: target.id,
     key: target.key,
     variants: C.isSet ? target.children.length : 1,

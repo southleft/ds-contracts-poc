@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "table-pagination",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/table-pagination.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "21:627",
+  "cellNodeId": "21:627",
+  "cellName": "TablePagination",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 37.76978417266187,
+    "pctAAUnmasked": 17.535971223021583,
+    "pctAAMasked": 17.535971223021583,
+    "maskCoveragePct": 0,
+    "canvasPx": "139x8",
+    "realPx": "139x8",
+    "inkCanvasPct": 17.805755395683455,
+    "inkRealPct": 26.169064748201436
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/table-pagination.png",
+  "referenceSha256": "ca1b769694b181d59df1fd4c38a43ec876c1a9549e975437ceec8b740ed75014",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/table-pagination.png",
+  "canvasShotSha256": "f4d8451d9160f247ccc3a18de303ffbbf0de255014ef38743724fa675ad909af",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/table-pagination.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 8.36330935251798,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=17.54 > 5)"
+}

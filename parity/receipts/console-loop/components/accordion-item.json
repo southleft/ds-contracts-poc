@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "accordion-item",
+  "contract": "contracts/accordion-item.contract.json",
+  "script": "parity/receipts/console-loop/emitted/02-accordionitem.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:41.724Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:908",
+    "page": "AccordionItem",
+    "sectionId": "1:909",
+    "result": {
+      "createdNodeIds": [
+        "1:908"
+      ],
+      "results": [
+        {
+          "name": "AccordionItem",
+          "contractId": "ds.accordion-item",
+          "nodeId": "1:908",
+          "key": "1b72688393030cf9b1c37314e1fad8d53fa2da6e",
+          "variants": 2,
+          "properties": [
+            "Title#1:279",
+            "Children#1:282",
+            "State"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Section screenshot: Collapsed (chevron right + Section title) and Expanded (chevron down + Slot dashed placeholder).",
+      "Bordered rounded surface; header/content hierarchy reads correctly.",
+      "No visual defects flagged."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:362055825",
+    "lineCount": 92,
+    "sampleLines": [
+      ":COMPONENT_SET/AccordionItem|fill|[]",
+      ":COMPONENT_SET/AccordionItem|radius|5,5,5,5",
+      ":COMPONENT_SET/AccordionItem|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/AccordionItem|description|AccordionItem — generated from contract ds.accordion-item v1.1.0 †",
+      ":COMPONENT_SET/AccordionItem|propdef|Children#1:282:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/AccordionItem|propdef|State:VARIANT=Closed",
+      ":COMPONENT_SET/AccordionItem|propdef|Title#1:279:TEXT=Section title",
+      "/0:COMPONENT/State=Closed|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/surface/raised\"}}}]",
+      "/0:COMPONENT/State=Closed|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
+      "/0:COMPONENT/State=Closed|radius|8,8,8,8",
+      "/0:COMPONENT/State=Closed|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/State=Closed|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/State=Closed|bound:bottomLeftRadius|radius/card",
+      "/0:COMPONENT/State=Closed|bound:bottomRightRadius|radius/card",
+      "/0:COMPONENT/State=Closed|bound:strokeBottomWeight|border-width/100",
+      "/0:COMPONENT/State=Closed|bound:strokeLeftWeight|border-width/100",
+      "/0:COMPONENT/State=Closed|bound:strokeRightWeight|border-width/100",
+      "/0:COMPONENT/State=Closed|bound:strokeTopWeight|border-width/100",
+      "/0:COMPONENT/State=Closed|bound:topLeftRadius|radius/card",
+      "/0:COMPONENT/State=Closed|bound:topRightRadius|radius/card"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "State",
+      "Title"
+    ],
+    "observed": {
+      "variantNames": [
+        "State=Closed",
+        "State=Open"
+      ],
+      "propDefs": [
+        {
+          "name": "Title#1:279",
+          "type": "TEXT",
+          "defaultValue": "Section title",
+          "variantOptions": null
+        },
+        {
+          "name": "Children#1:282",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Closed",
+          "variantOptions": [
+            "Closed",
+            "Open"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "State=Closed",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 8,
+        "fillVarName": "color/surface/raised",
+        "padBound": {
+          "width": "size/card/width",
+          "topLeftRadius": "radius/card",
+          "topRightRadius": "radius/card",
+          "bottomLeftRadius": "radius/card",
+          "bottomRightRadius": "radius/card",
+          "strokeTopWeight": "border-width/100",
+          "strokeBottomWeight": "border-width/100",
+          "strokeLeftWeight": "border-width/100",
+          "strokeRightWeight": "border-width/100",
+          "fills": "color/surface/raised",
+          "strokes": "color/border/subtle"
+        },
+        "textChild": [
+          {
+            "name": "titleText",
+            "chars": "Section title",
+            "fontSize": 14
+          }
+        ],
+        "w": 320,
+        "h": 35,
+        "childNames": [
+          "trigger:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

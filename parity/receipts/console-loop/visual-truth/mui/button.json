@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "button",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/button.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "21:287",
+  "cellNodeId": "21:195",
+  "cellName": "Variant=Contained, Color=Error, Size=Large, State=Default",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 99.97425997425997,
+    "pctAAUnmasked": 88.31402831402832,
+    "pctAAMasked": 88.31402831402832,
+    "maskCoveragePct": 0,
+    "canvasPx": "105x37",
+    "realPx": "102x36",
+    "inkCanvasPct": 97.014157014157,
+    "inkRealPct": 94.41441441441441
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/button.png",
+  "referenceSha256": "3e2598f1d67108208435fd255e039c9c434ff8c7c83382173cc5624383374d10",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/button.png",
+  "canvasShotSha256": "e66c9dddda8fbcd5250e73237874328a346f13b004dd34f17141386780972b71",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/button.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0294117647058822,
+  "inkDelta": 2.599742599742598,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=88.31 > 5)"
+}

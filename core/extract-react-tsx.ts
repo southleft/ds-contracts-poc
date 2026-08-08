@@ -796,7 +796,7 @@ export function extractFromSource(
     let anatomy: ExtractedComponent['anatomy'];
     if (input.css !== undefined) {
       const css = input.css;
-      cssVars = [...new Set([...css.matchAll(/var\(--([a-z0-9-]+)\)/g)].map((mm) => mm[1]))];
+      cssVars = [...new Set([...css.matchAll(/var\(--([a-zA-Z0-9-]+)\)/g)].map((mm) => mm[1]))];
       // A co-located CSS Module makes the component's structure legible —
       // propose anatomy from the JSX tree + the stylesheet (css-module
       // adapter). Extraction failures degrade to notes, never to a crash.

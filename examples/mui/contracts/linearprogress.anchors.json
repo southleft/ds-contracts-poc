@@ -1,0 +1,22 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "linearprogress",
+  "anchors": [
+    {
+      "leaf": "imported.linear-progress.linearprogress-bar-2.background-color",
+      "token": "palette-primary-main",
+      "part": "linearprogress-bar-2",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-1gxatw5-MuiLinearProgress-bar2"
+    },
+    {
+      "leaf": "imported.linear-progress.linearprogress-bar.background-color",
+      "token": "palette-primary-main",
+      "part": "linearprogress-bar",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-ico9hg-MuiLinearProgress-bar1"
+    }
+  ]
+}

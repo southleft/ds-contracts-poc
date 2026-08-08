@@ -103,6 +103,8 @@
       },
       "tokens": {
         "background-color": "{comp.button.primary.color.background.default}",
+        "padding-inline": "{spacing.1-5}",
+        "padding-block": "{spacing.1-5}",
         "border-radius": "{border.radius.8}",
         "gap": "{spacing.2}"
       },

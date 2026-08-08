@@ -13,13 +13,14 @@ This repository is the working proof, and the candidate reference implementation
 
 ## Release-candidate status
 
-The coordinated release candidate is staged in source as repository
-`1.0.0-rc.1`, CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, and web-components
-emitter `0.4.0-rc.1`. The RC versions are **not published merely
-because they appear in package manifests**. As checked on 2026-08-04, npm's
-`latest` tags still resolve to CLI `0.4.0`, schema `16.0.0`, and emitter
-`0.3.0`. Use an exact version when evaluating an RC after publication; do not
-assume `latest` points to it.
+The coordinated release candidate is repository `1.0.0-rc.1`, schema
+`16.1.0-rc.2`, and web-components emitter `0.4.0-rc.2`. The previous package
+RCs (schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`) were published under npm's
+`next` tag. The current conversion work advances the CLI source to
+`0.5.0-rc.2` and the schema and emitter sources to their `rc.2` versions; all
+three are source-ahead and unpublished. npm's `latest` tags remain on the
+stable line. Use an exact version when evaluating an RC; do not assume
+`latest` or `next` points to the current source tree.
 
 Publication, tagging, the GitHub release, and deployment remain explicit human
 approvals. The repeatable procedure, verification matrix, migration notes, and
@@ -28,10 +29,10 @@ the sign-off record is [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md).
 
 **Evaluating this? There are two documents, and neither is honest alone.**
 
-- **What it does — [docs/24 — What Works](docs/24-what-works.md).** Generated from committed artifacts, every number carrying the file it was read from. The headline: **89.6% mean computed-style equality** for 54 third-party components measured against the original npm package rendering in the same pinned Chromium — exact string match, no tolerance, over 379,861 style cells; **92.70% visual fidelity** in the other direction, over the 537 statically scorable variants of a 599-variant Figma kit; and generation that is **deterministic** — the same contract produces byte-identical output on any machine, with 265 generated files hashed against a golden manifest and no model anywhere in the path.
+- **What it does — [docs/24 — What Works](docs/24-what-works.md).** Generated from committed artifacts, every number carrying the file it was read from. The headline: **89.7% mean computed-style equality** for 71 third-party components measured against the original npm package rendering in the same pinned Chromium — exact string match, no tolerance, over 410,192 style cells; **92.70% visual fidelity** in the other direction, over the 537 statically scorable variants of a 599-variant Figma kit; and generation that is **deterministic** — the same contract produces byte-identical output on any machine, with 266 generated files hashed against a golden manifest and no model anywhere in the path.
 - **What it costs — [docs/23 — Known Limitations](docs/23-known-limitations.md).** The complete inventory of what this tool does *not* do: measured coverage per library, the component classes captured nowhere, what a captured component fails to reproduce, which examples are frozen, and what each gate does and does not measure. It is the longer of the two, deliberately the least flattering document here, and it is the one worth your time before you invest any.
 
-The number that reconciles them is the denominator, which docs/24 prints **before** any mean: those 54 components are **6.0% of the 893** in the six libraries they came from, and they were picked because they were the tractable ones. Read every percentage above as *"on the easy 6.0%."*
+The number that reconciles them is the denominator, which docs/24 prints **before** any mean: those 71 components are **8.0% of the 893** in the six libraries they came from, and they were picked because they were the tractable ones. Read every percentage above as *"on the easy 8.0%."*
 
 ---
 
@@ -117,9 +118,9 @@ Every PR states which of these it is, in the body — the tool does not let you 
 
 For a set **this tool generated** (it carries a `ds_contracts/contractId` marker), Journey A is a **true round trip**: re-running the emitters reproduces the component **byte for byte** from the contract in the PR, and this repo's own components re-extract to zero mismatches in both directions.
 
-For a **hand-built** set, it is **an inversion**, not a reproduction. The proposal is what can be read off the canvas: real structure, real variants, real bound variables — but a canvas cannot tell you about a `useEffect`, a keyboard handler, or why a value is what it is. **Treat the generated component as a reviewable starting point, not as your finished component**, and review it as new code. The measured shape of that claim, on a real kit this project does not own: all 15 Untitled UI sets that were run closed the round trip, and the set-level fact diff across them is **11,104 matched · 1,857 diverged · 4,088 lost · 6,365 invented**.
+For a **hand-built** set, it is **an inversion**, not a reproduction. The proposal is what can be read off the canvas: real structure, real variants, real bound variables — but a canvas cannot tell you about a `useEffect`, a keyboard handler, or why a value is what it is. **Treat the generated component as a reviewable starting point, not as your finished component**, and review it as new code. The measured shape of that claim, on a real kit this project does not own: all 15 Untitled UI sets that were run executed through the set-level fact diff, and the totals across them are **11,400 matched · 1,857 diverged · 7,671 lost · 15,359 invented**.
 
-**Read those four numbers with their context, because raw they read worse than the thing they measure.** They are 23,414 facts, so matched is **47.4%** — and the claim is *not* that the round trip is lossless. It is that it **closes**: it ran to completion on 15 of 15 components and every fact landed in exactly one of four named buckets, so a loss is a row in a table rather than an absence. The largest single divergence class is an artifact of the comparison, not a loss: **940 of the 960** `layout.mode` divergences are tagged `auto-layout-inert` (a frame whose children are all absolutely placed has no observable auto-layout direction to read back), which changes nothing that is drawn; the remaining 20 are real. The bucket-and-tag accounting, including the untagged remainder it does not explain, is [docs/24 §6.3](docs/24-what-works.md) — and the tagged detail is in [the full report](extract/figma/roundtrip-uui/REPORT.md).
+**Read those four numbers with their context, and do not expect the context to rescue them.** They are 36,287 facts, so matched is **31.4%** — and the claim is *not* that the round trip is lossless, because at 31.4% it plainly is not. The claim is that it **closes**: it ran to completion on 15 of 15 components and every fact landed in exactly one of four named buckets, so a loss is a row in a table rather than an absence. One caveat cuts the other way — the largest single divergence class is an artifact of the comparison, not a loss: **934 of the 954** `layout.mode` divergences are tagged `auto-layout-inert` (a frame whose children are all absolutely placed has no observable auto-layout direction to read back), which changes nothing that is drawn; the remaining 20 are real. The bucket-and-tag accounting, including the untagged remainder it does not explain, is [docs/24 §6.3](docs/24-what-works.md) — and the tagged detail is in [the full report](extract/figma/roundtrip-uui/REPORT.md).
 
 What the *drawing* scores is a separate measurement, and a higher one: the end-to-end proof of this path is [`examples/untitled-ui`](examples/untitled-ui/LEDGER.md) — 15 sets driven through [`uui-pipeline.mts`](examples/untitled-ui/uui-pipeline.mts), pixel fidelity **92.7% mean over 537 scored variants**, per-set 98.0% at best and 81.2% at worst ([docs/24 §4](docs/24-what-works.md)) — and it is exactly what "reviewable starting point" means: a faithful specification, an approximate drawing.
 
@@ -138,7 +139,7 @@ The goal: your real Button, with its real padding, its real colors, and its real
 ### The path
 
 ```bash
-npm i -g @ds-contracts/cli
+npm i -g @ds-contracts/cli   # installs the stable 0.4.0; the 0.5.0 RC line is on the `next` tag
 
 # ONE command, TWO phases, with a human acknowledgement between them.
 ds-contracts onboard @acme/ui          # detect · sandbox · seed · draft · STOP
@@ -290,16 +291,16 @@ Brownfield: a mature Figma library your team drew by hand, and a mature codebase
 
 The two numbers that matter pull in opposite directions, and both are true. Both are measured in [docs/24 — What Works](docs/24-what-works.md), and both are priced in [docs/23 — Known Limitations](docs/23-known-limitations.md):
 
-**Fidelity per captured component is high — 89.6% mean, and every component is listed.** What lands on the canvas is the browser's own computed truth for your real component: not an approximation, not a screenshot, not a guess. Measured against the original npm package rendering, per prop combination × interaction state, as an exact string match with no tolerance and no whitelist, 54 components across six libraries score **89.6% mean computed-style equality** (88.6% cell-weighted over 379,861 cells; 31 of 54 at ≥90%, 47 of 54 at ≥80%). [docs/24 §3.1](docs/24-what-works.md) lists all 54 worst-first, with nothing omitted — the worst is 69.8%. The capture runs twice and refuses if the runs disagree, which catches uncontrolled state, random ids and animation sampling before any of it reaches a contract.
+**Fidelity per captured component is high — 89.7% mean, and every component is listed.** What lands on the canvas is the browser's own computed truth for your real component: not an approximation, not a screenshot, not a guess. Measured against the original npm package rendering, per prop combination × interaction state, as an exact string match with no tolerance and no whitelist, 71 components across six libraries score **89.7% mean computed-style equality** (88.5% cell-weighted over 410,192 cells; 40 of 71 at ≥90%, 62 of 71 at ≥80%). [docs/24 §3.1](docs/24-what-works.md) lists all 71 worst-first, with nothing omitted — the worst is 69.8%. The capture runs twice and refuses if the runs disagree, which catches uncontrolled state, random ids and animation sampling before any of it reaches a contract.
 
-**Coverage per library is partial, and a first pass will not be your whole library.** Each foreign-library round in this repo committed a dozen or so components out of a library of one to two hundred — the measured per-library coverage runs from about 4% to about 12%, and 54 measured components against 893 in those six libraries is **6.0%** overall. The per-library table with its denominators is [docs/24 §2](docs/24-what-works.md), printed there *before* any fidelity average for exactly this reason; the source of those denominators is [docs/22 §8.3](docs/22-generality.md). Budget hours per library for the recon and the config, then machine time for the capture.
+**Coverage per library is partial, and a first pass will not be your whole library.** Each foreign-library round in this repo committed between 5 and 31 components out of a library of 46 to 243 — the measured per-library coverage runs from about 2% to about 23%, and 71 measured components against 893 in those six libraries is **8.0%** overall. The per-library table with its denominators is [docs/24 §2](docs/24-what-works.md), printed there *before* any fidelity average for exactly this reason; the source of those denominators is [docs/22 §8.3](docs/22-generality.md). Budget hours per library for the recon and the config, then machine time for the capture.
 
 Beyond that, four properties you can rely on:
 
 - **It refuses rather than guesses.** A token ref outside the inventory, an illegal contract, an unreviewed draft config, a state preview that would render identically to Default — each stops with a message that names the thing. A plausible substituted value is treated as worse than a crash.
 - **Everything it cannot carry, it names.** Every extraction writes a `*.extension.json` sidecar listing each captured fact the vocabulary refuses, with the reason. Nothing is dropped on the floor.
 - **Re-running is always safe.** Same input, same bytes. Applying an update to a live canvas preserves node ids, component keys and component-property overrides on placed instances.
-- **The known gaps are written down, not discovered.** Three you will meet soon enough: **overlay components** (Dialog, Menu, Tooltip) have no hover/focus/active planes in the captured truth, so those contracts declare `states: []` by design; **text wrapping is not implemented**, so a hugging text node inside a narrower fixed-width ancestor clips; **the harness loads no webfonts**, so absolute text widths are fallback-font widths. **The complete inventory is [Known Limitations](docs/23-known-limitations.md)** — coverage, fidelity, per-library freshness, the journey verbs that don't exist, and what each gate leaves out of its denominator; its counterpart, the measured success side, is [What Works](docs/24-what-works.md). The evidence behind the generality claim, and where it leaks, is [docs/22 §8](docs/22-generality.md).
+- **The known gaps are written down, not discovered.** Three you will meet soon enough: **overlay components** (Dialog, Menu, Tooltip) have no hover/focus/active planes in the captured truth, so those contracts declare `states: []` by design; **text wrapping is not implemented**, so a hugging text node inside a narrower fixed-width ancestor clips; **webfonts load only where a library's capture config declares them** (per-library `fonts` field, committed font files, no network — Altitude is configured today), so wherever unconfigured absolute text widths are fallback-font widths. **The complete inventory is [Known Limitations](docs/23-known-limitations.md)** — coverage, fidelity, per-library freshness, the journey verbs that don't exist, and what each gate leaves out of its denominator; its counterpart, the measured success side, is [What Works](docs/24-what-works.md). The evidence behind the generality claim, and where it leaks, is [docs/22 §8](docs/22-generality.md).
 
 ---
 
@@ -326,9 +327,8 @@ What is in there:
 
 Prefer a terminal? The engine also ships as npm packages. For the currently
 published stable CLI, use `npm exec --package=@ds-contracts/cli@0.4.0 --
-ds-contracts init`. The source tree stages CLI `0.5.0-rc.1`, schema
-`16.1.0-rc.1`, and emitter `0.4.0-rc.1`; those versions are source-only until a
-release owner publishes them. Every CLI verb is eval-pinned by a consumer-style
+ds-contracts init`. npm `next` carries CLI `0.5.0-rc.1`; the source tree is
+ahead at CLI `0.5.0-rc.2`. Every CLI verb is eval-pinned by a consumer-style
 smoke test.
 
 ## The model
@@ -369,7 +369,7 @@ Every capability claim in this repository is backed by an executable check or a 
 | **Engine as library** | the whole pipeline is browser-safe pure functions; CLI output golden-guarded through the refactor | `npm run core:browser-check` · [docs/15](docs/15-engine-as-library.md) |
 | **Advanced composition, live** | the multi-root composite Modal — a composed Card instance, a repeated Badge collection, real Button instances with applied labels, an inset backdrop — builds correctly on a **real Figma canvas** from one pasted contract (2026-07-22), deterministically, no AI in the conversion; both journey directions gated headless, and both real-Figma quirks found en route (auto-layout hug↔fill collapse, instance property-exposure lag) are modeled in the mock so they fail in Node forever | `npm run plugin:check` (composite pins) · [`docs/handoff/08`](docs/handoff/08-status-what-doesnt-work.md) · `npx tsx scripts/deterministic-roundtrip.mjs` |
 
-All of it is gated by **188 executable checks** (`npm run eval`) that run the real pipeline in a scratch copy — not mocks. They are classified by what they *claim*, and the two largest classes after extraction are **detection** (45) and **refusal** (29) — gates that fail if the engine *stops* saying no ([docs/24 §5.1](docs/24-what-works.md)). The measured results those checks protect — fidelity, coverage, the round-trip accounting, and the pins that make each re-derivable — are collected with their denominators in [docs/24 — What Works](docs/24-what-works.md); what they cost is [docs/23 — Known Limitations](docs/23-known-limitations.md).
+All of it is gated by **204 executable checks** (`npm run eval`) that run the real pipeline in a scratch copy — not mocks. They are classified by what they *claim*, and the largest classes after extraction (60) are **detection** (56) and **refusal** (33) — gates that fail if the engine *stops* saying no ([docs/24 §5.1](docs/24-what-works.md)). The measured results those checks protect — fidelity, coverage, the round-trip accounting, and the pins that make each re-derivable — are collected with their denominators in [docs/24 — What Works](docs/24-what-works.md); what they cost is [docs/23 — Known Limitations](docs/23-known-limitations.md).
 
 ## What's actually here
 
@@ -383,7 +383,7 @@ All of it is gated by **188 executable checks** (`npm run eval`) that run the re
 | `parity/` | The three-way differ: classifies every difference between contract, code, and canvas as *ahead*, *behind*, or *mismatched* — with a proposed remedy. Plus the adherence judge and the brownfield `diagnose` referee. | ✅ |
 | `extract/` | Brownfield extraction: code→contract (React/TSX, CSS Modules, Custom Elements Manifest) and design→contract (plugin dump + Figma REST) adapters, plus `computed/` — the real-browser capture floor. The static adapters always propose the API surface, and anatomy + token bindings when the styling method exposes them ([which is which](#what-the-static-path-does-and-does-not-give-you)); the computed floor is what produces browser-observed styling truth. Also the four pilot write-ups and the round-trip receipts. | ✅ |
 | `catalog/` + `context/` | The compiled generation constraint (every API + every token + the governance rules) that an AI agent — or a human — can be held to, sharded to fit an agent's context window at any component count, plus the org rules and memory that feed it. | catalog ❌ · rules ✅ |
-| `evals/` | 188 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
+| `evals/` | 204 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
 | `conformance/` | The **CSS/DOM conformance fixture** — a synthetic library of labelled CSS constructs, mounted through the unmodified capture pipeline, whose expected disposition is declared IN ADVANCE. Every other instrument here derives its denominator from the same filter that decides carriage, so a channel the filter never opened scores 100%; this one does not, which is what makes the frontier *predictable* instead of discovered one library at a time. Generated matrix: [`conformance/EXPECTATIONS.md`](conformance/EXPECTATIONS.md). | ✅ |
 | `playground/` | The public browser playground ([live](https://ds-contracts-playground.pages.dev)) — a Vite app importing `core/` unmodified. | ✅ |
 | `dashboard/` | The **Contract Hub** — a local app visualizing the whole system: live component previews, per-prop binding maps across all three surfaces, token provenance, one-click parity runs, contract editing with regeneration, and the full docs. | ✅ |
@@ -409,7 +409,7 @@ npm run parity   # ① code, canvas, and tokens checked against the contracts
 # ② edit any contract in contracts/ — add an enum value, change a token binding
 npm run build && npm run parity
 #    ③ the differ reports exactly what is now behind, and how to fix it
-npm run eval     # ④ 188 checks that detection, refusal, and convergence still hold
+npm run eval     # ④ 204 checks that detection, refusal, and convergence still hold
 npm run docs:check # ⑤ every number these docs quote, re-derived from the repo (seconds, no browser)
 ```
 
@@ -472,8 +472,9 @@ That is a claim about the future, so it's held to the same standard as everythin
 21. [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) · the nine-step recipe eight library rounds actually followed, the full capture-config reference, the decision guide for the parts that are still craft, and a troubleshooting table built from real failures
 22. [Generality — general engine, or just these libraries?](docs/22-generality.md) · the evidence behind the recipe: the styling-architecture matrix, the cross-library fix record (a defect found via one library repairing another's bytes in the same commit), the adversarial engine audit, and the honest ledger of where the claim leaks
 23. [**Known Limitations**](docs/23-known-limitations.md) · half of the adoption-decision pair — what it costs: measured coverage per library, the component classes captured nowhere, what a captured component does not reproduce, which examples are frozen and why, the journey verbs that do not exist, and what every gate leaves out of its denominator
-24. [**What Works**](docs/24-what-works.md) · the other half — what it does: the denominator first, then computed-style equality per library and per component (all 54, worst first), canvas→code fidelity, the round-trip fact accounting, and the pins that make each number re-derivable. Generated by `npm run capability:report`; `npm run capability:fresh` refuses if it has gone stale, and one of the 188 evals runs that refusal
+24. [**What Works**](docs/24-what-works.md) · the other half — what it does: the denominator first, then computed-style equality per library and per component (all 71, worst first), canvas→code fidelity, the round-trip fact accounting, and the pins that make each number re-derivable. Generated by `npm run capability:report`; `npm run capability:fresh` refuses if it has gone stale, and one of the 204 evals runs that refusal
 25. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
+26. [Beta Tester Runbook](docs/28-beta-runbook.md) · the three journeys packaged for someone who has never seen this repo — prerequisites, exact commands, what success looks like, the named limitations each track WILL hit, honest time budgets, and the structured issue forms for reporting
 26. [Definition of v1](docs/26-v1-definition.md) · the pinned release contract and its exact evidence
 27. [Release Process](docs/27-release-process.md) · coordinated RC build, pack, verify, publish, deploy, and rollback mechanics
 
@@ -487,7 +488,7 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-The model is validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 188/188 evals, stable schema and CLI releases on the public npm registry, a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same engine — with a companion Figma plugin bridging live selections into it. The coordinated RC in this tree is not a published release until the human steps in [docs/27](docs/27-release-process.md) are complete. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+The model is validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 204/204 evals, stable schema and CLI releases on the public npm registry, a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same engine — with a companion Figma plugin bridging live selections into it. The coordinated RC in this tree is not a published release until the human steps in [docs/27](docs/27-release-process.md) are complete. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
 - **What has been proven, dated, with receipts:** [MILESTONES.md](MILESTONES.md)
 - **What it DOES do, measured — read with the next line, never instead of it:** [docs/24 — What Works](docs/24-what-works.md)

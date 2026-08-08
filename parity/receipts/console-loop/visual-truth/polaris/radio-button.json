@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "polaris",
+  "stem": "radio-button",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/polaris/components/radio-button.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:10096",
+  "cellNodeId": "1:10079",
+  "cellName": "Checked=unchecked",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 39.66329966329966,
+    "pctAAUnmasked": 21.144781144781145,
+    "pctAAMasked": 21.144781144781145,
+    "maskCoveragePct": 0,
+    "canvasPx": "165x18",
+    "realPx": "142x18",
+    "inkCanvasPct": 28.68686868686869,
+    "inkRealPct": 22.828282828282827
+  },
+  "reference": "parity/receipts/console-loop/polaris/refs/radio-button.png",
+  "referenceSha256": "b37b7a427998a0ca7b8f60603bb5329196138f62de616f23725d1f12c91b52f3",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/polaris/shots/radio-button.png",
+  "canvasShotSha256": "bd919b1fdc385c763e2eb9b892def9f2813b6243e068e45003e133c504fbde78",
+  "diff": "parity/receipts/console-loop/visual-truth/polaris/diffs/radio-button.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.1619718309859155,
+  "inkDelta": 5.858585858585862,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=21.14 > 5)"
+}

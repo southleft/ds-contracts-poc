@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "examples/mui/oracle/live/receipt.schema.json",
+  "title": "MUI oracle live Figma session receipt",
+  "type": "object",
+  "required": ["version", "stem", "status"],
+  "additionalProperties": true,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "stem": {
+      "type": "string",
+      "enum": ["button", "switch", "table"]
+    },
+    "componentId": {
+      "type": "string",
+      "pattern": "^mui\\."
+    },
+    "runId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["template", "in-progress", "completed"],
+      "description": "template = scaffold only (ignored by live:check as empty). completed = validate agreement / defect rules."
+    },
+    "session": {
+      "type": "object",
+      "properties": {
+        "fileKey": {
+          "type": "string",
+          "description": "Figma file key; REDACTED or truncated OK"
+        },
+        "fileName": { "type": "string" },
+        "nodeIds": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Optional componentSet / variant / part node ids"
+        }
+      }
+    },
+    "stepsCompleted": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "emit-apply",
+          "dump-readback",
+          "controlled-edit",
+          "detect-drift",
+          "restore",
+          "compare-offline"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "artifacts": {
+      "type": "object",
+      "properties": {
+        "bundleOrBatch": { "type": "string" },
+        "dumpReadback": { "type": "string" },
+        "mcpOut": { "type": "string" },
+        "compileReceipt": { "type": "string" },
+        "offlineReport": { "type": "string" }
+      }
+    },
+    "offlineVsLive": {
+      "type": "object",
+      "properties": {
+        "agreement": {
+          "description": "true only when live agrees with offline oracle for this stem",
+          "type": ["boolean", "null"]
+        },
+        "offlineCommand": { "type": "string" },
+        "offlineReport": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "liveOnlyDefects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "summary"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "summary": { "type": "string", "minLength": 1 },
+          "headlessReproduction": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Fixture path or command that fails without desktop Figma — required before a fix is accepted; required if agreement is claimed while this defect is listed"
+          }
+        }
+      }
+    }
+  }
+}

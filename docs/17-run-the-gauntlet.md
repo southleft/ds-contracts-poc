@@ -1,6 +1,10 @@
 # 17 — Run the Gauntlet
 
 > **Path:** the two sequences below are **path B — code-first** (Sequence B: your code → a Figma library) and **path A — design-first** (Sequence A: canvas → code), packaged as a runbook — [Choose Your Path](00-choose-your-path.md) is the canonical statement of both.
+>
+> **Beta testing?** The tester-facing version of this page — all three tracks
+> (including reconcile), the limitation inventory each will hit, time budgets,
+> and the structured issue forms — is [docs/28 — Beta Tester Runbook](28-beta-runbook.md).
 
 *The to-and-from sequence, packaged for someone who has never seen this repo —
 run it against your own component codebase, then try to break it.*

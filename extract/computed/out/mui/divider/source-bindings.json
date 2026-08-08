@@ -1,0 +1,16 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Divider",
+  "varPrefix": "--mui-",
+  "facts": [],
+  "skips": [
+    "root.margin-left: source declares `calc(2 * var(--mui-spacing))` — a calc() over var(--mui-spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.margin-right: source declares `calc(2 * var(--mui-spacing))` — a calc() over var(--mui-spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 2,
+  "calcCeiling": 2,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

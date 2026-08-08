@@ -1,0 +1,34 @@
+{
+  "componentId": "mui.dialog",
+  "stem": "dialog",
+  "status": "in-pilot",
+  "authoredFrom": [
+    "examples/mui/PROVENANCE.md § portal sweep",
+    "extract/computed capture portalSweep / stripInertPortalChildren policy"
+  ],
+  "facts": [
+    {
+      "channel": "anatomy.root",
+      "expect": "CARRIED",
+      "expectWhere": "Single portaled modal root under portalCapture"
+    },
+    {
+      "channel": "anatomy.focus-trap-sentinel",
+      "expect": "REFUSED",
+      "expectName": "portal-inert-child",
+      "expectWhere": "Classless full-bleed focus-trap divs are DOM plumbing, not parts"
+    },
+    {
+      "channel": "states.interaction",
+      "expect": "LEDGERED",
+      "expectName": "portal-states-empty",
+      "expectWhere": "Portal subjects declare states: [] — overlay planes are capture-boundary, not silent loss"
+    },
+    {
+      "channel": "layout.full-bleed-scrim-width",
+      "expect": "REFUSED",
+      "expectName": "full-bleed-scrim-stage-width",
+      "expectWhere": "Viewport-measured 900px stage width must not bake as Dialog content width"
+    }
+  ]
+}

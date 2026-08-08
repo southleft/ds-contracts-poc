@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "tailwind",
+  "stem": "card",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/tailwind/components/card.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385245229284424737",
+  "setNodeId": "1:2267",
+  "cellNodeId": "1:2267",
+  "cellName": "Card (flowbite.card)",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 25.793852946170826,
+    "pctAAUnmasked": 7.683817286466294,
+    "pctAAMasked": 7.683817286466294,
+    "maskCoveragePct": 0,
+    "canvasPx": "151x78",
+    "realPx": "146x70",
+    "inkCanvasPct": 14.739344540669045,
+    "inkRealPct": 13.143148242485992
+  },
+  "reference": "parity/receipts/console-loop/tailwind/refs/card.png",
+  "referenceSha256": "3f11af975ec5bad9561586a9514e2c17affbfad73b20a61aeaa157ae285d6cf4",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/tailwind/shots/card.png",
+  "canvasShotSha256": "4b3e38ff9fa3a299f1dbd8aab88839ded0b1722d540e292748a3b33c2fa68689",
+  "diff": "parity/receipts/console-loop/visual-truth/tailwind/diffs/card.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.1142857142857143,
+  "inkDelta": 1.5961962981830524,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=7.68 > 5)"
+}

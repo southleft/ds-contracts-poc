@@ -1447,6 +1447,13 @@
       }
     }
   },
+  "icons": {
+    "alert-alert-icon-failure": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z\" clip-rule=\"evenodd\" fill=\"currentColor\"/></svg>",
+    "alert-alert-icon-info": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z\" clip-rule=\"evenodd\" fill=\"currentColor\"/></svg>",
+    "alert-alert-icon-success": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z\" clip-rule=\"evenodd\" fill=\"currentColor\"/></svg>",
+    "alert-alert-icon-warning": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z\" clip-rule=\"evenodd\" fill=\"currentColor\"/></svg>",
+    "alert-dismiss-icon": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" d=\"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z\" clip-rule=\"evenodd\" fill=\"currentColor\"/></svg>"
+  },
   "contracts": [
     {
       "$schema": "./contract.schema.json",
@@ -1487,6 +1494,36 @@
           }
         },
         {
+          "name": "icon",
+          "description": "Flowbite Alert renders the status icon only when the icon prop is passed; the developed default (gate-shots *__default) shows none.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Icon"
+            },
+            "code": {
+              "prop": "icon"
+            }
+          }
+        },
+        {
+          "name": "dismissable",
+          "description": "Flowbite Alert renders the dismiss button only when onDismiss is provided; the developed default shows none.",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "Dismissable"
+            },
+            "code": {
+              "prop": "onDismiss"
+            }
+          }
+        },
+        {
           "name": "children",
           "type": "text",
           "default": "Alert message",
@@ -1517,6 +1554,81 @@
                 "align": "center"
               },
               "parts": {
+                "alert-icon": {
+                  "description": "Flowbite alert status icon (icon prop) — canvas-developed anatomy; per-color glyph from Heroicons via react-icons/hi.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "parts": {
+                    "alert-icon-info": {
+                      "icon": {
+                        "asset": "alert-alert-icon-info",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "color",
+                        "equals": "info"
+                      }
+                    },
+                    "alert-icon-failure": {
+                      "icon": {
+                        "asset": "alert-alert-icon-failure",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "color",
+                        "equals": "failure"
+                      }
+                    },
+                    "alert-icon-success": {
+                      "icon": {
+                        "asset": "alert-alert-icon-success",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "color",
+                        "equals": "success"
+                      }
+                    },
+                    "alert-icon-warning": {
+                      "icon": {
+                        "asset": "alert-alert-icon-warning",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "color",
+                        "equals": "warning"
+                      }
+                    }
+                  },
+                  "literals": {
+                    "padding-right": "12px"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "color",
+                      "map": {
+                        "failure": {
+                          "color": "{imported.alert.label.color.failure}"
+                        },
+                        "info": {
+                          "color": "{imported.alert.label.color.info}"
+                        },
+                        "success": {
+                          "color": "{imported.alert.label.color.success}"
+                        },
+                        "warning": {
+                          "color": "{imported.alert.label.color.warning}"
+                        }
+                      }
+                    }
+                  ],
+                  "visibleWhen": {
+                    "prop": "icon"
+                  }
+                },
                 "label": {
                   "content": {
                     "prop": "children"
@@ -1552,6 +1664,58 @@
                       }
                     }
                   ]
+                },
+                "dismiss": {
+                  "description": "Flowbite dismiss control (onDismiss) — canvas-developed anatomy; close button with themed background per color.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "icon": {
+                    "asset": "alert-dismiss-icon",
+                    "size": 20
+                  },
+                  "tokens": {
+                    "border-bottom-left-radius": "{imported.shared.size-8}",
+                    "border-bottom-right-radius": "{imported.shared.size-8}",
+                    "border-top-left-radius": "{imported.shared.size-8}",
+                    "border-top-right-radius": "{imported.shared.size-8}"
+                  },
+                  "literals": {
+                    "height": "32px",
+                    "width": "32px",
+                    "padding-top": "6px",
+                    "padding-bottom": "6px",
+                    "padding-left": "6px",
+                    "padding-right": "6px"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "color",
+                      "map": {
+                        "failure": {
+                          "background-color": "{imported.alert.root.background-color.failure}",
+                          "color": "{imported.alert.label.color.failure}"
+                        },
+                        "info": {
+                          "background-color": "{imported.alert.root.background-color.info}",
+                          "color": "{imported.alert.label.color.info}"
+                        },
+                        "success": {
+                          "background-color": "{imported.alert.root.background-color.success}",
+                          "color": "{imported.alert.label.color.success}"
+                        },
+                        "warning": {
+                          "background-color": "{imported.alert.root.background-color.warning}",
+                          "color": "{imported.alert.label.color.warning}"
+                        }
+                      }
+                    }
+                  ],
+                  "visibleWhen": {
+                    "prop": "dismissable"
+                  }
                 }
               },
               "tokens": {
@@ -2117,6 +2281,28 @@
                 }
               }
             }
+          ],
+          "literalsByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "xs": {
+                  "height": "32px"
+                },
+                "sm": {
+                  "height": "36px"
+                },
+                "md": {
+                  "height": "40px"
+                },
+                "lg": {
+                  "height": "48px"
+                },
+                "xl": {
+                  "height": "52px"
+                }
+              }
+            }
           ]
         }
       },
@@ -2311,6 +2497,81 @@
                 "cursor": "pointer",
                 "position": "relative",
                 "text-align": "center"
+              },
+              "parts": {
+                "part-0-after": {
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 20,
+                    "height": 20
+                  },
+                  "declared": {
+                    "position": "absolute"
+                  },
+                  "literals": {
+                    "background-color": "rgba(255, 255, 255, 1)",
+                    "border-top-width": "1px",
+                    "border-right-width": "1px",
+                    "border-bottom-width": "1px",
+                    "border-left-width": "1px",
+                    "border-top-color": "rgba(209, 213, 219, 1)",
+                    "border-right-color": "rgba(209, 213, 219, 1)",
+                    "border-bottom-color": "rgba(209, 213, 219, 1)",
+                    "border-left-color": "rgba(209, 213, 219, 1)",
+                    "top": "2px",
+                    "width": "20px",
+                    "height": "20px"
+                  },
+                  "literalsByProp": [
+                    {
+                      "prop": "sizing",
+                      "map": {
+                        "sm": {
+                          "width": "16px",
+                          "height": "16px"
+                        },
+                        "md": {
+                          "width": "20px",
+                          "height": "20px"
+                        },
+                        "lg": {
+                          "width": "24px",
+                          "height": "24px"
+                        }
+                      }
+                    },
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "unchecked": {
+                          "background-color": "rgba(255, 255, 255, 1)",
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px",
+                          "border-top-color": "rgba(209, 213, 219, 1)",
+                          "border-right-color": "rgba(209, 213, 219, 1)",
+                          "border-bottom-color": "rgba(209, 213, 219, 1)",
+                          "border-left-color": "rgba(209, 213, 219, 1)",
+                          "left": "2px"
+                        },
+                        "checked": {
+                          "background-color": "rgba(255, 255, 255, 1)",
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px",
+                          "border-top-color": "rgba(0, 0, 0, 0)",
+                          "border-right-color": "rgba(0, 0, 0, 0)",
+                          "border-bottom-color": "rgba(0, 0, 0, 0)",
+                          "border-left-color": "rgba(0, 0, 0, 0)",
+                          "right": "2px"
+                        }
+                      }
+                    }
+                  ],
+                  "description": "Drawn ::after pseudo decor (pseudo-decor v2): ellipse thumb, absolute. Unchecked left:2px; Checked right:2px (PROVENANCE right-anchor — translate:100% ≡ right-pad 2 across sm/md/lg). Per-size width/height via sizing literalsByProp."
+                }
               },
               "tokens": {
                 "border-bottom-left-radius": "{imported.shared.size-9999}",

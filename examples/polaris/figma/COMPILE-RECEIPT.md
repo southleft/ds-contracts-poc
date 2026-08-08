@@ -12,18 +12,18 @@ Every committed `figma/*.figma.js` passed BOTH gates at generation time:
 
 | contract | variants compiled | variant axes | distinct bound variable names | script committed |
 |---|---|---|---|---|
-| `polaris.avatar` | 5 | 1 | 48 | yes |
-| `polaris.badge` | 56 | 2 | 49 | yes |
-| `polaris.banner` | 4 | 1 | 46 | yes |
-| `polaris.button` | 200 | 4 | 58 | yes |
-| `polaris.checkbox` | 3 | 1 | 47 | yes |
-| `polaris.progress-bar` | 12 | 2 | 48 | yes |
-| `polaris.radio-button` | 2 | 1 | 48 | yes |
-| `polaris.spinner` | 2 | 1 | 46 | yes |
-| `polaris.tag` | 2 | 1 | 47 | yes |
-| `polaris.text-field` | 4 | 5 | 53 | yes (canvas projection, see below) |
-| `polaris.text` | 55 | 5 | 46 | yes (canvas projection, see below) |
-| `polaris.thumbnail` | 4 | 1 | 48 | yes |
+| `polaris.avatar` | 5 | 1 | 46 | yes |
+| `polaris.badge` | 56 | 2 | 47 | yes |
+| `polaris.banner` | 4 | 1 | 45 | yes |
+| `polaris.button` | 300 | 4 | 56 | yes |
+| `polaris.checkbox` | 3 | 1 | 44 | yes |
+| `polaris.progress-bar` | 12 | 2 | 46 | yes |
+| `polaris.radio-button` | 2 | 1 | 45 | yes |
+| `polaris.spinner` | 2 | 1 | 44 | yes |
+| `polaris.tag` | 2 | 1 | 45 | yes |
+| `polaris.text-field` | 4 | 5 | 51 | yes (canvas projection, see below) |
+| `polaris.text` | 55 | 5 | 44 | yes (canvas projection, see below) |
+| `polaris.thumbnail` | 4 | 1 | 47 | yes |
 
 ## Canvas projections (owner ruling, floor round 2)
 

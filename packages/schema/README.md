@@ -17,7 +17,7 @@ Versioning: the package major tracks the spec version (`16.x.y` = spec v16).
 
 ## Release status
 
-This source tree stages `@ds-contracts/schema@16.1.0-rc.1`. It is source-only
+This source tree stages `@ds-contracts/schema@16.1.0-rc.2`. It is source-only
 until a release owner publishes it. The npm registry check on 2026-08-04
 reported `16.0.0` as `latest`; installing without an exact version therefore
 installs `16.0.0`, not this RC.
@@ -26,7 +26,7 @@ After publication, test the prerelease with an exact version. The RC must be
 published under the `next` tag so it does not move `latest`:
 
 ```sh
-npm install @ds-contracts/schema@16.1.0-rc.1
+npm install @ds-contracts/schema@16.1.0-rc.2
 ```
 
 See the repository [release process](../../docs/27-release-process.md) for

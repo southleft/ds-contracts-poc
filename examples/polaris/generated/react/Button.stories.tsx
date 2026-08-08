@@ -19,7 +19,7 @@ const meta = {
     fullWidth: { control: 'boolean', description: 'Allows the button to grow to the width of its container' },
     removeUnderline: { control: 'boolean', description: 'Removes underline from button text (including on interaction)' },
     dataPrimaryLink: { control: 'boolean', description: 'Indicates whether or not the button is the primary navigation link when rendered inside of an `IndexTable.Row`' },
-    tone: { control: 'select', options: ['critical', 'success'], description: 'Sets the color treatment of the Button.' },
+    tone: { control: 'select', options: ['default', 'critical', 'success'], description: 'Sets the color treatment of the Button. Wave B.4 FC-ENUM-HOLE: `default` is the developed unset tone (Polaris tone?: critical|success) — minted as `{variant}.none` paint paths.' },
     variant: { control: 'select', options: ['plain', 'primary', 'secondary', 'tertiary', 'monochromePlain'], description: 'Changes the visual appearance of the Button.' },
     withIcon: { control: 'boolean', description: 'Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library\'s `icon` ({"$import":"@shopify/polaris-icons#PlusCircleIcon"}); the created subtree is carried as parts gated on this prop.' },
   },
@@ -29,6 +29,7 @@ const meta = {
     fullWidth: false,
     removeUnderline: false,
     dataPrimaryLink: false,
+    tone: 'default',
     variant: 'secondary',
     withIcon: false,
   },
@@ -62,11 +63,16 @@ export const Matrix: Story = {
       style={{
         display: 'grid',
         gap: 16,
-        gridTemplateColumns: 'repeat(50, max-content)',
+        gridTemplateColumns: 'repeat(75, max-content)',
         alignItems: 'center',
         justifyItems: 'start',
       }}
     >
+        <Button size="micro" textAlign="left" tone="default" variant="plain" />
+        <Button size="micro" textAlign="left" tone="default" variant="primary" />
+        <Button size="micro" textAlign="left" tone="default" variant="secondary" />
+        <Button size="micro" textAlign="left" tone="default" variant="tertiary" />
+        <Button size="micro" textAlign="left" tone="default" variant="monochromePlain" />
         <Button size="micro" textAlign="left" tone="critical" variant="plain" />
         <Button size="micro" textAlign="left" tone="critical" variant="primary" />
         <Button size="micro" textAlign="left" tone="critical" variant="secondary" />
@@ -77,6 +83,11 @@ export const Matrix: Story = {
         <Button size="micro" textAlign="left" tone="success" variant="secondary" />
         <Button size="micro" textAlign="left" tone="success" variant="tertiary" />
         <Button size="micro" textAlign="left" tone="success" variant="monochromePlain" />
+        <Button size="micro" textAlign="right" tone="default" variant="plain" />
+        <Button size="micro" textAlign="right" tone="default" variant="primary" />
+        <Button size="micro" textAlign="right" tone="default" variant="secondary" />
+        <Button size="micro" textAlign="right" tone="default" variant="tertiary" />
+        <Button size="micro" textAlign="right" tone="default" variant="monochromePlain" />
         <Button size="micro" textAlign="right" tone="critical" variant="plain" />
         <Button size="micro" textAlign="right" tone="critical" variant="primary" />
         <Button size="micro" textAlign="right" tone="critical" variant="secondary" />
@@ -87,6 +98,11 @@ export const Matrix: Story = {
         <Button size="micro" textAlign="right" tone="success" variant="secondary" />
         <Button size="micro" textAlign="right" tone="success" variant="tertiary" />
         <Button size="micro" textAlign="right" tone="success" variant="monochromePlain" />
+        <Button size="micro" textAlign="center" tone="default" variant="plain" />
+        <Button size="micro" textAlign="center" tone="default" variant="primary" />
+        <Button size="micro" textAlign="center" tone="default" variant="secondary" />
+        <Button size="micro" textAlign="center" tone="default" variant="tertiary" />
+        <Button size="micro" textAlign="center" tone="default" variant="monochromePlain" />
         <Button size="micro" textAlign="center" tone="critical" variant="plain" />
         <Button size="micro" textAlign="center" tone="critical" variant="primary" />
         <Button size="micro" textAlign="center" tone="critical" variant="secondary" />
@@ -97,6 +113,11 @@ export const Matrix: Story = {
         <Button size="micro" textAlign="center" tone="success" variant="secondary" />
         <Button size="micro" textAlign="center" tone="success" variant="tertiary" />
         <Button size="micro" textAlign="center" tone="success" variant="monochromePlain" />
+        <Button size="micro" textAlign="start" tone="default" variant="plain" />
+        <Button size="micro" textAlign="start" tone="default" variant="primary" />
+        <Button size="micro" textAlign="start" tone="default" variant="secondary" />
+        <Button size="micro" textAlign="start" tone="default" variant="tertiary" />
+        <Button size="micro" textAlign="start" tone="default" variant="monochromePlain" />
         <Button size="micro" textAlign="start" tone="critical" variant="plain" />
         <Button size="micro" textAlign="start" tone="critical" variant="primary" />
         <Button size="micro" textAlign="start" tone="critical" variant="secondary" />
@@ -107,6 +128,11 @@ export const Matrix: Story = {
         <Button size="micro" textAlign="start" tone="success" variant="secondary" />
         <Button size="micro" textAlign="start" tone="success" variant="tertiary" />
         <Button size="micro" textAlign="start" tone="success" variant="monochromePlain" />
+        <Button size="micro" textAlign="end" tone="default" variant="plain" />
+        <Button size="micro" textAlign="end" tone="default" variant="primary" />
+        <Button size="micro" textAlign="end" tone="default" variant="secondary" />
+        <Button size="micro" textAlign="end" tone="default" variant="tertiary" />
+        <Button size="micro" textAlign="end" tone="default" variant="monochromePlain" />
         <Button size="micro" textAlign="end" tone="critical" variant="plain" />
         <Button size="micro" textAlign="end" tone="critical" variant="primary" />
         <Button size="micro" textAlign="end" tone="critical" variant="secondary" />
@@ -117,6 +143,11 @@ export const Matrix: Story = {
         <Button size="micro" textAlign="end" tone="success" variant="secondary" />
         <Button size="micro" textAlign="end" tone="success" variant="tertiary" />
         <Button size="micro" textAlign="end" tone="success" variant="monochromePlain" />
+        <Button size="slim" textAlign="left" tone="default" variant="plain" />
+        <Button size="slim" textAlign="left" tone="default" variant="primary" />
+        <Button size="slim" textAlign="left" tone="default" variant="secondary" />
+        <Button size="slim" textAlign="left" tone="default" variant="tertiary" />
+        <Button size="slim" textAlign="left" tone="default" variant="monochromePlain" />
         <Button size="slim" textAlign="left" tone="critical" variant="plain" />
         <Button size="slim" textAlign="left" tone="critical" variant="primary" />
         <Button size="slim" textAlign="left" tone="critical" variant="secondary" />
@@ -127,6 +158,11 @@ export const Matrix: Story = {
         <Button size="slim" textAlign="left" tone="success" variant="secondary" />
         <Button size="slim" textAlign="left" tone="success" variant="tertiary" />
         <Button size="slim" textAlign="left" tone="success" variant="monochromePlain" />
+        <Button size="slim" textAlign="right" tone="default" variant="plain" />
+        <Button size="slim" textAlign="right" tone="default" variant="primary" />
+        <Button size="slim" textAlign="right" tone="default" variant="secondary" />
+        <Button size="slim" textAlign="right" tone="default" variant="tertiary" />
+        <Button size="slim" textAlign="right" tone="default" variant="monochromePlain" />
         <Button size="slim" textAlign="right" tone="critical" variant="plain" />
         <Button size="slim" textAlign="right" tone="critical" variant="primary" />
         <Button size="slim" textAlign="right" tone="critical" variant="secondary" />
@@ -137,6 +173,11 @@ export const Matrix: Story = {
         <Button size="slim" textAlign="right" tone="success" variant="secondary" />
         <Button size="slim" textAlign="right" tone="success" variant="tertiary" />
         <Button size="slim" textAlign="right" tone="success" variant="monochromePlain" />
+        <Button size="slim" textAlign="center" tone="default" variant="plain" />
+        <Button size="slim" textAlign="center" tone="default" variant="primary" />
+        <Button size="slim" textAlign="center" tone="default" variant="secondary" />
+        <Button size="slim" textAlign="center" tone="default" variant="tertiary" />
+        <Button size="slim" textAlign="center" tone="default" variant="monochromePlain" />
         <Button size="slim" textAlign="center" tone="critical" variant="plain" />
         <Button size="slim" textAlign="center" tone="critical" variant="primary" />
         <Button size="slim" textAlign="center" tone="critical" variant="secondary" />
@@ -147,6 +188,11 @@ export const Matrix: Story = {
         <Button size="slim" textAlign="center" tone="success" variant="secondary" />
         <Button size="slim" textAlign="center" tone="success" variant="tertiary" />
         <Button size="slim" textAlign="center" tone="success" variant="monochromePlain" />
+        <Button size="slim" textAlign="start" tone="default" variant="plain" />
+        <Button size="slim" textAlign="start" tone="default" variant="primary" />
+        <Button size="slim" textAlign="start" tone="default" variant="secondary" />
+        <Button size="slim" textAlign="start" tone="default" variant="tertiary" />
+        <Button size="slim" textAlign="start" tone="default" variant="monochromePlain" />
         <Button size="slim" textAlign="start" tone="critical" variant="plain" />
         <Button size="slim" textAlign="start" tone="critical" variant="primary" />
         <Button size="slim" textAlign="start" tone="critical" variant="secondary" />
@@ -157,6 +203,11 @@ export const Matrix: Story = {
         <Button size="slim" textAlign="start" tone="success" variant="secondary" />
         <Button size="slim" textAlign="start" tone="success" variant="tertiary" />
         <Button size="slim" textAlign="start" tone="success" variant="monochromePlain" />
+        <Button size="slim" textAlign="end" tone="default" variant="plain" />
+        <Button size="slim" textAlign="end" tone="default" variant="primary" />
+        <Button size="slim" textAlign="end" tone="default" variant="secondary" />
+        <Button size="slim" textAlign="end" tone="default" variant="tertiary" />
+        <Button size="slim" textAlign="end" tone="default" variant="monochromePlain" />
         <Button size="slim" textAlign="end" tone="critical" variant="plain" />
         <Button size="slim" textAlign="end" tone="critical" variant="primary" />
         <Button size="slim" textAlign="end" tone="critical" variant="secondary" />
@@ -167,6 +218,11 @@ export const Matrix: Story = {
         <Button size="slim" textAlign="end" tone="success" variant="secondary" />
         <Button size="slim" textAlign="end" tone="success" variant="tertiary" />
         <Button size="slim" textAlign="end" tone="success" variant="monochromePlain" />
+        <Button size="medium" textAlign="left" tone="default" variant="plain" />
+        <Button size="medium" textAlign="left" tone="default" variant="primary" />
+        <Button size="medium" textAlign="left" tone="default" variant="secondary" />
+        <Button size="medium" textAlign="left" tone="default" variant="tertiary" />
+        <Button size="medium" textAlign="left" tone="default" variant="monochromePlain" />
         <Button size="medium" textAlign="left" tone="critical" variant="plain" />
         <Button size="medium" textAlign="left" tone="critical" variant="primary" />
         <Button size="medium" textAlign="left" tone="critical" variant="secondary" />
@@ -177,6 +233,11 @@ export const Matrix: Story = {
         <Button size="medium" textAlign="left" tone="success" variant="secondary" />
         <Button size="medium" textAlign="left" tone="success" variant="tertiary" />
         <Button size="medium" textAlign="left" tone="success" variant="monochromePlain" />
+        <Button size="medium" textAlign="right" tone="default" variant="plain" />
+        <Button size="medium" textAlign="right" tone="default" variant="primary" />
+        <Button size="medium" textAlign="right" tone="default" variant="secondary" />
+        <Button size="medium" textAlign="right" tone="default" variant="tertiary" />
+        <Button size="medium" textAlign="right" tone="default" variant="monochromePlain" />
         <Button size="medium" textAlign="right" tone="critical" variant="plain" />
         <Button size="medium" textAlign="right" tone="critical" variant="primary" />
         <Button size="medium" textAlign="right" tone="critical" variant="secondary" />
@@ -187,6 +248,11 @@ export const Matrix: Story = {
         <Button size="medium" textAlign="right" tone="success" variant="secondary" />
         <Button size="medium" textAlign="right" tone="success" variant="tertiary" />
         <Button size="medium" textAlign="right" tone="success" variant="monochromePlain" />
+        <Button size="medium" textAlign="center" tone="default" variant="plain" />
+        <Button size="medium" textAlign="center" tone="default" variant="primary" />
+        <Button size="medium" textAlign="center" tone="default" variant="secondary" />
+        <Button size="medium" textAlign="center" tone="default" variant="tertiary" />
+        <Button size="medium" textAlign="center" tone="default" variant="monochromePlain" />
         <Button size="medium" textAlign="center" tone="critical" variant="plain" />
         <Button size="medium" textAlign="center" tone="critical" variant="primary" />
         <Button size="medium" textAlign="center" tone="critical" variant="secondary" />
@@ -197,6 +263,11 @@ export const Matrix: Story = {
         <Button size="medium" textAlign="center" tone="success" variant="secondary" />
         <Button size="medium" textAlign="center" tone="success" variant="tertiary" />
         <Button size="medium" textAlign="center" tone="success" variant="monochromePlain" />
+        <Button size="medium" textAlign="start" tone="default" variant="plain" />
+        <Button size="medium" textAlign="start" tone="default" variant="primary" />
+        <Button size="medium" textAlign="start" tone="default" variant="secondary" />
+        <Button size="medium" textAlign="start" tone="default" variant="tertiary" />
+        <Button size="medium" textAlign="start" tone="default" variant="monochromePlain" />
         <Button size="medium" textAlign="start" tone="critical" variant="plain" />
         <Button size="medium" textAlign="start" tone="critical" variant="primary" />
         <Button size="medium" textAlign="start" tone="critical" variant="secondary" />
@@ -207,6 +278,11 @@ export const Matrix: Story = {
         <Button size="medium" textAlign="start" tone="success" variant="secondary" />
         <Button size="medium" textAlign="start" tone="success" variant="tertiary" />
         <Button size="medium" textAlign="start" tone="success" variant="monochromePlain" />
+        <Button size="medium" textAlign="end" tone="default" variant="plain" />
+        <Button size="medium" textAlign="end" tone="default" variant="primary" />
+        <Button size="medium" textAlign="end" tone="default" variant="secondary" />
+        <Button size="medium" textAlign="end" tone="default" variant="tertiary" />
+        <Button size="medium" textAlign="end" tone="default" variant="monochromePlain" />
         <Button size="medium" textAlign="end" tone="critical" variant="plain" />
         <Button size="medium" textAlign="end" tone="critical" variant="primary" />
         <Button size="medium" textAlign="end" tone="critical" variant="secondary" />
@@ -217,6 +293,11 @@ export const Matrix: Story = {
         <Button size="medium" textAlign="end" tone="success" variant="secondary" />
         <Button size="medium" textAlign="end" tone="success" variant="tertiary" />
         <Button size="medium" textAlign="end" tone="success" variant="monochromePlain" />
+        <Button size="large" textAlign="left" tone="default" variant="plain" />
+        <Button size="large" textAlign="left" tone="default" variant="primary" />
+        <Button size="large" textAlign="left" tone="default" variant="secondary" />
+        <Button size="large" textAlign="left" tone="default" variant="tertiary" />
+        <Button size="large" textAlign="left" tone="default" variant="monochromePlain" />
         <Button size="large" textAlign="left" tone="critical" variant="plain" />
         <Button size="large" textAlign="left" tone="critical" variant="primary" />
         <Button size="large" textAlign="left" tone="critical" variant="secondary" />
@@ -227,6 +308,11 @@ export const Matrix: Story = {
         <Button size="large" textAlign="left" tone="success" variant="secondary" />
         <Button size="large" textAlign="left" tone="success" variant="tertiary" />
         <Button size="large" textAlign="left" tone="success" variant="monochromePlain" />
+        <Button size="large" textAlign="right" tone="default" variant="plain" />
+        <Button size="large" textAlign="right" tone="default" variant="primary" />
+        <Button size="large" textAlign="right" tone="default" variant="secondary" />
+        <Button size="large" textAlign="right" tone="default" variant="tertiary" />
+        <Button size="large" textAlign="right" tone="default" variant="monochromePlain" />
         <Button size="large" textAlign="right" tone="critical" variant="plain" />
         <Button size="large" textAlign="right" tone="critical" variant="primary" />
         <Button size="large" textAlign="right" tone="critical" variant="secondary" />
@@ -237,6 +323,11 @@ export const Matrix: Story = {
         <Button size="large" textAlign="right" tone="success" variant="secondary" />
         <Button size="large" textAlign="right" tone="success" variant="tertiary" />
         <Button size="large" textAlign="right" tone="success" variant="monochromePlain" />
+        <Button size="large" textAlign="center" tone="default" variant="plain" />
+        <Button size="large" textAlign="center" tone="default" variant="primary" />
+        <Button size="large" textAlign="center" tone="default" variant="secondary" />
+        <Button size="large" textAlign="center" tone="default" variant="tertiary" />
+        <Button size="large" textAlign="center" tone="default" variant="monochromePlain" />
         <Button size="large" textAlign="center" tone="critical" variant="plain" />
         <Button size="large" textAlign="center" tone="critical" variant="primary" />
         <Button size="large" textAlign="center" tone="critical" variant="secondary" />
@@ -247,6 +338,11 @@ export const Matrix: Story = {
         <Button size="large" textAlign="center" tone="success" variant="secondary" />
         <Button size="large" textAlign="center" tone="success" variant="tertiary" />
         <Button size="large" textAlign="center" tone="success" variant="monochromePlain" />
+        <Button size="large" textAlign="start" tone="default" variant="plain" />
+        <Button size="large" textAlign="start" tone="default" variant="primary" />
+        <Button size="large" textAlign="start" tone="default" variant="secondary" />
+        <Button size="large" textAlign="start" tone="default" variant="tertiary" />
+        <Button size="large" textAlign="start" tone="default" variant="monochromePlain" />
         <Button size="large" textAlign="start" tone="critical" variant="plain" />
         <Button size="large" textAlign="start" tone="critical" variant="primary" />
         <Button size="large" textAlign="start" tone="critical" variant="secondary" />
@@ -257,6 +353,11 @@ export const Matrix: Story = {
         <Button size="large" textAlign="start" tone="success" variant="secondary" />
         <Button size="large" textAlign="start" tone="success" variant="tertiary" />
         <Button size="large" textAlign="start" tone="success" variant="monochromePlain" />
+        <Button size="large" textAlign="end" tone="default" variant="plain" />
+        <Button size="large" textAlign="end" tone="default" variant="primary" />
+        <Button size="large" textAlign="end" tone="default" variant="secondary" />
+        <Button size="large" textAlign="end" tone="default" variant="tertiary" />
+        <Button size="large" textAlign="end" tone="default" variant="monochromePlain" />
         <Button size="large" textAlign="end" tone="critical" variant="plain" />
         <Button size="large" textAlign="end" tone="critical" variant="primary" />
         <Button size="large" textAlign="end" tone="critical" variant="secondary" />

@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "metadata-list-item",
+  "contract": "contracts/metadata-list-item.contract.json",
+  "script": "parity/receipts/console-loop/emitted/26-metadatalistitem.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:04.195Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1407",
+    "page": "MetadataListItem",
+    "sectionId": "1:1414",
+    "result": {
+      "createdNodeIds": [
+        "1:1407"
+      ],
+      "results": [
+        {
+          "name": "MetadataListItem",
+          "contractId": "ds.metadata-list-item",
+          "nodeId": "1:1407",
+          "key": "71d301edbc06db6b0556c40e8882099d93b37965",
+          "variants": 1,
+          "properties": [
+            "Label#1:548",
+            "Value#1:549",
+            "Icon#1:550",
+            "Show Icon#1:551"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1414 captured (ok).",
+      "MetadataListItem: 1 variant(s); type COMPONENT; page MetadataListItem.",
+      "Props: Label, Value, Icon, Show Icon.",
+      "Sample text: \"Slot\", \"Label\", \"Value\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:108085772",
+    "lineCount": 36,
+    "sampleLines": [
+      ":COMPONENT/MetadataListItem|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/MetadataListItem|radius|0,0,0,0",
+      ":COMPONENT/MetadataListItem|layout|HORIZONTAL MIN/MIN gap 16 pad 0,0,0,0",
+      ":COMPONENT/MetadataListItem|sizing|HUG/HUG AUTO",
+      ":COMPONENT/MetadataListItem|bound:itemSpacing|space/gap/md",
+      ":COMPONENT/MetadataListItem|description|MetadataListItem — generated from contract ds.metadata-list-item v1.0.0",
+      ":COMPONENT/MetadataListItem|propdef|Icon#1:550:INSTANCE_SWAP=1:347",
+      ":COMPONENT/MetadataListItem|propdef|Label#1:548:TEXT=Label",
+      ":COMPONENT/MetadataListItem|propdef|Show Icon#1:551:BOOLEAN=true",
+      ":COMPONENT/MetadataListItem|propdef|Value#1:549:TEXT=Value",
+      "/0:FRAME/iconSlot|fill|[]",
+      "/0:FRAME/iconSlot|radius|0,0,0,0",
+      "/0:FRAME/iconSlot|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+      "/0:FRAME/iconSlot|sizing|HUG/HUG AUTO",
+      "/0/0:INSTANCE/Slot|fill|[]",
+      "/0/0:INSTANCE/Slot|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6000000238418579,\"g\":0.6200000047683716,\"b\":0.6800000071525574},\"boundVariables\":{}}] w1",
+      "/0/0:INSTANCE/Slot|radius|4,4,4,4",
+      "/0/0:INSTANCE/Slot|layout|HORIZONTAL CENTER/CENTER gap 0 pad 8,12,8,12",
+      "/0/0:INSTANCE/Slot|sizing|HUG/FIXED AUTO",
+      "/0/0/0:TEXT/Slot|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6000000238418579,\"g\":0.6200000047683716,\"b\":0.6800000071525574},\"boundVariables\":{}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Label",
+      "Value"
+    ],
+    "observed": {
+      "variantNames": [
+        "MetadataListItem"
+      ],
+      "propDefs": [
+        {
+          "name": "Label#1:548",
+          "type": "TEXT",
+          "defaultValue": "Label",
+          "variantOptions": null
+        },
+        {
+          "name": "Value#1:549",
+          "type": "TEXT",
+          "defaultValue": "Value",
+          "variantOptions": null
+        },
+        {
+          "name": "Icon#1:550",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Icon#1:551",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "MetadataListItem",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/gap/md"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Label",
+            "chars": "Label",
+            "fontSize": 14
+          },
+          {
+            "name": "valueText",
+            "chars": "Value",
+            "fontSize": 14
+          }
+        ],
+        "w": 239,
+        "h": 100,
+        "childNames": [
+          "iconSlot:FRAME",
+          "labelText:FRAME",
+          "valueText:TEXT"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

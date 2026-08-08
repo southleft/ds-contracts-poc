@@ -54,6 +54,7 @@ import {
   buildMultiRootUnion,
   descendToRealRoots,
   nameUnion as depthNameUnion,
+  pathDataExtent,
   promoteAnatomy as depthPromoteAnatomy,
   promoteMultiRootAnatomy,
 } from '../extract/computed/anatomy.js';
@@ -626,6 +627,46 @@ const cases: Case[] = [
       writeFileSync(path.join(SCRATCH, BADGE), pristine);
       if (r2.status === 0) throw new Error('empty-enum: ACCEPTED');
       if (r2.out.includes('TypeError')) throw new Error('empty-enum: crashed downstream instead of failing fast with the named refusal');
+    },
+  },
+  {
+    // B.16 (docs/23) — THE DEFAULTLESS-AXIS "__unset" WALL, closed. The old
+    // capture-config drafter shipped `unsetLabel: "__unset"`; fusion minted
+    // that sentinel into every defaultless-axis token path and the token-ref
+    // grammar (which forbids underscores) refused each ref with ~40 "must be
+    // brace-wrapped" errors, NONE naming the underscore. Two pins here:
+    // (a) an underscore-bearing ref is refused naming the ACTUAL rule + the
+    //     sentinel + the fix (a reviewed default in the capture config);
+    // (b) the shipped drafter never writes the sentinel again — its draft's
+    //     unsetLabel passes the token-ref grammar as a path segment, and every
+    //     defaultless enum axis gets a reviewed first-enum baseCombo pin.
+    id: 'refuse-underscore-ref-names-unset-sentinel',
+    claim: 'C2-refusal',
+    run: () => {
+      const BADGE = 'contracts/badge.contract.json';
+      const pristine = readFileSync(path.join(SCRATCH, BADGE), 'utf8');
+      editJson(BADGE, (c: any) => {
+        c.anatomy.root.tokens['background-color'] = '{color.badge.__unset.background}';
+      });
+      const r = generate();
+      writeFileSync(path.join(SCRATCH, BADGE), pristine);
+      if (r.status === 0) throw new Error('underscore-bearing token ref was ACCEPTED (must refuse)');
+      for (const needle of [
+        'may not contain underscores',
+        '__unset',
+        'reviewed default in the capture config',
+      ]) {
+        if (!r.out.includes(needle)) {
+          throw new Error(`refused, but the actual rule is not named — wanted "${needle}" in:\n${r.out.slice(0, 800)}`);
+        }
+      }
+      // (b) drafter half: the sentinel never ships. Red-test discipline — this
+      // fails on the pre-fix drafter (unsetLabel '__unset') by construction.
+      const drafterUnit = run(TSX, ['--test', 'packages/cli/test/draft-capture-config.test.ts']);
+      if (drafterUnit.status !== 0) {
+        throw new Error(`draft-capture-config unit pins failed (B.16 drafter half):\n${drafterUnit.out.slice(0, 1200)}`);
+      }
+      console.log('refuse-underscore-ref-names-unset-sentinel: underscore refs refused naming the rule/sentinel/fix; drafter ships a token-legal unsetLabel + reviewed baseCombo');
     },
   },
   {
@@ -1426,6 +1467,21 @@ const cases: Case[] = [
         if (r.status !== 1) throw new Error('15-day-old snapshot passed the 14-day staleness gate');
         if (!readReport().some((x) => x.subject === 'snapshot-stale'))
           throw new Error('Expected snapshot-stale finding');
+        // First-run softener (beta-tester packet): when snapshot-stale is the
+        // ONLY active finding class — exactly the fresh-clone state — the
+        // output must say so, so a first-time tester can tell "the staleness
+        // gate is working" from "the components drifted".
+        if (!r.out.includes('expected on a fresh clone'))
+          throw new Error(`stale-only red did not print the fresh-clone note:\n${r.out}`);
+        // FALSIFICATION: mix in a NON-stale finding (foreign fileKey) and the
+        // note must vanish — it may never launder real drift as clone noise.
+        editJson(FIGMA_COMPONENTS, (s2) => { s2.fileKey = 'WRONG_FILE_KEY'; });
+        const r2 = parity();
+        if (r2.status !== 1) throw new Error('mixed stale+provenance findings passed parity');
+        if (!readReport().some((x) => x.subject === 'snapshot-provenance'))
+          throw new Error('Expected snapshot-provenance finding in the mixed run');
+        if (r2.out.includes('expected on a fresh clone'))
+          throw new Error('the fresh-clone note printed over a mix that includes REAL drift findings');
       } finally {
         delete process.env.MAX_SNAPSHOT_AGE_DAYS;
       }
@@ -1953,7 +2009,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       editJson('extract/figma/fixtures/main-file-dumps.json', (d) => {
         for (const v of d.Badge.variants) v.fill = { hex: '3b82f6' };
       });
-      const r = run(TSX, ['extract/figma/propose.ts', 'extract/figma/fixtures/main-file-dumps.json', '--out', 'extract/out/figma']);
+      const r = run(TSX, [
+        'extract/figma/propose.ts',
+        'extract/figma/fixtures/main-file-dumps.json',
+        '--out',
+        'extract/out/figma',
+        '--reviewable-inversion',
+      ]);
       if (r.status !== 0) throw new Error(`Proposal failed on an unbound fill:\n${r.out}`);
       const proposed = JSON.parse(readFileSync(path.join(SCRATCH, 'extract', 'out', 'figma', 'badge.contract.proposed.json'), 'utf8'));
       const ref = proposed.anatomy.root.tokens?.['background-color'];
@@ -2071,7 +2133,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
   },
   {
     // Desktop-MCP import: recorded live fixtures replay to plugin-dump name
-    // fidelity — Badge zero-mismatch, Eventz foreign names + the U+2024 refusal.
+    // fidelity — Badge zero-mismatch, Eventz foreign names + the U+2024 fold.
     id: 'design-mcp-roundtrip-fixture-replay',
     claim: 'C5-extraction',
     run: () => {
@@ -2079,7 +2141,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (r.status !== 0) throw new Error(`desktop-MCP receipt failed:\n${r.out}`);
       const receipt = readFileSync(path.join(SCRATCH, 'extract/figma/mcp/RECEIPT.md'), 'utf8');
       if (!/\| Badge \| \d+ \| \d+ \| 0 \| ✅/.test(receipt)) throw new Error('Badge row is not zero-mismatch');
-      if (!receipt.includes('REFUSED by the token-ref grammar')) throw new Error('U+2024 refusal receipt missing');
+      // dump v1.16: the U+2024 name FOLDS to a named rename instead of
+      // refusing by grammar (design-gradient-textcase-carriage pins the fold
+      // rule itself; this pins it firing on live foreign data).
+      if (!receipt.includes('FOLDED to a NAMED RENAME')) throw new Error('U+2024 fold receipt missing');
     },
   },
   {
@@ -2287,7 +2352,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const corpus = loadTokenCorpus(process.cwd());
         const loaded = loadContracts(path.resolve('contracts'));
         const dump = j('extract/figma/fixtures/cbds-plugin-button-brand-primary.dump.json');
-        const batch = proposeBatchFromDump(dump, { corpus, contractIdByName: loaded.byName, contractsById: loaded.byId, fileKey: 'WofZT8xaxXuc2Q6Je9S4XE', mintUnbound: true });
+        const batch = proposeBatchFromDump(dump, { projectionMode: 'reviewable-inversion', corpus, contractIdByName: loaded.byName, contractsById: loaded.byId, fileKey: 'WofZT8xaxXuc2Q6Je9S4XE', mintUnbound: true });
         const p = batch.proposals[0];
         const c = ContractSchema.parse(p.contract);
         const contracts = new Map([[c.id, c]]);
@@ -2876,6 +2941,68 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // VOID-ELEMENT MOUNT GUARD (Eventz field case — the emit-side half of the
+    // wrong-element-mount class): Atoms/Checkbox and Atoms/Input proposed
+    // `semantics.element: "input"` over drawn children, and the emitters
+    // mounted the anatomy INSIDE the void element — React refuses that at
+    // runtime and the component renders NOTHING, silently. Reintroducing the
+    // shape must refuse BY NAME at generation, on every surface that calls
+    // validateContract, at BOTH guard sites: the single-root semantics
+    // element, and any part carrying an explicit void element. The legal void
+    // root stays legal — ds.divider's childless <hr> compiles in the
+    // whole-catalog generate that every green eval already exercises.
+    id: 'refuse-void-element-children-mount',
+    claim: 'C2-refusal',
+    run: () => {
+      // Site 1 — the Eventz shape verbatim: a void ROOT over child parts.
+      editJson('contracts/checkbox.contract.json', (c) => {
+        c.semantics.element = 'input';
+      });
+      const r = generate();
+      if (r.status === 0) {
+        throw new Error('Generator accepted children mounted inside a void <input> root — the Eventz mounted-nothing shape must refuse');
+      }
+      if (!r.out.includes('ds.checkbox') || !r.out.includes('children cannot mount inside void element <input>')) {
+        throw new Error(`Refusal not named (expected the void-element violation on ds.checkbox):\n${r.out}`);
+      }
+      if (!r.out.includes('Re-root the part') || !r.out.includes('or wrap the control')) {
+        throw new Error(`Refusal does not state the fix (re-root / wrap):\n${r.out}`);
+      }
+      // Site 2 — a PART carrying an explicit void element over children.
+      resetScratch();
+      editJson('contracts/checkbox.contract.json', (c) => {
+        c.anatomy.root.parts.box.element = 'img';
+      });
+      const r2 = generate();
+      if (r2.status === 0) throw new Error('Generator accepted child parts inside a void <img> part');
+      if (!r2.out.includes('part "box"') || !r2.out.includes('children cannot mount inside void element <img>')) {
+        throw new Error(`Part-level refusal not named:\n${r2.out}`);
+      }
+    },
+  },
+  {
+    // The PROPOSE-SIDE half of the same defect: the name/axis table infers
+    // "input" for checkbox/input-named sets, and a proposal must NEVER
+    // produce a contract the emitter refuses. When the drawn anatomy mounts
+    // children under a void inference, proposeFromDump demotes to the "div"
+    // container with a REVIEW re-root note — and the receipt EMITS the
+    // demoted proposal to prove the invariant, while a childless input-named
+    // set keeps element "input" (the ds.divider-class void root stays legal).
+    id: 'design-void-element-re-root',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cbds-check.ts']);
+      if (r.status !== 0) throw new Error(`CBDS receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ input-named set WITH drawn children → element demoted to "div" (never the emitter-refused void shape), with a REVIEW re-root note',
+        '✔ the demoted proposal EMITS — proposeFromDump never produces a contract the emitter refuses',
+        '✔ a CHILDLESS input-named set keeps element "input" (the demotion is scoped to drawn children — ds.divider-class void roots stay legal)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
     // The Examples gallery captions state FACTS about their contracts, and
     // one shipped wrong (the Badge card said "four variant classes" over a
     // five-variant contract). Countable claims are DERIVED in
@@ -3433,6 +3560,52 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
   },
 
   {
+    // GRADIENT_LINEAR fills, textCase, and the U+2024 name fold (dump v1.16 —
+    // the Eventz #21 close). The contract→canvas leg had parsed CSS
+    // linear-gradients into native GRADIENT_LINEAR paints since v15
+    // (parseCssGradient) while the design-side capture refused EVERY gradient
+    // at the dump (`paint-unsupported` — solid paints only), so the Badge
+    // accent/info/warning/featured grounds rendered NOTHING and badge scored
+    // 23.5. The same capture dropped textCase UPPER ("Label" for "LABEL")
+    // and refused 16 bindings of U+2024-named variables ("spacing/1․5").
+    // This pins the design-side half end to end on synthetic dumps:
+    // axis-aligned ramps carry EXACTLY (visible-segment normalization — the
+    // Eventz handles overshoot the box, and a naive full-ramp spelling would
+    // repaint half the ground), oblique ramps refuse BY NAME (the CSS angle
+    // is a function of the box's aspect ratio), and both new carries
+    // round-trip through the SAME engine the plugin runs. The live proof is
+    // examples/eventz-vars (badge 23.5 → 61.2, NOTES.md receipts).
+    id: 'design-gradient-textcase-carriage',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/gradient-fill-check.ts']);
+      if (r.status !== 0) throw new Error(`gradient/textCase receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ root tokens carry background-image as a substituted per-variant ref',
+        '✔ the Grad leaf is the VISIBLE-SEGMENT spelling — edge colors interpolated on the ramp (#808080 at 0%), stops inside the grammar',
+        "✔ the Plain leaf mints 'none' (its ground rides background-color)",
+        '✔ a 3-stop ramp remaps its interior stop into the segment (0.75 → 50%)',
+        '✔ CSS emits per-variant background-image vars',
+        '✔ the Grad variant compiles a native GRADIENT_LINEAR paint (angle 270, 2 stops, no gradientMiss)',
+        "✔ the Plain variant compiles NO gradient layer ('none' round-trips clean, no gradientMiss)",
+        '✔ the refusal is NAMED with the raw handles (box-aspect-dependent angle)',
+        '✔ uniform textCase UPPER → declared text-transform: uppercase on the Label part',
+        '✔ the Label spec carries textCase UPPER (declared text-transform round-trips)',
+        '✔ a MIXED case axis proposes nothing and is NAMED (never sampled)',
+        "✔ the binding CARRIES as {spacing.1-5} (was: 'outside the token-ref grammar', binding not proposed)",
+        '✔ the fold is a NAMED RENAME, one receipt per variable per set',
+        '✔ the captured-token layer registers the SAME fold (refs resolve end to end), original name kept on the entry',
+        '✔ a fold target another variable owns REFUSES registration by name (the occupant keeps the path)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+      console.log(
+        'design-gradient-textcase-carriage: dump v1.16 captures GRADIENT_LINEAR fills (handles + stops, both producers) and textCase — axis-aligned ramps carry as background-image minted gradient leaves normalized to the visible segment and round-trip to native GRADIENT_LINEAR paints; oblique ramps refuse BY NAME with the raw handles; textCase carries as declared text-transform when uniform; U+2024 variable names fold to a NAMED rename that resolves end to end, with fold-target collisions refused at registration.',
+      );
+    },
+  },
+
+  {
     // P21 (overlap collections): negative auto-layout spacing must NEVER
     // mint a plain negative-px gap token (`gap: -8px` is invalid CSS and the
     // overlap silently vanished — the pre-P21 bug). Uniform negative spacing
@@ -3718,7 +3891,12 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // Shape branch: stroke + bindings + default-paint clear (checkbox).
       const checkbox = readFileSync(path.join(ROOT, 'examples/polaris/figma/checkbox.figma.js'), 'utf8');
       const shapeBranch = checkbox.slice(checkbox.indexOf("spec.type === 'shape'"));
-      const shapeBody = shapeBranch.slice(0, shapeBranch.indexOf('} else {'));
+      // FC-PSEUDO-STROKE-GLYPH added an INNER `if (spec.svg) { … } else {`
+      // split inside the shape branch, so slicing at the first '} else {'
+      // truncated the branch before the parametric body this pin asserts on
+      // (the instrument, not the emitter, went stale). The branch's real end
+      // is the OUTER two-space-indented `} else {` (the frame default arm).
+      const shapeBody = shapeBranch.slice(0, shapeBranch.indexOf('\n  } else {'));
       if (!shapeBody.includes('spec.stroke')) throw new Error('shape branch must apply spec.stroke');
       if (!shapeBody.includes('spec.bindings')) throw new Error('shape branch must apply spec.bindings');
       // Round 5f (B5E finding 2): the shape branch applies a LITERAL fill
@@ -4930,7 +5108,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const WORK = 'jwork';
         const dump = JSON.parse(fs.readFileSync('extract/figma/fixtures/cbds-plugin-button-brand-primary.dump.json', 'utf8'));
         const loaded = loadContracts(path.resolve('contracts'));
-        const batch = proposeBatchFromDump(dump, { corpus: loadTokenCorpus(process.cwd()), contractIdByName: loaded.byName, contractsById: loaded.byId, fileKey: 'WofZT8xaxXuc2Q6Je9S4XE', mintUnbound: true });
+        const batch = proposeBatchFromDump(dump, { projectionMode: 'reviewable-inversion', corpus: loadTokenCorpus(process.cwd()), contractIdByName: loaded.byName, contractsById: loaded.byId, fileKey: 'WofZT8xaxXuc2Q6Je9S4XE', mintUnbound: true });
         if (batch.proposals.length !== 1 || batch.skipped.length !== 0) throw new Error('dump replay must propose exactly 1 with 0 skips (got ' + batch.proposals.length + '/' + batch.skipped.length + ')');
         const proposal = batch.proposals[0];
         const c = proposal.contract;
@@ -5212,6 +5390,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         'planReceive WITHOUT --apply: contractWrite is null even when the diff is non-empty — nothing writes silently',
         'figma receive (shell) without --apply: proposal artifact saved, contract file untouched; with --apply: written',
         'figma receive (shell): a dump-kind delivery is refused by name, nothing written',
+        // §B.15 softener: the one canvas door that does not REFUSE stub
+        // anatomy (script emit, kept for CI diffing) must WARN by name,
+        // listing each stub — and stay silent on all-drawable input.
+        'figma emit (script path) warns drawable-empty BY NAME, listing each stub — and stays silent when every contract is drawable',
       ]) {
         if (!t.out.includes(line)) throw new Error(`missing figma-receive test: ${line}`);
       }
@@ -5649,14 +5831,14 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         // gap stopped being refused and now mint 16+16+4 leaves. The exact
         // number is pinned, not just the >=900 floor, so a channel silently
         // ceasing to mint is a failure and not a quiet pass.
-        'the collection plans ≥900 variables (1026)',
+        'the collection plans ≥900 variables (1031)',
         'genuinely DIFFER between Light and Dark (43)',
         '✔ THE PASTE DOOR IS OPEN for both kits',
       ]) {
         if (!check.out.includes(want)) throw new Error(`paste-door-check missing receipt: ${want}\n${check.out}`);
       }
       console.log(
-        'paste-door-open: the developer path (contract → CLI bundle → paste → variable collection + component sets) runs END TO END through the REAL referee, with no bypass, for BOTH a Figma Community kit that publishes ZERO variables (Untitled UI — 30 contracts, 1026 minted variables, 17 icon assets incl. the per-variant {platform} glyph) and a kit that publishes real ones (Eventz — 17 contracts, 112 variables, 43 genuinely differing between Light and Dark). LEDGER §3.4 recorded this door SHUT for two rounds.',
+        'paste-door-open: the developer path (contract → CLI bundle → paste → variable collection + component sets) runs END TO END through the REAL referee, with no bypass, for BOTH a Figma Community kit that publishes ZERO variables (Untitled UI — 30 contracts, 1031 minted variables, 17 icon assets incl. the per-variant {platform} glyph) and a kit that publishes real ones (Eventz — 17 contracts, 112 variables, 43 genuinely differing between Light and Dark). LEDGER §3.4 recorded this door SHUT for two rounds.',
       );
     },
   },
@@ -5680,15 +5862,15 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         '✔ G9 sample library: the baked bundle (Card, Badge, Avatar, Button) parses, plans tokens-first, and builds in the mock',
         '✔ bundle order: ds.card plans 4 component scripts, dependencies first (ds.avatar → ds.button → ds.badge → ds.card)',
         // FOREIGN TOKEN SET — the JSON-only Generate: the MUI bundle
-        // (contracts + tokenSet + icons in ONE paste, MOLECULE round) through
+        // (contracts + tokenSet + icons in ONE paste, Wave 5 denominator) through
         // the real engine bundle path is EQUIVALENT to the compiled-script
-        // path (same sets + standalone Menu/Tooltip, 1543 variables incl. 73
+        // path (same sets + standalone Menu/Tooltip/TablePagination, 2136 variables incl. 134
         // Figma-native aliases, contained-primary Button fill resolves
         // #1976d2), and a contract ref outside base+minted refuses BY NAME.
         // STATE-PLANE PROJECTION round: Switch 14→28 (checked is a VARIANT
         // AXIS now) and Button 63→75 (accepted State preview axis) — both
         // survive the JSON-only paste identically to the script path.
-        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1543 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Alert(12), Autocomplete(2), Avatar(3), Badge(14), Button(75), Card(4), Checkbox(3), Chip(28), CircularProgress(2), Dialog(5), Divider(3), Drawer(2), Fab(9), IconButton(9), InputAdornment(2), LinearProgress(2), Link(42), Paper(8), Radio(14), Select(2), Slider(12), Snackbar(3), Switch(28), Table(2), Tabs(6), TextField(6) + standalone Menu, TablePagination, Tooltip with 2136 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -5782,6 +5964,29 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
       }
       console.log('plugin-propose-dry-run: dump→proposal→bounded diff round-trip + exact PR dry-run plan');
+    },
+  },
+  {
+    // G3 STALE-BASE GUARD (partial) — docs/18 Flow 7 step 4. The Send tab
+    // used to diff the canvas against WHATEVER base was pasted, with no check
+    // that the base is what the canvas was last synced from — a canvas N
+    // syncs behind main proposed the engineer's merged changes back out as
+    // the designer's "edits" (a silent revert the PR then blamed on her).
+    // The guard compares the provided base's spec fingerprint against the
+    // set's stored ds_contracts sync markers and WARNS by name — in the
+    // summary (→ PR body + export envelope) and as a structured verdict —
+    // while a matching base stays silent and absent markers verdict
+    // 'unverifiable' rather than a silent 'match'. Pinned through the built
+    // bundle in plugin-engine-check §5b (stale fixture + fresh fixture).
+    id: 'plugin-stale-base-guard',
+    claim: 'C2-refusal',
+    run: () => {
+      const check = run(process.execPath, ['scripts/plugin-engine-check.mjs']);
+      if (check.status !== 0) throw new Error(`plugin-engine-check failed:\n${check.out}`);
+      const want =
+        '✔ G3 stale-base guard (partial): a base matching the stored sync fingerprint stays silent; the pre-sync v1 base WARNS by name ("may contain reverts") in summary + envelope; absent markers verdict "unverifiable", never a silent match';
+      if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
+      console.log('plugin-stale-base-guard: stale base warns by name in UI summary + PR/export envelope; fresh base silent; absent markers named unverifiable');
     },
   },
   {
@@ -6179,18 +6384,25 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     claim: 'C3-detection',
     run: () => {
       const fig = (f: string) => readFileSync(path.join(ROOT, 'examples/polaris/figma', f), 'utf8');
-      for (const f of ['badge.figma.js']) {
+      // button carries icon margins + Show WithIcon (left-gap finding); badge
+      // still exercises the same runtime via any re-emitted Polaris script.
+      for (const f of ['button.figma.js']) {
         const s = fig(f);
         if (!s.includes('function applyMarginBox(')) throw new Error(`${f}: no margin-box runtime`);
-        // create path (buildNode): applyMarginBox(node, childNode, child)
-        if (!s.includes('applyMarginBox(node, childNode, child)')) throw new Error(`${f}: buildNode create path lost applyMarginBox`);
-        // amend path (amendSet): applyMarginBox(comp, childNode, childSpec) —
+        // create path (buildNode): applyMarginBox(node, childNode, child, registry)
+        if (!s.includes('applyMarginBox(node, childNode, child, registry)')) {
+          throw new Error(`${f}: buildNode create path lost applyMarginBox(…, registry)`);
+        }
+        // amend path (amendSet): applyMarginBox(comp, childNode, childSpec, registry)
         // the B5E-finding-1 fix; without it top-level margins vanish on re-amend
-        if (!s.includes('applyMarginBox(comp, childNode, childSpec)')) {
+        if (!s.includes('applyMarginBox(comp, childNode, childSpec, registry)')) {
           throw new Error(`${f}: amendSet top-level child loop is MISSING applyMarginBox — B5E finding 1 regressed (Badge pip would measure 24px on re-amend, spec/gate say 20px)`);
         }
+        if (!s.includes('vis.node === childNode') || !s.includes('vis.node = box')) {
+          throw new Error(`${f}: applyMarginBox must retarget Show bindings onto the margin-box wrapper (Polaris Button left-gap finding)`);
+        }
       }
-      console.log('amend-margin-box: badge script carries applyMarginBox on BOTH the create (buildNode) and re-amend (amendSet) top-level child loops — margins now survive a re-amend at source, not a canvas correction');
+      console.log('amend-margin-box: button script carries applyMarginBox on create+amend with Show→wrapper retarget (Polaris icon left-gap)');
     },
   },
   {
@@ -6668,6 +6880,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         'scripts/generate-components.ts',
         '--contracts', 'examples/astryx/contracts',
         '--tokens', 'examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json',
+        // Exact-conversion wave: banner's four status icons and text-input's
+        // three type glyphs are real SVG assets in the example's own icons
+        // dir — same flag the MUI genesis eval already passes.
+        '--icons', 'examples/astryx/assets/icons',
         '--out', out,
         '--stories',
       ];
@@ -6778,18 +6994,23 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const proposals = JSON.parse(readFileSync(T(OUTPUTS[0]), 'utf8'));
       const disp = (d: string) => proposals.rows.filter((r: any) => r.disposition === d);
       const refsOf = (d: string) => disp(d).reduce((a: number, r: any) => a + r.refs, 0);
-      // POST-REVIEW STATE: the queue is RESOLVED — 70 refs applied, 0 ambiguous.
+      // POST-REVIEW STATE: the queue is RESOLVED — 78 refs applied, 0 ambiguous.
       //
-      // Was 63/0 against the FROZEN capture. The 2026-07-29 recapture (task
-      // #43, the first after the capture stopped reading its own promote
-      // output) reads more of the library — the minted tree goes 237 -> 408
-      // leaves, of which the COLOUR leaves (the only anchorable kind) go
-      // 113 -> 134 — and the re-anchoring review was re-run against it. Both
-      // numbers moved the right way: aliased colour leaves 54 -> 68, i.e.
-      // 47.8% -> 50.7% of the anchorable denominator, with the review queue
-      // still empty at the end.
-      if (refsOf('applied') !== 70 || refsOf('ambiguous') !== 0) {
-        throw new Error(`join moved: expected 70 applied / 0 ambiguous refs, got ${refsOf('applied')} / ${refsOf('ambiguous')}`);
+      // Was 63/0 against the FROZEN capture, then 70/0 after the 2026-07-29
+      // recapture (task #43) review. The 2026-08 exact-conversion wave rebound
+      // the badge and switch contracts, minting new colour leaves that
+      // reopened the queue at 34 applied / 43 ambiguous; the 2026-08-08
+      // continuation review round (executed by automation under the owner
+      // delegation of TJ 2026-07-26, flagged for owner review) resolved it:
+      // five rows extended mechanically as same-value/same-target
+      // continuations, five new arms decided on the committed source bindings
+      // in the sandbox @astryxdesign/core (Badge.tsx names color-accent /
+      // color-error / color-success / color-warning and their color-on-*
+      // content partners per variant; Switch.tsx names color-text-secondary
+      // for labels and color-background-surface for the thumb), and one new
+      // kept-literal receipt for badge-neutral's alpha-serialisation near-miss.
+      if (refsOf('applied') !== 78 || refsOf('ambiguous') !== 0) {
+        throw new Error(`join moved: expected 78 applied / 0 ambiguous refs, got ${refsOf('applied')} / ${refsOf('ambiguous')}`);
       }
       // THE KEPT-LITERAL RECEIPTS TURNED OVER COMPLETELY, and both halves of
       // that are the point.
@@ -6808,9 +7029,17 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // token for the ABSENCE of paint, and re-anchoring either would make a
       // deliberately transparent surface start painting on a re-theme. Kept
       // literal on purpose, so the pair is DECIDED rather than pending.
+      //
+      // 2026-08-08 continuation round: a SECOND receipt (1 row / 1 leaf).
+      // badge.root.background-color.neutral is #0536591A in the wave's fresh
+      // mint; the source names {color-neutral} outright, but the anchor
+      // authors that token as rgba(5, 54, 89, 0.1) — alpha 25.5/255 vs the
+      // capture's 26/255 — and the join refuses near-miss tuple equality BY
+      // DESIGN. Receipted with the unblocking condition named (re-author the
+      // anchor's alpha so it round-trips), not silently pending.
       const lit = proposals.summary.literalReceipts;
-      if (!lit || lit.rows !== 1 || lit.leaves !== 2 || lit.refs !== 2) {
-        throw new Error(`the decided-literal receipts moved: expected 1 row / 2 leaves / 2 refs (the transparent pair), got ${JSON.stringify(lit)}`);
+      if (!lit || lit.rows !== 2 || lit.leaves !== 3 || lit.refs !== 3) {
+        throw new Error(`the decided-literal receipts moved: expected 2 rows / 3 leaves / 3 refs (the transparent pair + badge-neutral alpha near-miss), got ${JSON.stringify(lit)}`);
       }
       const cardBorder = proposals.rows.find((r: any) => r.exclusion === 'card-border-degraded-capture');
       if (!cardBorder || cardBorder.refs !== 48) {
@@ -6877,7 +7106,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // rows were authored against the fresh mint, 17 of whose leaves carry the
       // SAME target the previous round reviewed and are continuations rather
       // than new judgements.
-      if (ledger.length !== 31) throw new Error(`expected 31 ledger rows (the row-rule-color prune left 7; the post-recapture review authored 28; rows sharing an id AND a target were merged, so no leaf is anchored twice), got ${ledger.length}`);
+      // 36 rows after the 2026-08-08 continuation round (was 31): the wave's
+      // badge/switch rebinding reopened the queue and the round authored 5 new
+      // arms (badge warning content, badge success content, switch thumb
+      // surface, badge success background, badge warning background) while
+      // extending 5 existing rows in place — rows sharing an id AND a target
+      // stay merged, so no leaf is anchored twice.
+      if (ledger.length !== 36) throw new Error(`expected 36 ledger rows (31 post-recapture + 5 arms from the 2026-08-08 continuation round; rows sharing an id AND a target were merged, so no leaf is anchored twice), got ${ledger.length}`);
       let aliasedLeaves = 0;
       for (const d of ledger) {
         if (d.ack !== 'explicit CLI --apply') throw new Error(`ledger row ${d.ids} carries the wrong ack`);
@@ -6895,8 +7130,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           aliasedLeaves++;
         }
       }
-      // 68 leaves carry an alias after the post-recapture review (was 54), and
-      // every one is anchored exactly ONCE — rows sharing an id and a target
+      // 78 leaves carry an alias after the 2026-08-08 continuation round (was
+      // 68 post-recapture, 54 before that): +12 new badge/switch leaves
+      // decided this round, -2 pruned mechanically because the wave's
+      // rebinding left them with zero contract refs (shared.color-0064e0 and
+      // badge.root.color.neutral now sit in the unreferenced-leaf exclusion;
+      // their tree aliases are untouched, see _prunedByWaveUnbind). Every
+      // leaf is anchored exactly ONCE — rows sharing an id and a target
       // are merged, so the ledger cannot say the same leaf twice.
       //
       // THE NUMBER THAT SAYS WHETHER THE ROUND HELPED is the anchorable
@@ -6907,7 +7147,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // Measured against the whole tree the share appears to FALL (22.8% ->
       // 16.7%) purely because those 150 dimension leaves join the denominator
       // and no colour token can address them.
-      if (aliasedLeaves !== 68) throw new Error(`expected 68 re-anchored leaves, got ${aliasedLeaves}`);
+      if (aliasedLeaves !== 78) throw new Error(`expected 78 re-anchored leaves, got ${aliasedLeaves}`);
 
       // PER-LEAF GRAIN. One value group splits into several decisions under one
       // id, and the applier must land EVERY row that names the id — the
@@ -6925,23 +7165,29 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // and the post-recapture review names that surface
       // (color-background-inverted), so the text became decidable.
       const ffffff = ledger.filter((d: any) => d.ids.includes('RA-ffffff'));
-      if (ffffff.length !== 4) throw new Error(`RA-ffffff should split into 4 per-leaf decisions, got ${ffffff.length}`);
-      if (new Set(ffffff.map((d: any) => d.to)).size !== 4) throw new Error('the RA-ffffff split does not reach 4 distinct targets — the per-leaf grain is not exercised');
-      // 13 leaves, down from 19: six of the group's leaves were `row-rule-color`
-      // mirrors that the currentcolor fold (task #35) stopped minting, so there
-      // is nothing left to anchor there. The remaining 13 are the real ones —
-      // button content on two surfaces, card's default background, and the two
-      // slider tooltip leaves the previous round had to decline.
-      if (ffffff.reduce((a: number, d: any) => a + d.leaves.length, 0) !== 13) throw new Error('RA-ffffff does not cover its 13 re-anchored leaves');
+      // SIX arms after the 2026-08-08 continuation round (was 4): the wave's
+      // badge/switch rebinding minted new #ffffff leaves and the round added
+      // (5) badge success content -> color-on-success (the role-over-hue
+      // rubric, corroborated by Badge.tsx variantStyles.success) and (6) the
+      // switch thumb surface -> color-background-surface (a COMMITTED source
+      // binding in Switch.tsx styles.thumb outranks the mode-safe prediction;
+      // the row carries a `deviation` field saying so).
+      if (ffffff.length !== 6) throw new Error(`RA-ffffff should split into 6 per-leaf decisions, got ${ffffff.length}`);
+      if (new Set(ffffff.map((d: any) => d.to)).size !== 6) throw new Error('the RA-ffffff split does not reach 6 distinct targets — the per-leaf grain is not exercised');
+      // 18 leaves (was 13): +1 badge info content, +1 badge error content,
+      // +1 badge success content, +2 switch thumbs — all minted by the wave's
+      // rebinding and decided in the 2026-08-08 continuation round.
+      if (ffffff.reduce((a: number, d: any) => a + d.leaves.length, 0) !== 18) throw new Error('RA-ffffff does not cover its 18 re-anchored leaves');
 
       // THE OTHER HALF OF THE REVIEW: kept-literal receipts.
       const literals = JSON.parse(readFileSync(T(LEDGER), 'utf8')).literals;
-      // ONE receipt now, covering the transparent pair. The two it replaces
-      // both explained why a value-named SHARED leaf stayed anonymous, and both
-      // leaves existed only to back `row-rule-color` refs the currentcolor fold
-      // stopped minting — a receipt for a leaf that no longer exists explains
-      // nothing.
-      if (!Array.isArray(literals) || literals.length !== 1) throw new Error(`expected 1 decided-literal receipt (the transparent pair), got ${literals?.length}`);
+      // TWO receipts after the 2026-08-08 continuation round: the transparent
+      // pair (unchanged), plus badge-neutral's background — the source names
+      // {color-neutral} but the anchor's rgba(5, 54, 89, 0.1) does not
+      // tuple-equal the captured #0536591A (alpha 25.5 vs 26), and the join
+      // refuses near-miss equality by design, so the leaf is receipted with
+      // its unblocking condition rather than left pending.
+      if (!Array.isArray(literals) || literals.length !== 2) throw new Error(`expected 2 decided-literal receipts (the transparent pair + badge-neutral alpha near-miss), got ${literals?.length}`);
       for (const d of literals) {
         if (d.ack !== 'decided-literal') throw new Error(`literal receipt ${d.ids} carries the wrong ack`);
         if (!/ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26/.test(d.cause)) {
@@ -7001,10 +7247,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
 
       console.log(
         `astryx-reanchor-minted: value-identity join over the minted tree — --propose byte-stable ×2 AND byte-equal to the committed artifacts ` +
-          `(${proposals.rows.length} rows, queue RESOLVED: 63 applied refs across 19 ledger rows / 54 leaves, 0 ambiguous, 7 refs on 2 leaves REVIEWED AND KEPT LITERAL with receipts, 48 card-border refs REFUSED by name for a degraded capture; no live leaf is pending without a decision or a receipt); ` +
-          `every reviewed row carries the delegation provenance (orchestrator-reviewed under owner delegation, TJ 2026-07-26); PER-LEAF GRAIN pinned — RA-ffffff splits into 3 decisions / 2 targets / 19 leaves under one id; ` +
+          `(${proposals.rows.length} rows, queue RESOLVED: 78 applied refs across 36 ledger rows / 78 leaves, 0 ambiguous, 3 refs on 3 leaves REVIEWED AND KEPT LITERAL with receipts, 48 card-border refs REFUSED by name for a degraded capture; no live leaf is pending without a decision or a receipt); ` +
+          `every reviewed row carries the delegation provenance (orchestrator-reviewed under owner delegation, TJ 2026-07-26; the 2026-08-08 continuation round is additionally labelled executed-by-automation and flagged for owner review); PER-LEAF GRAIN pinned — RA-ffffff splits into 6 decisions / 6 targets / 18 leaves under one id; ` +
           `a docs-plane anchor is refused BY NAME (the silent-no-op trap); --apply refuses an un-acked id AND an excluded row, and is idempotent on an acked one; ` +
-          `the 54 aliases resolve to the UNCHANGED neutral light values and the 13 neutral component scripts re-emit byte-identical. ` +
+          `the 78 aliases resolve to the UNCHANGED neutral light values and the 13 neutral component scripts re-emit byte-identical. ` +
           `Falsified: tampered script → BYTE-GATE refusal; drifted DTCG → STALE LEDGER refusal + moved proposals; drifted kept-literal leaf → STALE LITERAL RECEIPT refusal`,
       );
     },
@@ -7195,12 +7441,12 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       });
       const receipt = run(process.execPath, ['examples/mui/scripts/figma-compile-receipt.mjs']);
       if (receipt.status !== 0) throw new Error(`mui figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
-      if (!receipt.out.includes('14 scripts, 160 variants')) {
-        throw new Error(`mui figma compile receipt missing the 14-scripts/160-variants line:\n${receipt.out.slice(0, 800)}`);
+      if (!receipt.out.includes('31 scripts, 273 variants')) {
+        throw new Error(`mui figma compile receipt missing the 31-scripts/273-variants line:\n${receipt.out.slice(0, 800)}`);
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(11 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1543 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(27 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\), InputAdornment\(2\), TextField\(6\), Avatar\(3\), Fab\(9\), IconButton\(9\), CircularProgress\(2\), LinearProgress\(2\), Alert\(12\), Badge\(14\), Divider\(3\), Link\(42\), Paper\(8\), Drawer\(2\), Radio\(14\), Select\(2\), Snackbar\(3\); standalone: TablePagination, Menu, Tooltip, Breadcrumbs; 2136 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -7225,7 +7471,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (160 variants — state-plane projection round: Switch 14→28 on the new Checked axis, Button 63→75 on the accepted State preview axis); token sync 1543 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 13 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 31/31 Emotion-runtime scripts referee+execute headless (273 variants — Wave 5 denominator; state-plane projection: Switch 14→28 on Checked, Button 63→75 on State preview); token sync 2136 variables incl. 134 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 22 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {
@@ -7259,6 +7505,9 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         'packages/cli/src/cli.ts', 'figma', 'bundle', 'examples/tailwind/contracts',
         '--tokens', 'examples/tailwind/tokens/tailwind.dtcg.json,examples/tailwind/tokens/tailwind-minted.dtcg.json',
         '--name', 'Tailwind',
+        // Exact-conversion wave: alert's status/dismiss icons are real SVG
+        // assets that ride the bundle (the MUI bundle's --icons precedent).
+        '--icons', 'examples/tailwind/assets/icons',
         '--out', 'examples/tailwind/figma/bundle-run.json',
       ]);
       if (twBundle.status !== 0) throw new Error(`figma bundle (tailwind) failed:\n${twBundle.out.slice(0, 1200)}`);
@@ -7319,7 +7568,18 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // as ink / D2 checkbox box + toggle knob / D3 no child wider than its
       // parent / D5 modal not a viewport rectangle / D6 no inert part + the
       // icon button keeps its box), so this eval fails if any of them regress.
-      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1207 variables\)/.test(batch.out)) {
+      // EXACT-CONVERSION WAVE — REPINNED 1207 → 1215 variables, after review,
+      // not silently: inline-notification's exact pass minted 15 new leaves
+      // (per-contrast root border widths+colors high/low — the D2-class ring
+      // facts —, the per-contrast close-button color the FC-CONTRAST-ICON pin
+      // requires, and root/showcase-width) and retired the single
+      // un-substituted close-button color leaf. The landing round corrected
+      // the wave's first repin (1221): it had not counted the SIX tabs width
+      // leaves the same wave retired (tabs-nav-item{,-2,-3} and their
+      // label-wrapper widths — FC-CARBON-TABS-LABEL demands the wrappers HUG,
+      // so their minted fixed widths left the tree): 1207 + 15 − 1 − 6 = 1215.
+      // Variant cells (132) and source aliases (96) are unchanged.
+      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1215 variables\)/.test(batch.out)) {
         throw new Error(`carbon genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // The token wrap is a PURE function of the pinned compiled stylesheet, so
@@ -7373,7 +7633,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const committed = readFileSync(path.join(ROOT, 'examples/carbon/figma/carbon.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/carbon/figma/carbon.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
       console.log(
-        `carbon-figma-genesis: 10/10 scripts referee+execute headless (132 variant cells, 1207 variables incl. 94 Figma-native source aliases; live-defect round: the six canvas defects are pinned by the compile receipt this eval runs); ` +
+        `carbon-figma-genesis: 10/10 scripts referee+execute headless (132 variant cells, 1215 variables incl. 96 Figma-native source aliases; live-defect round: the six canvas defects are pinned by the compile receipt this eval runs); ` +
           `Light/Dark = .cds--white/.cds--g100 differ on ${differing.length} tokens; no "unset" pseudo-value reached a contract enum; ` +
           `one-paste batch mock-proven; committed carbon.bundle.json fresh and byte-deterministic; ${tokenNote} — the generality control case`,
       );
@@ -7410,12 +7670,20 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       });
       const receipt = run(process.execPath, ['examples/altitude/scripts/figma-compile-receipt.mjs']);
       if (receipt.status !== 0) throw new Error(`altitude figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
-      if (!receipt.out.includes('8 scripts, 41 variants')) {
-        throw new Error(`altitude compile receipt missing the 8-scripts/41-variants line:\n${receipt.out.slice(0, 800)}`);
+      // Exact-conversion wave: 41 → 47 variant cells. The FC-ENUM-HOLE pin
+      // (code-to-canvas-wave-a-emit-pins) REQUIRES chip Type to carry the
+      // developed `default` (pill) alongside `squared` — 5×2=10 cells, +5 —
+      // and divider's contract documents the same enum-hole class (`default`
+      // horizontal rule alongside `vertical`) — 2 cells, +1, which also makes
+      // Divider a SET, not a standalone. 41 could only hold with chip
+      // Type(1), which the enum-hole pin forbids; the receipt derives every
+      // count from the contracts' own axes.
+      if (!receipt.out.includes('8 scripts, 47 variants')) {
+        throw new Error(`altitude compile receipt missing the 8-scripts/47-variants line:\n${receipt.out.slice(0, 800)}`);
       }
       const batch = run(process.execPath, ['examples/altitude/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`altitude genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(6 sets: Badge\(8\), Button\(12\), Chip\(10\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar, Divider; 638 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(7 sets: Badge\(8\), Button\(12\), Chip\(10\), Divider\(2\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar; 638 variables\)/.test(batch.out)) {
         throw new Error(`altitude genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // THE SHADOW-DOM ANATOMY PINS, read off the COMMITTED promoted contracts.
@@ -7495,7 +7763,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const committed = readFileSync(path.join(ROOT, 'examples/altitude/figma/altitude.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/altitude/figma/altitude.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
       console.log(
-        `altitude-shadow-dom-genesis: 8/8 shadow-DOM scripts referee+execute headless (41 variant cells, 638 variables incl. 41 Figma-native source aliases); ` +
+        `altitude-shadow-dom-genesis: 8/8 shadow-DOM scripts referee+execute headless (47 variant cells, 638 variables incl. 46 Figma-native source aliases); ` +
           `slotted text, depth-2 nested shadow (avatar → al-badge) and an svg inside a shadow root all reached the canvas; ` +
           `${defaultlessAxes} defaultless axes and no "unset" pseudo-value in any contract enum; Light/Dark differ on ${differing.length} tokens (thin by Altitude's own choice); ` +
           `one-paste batch mock-proven; committed altitude.bundle.json fresh and byte-deterministic; ${tokenNote} — the first shadow-DOM subject`,
@@ -8332,7 +8600,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error(`polaris lost its freshness row (task #26 added it via generate.ts --check):\n${fresh.out.slice(0, 1200)}`);
       }
       const total = baseline.rows.reduce((n, r) => n + r.overflows, 0);
-      console.log(`child-wider-ratchet-and-script-freshness: ${baseline.rows.length} libraries carry a committed child-wider baseline (${total} real overflows repo-wide, all astryx ProgressBar percent-width; text-caused and margin-box counted SEPARATELY so neither can flatter the first number), the ratchet is two-sided and names an unrecorded improvement, and every library's sync scripts are BYTE-FRESH vs a fresh emission (polaris via generate.ts --check since task #26 — zero named holes remain) — the gap that let MUI's scripts sit three engine fixes stale while the suite stayed green`);
+      console.log(`child-wider-ratchet-and-script-freshness: ${baseline.rows.length} libraries carry a committed child-wider baseline (${total} real overflows repo-wide, the MUI hug-cell label pair — the astryx ProgressBar percent-width class was FIXED by the exact-conversion wave and re-recorded; text-caused and margin-box counted SEPARATELY so neither can flatter the first number), the ratchet is two-sided and names an unrecorded improvement, and every library's sync scripts are BYTE-FRESH vs a fresh emission (polaris via generate.ts --check since task #26 — zero named holes remain) — the gap that let MUI's scripts sit three engine fixes stale while the suite stayed green`);
     },
   },
   {
@@ -8941,6 +9209,1137 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         `minted-leaves-bind-to-something: ZERO of ${totalLeaves} shipped minted leaves across ${rows.length} libraries sit under a part the anatomy promotion refused (cause A — the mint door holds; before it, carbon/IconButton alone minted 112 such leaves under \`popover\`/\`label\`/\`popover-caret\`). ` +
           `The residual ${totalUnref} unreferenced leaves are cause B — real parts whose BINDING was dropped downstream (inheritance refusal, reviewed-binding collision, overflow) — ratcheted decrease-only per library: ${rows.map((r) => `${r.library} ${r.unreferenced}/${r.leaves}`).join(', ')}. Removing them is a library-level sweep that belongs beside promote.ts's resolutionGuard; it is NAMED and COUNTED here rather than left to accumulate.`,
       );
+    },
+  },
+
+  {
+    // V1-EVID-04 live half — machine receipt for edit→detect→restore on a real
+    // Figma file. Offline half stays variant-drift:check. Console MCP replay
+    // scripts under parity/receipts/console-mcp/ are transport docs, not this pin.
+    id: 'live-figma-evidence-receipt',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(process.execPath, ['scripts/live-figma-evidence-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`live-figma-evidence-check failed:\n${out}`);
+      }
+      if (!out.includes('completed receipt')) {
+        throw new Error('live-figma-evidence-check did not report a completed receipt');
+      }
+      console.log(
+        'live-figma-evidence-receipt: committed V1-EVID-04 machine twin proves baseline→detached-edit→restore on DS-Contracts-Testing; offline half remains variant-drift:check',
+      );
+    },
+  },
+
+  {
+    // Human/release/second-impl rows must stay listed open — packaging and live
+    // receipts must not silently promote to "v1 shipped" or Phase 3 Candidate.
+    id: 'human-gate-inventory-honest',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = spawnSync(process.execPath, ['scripts/human-gate-inventory-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`human-gates:inventory failed:\n${out}`);
+      }
+      if (!out.includes('still open')) {
+        throw new Error('human-gates:inventory did not report open rows');
+      }
+      console.log(
+        'human-gate-inventory-honest: HUMAN-HANDOFF still lists pilot/Wave8/security/publish/deploy/W11-C/Phase4 and refuses false v1/Candidate claims',
+      );
+    },
+  },
+
+  {
+    // Console MCP live loop: contract → chunked figma_execute → screenshot →
+    // audit → v6 fingerprint → zero-mismatch light round-trip, receipted under
+    // parity/receipts/console-loop/components/ on DS-Contracts-Testing.
+    // Evidence semantics: first-party visual claims have no pixel scorecards
+    // yet — the gate must exit 0 but print them loudly as ATTESTED-ONLY, and
+    // the "first-party" ratchet floor must hold.
+    id: 'console-loop-evidence-receipt',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(process.execPath, ['scripts/console-loop-evidence-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`console-loop-evidence-check failed:\n${out}`);
+      }
+      if (!out.includes('required ok')) {
+        throw new Error('console-loop-evidence-check did not report required ok');
+      }
+      if (!out.includes('ATTESTED-ONLY')) {
+        throw new Error(
+          'console-loop-evidence-check must print unscored visual claims as ATTESTED-ONLY (first-party lane has no pixel scorecards yet)',
+        );
+      }
+      if (!out.includes('ratchet floor')) {
+        throw new Error('console-loop-evidence-check did not report the ratchet floor check');
+      }
+      console.log(
+        'console-loop-evidence-receipt: first-party receipts pinned; visual claims surfaced as attested-only (no scorecards yet); ratchet floor holds',
+      );
+    },
+  },
+
+  {
+    // MUI denominator (31) on MUI Test 1 — same Console MCP loop, foreign corpus.
+    // STRICT since 2026-08-08: every stem carries a pixel scorecard
+    // (mui/scores/<stem>.json, headless REST cell @1x vs committed developed
+    // refs under mui/refs/), so the gate reads scorecards, never receipt
+    // booleans — a pass-claim without a passing, hash-pinned scorecard fails
+    // the gate by name; honest fail-closed receipts are counted, not failed.
+    id: 'console-loop-mui-evidence-receipt',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(process.execPath, ['scripts/console-loop-mui-evidence-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`console-loop-mui-evidence-check failed:\n${out}`);
+      }
+      if (!out.includes('31/31')) {
+        throw new Error('console-loop-mui-evidence-check did not report 31/31');
+      }
+      if (out.includes('ATTESTED-ONLY')) {
+        throw new Error(
+          'console-loop-mui-evidence-check printed ATTESTED-ONLY — the MUI lane is strict; attested claims must be impossible',
+        );
+      }
+      if (!/\d+ scored-pass/.test(out) || !/\d+ fail-closed/.test(out)) {
+        throw new Error(
+          'console-loop-mui-evidence-check must report scored-pass and fail-closed counts',
+        );
+      }
+      console.log(
+        'console-loop-mui-evidence-receipt: MUI DENOMINATOR-50 stems receipted under the STRICT scorecard bar; ratchet floor holds',
+      );
+    },
+  },
+
+  ...(['tailwind', 'altitude', 'astryx', 'carbon', 'polaris'] as const).map((lib) => ({
+    // Foreign lanes are STRICT: the gate reads pixel scorecards
+    // (scores/<stem>.json, bar pctAAMasked<=5 AND compositionOk), never
+    // receipt booleans. Green means: every pass-claim is scorecard-backed and
+    // hash-pinned, honest fail-closed receipts (named defects, no claims) are
+    // counted without failing CI, and the RATCHET.json floor holds.
+    // Red-test: a synthetic receipt claiming a visual pass against a failing
+    // scorecard must fail the gate, naming the stem.
+    id: `console-loop-${lib}-evidence-receipt`,
+    claim: 'C3-detection' as const,
+    run: () => {
+      const r = spawnSync(
+        process.execPath,
+        ['scripts/console-loop-lib-evidence-check.mjs', lib],
+        { cwd: ROOT, encoding: 'utf8' },
+      );
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`console-loop-${lib}-evidence-check failed:\n${out}`);
+      }
+      if (!out.includes('stems ok')) {
+        throw new Error(`console-loop-${lib}-evidence-check did not report stems ok`);
+      }
+      if (!/\d+ scored-pass/.test(out) || !/\d+ fail-closed/.test(out)) {
+        throw new Error(
+          `console-loop-${lib}-evidence-check did not report scored-pass / fail-closed counts`,
+        );
+      }
+      if (!out.includes('ratchet floor')) {
+        throw new Error(`console-loop-${lib}-evidence-check did not report the ratchet floor check`);
+      }
+
+      // Red-test: false pass-claim (matchDeveloped:true, scorecard fail) must be refused.
+      const dir = path.join(SCRATCH, `console-loop-red-${lib}`);
+      rmSync(dir, { recursive: true, force: true });
+      const base = path.join(dir, 'parity', 'receipts', 'console-loop');
+      mkdirSync(path.join(base, lib, 'components'), { recursive: true });
+      mkdirSync(path.join(base, lib, 'scores'), { recursive: true });
+      mkdirSync(path.join(dir, 'scripts'), { recursive: true });
+      for (const f of ['console-loop-lib-evidence-check.mjs', 'console-loop-scorecard-lib.mjs']) {
+        cpSync(path.join(ROOT, 'scripts', f), path.join(dir, 'scripts', f));
+      }
+      writeFileSync(
+        path.join(base, 'RATCHET.json'),
+        `${JSON.stringify({ version: 1, floors: { [lib]: 0 } }, null, 2)}\n`,
+      );
+      writeFileSync(
+        path.join(base, lib, 'manifest.json'),
+        `${JSON.stringify({ fileKey: 'FAKEKEY', kind: `console-loop-${lib}-component`, required: ['widget'] }, null, 2)}\n`,
+      );
+      writeFileSync(
+        path.join(base, lib, 'components', 'widget.json'),
+        `${JSON.stringify(
+          {
+            version: 1,
+            kind: `console-loop-${lib}-component`,
+            status: 'completed',
+            component: 'widget',
+            fileKey: 'FAKEKEY',
+            visual: { ok: true, matchDeveloped: true, defects: [] },
+            fingerprint: { v6: 'v6:12345' },
+            roundtrip: { mismatches: [] },
+            acceptance: { screenshotReviewed: true, zeroMismatch: true, visualMatchDeveloped: true },
+          },
+          null,
+          2,
+        )}\n`,
+      );
+      writeFileSync(
+        path.join(base, lib, 'components', 'widget.md'),
+        '# widget\nFAKEKEY\nv6:12345\n',
+      );
+      writeFileSync(
+        path.join(base, lib, 'scores', 'widget.json'),
+        `${JSON.stringify(
+          {
+            version: 3,
+            status: 'fail',
+            passBar: { pctAAMaskedMax: 5, compositionOk: true },
+            metrics: { pctAAMasked: 42.5 },
+            compositionOk: false,
+          },
+          null,
+          2,
+        )}\n`,
+      );
+      const red = spawnSync(
+        process.execPath,
+        [path.join(dir, 'scripts', 'console-loop-lib-evidence-check.mjs'), lib],
+        { cwd: dir, encoding: 'utf8' },
+      );
+      const redOut = `${red.stdout ?? ''}${red.stderr ?? ''}`;
+      if ((red.status ?? 0) === 0) {
+        throw new Error(
+          `console-loop-${lib}-evidence-check accepted a false pass-claim (receipt matchDeveloped:true, scorecard fail):\n${redOut}`,
+        );
+      }
+      if (!redOut.includes('widget') || !redOut.includes('contradicts')) {
+        throw new Error(
+          `console-loop-${lib}-evidence-check refusal did not name the contradicting stem:\n${redOut}`,
+        );
+      }
+      rmSync(dir, { recursive: true, force: true });
+      console.log(
+        `console-loop-${lib}-evidence-receipt: scorecard-backed passes + honest fail-closed receipts green; false pass-claim refused by name`,
+      );
+    },
+  })),
+
+  // -------------------------------------------------------------------------
+  // CODE → CANVAS HILL-CLIMB — Wave A emit pins (FC-* failure classes).
+  // Deterministic + browser-free: createFigmaEngine over synthesized fixtures
+  // (same shape as checkbox-center). Empty/minimal token trees.
+  // -------------------------------------------------------------------------
+  {
+    id: 'code-to-canvas-wave-a-emit-pins',
+    claim: 'C3-detection',
+    run: () => {
+      const emptyTokens = { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+      const engine = createFigmaEngine({ tokens: emptyTokens, icons: new Map() });
+      const find = (s: any, name: string): any =>
+        s.name === name ? s : (s.children ?? []).map((c: any) => find(c, name)).find(Boolean);
+      const baseAnchors = { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'Fx' } };
+      const variantProp = {
+        name: 'variant', type: { enum: ['a'] }, default: 'a',
+        bindings: { figma: { kind: 'VARIANT', property: 'V' }, code: { prop: 'variant' } },
+      };
+
+      // FC-LH-RATIO — unitless ratio 1.4286 → PERCENT 142.86 (not 1.4px clip)
+      {
+        const fixture: any = {
+          id: 'fixture.lh-ratio', name: 'LhRatio', version: '0.0.0', status: 'draft',
+          description: 'Wave A FC-LH-RATIO pin', semantics: { element: 'span' },
+          props: [variantProp], states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                label: {
+                  element: 'span',
+                  text: 'Toast body',
+                  literals: { 'line-height': '1.4286', 'font-size': '14px' },
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const label = find(data.variants[0].spec, 'label');
+        if (!label) throw new Error('FC-LH-RATIO: text node missing');
+        const lh = label.lineHeight;
+        if (!lh || typeof lh !== 'object' || lh.unit !== 'PERCENT') {
+          throw new Error(`FC-LH-RATIO: expected PERCENT lineHeight, got ${JSON.stringify(lh)}`);
+        }
+        if (Math.abs(lh.value - 142.86) > 0.01) {
+          throw new Error(`FC-LH-RATIO: expected ~142.86 PERCENT, got ${lh.value}`);
+        }
+        const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+        if (!script.includes("unit === 'PERCENT'") && !script.includes('PERCENT')) {
+          throw new Error('FC-LH-RATIO: emitted runtime missing PERCENT lineHeight handling');
+        }
+      }
+
+      // FC-PLACEHOLDER — unresolved `{placeholder}` must not paint on canvas
+      {
+        const fixture: any = {
+          id: 'fixture.placeholder', name: 'PlaceholderFx', version: '0.0.0', status: 'draft',
+          description: 'Wave A FC-PLACEHOLDER pin', semantics: { element: 'div' },
+          props: [
+            variantProp,
+            {
+              name: 'placeholder', type: 'text',
+              // intentionally no default — brace form must not leak
+              bindings: { figma: { kind: 'TEXT', property: 'Placeholder' }, code: { prop: 'placeholder' } },
+            },
+          ],
+          states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                input: { element: 'input', attrs: { placeholder: '{placeholder}' } },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const input = find(data.variants[0].spec, 'input');
+        const ph = (input?.children ?? []).find((c: any) => c.name === 'placeholder');
+        if (!ph) throw new Error('FC-PLACEHOLDER: placeholder text child missing');
+        if (ph.characters === '{placeholder}' || /\{[a-z][\w-]*\}/.test(String(ph.characters ?? ''))) {
+          throw new Error(`FC-PLACEHOLDER: unresolved brace leaked onto canvas: ${JSON.stringify(ph.characters)}`);
+        }
+        if (ph.characters !== '' && ph.characters != null && String(ph.characters).includes('{')) {
+          throw new Error(`FC-PLACEHOLDER: characters still contain braces: ${JSON.stringify(ph.characters)}`);
+        }
+      }
+
+      // FC-BLOCK-ROW — display:block + layout.align without direction → VERTICAL
+      {
+        const fixture: any = {
+          id: 'fixture.block-row', name: 'BlockRow', version: '0.0.0', status: 'draft',
+          description: 'Wave A FC-BLOCK-ROW pin', semantics: { element: 'div' },
+          props: [variantProp], states: [],
+          anatomy: {
+            root: {
+              declared: { display: 'block' },
+              layout: { align: 'center' },
+              parts: {
+                label: { element: 'span', text: 'Label' },
+                field: { element: 'span', text: 'Field' },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const mode = data.variants[0].spec.layout?.mode;
+        if (mode !== 'VERTICAL') {
+          throw new Error(`FC-BLOCK-ROW: expected VERTICAL root (block stack), got ${mode} — label would sit beside field`);
+        }
+      }
+
+      // FC-SLOT-DEFAULT — optional slot Show BOOLEAN defaults false (not true)
+      {
+        const fixture: any = {
+          id: 'fixture.slot-default', name: 'SlotDefault', version: '0.0.0', status: 'draft',
+          description: 'Wave A FC-SLOT-DEFAULT pin', semantics: { element: 'div' },
+          props: [
+            variantProp,
+            {
+              name: 'body', type: 'text', default: 'Hello',
+              bindings: { figma: { kind: 'TEXT', property: 'Body' }, code: { prop: 'body' } },
+            },
+          ],
+          states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex', direction: 'row' },
+              parts: {
+                bodyText: { element: 'span', content: { prop: 'body' } },
+                end: {
+                  element: 'div',
+                  slot: { name: 'endContent' },
+                  optional: true,
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+        if (!script.includes("'BOOLEAN', false") && !script.includes('"BOOLEAN", false')) {
+          throw new Error("FC-SLOT-DEFAULT: emitted script missing BOOLEAN', false for optional Show");
+        }
+        // Show mint sites must default false — never true for optional slots
+        const showMintTrue = /Show ' \+ sl\.spec\.slotProperty,\s*'BOOLEAN',\s*true/.test(script)
+          || /'Show ' \+ s\.spec\.slotProperty,\s*'BOOLEAN',\s*true/.test(script)
+          || /mintOnce\('Show ' \+ s\.spec\.slotProperty,\s*'BOOLEAN',\s*true\)/.test(script);
+        if (showMintTrue) {
+          throw new Error('FC-SLOT-DEFAULT: optional slot Show defaults to true — dashed Slot chrome would show');
+        }
+        if (!script.includes("Show ' + sl.spec.slotProperty, 'BOOLEAN', false")
+          && !script.includes("mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false)")) {
+          throw new Error('FC-SLOT-DEFAULT: Show + BOOLEAN false mint site missing from emitted runtime');
+        }
+      }
+
+      // FC-ABS-SIZE — applyInsetOverlay keeps fixedW/H (fw != null guard)
+      {
+        const fixture: any = {
+          id: 'fixture.abs-size', name: 'AbsSize', version: '0.0.0', status: 'draft',
+          description: 'Wave A FC-ABS-SIZE pin', semantics: { element: 'span' },
+          props: [variantProp], states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                track: {
+                  element: 'span',
+                  declared: { position: 'relative' },
+                  literals: { width: '100px', height: '20px' },
+                  parts: {
+                    // absolute parent-bound overlay WITH fixed size — must emit
+                    // applyInsetOverlay + fw!=null guard (aspect-ratio → inset-0)
+                    thumb: {
+                      element: 'span',
+                      declared: { position: 'absolute', 'aspect-ratio': '1 / 1' },
+                      literals: { width: '20px', height: '20px' },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+        if (!script.includes('function applyInsetOverlay')) {
+          throw new Error('FC-ABS-SIZE: applyInsetOverlay runtime not emitted (inset overlay missing from compile)');
+        }
+        if (!script.includes('fw != null')) {
+          throw new Error('FC-ABS-SIZE: fixedWidth/fixedHeight guard (fw != null) missing from applyInsetOverlay');
+        }
+        if (!script.includes('clipsContent = false')) {
+          throw new Error('FC-ABS-SIZE: inset/absolute hosts must unclip (clipsContent = false)');
+        }
+      }
+
+      // FC-ABS-SIZE residual — display:contents parents hoist children (no
+      // clipped hug wrapper that half-cuts a fixed-size absolute thumb).
+      {
+        const fixture: any = {
+          id: 'fixture.contents-hoist', name: 'ContentsHoist', version: '0.0.0', status: 'draft',
+          description: 'Wave B.4 display:contents hoist pin', semantics: { element: 'div' },
+          props: [variantProp], states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              literals: { width: '100px', height: '20px' },
+              parts: {
+                wrapper: {
+                  element: 'div',
+                  declared: { display: 'contents' },
+                  parts: {
+                    thumb: {
+                      element: 'span',
+                      declared: { position: 'absolute' },
+                      literals: { width: '20px', height: '20px', left: '10px', top: '0px' },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const root = data.variants[0].spec;
+        const names = (root.children ?? []).map((c: any) => c.name);
+        if (names.includes('wrapper')) {
+          throw new Error('FC-ABS-SIZE contents: display:contents wrapper must be hoisted away, not emitted');
+        }
+        if (!names.includes('thumb')) {
+          throw new Error(`FC-ABS-SIZE contents: expected hoisted thumb among root children, got ${JSON.stringify(names)}`);
+        }
+      }
+
+      // FC-PSEUDO-SIZE / ELLIPSE stroke — emitted runtime must guard per-side
+      // stroke weights (ELLIPSE has strokeWeight only).
+      {
+        const fixture: any = {
+          id: 'fixture.ellipse-stroke', name: 'EllipseStroke', version: '0.0.0', status: 'draft',
+          description: 'Wave B.1 ELLIPSE strokeSides guard pin', semantics: { element: 'span' },
+          props: [
+            {
+              name: 'sizing', type: { enum: ['sm', 'md'] }, default: 'md',
+              bindings: { figma: { kind: 'VARIANT', property: 'Sizing', values: { sm: 'Sm', md: 'Md' } }, code: { prop: 'sizing' } },
+            },
+          ],
+          states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                thumb: {
+                  element: 'span',
+                  shape: { kind: 'ellipse', width: 20, height: 20 },
+                  declared: { position: 'absolute' },
+                  literals: {
+                    'background-color': 'rgba(255, 255, 255, 1)',
+                    'border-top-width': '1px',
+                    'border-right-width': '1px',
+                    'border-bottom-width': '1px',
+                    'border-left-width': '1px',
+                    'border-top-color': 'rgba(209, 213, 219, 1)',
+                    width: '20px',
+                    height: '20px',
+                    top: '2px',
+                    left: '2px',
+                  },
+                  literalsByProp: [
+                    {
+                      prop: 'sizing',
+                      map: {
+                        sm: { width: '16px', height: '16px' },
+                        md: { width: '20px', height: '20px' },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const sm = data.variants.find((v: any) => v.name.includes('Sm'));
+        const md = data.variants.find((v: any) => v.name.includes('Md'));
+        if (!sm || !md) throw new Error('FC-PSEUDO-SIZE: Sm/Md variants missing');
+        const smThumb = find(sm.spec, 'thumb');
+        const mdThumb = find(md.spec, 'thumb');
+        if (smThumb?.shape?.width !== 16 || mdThumb?.shape?.width !== 20) {
+          throw new Error(
+            `FC-PSEUDO-SIZE: expected shape widths 16/20, got ${smThumb?.shape?.width}/${mdThumb?.shape?.width}`,
+          );
+        }
+        const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+        if (!script.includes("'strokeTopWeight' in node") && !script.includes('"strokeTopWeight" in node')) {
+          throw new Error('FC-PSEUDO-SIZE: emitted runtime missing ELLIPSE strokeTopWeight guard');
+        }
+      }
+
+      // FC-PSEUDO-STROKE-GLYPH — adjacent two-side border L → ROUND polyline SVG
+      // (not a fillClear rect with strokeLeft+strokeBottom — the thin-V failure).
+      {
+        const fixture: any = {
+          id: 'fixture.l-stroke-glyph', name: 'LStrokeGlyph', version: '0.0.0', status: 'draft',
+          description: 'Wave B FC-PSEUDO-STROKE-GLYPH pin', semantics: { element: 'span' },
+          props: [variantProp],
+          states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                box: {
+                  element: 'span',
+                  shape: { kind: 'rect', width: 16, height: 16 },
+                  declared: { position: 'absolute' },
+                  literals: {
+                    'background-color': 'rgba(22, 22, 22, 1)',
+                    width: '16px',
+                    height: '16px',
+                    top: '2px',
+                    left: '0px',
+                  },
+                },
+                mark: {
+                  element: 'span',
+                  shape: { kind: 'rect', width: 10, height: 6 },
+                  declared: { position: 'absolute' },
+                  literals: {
+                    'background-color': 'transparent',
+                    'border-top-width': '0px',
+                    'border-right-width': '0px',
+                    'border-bottom-width': '2px',
+                    'border-left-width': '2px',
+                    'border-bottom-color': 'rgba(255, 255, 255, 1)',
+                    'border-left-color': 'rgba(255, 255, 255, 1)',
+                    width: '10px',
+                    height: '6px',
+                    top: '4px',
+                    left: '7px',
+                  },
+                  stylesWhen: [
+                    {
+                      prop: 'variant',
+                      equals: 'a',
+                      styles: {
+                        position: 'absolute',
+                        top: '4px',
+                        left: '7px',
+                        transform: 'rotate(-45deg)',
+                      },
+                    },
+                  ],
+                },
+                bar: {
+                  element: 'span',
+                  shape: { kind: 'rect', width: 8, height: 5 },
+                  declared: { position: 'absolute' },
+                  literals: {
+                    'background-color': 'transparent',
+                    'border-top-width': '0px',
+                    'border-right-width': '0px',
+                    'border-bottom-width': '2px',
+                    'border-left-width': '0px',
+                    'border-bottom-color': 'rgba(255, 255, 255, 1)',
+                    width: '8px',
+                    height: '5px',
+                    top: '8px',
+                    left: '4px',
+                  },
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const mark = find(data.variants[0].spec, 'mark');
+        if (!mark) throw new Error('FC-PSEUDO-STROKE-GLYPH: mark missing');
+        if (!mark.svg || !String(mark.svg).includes('polyline')) {
+          throw new Error(`FC-PSEUDO-STROKE-GLYPH: expected polyline SVG, got ${JSON.stringify(mark.svg)?.slice(0, 120)}`);
+        }
+        if (!String(mark.svg).includes('stroke-linecap="round"')) {
+          throw new Error('FC-PSEUDO-STROKE-GLYPH: polyline missing ROUND stroke-linecap');
+        }
+        if (mark.lits?.strokeSides) {
+          throw new Error('FC-PSEUDO-STROKE-GLYPH: strokeSides should be cleared after L→SVG collapse');
+        }
+        if (mark.shape?.rotation !== -45) {
+          throw new Error(`FC-PSEUDO-STROKE-GLYPH: expected rotation -45, got ${mark.shape?.rotation}`);
+        }
+        // Host-centering: left:7 in a 16×16 box at (0,2) → center on (8,10) →
+        // left=3 top=7, then -45° optical nudge top -= min(10,6)*0.2 = 1.2 → 5.8
+        if (mark.absolute?.left !== 3 || Math.abs((mark.absolute?.top ?? 0) - 5.8) > 0.01) {
+          throw new Error(
+            `FC-PSEUDO-STROKE-GLYPH: expected host-centered absolute (3,5.8), got (${mark.absolute?.left},${mark.absolute?.top})`,
+          );
+        }
+        if (/points="[^"]*,0 |points="0,/.test(String(mark.svg))) {
+          throw new Error('FC-PSEUDO-STROKE-GLYPH: polyline endpoints must be inset so ROUND caps stay in viewBox');
+        }
+        const bar = find(data.variants[0].spec, 'bar');
+        if (!bar) throw new Error('FC-PSEUDO-STROKE-GLYPH: single-side bar control missing');
+        if (bar.svg) throw new Error('FC-PSEUDO-STROKE-GLYPH: single-side bar must NOT become SVG polyline');
+        if (!bar.lits?.fillColor || bar.lits.height !== 2) {
+          throw new Error(
+            `FC-PSEUDO-STROKE-GLYPH: single-side control should stay filled-bar collapse, got height=${bar.lits?.height} fill=${!!bar.lits?.fillColor}`,
+          );
+        }
+        const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+        if (!script.includes('createNodeFromSvg(spec.svg)')) {
+          throw new Error('FC-PSEUDO-STROKE-GLYPH: shapeRuntime missing createNodeFromSvg(spec.svg) path');
+        }
+      }
+
+      // FC-MISSING-AXIS residual — literalsByProp on VARIANT-bound boolean
+      // (Astryx Switch On thumb: true → 20×20 @ left 18).
+      {
+        const fixture: any = {
+          id: 'fixture.variant-bool-lbp', name: 'VariantBoolLbp', version: '0.0.0', status: 'draft',
+          description: 'Wave B literalsByProp on VARIANT-bound boolean', semantics: { element: 'div' },
+          props: [
+            {
+              name: 'value', type: 'boolean', default: false,
+              bindings: {
+                figma: { kind: 'VARIANT', property: 'Value', values: { false: 'Off', true: 'On' } },
+                code: { prop: 'value' },
+              },
+            },
+          ],
+          states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                thumb: {
+                  element: 'span',
+                  declared: { position: 'absolute' },
+                  literals: { width: '16px', height: '16px', left: '4px', top: '4px' },
+                  literalsByProp: [
+                    {
+                      prop: 'value',
+                      map: {
+                        false: { width: '16px', height: '16px', left: '4px', top: '4px' },
+                        true: { width: '20px', height: '20px', left: '18px', top: '2px' },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const on = data.variants.find((v: any) => /Value=On/.test(v.name));
+        const off = data.variants.find((v: any) => /Value=Off/.test(v.name));
+        if (!on || !off) throw new Error('FC-VARIANT-BOOL-LBP: Off/On variants missing');
+        const onThumb = find(on.spec, 'thumb');
+        const offThumb = find(off.spec, 'thumb');
+        if (offThumb?.absolute?.left !== 4 || offThumb?.lits?.width !== 16) {
+          throw new Error(`FC-VARIANT-BOOL-LBP: Off expected 16@4, got w=${offThumb?.lits?.width} left=${offThumb?.absolute?.left}`);
+        }
+        if (onThumb?.absolute?.left !== 18 || onThumb?.lits?.width !== 20) {
+          throw new Error(`FC-VARIANT-BOOL-LBP: On expected 20@18, got w=${onThumb?.lits?.width} left=${onThumb?.absolute?.left}`);
+        }
+      }
+
+      // FC-CARBON-TABS-LABEL — tab labels HUG full strings; no textTruncation
+      {
+        const carbonTokens = {
+          primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon.dtcg.json'), 'utf8')),
+          semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon-minted.dtcg.json'), 'utf8')),
+          light: {},
+          dark: {},
+          brands: { default: {} },
+        };
+        const carbonIcons = new Map<string, string>();
+        const carbonIconsDir = path.join(ROOT, 'examples/carbon/assets/icons');
+        if (existsSync(carbonIconsDir)) {
+          for (const f of readdirSync(carbonIconsDir)) {
+            if (f.endsWith('.svg')) {
+              carbonIcons.set(f.replace(/\.svg$/, ''), readFileSync(path.join(carbonIconsDir, f), 'utf8').trim());
+            }
+          }
+        }
+        const carbonEngine = createFigmaEngine({ tokens: carbonTokens, icons: carbonIcons });
+        const tabsPath = path.join(ROOT, 'examples/carbon/contracts/tabs.contract.json');
+        const tabsContract = ContractSchema.parse(JSON.parse(readFileSync(tabsPath, 'utf8')));
+        const tabsById = new Map([[tabsContract.id, tabsContract]]);
+        const tabsData = carbonEngine.compileComponentData(tabsContract, tabsById);
+        const tabsScript = carbonEngine.buildComponentScript(tabsContract, tabsById);
+        const walkSpecs = (s: any, fn: (n: any) => void) => {
+          fn(s);
+          for (const c of s.children ?? []) walkSpecs(c, fn);
+        };
+        const textNodes: any[] = [];
+        for (const v of [...tabsData.variants, ...(tabsData.stateVariants ?? [])]) {
+          walkSpecs(v.spec, (n) => { if (n.type === 'text') textNodes.push(n); });
+        }
+        if (textNodes.length === 0) throw new Error('FC-CARBON-TABS-LABEL: no text nodes in carbon.tabs emit');
+        for (const t of textNodes) {
+          if (t.textTruncation) {
+            throw new Error(`FC-CARBON-TABS-LABEL: textTruncation on ${t.name} — labels must not truncate`);
+          }
+          if (t.fillW) {
+            throw new Error(`FC-CARBON-TABS-LABEL: fillW on ${t.name} — labels must HUG without truncation`);
+          }
+          if (typeof t.characters === 'string' && t.characters.length <= 5 && /^(Overv|Activ|Setti)$/.test(t.characters)) {
+            throw new Error(`FC-CARBON-TABS-LABEL: clipped label characters ${JSON.stringify(t.characters)}`);
+          }
+        }
+        const fullLabels = textNodes.filter((t) => /^(Overview|Activity|Settings)$/.test(String(t.characters ?? '')));
+        if (fullLabels.length < 3) {
+          throw new Error(`FC-CARBON-TABS-LABEL: expected Overview/Activity/Settings labels, got ${textNodes.map((t) => t.characters).join(', ')}`);
+        }
+        for (const name of ['tabs__nav-item-label-wrapper', 'tabs__nav-item-label-wrapper-2', 'tabs__nav-item-label-wrapper-3']) {
+          const wrap = find(tabsData.variants[0].spec, name);
+          if (wrap?.fixedWidth) {
+            throw new Error(`FC-CARBON-TABS-LABEL: ${name} still has fixedWidth ${wrap.fixedWidth.px}px — wrapper must HUG text`);
+          }
+        }
+        if (tabsScript.includes('textTruncation') && /textTruncation:\s*true/.test(tabsScript)) {
+          throw new Error('FC-CARBON-TABS-LABEL: emitted script carries textTruncation:true on tab labels');
+        }
+        // FC-FIGMA-CLIP-DEFAULT — frames unclip unless clipsContent:true
+        if (!/clipsContent = spec\.clipsContent === true/.test(tabsScript) && !/node\.clipsContent = spec\.clipsContent === true/.test(tabsScript)) {
+          throw new Error('FC-FIGMA-CLIP-DEFAULT: applyFrameSpec must set clipsContent from spec (default false)');
+        }
+        if (!tabsScript.includes('wrap.clipsContent = false')) {
+          throw new Error('FC-FIGMA-CLIP-DEFAULT: text wrappers must set clipsContent = false');
+        }
+        if (!tabsScript.includes('RUNTIME_EMIT_REV')) {
+          throw new Error('FC-FIGMA-CLIP-DEFAULT: RUNTIME_EMIT_REV must salt specHash so runtime-only fixes force amend');
+        }
+      }
+
+      // FC-ASTRYX-SLIDER-TOOLTIP — Value Display=Tooltip restores the bubble
+      {
+        const astryxTokens = {
+          primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/astryx/tokens/astryx-docs.dtcg.json'), 'utf8')),
+          semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/astryx/tokens/astryx-minted.dtcg.json'), 'utf8')),
+          light: {},
+          dark: {},
+          brands: { default: {} },
+        };
+        const astryxEngine = createFigmaEngine({ tokens: astryxTokens, icons: new Map() });
+        const sliderPath = path.join(ROOT, 'examples/astryx/contracts/slider.contract.json');
+        const sliderContract = ContractSchema.parse(JSON.parse(readFileSync(sliderPath, 'utf8')));
+        const sliderById = new Map([[sliderContract.id, sliderContract]]);
+        const sliderData = astryxEngine.compileComponentData(sliderContract, sliderById);
+        const tipVar = sliderData.variants.find((v: any) => /Value Display=Tooltip/.test(v.name));
+        const noneVar = sliderData.variants.find((v: any) => /Value Display=None/.test(v.name));
+        const textV = sliderData.variants.find((v: any) => /Orientation=Vertical, Value Display=Text/.test(v.name));
+        if (!tipVar || !noneVar) throw new Error('FC-ASTRYX-SLIDER-TOOLTIP: Tooltip/None variants missing');
+        const hasTip = (s: any): boolean => {
+          if (s.name === 'tooltip') return true;
+          return (s.children ?? []).some(hasTip);
+        };
+        if (!hasTip(tipVar.spec)) {
+          throw new Error('FC-ASTRYX-SLIDER-TOOLTIP: tooltip part missing on Tooltip variant — need stylesWhen display restore');
+        }
+        if (hasTip(noneVar.spec)) {
+          throw new Error('FC-ASTRYX-SLIDER-TOOLTIP: tooltip must stay omitted on None');
+        }
+        const findAbs = (s: any, name: string): any => {
+          if (s.name === name) return s;
+          for (const c of s.children ?? []) {
+            const hit = findAbs(c, name);
+            if (hit) return hit;
+          }
+          return null;
+        };
+        const vLabel = textV && findAbs(textV.spec, 'label-3');
+        if (!vLabel?.absolute || vLabel.absolute.top !== 86) {
+          throw new Error(
+            `FC-ASTRYX-SLIDER-TOOLTIP: vertical Text label-3 must pin beside thumb (top=86), got ${JSON.stringify(vLabel?.absolute)}`,
+          );
+        }
+      }
+
+      // FC-SVG-VIEWBOX — elliptical-arc radii must not inflate viewBox
+      {
+        const d =
+          'M 10 3.5 A 449.26 449.26 0 0 1 5.843 8.794 L 16.1 15.316 A 429.497 429.497 0 0 1 12.152 4.947 Z';
+        const extent = pathDataExtent(d);
+        if (extent > 40) {
+          throw new Error(`FC-SVG-VIEWBOX: pathDataExtent leaked arc radii (got ${extent})`);
+        }
+        const warnSvg = readFileSync(
+          path.join(ROOT, 'examples/polaris/assets/icons/banner-icon-warning.svg'),
+          'utf8',
+        );
+        if (!/viewBox="0 0 20 20"/.test(warnSvg)) {
+          throw new Error('FC-SVG-VIEWBOX: banner-icon-warning.svg must be viewBox 0 0 20 20');
+        }
+        const polarisIcons = new Map<string, string>();
+        const polarisIconsDir = path.join(ROOT, 'examples/polaris/assets/icons');
+        if (existsSync(polarisIconsDir)) {
+          for (const f of readdirSync(polarisIconsDir)) {
+            if (f.endsWith('.svg')) {
+              polarisIcons.set(f.replace(/\.svg$/, ''), readFileSync(path.join(polarisIconsDir, f), 'utf8').trim());
+            }
+          }
+        }
+        const polarisTokens = {
+          primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/tokens/polaris-light.dtcg.json'), 'utf8')),
+          semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/tokens/polaris-minted.dtcg.json'), 'utf8')),
+          light: {},
+          dark: {},
+          brands: { default: {} },
+        };
+        const bannerEngine = createFigmaEngine({ tokens: polarisTokens, icons: polarisIcons });
+        const bannerContract = ContractSchema.parse(
+          JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/banner.contract.json'), 'utf8')),
+        );
+        const bannerScript = bannerEngine.buildComponentScript(
+          bannerContract,
+          new Map([[bannerContract.id, bannerContract]]),
+          undefined,
+        );
+        if (/banner-icon-warning[\s\S]{0,200}viewBox=\\"0 0 450 450\\"/.test(bannerScript) || /viewBox=\\"0 0 450 450\\"[\s\S]{0,80}449\.26/.test(bannerScript)) {
+          throw new Error('FC-SVG-VIEWBOX: banner emit still embeds 450×450 warning glyph');
+        }
+        if (!bannerScript.includes('viewBox=\\"0 0 20 20\\"') && !bannerScript.includes('viewBox="0 0 20 20"')) {
+          // warning asset must appear with 20×20 — at least one 20 viewBox in script
+          throw new Error('FC-SVG-VIEWBOX: banner emit missing 20×20 viewBox (warning icon)');
+        }
+      }
+
+      // FC-FLEX-BASIS / modal footer grow
+      {
+        const carbonTokens = {
+          primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon.dtcg.json'), 'utf8')),
+          semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon-minted.dtcg.json'), 'utf8')),
+          light: {},
+          dark: {},
+          brands: { default: {} },
+        };
+        const carbonIcons = new Map<string, string>();
+        const carbonIconsDir = path.join(ROOT, 'examples/carbon/assets/icons');
+        if (existsSync(carbonIconsDir)) {
+          for (const f of readdirSync(carbonIconsDir)) {
+            if (f.endsWith('.svg')) {
+              carbonIcons.set(f.replace(/\.svg$/, ''), readFileSync(path.join(carbonIconsDir, f), 'utf8').trim());
+            }
+          }
+        }
+        const carbonEngine = createFigmaEngine({ tokens: carbonTokens, icons: carbonIcons });
+        const modalContract = ContractSchema.parse(
+          JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/contracts/modal.contract.json'), 'utf8')),
+        );
+        const modalData = carbonEngine.compileComponentData(
+          modalContract,
+          new Map([[modalContract.id, modalContract]]),
+        );
+        const find = (s: any, name: string): any => {
+          if (s.name === name) return s;
+          for (const c of s.children ?? []) {
+            const hit = find(c, name);
+            if (hit) return hit;
+          }
+          return null;
+        };
+        const btn6 = find(modalData.variants[0].spec, 'label-6');
+        const btn7 = find(modalData.variants[0].spec, 'label-7');
+        if (!btn6?.grow && !btn6?.fillW) {
+          throw new Error('FC-FLEX-BASIS: modal Cancel (label-6) must grow/fillW for 50/50 footer');
+        }
+        if (!btn7?.grow && !btn7?.fillW) {
+          throw new Error('FC-FLEX-BASIS: modal Save (label-7) must grow/fillW for 50/50 footer');
+        }
+      }
+
+      // FC-SVG-ROTATION — declared transform rotate on icon → spec.rotation
+      {
+        const spinnerContract = ContractSchema.parse(
+          JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/spinner.contract.json'), 'utf8')),
+        );
+        const polarisIcons = (() => {
+          const m = new Map<string, string>();
+          const dir = path.join(ROOT, 'examples/polaris/assets/icons');
+          if (existsSync(dir)) {
+            for (const f of readdirSync(dir)) {
+              if (f.endsWith('.svg')) m.set(f.replace(/\.svg$/, ''), readFileSync(path.join(dir, f), 'utf8').trim());
+            }
+          }
+          return m;
+        })();
+        const spinnerEngine = createFigmaEngine({
+          tokens: {
+            primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/tokens/polaris-light.dtcg.json'), 'utf8')),
+            semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/tokens/polaris-minted.dtcg.json'), 'utf8')),
+            light: {},
+            dark: {},
+            brands: { default: {} },
+          },
+          icons: polarisIcons,
+        });
+        const spinnerData = spinnerEngine.compileComponentData(
+          spinnerContract,
+          new Map([[spinnerContract.id, spinnerContract]]),
+        );
+        const findRot = (s: any): any => {
+          if (s.type === 'svg' && typeof s.rotation === 'number') return s;
+          for (const c of s.children ?? []) {
+            const hit = findRot(c);
+            if (hit) return hit;
+          }
+          return null;
+        };
+        const rotated = findRot(spinnerData.variants[0].spec);
+        if (!rotated || rotated.rotation !== 90) {
+          throw new Error('FC-SVG-ROTATION: spinner icon must compile rotation: 90 (CSS clockwise)');
+        }
+        const spinnerScript = spinnerEngine.buildComponentScript(
+          spinnerContract,
+          new Map([[spinnerContract.id, spinnerContract]]),
+          undefined,
+        );
+        // The rev moved rt4-svg-rotation → rt5-text-fill-alignment at the
+        // landing round (FC-TEXT-FILL-ALIGNMENT runtime guard change); the
+        // rotation lowering itself is still pinned by spec.rotation above,
+        // and the salt requirement is pinned against the CURRENT rev.
+        if (!spinnerScript.includes('spec.rotation') || !spinnerScript.includes('rt5-text-fill-alignment')) {
+          throw new Error('FC-SVG-ROTATION: runtime must apply spec.rotation and salt RUNTIME_EMIT_REV');
+        }
+      }
+
+      // FC-WIDTH-TOKEN — text-field showcase width (not hug "Example")
+      {
+        const tfRaw = readFileSync(path.join(ROOT, 'examples/polaris/contracts/text-field.contract.json'), 'utf8');
+        if (!tfRaw.includes('imported.text-field.connected.width.off.off')) {
+          throw new Error('FC-WIDTH-TOKEN: text-field contract must bind connected.width.off.off');
+        }
+        const tfScriptPath = path.join(ROOT, 'examples/polaris/figma/text-field.figma.js');
+        if (existsSync(tfScriptPath)) {
+          const tfScript = readFileSync(tfScriptPath, 'utf8');
+          if (!/"px":\s*211/.test(tfScript) && !/"px":211/.test(tfScript)) {
+            throw new Error('FC-WIDTH-TOKEN: text-field emit must include fixedWidth ~211px');
+          }
+        }
+      }
+
+      // FC-PSEUDO-OVERFLOW — inline-notification must not emit fixed 425px red root-before
+      {
+        const inlPath = path.join(ROOT, 'examples/carbon/contracts/inlinenotification.contract.json');
+        const inlRaw = readFileSync(inlPath, 'utf8');
+        if (inlRaw.includes('root-before') || inlRaw.includes('425')) {
+          throw new Error('FC-PSEUDO-OVERFLOW: inline-notification must drop overflow root-before (425px red spur)');
+        }
+        if (!inlRaw.includes('border-top-width.{contrast}')) {
+          throw new Error('FC-PSEUDO-OVERFLOW: low-contrast box border must bind border-*-width.{contrast}');
+        }
+        const inlScriptPath = path.join(ROOT, 'examples/carbon/figma/inline-notification.figma.js');
+        if (existsSync(inlScriptPath)) {
+          const inlScript = readFileSync(inlScriptPath, 'utf8');
+          if (inlScript.includes('"name": "root-before"') || /"width":\s*425/.test(inlScript)) {
+            throw new Error('FC-PSEUDO-OVERFLOW: emit still contains root-before / 425px decor');
+          }
+        }
+      }
+
+      // FC-ENUM-HOLE — altitude chip Type must include Default (pill), not Squared-only
+      {
+        const chip = JSON.parse(
+          readFileSync(path.join(ROOT, 'examples/altitude/contracts/chip.contract.json'), 'utf8'),
+        ) as { props?: Array<{ name: string; type?: { enum?: string[] } }> };
+        const typeProp = chip.props?.find((p) => p.name === 'type');
+        if (!typeProp?.type?.enum?.includes('default') || !typeProp.type.enum.includes('squared')) {
+          throw new Error('FC-ENUM-HOLE: altitude.chip type must enum [default, squared] (pill + squared)');
+        }
+        if (typeProp.type.enum.includes('unset')) {
+          throw new Error('FC-ENUM-HOLE: altitude.chip must not use capture-side unset as enum value');
+        }
+        const chipScriptPath = path.join(ROOT, 'examples/altitude/figma/chip.figma.js');
+        if (existsSync(chipScriptPath)) {
+          const chipScript = readFileSync(chipScriptPath, 'utf8');
+          if (!/Type=Default/.test(chipScript) || !/Type=Squared/.test(chipScript)) {
+            throw new Error('FC-ENUM-HOLE: chip emit must include Type=Default and Type=Squared variants');
+          }
+          if (!chipScript.includes('border-top-left-radius/unset')) {
+            throw new Error('FC-ENUM-HOLE: chip Default must bind pill radius token (.../unset)');
+          }
+          if (!chipScript.includes('border-top-left-radius/squared')) {
+            throw new Error('FC-ENUM-HOLE: chip Squared must bind squared radius token');
+          }
+        }
+      }
+
+      // FC-CONTRAST-ICON — high-contrast close glyph uses inverse/white paint
+      {
+        const inlContract = ContractSchema.parse(
+          JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/contracts/inlinenotification.contract.json'), 'utf8')),
+        );
+        const inlEngine = createFigmaEngine({
+          tokens: {
+            primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon.dtcg.json'), 'utf8')),
+            semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon-minted.dtcg.json'), 'utf8')),
+            light: {},
+            dark: {},
+            brands: { default: {} },
+          },
+          icons: (() => {
+            const m = new Map<string, string>();
+            const dir = path.join(ROOT, 'examples/carbon/assets/icons');
+            if (existsSync(dir)) {
+              for (const f of readdirSync(dir)) {
+                if (f.endsWith('.svg')) m.set(f.replace(/\.svg$/, ''), readFileSync(path.join(dir, f), 'utf8').trim());
+              }
+            }
+            return m;
+          })(),
+        });
+        const inlData = inlEngine.compileComponentData(
+          inlContract,
+          new Map([[inlContract.id, inlContract]]),
+        );
+        const high = inlData.variants.find((v: any) => /Contrast=High/i.test(v.name) || /contrast.*high/i.test(v.name));
+        const low = inlData.variants.find((v: any) => /Contrast=Low/i.test(v.name) || /contrast.*low/i.test(v.name));
+        const findClosePaint = (s: any): string | null => {
+          if (s.name?.includes('close-button') && s.svgPaintVar) return s.svgPaintVar;
+          for (const c of s.children ?? []) {
+            const hit = findClosePaint(c);
+            if (hit) return hit;
+          }
+          return null;
+        };
+        const highPaint = high ? findClosePaint(high.spec) : null;
+        const lowPaint = low ? findClosePaint(low.spec) : null;
+        if (!highPaint || !/color\/high/.test(highPaint)) {
+          throw new Error(`FC-CONTRAST-ICON: high-contrast close svgPaintVar must end color/high (got ${highPaint})`);
+        }
+        if (!lowPaint || !/color\/low/.test(lowPaint)) {
+          throw new Error(`FC-CONTRAST-ICON: low-contrast close svgPaintVar must end color/low (got ${lowPaint})`);
+        }
+      }
+
+      // FC-STATE-PREVIEW-NOISE — altitude chip Default-only canvas (no Focus Visible grid)
+      {
+        const chip = JSON.parse(
+          readFileSync(path.join(ROOT, 'examples/altitude/contracts/chip.contract.json'), 'utf8'),
+        ) as { figmaStatePreviews?: boolean };
+        if (chip.figmaStatePreviews) {
+          throw new Error('FC-STATE-PREVIEW-NOISE: altitude.chip figmaStatePreviews must be false (focus blue rings clutter showcase)');
+        }
+        const chipScriptPath = path.join(ROOT, 'examples/altitude/figma/chip.figma.js');
+        if (existsSync(chipScriptPath)) {
+          const chipScript = readFileSync(chipScriptPath, 'utf8');
+          // Measure the payload, not the runtime prose: every emitted script
+          // carries the amend-cleanup runtime whose COMMENT names the
+          // "State=Focus Visible" leftovers it removes — that string is not a
+          // variant. A real preview variant lands as a quoted node NAME in the
+          // COMPONENTS payload ("Variant=…, State=Focus Visible"), which is
+          // what this pin forbids when figmaStatePreviews is off.
+          if (/"name": "[^"]*State=Focus Visible/.test(chipScript)) {
+            throw new Error('FC-STATE-PREVIEW-NOISE: chip emit must not include Focus Visible variants');
+          }
+        }
+      }
+
+      console.log(
+        'code-to-canvas-wave-a-emit-pins: FC-LH-RATIO PERCENT, FC-PLACEHOLDER empty, FC-BLOCK-ROW VERTICAL, FC-SLOT-DEFAULT Show=false, FC-ABS-SIZE fw!=null, FC-PSEUDO-SIZE ellipse stroke, FC-PSEUDO-STROKE-GLYPH L→SVG, FC-VARIANT-BOOL-LBP, FC-CARBON-TABS-LABEL, FC-FIGMA-CLIP-DEFAULT, FC-ASTRYX-SLIDER-TOOLTIP, FC-SVG-VIEWBOX, FC-FLEX-BASIS, FC-SVG-ROTATION, FC-WIDTH-TOKEN, FC-CONTRAST-ICON, FC-ENUM-HOLE chip, FC-PSEUDO-OVERFLOW, FC-STATE-PREVIEW-NOISE — all green',
+      );
+    },
+  },
+
+  {
+    // Trap corpus structural gate — contracts/scripts/refs + emit markers.
+    // Does NOT require matchDeveloped / pixel scores (those stay warn/pending).
+    id: 'trap-corpus-check',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(process.execPath, ['scripts/trap-corpus-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`trap-corpus-check failed:\n${out}`);
+      }
+      if (!out.includes('trap-corpus-check')) {
+        throw new Error('trap-corpus-check did not print summary');
+      }
+      console.log('trap-corpus-check: frozen adversarial stems structural/compile markers green');
     },
   },
 ];

@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "badge",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/badge.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "84:2376",
+  "cellNodeId": "84:1941",
+  "cellName": "Color=Default, Variant=Dot",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 62,
+    "pctAAUnmasked": 54.625,
+    "pctAAMasked": 54.625,
+    "maskCoveragePct": 0,
+    "canvasPx": "40x20",
+    "realPx": "20x20",
+    "inkCanvasPct": 95.75,
+    "inkRealPct": 50
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/badge.png",
+  "referenceSha256": "858992e89922a72b05acde916b39989b570e6d4d2431656f6a163eb94021899c",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/badge.png",
+  "canvasShotSha256": "360d4c052cece40cbd3dec66d423aef3d1cc1752b922472b5f02aaebe955b737",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/badge.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 2,
+  "inkDelta": 45.75,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=2.00, inkDelta=45.8)"
+}

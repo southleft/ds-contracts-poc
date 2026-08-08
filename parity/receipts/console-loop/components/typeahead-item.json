@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "typeahead-item",
+  "contract": "contracts/typeahead-item.contract.json",
+  "script": "parity/receipts/console-loop/emitted/50-typeaheaditem.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:06.447Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1498",
+    "page": "TypeaheadItem",
+    "sectionId": "1:1505",
+    "result": {
+      "createdNodeIds": [
+        "1:1498"
+      ],
+      "results": [
+        {
+          "name": "TypeaheadItem",
+          "contractId": "ds.typeahead-item",
+          "nodeId": "1:1498",
+          "key": "9cf85bee8ebfa18cfd4e4c6be75c0f2d531a46e4",
+          "variants": 1,
+          "properties": [
+            "Label#1:581",
+            "Description#1:582",
+            "Icon#1:583",
+            "Show Icon#1:584"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1505 captured (ok).",
+      "TypeaheadItem: 1 variant(s); type COMPONENT; page TypeaheadItem.",
+      "Props: Label, Description, Icon, Show Icon.",
+      "First root fill bound to color/surface/raised.",
+      "Sample text: \"Slot\", \"Search result\", \"Supporting detail about this result.\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:599440583",
+    "lineCount": 45,
+    "sampleLines": [
+      ":COMPONENT/TypeaheadItem|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/surface/raised\"}}}]",
+      ":COMPONENT/TypeaheadItem|radius|4,4,4,4",
+      ":COMPONENT/TypeaheadItem|layout|HORIZONTAL MIN/CENTER gap 8 pad 8,12,8,12",
+      ":COMPONENT/TypeaheadItem|sizing|FIXED/HUG AUTO",
+      ":COMPONENT/TypeaheadItem|bound:bottomLeftRadius|radius/100",
+      ":COMPONENT/TypeaheadItem|bound:bottomRightRadius|radius/100",
+      ":COMPONENT/TypeaheadItem|bound:itemSpacing|space/gap/sm",
+      ":COMPONENT/TypeaheadItem|bound:paddingBottom|space/inset-y/md",
+      ":COMPONENT/TypeaheadItem|bound:paddingLeft|space/inset-x/sm",
+      ":COMPONENT/TypeaheadItem|bound:paddingRight|space/inset-x/sm",
+      ":COMPONENT/TypeaheadItem|bound:paddingTop|space/inset-y/md",
+      ":COMPONENT/TypeaheadItem|bound:topLeftRadius|radius/100",
+      ":COMPONENT/TypeaheadItem|bound:topRightRadius|radius/100",
+      ":COMPONENT/TypeaheadItem|bound:width|size/card/width",
+      ":COMPONENT/TypeaheadItem|description|TypeaheadItem — generated from contract ds.typeahead-item v1.0.0",
+      ":COMPONENT/TypeaheadItem|propdef|Description#1:582:TEXT=Supporting detail about this result.",
+      ":COMPONENT/TypeaheadItem|propdef|Icon#1:583:INSTANCE_SWAP=1:347",
+      ":COMPONENT/TypeaheadItem|propdef|Label#1:581:TEXT=Search result",
+      ":COMPONENT/TypeaheadItem|propdef|Show Icon#1:584:BOOLEAN=true",
+      "/0:FRAME/iconSlot|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Label",
+      "Description"
+    ],
+    "observed": {
+      "variantNames": [
+        "TypeaheadItem"
+      ],
+      "propDefs": [
+        {
+          "name": "Label#1:581",
+          "type": "TEXT",
+          "defaultValue": "Search result",
+          "variantOptions": null
+        },
+        {
+          "name": "Description#1:582",
+          "type": "TEXT",
+          "defaultValue": "Supporting detail about this result.",
+          "variantOptions": null
+        },
+        {
+          "name": "Icon#1:583",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Icon#1:584",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "TypeaheadItem",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 12,
+          "b": 8,
+          "l": 12
+        },
+        "radius": 4,
+        "fillVarName": "color/surface/raised",
+        "padBound": {
+          "itemSpacing": "space/gap/sm",
+          "paddingLeft": "space/inset-x/sm",
+          "paddingTop": "space/inset-y/md",
+          "paddingRight": "space/inset-x/sm",
+          "paddingBottom": "space/inset-y/md",
+          "width": "size/card/width",
+          "topLeftRadius": "radius/100",
+          "topRightRadius": "radius/100",
+          "bottomLeftRadius": "radius/100",
+          "bottomRightRadius": "radius/100",
+          "fills": "color/surface/raised"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "labelText",
+            "chars": "Search result",
+            "fontSize": 14
+          },
+          {
+            "name": "descriptionText",
+            "chars": "Supporting detail about this result.",
+            "fontSize": 14
+          }
+        ],
+        "w": 320,
+        "h": 116,
+        "childNames": [
+          "iconSlot:FRAME",
+          "textCol:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

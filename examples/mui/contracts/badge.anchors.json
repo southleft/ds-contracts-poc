@@ -1,0 +1,206 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "badge",
+  "anchors": [
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.background-color.error",
+      "token": "palette-error-main",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-error-main",
+      "selector": ".css-1xuqpsr-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.background-color.info",
+      "token": "palette-info-main",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-info-main",
+      "selector": ".css-1v8dr38-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.background-color.primary",
+      "token": "palette-primary-main",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-104rrlu-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.background-color.secondary",
+      "token": "palette-secondary-main",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-1v5avu0-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.background-color.success",
+      "token": "palette-success-main",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-success-main",
+      "selector": ".css-137quj8-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.background-color.warning",
+      "token": "palette-warning-main",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-warning-main",
+      "selector": ".css-1jn4y8l-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.color.error",
+      "token": "palette-error-contrast-text",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "color",
+      "varName": "--mui-palette-error-contrastText",
+      "selector": ".css-1xuqpsr-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.color.info",
+      "token": "palette-info-contrast-text",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "color",
+      "varName": "--mui-palette-info-contrastText",
+      "selector": ".css-1v8dr38-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.color.primary",
+      "token": "palette-primary-contrast-text",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-contrastText",
+      "selector": ".css-104rrlu-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.color.secondary",
+      "token": "palette-secondary-contrast-text",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-contrastText",
+      "selector": ".css-1v5avu0-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.color.success",
+      "token": "palette-success-contrast-text",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "color",
+      "varName": "--mui-palette-success-contrastText",
+      "selector": ".css-137quj8-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.badge-anchororigintopright.color.warning",
+      "token": "palette-warning-contrast-text",
+      "part": "badge-anchororigintopright",
+      "cssProperty": "color",
+      "varName": "--mui-palette-warning-contrastText",
+      "selector": ".css-1jn4y8l-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.background-color.error",
+      "token": "palette-error-main",
+      "part": "label-2",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-error-main",
+      "selector": ".css-1k83qqc-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.background-color.info",
+      "token": "palette-info-main",
+      "part": "label-2",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-info-main",
+      "selector": ".css-1utnimt-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.background-color.primary",
+      "token": "palette-primary-main",
+      "part": "label-2",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-1aqfz6p-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.background-color.secondary",
+      "token": "palette-secondary-main",
+      "part": "label-2",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-ffwtai-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.background-color.success",
+      "token": "palette-success-main",
+      "part": "label-2",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-success-main",
+      "selector": ".css-193sk91-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.background-color.warning",
+      "token": "palette-warning-main",
+      "part": "label-2",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-warning-main",
+      "selector": ".css-vcuyf0-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.color.error",
+      "token": "palette-error-contrast-text",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--mui-palette-error-contrastText",
+      "selector": ".css-1k83qqc-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.color.info",
+      "token": "palette-info-contrast-text",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--mui-palette-info-contrastText",
+      "selector": ".css-1utnimt-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.color.primary",
+      "token": "palette-primary-contrast-text",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-contrastText",
+      "selector": ".css-1aqfz6p-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.color.secondary",
+      "token": "palette-secondary-contrast-text",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-contrastText",
+      "selector": ".css-ffwtai-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.color.success",
+      "token": "palette-success-contrast-text",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--mui-palette-success-contrastText",
+      "selector": ".css-193sk91-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label-2.color.warning",
+      "token": "palette-warning-contrast-text",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--mui-palette-warning-contrastText",
+      "selector": ".css-vcuyf0-MuiBadge-badge"
+    },
+    {
+      "leaf": "imported.badge.label.color",
+      "token": "palette-background-default",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--mui-palette-background-default",
+      "selector": ".css-bgqpfx-MuiAvatar-root"
+    }
+  ]
+}

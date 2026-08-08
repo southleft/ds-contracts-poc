@@ -121,8 +121,96 @@ On "figma bundle", --tokens is the same FLAG (never positional) but takes
 EXACTLY <base[,minted]> — one flat DTCG base file, optionally the minted
 tree second; no slots, no directories.
 
-ds-contracts <command> --help shows nothing extra yet — this block is the reference.
+ds-contracts <command> --help prints that command's section from this reference.
 `;
+
+const COMMAND_HELP: Record<string, string> = {
+  onboard: `ds-contracts onboard — code → canvas pipeline (two phases)
+
+Phase 1:
+  ds-contracts onboard <package-or-path>
+    [--components a,b,c] [--workspace <dir>] [--force]
+
+  Detect adapter/styling, seed contracts, DRAFT capture config, then STOP at
+  the human review gate. --force restarts phase 1 over an in-flight workspace;
+  it does NOT skip the phase-2 review gate.
+
+Phase 2:
+  ds-contracts onboard --continue
+    [--channel-key K] [--dry-run] [--bridge <url>]
+    [--from capture|promote|emit|bundle|publish]
+
+  Capture → promote → emit → bundle → publish. Refuses an unreviewed capture
+  config by name. --from resumes a stage; the review gate still runs first.
+
+Also:
+  ds-contracts promote --config <ds-library.json>
+`,
+  promote: `ds-contracts promote --config <ds-library.json>
+
+Computed-capture artifacts → promoted contracts + minted token tree
+(source-alias pass, provenance anchors, figmaStatePreviews, resolution guard).
+Also runs as onboard's promote stage.
+`,
+  init: `ds-contracts init [--detect] [--force]
+
+Write ds-contracts.config.json here.
+  --detect  prefills adapter/root/tokens + styling hints (detected, not confirmed)
+  --force   overwrite an existing config
+`,
+  extract: `ds-contracts extract — code → proposed contracts
+
+  extract [config] [--reconcile]
+  extract [--draft-capture-config]
+  extract [--accept-candidates exact|<file>]
+  extract --computed --config <capture.json>
+           [--harness <dir>] [--out <dir>]
+
+Static adapters: react-tsx | cem.
+--draft-capture-config writes a capture config with __review:* markers (refused
+until reviewed). --computed needs playwright-core + Chromium.
+`,
+  generate: `ds-contracts generate <contracts..> --out <dir>
+  [--target react|html|react-inline|figma-script|<registered>]
+  [--tokens f,f] [--icons dir] [--stories] [--emitter <module>]
+
+Contract → code. See top-level --help for --tokens slot routing.
+`,
+  figma: `ds-contracts figma — contract ↔ Figma surfaces
+
+  figma <contracts..> --out <dir> [--tokens f,f] [--icons dir] [--file-key KEY]
+  figma bundle <contracts..> --out <file> --tokens <base[,minted]>
+       [--modes <light[,dark]>] [--name <collection>] [--icons dir]
+  figma push <file> --code <CODE> [--bridge <url>]
+  figma claim-channel [--bridge <url>]
+  figma publish <file> [--channel-key K] [--bridge <url>] [--dry-run]
+       [--repo o/n] [--run-id] [--commit] [--ref] [--run-url] [--no-provenance]
+  figma receive --out <contracts-dir> [--bridge <url>] [--apply]
+
+Bundle is the one-paste CONTRACTS-BUNDLE. receive writes nothing without --apply.
+`,
+  diff: `ds-contracts diff — parity referee / English summarizer
+
+  diff [config]
+    Contracts vs code/design. Exit 0 clean · 1 drift · 2 config error.
+
+  diff --summarize --base <before.json> <after.json>
+    English per-channel contract diff (docs/18 G11). Exit 0 if identical,
+    1 if channels changed, 2 on usage/config errors.
+`,
+  'propose-pr': `ds-contracts propose-pr <file> --repo owner/name
+  [--token t] [--base b] [--path p] [--title t] [--target t]
+  [--code-path d] [--tokens f,f] [--icons d] [--stories]
+  [--no-code] [--dry-run]
+
+Open the contract change + generated code as one PR. Token:
+--token, DS_CONTRACTS_GITHUB_TOKEN, or GITHUB_TOKEN (in memory only).
+`,
+};
+
+function wantsHelp(argv: string[]): boolean {
+  return argv.some((a) => a === '--help' || a === '-h' || a === 'help');
+}
 
 async function main(): Promise<number> {
   const [command, ...rest] = process.argv.slice(2);
@@ -137,6 +225,23 @@ async function main(): Promise<number> {
     case '-v':
       console.log(VERSION);
       return 0;
+    case 'onboard':
+    case 'promote':
+    case 'init':
+    case 'extract':
+    case 'generate':
+    case 'figma':
+    case 'diff':
+    case 'propose-pr':
+      if (wantsHelp(rest)) {
+        console.log(COMMAND_HELP[command] ?? USAGE);
+        return 0;
+      }
+      break;
+    default:
+      break;
+  }
+  switch (command) {
     case 'onboard':
       return onboardCommand(rest);
     case 'promote':

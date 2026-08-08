@@ -39,6 +39,7 @@ export interface MockNode {
   maxHeight: number | null;
   boundVariables: Record<string, { type: string; id: string }>;
   componentPropertyReferences: Record<string, string>;
+  variantProperties?: Record<string, string> | null;
   children?: MockNode[];
   characters?: string;
   fontSize?: number;

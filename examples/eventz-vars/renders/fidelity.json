@@ -1,0 +1,650 @@
+[
+ {
+  "set": "atoms-badge",
+  "variant": "variant_accent_hasicon_false_haslabel_true",
+  "score": 59.8,
+  "score20": 59.22
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_accent_hasicon_true_haslabel_false",
+  "score": 86.98,
+  "score20": 87.15
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_accent_hasicon_true_haslabel_true",
+  "score": 66.04,
+  "score20": 65.25
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_brand_hasicon_false_haslabel_true",
+  "score": 0.89,
+  "score20": 5.76
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_brand_hasicon_true_haslabel_false",
+  "score": 66.76,
+  "score20": 1.53
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_brand_hasicon_true_haslabel_true",
+  "score": 0.67,
+  "score20": 5.23
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_featured_hasicon_false_haslabel_true",
+  "score": 59.09,
+  "score20": 70.96
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_featured_hasicon_true_haslabel_false",
+  "score": 86.98,
+  "score20": 87.06
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_featured_hasicon_true_haslabel_true",
+  "score": 65.44,
+  "score20": 73.85
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_info_hasicon_false_haslabel_true",
+  "score": 59.98,
+  "score20": 58.62
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_info_hasicon_true_haslabel_false",
+  "score": 86.98,
+  "score20": 87.34
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_info_hasicon_true_haslabel_true",
+  "score": 66.18,
+  "score20": 65.07
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_warning_hasicon_false_haslabel_true",
+  "score": 59.18,
+  "score20": 58.81
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_warning_hasicon_true_haslabel_false",
+  "score": 86.98,
+  "score20": 87.29
+ },
+ {
+  "set": "atoms-badge",
+  "variant": "variant_warning_hasicon_true_haslabel_true",
+  "score": 65.64,
+  "score20": 65.38
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_bare_state_active_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_bare_state_default_isdisabled_false",
+  "score": 64.57,
+  "score20": 44.79
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_bare_state_default_isdisabled_true",
+  "score": 65.04,
+  "score20": 49.33
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_bare_state_focus_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_bare_state_focus_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_bare_state_hover_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_knockout_state_active_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_knockout_state_default_isdisabled_false",
+  "score": 89.42,
+  "score20": 89.13
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_knockout_state_default_isdisabled_true",
+  "score": 89.21,
+  "score20": 69.52
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_knockout_state_focus_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_knockout_state_focus_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_knockout_state_hover_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_primary_state_active_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_primary_state_default_isdisabled_false",
+  "score": 52.75,
+  "score20": 54.52
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_primary_state_default_isdisabled_true",
+  "score": 8.97,
+  "score20": 6.52
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_primary_state_focus_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_primary_state_focus_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_primary_state_hover_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_secondary_state_active_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_secondary_state_default_isdisabled_false",
+  "score": 51.35,
+  "score20": 86.23
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_secondary_state_default_isdisabled_true",
+  "score": 87.9,
+  "score20": 89.41
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_secondary_state_focus_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_secondary_state_focus_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-button",
+  "variant": "variant_secondary_state_hover_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_knockout_state_active_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_knockout_state_default_isdisabled_false",
+  "score": 100,
+  "score20": 100
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_knockout_state_default_isdisabled_true",
+  "score": 100,
+  "score20": 100
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_knockout_state_focus_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_knockout_state_focus_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_knockout_state_hover_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_state_active_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_state_default_isdisabled_false",
+  "score": 89.39,
+  "score20": 53.42
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_state_default_isdisabled_true",
+  "score": 90.43,
+  "score20": 65.53
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_state_focus_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_state_focus_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_bare_state_hover_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_knockout_state_active_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_knockout_state_default_isdisabled_false",
+  "score": 90.04,
+  "score20": 89.61
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_knockout_state_default_isdisabled_true",
+  "score": 82.61,
+  "score20": 68.09
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_knockout_state_focus_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_knockout_state_focus_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_knockout_state_hover_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_primary_state_active_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_primary_state_default_isdisabled_false",
+  "score": 16.21,
+  "score20": 62.31
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_primary_state_default_isdisabled_true",
+  "score": 7.81,
+  "score20": 16.47
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_primary_state_focus_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_primary_state_focus_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_primary_state_hover_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_secondary_state_active_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_secondary_state_default_isdisabled_false",
+  "score": 17.29,
+  "score20": 85.7
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_secondary_state_default_isdisabled_true",
+  "score": 83.11,
+  "score20": 93.71
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_secondary_state_focus_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_secondary_state_focus_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-icon-button",
+  "variant": "variant_secondary_state_hover_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-checkbox",
+  "variant": "state_default_ischecked_false_isdisabled_false",
+  "score": 91.12,
+  "score20": 67.26
+ },
+ {
+  "set": "atoms-checkbox",
+  "variant": "state_default_ischecked_false_isdisabled_true",
+  "score": 91.1,
+  "score20": 75.28
+ },
+ {
+  "set": "atoms-checkbox",
+  "variant": "state_default_ischecked_true_isdisabled_false",
+  "score": 88.69,
+  "score20": 63.72
+ },
+ {
+  "set": "atoms-checkbox",
+  "variant": "state_default_ischecked_true_isdisabled_true",
+  "score": 88.67,
+  "score20": 71.65
+ },
+ {
+  "set": "atoms-checkbox",
+  "variant": "state_focus_ischecked_false_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-checkbox",
+  "variant": "state_focus_ischecked_false_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-checkbox",
+  "variant": "state_focus_ischecked_true_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-checkbox",
+  "variant": "state_focus_ischecked_true_isdisabled_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-checkbox",
+  "variant": "state_hover_ischecked_false_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_default_isfilled_false_haserror_false_isdisabled_false",
+  "score": 90.85,
+  "score20": 86.33
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_default_isfilled_false_haserror_false_isdisabled_true",
+  "score": 91.58,
+  "score20": 88.04
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_default_isfilled_false_haserror_true_isdisabled_false",
+  "score": 92.02,
+  "score20": 82.18
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_default_isfilled_true_haserror_false_isdisabled_false",
+  "score": 90.92,
+  "score20": 86.24
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_default_isfilled_true_haserror_false_isdisabled_true",
+  "score": 91.39,
+  "score20": 87.94
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_default_isfilled_true_haserror_true_isdisabled_false",
+  "score": 92.08,
+  "score20": 82.04
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_focus_isfilled_false_haserror_false_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_focus_isfilled_false_haserror_true_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_focus_isfilled_true_haserror_false_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_focus_isfilled_true_haserror_true_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_hover_isfilled_false_haserror_false_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_hover_isfilled_true_haserror_false_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-input",
+  "variant": "state_hover_isfilled_true_haserror_true_isdisabled_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_default_isinteractive_false_variant_parent_isactive_false",
+  "score": 18.61,
+  "score20": 61.15
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_default_isinteractive_true_variant_child_isactive_false",
+  "score": 60.75,
+  "score20": 58.63
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_default_isinteractive_true_variant_child_isactive_true",
+  "score": 53.44,
+  "score20": 53.88
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_default_isinteractive_true_variant_parent_isactive_false",
+  "score": 10.23,
+  "score20": 63.23
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_default_isinteractive_true_variant_parent_isactive_true",
+  "score": 6.2,
+  "score20": 6.34
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_focus_isinteractive_true_variant_child_isactive_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_focus_isinteractive_true_variant_child_isactive_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_focus_isinteractive_true_variant_parent_isactive_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_focus_isinteractive_true_variant_parent_isactive_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_hover_isinteractive_true_variant_child_isactive_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_hover_isinteractive_true_variant_child_isactive_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_hover_isinteractive_true_variant_parent_isactive_false",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "atoms-tag",
+  "variant": "state_hover_isinteractive_true_variant_parent_isactive_true",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "molecules-alert",
+  "variant": "variant_danger",
+  "score": 24.93,
+  "score20": 87.75
+ },
+ {
+  "set": "molecules-alert",
+  "variant": "variant_info",
+  "score": 40.06,
+  "score20": 87.89
+ },
+ {
+  "set": "molecules-alert",
+  "variant": "variant_success",
+  "score": 28.03,
+  "score20": 87.84
+ },
+ {
+  "set": "molecules-alert",
+  "variant": "variant_warning",
+  "score": 27.27,
+  "score20": 87.85
+ }
+]

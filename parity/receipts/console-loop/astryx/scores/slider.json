@@ -1,0 +1,39 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 19.03125,
+    "pctAAUnmasked": 14.802083333333332,
+    "pctAAMasked": 14.802083333333332,
+    "maskCoveragePct": 0,
+    "canvasPx": "240x40",
+    "realPx": "54x14",
+    "inkCanvasPct": 15.625,
+    "inkRealPct": 3.6145833333333335
+  },
+  "reference": "parity/receipts/console-loop/astryx/refs/slider.png",
+  "referenceSha256": "953c7ff160fb9201b7ac99d195f70e92527bf3b5a98430da1f7316d6e0c42784",
+  "canvasShot": "parity/receipts/console-loop/astryx/shots/slider-cell.png",
+  "canvasShotSha256": "bee623ea284ba692898aedc60fc5fa3c8bc02306f905d5c0a0264c4adbff0086",
+  "diff": "parity/receipts/console-loop/astryx/scores/slider.diff.png",
+  "fc": [
+    "FC-ABS-SIZE"
+  ],
+  "receipt": "parity/receipts/console-loop/astryx/components/slider.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 4.444444444444445,
+  "inkDelta": 12.010416666666666,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=4.44, inkDelta=12.0) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T04:31:14.528Z"
+}

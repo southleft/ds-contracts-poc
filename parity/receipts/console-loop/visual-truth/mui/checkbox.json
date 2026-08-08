@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "checkbox",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/checkbox.json",
+  "status": "pass",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "21:323",
+  "cellNodeId": "21:315",
+  "cellName": "Checked=Checked",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 12.345679012345679,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
+    "maskCoveragePct": 0,
+    "canvasPx": "18x18",
+    "realPx": "18x18",
+    "inkCanvasPct": 92.5925925925926,
+    "inkRealPct": 92.5925925925926
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/checkbox.png",
+  "referenceSha256": "e2064b98180a8fee8efe3133fae0e9ba9b888ea5e267fdd46564f957a017d3cc",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/checkbox.png",
+  "canvasShotSha256": "4bd0e181fbab9843d2bffb3f49329af4233cd228d924599b4101784e05b2c6c9",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/checkbox.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

@@ -47,7 +47,8 @@
 #      source (config: ds-contracts.config.json, committed in the repo),
 #   2. adopts the freshly proposed contracts into contracts/ (code-led means
 #      code wins — extraction output IS the new truth),
-#   3. commits the refreshed contracts/ back to the branch,
+#   3. opens/updates a PR with the refreshed contracts/ (PR-first — docs/18
+#      G10; no default direct-main write),
 #   4. GATE — refuses the canvas half when any adopted contract is stub anatomy,
 #   5. (gated) uploads a CONTRACTS-BUNDLE artifact — the exact envelope the
 #      plugin bridge carries ({ "type": "CONTRACTS-BUNDLE", "version": 1,
@@ -98,6 +99,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   extract-contracts:
@@ -132,30 +134,56 @@ jobs:
         # canvas set of correctly-named, EMPTY variant frames. Nothing
         # downstream refuses it, so the refusal has to live here.
         #
-        # Stub test, read off the contract itself (not off the adapter name):
-        # the root part declares no parts AND no token bindings AND no content
-        # — there is nothing to draw.
+        # Stub test, read off the contract itself (not off the adapter name).
+        # Predicate MUST match packages/cli `anatomyNodeHasDrawableSubstance` /
+        # `isDrawableEmptyContract`: hollow `parts: { label: {} }` and empty
+        # `content: {}` are NOT drawable — they still paint blank frames.
         run: |
           node --input-type=module <<'EOF'
           import { appendFileSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+          const hasDrawableSubstance = (node) => {
+            if (!node || typeof node !== "object" || Array.isArray(node)) return false;
+            const tokens = node.tokens;
+            if (
+              tokens &&
+              typeof tokens === "object" &&
+              !Array.isArray(tokens) &&
+              Object.keys(tokens).length > 0
+            ) {
+              return true;
+            }
+            if (node.component !== undefined && node.component !== null) return true;
+            const content = node.content;
+            if (content !== undefined && content !== null) {
+              if (typeof content === "object" && !Array.isArray(content)) {
+                if (Object.keys(content).length > 0) return true;
+              } else if (content !== "") {
+                return true;
+              }
+            }
+            const parts = node.parts;
+            if (parts && typeof parts === "object" && !Array.isArray(parts)) {
+              for (const child of Object.values(parts)) {
+                if (hasDrawableSubstance(child)) return true;
+              }
+            }
+            return false;
+          };
           const files = readdirSync("contracts").filter((f) => f.endsWith(".contract.json")).sort();
           if (files.length === 0) throw new Error("no contracts to check");
           const stubs = [];
           for (const f of files) {
             const c = JSON.parse(readFileSync(`contracts/${f}`, "utf8"));
-            const root = c?.anatomy?.root ?? {};
-            const drawable =
-              Object.keys(root.parts ?? {}).length > 0 ||
-              Object.keys(root.tokens ?? {}).length > 0 ||
-              root.content !== undefined ||
-              root.component !== undefined;
-            if (!drawable) stubs.push(`${c.id} (${c.name}) — ${f}`);
+            const anatomy = c?.anatomy;
+            const roots = anatomy && typeof anatomy === "object" ? Object.keys(anatomy) : [];
+            const root = anatomy?.root ?? (roots[0] ? anatomy[roots[0]] : undefined);
+            if (!hasDrawableSubstance(root)) stubs.push(`${c.id} (${c.name}) — ${f}`);
           }
           const ready = stubs.length === 0;
           console.log(
             ready
               ? `anatomy OK: ${files.length}/${files.length} contract(s) carry real anatomy — canvas delivery proceeds`
-              : `STUB ANATOMY: ${stubs.length}/${files.length} contract(s) have an empty root. Canvas delivery is SKIPPED — sending these would create correctly-named, VISUALLY EMPTY component sets in the designer's file.`,
+              : `STUB ANATOMY: ${stubs.length}/${files.length} contract(s) have empty/hollow anatomy. Canvas delivery is SKIPPED — sending these would create correctly-named, VISUALLY EMPTY component sets in the designer's file.`,
           );
           for (const s of stubs) console.log(`  - ${s}`);
           writeFileSync("anatomy-stubs.txt", stubs.join("\n") + (stubs.length ? "\n" : ""));
@@ -168,6 +196,11 @@ jobs:
           EOF
 
       - name: Build the CONTRACTS-BUNDLE artifact (the plugin-bridge envelope)
+        # Gated by the substance anatomy check above — hollow parts/content
+        # never reach this step. The envelope is assembled here (not via a
+        # pinned older CLI) so the recipe stays runnable on @ds-contracts/cli
+        # 0.3.0 publish while the canvas_ready predicate tracks current
+        # `isDrawableEmptyContract` semantics.
         if: ${{ steps.anatomy.outputs.canvas_ready == 'true' }}
         run: |
           node --input-type=module <<'EOF'
@@ -180,22 +213,43 @@ jobs:
           console.log(`contracts-bundle.json: ${contracts.length} contract(s)`);
           EOF
 
-      - name: Commit the refreshed contracts back to the branch
+      - name: Open or update a PR for refreshed contracts (PR-first — G10)
         # NOT gated: contracts in git are the deliverable of the always-half.
         # A stub-anatomy contract is still a real, reviewable API surface —
         # it just must not reach a canvas.
         #
-        # CI-only: pushes with the workflow's GITHUB_TOKEN. No-op when
-        # extraction changed nothing (the diff check guards the commit).
+        # Wave 3 / docs/18 G10: default is PR-first, not a direct push to
+        # main. Direct-main writes are refused by this recipe; reviewers see
+        # the contract diff before merge. No-op when extraction changed
+        # nothing.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add contracts
           if git diff --cached --quiet; then
-            echo "contracts/ unchanged — nothing to commit"
+            echo "contracts/ unchanged — nothing to propose"
+            exit 0
+          fi
+          BRANCH="contracts/code-led-${GITHUB_SHA::7}"
+          git checkout -B "$BRANCH"
+          git commit -m "contracts: refresh from code (ds-contracts extract, ${GITHUB_SHA::7})"
+          git push -u origin "$BRANCH" --force-with-lease
+          if gh pr list --head "$BRANCH" --json number --jq 'length' | grep -q '^0$'; then
+            gh pr create \
+              --title "contracts: refresh from code (${GITHUB_SHA::7})" \
+              --body "$(cat <<'EOF'
+          ## Summary
+          Code-led extraction refreshed \`contracts/\` (docs/18 G10 PR-first default).
+
+          ## Notes
+          - Direct commits to main are not used by this recipe.
+          - Canvas delivery remains gated by the anatomy substance check.
+          EOF
+          )"
           else
-            git commit -m "contracts: refresh from code (ds-contracts extract, ${GITHUB_SHA::7})"
-            git push
+            echo "PR already open for $BRANCH"
           fi
 
       - name: Upload the CONTRACTS-BUNDLE artifact

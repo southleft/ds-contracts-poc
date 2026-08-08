@@ -1,0 +1,27 @@
+{
+  "runId": "exact-conversion-finish-wave5",
+  "wave": 5,
+  "title": "MUI 50% denominator",
+  "status": "READY",
+  "branch": "feat/exact-conversion-wave0",
+  "closedAt": "2026-08-05",
+  "denominator": {
+    "file": "examples/mui/oracle/DENOMINATOR-50.json",
+    "size": 31,
+    "carried": 31,
+    "pending": 0,
+    "negativeControl": "speed-dial (unsupported, outside denominator)"
+  },
+  "checks": {
+    "mui:denominator:check": "31/31 carried",
+    "mui:oracle:offline": "32 MATCH · 0 PENDING · 0 FAIL",
+    "accuracy:check": "hold",
+    "workflow-spine:check": "hold"
+  },
+  "accuracyBaselinesUntouched": true,
+  "notes": [
+    "All 15 pending members seeded, captured, promoted, and figma-emitted.",
+    "text-field Helper and Error text-style identity restored on imported.text-field.label-5.font-size after Wave 5 re-emit.",
+    "Badge childWrap Button caused determinism thrash; switched to Avatar childrenSpec."
+  ]
+}

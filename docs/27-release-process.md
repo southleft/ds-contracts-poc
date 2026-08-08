@@ -6,12 +6,12 @@ never mistaken for a published release.
 
 ## Candidate inventory
 
-| Surface | Candidate in source | Registry state checked 2026-08-04 | Release action |
+| Surface | Candidate in source | Registry state checked 2026-08-07 | Release action |
 | --- | --- | --- | --- |
 | Repository/reference implementation | `1.0.0-rc.1` | private root package; not published to npm | signed Git tag and GitHub prerelease |
-| `@ds-contracts/cli` | `0.5.0-rc.1` | `latest` is `0.4.0` | publish exact RC under `next` |
-| `@ds-contracts/schema` | `16.1.0-rc.1` | `latest` is `16.0.0` | publish exact RC under `next` |
-| `@ds-contracts/emitter-web-components` | `0.4.0-rc.1` | `latest` is `0.3.0` | publish exact RC under `next` |
+| `@ds-contracts/cli` | `0.5.0-rc.2` | `latest` is `0.4.0` · `next` is `0.5.0-rc.1` | publish exact RC under `next` |
+| `@ds-contracts/schema` | `16.1.0-rc.2` | `latest` is `16.0.0` · `next` is `16.1.0-rc.1` | publish exact RC under `next` |
+| `@ds-contracts/emitter-web-components` | `0.4.0-rc.2` | `latest` is `0.3.0` · `next` is `0.4.0-rc.1` | publish exact RC under `next` |
 
 Manifest versions are source state only. The candidate is not released until
 the release checklist records all applicable human approvals and post-release
@@ -123,8 +123,8 @@ packed CLI. This verifies package exports rather than workspace resolution.
 
 Release notes must tell adopters:
 
-- CLI `0.5.0-rc.1` is newer than the stable `0.4.0`; install it by exact
-  version while it is an RC. Re-run dry-run/review stages before allowing
+- CLI `0.5.0-rc.2` is newer than the stable `0.4.0` and than the published
+  `next` RC (`0.5.0-rc.1`); install it by exact version while it is an RC. Re-run dry-run/review stages before allowing
   `promote`, `figma receive --apply`, or PR-writing commands to change files.
 - Promotion now carries and checks contract provenance. A stale capture may be
   refused instead of overwriting a newer approved contract. Preserve the
@@ -133,9 +133,9 @@ Release notes must tell adopters:
 - Static extraction may refuse or leave geometry-only content empty instead of
   inventing visible text. Review proposals that previously depended on a
   placeholder.
-- Schema `16.1.0-rc.1` remains spec v16. Consumers must test validation and
+- Schema `16.1.0-rc.2` remains spec v16. Consumers must test validation and
   generated types against the RC before changing their range.
-- Emitter `0.4.0-rc.1` is newer than stable `0.3.0`. Consumers must install the
+- Emitter `0.4.0-rc.2` is newer than stable `0.3.0`. Consumers must install the
   exact RC, regenerate in a disposable output directory, and compare emitted
   Custom Elements, CSS, demos, and Custom Elements Manifest output before
   adopting it.
@@ -191,30 +191,41 @@ trusted publishing or an automation token, `id-token: write`, a protected
 release environment, and `npm publish --provenance --tag next`. That produces
 registry-verifiable build provenance tied to the release commit.
 
-This repository does not currently contain an npm publication workflow.
-Therefore publication with a registry attestation is blocked until the owner
-approves and lands a provenance-capable path. A local OTP-based
-`npm publish --tag next` may authenticate the human publisher but does not
+That path exists: `.github/workflows/publish-rc.yml` is the publication
+workflow. It is `workflow_dispatch`-only, runs only from `main`, and refuses
+to start unless the dispatcher types `PUBLISH_RC` into the confirmation input.
+It builds and packs all three packages once into sealed tarballs (with a
+`SHA256SUMS` receipt), then a separate `publish` job — gated by the protected
+`npm-rc` GitHub environment and holding `id-token: write` — publishes each
+tarball that is not already on the registry with
+`npm publish --access public --tag next --provenance` via npm trusted
+publishing (OIDC; no long-lived token). Every package, whether freshly
+published or already present, is then re-downloaded from the registry and
+**byte-compared against the sealed local tarball**; a mismatch fails the run.
+The workflow also refuses any manifest that is not a `-rc.N` version.
+
+Prerequisites before dispatching it:
+
+- the release commit is merged to `main` (the workflow will not run from any
+  other ref);
+- the `npm-rc` GitHub environment exists and carries the intended required
+  reviewers, so publication is an explicit human approval;
+- npm trusted publishing is configured on the registry side for
+  `@ds-contracts/cli`, `@ds-contracts/schema`, and
+  `@ds-contracts/emitter-web-components`, pointing at this repository and
+  workflow.
+
+A local OTP-based `npm publish --tag next` remains possible but does not
 create GitHub Actions provenance; do not describe it as attested. If the owner
 accepts that exception, record the explicit disposition in the checklist and
 release notes.
 
-After npm-owner approval, publish schema, emitter, and CLI from the exact tagged
-commit:
+After the workflow completes, verify independently of it:
 
 ```bash
-# Run only in the approved provenance-capable environment.
-cd packages/schema && npm publish --provenance --tag next
-cd ../emitter-web-components && npm publish --provenance --tag next
-cd ../cli && npm publish --provenance --tag next
-```
-
-Then verify independently:
-
-```bash
-npm view @ds-contracts/schema@16.1.0-rc.1 version dist.tarball dist.integrity --json
-npm view @ds-contracts/emitter-web-components@0.4.0-rc.1 version dist.tarball dist.integrity --json
-npm view @ds-contracts/cli@0.5.0-rc.1 version dist.tarball dist.integrity --json
+npm view @ds-contracts/schema@16.1.0-rc.2 version dist.tarball dist.integrity --json
+npm view @ds-contracts/emitter-web-components@0.4.0-rc.2 version dist.tarball dist.integrity --json
+npm view @ds-contracts/cli@0.5.0-rc.2 version dist.tarball dist.integrity --json
 npm view @ds-contracts/schema dist-tags --json
 npm view @ds-contracts/emitter-web-components dist-tags --json
 npm view @ds-contracts/cli dist-tags --json

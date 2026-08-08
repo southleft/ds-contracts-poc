@@ -22,6 +22,7 @@ import { contributePage } from './src/pages/contribute.js';
 import { cliPage } from './src/pages/cli.js';
 import { emittersPage } from './src/pages/emitters.js';
 import { assertJourneyCommands, MANIFEST_REL } from './src/journeys.js';
+import { assertRegistryTruth, REGISTRY_TRUTH_REL } from './src/registry-truth.js';
 import { layout } from './src/html.js';
 import { loadHowReplays } from './src/how-replays.js';
 import {
@@ -80,6 +81,16 @@ const pages: Array<{ route: string; html: string }> = [
 const journeyReceipt = assertJourneyCommands(pages);
 console.log(
   `✔ journey-commands: ${journeyReceipt.checked} rendered command line(s) verified against ${MANIFEST_REL} (${journeyReceipt.commands}/${journeyReceipt.commands} manifest commands rendered)`,
+);
+
+// Registry-truth guard: every rendered `@ds-contracts/<pkg>@<version>` string
+// must name a version scripts/registry-truth.json records as actually on npm
+// (latest or next), and no unpublished source-tree package.json version may
+// appear in any page. The site cannot claim a version is published when the
+// registry has never seen it; throws (build fails) on either lie.
+const registryReceipt = assertRegistryTruth(pages);
+console.log(
+  `✔ registry-truth: ${registryReceipt.claims} rendered published-version claim(s) across ${registryReceipt.pages} pages verified against ${REGISTRY_TRUTH_REL}`,
 );
 
 // 404 — served by Cloudflare Pages for unknown routes.

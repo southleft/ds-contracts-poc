@@ -43,6 +43,28 @@ export interface DumpPaint {
   alpha?: number;
 }
 
+/** A LINEAR gradient fill (dump v1.16, additive) — captured when the node's
+ *  first visible fill is GRADIENT_LINEAR (the Eventz field case: Badge
+ *  accent/info/warning/featured and Alert grounds, refused wholesale by dump
+ *  ≤ v1.15's solid-only projection and scored as unpainted ground).
+ *  Handles are NORMALIZED OBJECT SPACE points: `start` maps to ramp position
+ *  0 and `end` to ramp position 1 — the REST surface's
+ *  gradientHandlePositions[0]/[1] verbatim; the plugin producer inverts
+ *  gradientTransform to the same two points (the transform maps object space
+ *  → gradient space, so the handles are its inverse applied to (0, 0.5) and
+ *  (1, 0.5)). Stops carry the RESOLVED color (+ the bound variable's
+ *  slash-form name when the stop rides one — REST cannot name it, a plugin
+ *  capture can). RADIAL/ANGULAR/DIAMOND gradients remain paint-unsupported
+ *  degradation receipts — absence of this field on older dumps means NOT
+ *  CAPTURED, never "no gradient". */
+export interface DumpGradient {
+  start: { x: number; y: number };
+  end: { x: number; y: number };
+  stops: Array<{ position: number; hex: string; alpha?: number; var?: string }>;
+  /** Effective paint opacity 0–1 — OMITTED when 1 (the DumpPaint.alpha rule). */
+  alpha?: number;
+}
+
 export interface DumpText {
   characters: string;
   fontSize: number;
@@ -60,8 +82,18 @@ export interface DumpText {
    *  styles mirror semantic size-token paths ('badge' ← font.badge.size,
    *  'control/sm' ← font.control.size.sm), so this is a token identity. */
   style?: string;
+  /** Published TextStyle key when available (dump v1.15, additive). Local
+   *  styles may have no portable key; their exact name remains the identity. */
+  styleKey?: string;
   /** Variable behind the text fill (slash-form), when bound. */
   fillVar?: string;
+  /** Non-ORIGINAL text case (dump v1.16, additive) — the canvas fact behind
+   *  CSS text-transform (UPPER→uppercase, LOWER→lowercase, TITLE→capitalize).
+   *  Absence in older dumps means not captured (their captures receipted the
+   *  channel as text-channel-unsupported), never "as typed". Field case:
+   *  Eventz Badge labels ride textCase UPPER and rendered "Label" for
+   *  "LABEL". */
+  textCase?: 'UPPER' | 'LOWER' | 'TITLE';
 }
 
 /** One visible effect (dump v1.2, additive). Shadows carry their full
@@ -135,6 +167,11 @@ export interface DumpNode {
    *  same contract `slot` part the INSTANCE_SWAP spelling maps to, with a
    *  named provenance note (regeneration should reproduce the spelling). */
   type: 'COMPONENT' | 'FRAME' | 'TEXT' | 'INSTANCE' | 'SLOT' | string;
+  /** dump v1.14: authoritative realized VARIANT values for a direct child of
+   *  a COMPONENT_SET. Keys are preserved verbatim from Figma's component
+   *  property API; consumers must not reconstruct this tuple from `name`.
+   *  Absence means legacy/not captured, never an empty tuple. */
+  variantProperties?: Record<string, string>;
   layout?: DumpLayout;
   /** Literal corner radius when uniform and nonzero. Bound radii are in `bound`. */
   cornerRadius?: number;
@@ -142,6 +179,13 @@ export interface DumpNode {
    *  e.g. { paddingLeft: 'space/inset-x/sm', width: 'size/switch/width' }. */
   bound?: Record<string, string>;
   fill?: DumpPaint;
+  /** First visible GRADIENT_LINEAR fill (dump v1.16, additive — see
+   *  DumpGradient). Carried ALONE, or alongside `fill` when a visible SOLID
+   *  sits BELOW it in the paint stack (Figma paints draw bottom-to-top, so
+   *  that pair is exactly CSS background-color under background-image). A
+   *  gradient hidden under a solid keeps the truncation receipt instead.
+   *  Absence in older dumps means not captured, never "no gradient". */
+  gradient?: DumpGradient;
   stroke?: DumpPaint;
   strokeWeight?: number;
   /** Where the stroke weight is drawn relative to the node box (dump v1.11,
@@ -292,12 +336,48 @@ export interface DumpPreferredValue {
   key: string;
 }
 
+/** dump v1.14: the full set-level component property definition. Property
+ *  keys are preserved verbatim, including Figma's `#…` identity suffixes.
+ *  Keeping the discriminated shape lets exact-projection validation compare
+ *  the authoritative axis inventory against every realized row before any
+ *  name normalization or semantic state/theme promotion occurs. */
+export type DumpPropertyDefinition =
+  | {
+      type: 'VARIANT';
+      defaultValue: string;
+      variantOptions: string[];
+    }
+  | {
+      type: 'BOOLEAN';
+      defaultValue: boolean;
+    }
+  | {
+      type: 'TEXT';
+      defaultValue: string;
+    }
+  | {
+      type: 'INSTANCE_SWAP';
+      defaultValue: string;
+      preferredValues?: DumpPreferredValue[];
+    }
+  | {
+      type: 'SLOT';
+      defaultValue: string;
+      preferredValues?: DumpPreferredValue[];
+      description?: string;
+      slotSettings?: Record<string, unknown>;
+    };
+
 export interface DumpSet {
   setName: string;
   type: 'COMPONENT_SET' | 'COMPONENT';
   /** Set-level anchors (dump v1.1, additive). */
   nodeId?: string;
   key?: string;
+  /** Full, verbatim component-property definitions (dump v1.14, additive).
+   *  New exact consumers prefer this field. Absence means the producer did
+   *  not capture structured metadata, so exactness is unverified. */
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>;
   /** INSTANCE_SWAP property definitions' preferredValues (dump v1.5,
    *  additive), keyed by property name with the "#id" suffix stripped —
    *  the same spelling propRefs.mainComponent carries. Absence in older

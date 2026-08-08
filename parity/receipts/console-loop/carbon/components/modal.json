@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "kind": "console-loop-carbon-component",
+  "status": "completed",
+  "component": "modal",
+  "contract": "examples/carbon/contracts/modal.contract.json",
+  "script": "examples/carbon/figma/modal.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:06.733Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:5911",
+    "mode": "amended",
+    "page": "Modal",
+    "sectionId": "1:5912",
+    "contractId": "carbon.modal",
+    "result": {
+      "createdNodeIds": [
+        "1:5911"
+      ],
+      "results": [
+        {
+          "name": "Modal",
+          "contractId": "carbon.modal",
+          "nodeId": "1:5911",
+          "key": "e26db6cad26be09eec201de6ecf9a47152643109",
+          "variants": 4,
+          "properties": [
+            "Content#1:1207",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-07T17:11:53.999Z",
+    "notes": [
+      "Re-synced n=22 total=129740; amended rebuiltVariants=4. Footer btn-set strip proportions unverified. matchDeveloped left false."
+    ],
+    "defects": [
+      "Dialog surface/footer button-set strip proportions not verified as match to pair--unset__default — fail closed."
+    ],
+    "reference": "parity/receipts/console-loop/carbon/refs/modal.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "pair--unset__default.png#package-dialog-bbox",
+    "scorecard": "parity/receipts/console-loop/carbon/scores/modal.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "near-pass AA=12.66 compositionOk vs package dialog (Size=Sm; residual size/font)",
+        "matchedAt": "2026-08-08T03:19:23.478Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=12.66, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:2103121654",
+    "lineCount": 578,
+    "sampleLines": [
+      ":COMPONENT_SET/Modal|fill|[]",
+      ":COMPONENT_SET/Modal|radius|5,5,5,5",
+      ":COMPONENT_SET/Modal|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Modal|description|Modal â generated from contract carbon.modal v0.2.0 â",
+      ":COMPONENT_SET/Modal|propdef|Content#1:1207:TEXT=Modal body copy for the Carbon round.",
+      ":COMPONENT_SET/Modal|propdef|Size:VARIANT=Xs",
+      "/0:COMPONENT/Size=Xs|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.6000000238418579,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/modal/root/background-color\"}}}]",
+      "/0:COMPONENT/Size=Xs|radius|0,0,0,0",
+      "/0:COMPONENT/Size=Xs|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Size=Xs|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Size=Xs|bound:minWidth|imported/shared/size-0",
+      "/0/0:FRAME/modal-container|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.95686274766922,\"g\":0.95686274766922,\"b\":0.95686274766922},\"boundVariables\":{\"color\":{\"var\":\"imported/modal/modal-container/background-color\"}}}]",
+      "/0/0:FRAME/modal-container|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.7764706015586853,\"g\":0.7764706015586853,\"b\":0.7764706015586853},\"boundVariables\":{\"color\":{\"var\":\"imported/shared/color-c6c6c6\"}}}] w1",
+      "/0/0:FRAME/modal-container|radius|0,0,0,0",
+      "/0/0:FRAME/modal-container|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/modal-container|sizing|FIXED/FIXED AUTO",
+      "/0/0:FRAME/modal-container|bound:height|imported/modal/modal-container/height",
+      "/0/0:FRAME/modal-container|bound:strokeBottomWeight|imported/shared/size-1",
+      "/0/0:FRAME/modal-container|bound:strokeLeftWeight|imported/shared/size-1",
+      "/0/0:FRAME/modal-container|bound:strokeRightWeight|imported/shared/size-1"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Size enum → Xs/Sm/Md/Lg",
+      "TEXT Content",
+      "first-variant fill bound: imported/modal/root/background-color"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Xs",
+        "Size=Sm",
+        "Size=Md",
+        "Size=Lg"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#1:1207",
+          "type": "TEXT",
+          "defaultValue": "Modal body copy for the Carbon round.",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Xs",
+          "variantOptions": [
+            "Xs",
+            "Sm",
+            "Md",
+            "Lg"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Xs",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": "imported/modal/root/background-color",
+        "padBound": {
+          "minWidth": "imported/shared/size-0",
+          "fills": "imported/modal/root/background-color"
+        },
+        "w": 432,
+        "h": 213.968994140625,
+        "childTypes": [
+          "FRAME/modal-container"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T17:11:53.999Z",
+  "nodeId": "1:5911"
+}

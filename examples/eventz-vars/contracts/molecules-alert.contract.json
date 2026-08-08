@@ -148,7 +148,8 @@
           },
           "tokens": {
             "padding-inline": "{spacing.0}",
-            "padding-block": "{spacing.0}"
+            "padding-block": "{spacing.0}",
+            "gap": "{spacing.0-5}"
           },
           "parts": {
             "horizontalStack2": {

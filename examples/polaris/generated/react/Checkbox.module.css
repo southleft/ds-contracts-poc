@@ -11,7 +11,6 @@
   height: var(--imported-checkbox-root-height);
   padding-bottom: var(--imported-shared-size-4);
   padding-top: var(--imported-shared-size-4);
-  width: var(--imported-checkbox-root-width);
   cursor: pointer;
 }
 
@@ -108,7 +107,6 @@
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-  border-width: var(--p-border-width-0);
   border-bottom-left-radius: var(--imported-shared-size-4);
   border-bottom-right-radius: var(--imported-shared-size-4);
   border-top-left-radius: var(--imported-shared-size-4);
@@ -121,7 +119,6 @@
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
   width: var(--imported-shared-size-18);
-  border-style: solid;
   display: block;
   border-bottom-style: solid;
   border-left-style: solid;
@@ -136,28 +133,32 @@
   transition-timing-function: cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1);
 }
 
-.checked-checked .backdrop {
-  background-color: var(--imported-checkbox-backdrop-background-color-checked);
+.checked-unchecked .backdrop {
+  background-color: rgba(255, 255, 255, 1);
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-top-color: rgba(138, 138, 138, 1);
+  border-right-color: rgba(138, 138, 138, 1);
+  border-bottom-color: rgba(138, 138, 138, 1);
+  border-left-color: rgba(138, 138, 138, 1);
 }
 
 .checked-checked .backdrop {
-  box-shadow: var(--imported-checkbox-backdrop-box-shadow-checked);
+  background-color: rgba(48, 48, 48, 1);
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
 }
 
 .checked-indeterminate .backdrop {
-  background-color: var(--imported-checkbox-backdrop-background-color-indeterminate);
-}
-
-.checked-indeterminate .backdrop {
-  box-shadow: var(--imported-checkbox-backdrop-box-shadow-indeterminate);
-}
-
-.checked-unchecked .backdrop {
-  background-color: var(--imported-checkbox-backdrop-background-color-unchecked);
-}
-
-.checked-unchecked .backdrop {
-  box-shadow: var(--imported-checkbox-backdrop-box-shadow-unchecked);
+  background-color: rgba(48, 48, 48, 1);
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
 }
 
 .root:disabled .backdrop {
@@ -204,7 +205,7 @@
 .icon-4 {
   display: inline-flex;
   flex-shrink: 0;
-  color: var(--imported-shared-color-303030);
+  fill: var(--imported-checkbox-icon-6-color);
   margin-left: var(--imported-shared-size-1);
   margin-right: var(--imported-shared-size-1);
   min-height: var(--imported-shared-size-0);
@@ -295,7 +296,6 @@
 
 .choice__label {
   display: flex;
-  width: var(--imported-checkbox-choice-label-width);
   display: block;
   cursor: pointer;
 }

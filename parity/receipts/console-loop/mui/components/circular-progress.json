@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "circular-progress",
+  "contract": "examples/mui/contracts/circular-progress.contract.json",
+  "script": "examples/mui/figma/circular-progress.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:00:35.254Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "83:1647",
+    "mode": "generated",
+    "page": "CircularProgress",
+    "sectionId": "83:1648",
+    "result": {
+      "createdNodeIds": [
+        "83:1647"
+      ],
+      "results": [
+        {
+          "name": "CircularProgress",
+          "contractId": "mui.circular-progress",
+          "nodeId": "83:1647",
+          "key": "a57ba5bc4558d52ea7cb12aed0d46b625a6f41e8",
+          "variants": 2,
+          "properties": [
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Structure/variants reviewed via inspect (83:1647, page CircularProgress); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page CircularProgress)."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=21.24% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/circular-progress.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/circular-progress.png",
+    "referenceSource": "extract/computed/out/mui/circularprogress/gate-shots/determinate__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/circular-progress-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
+  },
+  "fingerprint": {
+    "v6": "v6:3509931486",
+    "lineCount": 29,
+    "sampleLines": [
+      ":COMPONENT_SET/CircularProgress|fill|[]",
+      ":COMPONENT_SET/CircularProgress|radius|5,5,5,5",
+      ":COMPONENT_SET/CircularProgress|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/CircularProgress|description|CircularProgress \u00e2\u0080\u0094 generated from contract mui.circular-progress v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/CircularProgress|propdef|Variant:VARIANT=Indeterminate",
+      "/0:COMPONENT/Variant=Indeterminate|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Variant=Indeterminate|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=Indeterminate|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Indeterminate|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Variant=Indeterminate|bound:width|imported/circular-progress/root/width",
+      "/0/0:FRAME/root-indeterminate|fill|[]",
+      "/0/0:FRAME/root-indeterminate|radius|0,0,0,0",
+      "/0/0:FRAME/root-indeterminate|sizing|FILL/FIXED AUTO",
+      "/0/0/0:VECTOR/Vector|fill|[]",
+      "/0/0/0:VECTOR/Vector|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.09803921729326248,\"g\":0.4627451002597809,\"b\":0.8235294222831726},\"boundVariables\":{\"color\":{\"var\":\"imported/circular-progress/root/color\"}}}] w3.5999999046325684",
+      "/0/0/0:VECTOR/Vector|radius|0,0,0,0",
+      "/0/0/0:VECTOR/Vector|sizing|FIXED/FIXED AUTO",
+      "/1:COMPONENT/Variant=Determinate|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/1:COMPONENT/Variant=Determinate|radius|0,0,0,0",
+      "/1:COMPONENT/Variant=Determinate|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Variant enum \u2192 Indeterminate/Determinate"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Indeterminate",
+        "Variant=Determinate"
+      ],
+      "propDefs": [
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Indeterminate",
+          "variantOptions": [
+            "Indeterminate",
+            "Determinate"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Indeterminate",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/circular-progress/root/width"
+        },
+        "w": 40,
+        "h": 40,
+        "childTypes": [
+          "FRAME/root-indeterminate"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

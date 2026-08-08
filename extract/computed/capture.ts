@@ -14,6 +14,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { Page } from 'playwright-core';
 import { ContractSchema, CONTRACT_STATES, type Contract } from '../../scripts/contract-schema.js';
 import { DRAFT_MARKER_KEY, draftRefusalMessage } from '../draft-capture-config.js';
@@ -29,6 +30,10 @@ import {
   type EnumerationResult,
   type StateAxisSpec,
 } from './lib.js';
+
+/** Repo root for repo-relative asset resolution (fonts) inside page builders
+ *  that only receive the HARNESS dir — the harness lives OUTSIDE the repo. */
+const CAPTURE_REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 // ---------------------------------------------------------------------------
 // Config (extract/computed/configs/*.json)
@@ -66,7 +71,7 @@ export interface PresenceProp {
  *  MOLECULE round shipped a STRICTLY ONE-LEVEL list (`<Tabs><Tab/><Tab/></Tabs>`);
  *  a composed organism is a TREE (`<Table><TableHead><TableRow><TableCell>
  *  <Checkbox/></TableCell>…`). `children` recurses; the marker grammar
- *  ($callback/$import/$render) is resolved at EVERY depth, and every
+ *  ($callback/$import/$render/$element) is resolved at EVERY depth, and every
  *  referenced export is imported at every depth.
  *
  *  `children` and `text` are MUTUALLY EXCLUSIVE on one node (refused at load
@@ -128,11 +133,13 @@ export interface ComponentConfig {
   stateProps?: StateAxisSpec[];
   /** Props pinned to fixed values on every mount (recorded). MOLECULE round:
    *  widened from scalars — arrays/objects mount verbatim through the marker
-   *  grammar (Autocomplete options/value), and the `$render` marker mounts
+   *  grammar (Autocomplete options/value), `$render` mounts
    *  the ONLY function shape the vocabulary admits: {"$render":"pkg#Export"}
    *  → (params) => <Export {...params} /> — the identity render-prop
    *  (Autocomplete's required renderInput). Any richer function body is a
-   *  named refusal, never config. */
+   *  named refusal, never config. `$element` is the bounded React-node form:
+   *  {"$element":"pkg#Export","props":{...},"text":"..."}; it exists for
+   *  element-valued component props such as MUI input adornments. */
   fixedProps?: Record<string, unknown>;
   /** MUI round (Card live finding): the library's CANONICAL child
    *  composition — sampleText mounts wrapped in this imported component
@@ -311,6 +318,48 @@ export interface CaptureConfig {
    *  contracts whose anatomy carries `icon.asset` refs (Spinner) need the
    *  same asset map the showcase generators use for validation + the gate. */
   icons?: string;
+  /** FC-FONT-SUBSTRATE (hillclimb §FC table) — OPT-IN per-library webfont
+   *  loading for every render this config drives (capture page, portal page,
+   *  fidelity-gate page). DEFAULT OFF: a config without this field renders
+   *  exactly as before — CSS-fallback glyphs — and no committed reference
+   *  moves until it is deliberately re-pinned.
+   *
+   *  Why it exists: the harness is network-free, so a library whose real
+   *  face arrives via a CDN `@import`/`@font-face` (Altitude's main.css
+   *  Google-Fonts import, Carbon's 105 Akamai-src faces) renders its text in
+   *  whatever the fallback stack resolves to — glyph-dominated pixel diffs
+   *  then fail-closed on a HARNESS artifact, not a conversion defect.
+   *
+   *  Each face names a font FILE from a committed or sandboxed source
+   *  (repo-relative; e.g. extract/computed/fonts/… committed from
+   *  @ibm/plex-sans — IBM Plex ships in npm). The file is inlined as a
+   *  base64 `data:` URI, so the page stays hermetic: NO network fetch at
+   *  render or check time, ever. A declared file that does not exist is
+   *  refused by name (a silently absent face would re-pin fallback glyphs
+   *  while the config claims the real ones).
+   *
+   *  DETERMINISM: same font files + same pinned Chromium on the recording
+   *  platform → same rasters (the data: URI carries the bytes; nothing is
+   *  resolved from the host). __REVIEW DISCIPLINE: when the family/weights
+   *  are the library's own declaration (Altitude's @import names IBM Plex
+   *  Sans 400/600), state that provenance in `__note`; when they are a GUESS
+   *  (a system-stack library with no webfont of its own), the field must
+   *  carry a `"__review:fonts"` marker until a human acks the choice —
+   *  drafts never re-pin references. */
+  fonts?: {
+    __note?: string;
+    faces: Array<{
+      /** CSS font-family name, exactly as the library's stack spells it. */
+      family: string;
+      /** CSS font-weight for the face (default 400). */
+      weight?: number | string;
+      /** CSS font-style for the face (default 'normal'). */
+      style?: 'normal' | 'italic';
+      /** Repo-relative font file (woff2/woff/ttf) from a committed or
+       *  sandboxed source — inlined as a data: URI, never fetched. */
+      file: string;
+    }>;
+  };
   browser: {
     viewport: { width: number; height: number };
     deviceScaleFactor: number;
@@ -670,13 +719,19 @@ export function buildHarnessPage(
   );
   // Round 4 presence-value marker grammar: collect $import values into real
   // import statements; markers resolve at mount time (resolveMarkers below).
-  // MOLECULE round: $render carries the same "pkg#Export" spelling — the
-  // referenced Export is imported the same way.
+  // MOLECULE round: $render/$element carry the same "pkg#Export" spelling —
+  // the referenced Export is imported the same way.
   const extraImports = new Map<string, Set<string>>(); // pkg → exports
   const collectImports = (v: unknown): void => {
     if (v && typeof v === 'object') {
       const rec = v as Record<string, unknown>;
-      const imp = typeof rec['$import'] === 'string' ? rec['$import'] : typeof rec['$render'] === 'string' ? rec['$render'] : undefined;
+      const imp = typeof rec['$import'] === 'string'
+        ? rec['$import']
+        : typeof rec['$render'] === 'string'
+          ? rec['$render']
+          : typeof rec['$element'] === 'string'
+            ? rec['$element']
+            : undefined;
       if (typeof imp === 'string') {
         const [pkg, name] = imp.split('#');
         (extraImports.get(pkg) ?? extraImports.set(pkg, new Set()).get(pkg)!).add(name);
@@ -735,12 +790,17 @@ const stage = stageStyle({ width: ${cfg.stage.width}, height: ${cfg.stage.height
 // presence-value marker grammar: {"$callback":true} → () => {};
 // {"$import":"pkg#Name"} → the imported binding (resolved recursively);
 // {"$render":"pkg#Name"} → (params) => <Name {...params} /> — the identity
-// render-prop, the ONLY function shape admitted (MOLECULE round).
+// render-prop; {"$element":"pkg#Name","props":{},"text":"..."} → a bounded
+// React element for element-valued props (for example input adornments).
 function resolveMarkers(v) {
   if (v && typeof v === 'object') {
     if (v.$callback === true) return () => {};
     if (typeof v.$import === 'string') return EXTRA[v.$import.split('#')[1]];
     if (typeof v.$render === 'string') { const K = EXTRA[v.$render.split('#')[1]]; return (params) => React.createElement(K, params); }
+    if (typeof v.$element === 'string') {
+      const K = EXTRA[v.$element.split('#')[1]];
+      return React.createElement(K, resolveMarkers(v.props || {}), v.text == null ? undefined : String(v.text));
+    }
     if (Array.isArray(v)) return v.map(resolveMarkers);
     const out = {};
     for (const [k, x] of Object.entries(v)) out[k] = resolveMarkers(x);
@@ -829,7 +889,7 @@ createRoot(document.getElementById('root')).render(<App />);
   writeFileSync(
     path.join(pageDir, 'index.html'),
     `<!doctype html><html><head><meta charset="utf-8">
-${headStyleTags(harness, cfg)}${preScriptTag(cfg)}${bundleCss ? `<style>${bundleCss}</style>` : ''}
+${fontFaceStyleTag(CAPTURE_REPO_ROOT, cfg)}${headStyleTags(harness, cfg)}${preScriptTag(cfg)}${bundleCss ? `<style>${bundleCss}</style>` : ''}
 <style>html { color-scheme: ${cfg.browser.colorScheme}; } body { margin: 0; background: #ddd; }</style>
 </head><body><div id="root"></div>
 <script>
@@ -865,6 +925,53 @@ export function headStyleTags(harness: string, cfg: CaptureConfig): string {
       return `<style${s.id ? ` id="${s.id}"` : ''}>${css}</style>\n`;
     })
     .join('');
+}
+
+/** FC-FONT-SUBSTRATE — `fonts.faces` → one `<style>` of `@font-face` blocks
+ *  whose `src` is a base64 `data:` URI of the committed/sandboxed font file.
+ *  '' when the config declares none, so every existing page is byte-unchanged
+ *  (default off). A declared file that does not exist REFUSES BY NAME: a
+ *  silently missing face would re-pin fallback glyphs while the config claims
+ *  the library's real font. Hermetic by construction — the bytes ride the
+ *  page; nothing is fetched at render or check time. */
+const FONT_MIME: Record<string, string> = {
+  '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+  '.ttf': 'font/ttf',
+  '.otf': 'font/otf',
+};
+export function fontFaceCss(repoRoot: string, cfg: CaptureConfig): string {
+  const faces = cfg.fonts?.faces ?? [];
+  if (faces.length === 0) return '';
+  if (Object.keys(cfg.fonts as Record<string, unknown>).some((k) => k.startsWith('__review'))) {
+    throw new Error(
+      `fonts: config carries an unreviewed "__review:*" marker — a guessed font face never renders a reference (draft ≠ approved; delete the marker after human review)`,
+    );
+  }
+  return faces
+    .map((f) => {
+      const p = path.join(repoRoot, f.file);
+      if (!existsSync(p)) {
+        throw new Error(
+          `fonts: ${f.file} not found (${p}) — the "${f.family}" face would silently fall back and the render would carry fallback glyphs while the config claims the real font`,
+        );
+      }
+      const ext = path.extname(f.file).toLowerCase();
+      const mime = FONT_MIME[ext];
+      if (!mime) {
+        throw new Error(`fonts: ${f.file} has unsupported extension "${ext}" (woff2/woff/ttf/otf)`);
+      }
+      const data = readFileSync(p).toString('base64');
+      return `@font-face { font-family: ${JSON.stringify(f.family)}; font-weight: ${f.weight ?? 400}; font-style: ${f.style ?? 'normal'}; src: url(data:${mime};base64,${data}) format(${JSON.stringify(ext.slice(1))}); }`;
+    })
+    .join('\n');
+}
+
+/** The `<style>` tag wrapping fontFaceCss for the harness/portal/gate pages —
+ *  '' when no faces are configured (default off, pages byte-unchanged). */
+export function fontFaceStyleTag(repoRoot: string, cfg: CaptureConfig): string {
+  const css = fontFaceCss(repoRoot, cfg);
+  return css === '' ? '' : `<style data-harness-fonts>${css}</style>\n`;
 }
 
 /** SHADOW-DOM ROUND — `mount.preScript` → one inline `<script>` in <head>,
@@ -1700,7 +1807,8 @@ const PORTAL_STAGE_ID = 'depth-stage';
  *  combo). MOLECULE round: every enumerated combo is baked (per-combo props
  *  via comboProps — presence/state axes included), and the canonical-children
  *  vocabulary (childWrap / childrenSpec / $render) matches buildHarnessPage.
- *  Mirrors buildHarnessPage's marker grammar ($callback/$import/$render) and
+ *  Mirrors buildHarnessPage's marker grammar
+ *  ($callback/$import/$render/$element) and
  *  provider wrapping. */
 export function buildPortalHarnessPage(
   harness: string,
@@ -1715,13 +1823,19 @@ export function buildPortalHarnessPage(
     props: { ...comboProps(comp, space, combo), ...(comp.openDriver ?? {}) } as Record<string, unknown>,
   }));
 
-  // $import/$render markers anywhere in the props become real import
+  // $import/$render/$element markers anywhere in the props become real import
   // statements (resolved at mount by resolveMarkers), as buildHarnessPage.
   const extraImports = new Map<string, Set<string>>();
   const collectImports = (v: unknown): void => {
     if (v && typeof v === 'object') {
       const rec = v as Record<string, unknown>;
-      const imp = typeof rec['$import'] === 'string' ? rec['$import'] : typeof rec['$render'] === 'string' ? rec['$render'] : undefined;
+      const imp = typeof rec['$import'] === 'string'
+        ? rec['$import']
+        : typeof rec['$render'] === 'string'
+          ? rec['$render']
+          : typeof rec['$element'] === 'string'
+            ? rec['$element']
+            : undefined;
       if (typeof imp === 'string') {
         const [pkg, name] = imp.split('#');
         (extraImports.get(pkg) ?? extraImports.set(pkg, new Set()).get(pkg)!).add(name);
@@ -1779,6 +1893,10 @@ function resolveMarkers(v) {
     if (v.$callback === true) return () => {};
     if (typeof v.$import === 'string') return EXTRA[v.$import.split('#')[1]];
     if (typeof v.$render === 'string') { const K = EXTRA[v.$render.split('#')[1]]; return (params) => React.createElement(K, params); }
+    if (typeof v.$element === 'string') {
+      const K = EXTRA[v.$element.split('#')[1]];
+      return React.createElement(K, resolveMarkers(v.props || {}), v.text == null ? undefined : String(v.text));
+    }
     if (Array.isArray(v)) return v.map(resolveMarkers);
     const out = {};
     for (const [k, x] of Object.entries(v)) out[k] = resolveMarkers(x);
@@ -1850,7 +1968,7 @@ window.__setSpec(false);
   writeFileSync(
     path.join(pageDir, 'index.html'),
     `<!doctype html><html><head><meta charset="utf-8">
-${headStyleTags(harness, cfg)}${preScriptTag(cfg)}${bundleCss ? `<style>${bundleCss}</style>` : ''}
+${fontFaceStyleTag(CAPTURE_REPO_ROOT, cfg)}${headStyleTags(harness, cfg)}${preScriptTag(cfg)}${bundleCss ? `<style>${bundleCss}</style>` : ''}
 <style>html { color-scheme: ${cfg.browser.colorScheme}; } body { margin: 0; background: #ddd; }</style>
 </head><body><div id="root"></div>
 <script>document.addEventListener('click', (e) => e.preventDefault(), true);</script>

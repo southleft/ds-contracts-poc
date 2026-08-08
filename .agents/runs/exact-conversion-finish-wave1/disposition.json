@@ -1,0 +1,26 @@
+{
+  "run_id": "exact-conversion-finish-wave1",
+  "seams_triaged": ["writes-mutations"],
+  "seams": [
+    {
+      "class": "writes-mutations",
+      "hint": "packages/cli/src/commands/figma.ts#commitReceiveWrites + receive --apply generated code destinations",
+      "contract_source": "specialist",
+      "contract_evidence": "subagent 906a1790-2ce0-47ef-bae8-42653021a6e8 security review write seam",
+      "review_result": "exposure-found",
+      "named_exposures": [
+        "receive --apply committed generateCodeFiles destPaths without assertSafeRepoPath / generate.out containment"
+      ],
+      "exposures": [
+        {
+          "id": "receive-apply-generated-path-traversal",
+          "summary": "Bridge-delivered contract.name could produce destPaths with .. and write outside generate.out on figma receive --apply when code generation is enabled.",
+          "disposition": "remediated",
+          "disposer": "manager-implementer",
+          "tracking": "assertUniqueDestinations + assertDestinationsUnderRoot before commitReceiveWrites; ATTACK test in figma-receive.test.ts"
+        }
+      ]
+    }
+  ],
+  "verdict_emitted": "READY"
+}

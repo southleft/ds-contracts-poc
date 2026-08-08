@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "tailwind",
+  "stem": "button",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/tailwind/components/button.json",
+  "status": "pass",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385245229284424737",
+  "setNodeId": "1:2254",
+  "cellNodeId": "1:2164",
+  "cellName": "Color=Default, Size=Md, State=Default",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 9.970588235294118,
+    "pctAAUnmasked": 1.9705882352941178,
+    "pctAAMasked": 1.9705882352941178,
+    "maskCoveragePct": 0,
+    "canvasPx": "85x40",
+    "realPx": "84x40",
+    "inkCanvasPct": 97.88235294117648,
+    "inkRealPct": 94.61764705882352
+  },
+  "reference": "parity/receipts/console-loop/tailwind/refs/button.png",
+  "referenceSha256": "06dbe7621273c2c759271bb5fdb7d20dc04761973d1ca6b2ebb7742823038be1",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/tailwind/shots/button.png",
+  "canvasShotSha256": "cd7c1235812807eebd6aface48ec13a4d24da7f5bccab6881ddbed01bafe7f98",
+  "diff": "parity/receipts/console-loop/visual-truth/tailwind/diffs/button.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0119047619047619,
+  "inkDelta": 3.2647058823529562,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

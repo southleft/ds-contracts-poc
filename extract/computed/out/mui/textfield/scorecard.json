@@ -1,0 +1,429 @@
+{
+  "component": "TextField",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 952,
+    "cellsEqual": 912,
+    "pctEqual": 95.7983193277311,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 2.367063492063492,
+    "meanAA": 1.6686507936507937,
+    "maxAA": 2.2063492063492065
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 40,
+    "mintedLeavesUnfolded": 36,
+    "baseBindings": 101,
+    "stateBindings": 10,
+    "codeOnlyChannels": 10,
+    "overflowBindings": 10,
+    "folds": 106
+  },
+  "worstRows": [
+    {
+      "key": "__focus-visible",
+      "pctAA": 2.2063492063492065,
+      "pctExact": 2.9107142857142856,
+      "channelsMismatched": 12
+    },
+    {
+      "key": "__active",
+      "pctAA": 2.2063492063492065,
+      "pctExact": 2.9107142857142856,
+      "channelsMismatched": 12
+    },
+    {
+      "key": "__default",
+      "pctAA": 1.130952380952381,
+      "pctExact": 1.8234126984126984,
+      "channelsMismatched": 8
+    },
+    {
+      "key": "__hover",
+      "pctAA": 1.130952380952381,
+      "pctExact": 1.8234126984126984,
+      "channelsMismatched": 8
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.display",
+      4
+    ],
+    [
+      "root.vertical-align",
+      4
+    ],
+    [
+      "label.max-width",
+      4
+    ],
+    [
+      "label.transform",
+      4
+    ],
+    [
+      "label.transition-behavior",
+      4
+    ],
+    [
+      "inputbase-input.animation-duration",
+      4
+    ],
+    [
+      "inputbase-input.animation-name",
+      4
+    ],
+    [
+      "outlinedinput-notchedoutline.min-width",
+      4
+    ],
+    [
+      "outlinedinput-notchedoutline.border-bottom-width",
+      2
+    ],
+    [
+      "outlinedinput-notchedoutline.border-left-width",
+      2
+    ],
+    [
+      "outlinedinput-notchedoutline.border-right-width",
+      2
+    ],
+    [
+      "outlinedinput-notchedoutline.border-top-width",
+      2
+    ]
+  ],
+  "namedLosses": [
+    "promotion: inert-overlay-wrapper: part-1-3-0 draws no box in any captured combo, carries no text/icon/shape of its own, and every one of its 1 child part(s) is declared display:none — a carried part that draws NOTHING; refused by name (Carbon's tooltip `popover` wrapper; census sibling of the portal round's stripInertPortalChildren)",
+    "promotion: static-part-unrendered: reviewed static part \"start-adornment\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
+    "promotion: static-part-unrendered: reviewed static part \"end-adornment\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
+    "overflow: inputbase-input.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-bottom-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-left-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-right-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-top-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: inputbase-input.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-bottom-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-left-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-right-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-top-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.max-width — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: label.transform — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: label.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-input.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-input.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: outlinedinput-notchedoutline.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-5.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/mui/tokens/mui-minted.dtcg.json",
+    "leavesAdded": 1381,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 238,
+      "channelsEqual": 230,
+      "pctExact": 1.8234126984126984,
+      "pctAA": 1.130952380952381,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 238,
+      "channelsEqual": 230,
+      "pctExact": 1.8234126984126984,
+      "pctAA": 1.130952380952381,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 238,
+      "channelsEqual": 226,
+      "pctExact": 2.9107142857142856,
+      "pctAA": 2.2063492063492065,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 238,
+      "channelsEqual": 226,
+      "pctExact": 2.9107142857142856,
+      "pctAA": 2.2063492063492065,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "accordion",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/accordion.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "21:79",
+  "cellNodeId": "21:39",
+  "cellName": "Variant=Elevation, Expanded=Collapsed",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 15.12413793103448,
+    "pctAAUnmasked": 7.344827586206897,
+    "pctAAMasked": 7.344827586206897,
+    "maskCoveragePct": 0,
+    "canvasPx": "290x50",
+    "realPx": "146x43",
+    "inkCanvasPct": 7.813793103448276,
+    "inkRealPct": 5.958620689655173
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/accordion.png",
+  "referenceSha256": "e81b66772c838c5b0c0a4951bc4c625929ad373d69cc549451d1ffc033c06f55",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/accordion.png",
+  "canvasShotSha256": "d9c1b726aaea7bc0c8023e88fc68fd4a09aba309b0dc1adbabaacdb24545ec14",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/accordion.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.9863013698630136,
+  "inkDelta": 1.8551724137931034,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.99, inkDelta=1.9)"
+}

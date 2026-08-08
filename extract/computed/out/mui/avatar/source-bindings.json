@@ -1,0 +1,55 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Avatar",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "circular",
+      "axisValues": {
+        "variant": "circular"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "rounded",
+      "axisValues": {
+        "variant": "rounded"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-wfgmm4-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "square",
+      "axisValues": {
+        "variant": "square"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-1f4hcgd-MuiAvatar-root"
+      }
+    }
+  ],
+  "skips": [
+    "root.background-color: candidate --mui-palette-Avatar-defaultBg → \"palette-avatar-default-bg\" = #bdbdbd (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

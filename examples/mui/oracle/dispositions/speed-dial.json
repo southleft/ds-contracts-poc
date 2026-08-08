@@ -1,0 +1,18 @@
+{
+  "componentId": "mui.speed-dial",
+  "stem": "speed-dial",
+  "status": "negative-control",
+  "authoredFrom": [
+    "docs/22-generality.md hard-class / organism notes",
+    "accuracy/grammar.json supportedArchetypes (SpeedDial absent)",
+    "examples/mui/PROVENANCE.md — hard classes not silently partial"
+  ],
+  "facts": [
+    {
+      "channel": "component",
+      "expect": "UNSUPPORTED",
+      "expectName": "mui-speed-dial-outside-grammar",
+      "expectWhere": "Wave 2 corpus negative control — nested Fab+actions organism is not in the declared supported archetype list; conversion must refuse by name or leave the component unpromoted, never emit a plausible blank/partial SpeedDial success."
+    }
+  ]
+}

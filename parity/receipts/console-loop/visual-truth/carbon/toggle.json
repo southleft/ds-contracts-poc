@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "carbon",
+  "stem": "toggle",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/carbon/components/toggle.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385245229284424737",
+  "setNodeId": "1:6126",
+  "cellNodeId": "1:6102",
+  "cellName": "Toggled=Toggled, State=Default",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 18.793793793793796,
+    "pctAAUnmasked": 8.558558558558559,
+    "pctAAMasked": 8.558558558558559,
+    "maskCoveragePct": 0,
+    "canvasPx": "74x53",
+    "realPx": "74x54",
+    "inkCanvasPct": 29.004004004004003,
+    "inkRealPct": 27.77777777777778
+  },
+  "reference": "extract/computed/out/carbon/toggle/gate-shots/toggled.enabled__default.png",
+  "referenceSha256": "5b6dcfb7b5a35b945722825c5c9dba96cc75f161a385bc540d92f2baf93dd377",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/carbon/shots/toggle.png",
+  "canvasShotSha256": "fa864bf4332892ab8da45c8981a8a28b9041c098e10f1e5d571b0d0a92259092",
+  "diff": "parity/receipts/console-loop/visual-truth/carbon/diffs/toggle.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0188679245283019,
+  "inkDelta": 1.226226226226224,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=8.56 > 5)"
+}

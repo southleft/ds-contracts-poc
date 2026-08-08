@@ -1,0 +1,21 @@
+{
+  "componentId": "mui.switch",
+  "stem": "switch",
+  "status": "in-pilot",
+  "authoredFrom": [
+    "examples/mui/PROVENANCE.md checked-axis projection",
+    "accuracy/grammar.json archetype toggle-switch"
+  ],
+  "facts": [
+    {
+      "channel": "props.checked",
+      "expect": "CARRIED",
+      "expectWhere": "checked is a VARIANT axis (enum), not a -state-checked name invention"
+    },
+    {
+      "channel": "layout.thumb-translate",
+      "expect": "CARRIED",
+      "expectWhere": "Checked thumb offset as size×checked product when measured; irreducible transform residue REFUSED/LEDGERED by name"
+    }
+  ]
+}

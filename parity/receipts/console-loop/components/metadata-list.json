@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "metadata-list",
+  "contract": "contracts/metadata-list.contract.json",
+  "script": "parity/receipts/console-loop/emitted/27-metadatalist.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:04.501Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1416",
+    "page": "MetadataList",
+    "sectionId": "1:1440",
+    "result": {
+      "createdNodeIds": [
+        "1:1416"
+      ],
+      "results": [
+        {
+          "name": "MetadataList",
+          "contractId": "ds.metadata-list",
+          "nodeId": "1:1416",
+          "key": "99cd5f4017b85a112a9ac2eb011702d4b329013b",
+          "variants": 1,
+          "properties": [
+            "Title#1:552"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1440 captured (ok).",
+      "MetadataList: 1 variant(s); type COMPONENT; page MetadataList.",
+      "Props: Title.",
+      "Sample text: \"Details\", \"Slot\", \"Owner\", \"Design Infrastructure\", \"Slot\", \"Status\", \"Active\", \"Slot\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:4200369828",
+    "lineCount": 110,
+    "sampleLines": [
+      ":COMPONENT/MetadataList|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/MetadataList|radius|0,0,0,0",
+      ":COMPONENT/MetadataList|layout|VERTICAL MIN/MIN gap 8 pad 0,0,0,0",
+      ":COMPONENT/MetadataList|sizing|FIXED/HUG AUTO",
+      ":COMPONENT/MetadataList|bound:itemSpacing|space/gap/sm",
+      ":COMPONENT/MetadataList|bound:width|size/card/width",
+      ":COMPONENT/MetadataList|description|MetadataList — generated from contract ds.metadata-list v1.0.0",
+      ":COMPONENT/MetadataList|propdef|Title#1:552:TEXT=Details",
+      "/0:TEXT/titleText|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.06666667014360428,\"g\":0.0941176488995552,\"b\":0.15294118225574493},\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]",
+      "/0:TEXT/titleText|radius|0,0,0,0",
+      "/0:TEXT/titleText|sizing|FILL/HUG AUTO",
+      "/0:TEXT/titleText|text|\"Details\" 14px {\"family\":\"Inter\",\"style\":\"Semi Bold\"}",
+      "/1:FRAME/items|fill|[]",
+      "/1:FRAME/items|radius|0,0,0,0",
+      "/1:FRAME/items|layout|VERTICAL MIN/MIN gap 8 pad 0,0,0,0",
+      "/1:FRAME/items|sizing|FILL/HUG AUTO",
+      "/1:FRAME/items|bound:itemSpacing|space/gap/sm",
+      "/1/0:INSTANCE/MetadataListItem|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/1/0:INSTANCE/MetadataListItem|radius|0,0,0,0",
+      "/1/0:INSTANCE/MetadataListItem|layout|HORIZONTAL MIN/MIN gap 16 pad 0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Title"
+    ],
+    "observed": {
+      "variantNames": [
+        "MetadataList"
+      ],
+      "propDefs": [
+        {
+          "name": "Title#1:552",
+          "type": "TEXT",
+          "defaultValue": "Details",
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "MetadataList",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/gap/sm",
+          "width": "size/card/width"
+        },
+        "textChild": [
+          {
+            "name": "titleText",
+            "chars": "Details",
+            "fontSize": 14
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Label",
+            "chars": "Owner",
+            "fontSize": 14
+          },
+          {
+            "name": "valueText",
+            "chars": "Design Infrastructure",
+            "fontSize": 14
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Label",
+            "chars": "Status",
+            "fontSize": 14
+          },
+          {
+            "name": "valueText",
+            "chars": "Active",
+            "fontSize": 14
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 320,
+        "h": 341,
+        "childNames": [
+          "titleText:TEXT",
+          "items:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

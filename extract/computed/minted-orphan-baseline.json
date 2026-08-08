@@ -8,28 +8,28 @@
     },
     {
       "library": "astryx",
-      "leaves": 408,
-      "unreferenced": 42
+      "leaves": 320,
+      "unreferenced": 8
     },
     {
       "library": "carbon",
-      "leaves": 868,
+      "leaves": 876,
       "unreferenced": 92
     },
     {
       "library": "eventz-vars",
-      "leaves": 53,
+      "leaves": 44,
       "unreferenced": 4
     },
     {
       "library": "mui",
-      "leaves": 1393,
-      "unreferenced": 355
+      "leaves": 1986,
+      "unreferenced": 373
     },
     {
       "library": "polaris",
-      "leaves": 1317,
-      "unreferenced": 635
+      "leaves": 1298,
+      "unreferenced": 619
     },
     {
       "library": "tailwind",

@@ -60,13 +60,21 @@ import {
   mkdirSync,
   readFileSync,
   readdirSync,
+  renameSync,
+  unlinkSync,
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
 import { figmaScriptEmitter } from "../../../../core/emitter.js";
 import {
+  contractFileNameForId,
+  flatIdStem,
+  proposalFileNameForId,
+} from "../../../../core/canvas-code-plan.js";
+import {
   assertContractProvenance,
   markAwaitingCodeAdoption,
+  revisionOf,
   type ProvenancedContract,
 } from "../../../../core/contract-provenance.js";
 import {
@@ -94,6 +102,12 @@ export const DEFAULT_BRIDGE_URL =
 /** The bundle envelope the bridge and the plugin agree on. */
 export const CONTRACTS_BUNDLE_TYPE = "CONTRACTS-BUNDLE";
 
+/** Stable refusal name — empty/stub anatomy must not report Apply or bundle
+ *  publication as success (Wave 1 acceptance #4). Matches the CI anatomy gate
+ *  in `examples/ci/code-led.yml` (substance predicate) and regate's
+ *  `empty anatomy table`. */
+export const DRAWABLE_EMPTY = "drawable-empty";
+
 export interface ContractsBundle {
   type: typeof CONTRACTS_BUNDLE_TYPE;
   version: 1;
@@ -104,6 +118,88 @@ export interface ContractsBundle {
   /** Bundle-carried icon assets ({name: svgMarkup}; figma bundle --icons
    *  writes it) — rides through push verbatim. */
   icons?: unknown;
+}
+
+/** True when an anatomy node (or any descendant part) carries drawable
+ *  substance: non-empty token bindings, a component ref, non-empty content,
+ *  or a child part that itself is drawable. Hollow `parts: { label: {} }`
+ *  and empty `content: {}` do not count — they still paint blank frames. */
+function anatomyNodeHasDrawableSubstance(node: unknown): boolean {
+  if (!node || typeof node !== "object" || Array.isArray(node)) return false;
+  const n = node as Record<string, unknown>;
+  const tokens = n.tokens;
+  if (
+    tokens &&
+    typeof tokens === "object" &&
+    !Array.isArray(tokens) &&
+    Object.keys(tokens).length > 0
+  ) {
+    return true;
+  }
+  if (n.component !== undefined && n.component !== null) return true;
+  const content = n.content;
+  if (content !== undefined && content !== null) {
+    if (typeof content === "object" && !Array.isArray(content)) {
+      if (Object.keys(content).length > 0) return true;
+    } else if (content !== "") {
+      return true;
+    }
+  }
+  const parts = n.parts;
+  if (parts && typeof parts === "object" && !Array.isArray(parts)) {
+    for (const child of Object.values(parts as Record<string, unknown>)) {
+      if (anatomyNodeHasDrawableSubstance(child)) return true;
+    }
+  }
+  return false;
+}
+
+/** True when a contract has nothing the canvas can draw — missing/empty
+ *  anatomy (regate: "empty anatomy table"), or a root/tree with no drawable
+ *  substance (CI stub test: `"anatomy":{"root":{}}`). PURE. */
+export function isDrawableEmptyContract(contract: unknown): boolean {
+  if (!contract || typeof contract !== "object" || Array.isArray(contract))
+    return true;
+  const anatomy = (contract as { anatomy?: unknown }).anatomy;
+  if (!anatomy || typeof anatomy !== "object" || Array.isArray(anatomy))
+    return true;
+  const roots = Object.keys(anatomy as object);
+  if (roots.length === 0) return true;
+  const root =
+    (anatomy as Record<string, unknown>).root ??
+    (anatomy as Record<string, unknown>)[roots[0]];
+  return !anatomyNodeHasDrawableSubstance(root);
+}
+
+/** Named refusal for canvas success paths (bundle / publish / receive --apply). */
+export function drawableEmptyRefusalMessage(
+  contract: unknown,
+  surface: "bundle" | "publish" | "apply",
+): string {
+  const id =
+    contract &&
+    typeof contract === "object" &&
+    typeof (contract as { id?: unknown }).id === "string"
+      ? (contract as { id: string }).id
+      : "(unnamed)";
+  const verb =
+    surface === "apply"
+      ? "apply refuses rather than writing blank frames"
+      : surface === "publish"
+        ? "publish refuses rather than delivering blank frames"
+        : "bundle refuses rather than publishing blank frames";
+  return `${DRAWABLE_EMPTY}: ${id} — anatomy has nothing drawable (empty anatomy / empty root / hollow parts or content with no tokens, content binding, or component); ${verb}. Run computed capture or carry real anatomy first.`;
+}
+
+export function assertContractsNotDrawableEmpty(
+  contracts: readonly unknown[],
+  surface: "bundle" | "publish",
+): void {
+  for (const contract of contracts) {
+    if (isDrawableEmptyContract(contract)) {
+      throw new CliUsageError(drawableEmptyRefusalMessage(contract, surface));
+    }
+  }
 }
 
 /** Read a file as a bundle: an existing CONTRACTS-BUNDLE envelope passes
@@ -137,6 +233,8 @@ export function toBundle(filePath: string): ContractsBundle {
         `bundle contract ${i + 1}`,
       );
     }
+    // Push/publish share this door — blank anatomy must not ride a success path.
+    assertContractsNotDrawableEmpty(contracts, "publish");
     return {
       type: CONTRACTS_BUNDLE_TYPE,
       version: 1,
@@ -154,6 +252,7 @@ export function toBundle(filePath: string): ContractsBundle {
       raw as ProvenancedContract,
       String((raw as { id: string }).id),
     );
+    assertContractsNotDrawableEmpty([raw], "publish");
     return { type: CONTRACTS_BUNDLE_TYPE, version: 1, contracts: [raw] };
   }
   throw new CliUsageError(
@@ -218,6 +317,9 @@ async function bundleCommand(argv: string[]): Promise<number> {
       String(contract.id ?? files[i]),
     ),
   );
+  // Stub / empty anatomy is schema-valid and used to publish blank Figma
+  // frames as a quiet success — refuse by name before any bundle bytes land.
+  assertContractsNotDrawableEmpty(contracts, "bundle");
 
   // MOLECULE round: contracts referencing icon assets (icon.asset) make the
   // bundle carry the SVGs — JSON stays the only thing a user pastes. Exactly
@@ -665,6 +767,20 @@ async function publishCommand(argv: string[]): Promise<number> {
  *  proposeDiff's exportJson) and the bridge tags as kind 'proposal'. */
 export const CONTRACT_PROPOSAL_TYPE = "CONTRACT-PROPOSAL";
 
+export type ProposalProjection =
+  | {
+      status: "verified-exact";
+      propertyNames: string[];
+      expectedCount: number;
+      observedCount: number;
+      tupleSetHash: string;
+      tuples: string[];
+    }
+  | {
+      status: "legacy-unverified";
+      reason: "structured-exact-evidence-absent";
+    };
+
 export interface ProposalEnvelope {
   type: typeof CONTRACT_PROPOSAL_TYPE;
   baseContractId: string;
@@ -673,6 +789,9 @@ export interface ProposalEnvelope {
   summary: string[];
   proposedContract: Record<string, unknown>;
   proposalNotes: string[];
+  /** Exact returned-tuple proof, or an explicit legacy inversion receipt.
+   *  Absent only on pre-v1.14 envelopes. */
+  projection?: ProposalProjection;
   /** ENVELOPE v2: auto-proposed STUB contracts for nested instances with no
    *  contract in scope. The engine always produced these; the export doors
    *  used to drop them, leaving the proposed contract with dangling
@@ -721,6 +840,66 @@ export function parseProposal(
       error:
         "neither proposedContract.id nor baseContractId names the contract — the proposal cannot be matched to a file",
     };
+  }
+  let projection: ProposalProjection | undefined;
+  if (o.projection !== undefined && o.projection !== null) {
+    if (typeof o.projection !== "object" || Array.isArray(o.projection)) {
+      return {
+        ok: false,
+        error:
+          'the proposal "projection" receipt is not an object — re-export from the plugin',
+      };
+    }
+    const p = o.projection as Record<string, unknown>;
+    if (p.status === "legacy-unverified") {
+      if (p.reason !== "structured-exact-evidence-absent") {
+        return {
+          ok: false,
+          error:
+            "the proposal's legacy projection receipt has an unknown reason",
+        };
+      }
+      projection = {
+        status: "legacy-unverified",
+        reason: "structured-exact-evidence-absent",
+      };
+    } else if (p.status === "verified-exact") {
+      const propertyNames = p.propertyNames;
+      const tuples = p.tuples;
+      if (
+        !Array.isArray(propertyNames) ||
+        propertyNames.some((value) => typeof value !== "string") ||
+        new Set(propertyNames).size !== propertyNames.length ||
+        !Array.isArray(tuples) ||
+        tuples.some((value) => typeof value !== "string") ||
+        new Set(tuples).size !== tuples.length ||
+        !Number.isInteger(p.expectedCount) ||
+        !Number.isInteger(p.observedCount) ||
+        p.expectedCount !== tuples.length ||
+        p.observedCount !== tuples.length ||
+        p.tupleSetHash !==
+          revisionOf([...tuples].sort()).slice("sha256:".length)
+      ) {
+        return {
+          ok: false,
+          error:
+            "the proposal's verified-exact projection receipt is malformed or does not match its tuple set",
+        };
+      }
+      projection = {
+        status: "verified-exact",
+        propertyNames: [...propertyNames],
+        expectedCount: p.expectedCount as number,
+        observedCount: p.observedCount as number,
+        tupleSetHash: p.tupleSetHash as string,
+        tuples: [...tuples],
+      };
+    } else {
+      return {
+        ok: false,
+        error: `the proposal projection is not verified exact or explicitly legacy (got ${JSON.stringify(p.status ?? null)})`,
+      };
+    }
   }
   // ENVELOPE v2 payloads. ABSENT fields are the old envelope shape and pass
   // untouched (backward compatible); a PRESENT-but-malformed field is a
@@ -805,6 +984,7 @@ export function parseProposal(
         ? o.summary.filter((s): s is string => typeof s === "string")
         : [],
       proposedContract: proposed as Record<string, unknown>,
+      ...(projection ? { projection } : {}),
       proposalNotes: Array.isArray(o.proposalNotes)
         ? o.proposalNotes.filter((s): s is string => typeof s === "string")
         : [],
@@ -823,21 +1003,17 @@ export function parseProposal(
  *  and the old form let `ds.../../x` walk the write out of --out (executed:
  *  ESCAPED-STUB.contract.json landed one directory above the target). Every
  *  character outside the schema's own id alphabet is replaced, path separators
- *  included, so the result is always a single flat filename. */
-const flatIdStem = (id: string, fallback: string): string =>
-  id
-    .normalize("NFKC")
-    .replace(/[^a-zA-Z0-9._-]+/g, "-")
-    .replace(/\.\.+/g, ".")
-    .replace(/^[.-]+|[.-]+$/g, "") || fallback;
-
-export const contractFileNameForId = (id: string): string =>
-  `${flatIdStem(id.replace(/^[^.]+\./, ""), "stub")}.contract.json`;
-
-/** Proposal artifacts retain valid ids verbatim for backward-compatible
- * filenames, while hostile ids collapse to one flat basename. */
-export const proposalFileNameForId = (id: string): string =>
-  `${flatIdStem(id, "proposal")}.proposal.json`;
+ *  included, so the result is always a single flat filename.
+ *
+ *  MOVED to core/canvas-code-plan.ts (the plugin's GitHub PR door now plans
+ *  the same file layout, and the naming rule must be ONE function on both
+ *  sides) — re-exported here so every existing CLI import keeps working. */
+export {
+  contractFileNameForId,
+  flatIdStem,
+  mintedTokensFileNameForId,
+  proposalFileNameForId,
+} from "../../../../core/canvas-code-plan.js";
 
 /** Resolve a planned output below a trusted root. Both native and Windows
  * absolute forms are rejected so a plan remains safe across platforms. */
@@ -862,6 +1038,79 @@ export function containedOutputPath(root: string, plannedPath: string): string {
     );
   }
   return resolved;
+}
+
+export interface ReceiveCommitOptions {
+  /** Fault-injection seam used by rollback tests. */
+  beforeInstall?: (index: number, destination: string) => void;
+}
+
+/** Commit every receive/apply artifact as one rollback-capable transaction.
+ * All bodies must be generated and validated before this function is called. */
+export function commitReceiveWrites(
+  plannedWrites: Map<string, string>,
+  options: ReceiveCommitOptions = {},
+): void {
+  const records: Array<{
+    destination: string;
+    temporary: string;
+    backup: string;
+    originalMoved: boolean;
+    installed: boolean;
+  }> = [];
+  try {
+    let index = 0;
+    for (const [destination, contents] of plannedWrites) {
+      mkdirSync(path.dirname(destination), { recursive: true });
+      const suffix = `.receive-${process.pid}-${index++}`;
+      const record = {
+        destination,
+        temporary: `${destination}${suffix}.tmp`,
+        backup: `${destination}${suffix}.bak`,
+        originalMoved: false,
+        installed: false,
+      };
+      writeFileSync(record.temporary, contents);
+      records.push(record);
+    }
+    for (const [index, record] of records.entries()) {
+      if (existsSync(record.destination)) {
+        renameSync(record.destination, record.backup);
+        record.originalMoved = true;
+      }
+      options.beforeInstall?.(index, record.destination);
+      renameSync(record.temporary, record.destination);
+      record.installed = true;
+    }
+  } catch (error) {
+    const rollbackErrors: unknown[] = [];
+    for (const record of [...records].reverse()) {
+      try {
+        if (record.installed && existsSync(record.destination)) {
+          unlinkSync(record.destination);
+        }
+        if (record.originalMoved && existsSync(record.backup)) {
+          renameSync(record.backup, record.destination);
+        }
+      } catch (rollbackError) {
+        rollbackErrors.push(rollbackError);
+      }
+    }
+    if (rollbackErrors.length > 0) {
+      throw new AggregateError(
+        [error, ...rollbackErrors],
+        "receive commit failed and rollback was incomplete; manual recovery artifacts were preserved",
+      );
+    }
+    for (const record of records) {
+      if (existsSync(record.temporary)) unlinkSync(record.temporary);
+      if (existsSync(record.backup)) unlinkSync(record.backup);
+    }
+    throw error;
+  }
+  for (const record of records) {
+    if (existsSync(record.backup)) unlinkSync(record.backup);
+  }
 }
 
 /** Minimal unified diff (LCS over lines, 3 lines of context) — zero-dep by
@@ -1282,6 +1531,18 @@ async function receiveCommand(argv: string[]): Promise<number> {
     },
   );
 
+  // --apply must not report success for blank anatomy. Refuse BEFORE
+  // commitReceiveWrites mutates anything (proposal, contract, stubs, tokens,
+  // or generated code). Without --apply the proposal artifact may still land
+  // for review — same split as the CI anatomy gate (contracts commit; canvas
+  // delivery does not).
+  if (apply && isDrawableEmptyContract(proposal.proposedContract)) {
+    console.error(
+      `✘ Refused — ${drawableEmptyRefusalMessage(proposal.proposedContract, "apply")}`,
+    );
+    return 1;
+  }
+
   // Validate the COMPLETE write set before the first mkdir/write. This keeps
   // a hostile late entry from leaving an earlier artifact or contract behind.
   const plannedOutputs = [
@@ -1306,11 +1567,8 @@ async function receiveCommand(argv: string[]): Promise<number> {
     return resolved;
   };
 
-  mkdirSync(path.dirname(outputPath(plan.proposalFileName)), {
-    recursive: true,
-  });
-  writeFileSync(outputPath(plan.proposalFileName), plan.proposalText);
-  console.log(`✔ Proposal saved: ${path.join(out, plan.proposalFileName)}`);
+  const proposalSaved = () =>
+    console.log(`✔ Proposal saved: ${path.join(out, plan.proposalFileName)}`);
 
   if (proposal.summary.length > 0) {
     console.log(`\nProposed change — ${proposal.setName ?? plan.contractId}:`);
@@ -1346,16 +1604,11 @@ async function receiveCommand(argv: string[]): Promise<number> {
 
   const writeExtras = () => {
     for (const s of plan.stubWrites) {
-      writeFileSync(outputPath(s.fileName), s.contents);
       console.log(
         `✔ Wrote stub contract ${path.join(out, s.fileName)} (${s.contractId}) — replace it by importing the real child set.`,
       );
     }
     if (plan.mintedWrite) {
-      writeFileSync(
-        outputPath(plan.mintedWrite.fileName),
-        plan.mintedWrite.contents,
-      );
       console.log(
         `✔ Wrote minted token tree ${path.join(out, plan.mintedWrite.fileName)} — provisional names; review before adopting.`,
       );
@@ -1370,8 +1623,34 @@ async function receiveCommand(argv: string[]): Promise<number> {
       );
     }
   };
+  const plannedReceiveWrites = (
+    codeFiles: Array<{ destPath: string; contents: string }> = [],
+  ): Map<string, string> => {
+    const writes = new Map<string, string>([
+      [outputPath(plan.proposalFileName), plan.proposalText],
+    ]);
+    if (plan.contractWrite) {
+      writes.set(
+        outputPath(plan.contractWrite.fileName),
+        plan.contractWrite.contents,
+      );
+    }
+    for (const stub of plan.stubWrites) {
+      writes.set(outputPath(stub.fileName), stub.contents);
+    }
+    if (plan.mintedWrite) {
+      writes.set(
+        outputPath(plan.mintedWrite.fileName),
+        plan.mintedWrite.contents,
+      );
+    }
+    for (const file of codeFiles) writes.set(file.destPath, file.contents);
+    return writes;
+  };
 
   if (!plan.changed) {
+    commitReceiveWrites(plannedReceiveWrites());
+    proposalSaved();
     console.log(
       `\n${plan.fileName} already matches the proposal byte-for-byte — nothing to apply to it.`,
     );
@@ -1386,20 +1665,13 @@ async function receiveCommand(argv: string[]): Promise<number> {
   for (const line of plan.diff) console.log(line);
 
   if (plan.contractWrite === null) {
+    commitReceiveWrites(plannedReceiveWrites());
+    proposalSaved();
     console.log(
       `\nNothing written to ${plan.fileName}${stubCount > 0 || mintedCount > 0 ? " (nor the stub/minted files above)" : ""} — review the diff, then re-run with --apply to write ${stubCount > 0 || mintedCount > 0 ? "all of it" : "it"} (or apply by hand from ${path.join(out, plan.proposalFileName)}).`,
     );
     return 0;
   }
-  writeFileSync(
-    outputPath(plan.contractWrite.fileName),
-    plan.contractWrite.contents,
-  );
-  console.log(
-    `\n✔ Wrote ${path.join(out, plan.contractWrite.fileName)} — review the diff and commit it yourself (ds-contracts never touches git).`,
-  );
-  writeExtras();
-
   // The landed contract is only half of what the proposal is worth: a
   // contract nobody can run is a document. `propose-pr` already carries both
   // halves into one PR; this door now does the same on disk — SAME
@@ -1407,19 +1679,25 @@ async function receiveCommand(argv: string[]): Promise<number> {
   // (the shipping generator), same named refusal printed when there is no
   // recorded target. Reached only under --apply: without it, plan.contractWrite
   // is null and this command's whole contract is that it writes nothing.
-  const { generateCodeFiles, loadDsConfig, resolveCodeConfig } =
-    await import("./propose-pr.js");
+  const {
+    assertDestinationsUnderRoot,
+    assertUniqueDestinations,
+    generateCodeFiles,
+    loadDsConfig,
+    resolveCodeConfig,
+  } = await import("./propose-pr.js");
   const rc = resolveCodeConfig(
     { noCode: false },
     loadDsConfig(process.cwd()),
     "ds-contracts.config.json",
   );
-  if (!rc.ok) console.log(`\nNo component code generated — ${rc.reason}`);
-  else {
+  let codeFiles: Array<{ destPath: string; contents: string }> = [];
+  let codeNotes: string[] = [];
+  if (rc.ok) {
     // ENVELOPE v2: the stubs ride into the generation scope and the minted
     // tree rides the token inventory — without them a foreign-kit proposal's
     // component/token refs refuse by name and the door dead-ends.
-    const { files, notes } = await generateCodeFiles(
+    const generated = await generateCodeFiles(
       plan.contractWrite.contents,
       rc.config,
       process.cwd(),
@@ -1428,14 +1706,31 @@ async function receiveCommand(argv: string[]): Promise<number> {
         mintedTree: proposal.mintedTokens?.tree ?? null,
       },
     );
-    for (const f of files) {
-      mkdirSync(path.dirname(f.destPath), { recursive: true });
-      writeFileSync(f.destPath, f.contents);
-    }
+    codeFiles = generated.files;
+    codeNotes = generated.notes;
+    // Bridge-delivered contract.name feeds emitter filenames. Propose-pr
+    // already refused unsafe destPaths; receive --apply must do the same
+    // before commitReceiveWrites or a traversal-shaped name writes outside
+    // generate.out / cwd.
+    assertUniqueDestinations(codeFiles);
+    assertDestinationsUnderRoot(codeFiles, process.cwd(), rc.config.outDir);
+  }
+
+  // All parsers, emitters, destination checks, and code generation have
+  // completed. Only now may any artifact move into place.
+  commitReceiveWrites(plannedReceiveWrites(codeFiles));
+  proposalSaved();
+  console.log(
+    `\n✔ Wrote ${path.join(out, plan.contractWrite.fileName)} — review the diff and commit it yourself (ds-contracts never touches git).`,
+  );
+  writeExtras();
+  if (!rc.ok) {
+    console.log(`\nNo component code generated — ${rc.reason}`);
+  } else {
     console.log(
-      `✔ Generated ${files.length} file(s): ${files.map((f) => f.destPath).join(", ")}`,
+      `✔ Generated ${codeFiles.length} file(s): ${codeFiles.map((f) => f.destPath).join(", ")}`,
     );
-    for (const n of notes) console.log(`  ${n}`);
+    for (const n of codeNotes) console.log(`  ${n}`);
   }
   return 0;
 }
@@ -1471,6 +1766,23 @@ export async function figmaCommand(argv: string[]): Promise<number> {
   );
   const outDir = path.resolve(out);
   mkdirSync(outDir, { recursive: true });
+  // §B.15 softener — the script emitter is the one canvas door that does NOT
+  // refuse drawable-empty (bundle / publish / receive --apply all do): the
+  // per-contract scripts exist for CI diffing, where emitting a stub is a
+  // legitimate byte-level operation. So it WARNS by the same name instead,
+  // listing each stub, so "my sets came out blank" is answered at emit time
+  // rather than discovered on the canvas.
+  const stubIds = [...contracts.values()]
+    .filter((c) => isDrawableEmptyContract(c))
+    .map((c) => c.id);
+  if (stubIds.length > 0) {
+    console.warn(
+      `⚠ ${DRAWABLE_EMPTY}: ${stubIds.length} contract(s) carry stub anatomy — ${stubIds.join(", ")} — ` +
+        `each will render as a correctly named component set with EMPTY frames inside (no fills, no padding, no bound variables); ` +
+        `run the computed capture (extract --computed / onboard) for real anatomy. ` +
+        `The bundle/publish/apply doors refuse these by name; emit warns so script-level CI diffing still works.`,
+    );
+  }
   const written: string[] = [];
   for (const contract of contracts.values()) {
     for (const file of withTokenDiagnostics(routing, () =>

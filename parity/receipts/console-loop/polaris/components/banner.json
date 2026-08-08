@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "banner",
+  "contract": "examples/polaris/contracts/banner.contract.json",
+  "script": "examples/polaris/figma/banner.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:20.654Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:8463",
+    "mode": "amended",
+    "page": "Banner (polaris.banner)",
+    "sectionId": "1:8464",
+    "contractId": "polaris.banner",
+    "result": {
+      "createdNodeIds": [
+        "1:8463"
+      ],
+      "results": [
+        {
+          "name": "Banner",
+          "contractId": "polaris.banner",
+          "nodeId": "1:8463",
+          "key": "3784601a4631edf3ebd15f1be7741f0f34624505",
+          "variants": 8,
+          "properties": [
+            "Hide Icon#1:1342",
+            "Stop Announcements#1:1351",
+            "Show Dismissible#1:1360",
+            "Show WithAction#1:1369",
+            "Title#1:1378",
+            "Content#1:1387",
+            "Tone",
+            "State"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-07T17:11:54.931Z",
+    "notes": [
+      "Re-synced n=45 total=264897; amended rebuiltVariants=8. Warning icon missing; focus ring heavy. matchDeveloped left false."
+    ],
+    "defects": [
+      "Warning icon / focus ring fidelity vs tone-* developed receipts — fail closed."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/banner.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "examples/polaris/generated/html/banner.html#first-item-inline-css",
+    "scorecard": "parity/receipts/console-loop/polaris/scores/banner.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "agent AA=8.96 compositionOk vs emit-html first-item",
+        "matchedAt": "2026-08-08T03:21:50.448Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=8.96, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:75310864",
+    "lineCount": 1628,
+    "sampleLines": [
+      ":COMPONENT_SET/Banner (polaris.banner)|fill|[]",
+      ":COMPONENT_SET/Banner (polaris.banner)|radius|5,5,5,5",
+      ":COMPONENT_SET/Banner (polaris.banner)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Banner (polaris.banner)|description|Banner â generated from contract polaris.banner v0.4.0 â",
+      ":COMPONENT_SET/Banner (polaris.banner)|propdef|Content#1:1387:TEXT=Use your finance report to get detailed insights.",
+      ":COMPONENT_SET/Banner (polaris.banner)|propdef|Hide Icon#1:1342:BOOLEAN=false",
+      ":COMPONENT_SET/Banner (polaris.banner)|propdef|Show Dismissible#1:1360:BOOLEAN=false",
+      ":COMPONENT_SET/Banner (polaris.banner)|propdef|Show WithAction#1:1369:BOOLEAN=false",
+      ":COMPONENT_SET/Banner (polaris.banner)|propdef|State:VARIANT=Default",
+      ":COMPONENT_SET/Banner (polaris.banner)|propdef|Stop Announcements#1:1351:BOOLEAN=false",
+      ":COMPONENT_SET/Banner (polaris.banner)|propdef|Title#1:1378:TEXT=Banner",
+      ":COMPONENT_SET/Banner (polaris.banner)|propdef|Tone:VARIANT=Info",
+      "/0:COMPONENT/Tone=Info, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"p/color-bg-surface\"}}}]",
+      "/0:COMPONENT/Tone=Info, State=Default|radius|12,12,12,12",
+      "/0:COMPONENT/Tone=Info, State=Default|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Tone=Info, State=Default|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Tone=Info, State=Default|effects|1",
+      "/0:COMPONENT/Tone=Info, State=Default|bound:bottomLeftRadius|imported/shared/size-12",
+      "/0:COMPONENT/Tone=Info, State=Default|bound:bottomRightRadius|imported/shared/size-12",
+      "/0:COMPONENT/Tone=Info, State=Default|bound:topLeftRadius|imported/shared/size-12"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "TEXT Title",
+      "BOOLEAN Hide Icon",
+      "Tone enum → Info/Success/Warning/Critical",
+      "BOOLEAN Stop Announcements",
+      "BOOLEAN Show Dismissible",
+      "BOOLEAN Show WithAction",
+      "TEXT Content",
+      "first-variant fill bound: p/color-bg-surface"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Tone=Info, State=Default",
+        "Tone=Success, State=Default",
+        "Tone=Warning, State=Default",
+        "Tone=Critical, State=Default",
+        "Tone=Info, State=Focus Visible",
+        "Tone=Success, State=Focus Visible",
+        "Tone=Warning, State=Focus Visible",
+        "Tone=Critical, State=Focus Visible"
+      ],
+      "propDefs": [
+        {
+          "name": "Hide Icon#1:1342",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Stop Announcements#1:1351",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Show Dismissible#1:1360",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Show WithAction#1:1369",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Title#1:1378",
+          "type": "TEXT",
+          "defaultValue": "Banner",
+          "variantOptions": null
+        },
+        {
+          "name": "Content#1:1387",
+          "type": "TEXT",
+          "defaultValue": "Use your finance report to get detailed insights.",
+          "variantOptions": null
+        },
+        {
+          "name": "Tone",
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Info",
+            "Success",
+            "Warning",
+            "Critical"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Focus Visible"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Tone=Info, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 12,
+        "fillVarName": "p/color-bg-surface",
+        "padBound": {
+          "width": "imported/shared/size-319-328",
+          "topLeftRadius": "imported/shared/size-12",
+          "topRightRadius": "imported/shared/size-12",
+          "bottomLeftRadius": "imported/shared/size-12",
+          "bottomRightRadius": "imported/shared/size-12",
+          "fills": "p/color-bg-surface"
+        },
+        "w": 319.3280029296875,
+        "h": 132,
+        "childTypes": [
+          "FRAME/box"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T17:11:54.931Z",
+  "nodeId": "1:8463"
+}

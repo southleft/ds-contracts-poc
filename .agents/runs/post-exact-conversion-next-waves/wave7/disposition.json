@@ -1,0 +1,22 @@
+{
+  "runId": "post-ecf-wave7",
+  "wave": 7,
+  "title": "Anatomy-level parity depth",
+  "status": "READY",
+  "branch": "feat/exact-conversion-wave0",
+  "closedAt": "2026-08-05",
+  "checks": [
+    "npm run variant-drift:check",
+    "npm run anatomy-diff:check",
+    "npm run workflow-spine:check"
+  ],
+  "artifacts": [
+    "core/anatomy-diff.ts",
+    "core/anatomy-diff-check.ts",
+    "parity/diff.ts (cssVars floor)",
+    "docs/07-validation.md",
+    "docs/12-roadmap.md",
+    "ROADMAP.md"
+  ],
+  "next": "wave8-g7-suggested-diffs"
+}

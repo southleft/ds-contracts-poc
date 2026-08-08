@@ -299,6 +299,18 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:viewport:check
 
+      # Full lane for the same reason as viewport above: both re-check the
+      # committed pseudo-decor promotions (Carbon Toggle rotate receipts, the
+      # sm/md/lg shape-size ladder) against the live engine over the committed
+      # corpus — no browser, seconds each.
+      - name: extract:computed:pseudo-decor-rotate:check (promoted decor keeps its rotation receipts)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:pseudo-decor-rotate:check
+
+      - name: extract:computed:pseudo-decor-size:check (promoted decor keeps the size ladder)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:pseudo-decor-size:check
+
       # Full lane, not fast: it re-fuses all 54 committed captured-truth files
       # through the live engine (~40s, no browser). It pins that every "no
       # schema channel today" refusal states whether its baseline was the right
@@ -379,6 +391,10 @@ jobs:
       - name: "extract:figma:wrap:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:wrap:check
+
+      - name: "extract:figma:gradient:check"
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:gradient:check
 
       - name: "extract:figma:constraints:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}

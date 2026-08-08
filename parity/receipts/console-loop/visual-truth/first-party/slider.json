@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "slider",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/slider.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:682",
+  "cellNodeId": "1:682",
+  "cellName": "Slider",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 14.1625,
+    "pctAAUnmasked": 7.04375,
+    "pctAAMasked": 7.04375,
+    "maskCoveragePct": 0,
+    "canvasPx": "320x34",
+    "realPx": "49x50",
+    "inkCanvasPct": 10.174999999999999,
+    "inkRealPct": 4.8375
+  },
+  "reference": "extract/computed/out/slider/gate-shots/horizontal.none__default.png",
+  "referenceSha256": "0e94c7ee06884b595dde7fbe9a234710e00f8dd0e7e1784f30f1e143c476c000",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/slider.png",
+  "canvasShotSha256": "56959794206b56db9f6f39e6121ffcf31b8930eefd5e50ddbcec3c36612bf1fa",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/slider.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 6.530612244897959,
+  "inkDelta": 5.337499999999999,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=6.53, inkDelta=5.3)"
+}

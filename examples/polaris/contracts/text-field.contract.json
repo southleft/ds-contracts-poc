@@ -13,6 +13,7 @@
       "name": "placeholder",
       "description": "Hint text to display",
       "type": "text",
+      "default": "Example",
       "bindings": {
         "figma": {
           "kind": "TEXT",
@@ -626,7 +627,8 @@
   "anatomy": {
     "root": {
       "layout": {
-        "align": "center"
+        "direction": "column",
+        "align": "stretch"
       },
       "tokens": {
         "color": "{p.color-text}"
@@ -732,7 +734,8 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|TextField — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex",
-                    "align": "center"
+                    "align": "center",
+                    "grow": true
                   },
                   "parts": {
                     "prefix": {
@@ -994,7 +997,6 @@
                       "tokens": {
                         "background-color": "{p.color-input-bg-surface}",
                         "border-radius": "{p.border-radius-200}",
-                        "border-width": "{p.border-width-0165}",
                         "border-color": "{p.color-input-border}",
                         "bottom": "{imported.shared.size-0}",
                         "left": "{imported.shared.size-0}",
@@ -1047,7 +1049,11 @@
                           "outline-style": "solid"
                         },
                         "disabled": {
-                          "cursor": "auto"
+                          "cursor": "auto",
+                          "border-top-style": "none",
+                          "border-right-style": "none",
+                          "border-bottom-style": "none",
+                          "border-left-style": "none"
                         },
                         "focus-visible": {
                           "outline-style": "solid"
@@ -1067,7 +1073,31 @@
                         "hover": {
                           "background-color": "{imported.text-field.backdrop.background-color-state-hover}"
                         }
-                      }
+                      },
+                      "literalsByProp": [
+                        {
+                          "prop": "variant",
+                          "map": {
+                            "inherit": {
+                              "border-top-width": "1px",
+                              "border-right-width": "1px",
+                              "border-bottom-width": "1px",
+                              "border-left-width": "1px",
+                              "border-top-color": "rgba(138, 138, 138, 1)",
+                              "border-right-color": "rgba(138, 138, 138, 1)",
+                              "border-bottom-color": "rgba(138, 138, 138, 1)",
+                              "border-left-color": "rgba(138, 138, 138, 1)"
+                            },
+                            "borderless": {
+                              "border-top-width": "0px",
+                              "border-right-width": "0px",
+                              "border-bottom-width": "0px",
+                              "border-left-width": "0px"
+                            }
+                          }
+                        }
+                      ],
+                      "description": "Canvas geometry (console-loop visual fix): literal 1px #8a8a8a border on inherit variant replaces p.border-width-0165 (0.66px on Figma canvas); disabled state drops border; borderless = 0 (matches examples/polaris/receipts/text-field/default.png)."
                     }
                   },
                   "declared": {
@@ -1139,7 +1169,8 @@
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}"
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.text-field.connected.width.off.off}"
           },
           "tokensByProp": [
             {
@@ -1155,6 +1186,9 @@
             }
           ]
         }
+      },
+      "tokens": {
+        "width": "{imported.text-field.connected.width.off.off}"
       },
       "tokensByProp": [
         {

@@ -9,9 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Coordinated release candidate
 
 The source tree stages repository `1.0.0-rc.1`,
-`@ds-contracts/cli@0.5.0-rc.1`, and
-`@ds-contracts/schema@16.1.0-rc.1`, and
-`@ds-contracts/emitter-web-components@0.4.0-rc.1`. These are source versions,
+`@ds-contracts/cli@0.5.0-rc.2`, and
+`@ds-contracts/schema@16.1.0-rc.2`, and
+`@ds-contracts/emitter-web-components@0.4.0-rc.2`. These are source versions,
 not publication claims. Registry checks on 2026-08-04 reported npm `latest` as
 CLI `0.4.0`, schema `16.0.0`, and emitter `0.3.0`.
 

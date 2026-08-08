@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "polaris",
+  "stem": "progress-bar",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/polaris/components/progress-bar.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:10076",
+  "cellNodeId": "1:10052",
+  "cellName": "Size=Medium, Tone=Highlight",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 60.373263888888886,
+    "pctAAUnmasked": 59.765625,
+    "pctAAMasked": 59.765625,
+    "maskCoveragePct": 0,
+    "canvasPx": "288x16",
+    "realPx": "288x16",
+    "inkCanvasPct": 99.86979166666666,
+    "inkRealPct": 99.91319444444444
+  },
+  "reference": "parity/receipts/console-loop/polaris/refs/progress-bar.png",
+  "referenceSha256": "e793942241d2b4040e56e11749b55fc1b611175dd68aa580ee5290fb5b85d7de",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/polaris/shots/progress-bar.png",
+  "canvasShotSha256": "7574254561e34148993ce2782c3d92c35ed796b461f4a0a4039df17b9f222aeb",
+  "diff": "parity/receipts/console-loop/visual-truth/polaris/diffs/progress-bar.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0.04340277777778567,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=59.77 > 5)"
+}

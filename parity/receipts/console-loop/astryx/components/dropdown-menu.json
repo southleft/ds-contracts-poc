@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "dropdown-menu",
+  "contract": "examples/astryx/contracts/dropdown-menu.contract.json",
+  "script": "examples/astryx/figma/dropdown-menu.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:14.392Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:4050",
+    "mode": "generated",
+    "page": "DropdownMenu",
+    "sectionId": "1:4062",
+    "contractId": "astryx.dropdown-menu",
+    "result": {
+      "createdNodeIds": [
+        "1:4050"
+      ],
+      "results": [
+        {
+          "name": "DropdownMenu",
+          "contractId": "astryx.dropdown-menu",
+          "nodeId": "1:4050",
+          "key": "6a9d57213b72c202fde26fb0d1a87255923da73c",
+          "variants": 1,
+          "properties": [
+            "Has Chevron#1:1123"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [],
+    "defects": [
+      "Not a COMPONENT_SET with expected item-state axes; no developed DropdownMenu site receipt — fail closed."
+    ],
+    "reference": "none",
+    "reviewSurface": "cream-#F8F4ED-component-set"
+  },
+  "fingerprint": {
+    "v6": "v6:253339315",
+    "lineCount": 97,
+    "sampleLines": [
+      ":COMPONENT/DropdownMenu|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/DropdownMenu|radius|0,0,0,0",
+      ":COMPONENT/DropdownMenu|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      ":COMPONENT/DropdownMenu|sizing|HUG/HUG AUTO",
+      ":COMPONENT/DropdownMenu|description|DropdownMenu â generated from contract astryx.dropdown-menu v0.2.0 â",
+      ":COMPONENT/DropdownMenu|propdef|Has Chevron#1:1123:BOOLEAN=true",
+      "/0:INSTANCE/trigger|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.10000000149011612,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.019607843831181526,\"g\":0.21176470816135406,\"b\":0.3490196168422699},\"boundVariables\":{\"color\":{\"var\":\"color-neutral\"}}}]",
+      "/0:INSTANCE/trigger|radius|8,8,8,8",
+      "/0:INSTANCE/trigger|layout|HORIZONTAL CENTER/CENTER gap 8 pad 8,12,8,12",
+      "/0:INSTANCE/trigger|sizing|FIXED/FIXED AUTO",
+      "/0:INSTANCE/trigger|bound:bottomLeftRadius|imported/shared/size-8",
+      "/0:INSTANCE/trigger|bound:bottomRightRadius|imported/shared/size-8",
+      "/0:INSTANCE/trigger|bound:height|imported/button/root/height/md",
+      "/0:INSTANCE/trigger|bound:itemSpacing|spacing-2",
+      "/0:INSTANCE/trigger|bound:paddingBottom|imported/shared/size-8",
+      "/0:INSTANCE/trigger|bound:paddingLeft|imported/button/root/padding-left",
+      "/0:INSTANCE/trigger|bound:paddingRight|imported/button/root/padding-right",
+      "/0:INSTANCE/trigger|bound:paddingTop|imported/shared/size-8",
+      "/0:INSTANCE/trigger|bound:topLeftRadius|imported/shared/size-8",
+      "/0:INSTANCE/trigger|bound:topRightRadius|imported/shared/size-8"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "BOOLEAN Has Chevron"
+    ],
+    "observed": {
+      "type": "COMPONENT",
+      "variantNames": [
+        "DropdownMenu"
+      ],
+      "propDefs": [
+        {
+          "name": "Has Chevron#1:1123",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "DropdownMenu",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {},
+        "w": 240,
+        "h": 143,
+        "childTypes": [
+          "INSTANCE/trigger",
+          "FRAME/menu"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

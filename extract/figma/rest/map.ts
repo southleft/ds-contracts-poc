@@ -65,7 +65,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import type { DumpEffect, DumpFile, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpSet, DumpShape, DumpText } from '../types.js';
+import type { DumpEffect, DumpFile, DumpGradient, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpSet, DumpShape, DumpText } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // REST shapes (trimmed to the consumed fields; figma/rest-api-spec names)
@@ -83,6 +83,14 @@ export interface RestPaint {
   opacity?: number;
   color?: { r: number; g: number; b: number; a: number };
   boundVariables?: { color?: RestVariableAlias };
+  /** GradientPaint (dump v1.16): [0] = ramp start, [1] = ramp end, [2] =
+   *  width handle (unused), all normalized object space. */
+  gradientHandlePositions?: Array<{ x: number; y: number }>;
+  gradientStops?: Array<{
+    position: number;
+    color?: { r: number; g: number; b: number; a: number };
+    boundVariables?: { color?: RestVariableAlias };
+  }>;
 }
 
 /** TypeStyle / BaseTypeStyle (api_types.ts). */
@@ -136,16 +144,18 @@ export interface RestEffect {
 
 /** ComponentProperty (api_types.ts) — applied values on an INSTANCE. */
 export interface RestComponentProperty {
-  type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT';
+  type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT' | 'SLOT';
   value: boolean | string;
 }
 
-/** ComponentPropertyDefinition (api_types.ts) — set-level definitions; only
- *  INSTANCE_SWAP preferredValues are consumed (dump v1.5). */
+/** ComponentPropertyDefinition (api_types.ts) — set-level definitions. */
 export interface RestComponentPropertyDefinition {
-  type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT';
+  type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT' | 'SLOT';
   defaultValue?: boolean | string;
+  variantOptions?: string[];
   preferredValues?: Array<{ type: string; key: string }>;
+  description?: string;
+  slotSettings?: Record<string, unknown>;
 }
 
 export interface RestNode {
@@ -218,7 +228,7 @@ export interface RestNodesResponse {
       document: RestNode;
       components?: Record<string, { name: string; componentSetId?: string; key?: string }>;
       componentSets?: Record<string, { name: string; key?: string }>;
-      styles?: Record<string, { name: string; styleType?: string }>;
+      styles?: Record<string, { name: string; key?: string; styleType?: string }>;
     } | null
   >;
 }
@@ -275,7 +285,7 @@ export interface MapOptions {
   variables?: RestVariablesResponse;
   /** Extra style-id → name map (e.g. from GET /v1/files/:key/styles). The
    *  nodes response's own styles metadata is always consulted first. */
-  styles?: Record<string, { name: string } | string>;
+  styles?: Record<string, { name: string; key?: string } | string>;
   /** Only map the set/component with this name. */
   target?: string;
   /** File key for _provenance (it rides the URL, not the nodes response). */
@@ -318,7 +328,7 @@ const isAlias = (v: unknown): v is RestVariableAlias =>
 
 interface Ctx {
   varNameById: Map<string, string>;
-  styleNameById: Map<string, string>;
+  styleById: Map<string, { name: string; key?: string }>;
   components: Map<string, { name: string; componentSetId?: string; key?: string }>;
   componentSets: Map<string, { name: string; key?: string }>;
   report: MapReport;
@@ -392,6 +402,91 @@ function mapPaint(
   }
   if (!p.color) return undefined;
   return withAlpha({ hex: rgbToHex(p.color) });
+}
+
+/** GRADIENT_LINEAR fill → DumpGradient (dump v1.16) — the REST surface hands
+ *  the two ramp handles directly (gradientHandlePositions[0]/[1], normalized
+ *  object space); stops carry the resolved color and, when a stop rides a
+ *  bound variable this route can name (variables endpoint provided), its
+ *  slash-form name — an unnameable stop variable degrades to its resolved
+ *  value under the standing variable-unresolved receipt. A ramp with < 2
+ *  stops or missing handles is refused by name. */
+function mapGradient(p: RestPaint, ctx: Ctx, nodePath: string): DumpGradient | undefined {
+  const h = p.gradientHandlePositions;
+  if (!Array.isArray(h) || h.length < 2) {
+    ctx.report.degradations.push({
+      code: 'paint-unsupported',
+      nodePath,
+      field: 'fill',
+      message: 'GRADIENT_LINEAR without gradientHandlePositions — gradient not captured (dump v1.16)',
+    });
+    return undefined;
+  }
+  const round4 = (v: number) => Math.round(v * 10000) / 10000;
+  const stops: DumpGradient['stops'] = [];
+  for (const s of p.gradientStops ?? []) {
+    if (!s.color) continue;
+    const stop: DumpGradient['stops'][number] = { position: round4(s.position), hex: rgbToHex(s.color) };
+    const sa = s.color.a ?? 1;
+    if (sa < 1) stop.alpha = round4(sa);
+    const alias = s.boundVariables?.color;
+    if (alias && isAlias(alias)) {
+      const name = resolveVarName(ctx, alias, nodePath, 'fill.gradientStop');
+      if (name) stop.var = name;
+    }
+    stops.push(stop);
+  }
+  if (stops.length < 2) {
+    ctx.report.degradations.push({
+      code: 'paint-unsupported',
+      nodePath,
+      field: 'fill',
+      message: `GRADIENT_LINEAR with ${stops.length} usable stop(s) — gradient not captured (dump v1.16)`,
+    });
+    return undefined;
+  }
+  const out: DumpGradient = {
+    start: { x: round4(h[0].x), y: round4(h[0].y) },
+    end: { x: round4(h[1].x), y: round4(h[1].y) },
+    stops,
+  };
+  if ((p.opacity ?? 1) < 1) out.alpha = round4(p.opacity!);
+  return out;
+}
+
+/** The FILL STACK rule (dump v1.16, non-TEXT nodes — dump.plugin.js
+ *  dumpFillStack parity): the first visible SOLID plus the first visible
+ *  GRADIENT_LINEAR drawn ABOVE it (Figma paints draw bottom-to-top, so the
+ *  pair is exactly CSS background-color under background-image). A gradient
+ *  hidden under a solid keeps the truncation receipt; other paint types keep
+ *  paint-unsupported. */
+function mapFillStack(node: RestNode, ctx: Ctx, nodePath: string): { fill?: DumpPaint; gradient?: DumpGradient } {
+  const paints = node.fills;
+  if (!Array.isArray(paints)) return {};
+  const visibles = paints.filter((x) => x.visible !== false);
+  const solid = visibles.find((x) => x.type === 'SOLID');
+  const grad = visibles.find((x) => x.type === 'GRADIENT_LINEAR');
+  const gradCarriable = grad !== undefined && (solid === undefined || visibles.indexOf(grad) > visibles.indexOf(solid));
+  const gradient = gradCarriable ? mapGradient(grad!, ctx, nodePath) : undefined;
+  if (!solid && !gradient && visibles.length > 0) {
+    ctx.report.degradations.push({
+      code: 'paint-unsupported',
+      nodePath,
+      field: 'fill',
+      message: `first visible fill paint is ${visibles[0].type}, not SOLID — dump v1.16 carries SOLID and GRADIENT_LINEAR fills only; paint omitted`,
+    });
+  }
+  const carried = (solid ? 1 : 0) + (gradient ? 1 : 0);
+  if (carried > 0 && visibles.length > carried) {
+    ctx.report.degradations.push({
+      code: 'paint-stack-truncated',
+      nodePath,
+      field: 'fill',
+      message: `${visibles.length} visible fill paints (${visibles.map((x) => x.type).join(', ')}) — dump v1.16 carries the first SOLID plus a GRADIENT_LINEAR above it only`,
+    });
+  }
+  const fill = solid ? mapPaint([solid], ctx, nodePath, 'fill') : undefined;
+  return { ...(fill ? { fill } : {}), ...(gradient ? { gradient } : {}) };
 }
 
 // ---------------------------------------------------------------------------
@@ -510,7 +605,10 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   // dump v1.2: text channels with no dump projection are NAMED per node.
   const channels: string[] = [];
   if (typeof s.letterSpacing === 'number' && s.letterSpacing !== 0) channels.push(`letterSpacing ${s.letterSpacing}`);
-  if (s.textCase !== undefined && s.textCase !== 'ORIGINAL') channels.push(`textCase ${s.textCase}`);
+  // dump v1.16: UPPER/LOWER/TITLE are CAPTURED (text.textCase — the canvas
+  // fact behind CSS text-transform); other spellings stay receipts.
+  if (s.textCase === 'UPPER' || s.textCase === 'LOWER' || s.textCase === 'TITLE') text.textCase = s.textCase;
+  else if (s.textCase !== undefined && s.textCase !== 'ORIGINAL') channels.push(`textCase ${s.textCase}`);
   if (s.textDecoration !== undefined && s.textDecoration !== 'NONE') channels.push(`textDecoration ${s.textDecoration}`);
   if (s.lineHeightUnit !== undefined && s.lineHeightUnit !== 'INTRINSIC_%' && s.lineHeightUnit !== 'PIXELS') {
     channels.push(`lineHeight ${s.lineHeightPx ?? '?'}px (${s.lineHeightUnit} — only PIXELS carries, dump v1.3)`);
@@ -525,8 +623,11 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   }
   const styleId = node.styles?.text ?? node.styles?.TEXT;
   if (styleId) {
-    const name = ctx.styleNameById.get(styleId);
-    if (name) text.style = name;
+    const style = ctx.styleById.get(styleId);
+    if (style) {
+      text.style = style.name;
+      if (style.key) text.styleKey = style.key;
+    }
     else {
       ctx.report.degradations.push({
         code: 'text-style-unresolved',
@@ -696,6 +797,19 @@ function mapNode(
 ): RestDumpNode {
   const out: RestDumpNode = { name: node.name, type: node.type };
 
+  // dump v1.14 structured-axis addition. The REST component-properties map
+  // carries each direct variant row's realized values; preserve its verbatim
+  // keys instead of re-parsing presentation names.
+  if (node.type === 'COMPONENT') {
+    const tuple = Object.fromEntries(
+      Object.entries(node.componentProperties ?? {})
+        .filter(([, property]) => property.type === 'VARIANT' && typeof property.value === 'string')
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([key, property]) => [key, String(property.value)]),
+    );
+    if (Object.keys(tuple).length > 0) out.variantProperties = tuple;
+  }
+
   // dump v1.5: variant-ROOT observed bounding box — the drawn dimension of a
   // FIXED root axis is otherwise unrecoverable (CBDS Dialog field case).
   if (node.type === 'COMPONENT' && node.absoluteBoundingBox) {
@@ -709,8 +823,15 @@ function mapNode(
   const bound = mapBound(node, ctx, nodePath);
   if (bound) out.bound = bound;
 
-  const fill = mapPaint(node.fills, ctx, nodePath, 'fill');
+  // dump v1.16: non-TEXT fills go through the STACK dumper (SOLID +
+  // GRADIENT_LINEAR above it); TEXT fills keep the single-solid rule (a
+  // gradient text fill stays a named receipt).
+  const stack = node.type === 'TEXT'
+    ? { fill: mapPaint(node.fills, ctx, nodePath, 'fill') }
+    : mapFillStack(node, ctx, nodePath);
+  const fill = stack.fill;
   if (fill && node.type !== 'TEXT') out.fill = fill;
+  if ('gradient' in stack && stack.gradient) out.gradient = stack.gradient;
   const stroke = mapPaint(node.strokes, ctx, nodePath, 'stroke');
   if (stroke) {
     out.stroke = stroke;
@@ -866,14 +987,21 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     if (doc.name === 'Slot') continue; // utility, never a contract component (dump.plugin.js rule)
     if (options.target && doc.name !== options.target) continue;
 
-    const styleNameById = new Map<string, string>();
-    for (const [id, s] of Object.entries(entry.styles ?? {})) styleNameById.set(id, s.name);
+    const styleById = new Map<string, { name: string; key?: string }>();
+    for (const [id, s] of Object.entries(entry.styles ?? {})) {
+      styleById.set(id, { name: s.name, ...(s.key ? { key: s.key } : {}) });
+    }
     for (const [id, s] of Object.entries(options.styles ?? {})) {
-      styleNameById.set(id, typeof s === 'string' ? s : s.name);
+      styleById.set(
+        id,
+        typeof s === 'string'
+          ? { name: s }
+          : { name: s.name, ...(s.key ? { key: s.key } : {}) },
+      );
     }
     const ctx: Ctx = {
       varNameById,
-      styleNameById,
+      styleById,
       components: new Map(Object.entries(entry.components ?? {})),
       componentSets: new Map(Object.entries(entry.componentSets ?? {})),
       report,
@@ -894,7 +1022,48 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     // `accepts` (unresolvable keys stay named notes, never guessed ids).
     const swapPreferredValues: Record<string, DumpPreferredValue[]> = {};
     const boolDefaults: Record<string, boolean> = {};
+    const propertyDefinitions: Record<string, DumpPropertyDefinition> = {};
     for (const [propName, def] of Object.entries(doc.componentPropertyDefinitions ?? {})) {
+      if (
+        def.type === 'VARIANT' &&
+        typeof def.defaultValue === 'string' &&
+        Array.isArray(def.variantOptions) &&
+        def.variantOptions.length > 0
+      ) {
+        propertyDefinitions[propName] = {
+          type: 'VARIANT',
+          defaultValue: def.defaultValue,
+          variantOptions: def.variantOptions.map(String),
+        };
+      } else if (def.type === 'BOOLEAN' && typeof def.defaultValue === 'boolean') {
+        propertyDefinitions[propName] = {
+          type: 'BOOLEAN',
+          defaultValue: def.defaultValue,
+        };
+      } else if (def.type === 'TEXT' && typeof def.defaultValue === 'string') {
+        propertyDefinitions[propName] = {
+          type: 'TEXT',
+          defaultValue: def.defaultValue,
+        };
+      } else if (def.type === 'INSTANCE_SWAP' && typeof def.defaultValue === 'string') {
+        propertyDefinitions[propName] = {
+          type: 'INSTANCE_SWAP',
+          defaultValue: def.defaultValue,
+          ...(Array.isArray(def.preferredValues) && def.preferredValues.length > 0
+            ? { preferredValues: def.preferredValues.map((value) => ({ type: value.type, key: value.key })) }
+            : {}),
+        };
+      } else if (def.type === 'SLOT' && typeof def.defaultValue === 'string') {
+        propertyDefinitions[propName] = {
+          type: 'SLOT',
+          defaultValue: def.defaultValue,
+          ...(Array.isArray(def.preferredValues) && def.preferredValues.length > 0
+            ? { preferredValues: def.preferredValues.map((value) => ({ type: value.type, key: value.key })) }
+            : {}),
+          ...(typeof def.description === 'string' ? { description: def.description } : {}),
+          ...(def.slotSettings ? { slotSettings: def.slotSettings } : {}),
+        };
+      }
       if (def.type === 'INSTANCE_SWAP' && Array.isArray(def.preferredValues) && def.preferredValues.length > 0) {
         swapPreferredValues[propName.split('#')[0]] = def.preferredValues.map((v) => ({ type: v.type, key: v.key }));
       }
@@ -909,6 +1078,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       type: doc.type,
       nodeId: doc.id,
       ...(key ? { key } : {}),
+      ...(Object.keys(propertyDefinitions).length > 0 ? { propertyDefinitions } : {}),
       ...(Object.keys(swapPreferredValues).length > 0 ? { swapPreferredValues } : {}),
       ...(Object.keys(boolDefaults).length > 0 ? { boolDefaults } : {}),
       variants,

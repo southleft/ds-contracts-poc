@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "tooltip",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/tooltip.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "21:810",
+  "cellNodeId": "21:810",
+  "cellName": "Tooltip",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 98.68969624776652,
+    "pctAAUnmasked": 23.466349017272186,
+    "pctAAMasked": 23.466349017272186,
+    "maskCoveragePct": 0,
+    "canvasPx": "73x21",
+    "realPx": "69x23",
+    "inkCanvasPct": 88.62418106015485,
+    "inkRealPct": 94.28231089934485
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/tooltip.png",
+  "referenceSha256": "cd0e2cfef4db8e868d9cbd6fa5633f84de7e04683ac2ecf5e0f185d72cd34c4a",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/tooltip.png",
+  "canvasShotSha256": "d470b9e0898648fbf6bab80f0affe97f2ced431cc94b4244c14b0b3eeb69ba35",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/tooltip.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0952380952380953,
+  "inkDelta": 5.658129839189996,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=23.47 > 5)"
+}

@@ -1,0 +1,39 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 98.88888888888889,
+    "pctAAUnmasked": 7.944444444444445,
+    "pctAAMasked": 7.944444444444445,
+    "maskCoveragePct": 0,
+    "canvasPx": "100x36",
+    "realPx": "100x36",
+    "inkCanvasPct": 96.94444444444444,
+    "inkRealPct": 95.91666666666666
+  },
+  "reference": "parity/receipts/console-loop/astryx/refs/button.png",
+  "referenceSha256": "db03be2d98c16778e55eb72faea677460ab73ce94c7471836ce1b7e4826c04f4",
+  "canvasShot": "parity/receipts/console-loop/astryx/shots/button-cell.png",
+  "canvasShotSha256": "c4b30b33b1b2c9775db1f0f422edbf2381dfb29d1fa82fb8e278cb5031c6afee",
+  "diff": "parity/receipts/console-loop/astryx/scores/button.diff.png",
+  "fc": [
+    "FC-THEME-ISO"
+  ],
+  "receipt": "parity/receipts/console-loop/astryx/components/button.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 1.0277777777777857,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=7.94 > 5)",
+  "recordedAt": "2026-08-08T04:31:12.995Z"
+}

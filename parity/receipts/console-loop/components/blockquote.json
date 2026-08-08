@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "blockquote",
+  "contract": "contracts/blockquote.contract.json",
+  "script": "parity/receipts/console-loop/emitted/08-blockquote.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:58:58.465Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:958",
+    "page": "Blockquote",
+    "sectionId": "1:965",
+    "result": {
+      "createdNodeIds": [
+        "1:958"
+      ],
+      "results": [
+        {
+          "name": "Blockquote",
+          "contractId": "ds.blockquote",
+          "nodeId": "1:958",
+          "key": "c75aae594d52c75ac735b5fcd4cfb7a1e4f3df58",
+          "variants": 1,
+          "properties": [
+            "Children#1:306",
+            "Cite#1:307",
+            "Show Cite#1:308"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:965 captured (ok).",
+      "Blockquote: 1 variant(s); type COMPONENT; page Blockquote.",
+      "Props: Children, Cite, Show Cite.",
+      "Sample text: \"Slot\", \"Slot\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:4276955563",
+    "lineCount": 40,
+    "sampleLines": [
+      ":COMPONENT/Blockquote|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/Blockquote|radius|0,0,0,0",
+      ":COMPONENT/Blockquote|layout|VERTICAL MIN/MIN gap 8 pad 8,16,8,16",
+      ":COMPONENT/Blockquote|sizing|HUG/HUG AUTO",
+      ":COMPONENT/Blockquote|bound:itemSpacing|space/gap/sm",
+      ":COMPONENT/Blockquote|bound:paddingBottom|space/inset-y/md",
+      ":COMPONENT/Blockquote|bound:paddingLeft|space/inset-x/md",
+      ":COMPONENT/Blockquote|bound:paddingRight|space/inset-x/md",
+      ":COMPONENT/Blockquote|bound:paddingTop|space/inset-y/md",
+      ":COMPONENT/Blockquote|bound:strokeLeftWeight|border/width/divider/strong",
+      ":COMPONENT/Blockquote|description|Blockquote — generated from contract ds.blockquote v1.0.0",
+      ":COMPONENT/Blockquote|propdef|Children#1:306:INSTANCE_SWAP=1:347",
+      ":COMPONENT/Blockquote|propdef|Cite#1:307:INSTANCE_SWAP=1:347",
+      ":COMPONENT/Blockquote|propdef|Show Cite#1:308:BOOLEAN=true",
+      "/0:FRAME/quote|fill|[]",
+      "/0:FRAME/quote|radius|0,0,0,0",
+      "/0:FRAME/quote|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:FRAME/quote|sizing|HUG/HUG AUTO",
+      "/0/0:INSTANCE/Slot|fill|[]",
+      "/0/0:INSTANCE/Slot|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6000000238418579,\"g\":0.6200000047683716,\"b\":0.6800000071525574},\"boundVariables\":{}}] w1"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [],
+    "observed": {
+      "variantNames": [
+        "Blockquote"
+      ],
+      "propDefs": [
+        {
+          "name": "Children#1:306",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Cite#1:307",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Cite#1:308",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "Blockquote",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 8,
+          "r": 16,
+          "b": 8,
+          "l": 16
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/gap/sm",
+          "paddingLeft": "space/inset-x/md",
+          "paddingTop": "space/inset-y/md",
+          "paddingRight": "space/inset-x/md",
+          "paddingBottom": "space/inset-y/md",
+          "strokeLeftWeight": "border/width/divider/strong",
+          "strokes": "color/divider/strong"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 83,
+        "h": 224,
+        "childNames": [
+          "quote:FRAME",
+          "citation:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

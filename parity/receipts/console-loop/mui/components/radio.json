@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "radio",
+  "contract": "examples/mui/contracts/radio.contract.json",
+  "script": "examples/mui/figma/radio.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:04:42.510Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "84:1933",
+    "mode": "generated",
+    "page": "Radio",
+    "sectionId": "84:1934",
+    "result": {
+      "createdNodeIds": [
+        "84:1933"
+      ],
+      "results": [
+        {
+          "name": "Radio",
+          "contractId": "mui.radio",
+          "nodeId": "84:1933",
+          "key": "28dfed4c46daa4cdb437780fd4020e9e5d536182",
+          "variants": 14,
+          "properties": [
+            "Color",
+            "Checked"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Screenshot reviewed on section/node 84:1934; structure/variants look sane (slot placeholders OK).",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 14 variants on page Radio)."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=38.50% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/radio.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/radio.png",
+    "referenceSource": "extract/computed/out/mui/radio/gate-shots/default.checked.enabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/radio-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
+  },
+  "fingerprint": {
+    "v6": "v6:4150206674",
+    "lineCount": 454,
+    "sampleLines": [
+      ":COMPONENT_SET/Radio|fill|[]",
+      ":COMPONENT_SET/Radio|radius|5,5,5,5",
+      ":COMPONENT_SET/Radio|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Radio|description|Radio \u00e2\u0080\u0094 generated from contract mui.radio v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Radio|propdef|Checked:VARIANT=Unchecked",
+      ":COMPONENT_SET/Radio|propdef|Color:VARIANT=Primary",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|radius|21,21,21,21",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|layout|HORIZONTAL CENTER/CENTER gap 0 pad 9,9,9,9",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|bound:bottomLeftRadius|imported/shared/size-21",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|bound:bottomRightRadius|imported/shared/size-21",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|bound:height|imported/shared/size-42",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|bound:paddingBottom|imported/shared/size-9",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|bound:paddingLeft|imported/shared/size-9",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|bound:paddingRight|imported/shared/size-9",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|bound:paddingTop|imported/shared/size-9",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|bound:topLeftRadius|imported/shared/size-21",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|bound:topRightRadius|imported/shared/size-21",
+      "/0:COMPONENT/Color=Primary, Checked=Unchecked|bound:width|imported/shared/size-42"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Color enum \u2192 Primary/Secondary/Error/Info/Success/Warning/Default",
+      "Checked enum \u2192 Unchecked/Checked"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Color=Primary, Checked=Unchecked",
+        "Color=Primary, Checked=Checked",
+        "Color=Secondary, Checked=Unchecked",
+        "Color=Secondary, Checked=Checked",
+        "Color=Error, Checked=Unchecked",
+        "Color=Error, Checked=Checked",
+        "Color=Info, Checked=Unchecked",
+        "Color=Info, Checked=Checked",
+        "Color=Success, Checked=Unchecked",
+        "Color=Success, Checked=Checked",
+        "Color=Warning, Checked=Unchecked",
+        "Color=Warning, Checked=Checked",
+        "Color=Default, Checked=Unchecked",
+        "Color=Default, Checked=Checked"
+      ],
+      "propDefs": [
+        {
+          "name": "Checked",
+          "type": "VARIANT",
+          "defaultValue": "Unchecked",
+          "variantOptions": [
+            "Unchecked",
+            "Checked"
+          ]
+        },
+        {
+          "name": "Color",
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Error",
+            "Info",
+            "Success",
+            "Warning",
+            "Default"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Color=Primary, Checked=Unchecked",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 9,
+          "r": 9,
+          "b": 9,
+          "l": 9
+        },
+        "radius": 21,
+        "fillVarName": null,
+        "padBound": {
+          "paddingLeft": "imported/shared/size-9",
+          "paddingTop": "imported/shared/size-9",
+          "paddingRight": "imported/shared/size-9",
+          "paddingBottom": "imported/shared/size-9",
+          "width": "imported/shared/size-42",
+          "height": "imported/shared/size-42",
+          "topLeftRadius": "imported/shared/size-21",
+          "topRightRadius": "imported/shared/size-21",
+          "bottomLeftRadius": "imported/shared/size-21",
+          "bottomRightRadius": "imported/shared/size-21"
+        },
+        "w": 42,
+        "h": 42,
+        "childTypes": [
+          "FRAME/part-1"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

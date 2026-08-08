@@ -151,7 +151,6 @@
       ]
     ],
     "namedLosses": [
-      "promotion: pseudo-decor-size-varies: part-0::after drawn at 16×16 vs 20×20 vs 24×24 — a shape part carries ONE intrinsic size (per-variant resize has no spelling); named refusal",
       "overflow: part-0.box-shadow [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: part-0.box-shadow [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "code-only[active]: part-0.--tw-ring-shadow — value shape outside mintable kinds and outside the declared vocabulary",

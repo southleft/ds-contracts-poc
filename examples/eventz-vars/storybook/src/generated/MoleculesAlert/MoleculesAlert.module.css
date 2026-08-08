@@ -1,0 +1,74 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/molecules-alert.contract.json (ds.molecules-alert v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  border: 0;
+  width: 100%;
+  min-width: fit-content;
+  padding-inline: var(--spacing-4);
+  padding-block: var(--spacing-3);
+  border-radius: var(--component-border-radius-rounded-md);
+  gap: var(--spacing-2);
+  max-width: var(--imported-molecules-alert-root-max-width);
+  box-shadow: var(--imported-molecules-alert-root-box-shadow);
+  width: var(--imported-molecules-alert-root-width);
+  height: fit-content;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--spacing-0);
+  padding-block: var(--spacing-0);
+  gap: var(--spacing-2);
+}
+
+.horizontalStack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-inline: var(--spacing-0);
+  padding-block: var(--spacing-0);
+  gap: var(--spacing-0-5);
+}
+
+.horizontalStack2 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-inline: var(--spacing-0);
+  padding-block: var(--spacing-0);
+  gap: var(--spacing-0);
+}
+
+.Title {
+  color: var(--color-content-inverse);
+  font-size: var(--imported-text-body-md-bold-font-size);
+  font-weight: var(--imported-text-body-md-bold-font-weight);
+  line-height: var(--imported-text-body-md-bold-line-height);
+}
+
+.Description {
+  color: var(--color-content-inverse);
+  font-size: var(--imported-text-body-sm-font-size);
+  font-weight: var(--imported-text-body-sm-font-weight);
+  line-height: var(--imported-text-body-sm-line-height);
+}
+
+.container2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--spacing-0);
+  padding-block: var(--spacing-0);
+  gap: var(--spacing-2);
+}

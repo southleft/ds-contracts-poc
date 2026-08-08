@@ -111,18 +111,21 @@
     },
     {
       "name": "tone",
-      "description": "Sets the color treatment of the Button.",
+      "description": "Sets the color treatment of the Button. Wave B.4 FC-ENUM-HOLE: `default` is the developed unset tone (Polaris tone?: critical|success) — minted as `{variant}.none` paint paths.",
       "type": {
         "enum": [
+          "default",
           "critical",
           "success"
         ]
       },
+      "default": "default",
       "bindings": {
         "figma": {
           "kind": "VARIANT",
           "property": "Tone",
           "values": {
+            "default": "Default",
             "critical": "Critical",
             "success": "Success"
           }
@@ -264,6 +267,13 @@
         {
           "prop": "tone",
           "map": {
+            "default": {
+              "background-color": "{imported.button.root.background-color.{variant}.none}",
+              "background-image": "{imported.button.root.background-image.{variant}.none}",
+              "box-shadow": "{imported.button.root.box-shadow.{variant}.none}",
+              "color": "{imported.button.root.color.{variant}.none}",
+              "outline-color": "{imported.button.root.outline-color.{variant}.none}"
+            },
             "critical": {
               "background-color": "{imported.button.root.background-color.{variant}.critical}",
               "background-image": "{imported.button.root.background-image.{variant}.critical}",

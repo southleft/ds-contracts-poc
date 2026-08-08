@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "kind": "live-figma-variant-drift",
+  "status": "completed",
+  "runId": "ds-contracts-testing-console-mcp-reack-2026-08-06",
+  "recordedAt": "2026-08-06T03:18:00Z",
+  "transport": {
+    "intended": "figma-console-mcp (figma_execute + Desktop Bridge)",
+    "used": "figma-console-mcp figma_execute",
+    "bridge": {
+      "mode": "local",
+      "port": 9224,
+      "pluginVersion": "1.39.0"
+    },
+    "prior": {
+      "used": "official-figma-mcp use_figma",
+      "note": "Cloud session (2026-08-06T02:40Z) had no Console MCP; same v6 stamps. Re-acked locally via Desktop Bridge."
+    },
+    "note": "Local Cursor session re-seeded Tooltip after canvas clear, then baseline→edit→restore via figma_execute. Fingerprints identical to prior cloud receipt."
+  },
+  "session": {
+    "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+    "fileName": "DS-Contracts-Testing",
+    "fileUrl": "https://www.figma.com/design/GnQnjSNBXtgtd2Ht0Hs1C8/DS-Contracts-Testing",
+    "sectionId": "1:2",
+    "componentId": "1:5",
+    "componentName": "Tooltip",
+    "labelId": "1:3",
+    "variableId": "VariableID:2:3",
+    "variableName": "tooltip/label/padding-left"
+  },
+  "fingerprintVersion": "v6",
+  "phases": {
+    "baseline": {
+      "fingerprint": "v6:3552508208",
+      "paddingLeft": 8,
+      "bound": "tooltip/label/padding-left",
+      "lineCount": 13
+    },
+    "afterEdit": {
+      "fingerprint": "v6:4062076634",
+      "paddingLeft": 12,
+      "bound": null,
+      "drifted": true,
+      "changedFacts": [
+        "/0:FRAME/label|layout HORIZONTAL MIN/MIN gap 0 pad 4,8,4,8 → pad 4,8,4,12",
+        "/0:FRAME/label|bound:paddingLeft tooltip/label/padding-left → (removed)"
+      ]
+    },
+    "restored": {
+      "fingerprint": "v6:3552508208",
+      "paddingLeft": 8,
+      "bound": "tooltip/label/padding-left",
+      "clean": true,
+      "lineCount": 13
+    }
+  },
+  "acceptance": {
+    "editDetachedBinding": true,
+    "editChangedFingerprint": true,
+    "restoreMatchedBaseline": true,
+    "offlineVariantDriftCheck": "npm run variant-drift:check"
+  },
+  "artifacts": {
+    "narrative": "parity/receipts/live-figma-variant-drift.md",
+    "consoleMcpScripts": "parity/receipts/console-mcp/",
+    "fingerprintSource": "core/canvas-fingerprint.ts"
+  }
+}

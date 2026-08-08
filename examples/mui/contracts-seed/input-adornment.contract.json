@@ -1,0 +1,64 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.input-adornment",
+  "name": "InputAdornment",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI nested-instance round. The position axis provides stable start/end identity for TextField adornment instances. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "position",
+      "type": {
+        "enum": [
+          "start",
+          "end"
+        ]
+      },
+      "default": "start",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Position",
+          "values": {
+            "start": "Start",
+            "end": "End"
+          }
+        },
+        "code": {
+          "prop": "position"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "$",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": "mui.input-adornment"
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "InputAdornment"
+    }
+  }
+}

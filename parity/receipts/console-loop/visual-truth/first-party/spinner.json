@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "spinner",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/spinner.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:639",
+  "cellNodeId": "1:639",
+  "cellName": "Spinner",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 48,
+    "pctAAUnmasked": 30,
+    "pctAAMasked": 30,
+    "maskCoveragePct": 0,
+    "canvasPx": "10x10",
+    "realPx": "10x9",
+    "inkCanvasPct": 42,
+    "inkRealPct": 15
+  },
+  "reference": "extract/computed/out/spinner/gate-shots/large__default.png",
+  "referenceSha256": "bbcb8f980951f1bc68cce24e49193ebe1b797efa82179f5ffa5e1a791354923b",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/spinner.png",
+  "canvasShotSha256": "a191dc6c6d98b49d701d4463b3c7c01fcb7149bc941c3509364c73dec2abfc0b",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/spinner.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.1111111111111112,
+  "inkDelta": 27,
+  "dprNormalized": false,
+  "sizeNormalized": true,
+  "note": "composition mismatch (scaleRatio=1.11, inkDelta=27.0)"
+}

@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "linear-progress",
+  "contract": "examples/mui/contracts/linear-progress.contract.json",
+  "script": "examples/mui/figma/linear-progress.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:00:35.671Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "83:1655",
+    "mode": "generated",
+    "page": "LinearProgress",
+    "sectionId": "83:1656",
+    "result": {
+      "createdNodeIds": [
+        "83:1655"
+      ],
+      "results": [
+        {
+          "name": "LinearProgress",
+          "contractId": "mui.linear-progress",
+          "nodeId": "83:1655",
+          "key": "84e2cd712a5194db50bed6f923a3f5214a31e817",
+          "variants": 2,
+          "properties": [
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Structure/variants reviewed via inspect (83:1655, page LinearProgress); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page LinearProgress)."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=56.18% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/linear-progress.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/linear-progress.png",
+    "referenceSource": "extract/computed/out/mui/linearprogress/gate-shots/determinate__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/linear-progress-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
+  },
+  "fingerprint": {
+    "v6": "v6:3801840436",
+    "lineCount": 39,
+    "sampleLines": [
+      ":COMPONENT_SET/LinearProgress|fill|[]",
+      ":COMPONENT_SET/LinearProgress|radius|5,5,5,5",
+      ":COMPONENT_SET/LinearProgress|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/LinearProgress|description|LinearProgress \u00e2\u0080\u0094 generated from contract mui.linear-progress v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/LinearProgress|propdef|Variant:VARIANT=Indeterminate",
+      "/0:COMPONENT/Variant=Indeterminate|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6549019813537598,\"g\":0.7921568751335144,\"b\":0.929411768913269},\"boundVariables\":{\"color\":{\"var\":\"imported/linear-progress/root/background-color\"}}}]",
+      "/0:COMPONENT/Variant=Indeterminate|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=Indeterminate|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Indeterminate|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Variant=Indeterminate|bound:height|imported/shared/size-4",
+      "/0:COMPONENT/Variant=Indeterminate|bound:minWidth|imported/shared/size-0",
+      "/0:COMPONENT/Variant=Indeterminate|bound:width|imported/linear-progress/root/width",
+      "/0/0:FRAME/linearprogress-bar|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.09803921729326248,\"g\":0.4627451002597809,\"b\":0.8235294222831726},\"boundVariables\":{\"color\":{\"var\":\"imported/linear-progress/linearprogress-bar/background-color\"}}}]",
+      "/0/0:FRAME/linearprogress-bar|radius|0,0,0,0",
+      "/0/0:FRAME/linearprogress-bar|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/linearprogress-bar|sizing|FIXED/FIXED ABSOLUTE",
+      "/0/0:FRAME/linearprogress-bar|bound:height|imported/shared/size-4",
+      "/0/0:FRAME/linearprogress-bar|bound:minWidth|imported/shared/size-0",
+      "/0/0:FRAME/linearprogress-bar|bound:width|imported/linear-progress/linearprogress-bar/width/indeterminate",
+      "/0/1:FRAME/linearprogress-bar-2|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.09803921729326248,\"g\":0.4627451002597809,\"b\":0.8235294222831726},\"boundVariables\":{\"color\":{\"var\":\"imported/linear-progress/linearprogress-bar-2/background-color\"}}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant enum \u2192 Indeterminate/Determinate",
+      "first-variant fill bound: imported/linear-progress/root/background-color"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Indeterminate",
+        "Variant=Determinate"
+      ],
+      "propDefs": [
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Indeterminate",
+          "variantOptions": [
+            "Indeterminate",
+            "Determinate"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Indeterminate",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": "imported/linear-progress/root/background-color",
+        "padBound": {
+          "width": "imported/linear-progress/root/width",
+          "height": "imported/shared/size-4",
+          "minWidth": "imported/shared/size-0"
+        },
+        "w": 288,
+        "h": 4,
+        "childTypes": [
+          "FRAME/linearprogress-bar",
+          "FRAME/linearprogress-bar-2"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

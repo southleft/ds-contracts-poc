@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "menu",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/menu.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "21:451",
+  "cellNodeId": "21:451",
+  "cellName": "Menu",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 25.706831695182625,
+    "pctAAUnmasked": 10.684382963232618,
+    "pctAAMasked": 10.684382963232618,
+    "maskCoveragePct": 0,
+    "canvasPx": "123x134",
+    "realPx": "68x48",
+    "inkCanvasPct": 20.252396553816286,
+    "inkRealPct": 5.072199975731101
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/menu.png",
+  "referenceSha256": "2d3bd302d7c7320902d28942a728fa194fc21b57a52a37906aaa365a68a91438",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/menu.png",
+  "canvasShotSha256": "588a744753326af3cfc490bf5bba8e8de3b3a8e5449cca9550fceacbaf36a903",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/menu.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 2.7916666666666665,
+  "inkDelta": 15.180196578085186,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=2.79, inkDelta=15.2)"
+}

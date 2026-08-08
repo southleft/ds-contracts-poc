@@ -1,0 +1,50 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.circular-progress",
+  "name": "CircularProgress",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI Wave 5 denominator round — variant axis only (determinate|indeterminate); color/size/value pinned via fixedProps. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "determinate",
+          "indeterminate"
+        ]
+      },
+      "default": "indeterminate",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "determinate": "Determinate",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "CircularProgress"
+    }
+  }
+}

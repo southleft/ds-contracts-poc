@@ -25,6 +25,11 @@
  *   5. propose   — the ui.html-embedded dump script runs against the mock
  *                  file; proposeDiff yields a proposal + bounded API diff
  *                  (a mutated base surfaces its +prop/default lines)
+ *   5b. stale-base — G3's guard half (docs/18 Flow 7 step 4): a base that is
+ *                  NOT what the set's stored sync fingerprint says the canvas
+ *                  was last synced from WARNS by name ("may contain reverts")
+ *                  in the summary + envelope; a matching base stays silent;
+ *                  absent markers verdict 'unverifiable', never 'match'
  *   6. pr        — the dry-run PR plan, exact lines, zero network
  *   6b. canvas→code — task #40: a proposal names the files it becomes and
  *                  STAMPS the round-trip fact (tool-generated vs hand-built
@@ -69,7 +74,12 @@ console.log(
 
 // --- load the bundle in a bare VM (window sandbox, no node globals) --------
 const { figma, root } = createFigmaMock();
-const sandbox = { window: {}, console: { log() {}, warn() {}, error() {} } };
+const sandbox = {
+  window: {},
+  TextEncoder,
+  TextDecoder,
+  console: { log() {}, warn() {}, error() {} },
+};
 vm.createContext(sandbox);
 vm.runInContext(bundle.code, sandbox, { timeout: 120_000 });
 const DSC = sandbox.window.DSC;
@@ -157,6 +167,155 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log(
     `✔ bundle order: ${composite.id} plans ${componentSteps.length} component scripts, dependencies first (${componentSteps.map((s) => s.contractId).join(' → ')})`,
   );
+}
+
+// --- 3b. nested semantic identity ------------------------------------------
+{
+  const clone = (value) => JSON.parse(JSON.stringify(value));
+  const childA = clone(badge);
+  childA.id = 'test.identity-child-a';
+  childA.name = 'CollisionChild';
+  childA.anchors.figma = { fileKey: null, componentSetKey: null, nodeId: null };
+  const childB = clone(childA);
+  childB.id = 'test.identity-child-b';
+  childB.description = 'The authoritative same-name child.';
+
+  const parent = clone(JSON.parse(read('contracts/card.contract.json')));
+  parent.id = 'test.identity-parent';
+  parent.name = 'IdentityParent';
+  parent.description = 'Exercises ordinary refs, slot defaults, and slot preferred values by semantic identity.';
+  parent.props = [];
+  parent.anatomy.root.parts = {
+    chosen: { component: { id: childB.id } },
+    choice: {
+      slot: {
+        name: 'choice',
+        figmaProperty: 'Choice',
+        required: true,
+        accepts: [childB.id],
+        defaultContent: [{ id: childB.id }],
+      },
+    },
+  };
+  parent.anchors.figma = { fileKey: null, componentSetKey: null, nodeId: null };
+
+  const identityMock = createFigmaMock();
+  const runIdentity = (code) =>
+    vm.runInContext(
+      `(async () => {\n${code}\n})()`,
+      vm.createContext({ figma: identityMock.figma, console: { log() {}, warn() {}, error() {} } }),
+      { timeout: 120_000 },
+    );
+  const initial = DSC.planGenerate([childA, childB, parent], { withTokens: true, fileKey: '' });
+  assert(initial.ok, `semantic identity fixture plans (${initial.ok ? '' : initial.issues.map((i) => i.headline).join('; ')})`);
+  for (const step of initial.steps) await runIdentity(step.code);
+
+  const marked = (id) =>
+    identityMock.root.findOne(
+      (n) =>
+        (n.type === 'COMPONENT_SET' || (n.type === 'COMPONENT' && n.parent?.type !== 'COMPONENT_SET')) &&
+        n.getSharedPluginData('ds_contracts', 'contractId') === id,
+    );
+  const childANode = marked(childA.id);
+  let childBNode = marked(childB.id);
+  let parentNode = marked(parent.id);
+  assert(childANode && childBNode && childANode !== childBNode, 'fresh same-name children retain distinct semantic identities');
+  const ownerOf = async (inst) => {
+    const main = await inst.getMainComponentAsync();
+    return main.parent?.type === 'COMPONENT_SET' ? main.parent : main;
+  };
+  let ordinary = parentNode.findOne((n) => n.type === 'INSTANCE' && n.name === 'chosen');
+  assert(ordinary && (await ownerOf(ordinary)) === childBNode, 'same-name distinct-ID parent targets the authoritative child');
+  const choiceDef = Object.values(parentNode.componentPropertyDefinitions).find(
+    (d) => d.type === 'INSTANCE_SWAP' && Array.isArray(d.preferredValues),
+  );
+  assert(
+    choiceDef?.preferredValues?.some((v) => v.key === childBNode.key) &&
+      !choiceDef.preferredValues.some((v) => v.key === childANode.key),
+    'slot preferred values resolve the authoritative child identity',
+  );
+  const choiceWrapper = parentNode.findOne((n) => n.type === 'FRAME' && n.name === 'choice');
+  const slotDefault = choiceWrapper?.findOne((n) => n.type === 'INSTANCE');
+  assert(slotDefault && (await ownerOf(slotDefault)) === childBNode, 'slot default resolves the authoritative child identity');
+  console.log('✔ nested semantic identity: fresh ordinary refs, slot defaults, and slot preferred values bind same-name children by contractId, never canvas name');
+
+  // Anchor adoption is rename-stable and amends the existing node/key. Clear
+  // the semantic marker to force the second resolver tier explicitly.
+  const childBKey = childBNode.key;
+  const childBId = childBNode.id;
+  childBNode.name = 'Designer-renamed child';
+  childBNode.setSharedPluginData('ds_contracts', 'contractId', '');
+  const anchoredB = clone(childB);
+  anchoredB.description += ' Amended through its stable anchor.';
+  anchoredB.anchors.figma.componentSetKey = childBKey;
+  const anchorPlan = DSC.planGenerate([anchoredB], { withTokens: false, fileKey: '' });
+  assert(anchorPlan.ok, 'rename-stability anchor fixture plans');
+  for (const step of anchorPlan.steps) await runIdentity(step.code);
+  childBNode = marked(childB.id);
+  assert(childBNode?.id === childBId && childBNode.key === childBKey, 'anchor-based amend preserves node id and component key');
+
+  const parentV2 = clone(parent);
+  parentV2.description += ' Rebuilt after the child rename.';
+  const renamePlan = DSC.planGenerate([anchoredB, parentV2], { withTokens: false, fileKey: '' });
+  assert(renamePlan.ok, 'rename-stability parent fixture plans');
+  for (const step of renamePlan.steps) await runIdentity(step.code);
+  parentNode = marked(parent.id);
+  ordinary = parentNode.findOne((n) => n.type === 'INSTANCE' && n.name === 'chosen');
+  assert(ordinary && (await ownerOf(ordinary)) === childBNode, 'child rename does not change nested semantic binding');
+  console.log(`✔ rename stability + amend key preservation: anchor adoption kept node ${childBId} / key ${childBKey}, and rebuilt parent refs still target it`);
+
+  // Two old generated nodes with the same legacy name are not evidence for
+  // either one. The resolver must refuse before creating or amending.
+  const legacyMock = createFigmaMock();
+  for (let i = 0; i < 2; i++) {
+    const legacy = legacyMock.figma.createComponent();
+    legacy.name = childA.name;
+    legacy.setSharedPluginData('ds_contracts', 'specHash', `legacy-${i}`);
+    legacyMock.figma.currentPage.appendChild(legacy);
+  }
+  const legacyPlan = DSC.planGenerate([childA], { withTokens: false, fileKey: '' });
+  assert(legacyPlan.ok, 'duplicate legacy refusal fixture plans');
+  let legacyRefusal = '';
+  try {
+    for (const step of legacyPlan.steps) {
+      await vm.runInContext(
+        `(async () => {\n${step.code}\n})()`,
+        vm.createContext({ figma: legacyMock.figma, console: { log() {}, warn() {}, error() {} } }),
+        { timeout: 120_000 },
+      );
+    }
+  } catch (error) {
+    legacyRefusal = String(error?.message ?? error);
+  }
+  assert(
+    legacyRefusal.includes('duplicate explicit legacy-generated name') && legacyRefusal.includes(childA.name),
+    `duplicate legacy targets refuse by name (got "${legacyRefusal}")`,
+  );
+  console.log('✔ duplicate legacy refusal: two unmarked generated same-name targets are ambiguous and the sync refuses instead of guessing');
+
+  const foreignMock = createFigmaMock();
+  const foreign = foreignMock.figma.createComponent();
+  foreign.name = childA.name;
+  foreignMock.figma.currentPage.appendChild(foreign);
+  const foreignPlan = DSC.planGenerate([childA], { withTokens: true, fileKey: '' });
+  assert(foreignPlan.ok, 'unmarked foreign same-name fixture plans');
+  for (const step of foreignPlan.steps) {
+    await vm.runInContext(
+      `(async () => {\n${step.code}\n})()`,
+      vm.createContext({ figma: foreignMock.figma, console: { log() {}, warn() {}, error() {} } }),
+      { timeout: 120_000 },
+    );
+  }
+  const generated = foreignMock.root.findOne(
+    (n) =>
+      (n.type === 'COMPONENT_SET' || (n.type === 'COMPONENT' && n.parent?.type !== 'COMPONENT_SET')) &&
+      n.getSharedPluginData('ds_contracts', 'contractId') === childA.id,
+  );
+  assert(
+    generated && generated !== foreign && foreign.getSharedPluginData('ds_contracts', 'contractId') === '',
+    'an unmarked foreign same-name component is never adopted',
+  );
+  console.log('✔ fresh semantic identity: an unmarked foreign same-name node remains untouched while a separately marked target is created');
 }
 
 // --- 4. update-library report + apply --------------------------------------
@@ -308,6 +467,20 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(scoped !== source, 'the dump script TARGET_SETS seam scopes');
   const dump = await runScript(scoped);
   assert(dump && dump.Badge, 'the dump captures the mock-built Badge set');
+  const structuredDefs = dump.Badge.propertyDefinitions ?? {};
+  const structuredAxes = Object.keys(structuredDefs)
+    .filter((key) => structuredDefs[key].type === 'VARIANT')
+    .sort();
+  assert(structuredAxes.length > 0, 'dump v1.14 captures structured VARIANT definitions');
+  assert(
+    dump.Badge.variants.every(
+      (variant) =>
+        variant.variantProperties &&
+        JSON.stringify(Object.keys(variant.variantProperties).sort()) ===
+          JSON.stringify(structuredAxes),
+    ),
+    'dump v1.14 captures a complete structured tuple on every direct variant row',
+  );
 
   const diff = DSC.proposeDiff(dump, 'Badge', badge);
   assert(diff.ok, `proposeDiff proposes from the drawn set (${diff.ok ? '' : diff.issue.headline})`);
@@ -319,6 +492,10 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(
     exported.type === 'CONTRACT-PROPOSAL' && exported.baseContractId === badge.id && exported.proposedContract,
     'the export artifact carries base id/version + the proposed contract',
+  );
+  assert(
+    exported.projection?.status === 'verified-exact',
+    'a structured tool-generated set exports returned-tuple verified exactness',
   );
 
   // Delta detection: a base missing a prop the drawn set carries must
@@ -453,6 +630,94 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
   console.log(
     '✔ dump v1.12 wrap: layoutWrap WRAP → layout.wrap, a DISTINCT counterAxisSpacing → rowSpacing, a SYNCED one (a number EQUAL to itemSpacing — null is write-only and never read back) invents nothing, and counterAxisAlignContent SPACE_BETWEEN is refused BY NAME — the return leg the emitter has been writing to since v15',
+  );
+}
+
+// --- 5b. G3 STALE-BASE GUARD (partial) --------------------------------------
+// docs/18 Flow 7 step 4: Propose against a base the canvas was NOT last
+// synced from manufactures the engineer's merged change as the designer's
+// revert. The guard compares the set's stored sync fingerprint (the
+// ds_contracts specHash markers) against the provided base and WARNS — in
+// the summary (→ PR body + export envelope) and as a structured verdict.
+// The mock canvas was amended to Badge v9.9.9 in section 4, so the ORIGINAL
+// v1 badge contract is exactly the stale base of the story.
+{
+  const ui = read('figma-sync/plugin/ui.html');
+  const openTag = '<script type="text/plain" id="dump-source">';
+  const start = ui.indexOf(openTag);
+  const source = ui.slice(start + openTag.length, ui.indexOf('</script>', start)).replace(/^\n/, '');
+  const scoped = source.replace(
+    /^const TARGET_SETS = \[[^\n]*\];$/m,
+    `const TARGET_SETS = ${JSON.stringify(['Badge'])};`,
+  );
+  const dump = await runScript(scoped);
+  const inv = (await runScript(DSC.inventoryScriptSource())).inventory;
+  const row = inv.find((r) => r.contractId === badge.id);
+  assert(row && row.specHash, 'the marked Badge row carries its stored sync fingerprint');
+  const markers = { contractId: row.contractId, specHash: row.specHash, version: row.version };
+
+  // The contract the canvas WAS last synced from (section 4's vNext, rebuilt
+  // byte-identically): a FRESH base — verdict 'match', zero warnings.
+  const vNext = JSON.parse(JSON.stringify(badge));
+  vNext.version = '9.9.9';
+  vNext.props.push({
+    name: 'experimental',
+    description: 'Harness-added boolean prop (update-report fixture).',
+    type: 'boolean',
+    default: false,
+    bindings: { figma: { kind: 'BOOLEAN', property: 'Experimental' }, code: { prop: 'experimental' } },
+  });
+  const fresh = DSC.proposeDiff(dump, 'Badge', vNext, { canvasMarkers: markers });
+  assert(fresh.ok, `fresh-base propose succeeds (${fresh.ok ? '' : fresh.issue.headline})`);
+  assert(
+    fresh.baseFreshness && fresh.baseFreshness.verdict === 'match' && fresh.baseFreshness.stale === false,
+    `a base matching the stored sync fingerprint verdicts 'match' (got ${JSON.stringify(fresh.baseFreshness)})`,
+  );
+  assert(
+    !fresh.summaryLines.some((l) => l.includes('Stale base')),
+    'a fresh base adds NO warning line — the guard never manufactures an alarm',
+  );
+
+  // The ORIGINAL v1 badge: a STALE base — the diff would read the applied
+  // v9.9.9 changes as the designer's edits, and dropping them is a revert.
+  const stale = DSC.proposeDiff(dump, 'Badge', badge, { canvasMarkers: markers });
+  assert(stale.ok, 'stale-base propose still succeeds — warn and name, never block');
+  assert(
+    stale.baseFreshness && stale.baseFreshness.verdict === 'stale' && stale.baseFreshness.stale === true,
+    `a base that is not what the canvas last synced from verdicts 'stale' (got ${JSON.stringify(stale.baseFreshness)})`,
+  );
+  assert(
+    stale.summaryLines[0].includes('last synced from a different contract version') &&
+      stale.summaryLines[0].includes('may contain reverts'),
+    `the warning LEADS the summary and names the revert risk (got "${stale.summaryLines[0]}")`,
+  );
+  assert(
+    stale.summaryLines[0].includes(`v${row.version}`) && stale.summaryLines[0].includes(`v${badge.version}`),
+    'the warning names both versions (canvas-synced vs provided base)',
+  );
+  const staleExport = JSON.parse(stale.exportJson);
+  assert(
+    staleExport.baseFreshness && staleExport.baseFreshness.verdict === 'stale',
+    'the CONTRACT-PROPOSAL envelope carries the structured stale verdict',
+  );
+  assert(
+    staleExport.summary.some((l) => l.includes('may contain reverts')),
+    'the export/PR summary carries the warning line (propose-pr prints summary lines into the PR body)',
+  );
+
+  // No markers passed (every pre-guard caller): 'unverifiable' BY NAME —
+  // never a silent 'match', never a manufactured warning.
+  const unknown = DSC.proposeDiff(dump, 'Badge', badge);
+  assert(
+    unknown.ok && unknown.baseFreshness.verdict === 'unverifiable' && unknown.baseFreshness.stale === false,
+    `no markers → verdict 'unverifiable' by name (got ${JSON.stringify(unknown.ok ? unknown.baseFreshness : unknown.issue)})`,
+  );
+  assert(
+    !unknown.summaryLines.some((l) => l.includes('Stale base')),
+    'an unverifiable base adds no warning line',
+  );
+  console.log(
+    '✔ G3 stale-base guard (partial): a base matching the stored sync fingerprint stays silent; the pre-sync v1 base WARNS by name ("may contain reverts") in summary + envelope; absent markers verdict "unverifiable", never a silent match',
   );
 }
 
@@ -754,9 +1019,11 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // drops it. MUI's shipped artifacts predated that refusal, so the bundle
   // had been carrying a glyph for a button the browser draws nowhere. A
   // DECREASE here is the phantom leaving, not coverage lost.
+  // Wave 5 denominator (2026-08-05): 13 → 22 as circular-progress + other
+  // promoted SVG assets joined the MUI bundle paste surface.
   assert(
-    parsed.icons && Object.keys(parsed.icons).length === 13,
-    `the bundle surfaces its 13 icon assets (got ${parsed.icons ? Object.keys(parsed.icons).length : 'none'})`,
+    parsed.icons && Object.keys(parsed.icons).length === 22,
+    `the bundle surfaces its 22 icon assets (got ${parsed.icons ? Object.keys(parsed.icons).length : 'none'})`,
   );
   const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '', tokenSet: parsed.tokenSet, icons: parsed.icons });
   assert(plan.ok, `the foreign bundle plans clean (${plan.ok ? '' : plan.issues.map((i) => i.headline).join('; ')})`);
@@ -794,8 +1061,10 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // an out-of-vocabulary stateProp to a real VARIANT AXIS) and Button 63 → 75
   // (the figmaStatePreviews probe accepted a State axis). Both must survive
   // the JSON-only paste identically to the compiled-script path.
+  // Wave 5 denominator (2026-08-05): Accordion→TextField carried set expanded
+  // from 11 to 27 COMPONENT_SETs as Alert/Avatar/Badge/… joined the paste surface.
   assert(
-    shapeA === 'Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6)',
+    shapeA === 'Accordion(4), Alert(12), Autocomplete(2), Avatar(3), Badge(14), Button(75), Card(4), Checkbox(3), Chip(28), CircularProgress(2), Dialog(5), Divider(3), Drawer(2), Fab(9), IconButton(9), InputAdornment(2), LinearProgress(2), Link(42), Paper(8), Radio(14), Select(2), Slider(12), Snackbar(3), Switch(28), Table(2), Tabs(6), TextField(6)',
     `the bundle path builds the exact MUI set shape (got ${shapeA})`,
   );
   assert(shapeA === shapeB, `bundle path ≡ script path on component sets (${shapeA} vs ${shapeB})`);
@@ -825,13 +1094,15 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // already refused by name. The EQUIVALENCE this pin exists for is unchanged
   // and is what matters: the bundle path and the compiled-script path land the
   // SAME count and the same NAME inventory.
+  // Wave 5 denominator (2026-08-05): 1543 → 2136 as carried Alert…TextField
+  // contracts joined the mint surface.
   assert(
-    mockA.variables.length === 1543 && mockB.variables.length === 1543,
-    `both paths land 1543 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 2136 && mockB.variables.length === 2136,
+    `both paths land 2136 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
-    aliasCountOf(mockA) === 73 && aliasCountOf(mockB) === 73,
-    `both paths carry 73 Figma-native alias variables (bundle ${aliasCountOf(mockA)}, script ${aliasCountOf(mockB)})`,
+    aliasCountOf(mockA) === 134 && aliasCountOf(mockB) === 134,
+    `both paths carry 134 Figma-native alias variables (bundle ${aliasCountOf(mockA)}, script ${aliasCountOf(mockB)})`,
   );
   const namesA = mockA.variables.map((v) => v.name).sort().join('\n');
   const namesB = mockB.variables.map((v) => v.name).sort().join('\n');
@@ -927,7 +1198,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 
   console.log(
-    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1543 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 2136 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 
   // --- NESTED MODES ARE REFUSED, NOT SILENTLY FLATTENED TO BASE -----------
@@ -1523,6 +1794,39 @@ return { ok: true };
       baselessExport.baseVersion === null && baselessExport.proposedContract,
     'the base-less export is a CONTRACT-PROPOSAL with a null base, never a fabricated one',
   );
+  assert(
+    baselessExport.projection?.status === 'verified-exact',
+    'a structured hand-built set is exact on canvas-expressible variant projection even though generated code remains an inversion',
+  );
+  const legacyHandDump = JSON.parse(JSON.stringify(handDump));
+  delete legacyHandDump.HandBuilt.propertyDefinitions;
+  for (const variant of legacyHandDump.HandBuilt.variants) {
+    delete variant.variantProperties;
+  }
+  const explicitLegacy = DSC.proposeDiff(
+    legacyHandDump,
+    'HandBuilt',
+    null,
+    { toolGenerated: false },
+  );
+  assert(
+    explicitLegacy.ok &&
+      JSON.parse(explicitLegacy.exportJson).projection?.status ===
+        'legacy-unverified',
+    'only an explicitly hand-built legacy dump enters reviewable inversion',
+  );
+  const unknownLegacy = DSC.proposeDiff(
+    legacyHandDump,
+    'HandBuilt',
+    null,
+  );
+  assert(
+    !unknownLegacy.ok &&
+      unknownLegacy.issue.headline.includes(
+        'structured propertyDefinitions',
+      ),
+    'legacy evidence with unknown provenance refuses exact conversion',
+  );
   // The WITH-base path is untouched, byte for byte.
   const withBase = DSC.proposeDiff(await runScript(
     source.replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['Badge'])};`),
@@ -1676,6 +1980,110 @@ return { ok: true };
   console.log(
     `✔ envelope v2: the CONTRACT-PROPOSAL export carries ALL THREE engine outputs — proposedContract + ${v2.childStubs.length} childStub(s) (${stubIds.join(', ')}) + mintedTokens (${v2.mintedTokens.count} token(s)); this pin fails the build if either payload is ever dropped again`,
   );
+
+  // (f) THE PR DOOR CARRIES THE ENVELOPE TOO. The copy/download and pairing
+  // doors ship childStubs + mintedTokens; the GitHub PR door used to plan
+  // exactly ONE PUT (the contract alone), so a hand-built set with nested
+  // instances landed a PR whose contract references child ids and minted
+  // token refs that were NOT in the PR — `generate` refuses it by name.
+  // The plan must now file every payload under the SAME names the CLI's
+  // propose-pr writes (contracts/<stem>.contract.json per stub,
+  // <contractId>.minted.dtcg.json for the tree), and the PR body must list
+  // every file.
+  const hostId = String(v2.proposedContract.id);
+  const prBase = {
+    owner: 'acme',
+    repo: 'design-system',
+    base: 'main',
+    path: `contracts/${hostId.replace(/^[^.]+\./, '')}.contract.json`,
+    contractJson: JSON.stringify(withStub.proposal, null, 2) + '\n',
+    contractId: hostId,
+    baseVersion: '(new — no base contract in the repo yet)',
+    summaryLines: withStub.summaryLines,
+    branchSuffix: 'fixture',
+  };
+  const envPlan = DSC.prPlan({ ...prBase, childStubs: withStub.childStubs, mintedTokens: withStub.mintedTokens });
+  const envPuts = envPlan.requests.filter((r) => r.method === 'PUT');
+  assert(
+    envPuts.length === 1 + withStub.childStubs.length + 1,
+    `PR DOOR REGRESSION: a proposal carrying ${withStub.childStubs.length} childStub(s) + mintedTokens must plan ${1 + withStub.childStubs.length + 1} PUTs (contract + each stub + minted tree) — got ${envPuts.length}`,
+  );
+  // Per-file paths: the CLI's propose-pr convention, byte for byte.
+  const expectStubPaths = stubIds.map((id) => `contracts/${String(id).replace(/^[^.]+\./, '')}.contract.json`);
+  const expectMintedPath = `contracts/${hostId}.minted.dtcg.json`;
+  const plannedPaths = envPlan.files.map((f) => f.path);
+  assert(
+    JSON.stringify(plannedPaths) === JSON.stringify([prBase.path, ...expectStubPaths, expectMintedPath]),
+    `PR plan file paths must match the CLI's propose-pr layout — expected ${JSON.stringify([prBase.path, ...expectStubPaths, expectMintedPath])}, got ${JSON.stringify(plannedPaths)}`,
+  );
+  assert(
+    envPuts.every((r, i) => r.url.endsWith('/contents/' + plannedPaths[i])),
+    'each planned PUT commits its own file (request order = file order)',
+  );
+  // The bytes are the CLI's bytes: stub files are the stub documents, the
+  // tokens file is the minted tree — pretty-printed with a trailing newline.
+  assert(
+    withStub.childStubs.every((stub, i) => envPlan.files[i + 1].contents === JSON.stringify(stub, null, 2) + '\n') &&
+      envPlan.files[envPlan.files.length - 1].contents === JSON.stringify(withStub.mintedTokens.tree, null, 2) + '\n',
+    'sidecar file contents are the envelope payloads verbatim (2-space JSON + trailing newline, the CLI spelling)',
+  );
+  // The body names every file and keeps the provenance-honesty copy.
+  assert(
+    envPlan.body.includes('## Files') &&
+      [prBase.path, ...expectStubPaths, expectMintedPath].every((p) => envPlan.body.includes('`' + p + '`')),
+    'the PR body lists EVERY file the PR carries, by path',
+  );
+  assert(
+    envPlan.body.includes('_The contract file in this PR is the proposed document; review it like any other contract diff._'),
+    'the envelope-carrying body keeps the existing review-honesty sentence',
+  );
+  // Dry-run lines surface the same plan — one numbered step per request.
+  const envDry = DSC.prDryRunLines({ ...prBase, childStubs: withStub.childStubs, mintedTokens: withStub.mintedTokens });
+  assert(
+    [prBase.path, ...expectStubPaths, expectMintedPath].every((p) => envDry.some((l) => l.includes(`Commit ${p} on `))),
+    'the dry run names every planned commit, sidecars included',
+  );
+  // RED TEST — strip the payloads from the envelope: the plan must FALL BACK
+  // to the documented contract-only shape (docs/00-choose-your-path.md, the
+  // GitHub PR door), byte-identical to the historic 4-step plan: one PUT,
+  // no Files section, same honesty sentence. Nothing may be invented.
+  const bare = DSC.prPlan(prBase);
+  assert(
+    bare.requests.length === 4 && bare.requests.filter((r) => r.method === 'PUT').length === 1 && bare.files.length === 1,
+    'a proposal WITHOUT childStubs/mintedTokens plans exactly the historic contract-only 4 steps (GET, POST branch, 1 PUT, POST pulls)',
+  );
+  assert(
+    !bare.body.includes('## Files') &&
+      bare.body.includes('_The contract file in this PR is the proposed document; review it like any other contract diff._'),
+    'the contract-only body keeps the documented wording — no invented Files section',
+  );
+  // RED TEST — a stub with no id is a NAMED refusal before any request is
+  // planned, never a silent drop back to a contract-only PR.
+  let stubRefusal = null;
+  try {
+    DSC.prPlan({ ...prBase, childStubs: [{ name: 'NoIdStub' }] });
+  } catch (e) {
+    stubRefusal = String((e && e.message) || e);
+  }
+  assert(
+    stubRefusal && stubRefusal.includes('REFUSED') && stubRefusal.includes('no non-empty string id'),
+    `a stub without an id must refuse BY NAME, not silently drop the file (got: ${stubRefusal})`,
+  );
+  // RED TEST — two files planning the same destination refuse by name (the
+  // CLI's assertUniqueDestinations, mirrored).
+  let dupRefusal = null;
+  try {
+    DSC.prPlan({ ...prBase, childStubs: [{ id: hostId }] });
+  } catch (e) {
+    dupRefusal = String((e && e.message) || e);
+  }
+  assert(
+    dupRefusal && dupRefusal.includes('REFUSED') && dupRefusal.includes('same destination'),
+    `a stub colliding with the main contract destination must refuse BY NAME (got: ${dupRefusal})`,
+  );
+  console.log(
+    `✔ PR door envelope: a proposal with ${withStub.childStubs.length} childStub(s) + mintedTokens plans ${envPuts.length} PUTs under the CLI's propose-pr file names (${plannedPaths.join(', ')}), the body lists every file; stripping the payloads falls back to the documented contract-only 4-step plan, and an id-less or colliding stub refuses BY NAME`,
+  );
   if (process.argv.includes('--show-brownfield')) {
     console.log('\n--- scan rows (plain words) ---\n  ' + report.lines.join('\n  '));
     console.log('\n--- base-less proposal for "HandBuilt" ---\n  ' + baseless.summaryLines.join('\n  ') + '\n');
@@ -1765,4 +2173,4 @@ return { ok: true };
   );
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles, brownfield-scan, base-less-propose, canvas-code-plan, read-only-enforcement)');
+console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, stale-base-guard, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles, brownfield-scan, base-less-propose, canvas-code-plan, read-only-enforcement)');

@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "kind": "console-loop-carbon-component",
+  "status": "completed",
+  "component": "icon-button",
+  "contract": "examples/carbon/contracts/iconbutton.contract.json",
+  "script": "examples/carbon/figma/icon-button.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:04.887Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload + eval(async IIFE)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:5645",
+    "mode": "amended",
+    "page": "IconButton (carbon.iconbutton)",
+    "sectionId": "1:5646",
+    "contractId": "carbon.iconbutton",
+    "result": {
+      "createdNodeIds": [
+        "1:5645"
+      ],
+      "results": [
+        {
+          "name": "IconButton",
+          "contractId": "carbon.iconbutton",
+          "nodeId": "1:5645",
+          "key": "a3484aa733155553737ae1c28602f972c77f2a9b",
+          "variants": 16,
+          "properties": [
+            "Kind",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "matchDeveloped": true,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Re-synced via console-loop batch 2026-08-07T16:32:44.350Z — amended rebuiltVariants=16; nodeId=1:5645; wrapper layout CENTER/CENTER; matchDeveloped left unset.",
+      "Re-synced via clientStorage chunks (n=19, total=111187); eval skipped unchanged nodeId=1:5645; btn-icon host layout NONE/MIN (btn wrapper CENTER). matchDeveloped left false.",
+      "Force-rebuilt via clientStorage chunks (n=19, total=111490); amended rebuiltVariants=16 nodeId=1:5645; btn-icon glyph centered in host (16/16). matchDeveloped left false."
+    ],
+    "defects": [],
+    "reference": "parity/receipts/console-loop/carbon/refs/icon-button.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "extract/computed/out/carbon/iconbutton/receipts/pair--primary.unset.enabled__default.png#package-left",
+    "scorecard": "parity/receipts/console-loop/carbon/scores/icon-button.json",
+    "matchDevelopedReason": "agent AA=0.95 compositionOk",
+    "matchedAt": "2026-08-08T03:17:04.209Z",
+    "status": "scored-pass",
+    "scoreConfirmed": {
+      "at": "2026-08-08T04:31:56.356Z",
+      "pctAAMasked": 0.9548611111111112,
+      "compositionOk": true,
+      "supersededDefects": [],
+      "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:1501913482",
+    "lineCount": 582,
+    "sampleLines": [
+      ":COMPONENT_SET/IconButton (carbon.iconbutton)|fill|[]",
+      ":COMPONENT_SET/IconButton (carbon.iconbutton)|radius|5,5,5,5",
+      ":COMPONENT_SET/IconButton (carbon.iconbutton)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/IconButton (carbon.iconbutton)|description|IconButton â generated from contract carbon.iconbutton v0.2.0 â",
+      ":COMPONENT_SET/IconButton (carbon.iconbutton)|propdef|Kind:VARIANT=Primary",
+      ":COMPONENT_SET/IconButton (carbon.iconbutton)|propdef|Size:VARIANT=Xs",
+      "/0:COMPONENT/Kind=Primary, Size=Xs|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Kind=Primary, Size=Xs|radius|0,0,0,0",
+      "/0:COMPONENT/Kind=Primary, Size=Xs|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Kind=Primary, Size=Xs|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Kind=Primary, Size=Xs|bound:height|imported/icon-button/root/height/xs",
+      "/0:COMPONENT/Kind=Primary, Size=Xs|bound:width|imported/icon-button/root/width/xs",
+      "/0/0:FRAME/tooltip-trigger__wrapper|fill|[]",
+      "/0/0:FRAME/tooltip-trigger__wrapper|radius|0,0,0,0",
+      "/0/0:FRAME/tooltip-trigger__wrapper|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/tooltip-trigger__wrapper|sizing|FIXED/FIXED AUTO",
+      "/0/0:FRAME/tooltip-trigger__wrapper|bound:height|imported/icon-button/tooltip-trigger-wrapper/height/xs",
+      "/0/0:FRAME/tooltip-trigger__wrapper|bound:minWidth|imported/shared/size-0",
+      "/0/0:FRAME/tooltip-trigger__wrapper|bound:width|imported/icon-button/tooltip-trigger-wrapper/width/xs",
+      "/0/0/0:FRAME/btn|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.05882352963089943,\"g\":0.3843137323856354,\"b\":0.9960784316062927},\"boundVariables\":{\"color\":{\"var\":\"imported/icon-button/btn/background-color/primary\"}}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Kind enum → Primary/Secondary/Tertiary/Ghost",
+      "Size enum → Xs/Sm/Md/Lg"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Kind=Primary, Size=Xs",
+        "Kind=Primary, Size=Sm",
+        "Kind=Primary, Size=Md",
+        "Kind=Primary, Size=Lg",
+        "Kind=Secondary, Size=Xs",
+        "Kind=Secondary, Size=Sm",
+        "Kind=Secondary, Size=Md",
+        "Kind=Secondary, Size=Lg",
+        "Kind=Tertiary, Size=Xs",
+        "Kind=Tertiary, Size=Sm",
+        "Kind=Tertiary, Size=Md",
+        "Kind=Tertiary, Size=Lg",
+        "Kind=Ghost, Size=Xs",
+        "Kind=Ghost, Size=Sm",
+        "Kind=Ghost, Size=Md",
+        "Kind=Ghost, Size=Lg"
+      ],
+      "propDefs": [
+        {
+          "name": "Kind",
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Tertiary",
+            "Ghost"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Xs",
+          "variantOptions": [
+            "Xs",
+            "Sm",
+            "Md",
+            "Lg"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Kind=Primary, Size=Xs",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/icon-button/root/width/xs",
+          "height": "imported/icon-button/root/height/xs"
+        },
+        "w": 24,
+        "h": 24,
+        "childTypes": [
+          "FRAME/tooltip-trigger__wrapper"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": true
+  },
+  "reSyncedAt": "2026-08-07T16:52:14.326Z",
+  "nodeId": "1:5645",
+  "reSyncNote": "Force-rebuilt via clientStorage chunks (n=19, total=111490); amended rebuiltVariants=16 nodeId=1:5645; btn-icon glyph centered in host (16/16). matchDeveloped left false."
+}

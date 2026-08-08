@@ -1,0 +1,162 @@
+[
+  {
+    "key": "0.elevation__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "0.elevation__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "0.elevation__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "0.elevation__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "0.outlined__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "0.outlined__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "0.outlined__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "0.outlined__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "1.elevation__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "1.elevation__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "1.elevation__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "1.elevation__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "1.outlined__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "1.outlined__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "1.outlined__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "1.outlined__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "3.elevation__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "3.elevation__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "3.elevation__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "3.elevation__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "3.outlined__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "3.outlined__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "3.outlined__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "3.outlined__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "8.elevation__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "8.elevation__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "8.elevation__focus-visible",
+    "pctExact": 4.485677083333333,
+    "pctAA": 0
+  },
+  {
+    "key": "8.elevation__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "8.outlined__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "8.outlined__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "8.outlined__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "8.outlined__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

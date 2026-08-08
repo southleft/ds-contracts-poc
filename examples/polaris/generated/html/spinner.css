@@ -5,7 +5,8 @@
 }
 
 .spinner {
-  display: inline-flex;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   border: 0;
@@ -30,6 +31,7 @@
 .spinner__root-small {
   display: inline-flex;
   flex-shrink: 0;
+  transform: rotate(90deg);
 }
 
 .spinner__root-large svg {
@@ -41,6 +43,7 @@
 .spinner__root-large {
   display: inline-flex;
   flex-shrink: 0;
+  transform: rotate(90deg);
 }
 
 /* showcase chrome */

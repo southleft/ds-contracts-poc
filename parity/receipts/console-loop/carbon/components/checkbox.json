@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "kind": "console-loop-carbon-component",
+  "status": "completed",
+  "component": "checkbox",
+  "contract": "examples/carbon/contracts/checkbox.contract.json",
+  "script": "examples/carbon/figma/checkbox.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:04.230Z",
+  "transport": "figma-console-mcp fetch localhost:9230/stem/carbon-checkbox → eval (83481 bytes) + force amend",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:5562",
+    "mode": "amended",
+    "page": "Checkbox (carbon.checkbox)",
+    "sectionId": "1:5563",
+    "contractId": "carbon.checkbox",
+    "result": {
+      "createdNodeIds": [
+        "1:5562"
+      ],
+      "results": [
+        {
+          "name": "Checkbox",
+          "contractId": "carbon.checkbox",
+          "amended": true,
+          "nodeId": "1:5562",
+          "key": "c81a1d9bf6e457ba836310d544f121c2dd08b453",
+          "rebuiltVariants": 3,
+          "properties": [
+            "Checked"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T19:04:17.000Z",
+    "notes": [
+      "Re-sync 2026-08-06 via Console MCP: storedLength=83481 from localhost:9230/stem/carbon-checkbox JSON .code field.",
+      "Force-amend eval rebuilt 3 variants on node 1:5562 (carbon.checkbox).",
+      "Label text: single-line \"Checkbox\" (label-text 68×18, WIDTH_AND_HEIGHT — no Check/box wrap).",
+      "Indeterminate checkbox-label-after: 8×2 fill SOLID @ abs left=4 top=9; stroke weights all 0 (filled bar, not stroke-L).",
+      "Checked=Checked after glyph: strokeLeft=1 strokeBottom=1, 9×5 rot 45° (checkmark).",
+      "Screenshots: parity/receipts/console-loop/carbon/shots/checkbox.png, checkbox-unchecked.png, checkbox-checked.png, checkbox-indeterminate.png",
+      "Wave B.2 layout fixes confirmed on canvas; developed-parity gate still mismatched — do not flip matchDeveloped",
+      "FC-PSEUDO-STROKE-GLYPH: L→ROUND polyline SVG + host-center + optical nudge; check contained in 16×16",
+      "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — skipped unchanged; nodeId=1:5562; matchDeveloped left unset."
+    ],
+    "defects": [
+      "matchDeveloped remains false — developed-parity not claimed; indeterminate bar glyph confirmed on canvas."
+    ],
+    "reference": "extract/computed/out/carbon/checkbox/gate-shots/unchecked.enabled__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "zOrder": {
+      "Checked=Checked": {
+        "beforeIndex": 1,
+        "afterIndex": 2,
+        "orderOk": true
+      },
+      "Checked=Indeterminate": {
+        "beforeIndex": 1,
+        "afterIndex": 2,
+        "orderOk": true
+      }
+    },
+    "checkVisiblyPresent": true,
+    "canvasShot": "parity/receipts/console-loop/carbon/shots/checkbox-unchecked.png",
+    "humanSpotCheck": "pass-layout-2026-08-06 — checkbox ✓/bar/label OK; matchDeveloped still needs like-for-like pixel score",
+    "scorecard": "parity/receipts/console-loop/carbon/scores/checkbox.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "chrome matches; residual FC-FONT-AA on Checkbox label (diff is text only)",
+        "matchedAt": "2026-08-08T03:05:52.736Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=30.93, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:4163950863",
+    "lineCount": 86,
+    "sampleLines": [
+      ":COMPONENT_SET/Checkbox (carbon.checkbox)|fill|[]",
+      ":COMPONENT_SET/Checkbox (carbon.checkbox)|radius|5,5,5,5",
+      ":COMPONENT_SET/Checkbox (carbon.checkbox)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Checkbox (carbon.checkbox)|description|Checkbox — generated from contract carbon.checkbox v0.2.0 †",
+      ":COMPONENT_SET/Checkbox (carbon.checkbox)|propdef|Checked:VARIANT=Unchecked",
+      "/0:COMPONENT/Checked=Unchecked|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Checked=Unchecked|radius|0,0,0,0",
+      "/0:COMPONENT/Checked=Unchecked|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Checked=Unchecked|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Checked=Unchecked|bound:height|imported/shared/size-20",
+      "/0:COMPONENT/Checked=Unchecked|bound:width|imported/checkbox/root/width",
+      "/0/0:FRAME/checkbox-label|fill|[]",
+      "/0/0:FRAME/checkbox-label|radius|0,0,0,0",
+      "/0/0:FRAME/checkbox-label|layout|HORIZONTAL MIN/MIN gap 0 pad 1,0,0,20",
+      "/0/0:FRAME/checkbox-label|sizing|FIXED/FIXED AUTO",
+      "/0/0:FRAME/checkbox-label|bound:height|imported/shared/size-20",
+      "/0/0:FRAME/checkbox-label|bound:paddingLeft|imported/shared/size-20",
+      "/0/0:FRAME/checkbox-label|bound:paddingTop|imported/shared/size-1",
+      "/0/0:FRAME/checkbox-label|bound:width|imported/checkbox/checkbox-label/width",
+      "/0/0/0:FRAME/label|fill|[]"
+    ],
+    "note": "Force re-sync paint-order; sampleLines stale until re-fingerprint pass"
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Checked enum → Unchecked/Checked/Indeterminate"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Checked=Unchecked",
+        "Checked=Checked",
+        "Checked=Indeterminate"
+      ],
+      "propDefs": [
+        {
+          "name": "Checked",
+          "type": "VARIANT",
+          "defaultValue": "Unchecked",
+          "variantOptions": [
+            "Unchecked",
+            "Checked",
+            "Indeterminate"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Checked=Unchecked",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/checkbox/root/width",
+          "height": "imported/shared/size-20"
+        },
+        "w": 288,
+        "h": 20,
+        "childTypes": [
+          "FRAME/checkbox-label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T12:02:33.399Z",
+  "storedLength": 83481,
+  "screenshot": "parity/receipts/console-loop/carbon/shots/checkbox.png",
+  "wave": "B.2",
+  "nodeId": "1:5562"
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.circular-progress",
+  "name": "CircularProgress",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI Wave 5 denominator round — variant axis only (determinate|indeterminate); color/size/value pinned via fixedProps. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "determinate",
+          "indeterminate"
+        ]
+      },
+      "default": "indeterminate",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "determinate": "Determinate",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block"
+      },
+      "parts": {
+        "root-determinate": {
+          "icon": {
+            "asset": "circular-progress-root-determinate",
+            "size": 40
+          },
+          "visibleWhen": {
+            "prop": "variant",
+            "equals": "determinate"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when variant=determinate."
+        },
+        "root-indeterminate": {
+          "icon": {
+            "asset": "circular-progress-root-indeterminate",
+            "size": 40
+          },
+          "visibleWhen": {
+            "prop": "variant",
+            "equals": "indeterminate"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when variant=indeterminate."
+        }
+      },
+      "tokens": {
+        "color": "{imported.circular-progress.root.color}",
+        "width": "{imported.circular-progress.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "CircularProgress"
+    }
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Paper",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "0.elevation",
+      "axisValues": {
+        "elevation": "0",
+        "variant": "elevation"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-elz8qu-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "0.outlined",
+      "axisValues": {
+        "elevation": "0",
+        "variant": "outlined"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-dsnul5-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "1.elevation",
+      "axisValues": {
+        "elevation": "1",
+        "variant": "elevation"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-elz8qu-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "1.outlined",
+      "axisValues": {
+        "elevation": "1",
+        "variant": "outlined"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-dsnul5-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "3.elevation",
+      "axisValues": {
+        "elevation": "3",
+        "variant": "elevation"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-elz8qu-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "3.outlined",
+      "axisValues": {
+        "elevation": "3",
+        "variant": "outlined"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-dsnul5-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "8.elevation",
+      "axisValues": {
+        "elevation": "8",
+        "variant": "elevation"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-elz8qu-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "8.outlined",
+      "axisValues": {
+        "elevation": "8",
+        "variant": "outlined"
+      },
+      "token": "palette-background-paper",
+      "varName": "--mui-palette-background-paper",
+      "anchor": {
+        "selector": ".css-dsnul5-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "0.elevation",
+      "axisValues": {
+        "elevation": "0",
+        "variant": "elevation"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-elz8qu-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "0.outlined",
+      "axisValues": {
+        "elevation": "0",
+        "variant": "outlined"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-dsnul5-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "1.elevation",
+      "axisValues": {
+        "elevation": "1",
+        "variant": "elevation"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-elz8qu-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "1.outlined",
+      "axisValues": {
+        "elevation": "1",
+        "variant": "outlined"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-dsnul5-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "3.elevation",
+      "axisValues": {
+        "elevation": "3",
+        "variant": "elevation"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-elz8qu-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "3.outlined",
+      "axisValues": {
+        "elevation": "3",
+        "variant": "outlined"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-dsnul5-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "8.elevation",
+      "axisValues": {
+        "elevation": "8",
+        "variant": "elevation"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-elz8qu-MuiPaper-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "8.outlined",
+      "axisValues": {
+        "elevation": "8",
+        "variant": "outlined"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-dsnul5-MuiPaper-root"
+      }
+    }
+  ],
+  "skips": [],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

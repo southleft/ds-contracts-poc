@@ -1,0 +1,14 @@
+{
+  "runId": "post-ecf-wave9",
+  "wave": 9,
+  "title": "Spec draft + conformance kit packaging",
+  "status": "READY",
+  "closedAt": "2026-08-05",
+  "artifacts": [
+    "spec/README.md",
+    "spec/normative.md",
+    "spec/conformance/README.md"
+  ],
+  "phase3ExitStillOpen": "second independent implementation",
+  "next": "wave10-v1-gates"
+}

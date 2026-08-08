@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "avatar",
+  "contract": "examples/polaris/contracts/avatar.contract.json",
+  "script": "examples/polaris/figma/avatar.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:17.394Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:7849",
+    "mode": "amended",
+    "page": "Avatar (polaris.avatar)",
+    "sectionId": "1:7850",
+    "contractId": "polaris.avatar",
+    "result": {
+      "createdNodeIds": [
+        "1:7849"
+      ],
+      "results": [
+        {
+          "name": "Avatar",
+          "contractId": "polaris.avatar",
+          "nodeId": "1:7849",
+          "key": "e5f076f114cabc55a4b482e4b7326d7895c1aade",
+          "variants": 5,
+          "properties": [
+            "Customer#1:1249",
+            "Show WithInitials#1:1255",
+            "Name#1:1261",
+            "Initials#1:1267",
+            "Source#1:1273",
+            "Accessibility Label#1:1279",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-07T17:11:53.459Z",
+    "notes": [
+      "Re-synced n=14 total=79820; amended rebuiltVariants=5. Magenta placeholder persists. matchDeveloped left false."
+    ],
+    "defects": [
+      "Saturated magenta placeholder not matching Polaris avatar developed defaults — fail closed."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/avatar.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "examples/polaris/generated/html/avatar.html#first-item-inline-css",
+    "scorecard": "parity/receipts/console-loop/polaris/scores/avatar.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "agent AA=14.54 compositionOk vs emit-html first-item",
+        "matchedAt": "2026-08-08T03:21:50.448Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=14.54, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:635946300",
+    "lineCount": 146,
+    "sampleLines": [
+      ":COMPONENT_SET/Avatar (polaris.avatar)|fill|[]",
+      ":COMPONENT_SET/Avatar (polaris.avatar)|radius|5,5,5,5",
+      ":COMPONENT_SET/Avatar (polaris.avatar)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Avatar (polaris.avatar)|description|Avatar â generated from contract polaris.avatar v0.4.0 â",
+      ":COMPONENT_SET/Avatar (polaris.avatar)|propdef|Accessibility Label#1:1279:TEXT=",
+      ":COMPONENT_SET/Avatar (polaris.avatar)|propdef|Customer#1:1249:BOOLEAN=false",
+      ":COMPONENT_SET/Avatar (polaris.avatar)|propdef|Initials#1:1267:TEXT=",
+      ":COMPONENT_SET/Avatar (polaris.avatar)|propdef|Name#1:1261:TEXT=",
+      ":COMPONENT_SET/Avatar (polaris.avatar)|propdef|Show WithInitials#1:1255:BOOLEAN=false",
+      ":COMPONENT_SET/Avatar (polaris.avatar)|propdef|Size:VARIANT=Md",
+      ":COMPONENT_SET/Avatar (polaris.avatar)|propdef|Source#1:1273:TEXT=",
+      "/0:COMPONENT/Size=Md|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.772549033164978,\"g\":0.1882352977991104,\"b\":0.772549033164978},\"boundVariables\":{\"color\":{\"var\":\"p/color-avatar-one-bg-fill\"}}}]",
+      "/0:COMPONENT/Size=Md|radius|6,6,6,6",
+      "/0:COMPONENT/Size=Md|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Size=Md|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Size=Md|bound:bottomLeftRadius|imported/avatar/root/border-bottom-left-radius/md",
+      "/0:COMPONENT/Size=Md|bound:bottomRightRadius|imported/avatar/root/border-bottom-right-radius/md",
+      "/0:COMPONENT/Size=Md|bound:height|imported/avatar/root/height/md",
+      "/0:COMPONENT/Size=Md|bound:topLeftRadius|imported/avatar/root/border-top-left-radius/md",
+      "/0:COMPONENT/Size=Md|bound:topRightRadius|imported/avatar/root/border-top-right-radius/md"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Size enum → Md/Xs/Sm/Lg/Xl",
+      "TEXT Name",
+      "TEXT Initials",
+      "BOOLEAN Customer",
+      "TEXT Source",
+      "TEXT Accessibility Label",
+      "BOOLEAN Show WithInitials",
+      "first-variant fill bound: p/color-avatar-one-bg-fill"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Md",
+        "Size=Xs",
+        "Size=Sm",
+        "Size=Lg",
+        "Size=Xl"
+      ],
+      "propDefs": [
+        {
+          "name": "Customer#1:1249",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Show WithInitials#1:1255",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Name#1:1261",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Initials#1:1267",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Source#1:1273",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Accessibility Label#1:1279",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Md",
+          "variantOptions": [
+            "Md",
+            "Xs",
+            "Sm",
+            "Lg",
+            "Xl"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Md",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 6,
+        "fillVarName": "p/color-avatar-one-bg-fill",
+        "padBound": {
+          "height": "imported/avatar/root/height/md",
+          "topLeftRadius": "imported/avatar/root/border-top-left-radius/md",
+          "topRightRadius": "imported/avatar/root/border-top-right-radius/md",
+          "bottomLeftRadius": "imported/avatar/root/border-bottom-left-radius/md",
+          "bottomRightRadius": "imported/avatar/root/border-bottom-right-radius/md",
+          "fills": "p/color-avatar-one-bg-fill"
+        },
+        "w": 28,
+        "h": 28,
+        "childTypes": [
+          "FRAME/initials"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T17:11:53.459Z",
+  "nodeId": "1:7849"
+}

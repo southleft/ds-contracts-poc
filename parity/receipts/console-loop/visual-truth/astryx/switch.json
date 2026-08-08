@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "astryx",
+  "stem": "switch",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/astryx/components/switch.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:3964",
+  "cellNodeId": "13:1322",
+  "cellName": "Value=Off, Label Position=End",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 24.391385767790265,
+    "pctAAUnmasked": 8.77808988764045,
+    "pctAAMasked": 8.77808988764045,
+    "maskCoveragePct": 0,
+    "canvasPx": "178x24",
+    "realPx": "178x24",
+    "inkCanvasPct": 33.66104868913858,
+    "inkRealPct": 34.55056179775281
+  },
+  "reference": "extract/computed/out/astryx/switch/gate-shots/end.no-isDisabled__default.png",
+  "referenceSha256": "9bc02668e787cab9b3bf439bbac88597a40b9dd1b5d61099490e26d631364662",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/switch.png",
+  "canvasShotSha256": "d21fd258e62d98f3fd623e5e9c6340ac3565aef8185be048879e8b1fe7fb01d4",
+  "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/switch.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0.8895131086142314,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=8.78 > 5)"
+}

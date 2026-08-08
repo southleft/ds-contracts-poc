@@ -1,0 +1,115 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.input-adornment",
+  "name": "InputAdornment",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI nested-instance round. The position axis provides stable start/end identity for TextField adornment instances. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "position",
+      "type": {
+        "enum": [
+          "start",
+          "end"
+        ]
+      },
+      "default": "start",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Position",
+          "values": {
+            "start": "Start",
+            "end": "End"
+          }
+        },
+        "code": {
+          "prop": "position"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "$",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "label": {
+          "element": "p",
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy p|Typography-body1.Typography-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "text-wrap-mode": "nowrap"
+          },
+          "layout": {
+            "grow": true
+          },
+          "tokens": {
+            "color": "{imported.input-adornment.label.color}",
+            "font-size": "{imported.input-adornment.label.font-size}",
+            "font-weight": "{imported.input-adornment.label.font-weight}",
+            "letter-spacing": "{imported.input-adornment.label.letter-spacing}",
+            "line-height": "{imported.input-adornment.label.line-height}"
+          }
+        }
+      },
+      "declared": {
+        "text-wrap-mode": "nowrap"
+      },
+      "tokens": {
+        "color": "{imported.input-adornment.root.color}",
+        "max-height": "{imported.input-adornment.root.max-height}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "position",
+          "map": {
+            "end": {
+              "margin-left": "{imported.input-adornment.root.margin-left.end}",
+              "margin-right": "{imported.input-adornment.root.margin-right.end}"
+            },
+            "start": {
+              "margin-left": "{imported.input-adornment.root.margin-left.start}",
+              "margin-right": "{imported.input-adornment.root.margin-right.start}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": "mui.input-adornment"
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "InputAdornment"
+    }
+  }
+}

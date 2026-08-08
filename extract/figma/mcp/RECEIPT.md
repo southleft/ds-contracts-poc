@@ -49,7 +49,7 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - ✅ foreign vocabulary recovered by name: "component/border/radius/rounded-md"
 - ✅ foreign vocabulary recovered by name: "color/content/inverse"
 - ✅ the U+2024 variable ("spacing/0․5", ONE DOT LEADER) is itself recovered by name by the join…
-- ✅ …and then REFUSED by the token-ref grammar (binding not proposed, named in notes) — the refusal fires on live foreign data
+- ✅ …and then FOLDED to a NAMED RENAME ({spacing.0-5}, dump v1.16 — was: refused by the token-ref grammar) — the fold receipt fires on live foreign data
 - ✅ recovered names BIND in the proposal: root carries {spacing.4} / {spacing.3} / {component.border.radius.rounded-md} / {spacing.2} (got {"padding-inline":"{spacing.4}","padding-block":"{spacing.3}","border-radius":"{component.border.radius.rounded-md}","gap":"{spacing.2}","max-width":"{imported.alert.root.max-width}","box-shadow":"{imported.alert.root.box-shadow}","width":"{imported.alert.root.width}"})
 - ✅ everything the join could not name still ships at literal fidelity as imported.* mints (15 minted, 0 unbound)
 
@@ -65,18 +65,23 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 
 ### Map degradations (named, never silent)
 
-- `[paint-unsupported]` Alert:variant=success `fill` — first visible paint is GRADIENT_LINEAR, not SOLID — dump v1 carries solid paints only; paint omitted
+- `[variable-unresolved]` Alert:variant=success `fill.gradientStop` — variable id VariableID:2308:683 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
+- `[variable-unresolved]` Alert:variant=success `fill.gradientStop` — variable id VariableID:2309:940 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
+- `[variable-unresolved]` Alert:variant=info `fill.gradientStop` — variable id VariableID:2308:684 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
+- `[variable-unresolved]` Alert:variant=warning `fill.gradientStop` — variable id VariableID:2308:682 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
+- `[variable-unresolved]` Alert:variant=danger `fill.gradientStop` — variable id VariableID:2308:677 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
 
-### Proposal notes (review line items, 35)
+### Proposal notes (review line items, 41)
 
 - semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas and the name/axis inference table matched nothing; set the real host element
+- variable name "spacing/0․5" contains U+2024 ONE DOT LEADER — folded to '-' and carried as {spacing.0-5} everywhere it binds (dump v1.16 fold rule; a RENAME relative to the canvas variable, which keeps its own spelling): rename the variable to match, or remap manually. A fold target another variable already owns refuses registration at the captured-token layer by name
+- Alert:root fill (variant=success): OBLIQUE GRADIENT_LINEAR (handles (-3.3897, -4.593) → (1.5453, 2.1339)) — the CSS angle and stop scale depend on the drawn box's aspect ratio, so no size-independent exact carriage exists — background-image REFUSED BY NAME for the whole node (carrying the other variants would mint 'none' here, an absence the canvas contradicts); the captured handles/stops stay in the dump for a later carriage, review
 - Alert:root/container: visibility bound to BOOLEAN "hasIcon" — proposed as prop `hasIcon` (default true: the property definition's defaultValue, dump v1.5)
 - Alert:root/container/Icon: nested instance of "check circle" has no known contract — component ref proposed as "ds.check-circle" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/container/Icon: fixed prop values of the nested "check circle" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
-- Alert:root/horizontal stack itemSpacing: variable name "spacing/0․5" contains characters outside the token-ref grammar ([a-z0-9.-]) — binding not proposed; rename the variable or map it manually
 - Alert:root/horizontal stack/horizontal stack: part name "horizontalStack" already names another part of this contract (part names are contract-wide: CSS classes, swap layers, and note paths key on them) — renamed to "horizontalStack2" (rule: first drawn part keeps the name; later collisions take the parent-derived prefix, else an ordinal suffix)
-- Alert:root/horizontal stack/horizontal stack/Title: rides text style "body/md-bold" which is not a token-derived style — typography not proposed
-- Alert:root/horizontal stack/horizontal stack/Description: rides text style "body/sm" which is not a token-derived style — typography not proposed
+- Alert:root/horizontal stack/horizontal stack/Title: rides text style "body/md-bold" which is not a token-derived style (the kit binds no variable to its typography) — minted under the STYLE's own name as `imported.text.body-md-bold`, shared by every part riding it; rename against your real type tokens (provisional)
+- Alert:root/horizontal stack/horizontal stack/Description: rides text style "body/sm" which is not a token-derived style (the kit binds no variable to its typography) — minted under the STYLE's own name as `imported.text.body-sm`, shared by every part riding it; rename against your real type tokens (provisional)
 - Alert:root/horizontal stack/Text link: nested instance of "Text link" has no known contract — component ref proposed as "ds.text-link" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/horizontal stack/Text link: fixed props of "Text link" canonicalized by spelling (dump v1.1) — verify against the child contract's bindings
 - Alert:root/horizontal stack/Text link: visibility bound to BOOLEAN "hasLink" — proposed as prop `hasLink` (default true: the property definition's defaultValue, dump v1.5)
@@ -86,13 +91,18 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - Alert:root/container 2/Icon: fixed prop values of the nested "close" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
 - Alert:root: a DROP_SHADOW stack (up to 2 layers) proposed as a comma-separated box-shadow value (dump v1.2) — CSS surfaces render it; the canvas preview and the Figma sync script project it as a native DROP_SHADOW effect (dump v1.3)
 - Alert:root: root width is DRAWN FIXED in every variant — the observed dimension (390px, dump v1.5 bbox) is proposed as a minted root token (the drawn value is the only witness; rename against your real tokens)
+- Alert:root: root height HUGS in every variant — carried as the literal `height: fit-content` (v16 grammar), the CSS twin of Figma HUG. The drawn 86px is a measurement of the DEFAULT content, not a design value, so it is NOT minted; the emitted box is content-sized and no longer cross-stretches when this component is nested inside another
+- Alert:root/horizontal stack/horizontal stack/Title lineHeight: observed 20 carried as a PROVISIONAL minted token (rename against your real system) — nearest real tokens by value: {size.checkbox.md}, {size.switch.height}, {space.250}; the proposal binds the provisional name, never a real token the canvas did not use
+- Alert:root/horizontal stack/horizontal stack/Description fontWeight: observed 500 carried as a PROVISIONAL minted token (rename against your real system) — nearest real tokens by value: {font.control.weight}, {font.tab.default.weight}, {font.weight.medium}; the proposal binds the provisional name, never a real token the canvas did not use
+- Alert:root/horizontal stack/horizontal stack/Description lineHeight: observed 20 carried as a PROVISIONAL minted token (rename against your real system) — nearest real tokens by value: {size.checkbox.md}, {size.switch.height}, {space.250}; the proposal binds the provisional name, never a real token the canvas did not use
+- Alert:root effects: observed 0px 12px 60px #00000026, 0px 12px 32px -16px #0009321f carried as a PROVISIONAL minted token (rename against your real system) — nearest real tokens by value: {radius.banner.section}, {radius.none}; the proposal binds the provisional name, never a real token the canvas did not use
 - MINTED {imported.alert.root.max-width} = 880px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root max-width
-- MINTED {imported.alert.horizontal-stack-horizontal-stack-title.font-size} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-size
-- MINTED {imported.alert.horizontal-stack-horizontal-stack-title.font-weight} = 700 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-weight
-- MINTED {imported.alert.horizontal-stack-horizontal-stack-title.line-height} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title line-height
-- MINTED {imported.alert.horizontal-stack-horizontal-stack-description.font-size} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description font-size
-- MINTED {imported.alert.horizontal-stack-horizontal-stack-description.font-weight} = 500 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description font-weight
-- MINTED {imported.alert.horizontal-stack-horizontal-stack-description.line-height} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description line-height
+- MINTED {imported.text.body-md-bold.font-size} = 16px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-size
+- MINTED {imported.text.body-md-bold.font-weight} = 700 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title font-weight
+- MINTED {imported.text.body-md-bold.line-height} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Title line-height
+- MINTED {imported.text.body-sm.font-size} = 14px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description font-size
+- MINTED {imported.text.body-sm.font-weight} = 500 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description font-weight
+- MINTED {imported.text.body-sm.line-height} = 20px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root/horizontal stack/horizontal stack/Description line-height
 - MINTED {imported.alert.root.box-shadow} = 0px 12px 60px #00000026, 0px 12px 32px -16px #0009321f — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root box-shadow
 - MINTED {imported.alert.root.width} = 390px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: Alert:root width
 - stub ds.check-circle: renders HONEST OBSERVED GEOMETRY (dump v1.5 bounding box) via minted imported.stub-* tokens — a correctly-sized box, NOT the child's anatomy (still not captured); import the real child set to replace it

@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "section",
+  "contract": "contracts/section.contract.json",
+  "script": "parity/receipts/console-loop/emitted/30-section.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:05.633Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1476",
+    "page": "Section",
+    "sectionId": "1:1477",
+    "result": {
+      "createdNodeIds": [
+        "1:1476"
+      ],
+      "results": [
+        {
+          "name": "Section",
+          "contractId": "ds.section",
+          "nodeId": "1:1476",
+          "key": "120f64e66cbee89840167043c49a93fe7238857a",
+          "variants": 2,
+          "properties": [
+            "Children#1:560",
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1477 captured (ok).",
+      "Section: 2 variant(s); type COMPONENT_SET; page Section.",
+      "Props: Children, Variant.",
+      "First root fill bound to color/section/section.",
+      "Sample text: \"Slot\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3994772349",
+    "lineCount": 72,
+    "sampleLines": [
+      ":COMPONENT_SET/Section|fill|[]",
+      ":COMPONENT_SET/Section|radius|5,5,5,5",
+      ":COMPONENT_SET/Section|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Section|description|Section — generated from contract ds.section v1.0.0",
+      ":COMPONENT_SET/Section|propdef|Children#1:560:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/Section|propdef|Variant:VARIANT=Section",
+      "/0:COMPONENT/Variant=Section|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/section/section\"}}}]",
+      "/0:COMPONENT/Variant=Section|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
+      "/0:COMPONENT/Variant=Section|radius|8,8,8,8",
+      "/0:COMPONENT/Variant=Section|layout|VERTICAL MIN/MIN gap 8 pad 16,16,16,16",
+      "/0:COMPONENT/Variant=Section|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Variant=Section|bound:bottomLeftRadius|radius/card",
+      "/0:COMPONENT/Variant=Section|bound:bottomRightRadius|radius/card",
+      "/0:COMPONENT/Variant=Section|bound:itemSpacing|space/gap/sm",
+      "/0:COMPONENT/Variant=Section|bound:paddingBottom|space/inset-x/md",
+      "/0:COMPONENT/Variant=Section|bound:paddingLeft|space/inset-x/md",
+      "/0:COMPONENT/Variant=Section|bound:paddingRight|space/inset-x/md",
+      "/0:COMPONENT/Variant=Section|bound:paddingTop|space/inset-x/md",
+      "/0:COMPONENT/Variant=Section|bound:strokeBottomWeight|border-width/100",
+      "/0:COMPONENT/Variant=Section|bound:strokeLeftWeight|border-width/100"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Variant"
+    ],
+    "observed": {
+      "variantNames": [
+        "Variant=Section",
+        "Variant=Muted"
+      ],
+      "propDefs": [
+        {
+          "name": "Children#1:560",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Section",
+          "variantOptions": [
+            "Section",
+            "Muted"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Section",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 16,
+          "r": 16,
+          "b": 16,
+          "l": 16
+        },
+        "radius": 8,
+        "fillVarName": "color/section/section",
+        "padBound": {
+          "itemSpacing": "space/gap/sm",
+          "paddingLeft": "space/inset-x/md",
+          "paddingTop": "space/inset-x/md",
+          "paddingRight": "space/inset-x/md",
+          "paddingBottom": "space/inset-x/md",
+          "width": "size/card/width",
+          "topLeftRadius": "radius/card",
+          "topRightRadius": "radius/card",
+          "bottomLeftRadius": "radius/card",
+          "bottomRightRadius": "radius/card",
+          "strokeTopWeight": "border-width/100",
+          "strokeBottomWeight": "border-width/100",
+          "strokeLeftWeight": "border-width/100",
+          "strokeRightWeight": "border-width/100",
+          "fills": "color/section/section",
+          "strokes": "color/border/subtle"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 320,
+        "h": 134,
+        "childNames": [
+          "content:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

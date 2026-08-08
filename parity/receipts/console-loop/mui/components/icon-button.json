@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "icon-button",
+  "contract": "examples/mui/contracts/icon-button.contract.json",
+  "script": "examples/mui/figma/icon-button.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:00:37.497Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "83:1708",
+    "mode": "generated",
+    "page": "IconButton",
+    "sectionId": "83:1709",
+    "result": {
+      "createdNodeIds": [
+        "83:1708"
+      ],
+      "results": [
+        {
+          "name": "IconButton",
+          "contractId": "mui.icon-button",
+          "nodeId": "83:1708",
+          "key": "48398694ddf8a9ac4d953cf1965b28b3892c57e9",
+          "variants": 9,
+          "properties": [
+            "Disabled#83:19",
+            "Icon#83:29",
+            "Size",
+            "Color"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Structure/variants reviewed via inspect (83:1708, page IconButton); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 9 variants on page IconButton)."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=25.78% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/icon-button.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/icon-button.png",
+    "referenceSource": "extract/computed/out/mui/iconbutton/gate-shots/large.default.enabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/icon-button-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
+  },
+  "fingerprint": {
+    "v6": "v6:1946274529",
+    "lineCount": 188,
+    "sampleLines": [
+      ":COMPONENT_SET/IconButton|fill|[]",
+      ":COMPONENT_SET/IconButton|radius|5,5,5,5",
+      ":COMPONENT_SET/IconButton|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/IconButton|description|IconButton \u00e2\u0080\u0094 generated from contract mui.icon-button v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/IconButton|propdef|Color:VARIANT=Default",
+      ":COMPONENT_SET/IconButton|propdef|Disabled#83:19:BOOLEAN=false",
+      ":COMPONENT_SET/IconButton|propdef|Icon#83:29:TEXT=\u00e2\u0098\u0085",
+      ":COMPONENT_SET/IconButton|propdef|Size:VARIANT=Medium",
+      "/0:COMPONENT/Size=Medium, Color=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/icon-button/root/background-color\"}}}]",
+      "/0:COMPONENT/Size=Medium, Color=Default|radius|20,20,20,20",
+      "/0:COMPONENT/Size=Medium, Color=Default|layout|HORIZONTAL CENTER/CENTER gap 0 pad 8,8,8,8",
+      "/0:COMPONENT/Size=Medium, Color=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Size=Medium, Color=Default|bound:bottomLeftRadius|imported/icon-button/root/border-bottom-left-radius/medium",
+      "/0:COMPONENT/Size=Medium, Color=Default|bound:bottomRightRadius|imported/icon-button/root/border-bottom-right-radius/medium",
+      "/0:COMPONENT/Size=Medium, Color=Default|bound:paddingBottom|imported/icon-button/root/padding-bottom/medium",
+      "/0:COMPONENT/Size=Medium, Color=Default|bound:paddingLeft|imported/icon-button/root/padding-left/medium",
+      "/0:COMPONENT/Size=Medium, Color=Default|bound:paddingRight|imported/icon-button/root/padding-right/medium",
+      "/0:COMPONENT/Size=Medium, Color=Default|bound:paddingTop|imported/icon-button/root/padding-top/medium",
+      "/0:COMPONENT/Size=Medium, Color=Default|bound:strokeBottomWeight|imported/shared/size-0",
+      "/0:COMPONENT/Size=Medium, Color=Default|bound:strokeLeftWeight|imported/shared/size-0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Size enum \u2192 Medium/Small/Large",
+      "Color enum \u2192 Default/Primary/Secondary",
+      "BOOLEAN Disabled",
+      "TEXT Icon",
+      "first-variant fill bound: imported/icon-button/root/background-color"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Medium, Color=Default",
+        "Size=Medium, Color=Primary",
+        "Size=Medium, Color=Secondary",
+        "Size=Small, Color=Default",
+        "Size=Small, Color=Primary",
+        "Size=Small, Color=Secondary",
+        "Size=Large, Color=Default",
+        "Size=Large, Color=Primary",
+        "Size=Large, Color=Secondary"
+      ],
+      "propDefs": [
+        {
+          "name": "Color",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Primary",
+            "Secondary"
+          ]
+        },
+        {
+          "name": "Disabled#83:19",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Icon#83:29",
+          "type": "TEXT",
+          "defaultValue": "\u00e2\u0098\u0085",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Medium, Color=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 8,
+          "b": 8,
+          "l": 8
+        },
+        "radius": 20,
+        "fillVarName": "imported/icon-button/root/background-color",
+        "padBound": {
+          "paddingLeft": "imported/icon-button/root/padding-left/medium",
+          "paddingTop": "imported/icon-button/root/padding-top/medium",
+          "paddingRight": "imported/icon-button/root/padding-right/medium",
+          "paddingBottom": "imported/icon-button/root/padding-bottom/medium",
+          "topLeftRadius": "imported/icon-button/root/border-top-left-radius/medium",
+          "topRightRadius": "imported/icon-button/root/border-top-right-radius/medium",
+          "bottomLeftRadius": "imported/icon-button/root/border-bottom-left-radius/medium",
+          "bottomRightRadius": "imported/icon-button/root/border-bottom-right-radius/medium",
+          "strokeTopWeight": "imported/shared/size-0",
+          "strokeBottomWeight": "imported/shared/size-0",
+          "strokeLeftWeight": "imported/shared/size-0",
+          "strokeRightWeight": "imported/shared/size-0"
+        },
+        "w": 78,
+        "h": 45,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

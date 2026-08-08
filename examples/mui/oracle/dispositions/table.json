@@ -1,0 +1,34 @@
+{
+  "componentId": "mui.table",
+  "stem": "table",
+  "status": "in-pilot",
+  "authoredFrom": [
+    "examples/mui/PROVENANCE.md organism / stickyHeader exclusions",
+    "accuracy/grammar.json — table semantics via lowering when required"
+  ],
+  "facts": [
+    {
+      "channel": "semantics.table",
+      "expect": "LOWERED",
+      "expectName": "table-box-to-accessible-structure",
+      "expectWhere": "Native table box may lower to named accessible structure; lowering must be explicit"
+    },
+    {
+      "channel": "layout.stickyHeader",
+      "expect": "REFUSED",
+      "expectName": "sticky-header-excluded",
+      "expectWhere": "position:sticky is not a carried canvas channel; classAllow excludes -stickyHeader$"
+    },
+    {
+      "channel": "anatomy.row-menu-open",
+      "expect": "REFUSED",
+      "expectName": "portal-single-root-drops-in-stage",
+      "expectWhere": "Open row Menu portals away; single-portaled-root policy must not silently keep a wrong root"
+    },
+    {
+      "channel": "anatomy.inlined-checkbox",
+      "expect": "CARRIED",
+      "expectWhere": "Inlined checkbox/row cells are anatomy facts when declared without component refs — do not invent nested instance identity"
+    }
+  ]
+}

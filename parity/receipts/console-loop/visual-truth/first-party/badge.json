@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "badge",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/badge.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:309",
+  "cellNodeId": "1:299",
+  "cellName": "Variant=Info",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 98.07555238774056,
+    "pctAAUnmasked": 87.45545260156807,
+    "pctAAMasked": 87.45545260156807,
+    "maskCoveragePct": 0,
+    "canvasPx": "61x23",
+    "realPx": "61x23",
+    "inkCanvasPct": 93.44262295081968,
+    "inkRealPct": 98.07555238774056
+  },
+  "reference": "extract/computed/out/badge/gate-shots/attention-strong.complete__default.png",
+  "referenceSha256": "80b4e8590fd536e51cbea92c616f731578b06498e8d36b62a5db78df4d43f3e0",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/badge.png",
+  "canvasShotSha256": "11f3b438ef6fe6e746d9ab705d97372dc37a07c080437e80615ac4f2c2245198",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/badge.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 4.632929436920875,
+  "dprNormalized": false,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=87.46 > 5)"
+}

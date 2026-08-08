@@ -1,0 +1,392 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "snackbar": {
+        "root": {
+          "min-height": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "min-width": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "z-index": {
+            "$value": "1400",
+            "$type": "number"
+          }
+        },
+        "paper-root": {
+          "background-color": {
+            "$value": "#323232",
+            "$type": "color"
+          },
+          "box-shadow": {
+            "$value": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px",
+            "$type": "shadow"
+          },
+          "color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "letter-spacing": {
+            "$value": "0.14994px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "20.02px",
+            "$type": "dimension"
+          },
+          "min-width": {
+            "$value": "288px",
+            "$type": "dimension"
+          },
+          "padding-bottom": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "padding-top": {
+            "$value": "6px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "letter-spacing": {
+            "$value": "0.14994px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "20.02px",
+            "$type": "dimension"
+          },
+          "padding-bottom": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "padding-top": {
+            "$value": "8px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "paper-root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "paper-root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "paper-root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "paper-root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "paper-root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "paper-root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "paper-root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "paper-root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "paper-root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "paper-root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "justify",
+        "value": "start"
+      },
+      {
+        "part": "paper-root",
+        "field": "align",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "paper-root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "paper-root",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "paper-root",
+        "channel": "transition-duration",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "paper-root",
+        "channel": "transition-property",
+        "value": "opacity, transform"
+      },
+      {
+        "part": "paper-root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "position",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "fixed",
+      "distinctValues": 1
+    },
+    {
+      "part": "paper-root",
+      "channel": "flex-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "wrap",
+      "distinctValues": 1
+    },
+    {
+      "part": "paper-root",
+      "channel": "transition-behavior",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal, normal",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "viewport-derived-geometry-refused: root (position:fixed) — bottom, left, right, top NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 24px + box 320px + right 556px = 900px = browser.viewport.width (900px); top 927.984px + box 48.0156px + bottom 24px = 1000px = browser.viewport.height (1000px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "webkit-prefixed-channels-refused: 3 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (paper-root, root); -webkit-text-fill-color (label, paper-root); -webkit-text-stroke-color (label, paper-root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"paper-root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: paper-root.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: paper-root.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: paper-root.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: paper-root.letter-spacing — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: paper-root.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: label.caret-color equals ancestor \"paper-root\" on all 1 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"paper-root\" on all 1 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"paper-root\" on all 1 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.letter-spacing equals ancestor \"paper-root\" on all 1 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label.line-height equals ancestor \"paper-root\" on all 1 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "read-boundary-not-read-on-portal-path: Snackbar sweeps through capturePortalRoots (two-phase baseline diff), which normalizes each root inside its own reader and never runs readBoundaryReceipts — so the text-fill fold and the closed-shadow-root signature are NOT MEASURED for this component. Zero lines above means UNREAD, not \"none found\"; a named residual of the molecule round, surfaced by the scope-independence fix (before it, this component displayed its SIBLINGS' folds and looked read).",
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "paper-root",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "paper-root",
+      "label"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "literal-text-carried: label = \"Snackbar message\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: root.layout.justify = start (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: paper-root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: paper-root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: paper-root.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: paper-root.transition-duration = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: paper-root.transition-property = opacity, transform (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: paper-root.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)"
+  ]
+}

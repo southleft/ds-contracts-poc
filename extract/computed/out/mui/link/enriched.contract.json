@@ -1,0 +1,169 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.link",
+  "name": "Link",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "a"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "error",
+          "info",
+          "success",
+          "warning",
+          "inherit"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "error": "Error",
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "inherit": "Inherit"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "underline",
+      "type": {
+        "enum": [
+          "none",
+          "hover",
+          "always"
+        ]
+      },
+      "default": "hover",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Underline",
+          "values": {
+            "none": "None",
+            "hover": "Hover",
+            "always": "Always"
+          }
+        },
+        "code": {
+          "prop": "underline"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Link",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block"
+      },
+      "content": {
+        "prop": "children"
+      },
+      "declaredStates": {
+        "focus-visible": {
+          "outline-style": "auto"
+        }
+      },
+      "tokens": {
+        "font-size": "{imported.link.root.font-size}",
+        "font-weight": "{imported.link.root.font-weight}",
+        "text-decoration-color": "{imported.link.root.text-decoration-color.{color}.{underline}}",
+        "width": "{imported.link.root.width}"
+      },
+      "states": {
+        "active": {
+          "text-decoration-color": "{imported.link.root.text-decoration-color-state-active.{color}}"
+        },
+        "focus-visible": {
+          "outline-color": "{imported.link.root.outline-color-state-focus-visible}",
+          "outline-offset": "{imported.link.root.outline-offset-state-focus-visible}",
+          "outline-width": "{imported.link.root.outline-width-state-focus-visible}"
+        },
+        "hover": {
+          "text-decoration-color": "{imported.link.root.text-decoration-color-state-hover.{color}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "error": {
+              "color": "{imported.link.root.color.error}",
+              "outline-color": "{imported.link.root.outline-color.error}"
+            },
+            "info": {
+              "color": "{imported.link.root.color.info}",
+              "outline-color": "{imported.link.root.outline-color.info}"
+            },
+            "inherit": {
+              "color": "{imported.link.root.color.inherit}",
+              "outline-color": "{imported.link.root.outline-color.inherit}"
+            },
+            "primary": {
+              "color": "{imported.link.root.color.primary}",
+              "outline-color": "{imported.link.root.outline-color.primary}"
+            },
+            "secondary": {
+              "color": "{imported.link.root.color.secondary}",
+              "outline-color": "{imported.link.root.outline-color.secondary}"
+            },
+            "success": {
+              "color": "{imported.link.root.color.success}",
+              "outline-color": "{imported.link.root.outline-color.success}"
+            },
+            "warning": {
+              "color": "{imported.link.root.color.warning}",
+              "outline-color": "{imported.link.root.outline-color.warning}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Link"
+    }
+  }
+}

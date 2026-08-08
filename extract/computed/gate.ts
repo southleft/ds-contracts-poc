@@ -29,7 +29,7 @@ import { flattenTokens, makeResolveLiteral, tokenInventoryFromJson, type TokenEn
 import { kebab } from '../types.js';
 import type { Contract } from '../../scripts/contract-schema.js';
 import type { CaptureConfig, ComponentConfig, PropSpace, Interaction } from './capture.js';
-import { INTERACTIONS, settleStage, stageFor } from './capture.js';
+import { INTERACTIONS, fontFaceCss, settleStage, stageFor } from './capture.js';
 import { isFusable, kindOf, mergeShippedMinted, SYNTHETIC_CHANNELS, type Capture, type Combo, type FlatEl, type MintedMerge } from './lib.js';
 import type { AlignedSweep } from './fuse.js';
 
@@ -326,6 +326,11 @@ export async function runGate(opts: {
     );
   }
   const html = `<!doctype html><html><head><meta charset="utf-8"><style>
+/* FC-FONT-SUBSTRATE (cfg.fonts, default off): the library's true faces as
+   data:-URI @font-face blocks — the gate page and the capture page load the
+   SAME faces, so the developed reference renders real glyphs, not the CSS
+   fallback's. '' when unconfigured — page byte-unchanged. */
+${fontFaceCss(repoRoot, cfg)}
 ${tokensCss}
 ${mintedTokenCss(merged.tree)}
 ${first.css}
@@ -465,11 +470,17 @@ ${stages.join('\n')}
         }
       }
 
+      // The gate-shot (OUR emitted render) is written unconditionally: it is
+      // the DEVELOPED REFERENCE the console-loop scorer and the headless
+      // visual-truth lane pin by sha256, and the offline regate path (no
+      // original screenshots by design) must be able to re-pin it — e.g. the
+      // FC-FONT-SUBSTRATE reference re-pin after cfg.fonts lands. Pixel
+      // SCORING below still requires the original.
+      const shot = await page.locator(stageSel).screenshot({ timeout: 10_000 });
+      writeFileSync(path.join(gateShots, `${combo.key}__${interaction}.png`), shot);
       // pixel vs the ORIGINAL screenshot of this combo×state
       const origPng = path.join(origShotsDir, `${comp.name}--${combo.key}__${interaction}.png`);
       if (existsSync(origPng)) {
-        const shot = await page.locator(stageSel).screenshot({ timeout: 10_000 });
-        writeFileSync(path.join(gateShots, `${combo.key}__${interaction}.png`), shot);
         const a = PNG.sync.read(readFileSync(origPng));
         const b = PNG.sync.read(shot);
         if (a.width !== b.width || a.height !== b.height) {

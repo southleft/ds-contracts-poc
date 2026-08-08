@@ -1,0 +1,58 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.alert",
+  "name": "Alert",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "severity",
+      "type": {
+        "enum": ["error", "warning", "info", "success"]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Severity",
+          "values": {
+            "error": "Error",
+            "warning": "Warning",
+            "info": "Info",
+            "success": "Success"
+          }
+        },
+        "code": { "prop": "severity" }
+      }
+    },
+    {
+      "name": "variant",
+      "type": {
+        "enum": ["standard", "filled", "outlined"]
+      },
+      "default": "standard",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "standard": "Standard",
+            "filled": "Filled",
+            "outlined": "Outlined"
+          }
+        },
+        "code": { "prop": "variant" }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": { "root": {} },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@mui/material", "export": "Alert" }
+  }
+}

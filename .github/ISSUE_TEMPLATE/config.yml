@@ -1,0 +1,18 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Beta Tester Runbook (start here)
+    url: https://github.com/southleft/ds-contracts-poc/blob/main/docs/28-beta-runbook.md
+    about: >-
+      The three tracks (design-first, code-first, reconcile) with exact
+      commands, what success looks like, the named limitations you will hit,
+      and honest time budgets.
+  - name: Known Limitations (check before filing)
+    url: https://github.com/southleft/ds-contracts-poc/blob/main/docs/23-known-limitations.md
+    about: >-
+      The complete inventory of what this tool does NOT do, with a section ID
+      per limitation — the bug form asks which one (if any) you hit.
+  - name: The Playground (try it in a browser, no install)
+    url: https://ds-contracts-playground.pages.dev
+    about: >-
+      Paste a contract, see the pipeline run; also serves the packaged Sync
+      Runner plugin zip for Figma desktop.

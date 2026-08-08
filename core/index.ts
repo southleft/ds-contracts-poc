@@ -150,6 +150,7 @@ export {
 export {
   createFigmaEngine,
   emitFigmaScript,
+  RUNTIME_EMIT_REV,
   type ComponentData,
   type FigmaEngine,
   type FigmaEngineInput,
@@ -177,7 +178,11 @@ export {
 export {
   CODE_TARGET_LABELS,
   canvasCodePlan,
+  contractFileNameForId,
+  flatIdStem,
+  mintedTokensFileNameForId,
   plannedCodePaths,
+  proposalFileNameForId,
   provenanceHeadline,
   provenanceSentence,
   type CanvasProvenance,
@@ -198,9 +203,79 @@ export {
   type ProvenancedContract,
 } from "./contract-provenance.js";
 
+// Wave 3 workflow spine — typed channel diffs, three-way merge, Apply preview.
+export {
+  channelLinePrefix,
+  channelLineValue,
+  diffChannelLines,
+  partNameOf,
+  splitPrefix,
+  summarizeChannelChange,
+  toSnapshotChanges,
+  toStyleChanges,
+  type ChannelChange,
+  type DiffChannelLinesOptions,
+} from "./channel-diff.js";
+export {
+  anatomyChannelLines,
+  diffContractAnatomy,
+  expectedCssVarsFromAnatomy,
+  tokenRefToCssVar,
+  type AnatomyPartNode,
+} from "./anatomy-diff.js";
+export {
+  assertProposeOnly,
+  suggestDiffsFromChannelChanges,
+  type ProvenanceAnchor,
+  type SuggestedDiff,
+  type SuggestedDiffKind,
+} from "./suggested-diff.js";
+export {
+  channelMapFromPairs,
+  mergeThreeWay,
+  summarizeMergeOutcome,
+  type ChannelCollision,
+  type ChannelMap,
+  type MergeChoice,
+  type MergeSide,
+  type ThreeWayMergeInput,
+  type ThreeWayMergeNeedChoices,
+  type ThreeWayMergeOutcome,
+  type ThreeWayMergeResult,
+  type ThreeWayMergeStale,
+} from "./three-way-merge.js";
+export {
+  buildApplyPreview,
+  buildApplyRecoveryReceipt,
+  type ApplyAction,
+  type ApplyPreviewPlan,
+  type ApplyRecoveryReceipt,
+  type ApplyTargetPreview,
+} from "./apply-preview.js";
+
+// Browser-safe exact variant-space proof and shared Figma name spellings.
+export { camel, canonicalPropName } from "./figma-names.js";
+export {
+  EXACT_PROJECTION_REFUSAL_CODES,
+  validateExactProjection,
+  validateExactVariantProjection,
+  type ExactDumpSet,
+  type ExactProjectionRefusal,
+  type ExactProjectionRefusalCode,
+  type ExactProjectionResult,
+  type ExactProjectionRows,
+  type ExactPropertyDefinition,
+  type ExactVariantRow,
+  type LegacyUnverifiedExactProjection,
+  type RefusedExactProjection,
+  type SourceMatrixVerifiedExactProjection,
+  type VerifiedExactProjection,
+} from "./exact-projection.js";
+
 // Design → contract (proposals from a canvas dump).
 export {
   componentIdSlug,
+  ExactProjectionError,
   figmaProposalsReport,
   idSlugSanitized,
   plainWordsProposalError,
@@ -208,9 +283,13 @@ export {
   proposeBatchFromDump,
   proposeFromDump,
   proposeFromDump as proposeFromFigmaDump,
+  TEXT_STYLE_IDENTITY_REFUSED,
+  TextStyleIdentityError,
   type DumpBatchResult,
+  type ExactProposalRefusalCode,
   type FigmaProposalResult,
   type SkippedSet,
+  type TextStyleIdentityRefusalCode,
   type UnboundValue,
 } from "./propose-figma.js";
 

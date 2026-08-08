@@ -1,0 +1,36 @@
+{
+  "setName": "Button",
+  "setId": "21:287",
+  "variantId": "21:137",
+  "variantName": "Variant=Text, Color=Primary, Size=Medium, State=Default",
+  "partId": "21:137",
+  "partName": "Variant=Text, Color=Primary, Size=Medium, State=Default",
+  "field": "paddingTop",
+  "varName": "imported/button/root/padding-top/text/medium",
+  "before": {
+    "nodeId": "21:137",
+    "name": "Variant=Text, Color=Primary, Size=Medium, State=Default",
+    "paddingTop": 6,
+    "paddingLeft": 8,
+    "boundPaddingTop": "imported/button/root/padding-top/text/medium",
+    "boundPaddingLeft": "imported/button/root/padding-left/text/medium"
+  },
+  "afterEdit": {
+    "nodeId": "21:137",
+    "name": "Variant=Text, Color=Primary, Size=Medium, State=Default",
+    "paddingTop": 8,
+    "paddingLeft": 8,
+    "boundPaddingTop": null,
+    "boundPaddingLeft": "imported/button/root/padding-left/text/medium"
+  },
+  "afterRestore": {
+    "nodeId": "21:137",
+    "name": "Variant=Text, Color=Primary, Size=Medium, State=Default",
+    "paddingTop": 6,
+    "paddingLeft": 8,
+    "boundPaddingTop": "imported/button/root/padding-top/text/medium",
+    "boundPaddingLeft": "imported/button/root/padding-left/text/medium"
+  },
+  "drifted": true,
+  "restored": true
+}

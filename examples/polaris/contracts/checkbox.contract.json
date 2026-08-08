@@ -209,7 +209,6 @@
                     "height": 18
                   },
                   "tokens": {
-                    "border-width": "{p.border-width-0}",
                     "border-bottom-left-radius": "{imported.shared.size-4}",
                     "border-bottom-right-radius": "{imported.shared.size-4}",
                     "border-top-left-radius": "{imported.shared.size-4}",
@@ -253,25 +252,39 @@
                       "outline-style": "solid"
                     }
                   },
-                  "tokensByProp": [
+                  "literalsByProp": [
                     {
                       "prop": "checked",
                       "map": {
+                        "unchecked": {
+                          "background-color": "rgba(255, 255, 255, 1)",
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px",
+                          "border-top-color": "rgba(138, 138, 138, 1)",
+                          "border-right-color": "rgba(138, 138, 138, 1)",
+                          "border-bottom-color": "rgba(138, 138, 138, 1)",
+                          "border-left-color": "rgba(138, 138, 138, 1)"
+                        },
                         "checked": {
-                          "background-color": "{imported.checkbox.backdrop.background-color.checked}",
-                          "box-shadow": "{imported.checkbox.backdrop.box-shadow.checked}"
+                          "background-color": "rgba(48, 48, 48, 1)",
+                          "border-top-width": "0px",
+                          "border-right-width": "0px",
+                          "border-bottom-width": "0px",
+                          "border-left-width": "0px"
                         },
                         "indeterminate": {
-                          "background-color": "{imported.checkbox.backdrop.background-color.indeterminate}",
-                          "box-shadow": "{imported.checkbox.backdrop.box-shadow.indeterminate}"
-                        },
-                        "unchecked": {
-                          "background-color": "{imported.checkbox.backdrop.background-color.unchecked}",
-                          "box-shadow": "{imported.checkbox.backdrop.box-shadow.unchecked}"
+                          "background-color": "rgba(48, 48, 48, 1)",
+                          "border-top-width": "0px",
+                          "border-right-width": "0px",
+                          "border-bottom-width": "0px",
+                          "border-left-width": "0px"
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Canvas geometry (console-loop visual fix): per-axis literal border+fill replaces inset box-shadow tokens — unchecked = white 18×18 + 1px #8a8a8a ring; checked/indeterminate = #303030 fill, no border (matches examples/polaris/receipts/checkbox/default.png)."
                 },
                 "icon-3": {
                   "element": "span",
@@ -336,13 +349,14 @@
                         "size": 22
                       },
                       "tokens": {
-                        "color": "{imported.shared.color-303030}",
+                        "fill": "{imported.checkbox.icon-6.color}",
                         "margin-left": "{imported.shared.size-1}",
                         "margin-right": "{imported.shared.size-1}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
                         "width": "{imported.shared.size-20}"
-                      }
+                      },
+                      "description": "Indeterminate minus glyph — fill bound to icon-6 white (#fff) on #303030 backdrop (was shared #303030, invisible on canvas)."
                     },
                     "icon-6": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -470,7 +484,7 @@
           },
           "parts": {
             "label": {
-              "text": "Save this product",
+              "text": "Save this information",
               "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "inline",
@@ -500,9 +514,7 @@
               "cursor": "default"
             }
           },
-          "tokens": {
-            "width": "{imported.checkbox.choice-label.width}"
-          },
+          "tokens": {},
           "states": {
             "disabled": {
               "color": "{imported.shared.color-b5b5b5}"
@@ -521,8 +533,7 @@
       "tokens": {
         "height": "{imported.checkbox.root.height}",
         "padding-bottom": "{imported.shared.size-4}",
-        "padding-top": "{imported.shared.size-4}",
-        "width": "{imported.checkbox.root.width}"
+        "padding-top": "{imported.shared.size-4}"
       }
     }
   },

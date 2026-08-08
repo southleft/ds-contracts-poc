@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "breadcrumbs",
+  "contract": "contracts/breadcrumbs.contract.json",
+  "script": "parity/receipts/console-loop/emitted/10-breadcrumbs.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:03.091Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1280",
+    "page": "Breadcrumbs",
+    "sectionId": "1:1294",
+    "result": {
+      "createdNodeIds": [
+        "1:1280"
+      ],
+      "results": [
+        {
+          "name": "Breadcrumbs",
+          "contractId": "ds.breadcrumbs",
+          "nodeId": "1:1280",
+          "key": "d584e6bfd38ead77283ef36c88faa2629ca63998",
+          "variants": 1,
+          "properties": [
+            "Label#1:541"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1294 captured (ok).",
+      "Breadcrumbs: 1 variant(s); type COMPONENT; page Breadcrumbs.",
+      "Props: Label.",
+      "Sample text: \"Home\", \"Components\", \"ProgressBar\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:649210368",
+    "lineCount": 61,
+    "sampleLines": [
+      ":COMPONENT/Breadcrumbs|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/Breadcrumbs|radius|0,0,0,0",
+      ":COMPONENT/Breadcrumbs|layout|HORIZONTAL MIN/CENTER gap 4 pad 0,0,0,0",
+      ":COMPONENT/Breadcrumbs|sizing|HUG/HUG AUTO",
+      ":COMPONENT/Breadcrumbs|bound:itemSpacing|space/inset-y/sm",
+      ":COMPONENT/Breadcrumbs|description|Breadcrumbs — generated from contract ds.breadcrumbs v1.0.0",
+      ":COMPONENT/Breadcrumbs|propdef|Label#1:541:TEXT=Breadcrumb",
+      "/0:FRAME/trail|fill|[]",
+      "/0:FRAME/trail|radius|0,0,0,0",
+      "/0:FRAME/trail|layout|HORIZONTAL MIN/CENTER gap 4 pad 0,0,0,0",
+      "/0:FRAME/trail|sizing|HUG/HUG AUTO",
+      "/0:FRAME/trail|bound:itemSpacing|space/inset-y/sm",
+      "/0/0:INSTANCE/BreadcrumbItem|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0/0:INSTANCE/BreadcrumbItem|radius|0,0,0,0",
+      "/0/0:INSTANCE/BreadcrumbItem|layout|HORIZONTAL MIN/CENTER gap 4 pad 0,0,0,0",
+      "/0/0:INSTANCE/BreadcrumbItem|sizing|HUG/HUG AUTO",
+      "/0/0:INSTANCE/BreadcrumbItem|bound:itemSpacing|space/inset-y/sm",
+      "/0/0/0:FRAME/separatorIcon|fill|[]",
+      "/0/0/0:FRAME/separatorIcon|radius|0,0,0,0",
+      "/0/0/0:FRAME/separatorIcon|sizing|FIXED/FIXED AUTO"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Label"
+    ],
+    "observed": {
+      "variantNames": [
+        "Breadcrumbs"
+      ],
+      "propDefs": [
+        {
+          "name": "Label#1:541",
+          "type": "TEXT",
+          "defaultValue": "Breadcrumb",
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "Breadcrumbs",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/inset-y/sm"
+        },
+        "textChild": [
+          {
+            "name": "link",
+            "chars": "Home",
+            "fontSize": 14
+          },
+          {
+            "name": "link",
+            "chars": "Components",
+            "fontSize": 14
+          },
+          {
+            "name": "link",
+            "chars": "ProgressBar",
+            "fontSize": 14
+          }
+        ],
+        "w": 248,
+        "h": 17,
+        "childNames": [
+          "trail:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

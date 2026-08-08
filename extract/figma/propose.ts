@@ -111,15 +111,25 @@
  *
  * Every proposal is validated against ContractSchema before it is written.
  */
-import type { MinimalChildContract } from '../../core/propose-figma.js';
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import type { DumpFile } from './types.js';
-import { isDumpSet } from './types.js';
-import { loadTokenCorpus, mergeTokenTrees, NoTokenCorpusError } from './tokens.js';
-import { loadConfig } from '../config.js';
-import { componentIdSlug, dumpCapturesHidden, figmaProposalsReport, proposeFromDump, type FigmaProposalResult } from '../../core/propose-figma.js';
+import type { MinimalChildContract } from "../../core/propose-figma.js";
+import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import type { DumpFile } from "./types.js";
+import {
+  loadTokenCorpus,
+  mergeTokenTrees,
+  NoTokenCorpusError,
+} from "./tokens.js";
+import { loadConfig } from "../config.js";
+import {
+  componentIdSlug,
+  dumpCapturesHidden,
+  figmaProposalsReport,
+  proposeBatchFromDump,
+  proposeFromDump,
+  type FigmaProposalResult,
+} from "../../core/propose-figma.js";
 
 // The inversion engine itself is the pure core module — re-exported here so
 // existing importers (extract/figma/roundtrip.ts) keep their import path.
@@ -132,7 +142,7 @@ export {
   type FigmaProposalResult,
   type TextOverrideDemand,
   type UnboundValue,
-} from '../../core/propose-figma.js';
+} from "../../core/propose-figma.js";
 
 // ---------------------------------------------------------------------------
 // Corpus helpers + report
@@ -154,13 +164,13 @@ export function loadContracts(dir: string): {
   const byKey = new Map<string, string>();
   let files: string[] = [];
   try {
-    files = readdirSync(dir).filter((f) => f.endsWith('.contract.json'));
+    files = readdirSync(dir).filter((f) => f.endsWith(".contract.json"));
   } catch {
     return { byName: out, byId: contractsById, byKey };
   }
   for (const f of files) {
     try {
-      const c = JSON.parse(readFileSync(path.join(dir, f), 'utf8')) as {
+      const c = JSON.parse(readFileSync(path.join(dir, f), "utf8")) as {
         id?: string;
         name?: string;
         anchors?: { figma?: { componentSetKey?: string | null } };
@@ -178,7 +188,6 @@ export function loadContracts(dir: string): {
   return { byName: out, byId: contractsById, byKey };
 }
 
-
 // ---------------------------------------------------------------------------
 // CLI: npm run extract:figma -- <dump.json> [--out dir] [--contracts dir]
 // ---------------------------------------------------------------------------
@@ -189,23 +198,28 @@ function main() {
     const i = args.indexOf(flag);
     return i >= 0 ? args.splice(i, 2)[1] : undefined;
   };
-  const outDir = readFlag('--out') ?? path.join('extract', 'out', 'figma');
-  const contractsDir = readFlag('--contracts') ?? 'contracts';
+  const outDir = readFlag("--out") ?? path.join("extract", "out", "figma");
+  const contractsDir = readFlag("--contracts") ?? "contracts";
   // BROWNFIELD: the token corpus is an INPUT, not this repo's layout.
   // --tokens wins; otherwise extract.config.json's "tokens" (the field
   // brownfield orgs already point at their own DTCG files); otherwise the
   // reference layout when it exists, and a named refusal when it does not.
-  const tokensFlag = readFlag('--tokens');
-  const configFlag = readFlag('--config');
+  const tokensFlag = readFlag("--tokens");
+  const configFlag = readFlag("--config");
+  const reviewableIndex = args.indexOf("--reviewable-inversion");
+  const reviewableInversion = reviewableIndex >= 0;
+  if (reviewableInversion) args.splice(reviewableIndex, 1);
   const dumpPathArg = args[0];
   if (!dumpPathArg) {
     console.error(
-      'Usage: npm run extract:figma -- <dump.json> [--out dir] [--contracts dir] [--tokens a.json,b.json] [--config extract.config.json]',
+      "Usage: npm run extract:figma -- <dump.json> [--out dir] [--contracts dir] [--tokens a.json,b.json] [--config extract.config.json] [--reviewable-inversion]",
     );
     process.exit(2);
   }
   const root = process.cwd();
-  const dump = JSON.parse(readFileSync(path.resolve(root, dumpPathArg), 'utf8')) as DumpFile;
+  const dump = JSON.parse(
+    readFileSync(path.resolve(root, dumpPathArg), "utf8"),
+  ) as DumpFile;
   const configTokens = (() => {
     try {
       return loadConfig(configFlag).config.tokens;
@@ -214,23 +228,27 @@ function main() {
     }
   })();
   const tokenFiles = tokensFlag
-    ? tokensFlag.split(',').map((s) => s.trim()).filter(Boolean)
+    ? tokensFlag
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean)
     : configTokens;
   /** Mirror of tokens.ts REPO_LAYOUT — the fallback corpus loadTokenCorpus
    *  reaches for when nothing was supplied. Named here so the printed
    *  generate command and the fallback warning can state the exact files. */
   const REPO_FALLBACK_FILES = [
-    'tokens/primitives.tokens.json',
-    'tokens/semantic.tokens.json',
-    'tokens/modes/semantic.light.tokens.json',
-    'tokens/modes/brand.default.tokens.json',
+    "tokens/primitives.tokens.json",
+    "tokens/semantic.tokens.json",
+    "tokens/modes/semantic.light.tokens.json",
+    "tokens/modes/brand.default.tokens.json",
   ];
   const usedFallbackCorpus = !tokenFiles || tokenFiles.length === 0;
   let corpus;
   try {
     corpus = loadTokenCorpus(root, {
       files: tokenFiles,
-      supplyHint: 'pass --tokens <files> or set "tokens" in extract.config.json',
+      supplyHint:
+        'pass --tokens <files> or set "tokens" in extract.config.json',
     });
   } catch (e) {
     if (e instanceof NoTokenCorpusError) {
@@ -245,16 +263,46 @@ function main() {
     // (e.g. {font.control.size.md}) wherever the raw values coincide —
     // wrong by construction. Named, never silent.
     console.warn(
-      `⚠ No token corpus was supplied (--tokens / extract.config.json "tokens") — the repo-demo reference tokens (${REPO_FALLBACK_FILES.join(', ')}) are the matching corpus. ` +
-        'For a FOREIGN design kit this binds its canvas values to THIS repo\'s token names wherever the raw values coincide (e.g. {font.control.size.md}) — wrong by construction. Pass the kit\'s own DTCG files instead.',
+      `⚠ No token corpus was supplied (--tokens / extract.config.json "tokens") — the repo-demo reference tokens (${REPO_FALLBACK_FILES.join(", ")}) are the matching corpus. ` +
+        "For a FOREIGN design kit this binds its canvas values to THIS repo's token names wherever the raw values coincide (e.g. {font.control.size.md}) — wrong by construction. Pass the kit's own DTCG files instead.",
     );
   }
-  const corpusFiles = usedFallbackCorpus ? REPO_FALLBACK_FILES : (tokenFiles as string[]);
+  const corpusFiles = usedFallbackCorpus
+    ? REPO_FALLBACK_FILES
+    : (tokenFiles as string[]);
   const loaded = loadContracts(path.resolve(root, contractsDir));
   const contractIdByName = loaded.byName;
   const fileKey = dump._provenance?.fileKey ?? null;
 
-  const results: Array<{ setName: string; proposal: FigmaProposalResult }> = [];
+  const batch = proposeBatchFromDump(
+    dump as unknown as Record<string, unknown>,
+    {
+      corpus,
+      contractIdByName,
+      contractsById: loaded.byId,
+      contractIdByKey: loaded.byKey,
+      fileKey,
+      projectionMode: reviewableInversion ? "reviewable-inversion" : "exact",
+      mintUnbound: true,
+      hiddenCaptured: dumpCapturesHidden(dump._provenance),
+    },
+  );
+  if (batch.skipped.length > 0) {
+    console.error(
+      `REFUSED: ${batch.skipped.length} component set(s) could not be proposed; no proposal artifacts were written.`,
+    );
+    for (const skip of batch.skipped) {
+      console.error(
+        `  - ${skip.setName}: ${skip.reason}${skip.detail ? ` — ${skip.detail}` : ""}`,
+      );
+    }
+    process.exit(2);
+  }
+  const results: Array<{ setName: string; proposal: FigmaProposalResult }> =
+    batch.proposals.map(({ setName, ...proposal }) => ({
+      setName,
+      proposal,
+    }));
   mkdirSync(path.resolve(root, outDir), { recursive: true });
   const proposalFiles: string[] = [];
   /** ENVELOPE v2 at the CLI door: the engine's other two outputs land as
@@ -263,67 +311,77 @@ function main() {
   const stubById = new Map<string, Record<string, unknown>>();
   const mintedTree: Record<string, unknown> = {};
   let mintedCount = 0;
-  for (const [name, value] of Object.entries(dump)) {
-    if (name === '_provenance' || !isDumpSet(value)) continue;
-    const proposal = proposeFromDump(value, {
-      corpus,
-      contractIdByName,
-      contractsById: loaded.byId,
-      contractIdByKey: loaded.byKey,
-      fileKey,
-      // The engine has always been able to mint the unbound values it names;
-      // this door just never asked, then exported contracts whose {imported.*}
-      // refs had nothing to resolve through.
-      mintUnbound: true,
-      hiddenCaptured: dumpCapturesHidden(dump._provenance),
-    });
-    results.push({ setName: name, proposal });
+  for (const { setName: name, proposal } of results) {
     // componentIdSlug, not raw kebab: a set name like "Button / Primary /
     // Medium" must not turn the output filename into a directory walk.
-    const file = path.resolve(root, outDir, `${componentIdSlug(name)}.contract.proposed.json`);
-    writeFileSync(file, JSON.stringify(proposal.contract, null, 2) + '\n');
+    const file = path.resolve(
+      root,
+      outDir,
+      `${componentIdSlug(name)}.contract.proposed.json`,
+    );
+    writeFileSync(file, JSON.stringify(proposal.contract, null, 2) + "\n");
     proposalFiles.push(path.relative(root, file));
-    console.log(`✔ ${name} → ${path.relative(root, file)} (${proposal.notes.length} notes, ${proposal.unbound.length} unbound value(s))`);
+    console.log(
+      `✔ ${name} → ${path.relative(root, file)} (${proposal.notes.length} notes, ${proposal.unbound.length} unbound value(s))`,
+    );
     for (const stub of proposal.childStubs ?? []) {
-      const stubId = String((stub as { id?: unknown }).id ?? '');
+      const stubId = String((stub as { id?: unknown }).id ?? "");
       if (stubId) stubById.set(stubId, stub);
     }
     if (proposal.mintedTokens) {
-      Object.assign(mintedTree, mergeTokenTrees([mintedTree, proposal.mintedTokens.tree]));
+      Object.assign(
+        mintedTree,
+        mergeTokenTrees([mintedTree, proposal.mintedTokens.tree]),
+      );
     }
   }
   // Count the MERGED tree's leaves — summing per-set counts would double-
   // count a leaf two sets both minted, and a wrong count is a wrong receipt.
   const countLeaves = (node: Record<string, unknown>): number =>
     Object.entries(node).reduce((n, [k, v]) => {
-      if (k.startsWith('$')) return n;
-      if (v && typeof v === 'object' && '$value' in (v as object)) return n + 1;
-      if (v && typeof v === 'object') return n + countLeaves(v as Record<string, unknown>);
+      if (k.startsWith("$")) return n;
+      if (v && typeof v === "object" && "$value" in (v as object)) return n + 1;
+      if (v && typeof v === "object")
+        return n + countLeaves(v as Record<string, unknown>);
       return n;
     }, 0);
   mintedCount = countLeaves(mintedTree);
   // A stub whose id a REAL proposal (or an in-scope contract) already claims
   // is not written — the real document wins, and the skip is named.
-  const proposedIds = new Set(results.map(({ proposal }) => String((proposal.contract as { id?: unknown }).id ?? '')));
+  const proposedIds = new Set(
+    results.map(({ proposal }) =>
+      String((proposal.contract as { id?: unknown }).id ?? ""),
+    ),
+  );
   const stubFiles: string[] = [];
   const stubSkips: string[] = [];
   for (const [stubId, stub] of stubById) {
     if (proposedIds.has(stubId) || loaded.byId.has(stubId)) {
-      stubSkips.push(`stub ${stubId}: skipped — a real contract with this id is already in scope`);
+      stubSkips.push(
+        `stub ${stubId}: skipped — a real contract with this id is already in scope`,
+      );
       continue;
     }
-    const file = path.resolve(root, outDir, `${componentIdSlug(stubId)}.stub.contract.proposed.json`);
-    writeFileSync(file, JSON.stringify(stub, null, 2) + '\n');
+    const file = path.resolve(
+      root,
+      outDir,
+      `${componentIdSlug(stubId)}.stub.contract.proposed.json`,
+    );
+    writeFileSync(file, JSON.stringify(stub, null, 2) + "\n");
     stubFiles.push(path.relative(root, file));
-    console.log(`✔ stub ${stubId} → ${path.relative(root, file)} (auto-proposed; replace by importing the real child set)`);
+    console.log(
+      `✔ stub ${stubId} → ${path.relative(root, file)} (auto-proposed; replace by importing the real child set)`,
+    );
   }
   for (const line of stubSkips) console.log(`  ${line}`);
   let mintedFile: string | null = null;
   if (Object.keys(mintedTree).length > 0) {
-    const file = path.resolve(root, outDir, 'minted.dtcg.json');
-    writeFileSync(file, JSON.stringify(mintedTree, null, 2) + '\n');
+    const file = path.resolve(root, outDir, "minted.dtcg.json");
+    writeFileSync(file, JSON.stringify(mintedTree, null, 2) + "\n");
     mintedFile = path.relative(root, file);
-    console.log(`✔ minted token tree (${mintedCount} token(s), provisional names) → ${mintedFile}`);
+    console.log(
+      `✔ minted token tree (${mintedCount} token(s), provisional names) → ${mintedFile}`,
+    );
   }
 
   // The runnable next step — the exact generate invocation whose --tokens
@@ -331,36 +389,48 @@ function main() {
   // first generate resolves every ref instead of refusing one by name.
   const generateCommand =
     proposalFiles.length > 0
-      ? `npx ds-contracts generate ${[...proposalFiles, ...stubFiles].join(' ')} --out ${path.join(outDir, 'generated')} --stories --tokens ${[...corpusFiles, ...(mintedFile ? [mintedFile] : [])].join(',')}`
+      ? `npx ds-contracts generate ${[...proposalFiles, ...stubFiles].join(" ")} --out ${path.join(outDir, "generated")} --stories --tokens ${[...corpusFiles, ...(mintedFile ? [mintedFile] : [])].join(",")}`
       : null;
 
   const reportExtras = [
-    '',
-    '## Export envelope (v2) — everything this run wrote',
-    '',
+    "",
+    "## Export envelope (v2) — everything this run wrote",
+    "",
     ...proposalFiles.map((f) => `- contract: ${f}`),
-    ...stubFiles.map((f) => `- stub contract: ${f} (auto-proposed; replace by importing the real child set)`),
+    ...stubFiles.map(
+      (f) =>
+        `- stub contract: ${f} (auto-proposed; replace by importing the real child set)`,
+    ),
     ...stubSkips.map((l) => `- ${l}`),
     ...(mintedFile
-      ? [`- minted token tree: ${mintedFile} (${mintedCount} token(s); machine-derived provisional names)`]
-      : ['- no minted token tree (nothing needed minting)']),
+      ? [
+          `- minted token tree: ${mintedFile} (${mintedCount} token(s); machine-derived provisional names)`,
+        ]
+      : ["- no minted token tree (nothing needed minting)"]),
     ...(usedFallbackCorpus
       ? [
-          `- ⚠ corpus fallback: no token corpus was supplied, so the repo-demo reference tokens (${REPO_FALLBACK_FILES.join(', ')}) matched the canvas values — for a foreign kit this binds their values to this repo's token names, wrong by construction.`,
+          `- ⚠ corpus fallback: no token corpus was supplied, so the repo-demo reference tokens (${REPO_FALLBACK_FILES.join(", ")}) matched the canvas values — for a foreign kit this binds their values to this repo's token names, wrong by construction.`,
         ]
-      : [`- token corpus: ${corpusFiles.join(', ')}`]),
-    ...(generateCommand ? ['', 'Next — generate the code:', '', '```', generateCommand, '```'] : []),
+      : [`- token corpus: ${corpusFiles.join(", ")}`]),
+    ...(generateCommand
+      ? ["", "Next — generate the code:", "", "```", generateCommand, "```"]
+      : []),
   ];
   writeFileSync(
-    path.resolve(root, outDir, 'figma-proposals.md'),
-    figmaProposalsReport(results) + reportExtras.join('\n') + '\n',
+    path.resolve(root, outDir, "figma-proposals.md"),
+    figmaProposalsReport(results) + reportExtras.join("\n") + "\n",
   );
-  console.log(`✔ report → ${path.join(outDir, 'figma-proposals.md')}`);
+  console.log(`✔ report → ${path.join(outDir, "figma-proposals.md")}`);
   if (generateCommand) {
-    console.log(`\nNext — generate the code (the minted tree rides --tokens so every ref resolves):\n  ${generateCommand}`);
+    console.log(
+      `\nNext — generate the code (the minted tree rides --tokens so every ref resolves):\n  ${generateCommand}`,
+    );
   }
 }
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+if (
+  process.argv[1] &&
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1])
+) {
   main();
 }

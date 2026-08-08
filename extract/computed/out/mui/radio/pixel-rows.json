@@ -1,0 +1,786 @@
+[
+  {
+    "key": "primary.unchecked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.unchecked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.unchecked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.unchecked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.unchecked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.unchecked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.unchecked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.unchecked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.checked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.checked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.checked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.checked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.checked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.checked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.checked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "primary.checked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.unchecked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.unchecked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.unchecked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.unchecked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.unchecked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.unchecked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.unchecked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.unchecked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.checked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.checked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.checked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.checked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.checked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.checked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.checked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "secondary.checked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.unchecked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.unchecked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.unchecked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.unchecked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.unchecked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.unchecked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.unchecked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.unchecked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.checked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.checked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.checked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.checked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.checked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.checked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.checked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "error.checked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.unchecked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.unchecked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.unchecked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.unchecked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.unchecked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.unchecked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.unchecked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.unchecked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.checked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.checked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.checked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.checked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.checked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.checked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.checked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "info.checked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.unchecked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.unchecked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.unchecked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.unchecked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.unchecked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.unchecked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.unchecked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.unchecked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.checked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.checked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.checked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.checked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.checked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.checked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.checked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "success.checked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.unchecked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.unchecked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.unchecked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.unchecked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.unchecked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.unchecked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.unchecked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.unchecked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.checked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.checked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.checked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.checked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.checked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.checked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.checked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "warning.checked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.unchecked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.unchecked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.unchecked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.unchecked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.unchecked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.unchecked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.unchecked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.unchecked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.checked.enabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.checked.enabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.checked.enabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.checked.enabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.checked.disabled__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.checked.disabled__hover",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.checked.disabled__focus-visible",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "default.checked.disabled__active",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  }
+]

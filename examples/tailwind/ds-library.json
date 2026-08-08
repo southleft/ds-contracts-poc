@@ -25,7 +25,8 @@
   },
   "seeds": "examples/tailwind/contracts-seed",
   "emit": {
-    "out": "examples/tailwind/figma"
+    "out": "examples/tailwind/figma",
+    "icons": "examples/tailwind/assets/icons"
   },
   "bundle": {
     "out": "examples/tailwind/figma/tailwind.bundle.json",

@@ -1,0 +1,327 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.radio",
+  "name": "Radio",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — color×checked axes (Switch/Checkbox STATE-PLANE PROJECTION precedent); size held fixed; disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "primary",
+          "secondary",
+          "error",
+          "info",
+          "success",
+          "warning",
+          "default"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "error": "Error",
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "part-0": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "auto",
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "font-family": "Arial",
+            "position": "absolute",
+            "user-select": "none"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default",
+              "pointer-events": "none"
+            },
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "font-size": "{imported.radio.part-0.font-size}",
+            "height": "{imported.shared.size-42}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "opacity": "{imported.shared.num-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-42}",
+            "z-index": "{imported.radio.part-0.z-index}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-545454}"
+            }
+          }
+        },
+        "part-1": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "grow": true
+          },
+          "parts": {
+            "icon": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "transition-duration": "0.3s",
+                "transition-property": "fill",
+                "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                "user-select": "none"
+              },
+              "layout": {
+                "grow": true
+              },
+              "icon": {
+                "asset": "radio-icon",
+                "size": 24
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "default",
+                  "pointer-events": "none"
+                }
+              },
+              "tokens": {
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-24}",
+                "height": "{imported.shared.size-24}",
+                "width": "{imported.shared.size-24}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-00000042}"
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "checked",
+                  "map": {
+                    "checked": {
+                      "color": "{imported.radio.icon.color.{color}.checked}",
+                      "fill": "{imported.radio.icon.fill.{color}.checked}"
+                    },
+                    "unchecked": {
+                      "color": "{imported.radio.icon.color.{color}.unchecked}",
+                      "fill": "{imported.radio.icon.fill.{color}.unchecked}"
+                    }
+                  }
+                }
+              ]
+            },
+            "icon-2": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy svg|SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute",
+                "cursor": "pointer",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "transition-duration": "0.15s",
+                "transition-property": "transform",
+                "user-select": "none"
+              },
+              "layout": {
+                "grow": true
+              },
+              "icon": {
+                "asset": "radio-icon-2",
+                "size": 24
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "default",
+                  "pointer-events": "none"
+                }
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "flex-shrink": "{imported.shared.num-0}",
+                "font-size": "{imported.shared.size-24}",
+                "height": "{imported.shared.size-24}",
+                "left": "{imported.shared.size-0}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-24}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-00000042}"
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "checked",
+                  "map": {
+                    "checked": {
+                      "color": "{imported.radio.icon-2.color.{color}.checked}",
+                      "fill": "{imported.radio.icon-2.fill.{color}.checked}"
+                    },
+                    "unchecked": {
+                      "color": "{imported.radio.icon-2.color.{color}.unchecked}",
+                      "fill": "{imported.radio.icon-2.fill.{color}.unchecked}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "cursor": "pointer",
+            "position": "relative",
+            "user-select": "none"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default",
+              "pointer-events": "none"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "height": "{imported.shared.size-24}",
+            "left": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-24}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-00000042}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "color": "{imported.radio.part-1.color.{color}.checked}"
+                },
+                "unchecked": {
+                  "color": "{imported.radio.part-1.color.{color}.unchecked}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "cursor": "pointer",
+        "position": "relative",
+        "user-select": "none"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "default",
+          "pointer-events": "none"
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-21}",
+        "border-bottom-right-radius": "{imported.shared.size-21}",
+        "border-top-left-radius": "{imported.shared.size-21}",
+        "border-top-right-radius": "{imported.shared.size-21}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.radio.root.color.{color}.{checked}}",
+        "height": "{imported.shared.size-42}",
+        "left": "{imported.shared.size-0}",
+        "outline-width": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.shared.size-9}",
+        "padding-left": "{imported.shared.size-9}",
+        "padding-right": "{imported.shared.size-9}",
+        "padding-top": "{imported.shared.size-9}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.shared.size-42}"
+      },
+      "states": {
+        "disabled": {
+          "color": "{imported.shared.color-00000042}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Radio"
+    }
+  }
+}

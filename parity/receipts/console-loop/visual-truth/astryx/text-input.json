@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "astryx",
+  "stem": "text-input",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/astryx/components/text-input.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:4003",
+  "cellNodeId": "1:3967",
+  "cellName": "Type=Text, Size=Md",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 22.73089580086935,
+    "pctAAUnmasked": 1.72072987574838,
+    "pctAAMasked": 1.72072987574838,
+    "maskCoveragePct": 0,
+    "canvasPx": "320x47",
+    "realPx": "1424x2192",
+    "inkCanvasPct": 0.046485432215205444,
+    "inkRealPct": 22.543896856803084
+  },
+  "reference": "examples/astryx/receipts/site/TextInput.png",
+  "referenceSha256": "c547611af9eeff9d6aeead41316315bd42cd6281484b4fde563867ed6086f3e5",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/text-input.png",
+  "canvasShotSha256": "567dd8f82a4c81f9d6ca70aab8075923dbd70038104cb82165e127916c756304",
+  "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/text-input.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 46.638297872340424,
+  "inkDelta": 22.497411424587877,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=46.64, inkDelta=22.5)"
+}

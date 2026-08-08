@@ -1,0 +1,184 @@
+{
+ "version": 1,
+ "kind": "console-loop-altitude-component",
+ "status": "completed",
+ "component": "button",
+ "contract": "examples/altitude/contracts/button.contract.json",
+ "script": "examples/altitude/figma/button.figma.js",
+ "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+ "recordedAt": "2026-08-06T05:43:11.810Z",
+ "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+ "generate": {
+  "ok": true,
+  "nodeId": "60:10151",
+  "mode": "generated",
+  "page": "Button (altitude.button)",
+  "sectionId": "1:2995",
+  "contractId": "altitude.button",
+  "result": {
+   "createdNodeIds": [
+    "60:10151"
+   ],
+   "results": [
+    {
+     "name": "Button",
+     "contractId": "altitude.button",
+     "nodeId": "60:10151",
+     "key": "f2702f08d09faf6c265f8f7231dbc1be9e08536e",
+     "variants": 12,
+     "properties": [
+      "Content#1:782",
+      "Variant",
+      "State"
+     ],
+     "wiredReactions": 4
+    }
+   ]
+  }
+ },
+ "visual": {
+  "ok": true,
+  "matchDeveloped": true,
+  "reviewedAt": "2026-08-06T13:32:20.271Z",
+  "notes": [],
+  "defects": [],
+  "reference": "parity/receipts/console-loop/altitude/refs/button.png",
+  "reviewSurface": "cream-#F8F4ED-component-set",
+  "referenceSource": "extract/computed/out/altitude/button/gate-shots/secondary__default.png",
+  "scorecard": "parity/receipts/console-loop/altitude/scores/button.json",
+  "matchDevelopedReason": "agent AA=4.23 compositionOk",
+  "matchedAt": "2026-08-08T03:18:21.374Z",
+  "status": "scored-pass",
+  "scoreConfirmed": {
+   "at": "2026-08-08T04:31:56.356Z",
+   "pctAAMasked": 4.226190476190476,
+   "compositionOk": true,
+   "supersededDefects": [],
+   "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+  }
+ },
+ "fingerprint": {
+  "v6": "v6:3196882528",
+  "lineCount": 299,
+  "sampleLines": [
+   ":COMPONENT_SET/Button (altitude.button)|fill|[]",
+   ":COMPONENT_SET/Button (altitude.button)|radius|5,5,5,5",
+   ":COMPONENT_SET/Button (altitude.button)|sizing|FIXED/FIXED AUTO",
+   ":COMPONENT_SET/Button (altitude.button)|description|Button \u00e2\u0080\u0094 generated from contract altitude.button v0.2.0 \u00e2\u0080",
+   ":COMPONENT_SET/Button (altitude.button)|propdef|Content#1:782:TEXT=Button",
+   ":COMPONENT_SET/Button (altitude.button)|propdef|State:VARIANT=Default",
+   ":COMPONENT_SET/Button (altitude.button)|propdef|Variant:VARIANT=Secondary",
+   "/0:COMPONENT/Variant=Secondary, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6431372761726379,\"g\":0.6000000238418579,\"b\":0.5058823823928833},\"boundVariables\":{\"color\":{\"var\":\"imported/button/root/background-color/secondary\"}}}]",
+   "/0:COMPONENT/Variant=Secondary, State=Default|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.09803921729326248,\"g\":0.07450980693101883,\"b\":0.0235294122248888},\"boundVariables\":{\"color\":{\"var\":\"imported/button/root/border-top-color/secondary\"}}}] w0",
+   "/0:COMPONENT/Variant=Secondary, State=Default|radius|4,4,4,4",
+   "/0:COMPONENT/Variant=Secondary, State=Default|layout|HORIZONTAL CENTER/CENTER gap 8 pad 8,16,8,16",
+   "/0:COMPONENT/Variant=Secondary, State=Default|sizing|HUG/HUG AUTO",
+   "/0:COMPONENT/Variant=Secondary, State=Default|bound:bottomLeftRadius|imported/shared/size-4",
+   "/0:COMPONENT/Variant=Secondary, State=Default|bound:bottomRightRadius|imported/shared/size-4",
+   "/0:COMPONENT/Variant=Secondary, State=Default|bound:itemSpacing|imported/shared/size-8",
+   "/0:COMPONENT/Variant=Secondary, State=Default|bound:minHeight|imported/shared/size-0",
+   "/0:COMPONENT/Variant=Secondary, State=Default|bound:minWidth|imported/shared/size-0",
+   "/0:COMPONENT/Variant=Secondary, State=Default|bound:paddingBottom|imported/shared/size-8",
+   "/0:COMPONENT/Variant=Secondary, State=Default|bound:paddingLeft|imported/shared/size-16",
+   "/0:COMPONENT/Variant=Secondary, State=Default|bound:paddingRight|imported/shared/size-16"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [],
+  "matchedAxes": [
+   "Variant enum \u2192 Secondary/Tertiary/Bare/Danger",
+   "TEXT Content",
+   "first-variant fill bound: imported/button/root/background-color/secondary"
+  ],
+  "observed": {
+   "type": "COMPONENT_SET",
+   "variantNames": [
+    "Variant=Secondary, State=Default",
+    "Variant=Tertiary, State=Default",
+    "Variant=Bare, State=Default",
+    "Variant=Danger, State=Default",
+    "Variant=Secondary, State=Focus Visible",
+    "Variant=Tertiary, State=Focus Visible",
+    "Variant=Bare, State=Focus Visible",
+    "Variant=Danger, State=Focus Visible",
+    "Variant=Secondary, State=Hover",
+    "Variant=Tertiary, State=Hover",
+    "Variant=Bare, State=Hover",
+    "Variant=Danger, State=Hover"
+   ],
+   "propDefs": [
+    {
+     "name": "Content#1:782",
+     "type": "TEXT",
+     "defaultValue": "Button",
+     "variantOptions": null
+    },
+    {
+     "name": "Variant",
+     "type": "VARIANT",
+     "defaultValue": "Secondary",
+     "variantOptions": [
+      "Secondary",
+      "Tertiary",
+      "Bare",
+      "Danger"
+     ]
+    },
+    {
+     "name": "State",
+     "type": "VARIANT",
+     "defaultValue": "Default",
+     "variantOptions": [
+      "Default",
+      "Focus Visible",
+      "Hover"
+     ]
+    }
+   ],
+   "firstRoot": {
+    "name": "Variant=Secondary, State=Default",
+    "type": "COMPONENT",
+    "layoutMode": "HORIZONTAL",
+    "padding": {
+     "t": 8,
+     "r": 16,
+     "b": 8,
+     "l": 16
+    },
+    "radius": 4,
+    "fillVarName": "imported/button/root/background-color/secondary",
+    "padBound": {
+     "itemSpacing": "imported/shared/size-8",
+     "paddingLeft": "imported/shared/size-16",
+     "paddingTop": "imported/shared/size-8",
+     "paddingRight": "imported/shared/size-16",
+     "paddingBottom": "imported/shared/size-8",
+     "topLeftRadius": "imported/shared/size-4",
+     "topRightRadius": "imported/shared/size-4",
+     "bottomLeftRadius": "imported/shared/size-4",
+     "bottomRightRadius": "imported/shared/size-4",
+     "strokeTopWeight": "imported/button/root/border-top-width/secondary",
+     "strokeBottomWeight": "imported/button/root/border-bottom-width/secondary",
+     "strokeLeftWeight": "imported/button/root/border-left-width/secondary",
+     "strokeRightWeight": "imported/button/root/border-right-width/secondary",
+     "minWidth": "imported/shared/size-0",
+     "minHeight": "imported/shared/size-0",
+     "fills": "imported/button/root/background-color/secondary",
+     "strokes": "imported/button/root/border-top-color/secondary"
+    },
+    "w": 84,
+    "h": 40,
+    "childTypes": [
+     "TEXT/label"
+    ]
+   }
+  }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": true
+ }
+}

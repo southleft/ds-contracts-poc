@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "badge",
+  "contract": "examples/mui/contracts/badge.contract.json",
+  "script": "examples/mui/figma/badge.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:22:31.359Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "84:2376",
+    "mode": "generated",
+    "page": "Badge",
+    "sectionId": "84:2377",
+    "result": {
+      "note": "timed out after create; present"
+    }
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Screenshot reviewed on section/node 84:2377; structure/variants look sane (slot placeholders OK)."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=54.00% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/badge.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/badge.png",
+    "referenceSource": "extract/computed/out/mui/badge/gate-shots/default.dot__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/badge-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
+  },
+  "fingerprint": {
+    "v6": "v6:3419500101",
+    "lineCount": 398,
+    "sampleLines": [
+      ":COMPONENT_SET/Badge|fill|[]",
+      ":COMPONENT_SET/Badge|radius|5,5,5,5",
+      ":COMPONENT_SET/Badge|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Badge|description|Badge \u00e2\u0080\u0094 generated from contract mui.badge v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Badge|propdef|Color:VARIANT=Default",
+      ":COMPONENT_SET/Badge|propdef|Variant:VARIANT=Standard",
+      "/0:COMPONENT/Color=Default, Variant=Standard|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Color=Default, Variant=Standard|radius|0,0,0,0",
+      "/0:COMPONENT/Color=Default, Variant=Standard|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Color=Default, Variant=Standard|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Color=Default, Variant=Standard|bound:height|imported/badge/root/height",
+      "/0:COMPONENT/Color=Default, Variant=Standard|bound:width|imported/badge/root/width",
+      "/0/0:FRAME/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.7411764860153198,\"g\":0.7411764860153198,\"b\":0.7411764860153198},\"boundVariables\":{\"color\":{\"var\":\"imported/badge/label/background-color\"}}}]",
+      "/0/0:FRAME/label|radius|0,0,0,0",
+      "/0/0:FRAME/label|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/label|sizing|FILL/HUG AUTO",
+      "/0/0/0:TEXT/A|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/badge/label/color\"}}}]",
+      "/0/0/0:TEXT/A|radius|0,0,0,0",
+      "/0/0/0:TEXT/A|sizing|HUG/HUG AUTO",
+      "/0/0/0:TEXT/A|text|\"A\" 20px {\"family\":\"Roboto\",\"style\":\"Regular\"}"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Color enum \u2192 Default/Primary/Secondary/Error/Info/Success/Warning",
+      "Variant enum \u2192 Standard/Dot"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Color=Default, Variant=Standard",
+        "Color=Default, Variant=Dot",
+        "Color=Primary, Variant=Standard",
+        "Color=Primary, Variant=Dot",
+        "Color=Secondary, Variant=Standard",
+        "Color=Secondary, Variant=Dot",
+        "Color=Error, Variant=Standard",
+        "Color=Error, Variant=Dot",
+        "Color=Info, Variant=Standard",
+        "Color=Info, Variant=Dot",
+        "Color=Success, Variant=Standard",
+        "Color=Success, Variant=Dot",
+        "Color=Warning, Variant=Standard",
+        "Color=Warning, Variant=Dot"
+      ],
+      "propDefs": [
+        {
+          "name": "Color",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Primary",
+            "Secondary",
+            "Error",
+            "Info",
+            "Success",
+            "Warning"
+          ]
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Standard",
+          "variantOptions": [
+            "Standard",
+            "Dot"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Color=Default, Variant=Standard",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/badge/root/width",
+          "height": "imported/badge/root/height"
+        },
+        "w": 40,
+        "h": 40,
+        "childTypes": [
+          "FRAME/label",
+          "FRAME/label-2"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

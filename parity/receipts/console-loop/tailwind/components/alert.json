@@ -1,0 +1,174 @@
+{
+ "version": 1,
+ "kind": "console-loop-tailwind-component",
+ "status": "completed",
+ "component": "alert",
+ "contract": "examples/tailwind/contracts/alert.contract.json",
+ "script": "examples/tailwind/figma/alert.figma.js",
+ "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+ "recordedAt": "2026-08-06T05:42:56.094Z",
+ "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+ "generate": {
+  "ok": true,
+  "nodeId": "1:2098",
+  "mode": "generated",
+  "page": "Alert",
+  "sectionId": "1:2099",
+  "contractId": "flowbite.alert",
+  "result": {
+   "createdNodeIds": [
+    "1:2098"
+   ],
+   "results": [
+    {
+     "name": "Alert",
+     "contractId": "flowbite.alert",
+     "nodeId": "1:2098",
+     "key": "50bc7866099a6ca01faf6e6c7dd8f68947911eb4",
+     "variants": 4,
+     "properties": [
+      "Content#1:689",
+      "Color"
+     ]
+    }
+   ]
+  }
+ },
+ "visual": {
+  "ok": true,
+  "matchDeveloped": true,
+  "reviewedAt": "2026-08-06T13:32:20.271Z",
+  "notes": [
+   "Re-synced via clientStorage chunks (n=10, total=79963); amended nodeId=1:2098; rebuiltVariants=4; literals for dismiss size/padding (no imported/alert/dismiss/* vars). matchDeveloped left false."
+  ],
+  "defects": [],
+  "reference": "extract/computed/out/tailwind/alert/gate-shots/failure__default.png",
+  "reviewSurface": "cream-#F8F4ED-component-set",
+  "scorecard": "parity/receipts/console-loop/tailwind/scores/alert.json",
+  "status": "scored-pass",
+  "revoked": {
+   "at": "2026-08-08T04:31:03.484Z",
+   "was": {
+    "ok": false,
+    "matchDeveloped": true,
+    "matchDevelopedReason": "agent AA=5.74 compositionOk (cropped-ref loop)",
+    "matchedAt": "2026-08-08T03:09:53.139Z"
+   },
+   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=5.74, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk \u2014 prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+  },
+  "matchDevelopedReason": "agent AA=3.83 compositionOk after FC-SLOT-DEFAULT fix: icon/dismissable booleans (default false) added to the contract \u2014 flowbite Alert renders icon only when the icon prop is passed and the dismiss button only with onDismiss; the developed gate-shot default shows neither",
+  "matchedAt": "2026-08-08T07:30:13.532Z",
+  "scoreConfirmed": {
+   "at": "2026-08-08T07:30:13.532Z",
+   "pctAAMasked": 3.831129807692308,
+   "compositionOk": true,
+   "supersededDefects": [
+    "Missing Flowbite alert icons / dismiss control; text-only chips \u2014 fail closed."
+   ],
+   "note": "fail-closed defects closed by the FC-SLOT-DEFAULT contract repair (icon/dismissable default-hidden) under the one bar (pctAAMasked<=5 AND compositionOk)"
+  }
+ },
+ "fingerprint": {
+  "v6": "v6:438794735",
+  "lineCount": 90,
+  "sampleLines": [
+   ":COMPONENT_SET/Alert|fill|[]",
+   ":COMPONENT_SET/Alert|radius|5,5,5,5",
+   ":COMPONENT_SET/Alert|sizing|FIXED/FIXED AUTO",
+   ":COMPONENT_SET/Alert|description|Alert \u00e2\u0080\u0094 generated from contract flowbite.alert v0.2.0 \u00e2\u0080",
+   ":COMPONENT_SET/Alert|propdef|Color:VARIANT=Info",
+   ":COMPONENT_SET/Alert|propdef|Content#1:689:TEXT=Alert message",
+   "/0:COMPONENT/Color=Info|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8078431487083435,\"g\":0.9803921580314636,\"b\":0.9960784316062927},\"boundVariables\":{\"color\":{\"var\":\"imported/alert/root/background-color/info\"}}}]",
+   "/0:COMPONENT/Color=Info|radius|8,8,8,8",
+   "/0:COMPONENT/Color=Info|layout|VERTICAL MIN/MIN gap 8 pad 16,16,16,16",
+   "/0:COMPONENT/Color=Info|sizing|HUG/HUG AUTO",
+   "/0:COMPONENT/Color=Info|bound:bottomLeftRadius|imported/shared/size-8",
+   "/0:COMPONENT/Color=Info|bound:bottomRightRadius|imported/shared/size-8",
+   "/0:COMPONENT/Color=Info|bound:itemSpacing|imported/shared/size-8",
+   "/0:COMPONENT/Color=Info|bound:paddingBottom|imported/shared/size-16",
+   "/0:COMPONENT/Color=Info|bound:paddingLeft|imported/shared/size-16",
+   "/0:COMPONENT/Color=Info|bound:paddingRight|imported/shared/size-16",
+   "/0:COMPONENT/Color=Info|bound:paddingTop|imported/shared/size-16",
+   "/0:COMPONENT/Color=Info|bound:topLeftRadius|imported/shared/size-8",
+   "/0:COMPONENT/Color=Info|bound:topRightRadius|imported/shared/size-8",
+   "/0/0:FRAME/part-0|fill|[]"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [
+   "canvas-absent: no State axis (contract has empty/absent states)"
+  ],
+  "matchedAxes": [
+   "Color enum \u2192 Info/Failure/Success/Warning",
+   "TEXT Content",
+   "first-variant fill bound: imported/alert/root/background-color/info"
+  ],
+  "observed": {
+   "type": "COMPONENT_SET",
+   "variantNames": [
+    "Color=Info",
+    "Color=Failure",
+    "Color=Success",
+    "Color=Warning"
+   ],
+   "propDefs": [
+    {
+     "name": "Content#1:689",
+     "type": "TEXT",
+     "defaultValue": "Alert message",
+     "variantOptions": null
+    },
+    {
+     "name": "Color",
+     "type": "VARIANT",
+     "defaultValue": "Info",
+     "variantOptions": [
+      "Info",
+      "Failure",
+      "Success",
+      "Warning"
+     ]
+    }
+   ],
+   "firstRoot": {
+    "name": "Color=Info",
+    "type": "COMPONENT",
+    "layoutMode": "VERTICAL",
+    "padding": {
+     "t": 16,
+     "r": 16,
+     "b": 16,
+     "l": 16
+    },
+    "radius": 8,
+    "fillVarName": "imported/alert/root/background-color/info",
+    "padBound": {
+     "itemSpacing": "imported/shared/size-8",
+     "paddingLeft": "imported/shared/size-16",
+     "paddingTop": "imported/shared/size-16",
+     "paddingRight": "imported/shared/size-16",
+     "paddingBottom": "imported/shared/size-16",
+     "topLeftRadius": "imported/shared/size-8",
+     "topRightRadius": "imported/shared/size-8",
+     "bottomLeftRadius": "imported/shared/size-8",
+     "bottomRightRadius": "imported/shared/size-8",
+     "fills": "imported/alert/root/background-color/info"
+    },
+    "w": 128,
+    "h": 52,
+    "childTypes": [
+     "FRAME/part-0"
+    ]
+   }
+  }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": true
+ },
+ "reSyncedAt": "2026-08-07T12:12:42.940Z",
+ "reSyncNote": "Re-synced via clientStorage chunks (n=10, total=79963); amended nodeId=1:2098; rebuiltVariants=4; literals for dismiss size/padding (no imported/alert/dismiss/* vars). matchDeveloped left false."
+}

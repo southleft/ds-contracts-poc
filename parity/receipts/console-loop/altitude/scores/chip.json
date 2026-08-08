@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "pass",
+  "matchDeveloped": true,
+  "recommendMatchDeveloped": true,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 17.318059299191376,
+    "pctAAUnmasked": 0.6738544474393532,
+    "pctAAMasked": 0.6738544474393532,
+    "maskCoveragePct": 0,
+    "canvasPx": "53x28",
+    "realPx": "52x28",
+    "inkCanvasPct": 90.83557951482479,
+    "inkRealPct": 88.94878706199461
+  },
+  "reference": "parity/receipts/console-loop/altitude/refs/chip.png",
+  "referenceSha256": "b28902a5f43a39e6ab670f849993d1a92532e1c128ab569ddd8d5be4c2ead8bf",
+  "canvasShot": "parity/receipts/console-loop/altitude/shots/chip-cell.png",
+  "canvasShotSha256": "76a151157ad8737ce93c34f375befa75646dc8ca47725e618623d1d698dd2c67",
+  "diff": "parity/receipts/console-loop/altitude/scores/chip.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/altitude/components/chip.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0192307692307692,
+  "inkDelta": 1.8867924528301785,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-08T08:18:19.920Z"
+}

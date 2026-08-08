@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 33.50676378772112,
+    "pctAAUnmasked": 14.151925078043703,
+    "pctAAMasked": 14.151925078043703,
+    "maskCoveragePct": 0,
+    "canvasPx": "20x31",
+    "realPx": "31x12",
+    "inkCanvasPct": 15.608740894901144,
+    "inkRealPct": 18.210197710718003
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/link.png",
+  "referenceSha256": "5a0d559b048550153519c9927cb13e3e71ebc8e4f2e4705d2c97acb19d6529c1",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/link-cell.png",
+  "canvasShotSha256": "4980d88e10dd5b0c7765af2b99a9a73778f6785a7cf616384e0fb1292240d843",
+  "diff": "parity/receipts/console-loop/mui/scores/link.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/mui/components/link.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 2.5833333333333335,
+  "inkDelta": 2.6014568158168583,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=2.58, inkDelta=2.6) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T08:30:11.608Z"
+}

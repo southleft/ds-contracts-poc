@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "citation",
+  "contract": "contracts/citation.contract.json",
+  "script": "parity/receipts/console-loop/emitted/16-citation.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:58:58.731Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:971",
+    "page": "Citation",
+    "sectionId": "1:972",
+    "result": {
+      "createdNodeIds": [
+        "1:971"
+      ],
+      "results": [
+        {
+          "name": "Citation",
+          "contractId": "ds.citation",
+          "nodeId": "1:971",
+          "key": "e0d132e3b4a7b32a17c046a6055364647cfff2f2",
+          "variants": 2,
+          "properties": [
+            "Href#1:309",
+            "Source#1:312",
+            "Number#1:315",
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:972 captured (ok).",
+      "Citation: 2 variant(s); type COMPONENT_SET; page Citation.",
+      "Props: Href, Source, Number, Variant.",
+      "First root fill bound to color/surface/sunken.",
+      "Sample text: \"example.com\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3382273654",
+    "lineCount": 40,
+    "sampleLines": [
+      ":COMPONENT_SET/Citation|fill|[]",
+      ":COMPONENT_SET/Citation|radius|5,5,5,5",
+      ":COMPONENT_SET/Citation|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Citation|description|Citation — generated from contract ds.citation v1.0.0",
+      ":COMPONENT_SET/Citation|propdef|Href#1:309:TEXT=https://example.com",
+      ":COMPONENT_SET/Citation|propdef|Number#1:315:TEXT=1",
+      ":COMPONENT_SET/Citation|propdef|Source#1:312:TEXT=example.com",
+      ":COMPONENT_SET/Citation|propdef|Variant:VARIANT=Label",
+      "/0:COMPONENT/Variant=Label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.9529411792755127,\"g\":0.95686274766922,\"b\":0.9647058844566345},\"boundVariables\":{\"color\":{\"var\":\"color/surface/sunken\"}}}]",
+      "/0:COMPONENT/Variant=Label|radius|4,4,4,4",
+      "/0:COMPONENT/Variant=Label|layout|HORIZONTAL MIN/CENTER gap 0 pad 2,8,2,8",
+      "/0:COMPONENT/Variant=Label|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Variant=Label|bound:bottomLeftRadius|radius/100",
+      "/0:COMPONENT/Variant=Label|bound:bottomRightRadius|radius/100",
+      "/0:COMPONENT/Variant=Label|bound:paddingBottom|space/inset-y/xs",
+      "/0:COMPONENT/Variant=Label|bound:paddingLeft|space/inset-x/xs",
+      "/0:COMPONENT/Variant=Label|bound:paddingRight|space/inset-x/xs",
+      "/0:COMPONENT/Variant=Label|bound:paddingTop|space/inset-y/xs",
+      "/0:COMPONENT/Variant=Label|bound:topLeftRadius|radius/100",
+      "/0:COMPONENT/Variant=Label|bound:topRightRadius|radius/100"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Variant",
+      "Source",
+      "Number",
+      "Href"
+    ],
+    "observed": {
+      "variantNames": [
+        "Variant=Label",
+        "Variant=Number"
+      ],
+      "propDefs": [
+        {
+          "name": "Href#1:309",
+          "type": "TEXT",
+          "defaultValue": "https://example.com",
+          "variantOptions": null
+        },
+        {
+          "name": "Source#1:312",
+          "type": "TEXT",
+          "defaultValue": "example.com",
+          "variantOptions": null
+        },
+        {
+          "name": "Number#1:315",
+          "type": "TEXT",
+          "defaultValue": "1",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Label",
+          "variantOptions": [
+            "Label",
+            "Number"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Label",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 2,
+          "r": 8,
+          "b": 2,
+          "l": 8
+        },
+        "radius": 4,
+        "fillVarName": "color/surface/sunken",
+        "padBound": {
+          "paddingLeft": "space/inset-x/xs",
+          "paddingTop": "space/inset-y/xs",
+          "paddingRight": "space/inset-x/xs",
+          "paddingBottom": "space/inset-y/xs",
+          "topLeftRadius": "radius/100",
+          "topRightRadius": "radius/100",
+          "bottomLeftRadius": "radius/100",
+          "bottomRightRadius": "radius/100",
+          "fills": "color/surface/sunken"
+        },
+        "textChild": [
+          {
+            "name": "labelText",
+            "chars": "example.com",
+            "fontSize": 12
+          }
+        ],
+        "w": 93,
+        "h": 19,
+        "childNames": [
+          "labelText:TEXT"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

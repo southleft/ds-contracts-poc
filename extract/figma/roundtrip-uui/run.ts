@@ -52,9 +52,17 @@ import { createPluginEngine } from '../../../figma-sync/plugin/engine/entry.js';
 import { parseTokenSet, type TokenSetPayload } from '../../../core/index.js';
 import { createFigmaMock } from '../../../scripts/plugin-engine-mock-figma.mjs';
 import type { MockNode } from '../../../scripts/plugin-engine-mock-figma.d.mts';
+import {
+  validateExactVariantProjection,
+  type ExactDumpSet,
+  type ExactProjectionResult,
+} from '../exact-projection.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..', '..', '..');
+const OUT_DIR = process.env.ROUNDTRIP_UUI_OUT_DIR
+  ? path.resolve(process.env.ROUNDTRIP_UUI_OUT_DIR)
+  : HERE;
 const UUI = path.join(ROOT, 'examples', 'untitled-ui');
 const CONTRACTS_DIR = path.join(UUI, 'storybook', 'contracts');
 const DUMPS_DIR = path.join(UUI, 'dumps-v2');
@@ -87,19 +95,29 @@ type LimitTag =
   | 'interaction-states' // State=… variants the contract carries only as previews (or not at all)
   | 'boolean-axis-drop' // a canvas variant axis whose contract prop is boolean — no figma-surface axis, so half the grid vanishes
   | 'restructured' // same content under different part nesting (a wrapper the proposal introduced/removed) — value preserved, path moved
+  | 'structure-wrapper-invention' // an introduced wrapper that is an ancestor of a separately paired restructured node
+  | 'duplicate-sibling-expansion' // repeated source sibling names collapse to one path while regenerated siblings receive numbered paths
   | 'vector-glyph' // svg/vector internals — mock renders empty frames; instancePrimaryFill unreadable
   | 'url-image' // url()/IMAGE channels — emitter ledgers gradientMiss by design (EXPECTED)
   | 'text-style-identity' // named text styles need the semantic slot; a foreign tokenSet has none
   | 'boolean-axis-placeholder' // {prop} minted paths over boolean props never substitute on the figma surface (CLOSED: VARIANT-bound bools are axes now)
   | 'single-variant-dep-collapse' // a 1-variant dependency emits standalone, dropping bound properties (CLOSED: parent drops/refuses at compile)
   | 'cartesian-fill' // the emit enumerates the FULL axis cartesian; rows the canvas never drew are round-trip-only by construction
-  | 'dup-sibling-names' // the dump reuses ONE layer name for N siblings — their facts collapse to one key, so N-1 uniquely-named round-trip siblings have no dump-side counterpart
   | 'hug-vs-fixed' // the canvas hugged (no comparable box fact), the emit lowered the captured measure to a FIXED/FILL axis — the mode disagreement is the finding
   | 'declared-not-drawn' // a component property the contract declares that the drawn instance never carried
   | 'mixed-stroke-weight' // per-side stroke weights spell 'mixed' in figma, so the dump omits the channel; a uniform RT weight has no dump-side counterpart
   | 'zero-stroke' // a strokeless original round-trips as an EXPLICIT zero-width transparent stroke: a partially stroked node now carries its own absence (border-width 0 + border-color #00000000) so the color channel stops resolving to currentColor — nothing renders at weight 0 with an alpha-0 paint
   | 'zero-fill' // the FILL twin of zero-stroke (gap-closing round 10): a node whose paint stack is an IMAGE draws no solid under it, and that absence is now carried EXPLICITLY as an alpha-0 background-color so the solid channel classifies over the whole axis instead of dropping (Avatar's #f9f5ff ground never rendered while the mixed stack refused the channel). Nothing renders at alpha 0, so the round-trip-only fill is rendering-neutral by construction
   | 'auto-layout-inert' // a frame drawn with NO auto-layout returns WITH one, and every child is ABSOLUTELY placed — figma auto-layout excludes absolute children, so the mode changes nothing drawn (437/437 such frames in the kit)
+  | 'instance-target-loss' // unresolved defect: a captured nested instance/instanceOf returns as a non-instance or disappears
+  | 'instance-ink-loss' // unresolved defect: the nested instance survives but its probed primary ink differs or disappears
+  | 'shape-kind-loss' // unresolved defect: a parametric shape returns as a generic box or disappears
+  | 'layout-projection-loss' // unresolved defect: layout mode/alignment/sizing/padding differs or disappears
+  | 'layout-mode-derivative' // a layout sub-fact whose presence/absence is caused by an already-counted mode change
+  | 'geometry-projection-loss' // unresolved defect: measured size/position/radius/arc/fill sizing differs or disappears
+  | 'paint-effect-projection-loss' // unresolved defect: fill/stroke/effect identity differs or disappears
+  | 'variant-projection-loss' // unresolved defect: a realized component property value differs or disappears
+  | 'text-content-projection-loss' // unresolved defect: text content or raw typography differs or disappears
   | 'headless-measure'; // mock hug sizes are estimates — excluded, never compared
 
 interface Fact {
@@ -108,6 +126,8 @@ interface Fact {
   channel: string;
   value: string;
   tag?: LimitTag;
+  /** Machine-checkable evidence behind paired classifications. */
+  basis?: string;
 }
 
 interface ComponentResult {
@@ -116,8 +136,11 @@ interface ComponentResult {
   status: 'diffed' | 'emit-refused' | 'exec-failed' | 'no-set';
   reason?: string;
   reasonTag?: LimitTag;
+  exactProjection: ExactProjectionResult;
   originalVariants: number;
   roundTripVariants?: number;
+  originalFacts?: number;
+  roundTripFacts?: number;
   matched?: number;
   diverged?: Fact[]; // value = "original → roundtrip"
   loss?: Fact[];
@@ -470,7 +493,10 @@ const mockEffectStr = (e: {
 
 const num = (v: unknown): number | undefined => (typeof v === 'number' ? v : undefined);
 
-function mockFacts(set: MockNode): Fact[] {
+function mockFacts(
+  set: MockNode,
+  textStyleNameById: ReadonlyMap<string, string> = new Map(),
+): Fact[] {
   const facts: Fact[] = [];
   const put = (variant: string, p: string, channel: string, value: string, tag?: LimitTag): void => {
     facts.push({ variant, path: p, channel, value, ...(tag ? { tag } : {}) });
@@ -527,9 +553,19 @@ function mockFacts(set: MockNode): Fact[] {
       if (n.lineHeight && n.lineHeight.unit === 'PIXELS' && typeof n.lineHeight.value === 'number') {
         put(variant, p, 'text.lineHeight', String(n.lineHeight.value));
       }
-      // textStyleId → text.style intentionally absent: a foreign tokenSet
-      // carries no semantic slot, so the engine derives no named styles
-      // (text-style-identity limit — the dump side fact ledgers as LOSS).
+      if (
+        typeof n.textStyleId === 'string' &&
+        n.textStyleId &&
+        textStyleNameById.has(n.textStyleId)
+      ) {
+        put(
+          variant,
+          p,
+          'text.style',
+          textStyleNameById.get(n.textStyleId)!,
+          'text-style-identity',
+        );
+      }
     }
     if (n.layoutPositioning === 'ABSOLUTE') put(variant, p, 'abs', `${r1(n.x)},${r1(n.y)}`);
     const arc = n.arcData as { startingAngle?: number; endingAngle?: number; innerRadius?: number } | undefined;
@@ -597,6 +633,8 @@ function mockFacts(set: MockNode): Fact[] {
 // ---------------------------------------------------------------------------
 
 interface DiffResult {
+  originalFacts: number;
+  roundTripFacts: number;
   matched: number;
   diverged: Fact[];
   loss: Fact[];
@@ -605,8 +643,16 @@ interface DiffResult {
 
 function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (variant: string) => LimitTag | undefined): DiffResult {
   const key = (f: Fact): string => `${f.variant} ▸ ${f.path || '(root)'} ▸ ${f.channel}`;
-  const a = new Map(original.map((f) => [key(f), f]));
-  const b = new Map(roundTrip.map((f) => [key(f), f]));
+  const group = (facts: Fact[]): Map<string, Fact[]> => {
+    const grouped = new Map<string, Fact[]>();
+    for (const fact of facts) {
+      const k = key(fact);
+      (grouped.get(k) ?? grouped.set(k, []).get(k)!).push(fact);
+    }
+    return grouped;
+  };
+  const a = group(original);
+  const b = group(roundTrip);
 
   // Variants present on one side only: ledger the variant fact itself, then
   // suppress that variant's node facts on the same side (one named line per
@@ -616,33 +662,72 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
   const onlyA = new Set([...variantsA].filter((v) => !variantsB.has(v)));
   const onlyB = new Set([...variantsB].filter((v) => !variantsA.has(v)));
 
-  const out: DiffResult = { matched: 0, diverged: [], loss: [], invented: [] };
-  for (const [k, fa] of a) {
-    if (onlyA.has(fa.variant)) {
-      if (fa.channel === 'variant') {
+  const out: DiffResult = {
+    originalFacts: original.length,
+    roundTripFacts: roundTrip.length,
+    matched: 0,
+    diverged: [],
+    loss: [],
+    invented: [],
+  };
+  for (const k of new Set([...a.keys(), ...b.keys()])) {
+    const source = [...(a.get(k) ?? [])];
+    const returned = [...(b.get(k) ?? [])];
+    const sample = source[0] ?? returned[0];
+    if (!sample) continue;
+    if (onlyA.has(sample.variant)) {
+      const variantTag =
+        missingVariantTag?.(sample.variant) ??
+        (sample.variant.includes('State=') ? 'interaction-states' : undefined);
+      for (const fact of source) {
         out.loss.push({
-          ...fa,
-          channel: 'variant',
-          value: 'missing in round trip',
-          tag: missingVariantTag?.(fa.variant) ?? (fa.variant.includes('State=') ? 'interaction-states' : fa.tag),
+          ...fact,
+          ...(fact.channel === 'variant' ? { value: 'missing in round trip' } : {}),
+          ...(variantTag ? { tag: variantTag } : {}),
         });
       }
       continue;
     }
-    const fb = b.get(k);
-    if (!fb) out.loss.push(fa);
-    else if (fa.value === fb.value) out.matched++;
-    else out.diverged.push({ ...fa, value: `${fa.value} → ${fb.value}`, tag: fa.tag ?? fb.tag });
-  }
-  for (const [k, fb] of b) {
-    if (onlyB.has(fb.variant)) {
+    if (onlyB.has(sample.variant)) {
       // The emit enumerates the FULL axis cartesian (bool axes included);
-      // a curated canvas grid draws a subset — the extra rows are round-
-      // trip-only BY CONSTRUCTION, named, never silently matched.
-      if (fb.channel === 'variant') out.invented.push({ ...fb, value: 'extra variant in round trip', tag: 'cartesian-fill' });
+      // every fact in an extra row stays in the denominator and shares the
+      // row-level cartesian-fill disposition.
+      for (const fact of returned) {
+        out.invented.push({
+          ...fact,
+          ...(fact.channel === 'variant' ? { value: 'extra variant in round trip' } : {}),
+          tag: 'cartesian-fill',
+        });
+      }
       continue;
     }
-    if (!a.has(k)) out.invented.push(fb);
+
+    // Match equal duplicate facts one-to-one before pairing differences. This
+    // preserves repeated sibling facts instead of Map's last-write-wins
+    // collapse, making the conservation equation falsifiable.
+    const unmatchedSource: Fact[] = [];
+    const unmatchedReturned = [...returned];
+    for (const fact of source) {
+      const index = unmatchedReturned.findIndex((candidate) => candidate.value === fact.value);
+      if (index >= 0) {
+        out.matched++;
+        unmatchedReturned.splice(index, 1);
+      } else {
+        unmatchedSource.push(fact);
+      }
+    }
+    const paired = Math.min(unmatchedSource.length, unmatchedReturned.length);
+    for (let i = 0; i < paired; i++) {
+      const fa = unmatchedSource[i];
+      const fb = unmatchedReturned[i];
+      out.diverged.push({
+        ...fa,
+        value: `${fa.value} → ${fb.value}`,
+        tag: fa.tag ?? fb.tag,
+      });
+    }
+    out.loss.push(...unmatchedSource.slice(paired));
+    out.invented.push(...unmatchedReturned.slice(paired));
   }
 
   // A layout.mode DIVERGENCE (NONE ↔ auto-layout) already names the finding
@@ -653,8 +738,9 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
   );
   const derivative = (f: Fact): boolean =>
     f.channel.startsWith('layout.') && f.channel !== 'layout.mode' && modeDiverged.has(`${f.variant} ▸ ${f.path}`);
-  out.loss = out.loss.filter((f) => !derivative(f));
-  out.invented = out.invented.filter((f) => !derivative(f));
+  for (const fact of [...out.loss, ...out.invented]) {
+    if (derivative(fact) && fact.tag === undefined) fact.tag = 'layout-mode-derivative';
+  }
 
   // RESTRUCTURED pairing — tree alignment between the two nestings. A loss
   // fact and an invented fact with the SAME (variant, channel, value) whose
@@ -682,9 +768,21 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
   const isAncestor = (shorter: string, longer: string): boolean =>
     shorter !== longer && longer.startsWith(shorter === '' ? '' : shorter + '/');
   const pathMap = new Map<string, string>(); // `${variant} ▸ ${invPath}` → lossPath
-  const pair = (inv: Fact, twin: Fact): void => {
+  const pair = (
+    inv: Fact,
+    twin: Fact,
+    relation:
+      | 'same-leaf'
+      | 'same-parent'
+      | 'ancestor'
+      | 'mapped-prefix'
+      | 'mapped-path',
+  ): void => {
+    const basis = `${relation}:${inv.variant} ▸ ${twin.path || '(root)'} ⇄ ${inv.path || '(root)'} ▸ ${inv.channel} ▸ ${inv.value}`;
     inv.tag = 'restructured';
+    inv.basis = basis;
     twin.tag = 'restructured';
+    twin.basis = basis;
     if (!pathMap.has(`${inv.variant} ▸ ${inv.path}`)) pathMap.set(`${inv.variant} ▸ ${inv.path}`, twin.path);
   };
   const lossByKey = new Map<string, Fact[]>();
@@ -701,7 +799,7 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
   for (const f of out.invented) {
     if (f.tag !== undefined) continue;
     const twin = lossByKey.get(`${f.variant} ▸ ${leaf(f.path)} ▸ ${f.channel} ▸ ${f.value}`)?.find((t) => t.tag === undefined);
-    if (twin) pair(f, twin);
+    if (twin) pair(f, twin, 'same-leaf');
   }
   // Pass 1 — same parent, related leaf (rename spellings).
   for (const f of out.invented) {
@@ -709,7 +807,7 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
     const twin = lossByCV
       .get(`${f.variant} ▸ ${f.channel} ▸ ${f.value}`)
       ?.find((t) => t.tag === undefined && parentOf(t.path) === parentOf(f.path) && leafRelated(leaf(t.path), leaf(f.path)));
-    if (twin) pair(f, twin);
+    if (twin) pair(f, twin, 'same-parent');
   }
   // Pass 2 — ancestor/descendant containment.
   for (const f of out.invented) {
@@ -717,7 +815,7 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
     const twin = lossByCV
       .get(`${f.variant} ▸ ${f.channel} ▸ ${f.value}`)
       ?.find((t) => t.tag === undefined && (isAncestor(t.path, f.path) || isAncestor(f.path, t.path)));
-    if (twin) pair(f, twin);
+    if (twin) pair(f, twin, 'ancestor');
   }
   // Pass 3 — mapped-prefix containment, to fixpoint.
   let paired = true;
@@ -743,7 +841,7 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
                 (parentOf(t.path) === parentOf(rewritten) && leafRelated(leaf(t.path), leaf(rewritten)))),
           );
         if (twin) {
-          pair(f, twin);
+          pair(f, twin, 'mapped-prefix');
           paired = true;
         }
         break; // longest mapped prefix only
@@ -755,31 +853,14 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
   // path) is restructure-paired, that node's remaining untagged facts at the
   // SAME path are the same finding — the node moved, its channel inventory
   // came with it (values still ledgered verbatim on both sides).
-  const movedInvPaths = new Set(out.invented.filter((f) => f.tag === 'restructured').map((f) => `${f.variant} ▸ ${f.path}`));
-  const movedLossPaths = new Set(out.loss.filter((f) => f.tag === 'restructured').map((f) => `${f.variant} ▸ ${f.path}`));
-  for (const f of out.invented) {
-    if (f.tag === undefined && movedInvPaths.has(`${f.variant} ▸ ${f.path}`)) f.tag = 'restructured';
-  }
-  for (const f of out.loss) {
-    if (f.tag === undefined && movedLossPaths.has(`${f.variant} ▸ ${f.path}`)) f.tag = 'restructured';
-  }
-
-  // DUP-SIBLING NAMES: the dump reuses one layer name for N siblings (avatar
-  // group draws eight 'Avatar' instances), so their facts collapse onto ONE
-  // key on the original side; the round trip names them uniquely ('avatar',
-  // 'avatar 2', …) and siblings 2..N have no dump-side key BY CONSTRUCTION.
-  // Condition: the invented leaf carries a digit suffix AND the original set
-  // has facts at the digit-stripped path in the SAME variant.
-  const origPaths = new Set(original.map((f) => `${f.variant} ▸ ${f.path}`));
-  const stripDigitsPath = (p: string): string => {
-    const segs = p.split('/');
-    segs[segs.length - 1] = stripD(segs[segs.length - 1]);
-    return segs.join('/');
-  };
   for (const f of out.invented) {
     if (f.tag !== undefined) continue;
-    const base = stripDigitsPath(f.path);
-    if (base !== f.path && origPaths.has(`${f.variant} ▸ ${base}`)) f.tag = 'dup-sibling-names';
+    const mapped = pathMap.get(`${f.variant} ▸ ${f.path}`);
+    if (mapped === undefined) continue;
+    const twin = lossByCV
+      .get(`${f.variant} ▸ ${f.channel} ▸ ${f.value}`)
+      ?.find((candidate) => candidate.tag === undefined && candidate.path === mapped);
+    if (twin) pair(f, twin, 'mapped-path');
   }
 
   // ONE-SIDED PROBE/SIZING channels at a node BOTH sides carry (the original
@@ -845,17 +926,51 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
     }
   }
 
+  // DUPLICATE-SIBLING EXPANSION. The source can draw several same-named
+  // siblings at one normalized path while regeneration assigns numbered
+  // identities. Multimap comparison preserves the source multiplicity; any
+  // remaining numbered return path is an explicit expansion, not a wrapper.
+  const originalPaths = new Set(
+    original.map((fact) => `${fact.variant} ▸ ${fact.path}`),
+  );
+  const stripNumberedLeaf = (value: string): string => {
+    const segments = value.split('/');
+    segments[segments.length - 1] = segments[segments.length - 1].replace(
+      /\d+$/,
+      '',
+    );
+    return segments.join('/');
+  };
+  for (const fact of out.invented) {
+    if (fact.tag !== undefined) continue;
+    const basePath = stripNumberedLeaf(fact.path);
+    if (
+      basePath !== fact.path &&
+      originalPaths.has(`${fact.variant} ▸ ${basePath}`)
+    ) {
+      fact.tag = 'duplicate-sibling-expansion';
+    }
+  }
+
   // The wrapper that did the moving: an untagged invented fact at a path that
   // is an ANCESTOR of restructure-paired paths is the introduced wrapper
-  // itself — same class, not an independent invention.
-  const restructuredPrefixes = new Set<string>();
+  // itself — keep it separate from the paired `restructured` class and bind
+  // it to the descendant pair that proves why the wrapper exists.
+  const restructuredPrefixes = new Map<string, string>();
   for (const f of out.invented) {
-    if (f.tag !== 'restructured') continue;
+    if (f.tag !== 'restructured' || !f.basis) continue;
     const segs = f.path.split('/');
-    for (let i = 1; i < segs.length; i++) restructuredPrefixes.add(`${f.variant} ▸ ${segs.slice(0, i).join('/')}`);
+    for (let i = 1; i <= segs.length; i++) {
+      const key = `${f.variant} ▸ ${segs.slice(0, i).join('/')}`;
+      if (!restructuredPrefixes.has(key)) restructuredPrefixes.set(key, f.basis);
+    }
   }
   for (const f of out.invented) {
-    if (f.tag === undefined && restructuredPrefixes.has(`${f.variant} ▸ ${f.path}`)) f.tag = 'restructured';
+    const descendantBasis = restructuredPrefixes.get(`${f.variant} ▸ ${f.path}`);
+    if (f.tag === undefined && descendantBasis) {
+      f.tag = 'structure-wrapper-invention';
+      f.basis = `ancestor-of:${descendantBasis}`;
+    }
   }
 
   // A kind divergence whose original side is vector geometry is the campaign's
@@ -878,6 +993,43 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
     ) {
       f.tag = 'auto-layout-inert';
     }
+  }
+
+  // ACCOUNTABILITY CLASSIFICATION. Remaining source-side facts are real
+  // conversion defects, not sanctioned lowerings. Classify them by the first
+  // semantic boundary they violate so REPORT.md has no flattering
+  // `(unclassified)` bucket while each class remains a concrete fix queue.
+  const classifyDefect = (f: Fact): LimitTag | undefined => {
+    if (f.channel === 'instanceOf' || (f.channel === 'kind' && (f.value === 'instance' || f.value.startsWith('instance →')))) {
+      return 'instance-target-loss';
+    }
+    if (f.channel === 'instanceInk') return 'instance-ink-loss';
+    if (f.channel === 'kind') return 'shape-kind-loss';
+    if (f.channel.startsWith('layout.')) return 'layout-projection-loss';
+    if (
+      f.channel === 'width' ||
+      f.channel === 'height' ||
+      f.channel === 'abs' ||
+      f.channel === 'radius' ||
+      f.channel === 'fillWidth' ||
+      f.channel.startsWith('shape.')
+    ) {
+      return 'geometry-projection-loss';
+    }
+    if (
+      f.channel === 'fill' ||
+      f.channel === 'stroke' ||
+      f.channel === 'strokeWeight' ||
+      f.channel === 'effects'
+    ) {
+      return 'paint-effect-projection-loss';
+    }
+    if (f.channel.startsWith('prop:')) return 'variant-projection-loss';
+    if (f.channel.startsWith('text.')) return 'text-content-projection-loss';
+    return undefined;
+  };
+  for (const f of [...out.diverged, ...out.loss]) {
+    if (f.tag === undefined) f.tag = classifyDefect(f);
   }
   return out;
 }
@@ -931,17 +1083,18 @@ function canonicalizeVariants(sides: Fact[][], axisDefaults: Record<string, stri
 // The pipeline, per component
 // ---------------------------------------------------------------------------
 
-const dumpSetOf = (dump: Json): { setName: string; variants: DumpNode[] } => {
+const dumpSetOf = (dump: Json): Omit<ExactDumpSet, 'variants'> & { setName: string; variants: DumpNode[] } => {
   const key = Object.keys(dump).find((k) => !['_provenance', '_degradations', '_variables'].includes(k));
   if (!key) throw new Error('dump has no set entry');
-  const entry = dump[key] as { setName?: string; variants: DumpNode[] };
-  return { setName: entry.setName ?? key.replace(/^_/, ''), variants: entry.variants };
+  const entry = dump[key] as Omit<ExactDumpSet, 'variants'> & { setName?: string; variants: DumpNode[] };
+  return { ...entry, setName: entry.setName ?? key.replace(/^_/, '') };
 };
 
 async function runComponent(name: string): Promise<ComponentResult> {
   const contractId = `ds.${name}`;
   const dump = readJson(path.join(DUMPS_DIR, `${name}.dump.json`));
   const setEntry = dumpSetOf(dump);
+  const sourceProjection = validateExactVariantProjection(setEntry);
   const originalFacts = dumpFacts(setEntry);
   const originalVariants = setEntry.variants.length;
 
@@ -968,6 +1121,7 @@ async function runComponent(name: string): Promise<ComponentResult> {
       status: 'emit-refused',
       reason,
       reasonTag: /\{[a-zA-Z][\w-]*\}/.test(reason) ? 'boolean-axis-placeholder' : undefined,
+      exactProjection: sourceProjection,
       originalVariants,
     };
   }
@@ -990,6 +1144,7 @@ async function runComponent(name: string): Promise<ComponentResult> {
         : /component propert/.test(reason)
           ? 'single-variant-dep-collapse'
           : undefined,
+      exactProjection: sourceProjection,
       originalVariants,
     };
   }
@@ -999,9 +1154,26 @@ async function runComponent(name: string): Promise<ComponentResult> {
       (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') &&
       n.getSharedPluginData('ds_contracts', 'contractId') === contractId,
   );
-  if (!set) return { component: name, contractId, status: 'no-set', reason: 'executed clean but no marked set in the mock file', originalVariants };
+  if (!set) return { component: name, contractId, status: 'no-set', reason: 'executed clean but no marked set in the mock file', exactProjection: sourceProjection, originalVariants };
 
-  const rtFacts = mockFacts(set);
+  const textStyleNameById = new Map(
+    (await figma.getLocalTextStylesAsync()).map((style) => [
+      style.id,
+      style.name,
+    ]),
+  );
+  const rtFacts = mockFacts(set, textStyleNameById);
+  const returnedRows =
+    set.type === 'COMPONENT_SET'
+      ? (set.children ?? []).map((variant) => ({
+          name: variant.name,
+          variantProperties: variant.variantProperties as
+            | Record<string, unknown>
+            | null
+            | undefined,
+        }))
+      : [{ name: set.name }];
+  const exactProjection = validateExactVariantProjection(setEntry, returnedRows);
 
   // Canonical variant grid: an axis one side does not spell fills from the
   // contract default. Two default sources, in order:
@@ -1053,12 +1225,25 @@ async function runComponent(name: string): Promise<ComponentResult> {
       .join(', ');
     if (!lossKeys.has(`${sibling} ▸ ${f.path} ▸ ${f.channel}`)) f.tag = 'interaction-states';
   }
+  if (diff.originalFacts !== diff.matched + diff.diverged.length + diff.loss.length) {
+    throw new Error(
+      `${name}: source conservation broken — ${diff.originalFacts} original != ${diff.matched} matched + ${diff.diverged.length} diverged + ${diff.loss.length} lost`,
+    );
+  }
+  if (diff.roundTripFacts !== diff.matched + diff.diverged.length + diff.invented.length) {
+    throw new Error(
+      `${name}: return conservation broken — ${diff.roundTripFacts} returned != ${diff.matched} matched + ${diff.diverged.length} diverged + ${diff.invented.length} invented`,
+    );
+  }
   return {
     component: name,
     contractId,
     status: 'diffed',
+    exactProjection,
     originalVariants,
     roundTripVariants: set.type === 'COMPONENT_SET' ? (set.children ?? []).length : 1,
+    originalFacts: diff.originalFacts,
+    roundTripFacts: diff.roundTripFacts,
     matched: diff.matched,
     diverged: diff.diverged,
     loss: diff.loss,
@@ -1117,6 +1302,12 @@ async function main(): Promise<void> {
     diverged: diffed.reduce((n, r) => n + (r.diverged?.length ?? 0), 0),
     loss: diffed.reduce((n, r) => n + (r.loss?.length ?? 0), 0),
     invented: diffed.reduce((n, r) => n + (r.invented?.length ?? 0), 0),
+    originalFacts: diffed.reduce((n, r) => n + (r.originalFacts ?? 0), 0),
+    roundTripFacts: diffed.reduce((n, r) => n + (r.roundTripFacts ?? 0), 0),
+    exactVerified: results.filter((r) => r.exactProjection.status === 'verified-exact').length,
+    exactSourceMatrixVerified: results.filter((r) => r.exactProjection.status === 'source-matrix-verified').length,
+    exactLegacyUnverified: results.filter((r) => r.exactProjection.status === 'legacy-unverified').length,
+    exactRefused: results.filter((r) => r.exactProjection.status === 'refused').length,
   };
 
   const lines: string[] = [];
@@ -1134,20 +1325,26 @@ async function main(): Promise<void> {
   }
   lines.push('## Totals');
   lines.push('');
-  lines.push('| component | status | variants (orig → rt) | matched | diverged | loss (orig-only) | invented (rt-only) |');
-  lines.push('|---|---|---|---|---|---|---|');
+  lines.push('| component | execution | exact projection | variants (orig → rt) | matched | diverged | loss (orig-only) | invented (rt-only) |');
+  lines.push('|---|---|---|---|---|---|---|---|');
   for (const r of results) {
     if (r.status === 'diffed') {
       lines.push(
-        `| ${r.component} | round trip closed | ${r.originalVariants} → ${r.roundTripVariants} | ${r.matched} | ${r.diverged!.length} | ${r.loss!.length} | ${r.invented!.length} |`,
+        `| ${r.component} | executed | ${r.exactProjection.status} | ${r.originalVariants} → ${r.roundTripVariants} | ${r.matched} | ${r.diverged!.length} | ${r.loss!.length} | ${r.invented!.length} |`,
       );
     } else {
-      lines.push(`| ${r.component} | **${r.status}** | ${r.originalVariants} → — | — | — | — | — |`);
+      lines.push(`| ${r.component} | **${r.status}** | ${r.exactProjection.status} | ${r.originalVariants} → — | — | — | — | — |`);
     }
   }
   lines.push('');
   lines.push(
-    `**${totals.roundTripClosed}/${totals.components} round trips closed.** Across the closed ones: ${totals.matched} matched, ${totals.diverged} diverged, ${totals.loss} one-way loss, ${totals.invented} invented.`,
+    `**${totals.roundTripClosed}/${totals.components} executions reached the fact diff.** This is completion evidence, not an exactness claim. Across those executions: ${totals.matched} matched, ${totals.diverged} diverged, ${totals.loss} one-way loss, ${totals.invented} invented.`,
+  );
+  lines.push(
+    `**Exact projection evidence:** ${totals.exactVerified} verified exact · ${totals.exactSourceMatrixVerified} source-matrix verified only · ${totals.exactLegacyUnverified} legacy unverified · ${totals.exactRefused} refused. Execution completion and source-only validation are never reported as round-trip exactness.`,
+  );
+  lines.push(
+    `**Fact conservation:** ${totals.originalFacts} original = ${totals.matched} matched + ${totals.diverged} diverged + ${totals.loss} lost; ${totals.roundTripFacts} returned = ${totals.matched} matched + ${totals.diverged} diverged + ${totals.invented} invented.`,
   );
   lines.push('');
 
@@ -1190,7 +1387,6 @@ async function main(): Promise<void> {
   lines.push('- `boolean-axis-drop` — CLOSED at the grid level by the same fix (a VARIANT-bound boolean prop emits a real figma axis). The tag remains for a contract-backed axis the emit surface still drops.');
   lines.push('- `single-variant-dep-collapse` — CLOSED on the parent side: a dependency whose every variant axis is single-valued emits standalone (no variant properties), and the parent now DROPS a binding the single form already guarantees — or refuses BY NAME at compile time when the bound value is not the sole value.');
   lines.push('- `cartesian-fill` — the emit enumerates the FULL axis cartesian (bool axes included); a curated canvas grid draws a subset, so the extra rows are round-trip-only BY CONSTRUCTION (e.g. the canvas treats Placeholder/Text as a 3-way exclusive content choice where the contract spells two independent booleans).');
-  lines.push('- `dup-sibling-names` — the dump reuses ONE layer name for N siblings (eight "Avatar" instances), so their facts collapse onto one (variant ▸ path ▸ channel) key on the original side; the round trip names them uniquely and siblings 2..N have no dump-side key by construction.');
   lines.push('- `hug-vs-fixed` — a width/height/fillWidth fact the round trip carries at a node the canvas HUGGED: hug boxes carry no comparable box fact (the headless-measure exclusion), and the emit lowers the captured measure to a FIXED/FILL axis — the sizing-MODE disagreement is the named finding.');
   lines.push('- `declared-not-drawn` — a component property the round-trip instance exposes that the drawn instance never carried: contract-declared API the canvas lacks.');
   lines.push('- `mixed-stroke-weight` — figma spells per-side stroke weights as "mixed" and the dump omits the channel, so the round trip\'s uniform weight has no dump-side counterpart by construction (the stroke PAINT still compares).');
@@ -1199,20 +1395,30 @@ async function main(): Promise<void> {
   lines.push('- `url-image` — url()/IMAGE fills; the emitter ledgers them as gradientMiss BY DESIGN (expected).');
   lines.push('- `text-style-identity` — named text styles need the semantic token slot; a foreign tokenSet has none, so style identities (e.g. "Text sm/Semibold") ledger as loss while the raw typography (size/weight/line-height) still compares.');
   lines.push('- `restructured` — the same content (variant, channel, value) at a different part nesting: a wrapper the proposal introduced or removed. Ledgered on BOTH sides (loss + invented), never silently matched.');
+  lines.push('- `structure-wrapper-invention` — an introduced wrapper that is an ancestor of a separately paired `restructured` node; its `basis` points to that exact descendant pair.');
+  lines.push('- `duplicate-sibling-expansion` — repeated same-named source siblings share one normalized path while regenerated siblings receive numbered paths; source multiplicity remains counted separately.');
+  lines.push('- `instance-target-loss` — UNRESOLVED DEFECT: a captured nested instance or `instanceOf` target returns as a non-instance or disappears.');
+  lines.push('- `instance-ink-loss` — UNRESOLVED DEFECT: a nested instance survives but its probed primary ink differs or disappears.');
+  lines.push('- `shape-kind-loss` — UNRESOLVED DEFECT: a captured parametric shape returns as a generic box or disappears.');
+  lines.push('- `layout-projection-loss` — UNRESOLVED DEFECT: layout mode, alignment, sizing, or padding differs or disappears.');
+  lines.push('- `geometry-projection-loss` — UNRESOLVED DEFECT: measured size, position, radius, arc, or fill sizing differs or disappears.');
+  lines.push('- `paint-effect-projection-loss` — UNRESOLVED DEFECT: fill, stroke, or effect identity differs or disappears.');
+  lines.push('- `variant-projection-loss` — UNRESOLVED DEFECT: a realized component-property value differs or disappears.');
+  lines.push('- `text-content-projection-loss` — UNRESOLVED DEFECT: text content or raw typography differs or disappears.');
   lines.push('- `auto-layout-inert` — a frame drawn with NO auto-layout returns WITH one, and every child is ABSOLUTELY placed (or the frame has no children). Figma auto-layout EXCLUDES absolutely-positioned children, so the added mode changes NOTHING that is drawn: the tree comparison differs, the canvas does not. 940 of the 960 `layout.mode` divergences are this. The remaining 20 are a REAL axis flip (VERTICAL → HORIZONTAL) and are all one part — slider ▸ progress/leftcontrol/tooltip, which the dump draws VERTICAL in the floating-label variants while the contract carries no layout for it at all. Reported undifferentiated, the 940 buried those 20.');
   lines.push('- `headless-measure` — hug-sized boxes are excluded from width/height compare (the mock measures text by estimate); named exclusion, not a loss.');
   lines.push('');
 
-  mkdirSync(HERE, { recursive: true });
-  writeFileSync(path.join(HERE, 'REPORT.md'), lines.join('\n') + '\n');
+  mkdirSync(OUT_DIR, { recursive: true });
+  writeFileSync(path.join(OUT_DIR, 'REPORT.md'), lines.join('\n') + '\n');
   writeFileSync(
-    path.join(HERE, 'report.json'),
+    path.join(OUT_DIR, 'report.json'),
     JSON.stringify({ generatedBy: 'extract/figma/roundtrip-uui/run.ts', totals, results }, null, 2) + '\n',
   );
 
-  console.log(`round-trip diff: ${totals.roundTripClosed}/${totals.components} closed — matched ${totals.matched}, diverged ${totals.diverged}, loss ${totals.loss}, invented ${totals.invented}`);
+  console.log(`round-trip diff: ${totals.roundTripClosed}/${totals.components} executed to fact diff — exact ${totals.exactVerified}, source-only ${totals.exactSourceMatrixVerified}, legacy-unverified ${totals.exactLegacyUnverified}, refused ${totals.exactRefused}; matched ${totals.matched}, diverged ${totals.diverged}, loss ${totals.loss}, invented ${totals.invented}`);
   for (const r of blocked) console.log(`  ✘ ${r.component}: ${r.status} — ${(r.reason ?? '').slice(0, 120)}`);
-  console.log(`wrote ${path.join('extract/figma/roundtrip-uui', 'REPORT.md')} + report.json`);
+  console.log(`wrote ${path.relative(ROOT, path.join(OUT_DIR, 'REPORT.md'))} + report.json`);
 }
 
 await main();

@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 92.38095238095238,
+    "pctAAUnmasked": 11.547619047619047,
+    "pctAAMasked": 11.547619047619047,
+    "maskCoveragePct": 0,
+    "canvasPx": "42x20",
+    "realPx": "39x20",
+    "inkCanvasPct": 91.9047619047619,
+    "inkRealPct": 84.76190476190476
+  },
+  "reference": "parity/receipts/console-loop/astryx/refs/badge.png",
+  "referenceSha256": "acbe128253998d720301fac3c2f456b8d92e6a984fca3fff65411201059c9869",
+  "canvasShot": "parity/receipts/console-loop/astryx/shots/badge-cell.png",
+  "canvasShotSha256": "2c446d200262dc86a921f10dcf0f8668fe4b633614be9b402f23b170028c863c",
+  "diff": "parity/receipts/console-loop/astryx/scores/badge.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/astryx/components/badge.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0769230769230769,
+  "inkDelta": 7.142857142857139,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=11.55 > 5)",
+  "recordedAt": "2026-08-08T04:31:12.463Z"
+}

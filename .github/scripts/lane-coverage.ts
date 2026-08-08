@@ -72,6 +72,29 @@ const EXCLUDED: Record<string, string> = {
   "root:mint:code:check":
     "Superseded surface kept for the code-side mint path; core/mint-check.ts (mint:check, full lane) " +
     "is the gate the minting invariants are pinned in. Listed here so its absence is visible.",
+  "root:console-loop:evidence:check":
+    "Subsumed: console-loop:all:evidence:check (fast lane) runs this first-party lane plus all six " +
+    "others through the aggregator without short-circuit; the per-lane scripts remain for local triage.",
+  "root:console-loop:mui:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:console-loop:altitude:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:console-loop:astryx:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:console-loop:carbon:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:console-loop:polaris:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:console-loop:tailwind:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:fidelity:uui:fresh":
+    "Byte-compares renders/fidelity.json against a re-derivation whose kernel runs canvas drawImage " +
+    "resampling inside Chromium, so its byte-identity across OSes is UNVERIFIED (catalog-visual keeps " +
+    "a separate baseline.linux.json for exactly this class of platform-sensitive score). Verified " +
+    "0-exit and drift-detecting on the recording platform (macOS arm64, 5.4s); it joins the " +
+    "catalog-visual lane the moment one Linux run reproduces the committed table byte-for-byte. The " +
+    "per-set fidelity FLOORS are already CI-enforced in the fast lane: accuracy:check reads the same " +
+    "committed fidelity.json and holds each set's mean above baseline minus 0.3.",
 };
 
 /** Tracked tests intentionally outside CI need a durable, file-specific reason. */
@@ -390,6 +413,7 @@ const resolveInvocation = (
   step: Step,
   prefix: string | undefined,
   name: string,
+  seen: Set<string> = new Set(),
 ) => {
   const dir = prefix ? path.resolve(ROOT, prefix) : ROOT;
   const manifestPath = path.join(dir, "package.json");
@@ -408,11 +432,23 @@ const resolveInvocation = (
     );
     return;
   }
+  const dedupeKey = `${dir}\0${name}`;
+  if (seen.has(dedupeKey)) return;
+  seen.add(dedupeKey);
   ciInvocations.push({ dir, name, lane });
   const configured = manifestByDir.get(path.resolve(dir));
   if (configured) {
     const key = scriptKey(configured, name);
     invocations.set(key, (invocations.get(key) ?? new Set()).add(lane));
+  }
+  // Composite scripts (`npm run a && npm run b`) cover their nested gates —
+  // otherwise workflow-spine:check leaves anatomy-diff / suggested-diff / …
+  // looking unwatched while they actually run in the fast lane.
+  const body = manifestScripts[name] ?? "";
+  const nested = /npm(?:\s+run)\s+([A-Za-z0-9:_-]+)/g;
+  let nm: RegExpExecArray | null;
+  while ((nm = nested.exec(body)) !== null) {
+    resolveInvocation(file, lane, step, prefix, nm[1]!, seen);
   }
 };
 

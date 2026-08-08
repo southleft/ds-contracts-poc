@@ -1,0 +1,124 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.text-field",
+  "name": "TextField",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI nested-instance/input-field round. The canonical capture mounts real start/end InputAdornment elements through the bounded $element marker, plus label and error helper text. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "outlined",
+          "filled",
+          "standard"
+        ]
+      },
+      "default": "outlined",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "outlined": "Outlined",
+            "filled": "Filled",
+            "standard": "Standard"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Amount",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "helperText",
+      "type": "text",
+      "default": "Enter a valid amount",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Helper Text"
+        },
+        "code": {
+          "prop": "helperText"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "start-adornment": {
+          "component": {
+            "id": "mui.input-adornment",
+            "props": {
+              "position": "start",
+              "children": "$"
+            }
+          }
+        },
+        "end-adornment": {
+          "component": {
+            "id": "mui.input-adornment",
+            "props": {
+              "position": "end",
+              "children": "USD"
+            }
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "TextField"
+    }
+  }
+}

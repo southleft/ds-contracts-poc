@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 43.956043956043956,
+    "pctAAUnmasked": 21.84065934065934,
+    "pctAAMasked": 21.84065934065934,
+    "maskCoveragePct": 0,
+    "canvasPx": "57x14",
+    "realPx": "91x16",
+    "inkCanvasPct": 9.203296703296704,
+    "inkRealPct": 37.43131868131868
+  },
+  "reference": "parity/receipts/console-loop/astryx/refs/checkbox-input.png",
+  "referenceSha256": "e15a105916e290f3c9266d6f9a32fdbaf3835cd83ea54e2fa91cb5b06c30322d",
+  "canvasShot": "parity/receipts/console-loop/astryx/shots/checkbox-input-cell.png",
+  "canvasShotSha256": "42f32369f692ce12f9a29c730a974803e29fc7ad0ab72d916c8c760e0937ea74",
+  "diff": "parity/receipts/console-loop/astryx/scores/checkbox-input.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/astryx/components/checkbox-input.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.5964912280701755,
+  "inkDelta": 28.228021978021975,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.60, inkDelta=28.2) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T04:31:13.506Z"
+}

@@ -20,12 +20,18 @@
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { arcMaskCss, ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel } from '../scripts/contract-schema.js';
+import { arcMaskCss, ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
-import { capturedTokensFromDump } from './captured-tokens.js';
+import { capturedTokensFromDump, foldVariablePath, ONE_DOT_LEADER } from './captured-tokens.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
+import {
+  validateExactVariantProjection,
+  type ExactProjectionRefusalCode,
+  type ExactProjectionResult,
+  type ExactVariantRow,
+} from './exact-projection.js';
 
 // ---------------------------------------------------------------------------
 // Shared spellings
@@ -49,7 +55,12 @@ export const camel = (s: string): string => {
   return sanitized.length > 0 ? sanitized : spelled;
 };
 
-const dotPath = (slashName: string) => slashName.split('/').join('.');
+/** Variable name → token path, through THE shared fold (captured-tokens.ts
+ *  foldVariablePath): '/'→'.' plus U+2024 ONE DOT LEADER → '-' (dump v1.16).
+ *  The captured-token layer registers under the SAME fold, so a folded ref
+ *  resolves end to end; the rename is receipted once per variable per set
+ *  (see noteFoldedVariableNames). */
+const dotPath = (slashName: string) => foldVariablePath(slashName).path;
 const ref = (slashName: string) => `{${dotPath(slashName)}}`;
 
 /** Canonical prop-name spelling for a Figma property name. A property that is
@@ -909,6 +920,12 @@ export interface FigmaProposalResult {
   contract: Record<string, unknown>;
   notes: string[];
   unbound: UnboundValue[];
+  /** Evidence for the variant projection used by this proposal. Exact mode
+   *  returns only `verified-exact`. Explicit reviewable inversion returns
+   *  `legacy-unverified`, or `verified-exact` when the proposed VARIANT rows
+   *  still prove the structured source matrix (never `source-matrix-verified`
+   *  — that status is internal evidence and is rejected by parseProposal). */
+  projection: ExactProjectionResult;
   /** Present only when proposeFromDump ran with `mintUnbound: true` and at
    *  least one leaf was minted: the provisional DTCG tree the proposal's
    *  minted refs resolve through (register it as an ADDITIONAL token source —
@@ -922,6 +939,114 @@ export interface FigmaProposalResult {
    *  the child is guessed). Register them alongside the proposal so the
    *  emitters resolve the refs; replace each by importing the real child set. */
   childStubs?: Array<Record<string, unknown>>;
+}
+
+export type ExactProposalRefusalCode =
+  | ExactProjectionRefusalCode
+  | 'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS';
+
+/** Stable refusal code when named text-style identity cannot be preserved. */
+export const TEXT_STYLE_IDENTITY_REFUSED = 'text-style-identity-refused' as const;
+export type TextStyleIdentityRefusalCode = typeof TEXT_STYLE_IDENTITY_REFUSED;
+
+/** Stable, browser-safe refusal raised when proposal cannot preserve the
+ * authoritative structured Figma variant matrix exactly. */
+export class ExactProjectionError extends Error {
+  readonly code: ExactProposalRefusalCode;
+  readonly projection: ExactProjectionResult;
+
+  constructor(
+    code: ExactProposalRefusalCode,
+    message: string,
+    projection: ExactProjectionResult,
+  ) {
+    super(message);
+    this.name = 'ExactProjectionError';
+    this.code = code;
+    this.projection = projection;
+  }
+}
+
+/** Exact mode fails closed when a named Figma text style cannot survive
+ *  proposal with its semantic identity. Reviewable inversion notes instead. */
+export class TextStyleIdentityError extends Error {
+  readonly code: TextStyleIdentityRefusalCode = TEXT_STYLE_IDENTITY_REFUSED;
+
+  constructor(message: string) {
+    super(
+      message.startsWith(`${TEXT_STYLE_IDENTITY_REFUSED}:`)
+        ? message
+        : `${TEXT_STYLE_IDENTITY_REFUSED}: ${message}`,
+    );
+    this.name = 'TextStyleIdentityError';
+  }
+}
+
+type ExactVerifiedStatus = 'source-matrix-verified' | 'verified-exact';
+
+/** Require a particular exact-projection proof, converting validator results
+ *  into the stable proposal error surface. */
+export function assertExactProjection<T extends ExactVerifiedStatus>(
+  projection: ExactProjectionResult,
+  expectedStatus: T,
+): Extract<ExactProjectionResult, { status: T }> {
+  if (projection.status === expectedStatus) {
+    return projection as Extract<ExactProjectionResult, { status: T }>;
+  }
+  if (projection.status === 'refused') {
+    const first = projection.refusals[0];
+    throw new ExactProjectionError(
+      projection.code,
+      first?.message ?? `Exact variant projection refused (${projection.code}).`,
+      projection,
+    );
+  }
+  throw new ExactProjectionError(
+    'EXACT_DEFINITIONS_MISSING',
+    projection.status === 'legacy-unverified'
+      ? 'Exact proposal requires structured propertyDefinitions and variantProperties evidence.'
+      : `Exact proposal requires projection status ${expectedStatus}; received ${projection.status}.`,
+    projection,
+  );
+}
+
+const semanticProjectionRefusal = (
+  projection: ExactProjectionResult,
+  axis: Axis,
+  semanticKind: 'interaction-state' | 'token-mode',
+): never => {
+  throw new ExactProjectionError(
+    'EXACT_SEMANTIC_PROJECTION_AMBIGUOUS',
+    `Exact proposal cannot promote variant axis ${JSON.stringify(axis.property)} to ${semanticKind} semantics because that changes the authoritative Figma variant projection.`,
+    projection,
+  );
+};
+
+/** Reconstruct the rows the proposed contract would emit using only its
+ *  Figma VARIANT bindings. This deliberately does not inspect variant names. */
+function exactRowsFromProposedContract(contract: Record<string, unknown>): ExactVariantRow[] {
+  const props = Array.isArray(contract.props) ? contract.props : [];
+  const axes: Array<{ property: string; values: string[] }> = [];
+  for (const raw of props) {
+    if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) continue;
+    const bindings = (raw as { bindings?: unknown }).bindings;
+    if (bindings === null || typeof bindings !== 'object' || Array.isArray(bindings)) continue;
+    const figma = (bindings as { figma?: unknown }).figma;
+    if (figma === null || typeof figma !== 'object' || Array.isArray(figma)) continue;
+    const binding = figma as { kind?: unknown; property?: unknown; values?: unknown };
+    if (binding.kind !== 'VARIANT' || typeof binding.property !== 'string') continue;
+    if (binding.values === null || typeof binding.values !== 'object' || Array.isArray(binding.values)) continue;
+    const values = Object.values(binding.values).filter((value): value is string => typeof value === 'string');
+    axes.push({ property: binding.property, values });
+  }
+
+  let tuples: Record<string, string>[] = [{}];
+  for (const axis of axes) {
+    tuples = tuples.flatMap((tuple) =>
+      axis.values.map((value) => ({ ...tuple, [axis.property]: value })),
+    );
+  }
+  return tuples.map((variantProperties) => ({ variantProperties }));
 }
 
 /** Minting capture (mintUnbound: true) — the observations the classic
@@ -1036,6 +1161,19 @@ interface Ctx {
    *  'root' (the root is a walked part name too). */
   partNames: Set<string>;
   mint?: MintCapture;
+  /** Exact fails closed on text-style identity gaps; reviewable notes. */
+  projectionMode: 'exact' | 'reviewable-inversion';
+}
+
+/** Exact mode throws; reviewable-inversion records the stable refusal name. */
+function refuseTextStyleIdentity(ctx: Ctx, detail: string): void {
+  const message = detail.startsWith(`${TEXT_STYLE_IDENTITY_REFUSED}:`)
+    ? detail
+    : `${TEXT_STYLE_IDENTITY_REFUSED}: ${detail}`;
+  if (ctx.projectionMode === 'exact') {
+    throw new TextStyleIdentityError(message);
+  }
+  ctx.notes.push(message);
 }
 
 /** ITERATION 8 — one exported stub-glyph asset (see proposeFromDump's
@@ -1167,7 +1305,13 @@ function mintObservation(
   where: string,
   cssProperty: string,
   kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient' | 'size',
-  occ: Array<{ variant: string; value: string | number }>,
+  occ: Array<{
+    variant: string;
+    value: string | number;
+    /** Per-variant style identity when names differ across the axis. */
+    styleName?: string;
+    styleKey?: string;
+  }>,
   source?: string,
   /** Presence-shaped channels only (mint-tokens MintObservation.sparse):
    *  the vacuous value unobserved axis combinations fill with. */
@@ -1176,18 +1320,22 @@ function mintObservation(
    *  a component-independent `imported.text.<style>` group (see
    *  MintObservation.styleName). */
   styleName?: string,
+  styleKey?: string,
 ) {
   if (!ctx.mint) return;
   ctx.mint.observations.push({
     nodePath: where,
     part: partPathOf(where),
     ...(styleName !== undefined ? { styleName } : {}),
+    ...(styleKey !== undefined ? { styleKey } : {}),
     cssProperty,
     kind,
     occurrences: occ.map((o) => ({
       variant: o.variant,
       axisValues: ctx.mint!.axisValuesByVariant.get(o.variant) ?? {},
       value: o.value,
+      ...(o.styleName !== undefined ? { styleName: o.styleName } : {}),
+      ...(o.styleKey !== undefined ? { styleKey: o.styleKey } : {}),
     })),
     target,
     source,
@@ -1547,6 +1695,148 @@ function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outli
   return 'border';
 }
 
+// ---------------------------------------------------------------------------
+// GRADIENT_LINEAR fills → background-image (dump v1.16)
+// ---------------------------------------------------------------------------
+
+/** One captured gradient → a CSS `linear-gradient()` literal, or a NAMED
+ *  refusal. AXIS-ALIGNED ramps (horizontal / vertical handles) carry EXACTLY
+ *  and size-independently: the handles are normalized object space, so the
+ *  box edges sit at fixed ramp positions whatever the box's pixel size. The
+ *  spelling is normalized to the VISIBLE SEGMENT — the emitted stops span
+ *  0%–100% of the box with the edge colors interpolated ON the ramp and
+ *  interior stops remapped — which is pixel-identical inside the box (a
+ *  linear ramp restricted to a segment is the same linear ramp) and keeps
+ *  every stop inside the grammar both parseCssGradient (contract→canvas) and
+ *  the CSS surfaces already speak. Eventz field case: Badge accent/info/
+ *  warning/featured grounds — handles run from x≈2.15 to x≈-0.006, so the
+ *  box shows the 53%–100% segment of the ramp; the naive full-ramp spelling
+ *  would repaint more than half the ground with colors the canvas never
+ *  draws.
+ *
+ *  OBLIQUE ramps are REFUSED BY NAME: a CSS gradient angle is measured in
+ *  pixel space while the handles live in normalized object space, so the
+ *  equivalent angle (and the gradient line's % scale) is a function of the
+ *  drawn box's aspect ratio — a size-independent exact carriage does not
+ *  exist, and baking the default box's angle would silently skew every other
+ *  size. (Eventz field case: the four Molecules/Alert grounds.) */
+function gradientCss(g: NonNullable<DumpNode['gradient']>): { css: string } | { refuse: string } {
+  const EPS = 1e-3;
+  const dx = g.end.x - g.start.x;
+  const dy = g.end.y - g.start.y;
+  const horizontal = Math.abs(dy) <= EPS && Math.abs(dx) > EPS;
+  const vertical = Math.abs(dx) <= EPS && Math.abs(dy) > EPS;
+  if (!horizontal && !vertical) {
+    return {
+      refuse:
+        Math.abs(dx) <= EPS && Math.abs(dy) <= EPS
+          ? `degenerate GRADIENT_LINEAR (start ≈ end handle) — no axis to carry`
+          : `OBLIQUE GRADIENT_LINEAR (handles (${g.start.x}, ${g.start.y}) → (${g.end.x}, ${g.end.y})) — the CSS angle and stop scale depend on the drawn box's aspect ratio, so no size-independent exact carriage exists`,
+    };
+  }
+  // CSS coordinate s ∈ [0,1] runs along the gradient direction; pick the
+  // angle whose s increases WITH the ramp so positions stay ordered.
+  const angle = horizontal ? (dx > 0 ? 90 : 270) : dy > 0 ? 180 : 0;
+  const rampAt = (obj: number) => (horizontal ? (obj - g.start.x) / dx : (obj - g.start.y) / dy);
+  // Ramp positions of the box edges at CSS s=0 and s=1.
+  const pA = rampAt(horizontal ? (dx > 0 ? 0 : 1) : dy > 0 ? 0 : 1);
+  const pB = rampAt(horizontal ? (dx > 0 ? 1 : 0) : dy > 0 ? 1 : 0);
+  if (!(pB > pA) || !isFinite(pA) || !isFinite(pB)) {
+    return { refuse: `GRADIENT_LINEAR handles produce an empty visible segment (${pA}..${pB}) — not carried` };
+  }
+  const paintAlpha = g.alpha ?? 1;
+  const sorted = [...g.stops].sort((a, b) => a.position - b.position);
+  const rgba = (s: (typeof sorted)[number]) => {
+    const hex = s.hex.length === 6 ? s.hex : s.hex.padEnd(6, '0');
+    return [
+      parseInt(hex.slice(0, 2), 16),
+      parseInt(hex.slice(2, 4), 16),
+      parseInt(hex.slice(4, 6), 16),
+      (s.alpha ?? 1) * paintAlpha,
+    ] as const;
+  };
+  const colorAt = (p: number): readonly [number, number, number, number] => {
+    if (p <= sorted[0].position) return rgba(sorted[0]);
+    if (p >= sorted[sorted.length - 1].position) return rgba(sorted[sorted.length - 1]);
+    for (let i = 0; i < sorted.length - 1; i++) {
+      const a = sorted[i];
+      const b = sorted[i + 1];
+      if (p < a.position || p > b.position) continue;
+      const t = b.position === a.position ? 0 : (p - a.position) / (b.position - a.position);
+      const ca = rgba(a);
+      const cb = rgba(b);
+      return [0, 1, 2, 3].map((k) => ca[k] + (cb[k] - ca[k]) * t) as unknown as readonly [number, number, number, number];
+    }
+    return rgba(sorted[sorted.length - 1]);
+  };
+  const spell = ([r, gg, b, a]: readonly [number, number, number, number]): string =>
+    paintCssHex({
+      hex: [r, gg, b].map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join(''),
+      alpha: Math.round(a * 10000) / 10000,
+    });
+  const pct = (p: number) => `${Math.round(((p - pA) / (pB - pA)) * 10000) / 100}%`;
+  const stops: string[] = [`${spell(colorAt(pA))} 0%`];
+  for (const s of sorted) {
+    if (s.position > pA && s.position < pB) stops.push(`${spell(rgba(s))} ${pct(s.position)}`);
+  }
+  stops.push(`${spell(colorAt(pB))} 100%`);
+  return { css: `linear-gradient(${angle}deg, ${stops.join(', ')})` };
+}
+
+/** dump v1.16 — a node whose fill stack carries a GRADIENT_LINEAR mints the
+ *  whole `background-image` axis (kind 'gradient', the imageFill precedent):
+ *  gradient variants carry their normalized `linear-gradient()` spelling,
+ *  gradient-less variants carry 'none' (their absence is a DRAWN fact — the
+ *  solid ground rides background-color), and the standard mint machinery
+ *  classifies uniform / per-axis shapes. One refused occurrence refuses the
+ *  WHOLE channel by name: minting 'none' where the canvas draws an oblique
+ *  ramp would assert an absence the canvas contradicts. Stop-level variable
+ *  bindings are NAMED (a token ref has no spelling inside a gradient value —
+ *  the ramp carries their resolved colors). */
+function mintGradientBackground(m: Merged, ctx: Ctx, where: string, tokens: Record<string, string>): void {
+  const withGradient = m.occ.filter((o) => o.node.gradient !== undefined);
+  if (withGradient.length === 0) return;
+  if (m.occ.some((o) => o.node.imageFill !== undefined)) {
+    ctx.notes.push(
+      `${where}: fill stack carries BOTH a GRADIENT_LINEAR and an IMAGE marker across the variants — background-image is claimed by the image channel; gradient NAMED, not carried (review)`,
+    );
+    return;
+  }
+  const boundStops = [
+    ...new Set(withGradient.flatMap((o) => o.node.gradient!.stops.map((s) => s.var).filter((v) => v !== undefined))),
+  ] as string[];
+  if (!ctx.mint) {
+    ctx.notes.push(
+      `${where}: GRADIENT_LINEAR fill captured (dump v1.16) in ${withGradient.length}/${m.occ.length} variant(s) — background-image not proposed without minting (a gradient value has no token-ref spelling)`,
+    );
+    return;
+  }
+  const values: Array<{ variant: string; value: string }> = [];
+  for (const o of m.occ) {
+    if (o.node.gradient === undefined) {
+      values.push({ variant: o.variant, value: 'none' });
+      continue;
+    }
+    const spelled = gradientCss(o.node.gradient);
+    if ('refuse' in spelled) {
+      ctx.notes.push(
+        `${where} fill (${o.variant}): ${spelled.refuse} — background-image REFUSED BY NAME for the whole node (carrying the other variants would mint 'none' here, an absence the canvas contradicts); the captured handles/stops stay in the dump for a later carriage, review`,
+      );
+      return;
+    }
+    values.push({ variant: o.variant, value: spelled.css });
+  }
+  if (boundStops.length > 0) {
+    ctx.notes.push(
+      `${where}: gradient stop(s) ride bound variable(s) ${boundStops.map((v) => `"${v}"`).join(', ')} — a token ref has no spelling inside a gradient value, so the ramp carries their RESOLVED colors (rename story: the variable names live here, review)`,
+    );
+  }
+  ctx.notes.push(
+    `${where}: GRADIENT_LINEAR fill (dump v1.16) carried as background-image — axis-aligned ramp normalized to the box's visible segment (pixel-exact inside the drawn box; stops respell against the box edges), 'none' minted where a variant draws no gradient (its ground rides background-color)`,
+  );
+  mintObservation(ctx, tokens, where, 'background-image', 'gradient', values, `${where}|gradient`, 'none');
+}
+
 /** Invert a node's variable bindings + paints into contract token refs.
  *  Value-level correlations (v10) collect into `byProp` — the caller
  *  attaches them to the part via attachByProp. */
@@ -1595,6 +1885,9 @@ function invertNodeTokens(
       sparse: '#00000000',
     }),
   );
+  // dump v1.16: a GRADIENT_LINEAR in the fill stack rides background-image
+  // beside (or instead of) the solid background-color above.
+  mintGradientBackground(m, ctx, where, tokens);
   carry(
     strokeColorProp,
     unifyPaint(m, (n) => n.stroke, ctx, where, 'stroke', {
@@ -2747,9 +3040,23 @@ function mintTextChannels(
   opts: { weight: boolean },
   /** v17 — see mintObservation.styleName. */
   styleName?: string,
+  styleKey?: string,
+  /** When styles differ per variant, attach each occurrence's identity to
+   *  weight/line-height leaves the same way font-size does. */
+  perOccStyleSource?: Array<{ variant: string; node: DumpNode }>,
 ) {
   const textOcc = m.occ.filter((o) => o.node.text !== undefined);
   if (textOcc.length === 0) return;
+  const styleFor = (variant: string): { styleName?: string; styleKey?: string } => {
+    if (!perOccStyleSource) return {};
+    const hit = perOccStyleSource.find((o) => o.variant === variant);
+    const name = hit?.node.text?.style;
+    const key = hit?.node.text?.styleKey;
+    return {
+      ...(name !== undefined ? { styleName: name } : {}),
+      ...(key !== undefined ? { styleKey: key } : {}),
+    };
+  };
   if (opts.weight) {
     const parsed = textOcc.map((o) => ({
       variant: o.variant,
@@ -2765,10 +3072,11 @@ function mintTextChannels(
       reportUnbound(ctx, where, 'fontWeight', parsed[0].weight!);
       mintObservation(
         ctx, tokens, where, 'font-weight', 'number',
-        parsed.map((p) => ({ variant: p.variant, value: p.weight! })),
+        parsed.map((p) => ({ variant: p.variant, value: p.weight!, ...styleFor(p.variant) })),
         `${where}|fontWeight`,
         undefined,
         styleName,
+        styleKey,
       );
     }
     const italics = parsed.filter((p) => p.italic);
@@ -2790,10 +3098,48 @@ function mintTextChannels(
   reportUnbound(ctx, where, 'lineHeight', withLh[0].node.text!.lineHeight!);
   mintObservation(
     ctx, tokens, where, 'line-height', 'px',
-    withLh.map((o) => ({ variant: o.variant, value: o.node.text!.lineHeight! })),
+    withLh.map((o) => ({
+      variant: o.variant,
+      value: o.node.text!.lineHeight!,
+      ...styleFor(o.variant),
+    })),
     `${where}|lineHeight`,
     undefined,
     styleName,
+    styleKey,
+  );
+}
+
+/** dump v1.16 — textCase UPPER/LOWER/TITLE → the declared `text-transform`
+ *  channel (uppercase/lowercase/capitalize): a canvas-DRAWN keyword fact
+ *  (DECLARED_CHANNELS verdict 'draw'; the return leg writes Figma textCase —
+ *  core/emit-figma-script.ts). Carried only when every text occurrence
+ *  agrees; a mixed axis is NAMED, never sampled (the CBDS uniformity rule).
+ *  Field case: Eventz Badge labels ride textCase UPPER and rendered "Label"
+ *  for "LABEL" (dump ≤ v1.15 receipted the channel away). */
+const TEXT_TRANSFORM_BY_CASE: Record<string, string> = {
+  UPPER: 'uppercase',
+  LOWER: 'lowercase',
+  TITLE: 'capitalize',
+};
+function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  if (textOcc.length === 0) return;
+  const cases = [...new Set(textOcc.map((o) => o.node.text!.textCase))];
+  const drawn = cases.filter((c): c is 'UPPER' | 'LOWER' | 'TITLE' => c !== undefined);
+  if (drawn.length === 0) return; // as-typed, or a pre-v1.16 dump (receipted at capture)
+  if (cases.length > 1) {
+    ctx.notes.push(
+      `${where}: textCase differs across variants (${cases.map((c) => c ?? 'ORIGINAL/not captured').join(', ')}) — text-transform is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
+    );
+    return;
+  }
+  const value = TEXT_TRANSFORM_BY_CASE[drawn[0]];
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared['text-transform'] === undefined) declared['text-transform'] = value;
+  holder.declared = declared;
+  ctx.notes.push(
+    `${where}: textCase ${drawn[0]} drawn in every variant — carried as declared text-transform: ${value} (dump v1.16; a canvas-drawable channel, the return leg writes Figma textCase)`,
   );
 }
 
@@ -2822,19 +3168,102 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   const distinctSizes = [...new Set(textOcc.map((o) => o.node.text!.fontSize))];
   const distinctWeights = [...new Set(textOcc.map((o) => o.node.text!.fontStyle ?? 'Medium'))];
   if (distinctSizes.length > 1 || distinctWeights.length > 1) {
-    ctx.notes.push(
-      `${where}: typography varies across variants (fontSize ${distinctSizes.join('/')}, weight ${distinctWeights.join('/')}) — no single text-style identity adopted (the first variant's value would be wrong for the others); font-size ${ctx.mint ? 'minted per variant where axis-correlated' : 'not proposed without minting'}${distinctWeights.length > 1 ? '; font-weight minted per variant through the weight-name table where every name maps (unknown names stay NAMED)' : ''} (review)`,
-    );
+    const varyingStyleNames = [
+      ...new Set(
+        textOcc
+          .map((o) => o.node.text!.style)
+          .filter((name) => name !== undefined),
+      ),
+    ];
+    const varyingStyleKeys = [
+      ...new Set(
+        textOcc
+          .map((o) => o.node.text!.styleKey)
+          .filter((key) => key !== undefined),
+      ),
+    ];
+    // One shared style name → mint under imported.text.<style> (v17).
+    // Multiple names (Avatar Size=xs/xl/2xl) → keep the component path and
+    // attach EACH occurrence's exact style name/key to its axis leaf so emit
+    // recreates semantic identity instead of sanitizing it away.
+    const varyingStyle =
+      varyingStyleNames.length === 1 ? varyingStyleNames[0] : undefined;
+    const varyingStyleKey =
+      varyingStyle && varyingStyleKeys.length === 1
+        ? varyingStyleKeys[0]
+        : undefined;
+    const perOccStyles = varyingStyle === undefined && varyingStyleNames.length > 1;
+    if (perOccStyles) {
+      ctx.notes.push(
+        `${where}: typography varies across variants (fontSize ${distinctSizes.join('/')}, weight ${distinctWeights.join('/')}) with distinct text styles (${varyingStyleNames.join(', ')}) — font-size ${ctx.mint ? 'minted per variant with per-leaf text-style identity (exact Figma style name/key)' : 'not proposed without minting'}${distinctWeights.length > 1 ? '; font-weight minted per variant through the weight-name table where every name maps (unknown names stay NAMED)' : ''}`,
+      );
+    } else {
+      ctx.notes.push(
+        `${where}: typography varies across variants (fontSize ${distinctSizes.join('/')}, weight ${distinctWeights.join('/')}) — ${varyingStyle ? `shared text style "${varyingStyle}" kept as identity; ` : ''}font-size ${ctx.mint ? 'minted per variant where axis-correlated' : 'not proposed without minting'}${distinctWeights.length > 1 ? '; font-weight minted per variant through the weight-name table where every name maps (unknown names stay NAMED)' : ''} (review)`,
+      );
+    }
+    if (!ctx.mint && varyingStyleNames.length > 0) {
+      refuseTextStyleIdentity(
+        ctx,
+        `${where}: named text style(s) ${varyingStyleNames.map((n) => JSON.stringify(n)).join(', ')} observed but minting is off — exact style identity cannot be proposed`,
+      );
+    }
     reportUnbound(ctx, where, 'fontSize', t.fontSize);
-    mintObservation(ctx, tokens, where, 'font-size', 'px', numOccurrences(m, (n) => n.text?.fontSize), `${where}|fontSize`);
-    mintTextChannels(m, tokens, ctx, where, { weight: true });
+    const sizeOcc = textOcc.map((o) => ({
+      variant: o.variant,
+      value: o.node.text!.fontSize,
+      ...(perOccStyles && o.node.text!.style !== undefined
+        ? {
+            styleName: o.node.text!.style,
+            ...(o.node.text!.styleKey !== undefined
+              ? { styleKey: o.node.text!.styleKey }
+              : {}),
+          }
+        : {}),
+    }));
+    mintObservation(
+      ctx,
+      tokens,
+      where,
+      'font-size',
+      'px',
+      sizeOcc,
+      `${where}|fontSize`,
+      undefined,
+      varyingStyle,
+      varyingStyleKey,
+    );
+    mintTextChannels(
+      m,
+      tokens,
+      ctx,
+      where,
+      { weight: true },
+      varyingStyle,
+      varyingStyleKey,
+      perOccStyles ? textOcc : undefined,
+    );
     return tokens;
   }
   const styleNames = [...new Set(m.occ.map((o) => o.node.text?.style).filter((s) => s !== undefined))];
+  const styleKeys = [
+    ...new Set(
+      m.occ
+        .map((o) => o.node.text?.styleKey)
+        .filter((key) => key !== undefined),
+    ),
+  ];
+  // Uniform size/weight with DIFFERENT named styles is contradictory identity
+  // for one binding — never pick styleNames[0]. Exact fails closed; reviewable
+  // notes and continues without inventing a winner.
   if (styleNames.length > 1) {
-    ctx.notes.push(`${where}: text style differs across variants (${styleNames.join(', ')}) — using ${styleNames[0]}`);
+    refuseTextStyleIdentity(
+      ctx,
+      `${where}: text style names differ across variants (${styleNames.join(', ')}) while fontSize/weight are uniform — cannot pick one identity`,
+    );
   }
-  let style = styleNames[0] ? ctx.corpus.textStyleByName.get(styleNames[0]) : undefined;
+  const soleStyleName = styleNames.length === 1 ? styleNames[0] : undefined;
+  let style = soleStyleName ? ctx.corpus.textStyleByName.get(soleStyleName) : undefined;
   // v17 — a NAMED Figma text style with no token-derived counterpart. This
   // used to end the road ("typography not proposed") and the size/weight/
   // line-height then minted under the component/part path, so ONE style became
@@ -2844,7 +3273,9 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   // IS design-system vocabulary — the designer named it — so the typography
   // now mints under `imported.text.<style>`, shared across every component
   // that rides it. The style still is not TOKEN-derived, and that stays named.
-  const unresolvedStyle = styleNames[0] && !style ? styleNames[0] : undefined;
+  const unresolvedStyle = soleStyleName && !style ? soleStyleName : undefined;
+  const unresolvedStyleKey =
+    unresolvedStyle && styleKeys.length === 1 ? styleKeys[0] : undefined;
   if (unresolvedStyle) {
     ctx.notes.push(
       `${where}: rides text style "${unresolvedStyle}" which is not a token-derived style (the kit binds no variable to its typography) — minted under the STYLE's own name as \`imported.text.${unresolvedStyle.replace(/[^a-zA-Z0-9-]+/g, '-').toLowerCase()}\`, shared by every part riding it; rename against your real type tokens (provisional)`,
@@ -2878,7 +3309,14 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     // style's name when the node rides one (v17).
     mintObservation(
       ctx, tokens, where, 'font-size', 'px', numOccurrences(m, (n) => n.text?.fontSize),
-      undefined, undefined, unresolvedStyle,
+      undefined, undefined, unresolvedStyle, unresolvedStyleKey,
+    );
+  } else if (soleStyleName) {
+    // Named style observed, no corpus identity, minting off — exact cannot
+    // preserve semantic identity; reviewable names the gap and continues.
+    refuseTextStyleIdentity(
+      ctx,
+      `${where}: named text style ${JSON.stringify(soleStyleName)} observed but minting is off — exact style identity cannot be proposed`,
     );
   }
   // Channels OUTSIDE the style identity: font-weight through the bounded
@@ -2887,7 +3325,15 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   // PIXEL line-height always (a text style's definition does not carry it).
   // Field case: the CBDS Tooltip title drawn "Semi Bold" at 12/16 rendered
   // un-bold and mis-proportioned when both channels were note-only.
-  mintTextChannels(m, tokens, ctx, where, { weight: !style }, unresolvedStyle);
+  mintTextChannels(
+    m,
+    tokens,
+    ctx,
+    where,
+    { weight: !style },
+    unresolvedStyle,
+    unresolvedStyleKey,
+  );
   return tokens;
 }
 
@@ -4437,6 +4883,7 @@ function buildPart(
     const byProp: ByPropCollector = { map: {} };
     const tokens = invertTextTokens(m, ctx, where, byProp);
     attachByProp(part, byProp);
+    carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
     invertNodeOpacity(m, part, tokens, ctx, where);
     if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
       ctx.notes.push(
@@ -6524,10 +6971,57 @@ export function proposeFromDump(
      *  legitimate re-import / stub-heal path). Repo contracts NEVER join
      *  this set: a repo-name landing stays the workspace re-import rule. */
     sessionClaimedIds?: ReadonlySet<string>;
+    /** Exact (default) requires structured source evidence and proves the
+     *  proposed contract emits the identical variant tuple set. The explicit
+     *  reviewable mode preserves legacy name-based inversion while still
+     *  refusing any structured evidence that is invalid or ragged. */
+    projectionMode?: 'exact' | 'reviewable-inversion';
   },
 ): FigmaProposalResult {
+  const projectionMode = opts.projectionMode ?? 'exact';
+  const sourceProjection = validateExactVariantProjection(set);
+  // Exact mode fails closed on unstructured/ragged variant matrices.
+  // Reviewable-inversion may continue without structured definitions
+  // (legacy name-based path) — but MUST still refuse when structured
+  // evidence is present and invalid/ragged (never invent a matrix).
+  if (projectionMode === 'exact') {
+    assertExactProjection(sourceProjection, 'source-matrix-verified');
+  } else if (
+    sourceProjection.status === 'refused' &&
+    sourceProjection.code !== 'EXACT_DEFINITIONS_MISSING'
+  ) {
+    assertExactProjection(sourceProjection, 'source-matrix-verified');
+  }
+
   const prefix = opts.prefix ?? 'ds';
   const preNotes: string[] = [];
+
+  // dump v1.16 — U+2024 fold receipts, ONE per distinct variable per set:
+  // every binding site below spells refs through dotPath, which folds ONE DOT
+  // LEADER to '-' (see captured-tokens.ts foldVariablePath). The fold is a
+  // RENAME relative to the canvas variable, so it is named up front rather
+  // than at each of its binding sites (Eventz: "spacing/1․5" binds 16 times).
+  {
+    const foldedNames = new Set<string>();
+    const scanNode = (n: DumpNode): void => {
+      const names = [
+        ...Object.values(n.bound ?? {}),
+        n.fill?.var,
+        n.stroke?.var,
+        n.text?.fillVar,
+        n.instancePrimaryFill?.var,
+        ...(n.gradient?.stops.map((s) => s.var) ?? []),
+      ];
+      for (const name of names) if (name !== undefined && name.includes(ONE_DOT_LEADER)) foldedNames.add(name);
+      for (const c of n.children ?? []) scanNode(c);
+    };
+    for (const v of set.variants) scanNode(v);
+    for (const name of [...foldedNames].sort()) {
+      preNotes.push(
+        `variable name "${name}" contains U+2024 ONE DOT LEADER — folded to '-' and carried as {${foldVariablePath(name).path}} everywhere it binds (dump v1.16 fold rule; a RENAME relative to the canvas variable, which keeps its own spelling): rename the variable to match, or remap manually. A fold target another variable already owns refuses registration at the captured-token layer by name`,
+      );
+    }
+  }
 
   // Theme/mode-axis promotion (§3 — see the section doc above): runs FIRST,
   // over the full drawn set. A corroborated mode axis is excluded from the
@@ -6536,6 +7030,9 @@ export function proposeFromDump(
   // facts, or the mint pass (their resolved literals are receipts, not a
   // second palette).
   const modePromo = detectModeAxis(parseAxes(set.variants.map((v) => v.name)), set.variants, set.setName, preNotes);
+  if (projectionMode === 'exact' && modePromo) {
+    semanticProjectionRefusal(sourceProjection, modePromo.axis, 'token-mode');
+  }
   let sourceVariants = set.variants;
   if (modePromo) {
     sourceVariants = set.variants
@@ -6567,6 +7064,9 @@ export function proposeFromDump(
       );
       statePromo = null;
     } else {
+      if (projectionMode === 'exact') {
+        semanticProjectionRefusal(sourceProjection, promo.axis, 'interaction-state');
+      }
       const strip = (v: DumpNode): DumpNode => ({
         ...(JSON.parse(JSON.stringify(v)) as DumpNode),
         name: stripAxisFromName(v.name, promo.axis.property, set.setName),
@@ -6636,6 +7136,7 @@ export function proposeFromDump(
     flattenedVariants: new Set(),
     stubs: new Map(),
     partNames: new Set(['root']),
+    projectionMode,
     mint: opts.mintUnbound
       ? {
           // Enum axes substitute anywhere; two-value True/False axes (minted
@@ -6768,6 +7269,8 @@ export function proposeFromDump(
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
     const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp);
     Object.assign(rootTokens, textTokens);
+    carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
+
     // The label's tokens hoisted — retarget its captured mint observations
     // to the record that actually ships (rootTokens).
     if (ctx.mint) {
@@ -7025,7 +7528,31 @@ export function proposeFromDump(
   // Deterministic semantics inference (name/axis table — zero AI, see
   // inferSemantics). A detected interaction-state axis is the structural
   // corroboration that the component is interactive.
-  const inferred = inferSemantics(set.setName, axes, statePromo !== null);
+  //
+  // VOID-ELEMENT RE-ROOT (Eventz field case): the table proposes "input" for
+  // checkbox/switch/input-named sets, but a VOID element cannot mount
+  // children and validateContract now refuses that shape BY NAME on every
+  // emit surface — a proposal must never produce a contract the emitter
+  // refuses. When the inferred element is void AND the drawn anatomy mounts
+  // child parts, the proposal keeps the drawn children under a CONTAINER
+  // root ("div", the existing hedge) and flags the re-root as a REVIEW item
+  // instead; an inferred role is NOT carried onto the container (role
+  // "switch" on a div would trip the native-semantics lint — the role
+  // belongs on the native control the reviewer mounts as a child part).
+  // Deliberately NOT a synthetic <input> child part: the canvas did not draw
+  // one, and inventing structure is the plausible-substitution failure mode
+  // this pipeline refuses everywhere else.
+  const inferredRaw = inferSemantics(set.setName, axes, statePromo !== null);
+  const rootPartCount = Object.keys((root.parts as Record<string, unknown> | undefined) ?? {}).length;
+  const inferred: InferredSemantics | null =
+    inferredRaw && VOID_ELEMENTS.has(inferredRaw.element) && rootPartCount > 0
+      ? {
+          element: 'div',
+          note:
+            `semantics: element "${inferredRaw.element}" matched the name/axis table for set "${set.setName}", but the drawn anatomy mounts ${rootPartCount} child part(s) and <${inferredRaw.element}> is a VOID element — children cannot mount inside it (React refuses the shape at runtime and renders NOTHING; the emitters refuse it by name). ` +
+            `Proposed as container element "div" instead${inferredRaw.role ? `; the inferred role "${inferredRaw.role}" is NOT carried (it belongs on the native control, not the container)` : ''} — REVIEW: re-root before adoption by mounting the native <${inferredRaw.element}> control as a child part inside this container`,
+        }
+      : inferredRaw;
   const contract: Record<string, unknown> = {
     $schema: './contract.schema.json',
     id: selfId,
@@ -7370,10 +7897,38 @@ export function proposeFromDump(
       }`,
     );
   }
+  // Envelope consumers (parseProposal) accept only verified-exact |
+  // legacy-unverified. Exact always proves returned VARIANT rows.
+  // Reviewable structured success upgrades to verified-exact when the
+  // proposed rows still match; semantic promotions that change the tuple
+  // set fall back to an explicit legacy receipt rather than emitting the
+  // internal source-matrix-verified status (which receive rejects).
+  let projection: ExactProjectionResult;
+  if (projectionMode === 'exact') {
+    projection = assertExactProjection(
+      validateExactVariantProjection(set, exactRowsFromProposedContract(contract)),
+      'verified-exact',
+    );
+  } else if (sourceProjection.status === 'source-matrix-verified') {
+    const returned = validateExactVariantProjection(
+      set,
+      exactRowsFromProposedContract(contract),
+    );
+    projection =
+      returned.status === 'verified-exact'
+        ? returned
+        : {
+            status: 'legacy-unverified',
+            reason: 'structured-exact-evidence-absent',
+          };
+  } else {
+    projection = sourceProjection;
+  }
   return {
     contract,
     notes: ctx.notes,
     unbound: ctx.unbound,
+    projection,
     ...(mintedTokens ? { mintedTokens } : {}),
     ...(childStubs.length > 0 ? { childStubs } : {}),
   };

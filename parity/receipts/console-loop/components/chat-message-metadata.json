@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "chat-message-metadata",
+  "contract": "contracts/chat-message-metadata.contract.json",
+  "script": "parity/receipts/console-loop/emitted/12-chatmessagemetadata.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:09.647Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1724",
+    "page": "ChatMessageMetadata",
+    "sectionId": "1:1725",
+    "result": {
+      "createdNodeIds": [
+        "1:1724"
+      ],
+      "results": [
+        {
+          "name": "ChatMessageMetadata",
+          "contractId": "ds.chat-message-metadata",
+          "nodeId": "1:1724",
+          "key": "b4c5a5b7f2359043fd31005274c53c1d60719a65",
+          "variants": 5,
+          "properties": [
+            "Timestamp#1:638",
+            "Footer#1:644",
+            "Show Footer#1:650",
+            "Status"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1725 captured (ok).",
+      "ChatMessageMetadata: 5 variant(s); type COMPONENT_SET; page ChatMessageMetadata.",
+      "Props: Timestamp, Footer, Show Footer, Status.",
+      "Sample text: \"2:14 PM\", \"Slot\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3272099092",
+    "lineCount": 178,
+    "sampleLines": [
+      ":COMPONENT_SET/ChatMessageMetadata|fill|[]",
+      ":COMPONENT_SET/ChatMessageMetadata|radius|5,5,5,5",
+      ":COMPONENT_SET/ChatMessageMetadata|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/ChatMessageMetadata|description|ChatMessageMetadata — generated from contract ds.chat-message-metadata v1.0.0",
+      ":COMPONENT_SET/ChatMessageMetadata|propdef|Footer#1:644:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/ChatMessageMetadata|propdef|Show Footer#1:650:BOOLEAN=true",
+      ":COMPONENT_SET/ChatMessageMetadata|propdef|Status:VARIANT=Sent",
+      ":COMPONENT_SET/ChatMessageMetadata|propdef|Timestamp#1:638:TEXT=2:14 PM",
+      "/0:COMPONENT/Status=Sent|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Status=Sent|radius|0,0,0,0",
+      "/0:COMPONENT/Status=Sent|layout|HORIZONTAL MIN/CENTER gap 4 pad 0,0,0,0",
+      "/0:COMPONENT/Status=Sent|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Status=Sent|bound:itemSpacing|space/inset-y/sm",
+      "/0/0:FRAME/statusIcon|fill|[]",
+      "/0/0:FRAME/statusIcon|radius|0,0,0,0",
+      "/0/0:FRAME/statusIcon|sizing|FIXED/FIXED AUTO",
+      "/0/0/0:VECTOR/Vector|fill|[]",
+      "/0/0/0:VECTOR/Vector|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.29411765933036804,\"g\":0.3333333432674408,\"b\":0.38823530077934265},\"boundVariables\":{\"color\":{\"var\":\"color/text/secondary\"}}}] w0.9000000357627869",
+      "/0/0/0:VECTOR/Vector|radius|0,0,0,0",
+      "/0/0/0:VECTOR/Vector|sizing|FIXED/FIXED AUTO"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Status",
+      "Timestamp"
+    ],
+    "observed": {
+      "variantNames": [
+        "Status=Sent",
+        "Status=Sending",
+        "Status=Delivered",
+        "Status=Read",
+        "Status=Error"
+      ],
+      "propDefs": [
+        {
+          "name": "Timestamp#1:638",
+          "type": "TEXT",
+          "defaultValue": "2:14 PM",
+          "variantOptions": null
+        },
+        {
+          "name": "Footer#1:644",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Footer#1:650",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "Status",
+          "type": "VARIANT",
+          "defaultValue": "Sent",
+          "variantOptions": [
+            "Sent",
+            "Sending",
+            "Delivered",
+            "Read",
+            "Error"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Status=Sent",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/inset-y/sm"
+        },
+        "textChild": [
+          {
+            "name": "timestampText",
+            "chars": "2:14 PM",
+            "fontSize": 12
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 115,
+        "h": 100,
+        "childNames": [
+          "statusIcon:FRAME",
+          "timestampText:TEXT",
+          "footer:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

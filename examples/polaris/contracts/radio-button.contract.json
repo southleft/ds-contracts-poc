@@ -181,7 +181,6 @@
                   },
                   "tokens": {
                     "border-radius": "{p.border-radius-full}",
-                    "border-width": "{p.border-width-0165}",
                     "bottom": "{imported.shared.size-0}",
                     "height": "{imported.shared.size-18}",
                     "left": "{imported.shared.size-0}",
@@ -220,27 +219,36 @@
                       "background-color": "{imported.radio-button.backdrop.background-color-state-disabled}"
                     }
                   },
-                  "tokensByProp": [
+                  "literalsByProp": [
                     {
                       "prop": "checked",
                       "map": {
-                        "checked": {
-                          "background-color": "{imported.radio-button.backdrop.background-color.checked}",
-                          "border-bottom-color": "{imported.radio-button.backdrop.border-bottom-color.checked}",
-                          "border-left-color": "{imported.radio-button.backdrop.border-left-color.checked}",
-                          "border-right-color": "{imported.radio-button.backdrop.border-right-color.checked}",
-                          "border-top-color": "{imported.radio-button.backdrop.border-top-color.checked}"
-                        },
                         "unchecked": {
-                          "background-color": "{imported.radio-button.backdrop.background-color.unchecked}",
-                          "border-bottom-color": "{imported.radio-button.backdrop.border-bottom-color.unchecked}",
-                          "border-left-color": "{imported.radio-button.backdrop.border-left-color.unchecked}",
-                          "border-right-color": "{imported.radio-button.backdrop.border-right-color.unchecked}",
-                          "border-top-color": "{imported.radio-button.backdrop.border-top-color.unchecked}"
+                          "background-color": "rgba(255, 255, 255, 1)",
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px",
+                          "border-top-color": "rgba(138, 138, 138, 1)",
+                          "border-right-color": "rgba(138, 138, 138, 1)",
+                          "border-bottom-color": "rgba(138, 138, 138, 1)",
+                          "border-left-color": "rgba(138, 138, 138, 1)"
+                        },
+                        "checked": {
+                          "background-color": "rgba(48, 48, 48, 1)",
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px",
+                          "border-top-color": "rgba(48, 48, 48, 1)",
+                          "border-right-color": "rgba(48, 48, 48, 1)",
+                          "border-bottom-color": "rgba(48, 48, 48, 1)",
+                          "border-left-color": "rgba(48, 48, 48, 1)"
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Canvas geometry (console-loop visual fix): literal border+fill per Checked axis — unchecked = white 18×18 + 1px #8a8a8a ring; checked = #303030 fill + matching ring; white dot rides backdrop-before (matches examples/polaris/receipts/radio-button/default.png)."
                 },
                 "backdrop-before": {
                   "shape": {

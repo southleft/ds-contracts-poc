@@ -1,0 +1,54 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "fab",
+  "anchors": [
+    {
+      "leaf": "imported.fab.root.background-color.default",
+      "token": "palette-grey-300",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-grey-300",
+      "selector": ".css-1t563x9-MuiButtonBase-root-MuiFab-root"
+    },
+    {
+      "leaf": "imported.fab.root.background-color.primary",
+      "token": "palette-primary-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-esele7-MuiButtonBase-root-MuiFab-root"
+    },
+    {
+      "leaf": "imported.fab.root.background-color.secondary",
+      "token": "palette-secondary-main",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-1pwa833-MuiButtonBase-root-MuiFab-root"
+    },
+    {
+      "leaf": "imported.fab.root.color.default",
+      "token": "palette-grey-900",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-grey-900",
+      "selector": ".css-1t563x9-MuiButtonBase-root-MuiFab-root"
+    },
+    {
+      "leaf": "imported.fab.root.color.primary",
+      "token": "palette-primary-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-contrastText",
+      "selector": ".css-esele7-MuiButtonBase-root-MuiFab-root"
+    },
+    {
+      "leaf": "imported.fab.root.color.secondary",
+      "token": "palette-secondary-contrast-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-contrastText",
+      "selector": ".css-1pwa833-MuiButtonBase-root-MuiFab-root"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "chip",
+  "contract": "examples/mui/contracts/chip.contract.json",
+  "script": "examples/mui/figma/chip.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.511Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:410",
+    "mode": "existing",
+    "page": "Chip",
+    "sectionId": "21:411",
+    "result": {}
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:410).",
+      "Chip COMPONENT_SET 21:410: 28 variant(s), 4 prop def(s). Structure looks sane; slot placeholders OK."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=6.47% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/chip.json",
+      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/chip.png",
+    "referenceSource": "extract/computed/out/mui/chip/gate-shots/filled.default.medium__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/chip-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
+  },
+  "fingerprint": {
+    "v6": "v6:1499592056",
+    "lineCount": 652,
+    "sampleLines": [
+      ":COMPONENT_SET/Chip|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant enum \u2192 Filled/Outlined",
+      "Color enum \u2192 Default/Primary/Secondary/Error/Success/Warning/Info",
+      "Size enum \u2192 Medium/Small",
+      "TEXT Label",
+      "first-variant fill bound: imported/chip/root/background-color/filled/default"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Filled, Color=Default, Size=Medium"
+      ],
+      "propDefs": [
+        {
+          "name": "Color",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Primary",
+            "Secondary",
+            "Error",
+            "Success",
+            "Warning",
+            "Info"
+          ]
+        },
+        {
+          "name": "Label#21:166",
+          "type": "TEXT",
+          "defaultValue": "Chip",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small"
+          ]
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Filled",
+          "variantOptions": [
+            "Filled",
+            "Outlined"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Filled, Color=Default, Size=Medium",
+        "type": "COMPONENT",
+        "fillVarName": "imported/chip/root/background-color/filled/default",
+        "padBound": {},
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 16,
+        "w": 51,
+        "h": 20,
+        "childTypes": [
+          "FRAME/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "divider",
+  "contract": "contracts/divider.contract.json",
+  "script": "parity/receipts/console-loop/emitted/09-divider.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:23.627Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:636",
+    "page": "Divider",
+    "sectionId": "1:637",
+    "result": {
+      "createdNodeIds": [
+        "1:636"
+      ],
+      "results": [
+        {
+          "name": "Divider",
+          "contractId": "ds.divider",
+          "nodeId": "1:636",
+          "key": "8d9a56799449c8be708ad7f18cfc09f44ddc15fc",
+          "variants": 2,
+          "properties": [
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:637 captured (ok).",
+      "Divider: 2 variant(s); type COMPONENT_SET; page Divider.",
+      "Props: Variant.",
+      "First root fill bound to color/divider/subtle."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3338360677",
+    "lineCount": 17,
+    "sampleLines": [
+      ":COMPONENT_SET/Divider|fill|[]",
+      ":COMPONENT_SET/Divider|radius|5,5,5,5",
+      ":COMPONENT_SET/Divider|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Divider|description|Divider — generated from contract ds.divider v1.0.0",
+      ":COMPONENT_SET/Divider|propdef|Variant:VARIANT=Subtle",
+      "/0:COMPONENT/Variant=Subtle|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/divider/subtle\"}}}]",
+      "/0:COMPONENT/Variant=Subtle|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=Subtle|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Subtle|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Variant=Subtle|bound:height|border/width/divider/subtle",
+      "/0:COMPONENT/Variant=Subtle|bound:width|size/divider/length",
+      "/1:COMPONENT/Variant=Strong|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6117647290229797,\"g\":0.6392157077789307,\"b\":0.686274528503418},\"boundVariables\":{\"color\":{\"var\":\"color/divider/strong\"}}}]",
+      "/1:COMPONENT/Variant=Strong|radius|0,0,0,0",
+      "/1:COMPONENT/Variant=Strong|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/1:COMPONENT/Variant=Strong|sizing|FIXED/FIXED AUTO",
+      "/1:COMPONENT/Variant=Strong|bound:height|border/width/divider/strong",
+      "/1:COMPONENT/Variant=Strong|bound:width|size/divider/length"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant"
+    ],
+    "observed": {
+      "variantNames": [
+        "Variant=Subtle",
+        "Variant=Strong"
+      ],
+      "propDefs": [
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Subtle",
+          "variantOptions": [
+            "Subtle",
+            "Strong"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Subtle",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": "color/divider/subtle",
+        "padBound": {
+          "width": "size/divider/length",
+          "height": "border/width/divider/subtle",
+          "fills": "color/divider/subtle"
+        },
+        "textChild": [],
+        "w": 320,
+        "h": 1,
+        "childNames": []
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

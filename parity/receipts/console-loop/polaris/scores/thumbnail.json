@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 99.05555555555556,
+    "pctAAUnmasked": 77.25,
+    "pctAAMasked": 77.25,
+    "maskCoveragePct": 0,
+    "canvasPx": "60x60",
+    "realPx": "56x51",
+    "inkCanvasPct": 98.77777777777777,
+    "inkRealPct": 29.305555555555557
+  },
+  "reference": "parity/receipts/console-loop/polaris/refs/thumbnail.png",
+  "referenceSha256": "c4d343e3ac601f0d7ff093e1fe20f66fb8004140ceebd4c169c17d1453a47c55",
+  "canvasShot": "parity/receipts/console-loop/polaris/shots/thumbnail-cell.png",
+  "canvasShotSha256": "5053eb49d5ccc1f11352329c8850226cc98bde3d0492d381b2d20dcf4faec1d7",
+  "diff": "parity/receipts/console-loop/polaris/scores/thumbnail.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/polaris/components/thumbnail.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.1764705882352942,
+  "inkDelta": 69.47222222222221,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.18, inkDelta=69.5) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T04:31:21.449Z"
+}

@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "altitude",
+  "stem": "chip",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/altitude/components/chip.json",
+  "status": "pass",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385245229284424737",
+  "setNodeId": "60:10126",
+  "cellNodeId": "60:10110",
+  "cellName": "Variant=Info, Type=Default",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 18.328840970350406,
+    "pctAAUnmasked": 0.6738544474393532,
+    "pctAAMasked": 0.6738544474393532,
+    "maskCoveragePct": 0,
+    "canvasPx": "53x28",
+    "realPx": "52x28",
+    "inkCanvasPct": 90.83557951482479,
+    "inkRealPct": 88.94878706199461
+  },
+  "reference": "parity/receipts/console-loop/altitude/refs/chip.png",
+  "referenceSha256": "b28902a5f43a39e6ab670f849993d1a92532e1c128ab569ddd8d5be4c2ead8bf",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/altitude/shots/chip.png",
+  "canvasShotSha256": "21e44b6a9469da8ef2ce9a59d48ba919b2cc533b07e2e7f09492279cd4b28fb9",
+  "diff": "parity/receipts/console-loop/visual-truth/altitude/diffs/chip.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0192307692307692,
+  "inkDelta": 1.8867924528301785,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

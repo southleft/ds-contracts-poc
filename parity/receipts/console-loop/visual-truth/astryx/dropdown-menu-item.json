@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "astryx",
+  "stem": "dropdown-menu-item",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/astryx/components/dropdown-menu-item.json",
+  "status": "skip",
+  "skipReason": "no-reference"
+}

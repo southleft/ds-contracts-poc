@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "text",
+  "contract": "examples/polaris/contracts/text.contract.json",
+  "script": "examples/polaris/figma/text.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:38.221Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:10480",
+    "mode": "generated",
+    "page": "Text",
+    "sectionId": "1:10481",
+    "contractId": "polaris.text",
+    "result": {
+      "createdNodeIds": [
+        "1:10480"
+      ],
+      "results": [
+        {
+          "name": "Text",
+          "contractId": "polaris.text",
+          "nodeId": "1:10480",
+          "key": "44a758ae68ab29ff6c4dea64be18ea9339557e42",
+          "variants": 55,
+          "properties": [
+            "Break Word#1:2710",
+            "Numeric#1:2766",
+            "Truncate#1:2822",
+            "Visually Hidden#1:2878",
+            "Content#1:2934",
+            "Alignment",
+            "As",
+            "Tone",
+            "Font Weight",
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [],
+    "defects": [
+      "Ultra-wide set illegible at review scale; type-scale match to minted styles / developed text receipts not confirmed — fail closed."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/text.png",
+    "reviewSurface": "cream-#F8F4ED-component-set"
+  },
+  "fingerprint": {
+    "v6": "v6:3918753726",
+    "lineCount": 454,
+    "sampleLines": [
+      ":COMPONENT_SET/Text|fill|[]",
+      ":COMPONENT_SET/Text|radius|5,5,5,5",
+      ":COMPONENT_SET/Text|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Text|description|Text â generated from contract polaris.text v0.4.0 â",
+      ":COMPONENT_SET/Text|propdef|Alignment:VARIANT=Start",
+      ":COMPONENT_SET/Text|propdef|As:VARIANT=P",
+      ":COMPONENT_SET/Text|propdef|Break Word#1:2710:BOOLEAN=false",
+      ":COMPONENT_SET/Text|propdef|Content#1:2934:TEXT=Online store dashboard",
+      ":COMPONENT_SET/Text|propdef|Font Weight:VARIANT=Regular",
+      ":COMPONENT_SET/Text|propdef|Numeric#1:2766:BOOLEAN=false",
+      ":COMPONENT_SET/Text|propdef|Tone:VARIANT=Base",
+      ":COMPONENT_SET/Text|propdef|Truncate#1:2822:BOOLEAN=false",
+      ":COMPONENT_SET/Text|propdef|Variant:VARIANT=Heading Xs",
+      ":COMPONENT_SET/Text|propdef|Visually Hidden#1:2878:BOOLEAN=false",
+      "/0:COMPONENT/Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs|radius|0,0,0,0",
+      "/0:COMPONENT/Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs|sizing|HUG/HUG AUTO",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.1882352977991104,\"g\":0.1882352977991104,\"b\":0.1882352977991104},\"boundVariables\":{\"color\":{\"var\":\"imported/text/root/color/none\"}}}]",
+      "/0/0:TEXT/label|radius|0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)",
+      "canvas-projection (named curation per examples/polaris/figma/COMPILE-RECEIPT.md): Drawn set is variant×tone sample (55 cells); fontWeight/alignment/as pinned to representative values — full cartesian remains on contract/code surfaces.",
+      "curated-not-drawn: Alignment missing option Center",
+      "curated-not-drawn: Alignment missing option End",
+      "curated-not-drawn: Alignment missing option Justify",
+      "curated-not-drawn: As missing option Dt",
+      "curated-not-drawn: As missing option Dd",
+      "curated-not-drawn: As missing option H1",
+      "curated-not-drawn: As missing option H2",
+      "curated-not-drawn: As missing option H3",
+      "curated-not-drawn: As missing option H4",
+      "curated-not-drawn: As missing option H5",
+      "curated-not-drawn: As missing option H6",
+      "curated-not-drawn: As missing option Span",
+      "curated-not-drawn: As missing option Strong",
+      "curated-not-drawn: As missing option Legend",
+      "curated-not-drawn: Tone missing option Disabled",
+      "curated-not-drawn: Tone missing option Inherit",
+      "curated-not-drawn: Tone missing option Text Inverse",
+      "curated-not-drawn: Tone missing option Text Inverse Secondary",
+      "curated-not-drawn: Tone missing option Magic",
+      "curated-not-drawn: Tone missing option Magic Subdued",
+      "curated-not-drawn: Font Weight missing option Medium",
+      "curated-not-drawn: Font Weight missing option Semibold",
+      "curated-not-drawn: Font Weight missing option Bold"
+    ],
+    "matchedAxes": [
+      "Alignment enum → Start",
+      "As enum → P",
+      "BOOLEAN Break Word",
+      "Tone enum → Base/Success/Critical/Caution/Subdued",
+      "Font Weight enum → Regular",
+      "BOOLEAN Numeric",
+      "BOOLEAN Truncate",
+      "Variant enum → Heading Xs/Heading Sm/Heading Md/Heading Lg/Heading Xl/Heading2xl/Heading3xl/Body Xs/Body Sm/Body Md/Body Lg",
+      "BOOLEAN Visually Hidden",
+      "TEXT Content",
+      "canvas projection cell count ~55 (see COMPILE-RECEIPT)"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Sm",
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Md",
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Lg",
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xl",
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading2xl",
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading3xl",
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Xs",
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Sm",
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Md",
+        "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Body Lg",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Xs",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Sm",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Md",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Lg",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading Xl",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading2xl",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Heading3xl",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Xs",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Sm",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Md",
+        "Alignment=Start, As=P, Tone=Success, Font Weight=Regular, Variant=Body Lg",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Xs",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Sm",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Md",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Lg",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading Xl",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading2xl",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Heading3xl",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Xs",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Sm",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Md",
+        "Alignment=Start, As=P, Tone=Critical, Font Weight=Regular, Variant=Body Lg",
+        "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Xs",
+        "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Sm",
+        "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Md",
+        "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Lg",
+        "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading Xl",
+        "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading2xl",
+        "Alignment=Start, As=P, Tone=Caution, Font Weight=Regular, Variant=Heading3xl"
+      ],
+      "propDefs": [
+        {
+          "name": "Break Word#1:2710",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Numeric#1:2766",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Truncate#1:2822",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Visually Hidden#1:2878",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Content#1:2934",
+          "type": "TEXT",
+          "defaultValue": "Online store dashboard",
+          "variantOptions": null
+        },
+        {
+          "name": "Alignment",
+          "type": "VARIANT",
+          "defaultValue": "Start",
+          "variantOptions": [
+            "Start"
+          ]
+        },
+        {
+          "name": "As",
+          "type": "VARIANT",
+          "defaultValue": "P",
+          "variantOptions": [
+            "P"
+          ]
+        },
+        {
+          "name": "Tone",
+          "type": "VARIANT",
+          "defaultValue": "Base",
+          "variantOptions": [
+            "Base",
+            "Success",
+            "Critical",
+            "Caution",
+            "Subdued"
+          ]
+        },
+        {
+          "name": "Font Weight",
+          "type": "VARIANT",
+          "defaultValue": "Regular",
+          "variantOptions": [
+            "Regular"
+          ]
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Heading Xs",
+          "variantOptions": [
+            "Heading Xs",
+            "Heading Sm",
+            "Heading Md",
+            "Heading Lg",
+            "Heading Xl",
+            "Heading2xl",
+            "Heading3xl",
+            "Body Xs",
+            "Body Sm",
+            "Body Md",
+            "Body Lg"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {},
+        "w": 134,
+        "h": 16,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "canvasProjectionDocumented": true,
+    "visualMatchDeveloped": false
+  }
+}

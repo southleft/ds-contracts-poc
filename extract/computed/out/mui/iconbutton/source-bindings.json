@@ -1,0 +1,268 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "IconButton",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.default.enabled",
+      "axisValues": {
+        "size": "small",
+        "color": "default"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-3lya2u-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.default.disabled",
+      "axisValues": {
+        "size": "small",
+        "color": "default"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-3lya2u-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.primary.enabled",
+      "axisValues": {
+        "size": "small",
+        "color": "primary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1h45afm-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.primary.disabled",
+      "axisValues": {
+        "size": "small",
+        "color": "primary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-1h45afm-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.secondary.enabled",
+      "axisValues": {
+        "size": "small",
+        "color": "secondary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-epg2mj-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.secondary.disabled",
+      "axisValues": {
+        "size": "small",
+        "color": "secondary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-epg2mj-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.default.enabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "default"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-tvj9z2-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.default.disabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "default"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-tvj9z2-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.primary.enabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "primary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1lyusn8-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.primary.disabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "primary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-1lyusn8-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.secondary.enabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "secondary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-16c44y7-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.secondary.disabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "secondary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-16c44y7-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.default.enabled",
+      "axisValues": {
+        "size": "large",
+        "color": "default"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-xmxsp3-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.default.disabled",
+      "axisValues": {
+        "size": "large",
+        "color": "default"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-xmxsp3-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.primary.enabled",
+      "axisValues": {
+        "size": "large",
+        "color": "primary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1q6iel7-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.primary.disabled",
+      "axisValues": {
+        "size": "large",
+        "color": "primary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-1q6iel7-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.secondary.enabled",
+      "axisValues": {
+        "size": "large",
+        "color": "secondary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-po28mk-MuiButtonBase-root-MuiIconButton-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.secondary.disabled",
+      "axisValues": {
+        "size": "large",
+        "color": "secondary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-po28mk-MuiButtonBase-root-MuiIconButton-root.Mui-disabled"
+      }
+    }
+  ],
+  "skips": [
+    "root.--IconButton-hoverBg: source declares `rgba(var(--mui-palette-secondary-mainChannel) / calc(var(--mui-palette-action-hoverOpacity)))` — a calc() over var(--mui-palette-action-hoverOpacity, --mui-palette-secondary-mainChannel). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 1,
+  "calcCeiling": 1,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

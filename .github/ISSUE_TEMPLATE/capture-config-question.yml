@@ -1,0 +1,63 @@
+name: Capture-config question
+description: >-
+  Track B's expert-work wall (docs/23 §B.16): stuck on classAllow, varPrefix,
+  mount, fixedProps, axis-vs-state, or the review gate refusing your draft.
+title: "[capture-config] "
+labels: ["question", "capture-config", "beta"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The three judgment calls (`classAllow`, `varPrefix`, axis-vs-state)
+        **fail silently when answered wrong** — that is why the review gate
+        exists and why this form exists. The decision guide is
+        [docs/21 — Bring Your Own Design System](https://github.com/southleft/ds-contracts-poc/blob/main/docs/21-bring-your-own-design-system.md);
+        the worked template for a runtime-styled library is
+        [examples/mui/PROVENANCE.md](https://github.com/southleft/ds-contracts-poc/blob/main/examples/mui/PROVENANCE.md).
+  - type: input
+    id: library
+    attributes:
+      label: The library you are capturing
+      description: Package name + styling method if you know it (CSS Modules, Tailwind, Emotion, StyleX, CEM/web components, …)
+      placeholder: "@acme/ui — Emotion runtime styling"
+    validations:
+      required: true
+  - type: dropdown
+    id: stuck-on
+    attributes:
+      label: Which field or step are you stuck on?
+      options:
+        - "classAllow (class-identity regex)"
+        - "varPrefix (token/variable prefix)"
+        - "mount (how a component is mounted for capture)"
+        - "fixedProps / baseCombo (pinning a defaultless axis)"
+        - "axis vs state (is this prop a variant axis or an interaction state?)"
+        - "the review gate refuses my draft (`__review:*` markers)"
+        - "the capture runs but measures the wrong thing"
+        - "the double-run self-check refuses (runs disagree)"
+        - "something else"
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Your draft capture config
+      description: Paste the drafted config (or the relevant part), including any `__review:*` markers still in it.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: What the tool said
+      description: The refusal, warning, or capture report output you got.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: What decision are you trying to make, and what have you tried?
+    validations:
+      required: true

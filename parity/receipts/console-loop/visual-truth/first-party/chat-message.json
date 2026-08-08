@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "chat-message",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/chat-message.json",
+  "status": "skip",
+  "skipReason": "no-reference"
+}

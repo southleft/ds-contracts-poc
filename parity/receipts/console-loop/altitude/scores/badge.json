@@ -1,0 +1,39 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 42.77777777777778,
+    "pctAAUnmasked": 15.444444444444445,
+    "pctAAMasked": 15.444444444444445,
+    "maskCoveragePct": 0,
+    "canvasPx": "45x20",
+    "realPx": "43x20",
+    "inkCanvasPct": 92.88888888888889,
+    "inkRealPct": 88
+  },
+  "reference": "extract/computed/out/altitude/badge/gate-shots/info.default__default.png",
+  "referenceSha256": "11b047fe79d9e498aa580ef1809d73d954ab8a4997942c863a79eaa8b1d352e4",
+  "canvasShot": "parity/receipts/console-loop/altitude/shots/badge-cell.png",
+  "canvasShotSha256": "606b68c625317d27c4fdb84a2ee2a502ca5252738834e81b89ee8e833e4f0fe6",
+  "diff": "parity/receipts/console-loop/altitude/scores/badge.diff.png",
+  "fc": [
+    "FC-CSS-ONLY-HIDE"
+  ],
+  "receipt": "parity/receipts/console-loop/altitude/components/badge.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0465116279069768,
+  "inkDelta": 4.888888888888886,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=15.44 > 5)",
+  "recordedAt": "2026-08-08T08:11:50.544Z"
+}

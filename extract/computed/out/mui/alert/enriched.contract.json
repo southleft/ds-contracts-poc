@@ -1,0 +1,277 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.alert",
+  "name": "Alert",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "severity",
+      "type": {
+        "enum": [
+          "error",
+          "warning",
+          "info",
+          "success"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Severity",
+          "values": {
+            "error": "Error",
+            "warning": "Warning",
+            "info": "Info",
+            "success": "Success"
+          }
+        },
+        "code": {
+          "prop": "severity"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "standard",
+          "filled",
+          "outlined"
+        ]
+      },
+      "default": "standard",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "standard": "Standard",
+            "filled": "Filled",
+            "outlined": "Outlined"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "This is an alert — check it out!",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "alert-icon": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Alert-icon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex"
+          },
+          "parts": {
+            "alert-icon-error": {
+              "icon": {
+                "asset": "alert-alert-icon-error",
+                "size": 22
+              },
+              "visibleWhen": {
+                "prop": "severity",
+                "equals": "error"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when severity=error."
+            },
+            "alert-icon-warning": {
+              "icon": {
+                "asset": "alert-alert-icon-warning",
+                "size": 22
+              },
+              "visibleWhen": {
+                "prop": "severity",
+                "equals": "warning"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when severity=warning."
+            },
+            "alert-icon-info": {
+              "icon": {
+                "asset": "alert-alert-icon-info",
+                "size": 22
+              },
+              "visibleWhen": {
+                "prop": "severity",
+                "equals": "info"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when severity=info."
+            },
+            "alert-icon-success": {
+              "icon": {
+                "asset": "alert-alert-icon-success",
+                "size": 22
+              },
+              "visibleWhen": {
+                "prop": "severity",
+                "equals": "success"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when severity=success."
+            }
+          },
+          "declared": {
+            "font-family": "Roboto, Helvetica, Arial, sans-serif"
+          },
+          "tokens": {
+            "font-size": "{imported.alert.alert-icon.font-size}",
+            "letter-spacing": "{imported.shared.size-0-14994}",
+            "line-height": "{imported.alert.alert-icon.line-height}",
+            "margin-right": "{imported.alert.alert-icon.margin-right}",
+            "opacity": "{imported.alert.alert-icon.opacity}",
+            "padding-bottom": "{imported.alert.alert-icon.padding-bottom}",
+            "padding-top": "{imported.alert.alert-icon.padding-top}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "filled": {
+                  "color": "{imported.alert.alert-icon.color.{severity}.filled}",
+                  "font-weight": "{imported.alert.alert-icon.font-weight.filled}"
+                },
+                "outlined": {
+                  "color": "{imported.alert.alert-icon.color.{severity}.outlined}",
+                  "font-weight": "{imported.alert.alert-icon.font-weight.outlined}"
+                },
+                "standard": {
+                  "color": "{imported.alert.alert-icon.color.{severity}.standard}",
+                  "font-weight": "{imported.alert.alert-icon.font-weight.standard}"
+                }
+              }
+            }
+          ]
+        },
+        "label": {
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Alert-message — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "auto",
+            "overflow-y": "auto"
+          },
+          "tokens": {
+            "font-size": "{imported.alert.label.font-size}",
+            "letter-spacing": "{imported.shared.size-0-14994}",
+            "line-height": "{imported.alert.label.line-height}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-bottom": "{imported.alert.label.padding-bottom}",
+            "padding-top": "{imported.alert.label.padding-top}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "filled": {
+                  "color": "{imported.alert.label.color.{severity}.filled}",
+                  "font-weight": "{imported.alert.label.font-weight.filled}"
+                },
+                "outlined": {
+                  "color": "{imported.alert.label.color.{severity}.outlined}",
+                  "font-weight": "{imported.alert.label.font-weight.outlined}"
+                },
+                "standard": {
+                  "color": "{imported.alert.label.color.{severity}.standard}",
+                  "font-weight": "{imported.alert.label.font-weight.standard}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "transition-duration": "0.3s",
+        "transition-property": "box-shadow",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "tokens": {
+        "background-color": "{imported.alert.root.background-color.{severity}.{variant}}",
+        "border-bottom-color": "{imported.alert.root.border-bottom-color.{severity}.{variant}}",
+        "border-bottom-left-radius": "{imported.shared.size-4}",
+        "border-bottom-right-radius": "{imported.shared.size-4}",
+        "border-left-color": "{imported.alert.root.border-left-color.{severity}.{variant}}",
+        "border-right-color": "{imported.alert.root.border-right-color.{severity}.{variant}}",
+        "border-top-color": "{imported.alert.root.border-top-color.{severity}.{variant}}",
+        "border-top-left-radius": "{imported.shared.size-4}",
+        "border-top-right-radius": "{imported.shared.size-4}",
+        "color": "{imported.alert.root.color.{severity}.{variant}}",
+        "font-size": "{imported.alert.root.font-size}",
+        "letter-spacing": "{imported.shared.size-0-14994}",
+        "line-height": "{imported.alert.root.line-height}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.alert.root.padding-bottom}",
+        "padding-left": "{imported.alert.root.padding-left}",
+        "padding-right": "{imported.alert.root.padding-right}",
+        "padding-top": "{imported.alert.root.padding-top}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "filled": {
+              "border-bottom-width": "{imported.alert.root.border-bottom-width.filled}",
+              "border-left-width": "{imported.alert.root.border-left-width.filled}",
+              "border-right-width": "{imported.alert.root.border-right-width.filled}",
+              "border-top-width": "{imported.alert.root.border-top-width.filled}",
+              "font-weight": "{imported.alert.root.font-weight.filled}"
+            },
+            "outlined": {
+              "border-bottom-width": "{imported.alert.root.border-bottom-width.outlined}",
+              "border-left-width": "{imported.alert.root.border-left-width.outlined}",
+              "border-right-width": "{imported.alert.root.border-right-width.outlined}",
+              "border-top-width": "{imported.alert.root.border-top-width.outlined}",
+              "font-weight": "{imported.alert.root.font-weight.outlined}"
+            },
+            "standard": {
+              "border-bottom-width": "{imported.alert.root.border-bottom-width.standard}",
+              "border-left-width": "{imported.alert.root.border-left-width.standard}",
+              "border-right-width": "{imported.alert.root.border-right-width.standard}",
+              "border-top-width": "{imported.alert.root.border-top-width.standard}",
+              "font-weight": "{imported.alert.root.font-weight.standard}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Alert"
+    }
+  }
+}

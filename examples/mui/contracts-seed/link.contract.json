@@ -1,0 +1,70 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.link",
+  "name": "Link",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "a"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": ["primary", "secondary", "error", "info", "success", "warning", "inherit"]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "error": "Error",
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "inherit": "Inherit"
+          }
+        },
+        "code": { "prop": "color" }
+      }
+    },
+    {
+      "name": "underline",
+      "type": {
+        "enum": ["none", "hover", "always"]
+      },
+      "default": "hover",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Underline",
+          "values": {
+            "none": "None",
+            "hover": "Hover",
+            "always": "Always"
+          }
+        },
+        "code": { "prop": "underline" }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Link",
+      "bindings": {
+        "figma": { "kind": "TEXT", "property": "Label" },
+        "code": { "prop": "children" }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": { "root": {} },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@mui/material", "export": "Link" }
+  }
+}

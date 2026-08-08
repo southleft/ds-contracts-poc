@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "empty-state",
+  "contract": "contracts/empty-state.contract.json",
+  "script": "parity/receipts/console-loop/emitted/19-emptystate.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:05.193Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1457",
+    "page": "EmptyState",
+    "sectionId": "1:1466",
+    "result": {
+      "createdNodeIds": [
+        "1:1457"
+      ],
+      "results": [
+        {
+          "name": "EmptyState",
+          "contractId": "ds.empty-state",
+          "nodeId": "1:1457",
+          "key": "884813624862058f992ef8942ab799a0024e1cba",
+          "variants": 1,
+          "properties": [
+            "Title#1:554",
+            "Description#1:555",
+            "Icon#1:556",
+            "Show Icon#1:557",
+            "Actions#1:558",
+            "Show Actions#1:559"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1466 captured (ok).",
+      "EmptyState: 1 variant(s); type COMPONENT; page EmptyState.",
+      "Props: Title, Description, Icon, Show Icon, Actions, Show Actions.",
+      "Sample text: \"Slot\", \"Nothing here yet\", \"When items are added they will show up in this list.\", \"Slot\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:1979502124",
+    "lineCount": 54,
+    "sampleLines": [
+      ":COMPONENT/EmptyState|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/EmptyState|radius|0,0,0,0",
+      ":COMPONENT/EmptyState|layout|VERTICAL MIN/CENTER gap 8 pad 24,24,24,24",
+      ":COMPONENT/EmptyState|sizing|FIXED/HUG AUTO",
+      ":COMPONENT/EmptyState|bound:itemSpacing|space/gap/sm",
+      ":COMPONENT/EmptyState|bound:paddingBottom|space/inset-x/lg",
+      ":COMPONENT/EmptyState|bound:paddingLeft|space/inset-x/lg",
+      ":COMPONENT/EmptyState|bound:paddingRight|space/inset-x/lg",
+      ":COMPONENT/EmptyState|bound:paddingTop|space/inset-x/lg",
+      ":COMPONENT/EmptyState|bound:width|size/card/width",
+      ":COMPONENT/EmptyState|description|EmptyState — generated from contract ds.empty-state v1.0.0",
+      ":COMPONENT/EmptyState|propdef|Actions#1:558:INSTANCE_SWAP=1:347",
+      ":COMPONENT/EmptyState|propdef|Description#1:555:TEXT=When items are added they will show up in this list.",
+      ":COMPONENT/EmptyState|propdef|Icon#1:556:INSTANCE_SWAP=1:347",
+      ":COMPONENT/EmptyState|propdef|Show Actions#1:559:BOOLEAN=true",
+      ":COMPONENT/EmptyState|propdef|Show Icon#1:557:BOOLEAN=true",
+      ":COMPONENT/EmptyState|propdef|Title#1:554:TEXT=Nothing here yet",
+      "/0:FRAME/iconArea|fill|[]",
+      "/0:FRAME/iconArea|radius|0,0,0,0",
+      "/0:FRAME/iconArea|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Title",
+      "Description"
+    ],
+    "observed": {
+      "variantNames": [
+        "EmptyState"
+      ],
+      "propDefs": [
+        {
+          "name": "Title#1:554",
+          "type": "TEXT",
+          "defaultValue": "Nothing here yet",
+          "variantOptions": null
+        },
+        {
+          "name": "Description#1:555",
+          "type": "TEXT",
+          "defaultValue": "When items are added they will show up in this list.",
+          "variantOptions": null
+        },
+        {
+          "name": "Icon#1:556",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Icon#1:557",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "Actions#1:558",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Actions#1:559",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "EmptyState",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 24,
+          "r": 24,
+          "b": 24,
+          "l": 24
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/gap/sm",
+          "paddingLeft": "space/inset-x/lg",
+          "paddingTop": "space/inset-x/lg",
+          "paddingRight": "space/inset-x/lg",
+          "paddingBottom": "space/inset-x/lg",
+          "width": "size/card/width"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "title",
+            "chars": "Nothing here yet",
+            "fontSize": 16
+          },
+          {
+            "name": "descriptionText",
+            "chars": "When items are added they will show up in this list.",
+            "fontSize": 14
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 320,
+        "h": 316,
+        "childNames": [
+          "iconArea:FRAME",
+          "title:TEXT",
+          "descriptionText:TEXT",
+          "actions:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

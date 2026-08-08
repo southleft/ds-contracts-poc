@@ -35,89 +35,126 @@
  * Node shell over pure core functions — the same split as every receipt in
  * extract/figma/. Reads the repo; writes nothing.
  */
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
-import type { DumpNode, DumpSet } from './types.js';
-import { generateCss } from '../../core/emit-react.js';
-import { emitFigmaScript } from '../../core/emit-figma-script.js';
-import { proposeFromDump } from '../../core/propose-figma.js';
-import { tokenInventoryFromJson } from '../../core/tokens.js';
-import { loadTokenCorpus } from './tokens.js';
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import type { DumpNode, DumpSet } from "./types.js";
+import { generateCss } from "../../core/emit-react.js";
+import { emitFigmaScript } from "../../core/emit-figma-script.js";
+import { proposeFromDump } from "../../core/propose-figma.js";
+import { tokenInventoryFromJson } from "../../core/tokens.js";
+import { loadTokenCorpus } from "./tokens.js";
 
 const ROOT = process.cwd();
-const read = (p: string) => JSON.parse(readFileSync(path.join(ROOT, p), 'utf8')) as Record<string, unknown>;
+const read = (p: string) =>
+  JSON.parse(readFileSync(path.join(ROOT, p), "utf8")) as Record<
+    string,
+    unknown
+  >;
 
 const failures: string[] = [];
 const check = (label: string, cond: boolean) => {
   if (!cond) failures.push(label);
-  console.log(`  ${cond ? '✔' : '✖'} ${label}`);
+  console.log(`  ${cond ? "✔" : "✖"} ${label}`);
 };
 
 /** A tag-row shaped variant: a HORIZONTAL stack of chips that may wrap. */
-function variant(tone: 'Neutral' | 'Accent', wrap: boolean, rowSpacing?: number): DumpNode {
+function variant(
+  tone: "Neutral" | "Accent",
+  wrap: boolean,
+  rowSpacing?: number,
+): DumpNode {
   return {
     name: `Tone=${tone}`,
-    type: 'COMPONENT',
+    type: "COMPONENT",
     layout: {
-      mode: 'HORIZONTAL',
-      primary: 'MIN',
-      counter: 'CENTER',
+      mode: "HORIZONTAL",
+      primary: "MIN",
+      counter: "CENTER",
       spacing: 8,
       padding: [4, 4, 4, 4],
-      primarySizing: 'FIXED',
-      counterSizing: 'AUTO',
+      primarySizing: "FIXED",
+      counterSizing: "AUTO",
       ...(wrap ? { wrap: true as const } : {}),
       ...(rowSpacing !== undefined ? { rowSpacing } : {}),
     },
-    fill: { hex: tone === 'Neutral' ? 'eeeeee' : '112233' },
+    fill: { hex: tone === "Neutral" ? "eeeeee" : "112233" },
     children: [
-      { name: 'ChipA', type: 'FRAME', fill: { hex: '333333' }, cornerRadius: 4 },
-      { name: 'ChipB', type: 'FRAME', fill: { hex: '333333' }, cornerRadius: 4 },
+      {
+        name: "ChipA",
+        type: "FRAME",
+        fill: { hex: "333333" },
+        cornerRadius: 4,
+      },
+      {
+        name: "ChipB",
+        type: "FRAME",
+        fill: { hex: "333333" },
+        cornerRadius: 4,
+      },
     ],
   };
 }
 
 const setOf = (variants: DumpNode[]): DumpSet => ({
-  setName: 'TagRow',
-  type: 'COMPONENT_SET',
+  setName: "TagRow",
+  type: "COMPONENT_SET",
   variants,
 });
 
 const corpus = loadTokenCorpus(ROOT);
-const opts = { corpus, contractIdByName: new Map<string, string>(), fileKey: null, mintUnbound: true };
+const opts = {
+  projectionMode: "reviewable-inversion" as const,
+  corpus,
+  contractIdByName: new Map<string, string>(),
+  fileKey: null,
+  mintUnbound: true,
+};
 const rootLayoutOf = (r: ReturnType<typeof proposeFromDump>) =>
-  ((r.contract.anatomy as Record<string, any>).root as any).layout as Record<string, unknown> | undefined;
+  ((r.contract.anatomy as Record<string, any>).root as any).layout as
+    Record<string, unknown> | undefined;
 
 // ---------------------------------------------------------------------------
 // 1. UNIFORM wrap — carried, and the round trip closes
 // ---------------------------------------------------------------------------
 
-console.log('\nUniform wrap (every variant)');
-const uniform = proposeFromDump(setOf([variant('Neutral', true), variant('Accent', true)]), opts);
+console.log("\nUniform wrap (every variant)");
+const uniform = proposeFromDump(
+  setOf([variant("Neutral", true), variant("Accent", true)]),
+  opts,
+);
 const uniformLayout = rootLayoutOf(uniform);
-check('root proposes layout.wrap: true (the fact the return leg used to delete)', uniformLayout?.wrap === true);
+check(
+  "root proposes layout.wrap: true (the fact the return leg used to delete)",
+  uniformLayout?.wrap === true,
+);
 
 const inventory = tokenInventoryFromJson([
-  read('tokens/primitives.tokens.json'),
-  read('tokens/semantic.tokens.json'),
+  read("tokens/primitives.tokens.json"),
+  read("tokens/semantic.tokens.json"),
   uniform.mintedTokens?.tree ?? {},
 ]);
 const cssErrors: string[] = [];
 const css = generateCss(uniform.contract as never, inventory, cssErrors);
-check('the proposal emits CSS with no errors', cssErrors.length === 0);
-check('CSS emits `flex-wrap: wrap` on the root', /flex-wrap:\s*wrap/.test(css));
+check("the proposal emits CSS with no errors", cssErrors.length === 0);
+check("CSS emits `flex-wrap: wrap` on the root", /flex-wrap:\s*wrap/.test(css));
 
-const script = emitFigmaScript(uniform.contract as never, {
-  tokens: {
-    primitives: read('tokens/primitives.tokens.json'),
-    semantic: { ...read('tokens/semantic.tokens.json'), ...(uniform.mintedTokens?.tree ?? {}) },
-    light: read('tokens/modes/semantic.light.tokens.json'),
-    dark: read('tokens/modes/semantic.dark.tokens.json'),
-    brands: { default: read('tokens/modes/brand.default.tokens.json') },
+const script = emitFigmaScript(
+  uniform.contract as never,
+  {
+    tokens: {
+      primitives: read("tokens/primitives.tokens.json"),
+      semantic: {
+        ...read("tokens/semantic.tokens.json"),
+        ...(uniform.mintedTokens?.tree ?? {}),
+      },
+      light: read("tokens/modes/semantic.light.tokens.json"),
+      dark: read("tokens/modes/semantic.dark.tokens.json"),
+      brands: { default: read("tokens/modes/brand.default.tokens.json") },
+    } as never,
+    icons: new Map<string, string>(),
+    contracts: new Map([[uniform.contract.id, uniform.contract as never]]),
   } as never,
-  icons: new Map<string, string>(),
-  contracts: new Map([[uniform.contract.id, uniform.contract as never]]),
-} as never);
+);
 check(
   "the figma script writes layoutWrap 'WRAP' (code→design still carries it)",
   /layoutWrap\s*=\s*'WRAP'/.test(script),
@@ -127,34 +164,54 @@ check(
 // 2. A DISTINCT row gap has no schema spelling — carried as wrap + NAMED
 // ---------------------------------------------------------------------------
 
-console.log('\nDistinct row gap (counterAxisSpacing ≠ itemSpacing)');
-const distinctRow = proposeFromDump(setOf([variant('Neutral', true, 20), variant('Accent', true, 20)]), opts);
-check('wrap is still carried', rootLayoutOf(distinctRow)?.wrap === true);
+console.log("\nDistinct row gap (counterAxisSpacing ≠ itemSpacing)");
+const distinctRow = proposeFromDump(
+  setOf([variant("Neutral", true, 20), variant("Accent", true, 20)]),
+  opts,
+);
+check("wrap is still carried", rootLayoutOf(distinctRow)?.wrap === true);
 check(
-  'the un-carriable ROW gap is a NAMED note (one `gap` covers both axes, as it does in Figma)',
-  distinctRow.notes.some((n) => n.includes('ROW gap') && n.includes('not carried')),
+  "the un-carriable ROW gap is a NAMED note (one `gap` covers both axes, as it does in Figma)",
+  distinctRow.notes.some(
+    (n) => n.includes("ROW gap") && n.includes("not carried"),
+  ),
 );
 
 // ---------------------------------------------------------------------------
 // 3. MIXED wrap — never guessed, and NAMED
 // ---------------------------------------------------------------------------
 
-console.log('\nMixed wrap (a per-part invariant, like overlap)');
-const mixed = proposeFromDump(setOf([variant('Neutral', true), variant('Accent', false)]), opts);
-check('layout.wrap is NOT set (wrap holds in only half the variants — never guessed)', rootLayoutOf(mixed)?.wrap === undefined);
+console.log("\nMixed wrap (a per-part invariant, like overlap)");
+const mixed = proposeFromDump(
+  setOf([variant("Neutral", true), variant("Accent", false)]),
+  opts,
+);
 check(
-  'the mixed-wrap limit is a NAMED note',
-  mixed.notes.some((n) => n.includes('WRAPS in 1 of 2 auto-layout variant(s)')),
+  "layout.wrap is NOT set (wrap holds in only half the variants — never guessed)",
+  rootLayoutOf(mixed)?.wrap === undefined,
+);
+check(
+  "the mixed-wrap limit is a NAMED note",
+  mixed.notes.some((n) => n.includes("WRAPS in 1 of 2 auto-layout variant(s)")),
 );
 
 // ---------------------------------------------------------------------------
 // 4. The control: no wrap anywhere invents nothing
 // ---------------------------------------------------------------------------
 
-console.log('\nControl (nothing wraps)');
-const none = proposeFromDump(setOf([variant('Neutral', false), variant('Accent', false)]), opts);
-check('no wrap key on a non-wrapping stack', rootLayoutOf(none)?.wrap === undefined);
-check('and no wrap note is emitted', !none.notes.some((n) => n.includes('WRAPS in')));
+console.log("\nControl (nothing wraps)");
+const none = proposeFromDump(
+  setOf([variant("Neutral", false), variant("Accent", false)]),
+  opts,
+);
+check(
+  "no wrap key on a non-wrapping stack",
+  rootLayoutOf(none)?.wrap === undefined,
+);
+check(
+  "and no wrap note is emitted",
+  !none.notes.some((n) => n.includes("WRAPS in")),
+);
 
 // ---------------------------------------------------------------------------
 // 5. THE CENTERED ROOT — the case the first cut silently dropped
@@ -171,20 +228,26 @@ check('and no wrap note is emitted', !none.notes.some((n) => n.includes('WRAPS i
 // wrapping root is `row` by construction — a centered tag cloud satisfies the
 // rest on its own.
 
-console.log('\nCentered root (row/center/center — the early-return trap)');
+console.log("\nCentered root (row/center/center — the early-return trap)");
 const centered = (wrap: boolean): DumpNode => {
-  const v = variant('Neutral', wrap);
-  v.layout = { ...v.layout!, primary: 'CENTER', counter: 'CENTER' };
+  const v = variant("Neutral", wrap);
+  v.layout = { ...v.layout!, primary: "CENTER", counter: "CENTER" };
   return v;
 };
-const centeredWrap = proposeFromDump(setOf([centered(true), centered(true)]), opts);
+const centeredWrap = proposeFromDump(
+  setOf([centered(true), centered(true)]),
+  opts,
+);
 check(
-  'a CENTERED wrapping root still carries layout.wrap (the early return no longer swallows it)',
+  "a CENTERED wrapping root still carries layout.wrap (the early return no longer swallows it)",
   rootLayoutOf(centeredWrap)?.wrap === true,
 );
-const centeredPlain = proposeFromDump(setOf([centered(false), centered(false)]), opts);
+const centeredPlain = proposeFromDump(
+  setOf([centered(false), centered(false)]),
+  opts,
+);
 check(
-  'and a CENTERED non-wrapping root still proposes NO layout block (the early return is intact)',
+  "and a CENTERED non-wrapping root still proposes NO layout block (the early return is intact)",
   rootLayoutOf(centeredPlain) === undefined,
 );
 
@@ -192,19 +255,30 @@ check(
 // 6. NESTED wrap — carried too, not just the root
 // ---------------------------------------------------------------------------
 
-console.log('\nNested wrap');
-const nestedVariant = (tone: 'Neutral' | 'Accent'): DumpNode => {
+console.log("\nNested wrap");
+const nestedVariant = (tone: "Neutral" | "Accent"): DumpNode => {
   const inner = variant(tone, true);
-  inner.name = 'TagList';
-  inner.type = 'FRAME';
+  inner.name = "TagList";
+  inner.type = "FRAME";
   return { ...variant(tone, false), children: [inner] };
 };
-const nested = proposeFromDump(setOf([nestedVariant('Neutral'), nestedVariant('Accent')]), opts);
-const nestedLayout = (((nested.contract.anatomy as Record<string, any>).root as any).parts?.TagList as any)?.layout;
-check('a NESTED wrapping part carries layout.wrap', nestedLayout?.wrap === true);
+const nested = proposeFromDump(
+  setOf([nestedVariant("Neutral"), nestedVariant("Accent")]),
+  opts,
+);
+const nestedLayout = (
+  ((nested.contract.anatomy as Record<string, any>).root as any).parts
+    ?.TagList as any
+)?.layout;
+check(
+  "a NESTED wrapping part carries layout.wrap",
+  nestedLayout?.wrap === true,
+);
 
 if (failures.length > 0) {
   console.error(`\n✖ ${failures.length} wrap invariant(s) failed`);
   process.exit(1);
 }
-console.log('\n✔ wrapping survives the round trip (dump v1.12 reads layoutWrap; uniform carries, mixed is named, row gap is named)');
+console.log(
+  "\n✔ wrapping survives the round trip (dump v1.12 reads layoutWrap; uniform carries, mixed is named, row gap is named)",
+);

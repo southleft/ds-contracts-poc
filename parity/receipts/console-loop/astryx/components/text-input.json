@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "text-input",
+  "contract": "examples/astryx/contracts/text-input.contract.json",
+  "script": "examples/astryx/figma/text-input.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:12.948Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:4003",
+    "mode": "generated",
+    "page": "TextInput",
+    "sectionId": "1:4004",
+    "contractId": "astryx.text-input",
+    "result": {
+      "createdNodeIds": [
+        "1:4003"
+      ],
+      "results": [
+        {
+          "name": "TextInput",
+          "contractId": "astryx.text-input",
+          "nodeId": "1:4003",
+          "key": "41fa657994802a20051df078feb917763de8b5e2",
+          "variants": 9,
+          "properties": [
+            "Is Required#1:1056",
+            "Is Disabled#1:1066",
+            "Has Clear#1:1076",
+            "Label#1:1086",
+            "Placeholder#1:1096",
+            "Type",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — amended rebuiltVariants=9; nodeId=1:4003; matchDeveloped left unset."
+    ],
+    "defects": [
+      "Missing light-gray border / leading-icon treatments shown in TextInput docs.",
+      "Placeholder hierarchy not demonstrated vs examples/astryx/receipts/site/TextInput.png."
+    ],
+    "reference": "examples/astryx/receipts/site/TextInput.png",
+    "reviewSurface": "cream-#F8F4ED-component-set"
+  },
+  "fingerprint": {
+    "v6": "v6:1777886922",
+    "lineCount": 281,
+    "sampleLines": [
+      ":COMPONENT_SET/TextInput|fill|[]",
+      ":COMPONENT_SET/TextInput|radius|5,5,5,5",
+      ":COMPONENT_SET/TextInput|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/TextInput|description|TextInput â generated from contract astryx.text-input v0.1.0",
+      ":COMPONENT_SET/TextInput|propdef|Has Clear#1:1076:BOOLEAN=false",
+      ":COMPONENT_SET/TextInput|propdef|Is Disabled#1:1066:BOOLEAN=false",
+      ":COMPONENT_SET/TextInput|propdef|Is Required#1:1056:BOOLEAN=false",
+      ":COMPONENT_SET/TextInput|propdef|Label#1:1086:TEXT=Email",
+      ":COMPONENT_SET/TextInput|propdef|Placeholder#1:1096:TEXT=you@example.com",
+      ":COMPONENT_SET/TextInput|propdef|Size:VARIANT=Md",
+      ":COMPONENT_SET/TextInput|propdef|Type:VARIANT=Text",
+      "/0:COMPONENT/Type=Text, Size=Md|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Type=Text, Size=Md|radius|0,0,0,0",
+      "/0:COMPONENT/Type=Text, Size=Md|layout|VERTICAL MIN/MIN gap 4 pad 0,0,0,0",
+      "/0:COMPONENT/Type=Text, Size=Md|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Type=Text, Size=Md|bound:itemSpacing|spacing-1",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.30588236451148987,\"g\":0.3764705955982208,\"b\":0.43529412150382996},\"boundVariables\":{\"color\":{\"var\":\"color-text-secondary\"}}}]",
+      "/0/0:TEXT/label|radius|0,0,0,0",
+      "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
+      "/0/0:TEXT/label|text|\"Email\" 10px {\"family\":\"Inter\",\"style\":\"Medium\"}"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Type enum → Text/Password/Email",
+      "TEXT Label",
+      "Size enum → Md/Sm/Lg",
+      "TEXT Placeholder",
+      "BOOLEAN Is Required",
+      "BOOLEAN Is Disabled",
+      "BOOLEAN Has Clear"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Type=Text, Size=Md",
+        "Type=Text, Size=Sm",
+        "Type=Text, Size=Lg",
+        "Type=Password, Size=Md",
+        "Type=Password, Size=Sm",
+        "Type=Password, Size=Lg",
+        "Type=Email, Size=Md",
+        "Type=Email, Size=Sm",
+        "Type=Email, Size=Lg"
+      ],
+      "propDefs": [
+        {
+          "name": "Is Required#1:1056",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Is Disabled#1:1066",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Has Clear#1:1076",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:1086",
+          "type": "TEXT",
+          "defaultValue": "Email",
+          "variantOptions": null
+        },
+        {
+          "name": "Placeholder#1:1096",
+          "type": "TEXT",
+          "defaultValue": "you@example.com",
+          "variantOptions": null
+        },
+        {
+          "name": "Type",
+          "type": "VARIANT",
+          "defaultValue": "Text",
+          "variantOptions": [
+            "Text",
+            "Password",
+            "Email"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Md",
+          "variantOptions": [
+            "Md",
+            "Sm",
+            "Lg"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Type=Text, Size=Md",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "spacing-1"
+        },
+        "w": 135,
+        "h": 49,
+        "childTypes": [
+          "TEXT/label",
+          "FRAME/field"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T12:02:33.399Z",
+  "nodeId": "1:4003"
+}

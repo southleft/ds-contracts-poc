@@ -75,6 +75,11 @@
       "parts": {
         "tooltip-trigger__wrapper": {
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip-trigger__wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
           "declared": {
             "display": "block",
             "aspect-ratio": "1 / 1"
@@ -84,7 +89,7 @@
               "element": "button",
               "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
-                "display": "inline-flex",
+                "display": "flex",
                 "align": "center",
                 "justify": "center"
               },

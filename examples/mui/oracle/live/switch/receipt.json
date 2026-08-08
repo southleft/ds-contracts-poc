@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "stem": "switch",
+  "componentId": "mui.switch",
+  "runId": "exact-conversion-finish-wave2",
+  "status": "completed",
+  "session": {
+    "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+    "fileName": "MUI Test 1",
+    "nodeIds": {
+      "componentSet": "21:624",
+      "controlledVariant": "21:512",
+      "controlledPart": "21:512"
+    }
+  },
+  "stepsCompleted": [
+    "emit-apply",
+    "dump-readback",
+    "controlled-edit",
+    "detect-drift",
+    "restore",
+    "compare-offline"
+  ],
+  "artifacts": {
+    "bundleOrBatch": "examples/mui/figma/mui.bundle.json",
+    "dumpReadback": "examples/mui/oracle/live/switch/dump.readback.json",
+    "editRestore": "examples/mui/oracle/live/switch/edit-restore.json",
+    "compileReceipt": "examples/mui/receipts/figma/COMPILE-RECEIPT.md",
+    "offlineReport": "examples/mui/oracle/report.json"
+  },
+  "offlineVsLive": {
+    "agreement": true,
+    "offlineCommand": "npm run mui:oracle:offline",
+    "offlineReport": "examples/mui/oracle/report.json",
+    "notes": "Live canvas on MUI Test 1 agrees with offline oracle for this stem. Offline summary 30 MATCH · 2 PENDING · 0 FAIL / 32 facts. Remaining PENDING are text-field awaiting-seed only (not liveSessionMinimum). Dump: live-fingerprint-1. Edit/restore: paddingTop detach+rebinding verified in edit-restore.json."
+  },
+  "liveOnlyDefects": []
+}

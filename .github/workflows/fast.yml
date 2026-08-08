@@ -198,13 +198,81 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run v1:definition:check
 
+      - name: test accuracy contract gate falsifications
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:accuracy-contract
+
+      - name: accuracy:check (declared grammar and R1–R6 ratchets)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run accuracy:check
+
+      - name: mui oracle corpus freeze gate
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run mui:oracle:corpus:check
+
+      - name: test mui oracle offline falsifications
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:mui-oracle-offline
+
+      - name: mui oracle offline score (no silent UNSUPPORTED/REFUSED success)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run mui:oracle:offline
+
+      - name: mui oracle live receipt schema (templates ok; agreement needs repro)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run mui:oracle:live:check
+
+      - name: live-figma:evidence:check (V1-EVID-04 live receipt machine twin)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run live-figma:evidence:check
+
+      - name: test:live-figma-evidence (receipt gate refuses forged clean edit)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:live-figma-evidence
+
+      - name: console-loop:all:evidence:check (first-party + MUI + foreign corpora)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run console-loop:all:evidence:check
+
+      - name: visual-truth:check (headless scorecard pins + per-lane RATCHET floors)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run visual-truth:check
+
+      - name: test:console-loop-evidence (first-party loop gate)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:console-loop-evidence
+
+      - name: test:console-loop-mui-evidence (MUI loop gate)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:console-loop-mui-evidence
+
+      - name: human-gates:inventory (pilot/Wave8/publish/second-impl still open)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run human-gates:inventory
+
+      - name: mui 50% denominator freeze (Wave 5 — no shrink)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run mui:denominator:check
+
+      - name: roundtrip:uui:fresh (accuracy evidence regenerates byte-identically)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run roundtrip:uui:fresh
+
       - name: generation:atomic:check (a late refusal leaves output untouched)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run generation:atomic:check
 
+      - name: figma:proposal:atomic:check (strict and batch refusals write nothing)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run figma:proposal:atomic:check
+
       - name: provenance:check (stale source cannot silently revert an approved design change)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run provenance:check
+
+      - name: workflow-spine:check (channel-diff + anatomy + merge + preview + adoption + G7 + summarize + spec subset)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run workflow-spine:check
 
       - name: snapshot:schema:check (malformed and future parity snapshots refuse by path)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
@@ -332,6 +400,14 @@ jobs:
       - name: variant-drift:check (the differ catches a hand edit inside ONE variant)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run variant-drift:check
+
+      - name: exact-projection:check (structured axes refuse ambiguity and ragged matrices)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run exact-projection:check
+
+      - name: exact-proposal:check (strict proposal refuses legacy and semantic ambiguity)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run exact-proposal:check
 
       # The TOKEN half of `npm run parity`, split out so it can be automated.
       # parity itself is excluded from every lane (it needs a snapshot younger

@@ -68,6 +68,28 @@ export interface CapturedTokenLayer {
   skipped: CapturedTokenSkip[];
 }
 
+/** U+2024 ONE DOT LEADER — the Eventz field case: variables named
+ *  "spacing/1․5" whose middle character LOOKS like a dot but is not one, so
+ *  the dot-form path fell outside the token-ref grammar ([a-z0-9.-]) and 16
+ *  bindings refused by name. */
+export const ONE_DOT_LEADER = '․';
+
+/** THE token-path fold for a Figma variable name — one rule, shared by the
+ *  captured-token layer (registration) and core/propose-figma.ts dotPath
+ *  (binding refs), so a folded name resolves end to end:
+ *    · '/' → '.'  (grouping, unchanged)
+ *    · U+2024 ONE DOT LEADER → '-'  (dump v1.16): '-' rather than '.' because
+ *      the designer's "1․5" is ONE path segment, and a real dot would split
+ *      it into two ("spacing.1.5"), changing the tree's depth.
+ *  The fold is a RENAME relative to the canvas variable — callers receipt it
+ *  (propose notes; the collision rule below refuses a folded name whose
+ *  target path another variable already owns). */
+export function foldVariablePath(name: string): { path: string; folded: boolean } {
+  const dotted = name.split('/').join('.');
+  if (!dotted.includes(ONE_DOT_LEADER)) return { path: dotted, folded: false };
+  return { path: dotted.split(ONE_DOT_LEADER).join('-'), folded: true };
+}
+
 /** Nested DTCG tree from flat entries (the mint-tokens tree shape). */
 function treeFromEntries(entries: CapturedTokenEntry[]): Record<string, unknown> {
   const tree: Record<string, unknown> = {};
@@ -102,11 +124,27 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
     if (isDumpSet(value)) for (const variant of value.variants) walk(variant);
   }
 
+  // Fold pass (dump v1.16): a folded path landing on a path another variable
+  // already owns is a COLLISION — the folded entry refuses by name (the
+  // original occupant keeps the path; a silent merge would resolve one
+  // variable's refs to the other's value).
+  const unfoldedPaths = new Set(
+    Object.keys(vars).map((name) => foldVariablePath(name)).filter((f) => !f.folded).map((f) => f.path),
+  );
   const entries: CapturedTokenEntry[] = [];
   const skipped: CapturedTokenSkip[] = [];
+  const claimedFolded = new Set<string>();
   for (const [name, cap] of Object.entries(vars)) {
     if (!cap || typeof cap !== 'object') continue;
-    const path = name.split('/').join('.');
+    const { path, folded } = foldVariablePath(name);
+    if (folded && (unfoldedPaths.has(path) || claimedFolded.has(path))) {
+      skipped.push({
+        name,
+        reason: `U+2024 fold target "${path}" collides with another captured variable — not registrable; rename the variable or map it manually`,
+      });
+      continue;
+    }
+    if (folded) claimedFolded.add(path);
     if (!/^[a-z0-9.-]+$/i.test(path)) {
       skipped.push({
         name,

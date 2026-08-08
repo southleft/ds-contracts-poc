@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "icon-button",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/icon-button.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "83:1708",
+  "cellNodeId": "83:1702",
+  "cellName": "Size=Large, Color=Default",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 62.732919254658384,
+    "pctAAUnmasked": 24.84472049689441,
+    "pctAAMasked": 24.84472049689441,
+    "maskCoveragePct": 0,
+    "canvasPx": "13x23",
+    "realPx": "14x13",
+    "inkCanvasPct": 52.17391304347826,
+    "inkRealPct": 28.26086956521739
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/icon-button.png",
+  "referenceSha256": "c26d63bfb0a32f63166ece4038e666935d2ef166a93db99654312a7ac90150f6",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/icon-button.png",
+  "canvasShotSha256": "c18fe343a10e057085ea8ae5802f1040be9622d9929f9e59a42084c93dab6e67",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/icon-button.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.7692307692307692,
+  "inkDelta": 23.913043478260867,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.77, inkDelta=23.9)"
+}

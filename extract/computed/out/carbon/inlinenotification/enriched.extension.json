@@ -152,6 +152,70 @@
           "min-width": {
             "$value": "288px",
             "$type": "dimension"
+          },
+          "border-top-color": {
+            "high": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "border-top-width": {
+            "high": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "low": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-right-color": {
+            "high": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "border-right-width": {
+            "high": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "low": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-color": {
+            "high": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#161616",
+              "$type": "color"
+            }
+          },
+          "border-bottom-width": {
+            "high": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "low": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "showcase-width": {
+            "$value": "428px",
+            "$type": "dimension"
           }
         },
         "inline-notification-details": {
@@ -338,8 +402,14 @@
             "$type": "color"
           },
           "color": {
-            "$value": "#000000",
-            "$type": "color"
+            "high": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "low": {
+              "$value": "#000000",
+              "$type": "color"
+            }
           },
           "outline-color": {
             "$value": "#00000000",

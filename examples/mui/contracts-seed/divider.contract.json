@@ -1,0 +1,52 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.divider",
+  "name": "Divider",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Orientation held fixed at horizontal (block stage): a vertical divider needs a flex parent with height, which conflicts with the block stage an <hr> needs for full-bleed width. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "hr"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "fullWidth",
+          "inset",
+          "middle"
+        ]
+      },
+      "default": "fullWidth",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "fullWidth": "FullWidth",
+            "inset": "Inset",
+            "middle": "Middle"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Divider"
+    }
+  }
+}

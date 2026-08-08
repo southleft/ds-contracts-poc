@@ -1,0 +1,92 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/atoms-icon-button.contract.json (ds.atoms-icon-button v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  background-color: var(--comp-button-primary-color-background-default);
+  padding-inline: var(--spacing-1-5);
+  padding-block: var(--spacing-1-5);
+  border-radius: var(--border-radius-8);
+  gap: var(--spacing-2);
+  width: fit-content;
+  height: fit-content;
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.variant-knockout {
+  background-color: var(--comp-button-color-background-knockout);
+}
+
+.variant-secondary {
+  background-color: var(--comp-button-color-background-default);
+}
+
+.variant-bare {
+  background-color: var(--color-background-none);
+}
+
+.variant-bareKnockout {
+  background-color: var(--color-background-none);
+}
+
+.root:focus-visible {
+  outline-color: var(--comp-border-focus-ring);
+}
+
+.root:focus-visible {
+  outline-width: var(--imported-atoms-icon-button-state-focus-visible-outline-width);
+}
+
+.variant-primary:hover:not(:disabled) {
+  background-color: var(--comp-button-primary-color-background-hover);
+}
+
+.variant-knockout:hover:not(:disabled) {
+  background-color: var(--comp-button-color-background-knockout-hover);
+}
+
+.variant-secondary:hover:not(:disabled) {
+  background-color: var(--comp-button-color-background-hover);
+}
+
+.variant-bare:hover:not(:disabled) {
+  background-color: var(--comp-button-color-background-hover);
+}
+
+.variant-bareKnockout:hover:not(:disabled) {
+  background-color: var(--comp-button-color-background-hover);
+}
+
+.variant-primary:active:not(:disabled) {
+  background-color: var(--comp-button-primary-color-background-active);
+}
+
+.variant-knockout:active:not(:disabled) {
+  background-color: var(--comp-button-color-background-knockout-active);
+}
+
+.variant-secondary:active:not(:disabled) {
+  background-color: var(--comp-button-color-background-default);
+}
+
+.variant-bare:active:not(:disabled) {
+  background-color: var(--color-background-none);
+}
+
+.variant-bareKnockout:active:not(:disabled) {
+  background-color: var(--color-background-none);
+}
+
+.Icon {
+  display: flex;
+}

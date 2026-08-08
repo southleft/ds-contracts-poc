@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "runId": "exact-conversion-finish-wave2",
+  "library": "mui",
+  "package": "@mui/material@9.2.0",
+  "exportListAuthority": "examples/mui/.mui-sandbox/node_modules/@mui/material (~62–63 families after sub-part fold; docs/22-generality.md §8.3)",
+  "selectionRule": "Stratified from the Material export family list — not tractability-picked. Pilot members reuse existing capture where they already stratify; TextField and SpeedDial are new for nested identity and intentional UNSUPPORTED.",
+  "authoredBeforeOracle": true,
+  "components": [
+    {
+      "id": "mui.button",
+      "stem": "button",
+      "stratum": ["primitive", "state-axis"],
+      "inPilot": true,
+      "role": "Large cartesian + disabled stateProp"
+    },
+    {
+      "id": "mui.chip",
+      "stem": "chip",
+      "stratum": ["primitive"],
+      "inPilot": true,
+      "role": "Variant × color × size product"
+    },
+    {
+      "id": "mui.switch",
+      "stem": "switch",
+      "stratum": ["state-axis"],
+      "inPilot": true,
+      "role": "checked as enum axis (not pseudo-state)"
+    },
+    {
+      "id": "mui.checkbox",
+      "stem": "checkbox",
+      "stratum": ["state-axis"],
+      "inPilot": true,
+      "role": "Tri-state via $props"
+    },
+    {
+      "id": "mui.slider",
+      "stem": "slider",
+      "stratum": ["primitive", "continuous"],
+      "inPilot": true,
+      "role": "Fixed value; callback props named"
+    },
+    {
+      "id": "mui.card",
+      "stem": "card",
+      "stratum": ["bounded-molecule"],
+      "inPilot": true,
+      "role": "childWrap composition"
+    },
+    {
+      "id": "mui.accordion",
+      "stem": "accordion",
+      "stratum": ["bounded-molecule", "state-axis"],
+      "inPilot": true,
+      "role": "expanded axis + childrenSpec"
+    },
+    {
+      "id": "mui.tabs",
+      "stem": "tabs",
+      "stratum": ["bounded-molecule", "composition"],
+      "inPilot": true,
+      "role": "Tab childrenSpec"
+    },
+    {
+      "id": "mui.autocomplete",
+      "stem": "autocomplete",
+      "stratum": ["bounded-complex"],
+      "inPilot": true,
+      "role": "renderInput → TextField; multi-select; listbox closed by policy"
+    },
+    {
+      "id": "mui.dialog",
+      "stem": "dialog",
+      "stratum": ["portal-molecule"],
+      "inPilot": true,
+      "role": "portalCapture; interaction states [] by portal policy"
+    },
+    {
+      "id": "mui.table",
+      "stem": "table",
+      "stratum": ["supported-organism"],
+      "inPilot": true,
+      "role": "Inlined rows; table box LOWERED; stickyHeader REFUSED by name"
+    },
+    {
+      "id": "mui.text-field",
+      "stem": "text-field",
+      "stratum": ["nested-instance", "input-field"],
+      "inPilot": true,
+      "role": "Seeded nested start/end InputAdornment instances with contract/anchor identity plus named text-style identity",
+      "status": "in-pilot"
+    },
+    {
+      "id": "mui.speed-dial",
+      "stem": "speed-dial",
+      "stratum": ["unsupported-organism"],
+      "inPilot": false,
+      "role": "Nested Fab+actions hard class — intentional UNSUPPORTED / named refusal, never silent partial",
+      "status": "negative-control"
+    }
+  ],
+  "liveSessionMinimum": ["button", "switch", "table"],
+  "acceptanceCommands": [
+    "npm run test:accuracy-contract",
+    "npm run accuracy:check",
+    "npm run conformance",
+    "npm run conformance:canvas",
+    "npm run exact-projection:check",
+    "npm run exact-proposal:check",
+    "node examples/mui/scripts/figma-compile-receipt.mjs"
+  ]
+}

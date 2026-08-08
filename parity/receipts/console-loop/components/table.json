@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "table",
+  "contract": "contracts/table.contract.json",
+  "script": "parity/receipts/console-loop/emitted/42-table.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:08.063Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1623",
+    "page": "Table",
+    "sectionId": "1:1624",
+    "result": {
+      "createdNodeIds": [
+        "1:1623"
+      ],
+      "results": [
+        {
+          "name": "Table",
+          "contractId": "ds.table",
+          "nodeId": "1:1623",
+          "key": "38fb59dbe0b2d376d3f313f92f384b6df71b5053",
+          "variants": 2,
+          "properties": [
+            "Density"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1624 captured (ok).",
+      "Table: 2 variant(s); type COMPONENT_SET; page Table.",
+      "Props: Density.",
+      "First root fill bound to color/surface/raised.",
+      "Sample text: \"Name\", \"Role\", \"Status\", \"Ada Lovelace\", \"Engineering\", \"Active\", \"Ada Lovelace\", \"Engineering\".",
+      "Spot-check: two table previews with Name/Role/Status header + 3 data rows; header fill distinct; selected/hover row tint visible; row dividers sane; no layout defects."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:772848675",
+    "lineCount": 409,
+    "sampleLines": [
+      ":COMPONENT_SET/Table|fill|[]",
+      ":COMPONENT_SET/Table|radius|5,5,5,5",
+      ":COMPONENT_SET/Table|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Table|description|Table — generated from contract ds.table v1.1.0",
+      ":COMPONENT_SET/Table|propdef|Density:VARIANT=Comfortable",
+      "/0:COMPONENT/Density=Comfortable|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/surface/raised\"}}}]",
+      "/0:COMPONENT/Density=Comfortable|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
+      "/0:COMPONENT/Density=Comfortable|radius|8,8,8,8",
+      "/0:COMPONENT/Density=Comfortable|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Density=Comfortable|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Density=Comfortable|bound:bottomLeftRadius|radius/card",
+      "/0:COMPONENT/Density=Comfortable|bound:bottomRightRadius|radius/card",
+      "/0:COMPONENT/Density=Comfortable|bound:strokeBottomWeight|border-width/100",
+      "/0:COMPONENT/Density=Comfortable|bound:strokeLeftWeight|border-width/100",
+      "/0:COMPONENT/Density=Comfortable|bound:strokeRightWeight|border-width/100",
+      "/0:COMPONENT/Density=Comfortable|bound:strokeTopWeight|border-width/100",
+      "/0:COMPONENT/Density=Comfortable|bound:topLeftRadius|radius/card",
+      "/0:COMPONENT/Density=Comfortable|bound:topRightRadius|radius/card",
+      "/0:COMPONENT/Density=Comfortable|bound:width|size/table/width",
+      "/0/0:FRAME/header|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.9529411792755127,\"g\":0.95686274766922,\"b\":0.9647058844566345},\"boundVariables\":{\"color\":{\"var\":\"color/surface/sunken\"}}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Density"
+    ],
+    "observed": {
+      "variantNames": [
+        "Density=Comfortable",
+        "Density=Compact"
+      ],
+      "propDefs": [
+        {
+          "name": "Density",
+          "type": "VARIANT",
+          "defaultValue": "Comfortable",
+          "variantOptions": [
+            "Comfortable",
+            "Compact"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Density=Comfortable",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 8,
+        "fillVarName": "color/surface/raised",
+        "padBound": {
+          "width": "size/table/width",
+          "topLeftRadius": "radius/card",
+          "topRightRadius": "radius/card",
+          "bottomLeftRadius": "radius/card",
+          "bottomRightRadius": "radius/card",
+          "strokeTopWeight": "border-width/100",
+          "strokeBottomWeight": "border-width/100",
+          "strokeLeftWeight": "border-width/100",
+          "strokeRightWeight": "border-width/100",
+          "fills": "color/surface/raised",
+          "strokes": "color/border/subtle"
+        },
+        "textChild": [
+          {
+            "name": "label",
+            "chars": "Name",
+            "fontSize": 14
+          },
+          {
+            "name": "label",
+            "chars": "Role",
+            "fontSize": 14
+          },
+          {
+            "name": "label",
+            "chars": "Status",
+            "fontSize": 14
+          },
+          {
+            "name": "label",
+            "chars": "Ada Lovelace",
+            "fontSize": 14
+          },
+          {
+            "name": "label",
+            "chars": "Engineering",
+            "fontSize": 14
+          },
+          {
+            "name": "label",
+            "chars": "Active",
+            "fontSize": 14
+          },
+          {
+            "name": "label",
+            "chars": "Ada Lovelace",
+            "fontSize": 14
+          },
+          {
+            "name": "label",
+            "chars": "Engineering",
+            "fontSize": 14
+          }
+        ],
+        "w": 480,
+        "h": 166,
+        "childNames": [
+          "header:FRAME",
+          "body:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

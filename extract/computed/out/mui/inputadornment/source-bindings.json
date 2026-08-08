@@ -1,0 +1,66 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "InputAdornment",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "start",
+      "axisValues": {
+        "position": "start"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-gsqgev-MuiTypography-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "end",
+      "axisValues": {
+        "position": "end"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-gsqgev-MuiTypography-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "start",
+      "axisValues": {
+        "position": "start"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-navhnp-MuiInputAdornment-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "end",
+      "axisValues": {
+        "position": "end"
+      },
+      "token": "palette-action-active",
+      "varName": "--mui-palette-action-active",
+      "anchor": {
+        "selector": ".css-1t5wmfw-MuiInputAdornment-root"
+      }
+    }
+  ],
+  "skips": [],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

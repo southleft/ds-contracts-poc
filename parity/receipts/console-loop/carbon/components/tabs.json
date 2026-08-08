@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "kind": "console-loop-carbon-component",
+  "status": "completed",
+  "component": "tabs",
+  "contract": "examples/carbon/contracts/tabs.contract.json",
+  "script": "examples/carbon/figma/tabs.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:07.520Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload + eval(async IIFE)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:5947",
+    "mode": "amended",
+    "page": "Tabs",
+    "sectionId": "1:5950",
+    "contractId": "carbon.tabs",
+    "result": {
+      "createdNodeIds": [
+        "1:5947"
+      ],
+      "results": [
+        {
+          "name": "Tabs",
+          "contractId": "carbon.tabs",
+          "nodeId": "1:5947",
+          "key": "dcaef014cdedb33b43213ec40f2fd14ea0b388a1",
+          "variants": 3,
+          "properties": [
+            "State"
+          ],
+          "wiredReactions": 1
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Cream surface improved contrast.",
+      "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — amended rebuiltVariants=3; nodeId=1:5947; matchDeveloped left unset.",
+      "Re-synced via console-loop batch 2026-08-07T16:32:44.350Z — amended rebuiltVariants=3; nodeId=1:5947; labels Overview/Activity/Settings full (not truncated); matchDeveloped left unset.",
+      "Re-synced via clientStorage chunks (n=15, total=85064); eval skipped unchanged nodeId=1:5947; labels Overview/Activity/Settings; label wrappers clipsContent=true (expected false). matchDeveloped left false.",
+      "Force-rebuilt via clientStorage chunks (n=15, total=85367); amended rebuiltVariants=3 nodeId=1:5947; all 9 label-wrapper clipsContent=false; labels Overview/Activity/Settings intact. matchDeveloped left false."
+    ],
+    "defects": [
+      "Label truncation and missing Carbon selected underline/bar treatment vs computed tabs pairs."
+    ],
+    "reference": "parity/receipts/console-loop/carbon/refs/tabs.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "extract/computed/out/carbon/tabs/gate-shots/__default.png#content"
+  },
+  "fingerprint": {
+    "v6": "v6:3251309082",
+    "lineCount": 271,
+    "sampleLines": [
+      ":COMPONENT_SET/Tabs|fill|[]",
+      ":COMPONENT_SET/Tabs|radius|5,5,5,5",
+      ":COMPONENT_SET/Tabs|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Tabs|description|Tabs â generated from contract carbon.tabs v0.2.0 â",
+      ":COMPONENT_SET/Tabs|propdef|State:VARIANT=Default",
+      "/0:COMPONENT/State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/State=Default|radius|0,0,0,0",
+      "/0:COMPONENT/State=Default|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/State=Default|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/State=Default|bound:height|imported/shared/size-40",
+      "/0:COMPONENT/State=Default|bound:minWidth|imported/shared/size-0",
+      "/0:COMPONENT/State=Default|bound:width|imported/tabs/root/width",
+      "/0:COMPONENT/State=Default|reaction|ON_HOVER→CHANGE_TO State=Hover",
+      "/0:COMPONENT/State=Default|reaction|ON_PRESS→CHANGE_TO State=Active",
+      "/0/0:FRAME/part-1|fill|[]",
+      "/0/0:FRAME/part-1|radius|0,0,0,0",
+      "/0/0:FRAME/part-1|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/part-1|sizing|FIXED/FIXED AUTO",
+      "/0/0:FRAME/part-1|bound:height|imported/shared/size-40",
+      "/0/0:FRAME/part-1|bound:width|imported/tabs/part-1/width"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "State=Default",
+        "State=Active",
+        "State=Hover"
+      ],
+      "propDefs": [
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Active",
+            "Hover"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/tabs/root/width",
+          "height": "imported/shared/size-40",
+          "minWidth": "imported/shared/size-0"
+        },
+        "w": 328,
+        "h": 40,
+        "childTypes": [
+          "FRAME/part-1"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T16:52:14.326Z",
+  "nodeId": "1:5947",
+  "reSyncNote": "Force-rebuilt via clientStorage chunks (n=15, total=85367); amended rebuiltVariants=3 nodeId=1:5947; all 9 label-wrapper clipsContent=false; labels Overview/Activity/Settings intact. matchDeveloped left false."
+}

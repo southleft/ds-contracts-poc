@@ -4215,10 +4215,6 @@
         "height": {
           "$value": "28px",
           "$type": "dimension"
-        },
-        "width": {
-          "$value": "136.359px",
-          "$type": "dimension"
         }
       },
       "choice-control": {
@@ -4270,34 +4266,6 @@
         }
       },
       "backdrop": {
-        "background-color": {
-          "unchecked": {
-            "$value": "{p.color-bg-surface}",
-            "$type": "color"
-          },
-          "checked": {
-            "$value": "{p.color-bg-fill-brand-selected}",
-            "$type": "color"
-          },
-          "indeterminate": {
-            "$value": "{p.color-bg-fill-brand-selected}",
-            "$type": "color"
-          }
-        },
-        "box-shadow": {
-          "unchecked": {
-            "$value": "rgba(138, 138, 138, 1) 0px 0px 0px 0.66px inset",
-            "$type": "shadow"
-          },
-          "checked": {
-            "$value": "rgba(48, 48, 48, 1) 0px 0px 0px 32px inset",
-            "$type": "shadow"
-          },
-          "indeterminate": {
-            "$value": "rgba(48, 48, 48, 1) 0px 0px 0px 32px inset",
-            "$type": "shadow"
-          }
-        },
         "background-color-state-active": {
           "unchecked": {
             "$value": "#fafafa",
@@ -4455,12 +4423,6 @@
           "$type": "color"
         }
       },
-      "choice-label": {
-        "width": {
-          "$value": "108.359px",
-          "$type": "dimension"
-        }
-      },
       "label": {
         "font-size": {
           "$value": "13px",
@@ -4548,56 +4510,6 @@
         }
       },
       "backdrop": {
-        "background-color": {
-          "unchecked": {
-            "$value": "{p.color-input-bg-surface}",
-            "$type": "color"
-          },
-          "checked": {
-            "$value": "{p.color-bg-fill-brand-selected}",
-            "$type": "color"
-          }
-        },
-        "border-bottom-color": {
-          "unchecked": {
-            "$value": "#8a8a8a",
-            "$type": "color"
-          },
-          "checked": {
-            "$value": "#303030",
-            "$type": "color"
-          }
-        },
-        "border-left-color": {
-          "unchecked": {
-            "$value": "#8a8a8a",
-            "$type": "color"
-          },
-          "checked": {
-            "$value": "#303030",
-            "$type": "color"
-          }
-        },
-        "border-right-color": {
-          "unchecked": {
-            "$value": "#8a8a8a",
-            "$type": "color"
-          },
-          "checked": {
-            "$value": "#303030",
-            "$type": "color"
-          }
-        },
-        "border-top-color": {
-          "unchecked": {
-            "$value": "#8a8a8a",
-            "$type": "color"
-          },
-          "checked": {
-            "$value": "#303030",
-            "$type": "color"
-          }
-        },
         "background-color-state-active": {
           "unchecked": {
             "$value": "#fafafa",
@@ -4955,10 +4867,6 @@
             "$value": "32px",
             "$type": "dimension"
           }
-        },
-        "width": {
-          "$value": "288px",
-          "$type": "dimension"
         }
       },
       "label": {

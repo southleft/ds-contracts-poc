@@ -451,7 +451,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 188/188 evals as of `evals/results.json` — by claim family: 29 refusal, 32 determinism, 45 detection, 58 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
+| **Eval suite** | 204/204 evals as of `evals/results.json` — by claim family: 33 refusal, 32 determinism, 56 detection, 60 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
@@ -598,14 +598,18 @@ captured at all*, and it is the largest qualifier in this document.
   element; the marker grammar resolves package *exports* only, and the pinned
   sandbox has no `@mui/icons-material`. A hand-drawn chevron would be a
   fabricated canvas fact, so there is none.
-- **Fonts are not loaded in the harness.** Carbon's `styles.css` carries 105
-  `@font-face` blocks, every `src` an Akamai CDN URL, and the harness is
-  network-free — so IBM Plex is not loaded and the metrics come from the fallback
-  stack. (`document.fonts.check` returns `true` for fonts that are certainly not
-  installed; it reports "can this be rendered", which fallback always satisfies.
-  It proves nothing.) Both sides of the gate degrade identically, so percentages
-  are unaffected; absolute text widths are fallback widths, and pixel-AA is 0
-  everywhere for that reason plus the uncarried type family.
+- **Fonts were not loaded in this harness run.** Carbon's `styles.css` carries
+  105 `@font-face` blocks, every `src` an Akamai CDN URL, and the harness is
+  network-free — so IBM Plex was not loaded and the metrics come from the
+  fallback stack. (`document.fonts.check` returns `true` for fonts that are
+  certainly not installed; it reports "can this be rendered", which fallback
+  always satisfies. It proves nothing.) Both sides of the gate degrade
+  identically, so percentages are unaffected; absolute text widths are
+  fallback widths, and pixel-AA is 0 everywhere for that reason plus the
+  uncarried type family. (Since 2026-08-08 a config may declare committed
+  font faces — docs/23 §C.5; Carbon's Plex ships in its sandbox's
+  `@ibm/plex-sans` but its config is not yet configured, so these numbers
+  stand as measured.)
 - **The `bound`-probe path spells a ref `{button-primary}` as
   `--button-primary`, not `--cds-button-primary`.** Shared pre-existing
   limitation across MUI, Tailwind and Carbon; harmless today because seed
@@ -635,13 +639,13 @@ denominator. Here it is.
 
 | library | contracts committed | of those, pinned by the drift instrument | library size | **coverage** | where the denominator comes from |
 |---|---|---|---|---|---|
-| MUI (`@mui/material@9.2.0`) | 14 | 14 | 135 | **10.4%** | capitalised component directories in the pinned sandbox (measured, §10) |
+| MUI (`@mui/material@9.2.0`) | 31 | 31 | 135 | **23.0%** | capitalised component directories in the pinned sandbox (measured, §10) |
 | Flowbite / Tailwind (`flowbite-react@0.12.17`) | 5 | 5 | 46 | **10.9%** | component directories in the pinned sandbox (measured, §10) |
 | Altitude (`altitude-web-components@1.0.2`) | 8 | 8 | 67 | **11.9%** | component directories in the published package (measured, §10; `examples/altitude/PROVENANCE.md` says "65 components" — the 2-directory gap is `bundle` / `focus-trap`, which are not components) |
 | Polaris (`@shopify/polaris@13.9.5`) | 12 | 12 | 180 | **6.7%** | **this repo's own extractor** over the whole library — `extract/pilots/ENTERPRISE-GAUNTLET.md` (180 extracted, 15 named-skipped) |
 | Carbon (`@carbon/react@1.112.0`) | 10 | 10 | 243 | **4.1%** | **this repo's own extractor** over the whole library — same table (243 extracted, 62 named-skipped) |
 | Astryx (`@astryxdesign/core@0.1.6`) | 13 | **5** | 222 | **5.9%** (2.3% computed-captured) | **this repo's own extractor** over the whole library — `examples/astryx/extraction/CENSUS.md` (222 extracted, 15 named-skipped) |
-| **total** | **62** | **54** | **893** | **6.9%** | |
+| **total** | **79** | **71** | **893** | **8.0%** | |
 
 **How to read it — both halves are true, and the second is the one usually
 left out:**
@@ -662,7 +666,7 @@ left out:**
   Chip, Card, Checkbox, Tag, Avatar, Divider. The hardest thing in the corpus is
   MUI's `Table`, and the hardest classes (data grid, tree, virtualized list,
   date picker, rich text, charts) are captured **nowhere**. Read every floor
-  percentage as "on the easy 6.9%".
+  percentage as "on the easy 8.0%".
 - **The denominators do not lean against us. They are INCOHERENT** — which is
   a different thing, and this document said the wrong one until 2026-08-03.
   MUI's 135 counts every capitalised directory including utilities (`NoSsr`,
@@ -671,7 +675,7 @@ left out:**
   included. That much was true. What was **not** true is the conclusion drawn
   from it — that the numbers are merely conservative. §8.3a below shows the
   column mixes three units against two different artifacts, and re-measures it.
-- **The gap between 62 and 54** is Astryx: 13 committed contracts, only 5 of
+- **The gap between 79 and 71** is Astryx: 13 committed contracts, only 5 of
   which went through the computed-capture pipeline and are pinned by
   `regate-baseline.json`. The other 8 came from the static Phase-A path and
   carry no captured floor. A contract existing is not the same as a contract
@@ -725,13 +729,13 @@ clause, in [docs/23 §C.1.3](23-known-limitations.md#c13-the-per-library-fractio
 
 | library | contracts | published denominator | unit | auditable from a clone? | **published** | filtered denominator | **filtered** |
 |---|---|---|---|---|---|---|---|
-| MUI (`@mui/material@9.2.0`) | 14 | 135 | PART | yes | **10.4%** | 116 | **12.1%** |
+| MUI (`@mui/material@9.2.0`) | 31 | 135 | PART | yes | **23.0%** | 116 | **26.7%** |
 | Flowbite (`flowbite-react@0.12.17`) | 5 | 46 | FAMILY | yes | **10.9%** | 45 | **11.1%** |
 | Altitude (`altitude-web-components@1.0.2`) | 8 | 67 | FAMILY | yes | **11.9%** | 64 | **12.5%** |
 | Polaris (`@shopify/polaris@13.9.5`) | 12 | 180 | PART | **NO** — clone `Shopify/polaris@2b1ea88` | **6.7%** | 98 *(substitute: the captured package's `build/esm/components`, 121 dirs)* | **12.2%** |
 | Carbon (`@carbon/react@1.112.0`) | 10 | 243 | PART | **NO** — clone `carbon-design-system/carbon@bc66fc71` | **4.1%** | 110 *(substitute: the captured package's `es/components`, 122 dirs)* | **9.1%** |
 | Astryx (`@astryxdesign/core@0.1.6`) | 13 | 222 | PART | yes | **5.9%** | 96 *(the package's own capitalised subpath exports, 99)* | **13.5%** |
-| **totals** | **62** | **893** | mixed | — | **6.9%** | **529** | **11.7%** |
+| **totals** | **79** | **893** | mixed | — | **8.8%** | **529** | **14.9%** |
 
 **The Polaris and Carbon rows are a SUBSTITUTION, not a filtering,** and must
 be read as such: their published denominators come from a clone whose
@@ -845,7 +849,7 @@ Figma account or a network call except `npm install`.
 npm install
 
 # ── the claim's own numbers ────────────────────────────────────────────────
-npm run eval                       # 188/188 as of evals/results.json
+npm run eval                       # 199/199 as of evals/results.json
 node -e "const r=require('./evals/results.json');console.log(r.passed+'/'+r.total)"
 
 # 54 drift rows, per library

@@ -1,0 +1,21 @@
+{
+  "library": "polaris",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileUrl": "https://www.figma.com/design/GnQnjSNBXtgtd2Ht0Hs1C8/DS-Contracts-Testing",
+  "kind": "console-loop-polaris-component",
+  "required": [
+    "avatar",
+    "badge",
+    "banner",
+    "button",
+    "checkbox",
+    "progress-bar",
+    "radio-button",
+    "spinner",
+    "tag",
+    "text",
+    "text-field",
+    "thumbnail"
+  ],
+  "recordedAt": "2026-08-06T05:50:06.433Z"
+}

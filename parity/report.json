@@ -1,13 +1,41 @@
 {
   "summary": {
-    "total": 0,
+    "total": 2,
     "acknowledged": 0,
     "pending": 0,
-    "bySurface": {}
+    "unmeasured": 1,
+    "bySurface": {
+      "figma": {
+        "mismatch": 2
+      }
+    }
   },
-  "findings": [],
+  "findings": [
+    {
+      "surface": "figma",
+      "classification": "mismatch",
+      "subject": "snapshot-stale",
+      "detail": "figma-components.json is 28.2 days old (max 14, override via MAX_SNAPSHOT_AGE_DAYS) — the Figma file has likely moved on",
+      "remedy": "Re-run parity/extract-figma.plugin.js and save fresh snapshots"
+    },
+    {
+      "surface": "figma",
+      "classification": "mismatch",
+      "subject": "snapshot-stale",
+      "detail": "figma-tokens.json is 28.2 days old (max 14, override via MAX_SNAPSHOT_AGE_DAYS) — the Figma file has likely moved on",
+      "remedy": "Re-run parity/extract-figma.plugin.js and save fresh snapshots"
+    }
+  ],
   "acknowledged": [],
   "pending": [],
+  "unmeasured": [
+    {
+      "subject": "canvas-variant-fingerprints",
+      "detail": "49 of 49 extracted set(s) carry no `variants` array, so per-variant canvas drift was NOT CHECKED — this is an unmeasured surface, not a clean one (AccordionItem, Avatar, AvatarGroup, Badge, Banner, Blockquote, BreadcrumbItem, Breadcrumbs, +41 more)",
+      "remedy": "Re-run parity/extract-figma.plugin.js in the live Figma file with the current version (it reads ds_contracts/canvasFingerprint + canvasSnapshot per variant and recomputes both) and save fresh parity/snapshots/figma-components.json",
+      "driftKind": "not-extracted"
+    }
+  ],
   "checkedContracts": [
     "ds.accordion-item@1.1.0",
     "ds.avatar-group@1.0.0",

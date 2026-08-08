@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "thumbnail",
+  "contract": "examples/polaris/contracts/thumbnail.contract.json",
+  "script": "examples/polaris/figma/thumbnail.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:39.023Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:10491",
+    "mode": "amended",
+    "page": "Thumbnail",
+    "sectionId": "1:10492",
+    "contractId": "polaris.thumbnail",
+    "result": {
+      "createdNodeIds": [
+        "1:10491"
+      ],
+      "results": [
+        {
+          "name": "Thumbnail",
+          "contractId": "polaris.thumbnail",
+          "nodeId": "1:10491",
+          "key": "3ea209fcfe107717266625fae1cd4135e6235624",
+          "variants": 4,
+          "properties": [
+            "Transparent#1:2990",
+            "Alt#1:2995",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-07T16:55:11.994Z",
+    "notes": [
+      "Re-synced n=13 total=74475; amended rebuiltVariants=4; part-0 radius now 8px (was 0). matchDeveloped left false."
+    ],
+    "defects": [
+      "0-radius gray squares; Polaris Thumbnails are rounded — geometry FAIL."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/thumbnail.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "examples/polaris/generated/html/thumbnail.html#first-item-inline-css"
+  },
+  "fingerprint": {
+    "v6": "v6:2374750881",
+    "lineCount": 71,
+    "sampleLines": [
+      ":COMPONENT_SET/Thumbnail|fill|[]",
+      ":COMPONENT_SET/Thumbnail|radius|5,5,5,5",
+      ":COMPONENT_SET/Thumbnail|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Thumbnail|description|Thumbnail â generated from contract polaris.thumbnail v0.4.0 â",
+      ":COMPONENT_SET/Thumbnail|propdef|Alt#1:2995:TEXT=Black choker necklace",
+      ":COMPONENT_SET/Thumbnail|propdef|Size:VARIANT=Medium",
+      ":COMPONENT_SET/Thumbnail|propdef|Transparent#1:2990:BOOLEAN=false",
+      "/0:COMPONENT/Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"p/color-bg-surface\"}}}]",
+      "/0:COMPONENT/Size=Medium|radius|8,8,8,8",
+      "/0:COMPONENT/Size=Medium|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Size=Medium|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Size=Medium|bound:bottomLeftRadius|p/border-radius-200",
+      "/0:COMPONENT/Size=Medium|bound:bottomRightRadius|p/border-radius-200",
+      "/0:COMPONENT/Size=Medium|bound:height|imported/thumbnail/root/height/medium",
+      "/0:COMPONENT/Size=Medium|bound:topLeftRadius|p/border-radius-200",
+      "/0:COMPONENT/Size=Medium|bound:topRightRadius|p/border-radius-200",
+      "/0/0:FRAME/part-0|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8509804010391235,\"g\":0.8509804010391235,\"b\":0.8509804010391235},\"boundVariables\":{}}]",
+      "/0/0:FRAME/part-0|radius|0,0,0,0",
+      "/0/0:FRAME/part-0|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/part-0|sizing|FIXED/FIXED ABSOLUTE"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Size enum → Medium/Extra Small/Small/Large",
+      "TEXT Alt",
+      "BOOLEAN Transparent",
+      "first-variant fill bound: p/color-bg-surface"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Medium",
+        "Size=Extra Small",
+        "Size=Small",
+        "Size=Large"
+      ],
+      "propDefs": [
+        {
+          "name": "Transparent#1:2990",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Alt#1:2995",
+          "type": "TEXT",
+          "defaultValue": "Black choker necklace",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Extra Small",
+            "Small",
+            "Large"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Medium",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 8,
+        "fillVarName": "p/color-bg-surface",
+        "padBound": {
+          "height": "imported/thumbnail/root/height/medium",
+          "topLeftRadius": "p/border-radius-200",
+          "topRightRadius": "p/border-radius-200",
+          "bottomLeftRadius": "p/border-radius-200",
+          "bottomRightRadius": "p/border-radius-200",
+          "fills": "p/color-bg-surface"
+        },
+        "w": 60,
+        "h": 60,
+        "childTypes": [
+          "FRAME/part-0"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T16:55:11.994Z",
+  "nodeId": "1:10491"
+}

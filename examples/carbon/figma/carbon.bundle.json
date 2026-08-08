@@ -6650,6 +6650,70 @@
             "min-width": {
               "$value": "288px",
               "$type": "dimension"
+            },
+            "border-top-color": {
+              "high": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#161616",
+                "$type": "color"
+              }
+            },
+            "border-top-width": {
+              "high": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "low": {
+                "$value": "1px",
+                "$type": "dimension"
+              }
+            },
+            "border-right-color": {
+              "high": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#161616",
+                "$type": "color"
+              }
+            },
+            "border-right-width": {
+              "high": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "low": {
+                "$value": "1px",
+                "$type": "dimension"
+              }
+            },
+            "border-bottom-color": {
+              "high": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#161616",
+                "$type": "color"
+              }
+            },
+            "border-bottom-width": {
+              "high": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "low": {
+                "$value": "1px",
+                "$type": "dimension"
+              }
+            },
+            "showcase-width": {
+              "$value": "428px",
+              "$type": "dimension"
             }
           },
           "inline-notification-details": {
@@ -6836,8 +6900,14 @@
               "$type": "color"
             },
             "color": {
-              "$value": "#000000",
-              "$type": "color"
+              "high": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "low": {
+                "$value": "#000000",
+                "$type": "color"
+              }
             },
             "outline-color": {
               "$value": "#00000000",
@@ -7065,29 +7135,16 @@
               "$value": "{text-primary}",
               "$type": "color"
             },
-            "width": {
-              "$value": "94.3125px",
-              "$type": "dimension"
-            },
             "outline-color-state-focus-visible": {
               "$value": "#0f62fe",
               "$type": "color"
             }
           },
-          "tabs-nav-item-label-wrapper": {
-            "width": {
-              "$value": "62.3125px",
-              "$type": "dimension"
-            }
-          },
+          "tabs-nav-item-label-wrapper": {},
           "tabs-nav-item-2": {
             "border-bottom-color": {
               "$value": "#e0e0e0",
               "$type": "color"
-            },
-            "width": {
-              "$value": "80px",
-              "$type": "dimension"
             },
             "border-bottom-color-state-active": {
               "$value": "#8d8d8d",
@@ -7102,12 +7159,7 @@
               "$type": "color"
             }
           },
-          "tabs-nav-item-label-wrapper-2": {
-            "width": {
-              "$value": "48px",
-              "$type": "dimension"
-            }
-          },
+          "tabs-nav-item-label-wrapper-2": {},
           "label-2": {
             "font-weight": {
               "$value": "400",
@@ -7118,18 +7170,9 @@
             "border-bottom-color": {
               "$value": "#e0e0e0",
               "$type": "color"
-            },
-            "width": {
-              "$value": "84.4688px",
-              "$type": "dimension"
             }
           },
-          "tabs-nav-item-label-wrapper-3": {
-            "width": {
-              "$value": "52.4688px",
-              "$type": "dimension"
-            }
-          },
+          "tabs-nav-item-label-wrapper-3": {},
           "label-3": {
             "font-weight": {
               "$value": "400",
@@ -8313,6 +8356,11 @@
                 },
                 "accordion__wrapper": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|accordion__wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "column",
+                    "align": "stretch"
+                  },
                   "declared": {
                     "display": "block",
                     "max-height": "fit-content",
@@ -8327,6 +8375,7 @@
                         "display": "block"
                       },
                       "tokens": {
+                        "color": "{imported.accordion.accordion-heading.color}",
                         "font-size": "{imported.shared.size-16}",
                         "font-weight": "{imported.accordion.label-2.font-weight}",
                         "line-height": "{imported.shared.size-16}",
@@ -8889,16 +8938,103 @@
                         },
                         "checked": {
                           "background-color": "rgba(22, 22, 22, 1)",
+                          "border-top-width": "0px",
+                          "border-right-width": "0px",
+                          "border-bottom-width": "0px",
+                          "border-left-width": "0px",
                           "border-radius": "2px"
                         },
                         "indeterminate": {
                           "background-color": "rgba(22, 22, 22, 1)",
+                          "border-top-width": "0px",
+                          "border-right-width": "0px",
+                          "border-bottom-width": "0px",
+                          "border-left-width": "0px",
                           "border-radius": "2px"
                         }
                       }
                     }
                   ],
-                  "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round): an UNCONDITIONAL 16×16 rect at 0,2 inside checkbox-label — position:absolute with literal offsets, per-value checked overrides; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+                  "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round + Wave B.2): an UNCONDITIONAL 16×16 rect at 0,2 inside checkbox-label — position:absolute with literal offsets, per-value checked overrides; rotation 0; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+                },
+                "checkbox-label-after": {
+                  "shape": {
+                    "kind": "rect",
+                    "width": 9,
+                    "height": 5
+                  },
+                  "literals": {
+                    "background-color": "transparent",
+                    "border-top-width": "0px",
+                    "border-right-width": "0px",
+                    "border-bottom-width": "1px",
+                    "border-left-width": "1px",
+                    "border-bottom-color": "rgba(255, 255, 255, 1)",
+                    "border-left-color": "rgba(255, 255, 255, 1)",
+                    "width": "9px",
+                    "height": "5px"
+                  },
+                  "literalsByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "checked": {
+                          "width": "9px",
+                          "height": "5px",
+                          "background-color": "transparent",
+                          "border-top-width": "0px",
+                          "border-right-width": "0px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px",
+                          "border-bottom-color": "rgba(255, 255, 255, 1)",
+                          "border-left-color": "rgba(255, 255, 255, 1)",
+                          "top": "6.5px",
+                          "left": "7px"
+                        },
+                        "indeterminate": {
+                          "width": "8px",
+                          "height": "2px",
+                          "background-color": "rgba(255, 255, 255, 1)",
+                          "border-top-width": "0px",
+                          "border-right-width": "0px",
+                          "border-bottom-width": "0px",
+                          "border-left-width": "0px",
+                          "top": "9px",
+                          "left": "4px"
+                        }
+                      }
+                    }
+                  ],
+                  "stylesWhen": [
+                    {
+                      "prop": "checked",
+                      "equals": "unchecked",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "checked",
+                      "equals": "checked",
+                      "styles": {
+                        "position": "absolute",
+                        "top": "6.5px",
+                        "left": "7px",
+                        "transform": "rotate(-45deg)"
+                      }
+                    },
+                    {
+                      "prop": "checked",
+                      "equals": "indeterminate",
+                      "styles": {
+                        "position": "absolute",
+                        "top": "9px",
+                        "left": "4px",
+                        "transform": "rotate(0deg)"
+                      }
+                    }
+                  ],
+                  "description": "Drawn ::after pseudo-element decor promoted from the computed floor (round 5c S5 + Wave B.2 rotate): a 9×5 rect at 7,6.5 inside checkbox-label, fill rgba(0, 0, 0, 0) — background+box+radius; translate folded; rotation per checked (receipted)."
                 }
               },
               "declared": {
@@ -9052,6 +9188,11 @@
           "parts": {
             "tooltip-trigger__wrapper": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip-trigger__wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "center"
+              },
               "declared": {
                 "display": "block",
                 "aspect-ratio": "1 / 1"
@@ -9061,7 +9202,7 @@
                   "element": "button",
                   "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
-                    "display": "inline-flex",
+                    "display": "flex",
                     "align": "center",
                     "justify": "center"
                   },
@@ -9329,17 +9470,25 @@
       "anatomy": {
         "root": {
           "layout": {
-            "display": "flex"
+            "display": "flex",
+            "align": "center"
           },
           "parts": {
             "inline-notification__details": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__details — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
-                "display": "flex"
+                "display": "flex",
+                "align": "center",
+                "grow": true
               },
               "parts": {
                 "icon": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy svg|inline-notification__icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center",
+                    "justify": "center"
+                  },
                   "declared": {
                     "display": "block",
                     "overflow-x": "hidden",
@@ -9415,8 +9564,7 @@
                   },
                   "tokens": {
                     "flex-shrink": "{imported.inline-notification.icon.flex-shrink}",
-                    "margin-right": "{imported.inline-notification.icon.margin-right}",
-                    "margin-top": "{imported.shared.size-14}"
+                    "margin-right": "{imported.inline-notification.icon.margin-right}"
                   },
                   "tokensByProp": [
                     {
@@ -9563,9 +9711,10 @@
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
-                "color": "{imported.inline-notification.inline-notification-close-button.color}",
+                "color": "{imported.inline-notification.inline-notification-close-button.color.{contrast}}",
                 "max-width": "{imported.shared.size-48}",
                 "min-width": "{imported.shared.size-48}",
+                "min-height": "{imported.shared.size-48}",
                 "outline-color": "{imported.inline-notification.inline-notification-close-button.outline-color}",
                 "outline-offset": "{imported.inline-notification.inline-notification-close-button.outline-offset}",
                 "outline-width": "{imported.inline-notification.inline-notification-close-button.outline-width}",
@@ -9576,57 +9725,31 @@
                 "right": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}"
               }
-            },
-            "root-before": {
-              "shape": {
-                "kind": "rect",
-                "width": 425,
-                "height": 48
-              },
-              "literals": {
-                "background-color": "transparent",
-                "border-top-width": "1px",
-                "border-right-width": "1px",
-                "border-bottom-width": "1px",
-                "border-top-color": "rgba(218, 30, 40, 1)",
-                "border-right-color": "rgba(218, 30, 40, 1)",
-                "border-bottom-color": "rgba(218, 30, 40, 1)",
-                "border-left-color": "rgba(218, 30, 40, 1)"
-              },
-              "stylesWhen": [
-                {
-                  "prop": "contrast",
-                  "equals": "high",
-                  "styles": {
-                    "display": "none"
-                  }
-                },
-                {
-                  "prop": "contrast",
-                  "equals": "low",
-                  "styles": {
-                    "position": "absolute",
-                    "top": "0px",
-                    "left": "0px"
-                  }
-                }
-              ],
-              "description": "Drawn ::before pseudo-element decor promoted from the computed floor (round 5c, S5 v1): a 425×48 rect at 0,0 inside root, fill rgba(0, 0, 0, 0) — background+box+radius only, no content text; translate folded into top/left (receipted)."
             }
           },
           "declared": {
             "border-left-style": "solid",
+            "border-top-style": "solid",
+            "border-right-style": "solid",
+            "border-bottom-style": "solid",
             "position": "relative"
           },
           "tokens": {
             "background-color": "{imported.inline-notification.root.background-color.{kind}.{contrast}}",
             "border-left-color": "{imported.inline-notification.root.border-left-color.{kind}.{contrast}}",
             "border-left-width": "{imported.inline-notification.root.border-left-width}",
+            "border-top-color": "{imported.inline-notification.root.border-top-color.{contrast}}",
+            "border-top-width": "{imported.inline-notification.root.border-top-width.{contrast}}",
+            "border-right-color": "{imported.inline-notification.root.border-right-color.{contrast}}",
+            "border-right-width": "{imported.inline-notification.root.border-right-width.{contrast}}",
+            "border-bottom-color": "{imported.inline-notification.root.border-bottom-color.{contrast}}",
+            "border-bottom-width": "{imported.inline-notification.root.border-bottom-width.{contrast}}",
             "bottom": "{imported.shared.size-0}",
             "left": "{imported.shared.size-0}",
             "max-width": "{imported.inline-notification.root.max-width}",
             "min-height": "{imported.shared.size-48}",
             "min-width": "{imported.inline-notification.root.min-width}",
+            "width": "{imported.inline-notification.root.showcase-width}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}"
           },
@@ -10002,19 +10125,20 @@
                   }
                 },
                 "btn-set": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|btn-set.modal-footer — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|btn-set.modal-footer — this element exists in the real component's DOM; the static layer had no part for it. justify start + growing children ≈ Carbon 50/50 footer (flex-basis 50% refused).",
                   "layout": {
                     "display": "flex",
-                    "justify": "end"
+                    "justify": "start"
                   },
                   "parts": {
                     "label-6": {
                       "element": "button",
                       "text": "Cancel",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it. Wave climb: flex-basis 50% was refused (FC-FLEX-BASIS); layout.grow shares the footer strip equally with Save.",
                       "layout": {
                         "display": "flex",
-                        "justify": "space-between"
+                        "justify": "space-between",
+                        "grow": true
                       },
                       "declared": {
                         "border-bottom-style": "solid",
@@ -10058,10 +10182,11 @@
                     "label-7": {
                       "element": "button",
                       "text": "Save",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it. Wave climb: flex-basis 50% was refused (FC-FLEX-BASIS); layout.grow shares the footer strip equally with Cancel.",
                       "layout": {
                         "display": "flex",
-                        "justify": "space-between"
+                        "justify": "space-between",
+                        "grow": true
                       },
                       "declared": {
                         "border-bottom-style": "solid",
@@ -10330,7 +10455,6 @@
                     "overflow-y": "hidden",
                     "position": "relative",
                     "text-align": "start",
-                    "text-overflow": "ellipsis",
                     "text-wrap-mode": "nowrap",
                     "transition-duration": "0.07s",
                     "transition-property": "color",
@@ -10351,9 +10475,6 @@
                             "cursor": "pointer",
                             "text-rendering": "auto",
                             "text-wrap-mode": "nowrap"
-                          },
-                          "layout": {
-                            "grow": true
                           },
                           "tokens": {
                             "font-size": "{imported.shared.size-14}",
@@ -10380,14 +10501,14 @@
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
-                        "top": "{imported.shared.size-1}",
-                        "width": "{imported.tabs.tabs-nav-item-label-wrapper.width}"
+                        "top": "{imported.shared.size-1}"
                       }
                     }
                   },
                   "tokens": {
                     "background-color": "{imported.shared.color-00000000}",
                     "border-bottom-color": "{imported.tabs.tabs-nav-item.border-bottom-color}",
+                    "border-bottom-width": "{imported.shared.size-2}",
                     "border-left-width": "{imported.shared.size-0}",
                     "border-right-width": "{imported.shared.size-0}",
                     "border-top-width": "{imported.shared.size-0}",
@@ -10409,8 +10530,7 @@
                     "padding-right": "{imported.shared.size-16}",
                     "padding-top": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-0}",
-                    "width": "{imported.tabs.tabs-nav-item.width}"
+                    "top": "{imported.shared.size-0}"
                   }
                 },
                 "part-1-1": {
@@ -10449,7 +10569,6 @@
                     "overflow-y": "hidden",
                     "position": "relative",
                     "text-align": "start",
-                    "text-overflow": "ellipsis",
                     "text-wrap-mode": "nowrap",
                     "transition-delay": "0s, 0s",
                     "transition-duration": "0.07s, 0.07s",
@@ -10471,9 +10590,6 @@
                             "cursor": "pointer",
                             "text-rendering": "auto",
                             "text-wrap-mode": "nowrap"
-                          },
-                          "layout": {
-                            "grow": true
                           },
                           "tokens": {
                             "color": "{imported.shared.color-525252}",
@@ -10509,8 +10625,7 @@
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
-                        "top": "{imported.shared.size-1}",
-                        "width": "{imported.tabs.tabs-nav-item-label-wrapper-2.width}"
+                        "top": "{imported.shared.size-1}"
                       },
                       "states": {
                         "active": {
@@ -10525,6 +10640,7 @@
                   "tokens": {
                     "background-color": "{imported.shared.color-00000000}",
                     "border-bottom-color": "{imported.tabs.tabs-nav-item-2.border-bottom-color}",
+                    "border-bottom-width": "{imported.shared.size-1}",
                     "border-left-width": "{imported.shared.size-0}",
                     "border-right-width": "{imported.shared.size-0}",
                     "border-top-width": "{imported.shared.size-0}",
@@ -10545,8 +10661,7 @@
                     "padding-right": "{imported.shared.size-16}",
                     "padding-top": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-0}",
-                    "width": "{imported.tabs.tabs-nav-item-2.width}"
+                    "top": "{imported.shared.size-0}"
                   },
                   "states": {
                     "active": {
@@ -10593,7 +10708,6 @@
                     "overflow-y": "hidden",
                     "position": "relative",
                     "text-align": "start",
-                    "text-overflow": "ellipsis",
                     "text-wrap-mode": "nowrap",
                     "transition-delay": "0s, 0s",
                     "transition-duration": "0.07s, 0.07s",
@@ -10615,9 +10729,6 @@
                             "cursor": "pointer",
                             "text-rendering": "auto",
                             "text-wrap-mode": "nowrap"
-                          },
-                          "layout": {
-                            "grow": true
                           },
                           "tokens": {
                             "color": "{imported.shared.color-525252}",
@@ -10645,14 +10756,14 @@
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
-                        "top": "{imported.shared.size-1}",
-                        "width": "{imported.tabs.tabs-nav-item-label-wrapper-3.width}"
+                        "top": "{imported.shared.size-1}"
                       }
                     }
                   },
                   "tokens": {
                     "background-color": "{imported.shared.color-00000000}",
                     "border-bottom-color": "{imported.tabs.tabs-nav-item-3.border-bottom-color}",
+                    "border-bottom-width": "{imported.shared.size-1}",
                     "border-left-width": "{imported.shared.size-0}",
                     "border-right-width": "{imported.shared.size-0}",
                     "border-top-width": "{imported.shared.size-0}",
@@ -10673,8 +10784,7 @@
                     "padding-right": "{imported.shared.size-16}",
                     "padding-top": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-0}",
-                    "width": "{imported.tabs.tabs-nav-item-3.width}"
+                    "top": "{imported.shared.size-0}"
                   }
                 },
                 "part-1-5": {
@@ -10956,6 +11066,23 @@
           "declared": {
             "cursor": "default"
           },
+          "literalsByProp": [
+            {
+              "prop": "type",
+              "map": {
+                "outline": {
+                  "border-top-width": "1px",
+                  "border-right-width": "1px",
+                  "border-bottom-width": "1px",
+                  "border-left-width": "1px",
+                  "border-top-color": "rgba(57, 57, 57, 1)",
+                  "border-right-color": "rgba(57, 57, 57, 1)",
+                  "border-bottom-color": "rgba(57, 57, 57, 1)",
+                  "border-left-color": "rgba(57, 57, 57, 1)"
+                }
+              }
+            }
+          ],
           "tokens": {
             "background-color": "{imported.tag.root.background-color.unset}",
             "border-bottom-left-radius": "{imported.shared.size-16}",
@@ -11203,6 +11330,9 @@
                     "text-input": {
                       "element": "input",
                       "description": "Promoted from the computed floor (round 4): rendered anatomy input|text-input — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "attrs": {
+                        "placeholder": "Placeholder"
+                      },
                       "declared": {
                         "display": "block",
                         "appearance": "auto",
@@ -11230,6 +11360,9 @@
                         "background-color": "{imported.text-input.text-input.background-color}",
                         "border-bottom-color": "{imported.text-input.text-input.border-bottom-color}",
                         "border-bottom-width": "{imported.shared.size-1}",
+                        "border-left-width": "{imported.shared.size-0}",
+                        "border-right-width": "{imported.shared.size-0}",
+                        "border-top-width": "{imported.shared.size-0}",
                         "font-size": "{imported.shared.size-14}",
                         "height": "{imported.text-input.text-input.height.unset}",
                         "letter-spacing": "{imported.shared.size-0-16}",

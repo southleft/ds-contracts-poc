@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "card",
+  "contract": "examples/mui/contracts/card.contract.json",
+  "script": "examples/mui/figma/card.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.511Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:308",
+    "mode": "existing",
+    "page": "Card",
+    "sectionId": "21:309",
+    "result": {}
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:308).",
+      "Card COMPONENT_SET 21:308: 4 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=31.48% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/card.json"
+    ],
+    "reference": "parity/receipts/console-loop/mui/refs/card.png",
+    "referenceSource": "extract/computed/out/mui/card/gate-shots/0__default.png",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/card-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed"
+  },
+  "fingerprint": {
+    "v6": "v6:2926211222",
+    "lineCount": 109,
+    "sampleLines": [
+      ":COMPONENT_SET/Card|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Elevation enum \u2192 1/0/3/8",
+      "TEXT Content",
+      "first-variant fill bound: imported/card/root/background-color"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Elevation=1",
+        "Elevation=0",
+        "Elevation=3",
+        "Elevation=8"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#21:157",
+          "type": "TEXT",
+          "defaultValue": "Card content",
+          "variantOptions": null
+        },
+        {
+          "name": "Elevation",
+          "type": "VARIANT",
+          "defaultValue": "1",
+          "variantOptions": [
+            "1",
+            "0",
+            "3",
+            "8"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Elevation=1",
+        "type": "COMPONENT",
+        "fillVarName": "imported/card/root/background-color",
+        "padBound": {},
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 4,
+        "w": 288,
+        "h": 59,
+        "childTypes": [
+          "FRAME/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

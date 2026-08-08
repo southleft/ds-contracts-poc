@@ -102,6 +102,9 @@
                 "text-input": {
                   "element": "input",
                   "description": "Promoted from the computed floor (round 4): rendered anatomy input|text-input — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "attrs": {
+                    "placeholder": "Placeholder"
+                  },
                   "declared": {
                     "display": "block",
                     "appearance": "auto",
@@ -129,6 +132,9 @@
                     "background-color": "{imported.text-input.text-input.background-color}",
                     "border-bottom-color": "{imported.text-input.text-input.border-bottom-color}",
                     "border-bottom-width": "{imported.shared.size-1}",
+                    "border-left-width": "{imported.shared.size-0}",
+                    "border-right-width": "{imported.shared.size-0}",
+                    "border-top-width": "{imported.shared.size-0}",
                     "font-size": "{imported.shared.size-14}",
                     "height": "{imported.text-input.text-input.height.unset}",
                     "letter-spacing": "{imported.shared.size-0-16}",

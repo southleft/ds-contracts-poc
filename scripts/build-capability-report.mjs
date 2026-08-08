@@ -370,7 +370,7 @@ check(
 check('the eval suite has as many result rows as it claims', evals.results.length, evals.total, 'evals/results.json → results.length', 'same file → total');
 check('every capture run carries the two-sweep determinism receipt', detOk, numbers.length, 'extract/computed/out/**/numbers.json', 'count of numbers.json files');
 check('every scorecard falls in a known corpus', strayCards.length, 0, 'extract/computed/out/**/scorecard.json', 'the library registry in this script');
-check('the round trip closed every component it opened', RT.roundTripClosed, RT.components, 'extract/figma/roundtrip-uui/report.json → totals.roundTripClosed', 'same file → totals.components');
+check('every round-trip execution reached the fact diff', RT.roundTripClosed, RT.components, 'extract/figma/roundtrip-uui/report.json → totals.roundTripClosed', 'same file → totals.components');
 for (const lib of LIBRARIES) {
   const cov = coverage.get(lib.dir);
   if (!cov) continue;
@@ -436,8 +436,9 @@ P(
   `(${fmt(REAL_GE90)} of ${fmt(REAL_N)} components at ≥90%, ${fmt(REAL_GE80)} of ${fmt(REAL_N)} at ≥80%).`,
   `In the other direction, a ${fmt(fid.length)}-variant Figma kit converted to code scores`,
   `**${f2(FID_MEAN)}% visual fidelity** over the ${fmt(fidScored.length)} statically scorable variants, and the`,
-  `canvas→code→canvas round trip closes on **${fmt(RT.roundTripClosed)} of ${fmt(RT.components)}** components with every`,
+  `canvas→code→canvas executes through the fact diff on **${fmt(RT.roundTripClosed)} of ${fmt(RT.components)}** components with every`,
   `one of ${fmt(RT_FACTS)} facts classified as matched, diverged, lost or invented rather than dropped in silence.`,
+  `Exact structured projection is separately evidenced: **${fmt(RT.exactVerified ?? 0)} verified exact, ${fmt(RT.exactLegacyUnverified ?? 0)} legacy unverified, ${fmt(RT.exactRefused ?? 0)} refused**.`,
   `The whole thing is pinned by ${fmt(evals.total)} executable claim gates and a ${fmt(GOLDEN_FILES)}-file byte-identical`,
   `generation manifest. **What that does not say:** those ${fmt(REAL_N)} components are`,
   `${COV_TOTAL ? f1(pct(COV_TOTAL.pinned, COV_TOTAL.size)) : '?'}% of the six libraries they came from, and they were picked because they were the tractable ones.`,
@@ -709,10 +710,10 @@ P(
   `suite — "it silently did nothing" is not an allowed outcome.`,
 );
 
-P('### 6.3 The round trip closes, and every fact is classified');
+P('### 6.3 Every execution reaches the fact diff; exactness is separate');
 P(
   'Canvas → code → canvas, on the Untitled UI kit. The claim is **not** that the',
-  'round trip is lossless. It is that it **closes** — it runs to completion on',
+  'round trip is lossless or exact. It runs to completion on',
   'every component and every fact lands in exactly one of four buckets, so a loss',
   'is a row in a table rather than an absence.',
 );
@@ -721,7 +722,9 @@ P(...table(['bucket', 'facts', 'share of all facts', 'source'], [
   ['diverged', fmt(RT.diverged), `${f1(pct(RT.diverged, RT_FACTS))}%`, 'same file'],
   ['loss', fmt(RT.loss), `${f1(pct(RT.loss, RT_FACTS))}%`, 'same file'],
   ['invented', fmt(RT.invented), `${f1(pct(RT.invented, RT_FACTS))}%`, 'same file'],
-  ['**components closed**', `**${fmt(RT.roundTripClosed)} / ${fmt(RT.components)}**`, '', 'same file, `totals`'],
+  ['**components executed to fact diff**', `**${fmt(RT.roundTripClosed)} / ${fmt(RT.components)}**`, '', 'same file, `totals`'],
+  ['**verified exact projections**', `**${fmt(RT.exactVerified ?? 0)} / ${fmt(RT.components)}**`, '', 'same file, `totals.exactVerified`'],
+  ['legacy-unverified projections', fmt(RT.exactLegacyUnverified ?? 0), '', 'same file, `totals.exactLegacyUnverified`'],
 ]));
 P(
   `**${f1(pct(RT.matched, RT_FACTS))}% matched is the honest headline, and it is not high.** The value of this`,

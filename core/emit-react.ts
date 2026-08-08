@@ -29,6 +29,7 @@ import {
   slotsOf,
   statePreviewSubstProps,
   tokensByPropEntries,
+  VOID_ELEMENTS,
   walkAnatomy,
   type Contract,
   type Part,
@@ -183,6 +184,11 @@ const JUSTIFY_CSS: Record<string, string> = {
 
 export const isEnum = (p: Prop): p is Prop & { type: { enum: string[] } } =>
   typeof p.type === 'object' && 'enum' in p.type;
+
+/** VARIANT-bound boolean — a true variant axis (subst keys 'true'|'false').
+ *  literalsByProp / tokensByProp may drive it the same way as an enum. */
+export const isVariantBool = (p: Prop): boolean =>
+  p.type === 'boolean' && p.bindings.figma.kind === 'VARIANT';
 
 /** v7: structured/array prop — code-only (bindings.figma.kind 'NONE'). */
 export const isArrayType = (
@@ -612,11 +618,14 @@ export function validateContract(
       const lbpProp = contract.props.find((pr) => pr.name === entry.prop);
       if (!lbpProp) {
         errors.push(`${contract.id}: part "${name}" literalsByProp references unknown prop "${entry.prop}"`);
-      } else if (!isEnum(lbpProp)) {
-        errors.push(`${contract.id}: part "${name}" literalsByProp prop "${entry.prop}" must be an enum prop`);
+      } else if (!isEnum(lbpProp) && !isVariantBool(lbpProp)) {
+        errors.push(
+          `${contract.id}: part "${name}" literalsByProp prop "${entry.prop}" must be an enum prop or VARIANT-bound boolean`,
+        );
       } else {
+        const allowed = isEnum(lbpProp) ? lbpProp.type.enum : ['true', 'false'];
         for (const [k, overrides] of Object.entries(entry.map)) {
-          if (!lbpProp.type.enum.includes(k)) {
+          if (!allowed.includes(k)) {
             errors.push(`${contract.id}: part "${name}" literalsByProp map key "${k}" is not a value of prop "${entry.prop}"`);
           }
           for (const ch of Object.keys(overrides)) {
@@ -1191,6 +1200,60 @@ export function validateContract(
     }
   }
 
+  // VOID-ELEMENT MOUNT GUARD (Eventz field case — the emit-side half of the
+  // #48 wrong-element-mount class): HTML void elements cannot have children,
+  // and React refuses them at MOUNT, at RUNTIME — so a contract that mounts
+  // anatomy children inside a void element ships code that renders NOTHING
+  // and no build step ever says why (Eventz Atoms/Checkbox + Atoms/Input:
+  // element "input" over drawn children, 10 fidelity rows painted nothing).
+  // Refused BY NAME here, on every surface (react/html/react-inline/
+  // figma-script all validate through this function). A void element with NO
+  // mounted children stays legal — ds.divider's <hr> exactly.
+  {
+    /** What the emitters would mount INSIDE this part's element, or null. */
+    const mountedChildren = (part: Part): string | null => {
+      const n = Object.keys(part.parts ?? {}).length;
+      if (n > 0) return `${n} child part(s)`;
+      if (part.slot) return `a slot ("${part.slot.name}")`;
+      if (part.content) return `bound text content (prop "${part.content.prop}")`;
+      if (part.text !== undefined) return 'static text';
+      if (part.icon) return 'an icon glyph';
+      return null;
+    };
+    const refuseVoid = (site: string, el: string, what: string) => {
+      errors.push(
+        `${contract.id}: ${site} mounts ${what}, but children cannot mount inside void element <${el}> — React refuses it at runtime and the component renders NOTHING. Re-root the part (host the children on a container element — div/span/label per context — and mount the <${el}> control as a child part) or wrap the control`,
+      );
+    };
+    if (!isMultiRoot(contract)) {
+      // Single-root: the root part's children (or the `{children}`
+      // passthrough a children-bound text prop ALWAYS fills) mount inside
+      // semantics.element and every elementByProp value.
+      const rootPart = contract.anatomy.root;
+      const what =
+        rootPart === undefined
+          ? null
+          : (mountedChildren(rootPart) ??
+            (textProps(contract).some((p) => p.bindings.code.prop === 'children')
+              ? 'the children-bound text prop'
+              : null));
+      if (what) {
+        for (const el of new Set(rootElementsOf(contract))) {
+          if (VOID_ELEMENTS.has(el)) refuseVoid(`anatomy.root (semantics.element "${el}")`, el, what);
+        }
+      }
+    }
+    // Every part carrying an explicit void element (multi-root top roots
+    // included — they render as part.element ?? 'div').
+    for (const { name, part, path: p } of walkAnatomy(contract)) {
+      if (!isMultiRoot(contract) && p.length === 1 && name === 'root') continue; // handled above
+      const el = part.element;
+      if (!el || !VOID_ELEMENTS.has(el)) continue;
+      const what = mountedChildren(part);
+      if (what) refuseVoid(`part "${name}" (element "${el}")`, el, what);
+    }
+  }
+
   // v11 SEMANTIC LINT: a role claim that RE-CREATES a native control (see
   // NATIVE_ROLE_HOSTS) refuses BY NAME on a non-native element — unless the
   // contract declares the exception, whose one-sentence reason renders on
@@ -1500,8 +1563,12 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     'height' in rootTokens &&
     Object.keys(root.parts ?? {}).length > 0 &&
     Object.values(root.parts ?? {}).every((p) => p.slot !== undefined);
+  // FC-HUG-CEILING-HTML: hug-below-max is a ceiling, not a fluid stretch.
+  // Mirrors core/emit-html.ts (Carbon Tag gate was 208px vs Figma ~46px).
   if ('max-width' in rootTokens) {
-    rootDecls.push('width: 100%');
+    if (root.hugsBelowMaxWidth !== true) {
+      rootDecls.push('width: 100%');
+    }
     if (!slotWrapperFloor) rootDecls.push('min-width: fit-content');
   }
   // v15: a declared cursor fact is authoritative — the emitter's own button

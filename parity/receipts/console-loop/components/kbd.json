@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "kbd",
+  "contract": "contracts/kbd.contract.json",
+  "script": "parity/receipts/console-loop/emitted/23-kbd.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:58:58.032Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:950",
+    "page": "Kbd",
+    "sectionId": "1:952",
+    "result": {
+      "createdNodeIds": [
+        "1:950"
+      ],
+      "results": [
+        {
+          "name": "Kbd",
+          "contractId": "ds.kbd",
+          "nodeId": "1:950",
+          "key": "933286896953db706f9eb982c8374ae74a3b34b8",
+          "variants": 1,
+          "properties": [
+            "Keys#1:304"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:952 captured (ok).",
+      "Kbd: 1 variant(s); type COMPONENT; page Kbd.",
+      "Props: Keys.",
+      "First root fill bound to color/surface/sunken.",
+      "Sample text: \"⌘K\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:1502495576",
+    "lineCount": 23,
+    "sampleLines": [
+      ":COMPONENT/Kbd|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.9529411792755127,\"g\":0.95686274766922,\"b\":0.9647058844566345},\"boundVariables\":{\"color\":{\"var\":\"color/surface/sunken\"}}}]",
+      ":COMPONENT/Kbd|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
+      ":COMPONENT/Kbd|radius|4,4,4,4",
+      ":COMPONENT/Kbd|layout|HORIZONTAL CENTER/CENTER gap 0 pad 2,8,2,8",
+      ":COMPONENT/Kbd|sizing|HUG/HUG AUTO",
+      ":COMPONENT/Kbd|bound:bottomLeftRadius|radius/100",
+      ":COMPONENT/Kbd|bound:bottomRightRadius|radius/100",
+      ":COMPONENT/Kbd|bound:paddingBottom|space/inset-y/xs",
+      ":COMPONENT/Kbd|bound:paddingLeft|space/inset-x/xs",
+      ":COMPONENT/Kbd|bound:paddingRight|space/inset-x/xs",
+      ":COMPONENT/Kbd|bound:paddingTop|space/inset-y/xs",
+      ":COMPONENT/Kbd|bound:strokeBottomWeight|border-width/100",
+      ":COMPONENT/Kbd|bound:strokeLeftWeight|border-width/100",
+      ":COMPONENT/Kbd|bound:strokeRightWeight|border-width/100",
+      ":COMPONENT/Kbd|bound:strokeTopWeight|border-width/100",
+      ":COMPONENT/Kbd|bound:topLeftRadius|radius/100",
+      ":COMPONENT/Kbd|bound:topRightRadius|radius/100",
+      ":COMPONENT/Kbd|description|Kbd — generated from contract ds.kbd v1.0.0",
+      ":COMPONENT/Kbd|propdef|Keys#1:304:TEXT=⌘K",
+      "/0:TEXT/keysText|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.06666667014360428,\"g\":0.0941176488995552,\"b\":0.15294118225574493},\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Keys"
+    ],
+    "observed": {
+      "variantNames": [
+        "Kbd"
+      ],
+      "propDefs": [
+        {
+          "name": "Keys#1:304",
+          "type": "TEXT",
+          "defaultValue": "⌘K",
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "Kbd",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 2,
+          "r": 8,
+          "b": 2,
+          "l": 8
+        },
+        "radius": 4,
+        "fillVarName": "color/surface/sunken",
+        "padBound": {
+          "paddingLeft": "space/inset-x/xs",
+          "paddingTop": "space/inset-y/xs",
+          "paddingRight": "space/inset-x/xs",
+          "paddingBottom": "space/inset-y/xs",
+          "topLeftRadius": "radius/100",
+          "topRightRadius": "radius/100",
+          "bottomLeftRadius": "radius/100",
+          "bottomRightRadius": "radius/100",
+          "strokeTopWeight": "border-width/100",
+          "strokeBottomWeight": "border-width/100",
+          "strokeLeftWeight": "border-width/100",
+          "strokeRightWeight": "border-width/100",
+          "fills": "color/surface/sunken",
+          "strokes": "color/border/subtle"
+        },
+        "textChild": [
+          {
+            "name": "keysText",
+            "chars": "⌘K",
+            "fontSize": 12
+          }
+        ],
+        "w": 38,
+        "h": 21,
+        "childNames": [
+          "keysText:TEXT"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

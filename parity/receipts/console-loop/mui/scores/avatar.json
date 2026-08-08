@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 52.85714285714286,
+    "pctAAUnmasked": 12.142857142857142,
+    "pctAAMasked": 12.142857142857142,
+    "maskCoveragePct": 0,
+    "canvasPx": "14x20",
+    "realPx": "12x20",
+    "inkCanvasPct": 77.85714285714286,
+    "inkRealPct": 71.78571428571429
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/avatar.png",
+  "referenceSha256": "aeee938ac834ae90516ee61e8d029bd36b1e7249fe181e1cfd94d5663eccff54",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/avatar-cell.png",
+  "canvasShotSha256": "d46061c9313b2a80410e9da0a969bb31358de289045a02e3a3142e6bb9c2ac26",
+  "diff": "parity/receipts/console-loop/mui/scores/avatar.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/mui/components/avatar.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.1666666666666667,
+  "inkDelta": 6.071428571428569,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=12.14 > 5)",
+  "recordedAt": "2026-08-08T08:30:09.362Z"
+}

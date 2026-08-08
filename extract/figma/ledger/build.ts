@@ -98,6 +98,9 @@ interface RtReport {
     diverged: number;
     loss: number;
     invented: number;
+    exactVerified: number;
+    exactLegacyUnverified: number;
+    exactRefused: number;
   };
   results: RtResult[];
 }
@@ -868,7 +871,7 @@ p(
 p(
   '## 1. The headline',
   '',
-  `Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, captured, inverted into contracts, and emitted as React. The loop then closed the other way: those same contracts were emitted **back** to Figma and diffed against the original drawing. ${rt.totals.roundTripClosed} of ${rt.totals.components} round trips close.`,
+  `Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, captured, inverted into contracts, and emitted as React. Those same contracts were emitted **back** to Figma and diffed against the original drawing. ${rt.totals.roundTripClosed} of ${rt.totals.components} executions reached the fact diff; ${rt.totals.exactVerified} are verified exact, ${rt.totals.exactLegacyUnverified} are legacy-unverified, and ${rt.totals.exactRefused} are refused. Completion is not exactness.`,
   '',
   '### The four instruments',
   '',
@@ -892,7 +895,7 @@ p(
       [
         'Canvas→code→canvas round trip',
         'every (variant ▸ node ▸ channel) fact, four ways',
-        `**${rt.totals.roundTripClosed}/${rt.totals.components}** closed · ${fmt(rt.totals.matched)} matched · ${fmt(rt.totals.diverged)} diverged · ${fmt(rt.totals.loss)} loss · ${fmt(rt.totals.invented)} invented`,
+        `**${rt.totals.roundTripClosed}/${rt.totals.components}** executed to fact diff · **${rt.totals.exactVerified}/${rt.totals.components} verified exact** · ${fmt(rt.totals.matched)} matched · ${fmt(rt.totals.diverged)} diverged · ${fmt(rt.totals.loss)} loss · ${fmt(rt.totals.invented)} invented`,
         '`extract/figma/roundtrip-uui/report.json`',
       ],
       [
@@ -1319,7 +1322,7 @@ p(
   '',
   '# 3 · the canvas→code→canvas round trip (rewrites REPORT.md + report.json)',
   'npm run extract:figma:roundtrip:uui',
-  `#    expect: ${rt.totals.roundTripClosed}/${rt.totals.components} round trips closed`,
+  `#    expect: ${rt.totals.roundTripClosed}/${rt.totals.components} executions reach the fact diff; exactness is reported separately`,
   '',
   '# 4 · the pixel fidelity table (renders every variant; slow)',
   'npx tsx examples/untitled-ui/fidelity-score.mts',

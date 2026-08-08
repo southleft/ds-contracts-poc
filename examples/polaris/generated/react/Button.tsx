@@ -22,8 +22,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   removeUnderline?: boolean;
   /** Indicates whether or not the button is the primary navigation link when rendered inside of an `IndexTable.Row` */
   dataPrimaryLink?: boolean;
-  /** Sets the color treatment of the Button. */
-  tone?: 'critical' | 'success';
+  /** Sets the color treatment of the Button. Wave B.4 FC-ENUM-HOLE: `default` is the developed unset tone (Polaris tone?: critical|success) — minted as `{variant}.none` paint paths. */
+  tone?: 'default' | 'critical' | 'success';
   /** Changes the visual appearance of the Button. */
   variant?: 'plain' | 'primary' | 'secondary' | 'tertiary' | 'monochromePlain';
   /** Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `icon` ({"$import":"@shopify/polaris-icons#PlusCircleIcon"}); the created subtree is carried as parts gated on this prop. */
@@ -32,7 +32,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 /** PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Button/Button.tsx (react-tsx adapter) — API surface only; anatomy, tokens, and design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow. */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { size = 'medium', textAlign = 'center', tone = 'undefined', variant = 'secondary', fullWidth = false, removeUnderline = false, dataPrimaryLink = false, withIcon = false, className, children, ...rest },
+  { size = 'medium', textAlign = 'center', tone = 'default', variant = 'secondary', fullWidth = false, removeUnderline = false, dataPrimaryLink = false, withIcon = false, className, children, ...rest },
   ref,
 ) {
   // axis-inert (ledgered, not a throw): textAlign — no `.<axis>-*` rule

@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "progress-bar",
+  "contract": "examples/astryx/contracts/progress-bar.contract.json",
+  "script": "examples/astryx/figma/progress-bar.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:09.675Z",
+  "reSyncedAt": "2026-08-07T12:09:10.107Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:3900",
+    "mode": "amended",
+    "page": "ProgressBar (astryx.progress-bar)",
+    "sectionId": "1:3901",
+    "contractId": "astryx.progress-bar",
+    "result": {
+      "createdNodeIds": [
+        "1:3900"
+      ],
+      "results": [
+        {
+          "name": "ProgressBar",
+          "contractId": "astryx.progress-bar",
+          "amended": true,
+          "nodeId": "1:3900",
+          "key": "e0bfc23ad144d00751912c412f9bedb4bd4f64e0",
+          "rebuiltVariants": 5,
+          "variants": 5,
+          "properties": [
+            "Is Indeterminate#1:996",
+            "Is Disabled#1:1002",
+            "Value#1:1008",
+            "Max#1:1014",
+            "Label#1:1020",
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T14:49:52.752Z",
+    "notes": [
+      "Re-synced 2026-08-06 from re-emitted progress-bar.figma.js via Console MCP (ds_loop_script 72214, djb2 verified). Amended 1:3900; track 240px with fill/meter ~96px present.",
+      "Developed score pending — do not treat as visual pass.",
+      "Re-synced via clientStorage chunks (n=10, total=72679); nodeId=1:3900; unchanged skip"
+    ],
+    "defects": [
+      "re-synced from contract; developed score pending"
+    ],
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "reference": "parity/receipts/console-loop/astryx/refs/progress-bar.png",
+    "referenceSource": "emit-html:examples/astryx/contracts/progress-bar.contract.json#first-item"
+  },
+  "fingerprint": {
+    "v6": "v6:1229328490",
+    "lineCount": 150,
+    "sampleLines": [
+      ":COMPONENT_SET/ProgressBar (astryx.progress-bar)|fill|[]",
+      ":COMPONENT_SET/ProgressBar (astryx.progress-bar)|radius|5,5,5,5",
+      ":COMPONENT_SET/ProgressBar (astryx.progress-bar)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/ProgressBar (astryx.progress-bar)|description|ProgressBar â generated from contract astryx.progress-bar v0.1.0",
+      ":COMPONENT_SET/ProgressBar (astryx.progress-bar)|propdef|Is Disabled#1:1002:BOOLEAN=false",
+      ":COMPONENT_SET/ProgressBar (astryx.progress-bar)|propdef|Is Indeterminate#1:996:BOOLEAN=false",
+      ":COMPONENT_SET/ProgressBar (astryx.progress-bar)|propdef|Label#1:1020:TEXT=Uploading",
+      ":COMPONENT_SET/ProgressBar (astryx.progress-bar)|propdef|Max#1:1014:TEXT=100",
+      ":COMPONENT_SET/ProgressBar (astryx.progress-bar)|propdef|Value#1:1008:TEXT=40",
+      ":COMPONENT_SET/ProgressBar (astryx.progress-bar)|propdef|Variant:VARIANT=Accent",
+      "/0:COMPONENT/Variant=Accent|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Variant=Accent|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=Accent|layout|VERTICAL MIN/MIN gap 4 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Accent|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Variant=Accent|bound:itemSpacing|spacing-1",
+      "/0:COMPONENT/Variant=Accent|bound:width|spacing-12",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.30588236451148987,\"g\":0.3764705955982208,\"b\":0.43529412150382996},\"boundVariables\":{\"color\":{\"var\":\"color-text-secondary\"}}}]",
+      "/0/0:TEXT/label|radius|0,0,0,0",
+      "/0/0:TEXT/label|sizing|FILL/HUG AUTO",
+      "/0/0:TEXT/label|text|\"Uploading\" 10px {\"family\":\"Inter\",\"style\":\"Medium\"}"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "TEXT Value",
+      "TEXT Max",
+      "TEXT Label",
+      "Variant enum → Accent/Success/Warning/Neutral/Error",
+      "BOOLEAN Is Indeterminate",
+      "BOOLEAN Is Disabled"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Accent",
+        "Variant=Success",
+        "Variant=Warning",
+        "Variant=Neutral",
+        "Variant=Error"
+      ],
+      "propDefs": [
+        {
+          "name": "Is Indeterminate#1:996",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Is Disabled#1:1002",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Value#1:1008",
+          "type": "TEXT",
+          "defaultValue": "40",
+          "variantOptions": null
+        },
+        {
+          "name": "Max#1:1014",
+          "type": "TEXT",
+          "defaultValue": "100",
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:1020",
+          "type": "TEXT",
+          "defaultValue": "Uploading",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Accent",
+          "variantOptions": [
+            "Accent",
+            "Success",
+            "Warning",
+            "Neutral",
+            "Error"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Accent",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "spacing-1",
+          "width": "spacing-12"
+        },
+        "w": 48,
+        "h": 32,
+        "childTypes": [
+          "TEXT/label",
+          "FRAME/track"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncNote": "Re-synced via clientStorage chunks (n=10, total=72679); nodeId=1:3900; unchanged skip"
+}

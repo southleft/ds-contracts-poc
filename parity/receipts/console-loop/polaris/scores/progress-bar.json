@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 60.373263888888886,
+    "pctAAUnmasked": 59.765625,
+    "pctAAMasked": 59.765625,
+    "maskCoveragePct": 0,
+    "canvasPx": "288x16",
+    "realPx": "288x16",
+    "inkCanvasPct": 99.86979166666666,
+    "inkRealPct": 99.91319444444444
+  },
+  "reference": "parity/receipts/console-loop/polaris/refs/progress-bar.png",
+  "referenceSha256": "e793942241d2b4040e56e11749b55fc1b611175dd68aa580ee5290fb5b85d7de",
+  "canvasShot": "parity/receipts/console-loop/polaris/shots/progress-bar-cell.png",
+  "canvasShotSha256": "7dc7aac78f71c630687237aeb935b61f0672dcfcd5536a7504067c643777360d",
+  "diff": "parity/receipts/console-loop/polaris/scores/progress-bar.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/polaris/components/progress-bar.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0.04340277777778567,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=59.77 > 5)",
+  "recordedAt": "2026-08-08T04:31:19.913Z"
+}

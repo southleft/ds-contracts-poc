@@ -245,6 +245,28 @@
             }
           }
         }
+      ],
+      "literalsByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "xs": {
+              "height": "32px"
+            },
+            "sm": {
+              "height": "36px"
+            },
+            "md": {
+              "height": "40px"
+            },
+            "lg": {
+              "height": "48px"
+            },
+            "xl": {
+              "height": "52px"
+            }
+          }
+        }
       ]
     }
   },

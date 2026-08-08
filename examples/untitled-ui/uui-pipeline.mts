@@ -206,6 +206,7 @@ const notesBySet = new Map<string, string[]>();
 
 for (const setName of IMPORT_ORDER) {
   const proposal: FigmaProposalResult = proposeFromDump(dump[setName] as DumpSet, {
+    projectionMode: 'reviewable-inversion',
     corpus,
     contractIdByName,
     contractIdByKey,

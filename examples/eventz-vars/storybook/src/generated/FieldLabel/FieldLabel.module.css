@@ -1,0 +1,14 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/field-label.contract.json (ds.field-label v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-field-label-root-width);
+  height: var(--imported-stub-field-label-root-height);
+  background-color: var(--color-background-default);
+}

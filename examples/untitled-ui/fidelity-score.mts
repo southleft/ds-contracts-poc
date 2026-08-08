@@ -82,16 +82,37 @@
  *  carriage is CSS pseudo-class rules — real, but not reachable by a static
  *  screenshot), NOT axis-not-carried; the debt column therefore counts only
  *  genuine carriage losses. */
-const ROOT='/Users/tjpitre/Sites/ds-contracts-poc';
-const { chromium } = await import(ROOT+'/node_modules/playwright-core/index.mjs');
-const { chromiumExecutable } = await import(ROOT+'/extract/figma/visual-parity/render.js');
-import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { execFileSync, spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const { chromium } = await import(ROOT+'/node_modules/playwright-core/index.mjs');
+const { chromiumExecutable } = await import(ROOT+'/extract/figma/visual-parity/render.js');
 const UI=`${ROOT}/examples/untitled-ui`;
+// FIDELITY_RENDERS_DIR redirects every output (PNGs via render-one, the two
+// FIDELITY tables and fidelity.json) so a fresh-check can regenerate into a
+// temp dir and byte-compare instead of mutating the committed evidence.
+const RENDERS=process.env.FIDELITY_RENDERS_DIR || `${UI}/renders`;
+mkdirSync(RENDERS, { recursive: true });
 const SCRATCH=process.env.SCRATCH || '/tmp';
 const CLIP=process.env.FIDELITY_CLIP === 'root' ? 'root' : 'union';
+// FIDELITY_RESCORE=committed — the fresh-check mode. No component is rendered:
+// every row's score is RECOMPUTED from the committed bytes (renders/*.png,
+// references/*.png, dumps-v2, and the committed geometry sidecar that a full
+// render run writes beside fidelity.json), through the SAME kernel below. A
+// full render pass measures ~1.8s/variant on the reference laptop (~18 min
+// over 599 references), so the render step itself is exercised only by
+// `npm run fidelity:uui`; the fresh gate proves the committed table is exactly
+// re-derivable from the committed evidence. The sidecar exists because the
+// v2.1 anchor needs the rendered root/clip boxes, which live in the DOM at
+// render time and nowhere else.
+const RESCORE=process.env.FIDELITY_RESCORE === 'committed';
+type Geom={box:{x:number,y:number,width:number,height:number},root:{x:number,y:number,width:number,height:number}};
+const GEO_IN: Record<string,Geom> = RESCORE
+  ? JSON.parse(readFileSync(`${UI}/renders/fidelity-geometry.json`,'utf8'))
+  : {};
+const GEO_OUT: Record<string,Geom> = {};
 // The renderer lives next to this file (committed pair); SCRATCH copies stay
 // usable through RENDER_ONE.
 const RENDER_ONE=process.env.RENDER_ONE || path.join(path.dirname(fileURLToPath(import.meta.url)), 'render-one.mts');
@@ -206,7 +227,12 @@ for (const [slug,{comp}] of Object.entries(SETS)) {
     if (interaction){ results.push({set:slug,variant:varslug,score:null,note:'interaction-state (CSS-rendered, not statically scorable)'}); continue; }
     if (!ok){ results.push({set:slug,variant:varslug,score:null,note:'slug→props unmapped'}); continue; }
     const out=`fid--${slug}--${varslug}`;
-    let geom: {box?:{x:number,y:number},root?:{x:number,y:number,width:number,height:number}} = {};
+    let geom: Partial<Geom> = {};
+    if (RESCORE) {
+      const g=GEO_IN[`${slug}--${varslug}`];
+      if(!g){ results.push({set:slug,variant:varslug,score:null,note:'no committed geometry — run `npm run fidelity:uui` and commit renders/'}); continue; }
+      geom=g;
+    } else {
     // Each variant launches its own chromium; under load a launch can fail
     // transiently, and an unscored row silently SHRINKS the denominator of
     // the whole table (measured: 41 rows lost to one concurrent job). One
@@ -220,7 +246,10 @@ for (const [slug,{comp}] of Object.entries(SETS)) {
       } catch(e){ lastErr=String((e as Error).message).slice(0,120); }
     }
     if(!rendered){ results.push({set:slug,variant:varslug,score:null,note:'render failed: '+lastErr}); continue; }
-    const rp=`${UI}/renders/${out}.png`;
+    if(geom.box && geom.root) GEO_OUT[`${slug}--${varslug}`]=geom as Geom;
+    }
+    // In rescore mode the render PNG is the COMMITTED one — that is the point.
+    const rp=RESCORE ? `${UI}/renders/${out}.png` : `${RENDERS}/${out}.png`;
     if(!existsSync(rp)){ results.push({set:slug,variant:varslug,score:null,note:'no render'}); continue; }
     // v2.1 needs the DRAWN box (true scale) and the rendered root box; a
     // reference with no dump variant is unscorable at true scale — named,
@@ -339,13 +368,18 @@ const stem = CLIP === 'union' ? 'fidelity' : 'fidelity-v13';
 if (!ONLY.length) {
   const day=new Date().toISOString().slice(0,10);
   if (CLIP === 'union') {
-    writeFileSync(`${UI}/renders/FIDELITY.md`, `# Canvas→code fidelity — ${day} @ HEAD\n\n${METHOD21}${TAIL}\n\n${lines.join('\n')}\n`);
-    writeFileSync(`${UI}/renders/FIDELITY-v20.md`, `# Canvas→code fidelity, v2.0 metric — ${day} @ HEAD\n\nThe SUPERSEDED metric, kept so the v2.1 shift is attributable: this table is scored from the SAME renders in the SAME run as FIDELITY.md, so every difference between the two is the measuring rule and nothing else.\n\n${METHOD20}${TAIL}\n\n${lines20.join('\n')}\n`);
+    writeFileSync(`${RENDERS}/FIDELITY.md`, `# Canvas→code fidelity — ${day} @ HEAD\n\n${METHOD21}${TAIL}\n\n${lines.join('\n')}\n`);
+    writeFileSync(`${RENDERS}/FIDELITY-v20.md`, `# Canvas→code fidelity, v2.0 metric — ${day} @ HEAD\n\nThe SUPERSEDED metric, kept so the v2.1 shift is attributable: this table is scored from the SAME renders in the SAME run as FIDELITY.md, so every difference between the two is the measuring rule and nothing else.\n\n${METHOD20}${TAIL}\n\n${lines20.join('\n')}\n`);
   } else {
-    writeFileSync(`${UI}/renders/FIDELITY-v13.md`, `# Canvas→code fidelity — ${day} @ HEAD\n\n${METHOD20}${TAIL}\n\n${lines20.join('\n')}\n`);
+    writeFileSync(`${RENDERS}/FIDELITY-v13.md`, `# Canvas→code fidelity — ${day} @ HEAD\n\n${METHOD20}${TAIL}\n\n${lines20.join('\n')}\n`);
   }
 }
-writeFileSync(`${UI}/renders/${stem}${ONLY.length?'-slice':''}.json`, JSON.stringify(results,null,1));
+writeFileSync(`${RENDERS}/${stem}${ONLY.length?'-slice':''}.json`, JSON.stringify(results,null,1));
+// The geometry sidecar — rendered root/clip boxes per scored row, the one
+// input to the v2.1 anchor that exists only in the DOM at render time.
+// Committed beside fidelity.json so FIDELITY_RESCORE=committed can re-derive
+// every score from committed bytes alone (scripts/fidelity-uui-fresh.mjs).
+if (!RESCORE && CLIP === 'union') writeFileSync(`${RENDERS}/fidelity-geometry${ONLY.length?'-slice':''}.json`, JSON.stringify(GEO_OUT,null,1));
 console.log('v2.1 (true scale, root-anchored):');
 console.log(lines.join('\n'));
 console.log('\nv2.0 (content-trim + 200px normalize), same renders:');

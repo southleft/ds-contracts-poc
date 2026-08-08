@@ -10,12 +10,14 @@
  *
  *   npm run anchors:writeback
  *
- * Matching is by component name (contract.name === result.name). Contracts
- * are only rewritten when an anchor value actually changed, and the write is
- * a targeted textual replacement of the three anchor values — the rest of
- * the file's formatting (2-space indent, one-line objects, trailing newline)
- * is untouched. Safe because "fileKey"/"componentSetKey"/"nodeId" each occur
- * exactly once per contract, inside anchors.figma (verified before writing).
+ * Matching is contractId-first. Older runner results without contractId may
+ * use a unique component name; duplicate legacy names are refused rather than
+ * guessed. Contracts are only rewritten when an anchor value actually
+ * changed, and the write is a targeted textual replacement of the three
+ * anchor values — the rest of the file's formatting (2-space indent,
+ * one-line objects, trailing newline) is untouched. Safe because "fileKey"/
+ * "componentSetKey"/"nodeId" each occur exactly once per contract, inside
+ * anchors.figma (verified before writing).
  */
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
@@ -47,27 +49,57 @@ if (!fileKey) {
   );
 }
 
-// Collect { name → { nodeId, key } } from every batch/script entry. Batch
-// scripts return { createdNodeIds, results: [{ name, nodeId, key, … }] };
-// tolerate entries that returned something else (e.g. the tokens script).
-const byName = new Map();
+// Collect semantic-id results first. Batch scripts now return contractId;
+// name-only entries are admitted solely as an explicit legacy result format.
+const byId = new Map();
+const legacyByName = new Map();
 for (const entry of scriptResults) {
   if (!entry || entry.ok === false) continue;
   const inner = entry.result && Array.isArray(entry.result.results) ? entry.result.results : [];
   for (const comp of inner) {
     if (comp && typeof comp.name === 'string' && typeof comp.key === 'string') {
-      byName.set(comp.name, { nodeId: typeof comp.nodeId === 'string' ? comp.nodeId : null, key: comp.key });
+      const hit = {
+        name: comp.name,
+        nodeId: typeof comp.nodeId === 'string' ? comp.nodeId : null,
+        key: comp.key,
+      };
+      if (typeof comp.contractId === 'string' && comp.contractId) {
+        if (byId.has(comp.contractId)) {
+          console.error(`✖ Runner result contains duplicate contractId "${comp.contractId}" — refusing ambiguous write-back.`);
+          process.exit(1);
+        }
+        byId.set(comp.contractId, hit);
+      } else {
+        if (legacyByName.has(comp.name)) {
+          console.error(`✖ Runner result contains duplicate legacy name "${comp.name}" without contractId — refusing ambiguous write-back.`);
+          process.exit(1);
+        }
+        legacyByName.set(comp.name, hit);
+      }
     }
   }
 }
 
-if (byName.size === 0) {
+if (byId.size === 0 && legacyByName.size === 0) {
   console.error('✖ Runner result contains no per-component { name, nodeId, key } entries — nothing to write back.');
   process.exit(1);
 }
 
 const contractFiles = readdirSync(CONTRACTS_DIR).filter((f) => f.endsWith('.contract.json'));
-const matchedNames = new Set();
+const contractNameCounts = new Map();
+for (const file of contractFiles) {
+  const contract = JSON.parse(readFileSync(path.join(CONTRACTS_DIR, file), 'utf8'));
+  contractNameCounts.set(contract.name, (contractNameCounts.get(contract.name) ?? 0) + 1);
+}
+for (const name of legacyByName.keys()) {
+  const count = contractNameCounts.get(name) ?? 0;
+  if (count > 1) {
+    console.error(`✖ Legacy runner result name "${name}" matches ${count} contracts — refusing ambiguous write-back.`);
+    process.exit(1);
+  }
+}
+const matchedIds = new Set();
+const matchedLegacyNames = new Set();
 let updated = 0;
 let unchanged = 0;
 
@@ -86,9 +118,10 @@ for (const file of contractFiles) {
   const filePath = path.join(CONTRACTS_DIR, file);
   const raw = readFileSync(filePath, 'utf8');
   const contract = JSON.parse(raw);
-  const hit = byName.get(contract.name);
+  const hit = byId.get(contract.id) ?? legacyByName.get(contract.name);
   if (!hit) continue;
-  matchedNames.add(contract.name);
+  if (byId.has(contract.id)) matchedIds.add(contract.id);
+  else matchedLegacyNames.add(contract.name);
 
   const anchor = contract.anchors?.figma;
   if (!anchor) {
@@ -129,7 +162,10 @@ for (const file of contractFiles) {
   console.log(`  ✎ ${file}: anchors.figma → { fileKey: ${next.fileKey}, componentSetKey: ${next.componentSetKey}, nodeId: ${next.nodeId} }`);
 }
 
-const unmatched = [...byName.keys()].filter((n) => !matchedNames.has(n));
+const unmatched = [
+  ...[...byId.keys()].filter((id) => !matchedIds.has(id)),
+  ...[...legacyByName.keys()].filter((name) => !matchedLegacyNames.has(name)),
+];
 console.log(
   `✔ Anchors write-back: ${updated} updated, ${unchanged} unchanged, ${unmatched.length} unmatched runner result(s)${
     unmatched.length > 0 ? ` (${unmatched.join(', ')})` : ''

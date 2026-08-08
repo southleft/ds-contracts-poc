@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "skeleton",
+  "contract": "contracts/skeleton.contract.json",
+  "script": "parity/receipts/console-loop/emitted/14-skeleton.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:24.616Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:679",
+    "page": "Skeleton",
+    "sectionId": "1:680",
+    "result": {
+      "createdNodeIds": [
+        "1:679"
+      ],
+      "results": [
+        {
+          "name": "Skeleton",
+          "contractId": "ds.skeleton",
+          "nodeId": "1:679",
+          "key": "19e59c2a0c9b53712e5ebff95f860a464895ab4e",
+          "variants": 3,
+          "properties": [
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:680 captured (ok).",
+      "Skeleton: 3 variant(s); type COMPONENT_SET; page Skeleton.",
+      "Props: Variant."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:2572131761",
+    "lineCount": 47,
+    "sampleLines": [
+      ":COMPONENT_SET/Skeleton|fill|[]",
+      ":COMPONENT_SET/Skeleton|radius|5,5,5,5",
+      ":COMPONENT_SET/Skeleton|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Skeleton|description|Skeleton — generated from contract ds.skeleton v1.0.0",
+      ":COMPONENT_SET/Skeleton|propdef|Variant:VARIANT=Text",
+      "/0:COMPONENT/Variant=Text|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Variant=Text|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=Text|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Text|sizing|HUG/HUG AUTO",
+      "/0/0:FRAME/block|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/skeleton\"}}}]",
+      "/0/0:FRAME/block|radius|4,4,4,4",
+      "/0/0:FRAME/block|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/block|sizing|FIXED/FIXED AUTO",
+      "/0/0:FRAME/block|bound:bottomLeftRadius|radius/skeleton/text",
+      "/0/0:FRAME/block|bound:bottomRightRadius|radius/skeleton/text",
+      "/0/0:FRAME/block|bound:height|size/skeleton/text/height",
+      "/0/0:FRAME/block|bound:topLeftRadius|radius/skeleton/text",
+      "/0/0:FRAME/block|bound:topRightRadius|radius/skeleton/text",
+      "/0/0:FRAME/block|bound:width|size/skeleton/text/width",
+      "/1:COMPONENT/Variant=Rect|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant"
+    ],
+    "observed": {
+      "variantNames": [
+        "Variant=Text",
+        "Variant=Rect",
+        "Variant=Circle"
+      ],
+      "propDefs": [
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Text",
+          "variantOptions": [
+            "Text",
+            "Rect",
+            "Circle"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Text",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {},
+        "textChild": [],
+        "w": 120,
+        "h": 12,
+        "childNames": [
+          "block:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

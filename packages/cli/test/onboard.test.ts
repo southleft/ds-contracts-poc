@@ -78,7 +78,10 @@ function scratchLibrary(opts: { reviewed: boolean }): { root: string; ws: string
     possessive: "the library's",
     mintedDocTitle: 'Scratch minted tokens',
     capture: { config: cfgOut, harness: path.join(TW, '.tw-sandbox') },
-    emit: { out: 'work/figma' },
+    // Exact-conversion wave: alert's status/dismiss glyphs are real SVG
+    // assets, so the emit (and bundle) must thread the icons dir — the same
+    // --icons the freshness manifest records for tailwind.
+    emit: { out: 'work/figma', icons: path.join(TW, 'assets/icons') },
     bundle: { out: 'work/figma/scratch.bundle.json', name: 'Scratch' },
   };
   writeFileSync(path.join(ws, 'ds-library.json'), JSON.stringify(manifest, null, 2) + '\n');

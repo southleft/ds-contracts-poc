@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "altitude",
+  "stem": "divider",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/altitude/components/divider.json",
+  "status": "pass",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385229420588708070",
+  "setNodeId": "59:9713",
+  "cellNodeId": "59:9711",
+  "cellName": "Variant=Default",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 0,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
+    "maskCoveragePct": 0,
+    "canvasPx": "288x1",
+    "realPx": "288x1",
+    "inkCanvasPct": 100,
+    "inkRealPct": 100
+  },
+  "reference": "parity/receipts/console-loop/altitude/refs/divider.png",
+  "referenceSha256": "67471ba41775e829e3e2b04077b226df311703e5971554934966a5a3609f85dd",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/altitude/shots/divider.png",
+  "canvasShotSha256": "6cc49496f88fd03a5a601b21ceb29f412620ce6fc8a7b40360ab5c60cf8ca5c8",
+  "diff": "parity/receipts/console-loop/visual-truth/altitude/diffs/divider.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

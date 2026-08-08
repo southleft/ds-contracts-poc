@@ -83,7 +83,8 @@
     "root": {
       "declared": {
         "display": "block",
-        "box-sizing": "border-box"
+        "box-sizing": "border-box",
+        "font-family": "\"IBM Plex Sans\", sans-serif"
       },
       "content": {
         "prop": "children"

@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "chat-system-message",
+  "contract": "contracts/chat-system-message.contract.json",
+  "script": "parity/receipts/console-loop/emitted/14-chatsystemmessage.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:10.042Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1739",
+    "page": "ChatSystemMessage",
+    "sectionId": "1:1740",
+    "result": {
+      "createdNodeIds": [
+        "1:1739"
+      ],
+      "results": [
+        {
+          "name": "ChatSystemMessage",
+          "contractId": "ds.chat-system-message",
+          "nodeId": "1:1739",
+          "key": "8789d260eb3fd32f161a430ec8709bdc79b8dbdb",
+          "variants": 2,
+          "properties": [
+            "Message#1:656",
+            "Icon#1:659",
+            "Show Icon#1:662",
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1740 captured (ok).",
+      "ChatSystemMessage: 2 variant(s); type COMPONENT_SET; page ChatSystemMessage.",
+      "Props: Message, Icon, Show Icon, Variant.",
+      "Sample text: \"Slot\", \"Today\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:1239964147",
+    "lineCount": 64,
+    "sampleLines": [
+      ":COMPONENT_SET/ChatSystemMessage|fill|[]",
+      ":COMPONENT_SET/ChatSystemMessage|radius|5,5,5,5",
+      ":COMPONENT_SET/ChatSystemMessage|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/ChatSystemMessage|description|ChatSystemMessage — generated from contract ds.chat-system-message v1.0.0",
+      ":COMPONENT_SET/ChatSystemMessage|propdef|Icon#1:659:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/ChatSystemMessage|propdef|Message#1:656:TEXT=Today",
+      ":COMPONENT_SET/ChatSystemMessage|propdef|Show Icon#1:662:BOOLEAN=true",
+      ":COMPONENT_SET/ChatSystemMessage|propdef|Variant:VARIANT=Default",
+      "/0:COMPONENT/Variant=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Variant=Default|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=Default|layout|HORIZONTAL CENTER/CENTER gap 8 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Default|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Variant=Default|bound:itemSpacing|space/gap/sm",
+      "/0:COMPONENT/Variant=Default|bound:width|size/card/width",
+      "/0/0:FRAME/iconSlot|fill|[]",
+      "/0/0:FRAME/iconSlot|radius|0,0,0,0",
+      "/0/0:FRAME/iconSlot|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/iconSlot|sizing|HUG/HUG AUTO",
+      "/0/0/0:INSTANCE/Slot|fill|[]",
+      "/0/0/0:INSTANCE/Slot|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6000000238418579,\"g\":0.6200000047683716,\"b\":0.6800000071525574},\"boundVariables\":{}}] w1"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Variant",
+      "Message"
+    ],
+    "observed": {
+      "variantNames": [
+        "Variant=Default",
+        "Variant=Divider"
+      ],
+      "propDefs": [
+        {
+          "name": "Message#1:656",
+          "type": "TEXT",
+          "defaultValue": "Today",
+          "variantOptions": null
+        },
+        {
+          "name": "Icon#1:659",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Icon#1:662",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Divider"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/gap/sm",
+          "width": "size/card/width"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "messageText",
+            "chars": "Today",
+            "fontSize": 12
+          }
+        ],
+        "w": 320,
+        "h": 100,
+        "childNames": [
+          "iconSlot:FRAME",
+          "messageText:TEXT"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

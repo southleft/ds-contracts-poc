@@ -1,0 +1,542 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "link": {
+        "root": {
+          "color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "inherit": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "outline-color": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "inherit": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          },
+          "text-decoration-color": {
+            "primary": {
+              "none": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "hover": {
+                "$value": "#1976d2",
+                "$type": "color"
+              },
+              "always": {
+                "$value": "#1976d266",
+                "$type": "color"
+              }
+            },
+            "secondary": {
+              "none": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "hover": {
+                "$value": "#9c27b0",
+                "$type": "color"
+              },
+              "always": {
+                "$value": "#9c27b066",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "none": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "hover": {
+                "$value": "#d32f2f",
+                "$type": "color"
+              },
+              "always": {
+                "$value": "#d32f2f66",
+                "$type": "color"
+              }
+            },
+            "info": {
+              "none": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "hover": {
+                "$value": "#0288d1",
+                "$type": "color"
+              },
+              "always": {
+                "$value": "#0288d166",
+                "$type": "color"
+              }
+            },
+            "success": {
+              "none": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "hover": {
+                "$value": "#2e7d32",
+                "$type": "color"
+              },
+              "always": {
+                "$value": "#2e7d3266",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "none": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "hover": {
+                "$value": "#ed6c02",
+                "$type": "color"
+              },
+              "always": {
+                "$value": "#ed6c0266",
+                "$type": "color"
+              }
+            },
+            "inherit": {
+              "none": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "hover": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "always": {
+                "$value": "#000000",
+                "$type": "color"
+              }
+            }
+          },
+          "width": {
+            "$value": "30.2188px",
+            "$type": "dimension"
+          },
+          "text-decoration-color-state-active": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "inherit": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#005fcc",
+            "$type": "color"
+          },
+          "outline-offset-state-focus-visible": {
+            "$value": "1px",
+            "$type": "dimension"
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "1px",
+            "$type": "dimension"
+          },
+          "text-decoration-color-state-hover": {
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "inherit": {
+              "$value": "#000000",
+              "$type": "color"
+            }
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [],
+    "state": [
+      {
+        "state": "focus-visible",
+        "part": "root",
+        "channel": "outline-style",
+        "value": "auto"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 8
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-line",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    }
+  ],
+  "stateOverflow": [
+    {
+      "state": "active",
+      "part": "root",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "root",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "declared-channel state delta on 7/21 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "hover",
+      "part": "root",
+      "channel": "text-decoration",
+      "sample": "underline",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "hover",
+      "part": "root",
+      "channel": "text-decoration-line",
+      "sample": "underline",
+      "reason": "declared-channel state delta on 7/21 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    }
+  ],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [
+    "root-signature-varies: primary.none__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: primary.none__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: primary.none__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: primary.none__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: primary.always__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: primary.always__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: primary.always__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: primary.always__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: secondary.none__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: secondary.none__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: secondary.none__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: secondary.none__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: secondary.always__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: secondary.always__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: secondary.always__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: secondary.always__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: error.none__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: error.none__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: error.none__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: error.none__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: error.always__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: error.always__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: error.always__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: error.always__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: info.none__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: info.none__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: info.none__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: info.none__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: info.always__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: info.always__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: info.always__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: info.always__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: success.none__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: success.none__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: success.none__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: success.none__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: success.always__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: success.always__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: success.always__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: success.always__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: warning.none__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: warning.none__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: warning.none__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: warning.none__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: warning.always__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: warning.always__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: warning.always__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: warning.always__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inherit.none__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inherit.none__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inherit.none__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inherit.none__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inherit.always__default: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inherit.always__hover: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inherit.always__focus-visible: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: inherit.always__active: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root (element-varies receipt; root always aligns)",
+    "signature-drift: primary.none__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: primary.none__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: primary.none__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: primary.none__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: primary.always__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: primary.always__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: primary.always__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: primary.always__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: secondary.none__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: secondary.none__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: secondary.none__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: secondary.none__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: secondary.always__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: secondary.always__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: secondary.always__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: secondary.always__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: error.none__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: error.none__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: error.none__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: error.none__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: error.always__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: error.always__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: error.always__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: error.always__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: info.none__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: info.none__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: info.none__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: info.none__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: info.always__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: info.always__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: info.always__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: info.always__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: success.none__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: success.none__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: success.none__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: success.none__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: success.always__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: success.always__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: success.always__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: success.always__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: warning.none__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: warning.none__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: warning.none__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: warning.none__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: warning.always__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: warning.always__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: warning.always__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: warning.always__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: inherit.none__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: inherit.none__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: inherit.none__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: inherit.none__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineNone.Typography-inherit.Typography-root",
+    "signature-drift: inherit.always__default root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: inherit.always__hover root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: inherit.always__focus-visible root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root",
+    "signature-drift: inherit.always__active root: a|Link-root.Link-underlineHover.Typography-inherit.Typography-root → a|Link-root.Link-underlineAlways.Typography-inherit.Typography-root"
+  ],
+  "styledChannelReceipts": [
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "block-root-width-source: root — the admitted width 30.2188px is NOT the stage content box (288px) and NOT the viewport (900px); this block root did not fill anything, it took its own intrinsic/shrink-to-fit size (a flex stage makes a block child a flex item). The admission stands — the number is the library's — but the sentence above names a container this measurement did not come from.",
+    "text-part-typography-carried: root — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "webkit-prefixed-channels-refused: 3 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-decorations-in-effect (root); -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-content-carried: the root holds direct text (\"Link\") with no text-holder child part — bound to text prop \"children\" (MUI Card class)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "declared state fact carried: [focus-visible] root.outline-style = auto (v15 declared vocabulary)"
+  ]
+}

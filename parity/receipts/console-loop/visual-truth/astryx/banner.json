@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "astryx",
+  "stem": "banner",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/astryx/components/banner.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:3813",
+  "cellNodeId": "1:3797",
+  "cellName": "Status=Info, Container=Card",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 97.30958816982032,
+    "pctAAUnmasked": 61.9144538082366,
+    "pctAAMasked": 61.9144538082366,
+    "maskCoveragePct": 0,
+    "canvasPx": "331x88",
+    "realPx": "319x95",
+    "inkCanvasPct": 92.3262839879154,
+    "inkRealPct": 57.058355859437114
+  },
+  "reference": "parity/receipts/console-loop/astryx/refs/banner.png",
+  "referenceSha256": "09b880f84ef84837b7988d4924a9dd12ae152d8e294073890befe5c3325207ff",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/banner.png",
+  "canvasShotSha256": "beacfb5d608954d1967b8fe124b5c4d5f2f5614f826a0569513f962f677e8d6d",
+  "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/banner.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0795454545454546,
+  "inkDelta": 35.26792812847829,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.08, inkDelta=35.3)"
+}

@@ -1,6 +1,6 @@
 {
   "_marker": "ASTRYX MINTED RE-ANCHORING \u2014 THE HUMAN LEDGER. Every row here is an explicit ack that a minted literal may be rewritten to a semantic token. Nothing is applied without a row AND an explicit `reanchor-minted.ts --apply <id>`; there is no --all. TO REVERT ANY ROW: delete it from `decisions` and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` \u2014 the minted tree is regenerated from the computed-floor capture and only the surviving rows are re-applied. Row shape follows extract/computed/out/*/decisions.json.",
-  "_provenance": "The first 9 rows were authored by the orchestrator in the opening re-anchoring round (ackNote \"auto-clean: single candidate, exact name affinity, orchestrator-applied\"). Rows 10-19 and both \"literals\" receipts are the REVIEWED ROUND: the 5 ambiguous value groups were split PER LEAF and decided under owner delegation \u2014 ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26. Every row carries that provenance in its own `cause`. Three rows carry a `deviation` field: their target differs from the review rubric's predicted token because a COMMITTED BINDING on disk names a different one, and a recorded fact outranks a name-shaped prediction.",
+  "_provenance": "The first 9 rows were authored by the orchestrator in the opening re-anchoring round (ackNote \"auto-clean: single candidate, exact name affinity, orchestrator-applied\"). Rows 10-19 and both \"literals\" receipts are the REVIEWED ROUND: the 5 ambiguous value groups were split PER LEAF and decided under owner delegation \u2014 ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26. Every row carries that provenance in its own `cause`. Three rows carry a `deviation` field: their target differs from the review rubric's predicted token because a COMMITTED BINDING on disk names a different one, and a recorded fact outranks a name-shaped prediction. The 2026-08-08 continuation round (exact-conversion wave) extended five rows and authored five new rows plus one literal receipt for the reopened badge/switch leaves; every one is labelled: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
   "_reviewQueue": "examples/astryx/tokens/reanchor-proposals.md",
   "decisions": [
     {
@@ -8,6 +8,7 @@
         "RA-ffffff"
       ],
       "leaves": [
+        "imported.badge.root.color.info",
         "imported.button.label.color.primary",
         "imported.button.part-0.color.primary",
         "imported.button.part-1.color.primary",
@@ -30,9 +31,10 @@
         "button:{imported.button.part-0.color.primary}",
         "button:{imported.button.part-1.color.primary}",
         "button:{imported.button.root.outline-color.primary}",
-        "button:{imported.button.root.color.primary}"
+        "button:{imported.button.root.color.primary}",
+        "badge:{imported.badge.root.color.info}"
       ],
-      "rationale": "A FOUR-WAY SPLIT of one value group that the join could not separate, resolved by role rather than by hue. (1) Button content on the primary surface \u2192 `color-on-accent`; (2) on the destructive surface \u2192 `color-on-error` \u2014 both continuing the PRIOR reviewed round, which decided exactly these targets for the same cells. (3) `card.root.background-color.default` is a SURFACE, not content, so it takes `color-background-card`; the `color-on-*` family is excluded by channel. (4) `slider.tooltip.color` and `slider.label-2.color` are white content on the tooltip, whose surface THIS ROUND names as `color-background-inverted` (RA-0a1317) \u2014 so they are content on a dark surface, `color-on-dark`. That fourth arm was DECLINED as undecidable by the previous round, whose receipt named the precondition: *\"name the tooltip surface first \u2026 then this leaf becomes decidable.\"* It is named, so it is decided. CONTINUATION, not a new judgement: 4 of these 5 leaf/leaves carried the SAME target in the pre-recapture ledger. every candidate's NEUTRAL light value tuple-equals the leaf literal #FFFFFF (255,255,255,1) \u2014 re-verified at apply time against the then-current DTCG. TWO ROUNDS AGREED ON THIS TARGET: the pre-recapture ledger and the post-recapture review independently anchored overlapping leaves here, and the rows are merged rather than left duplicated.",
+      "rationale": "A FOUR-WAY SPLIT of one value group that the join could not separate, resolved by role rather than by hue. (1) Button content on the primary surface \u2192 `color-on-accent`; (2) on the destructive surface \u2192 `color-on-error` \u2014 both continuing the PRIOR reviewed round, which decided exactly these targets for the same cells. (3) `card.root.background-color.default` is a SURFACE, not content, so it takes `color-background-card`; the `color-on-*` family is excluded by channel. (4) `slider.tooltip.color` and `slider.label-2.color` are white content on the tooltip, whose surface THIS ROUND names as `color-background-inverted` (RA-0a1317) \u2014 so they are content on a dark surface, `color-on-dark`. That fourth arm was DECLINED as undecidable by the previous round, whose receipt named the precondition: *\"name the tooltip surface first \u2026 then this leaf becomes decidable.\"* It is named, so it is decided. CONTINUATION, not a new judgement: 4 of these 5 leaf/leaves carried the SAME target in the pre-recapture ledger. every candidate's NEUTRAL light value tuple-equals the leaf literal #FFFFFF (255,255,255,1) \u2014 re-verified at apply time against the then-current DTCG. TWO ROUNDS AGREED ON THIS TARGET: the pre-recapture ledger and the post-recapture review independently anchored overlapping leaves here, and the rows are merged rather than left duplicated. EXTENDED 2026-08-08 (exact-conversion wave reopened the queue): `imported.badge.root.color.info` carry the same value and the same CSS property class as this row and are same-value/same-target CONTINUATIONS, not new judgements \u2014 mechanically extended to the parent row's anchor. Corroborated by the committed source binding: Badge.tsx (variantStyles.info) declares color: colorVars['--color-on-accent']. Provenance of the extension: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
       "darkDelta": "MODE-SAFE on the neutral plane \u2014 {color-on-accent} is #FFFFFF in both modes, identical to the frozen literal #ffffff; no neutral pixel moves. On a re-themed plane it moves deliberately (docs theme: #FFFFFF light / #15110C dark), which is exactly the half-retheme defect DOCS-THEME.md names for Button (32/41 of its colour refs rode literals before this round).",
       "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value \u2014 astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
       "ack": "explicit CLI --apply",
@@ -43,6 +45,7 @@
         "RA-ffffff"
       ],
       "leaves": [
+        "imported.badge.root.color.error",
         "imported.button.label.color.destructive",
         "imported.button.part-0.color.destructive",
         "imported.button.part-1.color.destructive",
@@ -65,9 +68,10 @@
         "button:{imported.button.part-0.color.destructive}",
         "button:{imported.button.part-1.color.destructive}",
         "button:{imported.button.root.outline-color.destructive}",
-        "button:{imported.button.root.color.destructive}"
+        "button:{imported.button.root.color.destructive}",
+        "badge:{imported.badge.root.color.error}"
       ],
-      "rationale": "A FOUR-WAY SPLIT of one value group that the join could not separate, resolved by role rather than by hue. (1) Button content on the primary surface \u2192 `color-on-accent`; (2) on the destructive surface \u2192 `color-on-error` \u2014 both continuing the PRIOR reviewed round, which decided exactly these targets for the same cells. (3) `card.root.background-color.default` is a SURFACE, not content, so it takes `color-background-card`; the `color-on-*` family is excluded by channel. (4) `slider.tooltip.color` and `slider.label-2.color` are white content on the tooltip, whose surface THIS ROUND names as `color-background-inverted` (RA-0a1317) \u2014 so they are content on a dark surface, `color-on-dark`. That fourth arm was DECLINED as undecidable by the previous round, whose receipt named the precondition: *\"name the tooltip surface first \u2026 then this leaf becomes decidable.\"* It is named, so it is decided. CONTINUATION, not a new judgement: 4 of these 5 leaf/leaves carried the SAME target in the pre-recapture ledger. every candidate's NEUTRAL light value tuple-equals the leaf literal #FFFFFF (255,255,255,1) \u2014 re-verified at apply time against the then-current DTCG. TWO ROUNDS AGREED ON THIS TARGET: the pre-recapture ledger and the post-recapture review independently anchored overlapping leaves here, and the rows are merged rather than left duplicated.",
+      "rationale": "A FOUR-WAY SPLIT of one value group that the join could not separate, resolved by role rather than by hue. (1) Button content on the primary surface \u2192 `color-on-accent`; (2) on the destructive surface \u2192 `color-on-error` \u2014 both continuing the PRIOR reviewed round, which decided exactly these targets for the same cells. (3) `card.root.background-color.default` is a SURFACE, not content, so it takes `color-background-card`; the `color-on-*` family is excluded by channel. (4) `slider.tooltip.color` and `slider.label-2.color` are white content on the tooltip, whose surface THIS ROUND names as `color-background-inverted` (RA-0a1317) \u2014 so they are content on a dark surface, `color-on-dark`. That fourth arm was DECLINED as undecidable by the previous round, whose receipt named the precondition: *\"name the tooltip surface first \u2026 then this leaf becomes decidable.\"* It is named, so it is decided. CONTINUATION, not a new judgement: 4 of these 5 leaf/leaves carried the SAME target in the pre-recapture ledger. every candidate's NEUTRAL light value tuple-equals the leaf literal #FFFFFF (255,255,255,1) \u2014 re-verified at apply time against the then-current DTCG. TWO ROUNDS AGREED ON THIS TARGET: the pre-recapture ledger and the post-recapture review independently anchored overlapping leaves here, and the rows are merged rather than left duplicated. EXTENDED 2026-08-08 (exact-conversion wave reopened the queue): `imported.badge.root.color.error` carry the same value and the same CSS property class as this row and are same-value/same-target CONTINUATIONS, not new judgements \u2014 mechanically extended to the parent row's anchor. Corroborated by the committed source binding: Badge.tsx (variantStyles.error) declares color: colorVars['--color-on-error']. Provenance of the extension: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
       "darkDelta": "MODE-SAFE on the neutral plane \u2014 {color-on-error} is #FFFFFF light and #FFFFFF dark, identical to the frozen literal #ffffff; no neutral pixel moves in either mode. The change is semantic + re-themable: the destructive label now follows the error surface's own on-colour instead of a frozen white.",
       "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value \u2014 astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
       "ack": "explicit CLI --apply",
@@ -78,7 +82,6 @@
         "RA-0a1317"
       ],
       "leaves": [
-        "imported.badge.root.color.neutral",
         "imported.button.label.color.ghost",
         "imported.button.label.color.secondary",
         "imported.button.part-0.color.ghost",
@@ -109,12 +112,11 @@
         "button:{imported.button.part-1.color.secondary}",
         "button:{imported.button.root.outline-color.ghost}",
         "button:{imported.button.root.outline-color.secondary}",
-        "badge:{imported.badge.root.color.neutral}",
         "button:{imported.button.root.color.ghost}",
         "button:{imported.button.root.color.secondary}",
         "slider:{imported.slider.label-3.color}"
       ],
-      "rationale": "SPLIT BY ROLE, and the split is what makes it decidable. `slider.tooltip.background-color` is a SURFACE and it is dark, which is precisely `color-background-inverted`. Every other leaf is content on the `color` channel (badge neutral, button ghost/secondary label/part/root, slider label-3), so the background token is excluded by channel. Between `color-text-gray` and `color-text-primary` \u2014 identical at #0A1317 in light, so the value join cannot separate them \u2014 the deciding fact is the LIBRARY'S AXIS VOCABULARY: Card exposes a distinct `gray` variant, which is what `color-text-gray` is for. This value is the DEFAULT content colour across badge-neutral and both quiet button variants; that breadth is the signature of the primary text role. CONTINUATION, not a new judgement: 8 of these 12 leaf/leaves carried the SAME target in the pre-recapture ledger. every candidate's NEUTRAL light value tuple-equals the leaf literal #0a1317 (10,19,23,1) \u2014 re-verified at apply time against the then-current DTCG. TWO ROUNDS AGREED ON THIS TARGET: the pre-recapture ledger and the post-recapture review independently anchored overlapping leaves here, and the rows are merged rather than left duplicated.",
+      "rationale": "SPLIT BY ROLE, and the split is what makes it decidable. `slider.tooltip.background-color` is a SURFACE and it is dark, which is precisely `color-background-inverted`. Every other leaf is content on the `color` channel (badge neutral, button ghost/secondary label/part/root, slider label-3), so the background token is excluded by channel. Between `color-text-gray` and `color-text-primary` \u2014 identical at #0A1317 in light, so the value join cannot separate them \u2014 the deciding fact is the LIBRARY'S AXIS VOCABULARY: Card exposes a distinct `gray` variant, which is what `color-text-gray` is for. This value is the DEFAULT content colour across badge-neutral and both quiet button variants; that breadth is the signature of the primary text role. CONTINUATION, not a new judgement: 8 of these 12 leaf/leaves carried the SAME target in the pre-recapture ledger. every candidate's NEUTRAL light value tuple-equals the leaf literal #0a1317 (10,19,23,1) \u2014 re-verified at apply time against the then-current DTCG. TWO ROUNDS AGREED ON THIS TARGET: the pre-recapture ledger and the post-recapture review independently anchored overlapping leaves here, and the rows are merged rather than left duplicated. PRUNED 2026-08-08: `imported.badge.root.color.neutral` was removed from this row because the exact-conversion wave's rebinding left it with ZERO contract refs (it now sits in the join's unreferenced-leaf exclusion) \u2014 a mechanical prune, not a new judgement; its alias in the minted tree is unchanged. continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
       "darkDelta": "DARK REPAIR \u2014 the leaves are mode-FROZEN at #0a1317 in both modes today; {color-text-primary} is #0A1317 light / #DFE2E5 dark. Ghost and secondary button labels stop painting near-black on a dark surface, which is the visible half of Button's \"78% minted\" finding in DOCS-THEME.md. Deliberate pixel change in dark; light plane unchanged.",
       "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value \u2014 astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
       "ack": "explicit CLI --apply",
@@ -177,11 +179,11 @@
         "RA-0064e0"
       ],
       "leaves": [
+        "imported.badge.root.background-color.info",
         "imported.button.root.background-color.primary",
         "imported.button.root.outline-color-state-focus-visible.ghost",
         "imported.button.root.outline-color-state-focus-visible.primary",
-        "imported.button.root.outline-color-state-focus-visible.secondary",
-        "imported.shared.color-0064e0"
+        "imported.button.root.outline-color-state-focus-visible.secondary"
       ],
       "value": "#0064e0",
       "candidates": [
@@ -193,12 +195,10 @@
       ],
       "to": "color-accent",
       "usedBy": [
-        "slider:{imported.shared.color-0064e0}",
-        "slider:{imported.shared.color-0064e0}",
-        "slider:{imported.shared.color-0064e0}",
-        "button:{imported.button.root.background-color.primary}"
+        "button:{imported.button.root.background-color.primary}",
+        "badge:{imported.badge.root.background-color.info}"
       ],
-      "rationale": "Button variant=primary paints its ACCENT surface, and the same value serves the focus ring on ghost/secondary/primary plus the slider's three track/fill backgrounds. Of the five tokens sharing #0064E0 only `color-accent` is a SURFACE role \u2014 `color-border-*`, `color-icon-*` and `color-text-*` are excluded by channel, since a background-color is not a border, an icon or text. Corroborated by the PRIOR reviewed round, whose RA-ffffff rationale recorded that button's primary cell binds background-color to {color-accent}. CONTINUATION, not a new judgement: 1 of these 5 leaf/leaves carried the SAME target in the pre-recapture ledger. every candidate's NEUTRAL light value tuple-equals the leaf literal #0064e0 (0,100,224,1) \u2014 re-verified at apply time against the then-current DTCG. TWO ROUNDS AGREED ON THIS TARGET: the pre-recapture ledger and the post-recapture review independently anchored overlapping leaves here, and the rows are merged rather than left duplicated.",
+      "rationale": "Button variant=primary paints its ACCENT surface, and the same value serves the focus ring on ghost/secondary/primary plus the slider's three track/fill backgrounds. Of the five tokens sharing #0064E0 only `color-accent` is a SURFACE role \u2014 `color-border-*`, `color-icon-*` and `color-text-*` are excluded by channel, since a background-color is not a border, an icon or text. Corroborated by the PRIOR reviewed round, whose RA-ffffff rationale recorded that button's primary cell binds background-color to {color-accent}. CONTINUATION, not a new judgement: 1 of these 5 leaf/leaves carried the SAME target in the pre-recapture ledger. every candidate's NEUTRAL light value tuple-equals the leaf literal #0064e0 (0,100,224,1) \u2014 re-verified at apply time against the then-current DTCG. TWO ROUNDS AGREED ON THIS TARGET: the pre-recapture ledger and the post-recapture review independently anchored overlapping leaves here, and the rows are merged rather than left duplicated. EXTENDED 2026-08-08 (exact-conversion wave reopened the queue): `imported.badge.root.background-color.info` carry the same value and the same CSS property class as this row and are same-value/same-target CONTINUATIONS, not new judgements \u2014 mechanically extended to the parent row's anchor. Corroborated by the committed source binding: Badge.tsx (sandbox @astryxdesign/core, variantStyles.info) declares backgroundColor: colorVars['--color-accent']. Provenance of the extension: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review. PRUNED 2026-08-08: `imported.shared.color-0064e0` was removed from this row because the exact-conversion wave's rebinding left it with ZERO contract refs (it now sits in the join's unreferenced-leaf exclusion) \u2014 a mechanical prune, not a new judgement; its alias in the minted tree is unchanged. continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
       "darkDelta": "DARK REPAIR \u2014 the leaf is mode-FROZEN at #0064e0 in both modes today; {color-accent} is #0064E0 light / #2694FE dark, so the slider fill and thumb follow the accent into dark mode instead of holding the light-mode blue. Deliberate; light plane unchanged.",
       "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value \u2014 astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). FACT CORRECTION to the review premise: the rubric described this leaf as \"slider thumb bg + two value-display texts\" and asked for a {color-accent}-vs-{color-text-accent} dark-arm comparison before deciding, with a leaf-split refusal if the arms diverged. On disk all three refs are background-color fills (slider/part-1-0-1, slider-thumb, slider-thumb-2); the slider's two value displays bind imported.shared.color-ffffff and imported.shared.color-0a1317, NOT this leaf. So the fill/text role divergence the premise guarded against does not exist here and no split is needed. For the record, the comparison the rubric asked for: {color-accent} dark #2694FE vs {color-text-accent} dark #3E9EFB, dE76 8.81 \u2014 materially divergent, not \"within a few units\"; had the premise held, the refusal branch would have fired.",
       "ack": "explicit CLI --apply",
@@ -209,7 +209,9 @@
         "RA-4e606f"
       ],
       "leaves": [
-        "imported.slider.label.color"
+        "imported.slider.label.color",
+        "imported.switch.label-2.color",
+        "imported.switch.label.color"
       ],
       "value": "#4e606f",
       "candidates": [
@@ -219,9 +221,11 @@
       ],
       "to": "color-text-secondary",
       "usedBy": [
-        "slider:{imported.slider.label.color}"
+        "slider:{imported.slider.label.color}",
+        "switch:{imported.switch.label-2.color}",
+        "switch:{imported.switch.label.color}"
       ],
-      "rationale": "The slider's label text (contract part `label`, channels color + row-rule-color, the latter currentColor-derived from the former). Role-grade evidence (b): the channel names the role \u2014 `color` fires the named channel rule color \u2192 color-text-*, and {color-text-secondary} is the only candidate in the text role class ({color-icon-gray} and {color-icon-secondary} are icon roles). Top affinity by score (3 vs 0 vs 0).",
+      "rationale": "The slider's label text (contract part `label`, channels color + row-rule-color, the latter currentColor-derived from the former). Role-grade evidence (b): the channel names the role \u2014 `color` fires the named channel rule color \u2192 color-text-*, and {color-text-secondary} is the only candidate in the text role class ({color-icon-gray} and {color-icon-secondary} are icon roles). Top affinity by score (3 vs 0 vs 0). EXTENDED 2026-08-08 (exact-conversion wave reopened the queue): `imported.switch.label-2.color`, `imported.switch.label.color` carry the same value and the same CSS property class as this row and are same-value/same-target CONTINUATIONS, not new judgements \u2014 mechanically extended to the parent row's anchor. Corroborated by the committed source binding: Switch.tsx (styles, label/description) declares color: colorVars['--color-text-secondary']. Provenance of the extension: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
       "darkDelta": "DARK REPAIR, but a CHOICE-FREE one: all three candidates are byte-identical in BOTH planes (#4E606F light / #AAAFB5 dark), so the dark behaviour is the same whichever candidate wins and the decision carries zero pixel risk \u2014 only the semantic name differs, and the channel decides that. The leaves are mode-FROZEN at #4e606f today; after this they follow the mode.",
       "cause": "StyleX compiles the token NAME away into a literal hex in the atomic class, so the computed-floor capture could only mint the value \u2014 astryx has no source-bindings.json by construction (see examples/mui/scripts/promote-floor.mjs for the evidence-driven pass this example cannot run). Decision authored in the reviewed re-anchoring round: ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt).",
       "ack": "explicit CLI --apply",
@@ -628,6 +632,7 @@
         "RA-e3193b"
       ],
       "leaves": [
+        "imported.badge.root.background-color.error",
         "imported.button.root.background-color.destructive",
         "imported.button.root.outline-color-state-focus-visible.destructive"
       ],
@@ -638,9 +643,10 @@
       ],
       "to": "color-error",
       "usedBy": [
-        "button:{imported.button.root.background-color.destructive}"
+        "button:{imported.button.root.background-color.destructive}",
+        "badge:{imported.badge.root.background-color.error}"
       ],
-      "rationale": "Button variant=destructive, on the surface and its focus ring. THE MIRROR OF THE YELLOW/RED ARGUMENT: `destructive` is a ROLE name, not a colour name, so it takes the role token `color-error` rather than `color-border-red`. Button exposes no `red` variant, so the colour-named token has no cell here to belong to. every candidate's NEUTRAL light value tuple-equals the leaf literal #e3193b (227,25,59,1) \u2014 re-verified at apply time against the then-current DTCG.",
+      "rationale": "Button variant=destructive, on the surface and its focus ring. THE MIRROR OF THE YELLOW/RED ARGUMENT: `destructive` is a ROLE name, not a colour name, so it takes the role token `color-error` rather than `color-border-red`. Button exposes no `red` variant, so the colour-named token has no cell here to belong to. every candidate's NEUTRAL light value tuple-equals the leaf literal #e3193b (227,25,59,1) \u2014 re-verified at apply time against the then-current DTCG. EXTENDED 2026-08-08 (exact-conversion wave reopened the queue): `imported.badge.root.background-color.error` carry the same value and the same CSS property class as this row and are same-value/same-target CONTINUATIONS, not new judgements \u2014 mechanically extended to the parent row's anchor. Corroborated by the committed source binding: Badge.tsx (variantStyles.error) declares backgroundColor: colorVars['--color-error']. Provenance of the extension: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
       "darkDelta": "DARK REPAIR \u2014 the leaf is frozen at #e3193b in BOTH modes today; aliasing to {color-error} makes it #E3193B light / #F5394F dark. This is a deliberate pixel change in dark mode.",
       "cause": "StyleX compiles the source token NAME away into a literal hex in the atomic class, so the computed-floor capture can only mint the VALUE \u2014 astryx has no source-bindings.json by construction. Re-derived after the 2026-07-29 recapture (task #43), the first since the capture stopped reading its own promote output. ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Re-exercised 2026-07-29 for the post-recapture queue.",
       "ack": "explicit CLI --apply",
@@ -771,6 +777,132 @@
       "cause": "StyleX compiles the source token NAME away into a literal hex in the atomic class, so the computed-floor capture can only mint the VALUE \u2014 astryx has no source-bindings.json by construction. Re-derived after the 2026-07-29 recapture (task #43), the first since the capture stopped reading its own promote output. ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Re-exercised 2026-07-29 for the post-recapture queue.",
       "ack": "explicit CLI --apply",
       "ackNote": "orchestrator-reviewed per-leaf split of value group RA-ffffff (color-on-dark arm) \u2014 ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Re-exercised 2026-07-29 for the post-recapture queue."
+    },
+    {
+      "ids": [
+        "RA-0a1317"
+      ],
+      "leaves": [
+        "imported.badge.root.color.warning"
+      ],
+      "value": "#0a1317",
+      "candidates": [
+        "color-text-gray",
+        "color-text-primary",
+        "color-on-warning",
+        "color-background-inverted",
+        "color-icon-primary"
+      ],
+      "to": "color-on-warning",
+      "usedBy": [
+        "badge:{imported.badge.root.color.warning}"
+      ],
+      "rationale": "Badge variant=warning content colour, a NEW leaf minted by the 2026-08 exact-conversion wave's badge rebinding. NOT a continuation of this id's color-text-primary arm: that arm is default content on neutral/quiet surfaces, while this leaf is content ON the warning surface (the sibling background anchors to {color-warning}, RA-e9af08). By the reviewed round's own rubric \u2014 resolved BY ROLE, never by hue; a role-named axis takes the role token \u2014 `warning` takes `color-on-warning`, exactly as badge error/info/success text takes color-on-error/color-on-accent/color-on-success. Corroborated by the committed source binding: Badge.tsx (variantStyles.warning) declares color: colorVars['--color-on-warning']. The mechanical alternative {color-text-primary} would re-theme the text to #DFE2E5 on a still-yellow warning surface in dark mode \u2014 a contrast defect the mode-safe role token avoids. every candidate's NEUTRAL light value tuple-equals the leaf literal #0a1317 (10,19,23,1) \u2014 re-verified at apply time against the then-current DTCG.",
+      "darkDelta": "MODE-SAFE \u2014 {color-on-warning} is #0A1317 in both modes, identical to the frozen literal #0a1317; aliasing changes NO pixel in either mode (semantics only). This is the pinned design rule for new decisions: anchor to the neutral plane, avoid any anchor that re-themes under dark mode.",
+      "cause": "StyleX compiles the source token NAME away into a literal hex in the atomic class, so the computed-floor capture can only mint the VALUE \u2014 astryx has no source-bindings.json by construction. Reopened by the 2026-08 exact-conversion wave, which rebound the badge and switch contracts and minted new colour leaves. ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Continuation round executed: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-0a1317 (badge warning content arm) \u2014 continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review"
+    },
+    {
+      "ids": [
+        "RA-ffffff"
+      ],
+      "leaves": [
+        "imported.badge.root.color.success"
+      ],
+      "value": "#ffffff",
+      "candidates": [
+        "color-on-error",
+        "color-on-accent",
+        "color-on-success",
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-dark"
+      ],
+      "to": "color-on-success",
+      "usedBy": [
+        "badge:{imported.badge.root.color.success}"
+      ],
+      "rationale": "Badge variant=success content colour, a NEW leaf minted by the 2026-08 exact-conversion wave's badge rebinding \u2014 the FIFTH arm of the RA-ffffff split, resolved by role rather than by hue like the other four. White content on the success surface (the sibling background anchors to {color-success}, RA-0d8626) takes the role token `color-on-success`, exactly as the error and info badges take color-on-error and color-on-accent. Corroborated by the committed source binding: Badge.tsx (variantStyles.success) declares color: colorVars['--color-on-success']. every candidate's NEUTRAL light value tuple-equals the leaf literal #FFFFFF (255,255,255,1) \u2014 re-verified at apply time against the then-current DTCG.",
+      "darkDelta": "MODE-SAFE \u2014 {color-on-success} is #FFFFFF in both modes, identical to the frozen literal #ffffff; aliasing changes NO pixel in either mode (semantics only).",
+      "cause": "StyleX compiles the source token NAME away into a literal hex in the atomic class, so the computed-floor capture can only mint the VALUE \u2014 astryx has no source-bindings.json by construction. Reopened by the 2026-08 exact-conversion wave, which rebound the badge and switch contracts and minted new colour leaves. ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Continuation round executed: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-ffffff (badge success content arm) \u2014 continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review"
+    },
+    {
+      "ids": [
+        "RA-ffffff"
+      ],
+      "leaves": [
+        "imported.switch.switch-thumb-2.background-color",
+        "imported.switch.switch-thumb.background-color"
+      ],
+      "value": "#ffffff",
+      "candidates": [
+        "color-on-error",
+        "color-on-accent",
+        "color-on-success",
+        "color-background-card",
+        "color-background-popover",
+        "color-background-surface",
+        "color-on-dark"
+      ],
+      "to": "color-background-surface",
+      "usedBy": [
+        "switch:{imported.switch.switch-thumb-2.background-color}",
+        "switch:{imported.switch.switch-thumb.background-color}"
+      ],
+      "rationale": "The switch thumb surfaces, NEW leaves minted by the 2026-08 exact-conversion wave's switch rebinding \u2014 the SIXTH arm of the RA-ffffff split. The thumb is a SURFACE, not content, so the color-on-* family is excluded by channel (the same argument that gave card's default background color-background-card). Between the three background candidates the deciding fact is a COMMITTED BINDING on disk: Switch.tsx (sandbox @astryxdesign/core, styles.thumb) declares backgroundColor: colorVars['--color-background-surface'], and a recorded fact outranks a name-shaped prediction. every candidate's NEUTRAL light value tuple-equals the leaf literal #FFFFFF (255,255,255,1) \u2014 re-verified at apply time against the then-current DTCG.",
+      "darkDelta": "DARK REPAIR \u2014 the leaves are frozen at #ffffff in BOTH modes today; aliasing to {color-background-surface} makes them #FFFFFF light / #1F1F22 dark. This is the REAL system's dark behaviour (the source binds this exact token), so the pixel change in dark is a repair toward the source of truth, not a drift from it.",
+      "deviation": "The pinned new-decision rule prefers a mode-safe anchor, and the mode-safe candidates (color-on-accent/on-dark/on-error/on-success) would keep the thumb white in dark mode \u2014 but the committed source binding names color-background-surface, and a recorded fact outranks the rubric's prediction (the same rule the three prior deviation rows follow). Flagged for owner review.",
+      "cause": "StyleX compiles the source token NAME away into a literal hex in the atomic class, so the computed-floor capture can only mint the VALUE \u2014 astryx has no source-bindings.json by construction. Reopened by the 2026-08 exact-conversion wave, which rebound the badge and switch contracts and minted new colour leaves. ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Continuation round executed: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed per-leaf split of value group RA-ffffff (switch thumb surface arm) \u2014 continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review"
+    },
+    {
+      "ids": [
+        "RA-0d8626"
+      ],
+      "leaves": [
+        "imported.badge.root.background-color.success"
+      ],
+      "value": "#0d8626",
+      "candidates": [
+        "color-success",
+        "color-border-green",
+        "color-icon-green"
+      ],
+      "to": "color-success",
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.success}"
+      ],
+      "rationale": "Badge variant=success background, a NEW leaf minted by the 2026-08 exact-conversion wave's badge rebinding. A BACKGROUND channel must anchor to a background/semantic-surface token, never a border- or icon-scoped one \u2014 {color-border-green} and {color-icon-green} are excluded by channel, leaving the role token {color-success}, which also wins the role-over-hue rubric (`success` is a role-named axis). Both modes were checked before deciding: {color-success} resolves to #0D8626 in light AND dark, identical to the captured hex, so nothing contradicts the anchor in either mode. Corroborated by the committed source binding: Badge.tsx (variantStyles.success) declares backgroundColor: colorVars['--color-success']. every candidate's NEUTRAL light value tuple-equals the leaf literal #0d8626 (13,134,38,1) \u2014 re-verified at apply time against the then-current DTCG.",
+      "darkDelta": "MODE-SAFE \u2014 {color-success} is #0D8626 in both modes, identical to the frozen literal #0d8626; aliasing changes NO pixel in either mode (semantics only).",
+      "cause": "StyleX compiles the source token NAME away into a literal hex in the atomic class, so the computed-floor capture can only mint the VALUE \u2014 astryx has no source-bindings.json by construction. Reopened by the 2026-08 exact-conversion wave, which rebound the badge and switch contracts and minted new colour leaves. ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Continuation round executed: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
+      "ack": "explicit CLI --apply",
+      "ackNote": "orchestrator-reviewed decision on value group RA-0d8626 (badge success background) \u2014 continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review"
+    },
+    {
+      "ids": [
+        "RA-e9af08"
+      ],
+      "leaves": [
+        "imported.badge.root.background-color.warning"
+      ],
+      "value": "#e9af08",
+      "candidates": [
+        "color-warning"
+      ],
+      "to": "color-warning",
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.warning}"
+      ],
+      "rationale": "Badge variant=warning background, a NEW leaf minted by the 2026-08 exact-conversion wave's badge rebinding. CLEAN row: exactly ONE base colour token carries #e9af08, and the axis name agrees (warning \u2192 *-warning). Corroborated by the committed source binding: Badge.tsx (variantStyles.warning) declares backgroundColor: colorVars['--color-warning']. every candidate's NEUTRAL light value tuple-equals the leaf literal #e9af08 (233,175,8,1) \u2014 re-verified at apply time against the then-current DTCG.",
+      "darkDelta": "DARK REPAIR \u2014 the leaf is frozen at #e9af08 in BOTH modes today; aliasing to {color-warning} makes it #E9AF08 light / #F2C00B dark. Deliberate pixel change in dark; light plane unchanged. The badge's warning text is anchored mode-safe ({color-on-warning}, RA-0a1317) so contrast holds in both modes.",
+      "cause": "StyleX compiles the source token NAME away into a literal hex in the atomic class, so the computed-floor capture can only mint the VALUE \u2014 astryx has no source-bindings.json by construction. Reopened by the 2026-08 exact-conversion wave, which rebound the badge and switch contracts and minted new colour leaves. ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Continuation round executed: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
+      "ack": "explicit CLI --apply",
+      "ackNote": "auto-clean: single candidate, exact name affinity, orchestrator-applied \u2014 continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review"
     }
   ],
   "literals": [
@@ -788,6 +920,20 @@
       "cause": "StyleX compiles the source token name away into a literal hex, so the computed capture mints the value; here the value is transparency, which no token in the anchor names. Surfaced by the 2026-07-29 recapture (task #43) as the only two live leaves left with neither a decision nor a receipt. ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Re-exercised 2026-07-29 for the post-recapture queue.",
       "ack": "decided-literal",
       "ackNote": "orchestrator-reviewed no-match row RA-nomatch-00000000 \u2014 ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Re-exercised 2026-07-29 for the post-recapture queue."
+    },
+    {
+      "ids": [
+        "RA-nomatch-0536591a"
+      ],
+      "leaves": [
+        "imported.badge.root.background-color.neutral"
+      ],
+      "value": "#0536591a",
+      "consideredCandidates": [],
+      "reason": "NO CANDIDATE EXISTS, and this time it is an ALPHA-SERIALISATION near-miss, not a missing token. The committed source binding names the token outright \u2014 Badge.tsx (variantStyles.neutral) declares backgroundColor: colorVars['--color-neutral'] \u2014 and the neutral anchor HAS color-neutral, but its value is authored as rgba(5, 54, 89, 0.1) (alpha 25.5/255) while the browser capture serialised the computed value as #0536591A (alpha 26/255). The value join keys on exact normalized r,g,b,a tuples and refuses near-miss equality BY DESIGN, so no candidate is offered and no honest row can be written. Kept literal with this receipt so the leaf is DECIDED rather than pending. THE UNBLOCKING CONDITION, named: re-author color-neutral's $value in astryx.dtcg.json in a form that round-trips the captured alpha (or teach the join a documented alpha-quantisation rule); then this leaf joins cleanly and this receipt should be retired for a decision row.",
+      "cause": "StyleX compiles the source token NAME away into a literal hex in the atomic class, so the computed-floor capture can only mint the VALUE \u2014 astryx has no source-bindings.json by construction. Reopened by the 2026-08 exact-conversion wave, which rebound the badge and switch contracts and minted new colour leaves. ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26 (the owner delegated review-queue ack authority to the orchestrator on that date; the provenance of the authority is part of this receipt). Continuation round executed: continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
+      "ack": "decided-literal",
+      "ackNote": "orchestrator-reviewed no-match row RA-nomatch-0536591a \u2014 continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review"
     }
   ],
   "_literalsMarker": "THE OTHER HALF OF A REVIEW. `literals` rows write NOTHING to the minted tree \u2014 they receipt a leaf that was looked at and DELIBERATELY kept literal, so \"reviewed and refused\" stops being indistinguishable from \"nobody looked yet\". They are validated like aliases (right ack, leaf exists, leaf is not already aliased, value re-checked against the live tree) and they move the leaf out of the pending queue in `reanchor-proposals.md`. TO RE-OPEN a leaf: delete its row here and re-run --propose.",
@@ -983,5 +1129,30 @@
     "_marker": "2026-07-29 \u2014 THE RE-ANCHORING REVIEW, RE-RUN AGAINST THE FRESH MINT (task #43, part 2). The recapture is not a regression to be undone: it reads MORE of the library than the frozen capture did (total token refs 504 -> 584), and the new facts arrive as anonymous literals, which is exactly what this ledger exists to name. 17 of the queued leaves carried a target the previous round had already reviewed and are re-applied as CONTINUATIONS, not new judgements. The rest were decided here: the clean rows are 1 leaf : 1 candidate with the channel and axis names agreeing, and the 7 ambiguous rows were resolved BY ROLE, never by hue \u2014 two of them as splits. The deciding evidence in the hard cases is the LIBRARY'S OWN AXIS VOCABULARY: badge exposes both `warning` and `yellow`, both `error` and `red`, and card exposes a distinct `gray`, so a colour-named axis takes the colour-named token and a role-named axis takes the role token. One arm closes a debt the previous round left open BY NAME: it declined the slider tooltip's white text as undecidable and recorded the precondition \u2014 *\"name the tooltip surface first ... then this leaf becomes decidable\"* \u2014 and this round names that surface (color-background-inverted), so the text is decided as color-on-dark.",
     "rowsAdded": 28,
     "leavesCovered": 62
+  },
+  "_prunedByWaveUnbind": {
+    "_marker": "2026-08-08 \u2014 MECHANICAL PRUNE, NOT A NEW JUDGEMENT (same rule as _prunedByCurrentcolorFold). The exact-conversion wave rebound the badge and switch contracts; two leaves this ledger had anchored are still minted (and still aliased) but now carry ZERO axis-expanded contract refs, so the live join files them under the unreferenced-leaf exclusion and --apply refuses any row that names them. They are pruned from their rows so the rows stay re-applicable; no anchor target, value or rationale changed, and the aliases in the minted tree are untouched. continuation under OWNER DELEGATION (TJ 2026-07-26); executed by automation 2026-08-08; flagged for owner review.",
+    "receipts": [
+      {
+        "ids": [
+          "RA-0064e0"
+        ],
+        "to": "color-accent",
+        "action": "PRUNED-UNREFERENCED",
+        "removed": [
+          "imported.shared.color-0064e0"
+        ]
+      },
+      {
+        "ids": [
+          "RA-0a1317"
+        ],
+        "to": "color-text-primary",
+        "action": "PRUNED-UNREFERENCED",
+        "removed": [
+          "imported.badge.root.color.neutral"
+        ]
+      }
+    ]
   }
 }

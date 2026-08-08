@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 22.730831727220536,
+    "pctAAUnmasked": 1.7207619125727875,
+    "pctAAMasked": 1.7207619125727875,
+    "maskCoveragePct": 0,
+    "canvasPx": "320x48",
+    "realPx": "1424x2192",
+    "inkCanvasPct": 0.046517469039612895,
+    "inkRealPct": 22.543896856803084
+  },
+  "reference": "examples/astryx/receipts/site/TextInput.png",
+  "referenceSha256": "c547611af9eeff9d6aeead41316315bd42cd6281484b4fde563867ed6086f3e5",
+  "canvasShot": "parity/receipts/console-loop/astryx/shots/text-input-cell.png",
+  "canvasShotSha256": "c8735a87bd5eb0e4d8e6e125c98971810885487069043469ab912e170dfc5a79",
+  "diff": "parity/receipts/console-loop/astryx/scores/text-input.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/astryx/components/text-input.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 45.666666666666664,
+  "inkDelta": 22.49737938776347,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=45.67, inkDelta=22.5) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T04:31:15.279Z"
+}

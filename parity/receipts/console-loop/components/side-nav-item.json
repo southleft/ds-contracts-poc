@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "side-nav-item",
+  "contract": "contracts/side-nav-item.contract.json",
+  "script": "parity/receipts/console-loop/emitted/31-sidenavitem.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:06.107Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1495",
+    "page": "SideNavItem",
+    "sectionId": "1:1496",
+    "result": {
+      "createdNodeIds": [
+        "1:1495"
+      ],
+      "results": [
+        {
+          "name": "SideNavItem",
+          "contractId": "ds.side-nav-item",
+          "nodeId": "1:1495",
+          "key": "ca01bb3635bcc6b7204605a39293518cf98f8dd9",
+          "variants": 2,
+          "properties": [
+            "Href#1:563",
+            "Label#1:566",
+            "Icon#1:569",
+            "Show Icon#1:572",
+            "EndContent#1:575",
+            "Show EndContent#1:578",
+            "State"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1496 captured (ok).",
+      "SideNavItem: 2 variant(s); type COMPONENT_SET; page SideNavItem.",
+      "Props: Href, Label, Icon, Show Icon, EndContent, Show EndContent, State.",
+      "First root fill bound to color/nav/default/background.",
+      "Sample text: \"Slot\", \"Navigation item\", \"Slot\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:4041151291",
+    "lineCount": 99,
+    "sampleLines": [
+      ":COMPONENT_SET/SideNavItem|fill|[]",
+      ":COMPONENT_SET/SideNavItem|radius|5,5,5,5",
+      ":COMPONENT_SET/SideNavItem|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/SideNavItem|description|SideNavItem — generated from contract ds.side-nav-item v1.0.0",
+      ":COMPONENT_SET/SideNavItem|propdef|EndContent#1:575:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/SideNavItem|propdef|Href#1:563:TEXT=#",
+      ":COMPONENT_SET/SideNavItem|propdef|Icon#1:569:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/SideNavItem|propdef|Label#1:566:TEXT=Navigation item",
+      ":COMPONENT_SET/SideNavItem|propdef|Show EndContent#1:578:BOOLEAN=true",
+      ":COMPONENT_SET/SideNavItem|propdef|Show Icon#1:572:BOOLEAN=true",
+      ":COMPONENT_SET/SideNavItem|propdef|State:VARIANT=Default",
+      "/0:COMPONENT/State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/nav/default/background\"}}}]",
+      "/0:COMPONENT/State=Default|radius|8,8,8,8",
+      "/0:COMPONENT/State=Default|layout|HORIZONTAL MIN/CENTER gap 8 pad 8,12,8,12",
+      "/0:COMPONENT/State=Default|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/State=Default|bound:bottomLeftRadius|radius/control",
+      "/0:COMPONENT/State=Default|bound:bottomRightRadius|radius/control",
+      "/0:COMPONENT/State=Default|bound:itemSpacing|space/gap/sm",
+      "/0:COMPONENT/State=Default|bound:paddingBottom|space/inset-y/md",
+      "/0:COMPONENT/State=Default|bound:paddingLeft|space/inset-x/sm"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "State",
+      "Label",
+      "Href"
+    ],
+    "observed": {
+      "variantNames": [
+        "State=Default",
+        "State=Selected"
+      ],
+      "propDefs": [
+        {
+          "name": "Href#1:563",
+          "type": "TEXT",
+          "defaultValue": "#",
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:566",
+          "type": "TEXT",
+          "defaultValue": "Navigation item",
+          "variantOptions": null
+        },
+        {
+          "name": "Icon#1:569",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Icon#1:572",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "EndContent#1:575",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show EndContent#1:578",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Selected"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 12,
+          "b": 8,
+          "l": 12
+        },
+        "radius": 8,
+        "fillVarName": "color/nav/default/background",
+        "padBound": {
+          "itemSpacing": "space/gap/sm",
+          "paddingLeft": "space/inset-x/sm",
+          "paddingTop": "space/inset-y/md",
+          "paddingRight": "space/inset-x/sm",
+          "paddingBottom": "space/inset-y/md",
+          "width": "size/card/width",
+          "topLeftRadius": "radius/control",
+          "topRightRadius": "radius/control",
+          "bottomLeftRadius": "radius/control",
+          "bottomRightRadius": "radius/control",
+          "fills": "color/nav/default/background"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "labelText",
+            "chars": "Navigation item",
+            "fontSize": 14
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 320,
+        "h": 116,
+        "childNames": [
+          "iconSlot:FRAME",
+          "labelText:TEXT",
+          "endContent:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

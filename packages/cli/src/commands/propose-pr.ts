@@ -181,7 +181,10 @@ function validateProposalChildren(
   }
 }
 
-function assertSafeRepoPath(destPath: string): void {
+/** Shared by propose-pr and figma receive --apply: generated destinations are
+ *  built from untrusted proposal content (contract.name) and must never carry
+ *  absolute paths, empty segments, or `..`. */
+export function assertSafeRepoPath(destPath: string): void {
   const segments = destPath.split("/");
   if (
     destPath.length === 0 ||
@@ -191,21 +194,45 @@ function assertSafeRepoPath(destPath: string): void {
     segments.some((segment) => segment === "" || segment === "." || segment === "..")
   ) {
     throw new CliUsageError(
-      `propose-pr REFUSED unsafe repository destination "${destPath}" — destinations must be relative, normalized paths.`,
+      `REFUSED unsafe repository destination "${destPath}" — destinations must be relative, normalized paths.`,
     );
   }
 }
 
-function assertUniqueDestinations(files: PrFile[]): void {
+export function assertUniqueDestinations(
+  files: Array<{ destPath: string }>,
+): void {
   const seen = new Set<string>();
   for (const file of files) {
     assertSafeRepoPath(file.destPath);
     if (seen.has(file.destPath)) {
       throw new CliUsageError(
-        `propose-pr REFUSED duplicate destination "${file.destPath}" — no files or requests were written.`,
+        `REFUSED duplicate destination "${file.destPath}" — no files or requests were written.`,
       );
     }
     seen.add(file.destPath);
+  }
+}
+
+/** Defense in depth: every generated path must resolve under the configured
+ *  generate.out tree (trusted config), not merely look relative. */
+export function assertDestinationsUnderRoot(
+  files: Array<{ destPath: string }>,
+  cwd: string,
+  rootDir: string,
+): void {
+  const resolvedRoot = path.resolve(cwd, rootDir);
+  for (const file of files) {
+    assertSafeRepoPath(file.destPath);
+    const resolved = path.resolve(cwd, file.destPath);
+    if (
+      resolved !== resolvedRoot &&
+      !resolved.startsWith(resolvedRoot + path.sep)
+    ) {
+      throw new CliUsageError(
+        `REFUSED generated destination "${file.destPath}" — resolves outside generate.out (${resolvedRoot}); no files were written.`,
+      );
+    }
   }
 }
 

@@ -11,8 +11,12 @@
   },
   "mount": {
     "__note": "LOAD-BEARING, THREE WAYS. (1) preScript sets globalThis.alAutoRegistry BEFORE the bundle evaluates — an `imports` line cannot, because ES import hoisting runs the library first, and WITHOUT the flag not one top-level tag registers (<al-button> stays an unknown element that renders its light children and nothing else). (2) headStyles puts style#al-theme-sheet in the document BEFORE the first connectedCallback — ALElement.getGlobalStyles() looks that id up ONCE, memoizes it on globalThis, adopts a stripped copy into every shadow root, and console.errors 'Altitude style#al-theme-sheet not found' otherwise; the tokens themselves are STRIPPED from that copy by the library and reach components by INHERITANCE from :root in the light DOM, so the same <style> is doing both jobs. (3) tokens-light.css is appended AFTER main.css because main.css's own :root block is the DARK set (322 names, dark values) — loading main.css alone gives a dark page under a light colorScheme. The Google-Fonts @import is stripped by the engine (quoted-string-aware; a naive [^;]+ strip cuts inside the URL's own semicolons and silently voids the whole :root token block — 323 custom properties to 0 with no error anywhere).",
-    "imports": ["import 'altitude-web-components';"],
-    "preScript": ["globalThis.alAutoRegistry = true;"],
+    "imports": [
+      "import 'altitude-web-components';"
+    ],
+    "preScript": [
+      "globalThis.alAutoRegistry = true;"
+    ],
     "headStyles": [
       {
         "id": "al-theme-sheet",
@@ -27,16 +31,54 @@
   },
   "tokens": {
     "__note": "varPrefix is --al-, NOT --al-theme-: the reader's tokenName() strips the prefix to get the DTCG leaf path, and Altitude carries BOTH tiers in one namespace (208 primitives + 115 semantic aliases). Prefixing at --al-theme- would leave every direct primitive reference unbindable. The recon's objection — that the ~40 UNDEFINED per-component escape hatches (--al-button-padding, --al-toggle-width) would crowd the candidates — is wrong and was measured: an undefined custom property computes to the empty string and the reader drops empty candidates before scoring them.",
-    "dtcg": ["examples/altitude/tokens/altitude.dtcg.json"],
+    "dtcg": [
+      "examples/altitude/tokens/altitude.dtcg.json"
+    ],
     "css": "examples/altitude/tokens/altitude.vars.css",
     "minted": "examples/altitude/tokens/altitude-minted.dtcg.json"
   },
+  "fonts": {
+    "__note": "FC-FONT-SUBSTRATE closure. NOT A GUESS: altitude-web-components/dist/css/main.css line 1 is @import\"https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap\" — the library's OWN declared faces, exactly these four (the harness strips that @import for network hermeticity; these committed files put the same family back, offline). Files committed under extract/computed/fonts/ from @ibm/plex-sans@1.1.0 (npm; also present in examples/carbon/.carbon-sandbox/node_modules/@ibm/plex-sans). Inlined as data: URIs — no network at render or check time; same files + same pinned Chromium => same rasters on the recording platform.",
+    "faces": [
+      {
+        "family": "IBM Plex Sans",
+        "weight": 400,
+        "style": "normal",
+        "file": "extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2"
+      },
+      {
+        "family": "IBM Plex Sans",
+        "weight": 600,
+        "style": "normal",
+        "file": "extract/computed/fonts/ibm-plex-sans/IBMPlexSans-SemiBold.woff2"
+      },
+      {
+        "family": "IBM Plex Sans",
+        "weight": 400,
+        "style": "italic",
+        "file": "extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Italic.woff2"
+      },
+      {
+        "family": "IBM Plex Sans",
+        "weight": 600,
+        "style": "italic",
+        "file": "extract/computed/fonts/ibm-plex-sans/IBMPlexSans-SemiBoldItalic.woff2"
+      }
+    ]
+  },
   "browser": {
-    "viewport": { "width": 900, "height": 1000 },
+    "viewport": {
+      "width": 900,
+      "height": 1000
+    },
     "deviceScaleFactor": 1,
     "colorScheme": "light"
   },
-  "stage": { "width": 320, "height": 96, "padding": 16 },
+  "stage": {
+    "width": 320,
+    "height": 96,
+    "padding": 16
+  },
   "enumeration": {
     "__note": "unsetLabel is \"unset\", not the drafter's \"__unset\" (underscores are outside the contract token-ref character class and fail ContractSchema.parse with errors that never mention the underscore — the Carbon lesson). It matters more here than anywhere: EVERY enum in this library is defaultless, so the pseudo-value is a segment of a minted token path on every single component.",
     "cartesianLimit": 512,
@@ -49,7 +91,9 @@
       "importName": "al-button",
       "contract": "examples/altitude/contracts-seed/button.contract.json",
       "sampleText": "Button",
-      "axes": ["variant"]
+      "axes": [
+        "variant"
+      ]
     },
     {
       "__note": "isDot is a prop-selected RENDERING (a modifier class plus an ::after), so it is a VARIANT AXIS through $props, not a state and not a presence prop (it creates no subtree). `position` is not an axis at all — it mutates parentElement.style.",
@@ -57,11 +101,20 @@
       "importName": "al-badge",
       "contract": "examples/altitude/contracts-seed/badge.contract.json",
       "sampleText": "Badge",
-      "axes": ["variant", "dot"],
+      "axes": [
+        "variant",
+        "dot"
+      ],
       "axisValueMap": {
         "dot": {
-          "default": { "$props": {} },
-          "dot": { "$props": { "isDot": true } }
+          "default": {
+            "$props": {}
+          },
+          "dot": {
+            "$props": {
+              "isDot": true
+            }
+          }
         }
       }
     },
@@ -70,7 +123,10 @@
       "importName": "al-chip",
       "contract": "examples/altitude/contracts-seed/chip.contract.json",
       "sampleText": "Chip",
-      "axes": ["variant", "type"]
+      "axes": [
+        "variant",
+        "type"
+      ]
     },
     {
       "__note": "href PINNED: the shadow template swaps its ROOT between <a> and <button> on this prop, so an unset href would make the anatomy a function of a non-axis. The value leaks into the root's classList verbatim (class=\"al-c-link #al\") — a real library defect; classAllow drops it.",
@@ -78,8 +134,12 @@
       "importName": "al-link",
       "contract": "examples/altitude/contracts-seed/link.contract.json",
       "sampleText": "Link",
-      "axes": ["variant"],
-      "fixedProps": { "href": "#al" }
+      "axes": [
+        "variant"
+      ],
+      "fixedProps": {
+        "href": "#al"
+      }
     },
     {
       "__note": "THE DEPTH-2 CASE. hasBadge mounts a nested <al-badge> — a custom element with its OWN shadow root — inside the avatar's shadow tree. The reader keeps the nested HOST as an element (it occupies a real box in its parent's layout and is the inheritance link its inner box reads) and descends into ITS shadow root for children; only the CAPTURED ROOT descends past a host.",
@@ -87,8 +147,16 @@
       "importName": "al-avatar",
       "contract": "examples/altitude/contracts-seed/avatar.contract.json",
       "sampleText": "AB",
-      "axes": ["variant"],
-      "presenceProps": [{ "prop": "hasBadge", "libraryProp": "hasBadge", "value": true }]
+      "axes": [
+        "variant"
+      ],
+      "presenceProps": [
+        {
+          "prop": "hasBadge",
+          "libraryProp": "hasBadge",
+          "value": true
+        }
+      ]
     },
     {
       "__note": "blockStage: a heading is a display:block element and shrink-to-fits inside the flex stage. tagName is held at its default h2 and is NOT an axis (semantic, and it shadows Element.prototype.tagName).",
@@ -96,15 +164,28 @@
       "importName": "al-heading",
       "contract": "examples/altitude/contracts-seed/heading.contract.json",
       "sampleText": "Heading",
-      "axes": ["variant", "weight"],
+      "axes": [
+        "variant",
+        "weight"
+      ],
       "axisValueMap": {
         "weight": {
-          "regular": { "$props": {} },
-          "bold": { "$props": { "isBold": true } }
+          "regular": {
+            "$props": {}
+          },
+          "bold": {
+            "$props": {
+              "isBold": true
+            }
+          }
         }
       },
       "blockStage": true,
-      "stage": { "width": 360, "height": 120, "padding": 16 }
+      "stage": {
+        "width": 360,
+        "height": 120,
+        "padding": 16
+      }
     },
     {
       "__note": "blockStage is REQUIRED, not cosmetic: measured 0x1px in the default flex stage (an <hr> is a shrink-to-fit flex item) and 288x1px in a block formatting context. The vertical variant then measures 1x64px in the same stage.",
@@ -112,7 +193,9 @@
       "importName": "al-divider",
       "contract": "examples/altitude/contracts-seed/divider.contract.json",
       "sampleText": "",
-      "axes": ["variant"],
+      "axes": [
+        "variant"
+      ],
       "blockStage": true
     },
     {
@@ -121,7 +204,9 @@
       "importName": "al-icon-close",
       "contract": "examples/altitude/contracts-seed/iconclose.contract.json",
       "sampleText": "",
-      "axes": ["size"]
+      "axes": [
+        "size"
+      ]
     }
   ]
 }

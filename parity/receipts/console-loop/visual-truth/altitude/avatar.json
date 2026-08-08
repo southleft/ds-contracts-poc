@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "altitude",
+  "stem": "avatar",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/altitude/components/avatar.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385229420588708070",
+  "setNodeId": "1:10498",
+  "cellNodeId": "1:10494",
+  "cellName": "Variant=Sm",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 1.5755208333333333,
+    "pctAAUnmasked": 0.13346354166666666,
+    "pctAAMasked": 0.13346354166666666,
+    "maskCoveragePct": 0,
+    "canvasPx": "24x24",
+    "realPx": "320x96",
+    "inkCanvasPct": 1.5234375,
+    "inkRealPct": 0
+  },
+  "reference": "extract/computed/out/altitude/avatar/gate-shots/sm.off__default.png",
+  "referenceSha256": "0d75ad46c04d517630590afcb2cf66ce1aabae5dc9c8b23c6985bfcc18edf300",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/altitude/shots/avatar.png",
+  "canvasShotSha256": "2ec70561fcb131100da37ff3eee09d1c380a8e7fdbb30851995c5ae077c06a89",
+  "diff": "parity/receipts/console-loop/visual-truth/altitude/diffs/avatar.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 13.333333333333334,
+  "inkDelta": 1.5234375,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=13.33, inkDelta=1.5)"
+}

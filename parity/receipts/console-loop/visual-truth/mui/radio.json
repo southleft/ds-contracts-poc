@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "radio",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/radio.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "84:1933",
+  "cellNodeId": "84:1927",
+  "cellName": "Color=Default, Checked=Checked",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 70.25,
+    "pctAAUnmasked": 38.5,
+    "pctAAMasked": 38.5,
+    "maskCoveragePct": 0,
+    "canvasPx": "20x20",
+    "realPx": "20x20",
+    "inkCanvasPct": 36,
+    "inkRealPct": 61
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/radio.png",
+  "referenceSha256": "3bd96f03ccf997d787e9084546ef760675b2453fc34f971f09a1ff3a4260c5ea",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/radio.png",
+  "canvasShotSha256": "4458850b2b5c2b4d79bef887877115cc9cd6a05a8230978f4358499d19f07400",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/radio.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 25,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=38.50 > 5)"
+}

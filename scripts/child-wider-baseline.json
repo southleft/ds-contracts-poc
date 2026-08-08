@@ -1,6 +1,6 @@
 {
-  "_marker": "CHILD-WIDER-THAN-PARENT BASELINE \u2014 a committed per-library defect count that may only DECREASE. `overflows` counts in-flow children wider than their parent with a non-text cause; `textCaused` counts the exempted class (the corpus-wide text-wrapping gap, docs/22) separately so it can never flatter the first number. Both ratchet TWO-SIDED: an increase is a new defect, a decrease is a fix that must be re-recorded here with its cause named. Re-record deliberately with `node scripts/child-wider.mjs --write` and say what moved.",
-  "recordedAt": "2026-07-30",
+  "_marker": "CHILD-WIDER-THAN-PARENT BASELINE — a committed per-library defect count that may only DECREASE. `overflows` counts in-flow children wider than their parent with a non-text cause; `textCaused` counts the exempted class (the corpus-wide text-wrapping gap, docs/22) separately so it can never flatter the first number. Both ratchet TWO-SIDED: an increase is a new defect, a decrease is a fix that must be re-recorded here with its cause named. Re-record deliberately with `node scripts/child-wider.mjs --write` and say what moved.",
+  "recordedAt": "2026-08-08",
   "rows": [
     {
       "library": "altitude",
@@ -14,16 +14,11 @@
     {
       "library": "astryx",
       "scripts": 13,
-      "overflows": 5,
-      "textCaused": 6,
+      "overflows": 0,
+      "textCaused": 33,
       "marginBox": 0,
-      "cause": "overflows(5): ProgressBar `fill` renders 100px inside a 48px `track` in all five Variant cells \u2014 ONE defect class, a PERCENT width (`width: 100%`) baked as a px literal by the computed floor. textCaused(6): the corpus-wide text-wrapping gap (docs/22 \u00a7\"Text wrapping is not implemented\") \u2014 Figma text nodes auto-size on one line, so a hugging box holds an unwrapped run.",
-      "detail": [
-        "\"fill\" 100 > parent \"track\" 48 (Variant=Accent)",
-        "\"fill\" 100 > parent \"track\" 48 (Variant=Success)",
-        "\"fill\" 100 > parent \"track\" 48 (Variant=Warning)",
-        "\"fill\" 100 > parent \"track\" 48 (Variant=Neutral)"
-      ]
+      "cause": "textCaused(33): the corpus-wide text-wrapping gap (docs/22 §\"Text wrapping is not implemented\") — grew 6→33 at the exact-conversion wave (feat/exact-conversion-wave0): Banner's promoted title/description rows, TextInput's label/helper runs and the source-geometry Slider labels are real hugging text runs the earlier harness-floor geometry hid. The five ProgressBar percent-width overflows the previous baseline named are FIXED — the wave carries the fill as a source-derived literal inside the track — so the non-text class is ZERO.",
+      "detail": []
     },
     {
       "library": "carbon",
@@ -31,25 +26,28 @@
       "overflows": 0,
       "textCaused": 8,
       "marginBox": 0,
-      "cause": "textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them \u2014 this row is the exempted class only.",
+      "cause": "textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them — this row is the exempted class only.",
       "detail": []
     },
     {
       "library": "mui",
-      "scripts": 14,
-      "overflows": 0,
-      "textCaused": 6,
+      "scripts": 31,
+      "overflows": 2,
+      "textCaused": 56,
       "marginBox": 2,
-      "cause": "textCaused(6): the corpus-wide text-wrapping gap (AccordionDetails body 426px inside 288px is the canonical case). marginBox(2): Autocomplete's POPUP indicator carries margin-right -2, so the margin-box wrapper reserves 26px while the 28px control paints over it \u2014 the MEANING of a negative margin, not an overflow. WAS 4 UNTIL THE TASK-#38 RECAPTURE: the other two were the CLEAR indicator, which MUI renders `visibility: hidden` in every combo of the closed-state capture. It was a PHANTOM \u2014 a fully-visible 28x28 button with an SVG glyph that the browser draws nowhere \u2014 carried because MUI's shipped artifacts predated the engine's `non-painting-part` refusal. The recapture refused it, and this number halving is what that removal looks like from the canvas side. Both classes reached their earlier values only after the MUI regen round gave the indicators a real control box (D6b).",
-      "detail": []
+      "cause": "overflows(2): Wave 5 denominator — `label` paints 75px inside a 74px Size=Medium/Small hug cell (Size=Medium + Size=Small). textCaused(56): corpus-wide text-wrapping gap (docs/22) — grew 14→56 at the exact-conversion wave landing, when MUI's scripts were finally re-emitted against the wave engine (they had sat stale; the freshness gate is what caught it): the non-truncating-text HUG rule (Carbon Tabs fix, refined by FC-TEXT-FILL-ALIGNMENT so alignment-displaced text still FILLs) makes hugging label runs measurable where the old FILL lowering masked them. Attribution: link +42 (one hugging label run per variant of the 42-variant set), text-field +6, accordion +4 (AccordionDetails body remains the canonical case), autocomplete +2, select +2. marginBox(2): Autocomplete POPUP indicator margin-right -2 (unchanged from task-#38).",
+      "detail": [
+        "\"label\" 75 > parent \"Size=Medium\" 74 (Size=Medium)",
+        "\"label\" 75 > parent \"Size=Small\" 74 (Size=Small)"
+      ]
     },
     {
       "library": "polaris",
       "scripts": 12,
       "overflows": 0,
-      "textCaused": 29,
-      "marginBox": 42,
-      "cause": "marginBox(42): every one of the 42 the Carbon round published as \"polaris 42\" is a NEGATIVE-MARGIN paint-outside, not an overflow. The margin-box wrapper reserves less layout space than its child paints, which is what a negative margin is for. Polaris has ZERO real child-wider overflows. Correcting the published number is the first thing this instrument did when it ran repo-wide. textCaused(29): NEW at the task-#26 recapture (2026-07-29) \u2014 the corpus-wide text-wrapping gap (docs/22 \u00a7\"Text wrapping is not implemented\") was ALWAYS in the library, but polaris's round-5-era artifacts predated the instrument's text-caused detection, so its exempted class read 0 by staleness, not by absence. The first fresh capture in the modern engine surfaces the same class every other text-bearing library already records (astryx 6, carbon 8, mui 6); the wrapping fix remains its own corpus-wide round. Real child-wider overflows stay at ZERO.",
+      "textCaused": 26,
+      "marginBox": 58,
+      "cause": "marginBox(58): every one is a NEGATIVE-MARGIN paint-outside, not an overflow — the margin-box wrapper reserves less layout space than its child paints, which is what a negative margin is for. 42→58 at the exact-conversion wave: the checkbox/radio-button canvas-geometry rework (literal border+fill replacing the inset box-shadow tokens, per the console-loop visual fix) added 16 wrappers of the same class. Polaris keeps ZERO real child-wider overflows. textCaused(26): the corpus-wide text-wrapping gap (docs/22), 29→26 — three runs stopped overflowing under the wave's geometry edits; the wrapping fix remains its own corpus-wide round.",
       "detail": []
     },
     {

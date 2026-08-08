@@ -41,6 +41,20 @@ let totalVariants = 0;
 const scripts = readdirSync(FIGMA_DIR)
   .filter((f) => f.endsWith('.figma.js') && f !== '00-tokens.figma.js' && f !== 'GENESIS-BATCH.figma.js')
   .sort();
+const contractFiles = readdirSync(path.join(EX, 'contracts'))
+  .filter((f) => f.endsWith('.contract.json'));
+const contractFileById = new Map(
+  contractFiles.map((file) => {
+    const contract = JSON.parse(readFileSync(path.join(EX, 'contracts', file), 'utf8'));
+    return [contract.id, file.replace('.contract.json', '')];
+  }),
+);
+const collectComponentIds = (node, out = new Set()) => {
+  if (!node || typeof node !== 'object') return out;
+  if (node.component?.id) out.add(node.component.id);
+  for (const part of Object.values(node.parts ?? {})) collectComponentIds(part, out);
+  return out;
+};
 
 for (const file of scripts) {
   const name = file.replace('.figma.js', '');
@@ -72,6 +86,12 @@ for (const file of scripts) {
     const mock = createFigmaMock();
     const tok = await runScript(mock.figma, TOKENS_SCRIPT);
     if (!tok || typeof tok.total !== 'number') throw new Error('token sync returned no receipt');
+    for (const depId of collectComponentIds(contract.anatomy?.root)) {
+      const depStem = contractFileById.get(depId);
+      if (!depStem) throw new Error(`dependency contract missing for ${depId}`);
+      const depSrc = readFileSync(path.join(FIGMA_DIR, `${depStem}.figma.js`), 'utf8');
+      await runScript(mock.figma, depSrc);
+    }
     await runScript(mock.figma, src);
     // LIVE-CANVAS PINS (2026-07-25 review): the two classes the first live
     // paste exposed that no gate caught — box-padded text lowering (Chip's

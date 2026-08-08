@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "tailwind",
+  "stem": "toggle-switch",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/tailwind/components/toggle-switch.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385245229284424737",
+  "setNodeId": "1:2296",
+  "cellNodeId": "1:2272",
+  "cellName": "Sizing=Md, Checked=Unchecked",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 20.75082508250825,
+    "pctAAUnmasked": 6.188118811881188,
+    "pctAAMasked": 6.188118811881188,
+    "maskCoveragePct": 0,
+    "canvasPx": "101x24",
+    "realPx": "100x24",
+    "inkCanvasPct": 42.491749174917494,
+    "inkRealPct": 42.367986798679866
+  },
+  "reference": "parity/receipts/console-loop/tailwind/refs/toggle-switch.png",
+  "referenceSha256": "5700671b49c88002d22c9ba0289feaa5260de7415bd66b0cad787645b873a5c0",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/tailwind/shots/toggle-switch.png",
+  "canvasShotSha256": "7a586340d5bc2f180eebb00847d313b39c75f066d3e926c103cc68fb84fde5b5",
+  "diff": "parity/receipts/console-loop/visual-truth/tailwind/diffs/toggle-switch.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.01,
+  "inkDelta": 0.12376237623762876,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=6.19 > 5)"
+}

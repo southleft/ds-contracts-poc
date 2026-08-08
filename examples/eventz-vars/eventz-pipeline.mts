@@ -30,7 +30,7 @@
  * the residual minted share is the honest gap — a fact the canvas draws that
  * no variable was bound to.
  */
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { proposeFromDump, type FigmaProposalResult } from '../../core/propose-figma.js';
 import { capturedTokensFromDump } from '../../core/captured-tokens.js';
@@ -49,6 +49,73 @@ mkdirSync(CONTRACTS, { recursive: true });
 mkdirSync(TOKENS, { recursive: true });
 
 const dump = JSON.parse(readFileSync(DUMP, 'utf8')) as Record<string, unknown>;
+
+// ---------------------------------------------------------------------------
+// 0. REST recovery sidecar (dumps/REST-RECOVERY.json) — the two dump-v1.16
+//    channels the committed v1.11 plugin dump predates, grafted in memory:
+//    GRADIENT_LINEAR fills (the Badge accent/info/warning/featured and Alert
+//    grounds — 16 paint-unsupported receipts) and textCase UPPER (10
+//    text-channel-unsupported receipts, "Label" for "LABEL"). Fetched by
+//    fetch-rest-recovery.mts from the SAME file the dump names; a fact the
+//    dump cannot host is a named skip at fetch time, and a fact the dump no
+//    longer matches is FATAL here — sidecar and dump must agree. The honest
+//    supersession is a full dump-v1.16 plugin recapture.
+// ---------------------------------------------------------------------------
+
+const RECOVERY = path.join(HERE, 'dumps', 'REST-RECOVERY.json');
+let recoverySection: string[] = [];
+if (existsSync(RECOVERY)) {
+  const rec = JSON.parse(readFileSync(RECOVERY, 'utf8')) as {
+    _provenance: Record<string, string>;
+    facts: Array<{
+      set: string;
+      variant: string;
+      path: string[];
+      gradient?: Record<string, unknown>;
+      stopsBound?: number;
+      textCase?: string;
+    }>;
+  };
+  let gradients = 0;
+  let textCases = 0;
+  let stopsBound = 0;
+  for (const f of rec.facts) {
+    const set = dump[f.set] as DumpSet | undefined;
+    const variant = set?.variants.find((v) => v.name === f.variant);
+    let node: any = variant;
+    for (const name of f.path) node = node?.children?.find((c: any) => c.name === name);
+    if (!node) {
+      console.error(
+        `FATAL: REST-RECOVERY.json names ${f.set}:${f.variant}/${f.path.join('/')} but dumps/MERGED.json does not host it — sidecar and dump disagree; re-run fetch-rest-recovery.mts`,
+      );
+      process.exit(1);
+    }
+    if (f.gradient && node.gradient === undefined) {
+      node.gradient = f.gradient;
+      gradients++;
+      stopsBound += f.stopsBound ?? 0;
+    }
+    if (f.textCase && node.text && node.text.textCase === undefined) {
+      node.text.textCase = f.textCase;
+      textCases++;
+    }
+  }
+  recoverySection = [
+    '## REST recovery sidecar (dump v1.16 channels)',
+    '',
+    `\`dumps/REST-RECOVERY.json\` (fetched ${rec._provenance.fetchedAt}, file version ${rec._provenance.fileVersion}, ${rec._provenance.source}) grafts ` +
+      `${gradients} GRADIENT_LINEAR fill(s) and ${textCases} textCase fact(s) onto the v1.11 plugin dump before proposing — exactly the facts the dump's own ` +
+      '`paint-unsupported`/`text-channel-unsupported` receipts name, recovered from the same file. Each carried or refused gradient is noted per set below. ' +
+      'Supersede this sidecar with a full dump-v1.16 plugin recapture (extract/figma/dump.plugin.js now carries both channels natively).',
+    ...(stopsBound > 0
+      ? [
+          '',
+          `${stopsBound} gradient stop binding(s) were OBSERVED but are not nameable over REST (the variables endpoint is Enterprise-only) — those stops carry resolved colors; the v1.16 plugin recapture resolves the names.`,
+        ]
+      : []),
+    '',
+  ];
+}
 
 // ---------------------------------------------------------------------------
 // 1. The designer's real variables → the corpus the proposal matches against
@@ -124,6 +191,13 @@ const fileKey = (dump._provenance as { fileKey?: string | null } | undefined)?.f
 
 for (const setName of IMPORT_ORDER) {
   const proposal: FigmaProposalResult = proposeFromDump(dump[setName] as DumpSet, {
+    // The exact-conversion wave flipped proposeFromDump's DEFAULT to
+    // 'exact', which refuses this kit outright (dumps/MERGED.json is a
+    // v1.11 bridge capture with no structured propertyDefinitions /
+    // variantProperties evidence). The committed contracts were built under
+    // reviewable-inversion; pin it explicitly so the byte-verify keeps
+    // measuring the kit and not the default (the cbds-check.ts spelling).
+    projectionMode: 'reviewable-inversion',
     corpus,
     contractIdByName,
     contractIdByKey,
@@ -218,6 +292,13 @@ const CLASSES: Array<[string, RegExp]> = [
   // refusal in this table. A non-zero "per-state-per-variant" row below would
   // mean the v17 carry regressed, so the refusal class is deliberately kept.
   ['CARRIED as statesByProp — a state binding that is also a function of an enum axis (v17)', /carried as statesByProp/],
+  // dump v1.16 carries (this round's former refusals) — counted ABOVE the
+  // refusal classes for the same reason as statesByProp: their old refusal
+  // rows below should read zero, and a regression shows up as a number.
+  ['CARRIED — GRADIENT_LINEAR fill as background-image (dump v1.16)', /GRADIENT_LINEAR fill \(dump v1\.16\) carried as background-image/],
+  ['CARRIED — textCase as declared text-transform (dump v1.16)', /drawn in every variant — carried as declared text-transform/],
+  ["CARRIED — variable name folded (U+2024 → '-'), a named RENAME", /U\+2024 ONE DOT LEADER — folded/],
+  ['OBLIQUE gradient refused by name (CSS angle is box-aspect-dependent)', /OBLIQUE GRADIENT_LINEAR/],
   ['per-state-per-variant — a state block holds ONE ref per channel', /a state block holds ONE ref per channel/],
   ['state promoted but nothing recoverable', /promoted from the axis but no root or part override was recoverable/],
   ['state override cannot unset a channel', /a state override cannot unset a channel/],
@@ -240,7 +321,8 @@ const notesMd = [
   '# Proposal notes — Eventz, the real-variable round',
   '',
   'Generated by `npx tsx examples/eventz-vars/eventz-pipeline.mts --write`, byte-verified',
-  'against a rebuild from `dumps/MERGED.json`.',
+  'against a rebuild from `dumps/MERGED.json` + the `dumps/REST-RECOVERY.json` sidecar',
+  '(see the REST recovery section below).',
   '',
   `**${allNotes.length} named decisions across ${notesBySet.size} set(s).** Every one is a fact the canvas`,
   'draws; a note says what happened to it. Nothing here is silent.',
@@ -263,6 +345,7 @@ const notesMd = [
   'The `per-state-per-variant` refusal row is kept in the table on purpose: it should read',
   'zero, and a non-zero count means the carry regressed.',
   '',
+  ...recoverySection,
   ...[...notesBySet.keys()].sort().flatMap((s) => [`## ${s}`, '', ...notesBySet.get(s)!.map((n) => `- ${n}`), '']),
 ].join('\n');
 built.set('NOTES.md', notesMd);
@@ -307,7 +390,7 @@ console.log(
       ? `= unchanged — ${built.size} file(s)`
       : `✎ rewrote ${drift.length} file(s) of ${built.size} — ${drift.join(', ')}`
     : drift.length === 0
-      ? `✔ ${built.size} file(s) byte-identical to a rebuild from dumps/MERGED.json`
+      ? `✔ ${built.size} file(s) byte-identical to a rebuild from dumps/MERGED.json + REST-RECOVERY.json`
       : `✖ ${drift.length} file(s) differ from a rebuild — ${drift.join(', ')}`,
 );
 if (!WRITE && drift.length > 0) process.exit(1);

@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "kind": "console-loop-tailwind-component",
+  "status": "completed",
+  "component": "button",
+  "contract": "examples/tailwind/contracts/button.contract.json",
+  "script": "examples/tailwind/figma/button.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:42:57.761Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:2254",
+    "mode": "generated",
+    "page": "Button (flowbite.button)",
+    "sectionId": "1:2265",
+    "contractId": "flowbite.button",
+    "result": {
+      "createdNodeIds": [
+        "1:2254"
+      ],
+      "results": [
+        {
+          "name": "Button",
+          "contractId": "flowbite.button",
+          "nodeId": "1:2254",
+          "key": "457432fa9d72f3274388b205608c71e843d614b7",
+          "variants": 45,
+          "properties": [
+            "Content#1:719",
+            "Color",
+            "Size",
+            "State"
+          ],
+          "wiredReactions": 5
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "matchDeveloped": true,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Re-synced via clientStorage chunks (n=20, total=152832); amended nodeId=1:2254; rebuiltVariants=45; literals for root height (no imported/button/root/height/* vars). matchDeveloped left false."
+    ],
+    "defects": [],
+    "reference": "parity/receipts/console-loop/tailwind/refs/button.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "pair--default.md.enabled__default.png#package-left",
+    "scorecard": "parity/receipts/console-loop/tailwind/scores/button.json",
+    "matchDevelopedReason": "agent AA=1.94 compositionOk vs package-left (Md Default)",
+    "matchedAt": "2026-08-08T03:23:28.851Z",
+    "status": "scored-pass",
+    "scoreConfirmed": {
+      "at": "2026-08-08T04:31:56.356Z",
+      "pctAAMasked": 1.9411764705882355,
+      "compositionOk": true,
+      "supersededDefects": [],
+      "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:2297298321",
+    "lineCount": 888,
+    "sampleLines": [
+      ":COMPONENT_SET/Button (flowbite.button)|fill|[]",
+      ":COMPONENT_SET/Button (flowbite.button)|radius|5,5,5,5",
+      ":COMPONENT_SET/Button (flowbite.button)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Button (flowbite.button)|description|Button â generated from contract flowbite.button v0.2.0 â",
+      ":COMPONENT_SET/Button (flowbite.button)|propdef|Color:VARIANT=Default",
+      ":COMPONENT_SET/Button (flowbite.button)|propdef|Content#1:719:TEXT=Button",
+      ":COMPONENT_SET/Button (flowbite.button)|propdef|Size:VARIANT=Md",
+      ":COMPONENT_SET/Button (flowbite.button)|propdef|State:VARIANT=Default",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.10196078568696976,\"g\":0.33725491166114807,\"b\":0.8588235378265381},\"boundVariables\":{\"color\":{\"var\":\"imported/button/root/background-color/default\"}}}]",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/button/root/border-top-color/default\"}}}] w0",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|radius|8,8,8,8",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,20,0,20",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|bound:bottomLeftRadius|imported/shared/size-8",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|bound:bottomRightRadius|imported/shared/size-8",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|bound:paddingLeft|imported/button/root/padding-left/md",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|bound:paddingRight|imported/button/root/padding-right/md",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|bound:strokeBottomWeight|imported/button/root/border-bottom-width/default",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|bound:strokeLeftWeight|imported/button/root/border-left-width/default",
+      "/0:COMPONENT/Color=Default, Size=Md, State=Default|bound:strokeRightWeight|imported/button/root/border-right-width/default"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Color enum → Default/Alternative/Dark/Green/Red",
+      "Size enum → Md/Xs/Sm/Lg/Xl",
+      "TEXT Content",
+      "first-variant fill bound: imported/button/root/background-color/default"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Color=Default, Size=Md, State=Default",
+        "Color=Default, Size=Xs, State=Default",
+        "Color=Default, Size=Sm, State=Default",
+        "Color=Default, Size=Lg, State=Default",
+        "Color=Default, Size=Xl, State=Default",
+        "Color=Alternative, Size=Md, State=Default",
+        "Color=Alternative, Size=Xs, State=Default",
+        "Color=Alternative, Size=Sm, State=Default",
+        "Color=Alternative, Size=Lg, State=Default",
+        "Color=Alternative, Size=Xl, State=Default",
+        "Color=Dark, Size=Md, State=Default",
+        "Color=Dark, Size=Xs, State=Default",
+        "Color=Dark, Size=Sm, State=Default",
+        "Color=Dark, Size=Lg, State=Default",
+        "Color=Dark, Size=Xl, State=Default",
+        "Color=Green, Size=Md, State=Default",
+        "Color=Green, Size=Xs, State=Default",
+        "Color=Green, Size=Sm, State=Default",
+        "Color=Green, Size=Lg, State=Default",
+        "Color=Green, Size=Xl, State=Default",
+        "Color=Red, Size=Md, State=Default",
+        "Color=Red, Size=Xs, State=Default",
+        "Color=Red, Size=Sm, State=Default",
+        "Color=Red, Size=Lg, State=Default",
+        "Color=Red, Size=Xl, State=Default",
+        "Color=Default, Size=Md, State=Disabled",
+        "Color=Alternative, Size=Md, State=Disabled",
+        "Color=Dark, Size=Md, State=Disabled",
+        "Color=Green, Size=Md, State=Disabled",
+        "Color=Red, Size=Md, State=Disabled",
+        "Color=Default, Size=Md, State=Active",
+        "Color=Alternative, Size=Md, State=Active",
+        "Color=Dark, Size=Md, State=Active",
+        "Color=Green, Size=Md, State=Active",
+        "Color=Red, Size=Md, State=Active",
+        "Color=Default, Size=Md, State=Focus Visible",
+        "Color=Alternative, Size=Md, State=Focus Visible",
+        "Color=Dark, Size=Md, State=Focus Visible",
+        "Color=Green, Size=Md, State=Focus Visible",
+        "Color=Red, Size=Md, State=Focus Visible"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#1:719",
+          "type": "TEXT",
+          "defaultValue": "Button",
+          "variantOptions": null
+        },
+        {
+          "name": "Color",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Alternative",
+            "Dark",
+            "Green",
+            "Red"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Md",
+          "variantOptions": [
+            "Md",
+            "Xs",
+            "Sm",
+            "Lg",
+            "Xl"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Disabled",
+            "Active",
+            "Focus Visible",
+            "Hover"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Color=Default, Size=Md, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 20,
+          "b": 0,
+          "l": 20
+        },
+        "radius": 8,
+        "fillVarName": "imported/button/root/background-color/default",
+        "padBound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/default",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+          "strokeLeftWeight": "imported/button/root/border-left-width/default",
+          "strokeRightWeight": "imported/button/root/border-right-width/default",
+          "fills": "imported/button/root/background-color/default",
+          "strokes": "imported/button/root/border-top-color/default"
+        },
+        "w": 85,
+        "h": 20,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": true
+  },
+  "reSyncedAt": "2026-08-07T12:12:42.940Z",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=20, total=152832); amended nodeId=1:2254; rebuiltVariants=45; literals for root height (no imported/button/root/height/* vars). matchDeveloped left false."
+}

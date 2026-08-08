@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "altitude",
+  "stem": "button",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/altitude/components/button.json",
+  "status": "pass",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385229420588708070",
+  "setNodeId": "60:10151",
+  "cellNodeId": "60:10127",
+  "cellName": "Variant=Secondary, State=Default",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 12.946428571428573,
+    "pctAAUnmasked": 4.226190476190476,
+    "pctAAMasked": 4.226190476190476,
+    "maskCoveragePct": 0,
+    "canvasPx": "84x40",
+    "realPx": "84x40",
+    "inkCanvasPct": 99.88095238095238,
+    "inkRealPct": 99.88095238095238
+  },
+  "reference": "parity/receipts/console-loop/altitude/refs/button.png",
+  "referenceSha256": "3f844b8b4a2aeae4d46e042487fed545c1fc2c7f2a11d323fd9a5a9e135b3f6c",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/altitude/shots/button.png",
+  "canvasShotSha256": "a2c7f70272439fb313c1eb1689d9ff53bcdc608f3b6a8a5e25620a08b41a8a91",
+  "diff": "parity/receipts/console-loop/visual-truth/altitude/diffs/button.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

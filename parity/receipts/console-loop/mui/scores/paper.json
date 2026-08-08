@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 49.35141509433962,
+    "pctAAUnmasked": 25.943396226415093,
+    "pctAAMasked": 25.943396226415093,
+    "maskCoveragePct": 0,
+    "canvasPx": "106x16",
+    "realPx": "88x15",
+    "inkCanvasPct": 34.964622641509436,
+    "inkRealPct": 31.191037735849058
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/paper.png",
+  "referenceSha256": "d7161916c56b9221649d9c3b4888b0c338f71046035119afe0cd59d2222389b9",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/paper-cell.png",
+  "canvasShotSha256": "27fc6fc0c0ba1630910491f4b25a1b1da49e248c5319c8c5eccc81b479116c58",
+  "diff": "parity/receipts/console-loop/mui/scores/paper.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/mui/components/paper.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.2045454545454546,
+  "inkDelta": 3.7735849056603783,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=25.94 > 5)",
+  "recordedAt": "2026-08-08T08:30:11.855Z"
+}

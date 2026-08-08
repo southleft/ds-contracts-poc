@@ -1,0 +1,40 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 59.129685480396375,
+    "pctAAUnmasked": 9.56484274019819,
+    "pctAAMasked": 9.56484274019819,
+    "maskCoveragePct": 0,
+    "canvasPx": "211x55",
+    "realPx": "69x47",
+    "inkCanvasPct": 11.900043084877208,
+    "inkRealPct": 5.730288668677294
+  },
+  "reference": "parity/receipts/console-loop/polaris/refs/text-field.png",
+  "referenceSha256": "47b5ae79e93669f0792efde2481b91ca9f469b9a10244c5e8dc8960bb434a4ca",
+  "canvasShot": "parity/receipts/console-loop/polaris/shots/text-field-cell.png",
+  "canvasShotSha256": "5363d0aada97303c129b3f881339876abc502a183201532ba11475b5c7798870",
+  "diff": "parity/receipts/console-loop/polaris/scores/text-field.diff.png",
+  "fc": [
+    "FC-PLACEHOLDER",
+    "FC-BLOCK-ROW"
+  ],
+  "receipt": "parity/receipts/console-loop/polaris/components/text-field.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 3.0579710144927534,
+  "inkDelta": 6.169754416199914,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=3.06, inkDelta=6.2) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T04:31:20.928Z"
+}

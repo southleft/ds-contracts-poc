@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "list-item",
+  "contract": "contracts/list-item.contract.json",
+  "script": "parity/receipts/console-loop/emitted/24-listitem.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:03.390Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1296",
+    "page": "ListItem",
+    "sectionId": "1:1306",
+    "result": {
+      "createdNodeIds": [
+        "1:1296"
+      ],
+      "results": [
+        {
+          "name": "ListItem",
+          "contractId": "ds.list-item",
+          "nodeId": "1:1296",
+          "key": "c689f4a014580fe58a55bf78194707ce451b0abe",
+          "variants": 1,
+          "properties": [
+            "Label#1:542",
+            "Description#1:543",
+            "StartContent#1:544",
+            "Show StartContent#1:545",
+            "EndContent#1:546",
+            "Show EndContent#1:547"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1306 captured (ok).",
+      "ListItem: 1 variant(s); type COMPONENT; page ListItem.",
+      "Props: Label, Description, StartContent, Show StartContent, EndContent, Show EndContent.",
+      "Sample text: \"Slot\", \"List item\", \"Supporting detail for this item.\", \"Slot\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3305958002",
+    "lineCount": 55,
+    "sampleLines": [
+      ":COMPONENT/ListItem|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/ListItem|radius|0,0,0,0",
+      ":COMPONENT/ListItem|layout|HORIZONTAL MIN/CENTER gap 8 pad 8,12,8,12",
+      ":COMPONENT/ListItem|sizing|HUG/HUG AUTO",
+      ":COMPONENT/ListItem|bound:itemSpacing|space/gap/sm",
+      ":COMPONENT/ListItem|bound:paddingBottom|space/inset-y/md",
+      ":COMPONENT/ListItem|bound:paddingLeft|space/inset-x/sm",
+      ":COMPONENT/ListItem|bound:paddingRight|space/inset-x/sm",
+      ":COMPONENT/ListItem|bound:paddingTop|space/inset-y/md",
+      ":COMPONENT/ListItem|description|ListItem — generated from contract ds.list-item v1.0.0",
+      ":COMPONENT/ListItem|propdef|Description#1:543:TEXT=Supporting detail for this item.",
+      ":COMPONENT/ListItem|propdef|EndContent#1:546:INSTANCE_SWAP=1:347",
+      ":COMPONENT/ListItem|propdef|Label#1:542:TEXT=List item",
+      ":COMPONENT/ListItem|propdef|Show EndContent#1:547:BOOLEAN=true",
+      ":COMPONENT/ListItem|propdef|Show StartContent#1:545:BOOLEAN=true",
+      ":COMPONENT/ListItem|propdef|StartContent#1:544:INSTANCE_SWAP=1:347",
+      "/0:FRAME/startContent|fill|[]",
+      "/0:FRAME/startContent|radius|0,0,0,0",
+      "/0:FRAME/startContent|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+      "/0:FRAME/startContent|sizing|HUG/HUG AUTO"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Label",
+      "Description"
+    ],
+    "observed": {
+      "variantNames": [
+        "ListItem"
+      ],
+      "propDefs": [
+        {
+          "name": "Label#1:542",
+          "type": "TEXT",
+          "defaultValue": "List item",
+          "variantOptions": null
+        },
+        {
+          "name": "Description#1:543",
+          "type": "TEXT",
+          "defaultValue": "Supporting detail for this item.",
+          "variantOptions": null
+        },
+        {
+          "name": "StartContent#1:544",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show StartContent#1:545",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "EndContent#1:546",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show EndContent#1:547",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "ListItem",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 12,
+          "b": 8,
+          "l": 12
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/gap/sm",
+          "paddingLeft": "space/inset-x/sm",
+          "paddingTop": "space/inset-y/md",
+          "paddingRight": "space/inset-x/sm",
+          "paddingBottom": "space/inset-y/md"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "labelText",
+            "chars": "List item",
+            "fontSize": 14
+          },
+          {
+            "name": "descriptionText",
+            "chars": "Supporting detail for this item.",
+            "fontSize": 14
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 342,
+        "h": 116,
+        "childNames": [
+          "startContent:FRAME",
+          "textCol:FRAME",
+          "endContent:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

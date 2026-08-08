@@ -18,8 +18,8 @@
  *
  *   npx tsx extract/fidelity-matrix/scripts/propose-emit.ts [subject-id …]
  */
-import { mkdirSync, writeFileSync } from 'node:fs';
-import path from 'node:path';
+import { mkdirSync, writeFileSync } from "node:fs";
+import path from "node:path";
 import {
   ContractSchema,
   createFigmaEngine,
@@ -31,10 +31,10 @@ import {
   proposeFromDump,
   type Contract,
   type SourceFileInput,
-} from '../../../core/index.js';
-import { isDumpSet, type DumpFile, type DumpSet } from '../../figma/types.js';
-import { MATRIX, composeMinted, loadRepoData, readJson } from './lib.js';
-import { SUBJECTS } from './subjects.js';
+} from "../../../core/index.js";
+import { isDumpSet, type DumpFile, type DumpSet } from "../../figma/types.js";
+import { MATRIX, composeMinted, loadRepoData, readJson } from "./lib.js";
+import { SUBJECTS } from "./subjects.js";
 
 const data = loadRepoData();
 
@@ -56,11 +56,19 @@ interface Proposed {
 }
 
 function proposeFigmaSubject(id: string): Proposed {
-  const dump = readJson(path.join(MATRIX, 'fixtures', id, 'dump.json')) as DumpFile;
+  const dump = readJson(
+    path.join(MATRIX, "fixtures", id, "dump.json"),
+  ) as DumpFile;
   const fileKey = dump._provenance?.fileKey ?? null;
-  const sets = Object.entries(dump).filter((e): e is [string, DumpSet] => e[0] !== '_provenance' && isDumpSet(e[1]));
-  if (sets.length !== 1) throw new Error(`${id}: expected exactly one set in the dump, found ${sets.length}`);
+  const sets = Object.entries(dump).filter(
+    (e): e is [string, DumpSet] => e[0] !== "_provenance" && isDumpSet(e[1]),
+  );
+  if (sets.length !== 1)
+    throw new Error(
+      `${id}: expected exactly one set in the dump, found ${sets.length}`,
+    );
   const result = proposeFromDump(sets[0][1], {
+    projectionMode: "reviewable-inversion",
     corpus: data.corpus,
     contractIdByName: data.contractIdByName,
     fileKey,
@@ -76,18 +84,20 @@ function proposeFigmaSubject(id: string): Proposed {
 }
 
 function proposeCodeSubject(id: string): Proposed {
-  const trace = readJson(path.join(MATRIX, 'fixtures', id, 'trace.json')) as {
+  const trace = readJson(path.join(MATRIX, "fixtures", id, "trace.json")) as {
     files: SourceFileInput[];
     extraCss: string[];
   };
   const result = proposeFromCode(trace.files, {
     tokens: data.treesForCode,
-    prefix: 'ds',
+    prefix: "ds",
     mintUnbound: true,
     extraCss: trace.extraCss,
   });
   if (result.proposals.length === 0) {
-    throw new Error(`${id}: no readable component — skipped: ${JSON.stringify(result.skipped)}`);
+    throw new Error(
+      `${id}: no readable component — skipped: ${JSON.stringify(result.skipped)}`,
+    );
   }
   const first = result.proposals[0];
   return {
@@ -102,41 +112,49 @@ function proposeCodeSubject(id: string): Proposed {
 /** The playground's assembleDoc, light surface, self-contained. */
 function previewDoc(html: string, css: string, mintedCss: string): string {
   return [
-    '<!doctype html>',
-    '<html>',
+    "<!doctype html>",
+    "<html>",
     '<head><meta charset="utf-8">',
     `<style>${data.tokensCss}</style>`,
     `<style>/* Minted provisional tokens (imported.*) — literal fidelity. */\n${mintedCss}</style>`,
-    '<style>body { margin: 0; padding: 20px; background: #f5f5f5; color: #1a1a1a; font-family: var(--font-family-sans, system-ui, sans-serif); }</style>',
+    "<style>body { margin: 0; padding: 20px; background: #f5f5f5; color: #1a1a1a; font-family: var(--font-family-sans, system-ui, sans-serif); }</style>",
     `<style>${css}</style>`,
-    '</head><body>',
+    "</head><body>",
     html,
-    '</body></html>',
-  ].join('\n');
+    "</body></html>",
+  ].join("\n");
 }
 
-function run(id: string, kind: 'figma' | 'code'): void {
-  const outDir = path.join(MATRIX, 'out', id);
+function run(id: string, kind: "figma" | "code"): void {
+  const outDir = path.join(MATRIX, "out", id);
   mkdirSync(outDir, { recursive: true });
-  const save = (name: string, contents: string) => writeFileSync(path.join(outDir, name), contents);
+  const save = (name: string, contents: string) =>
+    writeFileSync(path.join(outDir, name), contents);
 
-  const proposed = kind === 'figma' ? proposeFigmaSubject(id) : proposeCodeSubject(id);
+  const proposed =
+    kind === "figma" ? proposeFigmaSubject(id) : proposeCodeSubject(id);
   const { contract, minted } = proposed;
-  save('contract.json', JSON.stringify(contract, null, 2) + '\n');
+  save("contract.json", JSON.stringify(contract, null, 2) + "\n");
   save(
-    'proposal.json',
+    "proposal.json",
     JSON.stringify(
       {
         notes: proposed.notes,
         unbound: proposed.unbound,
-        minted: minted ? { count: minted.count, entries: minted.entries } : null,
+        minted: minted
+          ? { count: minted.count, entries: minted.entries }
+          : null,
       },
       null,
       2,
-    ) + '\n',
+    ) + "\n",
   );
-  console.log(`  props: ${contract.props.map((p) => p.name).join(', ') || '(none)'}`);
-  console.log(`  minted: ${minted?.count ?? 0} provisional token(s); notes: ${proposed.notes.length}; unbound: ${proposed.unbound.length}`);
+  console.log(
+    `  props: ${contract.props.map((p) => p.name).join(", ") || "(none)"}`,
+  );
+  console.log(
+    `  minted: ${minted?.count ?? 0} provisional token(s); notes: ${proposed.notes.length}; unbound: ${proposed.unbound.length}`,
+  );
 
   const composed = composeMinted(data, minted);
   const contracts = new Map(data.contracts);
@@ -146,25 +164,44 @@ function run(id: string, kind: 'figma' | 'code'): void {
   // `import { <Name> } from '../<Name>'` resolves, so root tsc stays green).
   for (const stub of proposed.childStubs) {
     contracts.set(stub.id, stub);
-    save(`stub.${stub.id}.contract.json`, JSON.stringify(stub, null, 2) + '\n');
-    const emitted = emitReact(stub, { tokens: composed.inventory, icons: data.icons, contracts: new Map([[stub.id, stub]]) });
-    writeFileSync(path.join(MATRIX, 'out', `${stub.name}.tsx`), emitted.tsx);
-    writeFileSync(path.join(MATRIX, 'out', `${stub.name}.module.css`), emitted.css);
-    console.log(`  child stub: ${stub.id} (${stub.props.length} observed prop(s)) → out/${stub.name}.tsx`);
+    save(`stub.${stub.id}.contract.json`, JSON.stringify(stub, null, 2) + "\n");
+    const emitted = emitReact(stub, {
+      tokens: composed.inventory,
+      icons: data.icons,
+      contracts: new Map([[stub.id, stub]]),
+    });
+    writeFileSync(path.join(MATRIX, "out", `${stub.name}.tsx`), emitted.tsx);
+    writeFileSync(
+      path.join(MATRIX, "out", `${stub.name}.module.css`),
+      emitted.css,
+    );
+    console.log(
+      `  child stub: ${stub.id} (${stub.props.length} observed prop(s)) → out/${stub.name}.tsx`,
+    );
   }
 
   // ---- html surface --------------------------------------------------------
   let htmlOk = false;
   try {
-    const { html, css } = emitHtml(contract, { tokens: composed.inventory, icons: data.icons, contracts });
-    save('component.html', html);
-    save('component.css', css);
-    save('preview.html', previewDoc(html, css, minted ? mintedTokenCss(minted.tree) : ''));
+    const { html, css } = emitHtml(contract, {
+      tokens: composed.inventory,
+      icons: data.icons,
+      contracts,
+    });
+    save("component.html", html);
+    save("component.css", css);
+    save(
+      "preview.html",
+      previewDoc(html, css, minted ? mintedTokenCss(minted.tree) : ""),
+    );
     htmlOk = true;
-    console.log('  emitHtml: ok');
+    console.log("  emitHtml: ok");
   } catch (e) {
-    save('component.html.REFUSED.txt', String(e instanceof Error ? e.message : e) + '\n');
-    console.log(`  emitHtml: REFUSED — ${(e as Error).message.split('\n')[0]}`);
+    save(
+      "component.html.REFUSED.txt",
+      String(e instanceof Error ? e.message : e) + "\n",
+    );
+    console.log(`  emitHtml: REFUSED — ${(e as Error).message.split("\n")[0]}`);
   }
 
   // ---- react surface -------------------------------------------------------
@@ -172,14 +209,23 @@ function run(id: string, kind: 'figma' | 'code'): void {
   // shape) so the emitted imports (./Tooltip, ./Button.module.css) resolve
   // and the artifacts typecheck with the root tsc.
   try {
-    const { tsx, css, stories } = emitReact(contract, { tokens: composed.inventory, icons: data.icons, contracts });
+    const { tsx, css, stories } = emitReact(contract, {
+      tokens: composed.inventory,
+      icons: data.icons,
+      contracts,
+    });
     save(`${contract.name}.tsx`, tsx);
     save(`${contract.name}.module.css`, css);
     save(`${contract.name}.stories.tsx`, stories);
-    console.log('  emitReact: ok');
+    console.log("  emitReact: ok");
   } catch (e) {
-    save('Component.tsx.REFUSED.txt', String(e instanceof Error ? e.message : e) + '\n');
-    console.log(`  emitReact: REFUSED — ${(e as Error).message.split('\n')[0]}`);
+    save(
+      "Component.tsx.REFUSED.txt",
+      String(e instanceof Error ? e.message : e) + "\n",
+    );
+    console.log(
+      `  emitReact: REFUSED — ${(e as Error).message.split("\n")[0]}`,
+    );
   }
 
   // ---- canvas surface ------------------------------------------------------
@@ -191,17 +237,24 @@ function run(id: string, kind: 'figma' | 'code'): void {
       contracts,
       ...(minted ? { mintedTokens: minted.tree } : {}),
     });
-    save('figma-script.js', script);
+    save("figma-script.js", script);
     let syntaxOk = true;
     try {
-      new Function('return (async () => {\n' + script + '\n})()');
+      new Function("return (async () => {\n" + script + "\n})()");
     } catch (e) {
       syntaxOk = false;
       canvas.syntaxError = e instanceof Error ? e.message : String(e);
     }
-    canvas.script = { bytes: script.length, mintedPreamble: script.includes("'Imported (provisional)'"), syntaxOk };
+    canvas.script = {
+      bytes: script.length,
+      mintedPreamble: script.includes("'Imported (provisional)'"),
+      syntaxOk,
+    };
 
-    const engine = createFigmaEngine({ tokens: composed.tokens, icons: data.icons });
+    const engine = createFigmaEngine({
+      tokens: composed.tokens,
+      icons: data.icons,
+    });
     const compiled = engine.compileComponentData(contract, contracts);
     canvas.compiled = {
       setName: compiled.setName,
@@ -212,12 +265,14 @@ function run(id: string, kind: 'figma' | 'code'): void {
         bindings: v.spec.bindings ?? {},
       })),
     };
-    console.log(`  figma script: ${script.length} bytes, syntax ${syntaxOk ? 'ok' : 'FAILED'}; canvas variants: ${compiled.variants.length}`);
+    console.log(
+      `  figma script: ${script.length} bytes, syntax ${syntaxOk ? "ok" : "FAILED"}; canvas variants: ${compiled.variants.length}`,
+    );
   } catch (e) {
     canvas.error = e instanceof Error ? e.message : String(e);
-    console.log(`  canvas: FAILED — ${(e as Error).message.split('\n')[0]}`);
+    console.log(`  canvas: FAILED — ${(e as Error).message.split("\n")[0]}`);
   }
-  save('canvas-summary.json', JSON.stringify(canvas, null, 2) + '\n');
+  save("canvas-summary.json", JSON.stringify(canvas, null, 2) + "\n");
 }
 
 const only = process.argv.slice(2);

@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "kind": "console-loop-tailwind-component",
+  "status": "completed",
+  "component": "badge",
+  "contract": "examples/tailwind/contracts/badge.contract.json",
+  "script": "examples/tailwind/figma/badge.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:42:56.743Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:2149",
+    "mode": "generated",
+    "page": "Badge (flowbite.badge)",
+    "sectionId": "1:2162",
+    "contractId": "flowbite.badge",
+    "result": {
+      "createdNodeIds": [
+        "1:2149"
+      ],
+      "results": [
+        {
+          "name": "Badge",
+          "contractId": "flowbite.badge",
+          "nodeId": "1:2149",
+          "key": "19499bc1beb8ae8363a39837eec1f14cbaa7db37",
+          "variants": 24,
+          "properties": [
+            "Content#1:694",
+            "Color",
+            "Size",
+            "State"
+          ],
+          "wiredReactions": 6
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "matchDeveloped": true,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [],
+    "defects": [],
+    "reference": "extract/computed/out/tailwind/badge/gate-shots/failure.sm__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "scorecard": "parity/receipts/console-loop/tailwind/scores/badge.json",
+    "matchDevelopedReason": "agent AA=2.43 compositionOk (cropped-ref loop)",
+    "matchedAt": "2026-08-08T03:09:53.139Z",
+    "status": "scored-pass",
+    "scoreConfirmed": {
+      "at": "2026-08-08T04:31:56.356Z",
+      "pctAAMasked": 2.430555555555556,
+      "compositionOk": true,
+      "supersededDefects": [],
+      "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:2933199349",
+    "lineCount": 428,
+    "sampleLines": [
+      ":COMPONENT_SET/Badge (flowbite.badge)|fill|[]",
+      ":COMPONENT_SET/Badge (flowbite.badge)|radius|5,5,5,5",
+      ":COMPONENT_SET/Badge (flowbite.badge)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Badge (flowbite.badge)|description|Badge â generated from contract flowbite.badge v0.2.0 â",
+      ":COMPONENT_SET/Badge (flowbite.badge)|propdef|Color:VARIANT=Info",
+      ":COMPONENT_SET/Badge (flowbite.badge)|propdef|Content#1:694:TEXT=Badge",
+      ":COMPONENT_SET/Badge (flowbite.badge)|propdef|Size:VARIANT=Xs",
+      ":COMPONENT_SET/Badge (flowbite.badge)|propdef|State:VARIANT=Default",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8078431487083435,\"g\":0.9803921580314636,\"b\":0.9960784316062927},\"boundVariables\":{\"color\":{\"var\":\"imported/badge/root/background-color/info\"}}}]",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|radius|4,4,4,4",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|layout|HORIZONTAL MIN/CENTER gap 4 pad 2,8,2,8",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|bound:bottomLeftRadius|imported/shared/size-4",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|bound:bottomRightRadius|imported/shared/size-4",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|bound:itemSpacing|imported/shared/size-4",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|bound:paddingBottom|imported/badge/root/padding-bottom",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|bound:paddingLeft|imported/badge/root/padding-left",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|bound:paddingRight|imported/badge/root/padding-right",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|bound:paddingTop|imported/badge/root/padding-top",
+      "/0:COMPONENT/Color=Info, Size=Xs, State=Default|bound:topLeftRadius|imported/shared/size-4"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Color enum → Info/Failure/Success/Warning/Indigo/Pink",
+      "Size enum → Xs/Sm",
+      "TEXT Content",
+      "first-variant fill bound: imported/badge/root/background-color/info"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Color=Info, Size=Xs, State=Default",
+        "Color=Info, Size=Sm, State=Default",
+        "Color=Failure, Size=Xs, State=Default",
+        "Color=Failure, Size=Sm, State=Default",
+        "Color=Success, Size=Xs, State=Default",
+        "Color=Success, Size=Sm, State=Default",
+        "Color=Warning, Size=Xs, State=Default",
+        "Color=Warning, Size=Sm, State=Default",
+        "Color=Indigo, Size=Xs, State=Default",
+        "Color=Indigo, Size=Sm, State=Default",
+        "Color=Pink, Size=Xs, State=Default",
+        "Color=Pink, Size=Sm, State=Default",
+        "Color=Info, Size=Xs, State=Active",
+        "Color=Failure, Size=Xs, State=Active",
+        "Color=Success, Size=Xs, State=Active",
+        "Color=Warning, Size=Xs, State=Active",
+        "Color=Indigo, Size=Xs, State=Active",
+        "Color=Pink, Size=Xs, State=Active",
+        "Color=Info, Size=Xs, State=Hover",
+        "Color=Failure, Size=Xs, State=Hover",
+        "Color=Success, Size=Xs, State=Hover",
+        "Color=Warning, Size=Xs, State=Hover",
+        "Color=Indigo, Size=Xs, State=Hover",
+        "Color=Pink, Size=Xs, State=Hover"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#1:694",
+          "type": "TEXT",
+          "defaultValue": "Badge",
+          "variantOptions": null
+        },
+        {
+          "name": "Color",
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Info",
+            "Failure",
+            "Success",
+            "Warning",
+            "Indigo",
+            "Pink"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Xs",
+          "variantOptions": [
+            "Xs",
+            "Sm"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Active",
+            "Hover"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Color=Info, Size=Xs, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 2,
+          "r": 8,
+          "b": 2,
+          "l": 8
+        },
+        "radius": 4,
+        "fillVarName": "imported/badge/root/background-color/info",
+        "padBound": {
+          "itemSpacing": "imported/shared/size-4",
+          "paddingLeft": "imported/badge/root/padding-left",
+          "paddingTop": "imported/badge/root/padding-top",
+          "paddingRight": "imported/badge/root/padding-right",
+          "paddingBottom": "imported/badge/root/padding-bottom",
+          "topLeftRadius": "imported/shared/size-4",
+          "topRightRadius": "imported/shared/size-4",
+          "bottomLeftRadius": "imported/shared/size-4",
+          "bottomRightRadius": "imported/shared/size-4",
+          "fills": "imported/badge/root/background-color/info"
+        },
+        "w": 53,
+        "h": 20,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": true
+  }
+}

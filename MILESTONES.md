@@ -1114,7 +1114,7 @@ Drift: **54/54**. `examples/polaris/PROVENANCE.md` exists at last.
 | Enterprise scale (code) | Carbon/Fluent 2/Spectrum/Polaris at pinned SHAs, pipeline unmodified | `extract/pilots/ENTERPRISE-GAUNTLET.md` |
 | Whole-kit census | 1,618/1,618 sets clean, facts/degradations counted | `npm run extract:figma:gauntlet` → `CENSUS.md` |
 | Visual parity | pixel diff vs Figma's own renders, worst-first queue | `npm run extract:figma:visual` → `REPORT.md` |
-| Published spec + CLI | `@ds-contracts/schema` 16.0.0 · `@ds-contracts/cli` 0.3.0 · `@ds-contracts/emitter-web-components` 0.3.0 on public npm (published 2026-07-29, `862b1e0`), stranger-verified | `cli-smoke` eval (byte-stable double run from scratch) |
+| Published spec + CLI | on public npm, stranger-verified: `@ds-contracts/schema` `latest` 16.0.0 / `next` 16.1.0-rc.1 (source tree ahead at 16.1.0-rc.2, unpublished) · `@ds-contracts/cli` `latest` 0.4.0 / `next` 0.5.0-rc.1 (source tree ahead at 0.5.0-rc.2, unpublished) · `@ds-contracts/emitter-web-components` `latest` 0.3.0 / `next` 0.4.0-rc.1 (source tree ahead at 0.4.0-rc.2, unpublished) | `cli-smoke` eval (byte-stable double run from scratch) |
 | Journey E2E | both product journeys as standing gates, commands read only from the docs seam | `journey-engineer` / `journey-designer` evals · `evals/fixtures/journey-commands.json` |
 | CI executes verbatim | every recipe `run:` step executed locally against the published CLI | `examples/ci/VALIDATION.md` |
 | Plugin engine freshness | zip build refuses a stale engine by committed input-hash receipt | `plugin-engine-bundle` eval (guard fires on a real core mutation) |

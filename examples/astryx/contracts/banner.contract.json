@@ -2,16 +2,16 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "astryx.banner",
   "name": "Banner",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "draft",
-  "description": "Astryx Banner \u2014 promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Banner/Banner.tsx, extracted 2026-07-20 \u2014 see examples/astryx/PROVENANCE.md). status + container axes and the dismissable/expanded flags are verbatim; the banner message is a materialized text slot (Astryx types it as ReactNode children). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "description": "Astryx Banner — promoted from @astryxdesign/core@0.1.6 (src/Banner/Banner.tsx). Two-part structure: a status header (muted background, status icon, semibold title, supporting description) and an optional collapsible content area (out of scope for the default exhibit). Status backgrounds use accent/warning/error/success *-muted tokens; icons use the vendor defaultIconNames mapping at md (20px).",
   "semantics": {
     "element": "div"
   },
   "props": [
     {
       "name": "status",
-      "description": "The banner tone.",
+      "description": "Status type controlling the icon and color scheme.",
       "type": {
         "enum": [
           "info",
@@ -77,17 +77,32 @@
       }
     },
     {
-      "name": "children",
-      "description": "Banner message (materialized slot).",
+      "name": "title",
+      "description": "Title text displayed prominently in the header area.",
       "type": "text",
-      "default": "Banner message",
+      "default": "A new software update is available.",
       "bindings": {
         "figma": {
           "kind": "TEXT",
-          "property": "Message"
+          "property": "Title"
         },
         "code": {
-          "prop": "children"
+          "prop": "title"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Optional supporting text below the title in the header area.",
+      "type": "text",
+      "default": "See what changed in this version.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
         }
       }
     }
@@ -97,44 +112,147 @@
     "root": {
       "layout": {
         "display": "flex",
-        "direction": "row",
-        "align": "center"
-      },
-      "tokens": {
-        "color": "{color-text-primary}",
-        "gap": "{spacing-2}",
-        "padding-block": "{spacing-3}",
-        "padding-inline": "{spacing-4}",
-        "border-radius": "{radius-container}",
-        "font-family": "{font-family-body}",
-        "font-size": "{font-size-sm}"
-      },
-      "tokensByProp": {
-        "prop": "status",
-        "map": {
-          "info": {
-            "background-color": "{color-background-blue}",
-            "color": "{color-text-blue}"
-          },
-          "warning": {
-            "background-color": "{color-warning-muted}",
-            "color": "{color-text-primary}"
-          },
-          "error": {
-            "background-color": "{color-error-muted}",
-            "color": "{color-text-primary}"
-          },
-          "success": {
-            "background-color": "{color-success-muted}",
-            "color": "{color-text-primary}"
-          }
-        }
+        "direction": "column"
       },
       "parts": {
-        "message": {
+        "header": {
           "element": "div",
-          "content": {
-            "prop": "children"
+          "layout": {
+            "display": "flex",
+            "direction": "row",
+            "align": "start"
+          },
+          "tokens": {
+            "gap": "{spacing-2}",
+            "padding-block": "{spacing-3}",
+            "padding-inline": "{spacing-4}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "status",
+              "map": {
+                "info": {
+                  "background-color": "{color-accent-muted}"
+                },
+                "warning": {
+                  "background-color": "{color-warning-muted}"
+                },
+                "error": {
+                  "background-color": "{color-error-muted}"
+                },
+                "success": {
+                  "background-color": "{color-success-muted}"
+                }
+              }
+            }
+          ],
+          "literalsByProp": [
+            {
+              "prop": "container",
+              "map": {
+                "card": {
+                  "border-radius": "12px"
+                },
+                "section": {
+                  "border-radius": "0"
+                }
+              }
+            }
+          ],
+          "parts": {
+            "iconWrapper": {
+              "layout": {
+                "display": "flex",
+                "align": "center"
+              },
+              "parts": {
+                "iconInfo": {
+                  "icon": {
+                    "asset": "banner-info",
+                    "size": 20
+                  },
+                  "visibleWhen": {
+                    "prop": "status",
+                    "equals": "info"
+                  },
+                  "tokens": {
+                    "color": "{color-accent}"
+                  }
+                },
+                "iconWarning": {
+                  "icon": {
+                    "asset": "banner-warning",
+                    "size": 20
+                  },
+                  "visibleWhen": {
+                    "prop": "status",
+                    "equals": "warning"
+                  },
+                  "tokens": {
+                    "color": "{color-warning}"
+                  }
+                },
+                "iconError": {
+                  "icon": {
+                    "asset": "banner-error",
+                    "size": 20
+                  },
+                  "visibleWhen": {
+                    "prop": "status",
+                    "equals": "error"
+                  },
+                  "tokens": {
+                    "color": "{color-error}"
+                  }
+                },
+                "iconSuccess": {
+                  "icon": {
+                    "asset": "banner-success",
+                    "size": 20
+                  },
+                  "visibleWhen": {
+                    "prop": "status",
+                    "equals": "success"
+                  },
+                  "tokens": {
+                    "color": "{color-success}"
+                  }
+                }
+              }
+            },
+            "headerContent": {
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "grow": true
+              },
+              "parts": {
+                "title": {
+                  "element": "div",
+                  "content": {
+                    "prop": "title"
+                  },
+                  "tokens": {
+                    "color": "{color-text-primary}",
+                    "font-size": "{text-label-size}",
+                    "font-weight": "{font-weight-semibold}",
+                    "line-height": "{text-label-leading}"
+                  }
+                },
+                "description": {
+                  "element": "div",
+                  "content": {
+                    "prop": "description"
+                  },
+                  "tokens": {
+                    "color": "{color-text-secondary}",
+                    "font-size": "{text-supporting-size}",
+                    "font-weight": "{text-supporting-weight}",
+                    "line-height": "{text-supporting-leading}"
+                  }
+                }
+              }
+            }
           }
         }
       }

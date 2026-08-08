@@ -63,8 +63,13 @@ const CORPORA: Corpus[] = [
   { id: 'mui', contractsDir: 'examples/mui/contracts', tokens: ['examples/mui/tokens/mui.dtcg.json', 'examples/mui/tokens/mui-minted.dtcg.json'], icons: 'examples/mui/assets/icons' },
   { id: 'carbon', contractsDir: 'examples/carbon/contracts', tokens: ['examples/carbon/tokens/carbon.dtcg.json', 'examples/carbon/tokens/carbon-minted.dtcg.json'], icons: 'examples/carbon/assets/icons' },
   { id: 'altitude', contractsDir: 'examples/altitude/contracts', tokens: ['examples/altitude/tokens/altitude.dtcg.json', 'examples/altitude/tokens/altitude-minted.dtcg.json'], icons: 'examples/altitude/assets/icons' },
-  { id: 'tailwind', contractsDir: 'examples/tailwind/contracts', tokens: ['examples/tailwind/tokens/tailwind.dtcg.json', 'examples/tailwind/tokens/tailwind-minted.dtcg.json'] },
-  { id: 'astryx', contractsDir: 'examples/astryx/contracts', tokens: ['examples/astryx/tokens/astryx.dtcg.json', 'examples/astryx/tokens/astryx-minted.dtcg.json'] },
+  // Exact-conversion wave (c924c9c2) threaded icon assets through the
+  // tailwind/astryx generate + bundle lanes; their contracts now reference
+  // real svg assets, so a bundle without --icons REFUSES by name. The census
+  // must pass the same icon dirs the canonical bundle commands pass, or the
+  // whole-corpus refusal masks every per-component receipt row.
+  { id: 'tailwind', contractsDir: 'examples/tailwind/contracts', tokens: ['examples/tailwind/tokens/tailwind.dtcg.json', 'examples/tailwind/tokens/tailwind-minted.dtcg.json'], icons: 'examples/tailwind/assets/icons' },
+  { id: 'astryx', contractsDir: 'examples/astryx/contracts', tokens: ['examples/astryx/tokens/astryx.dtcg.json', 'examples/astryx/tokens/astryx-minted.dtcg.json'], icons: 'examples/astryx/assets/icons' },
   { id: 'polaris', contractsDir: 'examples/polaris/contracts', tokens: ['examples/polaris/tokens/polaris-light.dtcg.json', 'examples/polaris/tokens/polaris-minted.dtcg.json'], icons: 'examples/polaris/assets/icons' },
 ];
 

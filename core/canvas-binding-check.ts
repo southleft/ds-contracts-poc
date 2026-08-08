@@ -70,7 +70,12 @@ const evalFp = (src: string) =>
 
 const bundle = await buildEngineBundle();
 const { figma, root } = createFigmaMock();
-const sandbox: Record<string, unknown> = { window: {}, console: { log() {}, warn() {}, error() {} } };
+const sandbox: Record<string, unknown> = {
+  window: {},
+  TextEncoder,
+  TextDecoder,
+  console: { log() {}, warn() {}, error() {} },
+};
 vm.createContext(sandbox);
 vm.runInContext(bundle.code, sandbox, { timeout: 120_000 });
 const DSC = (sandbox.window as { DSC: any }).DSC;

@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 60.24844720496895,
+    "pctAAUnmasked": 25.77639751552795,
+    "pctAAMasked": 25.77639751552795,
+    "maskCoveragePct": 0,
+    "canvasPx": "13x23",
+    "realPx": "14x13",
+    "inkCanvasPct": 52.17391304347826,
+    "inkRealPct": 23.60248447204969
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/icon-button.png",
+  "referenceSha256": "c26d63bfb0a32f63166ece4038e666935d2ef166a93db99654312a7ac90150f6",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/icon-button-cell.png",
+  "canvasShotSha256": "c18fe343a10e057085ea8ae5802f1040be9622d9929f9e59a42084c93dab6e67",
+  "diff": "parity/receipts/console-loop/mui/scores/icon-button.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/mui/components/icon-button.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.7692307692307692,
+  "inkDelta": 28.57142857142857,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.77, inkDelta=28.6) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T08:30:11.116Z"
+}

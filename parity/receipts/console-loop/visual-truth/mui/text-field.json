@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "text-field",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/text-field.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "84:2480",
+  "cellNodeId": "84:2143",
+  "cellName": "Variant=Outlined, Size=Medium",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 12.048521193948481,
+    "pctAAUnmasked": 6.328653854890737,
+    "pctAAMasked": 6.328653854890737,
+    "maskCoveragePct": 0,
+    "canvasPx": "253x87",
+    "realPx": "253x79",
+    "inkCanvasPct": 6.646676661669165,
+    "inkRealPct": 6.60124483212939
+  },
+  "reference": "parity/receipts/console-loop/mui/refs/text-field.png",
+  "referenceSha256": "e5fb834b6add2b5b0d0f45cb7b58eff01014072810d25306f3b677bde574e895",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/text-field.png",
+  "canvasShotSha256": "3a8af4eb273b22bfbf2698fa13411639587be42a649af1a0dbe744500ff2d26f",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/text-field.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.1012658227848102,
+  "inkDelta": 0.045431829539775315,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=6.33 > 5)"
+}

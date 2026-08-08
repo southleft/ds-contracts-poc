@@ -36,11 +36,14 @@
 import {
   CODE_TARGET_LABELS,
   ContractSchema,
+  RUNTIME_EMIT_REV,
   assertContractProvenance,
   componentRefsOf,
+  contractFileNameForId,
   createFigmaEngine,
   dumpCapturesHidden,
   emitTokenSetScript,
+  mintedTokensFileNameForId,
   parseTokenSet,
   plannedCodePaths,
   proposeBatchFromDump,
@@ -686,7 +689,11 @@ export function createPluginEngine(data: PluginEngineData) {
     eng: typeof engine = engine,
   ): string {
     const compiled = eng.compileComponentData(contract, byId);
-    const s = JSON.stringify(compiled);
+    // The emitted runtime salts its stored hash with RUNTIME_EMIT_REV (so a
+    // runtime-template-only fix still forces amend); the mirror must salt
+    // identically — the wave introduced the salt in the runtime only, and
+    // stored-vs-mirror equality failed by construction once reachable.
+    const s = JSON.stringify(compiled) + "|" + RUNTIME_EMIT_REV;
     let h = 5381;
     for (let i = 0; i < s.length; i++)
       h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
@@ -1577,6 +1584,109 @@ return { inventory: rows };
   const DIFF_SCOPE_NOTE =
     "Scope: this diff covers the API surface (version, props, slots, variant axes) and names when anatomy/style bytes differ — interior style changes are summarized, not itemized.";
 
+  // ---------------------------------------------------------------------------
+  // G3 STALE-BASE GUARD (partial — docs/18 Flow 7 step 4). The Send tab diffs
+  // the canvas against WHATEVER base contract is in the box, and a canvas N
+  // syncs behind main makes that diff manufacture the engineer's merged
+  // changes as the designer's reverts — a silent revert the PR then blames on
+  // her. The full three-way merge (G3) is out of scope here; this guard is
+  // the freshness HALF: the set's stored sync markers (ds_contracts/
+  // contractId + specHash — what this canvas was LAST SYNCED FROM) are
+  // compared against the provided base's spec fingerprint. Same posture as
+  // G2 and the channel guard: WARN AND NAME, never block.
+  // ---------------------------------------------------------------------------
+
+  interface BaseFreshness {
+    /** 'stale' = the markers say the canvas was last synced from something
+     *  OTHER than the provided base. 'unverifiable' = the set carries no
+     *  readable sync fingerprint (or the base does not compile) — named,
+     *  never silently promoted to 'match'. 'baseless' = no base to check. */
+    verdict: "match" | "stale" | "unverifiable" | "baseless";
+    stale: boolean;
+    /** The named warning (stale) or the named non-verdict (unverifiable);
+     *  null when there is nothing to say. Stale's line ALSO rides
+     *  summaryLines so the PR body and every export door carry it. */
+    line: string | null;
+    baseSpecHash: string | null;
+    canvasSpecHash: string | null;
+  }
+
+  function baseFreshnessOf(
+    baseData: Contract | null,
+    markers:
+      | {
+          contractId?: string | null;
+          specHash?: string | null;
+          version?: string | null;
+        }
+      | null
+      | undefined,
+    tokenSet: TokenSetPayload | null | undefined,
+  ): BaseFreshness {
+    if (!baseData) {
+      return {
+        verdict: "baseless",
+        stale: false,
+        line: null,
+        baseSpecHash: null,
+        canvasSpecHash: null,
+      };
+    }
+    const canvasSpecHash =
+      markers && typeof markers.specHash === "string" && markers.specHash
+        ? markers.specHash
+        : null;
+    const canvasContractId =
+      markers && typeof markers.contractId === "string" && markers.contractId
+        ? markers.contractId
+        : null;
+    let baseSpecHash: string | null = null;
+    try {
+      const eng = tokenSet ? foreignEngineFor(tokenSet) : engine;
+      baseSpecHash = specHashOf(baseData, scopeFor([baseData]), eng);
+    } catch {
+      baseSpecHash = null; // an uncompilable base cannot be fingerprinted — unverifiable, not stale
+    }
+    if (canvasContractId !== null && canvasContractId !== baseData.id) {
+      return {
+        verdict: "stale",
+        stale: true,
+        line: `⚠ Stale base: this set's sync marker records contract "${canvasContractId}" but the base you diffed against is "${baseData.id}" — the proposal may contain reverts. Deliver the current contracts to this file (Build tab) and propose again.`,
+        baseSpecHash,
+        canvasSpecHash,
+      };
+    }
+    if (canvasSpecHash === null || baseSpecHash === null) {
+      return {
+        verdict: "unverifiable",
+        stale: false,
+        line: "Base freshness not verified: this set carries no readable sync fingerprint (or the base does not compile), so the diff cannot confirm the base is what this canvas was last synced from.",
+        baseSpecHash,
+        canvasSpecHash,
+      };
+    }
+    if (canvasSpecHash === baseSpecHash) {
+      return {
+        verdict: "match",
+        stale: false,
+        line: null,
+        baseSpecHash,
+        canvasSpecHash,
+      };
+    }
+    const versionDetail =
+      markers?.version && markers.version !== baseData.version
+        ? ` (this canvas last synced v${markers.version}; the base you provided is v${baseData.version})`
+        : "";
+    return {
+      verdict: "stale",
+      stale: true,
+      line: `⚠ Stale base: this canvas was last synced from a different contract version than the base you diffed against${versionDetail} — the proposal may contain reverts. Deliver the current contract to this file (Build tab, or your team's channel) and propose again; every "-prop"/default line below could be someone else's merged change coming back out.`,
+      baseSpecHash,
+      canvasSpecHash,
+    };
+  }
+
   const BASELESS_SCOPE_NOTE =
     "Scope: this is a proposal READ FROM THE CANVAS, not a diff — there is no base contract to compare against, so nothing here is called a change. Review it, then adopt it into your repo as the contract for this set.";
 
@@ -1627,6 +1737,10 @@ return { inventory: rows };
     /** What this proposal turns into on the code side — shown in Send
      *  BEFORE anything leaves the canvas. */
     codePlan: CodePlanView;
+    /** G3 STALE-BASE GUARD (partial): the base-vs-canvas sync-fingerprint
+     *  verdict. When stale, `line` also rides summaryLines (and therefore
+     *  the PR body and every export door). */
+    baseFreshness: BaseFreshness;
   }
 
   /** The Send tab's "what code does this produce" answer. Names come from
@@ -1701,6 +1815,16 @@ return { inventory: rows };
        *  Omitted/null = the caller genuinely does not know, which is
        *  'unrecorded' — never quietly one of the two real answers. */
       toolGenerated?: boolean | null;
+      /** G3 STALE-BASE GUARD (partial): the set's stored sync markers from
+       *  the SAME inventory row `toolGenerated` reads — the canvas's "what I
+       *  was last synced from" fingerprint (ds_contracts/contractId +
+       *  specHash + version). Omitted/null with a base present = the guard
+       *  reports 'unverifiable' by name, never a silent 'match'. */
+      canvasMarkers?: {
+        contractId?: string | null;
+        specHash?: string | null;
+        version?: string | null;
+      } | null;
     } = {},
   ): ProposeDiffResult | { ok: false; issue: PlainIssue } {
     const baseless = baseRaw === null || baseRaw === undefined;
@@ -1722,6 +1846,17 @@ return { inventory: rows };
     );
     const provenance = (dump as { _provenance?: { fileKey?: string | null } })
       ._provenance;
+    const targetSet = dump[setName] as
+      | {
+          propertyDefinitions?: Record<string, unknown>;
+          variants?: Array<{ variantProperties?: Record<string, unknown> }>;
+        }
+      | undefined;
+    const hasStructuredProjection =
+      !!targetSet?.propertyDefinitions &&
+      (targetSet.variants ?? []).every(
+        (variant) => !!variant.variantProperties,
+      );
     let batch;
     try {
       batch = proposeBatchFromDump(dump as never, {
@@ -1744,6 +1879,15 @@ return { inventory: rows };
         ),
         contractsById: new Map(bakedById),
         fileKey: provenance?.fileKey ?? null,
+        // Structured dumps prove the matrix in exact mode.
+        // Unstructured dumps with a known hand-built / tool-generated
+        // provenance stay on reviewable inversion (name-based path; the
+        // asymmetry copy still rides `toolGenerated`). Unrecorded
+        // provenance without structured evidence fails closed in exact.
+        projectionMode:
+          hasStructuredProjection || opts.toolGenerated == null
+            ? "exact"
+            : "reviewable-inversion",
         mintUnbound: true,
         hiddenCaptured: dumpCapturesHidden(provenance as never),
       });
@@ -1776,6 +1920,17 @@ return { inventory: rows };
     const summaryLines = baseData
       ? boundedContractDiff(baseData, proposedContract)
       : baselessProposalLines(proposal.contract, proposal.unbound, tokenSource);
+    // G3 stale-base guard — a STALE verdict's warning leads the summary, so
+    // the panel, the export envelope, and the PR body all carry it; the
+    // other verdicts ride only the structured field (no manufactured alarm).
+    const baseFreshness = baseFreshnessOf(
+      baseData,
+      opts.canvasMarkers,
+      opts.tokenSet,
+    );
+    if (baseFreshness.stale && baseFreshness.line) {
+      summaryLines.unshift(baseFreshness.line);
+    }
     const canvasProvenance: CanvasProvenance =
       opts.toolGenerated === true
         ? "tool-generated"
@@ -1794,6 +1949,7 @@ return { inventory: rows };
         setName: proposal.setName,
         summary: summaryLines,
         proposedContract,
+        projection: proposal.projection,
         proposalNotes: proposal.notes,
         // ENVELOPE v2 — the two payloads the export doors used to DROP: the
         // stub contracts and the minted DTCG tree ride the SAME envelope the
@@ -1818,6 +1974,17 @@ return { inventory: rows };
           kind: canvasProvenance,
           note: provenanceSentence(canvasProvenance),
         },
+        // G3 STALE-BASE GUARD (partial): the base-freshness verdict rides
+        // the envelope so `figma receive` / `propose-pr` — and any human
+        // reading the export — see the same warning the panel showed. Old
+        // parsers ignore the unknown field.
+        baseFreshness: {
+          verdict: baseFreshness.verdict,
+          stale: baseFreshness.stale,
+          line: baseFreshness.line,
+          baseSpecHash: baseFreshness.baseSpecHash,
+          canvasSpecHash: baseFreshness.canvasSpecHash,
+        },
       },
       null,
       2,
@@ -1838,6 +2005,7 @@ return { inventory: rows };
       ...(proposal.mintedTokens ? { mintedTokens: proposal.mintedTokens } : {}),
       provenance: canvasProvenance,
       codePlan,
+      baseFreshness,
     };
   }
 
@@ -1986,12 +2154,36 @@ return { inventory: rows };
     summaryLines: string[];
     /** Deterministic override for the harness; live runs derive from Date. */
     branchSuffix?: string;
+    /** ENVELOPE v2 — the payloads the other two delivery doors already
+     *  carry. Absent/empty → the plan is byte-identical to the historic
+     *  contract-only plan (one PUT, same body). Present → each stub files
+     *  as its own *.contract.json and the minted tree as *.minted.dtcg.json
+     *  NEXT TO the contract, under the SAME names `figma receive` /
+     *  `propose-pr` write — without them the committed proposal references
+     *  child ids and minted token refs `generate` refuses by name. */
+    childStubs?: Array<Record<string, unknown>>;
+    mintedTokens?: {
+      tree: Record<string, unknown>;
+      count: number;
+      entries?: unknown[];
+    } | null;
+  }
+
+  /** One file the PR commits — path, exact bytes, and the commit message the
+   *  live run uses (the dry-run request templates quote the same message). */
+  interface PrPlanFile {
+    path: string;
+    contents: string;
+    kind: "contract" | "tokens";
+    role: "main" | "stub" | "minted-tokens";
+    message: string;
   }
 
   function prPlan(input: PrPlanInput): {
     branch: string;
     title: string;
     body: string;
+    files: PrPlanFile[];
     requests: PrRequest[];
   } {
     const api = "https://api.github.com";
@@ -2001,6 +2193,57 @@ return { inventory: rows };
     const branch = `ds-contracts/propose-${input.contractId.replace(/[^a-z0-9.-]+/gi, "-")}-${suffix}`;
     const repoUrl = `${api}/repos/${input.owner}/${input.repo}`;
     const title = `Proposed contract change: ${input.contractId} (from Figma)`;
+    // Sidecars land NEXT TO the contract — the CLI's propose-pr convention
+    // (dir from the contract path; file names from the shared core helpers).
+    const destDir = input.path.includes("/")
+      ? input.path.slice(0, input.path.lastIndexOf("/"))
+      : "";
+    const inDir = (name: string) => (destDir ? `${destDir}/${name}` : name);
+    const mainMessage = `propose: ${input.contractId} contract change from Figma`;
+    const files: PrPlanFile[] = [
+      {
+        path: input.path,
+        contents: input.contractJson,
+        kind: "contract",
+        role: "main",
+        message: mainMessage,
+      },
+    ];
+    for (const [i, stub] of (input.childStubs ?? []).entries()) {
+      const stubId =
+        typeof stub.id === "string" && stub.id.length > 0 ? stub.id : null;
+      if (!stubId)
+        throw new Error(
+          `PR plan REFUSED: childStubs[${i}] has no non-empty string id — an unidentifiable stub contract cannot be filed, and dropping it silently would re-open the door this plan closes. No request was planned.`,
+        );
+      files.push({
+        path: inDir(contractFileNameForId(stubId)),
+        contents: JSON.stringify(stub, null, 2) + "\n",
+        kind: "contract",
+        role: "stub",
+        message: `${mainMessage} — stub contract ${stubId}`,
+      });
+    }
+    if (input.mintedTokens && input.mintedTokens.tree) {
+      files.push({
+        path: inDir(mintedTokensFileNameForId(input.contractId || "proposal")),
+        contents: JSON.stringify(input.mintedTokens.tree, null, 2) + "\n",
+        kind: "tokens",
+        role: "minted-tokens",
+        message: `${mainMessage} — minted token tree`,
+      });
+    }
+    // The CLI's refusal, mirrored: two files planning the same destination
+    // would silently clobber each other on the branch.
+    const seen = new Set<string>();
+    for (const f of files) {
+      if (seen.has(f.path))
+        throw new Error(
+          `PR plan REFUSED: two files resolve to the same destination "${f.path}" — no request was planned.`,
+        );
+      seen.add(f.path);
+    }
+    const sidecars = files.filter((f) => f.role !== "main");
     const body = [
       `A designer proposed this change from Figma via the DS Contracts Sync Runner plugin.`,
       "",
@@ -2009,6 +2252,22 @@ return { inventory: rows };
       "## Summary",
       ...input.summaryLines.map((l) => `- ${l}`),
       "",
+      // ENVELOPE v2 — every file the PR carries, named in the body. A
+      // sidecar-less plan keeps the historic contract-only body verbatim.
+      ...(sidecars.length > 0
+        ? [
+            "## Files",
+            `- \`${input.path}\` — the proposed contract (the source of truth)`,
+            ...sidecars.map((f) =>
+              f.role === "stub"
+                ? `- \`${f.path}\` — auto-proposed STUB contract for a nested instance with no contract in scope (API from observed values only; import the real child set to replace it)`
+                : `- \`${f.path}\` — the provisional minted token tree the proposal's \`imported.*\` refs resolve through (rename these tokens on adoption)`,
+            ),
+            "",
+            `The ${sidecars.length} sidecar file(s) are the contract's companions — without them \`generate\` refuses the proposal's child ids and minted token refs by name. Nothing else in the repository is touched.`,
+            "",
+          ]
+        : []),
       "_The contract file in this PR is the proposed document; review it like any other contract diff._",
     ].join("\n");
     const requests: PrRequest[] = [
@@ -2026,17 +2285,24 @@ return { inventory: rows };
         url: `${repoUrl}/git/refs`,
         body: { ref: `refs/heads/${branch}`, sha: "<base branch head sha>" },
       },
-      {
-        title: `Commit ${input.path} on ${branch}`,
-        method: "PUT",
-        url: `${repoUrl}/contents/${input.path}`,
-        body: {
-          message: `propose: ${input.contractId} contract change from Figma`,
-          branch,
-          content: "<base64 of the proposed contract>",
-          sha: "<existing file sha, when the file already exists>",
-        },
-      },
+      ...files.map(
+        (f): PrRequest => ({
+          title: `Commit ${f.path} on ${branch}`,
+          method: "PUT",
+          url: `${repoUrl}/contents/${f.path}`,
+          body: {
+            message: f.message,
+            branch,
+            content:
+              f.role === "main"
+                ? "<base64 of the proposed contract>"
+                : f.role === "stub"
+                  ? "<base64 of the stub contract>"
+                  : "<base64 of the minted token tree>",
+            sha: "<existing file sha, when the file already exists>",
+          },
+        }),
+      ),
       {
         title: "Open the pull request",
         method: "POST",
@@ -2049,7 +2315,7 @@ return { inventory: rows };
         },
       },
     ];
-    return { branch, title, body, requests };
+    return { branch, title, body, files, requests };
   }
 
   /** Dry-run text — the exact plan, no network, no token needed. */

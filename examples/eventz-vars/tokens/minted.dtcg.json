@@ -1,51 +1,29 @@
 {
   "imported": {
-    "text": {
-      "caption-lg-allcaps-bold": {
-        "font-size": {
-          "$value": "12px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "700",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "18px",
-          "$type": "dimension"
-        }
-      },
-      "body-sm": {
-        "font-size": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "500",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "20px",
-          "$type": "dimension"
-        }
-      },
-      "body-md-bold": {
-        "font-size": {
-          "$value": "16px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "700",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "20px",
-          "$type": "dimension"
-        }
-      }
-    },
     "atoms-badge": {
       "root": {
+        "background-image": {
+          "accent": {
+            "$value": "linear-gradient(270deg, #d9c5f7 0%, #d0b5f9 100%)",
+            "$type": "gradient"
+          },
+          "info": {
+            "$value": "linear-gradient(270deg, #b2e7f3 0%, #9ae0f0 100%)",
+            "$type": "gradient"
+          },
+          "warning": {
+            "$value": "linear-gradient(270deg, #f3e0c6 0%, #f0d1a5 100%)",
+            "$type": "gradient"
+          },
+          "featured": {
+            "$value": "linear-gradient(270deg, #f9cde7 0%, #f6b2db 100%)",
+            "$type": "gradient"
+          },
+          "brand": {
+            "$value": "none",
+            "$type": "gradient"
+          }
+        },
         "width": {
           "true": {
             "$value": "fit-content"
@@ -62,6 +40,113 @@
           "false": {
             "$value": "22px",
             "$type": "dimension"
+          }
+        }
+      }
+    },
+    "text": {
+      "caption-lg-allcaps-bold": {
+        "font-size": {
+          "$value": "12px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "caption/lg-allcaps-bold"
+              }
+            }
+          }
+        },
+        "font-weight": {
+          "$value": "700",
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "caption/lg-allcaps-bold"
+              }
+            }
+          }
+        },
+        "line-height": {
+          "$value": "18px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "caption/lg-allcaps-bold"
+              }
+            }
+          }
+        }
+      },
+      "body-sm": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/sm"
+              }
+            }
+          }
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/sm"
+              }
+            }
+          }
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/sm"
+              }
+            }
+          }
+        }
+      },
+      "body-md-bold": {
+        "font-size": {
+          "$value": "16px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/md-bold"
+              }
+            }
+          }
+        },
+        "font-weight": {
+          "$value": "700",
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/md-bold"
+              }
+            }
+          }
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/md-bold"
+              }
+            }
           }
         }
       }

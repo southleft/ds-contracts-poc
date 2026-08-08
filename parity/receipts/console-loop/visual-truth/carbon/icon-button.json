@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "carbon",
+  "stem": "icon-button",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/carbon/components/icon-button.json",
+  "status": "pass",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385245229284424737",
+  "setNodeId": "1:5645",
+  "cellNodeId": "1:5565",
+  "cellName": "Kind=Primary, Size=Xs",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 7.638888888888889,
+    "pctAAUnmasked": 2.083333333333333,
+    "pctAAMasked": 2.083333333333333,
+    "maskCoveragePct": 0,
+    "canvasPx": "24x24",
+    "realPx": "24x24",
+    "inkCanvasPct": 100,
+    "inkRealPct": 100
+  },
+  "reference": "parity/receipts/console-loop/carbon/refs/icon-button.png",
+  "referenceSha256": "38cca82fdab648263d28b95e984501540d56b34cfeabeac132abde74bb626e19",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/carbon/shots/icon-button.png",
+  "canvasShotSha256": "910a688c809b9ff2f5c60598a5373204c7586490e01c0d574f1d28ea7e68d112",
+  "diff": "parity/receipts/console-loop/visual-truth/carbon/diffs/icon-button.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

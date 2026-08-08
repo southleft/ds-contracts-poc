@@ -6,7 +6,7 @@
   "status": "draft",
   "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
   "semantics": {
-    "element": "input"
+    "element": "div"
   },
   "props": [
     {
@@ -165,6 +165,7 @@
           "tokens": {
             "background-color": "{comp.form.color.background.default}",
             "padding-inline": "{spacing.3}",
+            "padding-block": "{spacing.1-5}",
             "border-radius": "{component.border.radius.rounded-lg}",
             "border-width": "{border.width.1}",
             "gap": "{spacing.2}"

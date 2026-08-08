@@ -1,0 +1,22 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "iconbutton",
+  "anchors": [
+    {
+      "leaf": "imported.icon-button.root.color.primary",
+      "token": "palette-primary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-1h45afm-MuiButtonBase-root-MuiIconButton-root"
+    },
+    {
+      "leaf": "imported.icon-button.root.color.secondary",
+      "token": "palette-secondary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-epg2mj-MuiButtonBase-root-MuiIconButton-root"
+    }
+  ]
+}

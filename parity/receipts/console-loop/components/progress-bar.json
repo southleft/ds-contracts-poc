@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "progress-bar",
+  "contract": "contracts/progress-bar.contract.json",
+  "script": "parity/receipts/console-loop/emitted/13-progressbar.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:24.165Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:659",
+    "page": "ProgressBar",
+    "sectionId": "1:660",
+    "result": {
+      "createdNodeIds": [
+        "1:659"
+      ],
+      "results": [
+        {
+          "name": "ProgressBar",
+          "contractId": "ds.progress-bar",
+          "nodeId": "1:659",
+          "key": "8dd60df0219642abf37385a0764345102b84f102",
+          "variants": 5,
+          "properties": [
+            "Value#1:156",
+            "Max#1:162",
+            "Label#1:168",
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:660 captured (ok).",
+      "Progress Bar: 5 variant(s); type COMPONENT_SET; page ProgressBar.",
+      "Props: Value, Max, Label, Variant."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3162590889",
+    "lineCount": 128,
+    "sampleLines": [
+      ":COMPONENT_SET/ProgressBar|fill|[]",
+      ":COMPONENT_SET/ProgressBar|radius|5,5,5,5",
+      ":COMPONENT_SET/ProgressBar|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/ProgressBar|description|ProgressBar — generated from contract ds.progress-bar v1.0.1 †",
+      ":COMPONENT_SET/ProgressBar|propdef|Label#1:168:TEXT=Progress",
+      ":COMPONENT_SET/ProgressBar|propdef|Max#1:162:TEXT=100",
+      ":COMPONENT_SET/ProgressBar|propdef|Value#1:156:TEXT=60",
+      ":COMPONENT_SET/ProgressBar|propdef|Variant:VARIANT=Accent",
+      "/0:COMPONENT/Variant=Accent|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Variant=Accent|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=Accent|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Accent|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Variant=Accent|bound:width|size/progress/width",
+      "/0/0:FRAME/track|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/progress/track\"}}}]",
+      "/0/0:FRAME/track|radius|4,4,4,4",
+      "/0/0:FRAME/track|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/track|sizing|FIXED/FIXED AUTO",
+      "/0/0:FRAME/track|bound:bottomLeftRadius|radius/100",
+      "/0/0:FRAME/track|bound:bottomRightRadius|radius/100",
+      "/0/0:FRAME/track|bound:height|size/progress/height"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-coercion: Figma TEXT defaults are strings; contract numbers stringify — OK (TEXT Value default got \"60\" expected 60)",
+      "canvas-coercion: Figma TEXT defaults are strings; contract numbers stringify — OK (TEXT Max default got \"100\" expected 100)"
+    ],
+    "matchedAxes": [
+      "Variant",
+      "Value",
+      "Max",
+      "Label"
+    ],
+    "observed": {
+      "variantNames": [
+        "Variant=Accent",
+        "Variant=Success",
+        "Variant=Warning",
+        "Variant=Error",
+        "Variant=Neutral"
+      ],
+      "propDefs": [
+        {
+          "name": "Value#1:156",
+          "type": "TEXT",
+          "defaultValue": "60",
+          "variantOptions": null
+        },
+        {
+          "name": "Max#1:162",
+          "type": "TEXT",
+          "defaultValue": "100",
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:168",
+          "type": "TEXT",
+          "defaultValue": "Progress",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Accent",
+          "variantOptions": [
+            "Accent",
+            "Success",
+            "Warning",
+            "Error",
+            "Neutral"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Accent",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "size/progress/width"
+        },
+        "textChild": [],
+        "w": 320,
+        "h": 8,
+        "childNames": [
+          "track:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}
