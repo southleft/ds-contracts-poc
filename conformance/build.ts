@@ -60,9 +60,21 @@ export interface CaseEntry {
    *  TWO-DIRECTION disposition spec, carried VERBATIM from the hand-authored
    *  draft. `codeToCanvas` is the direction this fixture's gate measures
    *  (CSS/DOM → computed capture → contract); `canvasToCode` is the dump →
-   *  propose-figma direction, eval-gated today (grid-code-proposer-check /
-   *  grid-bento-check) and declared here so the manifest names BOTH halves of
-   *  the frontier. `UNREACHABLE` means the source surface cannot construct
+   *  propose-figma direction, which has NO INSTRUMENT TODAY — extract/figma/
+   *  propose.ts reads no grid facts at all — and is declared here so the
+   *  manifest names BOTH halves of the frontier: a DECLARATION, not a
+   *  measurement. What the A2 grammar actually gates today are three
+   *  registered evals (`npm run eval`): grid-bento-carriage (contract →
+   *  .figma.js → strict-mock readback — the codeToCanvas half),
+   *  grid-css-emitters (the canonical G6 spellings on all three CSS
+   *  surfaces) and grid-code-proposer (CSS → contract inversion, the G7
+   *  refusals by name, the round-trip comparator's grid buckets). Until
+   *  2026-08-08 this comment said canvasToCode was "eval-gated today
+   *  (grid-code-proposer-check / grid-bento-check)" while the first of those
+   *  fixtures was run by no eval and no npm script whatsoever — the repo's
+   *  own "measure the instrument" class, corrected by wiring the fixtures
+   *  AND by narrowing this sentence to what they actually prove.
+   *  `UNREACHABLE` means the source surface cannot construct
    *  the case (proved by the cited probe) — the direction exists to prove the
    *  reader never invents it, and such cases ship NO dump.snippet.json by
    *  declaration. */

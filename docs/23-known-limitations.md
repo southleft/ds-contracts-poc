@@ -659,13 +659,19 @@ component, and each is stated with the number that produced it.
   for two different intents. The 69 are recorded in the gate's committed
   baseline and any growth fails the lane.
 
-- **`slot.acceptsMode: 'restrict'` has no canvas spelling.** Figma's
-  `INSTANCE_SWAP` carries `preferredValues`, a picker HINT that sorts entries
-  and prevents nothing. So `prefer` maps exactly, `open` maps by carrying
-  nothing, and the one tier with teeth cannot be expressed. Proven rather than
-  asserted: `npm run slot-constraints:check` §4 drives the real engine over
-  `ds.avatar-group` with only `acceptsMode` flipped and the two emitted scripts
-  are **byte-identical**. The restriction is enforced on the code surface by
+- **`slot.acceptsMode: 'restrict'` has no canvas spelling.** A native SLOT
+  property carries `preferredValues`, a picker HINT that sorts entries and
+  prevents nothing (an off-list append succeeds — live probe, 2026-08-08). So
+  `prefer` maps exactly, `open` maps by carrying nothing, and the one tier with
+  teeth cannot be enforced. Proven rather than asserted: `npm run
+  slot-constraints:check` §4 drives the real engine over `ds.avatar-group` with
+  only `acceptsMode` flipped; the emitted scripts carry **identical
+  preferredValues** and differ in exactly **one line** — the SLOT property's
+  `description`, where the emitter writes `REFUSED BY FIGMA: acceptsMode
+  "restrict" has no canvas enforcement…` so the limit reaches the designer's
+  property panel instead of being discovered by violating it. Off-list content
+  on canvas is a **differ finding** (`parity/diff.ts`, subject `… (accepts
+  violation)`), not a canvas impossibility. The restriction is enforced on the code surface by
   `validateContract` and is absent on canvas. No committed contract uses
   `restrict` today (all 38 `acceptsMode` declarations are `open` or `prefer`),
   so this constrains the first author who reaches for it.

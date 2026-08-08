@@ -89,7 +89,17 @@ import {
 } from '../sync/ledger.js';
 
 const ROOT = process.cwd();
-const SCRATCH = path.join(ROOT, 'evals', '.scratch');
+// EVAL_SCRATCH overrides the working copy's location. Default (and CI) is
+// evals/.scratch; the override exists because the scratch is a SINGLE shared
+// directory that resetScratch() wipes, so two runs in one checkout destroy
+// each other mid-flight (observed 2026-08-08: a concurrent extract/computed
+// run kept re-creating files under evals/.scratch/extract while another run's
+// rmSync walked it, and both died on ENOTEMPTY). Printed when set — a knob
+// that silently changes where a gate ran is the shape of a false receipt.
+const SCRATCH = process.env.EVAL_SCRATCH
+  ? path.resolve(ROOT, process.env.EVAL_SCRATCH)
+  : path.join(ROOT, 'evals', '.scratch');
+if (process.env.EVAL_SCRATCH) console.warn(`⚠ EVAL_SCRATCH=${SCRATCH} — the working copy is NOT evals/.scratch`);
 const TSX = path.join(SCRATCH, 'node_modules', '.bin', 'tsx');
 
 // ---------------------------------------------------------------------------
@@ -1324,6 +1334,29 @@ const cases: Case[] = [
     },
   },
   {
+    // NATIVE SLOTS (2026-08-08) — the dashed "Slot" utility placeholder the
+    // owner called out as non-functional is replaced by Figma's own SLOT
+    // property, per docs/research/native-slots-proposal.md against the live
+    // receipts in slots-recon-probes.md. Driven end to end through the strict
+    // mock (whose slot model carries the probes' refusals verbatim): native
+    // emission, the set-level unification of the per-variant
+    // duplicate-property trap, THE AMEND-SURVIVAL INVARIANT — a designer's
+    // slot fill survives an interior rebuild because the rebuilt slot is
+    // rebound to the PRESERVED property id, RED-TESTED by patching the rebind
+    // out and watching the fill die — the INSTANCE_SWAP → SLOT migration
+    // reported by name (stranded swap overrides included), every refusal the
+    // API forces, and the dump→propose readback through the plugin's own
+    // embedded dump script.
+    id: 'native-slots-carriage',
+    claim: 'C1-determinism',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/native-slots-check.ts']);
+      if (r.status !== 0 || !r.out.includes('native-slots ok:')) {
+        throw new Error(`native-slots check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
     // A2 layout grammar (grid): the canonical bento (conformance
     // grid-bento-span-matrix — the P8 live carriage receipt) proven headlessly
     // end to end: pinned-grammar contract → byte-deterministic .figma.js →
@@ -1337,6 +1370,62 @@ const cases: Case[] = [
       const r = run(TSX, ['evals/fixtures/grid-bento-check.ts']);
       if (r.status !== 0 || !r.out.includes('grid-bento ok:')) {
         throw new Error(`grid-bento check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
+    // A2 layout grammar (grid), CODE half — the emitter surface. The canonical
+    // G6 spellings the code-side proposer parses back, pinned on ALL THREE CSS
+    // surfaces (emit-html / emit-react CSS Modules+TSX / emit-react-inline):
+    // px|fr|fit-content(100%) tracks, the independent row-gap/column-gap pair,
+    // 1-based grid-row/grid-column with spans (the emitter's +1),
+    // justify-self/align-self with stretch-by-ABSENCE as the G3 fill spelling,
+    // grid-template-areas + grid-area slot anchors incl. the dual placeholder
+    // for an EMPTY area, grid-auto-flow: row with rows unspelled (G5), instance
+    // cells on display:grid wrappers, a SUBSTITUTED gap ref refused by name,
+    // and byte-determinism ×2 per surface.
+    //
+    // INSTRUMENT HONESTY: this fixture and grid-code-proposer below existed and
+    // passed by hand for the whole A2 round while NO eval and NO npm script ran
+    // them — yet conformance/build.ts and 23 dump.snippet.json markers claimed
+    // the canvasToCode surface was "eval-gated today (grid-code-proposer-check
+    // / grid-bento-check)". The code was sound; the CLAIM was false. Both
+    // fixtures are registered here, and the markers were ALSO narrowed: the
+    // canvasToCode direction (dump grid facts → contract layout.grid) has no
+    // reader at all in extract/figma/propose.ts, so no eval could have gated
+    // it — what these three evals gate is contract→canvas carriage, CSS
+    // emission, and CSS→contract inversion.
+    id: 'grid-css-emitters',
+    claim: 'C1-determinism',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/grid-css-emitters-check.ts']);
+      if (r.status !== 0 || !r.out.includes('grid-css-emitters ok:')) {
+        throw new Error(`grid-css-emitters check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
+    // A2 layout grammar (grid), the INVERSION — CSS Modules anatomy → contract.
+    // A bento inverts EXACTLY (tracks + gap pair + 0-based placement cells —
+    // the proposer's −1 of the emitter's +1 — plus per-child self-alignment);
+    // grid-template-areas becomes G4 layout.areas with the area name AS the
+    // anchor (no redundant explicit placement) and a non-matching grid-area is
+    // a NAMED refusal note; every G7 construct (minmax / auto-fit / percent /
+    // subgrid / column flow / dense / implicit tracks / zero tracks / baseline)
+    // refuses BY NAME with a receipt and leaks no track or placement fact,
+    // while `auto` tracks and `stretch` are NAMED lowerings rather than
+    // silences; the anatomy differ buckets grid facts by name and reports the
+    // P10 STRUCTURAL finding on a grid↔flex display change; and the design
+    // round-trip comparator names every grid bucket, treating a contract area
+    // rect recovered as an explicit placement as the SAME canvas fact (G4).
+    //
+    // Sibling of grid-css-emitters above — same unwired-fixture defect.
+    id: 'grid-code-proposer',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/grid-code-proposer-check.ts']);
+      if (r.status !== 0 || !r.out.includes('grid-code-proposer ok:')) {
+        throw new Error(`grid-code-proposer check failed:\n${r.out}`);
       }
     },
   },
@@ -10640,6 +10729,184 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       console.log(
         'sync-spine-drift: canvas-ahead fixture → plan carries proposal+diff+classification+marker PR body; ' +
           'in-sync scope plans nothing; cursor skips the already-PR-d drift by name (conflict sibling still pulls)',
+      );
+    },
+  },
+
+  {
+    // FLUENT 2 ENGINE DEFECT 1 (recon §2.6 / H10) — A PACKAGE WITH NO SOURCE
+    // RETURNED SILENT NOTHING. `@fluentui/react-*` publishes only
+    // api-extractor rollups: 0 .tsx and 0 non-.d.ts .ts across all 65
+    // packages. The walker skips `*.d.ts` BY NAME, so it opened nothing, and
+    // the run died on `No components found — check code.root …` — a refusal
+    // that names NOTHING, blames the config for a fact about the package, and
+    // is byte-identical to what an EMPTY DIRECTORY produces. A skip with no
+    // ledger is the one outcome this repo forbids.
+    id: 'rollup-only-package-refused-by-name',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/rollup-only.config.json']);
+      if (r.status === 0) throw new Error('a rollup-only package must REFUSE, not extract');
+      for (const [what, needle] of [
+        ['the refusal is named as a zero-candidate walk', 'ZERO CANDIDATE SOURCE FILES'],
+        ['it COUNTS the files it skipped', '2 .ts/.tsx file(s) WERE found and every one was skipped by name'],
+        ['it names the RULE that dropped them', 'ambient declaration file (*.d.ts)'],
+        ['it names the FILES themselves', 'Widget.d.ts, index.d.ts'],
+        ['it classifies the package', 'ROLLUP-ONLY PACKAGE'],
+        ['it says whose fact this is', 'a fact about the PACKAGE, not about code.root'],
+        ['it gives the actionable next step', 'Next step: point code.root at'],
+      ] as const) {
+        if (!r.out.includes(needle)) throw new Error(`${what} — missing "${needle}" in:\n${r.out}`);
+      }
+      if (r.out.includes('No components found — check code.root')) {
+        throw new Error('the old nothing-named message still fires on a rollup-only package');
+      }
+      // A ZERO-COMPONENT RESULT MUST NEVER BE INDISTINGUISHABLE FROM AN EMPTY
+      // DIRECTORY. Same refusal class, DIFFERENT named cause.
+      mkdirSync(path.join(SCRATCH, 'extract/fixtures/empty-tree'), { recursive: true });
+      writeFileSync(
+        path.join(SCRATCH, 'extract/fixtures/empty-tree.config.json'),
+        JSON.stringify({
+          code: { adapter: 'react-tsx', root: 'extract/fixtures/empty-tree' },
+          idPrefix: 'acme',
+          out: 'extract/fixtures/.out-empty-tree',
+        }) + '\n',
+      );
+      const empty = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/empty-tree.config.json']);
+      if (empty.status === 0) throw new Error('an empty tree must refuse too');
+      if (!empty.out.includes('0 .ts/.tsx files of ANY kind') || !empty.out.includes('EMPTY-OF-SOURCE tree')) {
+        throw new Error(`an empty directory must name ITS cause, not the rollup one:\n${empty.out}`);
+      }
+      if (empty.out.includes('ROLLUP-ONLY PACKAGE')) {
+        throw new Error('an empty directory was reported as a rollup-only package — the two causes collapsed');
+      }
+      // And the walked-but-unreadable path (files opened, every component
+      // skipped) must still carry its component-level ledger — the generic
+      // message used to throw that away with proposals.md unwritten.
+      mkdirSync(path.join(SCRATCH, 'extract/fixtures/unreadable-tree'), { recursive: true });
+      writeFileSync(
+        path.join(SCRATCH, 'extract/fixtures/unreadable-tree/Ghost.tsx'),
+        `import type {GhostProps} from 'ghost-pack';\nexport function Ghost(props: GhostProps) { return null; }\n`,
+      );
+      writeFileSync(
+        path.join(SCRATCH, 'extract/fixtures/unreadable-tree.config.json'),
+        JSON.stringify({
+          code: { adapter: 'react-tsx', root: 'extract/fixtures/unreadable-tree' },
+          idPrefix: 'acme',
+          out: 'extract/fixtures/.out-unreadable-tree',
+        }) + '\n',
+      );
+      const unreadable = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/unreadable-tree.config.json']);
+      if (unreadable.status === 0) throw new Error('an all-skipped tree must refuse');
+      if (!unreadable.out.includes('component(s) were SEEN and skipped by name') || !unreadable.out.includes('Ghost')) {
+        throw new Error(`the component-level skip ledger is dropped on the zero-component path:\n${unreadable.out}`);
+      }
+      console.log(
+        'rollup-only-package-refused-by-name: a package publishing only api-extractor `.d.ts` rollups (Fluent 2: 0 .tsx / 0 non-.d.ts .ts across 65 packages) walked ZERO candidate files and reported `No components found — check code.root` — a refusal naming nothing, indistinguishable from an empty directory and blaming the config for a fact about the package. The walker now keeps a skip ledger and refuses BY NAME: how many files, which rule dropped each, the files themselves, the ROLLUP-ONLY classification, and the next step. An empty tree names its OWN cause, and a tree whose files were opened but whose every component was skipped still carries the component-level ledger (which the old path discarded, proposals.md never being written).',
+      );
+    },
+  },
+
+  {
+    // FLUENT 2 ENGINE DEFECT 2 (recon §3a / H9) — THE DOCUMENTED DEFAULT WAS
+    // DROPPED AND THE DRAFTER THEN GUESSED WRONG. Fluent documents every prop
+    // default in JSDoc, in two tag spellings that both appear in the same
+    // library (`@default 'secondary'`, `@defaultvalue medium`). The extractor
+    // kept the prose and dropped the tag, so all 42 enum axes read defaultless
+    // and the capture-config drafter pinned each to its FIRST enum value —
+    // verified wrong against the sandbox rollups on Badge.size (documented
+    // `@defaultvalue medium`, pinned `tiny`) and Avatar.active (documented
+    // `@default unset`, pinned `active`). Nothing errored: the whole variant
+    // grid would have been captured around a base combo the library never
+    // renders. A silent wrong answer, which is worse than a refusal.
+    id: 'jsdoc-default-carried-and-disagreement-receipted',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/run.ts', 'code', 'extract/fixtures/jsdoc-defaults.config.json']);
+      if (r.status !== 0) throw new Error(`Extraction failed:\n${r.out}`);
+      const chip = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-jsdoc-defaults/contracts/chip.contract.json'), 'utf8'),
+      );
+      const prop = (n: string) => chip.props.find((p: any) => p.name === n);
+      // BOTH spellings, and the bare-word form is NOT the first enum value —
+      // exactly the Badge.size shape.
+      if (prop('size')?.default !== 'medium') {
+        throw new Error(`@defaultvalue (bare word) not carried: size.default = ${JSON.stringify(prop('size')?.default)} (first enum value is "tiny")`);
+      }
+      if (prop('appearance')?.default !== 'secondary') throw new Error('@default (quoted string) not carried');
+      if (prop('dismissible')?.default !== false) throw new Error('@default false (boolean literal) not carried');
+      if (prop('weight')?.default !== 400) throw new Error('@default 400 (numeric literal) not carried');
+      // Precedence: the INITIALIZER wins, and the disagreement is receipted.
+      if (prop('tone')?.default !== 'neutral') {
+        throw new Error(`initializer must win over a disagreeing JSDoc default: tone.default = ${JSON.stringify(prop('tone')?.default)}`);
+      }
+      // A default outside its own declared value set, and PROSE instead of a
+      // literal, are both REFUSED — never guessed into the contract.
+      if (prop('shape')?.default !== undefined) throw new Error('a default outside the declared enum values must not be carried');
+      if (prop('icon')?.default !== undefined) throw new Error('a prose @default must not be carried');
+      if (prop('hint')?.default !== undefined) throw new Error('`@default undefined` documents the ABSENCE of a default');
+      const notes = readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-jsdoc-defaults/proposals.md'), 'utf8');
+      for (const [what, needle] of [
+        ['the initializer/JSDoc disagreement is receipted', 'the INITIALIZER wins (it is what the component runs)'],
+        ['and it names both values', 'documents "brand" but the initializer/defaultProps sets "neutral"'],
+        ['the out-of-set default is named', 'which is NOT one of the declared enum values [circular, rounded, square]'],
+        ['the prose default is named', 'carries PROSE, not a literal'],
+      ] as const) {
+        if (!notes.includes(needle)) throw new Error(`${what} — missing "${needle}" in proposals.md`);
+      }
+      // THE MEASURABLE CONSEQUENCE: the capture-config drafter pins baseCombo
+      // only for axes that are GENUINELY defaultless. Before the fix all four
+      // enum axes were defaultless and `size` pinned to `tiny`.
+      const d = run(TSX, ['extract/draft-capture-config.ts', 'extract/fixtures/jsdoc-defaults.config.json']);
+      if (d.status !== 0) throw new Error(`draft failed:\n${d.out}`);
+      const draft = JSON.parse(
+        readFileSync(path.join(SCRATCH, 'extract/fixtures/.out-jsdoc-defaults/capture-config.draft.json'), 'utf8'),
+      );
+      const base = draft.components[0].baseCombo ?? {};
+      if (base.size !== undefined) throw new Error(`drafter still pins a documented-default axis: baseCombo.size = ${base.size}`);
+      if (base.appearance !== undefined || base.tone !== undefined) {
+        throw new Error('drafter still pins axes whose defaults are now readable');
+      }
+      if (base.shape !== 'circular') {
+        throw new Error('the genuinely defaultless axis must STILL be pinned and marked for review — the fix must not silence the real review item');
+      }
+      console.log(
+        'jsdoc-default-carried-and-disagreement-receipted: `@default` / `@defaultvalue` (both spellings ship in Fluent 2, 80 + 5 tags across the 12 probed rollups) are read into prop.default, so an axis documenting a default is no longer defaultless. Verified against the pinned sandbox: Badge.size documents `@defaultvalue medium` while the drafter pinned `tiny`, Avatar.active documents `@default unset` while the drafter pinned `active` — two of twelve components would have captured their whole variant grid around a base combo the library never renders, silently. An initializer that disagrees with the JSDoc WINS and the disagreement is receipted; a default outside its own enum, or written as prose, is refused by name rather than guessed; `@default undefined` documents the absence. The drafter now pins baseCombo only for the axis that is genuinely defaultless.',
+      );
+    },
+  },
+
+  {
+    // FLUENT 2 ENGINE DEFECT 3 (recon §5 H3) — A BARE `--` varPrefix MADE THE
+    // ONE-HOP READER BRANCH UNREACHABLE. Three libraries in the corpus declare
+    // `varPrefix: "--"` (tailwind, shadcn, proposed fluent) because their theme
+    // names carry no vendor prefix; with that value every custom property
+    // starts with the prefix, so `else → defs[name]` can never run and the
+    // theme token behind a component-local variable is never a candidate. The
+    // value survives, the NAME is gone, and the contract mints a literal where
+    // a real token existed. The gate drives the REAL reader source in Chromium.
+    id: 'local-var-hop-recovers-token-name',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = run(TSX, ['extract/computed/local-var-hop-check.ts']);
+      if (r.status !== 0) throw new Error(`one-hop receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ the THEME TOKEN behind the component-local variable is a candidate (--colorCompoundBrandStroke)',
+        '✔ the ident is read WHOLE — `_` is a legal custom-property character',
+        '✔ the DIRECT name is still offered, and FIRST',
+        '✔ the hopped candidate is FLAGGED (4th element `1`)',
+        '✔ the one-hop resolution still recovers the theme token under a real prefix',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}\n${r.out}`);
+      }
+      // The Node side must PREFER a direct candidate over a hopped one, so a
+      // recovered name can only fill a channel that bound nothing.
+      const src = readFileSync(path.join(ROOT, 'extract/computed/run.ts'), 'utf8');
+      if (!/\.sort\(\(a, b\) => a\.hop - b\.hop \|\| a\.token\.localeCompare\(b\.token\)\)/.test(src)) {
+        throw new Error('extract/computed/run.ts no longer sorts direct candidates ahead of one-hop candidates');
+      }
+      console.log(
+        'local-var-hop-recovers-token-name: with `varPrefix: "--"` the reader\'s one-hop `defs` branch was dead code — every custom property starts with a bare `--`, so a channel reading a component-local variable (`border-color: var(--fui-Checkbox__indicator--borderColor)`) offered only that variable, which names no DTCG leaf, and the theme token behind it was never a candidate. Measured on Fluent: 31 rules across 11 local variables, including ALL of Checkbox\'s indicator colours on all four interaction planes — a silent NAME loss with the pixels still right. A second half the recon did not name: the var-ident regex omitted `_`, so the name truncated at `--fui-Checkbox` and the hop key never matched, which also broke the branch for ORDINARY prefixes (the control fails pre-fix too). Hop targets are now offered as ADDITIONAL candidates flagged `1` and sorted after every direct candidate, so a recovered name can only fill a channel that bound nothing — it can never demote a semantic alias to the primitive behind it. Committed captures carry no 4th element and normalize byte-identically.',
       );
     },
   },
