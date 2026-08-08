@@ -16,13 +16,17 @@
    and the tag and re-tag the approved release commit after merge to main, or
    (b) re-freeze evidence on `e148d2d` — but do not publish a prerelease whose
    tag and evidence SHA disagree.
-2. **CI at branch tip `1d243fa` is not green** as of 2026-08-08: `fast` failed
-   (trap-corpus gate-shot references missing, `stretch:check`,
-   `variant-drift:check` pin), `full` in progress, `catalog-visual` and
-   `security` green. The CI links below are placeholders until the owner
-   freezes a commit whose four required checks are all green.
-3. Tarball hashes: run docs/27 §3 (`npm pack` × 3 + `shasum -a 256`) at the
-   frozen commit and replace each `<SHA256-AT-FREEZE>`.
+2. **CI at branch tip `9e6eb062` (J15 freeze candidate, 2026-08-08):**
+   `fast` (PR run 31249897605 + push run 31249895048), `release candidate`
+   (31249897599), `security` (31249897606), and `catalog-visual` (31249897604)
+   all SUCCESS; `full` (31249897620) **FAILED** — 4 red evals +
+   `dagger:census` + `ua-baseline:check`, reproduced locally on macOS
+   (diagnosis: FREEZE-EVIDENCE.md §8). `9e6eb062` cannot be the release
+   commit; fix/regenerate, re-freeze, and re-run J15. The CI links below are
+   placeholders until the owner confirms a green freeze SHA.
+3. Tarball hashes: filled at `9e6eb062` by the J15 rehearsal (see the table
+   below and `FREEZE-EVIDENCE.md` §5). If the owner freezes a different
+   commit, re-run docs/27 §3 and replace them.
 
 --- 8< ---
 
@@ -40,9 +44,19 @@ dist-tag only.
 
 | Package | RC version | Registry state at freeze | Tarball SHA-256 |
 |---|---|---|---|
-| `@ds-contracts/cli` | `0.5.0-rc.2` | **to be published** to `next` via `publish-rc.yml` (`next` currently `0.5.0-rc.1`) | `<SHA256-AT-FREEZE>` |
-| `@ds-contracts/schema` | `16.1.0-rc.2` | **to be published** to `next` via `publish-rc.yml` (`next` currently `16.1.0-rc.1`) | `<SHA256-AT-FREEZE>` |
-| `@ds-contracts/emitter-web-components` | `0.4.0-rc.2` | **to be published** to `next` via `publish-rc.yml` (`next` currently `0.4.0-rc.1`) | `<SHA256-AT-FREEZE>` |
+| `@ds-contracts/cli` | `0.5.0-rc.2` | **to be published** to `next` via `publish-rc.yml` (`next` currently `0.5.0-rc.1`) | `c8c6ed51474cf43412f9440cc93f4c7d14fd13c54890bf8c33dfe7a6b4e32083` |
+| `@ds-contracts/schema` | `16.1.0-rc.2` | **to be published** to `next` via `publish-rc.yml` (`next` currently `16.1.0-rc.1`) | `1161ff0062311528f0893b2c997fbd9fce01b643d1163a481c311f8689b87c7d` |
+| `@ds-contracts/emitter-web-components` | `0.4.0-rc.2` | **to be published** to `next` via `publish-rc.yml` (`next` currently `0.4.0-rc.1`) | `ca4e2225e15bb70f8857d7892db117b1c30869d626221815c4e9c03a30855489` |
+
+Tarball hashes above were produced at freeze candidate `9e6eb062` by the J15
+clean-clone rehearsal (`npm pack` from a fresh `file://` clone + `npm ci`;
+transcript in `.agents/runs/v1-release-prep/FREEZE-EVIDENCE.md` §5). Deployment
+artifact hashes at the same SHA: plugin zip
+`0091f20e7a580303a87ace713790da5096498599a56370fe5475610c7ed13a88`, playground
+`dist/index.html`
+`3068a2f41009d31eb35c4308b8cc9c4b9f153529a69762b265a19b6daa0f4b5c`, spec-site
+`dist/index.html`
+`4886f731d6d1d94e558a7e207c3f3c5f5c81afc384c3bc08531d68fdbd1d519b`.
 
 Registry links:
 
