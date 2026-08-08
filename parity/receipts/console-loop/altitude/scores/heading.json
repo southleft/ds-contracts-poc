@@ -8,7 +8,7 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 45.96631205673759,
+    "pctExactUnmasked": 46.01063829787234,
     "pctAAUnmasked": 3.7677304964539005,
     "pctAAMasked": 3.7677304964539005,
     "maskCoveragePct": 0,
@@ -20,7 +20,7 @@
   "reference": "parity/receipts/console-loop/altitude/refs/heading.png",
   "referenceSha256": "ef02a0de0a34ffe2fd4ee7214c34bfe2ac902f05290d8bcda63b512bce2e4383",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/heading-cell.png",
-  "canvasShotSha256": "aef89e6d30011cdcc5b1607e04ca87b8b132d52586d4ba986220d2204cc1f0d5",
+  "canvasShotSha256": "1055a6b9238bfba70e7fbb71c0546a2f039d2d4c91c71d51c19cf9ea080cb1c5",
   "diff": "parity/receipts/console-loop/altitude/scores/heading.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/altitude/components/heading.json",
@@ -33,5 +33,5 @@
   "dprNormalized": true,
   "sizeNormalized": true,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T04:31:11.692Z"
+  "recordedAt": "2026-08-08T07:06:47.392Z"
 }

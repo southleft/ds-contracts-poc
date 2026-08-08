@@ -46,3 +46,14 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - reSyncedAt: **2026-08-07T12:12:42.940Z**
 - note: Re-synced via clientStorage chunks (n=10, total=79963); amended nodeId=1:2098; rebuiltVariants=4; literals for dismiss size/padding (no imported/alert/dismiss/* vars). matchDeveloped left false.
 - matchDeveloped: **false**
+
+## 2026-08-08 — Track-2 hill-climb round 1: SCORED PASS
+
+- FC-SLOT-DEFAULT closed at the contract: flowbite Alert renders the status icon only when
+  the `icon` prop is passed and the dismiss button only with `onDismiss`; the developed
+  gate-shot default (`failure__default`) shows neither. The contract gained `icon` and
+  `dismissable` booleans (default false) with `visibleWhen` on the `alert-icon` / `dismiss`
+  parts; the set amended in place (nodeId=1:2098, addedProps Icon/Dismissable).
+- Scorecard: pctAAMasked **3.83** compositionOk true (bridge cell, Color=Failure, icon/dismiss
+  hidden per defaults) — `scores/alert.json`; headless REST scale-1 confirms 3.85.
+- matchDeveloped: **true** (supersedes the fail-closed rows above).

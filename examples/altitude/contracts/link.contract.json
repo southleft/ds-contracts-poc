@@ -65,6 +65,7 @@
       },
       "declared": {
         "box-sizing": "border-box",
+        "font-family": "\"IBM Plex Sans\", sans-serif",
         "transition-delay": "0s, 0s",
         "transition-duration": "0.2s, 0.2s",
         "transition-property": "color, background-color",

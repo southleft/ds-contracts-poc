@@ -17,27 +17,27 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "gate-shots-probe",
   "metrics": {
-    "pctExactUnmasked": 70.97839135654262,
-    "pctAAUnmasked": 51.540616246498594,
-    "pctAAMasked": 51.540616246498594,
+    "pctExactUnmasked": 75.12172854534388,
+    "pctAAUnmasked": 53.788800973828366,
+    "pctAAMasked": 53.788800973828366,
     "maskCoveragePct": 0,
-    "canvasPx": "294x68",
-    "realPx": "294x68",
-    "inkCanvasPct": 61.56962785114045,
-    "inkRealPct": 43.97258903561425
+    "canvasPx": "212x62",
+    "realPx": "212x62",
+    "inkCanvasPct": 64.97261107729763,
+    "inkRealPct": 44.910225197808884
   },
   "reference": "extract/computed/out/mui/dialog/gate-shots/lg__default.png",
   "referenceSha256": "8eed4c27327e71d1a956b5823c8e89112ede49cd56826c27fe44ccaf95dae0d6",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/dialog.png",
-  "canvasShotSha256": "62d0d6da7cf8e17b7fc20c55cc3945e2049f427f7eb02ec78ec30af6e22b89d6",
+  "canvasShotSha256": "ad7e75e815f80d954db80bcf19727ae14451c66cc945729554c1811c770397eb",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/dialog.diff.png",
   "compositionOk": true,
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 17.597038815526204,
-  "dprNormalized": false,
+  "inkDelta": 20.062385879488744,
+  "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=51.54 > 5)"
+  "note": "pixel bar missed (pctAAMasked=53.79 > 5)"
 }

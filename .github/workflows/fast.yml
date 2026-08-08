@@ -234,6 +234,10 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run console-loop:all:evidence:check
 
+      - name: visual-truth:check (headless scorecard pins + per-lane RATCHET floors)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run visual-truth:check
+
       - name: test:console-loop-evidence (first-party loop gate)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:console-loop-evidence

@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 12.5827492211838,
-    "pctAAUnmasked": 6.668613707165109,
-    "pctAAMasked": 6.668613707165109,
+    "pctExactUnmasked": 31.27433800623053,
+    "pctAAUnmasked": 25.31152647975078,
+    "pctAAMasked": 25.31152647975078,
     "maskCoveragePct": 0,
-    "canvasPx": "428x48",
+    "canvasPx": "346x48",
     "realPx": "428x48",
-    "inkCanvasPct": 98.79283489096574,
+    "inkCanvasPct": 79.63395638629284,
     "inkRealPct": 97.3666277258567
   },
   "reference": "extract/computed/out/carbon/inlinenotification/gate-shots/error.high__default.png",
   "referenceSha256": "5177b3aaee01c0673478a665ed6ee0b4a56eccb307feb16a370b599eeaf11bcd",
   "canvasShot": "parity/receipts/console-loop/carbon/shots/inline-notification-cell.png",
-  "canvasShotSha256": "afe227c3bb77df75890a632bae576db9a9786e02c5b842311f64c89df0dc1522",
+  "canvasShotSha256": "b699308965c1acd40cb5b5ea5392db6f68849f0697e9063d43af0d6b48206c73",
   "diff": "parity/receipts/console-loop/carbon/scores/inline-notification.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/carbon/components/inline-notification.json",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 1.4262071651090338,
+  "scaleRatio": 1.2369942196531791,
+  "inkDelta": 17.732671339563865,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=6.67 > 5)",
-  "recordedAt": "2026-08-08T04:31:17.089Z"
+  "note": "pixel bar missed (pctAAMasked=25.31 > 5)",
+  "recordedAt": "2026-08-08T07:33:41.960Z"
 }

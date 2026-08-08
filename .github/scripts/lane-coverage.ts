@@ -95,13 +95,6 @@ const EXCLUDED: Record<string, string> = {
     "catalog-visual lane the moment one Linux run reproduces the committed table byte-for-byte. The " +
     "per-set fidelity FLOORS are already CI-enforced in the fast lane: accuracy:check reads the same " +
     "committed fidelity.json and holds each set's mean above baseline minus 0.3.",
-  "root:visual-truth:check":
-    "Deliberately out of CI until the altitude lane reconverges: the headless sweep scored the LIVE " +
-    "canvas after it drifted from the bridge run (one set deleted, two stems hit the odd-pixel " +
-    "downscale artifact), so altitude's headless pass-count (2) sits under its RATCHET.json floor (4). " +
-    "The floor is not lowered by policy; the Track-2 hill-climb re-loops altitude on the live canvas, " +
-    "and this check joins the fast lane the moment it exits 0 there. The scorecard-vs-receipt honesty " +
-    "this would enforce is already enforced in CI by console-loop:all:evidence:check.",
 };
 
 /** Tracked tests intentionally outside CI need a durable, file-specific reason. */

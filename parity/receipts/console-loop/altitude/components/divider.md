@@ -37,3 +37,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - matchDeveloped: **false**
 - reference: extract/computed/out/altitude/divider/receipts
 - defect: 1×100 stub geometry not a developed divider aesthetic — fail closed.
+
+## 2026-08-08 — Track-2 hill-climb round 1
+
+- regenerated after canvas deletion (node-gone) — new set nodeId=59:9713; bridge scorecard pctAAMasked 0.00 PASS; headless scale-1 0.00 PASS.

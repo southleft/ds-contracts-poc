@@ -17,27 +17,27 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "gate-shots-probe",
   "metrics": {
-    "pctExactUnmasked": 29.531249999999996,
-    "pctAAUnmasked": 16.09375,
-    "pctAAMasked": 16.09375,
+    "pctExactUnmasked": 38.96490184414039,
+    "pctAAUnmasked": 21.237358715050565,
+    "pctAAMasked": 21.237358715050565,
     "maskCoveragePct": 0,
-    "canvasPx": "40x32",
+    "canvasPx": "41x41",
     "realPx": "40x32",
-    "inkCanvasPct": 29.062500000000004,
-    "inkRealPct": 21.328125
+    "inkCanvasPct": 31.4098750743605,
+    "inkRealPct": 16.240333135038668
   },
   "reference": "extract/computed/out/mui/circularprogress/gate-shots/determinate__default.png",
   "referenceSha256": "66a1e8b3e05e7849be2a52e0385c1cf8a770f5ec8daf8be42d28e3c0287101f3",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/circular-progress.png",
-  "canvasShotSha256": "435b1730a68adb16628fb37c03c54306aa1ca5d9da48a5721a8240ec5988408c",
+  "canvasShotSha256": "1e7a6489e26867f9c78c154c7ed3355b8855b1c927fe630b7856099a6b114a5a",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/circular-progress.diff.png",
   "compositionOk": true,
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 7.7343750000000036,
+  "scaleRatio": 1.28125,
+  "inkDelta": 15.169541939321832,
   "dprNormalized": false,
-  "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=16.09 > 5)"
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=21.24 > 5)"
 }

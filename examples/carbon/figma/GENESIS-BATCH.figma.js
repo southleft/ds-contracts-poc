@@ -1366,6 +1366,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -1783,6 +1824,14 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
+      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
+      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
+      // retry would load the true family more often. It was tried and
+      // deliberately REVERTED: the developed gate-shot references render the
+      // CSS fallback font (the computed-extract harness carries no
+      // @font-face), so truer canvas fonts scored WORSE against the pinned
+      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
+      // font-loading harness + reference re-pin.
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
         node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
@@ -6917,6 +6966,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -7300,6 +7390,14 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
+      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
+      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
+      // retry would load the true family more often. It was tried and
+      // deliberately REVERTED: the developed gate-shot references render the
+      // CSS fallback font (the computed-extract harness carries no
+      // @font-face), so truer canvas fonts scored WORSE against the pinned
+      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
+      // font-loading harness + reference re-pin.
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
         node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
@@ -8596,6 +8694,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -9151,6 +9290,14 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
+      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
+      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
+      // retry would load the true family more often. It was tried and
+      // deliberately REVERTED: the developed gate-shot references render the
+      // CSS fallback font (the computed-extract harness carries no
+      // @font-face), so truer canvas fonts scored WORSE against the pinned
+      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
+      // font-loading harness + reference re-pin.
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
         node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
@@ -11496,6 +11643,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -14426,6 +14614,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -14843,6 +15072,14 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
+      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
+      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
+      // retry would load the true family more often. It was tried and
+      // deliberately REVERTED: the developed gate-shot references render the
+      // CSS fallback font (the computed-extract harness carries no
+      // @font-face), so truer canvas fonts scored WORSE against the pinned
+      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
+      // font-loading harness + reference re-pin.
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
         node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
@@ -17231,6 +17468,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -17759,6 +18037,14 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
+      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
+      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
+      // retry would load the true family more often. It was tried and
+      // deliberately REVERTED: the developed gate-shot references render the
+      // CSS fallback font (the computed-extract harness carries no
+      // @font-face), so truer canvas fonts scored WORSE against the pinned
+      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
+      // font-loading harness + reference re-pin.
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
         node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
@@ -19363,6 +19649,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -19734,6 +20061,14 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
+      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
+      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
+      // retry would load the true family more often. It was tried and
+      // deliberately REVERTED: the developed gate-shot references render the
+      // CSS fallback font (the computed-extract harness carries no
+      // @font-face), so truer canvas fonts scored WORSE against the pinned
+      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
+      // font-loading harness + reference re-pin.
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
         node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
@@ -22290,6 +22625,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -22714,6 +23090,14 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
+      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
+      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
+      // retry would load the true family more often. It was tried and
+      // deliberately REVERTED: the developed gate-shot references render the
+      // CSS fallback font (the computed-extract harness carries no
+      // @font-face), so truer canvas fonts scored WORSE against the pinned
+      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
+      // font-loading harness + reference re-pin.
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
         node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
@@ -24766,6 +25150,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -25174,6 +25599,14 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
+      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
+      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
+      // retry would load the true family more often. It was tried and
+      // deliberately REVERTED: the developed gate-shot references render the
+      // CSS fallback font (the computed-extract harness carries no
+      // @font-face), so truer canvas fonts scored WORSE against the pinned
+      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
+      // font-loading harness + reference re-pin.
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
         node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
@@ -26650,6 +27083,47 @@ await figma.loadAllPagesAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varByName = {};
 for (const v of allVars) varByName[v.name] = v;
+// FC-THEME-ISO: a multi-library file carries colliding variable names across
+// collections (four `imported/badge/root/background-color/info`s on the
+// Testing file). The last-created-collection-wins map above silently rebound
+// fills across libraries (altitude Badge rendered a Polaris provisional
+// light-blue). Prefer the single collection covering the MOST of THIS
+// script's referenced names; names unique to one collection still resolve
+// globally, and an explicit preferred collection (below) still wins.
+{
+  const _names = new Set(allVars.map((v) => v.name));
+  const _wanted = new Set();
+  const _walk = (x) => {
+    if (typeof x === 'string') { if (_names.has(x)) _wanted.add(x); return; }
+    if (Array.isArray(x)) { for (const y of x) _walk(y); return; }
+    if (x && typeof x === 'object') { for (const k in x) _walk(x[k]); }
+  };
+  _walk(COMPONENTS);
+  let _dupe = false;
+  const _seen = new Set();
+  for (const v of allVars) {
+    if (!_wanted.has(v.name)) continue;
+    if (_seen.has(v.name)) { _dupe = true; break; }
+    _seen.add(v.name);
+  }
+  if (_dupe) {
+    const _cov = new Map();
+    for (const v of allVars) {
+      if (!_wanted.has(v.name)) continue;
+      if (!_cov.has(v.variableCollectionId)) _cov.set(v.variableCollectionId, new Set());
+      _cov.get(v.variableCollectionId).add(v.name);
+    }
+    let _best = null, _bestN = 0;
+    for (const [_colId, _covered] of _cov) {
+      if (_covered.size > _bestN) { _best = _colId; _bestN = _covered.size; }
+    }
+    if (_best !== null) {
+      for (const v of allVars) {
+        if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
+      }
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -27167,6 +27641,14 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
+      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
+      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
+      // retry would load the true family more often. It was tried and
+      // deliberately REVERTED: the developed gate-shot references render the
+      // CSS fallback font (the computed-extract harness carries no
+      // @font-face), so truer canvas fonts scored WORSE against the pinned
+      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
+      // font-loading harness + reference re-pin.
       try {
         await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
         node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };

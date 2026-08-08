@@ -42,3 +42,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - note: Re-synced via clientStorage chunks (n=19, total=148301); amended nodeId=1:5824; rebuiltVariants=12. matchDeveloped left false.
 - reference: extract/computed/out/carbon/inlinenotification/receipts/pair--error.high__default.png
 - defect: Warning/status iconography fidelity and layout artifacts not match to computed pairs — fail closed.
+
+## 2026-08-08 — Track-2 hill-climb round 1
+
+- regenerated (nodeId=60:10344): details margin-left 13px now applied. Root hugs at 346px under the task-#37 hug-ceiling doctrine (showcase-width 428px is a harness fact) so the 428px-framed ref scores 25.31 — fail-closed; the earlier 6.67 near-miss was a stale canvas with the pre-wave baked width.

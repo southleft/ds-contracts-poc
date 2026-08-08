@@ -46,3 +46,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - reSyncedAt: **2026-08-07T12:10:48.663Z**
 - note: Re-synced via clientStorage chunks (n=14, total=111012); amended, rebuilt 8 variants
 - matchDeveloped: **false**
+
+## 2026-08-08 — Track-2 hill-climb round 1
+
+- regenerated (nodeId=60:10429): 11.73 AA — ref wraps body copy under percent right-padding (not canvas-representable), carries the harness list-marker dot and hairline rules; fail-closed.

@@ -34,3 +34,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - reviewedAt: `2026-08-06T15:23:00.000Z`
 - matchDeveloped: **false**
 - defect: re-synced from contract; developed score pending
+
+## 2026-08-08 — Track-2 hill-climb round 1
+
+- regenerated (nodeId=60:10083). FC-THEME-ISO closed: previous rebind had bound the info fill to a Polaris 'Imported (provisional)' variable (light blue); collection-preference runtime now picks the Altitude collection (#4375FF). font-family carried into the contract. Remaining 6.44 AA is FC-FONT-SUBSTRATE (ref renders fallback glyphs; no @font-face in harness) — fail-closed.

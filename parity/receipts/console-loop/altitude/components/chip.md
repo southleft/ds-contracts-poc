@@ -50,3 +50,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - matchDeveloped: **false**
 - reference: extract/computed/out/altitude/chip/receipts
 - defect: Not verified vs altitude chip computed pairs — fail closed.
+
+## 2026-08-08 — Track-2 hill-climb round 1
+
+- regenerated (nodeId=60:10126). 5.12 AA, colors/sizes exact — FC-FONT-SUBSTRATE residual, fail-closed.

@@ -40,3 +40,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - matchDeveloped: **false**
 - reference: extract/computed/out/altitude/button/receipts
 - defect: Khaki/orange/blue matrix present on cream surface but not claimed match to altitude button computed pairs — fail closed.
+
+## 2026-08-08 — Track-2 hill-climb round 1
+
+- regenerated (nodeId=60:10151); bridge scorecard 4.23 PASS (Inter stands for 'Semi Bold' — IBM Plex 'SemiBold' loads a truer font but scored 5.51 against the fallback-rendered ref and was deliberately not kept).

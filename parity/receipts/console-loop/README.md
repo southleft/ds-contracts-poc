@@ -28,8 +28,8 @@ npm run console-loop:developed-score     # pixel-score a stem vs its developed r
 - **Honest fail-closed is legal.** No pass-claims + non-empty named
   `visual.defects` (`visual.status: "fail-closed"`) is counted and printed,
   not failed — the branch stays green while the visual hill-climb proceeds.
-  Current genuine scorecard passes: tailwind 2/5, altitude 4/8, carbon 2/10,
-  astryx 0/13, polaris 0/12 (8/48 foreign; see `CORPORA.md`).
+  Current genuine scorecard passes: tailwind 3/5, altitude 4/8, carbon 2/10,
+  astryx 0/13, polaris 0/12 (9/48 foreign; see `CORPORA.md`).
 - **Attested-only (first-party + MUI).** Those corpora have no pixel
   scorecards yet; their visual claims are legal but printed loudly as
   ATTESTED-ONLY until the pixel-score job lands. Once a scorecard exists the

@@ -40,3 +40,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - matchDeveloped: **false**
 - reference: extract/computed/out/altitude/link/receipts
 - defect: Not verified vs altitude link computed pairs — fail closed.
+
+## 2026-08-08 — Track-2 hill-climb round 1
+
+- regenerated (nodeId=60:10102). font-family carried; fill exact #4375FF both sides; 14.96 AA glyph-body — FC-FONT-SUBSTRATE, fail-closed.

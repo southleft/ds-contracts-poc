@@ -20,7 +20,7 @@
   "reference": "parity/receipts/console-loop/altitude/refs/divider.png",
   "referenceSha256": "67471ba41775e829e3e2b04077b226df311703e5971554934966a5a3609f85dd",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/divider-cell.png",
-  "canvasShotSha256": "1db750174af18d3eac0f8c859c45ac07841ee6c42faadfc03ef59c211a087f78",
+  "canvasShotSha256": "6cc49496f88fd03a5a601b21ceb29f412620ce6fc8a7b40360ab5c60cf8ca5c8",
   "diff": "parity/receipts/console-loop/altitude/scores/divider.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/altitude/components/divider.json",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T04:31:11.400Z"
+  "recordedAt": "2026-08-08T07:01:45.423Z"
 }

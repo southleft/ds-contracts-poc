@@ -8,12 +8,12 @@ Structural generate→fingerprint→round-trip loops and **developed-visual** ac
 |---|---|---:|---:|---|
 | First-party | DS-Contracts-Testing `GnQnjSNBXtgtd2Ht0Hs1C8` | **49/49** (skip native inline/stack) | 0 — all 49 visual claims **attested-only** (no scorecards yet; pixel-score job pending) | `console-loop:evidence:check` |
 | MUI denominator | MUI Test 1 `59mLQlOMiD5w5za6SUcoO5` | **31/31** | 0 — all 31 visual claims **attested-only** | `console-loop:mui:evidence:check` |
-| Tailwind | Testing | **5/5** | **2/5** (`badge`, `button`) | `console-loop:tailwind:evidence:check` |
+| Tailwind | Testing | **5/5** | **3/5** (`alert`, `badge`, `button`) | `console-loop:tailwind:evidence:check` |
 | Altitude | Testing | **8/8** | **4/8** (`button`, `divider`, `heading`, `icon-close`) | `console-loop:altitude:evidence:check` |
 | Astryx | Testing | **13/13** | **0/13** | `console-loop:astryx:evidence:check` |
 | Carbon | Testing | **10/10** | **2/10** (`icon-button`, `text-input`) | `console-loop:carbon:evidence:check` |
 | Polaris | Testing | **12/12** | **0/12** | `console-loop:polaris:evidence:check` |
-| **Totals** | | **128** structural | **8/48** foreign scorecard-passed; the other 40 are honest fail-closed with named defects | see `VISUAL-AUDIT.md` |
+| **Totals** | | **128** structural | **9/48** foreign scorecard-passed; the other 39 are honest fail-closed with named defects | see `VISUAL-AUDIT.md` |
 
 A 2026-08-07 audit found 22 receipts flagged `matchDeveloped:true` whose own scorecards said fail (e.g. carbon/button 75.41% masked AA); those flips were **revoked** to fail-closed (each receipt carries a `visual.revoked` audit note). The earlier "31/48 visual" claim was built on those self-attested booleans and is dead. The near-pass (≤6.5 AA) flip path in `console-loop-batch-score.mjs` is deleted; passes relying on the scorer's `framingTolerant` relaxation are marked on the scorecard and surfaced by the gates. Scorecards pin `sha256` of the reference + canvas PNGs they scored; gates verify the pins against disk.
 

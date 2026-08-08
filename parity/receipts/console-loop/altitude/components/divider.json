@@ -1,114 +1,114 @@
 {
-  "version": 1,
-  "kind": "console-loop-altitude-component",
-  "status": "completed",
-  "component": "divider",
-  "contract": "examples/altitude/contracts/divider.contract.json",
-  "script": "examples/altitude/figma/divider.figma.js",
-  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
-  "recordedAt": "2026-08-06T05:43:13.347Z",
-  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
-  "generate": {
-    "ok": true,
-    "nodeId": "1:3020",
-    "mode": "generated",
-    "page": "Divider (altitude.divider)",
-    "sectionId": "1:3021",
-    "contractId": "altitude.divider",
-    "result": {
-      "createdNodeIds": [
-        "1:3020"
-      ],
-      "results": [
-        {
-          "name": "Divider",
-          "contractId": "altitude.divider",
-          "nodeId": "1:3020",
-          "key": "691951ae755773ff3f8712b53ed557bc35bd094f",
-          "variants": 1,
-          "properties": []
-        }
-      ]
+ "version": 1,
+ "kind": "console-loop-altitude-component",
+ "status": "completed",
+ "component": "divider",
+ "contract": "examples/altitude/contracts/divider.contract.json",
+ "script": "examples/altitude/figma/divider.figma.js",
+ "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+ "recordedAt": "2026-08-06T05:43:13.347Z",
+ "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+ "generate": {
+  "ok": true,
+  "nodeId": "59:9713",
+  "mode": "generated",
+  "page": "Divider (altitude.divider)",
+  "sectionId": "1:3021",
+  "contractId": "altitude.divider",
+  "result": {
+   "createdNodeIds": [
+    "59:9713"
+   ],
+   "results": [
+    {
+     "name": "Divider",
+     "contractId": "altitude.divider",
+     "nodeId": "59:9713",
+     "key": "fa392552bdb59325228ae5ab22c22a058d6d307e",
+     "variants": 2,
+     "properties": []
     }
-  },
-  "visual": {
-    "ok": true,
-    "matchDeveloped": true,
-    "reviewedAt": "2026-08-06T13:32:20.271Z",
-    "notes": [],
-    "defects": [],
-    "reference": "parity/receipts/console-loop/altitude/refs/divider.png",
-    "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "synthetic-horizontal-rule-from-theme-border (gate unset content was padded 49x14)",
-    "scorecard": "parity/receipts/console-loop/altitude/scores/divider.json",
-    "matchDevelopedReason": "agent AA=0.00 after FC-ENUM-HOLE+height",
-    "matchedAt": "2026-08-08T03:17:54.830Z",
-    "status": "scored-pass",
-    "scoreConfirmed": {
-      "at": "2026-08-08T04:31:56.356Z",
-      "pctAAMasked": 0,
-      "compositionOk": true,
-      "supersededDefects": [],
-      "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
-    }
-  },
-  "fingerprint": {
-    "v6": "v6:3296776669",
-    "lineCount": 8,
-    "sampleLines": [
-      ":COMPONENT/Divider (altitude.divider)|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6901960968971252,\"g\":0.6901960968971252,\"b\":0.6901960968971252},\"boundVariables\":{\"color\":{\"var\":\"imported/divider/root/background-color\"}}}]",
-      ":COMPONENT/Divider (altitude.divider)|radius|0,0,0,0",
-      ":COMPONENT/Divider (altitude.divider)|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
-      ":COMPONENT/Divider (altitude.divider)|sizing|FIXED/HUG AUTO",
-      ":COMPONENT/Divider (altitude.divider)|bound:minHeight|imported/divider/root/min-height",
-      ":COMPONENT/Divider (altitude.divider)|bound:minWidth|imported/divider/root/min-width",
-      ":COMPONENT/Divider (altitude.divider)|bound:width|imported/divider/root/width/vertical",
-      ":COMPONENT/Divider (altitude.divider)|description|Divider â generated from contract altitude.divider v0.2.0 â"
-    ]
-  },
-  "roundtrip": {
-    "mismatches": [],
-    "gaps": [
-      "canvas-absent: no State axis (contract has empty/absent states)",
-      "canvas-absent: VARIANT Variant not exposed — generator emitted standalone COMPONENT (isSet=false); single-enum contract axis collapses off the prop surface"
-    ],
-    "matchedAxes": [
-      "first-variant fill bound: imported/divider/root/background-color"
-    ],
-    "observed": {
-      "type": "COMPONENT",
-      "variantNames": [
-        "Divider (altitude.divider)"
-      ],
-      "propDefs": [],
-      "firstRoot": {
-        "name": "Divider (altitude.divider)",
-        "type": "COMPONENT",
-        "layoutMode": "VERTICAL",
-        "padding": {
-          "t": 0,
-          "r": 0,
-          "b": 0,
-          "l": 0
-        },
-        "radius": 0,
-        "fillVarName": "imported/divider/root/background-color",
-        "padBound": {
-          "width": "imported/divider/root/width/vertical",
-          "minWidth": "imported/divider/root/min-width",
-          "minHeight": "imported/divider/root/min-height",
-          "fills": "imported/divider/root/background-color"
-        },
-        "w": 1,
-        "h": 100,
-        "childTypes": []
-      }
-    }
-  },
-  "acceptance": {
-    "generatedOrFound": true,
-    "screenshotReviewed": true,
-    "zeroMismatch": true,
-    "visualMatchDeveloped": true
+   ]
   }
+ },
+ "visual": {
+  "ok": true,
+  "matchDeveloped": true,
+  "reviewedAt": "2026-08-06T13:32:20.271Z",
+  "notes": [],
+  "defects": [],
+  "reference": "parity/receipts/console-loop/altitude/refs/divider.png",
+  "reviewSurface": "cream-#F8F4ED-component-set",
+  "referenceSource": "synthetic-horizontal-rule-from-theme-border (gate unset content was padded 49x14)",
+  "scorecard": "parity/receipts/console-loop/altitude/scores/divider.json",
+  "matchDevelopedReason": "agent AA=0.00 after FC-ENUM-HOLE+height",
+  "matchedAt": "2026-08-08T03:17:54.830Z",
+  "status": "scored-pass",
+  "scoreConfirmed": {
+   "at": "2026-08-08T04:31:56.356Z",
+   "pctAAMasked": 0,
+   "compositionOk": true,
+   "supersededDefects": [],
+   "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+  }
+ },
+ "fingerprint": {
+  "v6": "v6:3296776669",
+  "lineCount": 8,
+  "sampleLines": [
+   ":COMPONENT/Divider (altitude.divider)|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6901960968971252,\"g\":0.6901960968971252,\"b\":0.6901960968971252},\"boundVariables\":{\"color\":{\"var\":\"imported/divider/root/background-color\"}}}]",
+   ":COMPONENT/Divider (altitude.divider)|radius|0,0,0,0",
+   ":COMPONENT/Divider (altitude.divider)|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+   ":COMPONENT/Divider (altitude.divider)|sizing|FIXED/HUG AUTO",
+   ":COMPONENT/Divider (altitude.divider)|bound:minHeight|imported/divider/root/min-height",
+   ":COMPONENT/Divider (altitude.divider)|bound:minWidth|imported/divider/root/min-width",
+   ":COMPONENT/Divider (altitude.divider)|bound:width|imported/divider/root/width/vertical",
+   ":COMPONENT/Divider (altitude.divider)|description|Divider \u00e2\u0080\u0094 generated from contract altitude.divider v0.2.0 \u00e2\u0080"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [
+   "canvas-absent: no State axis (contract has empty/absent states)",
+   "canvas-absent: VARIANT Variant not exposed \u2014 generator emitted standalone COMPONENT (isSet=false); single-enum contract axis collapses off the prop surface"
+  ],
+  "matchedAxes": [
+   "first-variant fill bound: imported/divider/root/background-color"
+  ],
+  "observed": {
+   "type": "COMPONENT",
+   "variantNames": [
+    "Divider (altitude.divider)"
+   ],
+   "propDefs": [],
+   "firstRoot": {
+    "name": "Divider (altitude.divider)",
+    "type": "COMPONENT",
+    "layoutMode": "VERTICAL",
+    "padding": {
+     "t": 0,
+     "r": 0,
+     "b": 0,
+     "l": 0
+    },
+    "radius": 0,
+    "fillVarName": "imported/divider/root/background-color",
+    "padBound": {
+     "width": "imported/divider/root/width/vertical",
+     "minWidth": "imported/divider/root/min-width",
+     "minHeight": "imported/divider/root/min-height",
+     "fills": "imported/divider/root/background-color"
+    },
+    "w": 1,
+    "h": 100,
+    "childTypes": []
+   }
+  }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": true
+ }
 }

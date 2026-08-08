@@ -17,27 +17,27 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "gate-shots-probe",
   "metrics": {
-    "pctExactUnmasked": 95.93416735028713,
-    "pctAAUnmasked": 90.899302707137,
-    "pctAAMasked": 90.899302707137,
+    "pctExactUnmasked": 85.64621798689697,
+    "pctAAUnmasked": 59.85705777248362,
+    "pctAAMasked": 59.85705777248362,
     "maskCoveragePct": 0,
-    "canvasPx": "212x92",
+    "canvasPx": "53x23",
     "realPx": "73x20",
-    "inkCanvasPct": 95.04204265791633,
-    "inkRealPct": 3.6197703035274817
+    "inkCanvasPct": 72.30494341870161,
+    "inkRealPct": 42.04883859440143
   },
   "reference": "extract/computed/out/button/gate-shots/monochromePlain.critical.large.off.disabled__default.png",
   "referenceSha256": "8d13ccf38690bfa9fb5a560d180093791ae8076b8ac4ca494bd2e0e413b70922",
   "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/button.png",
-  "canvasShotSha256": "7a978768df86659956fcf2622c7d08e45ed02d1d2d1816eea57d2eeb8313dd6c",
+  "canvasShotSha256": "aecb503a59247f192206add901c4980d6fe31fb035ed4e751384a157a77aaee2",
   "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/button.diff.png",
   "compositionOk": false,
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 4.6,
-  "inkDelta": 91.42227235438884,
-  "dprNormalized": false,
+  "scaleRatio": 1.3773584905660377,
+  "inkDelta": 30.25610482430018,
+  "dprNormalized": true,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=4.60, inkDelta=91.4)"
+  "note": "composition mismatch (scaleRatio=1.38, inkDelta=30.3)"
 }

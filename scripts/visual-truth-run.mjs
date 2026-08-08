@@ -2,7 +2,8 @@
  * Track-1 HEADLESS canvas-vs-code comparator (visual-truth).
  *
  * With only a FIGMA_TOKEN — no Figma desktop app, no plugin bridge — score
- * every console-loop stem's canvas rendition (Figma REST images API, scale=2)
+ * every console-loop stem's canvas rendition (Figma REST images API, scale=1
+ * — like-for-like with the bridge's scale-1 cell exports)
  * against its code-side reference render, under the SAME bar the receipts
  * gate uses (pctAAMasked ≤ 5 AND compositionOk; see
  * extract/figma/visual-truth/score-policy.mjs, kept in lockstep with

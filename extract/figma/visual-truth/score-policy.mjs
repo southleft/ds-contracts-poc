@@ -63,18 +63,32 @@ function normalizeContentSize(png, tw, th) {
   return out;
 }
 
+/**
+ * True half downsample: pad odd dimensions to even (edge-replicate), then
+ * 2×2 box-average. The previous floor-decimation dropped the final odd
+ * row/column (a 31px 2× content box became 15px vs a 16px reference) and
+ * discarded anti-aliasing entirely, so honest canvas matches failed on
+ * instrument noise (altitude heading/icon-close). Round-half-up dimensions +
+ * averaging are applied identically to whichever side of the pair is
+ * downscaled — the bar itself is unchanged.
+ */
 function downscale2x(src) {
-  const w = Math.max(1, Math.floor(src.width / 2));
-  const h = Math.max(1, Math.floor(src.height / 2));
+  const w = Math.max(1, Math.ceil(src.width / 2));
+  const h = Math.max(1, Math.ceil(src.height / 2));
   const out = new PNG({ width: w, height: h });
+  const clampX = (x) => Math.min(src.width - 1, x);
+  const clampY = (y) => Math.min(src.height - 1, y);
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
-      const si = (y * 2 * src.width + x * 2) * 4;
       const di = (y * w + x) * 4;
-      out.data[di] = src.data[si];
-      out.data[di + 1] = src.data[si + 1];
-      out.data[di + 2] = src.data[si + 2];
-      out.data[di + 3] = src.data[si + 3];
+      for (let c = 0; c < 4; c++) {
+        let sum = 0;
+        for (const [dx, dy] of [[0, 0], [1, 0], [0, 1], [1, 1]]) {
+          const si = (clampY(y * 2 + dy) * src.width + clampX(x * 2 + dx)) * 4;
+          sum += src.data[si + c];
+        }
+        out.data[di + c] = Math.round(sum / 4);
+      }
     }
   }
   return out;
@@ -89,7 +103,8 @@ export function scoreStemPair(canvasIn, refIn, { alignPair, scoreCell }) {
   let canvasPng = canvasIn;
   let refPng = refIn;
 
-  // Whole-image DPR: REST renders come back @2× while gate-shots are @1×.
+  // Whole-image DPR guard: normally both sides are @1× (REST scale=1 like the
+  // bridge exports); a genuine 2×-vs-1× pair still gets halved here.
   const roughScale = Math.max(
     canvasPng.width / refPng.width,
     refPng.width / canvasPng.width,

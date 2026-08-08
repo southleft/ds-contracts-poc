@@ -2,11 +2,11 @@
 
 Source: `rest-images-api` (Figma REST renders at scale 2, no desktop app, no plugin bridge), scored under the one bar (`pctAAMasked <= 5` AND `compositionOk`) with the developed-score normalization policy. Written by `scripts/visual-truth-report.mjs`; regenerate with `npm run visual-truth:report`.
 
-generatedFrom: sha256:ebd9b2c7c50352d6b28eb62c144cb8f559b8adbd44f376e01cae4bc906705756 (128 scorecards)
+generatedFrom: sha256:b991d4ea39fb3848c1ffd875344858438b2cca66585fc24473fc772a1b187fec (128 scorecards)
 
 ## Summary
 
-**10 pass / 71 fail / 47 skip / 0 error** across 128 stems.
+**13 pass / 69 fail / 46 skip / 0 error** across 128 stems.
 
 ## Per-lane pass counts vs RATCHET floors
 
@@ -14,8 +14,8 @@ generatedFrom: sha256:ebd9b2c7c50352d6b28eb62c144cb8f559b8adbd44f376e01cae4bc906
 |---|---:|---:|---:|---|
 | first-party | 11/49 | 0 | 0 | yes |
 | mui | 26/31 | 4 | 0 | yes |
-| tailwind | 5/5 | 2 | 2 | yes |
-| altitude | 7/8 | 2 | 4 | **NO** |
+| tailwind | 5/5 | 3 | 3 | yes |
+| altitude | 8/8 | 4 | 4 | yes |
 | astryx | 10/13 | 0 | 0 | yes |
 | carbon | 10/10 | 2 | 2 | yes |
 | polaris | 12/12 | 0 | 0 | yes |
@@ -24,88 +24,88 @@ generatedFrom: sha256:ebd9b2c7c50352d6b28eb62c144cb8f559b8adbd44f376e01cae4bc906
 
 | lane | stem | pctAAMasked | compositionOk | status |
 |---|---|---:|---|---|
-| first-party | progress-bar | 90.91% | false | fail |
-| first-party | button | 90.90% | false | fail |
-| first-party | badge | 86.86% | false | fail |
-| mui | button | 86.77% | true | fail |
-| mui | linear-progress | 85.95% | false | fail |
-| polaris | button | 77.58% | false | fail |
-| polaris | thumbnail | 77.47% | false | fail |
-| mui | drawer | 73.30% | false | fail |
-| carbon | tag | 71.86% | false | fail |
-| first-party | avatar | 68.73% | false | fail |
-| astryx | banner | 63.67% | false | fail |
+| first-party | progress-bar | 99.69% | false | fail |
+| carbon | tag | 92.44% | false | fail |
+| mui | button | 88.31% | true | fail |
+| first-party | badge | 87.46% | true | fail |
+| polaris | button | 77.83% | false | fail |
+| polaris | thumbnail | 77.25% | false | fail |
+| first-party | avatar | 63.19% | true | fail |
+| astryx | card | 62.53% | false | fail |
+| astryx | banner | 61.91% | false | fail |
+| first-party | button | 59.86% | false | fail |
 | polaris | progress-bar | 59.77% | true | fail |
-| mui | dialog | 51.54% | true | fail |
-| mui | badge | 50.19% | false | fail |
-| mui | switch | 50.00% | true | fail |
-| mui | slider | 48.47% | true | fail |
-| carbon | checkbox | 41.92% | false | fail |
-| carbon | button | 37.79% | true | fail |
-| astryx | token | 31.39% | false | fail |
-| first-party | switch | 31.20% | true | fail |
-| astryx | slider | 30.69% | false | fail |
-| mui | card | 30.06% | true | fail |
-| first-party | spinner | 29.92% | true | fail |
-| first-party | checkbox | 29.06% | true | fail |
-| mui | breadcrumbs | 25.70% | true | fail |
-| astryx | progress-bar | 25.39% | false | fail |
-| mui | paper | 24.76% | true | fail |
-| mui | input-adornment | 23.44% | true | fail |
-| altitude | icon-close | 22.27% | true | fail |
-| polaris | radio-button | 19.90% | true | fail |
-| astryx | card | 19.31% | false | fail |
-| polaris | badge | 16.93% | false | fail |
-| mui | circular-progress | 16.09% | true | fail |
-| polaris | tag | 14.93% | true | fail |
-| carbon | modal | 14.64% | true | fail |
-| mui | link | 14.60% | false | fail |
+| mui | linear-progress | 56.18% | false | fail |
+| mui | drawer | 55.03% | false | fail |
+| mui | badge | 54.63% | false | fail |
+| mui | dialog | 53.79% | true | fail |
+| first-party | banner | 50.21% | false | fail |
+| mui | switch | 49.88% | true | fail |
+| mui | slider | 48.16% | true | fail |
+| polaris | badge | 41.38% | true | fail |
+| carbon | button | 35.66% | true | fail |
+| astryx | token | 35.29% | false | fail |
+| first-party | switch | 31.95% | true | fail |
+| mui | card | 31.48% | true | fail |
+| carbon | checkbox | 31.44% | true | fail |
+| astryx | progress-bar | 30.34% | false | fail |
+| astryx | slider | 30.29% | false | fail |
+| first-party | spinner | 30.00% | false | fail |
+| first-party | checkbox | 28.94% | true | fail |
+| mui | paper | 25.94% | true | fail |
+| carbon | inline-notification | 25.31% | true | fail |
+| mui | input-adornment | 24.22% | true | fail |
+| mui | tooltip | 23.47% | true | fail |
+| astryx | checkbox-input | 22.25% | false | fail |
+| mui | circular-progress | 21.24% | true | fail |
+| polaris | radio-button | 21.14% | true | fail |
+| mui | breadcrumbs | 20.49% | true | fail |
+| carbon | tabs | 17.59% | false | fail |
+| altitude | link | 16.74% | true | fail |
+| mui | tabs | 15.48% | true | fail |
+| polaris | checkbox | 14.84% | false | fail |
+| carbon | modal | 14.63% | true | fail |
 | polaris | avatar | 14.54% | true | fail |
-| polaris | text | 13.60% | false | fail |
-| altitude | heading | 13.00% | true | fail |
-| astryx | badge | 12.74% | true | fail |
-| polaris | checkbox | 11.35% | false | fail |
-| astryx | switch | 11.24% | true | fail |
-| mui | tabs | 11.21% | true | fail |
-| mui | menu | 11.14% | false | fail |
-| mui | alert | 10.27% | true | fail |
-| carbon | tabs | 9.96% | false | fail |
-| polaris | banner | 8.91% | true | fail |
-| astryx | checkbox-input | 8.82% | false | fail |
-| polaris | spinner | 8.82% | true | fail |
-| mui | avatar | 8.57% | true | fail |
-| mui | autocomplete | 8.56% | true | fail |
-| carbon | accordion | 7.86% | true | fail |
-| tailwind | card | 7.81% | true | fail |
-| polaris | text-field | 7.26% | false | fail |
-| first-party | slider | 7.03% | false | fail |
-| astryx | button | 6.94% | true | fail |
-| carbon | toggle | 6.81% | true | fail |
-| tailwind | toggle-switch | 6.72% | true | fail |
-| mui | text-field | 6.49% | true | fail |
-| carbon | inline-notification | 6.38% | true | fail |
-| first-party | banner | 6.02% | false | fail |
-| altitude | link | 6.01% | true | fail |
-| altitude | badge | 6.00% | true | fail |
-| tailwind | alert | 5.89% | true | fail |
-| mui | chip | 5.88% | true | fail |
-| mui | tooltip | 5.88% | true | fail |
-| first-party | text-field | 5.88% | false | fail |
-| mui | accordion | 5.05% | false | fail |
-| first-party | card | 2.38% | false | fail |
-| astryx | text-input | 1.80% | false | fail |
-| altitude | avatar | 0.36% | false | fail |
-| carbon | text-input | 4.29% | true | pass |
-| altitude | button | 3.96% | true | pass |
-| tailwind | badge | 3.96% | true | pass |
-| mui | snackbar | 3.63% | true | pass |
-| altitude | chip | 3.37% | true | pass |
-| carbon | icon-button | 3.30% | true | pass |
-| tailwind | button | 2.21% | true | pass |
-| mui | table | 1.65% | true | pass |
-| mui | checkbox | 0.62% | true | pass |
+| mui | link | 14.15% | false | fail |
+| polaris | tag | 14.03% | true | fail |
+| astryx | badge | 12.62% | true | fail |
+| mui | avatar | 12.14% | true | fail |
+| mui | menu | 10.68% | false | fail |
+| polaris | text | 10.55% | false | fail |
+| first-party | text-field | 10.42% | false | fail |
+| polaris | text-field | 9.60% | false | fail |
+| polaris | banner | 8.95% | true | fail |
+| carbon | accordion | 8.94% | true | fail |
+| astryx | switch | 8.78% | true | fail |
+| carbon | toggle | 8.56% | true | fail |
+| mui | autocomplete | 8.48% | true | fail |
+| astryx | button | 8.00% | true | fail |
+| polaris | spinner | 7.79% | true | fail |
+| tailwind | card | 7.68% | true | fail |
+| first-party | card | 7.36% | false | fail |
+| mui | accordion | 7.34% | false | fail |
+| first-party | slider | 7.04% | false | fail |
+| mui | alert | 6.49% | true | fail |
+| mui | chip | 6.47% | true | fail |
+| mui | text-field | 6.33% | true | fail |
+| altitude | badge | 6.22% | true | fail |
+| tailwind | toggle-switch | 6.19% | true | fail |
+| altitude | chip | 5.19% | true | fail |
+| astryx | text-input | 1.72% | false | fail |
+| altitude | avatar | 0.13% | false | fail |
+| carbon | text-input | 4.72% | true | pass |
+| altitude | icon-close | 4.69% | true | pass |
+| altitude | heading | 4.39% | true | pass |
+| altitude | button | 4.23% | true | pass |
+| tailwind | alert | 3.85% | true | pass |
+| tailwind | badge | 2.43% | true | pass |
+| mui | table | 2.36% | true | pass |
+| mui | snackbar | 2.09% | true | pass |
+| carbon | icon-button | 2.08% | true | pass |
+| tailwind | button | 1.97% | true | pass |
+| altitude | divider | 0.00% | true | pass |
+| mui | checkbox | 0.00% | true | pass |
 | mui | divider | 0.00% | true | pass |
-| altitude | divider | — | — | skip (node-gone) |
 | astryx | dropdown-menu | — | — | skip (no-reference) |
 | astryx | dropdown-menu-item | — | — | skip (no-reference) |
 | astryx | toast | — | — | skip (no-reference) |
@@ -156,5 +156,4 @@ generatedFrom: sha256:ebd9b2c7c50352d6b28eb62c144cb8f559b8adbd44f376e01cae4bc906
 ## Skip inventory
 
 - **no-reference** (46): astryx/dropdown-menu, astryx/dropdown-menu-item, astryx/toast, first-party/accordion-item, first-party/avatar-group, first-party/blockquote, first-party/breadcrumb-item, first-party/breadcrumbs, first-party/chat-message, first-party/chat-message-metadata, first-party/chat-system-message, first-party/citation, first-party/code, first-party/divider, first-party/empty-state, first-party/field, first-party/heading, first-party/icon-button, first-party/kbd, first-party/list, first-party/list-item, first-party/metadata-list, first-party/metadata-list-item, first-party/pagination, first-party/section, first-party/side-nav-item, first-party/skeleton, first-party/status-dot, first-party/tab, first-party/tab-list, first-party/table, first-party/table-cell, first-party/table-header-cell, first-party/table-row, first-party/text-area, first-party/toast, first-party/token, first-party/toolbar, first-party/top-nav, first-party/top-nav-item, first-party/typeahead-item, mui/fab, mui/icon-button, mui/radio, mui/select, mui/table-pagination
-- **node-gone** (1): altitude/divider
 

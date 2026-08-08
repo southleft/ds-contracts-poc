@@ -77,6 +77,7 @@ Do not hill-climb by “fix the next ugly screenshot.” Hill-climb by **closing
 | FC-ENUM-HOLE (chip) | Type enum Squared-only | Canvas never draws developed pill | Add `default` (not capture `unset`) + keep squared override |
 | FC-PSEUDO-OVERFLOW | Fixed-size `::before` wider than hugged root | Red spur lines on low-contrast notifications | Drop overflow decor; bind real box borders on root |
 | FC-STATE-PREVIEW-NOISE | `figmaStatePreviews` doubles grid with focus rings | Chip showcase dominated by brand-blue outlines | `figmaStatePreviews: false` when Default showcase is the review target |
+| FC-FONT-SUBSTRATE | Developed ref renders the CSS FALLBACK font (no @font-face in the computed-extract harness) | Glyph-body diff 5–15% with exact colors/sizes (altitude badge/chip/link, tailwind toggle-switch, astryx button ref is literally Times) | Instrument: font-loading harness + reference re-pin (canvas-side "truer font" was tried and scored WORSE — see emit-figma fontFamily note) |
 
 Every new bug must map to an **FC-*** (or add one). Receipts cite the ID. Evals pin the class.
 
@@ -320,14 +321,28 @@ This plan is the **agent-doable fidelity spine** that makes those later gates me
 
 ## Session board (auto)
 
-Updated 2026-08-08T03:23:52.527Z: **31/48** foreign visual.
+Updated 2026-08-08 (Track-2 hill-climb round 1): **9/48** foreign GENUINE scorecard passes
+(bridge `<lib>/scores/*.json` under the one bar — the previous board's 31/48 counted
+receipt booleans from before the 2026-08-07 evidence redesign and was stale).
 
-| Lib | Visual |
+| Lib | Scorecard passes |
 |---|---|
-| Altitude | 7/8 |
-| Astryx | 3/13 |
-| Carbon | 9/10 |
-| Polaris | 7/12 |
-| Tailwind | 5/5 |
+| Altitude | 4/8 (button, divider, heading, icon-close) |
+| Astryx | 0/13 |
+| Carbon | 2/10 (icon-button, text-input) |
+| Polaris | 0/12 |
+| Tailwind | 3/5 (alert, badge, button) |
 
-Engine fixes this session: FC-HUG-CEILING-HTML (emit-html/react), FC-ENUM-HOLE (altitude divider default), scorer blank-ref + framing scaleRatio guards, receipt-ref preferred over trap manifest.
+This session: altitude reconverged to its RATCHET floor 4 headlessly and
+`visual-truth:check` joined the fast lane; tailwind alert converted
+(FC-SLOT-DEFAULT: icon/dismissable booleans default-hidden, 5.74→3.83);
+FC-THEME-ISO closed in the emit runtime (collection-preference varByName —
+multi-library files no longer rebind fills across collections);
+headless REST fetch moved to scale=1 (like-for-like with bridge exports;
+scale-2 + downscale was instrument noise); FC-FONT-SUBSTRATE named — no
+harness loads webfonts, so refs render fallback glyphs and font-dominated
+near-misses (altitude badge/chip/link, tailwind card/toggle-switch, astryx
+button/switch) are honestly fail-closed pending a font-loading harness +
+reference re-pin. Carbon inline-notification's old 6.67 near-miss was a STALE
+canvas with a pre-wave baked width; honest regeneration hugs under the
+hug-ceiling doctrine and fails the 428px harness framing (25.31, fail-closed).

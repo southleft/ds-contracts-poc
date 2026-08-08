@@ -3,7 +3,7 @@
  * bridge. Two endpoints only:
  *
  *   GET /v1/files/<fileKey>/nodes?ids=…&depth=1   set subtree (variant cells)
- *   GET /v1/images/<fileKey>?ids=…&format=png&scale=2   Figma's own renders
+ *   GET /v1/images/<fileKey>?ids=…&format=png&scale=1   Figma's own renders
  *
  * Politeness: ids are batched comma-separated (IDS_PER_CALL per request),
  * fixed inter-call delay, retry with backoff on 429 (honors Retry-After).
@@ -91,15 +91,20 @@ export async function fetchNodes(cacheDir, token, fileKey, ids, { refresh = fals
 }
 
 /**
- * Fetch scale=2 PNG renders for nodes in one file, cached by node + file
- * version. Returns { ok:true, paths: Map<id, absPngPath|null> } — null when
+ * Fetch PNG renders for nodes in one file, cached by node + file version +
+ * scale. Default scale is 1 — like-for-like with the bridge lane's
+ * "representative VARIANT at scale 1" cell-capture discipline; scale=2 plus
+ * downscale was proven to inject resampling noise the canvas never had
+ * (altitude heading/icon-close failed headless while their identical cells
+ * passed the same bar from scale-1 bridge exports).
+ * Returns { ok:true, paths: Map<id, absPngPath|null> } — null when
  * the images API declined to render the id (stale/gone → named SKIP).
  * Returns { ok:false, status } when the images call itself is denied.
  */
-export async function fetchImages(cacheDir, token, fileKey, version, nodeIds) {
+export async function fetchImages(cacheDir, token, fileKey, version, nodeIds, { scale = 1 } = {}) {
   mkdirSync(cacheDir, { recursive: true });
   const pngPath = (id) =>
-    path.join(cacheDir, `png-${fileKey}-${id.replace(/[:;]/g, "_")}@v${version}@2x.png`);
+    path.join(cacheDir, `png-${fileKey}-${id.replace(/[:;]/g, "_")}@v${version}@${scale}x.png`);
   const declinedPath = (id) => `${pngPath(id)}.declined`;
 
   const paths = new Map();
@@ -109,7 +114,7 @@ export async function fetchImages(cacheDir, token, fileKey, version, nodeIds) {
 
   for (let i = 0; i < missing.length; i += IDS_PER_CALL) {
     const chunk = missing.slice(i, i + IDS_PER_CALL);
-    const url = `https://api.figma.com/v1/images/${fileKey}?ids=${encodeURIComponent(chunk.join(","))}&format=png&scale=2`;
+    const url = `https://api.figma.com/v1/images/${fileKey}?ids=${encodeURIComponent(chunk.join(","))}&format=png&scale=${scale}`;
     const res = await figmaFetch(url, token);
     if (!res.ok) return { ok: false, status: res.status };
     const body = await res.json();

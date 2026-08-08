@@ -17,27 +17,27 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "gate-shots-probe",
   "metrics": {
-    "pctExactUnmasked": 85.95444685466379,
-    "pctAAUnmasked": 85.95444685466379,
-    "pctAAMasked": 85.95444685466379,
+    "pctExactUnmasked": 56.182212581344906,
+    "pctAAUnmasked": 56.182212581344906,
+    "pctAAMasked": 56.182212581344906,
     "maskCoveragePct": 0,
-    "canvasPx": "922x8",
+    "canvasPx": "461x4",
     "realPx": "288x4",
     "inkCanvasPct": 100,
-    "inkRealPct": 15.61822125813449
+    "inkRealPct": 62.47288503253796
   },
   "reference": "extract/computed/out/mui/linearprogress/gate-shots/determinate__default.png",
   "referenceSha256": "ec041a9f468d619d99717c6f823883ce13716b2d71124e8f5113662b79656a8c",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/linear-progress.png",
-  "canvasShotSha256": "8acf64ca88d5fa97e7c690bab2f4eda741459b4976e7383f60bb5970f303f337",
+  "canvasShotSha256": "1d16cf85a1013716e03a844a483f2c79dc514adad6e8fd227c5c27bfe6be6544",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/linear-progress.diff.png",
   "compositionOk": false,
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 3.201388888888889,
-  "inkDelta": 84.3817787418655,
+  "scaleRatio": 1.6006944444444444,
+  "inkDelta": 37.52711496746204,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=3.20, inkDelta=84.4)"
+  "note": "composition mismatch (scaleRatio=1.60, inkDelta=37.5)"
 }

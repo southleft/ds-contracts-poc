@@ -1,168 +1,168 @@
 {
-  "version": 1,
-  "kind": "console-loop-altitude-component",
-  "status": "completed",
-  "component": "link",
-  "contract": "examples/altitude/contracts/link.contract.json",
-  "script": "examples/altitude/figma/link.figma.js",
-  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
-  "recordedAt": "2026-08-06T05:43:14.695Z",
-  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
-  "generate": {
-    "ok": true,
-    "nodeId": "1:3092",
-    "mode": "generated",
-    "page": "Link",
-    "sectionId": "1:3096",
-    "contractId": "altitude.link",
-    "result": {
-      "createdNodeIds": [
-        "1:3092"
-      ],
-      "results": [
-        {
-          "name": "Link",
-          "contractId": "altitude.link",
-          "nodeId": "1:3092",
-          "key": "18af777fffc87d7d1cb8bd6dd91c848ab540005d",
-          "variants": 9,
-          "properties": [
-            "Content#1:819",
-            "Variant",
-            "State"
-          ],
-          "wiredReactions": 3
-        }
-      ]
+ "version": 1,
+ "kind": "console-loop-altitude-component",
+ "status": "completed",
+ "component": "link",
+ "contract": "examples/altitude/contracts/link.contract.json",
+ "script": "examples/altitude/figma/link.figma.js",
+ "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+ "recordedAt": "2026-08-06T05:43:14.695Z",
+ "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+ "generate": {
+  "ok": true,
+  "nodeId": "60:10102",
+  "mode": "generated",
+  "page": "Link",
+  "sectionId": "1:3096",
+  "contractId": "altitude.link",
+  "result": {
+   "createdNodeIds": [
+    "60:10102"
+   ],
+   "results": [
+    {
+     "name": "Link",
+     "contractId": "altitude.link",
+     "nodeId": "60:10102",
+     "key": "18af777fffc87d7d1cb8bd6dd91c848ab540005d",
+     "variants": 9,
+     "properties": [
+      "Content#1:819",
+      "Variant",
+      "State"
+     ],
+     "wiredReactions": 3
     }
-  },
-  "visual": {
-    "ok": false,
-    "matchDeveloped": false,
-    "reviewedAt": "2026-08-06T13:32:20.271Z",
-    "notes": [],
-    "defects": [
-      "Not verified vs altitude link computed pairs — fail closed."
-    ],
-    "reference": "parity/receipts/console-loop/altitude/refs/link.png",
-    "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "extract/computed/out/altitude/link/gate-shots/lg__default.png",
-    "scorecard": "parity/receipts/console-loop/altitude/scores/link.json",
-    "status": "fail-closed",
-    "revoked": {
-      "at": "2026-08-08T04:31:03.484Z",
-      "was": {
-        "ok": false,
-        "matchDeveloped": true,
-        "matchDevelopedReason": "near-pass AA=15.13 compositionOk (FC-FONT-AA)",
-        "matchedAt": "2026-08-08T03:20:06.682Z"
-      },
-      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=15.13, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
-    }
-  },
-  "fingerprint": {
-    "v6": "v6:2052539233",
-    "lineCount": 109,
-    "sampleLines": [
-      ":COMPONENT_SET/Link|fill|[]",
-      ":COMPONENT_SET/Link|radius|5,5,5,5",
-      ":COMPONENT_SET/Link|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Link|description|Link â generated from contract altitude.link v0.2.0 â",
-      ":COMPONENT_SET/Link|propdef|Content#1:819:TEXT=Link",
-      ":COMPONENT_SET/Link|propdef|State:VARIANT=Default",
-      ":COMPONENT_SET/Link|propdef|Variant:VARIANT=Xs",
-      "/0:COMPONENT/Variant=Xs, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/0:COMPONENT/Variant=Xs, State=Default|radius|0,0,0,0",
-      "/0:COMPONENT/Variant=Xs, State=Default|layout|HORIZONTAL MIN/CENTER gap 8 pad 0,0,0,0",
-      "/0:COMPONENT/Variant=Xs, State=Default|sizing|HUG/HUG AUTO",
-      "/0:COMPONENT/Variant=Xs, State=Default|bound:itemSpacing|imported/link/root/column-gap",
-      "/0:COMPONENT/Variant=Xs, State=Default|bound:minHeight|imported/link/root/min-height",
-      "/0:COMPONENT/Variant=Xs, State=Default|bound:minWidth|imported/link/root/min-width",
-      "/0:COMPONENT/Variant=Xs, State=Default|reaction|ON_HOVER→CHANGE_TO Variant=Xs, State=Hover",
-      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.26274511218070984,\"g\":0.4588235318660736,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/link/root/color\"}}}]",
-      "/0/0:TEXT/label|radius|0,0,0,0",
-      "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
-      "/0/0:TEXT/label|text|\"Link\" 12px {\"family\":\"Inter\",\"style\":\"Regular\"}",
-      "/1:COMPONENT/Variant=Sm, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]"
-    ]
-  },
-  "roundtrip": {
-    "mismatches": [],
-    "gaps": [],
-    "matchedAxes": [
-      "Variant enum → Xs/Sm/Lg",
-      "TEXT Content"
-    ],
-    "observed": {
-      "type": "COMPONENT_SET",
-      "variantNames": [
-        "Variant=Xs, State=Default",
-        "Variant=Sm, State=Default",
-        "Variant=Lg, State=Default",
-        "Variant=Xs, State=Focus Visible",
-        "Variant=Sm, State=Focus Visible",
-        "Variant=Lg, State=Focus Visible",
-        "Variant=Xs, State=Hover",
-        "Variant=Sm, State=Hover",
-        "Variant=Lg, State=Hover"
-      ],
-      "propDefs": [
-        {
-          "name": "Content#1:819",
-          "type": "TEXT",
-          "defaultValue": "Link",
-          "variantOptions": null
-        },
-        {
-          "name": "Variant",
-          "type": "VARIANT",
-          "defaultValue": "Xs",
-          "variantOptions": [
-            "Xs",
-            "Sm",
-            "Lg"
-          ]
-        },
-        {
-          "name": "State",
-          "type": "VARIANT",
-          "defaultValue": "Default",
-          "variantOptions": [
-            "Default",
-            "Focus Visible",
-            "Hover"
-          ]
-        }
-      ],
-      "firstRoot": {
-        "name": "Variant=Xs, State=Default",
-        "type": "COMPONENT",
-        "layoutMode": "HORIZONTAL",
-        "padding": {
-          "t": 0,
-          "r": 0,
-          "b": 0,
-          "l": 0
-        },
-        "radius": 0,
-        "fillVarName": null,
-        "padBound": {
-          "itemSpacing": "imported/link/root/column-gap",
-          "minWidth": "imported/link/root/min-width",
-          "minHeight": "imported/link/root/min-height"
-        },
-        "w": 24,
-        "h": 20,
-        "childTypes": [
-          "TEXT/label"
-        ]
-      }
-    }
-  },
-  "acceptance": {
-    "generatedOrFound": true,
-    "screenshotReviewed": true,
-    "zeroMismatch": true,
-    "visualMatchDeveloped": false
+   ]
   }
+ },
+ "visual": {
+  "ok": false,
+  "matchDeveloped": false,
+  "reviewedAt": "2026-08-06T13:32:20.271Z",
+  "notes": [],
+  "defects": [
+   "FC-FONT-SUBSTRATE: developed gate-shot reference renders the CSS fallback font (computed-extract harness loads no @font-face; \"IBM Plex Sans\" stack falls back to Arial/Helvetica), so canvas glyphs cannot converge below the 5% bar \u2014 pctAAMasked 14.96 (IBM Plex Sans Regular 18px vs fallback ref; fill exact #4375FF both sides)."
+  ],
+  "reference": "parity/receipts/console-loop/altitude/refs/link.png",
+  "reviewSurface": "cream-#F8F4ED-component-set",
+  "referenceSource": "extract/computed/out/altitude/link/gate-shots/lg__default.png",
+  "scorecard": "parity/receipts/console-loop/altitude/scores/link.json",
+  "status": "fail-closed",
+  "revoked": {
+   "at": "2026-08-08T04:31:03.484Z",
+   "was": {
+    "ok": false,
+    "matchDeveloped": true,
+    "matchDevelopedReason": "near-pass AA=15.13 compositionOk (FC-FONT-AA)",
+    "matchedAt": "2026-08-08T03:20:06.682Z"
+   },
+   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=15.13, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk \u2014 prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+  }
+ },
+ "fingerprint": {
+  "v6": "v6:2052539233",
+  "lineCount": 109,
+  "sampleLines": [
+   ":COMPONENT_SET/Link|fill|[]",
+   ":COMPONENT_SET/Link|radius|5,5,5,5",
+   ":COMPONENT_SET/Link|sizing|FIXED/FIXED AUTO",
+   ":COMPONENT_SET/Link|description|Link \u00e2\u0080\u0094 generated from contract altitude.link v0.2.0 \u00e2\u0080",
+   ":COMPONENT_SET/Link|propdef|Content#1:819:TEXT=Link",
+   ":COMPONENT_SET/Link|propdef|State:VARIANT=Default",
+   ":COMPONENT_SET/Link|propdef|Variant:VARIANT=Xs",
+   "/0:COMPONENT/Variant=Xs, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+   "/0:COMPONENT/Variant=Xs, State=Default|radius|0,0,0,0",
+   "/0:COMPONENT/Variant=Xs, State=Default|layout|HORIZONTAL MIN/CENTER gap 8 pad 0,0,0,0",
+   "/0:COMPONENT/Variant=Xs, State=Default|sizing|HUG/HUG AUTO",
+   "/0:COMPONENT/Variant=Xs, State=Default|bound:itemSpacing|imported/link/root/column-gap",
+   "/0:COMPONENT/Variant=Xs, State=Default|bound:minHeight|imported/link/root/min-height",
+   "/0:COMPONENT/Variant=Xs, State=Default|bound:minWidth|imported/link/root/min-width",
+   "/0:COMPONENT/Variant=Xs, State=Default|reaction|ON_HOVER\u2192CHANGE_TO Variant=Xs, State=Hover",
+   "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.26274511218070984,\"g\":0.4588235318660736,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/link/root/color\"}}}]",
+   "/0/0:TEXT/label|radius|0,0,0,0",
+   "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
+   "/0/0:TEXT/label|text|\"Link\" 12px {\"family\":\"Inter\",\"style\":\"Regular\"}",
+   "/1:COMPONENT/Variant=Sm, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [],
+  "matchedAxes": [
+   "Variant enum \u2192 Xs/Sm/Lg",
+   "TEXT Content"
+  ],
+  "observed": {
+   "type": "COMPONENT_SET",
+   "variantNames": [
+    "Variant=Xs, State=Default",
+    "Variant=Sm, State=Default",
+    "Variant=Lg, State=Default",
+    "Variant=Xs, State=Focus Visible",
+    "Variant=Sm, State=Focus Visible",
+    "Variant=Lg, State=Focus Visible",
+    "Variant=Xs, State=Hover",
+    "Variant=Sm, State=Hover",
+    "Variant=Lg, State=Hover"
+   ],
+   "propDefs": [
+    {
+     "name": "Content#1:819",
+     "type": "TEXT",
+     "defaultValue": "Link",
+     "variantOptions": null
+    },
+    {
+     "name": "Variant",
+     "type": "VARIANT",
+     "defaultValue": "Xs",
+     "variantOptions": [
+      "Xs",
+      "Sm",
+      "Lg"
+     ]
+    },
+    {
+     "name": "State",
+     "type": "VARIANT",
+     "defaultValue": "Default",
+     "variantOptions": [
+      "Default",
+      "Focus Visible",
+      "Hover"
+     ]
+    }
+   ],
+   "firstRoot": {
+    "name": "Variant=Xs, State=Default",
+    "type": "COMPONENT",
+    "layoutMode": "HORIZONTAL",
+    "padding": {
+     "t": 0,
+     "r": 0,
+     "b": 0,
+     "l": 0
+    },
+    "radius": 0,
+    "fillVarName": null,
+    "padBound": {
+     "itemSpacing": "imported/link/root/column-gap",
+     "minWidth": "imported/link/root/min-width",
+     "minHeight": "imported/link/root/min-height"
+    },
+    "w": 24,
+    "h": 20,
+    "childTypes": [
+     "TEXT/label"
+    ]
+   }
+  }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": false
+ }
 }
