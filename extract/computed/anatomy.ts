@@ -223,7 +223,7 @@ export function lowerGridDisplay(
 }
 
 // ---------------------------------------------------------------------------
-// A2 GRID PROMOTION (G1/G2/G4) — the computed floor's half of the pinned
+// A2 GRID PROMOTION (G1/G2/G4/G5) — the computed floor's half of the pinned
 // layout grammar (docs/research/layout-grammar-proposal.md). A display:grid
 // part whose declared-track list, child anchors/spans and per-cell aligns are
 // all readable promotes as a STRUCTURED grid: layout.rows/columns/gap/areas +
@@ -245,6 +245,14 @@ export function lowerGridDisplay(
 // computed grid-row/column-start/end serialize as the area IDENT (Chromium),
 // and renameGridAreaParts (alignSweep) has already given such parts the area
 // name, so the G4 "the area name IS the slot anchor" rule holds by name.
+//
+// G5 (auto placement) is promoted too — see the placement-from-order block
+// below. An all-auto grid's cells are derived from CHILD ORDER exactly as CSS
+// row flow resolves them, and are then DECLARED: as explicit `Part.placement`
+// anchors when the author declared row tracks, or as `layout.flow: "row"` with
+// rows omitted when they did not. Occupancy that leaves the declared track
+// rectangle refuses by name (grid-implicit-tracks, P9) instead of letting the
+// canvas absorb it.
 // ---------------------------------------------------------------------------
 export interface GridPromotionOk {
   layout: NonNullable<Part['layout']>;
@@ -343,10 +351,7 @@ export function promoteGridLayout(
   const rows = rowsR.tracks;
   const columns = colsR.tracks;
 
-  // -- flow fence (G5/G7): dense/column refuse via the fallback's fence;
-  //    auto-flow placement-from-order is NOT promoted from the computed floor
-  //    this round (children under auto-flow read `auto` anchors below and
-  //    abandon there) --
+  // -- flow fence (G5/G7): dense/column refuse via the fallback's fence --
   const flow = parseGridAutoFlow(rep.style['grid-auto-flow'] || 'row');
   if (flow.refusal) return abandon('grid-auto-flow is a refused flow — the G7 fence names it');
 
@@ -385,6 +390,128 @@ export function promoteGridLayout(
       return abandon(`child part "${name}" has no captured grid anchors (synthetic/decor part) and is not an overlay — it cannot take a cell`);
     }
   }
+  // -- G5 AUTO-PLACEMENT: PLACEMENT FROM ORDER --------------------------------
+  // A grid whose children carry no explicit `grid-row`/`grid-column` is the
+  // single most common way CSS authors write a grid, and its placement is not
+  // ambiguous: CSS resolves it row-major across the declared columns with a
+  // cursor that never moves backwards, spans shifting every later item (CSS
+  // Grid §8.5, "sparse" packing — `dense` is refused by name, G7). The fact is
+  // CHILD ORDER, and this round carries it two ways, both pinned by G5:
+  //
+  //   · the author DECLARED row tracks → MANUAL mode: the order-derived cells
+  //     are carried as EXPLICIT `Part.placement` anchors. flow: "row" is not
+  //     available here — G5 requires `rows` to be OMITTED under flow, so
+  //     declaring flow would DROP the author's declared row list.
+  //   · the author declared NO row tracks → G5 flow mode: `layout.flow: "row"`,
+  //     rows omitted, no anchors carried. Every row of such a grid is IMPLICIT
+  //     in CSS; carrying Chromium's resolved implicit row list would write a
+  //     declaration the author never made (the P9 lossy edge), so the emitter
+  //     derives ceil(children / columns) explicit tracks itself (G5/G6) and the
+  //     contract never relies on implicit tracks.
+  //
+  // Either way the placement is DECLARED, never implied, and any occupancy that
+  // leaves the declared track rectangle refuses BY NAME (grid-implicit-tracks,
+  // P9) rather than emitting a placement the canvas would absorb by rewriting
+  // the declaration.
+  const inFlowKids = children.filter((c) => childParts[c.partName] !== undefined && !childParts[c.partName].overlay);
+  const isAutoLine = (v: string | undefined): boolean => (v ?? 'auto').trim() === 'auto';
+  const bothAuto = (c: { rep: CapturedNode }): boolean =>
+    isAutoLine(c.rep.style['grid-row-start']) && isAutoLine(c.rep.style['grid-column-start']);
+  const halfAuto = inFlowKids.find(
+    (c) => isAutoLine(c.rep.style['grid-row-start']) !== isAutoLine(c.rep.style['grid-column-start']),
+  );
+  if (halfAuto) {
+    return abandon(
+      `child "${halfAuto.partName}" is auto-placed on ONE axis and explicit on the other (grid-row-start "${(halfAuto.rep.style['grid-row-start'] ?? 'auto').trim()}", grid-column-start "${(halfAuto.rep.style['grid-column-start'] ?? 'auto').trim()}") — a half-auto item's cell is a function of the solver's per-axis cursor, not a declared fact (G2: explicit anchors, or G5: whole-grid child order)`,
+    );
+  }
+  const autoKids = inFlowKids.filter(bothAuto);
+  if (autoKids.length > 0 && autoKids.length < inFlowKids.length) {
+    return abandon(
+      `${autoKids.length} of ${inFlowKids.length} in-flow children are auto-placed and the rest carry explicit lines — G2 pins that every direct child places explicitly OR none does (auto-flow, G5); mixing is schema-invalid`,
+    );
+  }
+  /** part name → the order-derived cell (MANUAL mode only; empty under flow). */
+  let ordered: Map<string, { row: number; column: number; rowSpan: number; columnSpan: number }> | null = null;
+  let flowRow = false;
+  if (autoKids.length > 0) {
+    /** An auto-placed item carries only a SPAN on each axis (`auto / span N`);
+     *  anything else on the end line is not a cell this reader can declare. */
+    const spanOf = (endRaw: string | undefined, axis: string, who: string): number | GridPromotionAbandoned => {
+      const end = (endRaw ?? 'auto').trim();
+      if (end === 'auto' || end === '') return 1;
+      const m = /^span\s+(\d+)$/.exec(end);
+      if (m && Number(m[1]) >= 1) return Number(m[1]);
+      return abandon(
+        `auto-placed child "${who}" reads ${axis} end line "${end}" — an auto-placed item carries only a span (CSS Grid §8.5); a named or numeric end line against an auto start is not a declared cell`,
+      );
+    };
+    const cols = columns.length;
+    const taken = new Set<string>();
+    const blocked = (r: number, c: number, rs: number, cs: number): boolean => {
+      for (let y = r; y < r + rs; y++) for (let x = c; x < c + cs; x++) if (taken.has(`${y},${x}`)) return true;
+      return false;
+    };
+    const derived = new Map<string, { row: number; column: number; rowSpan: number; columnSpan: number }>();
+    let curRow = 0;
+    let curCol = 0;
+    for (const c of inFlowKids) {
+      const rowSpan = spanOf(c.rep.style['grid-row-end'], 'grid-row', c.partName);
+      if (typeof rowSpan !== 'number') return rowSpan;
+      const columnSpan = spanOf(c.rep.style['grid-column-end'], 'grid-column', c.partName);
+      if (typeof columnSpan !== 'number') return columnSpan;
+      if (columnSpan > cols) {
+        return abandon(
+          `auto-placed child "${c.partName}" spans ${columnSpan} columns but the grid declares ${cols} — P3's exact throw class ("Column span exceeds grid column count"); CSS clamps the span silently, the canvas refuses the write, so the contract refuses too`,
+        );
+      }
+      let r = curRow;
+      let col = curCol;
+      if (col + columnSpan > cols) { r += 1; col = 0; }
+      while (blocked(r, col, rowSpan, columnSpan)) {
+        col += 1;
+        if (col + columnSpan > cols) { r += 1; col = 0; }
+      }
+      for (let y = r; y < r + rowSpan; y++) for (let x = col; x < col + columnSpan; x++) taken.add(`${y},${x}`);
+      derived.set(c.partName, { row: r, column: col, rowSpan, columnSpan });
+      curRow = r;
+      curCol = col + columnSpan;
+    }
+    const occupiedRows = [...derived.values()].reduce((n, d) => Math.max(n, d.row + d.rowSpan), 0);
+    const unitSpans = [...derived.values()].every((d) => d.rowSpan === 1 && d.columnSpan === 1);
+    const orderNote =
+      `${inFlowKids.length} auto-placed child(ren) over ${cols} declared column track(s) → ${occupiedRows} occupied row(s)` +
+      (unitSpans ? ` (ceil(${inFlowKids.length}/${cols}), P9's derivation)` : ' (spans shift the row-major cursor — occupancy honored exactly as CSS row flow does, §8.5)');
+    const rowsDeclared = (rep.gdecl?.['grid-template-rows'] ?? []).length > 0;
+    if (rowsDeclared) {
+      ordered = derived;
+      receipts.push(
+        `grid-order-placement: ${label} — ${orderNote}; the author DECLARED ${rows.length} row track(s), which flow: "row" would have to DROP (G5 omits rows under flow), so the derived cells are carried as EXPLICIT Part.placement anchors instead (G2) — child order is the source, the anchor is the carried fact, and no cell relies on an implicit track (P9)`,
+      );
+    } else {
+      if (areas) {
+        return abandon(
+          `${label} declares grid-template-areas AND places every child by order — a grid declares areas or flow, never both (G4/G5: under flow the placement fact is child order, and the canvas refuses position setters under ROW_AUTO_FLOW, P5)`,
+        );
+      }
+      const autoRows = (rep.style['grid-auto-rows'] ?? 'auto').trim();
+      if (autoRows !== 'auto' && autoRows !== '') {
+        return abandon(
+          `${GRID_REFUSALS['grid-implicit-tracks']} — measured on ${label}: every row of this order-placed grid is implicit (no declared grid-template-rows) and \`grid-auto-rows: ${autoRows}\` SIZES those implicit tracks; under flow the contract omits rows and the emitter derives them (G5), so the authored implicit-track size has nowhere to land`,
+        );
+      }
+      if (occupiedRows !== rows.length) {
+        return abandon(
+          `${GRID_REFUSALS['grid-implicit-tracks']} — measured on ${label}: order derivation occupies ${occupiedRows} row(s) (${orderNote}) but the resolved grid-template-rows reads ${rows.length} track(s) ("${(rep.style['grid-template-rows'] ?? 'none').trim()}"); the browser materialized tracks the derivation does not predict, so the derived row list would be a guess`,
+        );
+      }
+      flowRow = true;
+      receipts.push(
+        `grid-flow-order-placement: ${label} — ${orderNote}; the author declared NO row tracks, so layout.flow "row" carries the order fact (G5: gridItemsPositioning ROW_AUTO_FLOW, placement fact = CHILD ORDER, P5) and \`rows\` is OMITTED — the resolved implicit row list ("${(rep.style['grid-template-rows'] ?? 'none').trim()}") is NOT carried, because it is a declaration the author never made (P9); the emitter declares ceil(${inFlowKids.length}/${cols}) = ${occupiedRows} explicit row track(s) itself on the canvas surface (G5/G6), never an implicit one`,
+      );
+    }
+  }
+
   const placements = new Map<string, NonNullable<Part['placement']>>();
   const rects: Array<{ who: string; r: number; c: number; rs: number; cs: number }> = [];
   for (const c of children) {
@@ -410,23 +537,6 @@ export function promoteGridLayout(
       }
       continue; // the area rect IS the placement (validateGridPart reads areas[name])
     }
-    if (rs === 'auto') {
-      // Name the CONSTRUCT, not just the child: the fact being dropped is the
-      // grid-auto-flow order-placement fact (G5) — without the channel name
-      // here the drop measured as SILENT-LOSS on grid-auto-flow-row
-      // (conformance, 2026-08-08); the loss stays OPEN but must stay NAMED.
-      return abandon(`child "${c.partName}" is auto-placed — the grid-auto-flow (${(rep.style['grid-auto-flow'] || 'row').trim()}) placement-from-order fact (G5) is not promoted from the computed floor this round; the flow channel's order fact is dropped with the promotion`);
-    }
-    const lineOf = (startRaw: string, endRaw: string, axis: string): { anchor: number; span: number } | GridPromotionAbandoned => {
-      const spec = endRaw === 'auto' || endRaw === '' ? startRaw : `${startRaw} / ${endRaw}`;
-      const p = parseGridLine(spec);
-      if (p.refusal || p.anchor === undefined) return abandon(`child "${c.partName}" ${axis} "${spec}": ${p.refusal ?? 'no anchor'}`);
-      return { anchor: p.anchor, span: p.span ?? 1 };
-    };
-    const rowLine = lineOf(rs, re, 'grid-row');
-    if ('abandon' in rowLine) return rowLine;
-    const colLine = lineOf(cs, ce, 'grid-column');
-    if ('abandon' in colLine) return colLine;
     const alignOf = (raw: string | undefined, ch: string): { align?: 'start' | 'center' | 'end' } | GridPromotionAbandoned => {
       const v = (raw ?? 'auto').trim();
       if (v === 'auto' || v === 'normal') return {};
@@ -442,6 +552,36 @@ export function promoteGridLayout(
     if ('abandon' in ax) return ax;
     const ay = alignOf(s['align-self'], 'align-self');
     if ('abandon' in ay) return ay;
+    // G5 — the order-derived cell (see the auto-placement block above). Under
+    // flow the child carries NO anchor at all: the placement fact IS the child
+    // order, and the canvas refuses position setters under ROW_AUTO_FLOW (P5).
+    if (rs === 'auto') {
+      if (flowRow) continue;
+      const d = ordered?.get(c.partName);
+      if (!d) {
+        return abandon(`child "${c.partName}" is auto-placed but the order derivation produced no cell for it — placement-from-order (G5) cannot be declared for this grid`);
+      }
+      placements.set(c.partName, {
+        row: d.row,
+        column: d.column,
+        ...(d.rowSpan > 1 ? { rowSpan: d.rowSpan } : {}),
+        ...(d.columnSpan > 1 ? { columnSpan: d.columnSpan } : {}),
+        ...(ax.align ? { alignX: ax.align } : {}),
+        ...(ay.align ? { alignY: ay.align } : {}),
+      });
+      rects.push({ who: `order-placed part "${c.partName}"`, r: d.row, c: d.column, rs: d.rowSpan, cs: d.columnSpan });
+      continue;
+    }
+    const lineOf = (startRaw: string, endRaw: string, axis: string): { anchor: number; span: number } | GridPromotionAbandoned => {
+      const spec = endRaw === 'auto' || endRaw === '' ? startRaw : `${startRaw} / ${endRaw}`;
+      const p = parseGridLine(spec);
+      if (p.refusal || p.anchor === undefined) return abandon(`child "${c.partName}" ${axis} "${spec}": ${p.refusal ?? 'no anchor'}`);
+      return { anchor: p.anchor, span: p.span ?? 1 };
+    };
+    const rowLine = lineOf(rs, re, 'grid-row');
+    if ('abandon' in rowLine) return rowLine;
+    const colLine = lineOf(cs, ce, 'grid-column');
+    if ('abandon' in colLine) return colLine;
     placements.set(c.partName, {
       row: rowLine.anchor,
       column: colLine.anchor,
@@ -475,12 +615,17 @@ export function promoteGridLayout(
     }
   }
 
+  // G5 — under flow the contract carries `flow: "row"` and OMITS `rows`: the
+  // emitter derives and declares the explicit row tracks itself, because the
+  // Plugin API under-reports implicitly created rows (P9). Both facts are
+  // schema-enforced (LayoutSchema refuses rows+flow together).
   const layout: NonNullable<Part['layout']> = {
     display: 'grid',
-    rows,
+    ...(flowRow ? {} : { rows }),
     columns,
     ...(gapRow > 0 || gapColumn > 0 ? { gap: { row: gapRow, column: gapColumn } } : {}),
     ...(areas ? { areas } : {}),
+    ...(flowRow ? { flow: 'row' as const } : {}),
   };
   if (layout.gap) {
     // G1: the contract deliberately has NO single-`gap` shorthand — the pair
@@ -511,7 +656,7 @@ export function promoteGridLayout(
     }
   }
   receipts.push(
-    `grid-promoted: ${label} — ${rows.length}×${columns.length} declared tracks carried as layout.rows/columns${gapRow > 0 || gapColumn > 0 ? `, gap ${gapRow}/${gapColumn}` : ''}${areas ? `, ${Object.keys(areas).length} named area(s) (G4: names are contract-owned slot anchors)` : ''}; ${placements.size} child placement(s) (0-based cells, spans, per-cell align — A2 G1/G2/G4)`,
+    `grid-promoted: ${label} — ${flowRow ? `${columns.length} declared column tracks carried as layout.columns + flow "row" (rows derived by the emitter, G5)` : `${rows.length}×${columns.length} declared tracks carried as layout.rows/columns`}${gapRow > 0 || gapColumn > 0 ? `, gap ${gapRow}/${gapColumn}` : ''}${areas ? `, ${Object.keys(areas).length} named area(s) (G4: names are contract-owned slot anchors)` : ''}; ${flowRow ? `${inFlowKids.length} child(ren) placed by ORDER (no anchors carried — G5/P5)` : `${placements.size} child placement(s) (0-based cells, spans, per-cell align — A2 G1/G2/G4)`}${ordered ? `, ${ordered.size} of them ORDER-DERIVED (G5 placement-from-order into the declared row rectangle)` : ''}`,
   );
   return { layout, placements, receipts };
 }

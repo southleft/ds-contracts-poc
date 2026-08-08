@@ -1,11 +1,26 @@
 {
   "$schema": "./subset.schema.json",
-  "id": "spec-conformance-subset-v0.1",
+  "id": "spec-conformance-subset-v0.1.1",
   "title": "Minimal normative subset for foreign implementations (Wave 11-A)",
-  "specDraft": "0.1.0",
+  "specDraft": "0.1.1",
   "frozenAt": "2026-08-05",
+  "revisedAt": "2026-08-08",
   "status": "draft-frozen",
-  "note": "A second implementation claiming draft conformance MUST cover every rule and fixture below. Expanding the set is a draft bump, not a silent widen.",
+  "note": "A second implementation claiming draft conformance MUST cover every rule and fixture below. Expanding the set — or moving a fixture's expected disposition — is a draft bump recorded in changeLog, never a silent widen.",
+  "changeLog": [
+    {
+      "subsetId": "spec-conformance-subset-v0.1",
+      "date": "2026-08-05",
+      "change": "Frozen (Wave 11-A): 14 normative rule ids + 11 fixtures covering CARRIED / LOWERED / REFUSED / UNSUPPORTED."
+    },
+    {
+      "subsetId": "spec-conformance-subset-v0.1.1",
+      "date": "2026-08-08",
+      "change": "grid-2d: REFUSED -> CARRIED. The declared widen the frozen entry was staged for — a foreign implementation must now CARRY an auto-placed declared-track grid, not refuse it by name.",
+      "why": "The REFUSED row was recorded against a Figma that had no grid layout mode. The A1 recon probed the platform half live (docs/research/grid-recon-probes.md: P1 layoutMode 'GRID' exists and reads back; P8 a 3x4 bento's tracks, gaps, anchors and spans all read back EXACTLY; P5/P5b ROW_AUTO_FLOW is the one bounded auto flow; P9 the implicit-track readback is lossy and fences the derivation). The G5 engine round (2026-08-08) then taught extract/computed promoteGridLayout placement-from-order: an all-auto grid's cells are derived from child order exactly as CSS row flow resolves them and DECLARED — as explicit Part.placement anchors when the author declared row tracks, as layout.flow 'row' with rows omitted when they did not — with occupancy past the declared track rectangle refused by name (grid-implicit-tracks, P9).",
+      "evidence": "conformance/BASELINE.json: grid-2d PASS as CARRIED (was PASS as REFUSED/grid-two-dimensional), and grid-two-column, grid-sidebar-px-fr, grid-track-fit-content, grid-tracks-mixed-fractional, grid-auto-flow-row all WRONG-NAME -> PASS in the same round. REFUSED remains demonstrable in the subset through display-out-of-vocab and svg-outside-grammar (N-DISP-01 needs one fixture per disposition)."
+    }
+  ],
   "normativeRules": [
     {
       "id": "N-ID-01",
@@ -101,7 +116,7 @@
       { "id": "calc-var", "expect": "LOWERED", "rules": ["N-DISP-01"] },
       { "id": "custom-prop-two-hop", "expect": "LOWERED", "rules": ["N-DISP-01"] },
       { "id": "display-out-of-vocab", "expect": "REFUSED", "rules": ["N-DISP-01", "N-DISP-02"] },
-      { "id": "grid-2d", "expect": "REFUSED", "rules": ["N-DISP-01", "N-DISP-02"] },
+      { "id": "grid-2d", "expect": "CARRIED", "rules": ["N-DISP-01", "N-ANAT-01"] },
       { "id": "svg-outside-grammar", "expect": "REFUSED", "rules": ["N-DISP-01", "N-DISP-02"] },
       { "id": "accent-color", "expect": "UNSUPPORTED", "rules": ["N-DISP-01", "N-CONF-01"] },
       { "id": "backdrop-filter", "expect": "UNSUPPORTED", "rules": ["N-DISP-01", "N-CONF-01"] },

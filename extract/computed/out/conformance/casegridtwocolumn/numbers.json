@@ -16,8 +16,8 @@
   "folds": {
     "count": 0,
     "receipts": [],
-    "mintedLeavesUnfolded": 9,
-    "mintedLeavesFolded": 9
+    "mintedLeavesUnfolded": 8,
+    "mintedLeavesFolded": 8
   },
   "bound": {
     "cellsChecked": 0,
@@ -26,11 +26,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 9,
-    "baseBindings": 11,
+    "leaves": 8,
+    "baseBindings": 10,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 11,
+      "uniform": 10,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -41,7 +41,7 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 4,
+    "base": 2,
     "state": 0,
     "overflowBindings": 0
   },

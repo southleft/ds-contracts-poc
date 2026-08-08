@@ -57,9 +57,19 @@
         }
       },
       "layout": {
-        "display": "flex",
-        "direction": "row",
-        "align": "stretch"
+        "display": "grid",
+        "columns": [
+          {
+            "px": 33.5
+          },
+          {
+            "fr": 2.5
+          },
+          {
+            "fr": 1
+          }
+        ],
+        "flow": "row"
       },
       "declared": {
         "box-sizing": "border-box",
@@ -68,7 +78,6 @@
       "tokens": {
         "background-color": "{imported.case-grid-tracks-mixed-fractional.root.background-color}",
         "font-size": "{imported.shared.size-12}",
-        "grid-template-rows": "{imported.case-grid-tracks-mixed-fractional.root.grid-template-rows}",
         "min-height": "{imported.case-grid-tracks-mixed-fractional.root.min-height}",
         "min-width": "{imported.case-grid-tracks-mixed-fractional.root.min-width}"
       }

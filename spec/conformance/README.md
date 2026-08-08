@@ -11,6 +11,8 @@ Phase 3 asks for the eval/conformance suite to run against **any** implementatio
 | [harness.md](./harness.md) | JSON report shape for foreign runners |
 | [check-subset.ts](./check-subset.ts) | Pin: subset + index dispositions still match `conformance/MANIFEST.json` |
 
+**Revision `spec-conformance-subset-v0.1.1` (2026-08-08)** — `grid-2d` moved `REFUSED` → `CARRIED`. The frozen entry was staged for exactly this: the refusal was recorded against a Figma with no grid layout mode, the A1 recon probed the platform half live (P1/P8/P5/P9), and the G5 engine round taught auto-placement promotion, so the case now measures CARRIED. The move is recorded in `subset-v0.1.json`'s `changeLog` with its evidence — a widen of what "conforming" means is a declared act, never a silent one. `REFUSED` stays demonstrable through `display-out-of-vocab` and `svg-outside-grammar`.
+
 ```bash
 npx tsx spec/conformance/check-subset.ts
 # or:

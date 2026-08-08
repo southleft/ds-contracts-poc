@@ -22,61 +22,59 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 11.969401041666666,
-    "meanAA": 11.643880208333334,
-    "maxAA": 11.643880208333334
+    "meanExact": 10.143229166666666,
+    "meanAA": 9.934895833333334,
+    "maxAA": 9.934895833333334
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 7,
-    "mintedLeavesUnfolded": 7,
-    "baseBindings": 14,
+    "mintedLeaves": 6,
+    "mintedLeavesUnfolded": 6,
+    "baseBindings": 13,
     "stateBindings": 0,
-    "codeOnlyChannels": 5,
+    "codeOnlyChannels": 3,
     "overflowBindings": 0,
     "folds": 0
   },
   "worstRows": [
     {
       "key": "__default",
-      "pctAA": 11.643880208333334,
-      "pctExact": 11.969401041666666,
+      "pctAA": 9.934895833333334,
+      "pctExact": 10.143229166666666,
       "channelsMismatched": 2
     },
     {
       "key": "__hover",
-      "pctAA": 11.643880208333334,
-      "pctExact": 11.969401041666666,
+      "pctAA": 9.934895833333334,
+      "pctExact": 10.143229166666666,
       "channelsMismatched": 2
     },
     {
       "key": "__focus-visible",
-      "pctAA": 11.643880208333334,
-      "pctExact": 11.969401041666666,
+      "pctAA": 9.934895833333334,
+      "pctExact": 10.143229166666666,
       "channelsMismatched": 2
     },
     {
       "key": "__active",
-      "pctAA": 11.643880208333334,
-      "pctExact": 11.969401041666666,
+      "pctAA": 9.934895833333334,
+      "pctExact": 10.143229166666666,
       "channelsMismatched": 2
     }
   ],
   "topMismatchedChannels": [
     [
-      "root.display",
+      "root.grid-template-columns",
       4
     ],
     [
-      "root.grid-template-columns",
+      "root.grid-template-rows",
       4
     ]
   ],
   "namedLosses": [
-    "code-only: root.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: root.grid-template-columns — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-3.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
@@ -95,20 +93,20 @@
       "key": "__default",
       "channelsCompared": 27,
       "channelsEqual": 25,
-      "pctExact": 11.969401041666666,
-      "pctAA": 11.643880208333334,
+      "pctExact": 10.143229166666666,
+      "pctAA": 9.934895833333334,
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "33.5px 18px 7.20312px",
+          "theirs": "33.5px 150px 60px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "33.5px 150px 60px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     },
@@ -116,20 +114,20 @@
       "key": "__hover",
       "channelsCompared": 27,
       "channelsEqual": 25,
-      "pctExact": 11.969401041666666,
-      "pctAA": 11.643880208333334,
+      "pctExact": 10.143229166666666,
+      "pctAA": 9.934895833333334,
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "33.5px 18px 7.20312px",
+          "theirs": "33.5px 150px 60px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "33.5px 150px 60px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     },
@@ -137,20 +135,20 @@
       "key": "__focus-visible",
       "channelsCompared": 27,
       "channelsEqual": 25,
-      "pctExact": 11.969401041666666,
-      "pctAA": 11.643880208333334,
+      "pctExact": 10.143229166666666,
+      "pctAA": 9.934895833333334,
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "33.5px 18px 7.20312px",
+          "theirs": "33.5px 150px 60px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "33.5px 150px 60px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     },
@@ -158,20 +156,20 @@
       "key": "__active",
       "channelsCompared": 27,
       "channelsEqual": 25,
-      "pctExact": 11.969401041666666,
-      "pctAA": 11.643880208333334,
+      "pctExact": 10.143229166666666,
+      "pctAA": 9.934895833333334,
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "33.5px 18px 7.20312px",
+          "theirs": "33.5px 150px 60px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "33.5px 150px 60px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     }

@@ -216,7 +216,7 @@
       "axes": []
     },
     {
-      "__case": "layout: display: grid + grid-template-columns: 1fr 1fr — declared REFUSED",
+      "__case": "layout: display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED) — declared CARRIED",
       "name": "CaseGrid2d",
       "importName": "CaseGrid2d",
       "contract": "conformance/seeds/grid-2d.contract.json",

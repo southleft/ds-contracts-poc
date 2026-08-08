@@ -165,11 +165,15 @@ probe dead-end, via the `GRID_REFUSALS` registry
 `grid-child-grow`. Conformance pins nine of these as measured cases
 (`conformance/MANIFEST.json`, `grid-*` REFUSED rows).
 
-**Honest boundary.** Canvas→code and code→contract promotion currently require
-**explicit** child placement: auto-placed grids (G5, placement-from-order) are
-not promoted yet and fall back to the named flex-era lowering — an open,
-measured gap ([docs/23 §B.22](23-known-limitations.md)), and the reason the
-frozen conformance subset still declares `grid-2d` REFUSED.
+**Honest boundary.** Code→contract promotion carries **auto-placed** grids as
+of 2026-08-08 (G5: the cell is derived from child order as CSS row flow
+resolves it, then declared — explicit anchors when the author declared row
+tracks, `layout.flow: "row"` when they did not), which is what released the
+frozen subset's staged widen of `grid-2d` to CARRIED. Half-auto children,
+mixed auto/explicit siblings and occupancy past the declared tracks stay
+refused by name ([docs/23 §B.22](23-known-limitations.md)). CANVAS→contract is
+the direction still missing: `core/propose-figma.ts` does not read the dump's
+`grid` block, so a drawn grid proposes as the flex-era lowering.
 
 ## State previews (`figmaStatePreviews`, v8)
 

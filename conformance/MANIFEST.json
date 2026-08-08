@@ -4,9 +4,9 @@
   "library": "@ds-contracts/conformance@0.1.0",
   "count": 82,
   "byExpectation": {
-    "CARRIED": 41,
+    "CARRIED": 42,
     "LOWERED": 4,
-    "REFUSED": 19,
+    "REFUSED": 18,
     "UNSUPPORTED": 18
   },
   "cases": [
@@ -396,11 +396,11 @@
     {
       "id": "grid-2d",
       "feature": "layout",
-      "construct": "display: grid + grid-template-columns: 1fr 1fr",
-      "why": "Two-dimensional grid is the layout every data-dense DS ships. STAGED WIDEN, NOT LANDED: the A1 grid recon (docs/research/grid-recon-probes.md P1/P8) removed the PLATFORM limit — layoutMode GRID exists and tracks read back byte-exactly — and the A2 engine carries EXPLICITLY-PLACED grids (grid-bento-span-matrix passes as CARRIED). But this case's children are AUTO-PLACED, and placement-from-order promotion (G5) is deliberately not in the engine this round, so the measured disposition is still the named refusal. The frozen subset (spec/conformance/subset-v0.1.json) keeps REFUSED until this case measures CARRIED; declaring the widen before the engine lands it would be exactly the silent widen the subset's change rule forbids.",
-      "expect": "REFUSED",
-      "expectName": "grid-two-dimensional",
-      "expectWhere": "LEDGER.md (DOM-anatomy promotion refusals — the flex-era fence names grid-two-dimensional for auto-placed 2-D grids pending G5 promotion)",
+      "construct": "display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED)",
+      "why": "Two-dimensional grid is the layout every data-dense DS ships. WIDEN LANDED (2026-08-08): the A1 grid recon (docs/research/grid-recon-probes.md P1/P8) removed the PLATFORM limit — layoutMode GRID exists and tracks read back byte-exactly — and the G5 round taught the computed floor's promoteGridLayout placement-from-order. This case's children carry no explicit grid-row/grid-column; their cells are now DERIVED from child order exactly as CSS row flow resolves them (A→(0,0), B→(0,1)) and DECLARED as explicit Part.placement anchors, because the author declared the row tracks (20px 20px) that flow: \"row\" would have to drop (G5 omits rows under flow). Measured CARRIED, so the frozen subset (spec/conformance/subset-v0.1.json) took the declared widen instead of keeping the staged REFUSED.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.display = \"grid\" (with layout.rows [20px,20px] / layout.columns [1fr,1fr] and the order-derived placement anchors on both children — receipt grid-order-placement)",
       "observable": {
         "part": "root",
         "channel": "display",
@@ -408,9 +408,20 @@
       },
       "canvas": {
         "expect": "PRESENT",
-        "note": "layoutMode GRID + gridColumnSizes [{FLEX,1},{FLEX,1}] — the grid DEFAULT, reads back exactly (P1/P8). The canvas CAN hold this construct now; the refusal is the ENGINE's auto-placement gap (G5), no longer a canvas limit — PRESENT also keeps a future engine carry non-harmful (good news, wrong manifest)."
+        "note": "layoutMode GRID + gridColumnSizes [{FLEX,1},{FLEX,1}] — the grid DEFAULT, reads back exactly (P1/P8); the two derived cells compile to child.setGridChildPosition(0,0) / (0,1) under MANUAL positioning (P3)."
       },
-      "blockStage": true
+      "blockStage": true,
+      "directions": {
+        "codeToCanvas": {
+          "expect": "CARRIED",
+          "note": "order-derived anchors are written with the child-side setter under MANUAL positioning — the canvas never has to infer the order (P3)"
+        },
+        "canvasToCode": {
+          "expect": "CARRIED",
+          "note": "structured gridRowSizes/gridColumnSizes + per-child anchors -> grid-template-rows/columns + grid-row/grid-column longhands"
+        }
+      },
+      "probe": "P1 (GRID exists; defaults are exactly these columns), P8 (readback exactness), P9 (the occupied-vs-declared fence the derivation is bounded by)"
     },
     {
       "id": "grid-absolute-overlay",

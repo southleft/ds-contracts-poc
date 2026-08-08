@@ -87,27 +87,6 @@
   },
   "codeOnlyChannels": [
     {
-      "part": "root",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "grid",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "grid-template-columns",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "100px 100px",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "grid-template-rows",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "20px 20px",
-      "distinctValues": 1
-    },
-    {
       "part": "label",
       "channel": "line-height",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -181,11 +160,11 @@
       "literal-text-carried: label = \"A\" (no text prop sample matches — the mounted value is carried verbatim)",
       "literal-text-carried: label-2 = \"B\" (no text prop sample matches — the mounted value is carried verbatim)",
       "grid-tracks-declared: root.grid-template-columns carries the DECLARED list \"1fr 1fr\" — verified against computed \"100px 100px\" (2 tracks; every px track agrees ≤0.5px; fr/fit spellings resolve to used px in computed style and are carried from source)",
-      "grid-promotion-fallback: root — child \"label\" is auto-placed — the grid-auto-flow (row) placement-from-order fact (G5) is not promoted from the computed floor this round; the flow channel's order fact is dropped with the promotion; the flex-era lowering decides (named)"
+      "grid-order-placement: root — 2 auto-placed child(ren) over 2 declared column track(s) → 1 occupied row(s) (ceil(2/2), P9's derivation); the author DECLARED 2 row track(s), which flow: \"row\" would have to DROP (G5 omits rows under flow), so the derived cells are carried as EXPLICIT Part.placement anchors instead (G2) — child order is the source, the anchor is the carried fact, and no cell relies on an implicit track (P9)",
+      "grid-area-nonrectangular: root — the 2 placed rect(s) occupy 2 of 4 declared cells (gapped occupancy) and declare no area names, so no grid-template-areas + grid-area spelling exists for the code side (G4: areas require contract-owned names tiling rectangles); the occupancy is carried as per-child grid-row/grid-column LONGHAND rects (Part.placement) — the named LOWERED disposition",
+      "grid-promoted: root — 2×2 declared tracks carried as layout.rows/columns; 2 child placement(s) (0-based cells, spans, per-cell align — A2 G1/G2/G4), 2 of them ORDER-DERIVED (G5 placement-from-order into the declared row rectangle)"
     ],
-    "refusals": [
-      "grid-two-dimensional: grid resolves 2 columns × 2 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (root)"
-    ]
+    "refusals": []
   },
   "enrichmentNotes": [
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",

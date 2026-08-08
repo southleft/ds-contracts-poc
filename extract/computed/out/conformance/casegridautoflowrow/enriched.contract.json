@@ -56,6 +56,18 @@
           }
         }
       },
+      "layout": {
+        "display": "grid",
+        "columns": [
+          {
+            "fr": 1
+          },
+          {
+            "fr": 1
+          }
+        ],
+        "flow": "row"
+      },
       "declared": {
         "box-sizing": "border-box",
         "font-family": "monospace"

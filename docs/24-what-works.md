@@ -204,7 +204,7 @@ No component is omitted. The worst row in the corpus is at the top.
 ### 3.2 The frontier fixture — held out of every average above
 
 `extract/computed/out/conformance/` holds **80** more scorecards with a mean of
-**94.6%** over 5,688 cells. They are **excluded from §3 entirely** and
+**94.8%** over 5,688 cells. They are **excluded from §3 entirely** and
 must never be folded into a library mean: they are *synthetic single-construct
 cases* built by this repo to probe one CSS or DOM feature each, not components
 from anyone's design system. Including them would raise the headline number by
@@ -215,7 +215,7 @@ no scorecard escaped classification.
 
 | fixture | cases | mean %equal | counted in §3? | source |
 |---|---|---|---|---|
-| synthetic CSS/DOM constructs | 80 | 94.6 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
+| synthetic CSS/DOM constructs | 80 | 94.8 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
 | real third-party components | 82 | 87.1 | yes | `extract/computed/out/**/scorecard.json` |
 
 ---
@@ -348,7 +348,7 @@ filter that decides carriage scores 100% on a channel it never opened.
 | manifest | cases | breakdown | source |
 |---|---|---|---|
 | canvas constructs | 91 | CARRIED 72 · LEDGERED 11 · REFUSED 8 | `extract/figma/conformance/MANIFEST.json` |
-| CSS / DOM frontier | 82 | CARRIED 41 · REFUSED 19 · UNSUPPORTED 18 · LOWERED 4 | `conformance/MANIFEST.json` |
+| CSS / DOM frontier | 82 | CARRIED 42 · REFUSED 18 · UNSUPPORTED 18 · LOWERED 4 | `conformance/MANIFEST.json` |
 
 Of the 91 canvas constructs, **91** are `green`.
 A construct that is neither carried nor named-refused is a hard failure of that
@@ -497,13 +497,13 @@ npm run capability:fresh
 
 | artifact | sha256 (12) | bytes | what it supplied |
 |---|---|---|---|
-| `conformance/MANIFEST.json` | `ae549bc2e3d1` | 75,039 | CSS/DOM frontier vocabulary |
-| `docs/22-generality.md` | `f0e45b36e7df` | 70,905 | coverage denominators (docs/22 §8.3 table) |
+| `conformance/MANIFEST.json` | `4414d908b2fe` | 75,681 | CSS/DOM frontier vocabulary |
+| `docs/22-generality.md` | `9335c35f21b1` | 71,156 | coverage denominators (docs/22 §8.3 table) |
 | `evals/golden.json` | `dc0193129c40` | 29,319 | generated-source golden manifest |
 | `evals/results.json` | `17bda33949d6` | 21,855 | executable claim suite |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `80873858f525` | 918,904 | capture counts + determinism receipts — 162 files |
-| `extract/computed/out/**/scorecard.json` | `6946dc65077d` | 10,965,206 | computed-equality per component — 162 files |
+| `extract/computed/out/**/numbers.json` | `8cb00a60f240` | 918,901 | capture counts + determinism receipts — 162 files |
+| `extract/computed/out/**/scorecard.json` | `5d2e4f8d18c4` | 10,961,309 | computed-equality per component — 162 files |
 | `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `80258165cbaa` | 2,949 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |

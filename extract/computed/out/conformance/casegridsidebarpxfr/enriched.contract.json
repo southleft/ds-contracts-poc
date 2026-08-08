@@ -43,9 +43,16 @@
         }
       },
       "layout": {
-        "display": "flex",
-        "direction": "row",
-        "align": "stretch"
+        "display": "grid",
+        "columns": [
+          {
+            "px": 240
+          },
+          {
+            "fr": 1
+          }
+        ],
+        "flow": "row"
       },
       "declared": {
         "box-sizing": "border-box",
@@ -54,7 +61,6 @@
       "tokens": {
         "background-color": "{imported.case-grid-sidebar-px-fr.root.background-color}",
         "font-size": "{imported.shared.size-12}",
-        "grid-template-rows": "{imported.case-grid-sidebar-px-fr.root.grid-template-rows}",
         "min-height": "{imported.case-grid-sidebar-px-fr.root.min-height}",
         "min-width": "{imported.case-grid-sidebar-px-fr.root.min-width}"
       }

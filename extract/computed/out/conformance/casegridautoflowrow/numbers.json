@@ -42,7 +42,7 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 6,
+    "base": 3,
     "state": 0,
     "overflowBindings": 0
   },
@@ -50,7 +50,7 @@
   "anatomyPromotion": {
     "partsCarried": 4,
     "svgAssets": 0,
-    "refusals": 1
+    "refusals": 0
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
@@ -108,7 +108,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 88.88888888888889,
+    "computedPctEqual": 92.5925925925926,
     "rowsFullyEqual": 0,
     "rows": 4,
     "pixelPerfectExact": 0,

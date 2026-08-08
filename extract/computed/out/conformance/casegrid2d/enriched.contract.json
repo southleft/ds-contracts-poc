@@ -21,6 +21,10 @@
             "box-sizing": "border-box",
             "font-family": "monospace"
           },
+          "placement": {
+            "row": 0,
+            "column": 0
+          },
           "tokens": {
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-grid2d.label.font-weight}"
@@ -34,11 +38,34 @@
             "box-sizing": "border-box",
             "font-family": "monospace"
           },
+          "placement": {
+            "row": 0,
+            "column": 1
+          },
           "tokens": {
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-grid2d.label-2.font-weight}"
           }
         }
+      },
+      "layout": {
+        "display": "grid",
+        "rows": [
+          {
+            "px": 20
+          },
+          {
+            "px": 20
+          }
+        ],
+        "columns": [
+          {
+            "fr": 1
+          },
+          {
+            "fr": 1
+          }
+        ]
       },
       "declared": {
         "box-sizing": "border-box",

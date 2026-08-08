@@ -22,61 +22,59 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 14.146286231884059,
-    "meanAA": 14.053442028985508,
-    "maxAA": 14.053442028985508
+    "meanExact": 6.66213768115942,
+    "meanAA": 6.66213768115942,
+    "maxAA": 6.66213768115942
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 9,
-    "mintedLeavesUnfolded": 9,
-    "baseBindings": 11,
+    "mintedLeaves": 8,
+    "mintedLeavesUnfolded": 8,
+    "baseBindings": 10,
     "stateBindings": 0,
-    "codeOnlyChannels": 4,
+    "codeOnlyChannels": 2,
     "overflowBindings": 0,
     "folds": 0
   },
   "worstRows": [
     {
       "key": "__default",
-      "pctAA": 14.053442028985508,
-      "pctExact": 14.146286231884059,
+      "pctAA": 6.66213768115942,
+      "pctExact": 6.66213768115942,
       "channelsMismatched": 2
     },
     {
       "key": "__hover",
-      "pctAA": 14.053442028985508,
-      "pctExact": 14.146286231884059,
+      "pctAA": 6.66213768115942,
+      "pctExact": 6.66213768115942,
       "channelsMismatched": 2
     },
     {
       "key": "__focus-visible",
-      "pctAA": 14.053442028985508,
-      "pctExact": 14.146286231884059,
+      "pctAA": 6.66213768115942,
+      "pctExact": 6.66213768115942,
       "channelsMismatched": 2
     },
     {
       "key": "__active",
-      "pctAA": 14.053442028985508,
-      "pctExact": 14.146286231884059,
+      "pctAA": 6.66213768115942,
+      "pctExact": 6.66213768115942,
       "channelsMismatched": 2
     }
   ],
   "topMismatchedChannels": [
     [
-      "root.display",
+      "root.grid-template-columns",
       4
     ],
     [
-      "root.grid-template-columns",
+      "root.grid-template-rows",
       4
     ]
   ],
   "namedLosses": [
-    "code-only: root.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: root.grid-template-columns — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
@@ -94,20 +92,20 @@
       "key": "__default",
       "channelsCompared": 21,
       "channelsEqual": 19,
-      "pctExact": 14.146286231884059,
-      "pctAA": 14.053442028985508,
+      "pctExact": 6.66213768115942,
+      "pctAA": 6.66213768115942,
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "240px 7.20312px",
+          "theirs": "240px 160px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "240px 160px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     },
@@ -115,20 +113,20 @@
       "key": "__hover",
       "channelsCompared": 21,
       "channelsEqual": 19,
-      "pctExact": 14.146286231884059,
-      "pctAA": 14.053442028985508,
+      "pctExact": 6.66213768115942,
+      "pctAA": 6.66213768115942,
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "240px 7.20312px",
+          "theirs": "240px 160px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "240px 160px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     },
@@ -136,20 +134,20 @@
       "key": "__focus-visible",
       "channelsCompared": 21,
       "channelsEqual": 19,
-      "pctExact": 14.146286231884059,
-      "pctAA": 14.053442028985508,
+      "pctExact": 6.66213768115942,
+      "pctAA": 6.66213768115942,
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "240px 7.20312px",
+          "theirs": "240px 160px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "240px 160px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     },
@@ -157,20 +155,20 @@
       "key": "__active",
       "channelsCompared": 21,
       "channelsEqual": 19,
-      "pctExact": 14.146286231884059,
-      "pctAA": 14.053442028985508,
+      "pctExact": 6.66213768115942,
+      "pctAA": 6.66213768115942,
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "240px 7.20312px",
+          "theirs": "240px 160px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "240px 160px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     }

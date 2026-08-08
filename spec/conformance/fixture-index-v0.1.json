@@ -1,7 +1,8 @@
 {
   "id": "spec-conformance-fixture-index-v0.1",
-  "subsetId": "spec-conformance-subset-v0.1",
+  "subsetId": "spec-conformance-subset-v0.1.1",
   "frozenAt": "2026-08-05",
+  "revisedAt": "2026-08-08",
   "note": "Paths relative to the repository root. A foreign runner SHOULD load only these files — not core/ or extract/computed/.",
   "schema": "contracts/contract.schema.json",
   "manifest": "conformance/MANIFEST.json",
@@ -44,7 +45,7 @@
     },
     {
       "id": "grid-2d",
-      "expect": "REFUSED",
+      "expect": "CARRIED",
       "case": "conformance/cases/grid-2d/case.json",
       "seed": "conformance/seeds/grid-2d.contract.json"
     },

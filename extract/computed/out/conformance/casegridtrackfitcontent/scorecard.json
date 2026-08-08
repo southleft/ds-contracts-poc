@@ -30,11 +30,11 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 8,
-    "mintedLeavesUnfolded": 8,
-    "baseBindings": 10,
+    "mintedLeaves": 7,
+    "mintedLeavesUnfolded": 7,
+    "baseBindings": 9,
     "stateBindings": 0,
-    "codeOnlyChannels": 3,
+    "codeOnlyChannels": 1,
     "overflowBindings": 0,
     "folds": 0
   },
@@ -66,17 +66,15 @@
   ],
   "topMismatchedChannels": [
     [
-      "root.display",
+      "root.grid-template-columns",
       4
     ],
     [
-      "root.grid-template-columns",
+      "root.grid-template-rows",
       4
     ]
   ],
   "namedLosses": [
-    "code-only: root.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: root.grid-template-columns — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "unresolvedTokenRefs": {
@@ -98,15 +96,15 @@
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "0px 7.20312px",
+          "theirs": "40px 160px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "40px 160px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     },
@@ -119,15 +117,15 @@
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "0px 7.20312px",
+          "theirs": "40px 160px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "40px 160px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     },
@@ -140,15 +138,15 @@
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "0px 7.20312px",
+          "theirs": "40px 160px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "40px 160px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     },
@@ -161,15 +159,15 @@
       "mismatches": [
         {
           "part": "root",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "grid"
+          "channel": "grid-template-columns",
+          "ours": "0px 7.20312px",
+          "theirs": "40px 160px"
         },
         {
           "part": "root",
-          "channel": "grid-template-columns",
-          "ours": "none",
-          "theirs": "40px 160px"
+          "channel": "grid-template-rows",
+          "ours": "14px",
+          "theirs": "16px"
         }
       ]
     }

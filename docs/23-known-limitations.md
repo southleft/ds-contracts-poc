@@ -69,15 +69,19 @@ Refused **by name** — the engine says the word rather than dropping the fact
 silently — and unlikely ever to change, because the target medium has no
 equivalent:
 
-- **CSS Grid — no longer irreducible, but only half-landed.** The A1 recon
-  (docs/research/grid-recon-probes.md) found the canvas grew `layoutMode:
-  "GRID"` with byte-exact track readback, and the A2 engine now CARRIES the
-  declared-track subset: px/fr/`fit-content(100%)` tracks (fractional ok),
-  the row/column gap pair, **explicitly-placed** children (0-based anchors,
-  spans, per-cell align), named areas as contract-owned slot anchors,
-  absolute overlays inside grids, grids on component variants, instance
-  children, and grid-in-flex composition (conformance: `grid-bento-span-matrix`
-  and 15 sibling cases green). Two bounded classes remain:
+- **CSS Grid — no longer irreducible; the declared-track half is landed.** The
+  A1 recon (docs/research/grid-recon-probes.md) found the canvas grew
+  `layoutMode: "GRID"` with byte-exact track readback, and the engine now
+  CARRIES the declared-track subset: px/fr/`fit-content(100%)` tracks
+  (fractional ok), the row/column gap pair, explicitly-placed children
+  (0-based anchors, spans, per-cell align), **auto-placed children** (cells
+  derived from child order exactly as CSS row flow resolves them, then
+  DECLARED — as explicit anchors when the author declared row tracks, as
+  `layout.flow: "row"` when they did not; G5, landed 2026-08-08), named areas
+  as contract-owned slot anchors, absolute overlays inside grids, grids on
+  component variants, instance children, and grid-in-flex composition
+  (conformance: **all 31 `grid-*` cases green** — 20 CARRIED, 2 LOWERED,
+  9 REFUSED-by-name — including `grid-2d`). One bounded class remains:
   - **REFUSED by name — the 9 solver-half constructs** (each with its probe
     dead-end, `GRID_REFUSALS` registry): `grid-track-percent` (track enum is
     FLEX|FIXED|HUG — no PERCENT, P2b), `grid-track-minmax` (`minmax()` has no
@@ -93,8 +97,8 @@ equivalent:
     REWRITING the declaration or under-reports it — lossy readback, P9), and
     `grid-child-grow` (`layoutGrow` inside a grid is silently accepted with
     no effect — refused so a dead fact is never minted, P4).
-  - **NOT BUILT YET — auto-placed grids** (no explicit per-child placement):
-    see [§B.22](#b22-auto-placed-grids-g5-placement-from-order-promotion-is-not-built).
+  - What auto-placement carries, and the two shapes it still refuses, is in
+    [§B.22](#b22-auto-placed-grids-g5-placement-from-order-landed-with-two-named-fences).
 - **`position: fixed`, `position: sticky`** — refused. Confirmed REFUSED in
   today's `npm run conformance`.
 - **`transform`, and the independent `rotate` property** — refused. This is
@@ -945,34 +949,60 @@ PROVENANCE prose.
 
 **What it would take — five small rounds.** Named follow-up.
 
-## B.22 Auto-placed grids: G5 placement-from-order promotion is not built
+## B.22 Auto-placed grids: G5 placement-from-order landed, with two named fences
 
-The A2 layout landing carries **explicitly-placed** declared-track grids (see
-the reclassified grid entry in [§A.1](#a1-css-constructs-with-no-canvas-spelling)).
-It deliberately did NOT land G5 of the pinned grammar
-(`docs/research/layout-grammar-proposal.md`): a grid whose children carry no
-explicit `grid-row`/`grid-column` — the single most common way CSS authors
-write a grid — abandons promotion with the named receipt
-`grid-promotion-fallback: … auto-placed … (G5) is not promoted from the
-computed floor this round` and falls back to the flex-era path: a 2-D grid
-refuses (`grid-two-dimensional`), a 1-D grid lowers to a flex row/column from
-measured track counts.
+**CLOSED for the declared-track case (2026-08-08).** A grid whose children
+carry no explicit `grid-row`/`grid-column` — the single most common way CSS
+authors write a grid — used to abandon promotion (`grid-promotion-fallback: …
+auto-placed … (G5) is not promoted from the computed floor this round`) and
+fall back to the flex-era path: a 2-D grid refused `grid-two-dimensional`, a
+1-D grid lowered to a flex row/column from measured track counts.
+`promoteGridLayout` (`extract/computed/anatomy.ts`) now derives each child's
+cell from DOM order exactly as CSS row flow resolves it — row-major, sparse
+cursor, spans shifting every later item (CSS Grid §8.5) — and then **declares**
+the result two ways, both pinned by G5:
 
-**Measured, recorded open** in `conformance/BASELINE.json` (the two-sided
-ratchet keeps them visible, never absorbed): `grid-2d`, `grid-two-column`,
+| the author declared… | what the contract carries | receipt |
+|---|---|---|
+| row tracks (`grid-template-rows`) | the declared `layout.rows` + the derived cells as EXPLICIT `Part.placement` anchors — `flow: "row"` is unavailable here because G5 omits `rows` under flow, so declaring it would DROP the author's row list | `grid-order-placement` |
+| no row tracks | `layout.flow: "row"`, `rows` omitted, no anchors — every row of such a grid is implicit in CSS, and carrying Chromium's resolved implicit row list would write a declaration the author never made (P9); the emitter declares `ceil(children / columns)` explicit tracks itself on the canvas | `grid-flow-order-placement` |
+
+**Measured**, in `conformance/BASELINE.json` (the two-sided ratchet: the fix
+had to be re-recorded, it could not be absorbed): `grid-two-column`,
 `grid-sidebar-px-fr`, `grid-track-fit-content`, `grid-tracks-mixed-fractional`
-(WRONG-NAME: declared CARRIED by the manifest per the pinned grammar, engine
-lowers instead) and `grid-auto-flow-row` (the flow channel's order fact is
-named in the fallback receipt but not carried). The frozen spec subset keeps
-`grid-2d` REFUSED until the engine measures it CARRIED — a **staged widen**,
-per `spec/README.md`'s no-silent-widen rule.
+and `grid-auto-flow-row` all moved **WRONG-NAME → PASS**, and `grid-2d`
+measured CARRIED — which is what released the **staged widen**: the frozen
+spec subset moved `grid-2d` REFUSED → CARRIED as revision
+`spec-conformance-subset-v0.1.1`, recorded with its evidence in
+`spec/conformance/subset-v0.1.json`'s `changeLog` per `spec/README.md`'s
+no-silent-widen rule. All 31 `grid-*` conformance cases are green.
 
-**What it would take — an engine round, not research.** The grammar is pinned
-(G5: placement fact = child order; rows derived `ceil(children / columns)`
-declared explicitly by the emitter, never implicit, P9), the canvas half is
-probed (`ROW_AUTO_FLOW`, P5/P5b), and the conformance cases already exist and
-are red. Implementation is `promoteGridLayout` learning order-derived
-placement plus the P9 occupied-vs-declared fence.
+**What is still refused, by name.** The derivation is fenced, not universal:
+
+- **`grid-implicit-tracks` (P9)** — occupancy that leaves the declared track
+  rectangle. Three shapes reach it: a derived cell beyond the declared rows or
+  columns; a no-declared-rows grid whose `grid-auto-rows` SIZES the implicit
+  rows (that size has nowhere to land once the contract omits `rows`); and a
+  derivation whose occupied-row count disagrees with the resolved
+  `grid-template-rows` (the browser materialized tracks the derivation does
+  not predict). The canvas absorbs such overflow by rewriting the declaration
+  (P9) — the contract refuses instead.
+- **Half-auto and mixed children** — a child auto on one axis and explicit on
+  the other (its cell is a function of the solver's per-axis cursor, not a
+  declared fact), and a grid where some children place explicitly and others
+  do not (G2 pins all-or-none; mixing is schema-invalid). Both ABANDON the
+  promotion with a named receipt and take the flex-era fallback, exactly as
+  before.
+- **A column span wider than the declared column list** — CSS clamps it
+  silently, the canvas throws (`Column span exceeds grid column count`, P3),
+  so the contract refuses rather than carrying a clamped guess.
+
+**Still open, one direction away from here:** the CANVAS→contract half of the
+grid grammar. `extract/figma/dump.plugin.js` captures the `grid` block
+(tracks, gaps, `flow`, per-child cells) and `core/emit-figma-script.ts`
+compiles it, but `core/propose-figma.ts` never reads `DumpNode.grid` — a drawn
+grid still proposes as the flex-era lowering. The conformance fixture cannot
+see this: its canvas half is DECLARED, not measured (`spec/conformance/README.md`).
 
 ---
 

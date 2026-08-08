@@ -17,12 +17,12 @@ repo it is simply absent from the denominator and scores 100%.
 | | |
 |---|---|
 | cases | **82** |
-| 🟢 pass | **74** |
-| 🔴 red | **8** |
+| 🟢 pass | **79** |
+| 🔴 red | **3** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 41 · LOWERED 4 · REFUSED 19 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 42 · LOWERED 4 · REFUSED 18 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -65,62 +65,6 @@ manifest.
 - **canvas** — ABSENT: a stage-sized box is a measurement artefact, not a component fact
 - **verdict** — 🔴 **UNDECLARED-CARRY**: declared REFUSED but the engine CARRIED it — update the manifest
 
-## WRONG-NAME 🔴 — 5
-
-The loss is named — by a message that does not distinguish this construct from any
-other. This is the condition that hid Carbon's hollow checkbox: two constructs
-collapsing into one indistinguishable receipt.
-
-### `grid-auto-flow-row`
-
-- **construct** — `grid-auto-flow: row over declared columns, placement by child order`
-- **why it matters** — The one bounded auto-flow the canvas has; placement fact = order, and rows must be DECLARED (derived ceil(n/cols)), never implicit.
-- **declared** CARRIED
-- **measured** — channel `grid-auto-flow`; observed on `label`, `label-2`, `label-3`, `root`; carried **not at all**
-- **canvas** — PRESENT: The one bounded auto-flow the canvas has; placement fact = order, and rows must be DECLARED (derived ceil(n/cols)), never implicit.
-- **verdict** — 🔴 **WRONG-NAME**: declared CARRIED but NOT carried; the engine names "grid-auto-flow" somewhere — the manifest and the engine disagree about the disposition
-- **what the engine actually said** — `px in computed style and are carried from source) - grid-promotion-fallback: root — child "label" is auto-placed — the grid-auto-flow (row) placement-from-order fact (G5) is not promoted from the computed floor this round; the flow channel's order fact is dropped with the promotion; the flex-era lowering decides (name`
-
-### `grid-sidebar-px-fr`
-
-- **construct** — `grid-template-columns: 240px 1fr`
-- **why it matters** — The sidebar archetype — one fixed rail, one flexible content column.
-- **declared** CARRIED
-- **measured** — channel `grid-template-columns`; observed on `root`; carried **not at all**
-- **canvas** — PRESENT: The sidebar archetype — one fixed rail, one flexible content column.
-- **verdict** — 🔴 **WRONG-NAME**: declared CARRIED but NOT carried; the engine names "grid-template-columns" somewhere — the manifest and the engine disagree about the disposition
-- **what the engine actually said** — `rried: label-2 = "B" (no text prop sample matches — the mounted value is carried verbatim) - grid-tracks-declared: root.grid-template-columns carries the DECLARED list "240px 1fr" — verified against computed "240px 160px" (2 tracks; every px track agrees ≤0.5px; fr/fit spellings resolve to used px in computed style and`
-
-### `grid-track-fit-content`
-
-- **construct** — `grid-template-columns: fit-content(100%) 1fr`
-- **why it matters** — The one content-sized track the canvas can spell; anything else content-sized is refused.
-- **declared** CARRIED
-- **measured** — channel `grid-template-columns`; observed on `root`; carried **not at all**
-- **canvas** — PRESENT: The one content-sized track the canvas can spell; anything else content-sized is refused.
-- **verdict** — 🔴 **WRONG-NAME**: declared CARRIED but NOT carried; the engine names "grid-template-columns" somewhere — the manifest and the engine disagree about the disposition
-- **what the engine actually said** — `carried: label = "B" (no text prop sample matches — the mounted value is carried verbatim) - grid-tracks-declared: root.grid-template-columns carries the DECLARED list "fit-content(100%) 1fr" — verified against computed "40px 160px" (2 tracks; every px track agrees ≤0.5px; fr/fit spellings resolve to used px in compute`
-
-### `grid-tracks-mixed-fractional`
-
-- **construct** — `grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values)`
-- **why it matters** — Proves the track list is carried as typed values, not re-derived — fractional px and fr must survive byte-exact.
-- **declared** CARRIED
-- **measured** — channel `grid-template-columns`; observed on `root`; carried **not at all**
-- **canvas** — PRESENT: Proves the track list is carried as typed values, not re-derived — fractional px and fr must survive byte-exact.
-- **verdict** — 🔴 **WRONG-NAME**: declared CARRIED but NOT carried; the engine names "grid-template-columns" somewhere — the manifest and the engine disagree about the disposition
-- **what the engine actually said** — `rried: label-3 = "C" (no text prop sample matches — the mounted value is carried verbatim) - grid-tracks-declared: root.grid-template-columns carries the DECLARED list "33.5px 2.5fr 1fr" — verified against computed "33.5px 150px 60px" (3 tracks; every px track agrees ≤0.5px; fr/fit spellings resolve to used px in compu`
-
-### `grid-two-column`
-
-- **construct** — `display: grid; grid-template-columns: 1fr 1fr`
-- **why it matters** — The minimal 2-D layout; the exact construct the frozen grid-2d REFUSED case measures today.
-- **declared** CARRIED
-- **measured** — channel `grid-template-columns`; observed on `root`; carried **not at all**
-- **canvas** — PRESENT: supersedes the frozen grid-2d ABSENT declaration — the platform grew the spelling
-- **verdict** — 🔴 **WRONG-NAME**: declared CARRIED but NOT carried; the engine names "grid-template-columns" somewhere — the manifest and the engine disagree about the disposition
-- **what the engine actually said** — `rried: label-2 = "B" (no text prop sample matches — the mounted value is carried verbatim) - grid-tracks-declared: root.grid-template-columns carries the DECLARED list "1fr 1fr" — verified against computed "100px 100px" (2 tracks; every px track agrees ≤0.5px; fr/fit spellings resolve to used px in computed style and a`
-
 ## The frontier — every case
 
 | | case | feature | construct | declared | measured | verdict |
@@ -157,7 +101,7 @@ collapsing into one indistinguishable receipt.
 | 🟢 | `grid-in-flex-fill` | grid-composition | `a grid frame as a FILL child of a flex (auto-layout) parent` | CARRIED | carried | PASS |
 | 🟢 | `grid-instance-child` | grid-composition | `a component INSTANCE placed in a cell with position + FILL` | CARRIED | carried | PASS |
 | 🟢 | `grid-on-component-variant` | grid-composition | `layoutMode GRID on a COMPONENT node (canvas variants are components)` | CARRIED | carried | PASS |
-| 🔴 | `grid-auto-flow-row` | grid-flow | `grid-auto-flow: row over declared columns, placement by child order` | CARRIED | refused, other name | WRONG-NAME |
+| 🟢 | `grid-auto-flow-row` | grid-flow | `grid-auto-flow: row over declared columns, placement by child order` | CARRIED | carried | PASS |
 | 🟢 | `grid-flow-column` | grid-flow | `grid-auto-flow: column` | REFUSED | refused, by name | PASS |
 | 🟢 | `grid-flow-dense` | grid-flow | `grid-auto-flow: dense` | REFUSED | refused, by name | PASS |
 | 🟢 | `grid-implicit-tracks` | grid-flow | `auto-placement beyond the declared track list (implicit rows; grid-auto-rows reliance)` | REFUSED | refused, by name | PASS |
@@ -174,16 +118,16 @@ collapsing into one indistinguishable receipt.
 | 🟢 | `grid-child-fill-cell` | grid-sizing | `grid child stretching to its cell (CSS default; canvas FILL both axes)` | CARRIED | carried | PASS |
 | 🟢 | `grid-child-grow-invalid` | grid-sizing | `layout.grow / flex-grow on a child of a grid parent` | REFUSED | refused, by name | PASS |
 | 🟢 | `grid-child-text-hug` | grid-sizing | `a TEXT child hugging its content inside a grid cell` | CARRIED | carried | PASS |
-| 🔴 | `grid-sidebar-px-fr` | grid-tracks | `grid-template-columns: 240px 1fr` | CARRIED | refused, other name | WRONG-NAME |
-| 🔴 | `grid-track-fit-content` | grid-tracks | `grid-template-columns: fit-content(100%) 1fr` | CARRIED | refused, other name | WRONG-NAME |
+| 🟢 | `grid-sidebar-px-fr` | grid-tracks | `grid-template-columns: 240px 1fr` | CARRIED | carried | PASS |
+| 🟢 | `grid-track-fit-content` | grid-tracks | `grid-template-columns: fit-content(100%) 1fr` | CARRIED | carried | PASS |
 | 🟢 | `grid-track-zero-value` | grid-tracks | `a 0px or 0fr track written to the canvas` | REFUSED | refused, by name | PASS |
-| 🔴 | `grid-tracks-mixed-fractional` | grid-tracks | `grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values)` | CARRIED | refused, other name | WRONG-NAME |
-| 🔴 | `grid-two-column` | grid-tracks | `display: grid; grid-template-columns: 1fr 1fr` | CARRIED | refused, other name | WRONG-NAME |
+| 🟢 | `grid-tracks-mixed-fractional` | grid-tracks | `grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values)` | CARRIED | carried | PASS |
+| 🟢 | `grid-two-column` | grid-tracks | `display: grid; grid-template-columns: 1fr 1fr` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-display-none` | invariant | `a NON-PAINTING element carrying text (display: none)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-visibility-hidden` | invariant | `a NON-PAINTING element carrying text (visibility: hidden)` | REFUSED | refused, by name | PASS |
 | 🔴 | `stage-box-equal` | invariant | `a captured box exactly equal to the STAGE box (100% × 100%)` | REFUSED | carried | UNDECLARED-CARRY |
 | 🟢 | `flex-gap` | layout | `column-gap / row-gap in px` | CARRIED | carried | PASS |
-| 🟢 | `grid-2d` | layout | `display: grid + grid-template-columns: 1fr 1fr` | REFUSED | refused, by name | PASS |
+| 🟢 | `grid-2d` | layout | `display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED)` | CARRIED | carried | PASS |
 | 🟢 | `transition-channel` | motion | `transition: background-color 200ms ease` | CARRIED | carried | PASS |
 | 🟢 | `position-absolute-insets` | position | `position: absolute + top/left insets` | CARRIED | carried | PASS |
 | 🟢 | `position-fixed` | position | `position: fixed` | REFUSED | refused, by name | PASS |

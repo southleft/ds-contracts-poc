@@ -595,8 +595,11 @@ captured at all*, and it is the largest qualifier in this document.
   landing):* the lowering is now the FALLBACK, not the frontier — declared-track
   grids with explicit child placement promote as structured `layout.rows/columns/
   gap/areas` + `Part.placement` (conformance `grid-bento-span-matrix` et al.),
-  the 9 solver-half constructs refuse by `GRID_REFUSALS` name, and AUTO-PLACED
-  grids still take this fallback pending G5 promotion
+  the 9 solver-half constructs refuse by `GRID_REFUSALS` name, and — since the
+  G5 round (2026-08-08) — AUTO-PLACED grids promote too, their cells derived
+  from child order and then DECLARED (explicit anchors, or `layout.flow: "row"`
+  when the author declared no row tracks). What still takes this fallback is
+  half-auto/mixed placement and occupancy past the declared tracks
   ([docs/23 §B.22](23-known-limitations.md)).
 - **The two-axis decor product has no spelling.** Flowbite's toggle knob offset
   is a function of `Sizing × Checked`; `stylesWhen` conditions are single-prop

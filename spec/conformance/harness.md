@@ -14,7 +14,7 @@ The runner MAY use any language. It MUST accept the frozen subset file and emit 
 
 ```json
 {
-  "subsetId": "spec-conformance-subset-v0.1",
+  "subsetId": "spec-conformance-subset-v0.1.1",
   "implementation": {
     "name": "string",
     "version": "string",

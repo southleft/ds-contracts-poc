@@ -11,10 +11,6 @@
             "$value": "#f2f0ec",
             "$type": "color"
           },
-          "grid-template-rows": {
-            "$value": "16px",
-            "$type": "dimension"
-          },
           "min-height": {
             "$value": "0px",
             "$type": "dimension"
@@ -96,20 +92,6 @@
     "state": []
   },
   "codeOnlyChannels": [
-    {
-      "part": "root",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "grid",
-      "distinctValues": 1
-    },
-    {
-      "part": "root",
-      "channel": "grid-template-columns",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "33.5px 150px 60px",
-      "distinctValues": 1
-    },
     {
       "part": "label",
       "channel": "line-height",
@@ -201,8 +183,8 @@
       "literal-text-carried: label-2 = \"B\" (no text prop sample matches — the mounted value is carried verbatim)",
       "literal-text-carried: label-3 = \"C\" (no text prop sample matches — the mounted value is carried verbatim)",
       "grid-tracks-declared: root.grid-template-columns carries the DECLARED list \"33.5px 2.5fr 1fr\" — verified against computed \"33.5px 150px 60px\" (3 tracks; every px track agrees ≤0.5px; fr/fit spellings resolve to used px in computed style and are carried from source)",
-      "grid-promotion-fallback: root — child \"label\" is auto-placed — the grid-auto-flow (row) placement-from-order fact (G5) is not promoted from the computed floor this round; the flow channel's order fact is dropped with the promotion; the flex-era lowering decides (named)",
-      "grid-lowering: root grid 3×1 → flex row, cross-axis stretch from align-items:normal (measured track counts)"
+      "grid-flow-order-placement: root — 3 auto-placed child(ren) over 3 declared column track(s) → 1 occupied row(s) (ceil(3/3), P9's derivation); the author declared NO row tracks, so layout.flow \"row\" carries the order fact (G5: gridItemsPositioning ROW_AUTO_FLOW, placement fact = CHILD ORDER, P5) and `rows` is OMITTED — the resolved implicit row list (\"16px\") is NOT carried, because it is a declaration the author never made (P9); the emitter declares ceil(3/3) = 1 explicit row track(s) itself on the canvas surface (G5/G6), never an implicit one",
+      "grid-promoted: root — 3 declared column tracks carried as layout.columns + flow \"row\" (rows derived by the emitter, G5); 3 child(ren) placed by ORDER (no anchors carried — G5/P5)"
     ],
     "refusals": []
   },
