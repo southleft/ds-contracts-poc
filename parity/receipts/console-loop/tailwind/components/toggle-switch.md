@@ -34,3 +34,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - reviewedAt: `2026-08-06T15:40:19.657Z`
 - matchDeveloped: **false**
 - defect: re-synced from contract; developed score pending
+
+## 2026-08-08 — FC-FONT-SUBSTRATE harness landed; this stem stays fail-closed by name
+
+- cfg.fonts (per-library @font-face, data:-URI, network-free) landed and converted altitude chip/link. This library is left unconfigured: no library-true font file exists in a committed/sandboxed source (see receipt note). Reference NOT re-pinned; residual cause updated on the receipt.

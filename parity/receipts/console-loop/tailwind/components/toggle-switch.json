@@ -47,11 +47,12 @@
   "matchDeveloped": false,
   "reviewedAt": "2026-08-06T15:40:19.657Z",
   "notes": [
-   "Re-synced 2026-08-06 from toggle-switch.figma.js via Console MCP (12\u00d78KB clientStorage chunk append; ELLIPSE strokeSides guard in BOTH applyLits + shapeRuntime). Forced amend after unchanged skip; rebuilt 6 variants on 1:2296.",
-   "White ELLIPSE thumbs present at Sm (16\u00d716), Md (20\u00d720), Lg (24\u00d724) for both Checked states; fill rgb(1,1,1).",
+   "Re-synced 2026-08-06 from toggle-switch.figma.js via Console MCP (12×8KB clientStorage chunk append; ELLIPSE strokeSides guard in BOTH applyLits + shapeRuntime). Forced amend after unchanged skip; rebuilt 6 variants on 1:2296.",
+   "White ELLIPSE thumbs present at Sm (16×16), Md (20×20), Lg (24×24) for both Checked states; fill rgb(1,1,1).",
    "Checked travel: right-anchor right:2px (PROVENANCE); Md checked x=22 on 44px track. Human spot-check PASS 2026-08-07 for thumb travel.",
    "matchDeveloped stays false until like-for-like pixel score recommends.",
-   "Re-synced via clientStorage chunks (n=12, total=93225); nodeId=1:2296"
+   "Re-synced via clientStorage chunks (n=12, total=93225); nodeId=1:2296",
+   "FC-FONT-SUBSTRATE update 2026-08-08: the harness now supports per-library @font-face loading (extract/computed cfg.fonts — altitude converted with it: chip 0.67 / link 2.01). Tailwind/Flowbite stays UNCONFIGURED by name: the library ships no webfont — its stack IS the platform system stack (-apple-system, Segoe UI, Roboto, ...), so there is no library-true font file to commit, and the canvas renders Inter (Figma fallback for an unloadable system family). Pinning Inter into the reference would be a guessed face (requires __review:fonts ack) and no Inter woff2 exists in any committed/sandboxed source — network fetch at render/check time is forbidden. Still fail-closed on the same cause, now named precisely."
   ],
   "defects": [
    "Developed pixel score still composition-blocked (set shot vs gate-shot cell).",
@@ -89,7 +90,7 @@
     "matchDevelopedReason": "agent AA=6.15",
     "matchedAt": "2026-08-08T03:23:43.356Z"
    },
-   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=6.15, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk \u2014 prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=6.15, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
   }
  },
  "fingerprint": {
@@ -99,7 +100,7 @@
    ":COMPONENT_SET/ToggleSwitch|fill|[]",
    ":COMPONENT_SET/ToggleSwitch|radius|5,5,5,5",
    ":COMPONENT_SET/ToggleSwitch|sizing|FIXED/FIXED AUTO",
-   ":COMPONENT_SET/ToggleSwitch|description|ToggleSwitch \u00e2\u0080\u0094 generated from contract flowbite.toggleswitch v0.2.0 \u00e2\u0080",
+   ":COMPONENT_SET/ToggleSwitch|description|ToggleSwitch â generated from contract flowbite.toggleswitch v0.2.0 â",
    ":COMPONENT_SET/ToggleSwitch|propdef|Checked:VARIANT=Unchecked",
    ":COMPONENT_SET/ToggleSwitch|propdef|Label#1:766:TEXT=Toggle",
    ":COMPONENT_SET/ToggleSwitch|propdef|Sizing:VARIANT=Md",
@@ -122,8 +123,8 @@
   "mismatches": [],
   "gaps": [],
   "matchedAxes": [
-   "Sizing enum \u2192 Md/Sm/Lg",
-   "Checked enum \u2192 Unchecked/Checked",
+   "Sizing enum → Md/Sm/Lg",
+   "Checked enum → Unchecked/Checked",
    "TEXT Label"
   ],
   "observed": {

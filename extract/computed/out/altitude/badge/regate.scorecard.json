@@ -140,6 +140,36 @@
       "leavesAdded": 282,
       "divergent": [
         {
+          "token": "imported.badge.root.background-color.danger",
+          "fresh": "#f05735",
+          "shipped": "{theme-color-background-danger-default}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.info",
+          "fresh": "#4375ff",
+          "shipped": "{theme-color-background-info-default}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.success",
+          "fresh": "#3ee48c",
+          "shipped": "{theme-color-background-success-default}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.unset",
+          "fresh": "#f4f3f1",
+          "shipped": "{theme-color-background-default-stronger}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.warning",
+          "fresh": "#ffab00",
+          "shipped": "{theme-color-background-warning-default}",
+          "resolvedEqual": true
+        },
+        {
           "token": "imported.badge.root.color.danger",
           "fresh": "#1f0600",
           "shipped": "{theme-color-content-danger-weak}",

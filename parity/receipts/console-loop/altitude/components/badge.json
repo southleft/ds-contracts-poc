@@ -44,12 +44,13 @@
   "notes": [
    "Re-synced 2026-08-06 from re-emitted badge.figma.js via Console MCP (fetch :9228, 67617 bytes). Amended 1:2963; rebuilt 8 variants.",
    "Dot=Default: label TEXT \"Badge\" visible on all four Variant rows (Info/Success/Warning/Danger).",
-   "Dot=Dot: no label text; 8\u00d78 pill/dot only.",
-   "Developed score pending \u2014 do not treat as visual pass.",
-   "Re-synced via clientStorage chunks (n=9, total=67617); nodeId=1:2963"
+   "Dot=Dot: no label text; 8×8 pill/dot only.",
+   "Developed score pending — do not treat as visual pass.",
+   "Re-synced via clientStorage chunks (n=9, total=67617); nodeId=1:2963",
+   "Reference re-pinned 2026-08-08 with IBM Plex Sans @font-face (FC-FONT-SUBSTRATE reference-side closure); trap-corpus ref copy updated in lockstep. Score moved 6.44 -> 15.44 because the canvas is Inter Semi Bold — residual is canvas-side, named above."
   ],
   "defects": [
-   "FC-FONT-SUBSTRATE: developed gate-shot reference renders the CSS fallback font (computed-extract harness loads no @font-face; \"IBM Plex Sans\" stack falls back to Arial/Helvetica), so canvas glyphs cannot converge below the 5% bar \u2014 pctAAMasked 6.44 (Inter Semi Bold on canvas; sizes 44x20 vs 45x20, colors exact). Root-cause fixes landed this round: FC-THEME-ISO collection-preference rebind (was bound to a Polaris provisional light-blue) + contract font-family carriage."
+   "FC-FONT-SUBSTRATE closed on the REFERENCE side 2026-08-08 (cfg.fonts loads IBM Plex Sans in the gate render; ref re-pinned, now real Plex SemiBold glyphs) — but the CANVAS cell renders Inter Semi Bold (the Figma runtime fell back at generation time; see the 6.44-era note \"Inter Semi Bold on canvas\"), so the glyph substrates now genuinely differ: pctAAMasked 6.44 (Plex-vs-fallback ref) -> 15.44 (Plex ref vs Inter canvas), both instruments agree. RESIDUAL: canvas-side font fallback — the badge set needs regeneration with \"IBM Plex Sans\" actually loaded (family+style naming) via the console loop; a truer reference scoring worse than a fallback reference is the expected honest direction of this re-pin."
   ],
   "reference": "extract/computed/out/altitude/badge/gate-shots/info.default__default.png",
   "reviewSurface": "cream-#F8F4ED-component-set",
@@ -72,7 +73,7 @@
     "matchDevelopedReason": "agent score AA=6.44 compositionOk after FC-THEME-ISO",
     "matchedAt": "2026-08-08T03:05:33.271Z"
    },
-   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=6.44, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk \u2014 prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=6.44, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
   }
  },
  "fingerprint": {
@@ -82,7 +83,7 @@
    ":COMPONENT_SET/Badge (altitude.badge)|fill|[]",
    ":COMPONENT_SET/Badge (altitude.badge)|radius|5,5,5,5",
    ":COMPONENT_SET/Badge (altitude.badge)|sizing|FIXED/FIXED AUTO",
-   ":COMPONENT_SET/Badge (altitude.badge)|description|Badge \u00e2\u0080\u0094 generated from contract altitude.badge v0.2.0 \u00e2\u0080",
+   ":COMPONENT_SET/Badge (altitude.badge)|description|Badge â generated from contract altitude.badge v0.2.0 â",
    ":COMPONENT_SET/Badge (altitude.badge)|propdef|Content#1:773:TEXT=Badge",
    ":COMPONENT_SET/Badge (altitude.badge)|propdef|Dot:VARIANT=Default",
    ":COMPONENT_SET/Badge (altitude.badge)|propdef|Variant:VARIANT=Info",
@@ -107,8 +108,8 @@
    "canvas-absent: no State axis (contract has empty/absent states)"
   ],
   "matchedAxes": [
-   "Variant enum \u2192 Info/Success/Warning/Danger",
-   "Dot enum \u2192 Default/Dot",
+   "Variant enum → Info/Success/Warning/Danger",
+   "Dot enum → Default/Dot",
    "TEXT Content",
    "first-variant fill bound: imported/badge/root/background-color/info"
   ],

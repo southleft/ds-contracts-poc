@@ -40,3 +40,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - matchDeveloped: **true**
 - reference: examples/astryx/receipts/site/Button.png; examples/astryx/tokens/astryx-docs.dtcg.json
 - defects: none
+
+## 2026-08-08 — FC-FONT-SUBSTRATE harness landed; this stem stays fail-closed by name
+
+- cfg.fonts (per-library @font-face, data:-URI, network-free) landed and converted altitude chip/link. This library is left unconfigured: no library-true font file exists in a committed/sandboxed source (see receipt note). Reference NOT re-pinned; residual cause updated on the receipt.

@@ -563,8 +563,12 @@ Other smoke probes worth running before capture, all from the Carbon round:
   so does the same probe for a font that is certainly not installed, because
   `fonts.check` reports "can this text be rendered", which fallback always
   satisfies. If your library's `@font-face` sources are remote URLs and the
-  harness is network-free, **your webfont is not loaded** and your text metrics
-  are fallback metrics. Record it; do not work around it.
+  harness is network-free, **your webfont is not loaded by default** and your
+  text metrics are fallback metrics. If the real font files are obtainable
+  from a committed or sandboxed source (many ship on npm — IBM Plex does),
+  declare them in the config's `fonts` field (docs/23 §C.5): each face is
+  inlined as a `data:` URI, still zero network. Where they are not
+  obtainable, record it; do not work around it.
 - **Reduced motion / transitions.** Check that your library's transition
   durations are shorter than the capture's steady-state probe (two consecutive
   stable samples at 60 ms, up to 1.5 s). Carbon's 240 ms modal animation is
@@ -712,7 +716,7 @@ error. (This is the second time it has been written down —
 | Parts refuse to align; part count changes per combo | A modifier class survived `classAllow` | §4.1 |
 | A `display:block` component captures shrink-to-fit (MUI's 114 px Card) | The stage is a flex row by default | `"blockStage": true` |
 | A full-bleed overlay paints over every other stage and swallows the interaction drivers | Overlay captured on the shared census page | `"portalCapture": true` + `openDriver` |
-| Pixel-AA is 0 everywhere while computed equality is high | Your webfont is not loaded in the network-free harness; both renders fall back but glyph metrics diverge | Expected on any library that does not ship its webfont locally. **Read the computed-equality number, not the pixel number**, and say so in your PROVENANCE |
+| Pixel-AA is 0 everywhere while computed equality is high | Your webfont is not loaded (no `fonts` field in the config); both renders fall back but glyph metrics diverge | Expected on any library that does not ship its webfont locally and declares no `fonts` faces. If the files are obtainable offline, configure `fonts` (docs/23 §C.5); otherwise **read the computed-equality number, not the pixel number**, and say so in your PROVENANCE |
 
 ---
 

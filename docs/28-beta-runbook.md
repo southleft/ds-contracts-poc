@@ -96,7 +96,7 @@ drawing.
 | You observe | It is | ID |
 |---|---|---|
 | a hand-built set produces code with `imported.*` token names | provisional minted tokens — placeholders for your vocabulary; rename them | [docs/00 path A](00-choose-your-path.md) |
-| text widths slightly off; long labels clip or overflow | no webfonts load in any harness (fallback-font widths), and text wrapping is not implemented | [§C.5](23-known-limitations.md) · [§B.3](23-known-limitations.md) |
+| text widths slightly off; long labels clip or overflow | webfonts load only where the library's capture config declares a `fonts` field (unconfigured libraries render fallback-font widths), and text wrapping is not implemented | [§C.5](23-known-limitations.md) · [§B.3](23-known-limitations.md) |
 | no `useEffect`, keyboard handlers, or business logic in the output | a canvas cannot carry them — the contract holds canvas-expressible facts only | [§A.3](23-known-limitations.md), [docs/16](16-sync-boundary.md) |
 | the round trip is not lossless | correct — it *closes* (every fact lands in a named bucket); the accounting is public | [docs/24 §6.3](24-what-works.md) |
 

@@ -38,3 +38,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 ## 2026-08-08 — Track-2 hill-climb round 1
 
 - regenerated (nodeId=60:10083). FC-THEME-ISO closed: previous rebind had bound the info fill to a Polaris 'Imported (provisional)' variable (light blue); collection-preference runtime now picks the Altitude collection (#4375FF). font-family carried into the contract. Remaining 6.44 AA is FC-FONT-SUBSTRATE (ref renders fallback glyphs; no @font-face in harness) — fail-closed.
+
+## 2026-08-08 — FC-FONT-SUBSTRATE reference-side closure; residual is canvas-side
+
+- reference re-pinned with IBM Plex Sans loaded (cfg.fonts); trap-corpus ref copy updated in lockstep. Score moved 6.44 → 15.44 on BOTH instruments: the ref now renders real Plex SemiBold, but the canvas cell renders **Inter Semi Bold** (Figma runtime fell back at generation time). Still fail-closed — residual named on the receipt: the badge set needs canvas-side regeneration with "IBM Plex Sans"/"SemiBold" actually loaded. A truer reference scoring worse than a fallback reference is the honest direction of this re-pin.

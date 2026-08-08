@@ -598,14 +598,18 @@ captured at all*, and it is the largest qualifier in this document.
   element; the marker grammar resolves package *exports* only, and the pinned
   sandbox has no `@mui/icons-material`. A hand-drawn chevron would be a
   fabricated canvas fact, so there is none.
-- **Fonts are not loaded in the harness.** Carbon's `styles.css` carries 105
-  `@font-face` blocks, every `src` an Akamai CDN URL, and the harness is
-  network-free — so IBM Plex is not loaded and the metrics come from the fallback
-  stack. (`document.fonts.check` returns `true` for fonts that are certainly not
-  installed; it reports "can this be rendered", which fallback always satisfies.
-  It proves nothing.) Both sides of the gate degrade identically, so percentages
-  are unaffected; absolute text widths are fallback widths, and pixel-AA is 0
-  everywhere for that reason plus the uncarried type family.
+- **Fonts were not loaded in this harness run.** Carbon's `styles.css` carries
+  105 `@font-face` blocks, every `src` an Akamai CDN URL, and the harness is
+  network-free — so IBM Plex was not loaded and the metrics come from the
+  fallback stack. (`document.fonts.check` returns `true` for fonts that are
+  certainly not installed; it reports "can this be rendered", which fallback
+  always satisfies. It proves nothing.) Both sides of the gate degrade
+  identically, so percentages are unaffected; absolute text widths are
+  fallback widths, and pixel-AA is 0 everywhere for that reason plus the
+  uncarried type family. (Since 2026-08-08 a config may declare committed
+  font faces — docs/23 §C.5; Carbon's Plex ships in its sandbox's
+  `@ibm/plex-sans` but its config is not yet configured, so these numbers
+  stand as measured.)
 - **The `bound`-probe path spells a ref `{button-primary}` as
   `--button-primary`, not `--cds-button-primary`.** Shared pre-existing
   limitation across MUI, Tailwind and Carbon; harmless today because seed

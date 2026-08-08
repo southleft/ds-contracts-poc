@@ -44,3 +44,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 ## 2026-08-08 — Track-2 hill-climb round 1
 
 - regenerated (nodeId=60:10102). font-family carried; fill exact #4375FF both sides; 14.96 AA glyph-body — FC-FONT-SUBSTRATE, fail-closed.
+
+## 2026-08-08 — FC-FONT-SUBSTRATE closure (font-loading harness)
+
+- reference re-pinned (refs/link.png ← gate-shots/lg__default.png rendered with IBM Plex Sans loaded via cfg.fonts). SAME canvas cell shot. 14.96 → **2.01 AA, scored-pass** (headless REST instrument agrees: 2.01).

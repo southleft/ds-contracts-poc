@@ -29,3 +29,7 @@ Uploaded `examples/astryx/figma/switch.figma.js` via clientStorage chunk append 
 ## Fingerprint
 
 - v6 stamp: `v6:204491426` (46 lines)
+
+## 2026-08-08 — FC-FONT-SUBSTRATE harness landed; this stem stays fail-closed by name
+
+- cfg.fonts (per-library @font-face, data:-URI, network-free) landed and converted altitude chip/link. This library is left unconfigured: no library-true font file exists in a committed/sandboxed source (see receipt note). Reference NOT re-pinned; residual cause updated on the receipt.

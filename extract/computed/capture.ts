@@ -14,6 +14,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { Page } from 'playwright-core';
 import { ContractSchema, CONTRACT_STATES, type Contract } from '../../scripts/contract-schema.js';
 import { DRAFT_MARKER_KEY, draftRefusalMessage } from '../draft-capture-config.js';
@@ -29,6 +30,10 @@ import {
   type EnumerationResult,
   type StateAxisSpec,
 } from './lib.js';
+
+/** Repo root for repo-relative asset resolution (fonts) inside page builders
+ *  that only receive the HARNESS dir — the harness lives OUTSIDE the repo. */
+const CAPTURE_REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 // ---------------------------------------------------------------------------
 // Config (extract/computed/configs/*.json)
@@ -313,6 +318,48 @@ export interface CaptureConfig {
    *  contracts whose anatomy carries `icon.asset` refs (Spinner) need the
    *  same asset map the showcase generators use for validation + the gate. */
   icons?: string;
+  /** FC-FONT-SUBSTRATE (hillclimb §FC table) — OPT-IN per-library webfont
+   *  loading for every render this config drives (capture page, portal page,
+   *  fidelity-gate page). DEFAULT OFF: a config without this field renders
+   *  exactly as before — CSS-fallback glyphs — and no committed reference
+   *  moves until it is deliberately re-pinned.
+   *
+   *  Why it exists: the harness is network-free, so a library whose real
+   *  face arrives via a CDN `@import`/`@font-face` (Altitude's main.css
+   *  Google-Fonts import, Carbon's 105 Akamai-src faces) renders its text in
+   *  whatever the fallback stack resolves to — glyph-dominated pixel diffs
+   *  then fail-closed on a HARNESS artifact, not a conversion defect.
+   *
+   *  Each face names a font FILE from a committed or sandboxed source
+   *  (repo-relative; e.g. extract/computed/fonts/… committed from
+   *  @ibm/plex-sans — IBM Plex ships in npm). The file is inlined as a
+   *  base64 `data:` URI, so the page stays hermetic: NO network fetch at
+   *  render or check time, ever. A declared file that does not exist is
+   *  refused by name (a silently absent face would re-pin fallback glyphs
+   *  while the config claims the real ones).
+   *
+   *  DETERMINISM: same font files + same pinned Chromium on the recording
+   *  platform → same rasters (the data: URI carries the bytes; nothing is
+   *  resolved from the host). __REVIEW DISCIPLINE: when the family/weights
+   *  are the library's own declaration (Altitude's @import names IBM Plex
+   *  Sans 400/600), state that provenance in `__note`; when they are a GUESS
+   *  (a system-stack library with no webfont of its own), the field must
+   *  carry a `"__review:fonts"` marker until a human acks the choice —
+   *  drafts never re-pin references. */
+  fonts?: {
+    __note?: string;
+    faces: Array<{
+      /** CSS font-family name, exactly as the library's stack spells it. */
+      family: string;
+      /** CSS font-weight for the face (default 400). */
+      weight?: number | string;
+      /** CSS font-style for the face (default 'normal'). */
+      style?: 'normal' | 'italic';
+      /** Repo-relative font file (woff2/woff/ttf) from a committed or
+       *  sandboxed source — inlined as a data: URI, never fetched. */
+      file: string;
+    }>;
+  };
   browser: {
     viewport: { width: number; height: number };
     deviceScaleFactor: number;
@@ -842,7 +889,7 @@ createRoot(document.getElementById('root')).render(<App />);
   writeFileSync(
     path.join(pageDir, 'index.html'),
     `<!doctype html><html><head><meta charset="utf-8">
-${headStyleTags(harness, cfg)}${preScriptTag(cfg)}${bundleCss ? `<style>${bundleCss}</style>` : ''}
+${fontFaceStyleTag(CAPTURE_REPO_ROOT, cfg)}${headStyleTags(harness, cfg)}${preScriptTag(cfg)}${bundleCss ? `<style>${bundleCss}</style>` : ''}
 <style>html { color-scheme: ${cfg.browser.colorScheme}; } body { margin: 0; background: #ddd; }</style>
 </head><body><div id="root"></div>
 <script>
@@ -878,6 +925,53 @@ export function headStyleTags(harness: string, cfg: CaptureConfig): string {
       return `<style${s.id ? ` id="${s.id}"` : ''}>${css}</style>\n`;
     })
     .join('');
+}
+
+/** FC-FONT-SUBSTRATE — `fonts.faces` → one `<style>` of `@font-face` blocks
+ *  whose `src` is a base64 `data:` URI of the committed/sandboxed font file.
+ *  '' when the config declares none, so every existing page is byte-unchanged
+ *  (default off). A declared file that does not exist REFUSES BY NAME: a
+ *  silently missing face would re-pin fallback glyphs while the config claims
+ *  the library's real font. Hermetic by construction — the bytes ride the
+ *  page; nothing is fetched at render or check time. */
+const FONT_MIME: Record<string, string> = {
+  '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+  '.ttf': 'font/ttf',
+  '.otf': 'font/otf',
+};
+export function fontFaceCss(repoRoot: string, cfg: CaptureConfig): string {
+  const faces = cfg.fonts?.faces ?? [];
+  if (faces.length === 0) return '';
+  if (Object.keys(cfg.fonts as Record<string, unknown>).some((k) => k.startsWith('__review'))) {
+    throw new Error(
+      `fonts: config carries an unreviewed "__review:*" marker — a guessed font face never renders a reference (draft ≠ approved; delete the marker after human review)`,
+    );
+  }
+  return faces
+    .map((f) => {
+      const p = path.join(repoRoot, f.file);
+      if (!existsSync(p)) {
+        throw new Error(
+          `fonts: ${f.file} not found (${p}) — the "${f.family}" face would silently fall back and the render would carry fallback glyphs while the config claims the real font`,
+        );
+      }
+      const ext = path.extname(f.file).toLowerCase();
+      const mime = FONT_MIME[ext];
+      if (!mime) {
+        throw new Error(`fonts: ${f.file} has unsupported extension "${ext}" (woff2/woff/ttf/otf)`);
+      }
+      const data = readFileSync(p).toString('base64');
+      return `@font-face { font-family: ${JSON.stringify(f.family)}; font-weight: ${f.weight ?? 400}; font-style: ${f.style ?? 'normal'}; src: url(data:${mime};base64,${data}) format(${JSON.stringify(ext.slice(1))}); }`;
+    })
+    .join('\n');
+}
+
+/** The `<style>` tag wrapping fontFaceCss for the harness/portal/gate pages —
+ *  '' when no faces are configured (default off, pages byte-unchanged). */
+export function fontFaceStyleTag(repoRoot: string, cfg: CaptureConfig): string {
+  const css = fontFaceCss(repoRoot, cfg);
+  return css === '' ? '' : `<style data-harness-fonts>${css}</style>\n`;
 }
 
 /** SHADOW-DOM ROUND — `mount.preScript` → one inline `<script>` in <head>,
@@ -1874,7 +1968,7 @@ window.__setSpec(false);
   writeFileSync(
     path.join(pageDir, 'index.html'),
     `<!doctype html><html><head><meta charset="utf-8">
-${headStyleTags(harness, cfg)}${preScriptTag(cfg)}${bundleCss ? `<style>${bundleCss}</style>` : ''}
+${fontFaceStyleTag(CAPTURE_REPO_ROOT, cfg)}${headStyleTags(harness, cfg)}${preScriptTag(cfg)}${bundleCss ? `<style>${bundleCss}</style>` : ''}
 <style>html { color-scheme: ${cfg.browser.colorScheme}; } body { margin: 0; background: #ddd; }</style>
 </head><body><div id="root"></div>
 <script>document.addEventListener('click', (e) => e.preventDefault(), true);</script>

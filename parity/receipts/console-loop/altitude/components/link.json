@@ -37,18 +37,18 @@
   }
  },
  "visual": {
-  "ok": false,
-  "matchDeveloped": false,
+  "ok": true,
+  "matchDeveloped": true,
   "reviewedAt": "2026-08-06T13:32:20.271Z",
-  "notes": [],
-  "defects": [
-   "FC-FONT-SUBSTRATE: developed gate-shot reference renders the CSS fallback font (computed-extract harness loads no @font-face; \"IBM Plex Sans\" stack falls back to Arial/Helvetica), so canvas glyphs cannot converge below the 5% bar \u2014 pctAAMasked 14.96 (IBM Plex Sans Regular 18px vs fallback ref; fill exact #4375FF both sides)."
+  "notes": [
+   "FC-FONT-SUBSTRATE CLOSED 2026-08-08: reference re-pinned from gate-shots/lg__default.png rendered with IBM Plex Sans loaded (cfg.fonts, committed woff2, data: URI — network-free). pctAAMasked 14.96 -> 2.01 against the SAME canvas cell shot; headless REST instrument agrees (2.01). Prior defect: FC-FONT-SUBSTRATE: developed gate-shot reference renders the CSS fallback font (computed-extract harness loads no @font-face; \"IBM Plex Sans\" stack falls back to Arial/Helvetica), so canvas glyphs cannot converge below the 5% bar — pctAAMasked 14.96 (IBM Plex Sans Regular 18px vs fallback ref; fill exact #4375FF both sides)."
   ],
+  "defects": [],
   "reference": "parity/receipts/console-loop/altitude/refs/link.png",
   "reviewSurface": "cream-#F8F4ED-component-set",
   "referenceSource": "extract/computed/out/altitude/link/gate-shots/lg__default.png",
   "scorecard": "parity/receipts/console-loop/altitude/scores/link.json",
-  "status": "fail-closed",
+  "status": "scored-pass",
   "revoked": {
    "at": "2026-08-08T04:31:03.484Z",
    "was": {
@@ -57,8 +57,10 @@
     "matchDevelopedReason": "near-pass AA=15.13 compositionOk (FC-FONT-AA)",
     "matchedAt": "2026-08-08T03:20:06.682Z"
    },
-   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=15.13, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk \u2014 prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
-  }
+   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=15.13, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+  },
+  "matchDevelopedReason": "scorer AA=2.01 compositionOk after FC-FONT-SUBSTRATE closure (cfg.fonts: IBM Plex Sans @font-face in the gate render; reference re-pinned)",
+  "matchedAt": "2026-08-08T10:30:00.000Z"
  },
  "fingerprint": {
   "v6": "v6:2052539233",
@@ -67,7 +69,7 @@
    ":COMPONENT_SET/Link|fill|[]",
    ":COMPONENT_SET/Link|radius|5,5,5,5",
    ":COMPONENT_SET/Link|sizing|FIXED/FIXED AUTO",
-   ":COMPONENT_SET/Link|description|Link \u00e2\u0080\u0094 generated from contract altitude.link v0.2.0 \u00e2\u0080",
+   ":COMPONENT_SET/Link|description|Link â generated from contract altitude.link v0.2.0 â",
    ":COMPONENT_SET/Link|propdef|Content#1:819:TEXT=Link",
    ":COMPONENT_SET/Link|propdef|State:VARIANT=Default",
    ":COMPONENT_SET/Link|propdef|Variant:VARIANT=Xs",
@@ -78,7 +80,7 @@
    "/0:COMPONENT/Variant=Xs, State=Default|bound:itemSpacing|imported/link/root/column-gap",
    "/0:COMPONENT/Variant=Xs, State=Default|bound:minHeight|imported/link/root/min-height",
    "/0:COMPONENT/Variant=Xs, State=Default|bound:minWidth|imported/link/root/min-width",
-   "/0:COMPONENT/Variant=Xs, State=Default|reaction|ON_HOVER\u2192CHANGE_TO Variant=Xs, State=Hover",
+   "/0:COMPONENT/Variant=Xs, State=Default|reaction|ON_HOVER→CHANGE_TO Variant=Xs, State=Hover",
    "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.26274511218070984,\"g\":0.4588235318660736,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/link/root/color\"}}}]",
    "/0/0:TEXT/label|radius|0,0,0,0",
    "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
@@ -90,7 +92,7 @@
   "mismatches": [],
   "gaps": [],
   "matchedAxes": [
-   "Variant enum \u2192 Xs/Sm/Lg",
+   "Variant enum → Xs/Sm/Lg",
    "TEXT Content"
   ],
   "observed": {
@@ -163,6 +165,6 @@
   "generatedOrFound": true,
   "screenshotReviewed": true,
   "zeroMismatch": true,
-  "visualMatchDeveloped": false
+  "visualMatchDeveloped": true
  }
 }

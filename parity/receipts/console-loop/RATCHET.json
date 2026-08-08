@@ -5,20 +5,33 @@
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
-  "note": "Per-lane minimum scorecard-passed counts. The evidence gates fail a lane when its count of genuine pixel-scorecard passes (scores/<stem>.json with status pass, pctAAMasked<=5, compositionOk) drops below its floor — honesty cannot decay. Raise a floor when a new stem genuinely passes; never lower one without owner sign-off. first-party/mui have no pixel scorecards yet (attested-only lanes), so their floors are 0.",
+  "note": "Per-lane minimum scorecard-passed counts. The evidence gates fail a lane when its count of genuine pixel-scorecard passes (scores/<stem>.json with status pass, pctAAMasked<=5, compositionOk) drops below its floor — honesty cannot decay. Raise a floor when a new stem genuinely passes; never lower one without owner sign-off. first-party/mui have no pixel scorecards yet (attested-only lanes), so their floors are 0. 2026-08-08: altitude 4→6 (chip, link converted by the FC-FONT-SUBSTRATE font-loading harness — cfg.fonts loads the library's true faces in the gate render; passes hold on BOTH instruments: bridge cell shots and the headless REST lane).",
   "seededAt": "2026-08-07",
   "seededFrom": {
-    "altitude": ["button", "divider", "heading", "icon-close"],
+    "altitude": [
+      "button",
+      "divider",
+      "heading",
+      "icon-close",
+      "chip",
+      "link"
+    ],
     "astryx": [],
-    "carbon": ["icon-button", "text-input"],
+    "carbon": [
+      "icon-button",
+      "text-input"
+    ],
     "polaris": [],
-    "tailwind": ["badge", "button"]
+    "tailwind": [
+      "badge",
+      "button"
+    ]
   },
   "floors": {
     "first-party": 0,
     "mui": 0,
     "tailwind": 3,
-    "altitude": 4,
+    "altitude": 6,
     "astryx": 0,
     "carbon": 2,
     "polaris": 0

@@ -40,3 +40,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 - matchDeveloped: **false**
 - reference: extract/computed/out/tailwind/card/receipts/pair--__default.png
 - defect: Not a COMPONENT_SET; border/shadow aesthetic not match to Flowbite card pairs — fail closed.
+
+## 2026-08-08 — FC-FONT-SUBSTRATE harness landed; this stem stays fail-closed by name
+
+- cfg.fonts (per-library @font-face, data:-URI, network-free) landed and converted altitude chip/link. This library is left unconfigured: no library-true font file exists in a committed/sandboxed source (see receipt note). Reference NOT re-pinned; residual cause updated on the receipt.

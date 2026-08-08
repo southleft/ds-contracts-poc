@@ -54,3 +54,7 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 ## 2026-08-08 — Track-2 hill-climb round 1
 
 - regenerated (nodeId=60:10126). 5.12 AA, colors/sizes exact — FC-FONT-SUBSTRATE residual, fail-closed.
+
+## 2026-08-08 — FC-FONT-SUBSTRATE closure (font-loading harness)
+
+- reference re-pinned: gate render now loads IBM Plex Sans 400/600 (cfg.fonts, committed woff2 as data: URIs — the library's own Google-Fonts declaration, network-free). Offline regate re-rendered gate-shots; SAME canvas cell shot. 5.12 → **0.67 AA, scored-pass** (headless REST instrument agrees: 0.67).

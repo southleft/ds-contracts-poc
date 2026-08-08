@@ -51,20 +51,20 @@
   }
  },
  "visual": {
-  "ok": false,
-  "matchDeveloped": false,
+  "ok": true,
+  "matchDeveloped": true,
   "reviewedAt": "2026-08-06T13:32:20.271Z",
-  "notes": [],
-  "defects": [
-   "FC-FONT-SUBSTRATE: developed gate-shot reference renders the CSS fallback font (computed-extract harness loads no @font-face; \"IBM Plex Sans\" stack falls back to Arial/Helvetica), so canvas glyphs cannot converge below the 5% bar \u2014 pctAAMasked 5.12 (IBM Plex Sans Regular on canvas vs fallback ref; text color exact 0,11,41)."
+  "notes": [
+   "FC-FONT-SUBSTRATE CLOSED 2026-08-08: extract/computed configs gained a fonts field; altitude loads IBM Plex Sans 400/600 (the library's own Google-Fonts declaration) as committed data:-URI @font-face in the gate render. Reference re-pinned via offline regate; pctAAMasked 5.12 -> 0.67 against the SAME canvas cell shot. Prior defect: FC-FONT-SUBSTRATE: developed gate-shot reference renders the CSS fallback font (computed-extract harness loads no @font-face; \"IBM Plex Sans\" stack falls back to Arial/Helvetica), so canvas glyphs cannot converge below the 5% bar — pctAAMasked 5.12 (IBM Plex Sans Regular on canvas vs fallback ref; text color exact 0,11,41)."
   ],
-  "reference": "extract/computed/out/altitude/chip/gate-shots/info.unset__default.png",
+  "defects": [],
+  "reference": "parity/receipts/console-loop/altitude/refs/chip.png",
   "reviewSurface": "cream-#F8F4ED-component-set",
   "reSyncedAt": "2026-08-08T02:13:50.609Z",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/chip.png",
   "cellShot": "parity/receipts/console-loop/altitude/shots/chip-cell.png",
   "scorecard": "parity/receipts/console-loop/altitude/scores/chip.json",
-  "status": "fail-closed",
+  "status": "scored-pass",
   "revoked": {
    "at": "2026-08-08T04:31:03.484Z",
    "was": {
@@ -73,8 +73,11 @@
     "matchDevelopedReason": "near-pass font-AA",
     "matchedAt": "2026-08-08T02:54:20.882Z"
    },
-   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=74.91, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk \u2014 prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
-  }
+   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=74.91, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+  },
+  "matchDevelopedReason": "scorer AA=0.67 compositionOk after FC-FONT-SUBSTRATE closure (cfg.fonts: IBM Plex Sans @font-face in the gate render; reference re-pinned)",
+  "matchedAt": "2026-08-08T10:30:00.000Z",
+  "referenceSource": "extract/computed/out/altitude/chip/gate-shots/info.unset__default.png"
  },
  "fingerprint": {
   "v6": "v6:2414831033",
@@ -83,7 +86,7 @@
    ":COMPONENT_SET/Chip|fill|[]",
    ":COMPONENT_SET/Chip|radius|5,5,5,5",
    ":COMPONENT_SET/Chip|sizing|FIXED/FIXED AUTO",
-   ":COMPONENT_SET/Chip|description|Chip \u00e2\u0080\u0094 generated from contract altitude.chip v0.2.0 \u00e2\u0080",
+   ":COMPONENT_SET/Chip|description|Chip â generated from contract altitude.chip v0.2.0 â",
    ":COMPONENT_SET/Chip|propdef|Content#1:795:TEXT=Chip",
    ":COMPONENT_SET/Chip|propdef|State:VARIANT=Default",
    ":COMPONENT_SET/Chip|propdef|Type:VARIANT=Squared",
@@ -106,8 +109,8 @@
   "mismatches": [],
   "gaps": [],
   "matchedAxes": [
-   "Variant enum \u2192 Secondary/Info/Success/Warning/Danger",
-   "Type enum \u2192 Default + Squared",
+   "Variant enum → Secondary/Info/Success/Warning/Danger",
+   "Type enum → Default + Squared",
    "TEXT Content",
    "first-variant fill bound: imported/chip/root/background-color/secondary"
   ],
@@ -244,6 +247,6 @@
   "generatedOrFound": true,
   "screenshotReviewed": true,
   "zeroMismatch": true,
-  "visualMatchDeveloped": false
+  "visualMatchDeveloped": true
  }
 }

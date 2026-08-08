@@ -130,9 +130,10 @@ in your repo — plus the contract that produced them, in the same change.
   children are all absolutely placed changes nothing that is drawn). Those
   are the honest proportions behind "reviewable starting point".
 - **What will look broken but is a named limit:** absolute text widths are
-  fallback-font widths (no webfonts load in any harness); overlay
-  components carry no hover/focus/active planes; a distinct row-gap is
-  carried as a note, not a second gap. The inventory is
+  fallback-font widths wherever a library's capture config declares no
+  `fonts` field (webfonts load only where configured — Altitude is, today);
+  overlay components carry no hover/focus/active planes; a distinct row-gap
+  is carried as a note, not a second gap. The inventory is
   [docs/23](23-known-limitations.md).
 
 **The cost.** Minutes per set for the read; the real cost is the code
@@ -214,8 +215,10 @@ their component-property overrides.
   limit, and the 89.7% above describes only the tractable 8.0%.
 - **What will look broken but is a named limit:** text wrapping is not
   implemented (a hugging text node inside a narrower fixed ancestor clips);
-  no webfonts load in the harness; overlay components declare `states: []`
-  by design. Inventory: [docs/23](23-known-limitations.md).
+  webfonts load only where the library's capture config declares them
+  (unconfigured libraries render fallback glyphs); overlay components
+  declare `states: []` by design. Inventory:
+  [docs/23](23-known-limitations.md).
 
 **The cost.** Budget **hours per library** for the recon and the capture
 config — the three judgment calls (`classAllow`, `varPrefix`,

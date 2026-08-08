@@ -98,7 +98,9 @@ at the point of the related claim:
 3. **Brownfield workflow gaps:** no in-place adoption of a hand-built Figma
    set, API-only reconciliation, and no general concurrent-change merge or
    write-back workflow ([§§B.11–B.13](23-known-limitations.md#b11-adopting-a-hand-built-figma-set-is-not-a-verb-this-tool-has)).
-4. **Known fidelity and reader ceilings:** text wrapping and webfont metrics,
+4. **Known fidelity and reader ceilings:** text wrapping and webfont metrics
+   (per-library `fonts` loading exists; metrics stay fallback wherever
+   unconfigured),
    multi-axis geometry/paint products, unopened pseudo-element channels,
    responsive/viewport constructs, shorthand and `calc()` token references,
    and the other measured residuals in [§§B and C](23-known-limitations.md#b--not-built-yet).

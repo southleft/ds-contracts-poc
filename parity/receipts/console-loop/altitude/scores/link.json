@@ -1,24 +1,24 @@
 {
   "version": 3,
-  "status": "fail",
+  "status": "pass",
   "matchDeveloped": false,
-  "recommendMatchDeveloped": false,
+  "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 50.44642857142857,
-    "pctAAUnmasked": 14.955357142857142,
-    "pctAAMasked": 14.955357142857142,
+    "pctExactUnmasked": 37.94642857142857,
+    "pctAAUnmasked": 2.0089285714285716,
+    "pctAAMasked": 2.0089285714285716,
     "maskCoveragePct": 0,
     "canvasPx": "32x14",
-    "realPx": "32x13",
+    "realPx": "32x14",
     "inkCanvasPct": 42.857142857142854,
-    "inkRealPct": 41.964285714285715
+    "inkRealPct": 47.99107142857143
   },
   "reference": "parity/receipts/console-loop/altitude/refs/link.png",
-  "referenceSha256": "e6819b0a2dcde4692d620feac7bb4640232b9a1c05b8f8afd230227fa4f418fc",
+  "referenceSha256": "9ab4b242ddcb2a198fd6c22ef305a058107e7780c3ee70f007b8b1976b7a6e90",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/link-cell.png",
   "canvasShotSha256": "9a29dcdf805628ab62f5a5928b59c776430cfc5c46a373c9413e5ec8c91bad20",
   "diff": "parity/receipts/console-loop/altitude/scores/link.diff.png",
@@ -26,12 +26,12 @@
   "receipt": "parity/receipts/console-loop/altitude/components/link.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.0769230769230769,
-  "inkDelta": 0.8928571428571388,
+  "scaleRatio": 1,
+  "inkDelta": 5.1339285714285765,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=14.96 > 5)",
-  "recordedAt": "2026-08-08T07:19:56.926Z"
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-08T08:11:50.720Z"
 }

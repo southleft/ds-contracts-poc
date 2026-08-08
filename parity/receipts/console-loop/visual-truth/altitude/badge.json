@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 32.44444444444444,
-    "pctAAUnmasked": 6.222222222222222,
-    "pctAAMasked": 6.222222222222222,
+    "pctExactUnmasked": 42.888888888888886,
+    "pctAAUnmasked": 15.444444444444445,
+    "pctAAMasked": 15.444444444444445,
     "maskCoveragePct": 0,
     "canvasPx": "45x20",
-    "realPx": "45x20",
+    "realPx": "43x20",
     "inkCanvasPct": 92.88888888888889,
-    "inkRealPct": 92.44444444444444
+    "inkRealPct": 88
   },
   "reference": "extract/computed/out/altitude/badge/gate-shots/info.default__default.png",
-  "referenceSha256": "7ed600175241e64df782a1dead372009e62471cf088eff5a516efd882e2c1451",
+  "referenceSha256": "11b047fe79d9e498aa580ef1809d73d954ab8a4997942c863a79eaa8b1d352e4",
   "canvasShot": "parity/receipts/console-loop/visual-truth/altitude/shots/badge.png",
   "canvasShotSha256": "52296753ce1a211dcabd2a76433902630823eedaeb3ab2975b9c54cf64a642e7",
   "diff": "parity/receipts/console-loop/visual-truth/altitude/diffs/badge.diff.png",
@@ -35,9 +35,9 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 0.44444444444444287,
+  "scaleRatio": 1.0465116279069768,
+  "inkDelta": 4.888888888888886,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=6.22 > 5)"
+  "note": "pixel bar missed (pctAAMasked=15.44 > 5)"
 }
