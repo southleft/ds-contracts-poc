@@ -178,7 +178,11 @@ export {
 export {
   CODE_TARGET_LABELS,
   canvasCodePlan,
+  contractFileNameForId,
+  flatIdStem,
+  mintedTokensFileNameForId,
   plannedCodePaths,
+  proposalFileNameForId,
   provenanceHeadline,
   provenanceSentence,
   type CanvasProvenance,

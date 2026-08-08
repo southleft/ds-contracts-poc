@@ -1887,6 +1887,110 @@ return { ok: true };
   console.log(
     `✔ envelope v2: the CONTRACT-PROPOSAL export carries ALL THREE engine outputs — proposedContract + ${v2.childStubs.length} childStub(s) (${stubIds.join(', ')}) + mintedTokens (${v2.mintedTokens.count} token(s)); this pin fails the build if either payload is ever dropped again`,
   );
+
+  // (f) THE PR DOOR CARRIES THE ENVELOPE TOO. The copy/download and pairing
+  // doors ship childStubs + mintedTokens; the GitHub PR door used to plan
+  // exactly ONE PUT (the contract alone), so a hand-built set with nested
+  // instances landed a PR whose contract references child ids and minted
+  // token refs that were NOT in the PR — `generate` refuses it by name.
+  // The plan must now file every payload under the SAME names the CLI's
+  // propose-pr writes (contracts/<stem>.contract.json per stub,
+  // <contractId>.minted.dtcg.json for the tree), and the PR body must list
+  // every file.
+  const hostId = String(v2.proposedContract.id);
+  const prBase = {
+    owner: 'acme',
+    repo: 'design-system',
+    base: 'main',
+    path: `contracts/${hostId.replace(/^[^.]+\./, '')}.contract.json`,
+    contractJson: JSON.stringify(withStub.proposal, null, 2) + '\n',
+    contractId: hostId,
+    baseVersion: '(new — no base contract in the repo yet)',
+    summaryLines: withStub.summaryLines,
+    branchSuffix: 'fixture',
+  };
+  const envPlan = DSC.prPlan({ ...prBase, childStubs: withStub.childStubs, mintedTokens: withStub.mintedTokens });
+  const envPuts = envPlan.requests.filter((r) => r.method === 'PUT');
+  assert(
+    envPuts.length === 1 + withStub.childStubs.length + 1,
+    `PR DOOR REGRESSION: a proposal carrying ${withStub.childStubs.length} childStub(s) + mintedTokens must plan ${1 + withStub.childStubs.length + 1} PUTs (contract + each stub + minted tree) — got ${envPuts.length}`,
+  );
+  // Per-file paths: the CLI's propose-pr convention, byte for byte.
+  const expectStubPaths = stubIds.map((id) => `contracts/${String(id).replace(/^[^.]+\./, '')}.contract.json`);
+  const expectMintedPath = `contracts/${hostId}.minted.dtcg.json`;
+  const plannedPaths = envPlan.files.map((f) => f.path);
+  assert(
+    JSON.stringify(plannedPaths) === JSON.stringify([prBase.path, ...expectStubPaths, expectMintedPath]),
+    `PR plan file paths must match the CLI's propose-pr layout — expected ${JSON.stringify([prBase.path, ...expectStubPaths, expectMintedPath])}, got ${JSON.stringify(plannedPaths)}`,
+  );
+  assert(
+    envPuts.every((r, i) => r.url.endsWith('/contents/' + plannedPaths[i])),
+    'each planned PUT commits its own file (request order = file order)',
+  );
+  // The bytes are the CLI's bytes: stub files are the stub documents, the
+  // tokens file is the minted tree — pretty-printed with a trailing newline.
+  assert(
+    withStub.childStubs.every((stub, i) => envPlan.files[i + 1].contents === JSON.stringify(stub, null, 2) + '\n') &&
+      envPlan.files[envPlan.files.length - 1].contents === JSON.stringify(withStub.mintedTokens.tree, null, 2) + '\n',
+    'sidecar file contents are the envelope payloads verbatim (2-space JSON + trailing newline, the CLI spelling)',
+  );
+  // The body names every file and keeps the provenance-honesty copy.
+  assert(
+    envPlan.body.includes('## Files') &&
+      [prBase.path, ...expectStubPaths, expectMintedPath].every((p) => envPlan.body.includes('`' + p + '`')),
+    'the PR body lists EVERY file the PR carries, by path',
+  );
+  assert(
+    envPlan.body.includes('_The contract file in this PR is the proposed document; review it like any other contract diff._'),
+    'the envelope-carrying body keeps the existing review-honesty sentence',
+  );
+  // Dry-run lines surface the same plan — one numbered step per request.
+  const envDry = DSC.prDryRunLines({ ...prBase, childStubs: withStub.childStubs, mintedTokens: withStub.mintedTokens });
+  assert(
+    [prBase.path, ...expectStubPaths, expectMintedPath].every((p) => envDry.some((l) => l.includes(`Commit ${p} on `))),
+    'the dry run names every planned commit, sidecars included',
+  );
+  // RED TEST — strip the payloads from the envelope: the plan must FALL BACK
+  // to the documented contract-only shape (docs/00-choose-your-path.md, the
+  // GitHub PR door), byte-identical to the historic 4-step plan: one PUT,
+  // no Files section, same honesty sentence. Nothing may be invented.
+  const bare = DSC.prPlan(prBase);
+  assert(
+    bare.requests.length === 4 && bare.requests.filter((r) => r.method === 'PUT').length === 1 && bare.files.length === 1,
+    'a proposal WITHOUT childStubs/mintedTokens plans exactly the historic contract-only 4 steps (GET, POST branch, 1 PUT, POST pulls)',
+  );
+  assert(
+    !bare.body.includes('## Files') &&
+      bare.body.includes('_The contract file in this PR is the proposed document; review it like any other contract diff._'),
+    'the contract-only body keeps the documented wording — no invented Files section',
+  );
+  // RED TEST — a stub with no id is a NAMED refusal before any request is
+  // planned, never a silent drop back to a contract-only PR.
+  let stubRefusal = null;
+  try {
+    DSC.prPlan({ ...prBase, childStubs: [{ name: 'NoIdStub' }] });
+  } catch (e) {
+    stubRefusal = String((e && e.message) || e);
+  }
+  assert(
+    stubRefusal && stubRefusal.includes('REFUSED') && stubRefusal.includes('no non-empty string id'),
+    `a stub without an id must refuse BY NAME, not silently drop the file (got: ${stubRefusal})`,
+  );
+  // RED TEST — two files planning the same destination refuse by name (the
+  // CLI's assertUniqueDestinations, mirrored).
+  let dupRefusal = null;
+  try {
+    DSC.prPlan({ ...prBase, childStubs: [{ id: hostId }] });
+  } catch (e) {
+    dupRefusal = String((e && e.message) || e);
+  }
+  assert(
+    dupRefusal && dupRefusal.includes('REFUSED') && dupRefusal.includes('same destination'),
+    `a stub colliding with the main contract destination must refuse BY NAME (got: ${dupRefusal})`,
+  );
+  console.log(
+    `✔ PR door envelope: a proposal with ${withStub.childStubs.length} childStub(s) + mintedTokens plans ${envPuts.length} PUTs under the CLI's propose-pr file names (${plannedPaths.join(', ')}), the body lists every file; stripping the payloads falls back to the documented contract-only 4-step plan, and an id-less or colliding stub refuses BY NAME`,
+  );
   if (process.argv.includes('--show-brownfield')) {
     console.log('\n--- scan rows (plain words) ---\n  ' + report.lines.join('\n  '));
     console.log('\n--- base-less proposal for "HandBuilt" ---\n  ' + baseless.summaryLines.join('\n  ') + '\n');

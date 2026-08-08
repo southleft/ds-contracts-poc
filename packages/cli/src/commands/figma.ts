@@ -67,6 +67,11 @@ import {
 import path from "node:path";
 import { figmaScriptEmitter } from "../../../../core/emitter.js";
 import {
+  contractFileNameForId,
+  flatIdStem,
+  proposalFileNameForId,
+} from "../../../../core/canvas-code-plan.js";
+import {
   assertContractProvenance,
   markAwaitingCodeAdoption,
   revisionOf,
@@ -998,21 +1003,17 @@ export function parseProposal(
  *  and the old form let `ds.../../x` walk the write out of --out (executed:
  *  ESCAPED-STUB.contract.json landed one directory above the target). Every
  *  character outside the schema's own id alphabet is replaced, path separators
- *  included, so the result is always a single flat filename. */
-const flatIdStem = (id: string, fallback: string): string =>
-  id
-    .normalize("NFKC")
-    .replace(/[^a-zA-Z0-9._-]+/g, "-")
-    .replace(/\.\.+/g, ".")
-    .replace(/^[.-]+|[.-]+$/g, "") || fallback;
-
-export const contractFileNameForId = (id: string): string =>
-  `${flatIdStem(id.replace(/^[^.]+\./, ""), "stub")}.contract.json`;
-
-/** Proposal artifacts retain valid ids verbatim for backward-compatible
- * filenames, while hostile ids collapse to one flat basename. */
-export const proposalFileNameForId = (id: string): string =>
-  `${flatIdStem(id, "proposal")}.proposal.json`;
+ *  included, so the result is always a single flat filename.
+ *
+ *  MOVED to core/canvas-code-plan.ts (the plugin's GitHub PR door now plans
+ *  the same file layout, and the naming rule must be ONE function on both
+ *  sides) — re-exported here so every existing CLI import keeps working. */
+export {
+  contractFileNameForId,
+  flatIdStem,
+  mintedTokensFileNameForId,
+  proposalFileNameForId,
+} from "../../../../core/canvas-code-plan.js";
 
 /** Resolve a planned output below a trusted root. Both native and Windows
  * absolute forms are rejected so a plan remains safe across platforms. */

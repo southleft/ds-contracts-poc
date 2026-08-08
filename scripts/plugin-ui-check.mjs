@@ -300,9 +300,15 @@ const HAND_DUMP = {
   _degradations: [], _variables: {},
   HandBuilt: {
     setName: 'HandBuilt', type: 'COMPONENT_SET', nodeId: '5:6', key: 'key-5:6',
+    // A raw token-less fill (→ mintedTokens via mintUnbound) and a nested
+    // INSTANCE of a component with no contract in scope (→ childStubs): the
+    // same two forcing facts plugin-engine-check's HostCard uses, so the PR
+    // door's dry run below exercises the FULL envelope through the real UI.
     variants: [
-      { name: 'Size=sm', type: 'COMPONENT', bbox: { width: 100, height: 100 }, children: [] },
-      { name: 'Size=lg', type: 'COMPONENT', bbox: { width: 100, height: 100 }, children: [] },
+      { name: 'Size=sm', type: 'COMPONENT', bbox: { width: 100, height: 100 }, fill: { hex: 'f7521c' },
+        children: [{ name: 'chip', type: 'INSTANCE', instanceOf: 'ForeignChip', children: [] }] },
+      { name: 'Size=lg', type: 'COMPONENT', bbox: { width: 100, height: 100 }, fill: { hex: 'f7521c' },
+        children: [{ name: 'chip', type: 'INSTANCE', instanceOf: 'ForeignChip', children: [] }] },
     ],
   },
 };
@@ -363,6 +369,27 @@ ok(propHtml.includes('proposal READ FROM THE CANVAS'), '…with the base-less sc
 ok(propHtml.includes('>Copy JSON<') && propHtml.includes('>Download JSON<'), 'the proposal carries copy AND download');
 ok(!(await shown('#prop-pr-section')) === false, 'the PR door opens for a base-less proposal too');
 ok((await page.locator('#pr-path').inputValue()).indexOf('contracts/') === 0, 'the PR path pre-fills from the PROPOSED id when there is no base');
+
+// --- 5a-bis. THE PR DOOR CARRIES THE ENVELOPE (dry run through the real UI)
+// The HandBuilt dump above forces childStubs (ForeignChip instance) and
+// mintedTokens (raw f7521c fill). The PR door used to plan exactly one PUT —
+// the contract alone — so this dry run would have shown a PR whose contract
+// references files that are not in it. Now it must plan contract + stub +
+// minted tree under the CLI propose-pr file names. Zero network: #pr-dry
+// ships checked and the plan is pure.
+ok(await page.locator('#pr-dry').isChecked(), 'the PR door defaults to Dry run');
+await page.fill('#pr-repo', 'acme/design-system');
+await page.fill('#pr-base', 'main');
+await page.click('#pr-run');
+await page.waitForTimeout(400);
+const prDryHtml = await page.locator('#pr-result').innerHTML();
+ok(prDryHtml.includes('DRY RUN — no request leaves this window.'), 'Open PR with Dry run checked prints the plan without any network');
+const prPuts = (prDryHtml.match(/PUT https:\/\/api\.github\.com/g) || []).length;
+ok(prPuts === 3, 'ENVELOPE THROUGH THE PR DOOR: 1 child stub + minted tokens plan 3 PUTs — contract + stub + minted tree (got ' + prPuts + ')');
+ok(prDryHtml.includes('Commit contracts/hand-built.contract.json on '), 'the proposed contract commits at the pre-filled path');
+ok(prDryHtml.includes('Commit contracts/foreign-chip.contract.json on '), 'the auto-proposed stub commits under the CLI propose-pr name (contracts/foreign-chip.contract.json)');
+ok(prDryHtml.includes('Commit contracts/ds.hand-built.minted.dtcg.json on '), 'the minted token tree commits under the CLI propose-pr name (contracts/ds.hand-built.minted.dtcg.json)');
+ok(prDryHtml.includes("kept in this window's memory, never stored"), 'the session-only token note still closes the dry run');
 
 // --- 5b. CLOSING THE LOOP (task #40): what code does this proposal make? --
 // A hand-built set has no ds_contracts/contractId marker, so the marked

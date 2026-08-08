@@ -1641,6 +1641,11 @@
       contractId: String(identity.id || ''),
       baseVersion: baseRaw ? String(baseRaw.version || '') : '(new — no base contract in the repo yet)',
       summaryLines: lastProposal.summaryLines,
+      // ENVELOPE v2 — the same payloads the copy/download and pairing doors
+      // already carry. The PR used to send the contract ALONE, which landed
+      // child ids and minted token refs `generate` refuses by name.
+      childStubs: lastProposal.childStubs || [],
+      mintedTokens: lastProposal.mintedTokens || null,
     };
   }
 
@@ -1655,8 +1660,13 @@
     }
     var box;
     if ($('pr-dry').checked) {
+      var planLines;
+      try { planLines = DSC.prDryRunLines(input); } catch (e) {
+        addLine(resultBox('pr-result', false, 'No plan.'), String(e && e.message || e));
+        return;
+      }
       box = resultBox('pr-result', true, 'Dry run:');
-      DSC.prDryRunLines(input).forEach(function (l) { addLine(box, l); });
+      planLines.forEach(function (l) { addLine(box, l); });
       return;
     }
     var token = $('pr-token').value.trim();
@@ -1710,7 +1720,17 @@
   function runPrLive(DSC, input, token, box) {
     var api = 'https://api.github.com';
     var repoUrl = api + '/repos/' + input.owner + '/' + input.repo;
-    var plan = DSC.prPlan(input);
+    // ENVELOPE v2: the plan carries ONE file per envelope payload (contract +
+    // each stub contract + the minted token tree) — the same file layout and
+    // names `ds-contracts propose-pr` writes. A malformed envelope is a
+    // NAMED refusal here, before any request leaves the window.
+    var plan;
+    try { plan = DSC.prPlan(input); } catch (e) {
+      box.className = 'result err';
+      box.firstChild.textContent = 'PR not opened.';
+      addLine(box, String(e && e.message || e), 'error');
+      return;
+    }
     var fail = function (step, r) {
       box.className = 'result err';
       box.firstChild.textContent = 'PR not opened.';
@@ -1736,23 +1756,31 @@
       ghFetch(token, 'POST', repoUrl + '/git/refs', { ref: 'refs/heads/' + plan.branch, sha: baseInfo.sha }).then(function (r) {
         if (!r.ok) { fail('Creating branch ' + plan.branch, r); return; }
         addLine(box, 'Branch created: ' + plan.branch, 'ok');
-        // Existing file sha (update) vs new file (create).
-        ghFetch(token, 'GET', repoUrl + '/contents/' + input.path + '?ref=' + encodeURIComponent(baseInfo.base)).then(function (rf) {
-          var sha = rf.ok && rf.json && rf.json.sha ? rf.json.sha : undefined;
-          var content = btoa(unescape(encodeURIComponent(input.contractJson)));
-          var putBody = { message: 'propose: ' + input.contractId + ' contract change from Figma', branch: plan.branch, content: content };
-          if (sha) putBody.sha = sha;
-          ghFetch(token, 'PUT', repoUrl + '/contents/' + input.path, putBody).then(function (rc) {
-            if (!rc.ok) { fail('Committing ' + input.path, rc); return; }
-            addLine(box, 'Committed ' + input.path, 'ok');
+        // Commit every planned file in order (contract first, then the
+        // envelope sidecars). Existing file sha (update) vs new file (create).
+        var commitNext = function (i) {
+          if (i >= plan.files.length) {
             ghFetch(token, 'POST', repoUrl + '/pulls', { title: plan.title, head: plan.branch, base: baseInfo.base, body: plan.body }).then(function (rp) {
               if (!rp.ok) { fail('Opening the pull request', rp); return; }
               box.className = 'result ok';
               box.firstChild.textContent = 'PR opened.';
               addLine(box, rp.json.html_url, 'ok');
             });
+            return;
+          }
+          var f = plan.files[i];
+          ghFetch(token, 'GET', repoUrl + '/contents/' + f.path + '?ref=' + encodeURIComponent(baseInfo.base)).then(function (rf) {
+            var sha = rf.ok && rf.json && rf.json.sha ? rf.json.sha : undefined;
+            var putBody = { message: f.message, branch: plan.branch, content: btoa(unescape(encodeURIComponent(f.contents))) };
+            if (sha) putBody.sha = sha;
+            ghFetch(token, 'PUT', repoUrl + '/contents/' + f.path, putBody).then(function (rc) {
+              if (!rc.ok) { fail('Committing ' + f.path, rc); return; }
+              addLine(box, 'Committed ' + f.path, 'ok');
+              commitNext(i + 1);
+            });
           });
-        });
+        };
+        commitNext(0);
       });
     });
   }

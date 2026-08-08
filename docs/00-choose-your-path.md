@@ -81,9 +81,12 @@ capture, no channel key.
    what is actually drawn: variants become props, layers become anatomy,
    bound variables become token refs.
 2. Get the proposal into the repo — three doors, all reviewable: a **GitHub
-   PR** (fine-grained token, session-only; the PR carries the contract *and*
-   the emitted component), **Send to repo** (`ds-contracts figma receive
-   --out contracts` prints a pairing code; nothing is written without
+   PR** (fine-grained token, session-only; the PR carries the full proposal
+   envelope — the contract plus any auto-proposed stub contracts and minted
+   token tree, under the same file names `propose-pr` writes, so `generate`
+   accepts what lands; component code is emitted on the code side, by step 3
+   or `ds-contracts propose-pr`), **Send to repo** (`ds-contracts figma
+   receive --out contracts` prints a pairing code; nothing is written without
    `--apply`), or **copy the JSON out** and commit it yourself.
 3. `ds-contracts generate <contract> --out src/generated --target react
    --tokens <your.dtcg.json> --stories` — deterministic; the same contract
