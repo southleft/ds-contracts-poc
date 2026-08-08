@@ -133,6 +133,53 @@ const semanticsOf = (setName: string) => {
     'name "Primary Btn" → element "button"',
     btn.semantics.element === "button",
   );
+
+  // VOID-ELEMENT RE-ROOT (Eventz field case — Atoms/Checkbox + Atoms/Input):
+  // "checkbox"/"input" infer the VOID element "input", but a set whose
+  // anatomy DRAWS CHILDREN must never propose that shape — children cannot
+  // mount inside a void element, React refuses it at runtime and renders
+  // NOTHING, and validateContract refuses it by name on every emit surface.
+  // The proposer demotes to the "div" container with a REVIEW re-root note;
+  // the propose→emit invariant (a proposal is never a contract the emitter
+  // refuses) is exercised below by actually emitting it.
+  const voidSet = miniSet("Checkbox");
+  (voidSet.variants[0].children as DumpNode[]).push({
+    name: "Label",
+    type: "TEXT",
+    text: { characters: "Label", fontSize: 14, fontStyle: "Medium" },
+  } as DumpNode);
+  const voidR = proposeFromDump(voidSet, opts);
+  const voidC = voidR.contract as J;
+  check(
+    'input-named set WITH drawn children → element demoted to "div" (never the emitter-refused void shape), with a REVIEW re-root note',
+    voidC.semantics.element === "div" &&
+      voidC.semantics.role === undefined &&
+      voidR.notes.some(
+        (n) => n.includes("VOID element") && n.includes("re-root before adoption"),
+      ),
+  );
+  {
+    let refusal = "";
+    try {
+      const parsed = ContractSchema.parse(voidC);
+      emitReact(parsed, {
+        tokens: tokenInventoryFromJson([]),
+        icons: new Map(),
+        contracts: new Map([[parsed.id, parsed]]),
+      });
+    } catch (e) {
+      refusal = String(e).split("\n")[0];
+    }
+    if (refusal !== "") console.log(`    (refusal: ${refusal})`);
+    check(
+      "the demoted proposal EMITS — proposeFromDump never produces a contract the emitter refuses",
+      refusal === "",
+    );
+  }
+  check(
+    'a CHILDLESS input-named set keeps element "input" (the demotion is scoped to drawn children — ds.divider-class void roots stay legal)',
+    semanticsOf("Checkbox").semantics.element === "input",
+  );
 }
 
 // ===========================================================================

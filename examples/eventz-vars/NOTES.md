@@ -131,7 +131,7 @@ zero, and a non-zero count means the carry regressed.
 
 ## Atoms/Checkbox
 
-- semantics: element "input" ("checkbox"; the type="checkbox" attribute is not canvas-recoverable — author it) inferred from the set name "Atoms/Checkbox" — inference is mechanical (name/axis table), review
+- semantics: element "input" matched the name/axis table for set "Atoms/Checkbox", but the drawn anatomy mounts 2 child part(s) and <input> is a VOID element — children cannot mount inside it (React refuses the shape at runtime and renders NOTHING; the emitters refuse it by name). Proposed as container element "div" instead — REVIEW: re-root before adoption by mounting the native <input> control as a child part inside this container
 - variant axis "state" (default|focus|hover) IS the platform's interaction states, not API — promoted: the axis is NOT a prop; anatomy and base facts come from the 4 default-state variant(s); focus→focus-visible, hover→hover propose root state overrides
 - Atoms/Checkbox:root opacity: bound in 2/4 variants (isChecked=false, isDisabled=true, isChecked=true, isDisabled=true) — inconsistent, not proposed
 - Atoms/Checkbox:root: bound variable on "counterAxisSpacing" has no contract vocabulary — binding NAMED, not proposed (review)
@@ -217,7 +217,7 @@ zero, and a non-zero count means the carry regressed.
 
 ## Atoms/Input
 
-- semantics: element "input" inferred from the set name "Atoms/Input" — inference is mechanical (name/axis table), review
+- semantics: element "input" matched the name/axis table for set "Atoms/Input", but the drawn anatomy mounts 4 child part(s) and <input> is a VOID element — children cannot mount inside it (React refuses the shape at runtime and renders NOTHING; the emitters refuse it by name). Proposed as container element "div" instead — REVIEW: re-root before adoption by mounting the native <input> control as a child part inside this container
 - variant axis "state" (default|hover|focus) IS the platform's interaction states, not API — promoted: the axis is NOT a prop; anatomy and base facts come from the 6 default-state variant(s); hover→hover, focus→focus-visible propose root state overrides
 - Atoms/Input:root opacity: bound in 2/6 variants (isFilled=false, hasError=false, isDisabled=true, isFilled=true, hasError=false, isDisabled=true) — inconsistent, not proposed
 - Atoms/Input:root: bound variable on "counterAxisSpacing" has no contract vocabulary — binding NAMED, not proposed (review)
@@ -305,7 +305,7 @@ zero, and a non-zero count means the carry regressed.
 - Atoms/Tag:root opacity: bound in 1/5 variants (isInteractive=false, variant=parent, isActive=false) — inconsistent, not proposed
 - Atoms/Tag:root: bound variable on "counterAxisSpacing" has no contract vocabulary — binding NAMED, not proposed (review)
 - Atoms/Tag:root/Label text fill: token paths differ in depth: color.background.default vs color.background.brand vs color.content.default vs color.content.weak vs comp.button.color.content.default
-- Atoms/Tag:root/Label: typography varies across variants (fontSize 14, weight Bold/Medium) — no single text-style identity adopted (the first variant's value would be wrong for the others); font-size minted per variant where axis-correlated; font-weight minted per variant through the weight-name table where every name maps (unknown names stay NAMED) (review)
+- Atoms/Tag:root/Label: typography varies across variants (fontSize 14, weight Bold/Medium) with distinct text styles (body/sm-bold, body/sm, doc/spec/karla-medium-14) — font-size minted per variant with per-leaf text-style identity (exact Figma style name/key); font-weight minted per variant through the weight-name table where every name maps (unknown names stay NAMED)
 - Atoms/Tag:root/Icon: present exactly where "isInteractive" is false — the visibleWhen vocabulary has no negated form, so the condition is inexpressible; kept unconditional (declared fidelity limit), review
 - Atoms/Tag:root/Icon: nested instance of "Icons/Placeholder" LINKED to ds.icons-placeholder by componentSetKey 8f0ab06f0098a262cb887252f56e0ecbe530cca0 (dump v1.5 — rename-safe: the key matches the contract's anchors, whatever either side is named)
 - Atoms/Tag:root/Icon: fixed props of "Icons/Placeholder" canonicalized through ds.icons-placeholder's bindings

@@ -7,17 +7,17 @@ Score = % of pixels REPRODUCED, measured at the reference's own true scale with 
 | atoms-badge | 15 | 23.5 | 0 | 0 | 0 |
 | atoms-button | 8 | 59.8 | 0 | 16 | 0 |
 | atoms-icon-button | 10 | 65.3 | 0 | 20 | 0 |
-| atoms-checkbox | 0 | — | 0 | 5 | 4 |
-| atoms-input | 0 | — | 0 | 7 | 6 |
+| atoms-checkbox | 4 | 89.9 | 0 | 5 | 0 |
+| atoms-input | 6 | 84.1 | 0 | 7 | 0 |
 | atoms-tag | 5 | 34.3 | 0 | 8 | 0 |
 | molecules-alert | 4 | 30.1 | 0 | 0 | 0 |
-| **ALL** | 42 | **42.3** | | | |
+| **ALL** | 52 | **50.7** | | | |
 
 ## Honest residual notes — where the score goes, named
 
 Lead finding first, then the classes already on the record (NOTES.md, dumps/MERGED.json _degradations, or the harness header). None is silently healed; each costs this table points wherever it applies.
 
-- **VOID-ELEMENT MOUNT — ENGINE DEFECT, this kit's headline.** The name/axis inference proposed `semantics.element: "input"` for Atoms/Checkbox and Atoms/Input (uui's input-field-base drew no such name and got `div`), and core/emit-react.ts emits the anatomy's drawn children INSIDE that element. `<input>` is a void element, React refuses it at mount, and every Checkbox and Input row renders NOTHING — the 10 default-plane rows are the `unscored` column, not a low score. The emitter needs a void-element guard (or the reviewer must override the element before adoption); neither exists today, so the rows are refused by name rather than painted around.
+- **VOID-ELEMENT MOUNT — ENGINE DEFECT, CLOSED (was this kit's headline).** The name/axis inference proposed `semantics.element: "input"` for Atoms/Checkbox and Atoms/Input (uui's input-field-base drew no such name and got `div`), and core/emit-react.ts mounted the anatomy's drawn children INSIDE that element — `<input>` is a void element, React refuses it at mount, and every Checkbox and Input row rendered NOTHING (their 10 default-plane rows were the `unscored` column). Both halves now exist: validateContract refuses children-inside-a-void-element BY NAME on every emit surface (eval `refuse-void-element-children-mount`), and proposeFromDump demotes a void inference over drawn children to a `div` container root with a REVIEW re-root note (eval `design-void-element-re-root`) — the committed contracts carry that demoted shape, both components render, and their rows score in the table above. The re-root remains a REVIEW item: the container div draws the layout, but no native `<input>` control is mounted until a reviewer re-roots the anatomy, so the semantic control itself is still absent from the render.
 - **GRADIENT_LINEAR fills omitted** — dump v1 carries solid paints only, so the accent and featured Badge grounds (and any other gradient paint) were refused by name at capture; the render draws NO ground there and every such pixel scores as missing.
 - **textCase UPPER dropped** — the dump's typography projection carries (fontSize, fontStyle, style identity) only, so the canvas's "LABEL" renders as "Label". Named in _degradations per variant.
 - **icons-\* are STUBS** — the icon child sets were never imported; their contracts carry the observed bounding box and primary paint only (the stub-geometry rule), so every glyph drawing scores as a colored box at best.
@@ -39,8 +39,8 @@ Score = % pixels within tolerance under the superseded v2.0 rule (content-trim +
 | atoms-badge | 15 | 13.0 | 0 | 0 | 0 |
 | atoms-button | 8 | 59.7 | 0 | 16 | 0 |
 | atoms-icon-button | 10 | 67.3 | 0 | 20 | 0 |
-| atoms-checkbox | 0 | — | 0 | 5 | 4 |
-| atoms-input | 0 | — | 0 | 7 | 6 |
+| atoms-checkbox | 4 | 69.5 | 0 | 5 | 0 |
+| atoms-input | 6 | 82.7 | 0 | 7 | 0 |
 | atoms-tag | 5 | 48.6 | 0 | 8 | 0 |
 | molecules-alert | 4 | 87.9 | 0 | 0 | 0 |
-| **ALL** | 42 | **46.2** | | | |
+| **ALL** | 52 | **52.2** | | | |

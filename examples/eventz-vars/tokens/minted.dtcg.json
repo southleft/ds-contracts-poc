@@ -4,43 +4,106 @@
       "caption-lg-allcaps-bold": {
         "font-size": {
           "$value": "12px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "caption/lg-allcaps-bold"
+              }
+            }
+          }
         },
         "font-weight": {
           "$value": "700",
-          "$type": "number"
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "caption/lg-allcaps-bold"
+              }
+            }
+          }
         },
         "line-height": {
           "$value": "18px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "caption/lg-allcaps-bold"
+              }
+            }
+          }
         }
       },
       "body-sm": {
         "font-size": {
           "$value": "14px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/sm"
+              }
+            }
+          }
         },
         "font-weight": {
           "$value": "500",
-          "$type": "number"
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/sm"
+              }
+            }
+          }
         },
         "line-height": {
           "$value": "20px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/sm"
+              }
+            }
+          }
         }
       },
       "body-md-bold": {
         "font-size": {
           "$value": "16px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/md-bold"
+              }
+            }
+          }
         },
         "font-weight": {
           "$value": "700",
-          "$type": "number"
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/md-bold"
+              }
+            }
+          }
         },
         "line-height": {
           "$value": "20px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "body/md-bold"
+              }
+            }
+          }
         }
       }
     },

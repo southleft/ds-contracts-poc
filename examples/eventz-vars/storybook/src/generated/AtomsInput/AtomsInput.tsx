@@ -4,13 +4,13 @@
  * Regenerate with: npm run generate
  */
 import { forwardRef } from 'react';
-import type { InputHTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import { FieldLabel } from '../FieldLabel';
 import { InlineDanger } from '../InlineDanger';
 import { InlineHint } from '../InlineHint';
 import styles from './AtomsInput.module.css';
 
-export interface AtomsInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface AtomsInputProps extends HTMLAttributes<HTMLDivElement> {
   isFilled?: boolean;
   hasError?: boolean;
   isDisabled?: boolean;
@@ -24,7 +24,7 @@ export interface AtomsInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
-export const AtomsInput = forwardRef<HTMLInputElement, AtomsInputProps>(function AtomsInput(
+export const AtomsInput = forwardRef<HTMLDivElement, AtomsInputProps>(function AtomsInput(
   {
     isFilled = false,
     hasError = false,
@@ -44,7 +44,7 @@ export const AtomsInput = forwardRef<HTMLInputElement, AtomsInputProps>(function
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
-    <input
+    <div
       ref={ref}
       className={classes}
       data-is-filled={isFilled || undefined}
@@ -64,6 +64,6 @@ export const AtomsInput = forwardRef<HTMLInputElement, AtomsInputProps>(function
       </div>
       {hasError ? <InlineDanger supportingText="Danger text" /> : null}
       {hasHint ? <InlineHint supportingText="Hint text" /> : null}
-    </input>
+    </div>
   );
 });

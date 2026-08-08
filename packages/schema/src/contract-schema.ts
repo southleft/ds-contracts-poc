@@ -1667,6 +1667,37 @@ export function isNativeCheckablePart(part: Part): boolean {
   );
 }
 
+/** HTML VOID elements — no closing tag, no children, EVER. React refuses
+ *  children inside one at MOUNT, at runtime ("<input> is a void element tag
+ *  and must neither have children nor use dangerouslySetInnerHTML"), so a
+ *  contract that mounts anatomy children inside a void element renders
+ *  NOTHING and no build step ever says why (Eventz field case, 2026-08:
+ *  Atoms/Checkbox and Atoms/Input inferred `semantics.element: "input"` over
+ *  drawn children — every one of their 10 default-plane fidelity rows painted
+ *  nothing). ONE shared spelling so both ends of the pipe agree:
+ *    · validateContract (core/emit-react.ts) refuses the shape BY NAME on
+ *      every emit surface (react / html / react-inline / figma-script);
+ *    · proposeFromDump (core/propose-figma.ts) demotes a void element
+ *      inference to a container root with a REVIEW note, so a proposal can
+ *      never carry the shape the emitters refuse.
+ *  A void element with NO mounted children stays legal — that is
+ *  ds.divider's <hr> exactly. */
+export const VOID_ELEMENTS: ReadonlySet<string> = new Set([
+  "area",
+  "base",
+  "br",
+  "col",
+  "embed",
+  "hr",
+  "img",
+  "input",
+  "link",
+  "meta",
+  "source",
+  "track",
+  "wbr",
+]);
+
 // ---------------------------------------------------------------------------
 // Shared composition helpers (used by both generators and the differ)
 // ---------------------------------------------------------------------------

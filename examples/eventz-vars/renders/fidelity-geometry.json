@@ -527,6 +527,166 @@
    "height": 2
   }
  },
+ "atoms-checkbox--state_default_ischecked_false_isdisabled_false": {
+  "out": "fid--atoms-checkbox--state_default_ischecked_false_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 256,
+   "height": 55
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 240,
+   "height": 38
+  }
+ },
+ "atoms-checkbox--state_default_ischecked_false_isdisabled_true": {
+  "out": "fid--atoms-checkbox--state_default_ischecked_false_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 256,
+   "height": 55
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 240,
+   "height": 38
+  }
+ },
+ "atoms-checkbox--state_default_ischecked_true_isdisabled_false": {
+  "out": "fid--atoms-checkbox--state_default_ischecked_true_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 256,
+   "height": 55
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 240,
+   "height": 38
+  }
+ },
+ "atoms-checkbox--state_default_ischecked_true_isdisabled_true": {
+  "out": "fid--atoms-checkbox--state_default_ischecked_true_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 256,
+   "height": 55
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 240,
+   "height": 38
+  }
+ },
+ "atoms-input--state_default_isfilled_false_haserror_false_isdisabled_false": {
+  "out": "fid--atoms-input--state_default_isfilled_false_haserror_false_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 284,
+   "height": 84
+  },
+  "root": {
+   "x": 96,
+   "y": 97,
+   "width": 268,
+   "height": 66
+  }
+ },
+ "atoms-input--state_default_isfilled_false_haserror_false_isdisabled_true": {
+  "out": "fid--atoms-input--state_default_isfilled_false_haserror_false_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 284,
+   "height": 84
+  },
+  "root": {
+   "x": 96,
+   "y": 97,
+   "width": 268,
+   "height": 66
+  }
+ },
+ "atoms-input--state_default_isfilled_false_haserror_true_isdisabled_false": {
+  "out": "fid--atoms-input--state_default_isfilled_false_haserror_true_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 284,
+   "height": 106
+  },
+  "root": {
+   "x": 96,
+   "y": 97,
+   "width": 268,
+   "height": 88
+  }
+ },
+ "atoms-input--state_default_isfilled_true_haserror_false_isdisabled_false": {
+  "out": "fid--atoms-input--state_default_isfilled_true_haserror_false_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 284,
+   "height": 84
+  },
+  "root": {
+   "x": 96,
+   "y": 97,
+   "width": 268,
+   "height": 66
+  }
+ },
+ "atoms-input--state_default_isfilled_true_haserror_false_isdisabled_true": {
+  "out": "fid--atoms-input--state_default_isfilled_true_haserror_false_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 284,
+   "height": 84
+  },
+  "root": {
+   "x": 96,
+   "y": 97,
+   "width": 268,
+   "height": 66
+  }
+ },
+ "atoms-input--state_default_isfilled_true_haserror_true_isdisabled_false": {
+  "out": "fid--atoms-input--state_default_isfilled_true_haserror_true_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 284,
+   "height": 106
+  },
+  "root": {
+   "x": 96,
+   "y": 97,
+   "width": 268,
+   "height": 88
+  }
+ },
  "atoms-tag--state_default_isinteractive_false_variant_parent_isactive_false": {
   "out": "fid--atoms-tag--state_default_isinteractive_false_variant_parent_isactive_false.png",
   "clip": "union",

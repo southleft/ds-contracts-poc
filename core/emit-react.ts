@@ -29,6 +29,7 @@ import {
   slotsOf,
   statePreviewSubstProps,
   tokensByPropEntries,
+  VOID_ELEMENTS,
   walkAnatomy,
   type Contract,
   type Part,
@@ -1196,6 +1197,60 @@ export function validateContract(
           errors.push(`${contract.id}: semantics.elementByProp maps "${k}" to unknown element "${el}" — must be one of the element vocabulary`);
         }
       }
+    }
+  }
+
+  // VOID-ELEMENT MOUNT GUARD (Eventz field case — the emit-side half of the
+  // #48 wrong-element-mount class): HTML void elements cannot have children,
+  // and React refuses them at MOUNT, at RUNTIME — so a contract that mounts
+  // anatomy children inside a void element ships code that renders NOTHING
+  // and no build step ever says why (Eventz Atoms/Checkbox + Atoms/Input:
+  // element "input" over drawn children, 10 fidelity rows painted nothing).
+  // Refused BY NAME here, on every surface (react/html/react-inline/
+  // figma-script all validate through this function). A void element with NO
+  // mounted children stays legal — ds.divider's <hr> exactly.
+  {
+    /** What the emitters would mount INSIDE this part's element, or null. */
+    const mountedChildren = (part: Part): string | null => {
+      const n = Object.keys(part.parts ?? {}).length;
+      if (n > 0) return `${n} child part(s)`;
+      if (part.slot) return `a slot ("${part.slot.name}")`;
+      if (part.content) return `bound text content (prop "${part.content.prop}")`;
+      if (part.text !== undefined) return 'static text';
+      if (part.icon) return 'an icon glyph';
+      return null;
+    };
+    const refuseVoid = (site: string, el: string, what: string) => {
+      errors.push(
+        `${contract.id}: ${site} mounts ${what}, but children cannot mount inside void element <${el}> — React refuses it at runtime and the component renders NOTHING. Re-root the part (host the children on a container element — div/span/label per context — and mount the <${el}> control as a child part) or wrap the control`,
+      );
+    };
+    if (!isMultiRoot(contract)) {
+      // Single-root: the root part's children (or the `{children}`
+      // passthrough a children-bound text prop ALWAYS fills) mount inside
+      // semantics.element and every elementByProp value.
+      const rootPart = contract.anatomy.root;
+      const what =
+        rootPart === undefined
+          ? null
+          : (mountedChildren(rootPart) ??
+            (textProps(contract).some((p) => p.bindings.code.prop === 'children')
+              ? 'the children-bound text prop'
+              : null));
+      if (what) {
+        for (const el of new Set(rootElementsOf(contract))) {
+          if (VOID_ELEMENTS.has(el)) refuseVoid(`anatomy.root (semantics.element "${el}")`, el, what);
+        }
+      }
+    }
+    // Every part carrying an explicit void element (multi-root top roots
+    // included — they render as part.element ?? 'div').
+    for (const { name, part, path: p } of walkAnatomy(contract)) {
+      if (!isMultiRoot(contract) && p.length === 1 && name === 'root') continue; // handled above
+      const el = part.element;
+      if (!el || !VOID_ELEMENTS.has(el)) continue;
+      const what = mountedChildren(part);
+      if (what) refuseVoid(`part "${name}" (element "${el}")`, el, what);
     }
   }
 

@@ -2938,6 +2938,68 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // VOID-ELEMENT MOUNT GUARD (Eventz field case — the emit-side half of the
+    // wrong-element-mount class): Atoms/Checkbox and Atoms/Input proposed
+    // `semantics.element: "input"` over drawn children, and the emitters
+    // mounted the anatomy INSIDE the void element — React refuses that at
+    // runtime and the component renders NOTHING, silently. Reintroducing the
+    // shape must refuse BY NAME at generation, on every surface that calls
+    // validateContract, at BOTH guard sites: the single-root semantics
+    // element, and any part carrying an explicit void element. The legal void
+    // root stays legal — ds.divider's childless <hr> compiles in the
+    // whole-catalog generate that every green eval already exercises.
+    id: 'refuse-void-element-children-mount',
+    claim: 'C2-refusal',
+    run: () => {
+      // Site 1 — the Eventz shape verbatim: a void ROOT over child parts.
+      editJson('contracts/checkbox.contract.json', (c) => {
+        c.semantics.element = 'input';
+      });
+      const r = generate();
+      if (r.status === 0) {
+        throw new Error('Generator accepted children mounted inside a void <input> root — the Eventz mounted-nothing shape must refuse');
+      }
+      if (!r.out.includes('ds.checkbox') || !r.out.includes('children cannot mount inside void element <input>')) {
+        throw new Error(`Refusal not named (expected the void-element violation on ds.checkbox):\n${r.out}`);
+      }
+      if (!r.out.includes('Re-root the part') || !r.out.includes('or wrap the control')) {
+        throw new Error(`Refusal does not state the fix (re-root / wrap):\n${r.out}`);
+      }
+      // Site 2 — a PART carrying an explicit void element over children.
+      resetScratch();
+      editJson('contracts/checkbox.contract.json', (c) => {
+        c.anatomy.root.parts.box.element = 'img';
+      });
+      const r2 = generate();
+      if (r2.status === 0) throw new Error('Generator accepted child parts inside a void <img> part');
+      if (!r2.out.includes('part "box"') || !r2.out.includes('children cannot mount inside void element <img>')) {
+        throw new Error(`Part-level refusal not named:\n${r2.out}`);
+      }
+    },
+  },
+  {
+    // The PROPOSE-SIDE half of the same defect: the name/axis table infers
+    // "input" for checkbox/input-named sets, and a proposal must NEVER
+    // produce a contract the emitter refuses. When the drawn anatomy mounts
+    // children under a void inference, proposeFromDump demotes to the "div"
+    // container with a REVIEW re-root note — and the receipt EMITS the
+    // demoted proposal to prove the invariant, while a childless input-named
+    // set keeps element "input" (the ds.divider-class void root stays legal).
+    id: 'design-void-element-re-root',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/cbds-check.ts']);
+      if (r.status !== 0) throw new Error(`CBDS receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ input-named set WITH drawn children → element demoted to "div" (never the emitter-refused void shape), with a REVIEW re-root note',
+        '✔ the demoted proposal EMITS — proposeFromDump never produces a contract the emitter refuses',
+        '✔ a CHILDLESS input-named set keeps element "input" (the demotion is scoped to drawn children — ds.divider-class void roots stay legal)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+    },
+  },
+  {
     // The Examples gallery captions state FACTS about their contracts, and
     // one shipped wrong (the Badge card said "four variant classes" over a
     // five-variant contract). Countable claims are DERIVED in

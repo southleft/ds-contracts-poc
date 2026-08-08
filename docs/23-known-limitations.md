@@ -445,6 +445,19 @@ shadow hosts with no `:host` rules, and eight of Polaris's twelve carry only
 generic stems like `icon` / `label` / `box`). A check that refuses two-thirds of
 a shipped library to catch one absent component is a check people learn to skip.
 
+**The EMIT-side variant of this class is now guarded** (Eventz field case,
+2026-08: Atoms/Checkbox and Atoms/Input inferred `semantics.element: "input"`
+over drawn children, React refused the void-element mount at runtime, and both
+components rendered NOTHING while every build step stayed green).
+`validateContract` (core/emit-react.ts) now refuses children mounted inside a
+void element BY NAME on all four emit surfaces, and `proposeFromDump` demotes a
+void-element inference over drawn children to a container root with a REVIEW
+re-root note, so a proposal can never carry the shape the emitters refuse
+(evals `refuse-void-element-children-mount`, `design-void-element-re-root`).
+The CAPTURE-side net is unchanged and remains exactly what this section says:
+mount-sanity plus the trigger advisory, with the plain-`<button>` gap above
+still open.
+
 ## B.11 Adopting a hand-built Figma set is not a verb this tool has
 
 *Stamping* an existing, hand-drawn Figma component set as contract-backed so
@@ -1305,22 +1318,44 @@ instance of the class in one file, and it is now a counted, href-named ceiling
 [§B.17](#b17-the-corpus-has-not-been-re-captured-through-the-stylesheet-ceiling-instrument)
 for why the committed corpus does not yet demonstrate it.
 
-## C.5 No webfonts are loaded in any harness
+## C.5 Webfonts load only where a library's capture config declares them
 
-The capture harness is network-free. Carbon's `styles.css` carries 105
-`@font-face` blocks whose every `src` is an Akamai CDN URL
-(`examples/carbon/PROVENANCE.md:168`); Altitude's published dist contains zero
-`@font-face` blocks at all. IBM Plex is not loaded and the metrics come from
-the fallback stack.
+The capture harness is network-free, and **by default no webfonts load**:
+Carbon's `styles.css` carries 105 `@font-face` blocks whose every `src` is an
+Akamai CDN URL (`examples/carbon/PROVENANCE.md:168`); Altitude's published
+dist contains zero `@font-face` blocks at all — its face arrives via a
+Google-Fonts `@import` the harness strips for hermeticity.
+
+Since 2026-08-08 a capture config may declare a **`fonts` field**
+(`extract/computed/capture.ts`): each face names a font file from a
+**committed or sandboxed source**, inlined into every render this config
+drives (capture page, portal page, fidelity-gate page) as a base64 `data:`
+URI — still zero network at render or check time, and a declared file that
+does not exist is refused by name. Same font files + same pinned Chromium →
+same rasters on the recording platform. A guessed face (a system-stack
+library with no webfont of its own) must carry a `"__review:fonts"` marker
+and never renders a reference until acked.
+
+Configured today: **Altitude** loads IBM Plex Sans 400/600 (the library's own
+Google-Fonts declaration; woff2 committed under `extract/computed/fonts/`
+from `@ibm/plex-sans@1.1.0`) — that re-pin converted altitude chip and link
+to genuine scored passes on both instruments. **Everywhere unconfigured the
+fallback-font behavior below remains**: Tailwind/Flowbite and Astryx ship no
+library-true font file any committed/sandboxed source provides (Tailwind's
+stack IS the platform system stack; Astryx's Figtree face is not in its
+sandbox), Carbon's Plex faces are obtainable (`@ibm/plex-sans` in its
+sandbox) but not yet configured, so its references are unmoved.
 
 (`document.fonts.check` returns `true` for fonts that are certainly not
 installed — it reports "can this be rendered", which fallback always satisfies.
-It proves nothing.)
+It proves nothing. The `fonts` field does not rely on it: the bytes ride the
+page and `document.fonts.ready` is awaited.)
 
-**What you'd observe** — **pixel anti-aliasing scores are 0 essentially
-everywhere** in the receipts, and absolute text widths in the contracts are
-fallback-font widths. Both sides of the fidelity gate degrade identically, so
-the *percentages* are unaffected; the *absolute widths* are not (see §B.3).
+**What you'd observe where unconfigured** — **pixel anti-aliasing scores are 0
+essentially everywhere** in the receipts, and absolute text widths in the
+contracts are fallback-font widths. Both sides of the fidelity gate degrade
+identically, so the *percentages* are unaffected; the *absolute widths* are
+not (see §B.3).
 
 ## C.6 Instruments — what the gates do and do not measure
 
@@ -1420,8 +1455,8 @@ fixture's canvas half (§C.6.2) is the part still missing.
   — the size-mismatch convention scores 100 pessimistically, so no pixel number
   is quoted for Dialog, Menu or Tooltip.
 - Masked scores mask text, because cross-renderer font rasterization never
-  flatters a result — but see §C.5: with no webfonts loaded, "masked" is doing
-  more work than usual.
+  flatters a result — but see §C.5: wherever a library's config declares no
+  `fonts`, no webfonts load and "masked" is doing more work than usual.
 - A low percentage against a blank canvas is not a pass; the canvas gate carries
   an explicit blank-canvas guard for that reason.
 
@@ -1988,7 +2023,7 @@ numbers are not reused; this is where they went.
 | §2.5 pseudo-elements | [§B.5](#b5-four-pseudo-element-channels-the-reader-has-never-opened) *(two rows reclassified)* + [§A.1](#a1-css-constructs-with-no-canvas-spelling) |
 | §2.6 shadow DOM | [§A.4](#a4-out-of-scope-by-decision--not-gaps) (closed roots) + [§B.6](#b6-shadow-dom-depth-3-nesting-is-not-exercised) (depth-3) |
 | §2.7 shorthand ceiling | [§C.4.1](#c41-the-shorthand-ceiling) |
-| §2.8 no webfonts | [§C.5](#c5-no-webfonts-are-loaded-in-any-harness) |
+| §2.8 no webfonts | [§C.5](#c5-webfonts-load-only-where-a-librarys-capture-config-declares-them) *(now per-library configurable)* |
 | §2.9 fidelity gate samples mid-transition | **[§D.1 — CLOSED](#d1-the-fidelity-gate-sampled-mid-transition--closed-task-34)** |
 | §2.10 channels with no canvas spelling | [§A.1](#a1-css-constructs-with-no-canvas-spelling) + [§B.7](#b7-flex-basis-is-not-a-carried-channel-anywhere-in-the-pipeline) (`flex-basis`) |
 | §2.11 constructs carried that should not be | [§B.8](#b8-two-constructs-the-engine-carries-that-it-should-not) |

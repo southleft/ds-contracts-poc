@@ -20,7 +20,7 @@
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { arcMaskCss, ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel } from '../scripts/contract-schema.js';
+import { arcMaskCss, ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -7315,7 +7315,31 @@ export function proposeFromDump(
   // Deterministic semantics inference (name/axis table — zero AI, see
   // inferSemantics). A detected interaction-state axis is the structural
   // corroboration that the component is interactive.
-  const inferred = inferSemantics(set.setName, axes, statePromo !== null);
+  //
+  // VOID-ELEMENT RE-ROOT (Eventz field case): the table proposes "input" for
+  // checkbox/switch/input-named sets, but a VOID element cannot mount
+  // children and validateContract now refuses that shape BY NAME on every
+  // emit surface — a proposal must never produce a contract the emitter
+  // refuses. When the inferred element is void AND the drawn anatomy mounts
+  // child parts, the proposal keeps the drawn children under a CONTAINER
+  // root ("div", the existing hedge) and flags the re-root as a REVIEW item
+  // instead; an inferred role is NOT carried onto the container (role
+  // "switch" on a div would trip the native-semantics lint — the role
+  // belongs on the native control the reviewer mounts as a child part).
+  // Deliberately NOT a synthetic <input> child part: the canvas did not draw
+  // one, and inventing structure is the plausible-substitution failure mode
+  // this pipeline refuses everywhere else.
+  const inferredRaw = inferSemantics(set.setName, axes, statePromo !== null);
+  const rootPartCount = Object.keys((root.parts as Record<string, unknown> | undefined) ?? {}).length;
+  const inferred: InferredSemantics | null =
+    inferredRaw && VOID_ELEMENTS.has(inferredRaw.element) && rootPartCount > 0
+      ? {
+          element: 'div',
+          note:
+            `semantics: element "${inferredRaw.element}" matched the name/axis table for set "${set.setName}", but the drawn anatomy mounts ${rootPartCount} child part(s) and <${inferredRaw.element}> is a VOID element — children cannot mount inside it (React refuses the shape at runtime and renders NOTHING; the emitters refuse it by name). ` +
+            `Proposed as container element "div" instead${inferredRaw.role ? `; the inferred role "${inferredRaw.role}" is NOT carried (it belongs on the native control, not the container)` : ''} — REVIEW: re-root before adoption by mounting the native <${inferredRaw.element}> control as a child part inside this container`,
+        }
+      : inferredRaw;
   const contract: Record<string, unknown> = {
     $schema: './contract.schema.json',
     id: selfId,

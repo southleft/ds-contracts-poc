@@ -124,6 +124,13 @@ const fileKey = (dump._provenance as { fileKey?: string | null } | undefined)?.f
 
 for (const setName of IMPORT_ORDER) {
   const proposal: FigmaProposalResult = proposeFromDump(dump[setName] as DumpSet, {
+    // The exact-conversion wave flipped proposeFromDump's DEFAULT to
+    // 'exact', which refuses this kit outright (dumps/MERGED.json is a
+    // v1.11 bridge capture with no structured propertyDefinitions /
+    // variantProperties evidence). The committed contracts were built under
+    // reviewable-inversion; pin it explicitly so the byte-verify keeps
+    // measuring the kit and not the default (the cbds-check.ts spelling).
+    projectionMode: 'reviewable-inversion',
     corpus,
     contractIdByName,
     contractIdByKey,

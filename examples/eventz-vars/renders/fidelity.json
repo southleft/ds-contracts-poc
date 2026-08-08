@@ -416,26 +416,26 @@
  {
   "set": "atoms-checkbox",
   "variant": "state_default_ischecked_false_isdisabled_false",
-  "score": null,
-  "note": "render reported no root box"
+  "score": 91.12,
+  "score20": 67.26
  },
  {
   "set": "atoms-checkbox",
   "variant": "state_default_ischecked_false_isdisabled_true",
-  "score": null,
-  "note": "render reported no root box"
+  "score": 91.1,
+  "score20": 75.28
  },
  {
   "set": "atoms-checkbox",
   "variant": "state_default_ischecked_true_isdisabled_false",
-  "score": null,
-  "note": "render reported no root box"
+  "score": 88.69,
+  "score20": 63.72
  },
  {
   "set": "atoms-checkbox",
   "variant": "state_default_ischecked_true_isdisabled_true",
-  "score": null,
-  "note": "render reported no root box"
+  "score": 88.67,
+  "score20": 71.65
  },
  {
   "set": "atoms-checkbox",
@@ -470,38 +470,38 @@
  {
   "set": "atoms-input",
   "variant": "state_default_isfilled_false_haserror_false_isdisabled_false",
-  "score": null,
-  "note": "render reported no root box"
+  "score": 78.9,
+  "score20": 84.06
  },
  {
   "set": "atoms-input",
   "variant": "state_default_isfilled_false_haserror_false_isdisabled_true",
-  "score": null,
-  "note": "render reported no root box"
+  "score": 92.2,
+  "score20": 85.6
  },
  {
   "set": "atoms-input",
   "variant": "state_default_isfilled_false_haserror_true_isdisabled_false",
-  "score": null,
-  "note": "render reported no root box"
+  "score": 81.18,
+  "score20": 78.54
  },
  {
   "set": "atoms-input",
   "variant": "state_default_isfilled_true_haserror_false_isdisabled_false",
-  "score": null,
-  "note": "render reported no root box"
+  "score": 78.93,
+  "score20": 83.77
  },
  {
   "set": "atoms-input",
   "variant": "state_default_isfilled_true_haserror_false_isdisabled_true",
-  "score": null,
-  "note": "render reported no root box"
+  "score": 92.07,
+  "score20": 85.54
  },
  {
   "set": "atoms-input",
   "variant": "state_default_isfilled_true_haserror_true_isdisabled_false",
-  "score": null,
-  "note": "render reported no root box"
+  "score": 81.21,
+  "score20": 78.43
  },
  {
   "set": "atoms-input",
@@ -644,7 +644,7 @@
  {
   "set": "molecules-alert",
   "variant": "variant_warning",
-  "score": 27.27,
+  "score": 27.26,
   "score20": 87.91
  }
 ]
