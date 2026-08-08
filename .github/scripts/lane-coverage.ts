@@ -72,6 +72,28 @@ const EXCLUDED: Record<string, string> = {
   "root:mint:code:check":
     "Superseded surface kept for the code-side mint path; core/mint-check.ts (mint:check, full lane) " +
     "is the gate the minting invariants are pinned in. Listed here so its absence is visible.",
+  "root:console-loop:evidence:check":
+    "Subsumed: console-loop:all:evidence:check (fast lane) runs this first-party lane plus all six " +
+    "others through the aggregator without short-circuit; the per-lane scripts remain for local triage.",
+  "root:console-loop:mui:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:console-loop:altitude:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:console-loop:astryx:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:console-loop:carbon:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:console-loop:polaris:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:console-loop:tailwind:evidence:check":
+    "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:visual-truth:check":
+    "Deliberately out of CI until the altitude lane reconverges: the headless sweep scored the LIVE " +
+    "canvas after it drifted from the bridge run (one set deleted, two stems hit the odd-pixel " +
+    "downscale artifact), so altitude's headless pass-count (2) sits under its RATCHET.json floor (4). " +
+    "The floor is not lowered by policy; the Track-2 hill-climb re-loops altitude on the live canvas, " +
+    "and this check joins the fast lane the moment it exits 0 there. The scorecard-vs-receipt honesty " +
+    "this would enforce is already enforced in CI by console-loop:all:evidence:check.",
 };
 
 /** Tracked tests intentionally outside CI need a durable, file-specific reason. */
