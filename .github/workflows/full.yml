@@ -392,6 +392,10 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:wrap:check
 
+      - name: "extract:figma:gradient:check"
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:gradient:check
+
       - name: "extract:figma:constraints:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:constraints:check

@@ -24,7 +24,7 @@ import { arcMaskCss, ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePrevie
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
-import { capturedTokensFromDump } from './captured-tokens.js';
+import { capturedTokensFromDump, foldVariablePath, ONE_DOT_LEADER } from './captured-tokens.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
 import {
   validateExactVariantProjection,
@@ -55,7 +55,12 @@ export const camel = (s: string): string => {
   return sanitized.length > 0 ? sanitized : spelled;
 };
 
-const dotPath = (slashName: string) => slashName.split('/').join('.');
+/** Variable name → token path, through THE shared fold (captured-tokens.ts
+ *  foldVariablePath): '/'→'.' plus U+2024 ONE DOT LEADER → '-' (dump v1.16).
+ *  The captured-token layer registers under the SAME fold, so a folded ref
+ *  resolves end to end; the rename is receipted once per variable per set
+ *  (see noteFoldedVariableNames). */
+const dotPath = (slashName: string) => foldVariablePath(slashName).path;
 const ref = (slashName: string) => `{${dotPath(slashName)}}`;
 
 /** Canonical prop-name spelling for a Figma property name. A property that is
@@ -1690,6 +1695,148 @@ function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outli
   return 'border';
 }
 
+// ---------------------------------------------------------------------------
+// GRADIENT_LINEAR fills → background-image (dump v1.16)
+// ---------------------------------------------------------------------------
+
+/** One captured gradient → a CSS `linear-gradient()` literal, or a NAMED
+ *  refusal. AXIS-ALIGNED ramps (horizontal / vertical handles) carry EXACTLY
+ *  and size-independently: the handles are normalized object space, so the
+ *  box edges sit at fixed ramp positions whatever the box's pixel size. The
+ *  spelling is normalized to the VISIBLE SEGMENT — the emitted stops span
+ *  0%–100% of the box with the edge colors interpolated ON the ramp and
+ *  interior stops remapped — which is pixel-identical inside the box (a
+ *  linear ramp restricted to a segment is the same linear ramp) and keeps
+ *  every stop inside the grammar both parseCssGradient (contract→canvas) and
+ *  the CSS surfaces already speak. Eventz field case: Badge accent/info/
+ *  warning/featured grounds — handles run from x≈2.15 to x≈-0.006, so the
+ *  box shows the 53%–100% segment of the ramp; the naive full-ramp spelling
+ *  would repaint more than half the ground with colors the canvas never
+ *  draws.
+ *
+ *  OBLIQUE ramps are REFUSED BY NAME: a CSS gradient angle is measured in
+ *  pixel space while the handles live in normalized object space, so the
+ *  equivalent angle (and the gradient line's % scale) is a function of the
+ *  drawn box's aspect ratio — a size-independent exact carriage does not
+ *  exist, and baking the default box's angle would silently skew every other
+ *  size. (Eventz field case: the four Molecules/Alert grounds.) */
+function gradientCss(g: NonNullable<DumpNode['gradient']>): { css: string } | { refuse: string } {
+  const EPS = 1e-3;
+  const dx = g.end.x - g.start.x;
+  const dy = g.end.y - g.start.y;
+  const horizontal = Math.abs(dy) <= EPS && Math.abs(dx) > EPS;
+  const vertical = Math.abs(dx) <= EPS && Math.abs(dy) > EPS;
+  if (!horizontal && !vertical) {
+    return {
+      refuse:
+        Math.abs(dx) <= EPS && Math.abs(dy) <= EPS
+          ? `degenerate GRADIENT_LINEAR (start ≈ end handle) — no axis to carry`
+          : `OBLIQUE GRADIENT_LINEAR (handles (${g.start.x}, ${g.start.y}) → (${g.end.x}, ${g.end.y})) — the CSS angle and stop scale depend on the drawn box's aspect ratio, so no size-independent exact carriage exists`,
+    };
+  }
+  // CSS coordinate s ∈ [0,1] runs along the gradient direction; pick the
+  // angle whose s increases WITH the ramp so positions stay ordered.
+  const angle = horizontal ? (dx > 0 ? 90 : 270) : dy > 0 ? 180 : 0;
+  const rampAt = (obj: number) => (horizontal ? (obj - g.start.x) / dx : (obj - g.start.y) / dy);
+  // Ramp positions of the box edges at CSS s=0 and s=1.
+  const pA = rampAt(horizontal ? (dx > 0 ? 0 : 1) : dy > 0 ? 0 : 1);
+  const pB = rampAt(horizontal ? (dx > 0 ? 1 : 0) : dy > 0 ? 1 : 0);
+  if (!(pB > pA) || !isFinite(pA) || !isFinite(pB)) {
+    return { refuse: `GRADIENT_LINEAR handles produce an empty visible segment (${pA}..${pB}) — not carried` };
+  }
+  const paintAlpha = g.alpha ?? 1;
+  const sorted = [...g.stops].sort((a, b) => a.position - b.position);
+  const rgba = (s: (typeof sorted)[number]) => {
+    const hex = s.hex.length === 6 ? s.hex : s.hex.padEnd(6, '0');
+    return [
+      parseInt(hex.slice(0, 2), 16),
+      parseInt(hex.slice(2, 4), 16),
+      parseInt(hex.slice(4, 6), 16),
+      (s.alpha ?? 1) * paintAlpha,
+    ] as const;
+  };
+  const colorAt = (p: number): readonly [number, number, number, number] => {
+    if (p <= sorted[0].position) return rgba(sorted[0]);
+    if (p >= sorted[sorted.length - 1].position) return rgba(sorted[sorted.length - 1]);
+    for (let i = 0; i < sorted.length - 1; i++) {
+      const a = sorted[i];
+      const b = sorted[i + 1];
+      if (p < a.position || p > b.position) continue;
+      const t = b.position === a.position ? 0 : (p - a.position) / (b.position - a.position);
+      const ca = rgba(a);
+      const cb = rgba(b);
+      return [0, 1, 2, 3].map((k) => ca[k] + (cb[k] - ca[k]) * t) as unknown as readonly [number, number, number, number];
+    }
+    return rgba(sorted[sorted.length - 1]);
+  };
+  const spell = ([r, gg, b, a]: readonly [number, number, number, number]): string =>
+    paintCssHex({
+      hex: [r, gg, b].map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join(''),
+      alpha: Math.round(a * 10000) / 10000,
+    });
+  const pct = (p: number) => `${Math.round(((p - pA) / (pB - pA)) * 10000) / 100}%`;
+  const stops: string[] = [`${spell(colorAt(pA))} 0%`];
+  for (const s of sorted) {
+    if (s.position > pA && s.position < pB) stops.push(`${spell(rgba(s))} ${pct(s.position)}`);
+  }
+  stops.push(`${spell(colorAt(pB))} 100%`);
+  return { css: `linear-gradient(${angle}deg, ${stops.join(', ')})` };
+}
+
+/** dump v1.16 — a node whose fill stack carries a GRADIENT_LINEAR mints the
+ *  whole `background-image` axis (kind 'gradient', the imageFill precedent):
+ *  gradient variants carry their normalized `linear-gradient()` spelling,
+ *  gradient-less variants carry 'none' (their absence is a DRAWN fact — the
+ *  solid ground rides background-color), and the standard mint machinery
+ *  classifies uniform / per-axis shapes. One refused occurrence refuses the
+ *  WHOLE channel by name: minting 'none' where the canvas draws an oblique
+ *  ramp would assert an absence the canvas contradicts. Stop-level variable
+ *  bindings are NAMED (a token ref has no spelling inside a gradient value —
+ *  the ramp carries their resolved colors). */
+function mintGradientBackground(m: Merged, ctx: Ctx, where: string, tokens: Record<string, string>): void {
+  const withGradient = m.occ.filter((o) => o.node.gradient !== undefined);
+  if (withGradient.length === 0) return;
+  if (m.occ.some((o) => o.node.imageFill !== undefined)) {
+    ctx.notes.push(
+      `${where}: fill stack carries BOTH a GRADIENT_LINEAR and an IMAGE marker across the variants — background-image is claimed by the image channel; gradient NAMED, not carried (review)`,
+    );
+    return;
+  }
+  const boundStops = [
+    ...new Set(withGradient.flatMap((o) => o.node.gradient!.stops.map((s) => s.var).filter((v) => v !== undefined))),
+  ] as string[];
+  if (!ctx.mint) {
+    ctx.notes.push(
+      `${where}: GRADIENT_LINEAR fill captured (dump v1.16) in ${withGradient.length}/${m.occ.length} variant(s) — background-image not proposed without minting (a gradient value has no token-ref spelling)`,
+    );
+    return;
+  }
+  const values: Array<{ variant: string; value: string }> = [];
+  for (const o of m.occ) {
+    if (o.node.gradient === undefined) {
+      values.push({ variant: o.variant, value: 'none' });
+      continue;
+    }
+    const spelled = gradientCss(o.node.gradient);
+    if ('refuse' in spelled) {
+      ctx.notes.push(
+        `${where} fill (${o.variant}): ${spelled.refuse} — background-image REFUSED BY NAME for the whole node (carrying the other variants would mint 'none' here, an absence the canvas contradicts); the captured handles/stops stay in the dump for a later carriage, review`,
+      );
+      return;
+    }
+    values.push({ variant: o.variant, value: spelled.css });
+  }
+  if (boundStops.length > 0) {
+    ctx.notes.push(
+      `${where}: gradient stop(s) ride bound variable(s) ${boundStops.map((v) => `"${v}"`).join(', ')} — a token ref has no spelling inside a gradient value, so the ramp carries their RESOLVED colors (rename story: the variable names live here, review)`,
+    );
+  }
+  ctx.notes.push(
+    `${where}: GRADIENT_LINEAR fill (dump v1.16) carried as background-image — axis-aligned ramp normalized to the box's visible segment (pixel-exact inside the drawn box; stops respell against the box edges), 'none' minted where a variant draws no gradient (its ground rides background-color)`,
+  );
+  mintObservation(ctx, tokens, where, 'background-image', 'gradient', values, `${where}|gradient`, 'none');
+}
+
 /** Invert a node's variable bindings + paints into contract token refs.
  *  Value-level correlations (v10) collect into `byProp` — the caller
  *  attaches them to the part via attachByProp. */
@@ -1738,6 +1885,9 @@ function invertNodeTokens(
       sparse: '#00000000',
     }),
   );
+  // dump v1.16: a GRADIENT_LINEAR in the fill stack rides background-image
+  // beside (or instead of) the solid background-color above.
+  mintGradientBackground(m, ctx, where, tokens);
   carry(
     strokeColorProp,
     unifyPaint(m, (n) => n.stroke, ctx, where, 'stroke', {
@@ -2957,6 +3107,39 @@ function mintTextChannels(
     undefined,
     styleName,
     styleKey,
+  );
+}
+
+/** dump v1.16 — textCase UPPER/LOWER/TITLE → the declared `text-transform`
+ *  channel (uppercase/lowercase/capitalize): a canvas-DRAWN keyword fact
+ *  (DECLARED_CHANNELS verdict 'draw'; the return leg writes Figma textCase —
+ *  core/emit-figma-script.ts). Carried only when every text occurrence
+ *  agrees; a mixed axis is NAMED, never sampled (the CBDS uniformity rule).
+ *  Field case: Eventz Badge labels ride textCase UPPER and rendered "Label"
+ *  for "LABEL" (dump ≤ v1.15 receipted the channel away). */
+const TEXT_TRANSFORM_BY_CASE: Record<string, string> = {
+  UPPER: 'uppercase',
+  LOWER: 'lowercase',
+  TITLE: 'capitalize',
+};
+function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  if (textOcc.length === 0) return;
+  const cases = [...new Set(textOcc.map((o) => o.node.text!.textCase))];
+  const drawn = cases.filter((c): c is 'UPPER' | 'LOWER' | 'TITLE' => c !== undefined);
+  if (drawn.length === 0) return; // as-typed, or a pre-v1.16 dump (receipted at capture)
+  if (cases.length > 1) {
+    ctx.notes.push(
+      `${where}: textCase differs across variants (${cases.map((c) => c ?? 'ORIGINAL/not captured').join(', ')}) — text-transform is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
+    );
+    return;
+  }
+  const value = TEXT_TRANSFORM_BY_CASE[drawn[0]];
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared['text-transform'] === undefined) declared['text-transform'] = value;
+  holder.declared = declared;
+  ctx.notes.push(
+    `${where}: textCase ${drawn[0]} drawn in every variant — carried as declared text-transform: ${value} (dump v1.16; a canvas-drawable channel, the return leg writes Figma textCase)`,
   );
 }
 
@@ -4700,6 +4883,7 @@ function buildPart(
     const byProp: ByPropCollector = { map: {} };
     const tokens = invertTextTokens(m, ctx, where, byProp);
     attachByProp(part, byProp);
+    carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
     invertNodeOpacity(m, part, tokens, ctx, where);
     if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
       ctx.notes.push(
@@ -6812,6 +6996,33 @@ export function proposeFromDump(
   const prefix = opts.prefix ?? 'ds';
   const preNotes: string[] = [];
 
+  // dump v1.16 — U+2024 fold receipts, ONE per distinct variable per set:
+  // every binding site below spells refs through dotPath, which folds ONE DOT
+  // LEADER to '-' (see captured-tokens.ts foldVariablePath). The fold is a
+  // RENAME relative to the canvas variable, so it is named up front rather
+  // than at each of its binding sites (Eventz: "spacing/1․5" binds 16 times).
+  {
+    const foldedNames = new Set<string>();
+    const scanNode = (n: DumpNode): void => {
+      const names = [
+        ...Object.values(n.bound ?? {}),
+        n.fill?.var,
+        n.stroke?.var,
+        n.text?.fillVar,
+        n.instancePrimaryFill?.var,
+        ...(n.gradient?.stops.map((s) => s.var) ?? []),
+      ];
+      for (const name of names) if (name !== undefined && name.includes(ONE_DOT_LEADER)) foldedNames.add(name);
+      for (const c of n.children ?? []) scanNode(c);
+    };
+    for (const v of set.variants) scanNode(v);
+    for (const name of [...foldedNames].sort()) {
+      preNotes.push(
+        `variable name "${name}" contains U+2024 ONE DOT LEADER — folded to '-' and carried as {${foldVariablePath(name).path}} everywhere it binds (dump v1.16 fold rule; a RENAME relative to the canvas variable, which keeps its own spelling): rename the variable to match, or remap manually. A fold target another variable already owns refuses registration at the captured-token layer by name`,
+      );
+    }
+  }
+
   // Theme/mode-axis promotion (§3 — see the section doc above): runs FIRST,
   // over the full drawn set. A corroborated mode axis is excluded from the
   // API; the whole pipeline (state promotion included) then runs on the
@@ -7058,6 +7269,8 @@ export function proposeFromDump(
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
     const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp);
     Object.assign(rootTokens, textTokens);
+    carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
+
     // The label's tokens hoisted — retarget its captured mint observations
     // to the record that actually ships (rootTokens).
     if (ctx.mint) {

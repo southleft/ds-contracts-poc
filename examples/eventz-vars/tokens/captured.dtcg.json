@@ -3,6 +3,40 @@
     "$value": "8px",
     "$type": "dimension"
   },
+  "spacing": {
+    "0": {
+      "$value": "0px",
+      "$type": "dimension"
+    },
+    "1": {
+      "$value": "4px",
+      "$type": "dimension"
+    },
+    "2": {
+      "$value": "8px",
+      "$type": "dimension"
+    },
+    "3": {
+      "$value": "12px",
+      "$type": "dimension"
+    },
+    "4": {
+      "$value": "16px",
+      "$type": "dimension"
+    },
+    "6": {
+      "$value": "6px",
+      "$type": "dimension"
+    },
+    "0-5": {
+      "$value": "2px",
+      "$type": "dimension"
+    },
+    "1-5": {
+      "$value": "6px",
+      "$type": "dimension"
+    }
+  },
   "component": {
     "border": {
       "radius": {
@@ -33,32 +67,6 @@
           "$type": "dimension"
         }
       }
-    }
-  },
-  "spacing": {
-    "0": {
-      "$value": "0px",
-      "$type": "dimension"
-    },
-    "1": {
-      "$value": "4px",
-      "$type": "dimension"
-    },
-    "2": {
-      "$value": "8px",
-      "$type": "dimension"
-    },
-    "3": {
-      "$value": "12px",
-      "$type": "dimension"
-    },
-    "4": {
-      "$value": "16px",
-      "$type": "dimension"
-    },
-    "6": {
-      "$value": "6px",
-      "$type": "dimension"
     }
   },
   "color": {

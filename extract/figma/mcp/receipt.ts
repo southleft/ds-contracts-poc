@@ -152,11 +152,17 @@ async function main(): Promise<void> {
     recoveredNames.includes(oneDotLeaderName),
     'the U+2024 variable ("spacing/0․5", ONE DOT LEADER) is itself recovered by name by the join…',
   );
+  // dump v1.16: the U+2024 name FOLDS to a named rename ({spacing.0-5})
+  // instead of refusing by grammar — the receipt pins the fold note firing
+  // on live foreign data (the old refusal note must be GONE).
   eCheck(
     eventzProposal.notes.some(
-      (n) => n.includes("0․5") && n.includes("token-ref grammar"),
-    ),
-    "…and then REFUSED by the token-ref grammar (binding not proposed, named in notes) — the refusal fires on live foreign data",
+      (n) => n.includes("0․5") && n.includes("ONE DOT LEADER — folded"),
+    ) &&
+      !eventzProposal.notes.some(
+        (n) => n.includes("0․5") && n.includes("token-ref grammar"),
+      ),
+    "…and then FOLDED to a NAMED RENAME ({spacing.0-5}, dump v1.16 — was: refused by the token-ref grammar) — the fold receipt fires on live foreign data",
   );
   const rootTokens = ((eventzProposal.contract.anatomy as J).root as J)
     .tokens as Record<string, string> | undefined;

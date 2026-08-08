@@ -65,7 +65,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import type { DumpEffect, DumpFile, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpSet, DumpShape, DumpText } from '../types.js';
+import type { DumpEffect, DumpFile, DumpGradient, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpSet, DumpShape, DumpText } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // REST shapes (trimmed to the consumed fields; figma/rest-api-spec names)
@@ -83,6 +83,14 @@ export interface RestPaint {
   opacity?: number;
   color?: { r: number; g: number; b: number; a: number };
   boundVariables?: { color?: RestVariableAlias };
+  /** GradientPaint (dump v1.16): [0] = ramp start, [1] = ramp end, [2] =
+   *  width handle (unused), all normalized object space. */
+  gradientHandlePositions?: Array<{ x: number; y: number }>;
+  gradientStops?: Array<{
+    position: number;
+    color?: { r: number; g: number; b: number; a: number };
+    boundVariables?: { color?: RestVariableAlias };
+  }>;
 }
 
 /** TypeStyle / BaseTypeStyle (api_types.ts). */
@@ -396,6 +404,91 @@ function mapPaint(
   return withAlpha({ hex: rgbToHex(p.color) });
 }
 
+/** GRADIENT_LINEAR fill → DumpGradient (dump v1.16) — the REST surface hands
+ *  the two ramp handles directly (gradientHandlePositions[0]/[1], normalized
+ *  object space); stops carry the resolved color and, when a stop rides a
+ *  bound variable this route can name (variables endpoint provided), its
+ *  slash-form name — an unnameable stop variable degrades to its resolved
+ *  value under the standing variable-unresolved receipt. A ramp with < 2
+ *  stops or missing handles is refused by name. */
+function mapGradient(p: RestPaint, ctx: Ctx, nodePath: string): DumpGradient | undefined {
+  const h = p.gradientHandlePositions;
+  if (!Array.isArray(h) || h.length < 2) {
+    ctx.report.degradations.push({
+      code: 'paint-unsupported',
+      nodePath,
+      field: 'fill',
+      message: 'GRADIENT_LINEAR without gradientHandlePositions — gradient not captured (dump v1.16)',
+    });
+    return undefined;
+  }
+  const round4 = (v: number) => Math.round(v * 10000) / 10000;
+  const stops: DumpGradient['stops'] = [];
+  for (const s of p.gradientStops ?? []) {
+    if (!s.color) continue;
+    const stop: DumpGradient['stops'][number] = { position: round4(s.position), hex: rgbToHex(s.color) };
+    const sa = s.color.a ?? 1;
+    if (sa < 1) stop.alpha = round4(sa);
+    const alias = s.boundVariables?.color;
+    if (alias && isAlias(alias)) {
+      const name = resolveVarName(ctx, alias, nodePath, 'fill.gradientStop');
+      if (name) stop.var = name;
+    }
+    stops.push(stop);
+  }
+  if (stops.length < 2) {
+    ctx.report.degradations.push({
+      code: 'paint-unsupported',
+      nodePath,
+      field: 'fill',
+      message: `GRADIENT_LINEAR with ${stops.length} usable stop(s) — gradient not captured (dump v1.16)`,
+    });
+    return undefined;
+  }
+  const out: DumpGradient = {
+    start: { x: round4(h[0].x), y: round4(h[0].y) },
+    end: { x: round4(h[1].x), y: round4(h[1].y) },
+    stops,
+  };
+  if ((p.opacity ?? 1) < 1) out.alpha = round4(p.opacity!);
+  return out;
+}
+
+/** The FILL STACK rule (dump v1.16, non-TEXT nodes — dump.plugin.js
+ *  dumpFillStack parity): the first visible SOLID plus the first visible
+ *  GRADIENT_LINEAR drawn ABOVE it (Figma paints draw bottom-to-top, so the
+ *  pair is exactly CSS background-color under background-image). A gradient
+ *  hidden under a solid keeps the truncation receipt; other paint types keep
+ *  paint-unsupported. */
+function mapFillStack(node: RestNode, ctx: Ctx, nodePath: string): { fill?: DumpPaint; gradient?: DumpGradient } {
+  const paints = node.fills;
+  if (!Array.isArray(paints)) return {};
+  const visibles = paints.filter((x) => x.visible !== false);
+  const solid = visibles.find((x) => x.type === 'SOLID');
+  const grad = visibles.find((x) => x.type === 'GRADIENT_LINEAR');
+  const gradCarriable = grad !== undefined && (solid === undefined || visibles.indexOf(grad) > visibles.indexOf(solid));
+  const gradient = gradCarriable ? mapGradient(grad!, ctx, nodePath) : undefined;
+  if (!solid && !gradient && visibles.length > 0) {
+    ctx.report.degradations.push({
+      code: 'paint-unsupported',
+      nodePath,
+      field: 'fill',
+      message: `first visible fill paint is ${visibles[0].type}, not SOLID — dump v1.16 carries SOLID and GRADIENT_LINEAR fills only; paint omitted`,
+    });
+  }
+  const carried = (solid ? 1 : 0) + (gradient ? 1 : 0);
+  if (carried > 0 && visibles.length > carried) {
+    ctx.report.degradations.push({
+      code: 'paint-stack-truncated',
+      nodePath,
+      field: 'fill',
+      message: `${visibles.length} visible fill paints (${visibles.map((x) => x.type).join(', ')}) — dump v1.16 carries the first SOLID plus a GRADIENT_LINEAR above it only`,
+    });
+  }
+  const fill = solid ? mapPaint([solid], ctx, nodePath, 'fill') : undefined;
+  return { ...(fill ? { fill } : {}), ...(gradient ? { gradient } : {}) };
+}
+
 // ---------------------------------------------------------------------------
 // Bound variables: REST spellings → Plugin-API spellings
 // ---------------------------------------------------------------------------
@@ -512,7 +605,10 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   // dump v1.2: text channels with no dump projection are NAMED per node.
   const channels: string[] = [];
   if (typeof s.letterSpacing === 'number' && s.letterSpacing !== 0) channels.push(`letterSpacing ${s.letterSpacing}`);
-  if (s.textCase !== undefined && s.textCase !== 'ORIGINAL') channels.push(`textCase ${s.textCase}`);
+  // dump v1.16: UPPER/LOWER/TITLE are CAPTURED (text.textCase — the canvas
+  // fact behind CSS text-transform); other spellings stay receipts.
+  if (s.textCase === 'UPPER' || s.textCase === 'LOWER' || s.textCase === 'TITLE') text.textCase = s.textCase;
+  else if (s.textCase !== undefined && s.textCase !== 'ORIGINAL') channels.push(`textCase ${s.textCase}`);
   if (s.textDecoration !== undefined && s.textDecoration !== 'NONE') channels.push(`textDecoration ${s.textDecoration}`);
   if (s.lineHeightUnit !== undefined && s.lineHeightUnit !== 'INTRINSIC_%' && s.lineHeightUnit !== 'PIXELS') {
     channels.push(`lineHeight ${s.lineHeightPx ?? '?'}px (${s.lineHeightUnit} — only PIXELS carries, dump v1.3)`);
@@ -727,8 +823,15 @@ function mapNode(
   const bound = mapBound(node, ctx, nodePath);
   if (bound) out.bound = bound;
 
-  const fill = mapPaint(node.fills, ctx, nodePath, 'fill');
+  // dump v1.16: non-TEXT fills go through the STACK dumper (SOLID +
+  // GRADIENT_LINEAR above it); TEXT fills keep the single-solid rule (a
+  // gradient text fill stays a named receipt).
+  const stack = node.type === 'TEXT'
+    ? { fill: mapPaint(node.fills, ctx, nodePath, 'fill') }
+    : mapFillStack(node, ctx, nodePath);
+  const fill = stack.fill;
   if (fill && node.type !== 'TEXT') out.fill = fill;
+  if ('gradient' in stack && stack.gradient) out.gradient = stack.gradient;
   const stroke = mapPaint(node.strokes, ctx, nodePath, 'stroke');
   if (stroke) {
     out.stroke = stroke;

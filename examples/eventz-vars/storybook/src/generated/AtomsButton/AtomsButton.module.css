@@ -11,6 +11,7 @@
   cursor: pointer;
   background-color: var(--comp-button-primary-color-background-default);
   padding-inline: var(--spacing-3);
+  padding-block: var(--spacing-1-5);
   border-radius: var(--component-border-radius-rounded-lg);
   gap: var(--spacing-1);
   width: fit-content;

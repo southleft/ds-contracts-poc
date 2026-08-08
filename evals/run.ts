@@ -2133,7 +2133,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
   },
   {
     // Desktop-MCP import: recorded live fixtures replay to plugin-dump name
-    // fidelity — Badge zero-mismatch, Eventz foreign names + the U+2024 refusal.
+    // fidelity — Badge zero-mismatch, Eventz foreign names + the U+2024 fold.
     id: 'design-mcp-roundtrip-fixture-replay',
     claim: 'C5-extraction',
     run: () => {
@@ -2141,7 +2141,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (r.status !== 0) throw new Error(`desktop-MCP receipt failed:\n${r.out}`);
       const receipt = readFileSync(path.join(SCRATCH, 'extract/figma/mcp/RECEIPT.md'), 'utf8');
       if (!/\| Badge \| \d+ \| \d+ \| 0 \| ✅/.test(receipt)) throw new Error('Badge row is not zero-mismatch');
-      if (!receipt.includes('REFUSED by the token-ref grammar')) throw new Error('U+2024 refusal receipt missing');
+      // dump v1.16: the U+2024 name FOLDS to a named rename instead of
+      // refusing by grammar (design-gradient-textcase-carriage pins the fold
+      // rule itself; this pins it firing on live foreign data).
+      if (!receipt.includes('FOLDED to a NAMED RENAME')) throw new Error('U+2024 fold receipt missing');
     },
   },
   {
@@ -3552,6 +3555,52 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       console.log(
         'wrapping-survives-the-round-trip: layoutWrap is READ BACK (dump v1.12) — uniform wrap carries as layout.wrap and closes the loop through CSS `flex-wrap: wrap` and the canvas script; a MIXED wrap is a per-part invariant that is refused BY NAME rather than resolved by the default variant; a DISTINCT counterAxisSpacing has no schema spelling and is NAMED. The capture half is pinned against the REAL dump source in plugin-engine-check (a falsification probe that deletes the capture fails it).',
+      );
+    },
+  },
+
+  {
+    // GRADIENT_LINEAR fills, textCase, and the U+2024 name fold (dump v1.16 —
+    // the Eventz #21 close). The contract→canvas leg had parsed CSS
+    // linear-gradients into native GRADIENT_LINEAR paints since v15
+    // (parseCssGradient) while the design-side capture refused EVERY gradient
+    // at the dump (`paint-unsupported` — solid paints only), so the Badge
+    // accent/info/warning/featured grounds rendered NOTHING and badge scored
+    // 23.5. The same capture dropped textCase UPPER ("Label" for "LABEL")
+    // and refused 16 bindings of U+2024-named variables ("spacing/1․5").
+    // This pins the design-side half end to end on synthetic dumps:
+    // axis-aligned ramps carry EXACTLY (visible-segment normalization — the
+    // Eventz handles overshoot the box, and a naive full-ramp spelling would
+    // repaint half the ground), oblique ramps refuse BY NAME (the CSS angle
+    // is a function of the box's aspect ratio), and both new carries
+    // round-trip through the SAME engine the plugin runs. The live proof is
+    // examples/eventz-vars (badge 23.5 → 61.2, NOTES.md receipts).
+    id: 'design-gradient-textcase-carriage',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/gradient-fill-check.ts']);
+      if (r.status !== 0) throw new Error(`gradient/textCase receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ root tokens carry background-image as a substituted per-variant ref',
+        '✔ the Grad leaf is the VISIBLE-SEGMENT spelling — edge colors interpolated on the ramp (#808080 at 0%), stops inside the grammar',
+        "✔ the Plain leaf mints 'none' (its ground rides background-color)",
+        '✔ a 3-stop ramp remaps its interior stop into the segment (0.75 → 50%)',
+        '✔ CSS emits per-variant background-image vars',
+        '✔ the Grad variant compiles a native GRADIENT_LINEAR paint (angle 270, 2 stops, no gradientMiss)',
+        "✔ the Plain variant compiles NO gradient layer ('none' round-trips clean, no gradientMiss)",
+        '✔ the refusal is NAMED with the raw handles (box-aspect-dependent angle)',
+        '✔ uniform textCase UPPER → declared text-transform: uppercase on the Label part',
+        '✔ the Label spec carries textCase UPPER (declared text-transform round-trips)',
+        '✔ a MIXED case axis proposes nothing and is NAMED (never sampled)',
+        "✔ the binding CARRIES as {spacing.1-5} (was: 'outside the token-ref grammar', binding not proposed)",
+        '✔ the fold is a NAMED RENAME, one receipt per variable per set',
+        '✔ the captured-token layer registers the SAME fold (refs resolve end to end), original name kept on the entry',
+        '✔ a fold target another variable owns REFUSES registration by name (the occupant keeps the path)',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+      console.log(
+        'design-gradient-textcase-carriage: dump v1.16 captures GRADIENT_LINEAR fills (handles + stops, both producers) and textCase — axis-aligned ramps carry as background-image minted gradient leaves normalized to the visible segment and round-trip to native GRADIENT_LINEAR paints; oblique ramps refuse BY NAME with the raw handles; textCase carries as declared text-transform when uniform; U+2024 variable names fold to a NAMED rename that resolves end to end, with fold-target collisions refused at registration.',
       );
     },
   },

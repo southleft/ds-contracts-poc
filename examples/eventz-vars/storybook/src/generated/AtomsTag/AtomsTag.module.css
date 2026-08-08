@@ -11,6 +11,7 @@
   appearance: none;
   background: none;
   cursor: pointer;
+  padding-block: var(--spacing-1-5);
   width: fit-content;
   height: fit-content;
 }

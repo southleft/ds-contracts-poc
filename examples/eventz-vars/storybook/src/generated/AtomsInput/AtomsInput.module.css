@@ -21,6 +21,7 @@
   align-items: center;
   background-color: var(--comp-form-color-background-default);
   padding-inline: var(--spacing-3);
+  padding-block: var(--spacing-1-5);
   border-radius: var(--component-border-radius-rounded-lg);
   border-width: var(--border-width-1);
   gap: var(--spacing-2);

@@ -1,5 +1,49 @@
 {
   "imported": {
+    "atoms-badge": {
+      "root": {
+        "background-image": {
+          "accent": {
+            "$value": "linear-gradient(270deg, #d9c5f7 0%, #d0b5f9 100%)",
+            "$type": "gradient"
+          },
+          "info": {
+            "$value": "linear-gradient(270deg, #b2e7f3 0%, #9ae0f0 100%)",
+            "$type": "gradient"
+          },
+          "warning": {
+            "$value": "linear-gradient(270deg, #f3e0c6 0%, #f0d1a5 100%)",
+            "$type": "gradient"
+          },
+          "featured": {
+            "$value": "linear-gradient(270deg, #f9cde7 0%, #f6b2db 100%)",
+            "$type": "gradient"
+          },
+          "brand": {
+            "$value": "none",
+            "$type": "gradient"
+          }
+        },
+        "width": {
+          "true": {
+            "$value": "fit-content"
+          },
+          "false": {
+            "$value": "22px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "true": {
+            "$value": "fit-content"
+          },
+          "false": {
+            "$value": "22px",
+            "$type": "dimension"
+          }
+        }
+      }
+    },
     "text": {
       "caption-lg-allcaps-bold": {
         "font-size": {
@@ -103,28 +147,6 @@
                 "name": "body/md-bold"
               }
             }
-          }
-        }
-      }
-    },
-    "atoms-badge": {
-      "root": {
-        "width": {
-          "true": {
-            "$value": "fit-content"
-          },
-          "false": {
-            "$value": "22px",
-            "$type": "dimension"
-          }
-        },
-        "height": {
-          "true": {
-            "$value": "fit-content"
-          },
-          "false": {
-            "$value": "22px",
-            "$type": "dimension"
           }
         }
       }

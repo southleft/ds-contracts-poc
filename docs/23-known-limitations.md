@@ -100,6 +100,21 @@ the canvas; a rotated caret draws unrotated; a sticky header draws in flow.
   `core/propose-figma.ts`; a refused SCALE part renders **in flow** rather
   than as a half-carried absolute box (pinned by
   `npx tsx extract/figma/constraints-check.ts`, 12 assertions).
+- **An OBLIQUE `GRADIENT_LINEAR` fill** — dump v1.16 captures every linear
+  gradient (handles + stops), and **axis-aligned ramps carry exactly**
+  (background-image, normalized to the box's visible segment — pinned by
+  `npm run extract:figma:gradient:check` and the `design-gradient-textcase-carriage`
+  eval; Eventz Badge is the field case, 23.5 → 61.2). An oblique ramp is
+  **refused by name**: Figma's handles live in normalized object space while
+  a CSS gradient angle lives in pixel space, so the equivalent angle and stop
+  scale are functions of the drawn box's **aspect ratio** — no
+  size-independent exact spelling exists (Eventz Molecules/Alert is the field
+  case; the refusal note carries the raw handles). **Unlock condition:** a
+  per-variant carriage that bakes the DRAWN box's angle would be exact at
+  that size and silently skewed at every other — carrying it would need a
+  box-aware gradient channel (angle recomputed from the rendered box), which
+  is an engine change on every emit surface, not a grammar extension.
+  Radial/angular/diamond gradients stay `paint-unsupported` capture receipts.
 - **Figma component-property types** have no CSS counterpart beyond the
   variant/enum lowering the contract already spells.
 

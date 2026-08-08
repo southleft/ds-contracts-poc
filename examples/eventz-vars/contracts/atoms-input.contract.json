@@ -165,6 +165,7 @@
           "tokens": {
             "background-color": "{comp.form.color.background.default}",
             "padding-inline": "{spacing.3}",
+            "padding-block": "{spacing.1-5}",
             "border-radius": "{component.border.radius.rounded-lg}",
             "border-width": "{border.width.1}",
             "gap": "{spacing.2}"

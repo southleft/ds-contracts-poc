@@ -8,7 +8,29 @@
   align-items: center;
   justify-content: center;
   border: 0;
+  padding-block: var(--spacing-0-5);
   border-radius: var(--component-border-radius-rounded);
+  gap: var(--spacing-0-5);
+}
+
+.variant-accent {
+  background-image: var(--imported-atoms-badge-root-background-image-accent);
+}
+
+.variant-info {
+  background-image: var(--imported-atoms-badge-root-background-image-info);
+}
+
+.variant-warning {
+  background-image: var(--imported-atoms-badge-root-background-image-warning);
+}
+
+.variant-featured {
+  background-image: var(--imported-atoms-badge-root-background-image-featured);
+}
+
+.variant-brand {
+  background-image: var(--imported-atoms-badge-root-background-image-brand);
 }
 
 .root[data-has-label] {
@@ -25,4 +47,5 @@
   font-size: var(--imported-text-caption-lg-allcaps-bold-font-size);
   font-weight: var(--imported-text-caption-lg-allcaps-bold-font-weight);
   line-height: var(--imported-text-caption-lg-allcaps-bold-line-height);
+  text-transform: uppercase;
 }

@@ -111,6 +111,9 @@
         "width": "fit-content",
         "height": "fit-content"
       },
+      "tokens": {
+        "padding-block": "{spacing.1-5}"
+      },
       "states": {
         "focus-visible": {
           "outline-color": "{comp.border.focus-ring}",

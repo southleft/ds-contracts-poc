@@ -105,6 +105,9 @@
           }
         },
         "Label": {
+          "declared": {
+            "text-transform": "uppercase"
+          },
           "content": {
             "prop": "label"
           },
@@ -119,7 +122,10 @@
         }
       },
       "tokens": {
+        "padding-block": "{spacing.0-5}",
         "border-radius": "{component.border.radius.rounded}",
+        "gap": "{spacing.0-5}",
+        "background-image": "{imported.atoms-badge.root.background-image.{variant}}",
         "width": "{imported.atoms-badge.root.width.{hasLabel}}",
         "height": "{imported.atoms-badge.root.height.{hasLabel}}"
       }

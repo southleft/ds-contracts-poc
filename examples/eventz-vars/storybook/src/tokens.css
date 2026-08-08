@@ -57,6 +57,11 @@
   --component-border-radius-rounded-xl: 12px;
   --component-border-radius-rounded: 4px;
   --component-border-width-sm: 1px;
+  --imported-atoms-badge-root-background-image-accent: linear-gradient(270deg, #d9c5f7 0%, #d0b5f9 100%);
+  --imported-atoms-badge-root-background-image-brand: none;
+  --imported-atoms-badge-root-background-image-featured: linear-gradient(270deg, #f9cde7 0%, #f6b2db 100%);
+  --imported-atoms-badge-root-background-image-info: linear-gradient(270deg, #b2e7f3 0%, #9ae0f0 100%);
+  --imported-atoms-badge-root-background-image-warning: linear-gradient(270deg, #f3e0c6 0%, #f0d1a5 100%);
   --imported-atoms-badge-root-height-false: 22px;
   --imported-atoms-badge-root-height-true: fit-content;
   --imported-atoms-badge-root-width-false: 22px;
@@ -104,7 +109,9 @@
   --opacity-disabled: 40;
   --opacity-full: 100;
   --space-xs: 8px;
+  --spacing-0-5: 2px;
   --spacing-0: 0px;
+  --spacing-1-5: 6px;
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 12px;

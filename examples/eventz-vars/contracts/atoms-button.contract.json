@@ -218,6 +218,7 @@
       "tokens": {
         "background-color": "{comp.button.primary.color.background.default}",
         "padding-inline": "{spacing.3}",
+        "padding-block": "{spacing.1-5}",
         "border-radius": "{component.border.radius.rounded-lg}",
         "gap": "{spacing.1}"
       },

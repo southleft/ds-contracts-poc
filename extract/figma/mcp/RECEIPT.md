@@ -49,7 +49,7 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 - ✅ foreign vocabulary recovered by name: "component/border/radius/rounded-md"
 - ✅ foreign vocabulary recovered by name: "color/content/inverse"
 - ✅ the U+2024 variable ("spacing/0․5", ONE DOT LEADER) is itself recovered by name by the join…
-- ✅ …and then REFUSED by the token-ref grammar (binding not proposed, named in notes) — the refusal fires on live foreign data
+- ✅ …and then FOLDED to a NAMED RENAME ({spacing.0-5}, dump v1.16 — was: refused by the token-ref grammar) — the fold receipt fires on live foreign data
 - ✅ recovered names BIND in the proposal: root carries {spacing.4} / {spacing.3} / {component.border.radius.rounded-md} / {spacing.2} (got {"padding-inline":"{spacing.4}","padding-block":"{spacing.3}","border-radius":"{component.border.radius.rounded-md}","gap":"{spacing.2}","max-width":"{imported.alert.root.max-width}","box-shadow":"{imported.alert.root.box-shadow}","width":"{imported.alert.root.width}"})
 - ✅ everything the join could not name still ships at literal fidelity as imported.* mints (15 minted, 0 unbound)
 
@@ -65,15 +65,20 @@ Fixtures in `extract/figma/mcp/fixtures/` are RECORDED LIVE responses (Figma des
 
 ### Map degradations (named, never silent)
 
-- `[paint-unsupported]` Alert:variant=success `fill` — first visible paint is GRADIENT_LINEAR, not SOLID — dump v1 carries solid paints only; paint omitted
+- `[variable-unresolved]` Alert:variant=success `fill.gradientStop` — variable id VariableID:2308:683 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
+- `[variable-unresolved]` Alert:variant=success `fill.gradientStop` — variable id VariableID:2309:940 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
+- `[variable-unresolved]` Alert:variant=info `fill.gradientStop` — variable id VariableID:2308:684 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
+- `[variable-unresolved]` Alert:variant=warning `fill.gradientStop` — variable id VariableID:2308:682 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
+- `[variable-unresolved]` Alert:variant=danger `fill.gradientStop` — variable id VariableID:2308:677 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
 
-### Proposal notes (review line items, 40)
+### Proposal notes (review line items, 41)
 
 - semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas and the name/axis inference table matched nothing; set the real host element
+- variable name "spacing/0․5" contains U+2024 ONE DOT LEADER — folded to '-' and carried as {spacing.0-5} everywhere it binds (dump v1.16 fold rule; a RENAME relative to the canvas variable, which keeps its own spelling): rename the variable to match, or remap manually. A fold target another variable already owns refuses registration at the captured-token layer by name
+- Alert:root fill (variant=success): OBLIQUE GRADIENT_LINEAR (handles (-3.3897, -4.593) → (1.5453, 2.1339)) — the CSS angle and stop scale depend on the drawn box's aspect ratio, so no size-independent exact carriage exists — background-image REFUSED BY NAME for the whole node (carrying the other variants would mint 'none' here, an absence the canvas contradicts); the captured handles/stops stay in the dump for a later carriage, review
 - Alert:root/container: visibility bound to BOOLEAN "hasIcon" — proposed as prop `hasIcon` (default true: the property definition's defaultValue, dump v1.5)
 - Alert:root/container/Icon: nested instance of "check circle" has no known contract — component ref proposed as "ds.check-circle" with a STUB child contract auto-proposed alongside (childStubs; API from observed applied values only, anatomy not captured — import the real child set to replace it)
 - Alert:root/container/Icon: fixed prop values of the nested "check circle" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured
-- Alert:root/horizontal stack itemSpacing: variable name "spacing/0․5" contains characters outside the token-ref grammar ([a-z0-9.-]) — binding not proposed; rename the variable or map it manually
 - Alert:root/horizontal stack/horizontal stack: part name "horizontalStack" already names another part of this contract (part names are contract-wide: CSS classes, swap layers, and note paths key on them) — renamed to "horizontalStack2" (rule: first drawn part keeps the name; later collisions take the parent-derived prefix, else an ordinal suffix)
 - Alert:root/horizontal stack/horizontal stack/Title: rides text style "body/md-bold" which is not a token-derived style (the kit binds no variable to its typography) — minted under the STYLE's own name as `imported.text.body-md-bold`, shared by every part riding it; rename against your real type tokens (provisional)
 - Alert:root/horizontal stack/horizontal stack/Description: rides text style "body/sm" which is not a token-derived style (the kit binds no variable to its typography) — minted under the STYLE's own name as `imported.text.body-sm`, shared by every part riding it; rename against your real type tokens (provisional)

@@ -1,0 +1,495 @@
+{
+  "_provenance": {
+    "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+    "fetchedAt": "2026-08-08",
+    "fileVersion": "2384408217982911317",
+    "note": "REST recovery sidecar (examples/eventz-vars/fetch-rest-recovery.mts) — dump v1.16 gradient/textCase facts for the committed v1.11 plugin dump, grafted in-memory by eventz-pipeline.mts. Supersede by a full v1.16 plugin re-dump.",
+    "source": "GET /v1/files/E7oXr98i91HYQGZxA2USOQ/nodes?depth=4"
+  },
+  "facts": [
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=accent, hasIcon=false, hasLabel=true",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1484,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "e3d7f5"
+          },
+          {
+            "position": 1,
+            "hex": "d0b5f9"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=accent, hasIcon=false, hasLabel=true",
+      "path": [
+        "Label"
+      ],
+      "textCase": "UPPER"
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=accent, hasIcon=true, hasLabel=false",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1484,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "e3d7f5"
+          },
+          {
+            "position": 1,
+            "hex": "d0b5f9"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=accent, hasIcon=true, hasLabel=true",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1484,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "e3d7f5"
+          },
+          {
+            "position": 1,
+            "hex": "d0b5f9"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=accent, hasIcon=true, hasLabel=true",
+      "path": [
+        "Label"
+      ],
+      "textCase": "UPPER"
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=brand, hasIcon=false, hasLabel=true",
+      "path": [
+        "Label"
+      ],
+      "textCase": "UPPER"
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=brand, hasIcon=true, hasLabel=true",
+      "path": [
+        "Label"
+      ],
+      "textCase": "UPPER"
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=featured, hasIcon=false, hasLabel=true",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1563,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "fcebf5"
+          },
+          {
+            "position": 1,
+            "hex": "f6b2db"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=featured, hasIcon=false, hasLabel=true",
+      "path": [
+        "Label"
+      ],
+      "textCase": "UPPER"
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=featured, hasIcon=true, hasLabel=false",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1563,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "fcebf5"
+          },
+          {
+            "position": 1,
+            "hex": "f6b2db"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=featured, hasIcon=true, hasLabel=true",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1563,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "fcebf5"
+          },
+          {
+            "position": 1,
+            "hex": "f6b2db"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=featured, hasIcon=true, hasLabel=true",
+      "path": [
+        "Label"
+      ],
+      "textCase": "UPPER"
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=info, hasIcon=false, hasLabel=true",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1797,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "cfeff6"
+          },
+          {
+            "position": 1,
+            "hex": "9ae0f0"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=info, hasIcon=false, hasLabel=true",
+      "path": [
+        "Label"
+      ],
+      "textCase": "UPPER"
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=info, hasIcon=true, hasLabel=false",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1797,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "cfeff6"
+          },
+          {
+            "position": 1,
+            "hex": "9ae0f0"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=info, hasIcon=true, hasLabel=true",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1797,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "cfeff6"
+          },
+          {
+            "position": 1,
+            "hex": "9ae0f0"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=info, hasIcon=true, hasLabel=true",
+      "path": [
+        "Label"
+      ],
+      "textCase": "UPPER"
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=warning, hasIcon=false, hasLabel=true",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1719,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "f7f2ec"
+          },
+          {
+            "position": 1,
+            "hex": "f0d1a5"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=warning, hasIcon=false, hasLabel=true",
+      "path": [
+        "Label"
+      ],
+      "textCase": "UPPER"
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=warning, hasIcon=true, hasLabel=false",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1719,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "f7f2ec"
+          },
+          {
+            "position": 1,
+            "hex": "f0d1a5"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=warning, hasIcon=true, hasLabel=true",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": 2.1719,
+          "y": 0.5
+        },
+        "end": {
+          "x": -0.0055,
+          "y": 0.5
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "f7f2ec"
+          },
+          {
+            "position": 1,
+            "hex": "f0d1a5"
+          }
+        ]
+      }
+    },
+    {
+      "set": "Atoms/Badge",
+      "variant": "variant=warning, hasIcon=true, hasLabel=true",
+      "path": [
+        "Label"
+      ],
+      "textCase": "UPPER"
+    },
+    {
+      "set": "Molecules/Alert",
+      "variant": "variant=danger",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": -1.7449,
+          "y": -3.1337
+        },
+        "end": {
+          "x": 1.3897,
+          "y": 2.3779
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "ff93a7"
+          },
+          {
+            "position": 1,
+            "hex": "ffffff"
+          }
+        ]
+      },
+      "stopsBound": 2
+    },
+    {
+      "set": "Molecules/Alert",
+      "variant": "variant=info",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": -2.6231,
+          "y": -2.8953
+        },
+        "end": {
+          "x": 1.1641,
+          "y": 1.3895
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "a6d5fb"
+          },
+          {
+            "position": 1,
+            "hex": "ffffff"
+          }
+        ]
+      },
+      "stopsBound": 2
+    },
+    {
+      "set": "Molecules/Alert",
+      "variant": "variant=success",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": -3.3897,
+          "y": -4.593
+        },
+        "end": {
+          "x": 1.5453,
+          "y": 2.1339
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "9cecac"
+          },
+          {
+            "position": 1,
+            "hex": "ffffff"
+          }
+        ]
+      },
+      "stopsBound": 2
+    },
+    {
+      "set": "Molecules/Alert",
+      "variant": "variant=warning",
+      "path": [],
+      "gradient": {
+        "start": {
+          "x": -1.9077,
+          "y": -2.2791
+        },
+        "end": {
+          "x": 1.3385,
+          "y": 1.657
+        },
+        "stops": [
+          {
+            "position": 0,
+            "hex": "ffd6aa"
+          },
+          {
+            "position": 1,
+            "hex": "ffffff"
+          }
+        ]
+      },
+      "stopsBound": 2
+    }
+  ]
+}
