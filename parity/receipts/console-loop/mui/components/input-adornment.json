@@ -1,137 +1,138 @@
 {
-  "version": 1,
-  "kind": "console-loop-mui-component",
-  "status": "completed",
-  "component": "input-adornment",
-  "contract": "examples/mui/contracts/input-adornment.contract.json",
-  "script": "examples/mui/figma/input-adornment.figma.js",
-  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
-  "recordedAt": "2026-08-06T05:00:37.029Z",
-  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
-  "generate": {
-    "ok": true,
-    "nodeId": "83:1687",
-    "mode": "generated",
-    "page": "InputAdornment",
-    "sectionId": "83:1688",
-    "result": {
-      "createdNodeIds": [
-        "83:1687"
-      ],
-      "results": [
-        {
-          "name": "InputAdornment",
-          "contractId": "mui.input-adornment",
-          "nodeId": "83:1687",
-          "key": "e70e9e6c1183b5f8c8ac3d66209431949e463a06",
-          "variants": 2,
-          "properties": [
-            "Content#83:16",
-            "Position"
-          ]
-        }
-      ]
+ "version": 1,
+ "kind": "console-loop-mui-component",
+ "status": "completed",
+ "component": "input-adornment",
+ "contract": "examples/mui/contracts/input-adornment.contract.json",
+ "script": "examples/mui/figma/input-adornment.figma.js",
+ "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+ "recordedAt": "2026-08-06T05:00:37.029Z",
+ "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+ "generate": {
+  "ok": true,
+  "nodeId": "83:1687",
+  "mode": "generated",
+  "page": "InputAdornment",
+  "sectionId": "83:1688",
+  "result": {
+   "createdNodeIds": [
+    "83:1687"
+   ],
+   "results": [
+    {
+     "name": "InputAdornment",
+     "contractId": "mui.input-adornment",
+     "nodeId": "83:1687",
+     "key": "e70e9e6c1183b5f8c8ac3d66209431949e463a06",
+     "variants": 2,
+     "properties": [
+      "Content#83:16",
+      "Position"
+     ]
     }
-  },
-  "visual": {
-    "ok": false,
-    "notes": [
-      "Structure/variants reviewed via inspect (83:1687, page InputAdornment); visual OK \u2014 slot placeholders acceptable.",
-      "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page InputAdornment)."
-    ],
-    "defects": [
-      "pixel scorecard fail: pctAAMasked=24.22% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/input-adornment.json",
-      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
-    ],
-    "reference": "parity/receipts/console-loop/mui/refs/input-adornment.png",
-    "referenceSource": "extract/computed/out/mui/inputadornment/gate-shots/end__default.png",
-    "canvasShot": "parity/receipts/console-loop/mui/shots/input-adornment-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed"
-  },
-  "fingerprint": {
-    "v6": "v6:3114867968",
-    "lineCount": 22,
-    "sampleLines": [
-      ":COMPONENT_SET/InputAdornment|fill|[]",
-      ":COMPONENT_SET/InputAdornment|radius|5,5,5,5",
-      ":COMPONENT_SET/InputAdornment|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/InputAdornment|description|InputAdornment \u00e2\u0080\u0094 generated from contract mui.input-adornment v0.2.0 \u00e2\u0080",
-      ":COMPONENT_SET/InputAdornment|propdef|Content#83:16:TEXT=$",
-      ":COMPONENT_SET/InputAdornment|propdef|Position:VARIANT=Start",
-      "/0:COMPONENT/Position=Start|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/0:COMPONENT/Position=Start|radius|0,0,0,0",
-      "/0:COMPONENT/Position=Start|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
-      "/0:COMPONENT/Position=Start|sizing|HUG/HUG AUTO",
-      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.6000000238418579,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/input-adornment/label/color\"}}}]",
-      "/0/0:TEXT/label|radius|0,0,0,0",
-      "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
-      "/0/0:TEXT/label|text|\"$\" 16px {\"family\":\"Roboto\",\"style\":\"Regular\"}",
-      "/1:COMPONENT/Position=End|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/1:COMPONENT/Position=End|radius|0,0,0,0",
-      "/1:COMPONENT/Position=End|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
-      "/1:COMPONENT/Position=End|sizing|HUG/HUG AUTO",
-      "/1/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.6000000238418579,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/input-adornment/label/color\"}}}]",
-      "/1/0:TEXT/label|radius|0,0,0,0"
-    ]
-  },
-  "roundtrip": {
-    "mismatches": [],
-    "gaps": [
-      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
-    ],
-    "matchedAxes": [
-      "Position enum \u2192 Start/End",
-      "TEXT Content"
-    ],
-    "observed": {
-      "type": "COMPONENT_SET",
-      "variantNames": [
-        "Position=Start",
-        "Position=End"
-      ],
-      "propDefs": [
-        {
-          "name": "Content#83:16",
-          "type": "TEXT",
-          "defaultValue": "$",
-          "variantOptions": null
-        },
-        {
-          "name": "Position",
-          "type": "VARIANT",
-          "defaultValue": "Start",
-          "variantOptions": [
-            "Start",
-            "End"
-          ]
-        }
-      ],
-      "firstRoot": {
-        "name": "Position=Start",
-        "type": "COMPONENT",
-        "layoutMode": "HORIZONTAL",
-        "padding": {
-          "t": 0,
-          "r": 0,
-          "b": 0,
-          "l": 0
-        },
-        "radius": 0,
-        "fillVarName": null,
-        "padBound": {},
-        "w": 9,
-        "h": 24,
-        "childTypes": [
-          "TEXT/label"
-        ]
-      }
-    }
-  },
-  "acceptance": {
-    "generatedOrFound": true,
-    "screenshotReviewed": true,
-    "zeroMismatch": true,
-    "visualMatchDeveloped": false
+   ]
   }
+ },
+ "visual": {
+  "ok": false,
+  "notes": [
+   "Structure/variants reviewed via inspect (83:1687, page InputAdornment); visual OK — slot placeholders acceptable.",
+   "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page InputAdornment).",
+   "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot."
+  ],
+  "defects": [
+   "pixel scorecard fail: pctAAMasked=20.83% lane / 20.83% headless (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/input-adornment.json",
+   "residual after FC-FONT-SUBSTRATE closure: reference now renders committed Roboto (was local Roboto-Thin), both instruments agree at 20.83/20.83 (was 24.22) — the remaining diff is not the harness font substrate; per-stem geometry/color/raster causes stay open"
+  ],
+  "reference": "parity/receipts/console-loop/mui/refs/input-adornment.png",
+  "referenceSource": "extract/computed/out/mui/inputadornment/gate-shots/end__default.png",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/input-adornment-cell.png",
+  "matchDeveloped": false,
+  "status": "fail-closed"
+ },
+ "fingerprint": {
+  "v6": "v6:3114867968",
+  "lineCount": 22,
+  "sampleLines": [
+   ":COMPONENT_SET/InputAdornment|fill|[]",
+   ":COMPONENT_SET/InputAdornment|radius|5,5,5,5",
+   ":COMPONENT_SET/InputAdornment|sizing|FIXED/FIXED AUTO",
+   ":COMPONENT_SET/InputAdornment|description|InputAdornment â generated from contract mui.input-adornment v0.2.0 â",
+   ":COMPONENT_SET/InputAdornment|propdef|Content#83:16:TEXT=$",
+   ":COMPONENT_SET/InputAdornment|propdef|Position:VARIANT=Start",
+   "/0:COMPONENT/Position=Start|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+   "/0:COMPONENT/Position=Start|radius|0,0,0,0",
+   "/0:COMPONENT/Position=Start|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+   "/0:COMPONENT/Position=Start|sizing|HUG/HUG AUTO",
+   "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.6000000238418579,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/input-adornment/label/color\"}}}]",
+   "/0/0:TEXT/label|radius|0,0,0,0",
+   "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
+   "/0/0:TEXT/label|text|\"$\" 16px {\"family\":\"Roboto\",\"style\":\"Regular\"}",
+   "/1:COMPONENT/Position=End|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+   "/1:COMPONENT/Position=End|radius|0,0,0,0",
+   "/1:COMPONENT/Position=End|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+   "/1:COMPONENT/Position=End|sizing|HUG/HUG AUTO",
+   "/1/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.6000000238418579,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/input-adornment/label/color\"}}}]",
+   "/1/0:TEXT/label|radius|0,0,0,0"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [
+   "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+  ],
+  "matchedAxes": [
+   "Position enum → Start/End",
+   "TEXT Content"
+  ],
+  "observed": {
+   "type": "COMPONENT_SET",
+   "variantNames": [
+    "Position=Start",
+    "Position=End"
+   ],
+   "propDefs": [
+    {
+     "name": "Content#83:16",
+     "type": "TEXT",
+     "defaultValue": "$",
+     "variantOptions": null
+    },
+    {
+     "name": "Position",
+     "type": "VARIANT",
+     "defaultValue": "Start",
+     "variantOptions": [
+      "Start",
+      "End"
+     ]
+    }
+   ],
+   "firstRoot": {
+    "name": "Position=Start",
+    "type": "COMPONENT",
+    "layoutMode": "HORIZONTAL",
+    "padding": {
+     "t": 0,
+     "r": 0,
+     "b": 0,
+     "l": 0
+    },
+    "radius": 0,
+    "fillVarName": null,
+    "padBound": {},
+    "w": 9,
+    "h": 24,
+    "childTypes": [
+     "TEXT/label"
+    ]
+   }
+  }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": false
+ }
 }

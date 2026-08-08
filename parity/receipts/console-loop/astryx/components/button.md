@@ -44,3 +44,9 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 ## 2026-08-08 — FC-FONT-SUBSTRATE harness landed; this stem stays fail-closed by name
 
 - cfg.fonts (per-library @font-face, data:-URI, network-free) landed and converted altitude chip/link. This library is left unconfigured: no library-true font file exists in a committed/sandboxed source (see receipt note). Reference NOT re-pinned; residual cause updated on the receipt.
+
+## 2026-08-08 — FONT-SUBSTRATE round (Times root cause fixed)
+
+- ROOT CAUSE: theme-neutral scopes ALL tokens under `@scope ([data-astryx-theme="neutral"])`; the capture mount never rendered the Theme provider, so no theme token resolved — Button computed font-family to literal 'Times' (browser default via reset's form-control inherit + unstyled body).
+- FIX AT CAUSE: mount now wraps `<Theme theme={neutralTheme}>` (the library's documented setup) + cfg.fonts Figtree 400/500/600/700 committed. Recaptured truth: 0 Times nodes, 104 Figtree nodes.
+- Ref re-pinned to the themed render: 7.94 → 89.31/89.29 both instruments — the canvas (pre-theme blue primary) is now the stale side. Fail-closed pending re-promote + canvas re-sync.

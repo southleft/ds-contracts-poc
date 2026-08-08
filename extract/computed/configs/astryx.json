@@ -7,13 +7,45 @@
     "classAllow": "^astryx-"
   },
   "mount": {
+    "__note": "FC-FONT-SUBSTRATE ROOT CAUSE (the Times defect), FIXED HERE. The old mount imported the three stylesheets but wrapped stages in a bare fragment — and EVERY token in @astryxdesign/theme-neutral/dist/theme.css lives inside '@scope ([data-astryx-theme=\"neutral\"]) to ([data-astryx-theme])' blocks (theme.css:9/84/509). With no element carrying that attribute the scope never matched, so no theme token — Figtree included — ever resolved; core astryx.css's :root fallbacks covered components that reference var(--font-family-body) directly (Switch label captured the -apple-system stack), but Button's <button> only has reset.css's form-control 'font-family: inherit', inherits from an UNSTYLED body (the base font is applied by the Theme provider's own wrapper div, stylex class x9ynric = font-family:var(--font-family-body)), and computed to the browser default: literal 'Times', 104 nodes of it in the committed captured truth. The fix is the library's own documented mount (README Quick Start): wrap in <Theme theme={neutralTheme}> — its wrapper div carries data-astryx-theme='neutral' (resolving every @scope'd token at capture) AND the base font-family, exactly what a real consumer renders under. Captured truth recaptured under this mount carries 'Figtree, -apple-system, ...' and the committed Figtree faces below render it.",
     "imports": [
       "import '@astryxdesign/core/reset.css';",
       "import '@astryxdesign/core/astryx.css';",
-      "import '@astryxdesign/theme-neutral/theme.css';"
+      "import '@astryxdesign/theme-neutral/theme.css';",
+      "import { Theme } from '@astryxdesign/core/theme';",
+      "import { neutralTheme } from '@astryxdesign/theme-neutral/built';"
     ],
-    "wrapperOpen": "<>",
-    "wrapperClose": "</>"
+    "wrapperOpen": "<Theme theme={neutralTheme}>",
+    "wrapperClose": "</Theme>"
+  },
+  "fonts": {
+    "__note": "FC-FONT-SUBSTRATE closure. NOT A GUESS: @astryxdesign/theme-neutral declares 'Figtree, -apple-system, BlinkMacSystemFont, ...' as --font-family-body/--font-family-heading (dist/theme.css:149-150, dist/neutral.js:83-84) — the library's OWN first-choice face; weights 400/500/600/700 are the library's full --font-weight-normal/medium/semibold/bold token set (core dist/astryx.css). Files committed under extract/computed/fonts/figtree/ from @fontsource/figtree@5.3.0 (exact-pinned in examples/astryx/.astryx-sandbox/package.json). Inlined as data: URIs — no network at render or check time. NOTE: the face only renders because the mount fix above makes --font-family-body resolve to Figtree at capture — loading a face for a token that never resolves was the trap this round refused.",
+    "faces": [
+      {
+        "family": "Figtree",
+        "weight": 400,
+        "style": "normal",
+        "file": "extract/computed/fonts/figtree/figtree-latin-400-normal.woff2"
+      },
+      {
+        "family": "Figtree",
+        "weight": 500,
+        "style": "normal",
+        "file": "extract/computed/fonts/figtree/figtree-latin-500-normal.woff2"
+      },
+      {
+        "family": "Figtree",
+        "weight": 600,
+        "style": "normal",
+        "file": "extract/computed/fonts/figtree/figtree-latin-600-normal.woff2"
+      },
+      {
+        "family": "Figtree",
+        "weight": 700,
+        "style": "normal",
+        "file": "extract/computed/fonts/figtree/figtree-latin-700-normal.woff2"
+      }
+    ]
   },
   "tokens": {
     "dtcg": [

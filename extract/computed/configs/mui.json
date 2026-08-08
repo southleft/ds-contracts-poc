@@ -22,6 +22,29 @@
     "css": "examples/mui/tokens/mui.vars.css",
     "minted": "examples/mui/tokens/mui-minted.dtcg.json"
   },
+  "fonts": {
+    "__note": "FC-FONT-SUBSTRATE closure (the altitude precedent). NOT A GUESS: MUI's own typography declaration — @mui/material createTypography defaults fontFamily '\"Roboto\", \"Helvetica\", \"Arial\", sans-serif' with fontWeightRegular 400 / fontWeightMedium 500 / fontWeightBold 700 (examples/mui/.mui-sandbox/node_modules/@mui/material/styles/createTypography.js:23-30), and every committed captured truth spells the stack 'Roboto, Helvetica, Arial, sans-serif'. fontWeightLight 300 exists but only h1/h2 render it and no captured component mounts either. Files committed under extract/computed/fonts/roboto/ from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox/package.json). Inlined as data: URIs — no network at render or check time; same files + same pinned Chromium => same rasters on the recording platform.",
+    "faces": [
+      {
+        "family": "Roboto",
+        "weight": 400,
+        "style": "normal",
+        "file": "extract/computed/fonts/roboto/roboto-latin-400-normal.woff2"
+      },
+      {
+        "family": "Roboto",
+        "weight": 500,
+        "style": "normal",
+        "file": "extract/computed/fonts/roboto/roboto-latin-500-normal.woff2"
+      },
+      {
+        "family": "Roboto",
+        "weight": 700,
+        "style": "normal",
+        "file": "extract/computed/fonts/roboto/roboto-latin-700-normal.woff2"
+      }
+    ]
+  },
   "browser": {
     "viewport": {
       "width": 900,

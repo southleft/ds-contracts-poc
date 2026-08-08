@@ -1,5 +1,5 @@
 {
-  "_marker": "REGATE DRIFT BASELINE \u2014 what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved.",
+  "_marker": "REGATE DRIFT BASELINE — what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved.",
   "recordedAt": "2026-07-29",
   "rows": [
     {
@@ -81,16 +81,16 @@
       "cellsCompared": 1512,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
-      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 1 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json \u2014 the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 1 -> 0 unresolved, 96.296 -> 100.000 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL \u2014 the recapture changed the measurement, not the artifact."
+      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 1 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json — the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 1 -> 0 unresolved, 96.296 -> 100.000 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL — the recapture changed the measurement, not the artifact."
     },
     {
       "library": "astryx",
       "component": "Button",
-      "rerunPctEqual": 98.95833333333333,
+      "rerunPctEqual": 98.75,
       "cellsCompared": 11520,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 98.95833333333333,
-      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 22 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json \u2014 the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 22 -> 0 unresolved, 95.391 -> 98.724 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL \u2014 the recapture changed the measurement, not the artifact. Re-recorded task-#26 round (2026-07-29): the #43 astryx rebuild (d563be6) moved this floor (fresh capture + re-promote); the 2026-07-28 baseline predated it. Committed and rerun agree."
+      "committedPctEqual": 98.75,
+      "gapCause": "re-recorded FONT-SUBSTRATE round 2026-08-08: astryx Button+Switch RECAPTURED under the library's documented Theme mount (<Theme theme={neutralTheme}> — the missing data-astryx-theme scope root that had left every theme.css token unresolved and Button's captured font-family at literal 'Times') + cfg.fonts Figtree faces. Committed and offline rerun agree exactly. Button: 98.958 -> 98.750 (theme-resolved values diverge from the shipped pre-theme minted tree in 26 named leaves; fresh wins per gate policy)."
     },
     {
       "library": "astryx",
@@ -99,7 +99,7 @@
       "cellsCompared": 1144,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 98.6013986013986,
-      "gapCause": "repaired: gate now measures shipped inventory (task #21) \u2014 54 unresolved refs -> 0 with pctEqual UNCHANGED at 98.252. This is the counterfactual that keeps unresolvedTokenRefs pinned SEPARATELY from pctEqual: the affected channels are already mismatched or uncompared, so the empty custom properties cost nothing here and closing them gains nothing. NOT re-run through the harness (outside the named scope of task #21, and its number is proven unmoved by the offline instrument) \u2014 so its committed scorecard.json still records the PRE-FIX count of 54 unresolved refs. That number in that file is stale; it is named here rather than quietly left to be rediscovered. Re-recorded task-#26 round (2026-07-29): the #43 astryx rebuild (d563be6) moved this floor (fresh capture + re-promote); the 2026-07-28 baseline predated it. Committed and rerun agree."
+      "gapCause": "repaired: gate now measures shipped inventory (task #21) — 54 unresolved refs -> 0 with pctEqual UNCHANGED at 98.252. This is the counterfactual that keeps unresolvedTokenRefs pinned SEPARATELY from pctEqual: the affected channels are already mismatched or uncompared, so the empty custom properties cost nothing here and closing them gains nothing. NOT re-run through the harness (outside the named scope of task #21, and its number is proven unmoved by the offline instrument) — so its committed scorecard.json still records the PRE-FIX count of 54 unresolved refs. That number in that file is stale; it is named here rather than quietly left to be rediscovered. Re-recorded task-#26 round (2026-07-29): the #43 astryx rebuild (d563be6) moved this floor (fresh capture + re-promote); the 2026-07-28 baseline predated it. Committed and rerun agree."
     },
     {
       "library": "astryx",
@@ -108,16 +108,16 @@
       "cellsCompared": 2944,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.38722826086956,
-      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 44 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json \u2014 the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 44 -> 0 unresolved, 55.333 -> 90.387 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL \u2014 the recapture changed the measurement, not the artifact."
+      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 44 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json — the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 44 -> 0 unresolved, 55.333 -> 90.387 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL — the recapture changed the measurement, not the artifact."
     },
     {
       "library": "astryx",
       "component": "Switch",
-      "rerunPctEqual": 77.34375,
-      "cellsCompared": 1536,
+      "rerunPctEqual": 75.51546391752578,
+      "cellsCompared": 1552,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 77.34375,
-      "gapCause": "ENGINE IMPROVED \u2014 absolute-positioning round f52c334 (+1.042). Reproduced 76.302 EXACTLY at 0078020. \u2014 NOT CLOSED BY THE TASK-#38 RECAPTURE WAVE, and named rather than left to look like an oversight: astryx WAS re-captured successfully (Switch came back 77.344 \u2014 the offline number exactly, closing this gap in the measurement) but the result was REVERTED and is not committed, because astryx cannot complete the wave. Two blockers, both pre-existing and both reproducible at HEAD: (1) examples/astryx/scripts/promote-floor.ts REFUSES \u2014 \"decision RA-ffffff: leaf imported.button.label.color.primary is not in the minted tree\" \u2014 the committed reanchor-decisions.json ledger acks a leaf the current engine no longer mints, so the contracts cannot be re-promoted; (2) astryx is the one library whose capture config reads its OWN SHIPPED contracts (extract/computed/configs/astryx.json points at examples/astryx/contracts/*.contract.json, not a contracts-seed/), so every capture+promote cycle appends another provenance sentence to each description and bumps the version \u2014 the loop is NOT IDEMPOTENT and committing one turn of it would ship a self-referential artifact. astryx's figma scripts and bundles WERE re-emitted (the engine moved); only its captured truth and contracts are stale."
+      "committedPctEqual": 75.51546391752578,
+      "gapCause": "re-recorded FONT-SUBSTRATE round 2026-08-08: astryx Button+Switch RECAPTURED under the library's documented Theme mount (<Theme theme={neutralTheme}> — the missing data-astryx-theme scope root that had left every theme.css token unresolved and Button's captured font-family at literal 'Times') + cfg.fonts Figtree faces. Committed and offline rerun agree exactly. Switch: 77.344 -> 75.515 and cellsCompared 1536 -> 1552 (the themed capture adds ::placeholder-era channels and 8 named fresh-vs-shipped leaf divergences, e.g. label-2.color #737373 vs {color-text-secondary}); the compared vocabulary moved WITH the recapture, stated here deliberately."
     },
     {
       "library": "carbon",
@@ -126,7 +126,7 @@
       "cellsCompared": 5472,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 77.63157894736842,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) \u2014 RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Accordion +1.170 (76.462 \u2192 77.632), cellsCompared UNCHANGED: `display: list-item` is now carried in the declared registry (it is a BLOCK-LEVEL box in CSS block flow). It previously fell into the `display-outside-vocabulary` receipt, so Carbon's `<li class=\"cds--accordion__item\">` reached the emitter with no display fact at all and took the HORIZONTAL default \u2014 the 472px panel drew BESIDE the 174px heading inside a 328px item."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Accordion +1.170 (76.462 → 77.632), cellsCompared UNCHANGED: `display: list-item` is now carried in the declared registry (it is a BLOCK-LEVEL box in CSS block flow). It previously fell into the `display-outside-vocabulary` receipt, so Carbon's `<li class=\"cds--accordion__item\">` reached the emitter with no display fact at all and took the HORIZONTAL default — the 472px panel drew BESIDE the 174px heading inside a 328px item."
     },
     {
       "library": "carbon",
@@ -135,7 +135,7 @@
       "cellsCompared": 20608,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 78.9741847826087,
-      "gapCause": "repaired: THE GATE SETTLES NOW (task #34). This row carried the baseline's ONLY widened tolerance (0.20) and a 0.28 harness/offline gap, and its previous gapCause named the cause and declined to fix it: extract/computed/gate.ts drove an interaction and then slept a FLAT 30ms while the CAPTURE sweep polled to two consecutive stable samples for up to 1.5s, so Carbon\u2019s 70-110ms transitions were sampled MID-FLIGHT. Both sampling points now share ONE implementation (capture.ts settleStage). MEASURED at the fixed engine: three consecutive offline runs return 78.974% / 78.974% / 78.974% (16275 of 20608, byte-identical), the harness gate reports the same 78.9741847826087, so the gap is 0.000000 and the spread is 0. The tolerance is RETIRED to the global 0.001 rather than left widened over a defect that no longer exists. The row moved +1.480 offline (+1.698 against the committed harness number) on an IDENTICAL cellsCompared of 20608 \u2014 a fidelity gain, not a shrunken denominator; the same fix moved altitude/Link +18.519, altitude/Button +6.719, carbon/Tabs +0.484, mui/Button +0.154 and polaris/Checkbox +0.492, every one of them on an unchanged denominator."
+      "gapCause": "repaired: THE GATE SETTLES NOW (task #34). This row carried the baseline's ONLY widened tolerance (0.20) and a 0.28 harness/offline gap, and its previous gapCause named the cause and declined to fix it: extract/computed/gate.ts drove an interaction and then slept a FLAT 30ms while the CAPTURE sweep polled to two consecutive stable samples for up to 1.5s, so Carbon’s 70-110ms transitions were sampled MID-FLIGHT. Both sampling points now share ONE implementation (capture.ts settleStage). MEASURED at the fixed engine: three consecutive offline runs return 78.974% / 78.974% / 78.974% (16275 of 20608, byte-identical), the harness gate reports the same 78.9741847826087, so the gap is 0.000000 and the spread is 0. The tolerance is RETIRED to the global 0.001 rather than left widened over a defect that no longer exists. The row moved +1.480 offline (+1.698 against the committed harness number) on an IDENTICAL cellsCompared of 20608 — a fidelity gain, not a shrunken denominator; the same fix moved altitude/Link +18.519, altitude/Button +6.719, carbon/Tabs +0.484, mui/Button +0.154 and polaris/Checkbox +0.492, every one of them on an unchanged denominator."
     },
     {
       "library": "carbon",
@@ -144,7 +144,7 @@
       "cellsCompared": 1776,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.29054054054055,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) \u2014 RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) \u2014 Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
     },
     {
       "library": "carbon",
@@ -153,7 +153,7 @@
       "cellsCompared": 1120,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) \u2014 RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. IconButton +8.190 (91.810 \u2192 100.000) and cellsCompared 9280 \u2192 1120 \u2014 the largest VOCABULARY CHANGE of the round, and the reason the number is not a victory lap: in Carbon an icon button IS a tooltip trigger, so its captured anatomy carried `span.cds--popover` and its whole invisible subtree (label + caret, both display:none in every combo). Promoted, that was a 24x24 ABSOLUTE frame over the entire component that draws NOTHING \u2014 the census sibling of the portal round's stripInertPortalChildren. Refusing it takes 3 of 6 parts and 8160 of 9280 compared cells out of the denominator; the surviving three parts happen to be exact. A 100% on 1120 cells is a SMALLER claim than 91.810% on 9280, not a bigger one."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. IconButton +8.190 (91.810 → 100.000) and cellsCompared 9280 → 1120 — the largest VOCABULARY CHANGE of the round, and the reason the number is not a victory lap: in Carbon an icon button IS a tooltip trigger, so its captured anatomy carried `span.cds--popover` and its whole invisible subtree (label + caret, both display:none in every combo). Promoted, that was a 24x24 ABSOLUTE frame over the entire component that draws NOTHING — the census sibling of the portal round's stripInertPortalChildren. Refusing it takes 3 of 6 parts and 8160 of 9280 compared cells out of the denominator; the surviving three parts happen to be exact. A 100% on 1120 cells is a SMALLER claim than 91.810% on 9280, not a bigger one."
     },
     {
       "library": "carbon",
@@ -162,7 +162,7 @@
       "cellsCompared": 4944,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.0873786407767,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) \u2014 RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. InlineNotification +0.506 (96.581 \u2192 97.087) and cellsCompared 7488 \u2192 4944 \u2014 a VOCABULARY CHANGE, named: Carbon's notification icons ship `<title>error icon</title>` inside the svg, and `<title>` is NON-PAINTING metadata (SVG 1.1 \u00a75.4). It was captured as a real element with real text, so (a) the words 'error icon' reached the canvas as visible ink and (b) the svg failed the path/g asset grammar, exploding one glyph into five per-path parts. The capture now drops SVG title/desc/metadata at the source; the six per-kind glyphs promote as REAL icon assets, so 5 path parts + 1 title part per icon leave the compared tree."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. InlineNotification +0.506 (96.581 → 97.087) and cellsCompared 7488 → 4944 — a VOCABULARY CHANGE, named: Carbon's notification icons ship `<title>error icon</title>` inside the svg, and `<title>` is NON-PAINTING metadata (SVG 1.1 §5.4). It was captured as a real element with real text, so (a) the words 'error icon' reached the canvas as visible ink and (b) the svg failed the path/g asset grammar, exploding one glyph into five per-path parts. The capture now drops SVG title/desc/metadata at the source; the six per-kind glyphs promote as REAL icon assets, so 5 path parts + 1 title part per icon leave the compared tree."
     },
     {
       "library": "carbon",
@@ -171,7 +171,7 @@
       "cellsCompared": 1305,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.03831417624521,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) \u2014 RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Modal +0.294 (89.744 \u2192 90.038) and cellsCompared 1560 \u2192 1305 \u2014 a VOCABULARY CHANGE, named: `display: grid` and `inline-grid` now lower to the flex vocabulary from the MEASURED grid-template track counts (modal-container is 1 column x 4 rows -> flex column). The dropped rows are the inert `popover` tooltip wrapper on the close button, refused by the new inert-overlay-wrapper rule (it draws no box in any combo and every one of its children is display:none)."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Modal +0.294 (89.744 → 90.038) and cellsCompared 1560 → 1305 — a VOCABULARY CHANGE, named: `display: grid` and `inline-grid` now lower to the flex vocabulary from the MEASURED grid-template track counts (modal-container is 1 column x 4 rows -> flex column). The dropped rows are the inert `popover` tooltip wrapper on the close button, refused by the new inert-overlay-wrapper rule (it draws no box in any combo and every one of its children is display:none)."
     },
     {
       "library": "carbon",
@@ -180,7 +180,7 @@
       "cellsCompared": 1240,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 93.2258064516129,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) \u2014 RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) \u2014 Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
     },
     {
       "library": "carbon",
@@ -189,7 +189,7 @@
       "cellsCompared": 12896,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 80.5210918114144,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) \u2014 RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) \u2014 Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
     },
     {
       "library": "carbon",
@@ -198,7 +198,7 @@
       "cellsCompared": 3560,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 89.04494382022472,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) \u2014 RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) \u2014 Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
     },
     {
       "library": "carbon",
@@ -207,7 +207,7 @@
       "cellsCompared": 1376,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.30232558139535,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) \u2014 RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Toggle +1.162 (83.140 \u2192 84.302), cellsCompared UNCHANGED: pseudo-decor v2 promotes the ::before KNOB (18x18 ellipse, per-`toggled` left 3px/27px) that the v1 grammar refused twice over ('unconditional placement' \u2014 it is drawn in every combo so it has no enum gate to hang a stylesWhen on; 'nonuniform' \u2014 its geometry is a function of one enum axis). Same vocabulary, one more drawn part."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Toggle +1.162 (83.140 → 84.302), cellsCompared UNCHANGED: pseudo-decor v2 promotes the ::before KNOB (18x18 ellipse, per-`toggled` left 3px/27px) that the v1 grammar refused twice over ('unconditional placement' — it is drawn in every combo so it has no enum gate to hang a stylesWhen on; 'nonuniform' — its geometry is a function of one enum axis). Same vocabulary, one more drawn part."
     },
     {
       "library": "mui",
@@ -261,7 +261,7 @@
       "cellsCompared": 6832,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.1639344262295,
-      "gapCause": "repaired by the TASK-#38 RECAPTURE WAVE: the gap this row recorded (\"ENGINE IMPROVED \u2014 state-plane projection 53792d3 (+2.459). Reproduced 87.705 EXACTLY at its own commit 82d312f.\") was the offline instrument knowing something the SHIPPED artifacts did not. MUI was re-captured through the real harness and its committed scorecard came back 90.164 \u2014 the offline number, to every decimal. cellsCompared UNCHANGED at 6832. What moved in the artifact: Chip's label side padding, which the shipped contract carried as ONE flat 12px for all 28 variants, is now the measured variant x size map (filled/medium 12, filled/small 8, outlined/medium 11, outlined/small 7 \u2014 the outlined pair a pixel narrower because its 1px border eats into the box), carried as 36 new minted leaves under imported.chip.label. This is the ONLY floor number that moved anywhere in the wave: 37 scorecards across carbon/mui/tailwind/altitude were re-measured and 36 came back byte-identical."
+      "gapCause": "repaired by the TASK-#38 RECAPTURE WAVE: the gap this row recorded (\"ENGINE IMPROVED — state-plane projection 53792d3 (+2.459). Reproduced 87.705 EXACTLY at its own commit 82d312f.\") was the offline instrument knowing something the SHIPPED artifacts did not. MUI was re-captured through the real harness and its committed scorecard came back 90.164 — the offline number, to every decimal. cellsCompared UNCHANGED at 6832. What moved in the artifact: Chip's label side padding, which the shipped contract carried as ONE flat 12px for all 28 variants, is now the measured variant x size map (filled/medium 12, filled/small 8, outlined/medium 11, outlined/small 7 — the outlined pair a pixel narrower because its 1px border eats into the box), carried as 36 new minted leaves under imported.chip.label. This is the ONLY floor number that moved anywhere in the wave: 37 scorecards across carbon/mui/tailwind/altitude were re-measured and 36 came back byte-identical."
     },
     {
       "library": "mui",
@@ -270,7 +270,7 @@
       "cellsCompared": 435,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 95.40229885057471,
-      "gapCause": "MOLECULE LIVE-DEFECT ROUND (round 6): VOCABULARY CHANGE \u2014 the two classless focus-trap sentinels (`<div tabindex=0>` around the modal content) are dropped from the captured anatomy; they draw nothing, contain nothing and lowered to full-bleed invisible frames over the component. cellsCompared 455 -> 435. Those sentinel rows matched nearly perfectly (empty divs), so removing them LOWERS the surviving percentage (95.604 -> 95.402) while the canvas strictly improves. Dialog KEEPS its full-bleed layer root by rule: its scrim is visible anatomy."
+      "gapCause": "MOLECULE LIVE-DEFECT ROUND (round 6): VOCABULARY CHANGE — the two classless focus-trap sentinels (`<div tabindex=0>` around the modal content) are dropped from the captured anatomy; they draw nothing, contain nothing and lowered to full-bleed invisible frames over the component. cellsCompared 455 -> 435. Those sentinel rows matched nearly perfectly (empty divs), so removing them LOWERS the surviving percentage (95.604 -> 95.402) while the canvas strictly improves. Dialog KEEPS its full-bleed layer root by rule: its scrim is visible anatomy."
     },
     {
       "library": "mui",
@@ -279,7 +279,7 @@
       "cellsCompared": 171,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 94.15204678362574,
-      "gapCause": "MOLECULE LIVE-DEFECT ROUND (round 6): VOCABULARY CHANGE \u2014 the portal capture no longer carries MUI's full-bleed `position:fixed; inset:0` Popover LAYER as the root. The demotion drops 4 non-painting elements (the layer itself, the INVISIBLE MuiBackdrop, two classless focus-trap sentinels) and promotes the PAPER; cellsCompared 198 -> 171. The surviving parts are the ones that draw, and they score better (93.434 -> 94.152). Live cause: the generated component was 900x1000 (the capture stage) with the 115x124 paper in its corner."
+      "gapCause": "MOLECULE LIVE-DEFECT ROUND (round 6): VOCABULARY CHANGE — the portal capture no longer carries MUI's full-bleed `position:fixed; inset:0` Popover LAYER as the root. The demotion drops 4 non-painting elements (the layer itself, the INVISIBLE MuiBackdrop, two classless focus-trap sentinels) and promotes the PAPER; cellsCompared 198 -> 171. The surviving parts are the ones that draw, and they score better (93.434 -> 94.152). Live cause: the generated component was 900x1000 (the capture stage) with the 115x124 paper in its corner."
     },
     {
       "library": "mui",
@@ -333,7 +333,7 @@
       "cellsCompared": 129,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.69767441860465,
-      "gapCause": "ENGINE IMPROVED \u2014 organism/table-lowering round 3e14f6f (+20.155). Reproduced 70.543 EXACTLY at its own commit aab937b. The harness receipt was RE-RUN by a later round (molecule live-defect round 8dad6b2), so committed and offline now AGREE at 90.698 and the row prints EXACT \u2014 but this baseline's committedPctEqual had been left at the old 70.543. It is a CONTEXT-ONLY field the drift check never compares, which is exactly why it could go stale unnoticed; task #21's re-record corrects it."
+      "gapCause": "ENGINE IMPROVED — organism/table-lowering round 3e14f6f (+20.155). Reproduced 70.543 EXACTLY at its own commit aab937b. The harness receipt was RE-RUN by a later round (molecule live-defect round 8dad6b2), so committed and offline now AGREE at 90.698 and the row prints EXACT — but this baseline's committedPctEqual had been left at the old 70.543. It is a CONTEXT-ONLY field the drift check never compares, which is exactly why it could go stale unnoticed; task #21's re-record corrects it."
     },
     {
       "library": "polaris",
@@ -342,7 +342,7 @@
       "cellsCompared": 1920,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 69.79166666666667,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -351,7 +351,7 @@
       "cellsCompared": 23396,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.46965293212514,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -360,7 +360,7 @@
       "cellsCompared": 12192,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.01443569553805,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -369,7 +369,7 @@
       "cellsCompared": 83520,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.81417624521073,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -378,7 +378,7 @@
       "cellsCompared": 2464,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.00649350649351,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -387,7 +387,7 @@
       "cellsCompared": 1824,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 92.10526315789474,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -396,7 +396,7 @@
       "cellsCompared": 1392,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.32183908045977,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -405,7 +405,7 @@
       "cellsCompared": 8,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -414,7 +414,7 @@
       "cellsCompared": 7401,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.01607890825564,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -423,7 +423,7 @@
       "cellsCompared": 24256,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -432,7 +432,7 @@
       "cellsCompared": 41440,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.96911196911196,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "polaris",
@@ -441,7 +441,7 @@
       "cellsCompared": 592,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
-      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history \u2014 docs/23 \u00a73.2."
+      "gapCause": "task-#26 recapture (2026-07-29): fresh capture through the committed .polaris-sandbox with the CSS-vars reader ON (varPrefix --p- + tokenGroup p), promoted v0.4.0 via the shared pipeline (179 {p.*} aliases). Committed harness scorecard and offline rerun agree exactly; the vocabulary move vs the pre-recapture baseline was the recapture itself. The former 'PERMANENT HOLE / cannot be recaptured' cause is closed history — docs/23 §3.2."
     },
     {
       "library": "tailwind",

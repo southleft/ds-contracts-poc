@@ -1,139 +1,140 @@
 {
-  "version": 1,
-  "kind": "console-loop-mui-component",
-  "status": "completed",
-  "component": "select",
-  "contract": "examples/mui/contracts/select.contract.json",
-  "script": "examples/mui/figma/select.figma.js",
-  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
-  "recordedAt": "2026-08-06T05:12:50.620Z",
-  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
-  "generate": {
-    "ok": true,
-    "nodeId": "84:2125",
-    "mode": "generated",
-    "page": "Select",
-    "sectionId": "84:2126",
-    "result": {
-      "createdNodeIds": [
-        "84:2125"
-      ],
-      "results": [
-        {
-          "name": "Select",
-          "contractId": "mui.select",
-          "nodeId": "84:2125",
-          "key": "abe33c03e83209668a0ec90bea086c0b51181336",
-          "variants": 2,
-          "properties": [
-            "Size"
-          ]
-        }
-      ]
+ "version": 1,
+ "kind": "console-loop-mui-component",
+ "status": "completed",
+ "component": "select",
+ "contract": "examples/mui/contracts/select.contract.json",
+ "script": "examples/mui/figma/select.figma.js",
+ "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+ "recordedAt": "2026-08-06T05:12:50.620Z",
+ "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+ "generate": {
+  "ok": true,
+  "nodeId": "84:2125",
+  "mode": "generated",
+  "page": "Select",
+  "sectionId": "84:2126",
+  "result": {
+   "createdNodeIds": [
+    "84:2125"
+   ],
+   "results": [
+    {
+     "name": "Select",
+     "contractId": "mui.select",
+     "nodeId": "84:2125",
+     "key": "abe33c03e83209668a0ec90bea086c0b51181336",
+     "variants": 2,
+     "properties": [
+      "Size"
+     ]
     }
-  },
-  "visual": {
-    "ok": false,
-    "notes": [
-      "Structure/variants reviewed via inspect (84:2125, page Select); visual OK \u2014 slot placeholders acceptable.",
-      "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page Select)."
-    ],
-    "defects": [
-      "pixel scorecard fail: pctAAMasked=11.24% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/select.json",
-      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
-    ],
-    "reference": "parity/receipts/console-loop/mui/refs/select.png",
-    "referenceSource": "extract/computed/out/mui/select/gate-shots/medium__default.png",
-    "canvasShot": "parity/receipts/console-loop/mui/shots/select-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed"
-  },
-  "fingerprint": {
-    "v6": "v6:273231726",
-    "lineCount": 143,
-    "sampleLines": [
-      ":COMPONENT_SET/Select|fill|[]",
-      ":COMPONENT_SET/Select|radius|5,5,5,5",
-      ":COMPONENT_SET/Select|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Select|description|Select \u00e2\u0080\u0094 generated from contract mui.select v0.2.0 \u00e2\u0080",
-      ":COMPONENT_SET/Select|propdef|Size:VARIANT=Medium",
-      "/0:COMPONENT/Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/0:COMPONENT/Size=Medium|radius|4,4,4,4",
-      "/0:COMPONENT/Size=Medium|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
-      "/0:COMPONENT/Size=Medium|sizing|FIXED/FIXED AUTO",
-      "/0:COMPONENT/Size=Medium|bound:bottomLeftRadius|imported/shared/size-4",
-      "/0:COMPONENT/Size=Medium|bound:bottomRightRadius|imported/shared/size-4",
-      "/0:COMPONENT/Size=Medium|bound:height|imported/select/root/height/medium",
-      "/0:COMPONENT/Size=Medium|bound:minWidth|imported/shared/size-0",
-      "/0:COMPONENT/Size=Medium|bound:topLeftRadius|imported/shared/size-4",
-      "/0:COMPONENT/Size=Medium|bound:topRightRadius|imported/shared/size-4",
-      "/0:COMPONENT/Size=Medium|bound:width|imported/select/root/width",
-      "/0/0:FRAME/label|fill|[]",
-      "/0/0:FRAME/label|radius|4,4,4,4",
-      "/0/0:FRAME/label|layout|HORIZONTAL MIN/MIN gap 0 pad 16.5,32,16.5,14",
-      "/0/0:FRAME/label|sizing|HUG/HUG AUTO"
-    ]
-  },
-  "roundtrip": {
-    "mismatches": [],
-    "gaps": [
-      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
-    ],
-    "matchedAxes": [
-      "Size enum \u2192 Medium/Small"
-    ],
-    "observed": {
-      "type": "COMPONENT_SET",
-      "variantNames": [
-        "Size=Medium",
-        "Size=Small"
-      ],
-      "propDefs": [
-        {
-          "name": "Size",
-          "type": "VARIANT",
-          "defaultValue": "Medium",
-          "variantOptions": [
-            "Medium",
-            "Small"
-          ]
-        }
-      ],
-      "firstRoot": {
-        "name": "Size=Medium",
-        "type": "COMPONENT",
-        "layoutMode": "HORIZONTAL",
-        "padding": {
-          "t": 0,
-          "r": 0,
-          "b": 0,
-          "l": 0
-        },
-        "radius": 4,
-        "fillVarName": null,
-        "padBound": {
-          "width": "imported/select/root/width",
-          "height": "imported/select/root/height/medium",
-          "topLeftRadius": "imported/shared/size-4",
-          "topRightRadius": "imported/shared/size-4",
-          "bottomLeftRadius": "imported/shared/size-4",
-          "bottomRightRadius": "imported/shared/size-4",
-          "minWidth": "imported/shared/size-0"
-        },
-        "w": 73.9375,
-        "h": 56,
-        "childTypes": [
-          "FRAME/label",
-          "FRAME/icon",
-          "FRAME/outlinedinput-notchedoutline"
-        ]
-      }
-    }
-  },
-  "acceptance": {
-    "generatedOrFound": true,
-    "screenshotReviewed": true,
-    "zeroMismatch": true,
-    "visualMatchDeveloped": false
+   ]
   }
+ },
+ "visual": {
+  "ok": false,
+  "notes": [
+   "Structure/variants reviewed via inspect (84:2125, page Select); visual OK — slot placeholders acceptable.",
+   "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page Select).",
+   "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot."
+  ],
+  "defects": [
+   "pixel scorecard fail: pctAAMasked=11.05% lane / 11.05% headless (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/select.json",
+   "residual after FC-FONT-SUBSTRATE closure: reference now renders committed Roboto (was local Roboto-Thin), both instruments agree at 11.05/11.05 (was 11.24) — the remaining diff is not the harness font substrate; per-stem geometry/color/raster causes stay open"
+  ],
+  "reference": "parity/receipts/console-loop/mui/refs/select.png",
+  "referenceSource": "extract/computed/out/mui/select/gate-shots/medium__default.png",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/select-cell.png",
+  "matchDeveloped": false,
+  "status": "fail-closed"
+ },
+ "fingerprint": {
+  "v6": "v6:273231726",
+  "lineCount": 143,
+  "sampleLines": [
+   ":COMPONENT_SET/Select|fill|[]",
+   ":COMPONENT_SET/Select|radius|5,5,5,5",
+   ":COMPONENT_SET/Select|sizing|FIXED/FIXED AUTO",
+   ":COMPONENT_SET/Select|description|Select â generated from contract mui.select v0.2.0 â",
+   ":COMPONENT_SET/Select|propdef|Size:VARIANT=Medium",
+   "/0:COMPONENT/Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+   "/0:COMPONENT/Size=Medium|radius|4,4,4,4",
+   "/0:COMPONENT/Size=Medium|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+   "/0:COMPONENT/Size=Medium|sizing|FIXED/FIXED AUTO",
+   "/0:COMPONENT/Size=Medium|bound:bottomLeftRadius|imported/shared/size-4",
+   "/0:COMPONENT/Size=Medium|bound:bottomRightRadius|imported/shared/size-4",
+   "/0:COMPONENT/Size=Medium|bound:height|imported/select/root/height/medium",
+   "/0:COMPONENT/Size=Medium|bound:minWidth|imported/shared/size-0",
+   "/0:COMPONENT/Size=Medium|bound:topLeftRadius|imported/shared/size-4",
+   "/0:COMPONENT/Size=Medium|bound:topRightRadius|imported/shared/size-4",
+   "/0:COMPONENT/Size=Medium|bound:width|imported/select/root/width",
+   "/0/0:FRAME/label|fill|[]",
+   "/0/0:FRAME/label|radius|4,4,4,4",
+   "/0/0:FRAME/label|layout|HORIZONTAL MIN/MIN gap 0 pad 16.5,32,16.5,14",
+   "/0/0:FRAME/label|sizing|HUG/HUG AUTO"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [
+   "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+  ],
+  "matchedAxes": [
+   "Size enum → Medium/Small"
+  ],
+  "observed": {
+   "type": "COMPONENT_SET",
+   "variantNames": [
+    "Size=Medium",
+    "Size=Small"
+   ],
+   "propDefs": [
+    {
+     "name": "Size",
+     "type": "VARIANT",
+     "defaultValue": "Medium",
+     "variantOptions": [
+      "Medium",
+      "Small"
+     ]
+    }
+   ],
+   "firstRoot": {
+    "name": "Size=Medium",
+    "type": "COMPONENT",
+    "layoutMode": "HORIZONTAL",
+    "padding": {
+     "t": 0,
+     "r": 0,
+     "b": 0,
+     "l": 0
+    },
+    "radius": 4,
+    "fillVarName": null,
+    "padBound": {
+     "width": "imported/select/root/width",
+     "height": "imported/select/root/height/medium",
+     "topLeftRadius": "imported/shared/size-4",
+     "topRightRadius": "imported/shared/size-4",
+     "bottomLeftRadius": "imported/shared/size-4",
+     "bottomRightRadius": "imported/shared/size-4",
+     "minWidth": "imported/shared/size-0"
+    },
+    "w": 73.9375,
+    "h": 56,
+    "childTypes": [
+     "FRAME/label",
+     "FRAME/icon",
+     "FRAME/outlinedinput-notchedoutline"
+    ]
+   }
+  }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": false
+ }
 }

@@ -1,92 +1,93 @@
 {
-  "version": 1,
-  "kind": "console-loop-mui-component",
-  "status": "completed",
-  "component": "tooltip",
-  "contract": "examples/mui/contracts/tooltip.contract.json",
-  "script": "examples/mui/figma/tooltip.figma.js",
-  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
-  "recordedAt": "2026-08-06T04:51:10.514Z",
-  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
-  "generate": {
-    "ok": true,
-    "nodeId": "21:810",
-    "mode": "existing",
-    "page": "Tooltip",
-    "sectionId": "21:814",
-    "result": {}
-  },
-  "visual": {
-    "ok": false,
-    "notes": [
-      "Existing on-canvas set inspected; structure/variants sane (21:810).",
-      "Tooltip COMPONENT 21:810: 1 variant(s), 1 prop def(s). Structure looks sane; slot placeholders OK."
-    ],
-    "defects": [
-      "pixel scorecard fail: pctAAMasked=23.47% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/tooltip.json",
-      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
-    ],
-    "reference": "parity/receipts/console-loop/mui/refs/tooltip.png",
-    "referenceSource": "extract/computed/out/mui/tooltip/gate-shots/off__default.png",
-    "canvasShot": "parity/receipts/console-loop/mui/shots/tooltip-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed"
-  },
-  "fingerprint": {
-    "v6": "v6:1221797663",
-    "lineCount": 34,
-    "sampleLines": [
-      ":COMPONENT/Tooltip|fill|[]"
-    ]
-  },
-  "roundtrip": {
-    "mismatches": [],
-    "gaps": [
-      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
-    ],
-    "matchedAxes": [
-      "BOOLEAN Show Arrow"
-    ],
-    "observed": {
-      "type": "COMPONENT",
-      "variantNames": [
-        "Tooltip"
-      ],
-      "propDefs": [
-        {
-          "name": "Show Arrow#21:243",
-          "type": "BOOLEAN",
-          "defaultValue": false,
-          "variantOptions": null
-        }
-      ],
-      "firstRoot": {
-        "name": "Tooltip",
-        "type": "COMPONENT",
-        "fillVarName": null,
-        "padBound": {
-          "width": "imported/tooltip/root/width"
-        },
-        "layoutMode": "VERTICAL",
-        "padding": {
-          "t": 0,
-          "r": 0,
-          "b": 0,
-          "l": 0
-        },
-        "radius": 0,
-        "w": 72.58,
-        "h": 21,
-        "childTypes": [
-          "FRAME/label"
-        ]
-      }
+ "version": 1,
+ "kind": "console-loop-mui-component",
+ "status": "completed",
+ "component": "tooltip",
+ "contract": "examples/mui/contracts/tooltip.contract.json",
+ "script": "examples/mui/figma/tooltip.figma.js",
+ "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+ "recordedAt": "2026-08-06T04:51:10.514Z",
+ "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+ "generate": {
+  "ok": true,
+  "nodeId": "21:810",
+  "mode": "existing",
+  "page": "Tooltip",
+  "sectionId": "21:814",
+  "result": {}
+ },
+ "visual": {
+  "ok": false,
+  "notes": [
+   "Existing on-canvas set inspected; structure/variants sane (21:810).",
+   "Tooltip COMPONENT 21:810: 1 variant(s), 1 prop def(s). Structure looks sane; slot placeholders OK.",
+   "FONT-SUBSTRATE round 2026-08-08: reference re-pin REFUSED for tooltip — the offline regate through the CURRENT working tree renders a DRIFTED tooltip (computed cellsCompared 129 -> 121 vs the committed scorecard; bubble clipped to 'Tooltip' and moved to the stage edge) while core/emit-* is mid-flight in a sibling workflow. Pinning that render would pin someone's half-done work product. Ref stays at its committed sha; FC-FONT-SUBSTRATE remains OPEN for tooltip until the emitters settle and the regate reproduces the committed vocabulary."
+  ],
+  "defects": [
+   "pixel scorecard fail: pctAAMasked=23.47% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/tooltip.json",
+   "FC-FONT-SUBSTRATE: still open for tooltip — Roboto cfg.fonts landed but this stem's reference could not be re-pinned this round (offline regate emits a drifted tooltip composition while core/emit-* is being edited by a sibling workflow; cells 129→121)"
+  ],
+  "reference": "parity/receipts/console-loop/mui/refs/tooltip.png",
+  "referenceSource": "extract/computed/out/mui/tooltip/gate-shots/off__default.png",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/tooltip-cell.png",
+  "matchDeveloped": false,
+  "status": "fail-closed"
+ },
+ "fingerprint": {
+  "v6": "v6:1221797663",
+  "lineCount": 34,
+  "sampleLines": [
+   ":COMPONENT/Tooltip|fill|[]"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [
+   "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+  ],
+  "matchedAxes": [
+   "BOOLEAN Show Arrow"
+  ],
+  "observed": {
+   "type": "COMPONENT",
+   "variantNames": [
+    "Tooltip"
+   ],
+   "propDefs": [
+    {
+     "name": "Show Arrow#21:243",
+     "type": "BOOLEAN",
+     "defaultValue": false,
+     "variantOptions": null
     }
-  },
-  "acceptance": {
-    "generatedOrFound": true,
-    "screenshotReviewed": true,
-    "zeroMismatch": true,
-    "visualMatchDeveloped": false
+   ],
+   "firstRoot": {
+    "name": "Tooltip",
+    "type": "COMPONENT",
+    "fillVarName": null,
+    "padBound": {
+     "width": "imported/tooltip/root/width"
+    },
+    "layoutMode": "VERTICAL",
+    "padding": {
+     "t": 0,
+     "r": 0,
+     "b": 0,
+     "l": 0
+    },
+    "radius": 0,
+    "w": 72.58,
+    "h": 21,
+    "childTypes": [
+     "FRAME/label"
+    ]
+   }
   }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": false
+ }
 }

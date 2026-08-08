@@ -1,24 +1,24 @@
 {
   "version": 3,
-  "status": "fail",
+  "status": "pass",
   "matchDeveloped": false,
-  "recommendMatchDeveloped": false,
+  "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 26.47058823529412,
-    "pctAAUnmasked": 6.470588235294119,
-    "pctAAMasked": 6.470588235294119,
+    "pctExactUnmasked": 21.176470588235293,
+    "pctAAUnmasked": 1.1764705882352942,
+    "pctAAMasked": 1.1764705882352942,
     "maskCoveragePct": 0,
     "canvasPx": "51x20",
-    "realPx": "49x20",
+    "realPx": "50x20",
     "inkCanvasPct": 93.23529411764706,
-    "inkRealPct": 89.41176470588236
+    "inkRealPct": 91.37254901960785
   },
   "reference": "parity/receipts/console-loop/mui/refs/chip.png",
-  "referenceSha256": "7bad7636a90b2aa1f1079c39eaa35e15a46a658b7baf40a3644befd2be216bcd",
+  "referenceSha256": "10599845374653837b842cdeb8dc08126967831483edb78583594811c964d80b",
   "canvasShot": "parity/receipts/console-loop/mui/shots/chip-cell.png",
   "canvasShotSha256": "f0a1305e19b212531d53dc0131d16dbea0181482ed85271dc552df98e17879be",
   "diff": "parity/receipts/console-loop/mui/scores/chip.diff.png",
@@ -26,12 +26,12 @@
   "receipt": "parity/receipts/console-loop/mui/components/chip.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.0408163265306123,
-  "inkDelta": 3.823529411764696,
+  "scaleRatio": 1.02,
+  "inkDelta": 1.8627450980392126,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "near-pass (pctAAMasked=6.47; likely font-AA) — NOT a pass; tighten emit (near-pass flips are dead)",
-  "recordedAt": "2026-08-08T08:30:05.279Z"
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-08T14:34:18.287Z"
 }

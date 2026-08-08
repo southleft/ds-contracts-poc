@@ -1,84 +1,85 @@
 {
-  "version": 1,
-  "kind": "console-loop-mui-component",
-  "status": "completed",
-  "component": "table-pagination",
-  "contract": "examples/mui/contracts/table-pagination.contract.json",
-  "script": "examples/mui/figma/table-pagination.figma.js",
-  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
-  "recordedAt": "2026-08-06T04:51:10.514Z",
-  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
-  "generate": {
-    "ok": true,
-    "nodeId": "21:627",
-    "mode": "existing",
-    "page": "TablePagination",
-    "sectionId": "21:648",
-    "result": {}
-  },
-  "visual": {
-    "ok": false,
-    "notes": [
-      "Existing on-canvas set inspected; structure/variants sane (21:627).",
-      "TablePagination COMPONENT 21:627: 1 variant(s), 0 prop def(s). Structure looks sane; slot placeholders OK."
-    ],
-    "defects": [
-      "pixel scorecard fail: pctAAMasked=17.68% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/table-pagination.json",
-      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
-    ],
-    "reference": "parity/receipts/console-loop/mui/refs/table-pagination.png",
-    "referenceSource": "extract/computed/out/mui/pagination/gate-shots/__default.png",
-    "canvasShot": "parity/receipts/console-loop/mui/shots/table-pagination-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed"
-  },
-  "fingerprint": {
-    "v6": "v6:527762080",
-    "lineCount": 125,
-    "sampleLines": [
-      ":COMPONENT/TablePagination|fill|[]"
+ "version": 1,
+ "kind": "console-loop-mui-component",
+ "status": "completed",
+ "component": "table-pagination",
+ "contract": "examples/mui/contracts/table-pagination.contract.json",
+ "script": "examples/mui/figma/table-pagination.figma.js",
+ "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+ "recordedAt": "2026-08-06T04:51:10.514Z",
+ "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+ "generate": {
+  "ok": true,
+  "nodeId": "21:627",
+  "mode": "existing",
+  "page": "TablePagination",
+  "sectionId": "21:648",
+  "result": {}
+ },
+ "visual": {
+  "ok": false,
+  "notes": [
+   "Existing on-canvas set inspected; structure/variants sane (21:627).",
+   "TablePagination COMPONENT 21:627: 1 variant(s), 0 prop def(s). Structure looks sane; slot placeholders OK.",
+   "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot."
+  ],
+  "defects": [
+   "pixel scorecard fail: pctAAMasked=17.83% lane / 18.31% headless (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/table-pagination.json",
+   "residual after FC-FONT-SUBSTRATE closure: reference now renders committed Roboto (was local Roboto-Thin), both instruments agree at 17.83/18.31 (was 17.68) — the remaining diff is not the harness font substrate; per-stem geometry/color/raster causes stay open"
+  ],
+  "reference": "parity/receipts/console-loop/mui/refs/table-pagination.png",
+  "referenceSource": "extract/computed/out/mui/pagination/gate-shots/__default.png",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/table-pagination-cell.png",
+  "matchDeveloped": false,
+  "status": "fail-closed"
+ },
+ "fingerprint": {
+  "v6": "v6:527762080",
+  "lineCount": 125,
+  "sampleLines": [
+   ":COMPONENT/TablePagination|fill|[]"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [
+   "canvas-absent: contract has empty props[] (anatomy/overlay-heavy) — OK",
+   "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+  ],
+  "matchedAxes": [],
+  "observed": {
+   "type": "COMPONENT",
+   "variantNames": [
+    "TablePagination"
+   ],
+   "propDefs": [],
+   "firstRoot": {
+    "name": "TablePagination",
+    "type": "COMPONENT",
+    "fillVarName": null,
+    "padBound": {
+     "width": "imported/pagination/root/width"
+    },
+    "layoutMode": "VERTICAL",
+    "padding": {
+     "t": 0,
+     "r": 0,
+     "b": 0,
+     "l": 0
+    },
+    "radius": 0,
+    "w": 428,
+    "h": 52,
+    "childTypes": [
+     "FRAME/tablepagination-toolbar"
     ]
-  },
-  "roundtrip": {
-    "mismatches": [],
-    "gaps": [
-      "canvas-absent: contract has empty props[] (anatomy/overlay-heavy) \u2014 OK",
-      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
-    ],
-    "matchedAxes": [],
-    "observed": {
-      "type": "COMPONENT",
-      "variantNames": [
-        "TablePagination"
-      ],
-      "propDefs": [],
-      "firstRoot": {
-        "name": "TablePagination",
-        "type": "COMPONENT",
-        "fillVarName": null,
-        "padBound": {
-          "width": "imported/pagination/root/width"
-        },
-        "layoutMode": "VERTICAL",
-        "padding": {
-          "t": 0,
-          "r": 0,
-          "b": 0,
-          "l": 0
-        },
-        "radius": 0,
-        "w": 428,
-        "h": 52,
-        "childTypes": [
-          "FRAME/tablepagination-toolbar"
-        ]
-      }
-    }
-  },
-  "acceptance": {
-    "generatedOrFound": true,
-    "screenshotReviewed": true,
-    "zeroMismatch": true,
-    "visualMatchDeveloped": false
+   }
   }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": false
+ }
 }

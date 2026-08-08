@@ -5,7 +5,7 @@
   "combos": 24,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 661,
+  "channelsEnumerated": 675,
   "elementsPerCapture": 4,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
@@ -252,8 +252,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 207,
-    "mintedLeavesFolded": 51
+    "mintedLeavesUnfolded": 208,
+    "mintedLeavesFolded": 52
   },
   "bound": {
     "cellsChecked": 0,
@@ -262,7 +262,7 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 51,
+    "leaves": 52,
     "baseBindings": 49,
     "stateBindings": 6,
     "byShape": {
@@ -290,9 +290,9 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 253056,
-    "cellsMatched": 252864,
-    "pct": 99.92412746585735,
+    "cellsCompared": 258432,
+    "cellsMatched": 258048,
+    "pct": 99.85141158989599,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -301,7 +301,11 @@
     ],
     "topMismatchedChannels": [
       [
-        "perspective-origin",
+        "inline-size",
+        192
+      ],
+      [
+        "width",
         192
       ]
     ]
@@ -315,60 +319,60 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.0994873046875,
-      "max": 2.4055989583333335,
-      "perfect": 87
+      "mean": 2.0359971788194424,
+      "max": 2.0670572916666665,
+      "perfect": 0
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 96
+      "mean": 1.0176595052083337,
+      "max": 1.5852864583333333,
+      "perfect": 0
     },
     "worst": [
       {
-        "key": "ghost.lg.no-isDisabled__hover",
-        "pctExact": 2.4055989583333335,
-        "pctAA": 0
+        "key": "destructive.sm.no-isDisabled__hover",
+        "pctExact": 2.0377604166666665,
+        "pctAA": 1.5852864583333333
       },
       {
-        "key": "ghost.md.no-isDisabled__hover",
-        "pctExact": 2.12890625,
-        "pctAA": 0
+        "key": "destructive.md.no-isDisabled__hover",
+        "pctExact": 2.0377604166666665,
+        "pctAA": 1.5852864583333333
       },
       {
-        "key": "ghost.sm.no-isDisabled__hover",
-        "pctExact": 1.8424479166666667,
-        "pctAA": 0
+        "key": "destructive.lg.no-isDisabled__hover",
+        "pctExact": 2.0377604166666665,
+        "pctAA": 1.5852864583333333
       },
       {
-        "key": "secondary.sm.no-isDisabled__active",
-        "pctExact": 1.3541666666666667,
-        "pctAA": 0
+        "key": "destructive.md.no-isDisabled__active",
+        "pctExact": 2.0670572916666665,
+        "pctAA": 1.5592447916666667
       },
       {
-        "key": "secondary.sm.no-isDisabled__hover",
-        "pctExact": 1.3313802083333333,
-        "pctAA": 0
+        "key": "destructive.sm.no-isDisabled__active",
+        "pctExact": 2.0442708333333335,
+        "pctAA": 1.5592447916666667
       },
       {
-        "key": "secondary.lg.no-isDisabled__hover",
-        "pctExact": 0.2701822916666667,
-        "pctAA": 0
+        "key": "destructive.lg.no-isDisabled__active",
+        "pctExact": 2.041015625,
+        "pctAA": 1.5592447916666667
       },
       {
-        "key": "secondary.lg.no-isDisabled__active",
-        "pctExact": 0.19205729166666666,
-        "pctAA": 0
+        "key": "primary.sm.no-isDisabled__hover",
+        "pctExact": 2.0377604166666665,
+        "pctAA": 1.1197916666666667
       },
       {
-        "key": "primary.lg.isDisabled__hover",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
+        "key": "primary.lg.no-isDisabled__hover",
+        "pctExact": 2.0377604166666665,
+        "pctAA": 1.1197916666666667
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 98.95833333333333,
+    "computedPctEqual": 98.75,
     "rowsFullyEqual": 0,
     "rows": 96,
     "pixelPerfectExact": 0,

@@ -4,7 +4,7 @@
   "name": "Switch",
   "version": "0.1.0",
   "status": "draft",
-  "description": "Astryx Switch — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; value, description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. STRUCTURAL: the track renders as a styled box, not a native role=switch input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "Astryx Switch — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. Wave B.3: `value` is restored as a VARIANT AXIS (off/on) — FC-MISSING-AXIS — never a stateProp (same pattern as Carbon `toggled`). STRUCTURAL: the track renders as a styled box, not a native role=switch input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -22,6 +22,25 @@
         },
         "code": {
           "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "Whether the switch is on or off.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Value",
+          "values": {
+            "false": "Off",
+            "true": "On"
+          }
+        },
+        "code": {
+          "prop": "value"
         }
       }
     },
@@ -126,8 +145,7 @@
                     }
                   ],
                   "declared": {
-                    "cursor": "pointer",
-                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                    "cursor": "pointer"
                   },
                   "tokens": {
                     "color": "{imported.switch.label-2.color}",
@@ -210,7 +228,7 @@
                       ],
                       "declared": {
                         "transform": "matrix(1, 0, 0, 1, 0, 0)",
-                        "transition-duration": "0.175s",
+                        "transition-duration": "0.125s",
                         "transition-property": "transform, width, height",
                         "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
                       },
@@ -226,7 +244,7 @@
                     }
                   },
                   "declared": {
-                    "transition-duration": "0.175s",
+                    "transition-duration": "0.125s",
                     "transition-property": "background-color",
                     "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
                   },
@@ -338,7 +356,7 @@
                       ],
                       "declared": {
                         "transform": "matrix(1, 0, 0, 1, 0, 0)",
-                        "transition-duration": "0.175s",
+                        "transition-duration": "0.125s",
                         "transition-property": "transform, width, height",
                         "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
                       },
@@ -354,7 +372,7 @@
                     }
                   },
                   "declared": {
-                    "transition-duration": "0.175s",
+                    "transition-duration": "0.125s",
                     "transition-property": "background-color",
                     "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
                   },
@@ -397,8 +415,7 @@
                     }
                   ],
                   "declared": {
-                    "cursor": "pointer",
-                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                    "cursor": "pointer"
                   },
                   "tokens": {
                     "color": "{imported.switch.label.color}",

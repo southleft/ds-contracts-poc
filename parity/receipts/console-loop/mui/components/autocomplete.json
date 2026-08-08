@@ -1,94 +1,95 @@
 {
-  "version": 1,
-  "kind": "console-loop-mui-component",
-  "status": "completed",
-  "component": "autocomplete",
-  "contract": "examples/mui/contracts/autocomplete.contract.json",
-  "script": "examples/mui/figma/autocomplete.figma.js",
-  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
-  "recordedAt": "2026-08-06T04:51:10.513Z",
-  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
-  "generate": {
-    "ok": true,
-    "nodeId": "21:134",
-    "mode": "existing",
-    "page": "Autocomplete",
-    "sectionId": "21:135",
-    "result": {}
-  },
-  "visual": {
-    "ok": false,
-    "notes": [
-      "Existing on-canvas set inspected; structure/variants sane (21:134).",
-      "Autocomplete COMPONENT_SET 21:134: 2 variant(s), 1 prop def(s). Structure looks sane; slot placeholders OK."
-    ],
-    "defects": [
-      "pixel scorecard fail: pctAAMasked=8.48% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/autocomplete.json",
-      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
-    ],
-    "reference": "parity/receipts/console-loop/mui/refs/autocomplete.png",
-    "referenceSource": "extract/computed/out/mui/autocomplete/gate-shots/medium__default.png",
-    "canvasShot": "parity/receipts/console-loop/mui/shots/autocomplete-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed"
-  },
-  "fingerprint": {
-    "v6": "v6:1521385897",
-    "lineCount": 345,
-    "sampleLines": [
-      ":COMPONENT_SET/Autocomplete|fill|[]"
-    ]
-  },
-  "roundtrip": {
-    "mismatches": [],
-    "gaps": [
-      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
-    ],
-    "matchedAxes": [
-      "Size enum \u2192 Medium/Small"
-    ],
-    "observed": {
-      "type": "COMPONENT_SET",
-      "variantNames": [
-        "Size=Medium",
-        "Size=Small"
-      ],
-      "propDefs": [
-        {
-          "name": "Size",
-          "type": "VARIANT",
-          "defaultValue": "Medium",
-          "variantOptions": [
-            "Medium",
-            "Small"
-          ]
-        }
-      ],
-      "firstRoot": {
-        "name": "Size=Medium",
-        "type": "COMPONENT",
-        "fillVarName": null,
-        "padBound": {},
-        "layoutMode": "VERTICAL",
-        "padding": {
-          "t": 0,
-          "r": 0,
-          "b": 0,
-          "l": 0
-        },
-        "radius": 0,
-        "w": 288,
-        "h": 56,
-        "childTypes": [
-          "FRAME/formcontrol-fullwidth"
-        ]
-      }
+ "version": 1,
+ "kind": "console-loop-mui-component",
+ "status": "completed",
+ "component": "autocomplete",
+ "contract": "examples/mui/contracts/autocomplete.contract.json",
+ "script": "examples/mui/figma/autocomplete.figma.js",
+ "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+ "recordedAt": "2026-08-06T04:51:10.513Z",
+ "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+ "generate": {
+  "ok": true,
+  "nodeId": "21:134",
+  "mode": "existing",
+  "page": "Autocomplete",
+  "sectionId": "21:135",
+  "result": {}
+ },
+ "visual": {
+  "ok": false,
+  "notes": [
+   "Existing on-canvas set inspected; structure/variants sane (21:134).",
+   "Autocomplete COMPONENT_SET 21:134: 2 variant(s), 1 prop def(s). Structure looks sane; slot placeholders OK.",
+   "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot."
+  ],
+  "defects": [
+   "pixel scorecard fail: pctAAMasked=8.14% lane / 8.14% headless (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/autocomplete.json",
+   "residual after FC-FONT-SUBSTRATE closure: reference now renders committed Roboto (was local Roboto-Thin), both instruments agree at 8.14/8.14 (was 8.48) — the remaining diff is not the harness font substrate; per-stem geometry/color/raster causes stay open"
+  ],
+  "reference": "parity/receipts/console-loop/mui/refs/autocomplete.png",
+  "referenceSource": "extract/computed/out/mui/autocomplete/gate-shots/medium__default.png",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/autocomplete-cell.png",
+  "matchDeveloped": false,
+  "status": "fail-closed"
+ },
+ "fingerprint": {
+  "v6": "v6:1521385897",
+  "lineCount": 345,
+  "sampleLines": [
+   ":COMPONENT_SET/Autocomplete|fill|[]"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [
+   "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+  ],
+  "matchedAxes": [
+   "Size enum → Medium/Small"
+  ],
+  "observed": {
+   "type": "COMPONENT_SET",
+   "variantNames": [
+    "Size=Medium",
+    "Size=Small"
+   ],
+   "propDefs": [
+    {
+     "name": "Size",
+     "type": "VARIANT",
+     "defaultValue": "Medium",
+     "variantOptions": [
+      "Medium",
+      "Small"
+     ]
     }
-  },
-  "acceptance": {
-    "generatedOrFound": true,
-    "screenshotReviewed": true,
-    "zeroMismatch": true,
-    "visualMatchDeveloped": false
+   ],
+   "firstRoot": {
+    "name": "Size=Medium",
+    "type": "COMPONENT",
+    "fillVarName": null,
+    "padBound": {},
+    "layoutMode": "VERTICAL",
+    "padding": {
+     "t": 0,
+     "r": 0,
+     "b": 0,
+     "l": 0
+    },
+    "radius": 0,
+    "w": 288,
+    "h": 56,
+    "childTypes": [
+     "FRAME/formcontrol-fullwidth"
+    ]
+   }
   }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": false
+ }
 }

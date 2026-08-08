@@ -11,11 +11,6 @@
         "value": "pointer"
       },
       {
-        "part": "label-2",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
-      },
-      {
         "part": "part-0-0-0",
         "channel": "appearance",
         "value": "auto"
@@ -53,7 +48,7 @@
       {
         "part": "switch",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "switch",
@@ -73,7 +68,7 @@
       {
         "part": "switch-thumb",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "switch-thumb",
@@ -123,7 +118,7 @@
       {
         "part": "switch-2",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "switch-2",
@@ -143,7 +138,7 @@
       {
         "part": "switch-thumb-2",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "switch-thumb-2",
@@ -159,11 +154,6 @@
         "part": "label",
         "channel": "cursor",
         "value": "pointer"
-      },
-      {
-        "part": "label",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       }
     ],
     "state": []
@@ -180,9 +170,9 @@
     "combos": 4,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1536,
-      "cellsEqual": 1188,
-      "pctEqual": 77.34375,
+      "cellsCompared": 1552,
+      "cellsEqual": 1172,
+      "pctEqual": 75.51546391752578,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -208,7 +198,7 @@
       "mintedLeavesUnfolded": 32,
       "baseBindings": 74,
       "stateBindings": 0,
-      "codeOnlyChannels": 56,
+      "codeOnlyChannels": 60,
       "overflowBindings": 0,
       "folds": 20
     },
@@ -217,56 +207,56 @@
         "key": "start.isDisabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 28,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "start.isDisabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 28,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "start.isDisabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 28,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "start.isDisabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 28,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "end.isDisabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 28,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "end.isDisabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 28,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "end.isDisabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 28,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "end.isDisabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 28,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       }
     ],
@@ -345,7 +335,9 @@
       "code-only: part-0-0.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0.row-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0-0-0.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-0-0.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: switch.--color-background-gray — CSS custom property, not a styled channel — `--color-background-gray` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: switch-thumb.--color-background-gray — CSS custom property, not a styled channel — `--color-background-gray` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0-1.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.column-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -358,7 +350,9 @@
       "code-only: part-0-1.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.row-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0-1-0.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-1-0.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: switch-2.--color-background-gray — CSS custom property, not a styled channel — `--color-background-gray` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: switch-thumb-2.--color-background-gray — CSS custom property, not a styled channel — `--color-background-gray` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only[active]: switch-2.background-color — value shape outside mintable kinds and outside the declared vocabulary",
       "code-only[active]: switch.background-color — value shape outside mintable kinds and outside the declared vocabulary",
       "code-only[disabled]: label-2.color — default-state values not kind-compatible for padding — cannot correlate",
@@ -396,14 +390,75 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 375,
-      "divergent": []
+      "leavesAdded": 287,
+      "divergent": [
+        {
+          "token": "imported.switch.label-2.color",
+          "fresh": "#737373",
+          "shipped": "{color-text-secondary}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.label.color",
+          "fresh": "#737373",
+          "shipped": "{color-text-secondary}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.part-0-0.width.start",
+          "fresh": "125.25px",
+          "shipped": "130.016px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.part-0-1.width.end",
+          "fresh": "125.25px",
+          "shipped": "130.016px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.part-0.width",
+          "fresh": "173.25px",
+          "shipped": "178.016px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.root.width",
+          "fresh": "173.25px",
+          "shipped": "178.016px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.switch-2.background-color",
+          "fresh": "#d4d4d4",
+          "shipped": "#0a131733",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.switch.switch-thumb-2.background-color",
+          "fresh": "#ffffff",
+          "shipped": "{color-background-surface}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.switch-thumb.background-color",
+          "fresh": "#ffffff",
+          "shipped": "{color-background-surface}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.switch.switch.background-color",
+          "fresh": "#d4d4d4",
+          "shipped": "#0a131733",
+          "resolvedEqual": false
+        }
+      ]
     },
     "rows": [
       {
         "key": "start.no-isDisabled__default",
-        "channelsCompared": 96,
-        "channelsEqual": 81,
+        "channelsCompared": 97,
+        "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -496,15 +551,27 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_r_"
+            "theirs": "--astryx-layer-_r_4_"
+          },
+          {
+            "part": "switch-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "start.no-isDisabled__hover",
-        "channelsCompared": 96,
-        "channelsEqual": 80,
+        "channelsCompared": 97,
+        "channelsEqual": 79,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -597,121 +664,32 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_r_"
+            "theirs": "--astryx-layer-_r_4_"
+          },
+          {
+            "part": "switch-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "switch-2",
             "channel": "background-color",
-            "ours": "rgba(10, 19, 23, 0.2)",
-            "theirs": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)"
+            "ours": "rgba(212, 212, 212, 1)",
+            "theirs": "color(srgb 0.789804 0.789804 0.789804)"
+          },
+          {
+            "part": "switch-thumb-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "start.no-isDisabled__focus-visible",
-        "channelsCompared": 96,
-        "channelsEqual": 81,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "part-0-0",
-            "channel": "column-gap",
-            "ours": "normal",
-            "theirs": "2px"
-          },
-          {
-            "part": "part-0-0",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-0-0",
-            "channel": "justify-content",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "part-0-0",
-            "channel": "min-height",
-            "ours": "auto",
-            "theirs": "24px"
-          },
-          {
-            "part": "part-0-0",
-            "channel": "row-gap",
-            "ours": "normal",
-            "theirs": "2px"
-          },
-          {
-            "part": "label-2",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "label-2",
-            "channel": "display",
-            "ours": "block",
-            "theirs": "flex"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "bottom",
-            "ours": "auto",
-            "theirs": "0px"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "isolation",
-            "ours": "auto",
-            "theirs": "isolate"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "left",
-            "ours": "auto",
-            "theirs": "0px"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "position",
-            "ours": "static",
-            "theirs": "relative"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "0px"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "0px"
-          },
-          {
-            "part": "part-0-1-0",
-            "channel": "anchor-name",
-            "ours": "none",
-            "theirs": "--astryx-layer-_r_r_"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "start.no-isDisabled__active",
-        "channelsCompared": 96,
+        "channelsCompared": 97,
         "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
@@ -805,21 +783,146 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_r_"
+            "theirs": "--astryx-layer-_r_4_"
+          },
+          {
+            "part": "switch-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "start.no-isDisabled__active",
+        "channelsCompared": 97,
+        "channelsEqual": 79,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "part-0-0",
+            "channel": "column-gap",
+            "ours": "normal",
+            "theirs": "2px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "min-height",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "row-gap",
+            "ours": "normal",
+            "theirs": "2px"
+          },
+          {
+            "part": "label-2",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label-2",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_4_"
+          },
+          {
+            "part": "switch-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "switch-2",
             "channel": "background-color",
-            "ours": "rgba(10, 19, 23, 0.2)",
-            "theirs": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)"
+            "ours": "rgba(212, 212, 212, 1)",
+            "theirs": "color(srgb 0.789804 0.789804 0.789804)"
+          },
+          {
+            "part": "switch-thumb-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "start.isDisabled__default",
-        "channelsCompared": 96,
-        "channelsEqual": 68,
+        "channelsCompared": 97,
+        "channelsEqual": 67,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -863,44 +966,44 @@
           {
             "part": "label-2",
             "channel": "border-bottom-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-left-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-right-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-top-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "caret-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "column-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
@@ -917,26 +1020,26 @@
           {
             "part": "label-2",
             "channel": "outline-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "row-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "text-decoration-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "text-emphasis-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "part-0-1",
@@ -984,21 +1087,33 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_v_"
+            "theirs": "--astryx-layer-_r_8_"
           },
           {
             "part": "part-0-1-0",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "switch-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "start.isDisabled__hover",
-        "channelsCompared": 96,
-        "channelsEqual": 68,
+        "channelsCompared": 97,
+        "channelsEqual": 67,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1042,44 +1157,44 @@
           {
             "part": "label-2",
             "channel": "border-bottom-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-left-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-right-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-top-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "caret-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "column-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
@@ -1096,26 +1211,26 @@
           {
             "part": "label-2",
             "channel": "outline-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "row-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "text-decoration-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "text-emphasis-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "part-0-1",
@@ -1163,21 +1278,33 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_v_"
+            "theirs": "--astryx-layer-_r_8_"
           },
           {
             "part": "part-0-1-0",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "switch-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "start.isDisabled__focus-visible",
-        "channelsCompared": 96,
-        "channelsEqual": 68,
+        "channelsCompared": 97,
+        "channelsEqual": 67,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1221,44 +1348,44 @@
           {
             "part": "label-2",
             "channel": "border-bottom-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-left-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-right-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-top-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "caret-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "column-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
@@ -1275,26 +1402,26 @@
           {
             "part": "label-2",
             "channel": "outline-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "row-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "text-decoration-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "text-emphasis-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "part-0-1",
@@ -1342,21 +1469,33 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_v_"
+            "theirs": "--astryx-layer-_r_8_"
           },
           {
             "part": "part-0-1-0",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "switch-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "start.isDisabled__active",
-        "channelsCompared": 96,
-        "channelsEqual": 68,
+        "channelsCompared": 97,
+        "channelsEqual": 67,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1400,44 +1539,44 @@
           {
             "part": "label-2",
             "channel": "border-bottom-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-left-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-right-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "border-top-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "caret-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "column-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
@@ -1454,26 +1593,26 @@
           {
             "part": "label-2",
             "channel": "outline-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "row-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "text-decoration-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label-2",
             "channel": "text-emphasis-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "part-0-1",
@@ -1521,21 +1660,33 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_v_"
+            "theirs": "--astryx-layer-_r_8_"
           },
           {
             "part": "part-0-1-0",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "switch-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb-2",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "end.no-isDisabled__default",
-        "channelsCompared": 96,
-        "channelsEqual": 81,
+        "channelsCompared": 97,
+        "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1586,7 +1737,19 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_13_"
+            "theirs": "--astryx-layer-_r_c_"
+          },
+          {
+            "part": "switch",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "part-0-1",
@@ -1635,8 +1798,8 @@
       },
       {
         "key": "end.no-isDisabled__hover",
-        "channelsCompared": 96,
-        "channelsEqual": 80,
+        "channelsCompared": 97,
+        "channelsEqual": 79,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1687,13 +1850,25 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_13_"
+            "theirs": "--astryx-layer-_r_c_"
+          },
+          {
+            "part": "switch",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "switch",
             "channel": "background-color",
-            "ours": "rgba(10, 19, 23, 0.2)",
-            "theirs": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)"
+            "ours": "rgba(212, 212, 212, 1)",
+            "theirs": "color(srgb 0.789804 0.789804 0.789804)"
+          },
+          {
+            "part": "switch-thumb",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "part-0-1",
@@ -1742,108 +1917,7 @@
       },
       {
         "key": "end.no-isDisabled__focus-visible",
-        "channelsCompared": 96,
-        "channelsEqual": 81,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "part-0-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "part-0-0",
-            "channel": "bottom",
-            "ours": "auto",
-            "theirs": "0px"
-          },
-          {
-            "part": "part-0-0",
-            "channel": "isolation",
-            "ours": "auto",
-            "theirs": "isolate"
-          },
-          {
-            "part": "part-0-0",
-            "channel": "left",
-            "ours": "auto",
-            "theirs": "0px"
-          },
-          {
-            "part": "part-0-0",
-            "channel": "position",
-            "ours": "static",
-            "theirs": "relative"
-          },
-          {
-            "part": "part-0-0",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "0px"
-          },
-          {
-            "part": "part-0-0",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "0px"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "anchor-name",
-            "ours": "none",
-            "theirs": "--astryx-layer-_r_13_"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "column-gap",
-            "ours": "normal",
-            "theirs": "2px"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "justify-content",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "min-height",
-            "ours": "auto",
-            "theirs": "24px"
-          },
-          {
-            "part": "part-0-1",
-            "channel": "row-gap",
-            "ours": "normal",
-            "theirs": "2px"
-          },
-          {
-            "part": "label",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "label",
-            "channel": "display",
-            "ours": "block",
-            "theirs": "flex"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "end.no-isDisabled__active",
-        "channelsCompared": 96,
+        "channelsCompared": 97,
         "channelsEqual": 80,
         "pctExact": null,
         "pctAA": null,
@@ -1895,13 +1969,138 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_13_"
+            "theirs": "--astryx-layer-_r_c_"
+          },
+          {
+            "part": "switch",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "column-gap",
+            "ours": "normal",
+            "theirs": "2px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "flex-direction",
+            "ours": "row",
+            "theirs": "column"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "min-height",
+            "ours": "auto",
+            "theirs": "24px"
+          },
+          {
+            "part": "part-0-1",
+            "channel": "row-gap",
+            "ours": "normal",
+            "theirs": "2px"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "end.no-isDisabled__active",
+        "channelsCompared": 97,
+        "channelsEqual": 79,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "part-0-0",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "bottom",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "isolation",
+            "ours": "auto",
+            "theirs": "isolate"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "left",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "relative"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "right",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0",
+            "channel": "top",
+            "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "part-0-0-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_c_"
+          },
+          {
+            "part": "switch",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "switch",
             "channel": "background-color",
-            "ours": "rgba(10, 19, 23, 0.2)",
-            "theirs": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)"
+            "ours": "rgba(212, 212, 212, 1)",
+            "theirs": "color(srgb 0.789804 0.789804 0.789804)"
+          },
+          {
+            "part": "switch-thumb",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "part-0-1",
@@ -1950,8 +2149,8 @@
       },
       {
         "key": "end.isDisabled__default",
-        "channelsCompared": 96,
-        "channelsEqual": 68,
+        "channelsCompared": 97,
+        "channelsEqual": 67,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2002,13 +2201,25 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_17_"
+            "theirs": "--astryx-layer-_r_g_"
           },
           {
             "part": "part-0-0-0",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "switch",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "part-0-1",
@@ -2049,44 +2260,44 @@
           {
             "part": "label",
             "channel": "border-bottom-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-left-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-right-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-top-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "caret-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "column-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
@@ -2103,34 +2314,34 @@
           {
             "part": "label",
             "channel": "outline-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "row-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "text-decoration-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "text-emphasis-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "end.isDisabled__hover",
-        "channelsCompared": 96,
-        "channelsEqual": 68,
+        "channelsCompared": 97,
+        "channelsEqual": 67,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2181,13 +2392,25 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_17_"
+            "theirs": "--astryx-layer-_r_g_"
           },
           {
             "part": "part-0-0-0",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "switch",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "part-0-1",
@@ -2228,44 +2451,44 @@
           {
             "part": "label",
             "channel": "border-bottom-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-left-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-right-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-top-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "caret-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "column-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
@@ -2282,34 +2505,34 @@
           {
             "part": "label",
             "channel": "outline-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "row-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "text-decoration-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "text-emphasis-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "end.isDisabled__focus-visible",
-        "channelsCompared": 96,
-        "channelsEqual": 68,
+        "channelsCompared": 97,
+        "channelsEqual": 67,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2360,13 +2583,25 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_17_"
+            "theirs": "--astryx-layer-_r_g_"
           },
           {
             "part": "part-0-0-0",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "switch",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "part-0-1",
@@ -2407,44 +2642,44 @@
           {
             "part": "label",
             "channel": "border-bottom-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-left-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-right-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-top-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "caret-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "column-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
@@ -2461,34 +2696,34 @@
           {
             "part": "label",
             "channel": "outline-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "row-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "text-decoration-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "text-emphasis-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "end.isDisabled__active",
-        "channelsCompared": 96,
-        "channelsEqual": 68,
+        "channelsCompared": 97,
+        "channelsEqual": 67,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2539,13 +2774,25 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_17_"
+            "theirs": "--astryx-layer-_r_g_"
           },
           {
             "part": "part-0-0-0",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "switch",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
+          },
+          {
+            "part": "switch-thumb",
+            "channel": "--color-background-gray",
+            "ours": "#0A131733",
+            "theirs": "light-dark(#d4d4d4, #525252)"
           },
           {
             "part": "part-0-1",
@@ -2586,44 +2833,44 @@
           {
             "part": "label",
             "channel": "border-bottom-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-left-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-right-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "border-top-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "caret-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "column-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
@@ -2640,26 +2887,26 @@
           {
             "part": "label",
             "channel": "outline-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "row-rule-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "text-decoration-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           },
           {
             "part": "label",
             "channel": "text-emphasis-color",
-            "ours": "rgba(78, 96, 111, 1)",
-            "theirs": "rgba(164, 176, 188, 1)"
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "rgba(163, 163, 163, 1)"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

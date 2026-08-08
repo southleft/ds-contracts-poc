@@ -1,0 +1,1466 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Alert",
+  "config": "extract/computed/configs/mui.json",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "part": "root",
+        "channel": "transition-property",
+        "value": "box-shadow"
+      },
+      {
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "alert-icon",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "auto"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Alert",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 12,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 3888,
+      "cellsEqual": 3760,
+      "pctEqual": 96.70781893004116,
+      "rowsFullyEqual": 32,
+      "rows": 48
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 48,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 136,
+      "mintedLeavesUnfolded": 448,
+      "baseBindings": 41,
+      "stateBindings": 0,
+      "codeOnlyChannels": 4,
+      "overflowBindings": 0,
+      "folds": 46
+    },
+    "worstRows": [
+      {
+        "key": "error.outlined__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 8,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "error.outlined__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 8,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "error.outlined__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 8,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "error.outlined__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 8,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "warning.outlined__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 8,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "warning.outlined__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 8,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "warning.outlined__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 8,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "warning.outlined__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 8,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.border-bottom-style",
+        16
+      ],
+      [
+        "root.border-bottom-width",
+        16
+      ],
+      [
+        "root.border-left-style",
+        16
+      ],
+      [
+        "root.border-left-width",
+        16
+      ],
+      [
+        "root.border-right-style",
+        16
+      ],
+      [
+        "root.border-right-width",
+        16
+      ],
+      [
+        "root.border-top-style",
+        16
+      ],
+      [
+        "root.border-top-width",
+        16
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1850,
+      "divergent": []
+    },
+    "rows": [
+      {
+        "key": "error.standard__default",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.standard__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.standard__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.standard__active",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.filled__default",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.filled__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.filled__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.filled__active",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.outlined__default",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.outlined__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.outlined__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.outlined__active",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.standard__default",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.standard__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.standard__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.standard__active",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.filled__default",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.filled__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.filled__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.filled__active",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.outlined__default",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.outlined__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.outlined__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.outlined__active",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.standard__default",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.standard__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.standard__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.standard__active",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.filled__default",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.filled__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.filled__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.filled__active",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.outlined__default",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.outlined__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.outlined__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.outlined__active",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.standard__default",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.standard__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.standard__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.standard__active",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.filled__default",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.filled__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.filled__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.filled__active",
+        "channelsCompared": 81,
+        "channelsEqual": 81,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.outlined__default",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.outlined__hover",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.outlined__focus-visible",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.outlined__active",
+        "channelsCompared": 81,
+        "channelsEqual": 73,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

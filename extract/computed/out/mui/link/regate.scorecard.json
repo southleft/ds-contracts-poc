@@ -1,0 +1,1994 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Link",
+  "config": "extract/computed/configs/mui.json",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "declared": {
+    "base": [],
+    "state": [
+      {
+        "state": "focus-visible",
+        "part": "root",
+        "channel": "outline-style",
+        "value": "auto"
+      }
+    ]
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Link",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 21,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 1344,
+      "cellsEqual": 1197,
+      "pctEqual": 89.0625,
+      "rowsFullyEqual": 0,
+      "rows": 84
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 84,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 55,
+      "mintedLeavesUnfolded": 111,
+      "baseBindings": 6,
+      "stateBindings": 5,
+      "codeOnlyChannels": 7,
+      "overflowBindings": 0,
+      "folds": 8
+    },
+    "worstRows": [
+      {
+        "key": "primary.always__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "secondary.always__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "error.always__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info.always__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "success.always__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "warning.always__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "inherit.always__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "primary.none__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 2,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.text-decoration",
+        84
+      ],
+      [
+        "root.text-decoration-line",
+        42
+      ],
+      [
+        "root.outline-color",
+        21
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-decoration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-decoration-line — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only[active]: root.text-decoration — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[active]: root.text-decoration-line — declared-channel state delta on 7/21 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[hover]: root.text-decoration — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[hover]: root.text-decoration-line — declared-channel state delta on 7/21 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1931,
+      "divergent": [
+        {
+          "token": "imported.link.root.color.error",
+          "fresh": "#d32f2f",
+          "shipped": "{palette-error-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.link.root.color.info",
+          "fresh": "#0288d1",
+          "shipped": "{palette-info-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.link.root.color.primary",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.link.root.color.secondary",
+          "fresh": "#9c27b0",
+          "shipped": "{palette-secondary-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.link.root.color.success",
+          "fresh": "#2e7d32",
+          "shipped": "{palette-success-main}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.link.root.color.warning",
+          "fresh": "#ed6c02",
+          "shipped": "{palette-warning-main}",
+          "resolvedEqual": true
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "primary.none__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.none__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.none__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.none__active",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.hover__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.hover__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.hover__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.hover__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.always__default",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 0.4)",
+            "theirs": "underline rgba(25, 118, 210, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.always__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.always__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 13,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 0.4)",
+            "theirs": "underline rgba(25, 118, 210, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "primary.always__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(25, 118, 210, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.none__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.none__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.none__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.none__active",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.hover__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.hover__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.hover__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.hover__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.always__default",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 0.4)",
+            "theirs": "underline rgba(156, 39, 176, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.always__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.always__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 13,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 0.4)",
+            "theirs": "underline rgba(156, 39, 176, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "secondary.always__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(156, 39, 176, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.none__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.none__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.none__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.none__active",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.hover__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.hover__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.hover__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.hover__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.always__default",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 0.4)",
+            "theirs": "underline rgba(211, 47, 47, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.always__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.always__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 13,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 0.4)",
+            "theirs": "underline rgba(211, 47, 47, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.always__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(211, 47, 47, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.none__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.none__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.none__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.none__active",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.hover__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.hover__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.hover__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.hover__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.always__default",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 0.4)",
+            "theirs": "underline rgba(2, 136, 209, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.always__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.always__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 13,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 0.4)",
+            "theirs": "underline rgba(2, 136, 209, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.always__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(2, 136, 209, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.none__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.none__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.none__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.none__active",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.hover__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.hover__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.hover__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.hover__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.always__default",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 0.4)",
+            "theirs": "underline rgba(46, 125, 50, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.always__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.always__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 13,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 0.4)",
+            "theirs": "underline rgba(46, 125, 50, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.always__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(46, 125, 50, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.none__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.none__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.none__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.none__active",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.hover__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.hover__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.hover__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.hover__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.always__default",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 0.4)",
+            "theirs": "underline rgba(237, 108, 2, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.always__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.always__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 13,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 0.4)",
+            "theirs": "underline rgba(237, 108, 2, 0.4)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.always__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(237, 108, 2, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.none__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.none__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.none__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.none__active",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.hover__default",
+        "channelsCompared": 16,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.hover__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.hover__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.hover__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.always__default",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.always__hover",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.always__focus-visible",
+        "channelsCompared": 16,
+        "channelsEqual": 13,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(0, 95, 204, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inherit.always__active",
+        "channelsCompared": 16,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-decoration",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "underline"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-line",
+            "ours": "none",
+            "theirs": "underline"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

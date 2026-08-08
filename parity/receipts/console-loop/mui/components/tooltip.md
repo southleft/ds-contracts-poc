@@ -35,3 +35,7 @@ Compared canvas axes/prop defs to `examples/mui/contracts/tooltip.contract.json`
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 
 **2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=23.47%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/tooltip.png`; card `parity/receipts/console-loop/mui/scores/tooltip.json`).
+
+## 2026-08-08 — FONT-SUBSTRATE round (Roboto cfg.fonts)
+
+- re-pin REFUSED: current-tree regate renders a drifted tooltip (cells 129→121, clipped bubble) while core/emit-* is mid-flight in a sibling workflow; ref keeps its committed pin, 23.47 AA, FC-FONT-SUBSTRATE stays open here.

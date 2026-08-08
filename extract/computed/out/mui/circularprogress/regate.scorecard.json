@@ -1,0 +1,476 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "CircularProgress",
+  "config": "extract/computed/configs/mui.json",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "declared": {
+    "base": [],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "CircularProgress",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 2,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 152,
+      "cellsEqual": 116,
+      "pctEqual": 76.3157894736842,
+      "rowsFullyEqual": 0,
+      "rows": 8
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 8,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 2,
+      "mintedLeavesUnfolded": 2,
+      "baseBindings": 2,
+      "stateBindings": 0,
+      "codeOnlyChannels": 8,
+      "overflowBindings": 0,
+      "folds": 30
+    },
+    "worstRows": [
+      {
+        "key": "indeterminate__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 5,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "indeterminate__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 5,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "indeterminate__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 5,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "indeterminate__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 5,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "determinate__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 4,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "determinate__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 4,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "determinate__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 4,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "determinate__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 4,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.transform",
+        8
+      ],
+      [
+        "root.transition-duration",
+        4
+      ],
+      [
+        "root.transition-property",
+        4
+      ],
+      [
+        "root.transition-timing-function",
+        4
+      ],
+      [
+        "root.animation-duration",
+        4
+      ],
+      [
+        "root.animation-iteration-count",
+        4
+      ],
+      [
+        "root.animation-name",
+        4
+      ],
+      [
+        "root.animation-timing-function",
+        4
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.animation-iteration-count — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.animation-timing-function — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.transition-duration — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.transition-property — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.transition-timing-function — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1984,
+      "divergent": [
+        {
+          "token": "imported.circular-progress.root.color",
+          "fresh": "#1976d2",
+          "shipped": "{palette-primary-main}",
+          "resolvedEqual": true
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "determinate__default",
+        "channelsCompared": 19,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0, -1, 1, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.3s"
+          },
+          {
+            "part": "root",
+            "channel": "transition-property",
+            "ours": "all",
+            "theirs": "transform"
+          },
+          {
+            "part": "root",
+            "channel": "transition-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.4, 0, 0.2, 1)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "determinate__hover",
+        "channelsCompared": 19,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0, -1, 1, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.3s"
+          },
+          {
+            "part": "root",
+            "channel": "transition-property",
+            "ours": "all",
+            "theirs": "transform"
+          },
+          {
+            "part": "root",
+            "channel": "transition-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.4, 0, 0.2, 1)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "determinate__focus-visible",
+        "channelsCompared": 19,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0, -1, 1, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.3s"
+          },
+          {
+            "part": "root",
+            "channel": "transition-property",
+            "ours": "all",
+            "theirs": "transform"
+          },
+          {
+            "part": "root",
+            "channel": "transition-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.4, 0, 0.2, 1)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "determinate__active",
+        "channelsCompared": 19,
+        "channelsEqual": 15,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0, -1, 1, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "transition-duration",
+            "ours": "0s",
+            "theirs": "0.3s"
+          },
+          {
+            "part": "root",
+            "channel": "transition-property",
+            "ours": "all",
+            "theirs": "transform"
+          },
+          {
+            "part": "root",
+            "channel": "transition-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.4, 0, 0.2, 1)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "indeterminate__default",
+        "channelsCompared": 19,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "1.4s"
+          },
+          {
+            "part": "root",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "root",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-61bdi0"
+          },
+          {
+            "part": "root",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "linear"
+          },
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "indeterminate__hover",
+        "channelsCompared": 19,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "1.4s"
+          },
+          {
+            "part": "root",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "root",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-61bdi0"
+          },
+          {
+            "part": "root",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "linear"
+          },
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "indeterminate__focus-visible",
+        "channelsCompared": 19,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "1.4s"
+          },
+          {
+            "part": "root",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "root",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-61bdi0"
+          },
+          {
+            "part": "root",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "linear"
+          },
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "indeterminate__active",
+        "channelsCompared": 19,
+        "channelsEqual": 14,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "1.4s"
+          },
+          {
+            "part": "root",
+            "channel": "animation-iteration-count",
+            "ours": "1",
+            "theirs": "infinite"
+          },
+          {
+            "part": "root",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "animation-61bdi0"
+          },
+          {
+            "part": "root",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "linear"
+          },
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

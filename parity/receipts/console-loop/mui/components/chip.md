@@ -35,3 +35,7 @@ Compared canvas axes/prop defs to `examples/mui/contracts/chip.contract.json`.
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 
 **2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=6.47%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/chip.png`; card `parity/receipts/console-loop/mui/scores/chip.json`).
+
+## 2026-08-08 — FONT-SUBSTRATE round (Roboto cfg.fonts)
+
+- reference re-pinned (offline regate, Roboto 400/500/700 data:-URI faces). 6.47 → **1.18 AA, scored-pass** on BOTH instruments (headless 1.18). Prior refs rendered the machine-local Roboto-Thin face, not Helvetica — the substrate defect was a wrong local face.

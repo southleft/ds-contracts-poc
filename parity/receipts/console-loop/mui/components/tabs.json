@@ -1,104 +1,105 @@
 {
-  "version": 1,
-  "kind": "console-loop-mui-component",
-  "status": "completed",
-  "component": "tabs",
-  "contract": "examples/mui/contracts/tabs.contract.json",
-  "script": "examples/mui/figma/tabs.figma.js",
-  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
-  "recordedAt": "2026-08-06T04:51:10.512Z",
-  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
-  "generate": {
-    "ok": true,
-    "nodeId": "21:807",
-    "mode": "existing",
-    "page": "Tabs",
-    "sectionId": "21:808",
-    "result": {}
-  },
-  "visual": {
-    "ok": false,
-    "notes": [
-      "Existing on-canvas set inspected; structure/variants sane (21:807).",
-      "Tabs COMPONENT_SET 21:807: 6 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK."
-    ],
-    "defects": [
-      "pixel scorecard fail: pctAAMasked=10.19% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/tabs.json",
-      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
-    ],
-    "reference": "parity/receipts/console-loop/mui/refs/tabs.png",
-    "referenceSource": "extract/computed/out/mui/tabs/gate-shots/inherit.primary__default.png",
-    "canvasShot": "parity/receipts/console-loop/mui/shots/tabs-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed"
-  },
-  "fingerprint": {
-    "v6": "v6:2607696146",
-    "lineCount": 508,
-    "sampleLines": [
-      ":COMPONENT_SET/Tabs|fill|[]"
-    ]
-  },
-  "roundtrip": {
-    "mismatches": [],
-    "gaps": [
-      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
-    ],
-    "matchedAxes": [
-      "Text color enum \u2192 Primary/Secondary/Inherit",
-      "Indicator color enum \u2192 Primary/Secondary"
-    ],
-    "observed": {
-      "type": "COMPONENT_SET",
-      "variantNames": [
-        "Text color=Primary, Indicator color=Primary"
-      ],
-      "propDefs": [
-        {
-          "name": "Indicator color",
-          "type": "VARIANT",
-          "defaultValue": "Primary",
-          "variantOptions": [
-            "Primary",
-            "Secondary"
-          ]
-        },
-        {
-          "name": "Text color",
-          "type": "VARIANT",
-          "defaultValue": "Primary",
-          "variantOptions": [
-            "Primary",
-            "Secondary",
-            "Inherit"
-          ]
-        }
-      ],
-      "firstRoot": {
-        "name": "Text color=Primary, Indicator color=Primary",
-        "type": "COMPONENT",
-        "fillVarName": null,
-        "padBound": {},
-        "layoutMode": "HORIZONTAL",
-        "padding": {
-          "t": 0,
-          "r": 0,
-          "b": 0,
-          "l": 0
-        },
-        "radius": 0,
-        "w": 288,
-        "h": 48,
-        "childTypes": [
-          "FRAME/tabs-fixed"
-        ]
-      }
+ "version": 1,
+ "kind": "console-loop-mui-component",
+ "status": "completed",
+ "component": "tabs",
+ "contract": "examples/mui/contracts/tabs.contract.json",
+ "script": "examples/mui/figma/tabs.figma.js",
+ "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+ "recordedAt": "2026-08-06T04:51:10.512Z",
+ "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+ "generate": {
+  "ok": true,
+  "nodeId": "21:807",
+  "mode": "existing",
+  "page": "Tabs",
+  "sectionId": "21:808",
+  "result": {}
+ },
+ "visual": {
+  "ok": false,
+  "notes": [
+   "Existing on-canvas set inspected; structure/variants sane (21:807).",
+   "Tabs COMPONENT_SET 21:807: 6 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK.",
+   "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot."
+  ],
+  "defects": [
+   "pixel scorecard fail: pctAAMasked=11.74% lane / 9.99% headless (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/tabs.json",
+   "residual after FC-FONT-SUBSTRATE closure: reference now renders committed Roboto (was local Roboto-Thin), instruments near-agree at 11.74/9.99 (was 10.19) — the remaining diff is not the harness font substrate; per-stem geometry/color/raster causes stay open"
+  ],
+  "reference": "parity/receipts/console-loop/mui/refs/tabs.png",
+  "referenceSource": "extract/computed/out/mui/tabs/gate-shots/inherit.primary__default.png",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/tabs-cell.png",
+  "matchDeveloped": false,
+  "status": "fail-closed"
+ },
+ "fingerprint": {
+  "v6": "v6:2607696146",
+  "lineCount": 508,
+  "sampleLines": [
+   ":COMPONENT_SET/Tabs|fill|[]"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [
+   "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+  ],
+  "matchedAxes": [
+   "Text color enum → Primary/Secondary/Inherit",
+   "Indicator color enum → Primary/Secondary"
+  ],
+  "observed": {
+   "type": "COMPONENT_SET",
+   "variantNames": [
+    "Text color=Primary, Indicator color=Primary"
+   ],
+   "propDefs": [
+    {
+     "name": "Indicator color",
+     "type": "VARIANT",
+     "defaultValue": "Primary",
+     "variantOptions": [
+      "Primary",
+      "Secondary"
+     ]
+    },
+    {
+     "name": "Text color",
+     "type": "VARIANT",
+     "defaultValue": "Primary",
+     "variantOptions": [
+      "Primary",
+      "Secondary",
+      "Inherit"
+     ]
     }
-  },
-  "acceptance": {
-    "generatedOrFound": true,
-    "screenshotReviewed": true,
-    "zeroMismatch": true,
-    "visualMatchDeveloped": false
+   ],
+   "firstRoot": {
+    "name": "Text color=Primary, Indicator color=Primary",
+    "type": "COMPONENT",
+    "fillVarName": null,
+    "padBound": {},
+    "layoutMode": "HORIZONTAL",
+    "padding": {
+     "t": 0,
+     "r": 0,
+     "b": 0,
+     "l": 0
+    },
+    "radius": 0,
+    "w": 288,
+    "h": 48,
+    "childTypes": [
+     "FRAME/tabs-fixed"
+    ]
+   }
   }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": false
+ }
 }

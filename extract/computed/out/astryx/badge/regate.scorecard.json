@@ -130,7 +130,7 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 372,
+      "leavesAdded": 284,
       "divergent": [
         {
           "token": "imported.badge.root.background-color.blue",
@@ -145,9 +145,21 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.badge.root.background-color.error",
+          "fresh": "#e3193b",
+          "shipped": "{color-error}",
+          "resolvedEqual": true
+        },
+        {
           "token": "imported.badge.root.background-color.green",
           "fresh": "#24bb5e33",
           "shipped": "{color-background-green}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.info",
+          "fresh": "#0064e0",
+          "shipped": "{color-accent}",
           "resolvedEqual": true
         },
         {
@@ -175,9 +187,21 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.badge.root.background-color.success",
+          "fresh": "#0d8626",
+          "shipped": "{color-success}",
+          "resolvedEqual": true
+        },
+        {
           "token": "imported.badge.root.background-color.teal",
           "fresh": "#0db7af33",
           "shipped": "{color-background-teal}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.warning",
+          "fresh": "#e9af08",
+          "shipped": "{color-warning}",
           "resolvedEqual": true
         },
         {
@@ -199,9 +223,21 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.badge.root.color.error",
+          "fresh": "#ffffff",
+          "shipped": "{color-on-error}",
+          "resolvedEqual": true
+        },
+        {
           "token": "imported.badge.root.color.green",
           "fresh": "#09441f",
           "shipped": "{color-text-green}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.info",
+          "fresh": "#ffffff",
+          "shipped": "{color-on-accent}",
           "resolvedEqual": true
         },
         {
@@ -235,9 +271,21 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.badge.root.color.success",
+          "fresh": "#ffffff",
+          "shipped": "{color-on-success}",
+          "resolvedEqual": true
+        },
+        {
           "token": "imported.badge.root.color.teal",
           "fresh": "#083943",
           "shipped": "{color-text-teal}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.warning",
+          "fresh": "#0a1317",
+          "shipped": "{color-on-warning}",
           "resolvedEqual": true
         },
         {

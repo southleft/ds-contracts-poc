@@ -35,3 +35,7 @@ Compared canvas axes/prop defs to `examples/mui/contracts/select.contract.json`.
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 
 **2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=11.24%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/select.png`; card `parity/receipts/console-loop/mui/scores/select.json`).
+
+## 2026-08-08 — FONT-SUBSTRATE round (Roboto cfg.fonts)
+
+- reference re-pinned (offline regate, Roboto 400/500/700 data:-URI faces). 11.24 → 11.05 AA lane / 11.05 headless — still fail-closed; the glyph substrate is no longer the named cause.

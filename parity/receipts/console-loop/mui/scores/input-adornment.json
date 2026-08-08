@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 67.1875,
-    "pctAAUnmasked": 24.21875,
-    "pctAAMasked": 24.21875,
+    "pctExactUnmasked": 66.66666666666666,
+    "pctAAUnmasked": 20.833333333333336,
+    "pctAAMasked": 20.833333333333336,
     "maskCoveragePct": 0,
     "canvasPx": "8x16",
-    "realPx": "8x16",
-    "inkCanvasPct": 57.8125,
-    "inkRealPct": 35.9375
+    "realPx": "9x16",
+    "inkCanvasPct": 51.388888888888886,
+    "inkRealPct": 54.861111111111114
   },
   "reference": "parity/receipts/console-loop/mui/refs/input-adornment.png",
-  "referenceSha256": "9351e98d7c74326d0b7f25408c305e238da58ead62b850d686559b549a6bc048",
+  "referenceSha256": "379b684fabf2e8169a64f70dfe3b90968345434cd907dcf85b08853a8c8b5ec2",
   "canvasShot": "parity/receipts/console-loop/mui/shots/input-adornment-cell.png",
   "canvasShotSha256": "54a2fce95391d856b337c8344ece455c7c860f245770e6392e904869f5a1d2eb",
   "diff": "parity/receipts/console-loop/mui/scores/input-adornment.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 21.875,
+  "scaleRatio": 1.125,
+  "inkDelta": 3.4722222222222285,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=24.22 > 5)",
-  "recordedAt": "2026-08-08T08:30:08.585Z"
+  "note": "pixel bar missed (pctAAMasked=20.83 > 5)",
+  "recordedAt": "2026-08-08T14:34:20.169Z"
 }

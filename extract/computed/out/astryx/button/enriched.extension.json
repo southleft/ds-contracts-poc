@@ -9,11 +9,11 @@
         "root": {
           "background-color": {
             "primary": {
-              "$value": "#0064e0",
+              "$value": "#262626",
               "$type": "color"
             },
             "secondary": {
-              "$value": "#0536591a",
+              "$value": "#0000000f",
               "$type": "color"
             },
             "ghost": {
@@ -21,7 +21,7 @@
               "$type": "color"
             },
             "destructive": {
-              "$value": "#e3193b",
+              "$value": "#facecb",
               "$type": "color"
             }
           },
@@ -31,15 +31,15 @@
               "$type": "color"
             },
             "secondary": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "ghost": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "destructive": {
-              "$value": "#ffffff",
+              "$value": "#a50c25",
               "$type": "color"
             }
           },
@@ -63,15 +63,15 @@
               "$type": "color"
             },
             "secondary": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "ghost": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "destructive": {
-              "$value": "#ffffff",
+              "$value": "#a50c25",
               "$type": "color"
             }
           },
@@ -84,11 +84,11 @@
             "$type": "dimension"
           },
           "width": {
-            "$value": "99.8125px",
+            "$value": "110.984px",
             "$type": "dimension"
           },
           "background-image-state-active": {
-            "$value": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+            "$value": "linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))",
             "$type": "gradient"
           },
           "opacity-state-disabled": {
@@ -97,19 +97,19 @@
           },
           "outline-color-state-focus-visible": {
             "primary": {
-              "$value": "#0064e0",
+              "$value": "#262626",
               "$type": "color"
             },
             "secondary": {
-              "$value": "#0064e0",
+              "$value": "#262626",
               "$type": "color"
             },
             "ghost": {
-              "$value": "#0064e0",
+              "$value": "#262626",
               "$type": "color"
             },
             "destructive": {
-              "$value": "#e3193b",
+              "$value": "#a50c25",
               "$type": "color"
             }
           },
@@ -122,7 +122,7 @@
             "$type": "dimension"
           },
           "background-image-state-hover": {
-            "$value": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+            "$value": "linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))",
             "$type": "gradient"
           }
         },
@@ -133,15 +133,15 @@
               "$type": "color"
             },
             "secondary": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "ghost": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "destructive": {
-              "$value": "#ffffff",
+              "$value": "#a50c25",
               "$type": "color"
             }
           }
@@ -153,15 +153,15 @@
               "$type": "color"
             },
             "secondary": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "ghost": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "destructive": {
-              "$value": "#ffffff",
+              "$value": "#a50c25",
               "$type": "color"
             }
           }
@@ -187,15 +187,15 @@
               "$type": "color"
             },
             "secondary": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "ghost": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "destructive": {
-              "$value": "#ffffff",
+              "$value": "#a50c25",
               "$type": "color"
             }
           },
@@ -204,7 +204,7 @@
             "$type": "dimension"
           },
           "right": {
-            "$value": "100.812px",
+            "$value": "111.984px",
             "$type": "dimension"
           },
           "width": {
@@ -214,12 +214,16 @@
         }
       },
       "shared": {
-        "size-8": {
-          "$value": "8px",
+        "size-10": {
+          "$value": "10px",
           "$type": "dimension"
         },
         "size-0": {
           "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-8": {
+          "$value": "8px",
           "$type": "dimension"
         },
         "size-14": {
@@ -536,7 +540,7 @@
       {
         "part": "root",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "root",
@@ -741,6 +745,8 @@
     "interaction-on-isDisabled-changed: destructive.md.isDisabled active root.transform",
     "interaction-on-isDisabled-changed: destructive.lg.isDisabled active root.transform"
   ],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
@@ -818,7 +824,7 @@
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: root.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-duration = 0.125s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.transition-property = background-image, background-color, color, opacity, transform (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",

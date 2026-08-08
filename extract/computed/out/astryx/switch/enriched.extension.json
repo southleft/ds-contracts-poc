@@ -8,7 +8,7 @@
       "switch": {
         "root": {
           "width": {
-            "$value": "178.016px",
+            "$value": "173.25px",
             "$type": "dimension"
           }
         },
@@ -22,7 +22,7 @@
             "$type": "dimension"
           },
           "width": {
-            "$value": "178.016px",
+            "$value": "173.25px",
             "$type": "dimension"
           }
         },
@@ -39,7 +39,7 @@
           },
           "width": {
             "start": {
-              "$value": "130.016px",
+              "$value": "125.25px",
               "$type": "dimension"
             },
             "end": {
@@ -50,7 +50,7 @@
         },
         "label-2": {
           "color": {
-            "$value": "#4e606f",
+            "$value": "#737373",
             "$type": "color"
           },
           "font-size": {
@@ -78,7 +78,7 @@
         },
         "switch": {
           "background-color": {
-            "$value": "#0a131733",
+            "$value": "#d4d4d4",
             "$type": "color"
           }
         },
@@ -105,7 +105,7 @@
               "$type": "dimension"
             },
             "end": {
-              "$value": "130.016px",
+              "$value": "125.25px",
               "$type": "dimension"
             }
           }
@@ -122,7 +122,7 @@
         },
         "switch-2": {
           "background-color": {
-            "$value": "#0a131733",
+            "$value": "#d4d4d4",
             "$type": "color"
           }
         },
@@ -134,7 +134,7 @@
         },
         "label": {
           "color": {
-            "$value": "#4e606f",
+            "$value": "#737373",
             "$type": "color"
           },
           "font-size": {
@@ -387,11 +387,6 @@
         "value": "pointer"
       },
       {
-        "part": "label-2",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
-      },
-      {
         "part": "part-0-0-0",
         "channel": "appearance",
         "value": "auto"
@@ -429,7 +424,7 @@
       {
         "part": "switch",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "switch",
@@ -449,7 +444,7 @@
       {
         "part": "switch-thumb",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "switch-thumb",
@@ -499,7 +494,7 @@
       {
         "part": "switch-2",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "switch-2",
@@ -519,7 +514,7 @@
       {
         "part": "switch-thumb-2",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "switch-thumb-2",
@@ -535,11 +530,6 @@
         "part": "label",
         "channel": "cursor",
         "value": "pointer"
-      },
-      {
-        "part": "label",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       }
     ],
     "state": []
@@ -632,8 +622,22 @@
     {
       "part": "part-0-0-0",
       "channel": "anchor-name",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "--astryx-layer-_r_13_",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "--astryx-layer-_r_c_",
+      "distinctValues": 1
+    },
+    {
+      "part": "switch",
+      "channel": "--color-background-gray",
+      "reason": "CSS custom property, not a styled channel — `--color-background-gray` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#d4d4d4, #525252)",
+      "distinctValues": 1
+    },
+    {
+      "part": "switch-thumb",
+      "channel": "--color-background-gray",
+      "reason": "CSS custom property, not a styled channel — `--color-background-gray` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#d4d4d4, #525252)",
       "distinctValues": 1
     },
     {
@@ -723,8 +727,22 @@
     {
       "part": "part-0-1-0",
       "channel": "anchor-name",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "--astryx-layer-_r_r_",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "--astryx-layer-_r_4_",
+      "distinctValues": 1
+    },
+    {
+      "part": "switch-2",
+      "channel": "--color-background-gray",
+      "reason": "CSS custom property, not a styled channel — `--color-background-gray` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#d4d4d4, #525252)",
+      "distinctValues": 1
+    },
+    {
+      "part": "switch-thumb-2",
+      "channel": "--color-background-gray",
+      "reason": "CSS custom property, not a styled channel — `--color-background-gray` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#d4d4d4, #525252)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#d4d4d4, #525252)",
       "distinctValues": 1
     }
   ],
@@ -733,21 +751,21 @@
       "state": "active",
       "part": "switch-2",
       "channel": "background-color",
-      "sample": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+      "sample": "color(srgb 0.789804 0.789804 0.789804)",
       "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     },
     {
       "state": "active",
       "part": "switch",
       "channel": "background-color",
-      "sample": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+      "sample": "color(srgb 0.789804 0.789804 0.789804)",
       "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     },
     {
       "state": "disabled",
       "part": "label-2",
       "channel": "color",
-      "sample": "rgba(164, 176, 188, 1)",
+      "sample": "rgba(163, 163, 163, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
@@ -761,7 +779,7 @@
       "state": "disabled",
       "part": "label",
       "channel": "color",
-      "sample": "rgba(164, 176, 188, 1)",
+      "sample": "rgba(163, 163, 163, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
@@ -775,7 +793,7 @@
       "state": "disabled",
       "part": "part-0-0-0",
       "channel": "anchor-name",
-      "sample": "--astryx-layer-_r_17_",
+      "sample": "--astryx-layer-_r_g_",
       "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     },
     {
@@ -789,7 +807,7 @@
       "state": "disabled",
       "part": "part-0-1-0",
       "channel": "anchor-name",
-      "sample": "--astryx-layer-_r_v_",
+      "sample": "--astryx-layer-_r_8_",
       "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     },
     {
@@ -873,7 +891,7 @@
       "state": "focus-visible",
       "part": "switch-2",
       "channel": "outline-color",
-      "sample": "rgba(0, 100, 224, 1)",
+      "sample": "rgba(38, 38, 38, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
@@ -901,7 +919,7 @@
       "state": "focus-visible",
       "part": "switch",
       "channel": "outline-color",
-      "sample": "rgba(0, 100, 224, 1)",
+      "sample": "rgba(38, 38, 38, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
@@ -929,14 +947,14 @@
       "state": "hover",
       "part": "switch-2",
       "channel": "background-color",
-      "sample": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+      "sample": "color(srgb 0.789804 0.789804 0.789804)",
       "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     },
     {
       "state": "hover",
       "part": "switch",
       "channel": "background-color",
-      "sample": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+      "sample": "color(srgb 0.789804 0.789804 0.789804)",
       "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     }
   ],
@@ -949,6 +967,29 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [
+    "label-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-0-0-0: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-0-0-0: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-0-0-0: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-0-1-0: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-0-1-0: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-0-1-0: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "switch-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "switch-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "switch-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "switch-thumb-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "switch-thumb-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "switch-thumb-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "switch-thumb: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "switch-thumb: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only"
+  ],
+  "interactionOnlyPlaneDropCount": 24,
   "structureReceipts": [
     "union-part-added: start.no-isDisabled__default @0.0.0 (label|field-label)",
     "union-part-added: start.no-isDisabled__default @0.1.0 (input||sr-only)",
@@ -1119,7 +1160,6 @@
     "layout enriched: switch-thumb-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-0-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-0.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-0.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1127,11 +1167,11 @@
     "declared fact carried: part-0-0-0.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: switch.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch.transition-duration = 0.125s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: switch-thumb.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-thumb.transition-duration = 0.125s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.transition-property = transform, width, height (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-1-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1141,14 +1181,13 @@
     "declared fact carried: part-0-1-0.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-1-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: switch-2.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-2.transition-duration = 0.125s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-2.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-2.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb-2.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: switch-thumb-2.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: switch-thumb-2.transition-duration = 0.125s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb-2.transition-property = transform, width, height (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb-2.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)"
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)"
   ]
 }

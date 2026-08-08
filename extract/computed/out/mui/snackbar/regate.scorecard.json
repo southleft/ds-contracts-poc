@@ -1,0 +1,202 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Snackbar",
+  "config": "extract/computed/configs/mui.json",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "paper-root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "paper-root",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "paper-root",
+        "channel": "transition-duration",
+        "value": "0s, 0s"
+      },
+      {
+        "part": "paper-root",
+        "channel": "transition-property",
+        "value": "opacity, transform"
+      },
+      {
+        "part": "paper-root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Snackbar",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 1,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 59,
+      "cellsEqual": 56,
+      "pctEqual": 94.91525423728814,
+      "rowsFullyEqual": 0,
+      "rows": 4
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 4,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 22,
+      "mintedLeavesUnfolded": 21,
+      "baseBindings": 25,
+      "stateBindings": 0,
+      "codeOnlyChannels": 3,
+      "overflowBindings": 0,
+      "folds": 20
+    },
+    "worstRows": [
+      {
+        "key": "__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.position",
+        1
+      ],
+      [
+        "paper-root.flex-wrap",
+        1
+      ],
+      [
+        "paper-root.transition-behavior",
+        1
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: paper-root.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: paper-root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/mui/tokens/mui-minted.dtcg.json",
+      "leavesAdded": 1964,
+      "divergent": []
+    },
+    "rows": [
+      {
+        "key": "__default",
+        "channelsCompared": 59,
+        "channelsEqual": 56,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "paper-root",
+            "channel": "flex-wrap",
+            "ours": "nowrap",
+            "theirs": "wrap"
+          },
+          {
+            "part": "paper-root",
+            "channel": "transition-behavior",
+            "ours": "normal",
+            "theirs": "normal, normal"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      }
+    ]
+  }
+}

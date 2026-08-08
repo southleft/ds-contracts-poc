@@ -1354,12 +1354,26 @@ and never renders a reference until acked.
 Configured today: **Altitude** loads IBM Plex Sans 400/600 (the library's own
 Google-Fonts declaration; woff2 committed under `extract/computed/fonts/`
 from `@ibm/plex-sans@1.1.0`) — that re-pin converted altitude chip and link
-to genuine scored passes on both instruments. **Everywhere unconfigured the
-fallback-font behavior below remains**: Tailwind/Flowbite and Astryx ship no
-library-true font file any committed/sandboxed source provides (Tailwind's
-stack IS the platform system stack; Astryx's Figtree face is not in its
-sandbox), Carbon's Plex faces are obtainable (`@ibm/plex-sans` in its
-sandbox) but not yet configured, so its references are unmoved.
+to genuine scored passes on both instruments. **MUI** loads Roboto 400/500/700
+(its `createTypography` defaults; woff2 committed under
+`extract/computed/fonts/roboto/` from `@fontsource/roboto@5.3.0`, exact-pinned
+in its sandbox) — that re-pin converted mui chip (6.47 → 1.18 on both
+instruments) and exposed an instrument subtlety: the recording machine's only
+locally installed Roboto face is Roboto-**Thin**, so the unconfigured refs had
+rendered Thin glyphs, not the Helvetica fallback — a wrong *local* face is the
+same defect class as a wrong fallback, and only the committed `data:`-URI face
+pins it. **Astryx** loads Figtree 400/500/600/700 (`@fontsource/figtree@5.3.0`
+pinned in its sandbox, faces under `extract/computed/fonts/figtree/`) — but the
+face alone was not its defect: theme-neutral scopes every token under
+`@scope ([data-astryx-theme="neutral"])` and the old capture mount never
+rendered the `<Theme>` provider, so no theme token resolved and Button's
+captured font-family was literal `Times`; the mount now wraps
+`<Theme theme={neutralTheme}>` (the library's documented setup) and the
+recaptured truth carries Figtree. **Everywhere unconfigured the
+fallback-font behavior below remains**: Tailwind/Flowbite ships no
+library-true font file (its stack IS the platform system stack), Carbon's
+Plex faces are obtainable (`@ibm/plex-sans` in its sandbox) but not yet
+configured, so its references are unmoved.
 
 (`document.fonts.check` returns `true` for fonts that are certainly not
 installed — it reports "can this be rendered", which fallback always satisfies.

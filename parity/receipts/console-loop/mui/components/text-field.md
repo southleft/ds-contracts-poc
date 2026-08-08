@@ -35,3 +35,7 @@ Compared canvas axes/prop defs to `examples/mui/contracts/text-field.contract.js
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 
 **2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=6.33%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/text-field.png`; card `parity/receipts/console-loop/mui/scores/text-field.json`).
+
+## 2026-08-08 — FONT-SUBSTRATE round (Roboto cfg.fonts)
+
+- reference re-pinned (offline regate, Roboto 400/500/700 data:-URI faces). 6.33 → 7.29 AA lane / 7.29 headless — still fail-closed; the glyph substrate is no longer the named cause.

@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 98.88888888888889,
-    "pctAAUnmasked": 7.944444444444445,
-    "pctAAMasked": 7.944444444444445,
+    "pctExactUnmasked": 98.24824824824825,
+    "pctAAUnmasked": 89.31431431431432,
+    "pctAAMasked": 89.31431431431432,
     "maskCoveragePct": 0,
     "canvasPx": "100x36",
-    "realPx": "100x36",
-    "inkCanvasPct": 96.94444444444444,
-    "inkRealPct": 95.91666666666666
+    "realPx": "111x36",
+    "inkCanvasPct": 87.33733733733735,
+    "inkRealPct": 95.12012012012012
   },
   "reference": "parity/receipts/console-loop/astryx/refs/button.png",
-  "referenceSha256": "db03be2d98c16778e55eb72faea677460ab73ce94c7471836ce1b7e4826c04f4",
+  "referenceSha256": "03bb81eafa22b8e7de8d0dc6dca08679df269df17a58234decf5228a1f563a4c",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/button-cell.png",
   "canvasShotSha256": "c4b30b33b1b2c9775db1f0f422edbf2381dfb29d1fa82fb8e278cb5031c6afee",
   "diff": "parity/receipts/console-loop/astryx/scores/button.diff.png",
@@ -30,10 +30,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 1.0277777777777857,
+  "scaleRatio": 1.11,
+  "inkDelta": 7.782782782782775,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=7.94 > 5)",
-  "recordedAt": "2026-08-08T04:31:12.995Z"
+  "note": "pixel bar missed (pctAAMasked=89.31 > 5)",
+  "recordedAt": "2026-08-08T14:37:32.937Z"
 }

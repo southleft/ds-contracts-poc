@@ -43,7 +43,7 @@
       {
         "part": "root",
         "channel": "transition-duration",
-        "value": "0.175s"
+        "value": "0.125s"
       },
       {
         "part": "root",
@@ -211,8 +211,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 11520,
-      "cellsEqual": 11400,
-      "pctEqual": 98.95833333333333,
+      "cellsEqual": 11376,
+      "pctEqual": 98.75,
       "rowsFullyEqual": 0,
       "rows": 96
     },
@@ -234,8 +234,8 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 51,
-      "mintedLeavesUnfolded": 207,
+      "mintedLeaves": 52,
+      "mintedLeavesUnfolded": 208,
       "baseBindings": 49,
       "stateBindings": 6,
       "codeOnlyChannels": 4,
@@ -243,6 +243,48 @@
       "folds": 39
     },
     "worstRows": [
+      {
+        "key": "secondary.sm.no-isDisabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "secondary.sm.isDisabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "secondary.md.no-isDisabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "secondary.md.isDisabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "secondary.lg.no-isDisabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "secondary.lg.isDisabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
       {
         "key": "primary.sm.no-isDisabled__active",
         "pctAA": null,
@@ -256,48 +298,6 @@
         "pctExact": null,
         "channelsMismatched": 2,
         "unscorable": "no-original"
-      },
-      {
-        "key": "primary.md.no-isDisabled__active",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 2,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "primary.md.isDisabled__active",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 2,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "primary.lg.no-isDisabled__active",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 2,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "primary.lg.isDisabled__active",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 2,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "secondary.sm.no-isDisabled__active",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 2,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "secondary.sm.isDisabled__active",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 2,
-        "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
@@ -307,6 +307,10 @@
       ],
       [
         "root.transform",
+        24
+      ],
+      [
+        "root.background-color",
         24
       ]
     ],
@@ -322,19 +326,19 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 357,
+      "leavesAdded": 269,
       "divergent": [
         {
           "token": "imported.button.label.color.destructive",
-          "fresh": "#ffffff",
+          "fresh": "#a50c25",
           "shipped": "{color-on-error}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.label.color.ghost",
-          "fresh": "#0a1317",
+          "fresh": "#171717",
           "shipped": "{color-text-primary}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.label.color.primary",
@@ -344,21 +348,21 @@
         },
         {
           "token": "imported.button.label.color.secondary",
-          "fresh": "#0a1317",
+          "fresh": "#171717",
           "shipped": "{color-text-primary}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.part-0.color.destructive",
-          "fresh": "#ffffff",
+          "fresh": "#a50c25",
           "shipped": "{color-on-error}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.part-0.color.ghost",
-          "fresh": "#0a1317",
+          "fresh": "#171717",
           "shipped": "{color-text-primary}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.part-0.color.primary",
@@ -368,21 +372,21 @@
         },
         {
           "token": "imported.button.part-0.color.secondary",
-          "fresh": "#0a1317",
+          "fresh": "#171717",
           "shipped": "{color-text-primary}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.part-1.color.destructive",
-          "fresh": "#ffffff",
+          "fresh": "#a50c25",
           "shipped": "{color-on-error}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.part-1.color.ghost",
-          "fresh": "#0a1317",
+          "fresh": "#171717",
           "shipped": "{color-text-primary}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.part-1.color.primary",
@@ -392,33 +396,57 @@
         },
         {
           "token": "imported.button.part-1.color.secondary",
-          "fresh": "#0a1317",
+          "fresh": "#171717",
           "shipped": "{color-text-primary}",
-          "resolvedEqual": true
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.part-1.right",
+          "fresh": "111.984px",
+          "shipped": "100.812px",
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.background-color.destructive",
-          "fresh": "#e3193b",
+          "fresh": "#facecb",
           "shipped": "{color-error}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.background-color.primary",
-          "fresh": "#0064e0",
+          "fresh": "#262626",
           "shipped": "{color-accent}",
-          "resolvedEqual": true
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.background-color.secondary",
+          "fresh": "#0000000f",
+          "shipped": "#0536591a",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.background-image-state-active",
+          "fresh": "linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))",
+          "shipped": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.background-image-state-hover",
+          "fresh": "linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))",
+          "shipped": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.color.destructive",
-          "fresh": "#ffffff",
+          "fresh": "#a50c25",
           "shipped": "{color-on-error}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.color.ghost",
-          "fresh": "#0a1317",
+          "fresh": "#171717",
           "shipped": "{color-text-primary}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.color.primary",
@@ -428,45 +456,45 @@
         },
         {
           "token": "imported.button.root.color.secondary",
-          "fresh": "#0a1317",
+          "fresh": "#171717",
           "shipped": "{color-text-primary}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.outline-color-state-focus-visible.destructive",
-          "fresh": "#e3193b",
+          "fresh": "#a50c25",
           "shipped": "{color-error}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.outline-color-state-focus-visible.ghost",
-          "fresh": "#0064e0",
+          "fresh": "#262626",
           "shipped": "{color-accent}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.outline-color-state-focus-visible.primary",
-          "fresh": "#0064e0",
+          "fresh": "#262626",
           "shipped": "{color-accent}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.outline-color-state-focus-visible.secondary",
-          "fresh": "#0064e0",
+          "fresh": "#262626",
           "shipped": "{color-accent}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.outline-color.destructive",
-          "fresh": "#ffffff",
+          "fresh": "#a50c25",
           "shipped": "{color-on-error}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.outline-color.ghost",
-          "fresh": "#0a1317",
+          "fresh": "#171717",
           "shipped": "{color-text-primary}",
-          "resolvedEqual": true
+          "resolvedEqual": false
         },
         {
           "token": "imported.button.root.outline-color.primary",
@@ -476,9 +504,15 @@
         },
         {
           "token": "imported.button.root.outline-color.secondary",
-          "fresh": "#0a1317",
+          "fresh": "#171717",
           "shipped": "{color-text-primary}",
-          "resolvedEqual": true
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.button.root.width",
+          "fresh": "110.984px",
+          "shipped": "99.8125px",
+          "resolvedEqual": false
         }
       ]
     },
@@ -930,11 +964,17 @@
       {
         "key": "secondary.sm.no-isDisabled__default",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -947,11 +987,17 @@
       {
         "key": "secondary.sm.no-isDisabled__hover",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -964,11 +1010,17 @@
       {
         "key": "secondary.sm.no-isDisabled__focus-visible",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -981,11 +1033,17 @@
       {
         "key": "secondary.sm.no-isDisabled__active",
         "channelsCompared": 120,
-        "channelsEqual": 118,
+        "channelsEqual": 117,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "root",
             "channel": "transform",
@@ -1004,11 +1062,17 @@
       {
         "key": "secondary.sm.isDisabled__default",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1021,11 +1085,17 @@
       {
         "key": "secondary.sm.isDisabled__hover",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1038,11 +1108,17 @@
       {
         "key": "secondary.sm.isDisabled__focus-visible",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1055,11 +1131,17 @@
       {
         "key": "secondary.sm.isDisabled__active",
         "channelsCompared": 120,
-        "channelsEqual": 118,
+        "channelsEqual": 117,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "root",
             "channel": "transform",
@@ -1078,11 +1160,17 @@
       {
         "key": "secondary.md.no-isDisabled__default",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1095,11 +1183,17 @@
       {
         "key": "secondary.md.no-isDisabled__hover",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1112,11 +1206,17 @@
       {
         "key": "secondary.md.no-isDisabled__focus-visible",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1129,11 +1229,17 @@
       {
         "key": "secondary.md.no-isDisabled__active",
         "channelsCompared": 120,
-        "channelsEqual": 118,
+        "channelsEqual": 117,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "root",
             "channel": "transform",
@@ -1152,11 +1258,17 @@
       {
         "key": "secondary.md.isDisabled__default",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1169,11 +1281,17 @@
       {
         "key": "secondary.md.isDisabled__hover",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1186,11 +1304,17 @@
       {
         "key": "secondary.md.isDisabled__focus-visible",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1203,11 +1327,17 @@
       {
         "key": "secondary.md.isDisabled__active",
         "channelsCompared": 120,
-        "channelsEqual": 118,
+        "channelsEqual": 117,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "root",
             "channel": "transform",
@@ -1226,11 +1356,17 @@
       {
         "key": "secondary.lg.no-isDisabled__default",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1243,11 +1379,17 @@
       {
         "key": "secondary.lg.no-isDisabled__hover",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1260,11 +1402,17 @@
       {
         "key": "secondary.lg.no-isDisabled__focus-visible",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1277,11 +1425,17 @@
       {
         "key": "secondary.lg.no-isDisabled__active",
         "channelsCompared": 120,
-        "channelsEqual": 118,
+        "channelsEqual": 117,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "root",
             "channel": "transform",
@@ -1300,11 +1454,17 @@
       {
         "key": "secondary.lg.isDisabled__default",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1317,11 +1477,17 @@
       {
         "key": "secondary.lg.isDisabled__hover",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1334,11 +1500,17 @@
       {
         "key": "secondary.lg.isDisabled__focus-visible",
         "channelsCompared": 120,
-        "channelsEqual": 119,
+        "channelsEqual": 118,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "part-1",
             "channel": "clip",
@@ -1351,11 +1523,17 @@
       {
         "key": "secondary.lg.isDisabled__active",
         "channelsCompared": 120,
-        "channelsEqual": 118,
+        "channelsEqual": 117,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(5, 54, 89, 0.1)",
+            "theirs": "rgba(0, 0, 0, 0.06)"
+          },
           {
             "part": "root",
             "channel": "transform",

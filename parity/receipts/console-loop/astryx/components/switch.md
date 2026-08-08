@@ -33,3 +33,7 @@ Uploaded `examples/astryx/figma/switch.figma.js` via clientStorage chunk append 
 ## 2026-08-08 — FC-FONT-SUBSTRATE harness landed; this stem stays fail-closed by name
 
 - cfg.fonts (per-library @font-face, data:-URI, network-free) landed and converted altitude chip/link. This library is left unconfigured: no library-true font file exists in a committed/sandboxed source (see receipt note). Reference NOT re-pinned; residual cause updated on the receipt.
+
+## 2026-08-08 — FONT-SUBSTRATE round (Times root cause fixed)
+
+- same Theme-mount root cause as button (see button.md); Switch recaptured under `<Theme theme={neutralTheme}>` + Figtree faces. Gate-shot ref regenerated: 8.78 → 14.21/14.12 both instruments — residual is the pre-theme canvas label raster/colors, not the harness substrate. FC-FONT-AA superseded by FC-THEME-ISO (stale-contract canvas).

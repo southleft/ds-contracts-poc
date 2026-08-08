@@ -1,149 +1,150 @@
 {
-  "version": 1,
-  "kind": "console-loop-mui-component",
-  "status": "completed",
-  "component": "text-field",
-  "contract": "examples/mui/contracts/text-field.contract.json",
-  "script": "examples/mui/figma/text-field.figma.js",
-  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
-  "recordedAt": "2026-08-06T05:26:56.332Z",
-  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
-  "generate": {
-    "ok": true,
-    "nodeId": "84:2480",
-    "mode": "generated",
-    "page": "TextField",
-    "sectionId": "84:2481",
-    "result": {
-      "note": "created; eval may still finish/timeout"
-    }
-  },
-  "visual": {
-    "ok": false,
-    "notes": [
-      "Screenshot reviewed on section/node 84:2481; structure/variants look sane (slot placeholders OK)."
-    ],
-    "defects": [
-      "pixel scorecard fail: pctAAMasked=6.33% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/text-field.json",
-      "FC-FONT-SUBSTRATE: developed reference renders the CSS fallback stack \u2014 MUI declares Roboto and the computed-extract harness loads no @font-face; MUI stays UNCONFIGURED by name this round (no committed Roboto file; configuring fonts is a later job, per the tailwind/astryx precedent in the FC ledger)"
-    ],
-    "reference": "parity/receipts/console-loop/mui/refs/text-field.png",
-    "referenceSource": "extract/computed/out/mui/textfield/gate-shots/__default.png",
-    "canvasShot": "parity/receipts/console-loop/mui/shots/text-field-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed"
-  },
-  "fingerprint": {
-    "v6": "v6:3304990436",
-    "lineCount": 488,
-    "sampleLines": [
-      ":COMPONENT_SET/TextField|fill|[]",
-      ":COMPONENT_SET/TextField|radius|5,5,5,5",
-      ":COMPONENT_SET/TextField|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/TextField|description|TextField \u00e2\u0080\u0094 generated from contract mui.text-field v0.2.0 \u00e2\u0080",
-      ":COMPONENT_SET/TextField|propdef|Helper Text#84:148:TEXT=Enter a valid amount",
-      ":COMPONENT_SET/TextField|propdef|Label#84:155:TEXT=Amount",
-      ":COMPONENT_SET/TextField|propdef|Size:VARIANT=Medium",
-      ":COMPONENT_SET/TextField|propdef|Variant:VARIANT=Outlined",
-      "/0:COMPONENT/Variant=Outlined, Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/0:COMPONENT/Variant=Outlined, Size=Medium|radius|0,0,0,0",
-      "/0:COMPONENT/Variant=Outlined, Size=Medium|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
-      "/0:COMPONENT/Variant=Outlined, Size=Medium|sizing|FIXED/FIXED AUTO",
-      "/0:COMPONENT/Variant=Outlined, Size=Medium|bound:height|imported/text-field/root/height",
-      "/0:COMPONENT/Variant=Outlined, Size=Medium|bound:minWidth|imported/shared/size-0",
-      "/0:COMPONENT/Variant=Outlined, Size=Medium|bound:width|imported/shared/size-252-969",
-      "/0/0:FRAME/inputbase-adornedend|fill|[]",
-      "/0/0:FRAME/inputbase-adornedend|radius|4,4,4,4",
-      "/0/0:FRAME/inputbase-adornedend|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,14,0,14",
-      "/0/0:FRAME/inputbase-adornedend|sizing|FIXED/FIXED AUTO",
-      "/0/0:FRAME/inputbase-adornedend|bound:bottomLeftRadius|imported/shared/size-4"
-    ]
-  },
-  "roundtrip": {
-    "mismatches": [],
-    "gaps": [
-      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
-    ],
-    "matchedAxes": [
-      "Variant enum \u2192 Outlined/Filled/Standard",
-      "Size enum \u2192 Medium/Small",
-      "TEXT Label",
-      "TEXT Helper Text"
-    ],
-    "observed": {
-      "type": "COMPONENT_SET",
-      "variantNames": [
-        "Variant=Outlined, Size=Medium",
-        "Variant=Outlined, Size=Small",
-        "Variant=Filled, Size=Medium",
-        "Variant=Filled, Size=Small",
-        "Variant=Standard, Size=Medium",
-        "Variant=Standard, Size=Small"
-      ],
-      "propDefs": [
-        {
-          "name": "Helper Text#84:148",
-          "type": "TEXT",
-          "defaultValue": "Enter a valid amount",
-          "variantOptions": null
-        },
-        {
-          "name": "Label#84:155",
-          "type": "TEXT",
-          "defaultValue": "Amount",
-          "variantOptions": null
-        },
-        {
-          "name": "Size",
-          "type": "VARIANT",
-          "defaultValue": "Medium",
-          "variantOptions": [
-            "Medium",
-            "Small"
-          ]
-        },
-        {
-          "name": "Variant",
-          "type": "VARIANT",
-          "defaultValue": "Outlined",
-          "variantOptions": [
-            "Outlined",
-            "Filled",
-            "Standard"
-          ]
-        }
-      ],
-      "firstRoot": {
-        "name": "Variant=Outlined, Size=Medium",
-        "type": "COMPONENT",
-        "layoutMode": "VERTICAL",
-        "padding": {
-          "t": 0,
-          "r": 0,
-          "b": 0,
-          "l": 0
-        },
-        "radius": 0,
-        "fillVarName": null,
-        "padBound": {
-          "width": "imported/shared/size-252-969",
-          "height": "imported/text-field/root/height",
-          "minWidth": "imported/shared/size-0"
-        },
-        "w": 252.968994140625,
-        "h": 78.90619659423828,
-        "childTypes": [
-          "FRAME/inputbase-adornedend",
-          "TEXT/label-5",
-          "FRAME/label"
-        ]
-      }
-    }
-  },
-  "acceptance": {
-    "generatedOrFound": true,
-    "screenshotReviewed": true,
-    "zeroMismatch": true,
-    "visualMatchDeveloped": false
+ "version": 1,
+ "kind": "console-loop-mui-component",
+ "status": "completed",
+ "component": "text-field",
+ "contract": "examples/mui/contracts/text-field.contract.json",
+ "script": "examples/mui/figma/text-field.figma.js",
+ "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+ "recordedAt": "2026-08-06T05:26:56.332Z",
+ "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+ "generate": {
+  "ok": true,
+  "nodeId": "84:2480",
+  "mode": "generated",
+  "page": "TextField",
+  "sectionId": "84:2481",
+  "result": {
+   "note": "created; eval may still finish/timeout"
   }
+ },
+ "visual": {
+  "ok": false,
+  "notes": [
+   "Screenshot reviewed on section/node 84:2481; structure/variants look sane (slot placeholders OK).",
+   "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot."
+  ],
+  "defects": [
+   "pixel scorecard fail: pctAAMasked=7.29% lane / 7.29% headless (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/text-field.json",
+   "residual after FC-FONT-SUBSTRATE closure: reference now renders committed Roboto (was local Roboto-Thin), both instruments agree at 7.29/7.29 (was 6.33) — the remaining diff is not the harness font substrate; per-stem geometry/color/raster causes stay open"
+  ],
+  "reference": "parity/receipts/console-loop/mui/refs/text-field.png",
+  "referenceSource": "extract/computed/out/mui/textfield/gate-shots/__default.png",
+  "canvasShot": "parity/receipts/console-loop/mui/shots/text-field-cell.png",
+  "matchDeveloped": false,
+  "status": "fail-closed"
+ },
+ "fingerprint": {
+  "v6": "v6:3304990436",
+  "lineCount": 488,
+  "sampleLines": [
+   ":COMPONENT_SET/TextField|fill|[]",
+   ":COMPONENT_SET/TextField|radius|5,5,5,5",
+   ":COMPONENT_SET/TextField|sizing|FIXED/FIXED AUTO",
+   ":COMPONENT_SET/TextField|description|TextField â generated from contract mui.text-field v0.2.0 â",
+   ":COMPONENT_SET/TextField|propdef|Helper Text#84:148:TEXT=Enter a valid amount",
+   ":COMPONENT_SET/TextField|propdef|Label#84:155:TEXT=Amount",
+   ":COMPONENT_SET/TextField|propdef|Size:VARIANT=Medium",
+   ":COMPONENT_SET/TextField|propdef|Variant:VARIANT=Outlined",
+   "/0:COMPONENT/Variant=Outlined, Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+   "/0:COMPONENT/Variant=Outlined, Size=Medium|radius|0,0,0,0",
+   "/0:COMPONENT/Variant=Outlined, Size=Medium|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+   "/0:COMPONENT/Variant=Outlined, Size=Medium|sizing|FIXED/FIXED AUTO",
+   "/0:COMPONENT/Variant=Outlined, Size=Medium|bound:height|imported/text-field/root/height",
+   "/0:COMPONENT/Variant=Outlined, Size=Medium|bound:minWidth|imported/shared/size-0",
+   "/0:COMPONENT/Variant=Outlined, Size=Medium|bound:width|imported/shared/size-252-969",
+   "/0/0:FRAME/inputbase-adornedend|fill|[]",
+   "/0/0:FRAME/inputbase-adornedend|radius|4,4,4,4",
+   "/0/0:FRAME/inputbase-adornedend|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,14,0,14",
+   "/0/0:FRAME/inputbase-adornedend|sizing|FIXED/FIXED AUTO",
+   "/0/0:FRAME/inputbase-adornedend|bound:bottomLeftRadius|imported/shared/size-4"
+  ]
+ },
+ "roundtrip": {
+  "mismatches": [],
+  "gaps": [
+   "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+  ],
+  "matchedAxes": [
+   "Variant enum → Outlined/Filled/Standard",
+   "Size enum → Medium/Small",
+   "TEXT Label",
+   "TEXT Helper Text"
+  ],
+  "observed": {
+   "type": "COMPONENT_SET",
+   "variantNames": [
+    "Variant=Outlined, Size=Medium",
+    "Variant=Outlined, Size=Small",
+    "Variant=Filled, Size=Medium",
+    "Variant=Filled, Size=Small",
+    "Variant=Standard, Size=Medium",
+    "Variant=Standard, Size=Small"
+   ],
+   "propDefs": [
+    {
+     "name": "Helper Text#84:148",
+     "type": "TEXT",
+     "defaultValue": "Enter a valid amount",
+     "variantOptions": null
+    },
+    {
+     "name": "Label#84:155",
+     "type": "TEXT",
+     "defaultValue": "Amount",
+     "variantOptions": null
+    },
+    {
+     "name": "Size",
+     "type": "VARIANT",
+     "defaultValue": "Medium",
+     "variantOptions": [
+      "Medium",
+      "Small"
+     ]
+    },
+    {
+     "name": "Variant",
+     "type": "VARIANT",
+     "defaultValue": "Outlined",
+     "variantOptions": [
+      "Outlined",
+      "Filled",
+      "Standard"
+     ]
+    }
+   ],
+   "firstRoot": {
+    "name": "Variant=Outlined, Size=Medium",
+    "type": "COMPONENT",
+    "layoutMode": "VERTICAL",
+    "padding": {
+     "t": 0,
+     "r": 0,
+     "b": 0,
+     "l": 0
+    },
+    "radius": 0,
+    "fillVarName": null,
+    "padBound": {
+     "width": "imported/shared/size-252-969",
+     "height": "imported/text-field/root/height",
+     "minWidth": "imported/shared/size-0"
+    },
+    "w": 252.968994140625,
+    "h": 78.90619659423828,
+    "childTypes": [
+     "FRAME/inputbase-adornedend",
+     "TEXT/label-5",
+     "FRAME/label"
+    ]
+   }
+  }
+ },
+ "acceptance": {
+  "generatedOrFound": true,
+  "screenshotReviewed": true,
+  "zeroMismatch": true,
+  "visualMatchDeveloped": false
+ }
 }

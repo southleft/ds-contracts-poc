@@ -1,52 +1,53 @@
 {
-  "version": 1,
-  "kind": "console-loop-pass-count-ratchet",
-  "bar": {
-    "pctAAMaskedMax": 5,
-    "compositionOk": true
-  },
-  "note": "Per-lane minimum scorecard-passed counts. The evidence gates fail a lane when its count of genuine pixel-scorecard passes (scores/<stem>.json with status pass, pctAAMasked<=5, compositionOk) drops below its floor \u2014 honesty cannot decay. Raise a floor when a new stem genuinely passes; never lower one without owner sign-off. first-party has no pixel scorecards yet (attested-only lane), so its floor is 0. 2026-08-08: altitude 4\u21926 (chip, link converted by the FC-FONT-SUBSTRATE font-loading harness \u2014 cfg.fonts loads the library's true faces in the gate render; passes hold on BOTH instruments: bridge cell shots and the headless REST lane). 2026-08-08: mui lane went STRICT \u2014 31/31 stems pixel-scored headlessly (REST cell @1x vs committed developed refs under mui/refs/); floor seeded at 4 from the both-instrument passes (checkbox, divider, snackbar, table; alert passes the lane scorer only after dpr+size normalization while the headless card fails it 6.49 \u2014 instruments disagree, not seeded, receipt stays fail-closed). 2026-08-08 (blank-file loop): first-party went from attested-only to 5 strict scorecard passes \u2014 avatar/badge/banner/divider/switch scored on BOTH instruments (bridge scale-1 cell exports scored by the lane scorer AND headless REST visual-truth cards) against contract-default src/components renders (refs/); floor seeded 0->5. Fixes that produced the passes: FC-WEIGHT-DEFAULT (descriptionText font-weight pinned to font.weight.regular in switch/checkbox/banner/text-field contracts) and FC-BOX-MODEL (generated module.css now ships a scoped border-box reset, matching the Figma emitter's border-box frames). button/card/checkbox/text-field/token stay honest fail-closed with named FC causes.",
-  "seededAt": "2026-08-07",
-  "seededFrom": {
-    "altitude": [
-      "button",
-      "divider",
-      "heading",
-      "icon-close",
-      "chip",
-      "link"
-    ],
-    "astryx": [],
-    "carbon": [
-      "icon-button",
-      "text-input"
-    ],
-    "polaris": [],
-    "tailwind": [
-      "badge",
-      "button"
-    ],
-    "mui": [
-      "checkbox",
-      "divider",
-      "snackbar",
-      "table"
-    ],
-    "first-party": [
-      "avatar",
-      "badge",
-      "banner",
-      "divider",
-      "switch"
-    ]
-  },
-  "floors": {
-    "first-party": 5,
-    "mui": 4,
-    "tailwind": 3,
-    "altitude": 6,
-    "astryx": 0,
-    "carbon": 2,
-    "polaris": 0
-  }
+ "version": 1,
+ "kind": "console-loop-pass-count-ratchet",
+ "bar": {
+  "pctAAMaskedMax": 5,
+  "compositionOk": true
+ },
+ "note": "Per-lane minimum scorecard-passed counts. The evidence gates fail a lane when its count of genuine pixel-scorecard passes (scores/<stem>.json with status pass, pctAAMasked<=5, compositionOk) drops below its floor — honesty cannot decay. Raise a floor when a new stem genuinely passes; never lower one without owner sign-off. first-party has no pixel scorecards yet (attested-only lane), so its floor is 0. 2026-08-08: altitude 4→6 (chip, link converted by the FC-FONT-SUBSTRATE font-loading harness — cfg.fonts loads the library's true faces in the gate render; passes hold on BOTH instruments: bridge cell shots and the headless REST lane). 2026-08-08: mui lane went STRICT — 31/31 stems pixel-scored headlessly (REST cell @1x vs committed developed refs under mui/refs/); floor seeded at 4 from the both-instrument passes (checkbox, divider, snackbar, table; alert passes the lane scorer only after dpr+size normalization while the headless card fails it 6.49 — instruments disagree, not seeded, receipt stays fail-closed). 2026-08-08 (blank-file loop): first-party went from attested-only to 5 strict scorecard passes — avatar/badge/banner/divider/switch scored on BOTH instruments (bridge scale-1 cell exports scored by the lane scorer AND headless REST visual-truth cards) against contract-default src/components renders (refs/); floor seeded 0->5. Fixes that produced the passes: FC-WEIGHT-DEFAULT (descriptionText font-weight pinned to font.weight.regular in switch/checkbox/banner/text-field contracts) and FC-BOX-MODEL (generated module.css now ships a scoped border-box reset, matching the Figma emitter's border-box frames). button/card/checkbox/text-field/token stay honest fail-closed with named FC causes. 2026-08-08 (font-substrate round): mui 4->5 — chip converted by the Roboto cfg.fonts substrate (configs/mui.json; @fontsource/roboto@5.3.0 faces committed under extract/computed/fonts/roboto/), reference re-pinned via offline regate, 6.47 -> 1.18 pctAAMasked holding on BOTH instruments (lane scorer and headless REST visual-truth). alert stays un-seeded: its instrument pair moved 4.50/6.49 -> 4.72/7.24 — the disagreement did not shrink with a real Roboto substrate, so the cause is not fonts and the receipt stays fail-closed. astryx floor stays 0: button/switch recaptured under the fixed Theme mount (the Times root cause) score 89.31/14.21 against a canvas generated from the pre-theme contract — honest fail-closed pending canvas re-sync.",
+ "seededAt": "2026-08-07",
+ "seededFrom": {
+  "altitude": [
+   "button",
+   "divider",
+   "heading",
+   "icon-close",
+   "chip",
+   "link"
+  ],
+  "astryx": [],
+  "carbon": [
+   "icon-button",
+   "text-input"
+  ],
+  "polaris": [],
+  "tailwind": [
+   "badge",
+   "button"
+  ],
+  "mui": [
+   "checkbox",
+   "chip",
+   "divider",
+   "snackbar",
+   "table"
+  ],
+  "first-party": [
+   "avatar",
+   "badge",
+   "banner",
+   "divider",
+   "switch"
+  ]
+ },
+ "floors": {
+  "first-party": 5,
+  "mui": 5,
+  "tailwind": 3,
+  "altitude": 6,
+  "astryx": 0,
+  "carbon": 2,
+  "polaris": 0
+ }
 }
