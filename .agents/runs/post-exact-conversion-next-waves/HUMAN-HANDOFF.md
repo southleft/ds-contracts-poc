@@ -48,16 +48,20 @@ Wave ledgers: `PLAN.md`, `wave6/`…`wave11/`.
 
 ## Remaining human rows only
 
-| # | Row | Where | Why agent stopped |
-|---|---|---|---|
-| 1 | Pilot persona sign-off (designer + engineer unaided) | `.agents/runs/exact-conversion-finish-wave4/PILOT-ACCEPTANCE.md` | Requires humans who did not build the feature |
-| 2 | Wave 8 team drift-report confirmation (Journey C honesty) | `wave8/ledger.md` · Known Limitations B.11–B.13 | Team confirmation, not a CI gate |
-| 3 | Security owner secret-scan disposition on release PR | `RELEASE_CHECKLIST.md` · V1-SEC-01 | Owner approval |
-| 4 | Exact release commit / signed RC tag / GitHub prerelease approvals | `RELEASE_CHECKLIST.md` Human approvals | Release owner |
-| 5 | npm publish (schema / emitter / CLI) + provenance path | `RELEASE_CHECKLIST.md` · docs/27 | Credentials / OIDC / owner |
-| 6 | Cloudflare deploy + post-deploy `deploy:check` | `RELEASE_CHECKLIST.md` | Deploy secrets / owner |
-| 7 | Wave 11-C — named second implementation + harness dry-run | `wave11/ledger.md` · `spec/conformance/` | Packaging alone ≠ Candidate; **do not invent a foreign impl** |
-| 8 | Phase 4 governance / community after real second impl | `ROADMAP.md` · `docs/12-roadmap.md` | Blocked on W11-C |
+Read-and-sign prep artifacts for each row live in
+[`../v1-release-prep/`](../v1-release-prep/) (drafted 2026-08-08; no row is
+closed by them).
+
+| # | Row | Where | Why agent stopped | Prep artifact (read-and-sign) |
+|---|---|---|---|---|
+| 1 | Pilot persona sign-off (designer + engineer unaided) | `.agents/runs/exact-conversion-finish-wave4/PILOT-ACCEPTANCE.md` | Requires humans who did not build the feature | [`../v1-release-prep/PILOT-RUNBOOK.md`](../v1-release-prep/PILOT-RUNBOOK.md) — command-by-command D1–D4 / E1–E4 script + budget tally sheet |
+| 2 | Wave 8 team drift-report confirmation (Journey C honesty) | `wave8/ledger.md` · Known Limitations B.11–B.13 | Team confirmation, not a CI gate | [`../v1-release-prep/WAVE8-CONFIRMATION-PACKET.md`](../v1-release-prep/WAVE8-CONFIRMATION-PACKET.md) — what to send, 3 questions, signature block |
+| 3 | Security owner secret-scan disposition on release PR | `RELEASE_CHECKLIST.md` · V1-SEC-01 | Owner approval | [`../v1-release-prep/SECURITY-DISPOSITION-PREFILL.md`](../v1-release-prep/SECURITY-DISPOSITION-PREFILL.md) — three green run URLs + attestation text pre-filled |
+| 4 | Exact release commit / signed RC tag / GitHub prerelease approvals | `RELEASE_CHECKLIST.md` Human approvals | Release owner | [`../v1-release-prep/RELEASE-NOTES-DRAFT.md`](../v1-release-prep/RELEASE-NOTES-DRAFT.md) — full prerelease body incl. v0.7.0 disposition (owner strikes one option); flags the stale draft release + tag at `e148d2d` |
+| 5 | npm publish (schema / emitter / CLI) + provenance path | `RELEASE_CHECKLIST.md` · docs/27 | Credentials / OIDC / owner | [`../v1-release-prep/RELEASE-NOTES-DRAFT.md`](../v1-release-prep/RELEASE-NOTES-DRAFT.md) — package/version table, `<SHA256-AT-FREEZE>` slots, attestation statement (publish-rc.yml OIDC) |
+| 6 | Cloudflare deploy + post-deploy `deploy:check` | `RELEASE_CHECKLIST.md` | Deploy secrets / owner | [`../v1-release-prep/RELEASE-NOTES-DRAFT.md`](../v1-release-prep/RELEASE-NOTES-DRAFT.md) — deployment-status + deploy-check link placeholders in the Evidence section |
+| 7 | Wave 11-C — named second implementation + harness dry-run | `wave11/ledger.md` · `spec/conformance/` | Packaging alone ≠ Candidate; **do not invent a foreign impl** | [`../v1-release-prep/W11C-IMPLEMENTER-BRIEF.md`](../v1-release-prep/W11C-IMPLEMENTER-BRIEF.md) — send-as-is outreach brief for recruiting the implementer |
+| 8 | Phase 4 governance / community after real second impl | `ROADMAP.md` · `docs/12-roadmap.md` | Blocked on W11-C | — (no prep possible until W11-C lands) |
 
 ---
 
