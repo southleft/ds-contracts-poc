@@ -76,6 +76,14 @@ export function createFigmaMock() {
       this.dashPattern = [];
       this.effects = [];
       this.cornerRadius = 0;
+      // GRID layout mode state (see the grid accessor block below — modeled
+      // from the live probes in docs/research/grid-recon-probes.md).
+      this._gridRows = [];
+      this._gridCols = [];
+      this._gridItemsPositioning = 'MANUAL';
+      this._gridAutoTracks = 'NONE';
+      this.gridRowGap = 0;
+      this.gridColumnGap = 0;
       this.layoutMode = 'NONE';
       this.primaryAxisAlignItems = 'MIN';
       this.counterAxisAlignItems = 'MIN';
@@ -157,6 +165,33 @@ export function createFigmaMock() {
       }
       node.parent = this;
       this.children.push(node);
+      // GRID auto-slot (P3): children appended to a MANUAL grid slot into the
+      // first free cell in row-major order — deterministic. Overflow is
+      // absorbed by GROWING the explicit row count (P9: append of a 5th child
+      // onto a 2×2 grew gridRowCount to 3) — a write the contract did not
+      // make, which is exactly what the emitted runtime's declaration guard
+      // must catch. Under ROW_AUTO_FLOW anchors are computed from order.
+      if (this._layoutMode === 'GRID' && this._gridItemsPositioning === 'MANUAL' && typeof node._gridRow !== 'number') {
+        const rows = this._gridRows.length;
+        const cols = this._gridCols.length;
+        const taken = (r, c) => this.children.some((ch) => {
+          if (ch === node || ch.layoutPositioning === 'ABSOLUTE') return false;
+          if (typeof ch._gridRow !== 'number') return false;
+          return r >= ch._gridRow && r < ch._gridRow + (ch._gridRowSpan ?? 1) &&
+                 c >= ch._gridCol && c < ch._gridCol + (ch._gridColSpan ?? 1);
+        });
+        let slotted = false;
+        for (let r = 0; r < rows && !slotted; r++) {
+          for (let c = 0; c < cols && !slotted; c++) {
+            if (!taken(r, c)) { node._gridRow = r; node._gridCol = c; slotted = true; }
+          }
+        }
+        if (!slotted) {
+          this._gridRows.push({ type: 'FLEX', value: 1 }); // P9 absorption
+          node._gridRow = rows;
+          node._gridCol = 0;
+        }
+      }
     }
 
     insertChild(index, node) {
@@ -182,6 +217,213 @@ export function createFigmaMock() {
 
     resizeWithoutConstraints(w, h) {
       this.resize(w, h);
+    }
+
+    // --- GRID layout mode (A2; docs/research/grid-recon-probes.md P1-P14) --
+    // Modeled from the LIVE probe receipts, refusals included — a mock that
+    // accepts what Figma refuses is an alibi, not a test (the layoutWrap
+    // lesson below, applied in advance). What is enforced:
+    //   · sizes-vs-count length validation with the P2 error text
+    //   · the FLEX|FIXED|HUG enum fence + min/max key refusal (P2b/P6)
+    //   · SILENT zero normalization (P2b: 0px snaps, 0fr clamps) — the write
+    //     hazard the schema exists to fence out
+    //   · anchors as READ-ONLY getters; placement via the child-side
+    //     setGridChildPosition only, refused under ROW_AUTO_FLOW (P3/P5)
+    //   · span bounds + occupancy throws with the P3 error texts
+    //   · the align enum fence (STRETCH/BASELINE rejected, P3)
+    //   · P10 mode-switch destruction (tracks reset on entering GRID, clear
+    //     on leaving) and P9 overflow absorption (see appendChild).
+    set layoutMode(v) {
+      const prev = this._layoutMode;
+      this._layoutMode = v;
+      if (v === 'GRID' && prev !== 'GRID') {
+        // P1 fresh-grid defaults; P10: prior tracks never survive the switch.
+        this._gridRows = [{ type: 'FLEX', value: 1 }, { type: 'FLEX', value: 1 }];
+        this._gridCols = [{ type: 'FLEX', value: 1 }, { type: 'FLEX', value: 1 }];
+        this.gridRowGap = 0;
+        this.gridColumnGap = 0;
+        this._gridItemsPositioning = 'MANUAL';
+        this._gridAutoTracks = 'NONE';
+      }
+      if (v !== 'GRID' && prev === 'GRID') {
+        this._gridRows = []; // P10: gridColumnSizes reads [] off-grid
+        this._gridCols = [];
+      }
+    }
+
+    get layoutMode() {
+      return this._layoutMode ?? 'NONE';
+    }
+
+    _validateGridTracks(sizes, field, count) {
+      if (!Array.isArray(sizes)) {
+        throw new Error(`in set_${field}: Expected an array of grid track sizes`);
+      }
+      if (sizes.length !== count) {
+        throw new Error(
+          `in set_${field}: Grid track sizes must be the same length as the grid ${field === 'gridRowSizes' ? 'row' : 'column'} count`,
+        );
+      }
+      return sizes.map((t, i) => {
+        if (!t || typeof t !== 'object') {
+          throw new Error(`in set_${field}: Property '${field}' failed validation at index ${i}`);
+        }
+        const extra = Object.keys(t).filter((k) => k !== 'type' && k !== 'value');
+        if (extra.length > 0) {
+          throw new Error(
+            `in set_${field}: Property '${field}' failed validation: Unrecognized key(s) in object: ${extra.map((k) => `'${k}'`).join(', ')} at index ${i}`,
+          );
+        }
+        if (t.type !== 'FIXED' && t.type !== 'FLEX' && t.type !== 'HUG') {
+          throw new Error(
+            `in set_${field}: Invalid enum value. Expected 'FLEX' | 'FIXED' | 'HUG', received '${t.type}'`,
+          );
+        }
+        // P2b: zero writes are ACCEPTED and silently rewritten — the exact
+        // hazard. FIXED 0 snaps to the track's rendered px (modeled as 100);
+        // FLEX 0 clamps to 1fr. HUG's value reads back as noise 1.
+        if (t.type === 'FIXED' && t.value === 0) return { type: 'FIXED', value: 100 };
+        if (t.type === 'FLEX' && t.value === 0) return { type: 'FLEX', value: 1 };
+        return { type: t.type, value: t.type === 'HUG' ? 1 : t.value };
+      });
+    }
+
+    get gridRowCount() { return this._gridRows.length; }
+    set gridRowCount(n) {
+      // P2c: growing the count appends {FLEX,1} tracks; it never invents FIXED.
+      while (this._gridRows.length < n) this._gridRows.push({ type: 'FLEX', value: 1 });
+      this._gridRows.length = Math.min(this._gridRows.length, n);
+    }
+    get gridColumnCount() { return this._gridCols.length; }
+    set gridColumnCount(n) {
+      while (this._gridCols.length < n) this._gridCols.push({ type: 'FLEX', value: 1 });
+      this._gridCols.length = Math.min(this._gridCols.length, n);
+    }
+    get gridRowSizes() { return this._gridRows.map((t) => ({ ...t })); }
+    set gridRowSizes(sizes) {
+      this._gridRows = this._validateGridTracks(sizes, 'gridRowSizes', this._gridRows.length);
+    }
+    get gridColumnSizes() { return this._gridCols.map((t) => ({ ...t })); }
+    set gridColumnSizes(sizes) {
+      this._gridCols = this._validateGridTracks(sizes, 'gridColumnSizes', this._gridCols.length);
+    }
+    get gridItemsPositioning() { return this._gridItemsPositioning; }
+    set gridItemsPositioning(v) {
+      if (v !== 'MANUAL' && v !== 'ROW_AUTO_FLOW') {
+        throw new Error(`in set_gridItemsPositioning: Invalid enum value. Expected 'MANUAL' | 'ROW_AUTO_FLOW', received '${v}'`);
+      }
+      this._gridItemsPositioning = v;
+    }
+    get gridAutoTracks() { return this._gridAutoTracks; }
+    set gridAutoTracks(v) {
+      if (v !== 'NONE' && v !== 'ROWS') {
+        throw new Error(`in set_gridAutoTracks: Invalid enum value. Expected 'NONE' | 'ROWS', received '${v}'`);
+      }
+      this._gridAutoTracks = v;
+    }
+
+    // Child-side placement — the ONE setter (P3: a method on the CHILD; the
+    // parent spelling throws 'Node is not a grid child').
+    setGridChildPosition(rowIndex, columnIndex) {
+      const p = this.parent;
+      if (!p || p.layoutMode !== 'GRID') throw new Error('Node is not a grid child');
+      if (p.gridItemsPositioning === 'ROW_AUTO_FLOW') {
+        throw new Error(
+          'cannot set grid child position directly inside of a grid with automatically positioned items, use parent.insertChild() instead',
+        );
+      }
+      this._gridRow = rowIndex;
+      this._gridCol = columnIndex;
+    }
+    // Anchors are READ-ONLY getters (P3). Under ROW_AUTO_FLOW they report
+    // row-major order-computed cells (P5) — including beyond the declared
+    // rows (P9's lossy readback). QUIRK kept faithfully: ABSOLUTE children
+    // still report anchors (P13) — readers must gate.
+    _autoFlowAnchor() {
+      const p = this.parent;
+      const cols = Math.max(1, p._gridCols.length);
+      const inFlow = p.children.filter((c) => c.layoutPositioning !== 'ABSOLUTE');
+      const i = Math.max(0, inFlow.indexOf(this));
+      return { row: Math.floor(i / cols), col: i % cols };
+    }
+    get gridRowAnchorIndex() {
+      const p = this.parent;
+      if (!p || p.layoutMode !== 'GRID') return 0;
+      if (p.gridItemsPositioning === 'ROW_AUTO_FLOW') return this._autoFlowAnchor().row;
+      return this._gridRow ?? 0;
+    }
+    get gridColumnAnchorIndex() {
+      const p = this.parent;
+      if (!p || p.layoutMode !== 'GRID') return 0;
+      if (p.gridItemsPositioning === 'ROW_AUTO_FLOW') return this._autoFlowAnchor().col;
+      return this._gridCol ?? 0;
+    }
+
+    _setGridSpan(axis, n) {
+      const p = this.parent;
+      if (!p || p.layoutMode !== 'GRID') throw new Error('Node is not a grid child');
+      const word = axis === 'row' ? 'Row' : 'Column';
+      const count = axis === 'row' ? p._gridRows.length : p._gridCols.length;
+      if (n > count) throw new Error(`${word} span exceeds grid ${axis} count`);
+      const r = this._gridRow ?? 0;
+      const c = this._gridCol ?? 0;
+      const rs = axis === 'row' ? n : (this._gridRowSpan ?? 1);
+      const cs = axis === 'row' ? (this._gridColSpan ?? 1) : n;
+      for (const sib of p.children) {
+        if (sib === this || sib.layoutPositioning === 'ABSOLUTE' || typeof sib._gridRow !== 'number') continue;
+        const sr = sib._gridRow, sc = sib._gridCol;
+        const srs = sib._gridRowSpan ?? 1, scs = sib._gridColSpan ?? 1;
+        if (r < sr + srs && sr < r + rs && c < sc + scs && sc < c + cs) {
+          throw new Error(
+            `Cannot set child to specified ${axis} span due to existing children in adjacent ${axis}s`,
+          );
+        }
+      }
+      if (axis === 'row') this._gridRowSpan = n; else this._gridColSpan = n;
+    }
+    get gridRowSpan() { return this._gridRowSpan ?? 1; }
+    set gridRowSpan(n) { this._setGridSpan('row', n); }
+    get gridColumnSpan() { return this._gridColSpan ?? 1; }
+    set gridColumnSpan(n) { this._setGridSpan('column', n); }
+
+    get gridChildHorizontalAlign() { return this._gridHAlign ?? 'AUTO'; }
+    set gridChildHorizontalAlign(v) {
+      if (v !== 'AUTO' && v !== 'MIN' && v !== 'CENTER' && v !== 'MAX') {
+        throw new Error(`in set_gridChildHorizontalAlign: Invalid enum value. Expected 'AUTO' | 'MIN' | 'CENTER' | 'MAX', received '${v}'`);
+      }
+      this._gridHAlign = v;
+    }
+    get gridChildVerticalAlign() { return this._gridVAlign ?? 'AUTO'; }
+    set gridChildVerticalAlign(v) {
+      if (v !== 'AUTO' && v !== 'MIN' && v !== 'CENTER' && v !== 'MAX') {
+        throw new Error(`in set_gridChildVerticalAlign: Invalid enum value. Expected 'AUTO' | 'MIN' | 'CENTER' | 'MAX', received '${v}'`);
+      }
+      this._gridVAlign = v;
+    }
+
+    // Track pixel resolution for the cell-size model: FIXED = its px, FLEX =
+    // its share of the free space (P2's minmax(0,Nfr) semantics), HUG = 0
+    // (content sizing is out of the mock's scope). Gap-corrected exactly as
+    // P4 verified ((500-10)/2 × (240-10)/2).
+    _gridTrackPx(tracks, total, gap) {
+      const fixed = tracks.reduce((a, t) => a + (t.type === 'FIXED' ? t.value : 0), 0);
+      const frTotal = tracks.reduce((a, t) => a + (t.type === 'FLEX' ? t.value : 0), 0);
+      const free = Math.max(0, total - fixed - gap * Math.max(0, tracks.length - 1));
+      return tracks.map((t) =>
+        t.type === 'FIXED' ? t.value : t.type === 'FLEX' && frTotal > 0 ? (free * t.value) / frTotal : 0,
+      );
+    }
+    _gridCellSize(axis) {
+      const p = this.parent;
+      const tracks = axis === 'w' ? p._gridCols : p._gridRows;
+      const gap = axis === 'w' ? p.gridColumnGap : p.gridRowGap;
+      const total = axis === 'w' ? p.width : p.height;
+      const anchor = axis === 'w' ? this.gridColumnAnchorIndex : this.gridRowAnchorIndex;
+      const span = axis === 'w' ? (this._gridColSpan ?? 1) : (this._gridRowSpan ?? 1);
+      const px = this._gridTrackPx(tracks, total, gap);
+      let size = gap * Math.max(0, span - 1);
+      for (let i = anchor; i < Math.min(anchor + span, px.length); i++) size += px[i];
+      return size;
     }
 
     // --- layoutWrap ENFORCES the Plugin API's own precondition --------------
@@ -222,7 +464,9 @@ export function createFigmaMock() {
       if (depth > 32) return 0; // cycle guard — never expected, never fatal
       if (this.type === 'TEXT') return this._measureText(axis);
       const fillField = axis === 'w' ? 'layoutSizingHorizontal' : 'layoutSizingVertical';
-      if (this.layoutMode === 'NONE' || !this.children || this.children.length === 0) {
+      // A GRID frame's box is its own (tracks divide it; children never sum
+      // into it) — the flex hug math below would be an invented fact here.
+      if (this.layoutMode === 'NONE' || this.layoutMode === 'GRID' || !this.children || this.children.length === 0) {
         return axis === 'w' ? this._w : this._h;
       }
       const horizontalIsPrimary = this.layoutMode === 'HORIZONTAL';
@@ -276,6 +520,15 @@ export function createFigmaMock() {
       if (
         this.layoutSizingHorizontal === 'FILL' &&
         this.layoutPositioning !== 'ABSOLUTE' &&
+        this.parent?.layoutMode === 'GRID'
+      ) {
+        // A FILL grid child fills its CELL AREA, not the parent box (P4's
+        // gap-corrected cell math, verified live: (500-10)/2 × (240-10)/2).
+        return this._gridCellSize('w');
+      }
+      if (
+        this.layoutSizingHorizontal === 'FILL' &&
+        this.layoutPositioning !== 'ABSOLUTE' &&
         this.parent?.layoutMode && this.parent.layoutMode !== 'NONE'
       ) {
         return Math.max(0, this.parent.width - this.parent.paddingLeft - this.parent.paddingRight);
@@ -289,6 +542,13 @@ export function createFigmaMock() {
 
     get height() {
       // See the width getter: ABSOLUTE children never FILL (round 6).
+      if (
+        this.layoutSizingVertical === 'FILL' &&
+        this.layoutPositioning !== 'ABSOLUTE' &&
+        this.parent?.layoutMode === 'GRID'
+      ) {
+        return this._gridCellSize('h'); // cell area, not parent box (P4)
+      }
       if (
         this.layoutSizingVertical === 'FILL' &&
         this.layoutPositioning !== 'ABSOLUTE' &&
@@ -482,6 +742,19 @@ export function createFigmaMock() {
         '_w', '_h', '_resized', 'x', 'y',
       ]) {
         if (this[field] !== undefined) clone[field] = this[field];
+      }
+      // GRID facts survive instancing (P12: instances place, span and fill
+      // in cells natively) — deep copies, never shared track arrays.
+      if (this._layoutMode === 'GRID') {
+        clone._gridRows = this._gridRows.map((t) => ({ ...t }));
+        clone._gridCols = this._gridCols.map((t) => ({ ...t }));
+        clone._gridItemsPositioning = this._gridItemsPositioning;
+        clone._gridAutoTracks = this._gridAutoTracks;
+        clone.gridRowGap = this.gridRowGap;
+        clone.gridColumnGap = this.gridColumnGap;
+      }
+      for (const gf of ['_gridRow', '_gridCol', '_gridRowSpan', '_gridColSpan', '_gridHAlign', '_gridVAlign']) {
+        if (this[gf] !== undefined) clone[gf] = this[gf];
       }
       clone.componentPropertyReferences = { ...this.componentPropertyReferences };
       if (this.type === 'TEXT') {

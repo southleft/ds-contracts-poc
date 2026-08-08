@@ -139,26 +139,284 @@ export const PropSchema = z
     },
   );
 
-export const LayoutSchema = z.strictObject({
-  display: z.enum(["flex", "inline-flex"]).optional(),
-  direction: z.enum(["row", "column"]).optional(),
-  /** Cross-axis alignment. `baseline` is CARRY-BOTH like the rest: CSS
-   *  `align-items: baseline`, canvas `counterAxisAlignItems: 'BASELINE'`
-   *  (native on HORIZONTAL auto-layout — on a column the canvas falls back
-   *  to MIN, which is what a column baseline draws anyway). */
-  align: z.enum(["start", "center", "end", "stretch", "baseline"]).optional(),
-  justify: z.enum(["start", "center", "end", "space-between"]).optional(),
-  /** Part takes remaining space (code: flex 1 1 auto; Figma: fill container). */
-  grow: z.boolean().optional(),
-  /** Children overlap (AvatarGroup): the gap token is applied as a NEGATIVE
-   *  child margin in CSS and as negative itemSpacing on the canvas. */
-  overlap: z.boolean().optional(),
-  /** v15 (S4/matrix a.8): flex-wrap: wrap — natively CARRY-BOTH (Figma
-   *  layoutWrap: 'WRAP'). Chip rows and tag groups wrap in every target
-   *  system; the counter-axis gap rides the same `gap` token (Figma
-   *  counterAxisSpacing follows itemSpacing unless a row-gap fact lands). */
-  wrap: z.boolean().optional(),
+// ---------------------------------------------------------------------------
+// GRID layout grammar (A2, implements the PINNED proposal
+// docs/research/layout-grammar-proposal.md G1–G7 against the probe receipts
+// docs/research/grid-recon-probes.md P1–P14). Declared-track grids ONLY: a
+// fixed list of row/column tracks, explicit (or order-deterministic)
+// placement, spans, two gaps, per-child alignment. The solver half of CSS
+// grid is REFUSED BY NAME below — never silently dropped, never approximated.
+// ---------------------------------------------------------------------------
+
+/** G7 — the refusal fence. One message per named construct, each citing the
+ *  probe-proven dead end. The Zod schemas below quote these verbatim so a
+ *  refusal is greppable by its conformance name
+ *  (conformance/layout-cases-draft/MANIFEST.json ids). */
+export const GRID_REFUSALS: Record<string, string> = {
+  "grid-track-zero":
+    "grid-track-zero: 0px/0fr tracks are refused — the Plugin API SILENTLY REWRITES them " +
+    "(P2b: {FIXED,0} reads back snapped to the rendered px, {FLEX,0} clamps to 1fr); the schema " +
+    "refuses so the emitter can never trigger the rewrite",
+  "grid-track-percent":
+    "grid-track-percent: percent tracks are refused — the track-type enum is FLEX | FIXED | HUG " +
+    "(P2b exact error: \"Invalid enum value. Expected 'FLEX' | 'FIXED' | 'HUG', received 'PERCENT'\")",
+  "grid-track-minmax":
+    "grid-track-minmax: minmax() tracks are refused — no canvas spelling exists " +
+    "(P6 exact error: \"Unrecognized key(s) in object: 'min', 'max'\" on gridColumnSizes)",
+  "grid-auto-fit-minmax":
+    "grid-auto-fit-minmax: repeat(auto-fit/auto-fill, …) is refused — the canvas track count is a " +
+    "fixed number with no repeat-to-fit concept (P1 reflection); a viewport-responsive track COUNT " +
+    "is a reflow family one frame cannot carry",
+  "grid-subgrid":
+    "grid-subgrid: subgrid is refused — no track-inheritance property exists anywhere in the " +
+    "reflected Plugin API inventory (P1); a nested grid with copied literal tracks is a DIFFERENT " +
+    "fact and must not be passed off as subgrid",
+  "grid-flow-column":
+    "grid-flow-column: grid-auto-flow: column is refused — gridItemsPositioning is exactly " +
+    "'MANUAL' | 'ROW_AUTO_FLOW' (P5: COLUMN_AUTO_FLOW rejected); refusing beats a silent transpose",
+  "grid-flow-dense":
+    "grid-flow-dense: grid-auto-flow: dense is refused — dense packing is SOLVER OUTPUT, not a " +
+    "declared fact, and the enum rejects it anyway (P5: DENSE rejected)",
+  "grid-implicit-tracks":
+    "grid-implicit-tracks: placement beyond the declared track list is refused — the canvas absorbs " +
+    "overflow by REWRITING the declaration (P9: MANUAL append grew gridRowCount 2→3) or under-reports " +
+    "it (P9: ROW_AUTO_FLOW anchors exceeded gridRowCount); the contract never relies on implicit tracks",
+  "grid-align-stretch-keyword":
+    "grid-align-stretch-keyword: an explicit stretch ALIGN fact is refused — the canvas align enum " +
+    "rejects STRETCH (P3); stretch is spelled as the ABSENCE of alignment plus fill sizing (G3), a " +
+    "named LOWERED disposition, never a silent normalization",
+  "grid-baseline-align":
+    "grid-baseline-align: baseline alignment in a grid cell is refused — the canvas align enum " +
+    "rejects BASELINE (P3)",
+  "grid-negative-line":
+    "grid-negative-line: negative line indexes are refused — the anchor API has no negative-index " +
+    "concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives " +
+    "to absolute indexes (LOWERED) and refuse unresolvable ones",
+  "grid-child-grow":
+    "grid-child-grow: layout.grow on a child of a grid parent is refused — the Plugin API silently " +
+    "ACCEPTS layoutGrow on grid children with no layout effect (P4); the schema refuses what the " +
+    "platform would silently swallow",
+};
+
+/** G1 — a TRACK is exactly one of {"px": n}, {"fr": n}, {"fit": true}: the
+ *  three spellings the API round-trips (P2/P2b: FIXED | FLEX | HUG; HUG's
+ *  code spelling is fit-content(100%), P14). Values may be fractional (P2b:
+ *  33.5px / 2.5fr carried exactly); ZERO is invalid (P2b normalization —
+ *  see GRID_REFUSALS['grid-track-zero']). Every G7 track construct refuses
+ *  BY NAME through the union's error map. */
+const gridTrackRefusal = (input: unknown): string => {
+  if (typeof input === "string") {
+    const s = input.trim();
+    if (/^repeat\(\s*auto-(fit|fill)/.test(s)) return GRID_REFUSALS["grid-auto-fit-minmax"];
+    if (s.includes("minmax(")) return GRID_REFUSALS["grid-track-minmax"];
+    if (s === "subgrid") return GRID_REFUSALS["grid-subgrid"];
+    if (s.includes("%") && !s.startsWith("fit-content")) return GRID_REFUSALS["grid-track-percent"];
+  }
+  if (typeof input === "object" && input !== null) {
+    const o = input as Record<string, unknown>;
+    if ("min" in o || "max" in o) return GRID_REFUSALS["grid-track-minmax"];
+    if ("percent" in o || o["type"] === "PERCENT") return GRID_REFUSALS["grid-track-percent"];
+    if (o["px"] === 0 || o["fr"] === 0) return GRID_REFUSALS["grid-track-zero"];
+    if (typeof o["px"] === "number" && o["px"] < 0) return GRID_REFUSALS["grid-negative-line"];
+  }
+  return (
+    'grid track must be exactly one of {"px": number>0}, {"fr": number>0}, {"fit": true} — ' +
+    "the three spellings the Plugin API round-trips (P2/P2b: FIXED | FLEX | HUG)"
+  );
+};
+/** Zero names its refusal even when the union matched the option's shape —
+ *  Zod surfaces the closest option's inner issue, so the inner check carries
+ *  the same named message the union's error map would. */
+const positiveTrackValue = z.number().positive({
+  error: (iss) =>
+    (iss as { input?: unknown }).input === 0
+      ? GRID_REFUSALS["grid-track-zero"]
+      : "grid track px/fr values must be > 0 (fractional ok — P2b: 33.5px / 2.5fr carried exactly)",
 });
+export const GridTrackSchema = z.union(
+  [
+    z.strictObject({ px: positiveTrackValue }),
+    z.strictObject({ fr: positiveTrackValue }),
+    z.strictObject({ fit: z.literal(true) }),
+  ],
+  { error: (iss) => gridTrackRefusal((iss as { input?: unknown }).input) },
+);
+export type GridTrack = z.infer<typeof GridTrackSchema>;
+
+/** G1 — gap.row / gap.column are INDEPENDENT facts (P2: gridRowGap /
+ *  gridColumnGap are separate setters); px numbers or token refs. There is
+ *  deliberately NO single-`gap` shorthand in the contract — proposers
+ *  normalize CSS `gap: 12px 16px` (and one-value `gap: 12px`) into the pair
+ *  (a named LOWERED disposition). */
+const GridGapValueSchema = z.union([z.number().min(0), TokenRefSchema]);
+export const GridGapSchema = z.strictObject({
+  row: GridGapValueSchema,
+  column: GridGapValueSchema,
+});
+
+/** G5 — the ONE bounded auto-flow the canvas has (P5: gridItemsPositioning
+ *  is exactly 'MANUAL' | 'ROW_AUTO_FLOW'). Placement fact = CHILD ORDER;
+ *  rows must be omitted and derivable as ceil(children / columns.length) —
+ *  the emitter declares that many explicit row tracks itself because the
+ *  API under-reports implicit rows (P9). column/dense refuse BY NAME. */
+const GridFlowSchema = z.literal("row", {
+  error: (iss) => {
+    const v = (iss as { input?: unknown }).input;
+    if (v === "column" || v === "column dense") return GRID_REFUSALS["grid-flow-column"];
+    if (v === "dense" || v === "row dense") return GRID_REFUSALS["grid-flow-dense"];
+    return (
+      'flow must be "row" — the one bounded auto-flow the canvas has ' +
+      "(P5: gridItemsPositioning is 'MANUAL' | 'ROW_AUTO_FLOW')"
+    );
+  },
+});
+
+/** G2 — per-cell alignment vocabulary: auto | start | center | end →
+ *  AUTO | MIN | CENTER | MAX (P3/P4: exactly those four; STRETCH and
+ *  BASELINE are refused BY NAME — stretch is spelled as fill sizing, G3). */
+const GridAlignSchema = z.enum(["auto", "start", "center", "end"], {
+  error: (iss) => {
+    const v = (iss as { input?: unknown }).input;
+    if (v === "stretch") return GRID_REFUSALS["grid-align-stretch-keyword"];
+    if (v === "baseline") return GRID_REFUSALS["grid-baseline-align"];
+    return (
+      "grid alignment vocabulary is auto | start | center | end " +
+      "(P3/P4: AUTO | MIN | CENTER | MAX — exactly those four)"
+    );
+  },
+});
+
+/** 0-based anchor cell index. Negative line indexes refuse BY NAME (G7). */
+const GridIndexSchema = z
+  .number()
+  .int()
+  .nonnegative({ error: () => GRID_REFUSALS["grid-negative-line"] });
+const GridSpanSchema = z.number().int().min(1);
+
+/** G2 — explicit child placement on a part whose PARENT declares
+ *  `layout.display: "grid"`. Anchors map to child.setGridChildPosition(row,
+ *  column) — the child-side setter, the only one that exists (P3); spans map
+ *  to gridRowSpan / gridColumnSpan. Bounds and occupancy are validated
+ *  contract-side (the part-level referee below) BEFORE emitting, so the
+ *  canvas write can never throw mid-script (P3's two named errors). */
+export const GridPlacementSchema = z.strictObject({
+  row: GridIndexSchema,
+  column: GridIndexSchema,
+  rowSpan: GridSpanSchema.optional(),
+  columnSpan: GridSpanSchema.optional(),
+  alignX: GridAlignSchema.optional(),
+  alignY: GridAlignSchema.optional(),
+});
+export type GridPlacement = z.infer<typeof GridPlacementSchema>;
+
+/** G4 — a named area IS a slot anchor: the key is simultaneously a slot
+ *  name and a placement rect (same fields as G2 placements minus alignment).
+ *  A part (or slot) with the same name under this parent takes the area's
+ *  placement; declaring both an area and an explicit `placement` for one
+ *  name is schema-invalid (one source of truth). Figma has no native area
+ *  names — the CONTRACT owns the names, both surfaces carry the rects. */
+export const GridAreaSchema = z.strictObject({
+  row: GridIndexSchema,
+  column: GridIndexSchema,
+  rowSpan: GridSpanSchema.optional(),
+  columnSpan: GridSpanSchema.optional(),
+});
+export type GridArea = z.infer<typeof GridAreaSchema>;
+
+export const LayoutSchema = z
+  .strictObject({
+    /** "grid" joins the flex spellings (G1) — declared-track grids only. */
+    display: z.enum(["flex", "inline-flex", "grid"]).optional(),
+    direction: z.enum(["row", "column"]).optional(),
+    /** Cross-axis alignment. `baseline` is CARRY-BOTH like the rest: CSS
+     *  `align-items: baseline`, canvas `counterAxisAlignItems: 'BASELINE'`
+     *  (native on HORIZONTAL auto-layout — on a column the canvas falls back
+     *  to MIN, which is what a column baseline draws anyway). */
+    align: z.enum(["start", "center", "end", "stretch", "baseline"]).optional(),
+    justify: z.enum(["start", "center", "end", "space-between"]).optional(),
+    /** Part takes remaining space (code: flex 1 1 auto; Figma: fill container). */
+    grow: z.boolean().optional(),
+    /** Children overlap (AvatarGroup): the gap token is applied as a NEGATIVE
+     *  child margin in CSS and as negative itemSpacing on the canvas. */
+    overlap: z.boolean().optional(),
+    /** v15 (S4/matrix a.8): flex-wrap: wrap — natively CARRY-BOTH (Figma
+     *  layoutWrap: 'WRAP'). Chip rows and tag groups wrap in every target
+     *  system; the counter-axis gap rides the same `gap` token (Figma
+     *  counterAxisSpacing follows itemSpacing unless a row-gap fact lands). */
+    wrap: z.boolean().optional(),
+    /** G1 — the declared track lists ARE the contract fact; counts are
+     *  derived (rows.length), never stored (the API's count-before-sizes
+     *  ordering, P2, is an EMITTER obligation, not a schema concern). */
+    rows: z.array(GridTrackSchema).min(1).optional(),
+    columns: z.array(GridTrackSchema).min(1).optional(),
+    /** G1 — the independent gap pair (see GridGapSchema). */
+    gap: GridGapSchema.optional(),
+    /** G4 — named areas as slot anchors (see GridAreaSchema). */
+    areas: z.record(z.string(), GridAreaSchema).optional(),
+    /** G5 — bounded row auto-flow (see GridFlowSchema). */
+    flow: GridFlowSchema.optional(),
+  })
+  .superRefine((l, ctx) => {
+    if (l.display === "grid") {
+      // G1: direction/justify/align/wrap are flex-only facts. `overlap` joins
+      // them: it lowers to negative itemSpacing, a field GRID frames do not
+      // have — carrying it would be a dead fact, the grid-child-grow class.
+      for (const f of ["direction", "justify", "align", "wrap", "overlap"] as const) {
+        if (l[f] !== undefined) {
+          ctx.addIssue({
+            code: "custom",
+            path: [f],
+            message: `"${f}" is a flex-only fact and is schema-invalid together with display: "grid" (G1)`,
+          });
+        }
+      }
+      if (!l.columns) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["columns"],
+          message:
+            'display: "grid" requires a declared "columns" track list — the declared tracks ARE the contract fact (G1)',
+        });
+      }
+      if (l.flow === "row") {
+        if (l.rows) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["rows"],
+            message:
+              'flow: "row" derives rows as ceil(children / columns.length) and the emitter declares ' +
+              'them itself (G5; P9: implicit-track readback is lossy) — omit "rows"',
+          });
+        }
+        if (l.areas) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["areas"],
+            message:
+              'named areas are explicit placements; under flow: "row" placement is CHILD ORDER ' +
+              "(P5: position setters are refused under auto-flow) — a grid declares areas or flow, never both",
+          });
+        }
+      } else if (!l.rows) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["rows"],
+          message:
+            'display: "grid" requires a declared "rows" track list, or flow: "row" with derivable rows (G1/G5)',
+        });
+      }
+    } else {
+      for (const f of ["rows", "columns", "gap", "areas", "flow"] as const) {
+        if (l[f] !== undefined) {
+          ctx.addIssue({
+            code: "custom",
+            path: [f],
+            message: `"${f}" is a grid-only fact — it requires display: "grid" (G1)`,
+          });
+        }
+      }
+    }
+  });
 
 /** v7: per-enum-value layout overrides (chat sender flip, toolbar density).
  *  A subset of LayoutSchema — plus REVERSED directions, which only make
@@ -725,6 +983,20 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
   fill: drawn(
     "baked into the promoted glyph markup (iconSvg), like currentColor bakes the text colour.",
   ),
+  // SHADCN ROUND — stroke-drawn icon sets (lucide). Carbon-class glyphs are
+  // fill-drawn; lucide-class glyphs are stroke-drawn (`stroke="currentColor"
+  // fill="none"` on the <svg>), so the captured icon part carries `stroke`
+  // (color) and `stroke-width` (px) as computed channels. Both are DRAWN the
+  // same way `fill` is: the promoted glyph markup carries them verbatim, and
+  // iconSvg's currentColor→hex pass bakes the stroke paint exactly like it
+  // bakes a fill paint. CSS surfaces render the properties verbatim (both are
+  // real CSS properties on SVG parts).
+  stroke: drawn(
+    "the glyph's stroke paint — baked into the promoted glyph markup (iconSvg) via the currentColor pass; the stroke-drawn (lucide-class) counterpart of `fill`.",
+  ),
+  "stroke-width": drawn(
+    "the glyph's stroke weight — carried verbatim in the promoted glyph markup (stroke-width attribute); CSS surfaces render the computed value.",
+  ),
   opacity: drawn(
     "the node opacity (literal — Figma opacity is percent-scaled, so the 0-1 token is not bound).",
   ),
@@ -1216,6 +1488,11 @@ export interface Part {
    *  renders on the spec sheet so the exception is reviewable, never silent. */
   roleException?: string;
   layout?: z.infer<typeof LayoutSchema>;
+  /** A2 grid (G2): explicit cell placement — legal ONLY on a part whose
+   *  PARENT declares layout.display "grid" (the part-level referee refuses
+   *  everything else, including placement+overlay: P13's absolute children
+   *  report bogus 0,0 anchors, so overlays never carry cells). */
+  placement?: z.infer<typeof GridPlacementSchema>;
   /** v7: per-enum-value layout overrides merged over `layout`. */
   layoutByProp?: z.infer<typeof LayoutByPropSchema>;
   /** v7: conditional literal styles (code-side; canvas fidelity limit). */
@@ -1331,6 +1608,130 @@ export interface Part {
   parts?: Record<string, Part>;
 }
 
+/** A2 grid — the PART-LEVEL grid referee (G2/G4/G5), run as a superRefine on
+ *  every part: the cross-child rules a field schema cannot see. Both P3
+ *  canvas throws (span > track count; occupancy collision) are refused HERE,
+ *  contract-side, so the compiled canvas write can never throw mid-script. */
+function validateGridPart(part: Part, ctx: z.core.$RefinementCtx): void {
+  const issue = (path: Array<string | number>, message: string) =>
+    ctx.addIssue({ code: "custom", path, message });
+  const l = part.layout;
+  const children = Object.entries(part.parts ?? {});
+  if (l?.display !== "grid") {
+    for (const [name, child] of children) {
+      if (child.placement) {
+        issue(
+          ["parts", name, "placement"],
+          `part "${name}" carries "placement" but its parent does not declare layout.display "grid" — placement is a grid-cell fact (G2)`,
+        );
+      }
+    }
+    return;
+  }
+  // P10: a layout.mode change physically DESTROYS tracks on the canvas — a
+  // per-variant display override reaching a grid part is refused, never
+  // compiled into a destructive mode switch.
+  if (part.layoutByProp) {
+    issue(
+      ["layoutByProp"],
+      "a grid part may not carry layoutByProp — a layout.mode change is STRUCTURAL " +
+        "(P10: the canvas physically destroys tracks on mode switch); per-variant grids are separate parts",
+    );
+  }
+  const rows = l.rows?.length ?? 0;
+  const cols = l.columns?.length ?? 0;
+  const flow = l.flow === "row";
+  const areas = l.areas ?? {};
+  const inFlow = children.filter(([, c]) => !c.overlay);
+  for (const [name, child] of children) {
+    if (child.overlay && child.placement) {
+      issue(
+        ["parts", name, "placement"],
+        `overlay part "${name}" may not carry placement — overlays keep the out-of-flow grammar ` +
+          "(P13: absolute children even report bogus 0,0 anchors, which readers must gate)",
+      );
+    }
+    if (child.layout?.grow) {
+      issue(["parts", name, "layout", "grow"], GRID_REFUSALS["grid-child-grow"]);
+    }
+    if (child.placement && areas[name]) {
+      issue(
+        ["parts", name, "placement"],
+        `part "${name}" is named by an area AND carries explicit placement — the area name IS the ` +
+          "placement anchor; one source of truth (G4)",
+      );
+    }
+  }
+  if (flow) {
+    for (const [name, child] of inFlow) {
+      if (child.placement) {
+        issue(
+          ["parts", name, "placement"],
+          `flow: "row" places by CHILD ORDER — part "${name}" may not carry placement ` +
+            "(P5: setGridChildPosition is refused under auto-flow)",
+        );
+      }
+    }
+    return;
+  }
+  // G2: every direct child of a manual grid places explicitly (or takes an
+  // area's rect), OR none may (auto-flow, G5). Mixing is schema-invalid.
+  const unplaced = inFlow.filter(([n, c]) => !c.placement && !areas[n]).map(([n]) => n);
+  if (unplaced.length > 0) {
+    issue(
+      ["parts"],
+      unplaced.length < inFlow.length
+        ? "manual grid: every direct child must carry placement (or take an area's), or none may " +
+            `(auto-flow, G5) — mixing is schema-invalid; unplaced: ${unplaced.join(", ")}`
+        : 'manual grid: no direct child carries placement — declare flow: "row" for order-placed ' +
+            "grids (G5) or place every child (G2)",
+    );
+    return;
+  }
+  // Bounds + occupancy over child placements AND area rects (empty areas
+  // occupy too — G4's shared-placeholder convention keeps their cells).
+  const rects: Array<{ who: string; r: number; c: number; rs: number; cs: number }> = [];
+  for (const [name, child] of inFlow) {
+    const p = child.placement ?? areas[name];
+    if (p) rects.push({ who: `part "${name}"`, r: p.row, c: p.column, rs: p.rowSpan ?? 1, cs: p.columnSpan ?? 1 });
+  }
+  const childNames = new Set(inFlow.map(([n]) => n));
+  for (const [name, a] of Object.entries(areas)) {
+    if (!childNames.has(name)) {
+      rects.push({ who: `area "${name}"`, r: a.row, c: a.column, rs: a.rowSpan ?? 1, cs: a.columnSpan ?? 1 });
+    }
+  }
+  for (const x of rects) {
+    if (x.r + x.rs > rows) {
+      issue(
+        ["parts"],
+        `${x.who}: Row span exceeds grid row count — anchor ${x.r} + span ${x.rs} > ${rows} declared ` +
+          "rows (P3's exact throw class; the canvas would absorb overflow by rewriting the declaration, P9)",
+      );
+    }
+    if (x.c + x.cs > cols) {
+      issue(
+        ["parts"],
+        `${x.who}: Column span exceeds grid column count — anchor ${x.c} + span ${x.cs} > ${cols} ` +
+          "declared columns (P3's exact throw class)",
+      );
+    }
+  }
+  for (let i = 0; i < rects.length; i++) {
+    for (let j = i + 1; j < rects.length; j++) {
+      const a = rects[i];
+      const b = rects[j];
+      if (a.r < b.r + b.rs && b.r < a.r + a.rs && a.c < b.c + b.cs && b.c < a.c + a.cs) {
+        issue(
+          ["parts"],
+          `${a.who} and ${b.who} overlap on the grid — placements+spans may not occupy the same cell ` +
+            "(P3: the canvas throws the occupancy error mid-script; the contract refuses BEFORE emitting)",
+        );
+      }
+    }
+  }
+}
+
 export const PartSchema: z.ZodType<Part> = z.lazy(() =>
   z.strictObject({
     description: z.string().optional(),
@@ -1338,6 +1739,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** v11: named exception to the native-semantics lint (see Part). */
     roleException: z.string().optional(),
     layout: LayoutSchema.optional(),
+    /** A2 grid (G2) — see the Part interface + validateGridPart. */
+    placement: GridPlacementSchema.optional(),
     /** v7. */
     layoutByProp: LayoutByPropSchema.optional(),
     /** v7. */
@@ -1396,7 +1799,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     visibleWhen: VisibleWhenSchema.optional(),
     optional: z.boolean().optional(),
     parts: z.record(z.string(), PartSchema).optional(),
-  }),
+  }).superRefine(validateGridPart),
 );
 
 /** v6: the interaction SURFACE, declared — never the implementation.
@@ -1581,7 +1984,7 @@ export type VariantLayout = z.infer<typeof VariantLayoutSchema>;
  *  override (if the combo's value has one) merged over the base layout.
  *  With an empty subst (code side / no enum context) the base layout wins. */
 export interface ResolvedLayout {
-  display?: "flex" | "inline-flex";
+  display?: "flex" | "inline-flex" | "grid";
   direction?: "row" | "column" | "row-reverse" | "column-reverse";
   align?: "start" | "center" | "end" | "stretch" | "baseline";
   justify?: "start" | "center" | "end" | "space-between";
@@ -1589,6 +1992,15 @@ export interface ResolvedLayout {
   overlap?: boolean;
   /** v15: flex-wrap: wrap (Figma layoutWrap 'WRAP'). */
   wrap?: boolean;
+  /** A2 grid (G1/G4/G5) — present only when display is "grid". layoutByProp
+   *  can never override these (validateGridPart refuses layoutByProp on grid
+   *  parts — P10 mode-switch destruction), so the base layout's grid facts
+   *  always survive resolution unchanged. */
+  rows?: GridTrack[];
+  columns?: GridTrack[];
+  gap?: { row: number | string; column: number | string };
+  areas?: Record<string, GridArea>;
+  flow?: "row";
 }
 
 export function resolveLayout(

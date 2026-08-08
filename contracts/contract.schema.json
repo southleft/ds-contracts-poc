@@ -556,7 +556,8 @@
               "type": "string",
               "enum": [
                 "flex",
-                "inline-flex"
+                "inline-flex",
+                "grid"
               ]
             },
             "direction": {
@@ -593,8 +594,224 @@
             },
             "wrap": {
               "type": "boolean"
+            },
+            "rows": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "px": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      }
+                    },
+                    "required": [
+                      "px"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "fr": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      }
+                    },
+                    "required": [
+                      "fr"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "fit": {
+                        "type": "boolean",
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "fit"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "columns": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "px": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      }
+                    },
+                    "required": [
+                      "px"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "fr": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      }
+                    },
+                    "required": [
+                      "fr"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "fit": {
+                        "type": "boolean",
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "fit"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "gap": {
+              "type": "object",
+              "properties": {
+                "row": {
+                  "anyOf": [
+                    {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+                    }
+                  ]
+                },
+                "column": {
+                  "anyOf": [
+                    {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "row",
+                "column"
+              ],
+              "additionalProperties": false
+            },
+            "areas": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "row": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "column": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "rowSpan": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "columnSpan": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "row",
+                  "column"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "flow": {
+              "type": "string",
+              "const": "row"
             }
           },
+          "additionalProperties": false
+        },
+        "placement": {
+          "type": "object",
+          "properties": {
+            "row": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "column": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "rowSpan": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "columnSpan": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "alignX": {
+              "type": "string",
+              "enum": [
+                "auto",
+                "start",
+                "center",
+                "end"
+              ]
+            },
+            "alignY": {
+              "type": "string",
+              "enum": [
+                "auto",
+                "start",
+                "center",
+                "end"
+              ]
+            }
+          },
+          "required": [
+            "row",
+            "column"
+          ],
           "additionalProperties": false
         },
         "layoutByProp": {

@@ -1314,6 +1314,23 @@ const cases: Case[] = [
     },
   },
   {
+    // A2 layout grammar (grid): the canonical bento (conformance
+    // grid-bento-span-matrix — the P8 live carriage receipt) proven headlessly
+    // end to end: pinned-grammar contract → byte-deterministic .figma.js →
+    // strict-mock execution (the mock enforces the real API's grid refusals:
+    // count-before-sizes, place-before-span occupancy, align enum fence,
+    // P9/P10 hazards) → every track/anchor/span/gap fact read back EXACTLY,
+    // plus the G7 fence refusing by name at the schema.
+    id: 'grid-bento-carriage',
+    claim: 'C1-determinism',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/grid-bento-check.ts']);
+      if (r.status !== 0 || !r.out.includes('grid-bento ok:')) {
+        throw new Error(`grid-bento check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
     // TASK #37, the owner's live canvas ("the buttons are messed up"). A ROOT's
     // max-width was baked as a FIXED width — the molecule round bound the real
     // Figma `maxWidth` ceiling for PARTS but exempted roots by name — so

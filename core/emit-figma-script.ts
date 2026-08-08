@@ -55,8 +55,16 @@ import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 
 
+/** A2 grid: a compiled track — the Plugin API's own structured spelling
+ *  (P2: gridRow/ColumnSizes entries are {type:'FIXED'|'FLEX'|'HUG', value}).
+ *  HUG carries value 1, matching the API's readback noise (P2b). */
+export interface GridTrackSpec {
+  type: 'FIXED' | 'FLEX' | 'HUG';
+  value: number;
+}
+
 export interface LayoutSpec {
-  mode: 'HORIZONTAL' | 'VERTICAL';
+  mode: 'HORIZONTAL' | 'VERTICAL' | 'GRID';
   primary: 'MIN' | 'CENTER' | 'MAX' | 'SPACE_BETWEEN';
   /** BASELINE is native, but ONLY on HORIZONTAL auto-layout — Figma throws on
    *  a VERTICAL frame. `layoutSpec` never produces it under mode VERTICAL. */
@@ -64,6 +72,18 @@ export interface LayoutSpec {
   stretchChildren?: boolean;
   /** v15 (S4/matrix a.8): flex-wrap: wrap → layoutWrap 'WRAP' (native). */
   wrap?: boolean;
+  /** A2 grid (G1/G5/G6): the declared tracks, both gaps (compile-resolved to
+   *  px), and the bounded auto-flow. Present exactly when mode is 'GRID'.
+   *  Under flow, `rows` holds the EMITTER-DECLARED explicit tracks —
+   *  ceil(children/columns) × {FLEX,1} — because the API under-reports
+   *  implicit rows (P9); the contract never relies on implicit tracks. */
+  grid?: {
+    rows: GridTrackSpec[];
+    columns: GridTrackSpec[];
+    rowGap: number;
+    columnGap: number;
+    flow?: 'ROW_AUTO_FLOW';
+  };
 }
 
 export interface NodeSpec {
@@ -118,6 +138,20 @@ export interface NodeSpec {
    *  createFrame clips by default but CSS overflow is visible; clipping HUG
    *  text truncates Semi Bold overhang (Carbon Tabs "Settings"). */
   clipsContent?: true;
+  /** A2 grid (G2/G4): this node's cell under a GRID parent — 0-based anchor,
+   *  spans only when >1, aligns only when not AUTO (deterministic minimal
+   *  spec). The runtime applies it AFTER append in the probe-pinned order:
+   *  place ALL children (child.setGridChildPosition, P3) → spans (all
+   *  placements before any span — the occupancy throw) → FILL → aligns.
+   *  Absent under flow (placement fact = child order, P5). */
+  cell?: {
+    row: number;
+    column: number;
+    rowSpan?: number;
+    columnSpan?: number;
+    hAlign?: 'MIN' | 'CENTER' | 'MAX';
+    vAlign?: 'MIN' | 'CENTER' | 'MAX';
+  };
   /** visibleWhen on a boolean prop → node visibility bound to its BOOLEAN
    *  component property. (visibleWhen.equals is resolved at compile time:
    *  the part is simply omitted from non-matching variants.) */
@@ -1184,10 +1218,53 @@ function boundFullBleedScrimRoot(
   );
 }
 
+/** A2 grid: contract align vocabulary → the canvas enum (P3/P4's four).
+ *  'auto' never compiles — AUTO is the canvas default, omitted for a
+ *  deterministic minimal spec. */
+const GRID_ALIGN_FIGMA: Record<string, 'MIN' | 'CENTER' | 'MAX'> = {
+  start: 'MIN',
+  center: 'CENTER',
+  end: 'MAX',
+};
+
 function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> = {}): LayoutSpec {
   // v7 layoutByProp: each canvas variant is compiled with every enum axis's
   // value (subst), so the per-variant layout override resolves right here.
   const l = resolveLayout(part, subst);
+  // A2 grid (G1): declared tracks compile to the API's structured spelling;
+  // gaps resolve to px at compile time (numbers or token refs). Zero tracks
+  // can never reach here — the schema refuses them (P2b silent rewrite).
+  if (l?.display === 'grid') {
+    const toTrack = (t: NonNullable<typeof l.rows>[number]): GridTrackSpec =>
+      'px' in t ? { type: 'FIXED', value: t.px }
+      : 'fr' in t ? { type: 'FLEX', value: t.fr }
+      : { type: 'HUG', value: 1 };
+    const gapPx = (v: number | string | undefined): number => {
+      if (v === undefined) return 0;
+      if (typeof v === 'number') return v;
+      let tokenPath = v.slice(1, -1);
+      for (const [propName, val] of Object.entries(subst)) tokenPath = tokenPath.replaceAll(`{${propName}}`, val);
+      const n = pxOrNull(String(resolveLiteral(tokenPath)));
+      if (n === null) throw new Error(`grid gap token "${v}" does not resolve to a px value`);
+      return n;
+    };
+    return {
+      // primary/counter are flex fields — inert under GRID (the runtime's
+      // grid branch never writes them); pinned to MIN for determinism.
+      mode: 'GRID',
+      primary: 'MIN',
+      counter: 'MIN',
+      grid: {
+        // Under flow, rows are re-declared per compiled variant by
+        // stampGridCells (ceil of the ACTUAL child count — G5/P9).
+        rows: (l.rows ?? []).map(toTrack),
+        columns: (l.columns ?? []).map(toTrack),
+        rowGap: gapPx(l.gap?.row),
+        columnGap: gapPx(l.gap?.column),
+        ...(l.flow === 'row' ? { flow: 'ROW_AUTO_FLOW' as const } : {}),
+      },
+    };
+  }
   // Polaris TextField live finding: root carries `layout.align: center` AND
   // `declared.display: block`. Presence of `l` used to short-circuit the
   // block-flow VERTICAL rule below, so label sat BESIDE the input (row).
@@ -3006,6 +3083,70 @@ function textExtras(ctx: TextCtx): Partial<NodeSpec> {
   };
 }
 
+/** A2 grid (G2/G4/G5): stamp compiled cells onto a GRID parent's children.
+ *  Runs AFTER the parent's children are compiled (specs carry the part
+ *  names, which is how a cell finds its part). Three jobs:
+ *    · manual mode — each child takes its part's `placement`, or the area
+ *      rect its NAME anchors to (G4: the area name IS the slot anchor);
+ *      spans of 1 and AUTO aligns are omitted (deterministic minimal spec).
+ *    · empty areas — an area with no matching child compiles a PLACEHOLDER
+ *      frame carrying the area's rect, so the grid's shape is visible with
+ *      nothing in it (G4's shared-placeholder convention; the dashed slot
+ *      chrome is named residue this round).
+ *    · flow mode — placement fact is CHILD ORDER (P5); the emitter DECLARES
+ *      the derived row tracks itself (ceil(children/columns) × {FLEX,1})
+ *      because the API under-reports implicit rows (P9).
+ *  Overlay/absolute parts keep the out-of-flow grammar and never take cells
+ *  (P13: absolute children report bogus 0,0 anchors). */
+function stampGridCells(parentSpec: NodeSpec, part: Part, subst: Record<string, string>): void {
+  const g = parentSpec.layout?.grid;
+  if (!g || parentSpec.layout?.mode !== 'GRID') return;
+  const children = parentSpec.children ?? [];
+  if (g.flow) {
+    const inFlow = children.filter((c) => !c.overlay && !c.insetOverlay && !c.absolute).length;
+    const rowsN = Math.max(1, Math.ceil(inFlow / Math.max(1, g.columns.length)));
+    g.rows = Array.from({ length: rowsN }, () => ({ type: 'FLEX' as const, value: 1 }));
+    return;
+  }
+  const areas = (resolveLayout(part, subst)?.areas ?? {});
+  const parts = part.parts ?? {};
+  for (const child of children) {
+    const src = parts[child.name];
+    if (!src || src.overlay) continue;
+    const placement = src.placement ?? areas[child.name];
+    if (!placement) continue;
+    const alignX = ('alignX' in placement ? placement.alignX : undefined) as
+      | 'auto' | 'start' | 'center' | 'end' | undefined;
+    const alignY = ('alignY' in placement ? placement.alignY : undefined) as
+      | 'auto' | 'start' | 'center' | 'end' | undefined;
+    child.cell = {
+      row: placement.row,
+      column: placement.column,
+      ...(placement.rowSpan && placement.rowSpan > 1 ? { rowSpan: placement.rowSpan } : {}),
+      ...(placement.columnSpan && placement.columnSpan > 1 ? { columnSpan: placement.columnSpan } : {}),
+      ...(alignX && alignX !== 'auto' ? { hAlign: GRID_ALIGN_FIGMA[alignX] } : {}),
+      ...(alignY && alignY !== 'auto' ? { vAlign: GRID_ALIGN_FIGMA[alignY] } : {}),
+    };
+  }
+  const childNames = new Set(children.map((c) => c.name));
+  for (const [areaName, rect] of Object.entries(areas)) {
+    if (childNames.has(areaName)) continue;
+    children.push({
+      type: 'frame',
+      name: areaName,
+      layout: { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' },
+      children: [],
+      cell: {
+        row: rect.row,
+        column: rect.column,
+        ...(rect.rowSpan && rect.rowSpan > 1 ? { rowSpan: rect.rowSpan } : {}),
+        ...(rect.columnSpan && rect.columnSpan > 1 ? { columnSpan: rect.columnSpan } : {}),
+      },
+    });
+  }
+  parentSpec.children = children;
+}
+
 function partToSpecs(
   name: string,
   part: Part,
@@ -3434,6 +3575,9 @@ function partToSpecInner(
   );
   if (isReversed(part, subst)) spec.children.reverse();
   centerStrokeGlyphsInHosts(spec.children);
+  // A2 grid: cells stamp AFTER the child list is final (reversal is a flex
+  // fact and cannot occur here — direction is schema-invalid with grid).
+  stampGridCells(spec, part, subst);
   // Round 5f (CLASS 3): an inset-0 overlay that CONTAINS content — the
   // Checkbox check glyph, the RadioButton dot — must CENTER it in the control
   // box. The captured display:block carried no centering, so the glyph pinned
@@ -3577,15 +3721,20 @@ function annotateFillW(rootSpec: NodeSpec): void {
     // grow:true details collapsed the root to min-width 288 under a 331px
     // text-wrapper — the D3 overflow the compile receipt caught).
     const ready = (established || intrinsic) && s.hugCeiling !== true;
+    // A2 grid: a GRID parent's children are cell-sized by the grid runtime
+    // (G3 FILL default — place→span→FILL→align), never flex fillW
+    // candidates; their own subtrees ARE width-established (the declared
+    // tracks size the cell the way a fixed width sizes a box).
+    const gridParent = s.layout?.mode === 'GRID';
     for (const c of kids) {
-      const fills = ready && isCandidate(c);
+      const fills = !gridParent && ready && isCandidate(c);
       if (fills) {
         c.fillW = true;
         // FC-TEXT-FILL-ALIGNMENT: a text candidate only reaches here when
         // hugging displaces it; the flag is the runtime's proof.
         if (c.type === 'text' && !c.textTruncation) c.fillText = true;
       }
-      walk(c, fills || hasOwnWidth(c));
+      walk(c, fills || hasOwnWidth(c) || gridParent);
     }
   };
   walk(rootSpec, hasOwnWidth(rootSpec));
@@ -3714,6 +3863,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       );
       if (isReversed(root, subst)) rootSpec.children.reverse();
       centerStrokeGlyphsInHosts(rootSpec.children);
+      stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
     } else if (textProp) {
       rootSpec.children = [
         {
@@ -3817,6 +3967,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           );
           if (isReversed(root, subst)) rootSpec.children.reverse();
           centerStrokeGlyphsInHosts(rootSpec.children);
+          stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
         } else if (textProp) {
           rootSpec.children = [
             {
@@ -4487,6 +4638,83 @@ const textExtrasRuntime = (has: boolean): string =>
     if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }`
     : '';
 
+/** A2 grid — the GRID runtime, feature-gated so grid-less corpora emit
+ *  byte-identical scripts (the golden discipline). Two halves: applyGridFrame
+ *  runs inside applyFrameSpec (the probe-pinned DECLARATION order) and
+ *  applyGridChildren runs after append (the probe-pinned PLACEMENT order). */
+const gridRuntime = (has: boolean): string =>
+  has
+    ? `
+// A2 grid: declaration order is API-pinned (P2: sizes must match the CURRENT
+// count — "Grid track sizes must be the same length as the grid column
+// count"), so counts are written FIRST, then sizes, then gaps, then flow.
+// P10 hazard guard (mode-switch destroys tracks): entering GRID resets the
+// canvas to a default 2×2 — safe ONLY because the full declaration is
+// rewritten here every time, and applyGridChildren re-verifies the canvas
+// holds EXACTLY the declared lists before any placement. Nothing ever relies
+// on tracks surviving a mode switch.
+function applyGridFrame(node, l) {
+  const g = l.grid;
+  node.layoutMode = 'GRID';
+  node.gridRowCount = g.rows.length;
+  node.gridColumnCount = g.columns.length;
+  node.gridRowSizes = g.rows.map((t) => ({ type: t.type, value: t.value }));
+  node.gridColumnSizes = g.columns.map((t) => ({ type: t.type, value: t.value }));
+  node.gridRowGap = g.rowGap;
+  node.gridColumnGap = g.columnGap;
+  if (g.flow) node.gridItemsPositioning = g.flow;
+}
+
+// A2 grid: children were appended by the caller — now the probe-pinned tail:
+// place ALL children (child.setGridChildPosition, the child-side setter, P3)
+// BEFORE any span (the occupancy throw), then FILL (G3: a placed part fills
+// both axes of its cell; fixed channels keep their box; TEXT hugs — the flex
+// fence re-proved under grid, P4), then per-child aligns (P3's four-value
+// fence). Out-of-flow children are skipped throughout (P13).
+function applyGridChildren(parent, spec, built) {
+  const l = spec.layout;
+  if (!l || l.mode !== 'GRID' || !l.grid) return;
+  // P9/P10 declaration guard: Figma absorbs placement overflow by REWRITING
+  // gridRowCount (P9) and destroys tracks on mode switch (P10). A mismatch
+  // here means the canvas holds a declaration the contract did not make —
+  // refuse loudly, never carry the rewrite.
+  if (parent.gridRowSizes.length !== l.grid.rows.length || parent.gridColumnSizes.length !== l.grid.columns.length) {
+    throw new Error(
+      'grid-declaration-rewritten: canvas holds ' + parent.gridRowSizes.length + 'x' + parent.gridColumnSizes.length +
+      ' tracks but the contract declared ' + l.grid.rows.length + 'x' + l.grid.columns.length +
+      ' (P9 overflow absorption / P10 mode-switch loss) — refusing to carry a write the contract did not make'
+    );
+  }
+  const inFlow = built.filter((p) => !p[0].overlay && !p[0].insetOverlay && !p[0].absolute && p[1].layoutPositioning !== 'ABSOLUTE');
+  const placed = inFlow.filter((p) => p[0].cell);
+  if (!l.grid.flow) {
+    for (const p of placed) p[1].setGridChildPosition(p[0].cell.row, p[0].cell.column);
+    for (const p of placed) {
+      if (p[0].cell.rowSpan) p[1].gridRowSpan = p[0].cell.rowSpan;
+      if (p[0].cell.columnSpan) p[1].gridColumnSpan = p[0].cell.columnSpan;
+    }
+  }
+  for (const p of inFlow) {
+    const cs = p[0], cn = p[1];
+    if (cs.type === 'text') continue; // text hugs its glyphs (P4's fence)
+    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
+      try { cn.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+    }
+    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
+      try { cn.layoutSizingVertical = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+    }
+  }
+  for (const p of placed) {
+    if (p[0].cell.hAlign) p[1].gridChildHorizontalAlign = p[0].cell.hAlign;
+    if (p[0].cell.vAlign) p[1].gridChildVerticalAlign = p[0].cell.vAlign;
+  }
+}
+`
+    : '';
+const gridChildrenCall = (has: boolean, args: string): string =>
+  has ? `
+  applyGridChildren(${args});` : '';
+
 /** v9 shape placement: layoutPositioning ABSOLUTE + constraints + exact
  *  offsets vs the parent box, AFTER append (mirrors applyOverlay). */
 const absoluteRuntime = (has: boolean): string =>
@@ -4833,6 +5061,9 @@ function buildSyncScript(
   const hasShapeLits = datas.some((d) =>
     dataSome(d, (x) => x.shape !== undefined && (x.lits?.strokeColor !== undefined || x.lits?.strokeWeight !== undefined || x.lits?.strokeSides !== undefined || x.lits?.radius !== undefined)),
   );
+  // A2 grid: the whole GRID runtime (declaration + placement passes) is
+  // feature-gated — grid-less corpora emit byte-identical scripts.
+  const hasGrid = datas.some((d) => dataSome(d, (x) => x.layout?.mode === 'GRID'));
   const hasWrap = datas.some((d) => dataSome(d, (x) => x.layout?.wrap === true));
   // A COLUMN stack carrying `wrap` is schema-valid and legal CSS, and Figma
   // THROWS on it (layoutWrap is HORIZONTAL-only). Detected statically so the
@@ -5216,10 +5447,14 @@ async function ensureSlotUtility() {
 }
 
 function applyFrameSpec(node, spec) {
-  const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
+  const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `
+  // A2 grid: GRID frames take the declaration path — the flex fields below
+  // (axis aligns, layoutWrap) are not grid facts and are never written.
+  if (l.mode === 'GRID') { applyGridFrame(node, l); } else {` : ''}
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
-  node.counterAxisAlignItems = l.counter;${wrapRuntime(hasWrap, hasColumnWrap)}
+  node.counterAxisAlignItems = l.counter;${wrapRuntime(hasWrap, hasColumnWrap)}${hasGrid ? `
+  }` : ''}
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
@@ -5271,7 +5506,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
-${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}
+${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -5434,7 +5669,7 @@ async function buildNode(spec, registry) {
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
-  }${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}
+  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}
   return node;
 }
 
@@ -5596,7 +5831,7 @@ async function amendSet(set, C) {
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
-      }${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}
+      }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -5752,7 +5987,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
-  }${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}
+  }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
