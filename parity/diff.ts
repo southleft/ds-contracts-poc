@@ -992,6 +992,23 @@ for (const [surface, byClass] of Object.entries(bySurface)) {
 }
 console.log('');
 
+// First-run softener: when the staleness gate is the ONLY thing firing, say
+// so — a fresh clone always trips it (the committed snapshots age past
+// MAX_SNAPSHOT_AGE_DAYS by design, so an untouched snapshot can never report
+// green forever), and a first-time tester must be able to tell "the gate is
+// working" from "the components drifted" without reading the README first.
+// The note prints ONLY when every active finding is snapshot-stale; one real
+// drift finding in the mix and it stays silent.
+if (active.length > 0 && active.every((f) => f.subject === 'snapshot-stale')) {
+  console.log(
+    `  ℹ Every finding above is \`snapshot-stale\` — expected on a fresh clone (see README §Working in this repository).\n` +
+    `    The design-side inputs are committed Figma snapshots, and the differ refuses to trust one older than\n` +
+    `    ${MAX_SNAPSHOT_AGE_DAYS} days by design — that is the staleness gate working, not drift in the components.\n` +
+    `    The contract↔code and contract↔token checks DID run and found nothing. To re-verify the canvas half,\n` +
+    `    re-run parity/extract-figma.plugin.js in the anchored Figma file, or override MAX_SNAPSHOT_AGE_DAYS.\n`,
+  );
+}
+
 const MAX_CONSOLE_FINDINGS = 50;
 for (const f of active.slice(0, MAX_CONSOLE_FINDINGS)) printFinding(f);
 if (active.length > MAX_CONSOLE_FINDINGS) {

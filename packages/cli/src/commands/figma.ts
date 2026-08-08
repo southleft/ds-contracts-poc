@@ -1766,6 +1766,23 @@ export async function figmaCommand(argv: string[]): Promise<number> {
   );
   const outDir = path.resolve(out);
   mkdirSync(outDir, { recursive: true });
+  // §B.15 softener — the script emitter is the one canvas door that does NOT
+  // refuse drawable-empty (bundle / publish / receive --apply all do): the
+  // per-contract scripts exist for CI diffing, where emitting a stub is a
+  // legitimate byte-level operation. So it WARNS by the same name instead,
+  // listing each stub, so "my sets came out blank" is answered at emit time
+  // rather than discovered on the canvas.
+  const stubIds = [...contracts.values()]
+    .filter((c) => isDrawableEmptyContract(c))
+    .map((c) => c.id);
+  if (stubIds.length > 0) {
+    console.warn(
+      `⚠ ${DRAWABLE_EMPTY}: ${stubIds.length} contract(s) carry stub anatomy — ${stubIds.join(", ")} — ` +
+        `each will render as a correctly named component set with EMPTY frames inside (no fills, no padding, no bound variables); ` +
+        `run the computed capture (extract --computed / onboard) for real anatomy. ` +
+        `The bundle/publish/apply doors refuse these by name; emit warns so script-level CI diffing still works.`,
+    );
+  }
   const written: string[] = [];
   for (const contract of contracts.values()) {
     for (const file of withTokenDiagnostics(routing, () =>

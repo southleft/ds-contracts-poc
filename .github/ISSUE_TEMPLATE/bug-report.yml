@@ -1,0 +1,100 @@
+name: Bug report
+description: >-
+  Something broke, refused without a usable message, or — the class we care
+  about most — produced output that looks right but isn't.
+title: "[bug] "
+labels: ["bug", "beta"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Before filing:** skim [docs/23 — Known Limitations](https://github.com/southleft/ds-contracts-poc/blob/main/docs/23-known-limitations.md).
+        A named limitation is still worth filing (it tells us whether the docs prepared you),
+        but the triage is different — the dropdown below routes it.
+
+        Ranking, from [the beta runbook](https://github.com/southleft/ds-contracts-poc/blob/main/docs/28-beta-runbook.md):
+        *"it refused and told me why"* is working as intended;
+        *"it produced output that looks right but isn't"* is the report we want most.
+  - type: dropdown
+    id: journey
+    attributes:
+      label: Which journey were you running?
+      description: The three tracks in docs/28 / the three paths in docs/00.
+      options:
+        - "A — design-first (Figma set → contract → React/Storybook)"
+        - "B — code-first (code → capture → contract → Figma sets)"
+        - "C — reconcile (both exist; disagreement report / CI diff)"
+        - "Working in the repo itself (parity / eval / build / docs)"
+        - "Other / not sure"
+    validations:
+      required: true
+  - type: dropdown
+    id: known-limitation
+    attributes:
+      label: Is this a named limitation from docs/23?
+      description: >-
+        Check the inventory first. If your symptom matches one of these, pick
+        it — the report is still useful, filed as a docs/expectation finding.
+      options:
+        - "I checked docs/23 — this is NOT in the list (new defect)"
+        - "§B.15 — static extraction produced stub anatomy / blank frames on canvas"
+        - "§B.16 — capture config (classAllow / varPrefix / mount / axis-vs-state)"
+        - "§B.1 — overlay (Dialog/Menu/Tooltip) lost source token names"
+        - "§B.2 — overlay component has states: [] (no hover/focus/active planes)"
+        - "§B.3 — text wrapping / clipped or overflowing labels"
+        - "§C.5 — text widths are fallback-font widths (no webfonts in harness)"
+        - "§B.11 — cannot adopt a hand-built Figma set (not a verb)"
+        - "§B.12 — reconciliation compares API surfaces only"
+        - "§B.19 — intake cost (seed authoring / scale wall)"
+        - "§A.3 / §A.4 — plugin architecture: desktop-only manifest import; plugin cannot run my code"
+        - "Fresh-clone `npm run parity` red with only snapshot-stale findings (by design — README §Working in this repository)"
+        - "Another §A.x / §B.x / §C.x (name it in the description)"
+        - "I did not check docs/23"
+    validations:
+      required: true
+  - type: textarea
+    id: what-ran
+    attributes:
+      label: What you ran
+      description: The exact command(s) or plugin action(s), in order.
+      render: shell
+      placeholder: |
+        npx @ds-contracts/cli extract
+        npx @ds-contracts/cli figma bundle ./contracts --tokens base.dtcg.json --out my.bundle.json
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: What the docs or the tool's own output led you to expect.
+    validations:
+      required: true
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened instead
+      description: >-
+        Paste the full output — refusal messages, warnings (e.g. a
+        `drawable-empty` line), stack traces. If output landed on a Figma
+        canvas, a screenshot helps.
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Receipts and artifacts
+      description: >-
+        Paths to anything the run wrote — extraction report, scorecard.json,
+        parity/report.json, a bundle file, a receipt — and, if you can, the
+        artifact itself (attach or paste the relevant part).
+    validations:
+      required: false
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS · Node version · CLI version (`npx @ds-contracts/cli --version`) · Figma desktop version if the plugin was involved
+      placeholder: "macOS 15 · Node 22.6 · @ds-contracts/cli 1.x.x · Figma desktop 125"
+    validations:
+      required: true

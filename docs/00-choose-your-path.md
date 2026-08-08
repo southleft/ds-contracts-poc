@@ -287,6 +287,10 @@ real cost, it is human, and today it is unassisted.
 - [README](../README.md) — the front door; its journey table points here.
 - [docs/00-getting-started](00-getting-started.md) — the five-minute
   orientation.
+- [docs/28 — Beta Tester Runbook](28-beta-runbook.md) — **if you are here to
+  test this tool, start there**: all three paths with exact commands, success
+  criteria, the named limitations each track will hit, honest time budgets,
+  and the structured issue forms for reporting findings.
 - [docs/17 — Run the Gauntlet](17-run-the-gauntlet.md) — paths B and A
   packaged as a runbook for an outside tester.
 - [docs/21 — Bring Your Own Design System](21-bring-your-own-design-system.md)

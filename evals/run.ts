@@ -1467,6 +1467,21 @@ const cases: Case[] = [
         if (r.status !== 1) throw new Error('15-day-old snapshot passed the 14-day staleness gate');
         if (!readReport().some((x) => x.subject === 'snapshot-stale'))
           throw new Error('Expected snapshot-stale finding');
+        // First-run softener (beta-tester packet): when snapshot-stale is the
+        // ONLY active finding class — exactly the fresh-clone state — the
+        // output must say so, so a first-time tester can tell "the staleness
+        // gate is working" from "the components drifted".
+        if (!r.out.includes('expected on a fresh clone'))
+          throw new Error(`stale-only red did not print the fresh-clone note:\n${r.out}`);
+        // FALSIFICATION: mix in a NON-stale finding (foreign fileKey) and the
+        // note must vanish — it may never launder real drift as clone noise.
+        editJson(FIGMA_COMPONENTS, (s2) => { s2.fileKey = 'WRONG_FILE_KEY'; });
+        const r2 = parity();
+        if (r2.status !== 1) throw new Error('mixed stale+provenance findings passed parity');
+        if (!readReport().some((x) => x.subject === 'snapshot-provenance'))
+          throw new Error('Expected snapshot-provenance finding in the mixed run');
+        if (r2.out.includes('expected on a fresh clone'))
+          throw new Error('the fresh-clone note printed over a mix that includes REAL drift findings');
       } finally {
         delete process.env.MAX_SNAPSHOT_AGE_DAYS;
       }
@@ -5264,6 +5279,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         'planReceive WITHOUT --apply: contractWrite is null even when the diff is non-empty — nothing writes silently',
         'figma receive (shell) without --apply: proposal artifact saved, contract file untouched; with --apply: written',
         'figma receive (shell): a dump-kind delivery is refused by name, nothing written',
+        // §B.15 softener: the one canvas door that does not REFUSE stub
+        // anatomy (script emit, kept for CI diffing) must WARN by name,
+        // listing each stub — and stay silent on all-drawable input.
+        'figma emit (script path) warns drawable-empty BY NAME, listing each stub — and stays silent when every contract is drawable',
       ]) {
         if (!t.out.includes(line)) throw new Error(`missing figma-receive test: ${line}`);
       }

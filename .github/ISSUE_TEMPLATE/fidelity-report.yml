@@ -1,0 +1,73 @@
+name: Fidelity report
+description: >-
+  It generated, but it doesn't look right — a canvas set or generated
+  component that visibly diverges from the source of truth.
+title: "[fidelity] "
+labels: ["fidelity", "beta"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fidelity claims in this repo always travel with the artifact they were
+        measured from — hold this report to the same bar. The named visual
+        gaps (text wrapping §B.3, fallback-font widths §C.5, overlay states
+        §B.2) are inventoried in
+        [docs/23 — Known Limitations](https://github.com/southleft/ds-contracts-poc/blob/main/docs/23-known-limitations.md);
+        a divergence NOT explained by that list is exactly what this form is for.
+  - type: dropdown
+    id: direction
+    attributes:
+      label: Which direction?
+      options:
+        - "code → canvas (a Figma set that doesn't match the rendered component)"
+        - "canvas → code (a generated component that doesn't match the Figma set)"
+        - "round trip (it degraded across a there-and-back)"
+    validations:
+      required: true
+  - type: input
+    id: component
+    attributes:
+      label: Component and variant
+      description: Which component, and which prop combination / variant / state shows the divergence.
+      placeholder: "Button — variant=secondary size=sm, hover state"
+    validations:
+      required: true
+  - type: textarea
+    id: scorecard
+    attributes:
+      label: Scorecard / receipt path
+      description: >-
+        The path to the measured artifact for this component if your run
+        produced one — a `scorecard.json` under `extract/computed/out/`, a
+        fidelity/renders entry, a capture report, a COMPILE-RECEIPT — plus the
+        relevant numbers or lines pasted in. If there is no scorecard, say so;
+        "it looks wrong" with no artifact is still fileable, just slower to act on.
+      placeholder: |
+        extract/computed/out/acme/button/scorecard.json — computed.pctEqual 71.2
+        worst channels: padding-left, background-color
+    validations:
+      required: true
+  - type: textarea
+    id: divergence
+    attributes:
+      label: What diverges
+      description: >-
+        The specific visible difference(s): which channel (color, spacing,
+        radius, size, typography), on which part. Screenshots of both sides
+        help enormously.
+    validations:
+      required: true
+  - type: textarea
+    id: source-truth
+    attributes:
+      label: What the source of truth looks like
+      description: How the original renders (npm package in a browser, or the hand-built Figma set) — screenshot or description.
+    validations:
+      required: false
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "macOS 15 · Node 22.6 · @ds-contracts/cli 1.x.x · Figma desktop 125"
+    validations:
+      required: true

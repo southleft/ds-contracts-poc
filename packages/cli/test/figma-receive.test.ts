@@ -1256,6 +1256,85 @@ test("figma bundle refuses drawable-empty contracts by name and writes nothing",
   }
 });
 
+test("figma emit (script path) warns drawable-empty BY NAME, listing each stub — and stays silent when every contract is drawable", async () => {
+  // §B.15's quiet failure, at the one canvas door that does NOT refuse:
+  // the per-contract script emitter (CI diffing needs stub emission to
+  // work). It must say, at emit time, which sets will land as named empty
+  // frames — not let the canvas be the first place anyone finds out.
+  const dir = mkdtempSync(path.join(tmpdir(), "dsc-emit-stub-warn-"));
+  const warnings: string[] = [];
+  const realWarn = console.warn;
+  console.warn = (...args: unknown[]) => {
+    warnings.push(args.map(String).join(" "));
+  };
+  try {
+    const blankPath = path.join(dir, "blank.contract.json");
+    const goodPath = path.join(dir, "pill.contract.json");
+    const tokensPath = path.join(dir, "base.dtcg.json");
+    const outDir = path.join(dir, "out");
+    writeFileSync(blankPath, JSON.stringify(BLANK_CONTRACT, null, 2) + "\n");
+    writeFileSync(goodPath, JSON.stringify(DRAWABLE_CONTRACT, null, 2) + "\n");
+    writeFileSync(
+      tokensPath,
+      JSON.stringify(
+        { color: { bg: { $type: "color", $value: "#fff" } } },
+        null,
+        2,
+      ) + "\n",
+    );
+
+    // Mixed input: emit succeeds for BOTH, but the stub is named in a warning.
+    const code = await figmaCommand([
+      blankPath,
+      goodPath,
+      "--tokens",
+      tokensPath,
+      "--out",
+      outDir,
+    ]);
+    assert.equal(code, 0, "emit is a warning door, not a refusal door");
+    const stubWarnings = warnings.filter((w) =>
+      w.includes(`${DRAWABLE_EMPTY}:`),
+    );
+    assert.equal(stubWarnings.length, 1, JSON.stringify(warnings));
+    assert.ok(
+      stubWarnings[0].includes("acme.blank"),
+      `warning must list the stub contract: ${stubWarnings[0]}`,
+    );
+    assert.ok(
+      !stubWarnings[0].includes("acme.pill"),
+      `drawable contract must NOT be listed as a stub: ${stubWarnings[0]}`,
+    );
+    assert.ok(
+      /EMPTY frames/i.test(stubWarnings[0]),
+      `warning must say what lands on canvas: ${stubWarnings[0]}`,
+    );
+    assert.ok(
+      /computed capture/i.test(stubWarnings[0]),
+      `warning must name the fix: ${stubWarnings[0]}`,
+    );
+
+    // FALSIFICATION: all-drawable input must emit with NO stub warning.
+    warnings.length = 0;
+    const code2 = await figmaCommand([
+      goodPath,
+      "--tokens",
+      tokensPath,
+      "--out",
+      path.join(dir, "out2"),
+    ]);
+    assert.equal(code2, 0);
+    assert.equal(
+      warnings.filter((w) => w.includes(`${DRAWABLE_EMPTY}:`)).length,
+      0,
+      `no stub in the input, no warning: ${JSON.stringify(warnings)}`,
+    );
+  } finally {
+    console.warn = realWarn;
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test("toBundle / publish door refuses drawable-empty; a drawable contract passes the gate", () => {
   const dir = mkdtempSync(path.join(tmpdir(), "dsc-tobundle-drawable-empty-"));
   try {

@@ -199,10 +199,10 @@ npm run storybook    # the generated component library — blocks
 
 Then prove the loop to yourself in about two minutes:
 
-1. `npm run parity` — see it report **clean**: code, canvas, and tokens all match the contracts.
+1. `npm run parity` — code and tokens check **clean** against the contracts. (On a fresh clone the canvas half likely reports `snapshot-stale` instead of green — the committed Figma snapshots age out past 14 days **by design**, and the output says so when that is the only finding class. See [README §Working in this repository](../README.md).)
 2. Open a contract in `contracts/` and change something small — add an enum value, tweak a token binding.
 3. `npm run build && npm run parity` — the differ now reports the canvas **behind**, naming exactly what's missing and how to fix it. That honest red state *is* the product: nothing pretends to be in sync when it isn't.
 4. Revert, or carry the change through — regenerate, sync the canvas, and watch it go green again.
 5. `npm run eval` — 199 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
 
-From there: [The Bridge](./00-the-bridge.md) for the narrative, [Architecture](./01-architecture.md) for the model, [Contract Specification](./02-contract-spec.md) when you're ready to write one.
+From there: [The Bridge](./00-the-bridge.md) for the narrative, [Architecture](./01-architecture.md) for the model, [Contract Specification](./02-contract-spec.md) when you're ready to write one. Testing the tool against your own library and planning to report what you find? [The Beta Tester Runbook](./28-beta-runbook.md) is the packaged version of that: three tracks, exact commands, the named limitations each will hit, and the issue forms.
