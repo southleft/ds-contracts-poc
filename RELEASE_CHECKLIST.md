@@ -10,7 +10,7 @@ owner-approved reason; a blank box is not an approval.
 Automation evidence below is pinned to PR
 [#13](https://github.com/southleft/ds-contracts-poc/pull/13) on branch
 `feat/exact-conversion-wave0` at SHA
-`9e6eb06283335c289f79286f3c0a1777cb6f8ae5` (J15 freeze-and-rehearse,
+`5adfc8bc` supersedes `9e6eb06283335c289f79286f3c0a1777cb6f8ae5` (J15 freeze-and-rehearse,
 2026-08-08, superseding the earlier `4fda3b3` evidence freeze). Full command
 transcripts: [`.agents/runs/v1-release-prep/FREEZE-EVIDENCE.md`](.agents/runs/v1-release-prep/FREEZE-EVIDENCE.md).
 See also
@@ -18,7 +18,7 @@ See also
 
 ## Immutable inputs
 
-- [x] Release commit SHA: `9e6eb06283335c289f79286f3c0a1777cb6f8ae5` (J15 automation evidence freeze 2026-08-08; release owner signs the final commit choice) — FREEZE-EVIDENCE.md §1
+- [x] Release commit SHA candidate: `5adfc8bc` (all five workflows green: fast 31252088735/31252087135, full 31252088820, catalog-visual 31252088738, release-candidate 31252088752, security 31252088741; supersedes the `9e6eb062` freeze whose full lane was red; rehearsal evidence §§3-7 carries over — no package source moved between the SHAs, tarball hashes stand; release owner signs the final commit choice) — FREEZE-EVIDENCE.md §1 + §8-addendum
 - [x] Release branch: `feat/exact-conversion-wave0` → PR #13
 - [x] Working-tree disposition: clean at evidence SHA except the J15 evidence file itself; prior `.tmp-*.js` strays deleted in `9e6eb062` — FREEZE-EVIDENCE.md §1
 - [x] Node and npm versions: Node `v20.19.4`, npm `10.8.2` (local macOS arm64 Darwin 25.3); CI uses Node `20.19.4` — FREEZE-EVIDENCE.md §1
@@ -43,7 +43,7 @@ See also
 ## Linux and GitHub evidence
 
 - [x] Required `fast` check green: run 31249897605 (PR) + 31249895048 (push) SUCCESS @ `9e6eb062` — FREEZE-EVIDENCE.md §2
-- [ ] Required `full` check green: **RED** — run 31249897620 @ `9e6eb062` FAILED (eval ×4, `dagger:census`, `ua-baseline:check`); diagnosis in FREEZE-EVIDENCE.md §8 — **release blocked until fixed and re-frozen**
+- [x] Required `full` check green: run 31252088820 SUCCESS @ `5adfc8bc` (the §8 defects fixed at cause in `ac5e6181`: fixture re-rooted, promote inputs back-ported, bundles regenerated, census config + records re-recorded, astryx axis truth) — FREEZE-EVIDENCE.md §8-addendum
 - [x] Required `catalog-visual` check green: run 31249897604 SUCCESS @ `9e6eb062` — FREEZE-EVIDENCE.md §2
 - [x] Required `security` checks green: run 31249897606 SUCCESS @ `9e6eb062` — FREEZE-EVIDENCE.md §2
 - [x] macOS/Linux difference review complete: RC matrix run 31249897599 SUCCESS on both platforms; `SHA256SUMS` byte-identical across CI-Linux, CI-macOS, and local macOS clean-clone pack — FREEZE-EVIDENCE.md §4

@@ -251,3 +251,16 @@ scripts at repo root, and the checklist lockfile-hash drift. All three
 findings were fixed/disposed in `9e6eb062`, on which this file's evidence was
 produced. (`ci:lanes`, `docs:check`, `audit:production`, `npm ci`, and the
 three package builds were already green at `fabaea84`.)
+
+## §8-addendum — re-freeze on `5adfc8bc` (2026-08-08, automation)
+
+The five §8 defects were fixed at cause in `ac5e6181` (fixture re-rooted per
+the guard's own message; promote inputs back-ported to committed truth;
+tailwind/altitude bundles regenerated ×2 byte-identical; dagger census config
+gained the `--icons` dirs it lagged and re-recorded 87→89 with the two real
+wave-born receipts kept; astryx switch capture axis corrected to the
+boolean-axis truth). Local full lane: 36/36, eval 204/204. CI on `5adfc8bc`:
+fast 31252088735 + 31252087135, full 31252088820, catalog-visual 31252088738,
+release-candidate 31252088752, security 31252088741 — ALL SUCCESS.
+No package source moved between `9e6eb062` and `5adfc8bc`, so §4's tarball
+SHA-256s and §5-6 rehearsal evidence carry over to this SHA unchanged.
