@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "fab",
+  "contract": "examples/mui/contracts/fab.contract.json",
+  "script": "examples/mui/figma/fab.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:17:13.326Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "84:1743",
+    "mode": "generated",
+    "page": "Fab",
+    "sectionId": "84:1744",
+    "result": {
+      "note": "script timed out after create; component present on canvas"
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot reviewed on section/node 84:1744; structure/variants look sane (slot placeholders OK)."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:2082406472",
+    "lineCount": 215,
+    "sampleLines": [
+      ":COMPONENT_SET/Fab|fill|[]",
+      ":COMPONENT_SET/Fab|radius|5,5,5,5",
+      ":COMPONENT_SET/Fab|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Fab|description|Fab \u00e2\u0080\u0094 generated from contract mui.fab v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Fab|propdef|Color:VARIANT=Default",
+      ":COMPONENT_SET/Fab|propdef|Disabled#84:39:BOOLEAN=false",
+      ":COMPONENT_SET/Fab|propdef|Label#84:49:TEXT=+",
+      ":COMPONENT_SET/Fab|propdef|Size:VARIANT=Large",
+      "/0:COMPONENT/Size=Large, Color=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8784313797950745,\"g\":0.8784313797950745,\"b\":0.8784313797950745},\"boundVariables\":{\"color\":{\"var\":\"imported/fab/root/background-color/default\"}}}]",
+      "/0:COMPONENT/Size=Large, Color=Default|radius|28,28,28,28",
+      "/0:COMPONENT/Size=Large, Color=Default|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Size=Large, Color=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Size=Large, Color=Default|effects|3",
+      "/0:COMPONENT/Size=Large, Color=Default|bound:bottomLeftRadius|imported/fab/root/border-bottom-left-radius/large",
+      "/0:COMPONENT/Size=Large, Color=Default|bound:bottomRightRadius|imported/fab/root/border-bottom-right-radius/large",
+      "/0:COMPONENT/Size=Large, Color=Default|bound:minHeight|imported/fab/root/min-height",
+      "/0:COMPONENT/Size=Large, Color=Default|bound:minWidth|imported/shared/size-0",
+      "/0:COMPONENT/Size=Large, Color=Default|bound:paddingBottom|imported/shared/size-0",
+      "/0:COMPONENT/Size=Large, Color=Default|bound:paddingLeft|imported/shared/size-0",
+      "/0:COMPONENT/Size=Large, Color=Default|bound:paddingRight|imported/shared/size-0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Size enum \u2192 Large/Small/Medium",
+      "Color enum \u2192 Default/Primary/Secondary",
+      "BOOLEAN Disabled",
+      "TEXT Label",
+      "first-variant fill bound: imported/fab/root/background-color/default"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Large, Color=Default",
+        "Size=Large, Color=Primary",
+        "Size=Large, Color=Secondary",
+        "Size=Small, Color=Default",
+        "Size=Small, Color=Primary",
+        "Size=Small, Color=Secondary",
+        "Size=Medium, Color=Default",
+        "Size=Medium, Color=Primary",
+        "Size=Medium, Color=Secondary"
+      ],
+      "propDefs": [
+        {
+          "name": "Color",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Primary",
+            "Secondary"
+          ]
+        },
+        {
+          "name": "Disabled#84:39",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Label#84:49",
+          "type": "TEXT",
+          "defaultValue": "+",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Large",
+          "variantOptions": [
+            "Large",
+            "Small",
+            "Medium"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Large, Color=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 28,
+        "fillVarName": "imported/fab/root/background-color/default",
+        "padBound": {
+          "paddingLeft": "imported/shared/size-0",
+          "paddingTop": "imported/shared/size-0",
+          "paddingRight": "imported/shared/size-0",
+          "paddingBottom": "imported/shared/size-0",
+          "topLeftRadius": "imported/fab/root/border-top-left-radius/large",
+          "topRightRadius": "imported/fab/root/border-top-right-radius/large",
+          "bottomLeftRadius": "imported/fab/root/border-bottom-left-radius/large",
+          "bottomRightRadius": "imported/fab/root/border-bottom-right-radius/large",
+          "strokeTopWeight": "imported/shared/size-0",
+          "strokeBottomWeight": "imported/shared/size-0",
+          "strokeLeftWeight": "imported/shared/size-0",
+          "strokeRightWeight": "imported/shared/size-0",
+          "minWidth": "imported/shared/size-0",
+          "minHeight": "imported/fab/root/min-height"
+        },
+        "w": 8,
+        "h": 36,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

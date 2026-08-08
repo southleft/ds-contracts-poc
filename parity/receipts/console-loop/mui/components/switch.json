@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "switch",
+  "contract": "examples/mui/contracts/switch.contract.json",
+  "script": "examples/mui/figma/switch.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.511Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:624",
+    "mode": "existing",
+    "page": "Switch",
+    "sectionId": null,
+    "result": {}
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:624).",
+      "Switch COMPONENT_SET 21:624: 28 variant(s), 5 prop def(s). Structure looks sane; slot placeholders OK."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:2381775060",
+    "lineCount": 1465,
+    "sampleLines": [
+      ":COMPONENT_SET/Switch|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Color enum \u2192 Primary/Secondary/Error/Warning/Info/Success/Default",
+      "Size enum \u2192 Medium/Small",
+      "Checked enum \u2192 Unchecked/Checked",
+      "BOOLEAN Disabled"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Color=Primary, Size=Medium, Checked=Unchecked"
+      ],
+      "propDefs": [
+        {
+          "name": "Checked",
+          "type": "VARIANT",
+          "defaultValue": "Unchecked",
+          "variantOptions": [
+            "Unchecked",
+            "Checked"
+          ]
+        },
+        {
+          "name": "Color",
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Error",
+            "Warning",
+            "Info",
+            "Success",
+            "Default"
+          ]
+        },
+        {
+          "name": "Disabled#21:214",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Is enabled#21:244",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Color=Primary, Size=Medium, Checked=Unchecked",
+        "type": "COMPONENT",
+        "fillVarName": null,
+        "padBound": {
+          "paddingLeft": "imported/switch/root/padding-left/medium"
+        },
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 12,
+          "r": 12,
+          "b": 12,
+          "l": 12
+        },
+        "radius": 0,
+        "w": 58,
+        "h": 38,
+        "childTypes": [
+          "FRAME/switch-track"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

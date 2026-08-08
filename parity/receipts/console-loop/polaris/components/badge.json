@@ -1,0 +1,224 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "badge",
+  "contract": "examples/polaris/contracts/badge.contract.json",
+  "script": "examples/polaris/figma/badge.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:19.080Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:8216",
+    "mode": "generated",
+    "page": "Badge (polaris.badge)",
+    "sectionId": "1:8217",
+    "contractId": "polaris.badge",
+    "result": {
+      "createdNodeIds": [
+        "1:8216"
+      ],
+      "results": [
+        {
+          "name": "Badge",
+          "contractId": "polaris.badge",
+          "nodeId": "1:8216",
+          "key": "8cf8acf2c0b94d9bf3bad4e8aeacada897385729",
+          "variants": 56,
+          "properties": [
+            "Tone And Progress Label Override#1:1285",
+            "Tone",
+            "Progress"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Re-synced via clientStorage chunks (n=32, total=252361); nodeId=1:8216"
+    ],
+    "defects": [
+      "Pill radius/padding/progress glyph fidelity vs developed badge receipts incomplete — fail closed."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/badge.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "examples/polaris/generated/html/badge.html#first-item-inline-css",
+    "scorecard": "parity/receipts/console-loop/polaris/scores/badge.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "agent AA=15.81 compositionOk vs emit-html first-item",
+        "matchedAt": "2026-08-08T03:21:50.448Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=15.81, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:68910415",
+    "lineCount": 2079,
+    "sampleLines": [
+      ":COMPONENT_SET/Badge (polaris.badge)|fill|[]",
+      ":COMPONENT_SET/Badge (polaris.badge)|radius|5,5,5,5",
+      ":COMPONENT_SET/Badge (polaris.badge)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Badge (polaris.badge)|description|Badge â generated from contract polaris.badge v0.4.0 â",
+      ":COMPONENT_SET/Badge (polaris.badge)|propdef|Progress:VARIANT=none",
+      ":COMPONENT_SET/Badge (polaris.badge)|propdef|Tone:VARIANT=info",
+      ":COMPONENT_SET/Badge (polaris.badge)|propdef|Tone And Progress Label Override#1:1285:TEXT=",
+      "/0:COMPONENT/Tone=info, Progress=none|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8352941274642944,\"g\":0.9215686321258545,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/badge/root/background-color/info\"}}}]",
+      "/0:COMPONENT/Tone=info, Progress=none|radius|8,8,8,8",
+      "/0:COMPONENT/Tone=info, Progress=none|layout|HORIZONTAL MIN/CENTER gap 0 pad 2,8,2,8",
+      "/0:COMPONENT/Tone=info, Progress=none|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Tone=info, Progress=none|bound:bottomLeftRadius|p/border-radius-200",
+      "/0:COMPONENT/Tone=info, Progress=none|bound:bottomRightRadius|p/border-radius-200",
+      "/0:COMPONENT/Tone=info, Progress=none|bound:paddingBottom|p/space-050",
+      "/0:COMPONENT/Tone=info, Progress=none|bound:paddingLeft|p/space-200",
+      "/0:COMPONENT/Tone=info, Progress=none|bound:paddingRight|p/space-200",
+      "/0:COMPONENT/Tone=info, Progress=none|bound:paddingTop|p/space-050",
+      "/0:COMPONENT/Tone=info, Progress=none|bound:topLeftRadius|p/border-radius-200",
+      "/0:COMPONENT/Tone=info, Progress=none|bound:topRightRadius|p/border-radius-200",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0.22745098173618317,\"b\":0.3529411852359772},\"boundVariables\":{\"color\":{\"var\":\"imported/badge/label/color/info\"}}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Tone enum → info/success/warning/critical/attention/new/magic/info-strong/success-strong/warning-strong/critical-strong/attention-strong/read-only/enabled",
+      "Progress enum → none/incomplete/partiallyComplete/complete",
+      "TEXT Tone And Progress Label Override",
+      "first-variant fill bound: imported/badge/root/background-color/info"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Tone=info, Progress=none",
+        "Tone=info, Progress=incomplete",
+        "Tone=info, Progress=partiallyComplete",
+        "Tone=info, Progress=complete",
+        "Tone=success, Progress=none",
+        "Tone=success, Progress=incomplete",
+        "Tone=success, Progress=partiallyComplete",
+        "Tone=success, Progress=complete",
+        "Tone=warning, Progress=none",
+        "Tone=warning, Progress=incomplete",
+        "Tone=warning, Progress=partiallyComplete",
+        "Tone=warning, Progress=complete",
+        "Tone=critical, Progress=none",
+        "Tone=critical, Progress=incomplete",
+        "Tone=critical, Progress=partiallyComplete",
+        "Tone=critical, Progress=complete",
+        "Tone=attention, Progress=none",
+        "Tone=attention, Progress=incomplete",
+        "Tone=attention, Progress=partiallyComplete",
+        "Tone=attention, Progress=complete",
+        "Tone=new, Progress=none",
+        "Tone=new, Progress=incomplete",
+        "Tone=new, Progress=partiallyComplete",
+        "Tone=new, Progress=complete",
+        "Tone=magic, Progress=none",
+        "Tone=magic, Progress=incomplete",
+        "Tone=magic, Progress=partiallyComplete",
+        "Tone=magic, Progress=complete",
+        "Tone=info-strong, Progress=none",
+        "Tone=info-strong, Progress=incomplete",
+        "Tone=info-strong, Progress=partiallyComplete",
+        "Tone=info-strong, Progress=complete",
+        "Tone=success-strong, Progress=none",
+        "Tone=success-strong, Progress=incomplete",
+        "Tone=success-strong, Progress=partiallyComplete",
+        "Tone=success-strong, Progress=complete",
+        "Tone=warning-strong, Progress=none",
+        "Tone=warning-strong, Progress=incomplete",
+        "Tone=warning-strong, Progress=partiallyComplete",
+        "Tone=warning-strong, Progress=complete"
+      ],
+      "propDefs": [
+        {
+          "name": "Tone And Progress Label Override#1:1285",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Tone",
+          "type": "VARIANT",
+          "defaultValue": "info",
+          "variantOptions": [
+            "info",
+            "success",
+            "warning",
+            "critical",
+            "attention",
+            "new",
+            "magic",
+            "info-strong",
+            "success-strong",
+            "warning-strong",
+            "critical-strong",
+            "attention-strong",
+            "read-only",
+            "enabled"
+          ]
+        },
+        {
+          "name": "Progress",
+          "type": "VARIANT",
+          "defaultValue": "none",
+          "variantOptions": [
+            "none",
+            "incomplete",
+            "partiallyComplete",
+            "complete"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Tone=info, Progress=none",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 2,
+          "r": 8,
+          "b": 2,
+          "l": 8
+        },
+        "radius": 8,
+        "fillVarName": "imported/badge/root/background-color/info",
+        "padBound": {
+          "paddingLeft": "p/space-200",
+          "paddingTop": "p/space-050",
+          "paddingRight": "p/space-200",
+          "paddingBottom": "p/space-050",
+          "topLeftRadius": "p/border-radius-200",
+          "topRightRadius": "p/border-radius-200",
+          "bottomLeftRadius": "p/border-radius-200",
+          "bottomRightRadius": "p/border-radius-200",
+          "fills": "imported/badge/root/background-color/info"
+        },
+        "w": 61,
+        "h": 20,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T12:03:18.147Z",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=32, total=252361); nodeId=1:8216"
+}

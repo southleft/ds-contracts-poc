@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "kind": "console-loop-altitude-component",
+  "status": "completed",
+  "component": "heading",
+  "contract": "examples/altitude/contracts/heading.contract.json",
+  "script": "examples/altitude/figma/heading.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:43:13.859Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:3047",
+    "mode": "generated",
+    "page": "Heading (altitude.heading)",
+    "sectionId": "1:3048",
+    "contractId": "altitude.heading",
+    "result": {
+      "createdNodeIds": [
+        "1:3047"
+      ],
+      "results": [
+        {
+          "name": "Heading",
+          "contractId": "altitude.heading",
+          "nodeId": "1:3047",
+          "key": "cf91d11ab7bf9904da57884a487584d8cbf35f5a",
+          "variants": 12,
+          "properties": [
+            "Content#1:806",
+            "Variant",
+            "Weight"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "matchDeveloped": true,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [],
+    "defects": [],
+    "reference": "parity/receipts/console-loop/altitude/refs/heading.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "extract/computed/out/altitude/heading/gate-shots/display-lg.bold__default.png",
+    "scorecard": "parity/receipts/console-loop/altitude/scores/heading.json",
+    "matchDevelopedReason": "agent AA=3.77 compositionOk (cropped-ref loop)",
+    "matchedAt": "2026-08-08T03:09:53.136Z",
+    "status": "scored-pass",
+    "scoreConfirmed": {
+      "at": "2026-08-08T04:31:56.356Z",
+      "pctAAMasked": 3.7677304964539005,
+      "compositionOk": true,
+      "supersededDefects": [],
+      "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:3593476120",
+    "lineCount": 139,
+    "sampleLines": [
+      ":COMPONENT_SET/Heading (altitude.heading)|fill|[]",
+      ":COMPONENT_SET/Heading (altitude.heading)|radius|5,5,5,5",
+      ":COMPONENT_SET/Heading (altitude.heading)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Heading (altitude.heading)|description|Heading â generated from contract altitude.heading v0.2.0 â",
+      ":COMPONENT_SET/Heading (altitude.heading)|propdef|Content#1:806:TEXT=Heading",
+      ":COMPONENT_SET/Heading (altitude.heading)|propdef|Variant:VARIANT=Display Lg",
+      ":COMPONENT_SET/Heading (altitude.heading)|propdef|Weight:VARIANT=Regular",
+      "/0:COMPONENT/Variant=Display Lg, Weight=Regular|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Variant=Display Lg, Weight=Regular|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=Display Lg, Weight=Regular|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Display Lg, Weight=Regular|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Variant=Display Lg, Weight=Regular|bound:minHeight|imported/heading/root/min-height",
+      "/0:COMPONENT/Variant=Display Lg, Weight=Regular|bound:minWidth|imported/heading/root/min-width",
+      "/0:COMPONENT/Variant=Display Lg, Weight=Regular|bound:width|imported/heading/root/width",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{}}]",
+      "/0/0:TEXT/label|radius|0,0,0,0",
+      "/0/0:TEXT/label|sizing|FILL/HUG AUTO",
+      "/0/0:TEXT/label|text|\"Heading\" 48px {\"family\":\"Inter\",\"style\":\"Regular\"}",
+      "/1:COMPONENT/Variant=Display Lg, Weight=Bold|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/1:COMPONENT/Variant=Display Lg, Weight=Bold|radius|0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Variant enum → Display Lg/Display Md/Display Sm/Lg/Md/Sm",
+      "Weight enum → Regular/Bold",
+      "TEXT Content"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Display Lg, Weight=Regular",
+        "Variant=Display Lg, Weight=Bold",
+        "Variant=Display Md, Weight=Regular",
+        "Variant=Display Md, Weight=Bold",
+        "Variant=Display Sm, Weight=Regular",
+        "Variant=Display Sm, Weight=Bold",
+        "Variant=Lg, Weight=Regular",
+        "Variant=Lg, Weight=Bold",
+        "Variant=Md, Weight=Regular",
+        "Variant=Md, Weight=Bold",
+        "Variant=Sm, Weight=Regular",
+        "Variant=Sm, Weight=Bold"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#1:806",
+          "type": "TEXT",
+          "defaultValue": "Heading",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Display Lg",
+          "variantOptions": [
+            "Display Lg",
+            "Display Md",
+            "Display Sm",
+            "Lg",
+            "Md",
+            "Sm"
+          ]
+        },
+        {
+          "name": "Weight",
+          "type": "VARIANT",
+          "defaultValue": "Regular",
+          "variantOptions": [
+            "Regular",
+            "Bold"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Display Lg, Weight=Regular",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/heading/root/width",
+          "minWidth": "imported/heading/root/min-width",
+          "minHeight": "imported/heading/root/min-height"
+        },
+        "w": 328,
+        "h": 52,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "dialog",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/dialog.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "21:448",
+  "cellNodeId": "21:434",
+  "cellName": "Max width=Lg",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 70.97839135654262,
+    "pctAAUnmasked": 51.540616246498594,
+    "pctAAMasked": 51.540616246498594,
+    "maskCoveragePct": 0,
+    "canvasPx": "294x68",
+    "realPx": "294x68",
+    "inkCanvasPct": 61.56962785114045,
+    "inkRealPct": 43.97258903561425
+  },
+  "reference": "extract/computed/out/mui/dialog/gate-shots/lg__default.png",
+  "referenceSha256": "8eed4c27327e71d1a956b5823c8e89112ede49cd56826c27fe44ccaf95dae0d6",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/dialog.png",
+  "canvasShotSha256": "62d0d6da7cf8e17b7fc20c55cc3945e2049f427f7eb02ec78ec30af6e22b89d6",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/dialog.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 17.597038815526204,
+  "dprNormalized": false,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=51.54 > 5)"
+}

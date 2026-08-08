@@ -12,9 +12,32 @@ Does **not** overwrite golden `figma-sync/` (evals pin those bytes). Emits into
 ## Commands
 
 ```bash
-npm run console-loop:emit              # regenerate emitted/*.js for Testing file
-npm run console-loop:evidence:check    # fail-closed on required receipts
+npm run console-loop:emit                # regenerate emitted/*.js for Testing file
+npm run console-loop:evidence:check      # first-party gate (attested-only lane)
+npm run console-loop:all:evidence:check  # ALL 7 lanes, aggregated (no short-circuit)
+npm run console-loop:developed-score     # pixel-score a stem vs its developed reference
 ```
+
+## Evidence semantics (2026-08-07 redesign)
+
+- **Scorecards, never booleans.** A receipt may claim a visual pass
+  (`visual.ok` / `visual.matchDeveloped`) only when `<lib>/scores/<stem>.json`
+  passes the one bar: `pctAAMasked ≤ 5` AND `compositionOk`. Foreign lanes
+  (tailwind/altitude/astryx/carbon/polaris) enforce this strictly; a
+  pass-claim without a passing scorecard fails CI naming the stem.
+- **Honest fail-closed is legal.** No pass-claims + non-empty named
+  `visual.defects` (`visual.status: "fail-closed"`) is counted and printed,
+  not failed — the branch stays green while the visual hill-climb proceeds.
+  Current genuine scorecard passes: tailwind 2/5, altitude 4/8, carbon 2/10,
+  astryx 0/13, polaris 0/12 (8/48 foreign; see `CORPORA.md`).
+- **Attested-only (first-party + MUI).** Those corpora have no pixel
+  scorecards yet; their visual claims are legal but printed loudly as
+  ATTESTED-ONLY until the pixel-score job lands. Once a scorecard exists the
+  claim is enforced strictly.
+- **Ratchet.** `RATCHET.json` pins per-lane minimum scorecard-passed counts;
+  a lane fails if its count drops below its floor.
+- **Hash pinning.** Scorecards record `sha256` of the reference and canvas
+  PNGs they scored; gates verify the pins against the files on disk.
 
 Chunk a script for Desktop Bridge upload:
 

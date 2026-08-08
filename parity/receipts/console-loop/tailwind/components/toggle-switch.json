@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "kind": "console-loop-tailwind-component",
+  "status": "completed",
+  "component": "toggle-switch",
+  "contract": "examples/tailwind/contracts/toggleswitch.contract.json",
+  "script": "examples/tailwind/figma/toggle-switch.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:42:58.542Z",
+  "reSyncedAt": "2026-08-07T12:03:45.970Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk append (parts :9228) into ds_loop_script",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:2296",
+    "mode": "amended",
+    "page": "ToggleSwitch",
+    "sectionId": "1:2297",
+    "contractId": "flowbite.toggleswitch",
+    "result": {
+      "createdNodeIds": [
+        "1:2296"
+      ],
+      "results": [
+        {
+          "name": "ToggleSwitch",
+          "contractId": "flowbite.toggleswitch",
+          "amended": true,
+          "nodeId": "1:2296",
+          "key": "647547bf9a84a03d86745ff849efa148b38cfd19",
+          "rebuiltVariants": 6,
+          "properties": [
+            "Label",
+            "Sizing",
+            "Checked"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "humanSpotCheck": {
+      "passed": true,
+      "at": "2026-08-07T11:45:00.000Z",
+      "scope": "Md thumb left/right travel + size ladder presence"
+    },
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T15:40:19.657Z",
+    "notes": [
+      "Re-synced 2026-08-06 from toggle-switch.figma.js via Console MCP (12×8KB clientStorage chunk append; ELLIPSE strokeSides guard in BOTH applyLits + shapeRuntime). Forced amend after unchanged skip; rebuilt 6 variants on 1:2296.",
+      "White ELLIPSE thumbs present at Sm (16×16), Md (20×20), Lg (24×24) for both Checked states; fill rgb(1,1,1).",
+      "Checked travel: right-anchor right:2px (PROVENANCE); Md checked x=22 on 44px track. Human spot-check PASS 2026-08-07 for thumb travel.",
+      "matchDeveloped stays false until like-for-like pixel score recommends.",
+      "Re-synced via clientStorage chunks (n=12, total=93225); nodeId=1:2296"
+    ],
+    "defects": [
+      "Developed pixel score still composition-blocked (set shot vs gate-shot cell)."
+    ],
+    "reference": "parity/receipts/console-loop/tailwind/refs/toggle-switch.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "observations": {
+      "whiteEllipseThumb": true,
+      "thumbSizes": {
+        "sm": {
+          "w": 16,
+          "h": 16
+        },
+        "md": {
+          "w": 20,
+          "h": 20
+        },
+        "lg": {
+          "w": 24,
+          "h": 24
+        }
+      },
+      "applyLitsEllipseGuard": true,
+      "shapeRuntimeEllipseGuard": true
+    },
+    "referenceSource": "extract/computed/out/tailwind/toggleswitch/receipts/pair--md.unchecked__default.png#package-left",
+    "scorecard": "parity/receipts/console-loop/tailwind/scores/toggle-switch.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "agent AA=6.15",
+        "matchedAt": "2026-08-08T03:23:43.356Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=6.15, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:3468428338",
+    "lineCount": 181,
+    "sampleLines": [
+      ":COMPONENT_SET/ToggleSwitch|fill|[]",
+      ":COMPONENT_SET/ToggleSwitch|radius|5,5,5,5",
+      ":COMPONENT_SET/ToggleSwitch|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/ToggleSwitch|description|ToggleSwitch â generated from contract flowbite.toggleswitch v0.2.0 â",
+      ":COMPONENT_SET/ToggleSwitch|propdef|Checked:VARIANT=Unchecked",
+      ":COMPONENT_SET/ToggleSwitch|propdef|Label#1:766:TEXT=Toggle",
+      ":COMPONENT_SET/ToggleSwitch|propdef|Sizing:VARIANT=Md",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|radius|8,8,8,8",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|layout|HORIZONTAL MIN/MIN gap 12 pad 0,0,0,0",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|bound:bottomLeftRadius|imported/shared/size-8",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|bound:bottomRightRadius|imported/shared/size-8",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|bound:height|imported/toggle-switch/root/height/md",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|bound:itemSpacing|imported/toggle-switch/label/margin-left",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|bound:topLeftRadius|imported/shared/size-8",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|bound:topRightRadius|imported/shared/size-8",
+      "/0:COMPONENT/Sizing=Md, Checked=Unchecked|bound:width|imported/toggle-switch/root/width/md",
+      "/0/0:FRAME/part-0|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"imported/toggle-switch/part-0/background-color/unchecked\"}}}]",
+      "/0/0:FRAME/part-0|radius|9999,9999,9999,9999"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Sizing enum → Md/Sm/Lg",
+      "Checked enum → Unchecked/Checked",
+      "TEXT Label"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Sizing=Md, Checked=Unchecked",
+        "Sizing=Md, Checked=Checked",
+        "Sizing=Sm, Checked=Unchecked",
+        "Sizing=Sm, Checked=Checked",
+        "Sizing=Lg, Checked=Unchecked",
+        "Sizing=Lg, Checked=Checked"
+      ],
+      "propDefs": [
+        {
+          "name": "Label#1:766",
+          "type": "TEXT",
+          "defaultValue": "Toggle",
+          "variantOptions": null
+        },
+        {
+          "name": "Sizing",
+          "type": "VARIANT",
+          "defaultValue": "Md",
+          "variantOptions": [
+            "Md",
+            "Sm",
+            "Lg"
+          ]
+        },
+        {
+          "name": "Checked",
+          "type": "VARIANT",
+          "defaultValue": "Unchecked",
+          "variantOptions": [
+            "Unchecked",
+            "Checked"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Sizing=Md, Checked=Unchecked",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 8,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "imported/toggle-switch/label/margin-left",
+          "width": "imported/toggle-switch/root/width/md",
+          "height": "imported/toggle-switch/root/height/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8"
+        },
+        "w": 100.43800354003906,
+        "h": 24,
+        "childTypes": [
+          "FRAME/part-0",
+          "FRAME/label (margin box)"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "screenshot": "parity/receipts/console-loop/tailwind/shots/toggle-switch.png",
+  "screenshotVariant": {
+    "nodeId": "1:2272",
+    "name": "Sizing=Md, Checked=Unchecked",
+    "bytes": 3604
+  },
+  "reSyncNote": "Re-synced via clientStorage chunks (n=12, total=93225); nodeId=1:2296"
+}

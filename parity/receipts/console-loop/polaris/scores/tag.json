@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 28.888888888888886,
+    "pctAAUnmasked": 9.722222222222223,
+    "pctAAMasked": 9.722222222222223,
+    "maskCoveragePct": 0,
+    "canvasPx": "36x10",
+    "realPx": "36x10",
+    "inkCanvasPct": 96.94444444444444,
+    "inkRealPct": 97.22222222222221
+  },
+  "reference": "parity/receipts/console-loop/polaris/refs/tag.png",
+  "referenceSha256": "b49a3b065ef001ac201d650ebfd0af75bb0ed6332f5c71deb146730aec9649c0",
+  "canvasShot": "parity/receipts/console-loop/polaris/shots/tag-cell.png",
+  "canvasShotSha256": "d228482608243d2703741badda878ed3138733f65ff196f9bb49956b1457bc85",
+  "diff": "parity/receipts/console-loop/polaris/scores/tag.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/polaris/components/tag.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0.27777777777777146,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=9.72 > 5)",
+  "recordedAt": "2026-08-08T04:31:20.669Z"
+}

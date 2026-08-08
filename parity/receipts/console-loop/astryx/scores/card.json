@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 42.423913043478265,
+    "pctAAUnmasked": 33.27173913043479,
+    "pctAAMasked": 33.27173913043479,
+    "maskCoveragePct": 0,
+    "canvasPx": "115x80",
+    "realPx": "114x56",
+    "inkCanvasPct": 98.76086956521739,
+    "inkRealPct": 68.3913043478261
+  },
+  "reference": "parity/receipts/console-loop/astryx/refs/card.png",
+  "referenceSha256": "72d2d50d9223eff926d251e8856825c9590764cce986baab48e45b960ad73459",
+  "canvasShot": "parity/receipts/console-loop/astryx/shots/card-cell.png",
+  "canvasShotSha256": "12da19bda44edd12db1a8f78a9912d72fe47a97db731961efc48deab08b906d8",
+  "diff": "parity/receipts/console-loop/astryx/scores/card.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/astryx/components/card.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.4285714285714286,
+  "inkDelta": 30.369565217391298,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.43, inkDelta=30.4) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T04:31:13.248Z"
+}

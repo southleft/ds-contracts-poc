@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "card",
+  "contract": "examples/astryx/contracts/card.contract.json",
+  "script": "examples/astryx/figma/card.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:13.994Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:4047",
+    "mode": "generated",
+    "page": "Card (astryx.card)",
+    "sectionId": "1:4048",
+    "contractId": "astryx.card",
+    "result": {
+      "createdNodeIds": [
+        "1:4047"
+      ],
+      "results": [
+        {
+          "name": "Card",
+          "contractId": "astryx.card",
+          "nodeId": "1:4047",
+          "key": "945b24aaa40af6132dbceca2132547befa9758d6",
+          "variants": 13,
+          "properties": [
+            "Body#1:1109",
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Cream surface improved text contrast."
+    ],
+    "defects": [
+      "Color variants still lack developed title/body hierarchy and elevation/border cues from Card docs.",
+      "Body-only placeholder aesthetic — fail closed."
+    ],
+    "reference": "parity/receipts/console-loop/astryx/refs/card.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "emit-html:examples/astryx/contracts/card.contract.json#first-item"
+  },
+  "fingerprint": {
+    "v6": "v6:3092228042",
+    "lineCount": 292,
+    "sampleLines": [
+      ":COMPONENT_SET/Card (astryx.card)|fill|[]",
+      ":COMPONENT_SET/Card (astryx.card)|radius|5,5,5,5",
+      ":COMPONENT_SET/Card (astryx.card)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Card (astryx.card)|description|Card â generated from contract astryx.card v0.3.0 â",
+      ":COMPONENT_SET/Card (astryx.card)|propdef|Body#1:1109:TEXT=Card content",
+      ":COMPONENT_SET/Card (astryx.card)|propdef|Variant:VARIANT=Default",
+      "/0:COMPONENT/Variant=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/card/root/background-color/default\"}}}]",
+      "/0:COMPONENT/Variant=Default|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.800000011920929,\"g\":0.8274509906768799,\"b\":0.8588235378265381},\"boundVariables\":{\"color\":{\"var\":\"imported/card/root/border-top-color/default\"}}}] w1",
+      "/0:COMPONENT/Variant=Default|radius|12,12,12,12",
+      "/0:COMPONENT/Variant=Default|layout|VERTICAL MIN/MIN gap 0 pad 15,15,15,15",
+      "/0:COMPONENT/Variant=Default|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Variant=Default|bound:bottomLeftRadius|imported/shared/size-12",
+      "/0:COMPONENT/Variant=Default|bound:bottomRightRadius|imported/shared/size-12",
+      "/0:COMPONENT/Variant=Default|bound:paddingBottom|imported/card/root/padding-bottom/default",
+      "/0:COMPONENT/Variant=Default|bound:paddingLeft|imported/card/root/padding-left/default",
+      "/0:COMPONENT/Variant=Default|bound:paddingRight|imported/card/root/padding-right/default",
+      "/0:COMPONENT/Variant=Default|bound:paddingTop|imported/card/root/padding-top/default",
+      "/0:COMPONENT/Variant=Default|bound:strokeBottomWeight|imported/card/root/border-bottom-width/default",
+      "/0:COMPONENT/Variant=Default|bound:strokeLeftWeight|imported/card/root/border-left-width/default",
+      "/0:COMPONENT/Variant=Default|bound:strokeRightWeight|imported/card/root/border-right-width/default"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Variant enum → Default/Transparent/Muted/Blue/Cyan/Gray/Green/Orange/Pink/Purple/Red/Teal/Yellow",
+      "TEXT Body",
+      "first-variant fill bound: imported/card/root/background-color/default"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Default",
+        "Variant=Transparent",
+        "Variant=Muted",
+        "Variant=Blue",
+        "Variant=Cyan",
+        "Variant=Gray",
+        "Variant=Green",
+        "Variant=Orange",
+        "Variant=Pink",
+        "Variant=Purple",
+        "Variant=Red",
+        "Variant=Teal",
+        "Variant=Yellow"
+      ],
+      "propDefs": [
+        {
+          "name": "Body#1:1109",
+          "type": "TEXT",
+          "defaultValue": "Card content",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Transparent",
+            "Muted",
+            "Blue",
+            "Cyan",
+            "Gray",
+            "Green",
+            "Orange",
+            "Pink",
+            "Purple",
+            "Red",
+            "Teal",
+            "Yellow"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Default",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 15,
+          "r": 15,
+          "b": 15,
+          "l": 15
+        },
+        "radius": 12,
+        "fillVarName": "imported/card/root/background-color/default",
+        "padBound": {
+          "paddingLeft": "imported/card/root/padding-left/default",
+          "paddingTop": "imported/card/root/padding-top/default",
+          "paddingRight": "imported/card/root/padding-right/default",
+          "paddingBottom": "imported/card/root/padding-bottom/default",
+          "width": "imported/card/root/width",
+          "topLeftRadius": "imported/shared/size-12",
+          "topRightRadius": "imported/shared/size-12",
+          "bottomLeftRadius": "imported/shared/size-12",
+          "bottomRightRadius": "imported/shared/size-12",
+          "strokeTopWeight": "imported/card/root/border-top-width/default",
+          "strokeBottomWeight": "imported/card/root/border-bottom-width/default",
+          "strokeLeftWeight": "imported/card/root/border-left-width/default",
+          "strokeRightWeight": "imported/card/root/border-right-width/default",
+          "fills": "imported/card/root/background-color/default",
+          "strokes": "imported/card/root/border-top-color/default"
+        },
+        "w": 114.2030029296875,
+        "h": 80,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

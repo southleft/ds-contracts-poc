@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "badge",
+  "contract": "examples/astryx/contracts/badge.contract.json",
+  "script": "examples/astryx/figma/badge.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:07.010Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:3794",
+    "mode": "amended",
+    "page": "Badge (astryx.badge)",
+    "sectionId": "1:3795",
+    "contractId": "astryx.badge",
+    "result": {
+      "createdNodeIds": [
+        "1:3794"
+      ],
+      "results": [
+        {
+          "name": "Badge",
+          "contractId": "astryx.badge",
+          "nodeId": "1:3794",
+          "key": "7e88f3f6e4d7a7cc5e5d98b2e1511942b6c05ff0",
+          "variants": 14,
+          "properties": [
+            "Label#1:897",
+            "Variant"
+          ],
+          "amended": true,
+          "rebuiltVariants": 14,
+          "addedVariants": [],
+          "extraVariants": [],
+          "addedProps": [],
+          "editedDefaults": [],
+          "wiredReactions": 0
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Cream surface + pastel color chips improved contrast vs prior black-canvas review; Neutral light gray OK.",
+      "Re-synced via clientStorage chunks (n=10, total=75937); nodeId=1:3794; rebuilt 14 variants"
+    ],
+    "defects": [
+      "Accent/default row uses near-black solid; docs Info status is saturated blue with white text — status mapping incomplete.",
+      "Missing icon treatments present in some docs badge examples; fail closed until status axis maps 1:1 to developed Neutral/Info/Success/Warning/Error row."
+    ],
+    "reference": "parity/receipts/console-loop/astryx/refs/badge.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "extract/computed/out/astryx/badge/gate-shots/blue__default.png",
+    "scorecard": "parity/receipts/console-loop/astryx/scores/badge.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "chrome matches (New+Blue); residual FC-FONT-AA / 3px width (42 vs 39)",
+        "matchedAt": "2026-08-08T03:17:04.210Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=11.55, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:1192491616",
+    "lineCount": 244,
+    "sampleLines": [
+      ":COMPONENT_SET/Badge (astryx.badge)|fill|[]",
+      ":COMPONENT_SET/Badge (astryx.badge)|radius|5,5,5,5",
+      ":COMPONENT_SET/Badge (astryx.badge)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Badge (astryx.badge)|description|Badge â generated from contract astryx.badge v0.3.0 â",
+      ":COMPONENT_SET/Badge (astryx.badge)|propdef|Label#1:897:TEXT=Badge",
+      ":COMPONENT_SET/Badge (astryx.badge)|propdef|Variant:VARIANT=Neutral",
+      "/0:COMPONENT/Variant=Neutral|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.10000000149011612,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.019607843831181526,\"g\":0.21176470816135406,\"b\":0.3490196168422699},\"boundVariables\":{\"color\":{\"var\":\"color-neutral\"}}}]",
+      "/0:COMPONENT/Variant=Neutral|radius|9999,9999,9999,9999",
+      "/0:COMPONENT/Variant=Neutral|layout|HORIZONTAL CENTER/CENTER gap 4 pad 0,8,0,8",
+      "/0:COMPONENT/Variant=Neutral|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Variant=Neutral|bound:bottomLeftRadius|imported/shared/size-9999",
+      "/0:COMPONENT/Variant=Neutral|bound:bottomRightRadius|imported/shared/size-9999",
+      "/0:COMPONENT/Variant=Neutral|bound:itemSpacing|imported/badge/root/column-gap",
+      "/0:COMPONENT/Variant=Neutral|bound:paddingBottom|spacing-0",
+      "/0:COMPONENT/Variant=Neutral|bound:paddingLeft|imported/badge/root/padding-left",
+      "/0:COMPONENT/Variant=Neutral|bound:paddingRight|imported/badge/root/padding-right",
+      "/0:COMPONENT/Variant=Neutral|bound:paddingTop|spacing-0",
+      "/0:COMPONENT/Variant=Neutral|bound:topLeftRadius|imported/shared/size-9999",
+      "/0:COMPONENT/Variant=Neutral|bound:topRightRadius|imported/shared/size-9999",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.03921568766236305,\"g\":0.07450980693101883,\"b\":0.09019608050584793},\"boundVariables\":{\"color\":{\"var\":\"imported/badge/root/color/neutral\"}}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Variant enum → Neutral/Info/Success/Warning/Error/Blue/Cyan/Green/Orange/Pink/Purple/Red/Teal/Yellow",
+      "TEXT Label",
+      "first-variant fill bound: color-neutral"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Neutral",
+        "Variant=Info",
+        "Variant=Success",
+        "Variant=Warning",
+        "Variant=Error",
+        "Variant=Blue",
+        "Variant=Cyan",
+        "Variant=Green",
+        "Variant=Orange",
+        "Variant=Pink",
+        "Variant=Purple",
+        "Variant=Red",
+        "Variant=Teal",
+        "Variant=Yellow"
+      ],
+      "propDefs": [
+        {
+          "name": "Label#1:897",
+          "type": "TEXT",
+          "defaultValue": "Badge",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Neutral",
+          "variantOptions": [
+            "Neutral",
+            "Info",
+            "Success",
+            "Warning",
+            "Error",
+            "Blue",
+            "Cyan",
+            "Green",
+            "Orange",
+            "Pink",
+            "Purple",
+            "Red",
+            "Teal",
+            "Yellow"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Neutral",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 8,
+          "b": 0,
+          "l": 8
+        },
+        "radius": 9999,
+        "fillVarName": "color-neutral",
+        "padBound": {
+          "itemSpacing": "imported/badge/root/column-gap",
+          "paddingLeft": "imported/badge/root/padding-left",
+          "paddingTop": "spacing-0",
+          "paddingRight": "imported/badge/root/padding-right",
+          "paddingBottom": "spacing-0",
+          "topLeftRadius": "imported/shared/size-9999",
+          "topRightRadius": "imported/shared/size-9999",
+          "bottomLeftRadius": "imported/shared/size-9999",
+          "bottomRightRadius": "imported/shared/size-9999",
+          "fills": "color-neutral"
+        },
+        "w": 53,
+        "h": 20,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T12:09:10.107Z",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=10, total=75937); nodeId=1:3794; rebuilt 14 variants"
+}

@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "dropdown-menu-item",
+  "contract": "examples/astryx/contracts/dropdown-menu-item.contract.json",
+  "script": "examples/astryx/figma/dropdown-menu-item.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:09.106Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:3876",
+    "mode": "generated",
+    "page": "DropdownMenuItem",
+    "sectionId": "1:3878",
+    "contractId": "astryx.dropdown-menu-item",
+    "result": {
+      "createdNodeIds": [
+        "1:3876"
+      ],
+      "results": [
+        {
+          "name": "DropdownMenuItem",
+          "contractId": "astryx.dropdown-menu-item",
+          "nodeId": "1:3876",
+          "key": "8a8938c6bdcbea34112247d6754069d6048fa522",
+          "variants": 1,
+          "properties": [
+            "Is Disabled#1:994",
+            "Label#1:995"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [],
+    "defects": [
+      "Not a COMPONENT_SET; missing hover/selected/destructive variants; no developed site reference — fail closed."
+    ],
+    "reference": "none",
+    "reviewSurface": "cream-#F8F4ED-component-set"
+  },
+  "fingerprint": {
+    "v6": "v6:2766064663",
+    "lineCount": 19,
+    "sampleLines": [
+      ":COMPONENT/DropdownMenuItem|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/DropdownMenuItem|radius|8,8,8,8",
+      ":COMPONENT/DropdownMenuItem|layout|HORIZONTAL MIN/CENTER gap 0 pad 8,8,8,8",
+      ":COMPONENT/DropdownMenuItem|sizing|HUG/HUG AUTO",
+      ":COMPONENT/DropdownMenuItem|bound:bottomLeftRadius|radius-element",
+      ":COMPONENT/DropdownMenuItem|bound:bottomRightRadius|radius-element",
+      ":COMPONENT/DropdownMenuItem|bound:paddingBottom|spacing-2",
+      ":COMPONENT/DropdownMenuItem|bound:paddingLeft|spacing-2",
+      ":COMPONENT/DropdownMenuItem|bound:paddingRight|spacing-2",
+      ":COMPONENT/DropdownMenuItem|bound:paddingTop|spacing-2",
+      ":COMPONENT/DropdownMenuItem|bound:topLeftRadius|radius-element",
+      ":COMPONENT/DropdownMenuItem|bound:topRightRadius|radius-element",
+      ":COMPONENT/DropdownMenuItem|description|DropdownMenuItem â generated from contract astryx.dropdown-menu-item v0.2.0",
+      ":COMPONENT/DropdownMenuItem|propdef|Is Disabled#1:994:BOOLEAN=false",
+      ":COMPONENT/DropdownMenuItem|propdef|Label#1:995:TEXT=Menu item",
+      "/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.03921568766236305,\"g\":0.07450980693101883,\"b\":0.09019608050584793},\"boundVariables\":{\"color\":{\"var\":\"color-text-primary\"}}}]",
+      "/0:TEXT/label|radius|0,0,0,0",
+      "/0:TEXT/label|sizing|HUG/HUG AUTO",
+      "/0:TEXT/label|text|\"Menu item\" 14px {\"family\":\"Inter\",\"style\":\"Medium\"}"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "TEXT Label",
+      "BOOLEAN Is Disabled"
+    ],
+    "observed": {
+      "type": "COMPONENT",
+      "variantNames": [
+        "DropdownMenuItem"
+      ],
+      "propDefs": [
+        {
+          "name": "Is Disabled#1:994",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:995",
+          "type": "TEXT",
+          "defaultValue": "Menu item",
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "DropdownMenuItem",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 8,
+          "b": 8,
+          "l": 8
+        },
+        "radius": 8,
+        "fillVarName": null,
+        "padBound": {
+          "paddingLeft": "spacing-2",
+          "paddingTop": "spacing-2",
+          "paddingRight": "spacing-2",
+          "paddingBottom": "spacing-2",
+          "topLeftRadius": "radius-element",
+          "topRightRadius": "radius-element",
+          "bottomLeftRadius": "radius-element",
+          "bottomRightRadius": "radius-element"
+        },
+        "w": 87,
+        "h": 33,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "progress-bar",
+  "contract": "examples/polaris/contracts/progress-bar.contract.json",
+  "script": "examples/polaris/figma/progress-bar.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:31.926Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload + eval(async IIFE)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:10076",
+    "mode": "amended",
+    "page": "ProgressBar (polaris.progress-bar)",
+    "sectionId": "1:10077",
+    "contractId": "polaris.progress-bar",
+    "result": {
+      "createdNodeIds": [
+        "1:10076"
+      ],
+      "results": [
+        {
+          "name": "ProgressBar",
+          "contractId": "polaris.progress-bar",
+          "nodeId": "1:10076",
+          "key": "8a16ba083c4817c8514d138d2a51bf9e968eb4fc",
+          "variants": 12,
+          "properties": [
+            "Animated#1:2308",
+            "Progress#1:2321",
+            "Aria Labelled By#1:2334",
+            "Size",
+            "Tone"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Re-synced via console-loop batch 2026-08-07T16:32:44.350Z — amended rebuiltVariants=12; nodeId=1:10076; indicator pct~0.4 (115/288); matchDeveloped left unset.",
+      "Re-synced via clientStorage chunks (n=14, total=78188); eval skipped unchanged nodeId=1:10076; indicator 115/288 (~40%). matchDeveloped left false."
+    ],
+    "defects": [
+      "Track fills lack Polaris rounded-track fidelity vs developed progress-bar receipts — fail closed."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/progress-bar.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "examples/polaris/generated/html/progress-bar.html#first-item-inline-css"
+  },
+  "fingerprint": {
+    "v6": "v6:3437476105",
+    "lineCount": 201,
+    "sampleLines": [
+      ":COMPONENT_SET/ProgressBar (polaris.progress-bar)|fill|[]",
+      ":COMPONENT_SET/ProgressBar (polaris.progress-bar)|radius|5,5,5,5",
+      ":COMPONENT_SET/ProgressBar (polaris.progress-bar)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/ProgressBar (polaris.progress-bar)|description|ProgressBar â generated from contract polaris.progress-bar v0.4.0 â",
+      ":COMPONENT_SET/ProgressBar (polaris.progress-bar)|propdef|Animated#1:2308:BOOLEAN=false",
+      ":COMPONENT_SET/ProgressBar (polaris.progress-bar)|propdef|Aria Labelled By#1:2334:TEXT=",
+      ":COMPONENT_SET/ProgressBar (polaris.progress-bar)|propdef|Progress#1:2321:TEXT=0",
+      ":COMPONENT_SET/ProgressBar (polaris.progress-bar)|propdef|Size:VARIANT=Medium",
+      ":COMPONENT_SET/ProgressBar (polaris.progress-bar)|propdef|Tone:VARIANT=Highlight",
+      "/0:COMPONENT/Size=Medium, Tone=Highlight|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8901960849761963,\"g\":0.8901960849761963,\"b\":0.8901960849761963},\"boundVariables\":{\"color\":{\"var\":\"p/color-bg-fill-tertiary\"}}}]",
+      "/0:COMPONENT/Size=Medium, Tone=Highlight|radius|4,4,4,4",
+      "/0:COMPONENT/Size=Medium, Tone=Highlight|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Size=Medium, Tone=Highlight|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Size=Medium, Tone=Highlight|bound:bottomLeftRadius|p/border-radius-100",
+      "/0:COMPONENT/Size=Medium, Tone=Highlight|bound:bottomRightRadius|p/border-radius-100",
+      "/0:COMPONENT/Size=Medium, Tone=Highlight|bound:topLeftRadius|p/border-radius-100",
+      "/0:COMPONENT/Size=Medium, Tone=Highlight|bound:topRightRadius|p/border-radius-100",
+      "/0:COMPONENT/Size=Medium, Tone=Highlight|bound:width|imported/progress-bar/root/width",
+      "/0/0:FRAME/indicator|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.5686274766921997,\"g\":0.8156862854957581,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"p/color-bg-fill-info\"}}}]",
+      "/0/0:FRAME/indicator|radius|0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "TEXT Progress",
+      "Size enum → Medium/Small/Large",
+      "BOOLEAN Animated",
+      "TEXT Aria Labelled By",
+      "Tone enum → Highlight/Primary/Success/Critical",
+      "first-variant fill bound: p/color-bg-fill-tertiary"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Medium, Tone=Highlight",
+        "Size=Medium, Tone=Primary",
+        "Size=Medium, Tone=Success",
+        "Size=Medium, Tone=Critical",
+        "Size=Small, Tone=Highlight",
+        "Size=Small, Tone=Primary",
+        "Size=Small, Tone=Success",
+        "Size=Small, Tone=Critical",
+        "Size=Large, Tone=Highlight",
+        "Size=Large, Tone=Primary",
+        "Size=Large, Tone=Success",
+        "Size=Large, Tone=Critical"
+      ],
+      "propDefs": [
+        {
+          "name": "Animated#1:2308",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Progress#1:2321",
+          "type": "TEXT",
+          "defaultValue": "0",
+          "variantOptions": null
+        },
+        {
+          "name": "Aria Labelled By#1:2334",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ]
+        },
+        {
+          "name": "Tone",
+          "type": "VARIANT",
+          "defaultValue": "Highlight",
+          "variantOptions": [
+            "Highlight",
+            "Primary",
+            "Success",
+            "Critical"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Medium, Tone=Highlight",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 4,
+        "fillVarName": "p/color-bg-fill-tertiary",
+        "padBound": {
+          "width": "imported/progress-bar/root/width",
+          "topLeftRadius": "p/border-radius-100",
+          "topRightRadius": "p/border-radius-100",
+          "bottomLeftRadius": "p/border-radius-100",
+          "bottomRightRadius": "p/border-radius-100",
+          "fills": "p/color-bg-fill-tertiary"
+        },
+        "w": 288,
+        "h": 16,
+        "childTypes": [
+          "FRAME/indicator"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T16:50:01.601Z",
+  "nodeId": "1:10076",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=14, total=78188); eval skipped unchanged nodeId=1:10076; indicator 115/288 (~40%). matchDeveloped left false."
+}

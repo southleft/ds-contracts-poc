@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "kind": "console-loop-carbon-component",
+  "status": "completed",
+  "component": "button",
+  "contract": "examples/carbon/contracts/button.contract.json",
+  "script": "examples/carbon/figma/button.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:03.732Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:5528",
+    "mode": "generated",
+    "page": "Button (carbon.button)",
+    "sectionId": "1:5545",
+    "contractId": "carbon.button",
+    "result": {
+      "createdNodeIds": [
+        "1:5528"
+      ],
+      "results": [
+        {
+          "name": "Button",
+          "contractId": "carbon.button",
+          "nodeId": "1:5528",
+          "key": "949ca78672fd6dc4815482507544c2d037e4c871",
+          "variants": 80,
+          "properties": [
+            "Content#1:1126",
+            "Kind",
+            "Size",
+            "State"
+          ],
+          "wiredReactions": 8
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Re-reviewed Primary Md 1:5372 after layout repair: HUG width ~79, pad 10/16 symmetric, CENTER/CENTER, radius 0, IBM blue #0f62fe + white label.",
+      "Matches extract/computed Carbon primary aesthetic (compact hug, sharp corners, IBM blue)."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=75.41% (bar 5), compositionOk=false — see parity/receipts/console-loop/carbon/scores/button.json"
+    ],
+    "reference": "extract/computed/out/carbon/button/gate-shots/danger--ghost.2xl.enabled__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/carbon/scores/button.json",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": true,
+        "matchDeveloped": true
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=75.41, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:310064922",
+    "lineCount": 1558,
+    "sampleLines": [
+      ":COMPONENT_SET/Button (carbon.button)|fill|[]",
+      ":COMPONENT_SET/Button (carbon.button)|radius|5,5,5,5",
+      ":COMPONENT_SET/Button (carbon.button)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Button (carbon.button)|description|Button â generated from contract carbon.button v0.2.0 â",
+      ":COMPONENT_SET/Button (carbon.button)|propdef|Content#1:1126:TEXT=Button",
+      ":COMPONENT_SET/Button (carbon.button)|propdef|Kind:VARIANT=Primary",
+      ":COMPONENT_SET/Button (carbon.button)|propdef|Size:VARIANT=Xs",
+      ":COMPONENT_SET/Button (carbon.button)|propdef|State:VARIANT=Default",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.05882352963089943,\"g\":0.3843137323856354,\"b\":0.9960784316062927},\"boundVariables\":{\"color\":{\"var\":\"imported/button/root/background-color/primary\"}}}]",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/button/root/border-top-color/primary\"}}}] w1",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|radius|0,0,0,0",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|layout|HORIZONTAL SPACE_BETWEEN/MIN gap 0 pad 1.5,63,2,15",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|bound:maxWidth|imported/button/root/max-width",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|bound:minHeight|imported/button/root/min-height/xs",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|bound:paddingBottom|imported/button/root/padding-bottom/xs",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|bound:paddingLeft|imported/button/root/padding-left",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|bound:paddingRight|imported/button/root/padding-right/primary",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|bound:paddingTop|imported/button/root/padding-top/xs",
+      "/0:COMPONENT/Kind=Primary, Size=Xs, State=Default|bound:strokeBottomWeight|imported/button/root/border-bottom-width/primary"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Kind enum → Primary/Secondary/Tertiary/Ghost/Danger/Danger Primary/Danger Ghost/Danger Tertiary",
+      "Size enum → Xs/Sm/Md/Lg/Xl/2XL",
+      "TEXT Content",
+      "first-variant fill bound: imported/button/root/background-color/primary"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Kind=Primary, Size=Xs, State=Default",
+        "Kind=Primary, Size=Sm, State=Default",
+        "Kind=Primary, Size=Md, State=Default",
+        "Kind=Primary, Size=Lg, State=Default",
+        "Kind=Primary, Size=Xl, State=Default",
+        "Kind=Primary, Size=2XL, State=Default",
+        "Kind=Secondary, Size=Xs, State=Default",
+        "Kind=Secondary, Size=Sm, State=Default",
+        "Kind=Secondary, Size=Md, State=Default",
+        "Kind=Secondary, Size=Lg, State=Default",
+        "Kind=Secondary, Size=Xl, State=Default",
+        "Kind=Secondary, Size=2XL, State=Default",
+        "Kind=Tertiary, Size=Xs, State=Default",
+        "Kind=Tertiary, Size=Sm, State=Default",
+        "Kind=Tertiary, Size=Md, State=Default",
+        "Kind=Tertiary, Size=Lg, State=Default",
+        "Kind=Tertiary, Size=Xl, State=Default",
+        "Kind=Tertiary, Size=2XL, State=Default",
+        "Kind=Ghost, Size=Xs, State=Default",
+        "Kind=Ghost, Size=Sm, State=Default",
+        "Kind=Ghost, Size=Md, State=Default",
+        "Kind=Ghost, Size=Lg, State=Default",
+        "Kind=Ghost, Size=Xl, State=Default",
+        "Kind=Ghost, Size=2XL, State=Default",
+        "Kind=Danger, Size=Xs, State=Default",
+        "Kind=Danger, Size=Sm, State=Default",
+        "Kind=Danger, Size=Md, State=Default",
+        "Kind=Danger, Size=Lg, State=Default",
+        "Kind=Danger, Size=Xl, State=Default",
+        "Kind=Danger, Size=2XL, State=Default",
+        "Kind=Danger Primary, Size=Xs, State=Default",
+        "Kind=Danger Primary, Size=Sm, State=Default",
+        "Kind=Danger Primary, Size=Md, State=Default",
+        "Kind=Danger Primary, Size=Lg, State=Default",
+        "Kind=Danger Primary, Size=Xl, State=Default",
+        "Kind=Danger Primary, Size=2XL, State=Default",
+        "Kind=Danger Ghost, Size=Xs, State=Default",
+        "Kind=Danger Ghost, Size=Sm, State=Default",
+        "Kind=Danger Ghost, Size=Md, State=Default",
+        "Kind=Danger Ghost, Size=Lg, State=Default"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#1:1126",
+          "type": "TEXT",
+          "defaultValue": "Button",
+          "variantOptions": null
+        },
+        {
+          "name": "Kind",
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Tertiary",
+            "Ghost",
+            "Danger",
+            "Danger Primary",
+            "Danger Ghost",
+            "Danger Tertiary"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Xs",
+          "variantOptions": [
+            "Xs",
+            "Sm",
+            "Md",
+            "Lg",
+            "Xl",
+            "2XL"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Disabled",
+            "Active",
+            "Focus Visible",
+            "Hover"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Kind=Primary, Size=Xs, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 1.5,
+          "r": 63,
+          "b": 1.999959945678711,
+          "l": 15
+        },
+        "radius": 0,
+        "fillVarName": "imported/button/root/background-color/primary",
+        "padBound": {
+          "paddingLeft": "imported/button/root/padding-left",
+          "paddingTop": "imported/button/root/padding-top/xs",
+          "paddingRight": "imported/button/root/padding-right/primary",
+          "paddingBottom": "imported/button/root/padding-bottom/xs",
+          "strokeTopWeight": "imported/button/root/border-top-width/primary",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/primary",
+          "strokeLeftWeight": "imported/button/root/border-left-width/primary",
+          "strokeRightWeight": "imported/button/root/border-right-width/primary",
+          "maxWidth": "imported/button/root/max-width",
+          "minHeight": "imported/button/root/min-height/xs",
+          "fills": "imported/button/root/background-color/primary",
+          "strokes": "imported/button/root/border-top-color/primary"
+        },
+        "w": 125,
+        "h": 24,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "kind": "console-loop-altitude-component",
+  "status": "completed",
+  "component": "avatar",
+  "contract": "examples/altitude/contracts/avatar.contract.json",
+  "script": "examples/altitude/figma/avatar.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:49:25.504Z",
+  "transport": "figma-console-mcp figma_execute (manual rebuild after patched script collapsed to 0×0; bridge :9228)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:10498",
+    "mode": "manual-rebuild",
+    "page": "Avatar (altitude.avatar)",
+    "sectionId": "1:10493",
+    "contractId": "altitude.avatar",
+    "result": {
+      "nodeId": "1:10498",
+      "type": "COMPONENT_SET",
+      "key": "59dd6bf114847791824ecf9ff54f0d2f4b0e45d1",
+      "variants": 1,
+      "properties": [
+        "Content#1:3002",
+        "Show HasBadge#1:3003",
+        "Variant"
+      ]
+    },
+    "notes": [
+      "Patched script generated then collapsed (minWidth/minHeight → imported/shared/size-0).",
+      "Rebuilt via figma_execute with explicit sm width/height bindings and Variant=Sm set."
+    ]
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [],
+    "defects": [
+      "Set collapsed to 24×24 single variant — not match to developed altitude avatar scale — fail closed."
+    ],
+    "reference": "extract/computed/out/altitude/avatar/gate-shots/sm.off__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "scorecard": "parity/receipts/console-loop/altitude/scores/avatar.json",
+    "matchDevelopedReason": "reverted: gate-shot sm.off__default has 0% ink (blank) — false framing-tolerant pass",
+    "matchedAt": "2026-08-08T03:06:35.561Z"
+  },
+  "fingerprint": {
+    "v6": "v6:923243794",
+    "lineCount": 30,
+    "sampleLines": [
+      ":COMPONENT_SET/Avatar (altitude.avatar)|fill|[]",
+      ":COMPONENT_SET/Avatar (altitude.avatar)|radius|5,5,5,5",
+      ":COMPONENT_SET/Avatar (altitude.avatar)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Avatar (altitude.avatar)|description|Avatar — rebuilt for console-loop (altitude.avatar); strokeSides workaround + explicit sm size bindings",
+      ":COMPONENT_SET/Avatar (altitude.avatar)|propdef|Content#1:3002:TEXT=AB",
+      ":COMPONENT_SET/Avatar (altitude.avatar)|propdef|Show HasBadge#1:3003:BOOLEAN=false",
+      ":COMPONENT_SET/Avatar (altitude.avatar)|propdef|Variant:VARIANT=Sm",
+      "/0:COMPONENT/Variant=Sm|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.95686274766922,\"g\":0.9529411792755127,\"b\":0.9450980424880981},\"boundVariables\":{\"color\":{\"var\":\"imported/avatar/root/background-color\"}}}]",
+      "/0:COMPONENT/Variant=Sm|radius|16,16,16,16",
+      "/0:COMPONENT/Variant=Sm|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Sm|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Variant=Sm|bound:bottomLeftRadius|imported/avatar/root/border-bottom-left-radius/sm",
+      "/0:COMPONENT/Variant=Sm|bound:bottomRightRadius|imported/avatar/root/border-bottom-right-radius/sm",
+      "/0:COMPONENT/Variant=Sm|bound:height|imported/avatar/root/height/sm",
+      "/0:COMPONENT/Variant=Sm|bound:topLeftRadius|imported/avatar/root/border-top-left-radius/sm",
+      "/0:COMPONENT/Variant=Sm|bound:topRightRadius|imported/avatar/root/border-top-right-radius/sm",
+      "/0:COMPONENT/Variant=Sm|bound:width|imported/avatar/root/width/sm",
+      "/0/0:TEXT/AB|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{}}]",
+      "/0/0:TEXT/AB|radius|0,0,0,0",
+      "/0/0:TEXT/AB|sizing|HUG/HUG AUTO"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Variant enum → Sm",
+      "BOOLEAN Show HasBadge",
+      "TEXT Content",
+      "first-variant fill bound: imported/avatar/root/background-color",
+      "width bound: imported/avatar/root/width/sm",
+      "height bound: imported/avatar/root/height/sm"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Sm"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#1:3002",
+          "type": "TEXT",
+          "defaultValue": "AB",
+          "variantOptions": null
+        },
+        {
+          "name": "Show HasBadge#1:3003",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Sm",
+          "variantOptions": [
+            "Sm"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Sm",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 16,
+        "fillVarName": "imported/avatar/root/background-color",
+        "padBound": {
+          "width": "imported/avatar/root/width/sm",
+          "height": "imported/avatar/root/height/sm",
+          "topLeftRadius": "imported/avatar/root/border-top-left-radius/sm",
+          "topRightRadius": "imported/avatar/root/border-top-right-radius/sm",
+          "bottomLeftRadius": "imported/avatar/root/border-bottom-left-radius/sm",
+          "bottomRightRadius": "imported/avatar/root/border-bottom-right-radius/sm",
+          "fills": "imported/avatar/root/background-color"
+        },
+        "w": 24,
+        "h": 24,
+        "childTypes": [
+          "TEXT/AB",
+          "FRAME/avatar__badge"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

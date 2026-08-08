@@ -1,0 +1,249 @@
+{
+  "version": 1,
+  "kind": "console-loop-altitude-component",
+  "status": "completed",
+  "component": "chip",
+  "contract": "examples/altitude/contracts/chip.contract.json",
+  "script": "examples/altitude/figma/chip.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:43:13.030Z",
+  "reSyncedAt": "2026-08-07T18:13:43.000Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:3017",
+    "mode": "generated",
+    "page": "Chip",
+    "sectionId": "1:3018",
+    "contractId": "altitude.chip",
+    "result": {
+      "createdNodeIds": [
+        "1:3017"
+      ],
+      "results": [
+        {
+          "name": "Chip",
+          "contractId": "altitude.chip",
+          "nodeId": "1:3017",
+          "key": "7c363df9d6d0a01b0a9461fc60746dc5ef46c772",
+          "variants": 20,
+          "amended": true,
+          "addedVariants": [
+            "Variant=Secondary, Type=Default, State=Default",
+            "Variant=Info, Type=Default, State=Default",
+            "Variant=Success, Type=Default, State=Default",
+            "Variant=Warning, Type=Default, State=Default",
+            "Variant=Danger, Type=Default, State=Default",
+            "Variant=Secondary, Type=Default, State=Focus Visible",
+            "Variant=Info, Type=Default, State=Focus Visible",
+            "Variant=Success, Type=Default, State=Focus Visible",
+            "Variant=Warning, Type=Default, State=Focus Visible",
+            "Variant=Danger, Type=Default, State=Focus Visible"
+          ],
+          "properties": [
+            "Content#1:795",
+            "Variant",
+            "Type",
+            "State"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [],
+    "defects": [
+      "Not verified vs altitude chip computed pairs — fail closed."
+    ],
+    "reference": "extract/computed/out/altitude/chip/gate-shots/info.unset__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "reSyncedAt": "2026-08-08T02:13:50.609Z",
+    "canvasShot": "parity/receipts/console-loop/altitude/shots/chip.png",
+    "cellShot": "parity/receipts/console-loop/altitude/shots/chip-cell.png",
+    "scorecard": "parity/receipts/console-loop/altitude/scores/chip.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "near-pass font-AA",
+        "matchedAt": "2026-08-08T02:54:20.882Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=74.91, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:2414831033",
+    "lineCount": 248,
+    "sampleLines": [
+      ":COMPONENT_SET/Chip|fill|[]",
+      ":COMPONENT_SET/Chip|radius|5,5,5,5",
+      ":COMPONENT_SET/Chip|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Chip|description|Chip â generated from contract altitude.chip v0.2.0 â",
+      ":COMPONENT_SET/Chip|propdef|Content#1:795:TEXT=Chip",
+      ":COMPONENT_SET/Chip|propdef|State:VARIANT=Default",
+      ":COMPONENT_SET/Chip|propdef|Type:VARIANT=Squared",
+      ":COMPONENT_SET/Chip|propdef|Variant:VARIANT=Secondary",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/chip/root/background-color/secondary\"}}}]",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6901960968971252,\"g\":0.6901960968971252,\"b\":0.6901960968971252},\"boundVariables\":{\"color\":{\"var\":\"imported/chip/root/border-top-color/secondary\"}}}] w1",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|radius|4,4,4,4",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|layout|HORIZONTAL CENTER/CENTER gap 8 pad 4,12,4,12",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|bound:bottomLeftRadius|imported/chip/root/border-bottom-left-radius/squared",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|bound:bottomRightRadius|imported/chip/root/border-bottom-right-radius/squared",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|bound:itemSpacing|imported/chip/root/column-gap",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|bound:minHeight|imported/chip/root/min-height",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|bound:minWidth|imported/chip/root/min-width",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|bound:paddingBottom|imported/chip/root/padding-bottom",
+      "/0:COMPONENT/Variant=Secondary, Type=Squared, State=Default|bound:paddingLeft|imported/chip/root/padding-left"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant enum → Secondary/Info/Success/Warning/Danger",
+      "Type enum → Default + Squared",
+      "TEXT Content",
+      "first-variant fill bound: imported/chip/root/background-color/secondary"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Danger, Type=Default, State=Default",
+        "Variant=Danger, Type=Default, State=Focus Visible",
+        "Variant=Danger, Type=Squared, State=Default",
+        "Variant=Danger, Type=Squared, State=Focus Visible",
+        "Variant=Info, Type=Default, State=Default",
+        "Variant=Info, Type=Default, State=Focus Visible",
+        "Variant=Info, Type=Squared, State=Default",
+        "Variant=Info, Type=Squared, State=Focus Visible",
+        "Variant=Secondary, Type=Default, State=Default",
+        "Variant=Secondary, Type=Default, State=Focus Visible",
+        "Variant=Secondary, Type=Squared, State=Default",
+        "Variant=Secondary, Type=Squared, State=Focus Visible",
+        "Variant=Success, Type=Default, State=Default",
+        "Variant=Success, Type=Default, State=Focus Visible",
+        "Variant=Success, Type=Squared, State=Default",
+        "Variant=Success, Type=Squared, State=Focus Visible",
+        "Variant=Warning, Type=Default, State=Default",
+        "Variant=Warning, Type=Default, State=Focus Visible",
+        "Variant=Warning, Type=Squared, State=Default",
+        "Variant=Warning, Type=Squared, State=Focus Visible"
+      ],
+      "radiusMeasurements": {
+        "Type=Default": {
+          "sample": "Variant=Secondary, Type=Default, State=Default",
+          "tl": 32,
+          "tr": 32,
+          "bl": 32,
+          "br": 32,
+          "boundTokens": {
+            "tl": "imported/chip/root/border-top-left-radius/unset",
+            "tr": "imported/chip/root/border-top-right-radius/unset",
+            "bl": "imported/chip/root/border-bottom-left-radius/unset",
+            "br": "imported/chip/root/border-bottom-right-radius/unset"
+          }
+        },
+        "Type=Squared": {
+          "sample": "Variant=Secondary, Type=Squared, State=Default",
+          "tl": 4,
+          "tr": 4,
+          "bl": 4,
+          "br": 4,
+          "boundTokens": {
+            "tl": "imported/chip/root/border-top-left-radius/squared",
+            "tr": "imported/chip/root/border-top-right-radius/squared",
+            "bl": "imported/chip/root/border-bottom-left-radius/squared",
+            "br": "imported/chip/root/border-bottom-right-radius/squared"
+          }
+        }
+      },
+      "propDefs": [
+        {
+          "name": "Content#1:795",
+          "type": "TEXT",
+          "defaultValue": "Chip",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Secondary",
+          "variantOptions": [
+            "Secondary",
+            "Info",
+            "Success",
+            "Warning",
+            "Danger"
+          ]
+        },
+        {
+          "name": "Type",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Squared"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Focus Visible"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Secondary, Type=Squared, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 4,
+          "r": 12,
+          "b": 4,
+          "l": 12
+        },
+        "radius": 4,
+        "fillVarName": "imported/chip/root/background-color/secondary",
+        "padBound": {
+          "itemSpacing": "imported/chip/root/column-gap",
+          "paddingLeft": "imported/chip/root/padding-left",
+          "paddingTop": "imported/chip/root/padding-top",
+          "paddingRight": "imported/chip/root/padding-right",
+          "paddingBottom": "imported/chip/root/padding-bottom",
+          "topLeftRadius": "imported/chip/root/border-top-left-radius/squared",
+          "topRightRadius": "imported/chip/root/border-top-right-radius/squared",
+          "bottomLeftRadius": "imported/chip/root/border-bottom-left-radius/squared",
+          "bottomRightRadius": "imported/chip/root/border-bottom-right-radius/squared",
+          "strokeTopWeight": "imported/chip/root/border-top-width/secondary",
+          "strokeBottomWeight": "imported/chip/root/border-bottom-width/secondary",
+          "strokeLeftWeight": "imported/chip/root/border-left-width/secondary",
+          "strokeRightWeight": "imported/chip/root/border-right-width/secondary",
+          "minWidth": "imported/chip/root/min-width",
+          "minHeight": "imported/chip/root/min-height",
+          "fills": "imported/chip/root/background-color/secondary",
+          "strokes": "imported/chip/root/border-top-color/secondary"
+        },
+        "w": 55,
+        "h": 30,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

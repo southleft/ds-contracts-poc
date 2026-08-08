@@ -1,16 +1,41 @@
 /**
- * Fail-closed gate for Console MCP contract→Figma loop receipts.
+ * Fail-closed gate for Console MCP contract→Figma loop receipts (FIRST-PARTY
+ * lane — attested-only allowed).
  *
  * Requires parity/receipts/console-loop/components/<stem>.json with
- * status:completed, generate.ok, visual.ok, zero roundtrip mismatches,
- * and a sibling .md that mentions the fileKey + v6 fingerprint.
+ * status:completed, generate.ok, zero roundtrip mismatches, and a sibling .md
+ * that mentions the fileKey + v6 fingerprint.
+ *
+ * EVIDENCE SEMANTICS (first-party lane — contrast with the foreign-lib gate
+ * console-loop-lib-evidence-check.mjs, which is STRICT):
+ *
+ *   - First-party receipts have NO pixel scorecards yet. A visual pass-claim
+ *     (visual.ok:true / visual.matchDeveloped:true) WITHOUT a scorecard is
+ *     "attested-only": legal for now, but counted and printed loudly. The
+ *     owner will pixel-score these in a later job; once a scorecard exists at
+ *     parity/receipts/console-loop/scores/<stem>.json the claim is enforced
+ *     strictly against the one bar (pctAAMasked <= 5 AND compositionOk) plus
+ *     sha256 pins, exactly like foreign lanes.
+ *   - Honest fail-closed (no pass-claims + non-empty named visual.defects)
+ *     is legal and does not fail CI.
+ *   - RATCHET.json floor for lane "first-party" must hold.
  */
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  PASS_AA_MASKED,
+  countScorecardPasses,
+  ratchetErrors,
+  readScorecard,
+  scorecardPasses,
+  verifyScorecardPins,
+  visualClaimsPass,
+} from "./console-loop-scorecard-lib.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIR = path.join(ROOT, "parity/receipts/console-loop/components");
+const SCORES_DIR = path.join(ROOT, "parity/receipts/console-loop/scores");
 const FILE_KEY = "GnQnjSNBXtgtd2Ht0Hs1C8";
 
 /**
@@ -75,6 +100,9 @@ const REQUIRED = (process.env.CONSOLE_LOOP_REQUIRED ?? DEFAULT_REQUIRED.join(","
   .filter(Boolean);
 
 const errors = [];
+const attestedOnly = [];
+const scoredPass = [];
+const failClosed = [];
 
 if (!existsSync(DIR)) {
   console.error("✖ console-loop-evidence-check: missing components/ directory");
@@ -118,11 +146,36 @@ for (const stem of REQUIRED) {
   if (!receipt.generate?.ok || !receipt.generate?.nodeId) {
     errors.push(`${stem}: generate.ok + nodeId required`);
   }
-  if (receipt.visual?.ok !== true) {
-    errors.push(`${stem}: visual.ok must be true`);
-  }
-  if (Array.isArray(receipt.visual?.defects) && receipt.visual.defects.length) {
-    errors.push(`${stem}: visual.defects must be empty`);
+  // --- visual evidence: scorecard-enforced when present, attested-only otherwise ---
+  const claims = visualClaimsPass(receipt);
+  const defects = Array.isArray(receipt.visual?.defects) ? receipt.visual.defects : [];
+  const sc = readScorecard(SCORES_DIR, stem);
+  if (claims) {
+    if (defects.length) {
+      errors.push(`${stem}: visual pass-claim with non-empty visual.defects — contradiction`);
+    }
+    if (sc && sc.data) {
+      // Scorecard exists → enforce strictly, exactly like foreign lanes.
+      if (!scorecardPasses(sc.data)) {
+        const aa = sc.data.metrics?.pctAAMasked;
+        errors.push(
+          `${stem}: pass-claim contradicts its scorecard (status=${sc.data.status}, pctAAMasked=${typeof aa === "number" ? aa.toFixed(2) : aa}, compositionOk=${sc.data.compositionOk}; bar is pctAAMasked<=${PASS_AA_MASKED} AND compositionOk)`,
+        );
+      } else {
+        for (const e of verifyScorecardPins(ROOT, sc.data)) errors.push(`${stem}: ${e}`);
+        scoredPass.push(stem);
+      }
+    } else if (sc && !sc.data) {
+      errors.push(`${stem}: scorecard unreadable — ${sc.error}`);
+    } else {
+      attestedOnly.push(stem);
+    }
+  } else {
+    // Honest fail-closed: legal, counted, printed — not a gate failure.
+    if (!defects.length) {
+      errors.push(`${stem}: fail-closed receipt must name defects (visual.defects non-empty)`);
+    }
+    failClosed.push(stem);
   }
   const fp = receipt.fingerprint?.v6;
   if (typeof fp !== "string" || !fp.startsWith("v6:")) {
@@ -160,6 +213,10 @@ const completed = [...present].filter((stem) => {
   }
 });
 
+// --- pass-count ratchet (lane "first-party") ---
+const { passed: genuinePasses } = countScorecardPasses(SCORES_DIR);
+errors.push(...ratchetErrors(ROOT, "first-party", genuinePasses.length));
+
 if (errors.length) {
   console.error(
     "✖ console-loop-evidence-check:\n" + errors.map((e) => `  - ${e}`).join("\n"),
@@ -167,6 +224,15 @@ if (errors.length) {
   process.exit(1);
 }
 
+if (attestedOnly.length) {
+  console.log(
+    `⚠ ATTESTED-ONLY visual claims (NO pixel scorecard — pending pixel-score job): ${attestedOnly.length}/${REQUIRED.length} stems\n` +
+      `  ${attestedOnly.join(", ")}`,
+  );
+}
+for (const stem of failClosed) {
+  console.log(`  fail-closed first-party/${stem} (named defects; visual hill-climb open)`);
+}
 console.log(
-  `✔ console-loop-evidence-check: ${REQUIRED.length} required ok (${REQUIRED.join(", ")}); ${completed.length} completed receipt(s) on ${FILE_KEY}`,
+  `✔ console-loop-evidence-check: ${REQUIRED.length} required ok; ${completed.length} completed receipt(s) on ${FILE_KEY} — ${scoredPass.length} scored-pass, ${attestedOnly.length} attested-only, ${failClosed.length} fail-closed; scorecard passes ${genuinePasses.length} hold ratchet floor`,
 );

@@ -15,6 +15,16 @@ import assert from "node:assert/strict";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CHECK = path.join(ROOT, "scripts/console-loop-evidence-check.mjs");
+const SCORE_LIB = path.join(ROOT, "scripts/console-loop-scorecard-lib.mjs");
+
+/** Scratch fixtures need the shared scorecard lib + a ratchet file. */
+function seedFixtureCommon(dir) {
+  cpSync(SCORE_LIB, path.join(dir, "scripts/console-loop-scorecard-lib.mjs"));
+  writeFileSync(
+    path.join(dir, "parity/receipts/console-loop/RATCHET.json"),
+    `${JSON.stringify({ version: 1, floors: { "first-party": 0 } }, null, 2)}\n`,
+  );
+}
 
 test("console-loop-evidence-check passes on committed receipts", () => {
   const r = spawnSync(process.execPath, [CHECK], { cwd: ROOT, encoding: "utf8" });
@@ -30,6 +40,7 @@ test("console-loop-evidence-check refuses a mismatched round-trip", () => {
     });
     mkdirSync(path.join(dir, "scripts"), { recursive: true });
     cpSync(CHECK, path.join(dir, "scripts/console-loop-evidence-check.mjs"));
+    seedFixtureCommon(dir);
     const good = JSON.parse(
       readFileSync(
         path.join(ROOT, "parity/receipts/console-loop/components/badge.json"),

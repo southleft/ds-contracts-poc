@@ -1,0 +1,294 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "button",
+  "contract": "examples/polaris/contracts/button.contract.json",
+  "script": "examples/polaris/figma/button.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:30.153Z",
+  "transport": "figma-console-mcp fetch localhost:9230/stem/polaris-button → eval (1193543 bytes) + force amend (cleared specHash)",
+  "reSyncedAt": "2026-08-06T19:04:17.000Z",
+  "storedLength": 1193543,
+  "generate": {
+    "ok": true,
+    "nodeId": "1:10006",
+    "mode": "amended",
+    "page": "Button (polaris.button)",
+    "sectionId": "1:10017",
+    "contractId": "polaris.button",
+    "result": {
+      "createdNodeIds": [
+        "1:10006"
+      ],
+      "results": [
+        {
+          "name": "Button",
+          "contractId": "polaris.button",
+          "nodeId": "1:10006",
+          "key": "6c631366748d371299a0fc2cef67220213a09792",
+          "amended": true,
+          "variants": 340,
+          "rebuiltVariants": 320,
+          "properties": [
+            "Full Width#1:1396",
+            "Remove Underline#1:1617",
+            "Data Primary Link#1:1838",
+            "Show WithIcon#1:2059",
+            "Size",
+            "Text Align",
+            "Tone",
+            "Variant",
+            "State"
+          ],
+          "wiredReactions": 5
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T19:04:17.000Z",
+    "notes": [
+      "Re-sync 2026-08-06 via Console MCP: fetch localhost:9230/stem/polaris-button (1193543 bytes); localhost required (127.0.0.1 blocked).",
+      "Initial eval skipped unchanged; force-amend via cleared specHash → rebuilt 320 variants on node 1:10006.",
+      "Default Secondary Medium (Tone=Default, Show WithIcon=false): icon (margin box) visible=false, 20×16 hidden; label \"Button\" centered (leftGap=12 rightGap=12, labelCenterX=compCenterX=31.5).",
+      "WithIcon=true instance comparison: icon visible @ x=12, label shifts to x=34, width 85 vs 63 — icon slot only reserves space when shown.",
+      "Screenshots: parity/receipts/console-loop/polaris/shots/button.png, button-with-icon.png",
+      "Wave B.4 layout fix: no phantom left gap when Show WithIcon=false; matchDeveloped still false (primary gradient gap vs developed receipts)."
+    ],
+    "defects": [
+      "Primary+Critical is flat red without Polaris top-highlight gradient of developed primary receipts.",
+      "Emit/contract gap for primary gradient, not an intentional COMPILE canvas projection."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/button.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "examples/polaris/generated/html/button.html#first-item-inline-css",
+    "scorecard": "parity/receipts/console-loop/polaris/scores/button.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "near-pass AA=11.61 compositionOk Tone=Default Primary Medium vs emit-html",
+        "matchedAt": "2026-08-08T03:22:39.761Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=11.61, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:3705147195",
+    "lineCount": 9134,
+    "sampleLines": [
+      ":COMPONENT_SET/Button (polaris.button)|fill|[]",
+      ":COMPONENT_SET/Button (polaris.button)|radius|5,5,5,5",
+      ":COMPONENT_SET/Button (polaris.button)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Button (polaris.button)|description|Button â generated from contract polaris.button v0.4.0 â",
+      ":COMPONENT_SET/Button (polaris.button)|propdef|Data Primary Link#1:1838:BOOLEAN=false",
+      ":COMPONENT_SET/Button (polaris.button)|propdef|Full Width#1:1396:BOOLEAN=false",
+      ":COMPONENT_SET/Button (polaris.button)|propdef|Remove Underline#1:1617:BOOLEAN=false",
+      ":COMPONENT_SET/Button (polaris.button)|propdef|Show WithIcon#1:2059:BOOLEAN=false",
+      ":COMPONENT_SET/Button (polaris.button)|propdef|Size:VARIANT=Medium",
+      ":COMPONENT_SET/Button (polaris.button)|propdef|State:VARIANT=Default",
+      ":COMPONENT_SET/Button (polaris.button)|propdef|Text Align:VARIANT=Center",
+      ":COMPONENT_SET/Button (polaris.button)|propdef|Tone:VARIANT=Default",
+      ":COMPONENT_SET/Button (polaris.button)|propdef|Variant:VARIANT=Secondary",
+      "/0:COMPONENT/Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/button/root/background-color/secondary/critical\"}}}]",
+      "/0:COMPONENT/Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default|radius|8,8,8,8",
+      "/0:COMPONENT/Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default|layout|HORIZONTAL CENTER/CENTER gap 2 pad 6,12,6,12",
+      "/0:COMPONENT/Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default|effects|3",
+      "/0:COMPONENT/Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default|bound:bottomLeftRadius|p/border-radius-200",
+      "/0:COMPONENT/Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default|bound:bottomRightRadius|p/border-radius-200"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Size enum → Medium/Micro/Slim/Large",
+      "Text Align enum → Center/Left/Right/Start/End",
+      "BOOLEAN Full Width",
+      "BOOLEAN Remove Underline",
+      "BOOLEAN Data Primary Link",
+      "Tone enum → Critical/Success/Default",
+      "Variant enum → Secondary/Plain/Primary/Tertiary/Monochrome Plain",
+      "BOOLEAN Show WithIcon",
+      "first-variant fill bound: imported/button/root/background-color/secondary/critical"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default",
+        "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain, State=Default",
+        "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary, State=Default",
+        "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary, State=Default",
+        "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain, State=Default",
+        "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary, State=Default",
+        "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain, State=Default",
+        "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary, State=Default",
+        "Size=Medium, Text Align=Center, Tone=Success, Variant=Tertiary, State=Default",
+        "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain, State=Default",
+        "Size=Medium, Text Align=Left, Tone=Critical, Variant=Secondary, State=Default",
+        "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain, State=Default",
+        "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary, State=Default",
+        "Size=Medium, Text Align=Left, Tone=Critical, Variant=Tertiary, State=Default",
+        "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain, State=Default",
+        "Size=Medium, Text Align=Left, Tone=Success, Variant=Secondary, State=Default",
+        "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain, State=Default",
+        "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary, State=Default",
+        "Size=Medium, Text Align=Left, Tone=Success, Variant=Tertiary, State=Default",
+        "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain, State=Default",
+        "Size=Medium, Text Align=Right, Tone=Critical, Variant=Secondary, State=Default",
+        "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain, State=Default",
+        "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary, State=Default",
+        "Size=Medium, Text Align=Right, Tone=Critical, Variant=Tertiary, State=Default",
+        "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain, State=Default",
+        "Size=Medium, Text Align=Right, Tone=Success, Variant=Secondary, State=Default",
+        "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain, State=Default",
+        "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary, State=Default",
+        "Size=Medium, Text Align=Right, Tone=Success, Variant=Tertiary, State=Default",
+        "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain, State=Default",
+        "Size=Medium, Text Align=Start, Tone=Critical, Variant=Secondary, State=Default",
+        "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain, State=Default",
+        "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary, State=Default",
+        "Size=Medium, Text Align=Start, Tone=Critical, Variant=Tertiary, State=Default",
+        "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain, State=Default",
+        "Size=Medium, Text Align=Start, Tone=Success, Variant=Secondary, State=Default",
+        "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain, State=Default",
+        "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary, State=Default",
+        "Size=Medium, Text Align=Start, Tone=Success, Variant=Tertiary, State=Default",
+        "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain, State=Default"
+      ],
+      "propDefs": [
+        {
+          "name": "Full Width#1:1396",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Remove Underline#1:1617",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Data Primary Link#1:1838",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Show WithIcon#1:2059",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Micro",
+            "Slim",
+            "Large"
+          ]
+        },
+        {
+          "name": "Text Align",
+          "type": "VARIANT",
+          "defaultValue": "Center",
+          "variantOptions": [
+            "Center",
+            "Left",
+            "Right",
+            "Start",
+            "End"
+          ]
+        },
+        {
+          "name": "Tone",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Critical",
+            "Success",
+            "Default"
+          ]
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Secondary",
+          "variantOptions": [
+            "Secondary",
+            "Plain",
+            "Primary",
+            "Tertiary",
+            "Monochrome Plain"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Disabled",
+            "Focus Visible",
+            "Active",
+            "Hover"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 6,
+          "r": 12,
+          "b": 6,
+          "l": 12
+        },
+        "radius": 8,
+        "fillVarName": "imported/button/root/background-color/secondary/critical",
+        "padBound": {
+          "itemSpacing": "p/space-050",
+          "paddingLeft": "p/space-300",
+          "paddingTop": "p/space-150",
+          "paddingRight": "p/space-300",
+          "paddingBottom": "p/space-150",
+          "topLeftRadius": "p/border-radius-200",
+          "topRightRadius": "p/border-radius-200",
+          "bottomLeftRadius": "p/border-radius-200",
+          "bottomRightRadius": "p/border-radius-200",
+          "strokeTopWeight": "imported/shared/size-0",
+          "strokeBottomWeight": "imported/shared/size-0",
+          "strokeLeftWeight": "imported/shared/size-0",
+          "strokeRightWeight": "imported/shared/size-0",
+          "minWidth": "p/width-800",
+          "minHeight": "p/height-800",
+          "fills": "imported/button/root/background-color/secondary/critical"
+        },
+        "w": 85,
+        "h": 32,
+        "childTypes": [
+          "FRAME/icon (margin box)",
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "screenshot": "parity/receipts/console-loop/polaris/shots/button.png"
+}

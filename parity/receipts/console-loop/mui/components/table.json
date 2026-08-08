@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "table",
+  "contract": "examples/mui/contracts/table.contract.json",
+  "script": "examples/mui/figma/table.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.515Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:744",
+    "mode": "existing",
+    "page": "Table",
+    "sectionId": "21:745",
+    "result": {}
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:744).",
+      "Table COMPONENT_SET 21:744: 2 variant(s), 1 prop def(s). Structure looks sane; slot placeholders OK."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:966664822",
+    "lineCount": 727,
+    "sampleLines": [
+      ":COMPONENT_SET/Table|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Size enum \u2192 Medium/Small"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Medium",
+        "Size=Small"
+      ],
+      "propDefs": [
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Medium",
+        "type": "COMPONENT",
+        "fillVarName": null,
+        "padBound": {},
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "w": 688,
+        "h": 187.8,
+        "childTypes": [
+          "FRAME/tablehead-root",
+          "FRAME/tablebody-root"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

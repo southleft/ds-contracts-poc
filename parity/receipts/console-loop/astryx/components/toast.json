@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "toast",
+  "contract": "examples/astryx/contracts/toast.contract.json",
+  "script": "examples/astryx/figma/toast.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:13.449Z",
+  "transport": "figma-console-mcp figma_execute + fetch localhost:9228 stem script into ds_loop_script",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:4006",
+    "mode": "amended",
+    "page": "Toast (astryx.toast)",
+    "sectionId": "1:4019",
+    "contractId": "astryx.toast",
+    "result": {
+      "createdNodeIds": [
+        "1:4006"
+      ],
+      "results": [
+        {
+          "name": "Toast",
+          "contractId": "astryx.toast",
+          "amended": true,
+          "standalone": true,
+          "nodeId": "1:4006",
+          "key": "e54f8af677011b3c4b0bbbc04ac53413aab7be6f",
+          "addedProps": [],
+          "editedDefaults": []
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T15:19:44.562Z",
+    "notes": [
+      "Re-synced 2026-08-06 from re-emitted toast.figma.js via Console MCP (fetch :9228, 62819 bytes). Amended 1:4006.",
+      "Show EndContent default false \u2014 Slot/endContent hidden by default.",
+      "Body text unclipped (lineHeight PERCENT 142.86); Dismiss fully visible; height 64.",
+      "Developed score pending \u2014 do not treat as visual pass.",
+      "Re-synced via clientStorage chunks (n=8, total=63284); nodeId=1:4006; unchanged skip"
+    ],
+    "defects": [
+      "re-synced from contract; developed score pending"
+    ],
+    "reference": "none",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "observations": {
+      "slotHiddenByDefault": true,
+      "showEndContentDefault": false,
+      "textUnclipped": true,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 142.86
+      },
+      "size": {
+        "w": 360,
+        "h": 64
+      }
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:4236041702",
+    "lineCount": 68,
+    "sampleLines": [
+      ":COMPONENT/Toast (astryx.toast)|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color-background-surface\"}}}]",
+      ":COMPONENT/Toast (astryx.toast)|radius|12,12,12,12",
+      ":COMPONENT/Toast (astryx.toast)|layout|HORIZONTAL MIN/MIN gap 12 pad 16,16,16,16",
+      ":COMPONENT/Toast (astryx.toast)|sizing|FIXED/HUG AUTO",
+      ":COMPONENT/Toast (astryx.toast)|bound:bottomLeftRadius|radius-container",
+      ":COMPONENT/Toast (astryx.toast)|bound:bottomRightRadius|radius-container",
+      ":COMPONENT/Toast (astryx.toast)|bound:itemSpacing|spacing-3",
+      ":COMPONENT/Toast (astryx.toast)|bound:paddingBottom|spacing-4",
+      ":COMPONENT/Toast (astryx.toast)|bound:paddingLeft|spacing-4",
+      ":COMPONENT/Toast (astryx.toast)|bound:paddingRight|spacing-4",
+      ":COMPONENT/Toast (astryx.toast)|bound:paddingTop|spacing-4",
+      ":COMPONENT/Toast (astryx.toast)|bound:topLeftRadius|radius-container",
+      ":COMPONENT/Toast (astryx.toast)|bound:topRightRadius|radius-container",
+      ":COMPONENT/Toast (astryx.toast)|description|Toast \u00e2\u0080\u0094 generated from contract astryx.toast v0.2.0 \u00e2\u0080",
+      ":COMPONENT/Toast (astryx.toast)|propdef|Body#1:1106:TEXT=Saved successfully",
+      ":COMPONENT/Toast (astryx.toast)|propdef|EndContent#1:1107:INSTANCE_SWAP=1:347",
+      ":COMPONENT/Toast (astryx.toast)|propdef|Show EndContent#1:1108:BOOLEAN=true",
+      "/0:FRAME/content|fill|[]",
+      "/0:FRAME/content|radius|0,0,0,0",
+      "/0:FRAME/content|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "TEXT Body",
+      "first-variant fill bound: color-background-surface"
+    ],
+    "observed": {
+      "type": "COMPONENT",
+      "variantNames": [
+        "Toast (astryx.toast)"
+      ],
+      "propDefs": [
+        {
+          "name": "Body#1:1106",
+          "type": "TEXT",
+          "defaultValue": "Saved successfully",
+          "variantOptions": null
+        },
+        {
+          "name": "EndContent#1:1107",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show EndContent#1:1108",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "Toast (astryx.toast)",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 16,
+          "r": 16,
+          "b": 16,
+          "l": 16
+        },
+        "radius": 12,
+        "fillVarName": "color-background-surface",
+        "padBound": {
+          "itemSpacing": "spacing-3",
+          "paddingLeft": "spacing-4",
+          "paddingTop": "spacing-4",
+          "paddingRight": "spacing-4",
+          "paddingBottom": "spacing-4",
+          "topLeftRadius": "radius-container",
+          "topRightRadius": "radius-container",
+          "bottomLeftRadius": "radius-container",
+          "bottomRightRadius": "radius-container",
+          "fills": "color-background-surface"
+        },
+        "w": 360,
+        "h": 132,
+        "childTypes": [
+          "FRAME/content",
+          "FRAME/endContent",
+          "INSTANCE/dismiss"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T12:09:10.107Z",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=8, total=63284); nodeId=1:4006; unchanged skip"
+}

@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "kind": "console-loop-carbon-component",
+  "status": "completed",
+  "component": "accordion",
+  "contract": "examples/carbon/contracts/accordion.contract.json",
+  "script": "examples/carbon/figma/accordion.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:02.201Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:5365",
+    "mode": "amended",
+    "page": "Accordion",
+    "sectionId": "1:5366",
+    "contractId": "carbon.accordion",
+    "result": {
+      "createdNodeIds": [
+        "1:5365"
+      ],
+      "results": [
+        {
+          "name": "Accordion",
+          "contractId": "carbon.accordion",
+          "amended": true,
+          "nodeId": "1:5365",
+          "key": "8987c33dc8b061199606453a72a16d7757b9e2ef",
+          "addedVariants": [],
+          "rebuiltVariants": 8,
+          "extraVariants": [],
+          "addedProps": [],
+          "editedDefaults": [],
+          "wiredReactions": 0
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [],
+    "defects": [
+      "Missing expanded body panel aesthetic vs Carbon accordion developed pairs."
+    ],
+    "reference": "extract/computed/out/carbon/accordion/gate-shots/end.lg.enabled__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "scorecard": "parity/receipts/console-loop/carbon/scores/accordion.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "compositionOk near-pass; residual font/chrome AA",
+        "matchedAt": "2026-08-08T03:01:18.464Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=8.91, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:1242425722",
+    "lineCount": 543,
+    "sampleLines": [
+      ":COMPONENT_SET/Accordion|fill|[]",
+      ":COMPONENT_SET/Accordion|radius|5,5,5,5",
+      ":COMPONENT_SET/Accordion|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Accordion|description|Accordion â generated from contract carbon.accordion v0.2.0 â",
+      ":COMPONENT_SET/Accordion|propdef|Align:VARIANT=End",
+      ":COMPONENT_SET/Accordion|propdef|Size:VARIANT=Sm",
+      ":COMPONENT_SET/Accordion|propdef|State:VARIANT=Default",
+      "/0:COMPONENT/Align=End, Size=Sm, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Align=End, Size=Sm, State=Default|radius|0,0,0,0",
+      "/0:COMPONENT/Align=End, Size=Sm, State=Default|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Align=End, Size=Sm, State=Default|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Align=End, Size=Sm, State=Default|bound:minHeight|imported/shared/size-0",
+      "/0:COMPONENT/Align=End, Size=Sm, State=Default|bound:minWidth|imported/shared/size-0",
+      "/0:COMPONENT/Align=End, Size=Sm, State=Default|bound:width|imported/accordion/root/width",
+      "/0/0:FRAME/accordion__item|fill|[]",
+      "/0/0:FRAME/accordion__item|radius|0,0,0,0",
+      "/0/0:FRAME/accordion__item|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/accordion__item|sizing|FILL/HUG AUTO",
+      "/0/0:FRAME/accordion__item|bound:minHeight|imported/shared/size-0",
+      "/0/0:FRAME/accordion__item|bound:minWidth|imported/shared/size-0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Align enum → End/Start",
+      "Size enum → Sm/Md/Lg"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Align=End, Size=Sm, State=Default",
+        "Align=End, Size=Md, State=Default",
+        "Align=End, Size=Lg, State=Default",
+        "Align=Start, Size=Sm, State=Default",
+        "Align=Start, Size=Md, State=Default",
+        "Align=Start, Size=Lg, State=Default",
+        "Align=End, Size=Sm, State=Disabled",
+        "Align=Start, Size=Sm, State=Disabled"
+      ],
+      "propDefs": [
+        {
+          "name": "Align",
+          "type": "VARIANT",
+          "defaultValue": "End",
+          "variantOptions": [
+            "End",
+            "Start"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Sm",
+          "variantOptions": [
+            "Sm",
+            "Md",
+            "Lg"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Disabled"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Align=End, Size=Sm, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/accordion/root/width",
+          "minWidth": "imported/shared/size-0",
+          "minHeight": "imported/shared/size-0"
+        },
+        "w": 328,
+        "h": 82,
+        "childTypes": [
+          "FRAME/accordion__item"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T12:10:48.663Z",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=14, total=111012); amended, rebuilt 8 variants"
+}

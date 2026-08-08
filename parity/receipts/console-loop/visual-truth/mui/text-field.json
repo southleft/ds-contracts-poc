@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "text-field",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/text-field.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "84:2480",
+  "cellNodeId": "84:2143",
+  "cellName": "Variant=Outlined, Size=Medium",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 10.901737292030518,
+    "pctAAUnmasked": 6.48956705579557,
+    "pctAAMasked": 6.48956705579557,
+    "maskCoveragePct": 0,
+    "canvasPx": "253x86",
+    "realPx": "253x79",
+    "inkCanvasPct": 5.317584336795662,
+    "inkRealPct": 6.678003492968104
+  },
+  "reference": "extract/computed/out/mui/textfield/gate-shots/__default.png",
+  "referenceSha256": "e5fb834b6add2b5b0d0f45cb7b58eff01014072810d25306f3b677bde574e895",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/text-field.png",
+  "canvasShotSha256": "a36abe58d89cfb1f3393b2eaec89fcc2f4b71be453be8801dac2a0f15a9932c4",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/text-field.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0886075949367089,
+  "inkDelta": 1.3604191561724424,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=6.49 > 5)"
+}

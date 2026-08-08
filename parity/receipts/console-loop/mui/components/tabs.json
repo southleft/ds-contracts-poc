@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "tabs",
+  "contract": "examples/mui/contracts/tabs.contract.json",
+  "script": "examples/mui/figma/tabs.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.512Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:807",
+    "mode": "existing",
+    "page": "Tabs",
+    "sectionId": "21:808",
+    "result": {}
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:807).",
+      "Tabs COMPONENT_SET 21:807: 6 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:2607696146",
+    "lineCount": 508,
+    "sampleLines": [
+      ":COMPONENT_SET/Tabs|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Text color enum \u2192 Primary/Secondary/Inherit",
+      "Indicator color enum \u2192 Primary/Secondary"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Text color=Primary, Indicator color=Primary"
+      ],
+      "propDefs": [
+        {
+          "name": "Indicator color",
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary"
+          ]
+        },
+        {
+          "name": "Text color",
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Inherit"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Text color=Primary, Indicator color=Primary",
+        "type": "COMPONENT",
+        "fillVarName": null,
+        "padBound": {},
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "w": 288,
+        "h": 48,
+        "childTypes": [
+          "FRAME/tabs-fixed"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

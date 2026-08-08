@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "divider",
+  "contract": "examples/mui/contracts/divider.contract.json",
+  "script": "examples/mui/figma/divider.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:00:33.498Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "83:1610",
+    "mode": "generated",
+    "page": "Divider",
+    "sectionId": "83:1611",
+    "result": {
+      "createdNodeIds": [
+        "83:1610"
+      ],
+      "results": [
+        {
+          "name": "Divider",
+          "contractId": "mui.divider",
+          "nodeId": "83:1610",
+          "key": "c9e62f87417828041c1d31d7620d118b01198c4c",
+          "variants": 3,
+          "properties": [
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot reviewed on section/node 83:1611; structure/variants look sane (slot placeholders OK).",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 3 variants on page Divider)."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:1949352536",
+    "lineCount": 29,
+    "sampleLines": [
+      ":COMPONENT_SET/Divider|fill|[]",
+      ":COMPONENT_SET/Divider|radius|5,5,5,5",
+      ":COMPONENT_SET/Divider|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Divider|description|Divider \u00e2\u0080\u0094 generated from contract mui.divider v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Divider|propdef|Variant:VARIANT=FullWidth",
+      "/0:COMPONENT/Variant=FullWidth|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Variant=FullWidth|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=FullWidth|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=FullWidth|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Variant=FullWidth|bound:minHeight|imported/divider/root/min-height",
+      "/0:COMPONENT/Variant=FullWidth|bound:minWidth|imported/divider/root/min-width",
+      "/0:COMPONENT/Variant=FullWidth|bound:strokeBottomWeight|imported/divider/root/border-bottom-width",
+      "/0:COMPONENT/Variant=FullWidth|bound:width|imported/divider/root/width/fullWidth",
+      "/1:COMPONENT/Variant=Inset|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/1:COMPONENT/Variant=Inset|radius|0,0,0,0",
+      "/1:COMPONENT/Variant=Inset|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/1:COMPONENT/Variant=Inset|sizing|FIXED/HUG AUTO",
+      "/1:COMPONENT/Variant=Inset|bound:minHeight|imported/divider/root/min-height",
+      "/1:COMPONENT/Variant=Inset|bound:minWidth|imported/divider/root/min-width",
+      "/1:COMPONENT/Variant=Inset|bound:strokeBottomWeight|imported/divider/root/border-bottom-width"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Variant enum \u2192 FullWidth/Inset/Middle"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=FullWidth",
+        "Variant=Inset",
+        "Variant=Middle"
+      ],
+      "propDefs": [
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "FullWidth",
+          "variantOptions": [
+            "FullWidth",
+            "Inset",
+            "Middle"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=FullWidth",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/divider/root/width/fullWidth",
+          "strokeBottomWeight": "imported/divider/root/border-bottom-width",
+          "minWidth": "imported/divider/root/min-width",
+          "minHeight": "imported/divider/root/min-height"
+        },
+        "w": 288,
+        "h": 100,
+        "childTypes": []
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

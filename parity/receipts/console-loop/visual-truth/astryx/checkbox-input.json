@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "astryx",
+  "stem": "checkbox-input",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/astryx/components/checkbox-input.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:3873",
+  "cellNodeId": "1:3867",
+  "cellName": "Size=Md",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 15.84920634920635,
+    "pctAAUnmasked": 8.817460317460316,
+    "pctAAMasked": 8.817460317460316,
+    "maskCoveragePct": 0,
+    "canvasPx": "225x56",
+    "realPx": "91x16",
+    "inkCanvasPct": 13.428571428571429,
+    "inkRealPct": 4.325396825396825
+  },
+  "reference": "parity/receipts/console-loop/astryx/refs/checkbox-input.png",
+  "referenceSha256": "e15a105916e290f3c9266d6f9a32fdbaf3835cd83ea54e2fa91cb5b06c30322d",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/checkbox-input.png",
+  "canvasShotSha256": "d6f1a69f12405b2410aa4724f8d36e770b04278b7adcad7f2a555e7dbde988e4",
+  "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/checkbox-input.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 3.5,
+  "inkDelta": 9.103174603174605,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=3.50, inkDelta=9.1)"
+}

@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "kind": "console-loop-altitude-component",
+  "status": "completed",
+  "component": "badge",
+  "contract": "examples/altitude/contracts/badge.contract.json",
+  "script": "examples/altitude/figma/badge.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:43:10.768Z",
+  "reSyncedAt": "2026-08-07T12:03:59.615Z",
+  "transport": "figma-console-mcp figma_execute + fetch localhost:9228 stem script into ds_loop_script",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:2963",
+    "mode": "amended",
+    "page": "Badge (altitude.badge)",
+    "sectionId": "1:2964",
+    "contractId": "altitude.badge",
+    "result": {
+      "createdNodeIds": [
+        "1:2963"
+      ],
+      "results": [
+        {
+          "name": "Badge",
+          "contractId": "altitude.badge",
+          "amended": true,
+          "nodeId": "1:2963",
+          "key": "aeafc10397c133eeafa78dfd4524c20df75a7a0f",
+          "rebuiltVariants": 8,
+          "properties": [
+            "Content",
+            "Variant",
+            "Dot"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T15:23:00.000Z",
+    "notes": [
+      "Re-synced 2026-08-06 from re-emitted badge.figma.js via Console MCP (fetch :9228, 67617 bytes). Amended 1:2963; rebuilt 8 variants.",
+      "Dot=Default: label TEXT \"Badge\" visible on all four Variant rows (Info/Success/Warning/Danger).",
+      "Dot=Dot: no label text; 8×8 pill/dot only.",
+      "Developed score pending — do not treat as visual pass.",
+      "Re-synced via clientStorage chunks (n=9, total=67617); nodeId=1:2963"
+    ],
+    "defects": [
+      "re-synced from contract; developed score pending"
+    ],
+    "reference": "extract/computed/out/altitude/badge/gate-shots/info.default__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "observations": {
+      "defaultLabelVisible": true,
+      "dotLabelAbsent": true,
+      "variantCount": 8,
+      "size": {
+        "w": 173,
+        "h": 280
+      }
+    },
+    "scorecard": "parity/receipts/console-loop/altitude/scores/badge.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "agent score AA=6.44 compositionOk after FC-THEME-ISO",
+        "matchedAt": "2026-08-08T03:05:33.271Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=6.44, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:3192606537",
+    "lineCount": 143,
+    "sampleLines": [
+      ":COMPONENT_SET/Badge (altitude.badge)|fill|[]",
+      ":COMPONENT_SET/Badge (altitude.badge)|radius|5,5,5,5",
+      ":COMPONENT_SET/Badge (altitude.badge)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Badge (altitude.badge)|description|Badge â generated from contract altitude.badge v0.2.0 â",
+      ":COMPONENT_SET/Badge (altitude.badge)|propdef|Content#1:773:TEXT=Badge",
+      ":COMPONENT_SET/Badge (altitude.badge)|propdef|Dot:VARIANT=Default",
+      ":COMPONENT_SET/Badge (altitude.badge)|propdef|Variant:VARIANT=Info",
+      "/0:COMPONENT/Variant=Info, Dot=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.26274511218070984,\"g\":0.4588235318660736,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/badge/root/background-color/info\"}}}]",
+      "/0:COMPONENT/Variant=Info, Dot=Default|radius|20,20,20,20",
+      "/0:COMPONENT/Variant=Info, Dot=Default|layout|HORIZONTAL CENTER/CENTER gap 4 pad 0,4,0,4",
+      "/0:COMPONENT/Variant=Info, Dot=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Variant=Info, Dot=Default|bound:bottomLeftRadius|imported/badge/root/border-bottom-left-radius/default",
+      "/0:COMPONENT/Variant=Info, Dot=Default|bound:bottomRightRadius|imported/badge/root/border-bottom-right-radius/default",
+      "/0:COMPONENT/Variant=Info, Dot=Default|bound:itemSpacing|imported/badge/root/column-gap",
+      "/0:COMPONENT/Variant=Info, Dot=Default|bound:minHeight|imported/badge/root/min-height/default",
+      "/0:COMPONENT/Variant=Info, Dot=Default|bound:minWidth|imported/badge/root/min-width/default",
+      "/0:COMPONENT/Variant=Info, Dot=Default|bound:paddingLeft|imported/badge/root/padding-left/default",
+      "/0:COMPONENT/Variant=Info, Dot=Default|bound:paddingRight|imported/badge/root/padding-right/default",
+      "/0:COMPONENT/Variant=Info, Dot=Default|bound:topLeftRadius|imported/badge/root/border-top-left-radius/default",
+      "/0:COMPONENT/Variant=Info, Dot=Default|bound:topRightRadius|imported/badge/root/border-top-right-radius/default"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Variant enum → Info/Success/Warning/Danger",
+      "Dot enum → Default/Dot",
+      "TEXT Content",
+      "first-variant fill bound: imported/badge/root/background-color/info"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Info, Dot=Default",
+        "Variant=Info, Dot=Dot",
+        "Variant=Success, Dot=Default",
+        "Variant=Success, Dot=Dot",
+        "Variant=Warning, Dot=Default",
+        "Variant=Warning, Dot=Dot",
+        "Variant=Danger, Dot=Default",
+        "Variant=Danger, Dot=Dot"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#1:773",
+          "type": "TEXT",
+          "defaultValue": "Badge",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Info",
+            "Success",
+            "Warning",
+            "Danger"
+          ]
+        },
+        {
+          "name": "Dot",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Dot"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Info, Dot=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 4,
+          "b": 0,
+          "l": 4
+        },
+        "radius": 20,
+        "fillVarName": "imported/badge/root/background-color/info",
+        "padBound": {
+          "itemSpacing": "imported/badge/root/column-gap",
+          "paddingLeft": "imported/badge/root/padding-left/default",
+          "paddingRight": "imported/badge/root/padding-right/default",
+          "topLeftRadius": "imported/badge/root/border-top-left-radius/default",
+          "topRightRadius": "imported/badge/root/border-top-right-radius/default",
+          "bottomLeftRadius": "imported/badge/root/border-bottom-left-radius/default",
+          "bottomRightRadius": "imported/badge/root/border-bottom-right-radius/default",
+          "minWidth": "imported/badge/root/min-width/default",
+          "minHeight": "imported/badge/root/min-height/default",
+          "fills": "imported/badge/root/background-color/info"
+        },
+        "w": 45,
+        "h": 20,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "screenshot": "parity/receipts/console-loop/altitude/shots/badge.png",
+  "screenshotVariant": {
+    "nodeId": "1:2947",
+    "name": "Variant=Info, Dot=Default",
+    "bytes": 2072
+  },
+  "reSyncNote": "Re-synced via clientStorage chunks (n=9, total=67617); nodeId=1:2963"
+}

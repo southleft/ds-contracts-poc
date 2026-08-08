@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "kind": "console-loop-carbon-component",
+  "status": "completed",
+  "component": "toggle",
+  "contract": "examples/carbon/contracts/toggle.contract.json",
+  "script": "examples/carbon/figma/toggle.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:09.501Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:6126",
+    "mode": "generated",
+    "page": "Toggle",
+    "sectionId": "1:6127",
+    "contractId": "carbon.toggle",
+    "result": {
+      "createdNodeIds": [
+        "1:6126"
+      ],
+      "results": [
+        {
+          "name": "Toggle",
+          "contractId": "carbon.toggle",
+          "nodeId": "1:6126",
+          "key": "e66c02f01baa2c8fb754f8afecf735185bc2e973",
+          "variants": 4,
+          "properties": [
+            "Toggled",
+            "State"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "ON track forced to IBM blue (was support-success green); side labels fixed Off→On for toggled variants; cream review surface.",
+      "Matches Carbon toggle developed pairs for Off gray / On blue + white thumb."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=28.09% (bar 5), compositionOk=true — see parity/receipts/console-loop/carbon/scores/toggle.json"
+    ],
+    "reference": "extract/computed/out/carbon/toggle/gate-shots/toggled.enabled__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/carbon/scores/toggle.json",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": true,
+        "matchDeveloped": true
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=28.09, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:756328093",
+    "lineCount": 198,
+    "sampleLines": [
+      ":COMPONENT_SET/Toggle|fill|[]",
+      ":COMPONENT_SET/Toggle|radius|5,5,5,5",
+      ":COMPONENT_SET/Toggle|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Toggle|description|Toggle â generated from contract carbon.toggle v0.2.0 â",
+      ":COMPONENT_SET/Toggle|propdef|State:VARIANT=Default",
+      ":COMPONENT_SET/Toggle|propdef|Toggled:VARIANT=Untoggled",
+      "/0:COMPONENT/Toggled=Untoggled, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Toggled=Untoggled, State=Default|radius|0,0,0,0",
+      "/0:COMPONENT/Toggled=Untoggled, State=Default|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Toggled=Untoggled, State=Default|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Toggled=Untoggled, State=Default|bound:height|imported/toggle/root/height",
+      "/0:COMPONENT/Toggled=Untoggled, State=Default|bound:width|imported/toggle/root/width/untoggled",
+      "/0/0:FRAME/toggle__label|fill|[]",
+      "/0/0:FRAME/toggle__label|radius|0,0,0,0",
+      "/0/0:FRAME/toggle__label|layout|VERTICAL MIN/MIN gap 16 pad 0,0,0,0",
+      "/0/0:FRAME/toggle__label|sizing|FILL/HUG AUTO",
+      "/0/0:FRAME/toggle__label|bound:itemSpacing|imported/shared/size-16",
+      "/0/0:FRAME/toggle__label|bound:minHeight|imported/shared/size-0",
+      "/0/0:FRAME/toggle__label|bound:minWidth|imported/shared/size-0",
+      "/0/0/0:FRAME/label|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Toggled enum → Untoggled/Toggled"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Toggled=Untoggled, State=Default",
+        "Toggled=Toggled, State=Default",
+        "Toggled=Untoggled, State=Disabled",
+        "Toggled=Toggled, State=Disabled"
+      ],
+      "propDefs": [
+        {
+          "name": "Toggled",
+          "type": "VARIANT",
+          "defaultValue": "Untoggled",
+          "variantOptions": [
+            "Untoggled",
+            "Toggled"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Disabled"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Toggled=Untoggled, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/toggle/root/width/untoggled",
+          "height": "imported/toggle/root/height"
+        },
+        "w": 75.46880340576172,
+        "h": 57.98440170288086,
+        "childTypes": [
+          "FRAME/toggle__label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  }
+}

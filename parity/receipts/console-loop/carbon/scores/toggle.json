@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 38.913255360623786,
+    "pctAAUnmasked": 28.094541910331383,
+    "pctAAMasked": 28.094541910331383,
+    "maskCoveragePct": 0,
+    "canvasPx": "76x53",
+    "realPx": "74x54",
+    "inkCanvasPct": 28.630604288499022,
+    "inkRealPct": 27.046783625730995
+  },
+  "reference": "extract/computed/out/carbon/toggle/gate-shots/toggled.enabled__default.png",
+  "referenceSha256": "5b6dcfb7b5a35b945722825c5c9dba96cc75f161a385bc540d92f2baf93dd377",
+  "canvasShot": "parity/receipts/console-loop/carbon/shots/toggle-cell.png",
+  "canvasShotSha256": "90370093379dc329c524e844fd5d06ca2712a035d68dd1d0d59c9bcf7edfa37e",
+  "diff": "parity/receipts/console-loop/carbon/scores/toggle.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/carbon/components/toggle.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.027027027027027,
+  "inkDelta": 1.5838206627680265,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=28.09 > 5)",
+  "recordedAt": "2026-08-08T04:31:18.396Z"
+}

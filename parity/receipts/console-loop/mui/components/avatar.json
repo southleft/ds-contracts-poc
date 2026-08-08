@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "avatar",
+  "contract": "examples/mui/contracts/avatar.contract.json",
+  "script": "examples/mui/figma/avatar.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:00:34.663Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "83:1638",
+    "mode": "generated",
+    "page": "Avatar",
+    "sectionId": "83:1639",
+    "result": {
+      "createdNodeIds": [
+        "83:1638"
+      ],
+      "results": [
+        {
+          "name": "Avatar",
+          "contractId": "mui.avatar",
+          "nodeId": "83:1638",
+          "key": "1b69dcd586117a167af2d24e7de684acb685a51b",
+          "variants": 3,
+          "properties": [
+            "Initials#83:9",
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Structure/variants reviewed via inspect (83:1638, page Avatar); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 3 variants on page Avatar)."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:2993664762",
+    "lineCount": 42,
+    "sampleLines": [
+      ":COMPONENT_SET/Avatar|fill|[]",
+      ":COMPONENT_SET/Avatar|radius|5,5,5,5",
+      ":COMPONENT_SET/Avatar|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Avatar|description|Avatar \u00e2\u0080\u0094 generated from contract mui.avatar v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Avatar|propdef|Initials#83:9:TEXT=A",
+      ":COMPONENT_SET/Avatar|propdef|Variant:VARIANT=Circular",
+      "/0:COMPONENT/Variant=Circular|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.7411764860153198,\"g\":0.7411764860153198,\"b\":0.7411764860153198},\"boundVariables\":{\"color\":{\"var\":\"imported/avatar/root/background-color\"}}}]",
+      "/0:COMPONENT/Variant=Circular|radius|20,20,20,20",
+      "/0:COMPONENT/Variant=Circular|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Circular|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Variant=Circular|bound:bottomLeftRadius|imported/avatar/root/border-bottom-left-radius/circular",
+      "/0:COMPONENT/Variant=Circular|bound:bottomRightRadius|imported/avatar/root/border-bottom-right-radius/circular",
+      "/0:COMPONENT/Variant=Circular|bound:topLeftRadius|imported/avatar/root/border-top-left-radius/circular",
+      "/0:COMPONENT/Variant=Circular|bound:topRightRadius|imported/avatar/root/border-top-right-radius/circular",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/avatar/root/color\"}}}]",
+      "/0/0:TEXT/label|radius|0,0,0,0",
+      "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
+      "/0/0:TEXT/label|text|\"A\" 20px {\"family\":\"Roboto\",\"style\":\"Regular\"}",
+      "/1:COMPONENT/Variant=Rounded|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.7411764860153198,\"g\":0.7411764860153198,\"b\":0.7411764860153198},\"boundVariables\":{\"color\":{\"var\":\"imported/avatar/root/background-color\"}}}]",
+      "/1:COMPONENT/Variant=Rounded|radius|4,4,4,4"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant enum \u2192 Circular/Rounded/Square",
+      "TEXT Initials",
+      "first-variant fill bound: imported/avatar/root/background-color"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Circular",
+        "Variant=Rounded",
+        "Variant=Square"
+      ],
+      "propDefs": [
+        {
+          "name": "Initials#83:9",
+          "type": "TEXT",
+          "defaultValue": "A",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Circular",
+          "variantOptions": [
+            "Circular",
+            "Rounded",
+            "Square"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Circular",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 20,
+        "fillVarName": "imported/avatar/root/background-color",
+        "padBound": {
+          "topLeftRadius": "imported/avatar/root/border-top-left-radius/circular",
+          "topRightRadius": "imported/avatar/root/border-top-right-radius/circular",
+          "bottomLeftRadius": "imported/avatar/root/border-bottom-left-radius/circular",
+          "bottomRightRadius": "imported/avatar/root/border-bottom-right-radius/circular"
+        },
+        "w": 14,
+        "h": 20,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

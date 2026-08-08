@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "checkbox",
+  "contract": "examples/polaris/contracts/checkbox.contract.json",
+  "script": "examples/polaris/figma/checkbox.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:31.032Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload + eval(async IIFE)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:10049",
+    "mode": "amended",
+    "page": "Checkbox (polaris.checkbox)",
+    "sectionId": "1:10050",
+    "contractId": "polaris.checkbox",
+    "result": {
+      "createdNodeIds": [
+        "1:10049"
+      ],
+      "results": [
+        {
+          "name": "Checkbox",
+          "contractId": "polaris.checkbox",
+          "nodeId": "1:10049",
+          "key": "f6f3ac26d2be5b418d49a33e38f22e7b3a869629",
+          "variants": 3,
+          "properties": [
+            "Label Hidden#1:2280",
+            "Disabled#1:2284",
+            "Aria Controls#1:2288",
+            "Aria Described By#1:2292",
+            "Name#1:2296",
+            "Value#1:2300",
+            "Label Class Name#1:2304",
+            "Checked"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Re-synced via clientStorage chunks (n=12, total=92682); nodeId=1:10049",
+      "Re-synced via console-loop batch 2026-08-07T16:32:44.350Z — amended rebuiltVariants=3; nodeId=1:10049; label \"Save this information\"; absolute glyph present; matchDeveloped left unset.",
+      "Re-synced via clientStorage chunks (n=16, total=92980); eval skipped unchanged nodeId=1:10049; label \"Save this information\". matchDeveloped left false."
+    ],
+    "defects": [
+      "Unchecked/indeterminate geometry inverted vs Polaris checkbox; labels missing vs developed receipt."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/checkbox.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "examples/polaris/generated/html/checkbox.html#first-item-inline-css",
+    "scorecard": "parity/receipts/console-loop/polaris/scores/checkbox.json",
+    "matchDevelopedReason": "reverted — exact~39% indicates paint/layout gap beyond FC-FONT-AA"
+  },
+  "fingerprint": {
+    "v6": "v6:1753212640",
+    "lineCount": 190,
+    "sampleLines": [
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|fill|[]",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|radius|5,5,5,5",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|description|Checkbox â generated from contract polaris.checkbox v0.4.0 â",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|propdef|Aria Controls#1:2288:TEXT=",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|propdef|Aria Described By#1:2292:TEXT=",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|propdef|Checked:VARIANT=unchecked",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|propdef|Disabled#1:2284:BOOLEAN=false",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|propdef|Label Class Name#1:2304:TEXT=",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|propdef|Label Hidden#1:2280:BOOLEAN=false",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|propdef|Name#1:2296:TEXT=",
+      ":COMPONENT_SET/Checkbox (polaris.checkbox)|propdef|Value#1:2300:TEXT=",
+      "/0:COMPONENT/Checked=unchecked|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Checked=unchecked|radius|0,0,0,0",
+      "/0:COMPONENT/Checked=unchecked|layout|HORIZONTAL MIN/CENTER gap 8 pad 4,0,4,0",
+      "/0:COMPONENT/Checked=unchecked|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Checked=unchecked|bound:height|imported/checkbox/root/height",
+      "/0:COMPONENT/Checked=unchecked|bound:itemSpacing|imported/checkbox/choice-control/margin-right",
+      "/0:COMPONENT/Checked=unchecked|bound:paddingBottom|imported/shared/size-4",
+      "/0:COMPONENT/Checked=unchecked|bound:paddingTop|imported/shared/size-4"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Checked enum → unchecked/checked/indeterminate",
+      "TEXT Aria Controls",
+      "TEXT Aria Described By",
+      "BOOLEAN Label Hidden",
+      "BOOLEAN Disabled",
+      "TEXT Name",
+      "TEXT Value",
+      "TEXT Label Class Name"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Checked=unchecked",
+        "Checked=checked",
+        "Checked=indeterminate"
+      ],
+      "propDefs": [
+        {
+          "name": "Label Hidden#1:2280",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Disabled#1:2284",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Aria Controls#1:2288",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Aria Described By#1:2292",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Name#1:2296",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Value#1:2300",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Label Class Name#1:2304",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Checked",
+          "type": "VARIANT",
+          "defaultValue": "unchecked",
+          "variantOptions": [
+            "unchecked",
+            "checked",
+            "indeterminate"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Checked=unchecked",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 4,
+          "r": 0,
+          "b": 4,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "imported/checkbox/choice-control/margin-right",
+          "paddingTop": "imported/shared/size-4",
+          "paddingBottom": "imported/shared/size-4",
+          "width": "imported/checkbox/root/width",
+          "height": "imported/checkbox/root/height"
+        },
+        "w": 136.35899353027344,
+        "h": 28,
+        "childTypes": [
+          "FRAME/choice__control",
+          "FRAME/choice__label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T16:50:01.601Z",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=16, total=92980); eval skipped unchanged nodeId=1:10049; label \"Save this information\". matchDeveloped left false.",
+  "nodeId": "1:10049"
+}

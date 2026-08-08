@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "avatar",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/avatar.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:338",
+  "cellNodeId": "1:334",
+  "cellName": "Size=Small",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 95.703125,
+    "pctAAUnmasked": 68.7255859375,
+    "pctAAMasked": 68.7255859375,
+    "maskCoveragePct": 0,
+    "canvasPx": "48x48",
+    "realPx": "64x64",
+    "inkCanvasPct": 45.01953125,
+    "inkRealPct": 95.703125
+  },
+  "reference": "extract/computed/out/avatar/gate-shots/lg.off__default.png",
+  "referenceSha256": "86ea867cae89d4077ec9355d7f0f75be0698e68202dc058435abaa41b78b256f",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/avatar.png",
+  "canvasShotSha256": "12aac6536c492bafaf1fb695c187dd6e4decbabd1718fea7e257576dd01e6253",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/avatar.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.3333333333333333,
+  "inkDelta": 50.68359375,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.33, inkDelta=50.7)"
+}

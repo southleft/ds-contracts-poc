@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "drawer",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/drawer.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "83:1680",
+  "cellNodeId": "83:1673",
+  "cellName": "Variant=Temporary",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 76.49269496764438,
+    "pctAAUnmasked": 73.30160777424449,
+    "pctAAMasked": 73.30160777424449,
+    "maskCoveragePct": 0,
+    "canvasPx": "233x193",
+    "realPx": "67x32",
+    "inkCanvasPct": 76.49714247592786,
+    "inkRealPct": 3.5824679223465057
+  },
+  "reference": "extract/computed/out/mui/drawer/gate-shots/temporary__default.png",
+  "referenceSha256": "53dbebb6bcc200b44ed7786706765aeaefbb9cb7702ba59a5cfd3e6701b4fe35",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/drawer.png",
+  "canvasShotSha256": "49e24417b287d180a41d3adad775cd270e29d283d7908953b640ba10231a7661",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/drawer.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 6.03125,
+  "inkDelta": 72.91467455358135,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=6.03, inkDelta=72.9)"
+}

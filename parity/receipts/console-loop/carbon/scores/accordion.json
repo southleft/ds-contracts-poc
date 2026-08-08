@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 17.15496728138013,
+    "pctAAUnmasked": 8.908387864366448,
+    "pctAAMasked": 8.908387864366448,
+    "maskCoveragePct": 0,
+    "canvasPx": "328x82",
+    "realPx": "328x64",
+    "inkCanvasPct": 10.317519333729923,
+    "inkRealPct": 7.112581796549673
+  },
+  "reference": "extract/computed/out/carbon/accordion/gate-shots/end.lg.enabled__default.png",
+  "referenceSha256": "20e12b797ecafad0cb18123292a04318fbbef55b4f601fa6f527c80f7c73cd44",
+  "canvasShot": "parity/receipts/console-loop/carbon/shots/accordion-cell.png",
+  "canvasShotSha256": "1d362aba15ee33e3a78e35e4f8b3a6ff147bd61541faa47feb1bd9df4ab6047c",
+  "diff": "parity/receipts/console-loop/carbon/scores/accordion.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/carbon/components/accordion.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.28125,
+  "inkDelta": 3.2049375371802498,
+  "dprNormalized": false,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=8.91 > 5)",
+  "recordedAt": "2026-08-08T04:31:16.064Z"
+}

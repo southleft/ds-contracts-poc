@@ -1,0 +1,469 @@
+{
+  "version": 1,
+  "kind": "console-loop-visual-audit",
+  "reviewedAt": "2026-08-06T13:32:20.271Z",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileName": "DS Contracts Testing",
+  "method": "figma-console-mcp figma_capture_screenshot + figma_execute property inspection vs developed site/computed pair PNGs",
+  "fixesAppliedThisPass": [
+    "Restored Astryx collection colors to astryx-docs.dtcg.json (accent #15110C, etc.)",
+    "Cream (#F8F4ED) fills on foreign COMPONENT_SETs so translucent/dark-text variants are reviewable",
+    "Carbon button: CENTER/CENTER, symmetric pad, HUG width (was SPACE_BETWEEN + L15/R63)",
+    "Carbon toggle ON: IBM blue (was support-success green); On labels for toggled variants",
+    "Astryx Switch: added missing white thumb ellipses for Off-state review"
+  ],
+  "counts": {
+    "astryx": {
+      "pass": 1,
+      "fail": 12,
+      "total": 13
+    },
+    "carbon": {
+      "pass": 2,
+      "fail": 8,
+      "total": 10
+    },
+    "polaris": {
+      "pass": 0,
+      "fail": 12,
+      "total": 12
+    },
+    "tailwind": {
+      "pass": 0,
+      "fail": 5,
+      "total": 5
+    },
+    "altitude": {
+      "pass": 0,
+      "fail": 8,
+      "total": 8
+    }
+  },
+  "totals": {
+    "pass": 3,
+    "fail": 45,
+    "total": 48
+  },
+  "libraries": {
+    "astryx": {
+      "pass": 1,
+      "fail": 12,
+      "stems": [
+        {
+          "stem": "button",
+          "matchDeveloped": true,
+          "defects": [],
+          "reference": "examples/astryx/receipts/site/Button.png; examples/astryx/tokens/astryx-docs.dtcg.json"
+        },
+        {
+          "stem": "badge",
+          "matchDeveloped": false,
+          "defects": [
+            "Accent/default row uses near-black solid; docs Info status is saturated blue with white text — status mapping incomplete.",
+            "Missing icon treatments present in some docs badge examples; fail closed until status axis maps 1:1 to developed Neutral/Info/Success/Warning/Error row."
+          ],
+          "reference": "examples/astryx/receipts/site/Badge.png"
+        },
+        {
+          "stem": "banner",
+          "matchDeveloped": false,
+          "defects": [
+            "Pastel fills improved on cream, but still dense pill chips without status icons / title+body hierarchy of developed Banner docs.",
+            "Not full-width alert banners as in examples/astryx/receipts/site/Banner.png."
+          ],
+          "reference": "examples/astryx/receipts/site/Banner.png"
+        },
+        {
+          "stem": "card",
+          "matchDeveloped": false,
+          "defects": [
+            "Color variants still lack developed title/body hierarchy and elevation/border cues from Card docs.",
+            "Body-only placeholder aesthetic — fail closed."
+          ],
+          "reference": "examples/astryx/receipts/site/Card.png"
+        },
+        {
+          "stem": "checkbox-input",
+          "matchDeveloped": false,
+          "defects": [
+            "Only Size axis; missing checked/indeterminate visual states vs typical Astryx checkbox UX.",
+            "No developed site Checkbox receipt — fail closed on matchDeveloped."
+          ],
+          "reference": "none"
+        },
+        {
+          "stem": "dropdown-menu-item",
+          "matchDeveloped": false,
+          "defects": [
+            "Not a COMPONENT_SET; missing hover/selected/destructive variants; no developed site reference — fail closed."
+          ],
+          "reference": "none"
+        },
+        {
+          "stem": "dropdown-menu",
+          "matchDeveloped": false,
+          "defects": [
+            "Not a COMPONENT_SET with expected item-state axes; no developed DropdownMenu site receipt — fail closed."
+          ],
+          "reference": "none"
+        },
+        {
+          "stem": "progress-bar",
+          "matchDeveloped": false,
+          "defects": [
+            "Label wrap (Upload/ing) indicates width/padding not matching developed progress chrome.",
+            "No developed site ProgressBar receipt — fail closed."
+          ],
+          "reference": "none"
+        },
+        {
+          "stem": "slider",
+          "matchDeveloped": false,
+          "defects": [
+            "Active track is near-black (docs OK) but thumb geometry is line/semi-circle, not circular disk in examples/astryx/receipts/site/Slider.png.",
+            "Vertical variants still show detached/misaligned thumbs vs developed horizontal circular thumb."
+          ],
+          "reference": "examples/astryx/receipts/site/Slider.png"
+        },
+        {
+          "stem": "switch",
+          "matchDeveloped": false,
+          "defects": [
+            "Off-state now has medium-gray track + white circular thumb (manual canvas repair) and matches docs Off aesthetic.",
+            "No On-state variant axis (only Label Position) — cannot render near-black On from docs; fail closed on full matchDeveloped."
+          ],
+          "reference": "examples/astryx/receipts/site/Switch.png"
+        },
+        {
+          "stem": "text-input",
+          "matchDeveloped": false,
+          "defects": [
+            "Missing light-gray border / leading-icon treatments shown in TextInput docs.",
+            "Placeholder hierarchy not demonstrated vs examples/astryx/receipts/site/TextInput.png."
+          ],
+          "reference": "examples/astryx/receipts/site/TextInput.png"
+        },
+        {
+          "stem": "toast",
+          "matchDeveloped": false,
+          "defects": [
+            "Title/message clipping and Slot placeholder remain; not a COMPONENT_SET with status variants.",
+            "No developed site Toast receipt — fail closed."
+          ],
+          "reference": "none"
+        },
+        {
+          "stem": "token",
+          "matchDeveloped": false,
+          "defects": [
+            "No developed site Token receipt — fail closed on matchDeveloped despite cream-surface contrast improvement."
+          ],
+          "reference": "none"
+        }
+      ]
+    },
+    "carbon": {
+      "pass": 2,
+      "fail": 8,
+      "stems": [
+        {
+          "stem": "button",
+          "matchDeveloped": true,
+          "defects": [],
+          "reference": "extract/computed/out/carbon/button/receipts/pair--primary.unset.enabled__default.png"
+        },
+        {
+          "stem": "toggle",
+          "matchDeveloped": true,
+          "defects": [],
+          "reference": "extract/computed/out/carbon/toggle/receipts/pair--untoggled.enabled__default.png"
+        },
+        {
+          "stem": "checkbox",
+          "matchDeveloped": false,
+          "defects": [
+            "Control/label fidelity vs computed pairs still unverified after cream surface; fail closed until pair-level match confirmed."
+          ],
+          "reference": "extract/computed/out/carbon/checkbox/receipts/pair--unchecked.enabled__default.png"
+        },
+        {
+          "stem": "accordion",
+          "matchDeveloped": false,
+          "defects": [
+            "Missing expanded body panel aesthetic vs Carbon accordion developed pairs."
+          ],
+          "reference": "extract/computed/out/carbon/accordion/receipts/pair--end.unset.enabled__default.png"
+        },
+        {
+          "stem": "icon-button",
+          "matchDeveloped": false,
+          "defects": [
+            "Plus glyph placeholder only; not aesthetic match to computed iconbutton pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/carbon/iconbutton/receipts/pair--primary.unset.enabled__default.png"
+        },
+        {
+          "stem": "inline-notification",
+          "matchDeveloped": false,
+          "defects": [
+            "Warning/status iconography fidelity and layout artifacts not match to computed pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/carbon/inlinenotification/receipts/pair--error.high__default.png"
+        },
+        {
+          "stem": "modal",
+          "matchDeveloped": false,
+          "defects": [
+            "Dialog surface/footer button-set strip proportions not verified as match to pair--unset__default — fail closed."
+          ],
+          "reference": "extract/computed/out/carbon/modal/receipts/pair--unset__default.png"
+        },
+        {
+          "stem": "tabs",
+          "matchDeveloped": false,
+          "defects": [
+            "Label truncation and missing Carbon selected underline/bar treatment vs computed tabs pairs."
+          ],
+          "reference": "extract/computed/out/carbon/tabs/receipts/pair--__default.png"
+        },
+        {
+          "stem": "tag",
+          "matchDeveloped": false,
+          "defects": [
+            "Padding/type scale / High Contrast/Outline rows not verified as matchDeveloped — fail closed."
+          ],
+          "reference": "extract/computed/out/carbon/tag/receipts/pair--unset.unset__default.png"
+        },
+        {
+          "stem": "text-input",
+          "matchDeveloped": false,
+          "defects": [
+            "Missing Carbon bottom-border emphasis / helper text vs computed textinput pairs."
+          ],
+          "reference": "extract/computed/out/carbon/textinput/receipts/pair--unset.enabled__default.png"
+        }
+      ]
+    },
+    "polaris": {
+      "pass": 0,
+      "fail": 12,
+      "stems": [
+        {
+          "stem": "button",
+          "matchDeveloped": false,
+          "defects": [
+            "Contract tone enum is only critical|success — no undefined/default Tone, so dark Polaris Primary (examples/polaris/receipts/button/variant-primary.png) cannot be projected.",
+            "Primary+Critical is flat red without Polaris top-highlight gradient of developed primary receipts.",
+            "Emit/contract gap, not an intentional COMPILE canvas projection."
+          ],
+          "reference": "examples/polaris/receipts/button/variant-primary.png; examples/polaris/contracts/button.contract.json"
+        },
+        {
+          "stem": "badge",
+          "matchDeveloped": false,
+          "defects": [
+            "Pill radius/padding/progress glyph fidelity vs developed badge receipts incomplete — fail closed."
+          ],
+          "reference": "examples/polaris/receipts/badge/default.png"
+        },
+        {
+          "stem": "banner",
+          "matchDeveloped": false,
+          "defects": [
+            "Warning icon / focus ring fidelity vs tone-* developed receipts — fail closed."
+          ],
+          "reference": "examples/polaris/receipts/banner/tone-info.png"
+        },
+        {
+          "stem": "avatar",
+          "matchDeveloped": false,
+          "defects": [
+            "Saturated magenta placeholder not matching Polaris avatar developed defaults — fail closed."
+          ],
+          "reference": "examples/polaris/receipts/avatar/default.png"
+        },
+        {
+          "stem": "checkbox",
+          "matchDeveloped": false,
+          "defects": [
+            "Unchecked/indeterminate geometry inverted vs Polaris checkbox; labels missing vs developed receipt."
+          ],
+          "reference": "examples/polaris/receipts/checkbox/default.png"
+        },
+        {
+          "stem": "progress-bar",
+          "matchDeveloped": false,
+          "defects": [
+            "Track fills lack Polaris rounded-track fidelity vs developed progress-bar receipts — fail closed."
+          ],
+          "reference": "examples/polaris/receipts/progress-bar/default.png"
+        },
+        {
+          "stem": "radio-button",
+          "matchDeveloped": false,
+          "defects": [
+            "Unchecked solid white disk / checked ring inverted vs Polaris radio outline+dot; labels missing."
+          ],
+          "reference": "examples/polaris/receipts/radio-button/default.png"
+        },
+        {
+          "stem": "spinner",
+          "matchDeveloped": false,
+          "defects": [
+            "Arc contrast/color not match to developed spinner receipts — fail closed."
+          ],
+          "reference": "examples/polaris/receipts/spinner/default.png"
+        },
+        {
+          "stem": "tag",
+          "matchDeveloped": false,
+          "defects": [
+            "Active/focus heavy borders atypical of Polaris Tag; size geometry inconsistent with developed tag receipt."
+          ],
+          "reference": "examples/polaris/receipts/tag/default.png"
+        },
+        {
+          "stem": "text-field",
+          "matchDeveloped": false,
+          "defects": [
+            "Placeholder literal and borderless/disabled cells incomplete vs developed text-field receipt — fail closed."
+          ],
+          "reference": "examples/polaris/receipts/text-field/default.png"
+        },
+        {
+          "stem": "text",
+          "matchDeveloped": false,
+          "defects": [
+            "Ultra-wide set illegible at review scale; type-scale match to minted styles / developed text receipts not confirmed — fail closed."
+          ],
+          "reference": "examples/polaris/receipts/text/body-md.png"
+        },
+        {
+          "stem": "thumbnail",
+          "matchDeveloped": false,
+          "defects": [
+            "0-radius gray squares; Polaris Thumbnails are rounded — geometry FAIL."
+          ],
+          "reference": "examples/polaris/receipts/thumbnail/default.png"
+        }
+      ]
+    },
+    "tailwind": {
+      "pass": 0,
+      "fail": 5,
+      "stems": [
+        {
+          "stem": "button",
+          "matchDeveloped": false,
+          "defects": [
+            "Size ladder still not verified as Flowbite height scale fidelity vs pair--default.md.enabled__default.png — fail closed.",
+            "Cream surface improved reviewability; aesthetic match not claimed."
+          ],
+          "reference": "extract/computed/out/tailwind/button/receipts/pair--default.md.enabled__default.png"
+        },
+        {
+          "stem": "alert",
+          "matchDeveloped": false,
+          "defects": [
+            "Missing Flowbite alert icons / dismiss control; text-only chips — fail closed."
+          ],
+          "reference": "extract/computed/out/tailwind/alert/receipts/pair--info__default.png"
+        },
+        {
+          "stem": "badge",
+          "matchDeveloped": false,
+          "defects": [
+            "State Active/Hover fill shifts not verified vs Flowbite badge pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/tailwind/badge/receipts/pair--info.xs__default.png"
+        },
+        {
+          "stem": "card",
+          "matchDeveloped": false,
+          "defects": [
+            "Not a COMPONENT_SET; border/shadow aesthetic not match to Flowbite card pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/tailwind/card/receipts/pair--__default.png"
+        },
+        {
+          "stem": "toggle-switch",
+          "matchDeveloped": false,
+          "defects": [
+            "Tracks lack verified white thumb fidelity vs Flowbite toggleswitch pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/tailwind/toggleswitch/receipts/pair--md.unchecked__default.png"
+        }
+      ]
+    },
+    "altitude": {
+      "pass": 0,
+      "fail": 8,
+      "stems": [
+        {
+          "stem": "avatar",
+          "matchDeveloped": false,
+          "defects": [
+            "Set collapsed to 24×24 single variant — not match to developed altitude avatar scale — fail closed."
+          ],
+          "reference": "extract/computed/out/altitude/avatar/receipts"
+        },
+        {
+          "stem": "badge",
+          "matchDeveloped": false,
+          "defects": [
+            "Not verified 1:1 vs altitude badge computed pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/altitude/badge/receipts"
+        },
+        {
+          "stem": "button",
+          "matchDeveloped": false,
+          "defects": [
+            "Khaki/orange/blue matrix present on cream surface but not claimed match to altitude button computed pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/altitude/button/receipts"
+        },
+        {
+          "stem": "chip",
+          "matchDeveloped": false,
+          "defects": [
+            "Not verified vs altitude chip computed pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/altitude/chip/receipts"
+        },
+        {
+          "stem": "divider",
+          "matchDeveloped": false,
+          "defects": [
+            "1×100 stub geometry not a developed divider aesthetic — fail closed."
+          ],
+          "reference": "extract/computed/out/altitude/divider/receipts"
+        },
+        {
+          "stem": "heading",
+          "matchDeveloped": false,
+          "defects": [
+            "Type scale not verified vs altitude heading computed pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/altitude/heading/receipts"
+        },
+        {
+          "stem": "icon-close",
+          "matchDeveloped": false,
+          "defects": [
+            "Not verified vs altitude icon-close computed pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/altitude/iconclose/receipts"
+        },
+        {
+          "stem": "link",
+          "matchDeveloped": false,
+          "defects": [
+            "Not verified vs altitude link computed pairs — fail closed."
+          ],
+          "reference": "extract/computed/out/altitude/link/receipts"
+        }
+      ]
+    }
+  }
+}

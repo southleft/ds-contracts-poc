@@ -1,0 +1,40 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 20.70957095709571,
+    "pctAAUnmasked": 6.146864686468647,
+    "pctAAMasked": 6.146864686468647,
+    "maskCoveragePct": 0,
+    "canvasPx": "101x24",
+    "realPx": "100x24",
+    "inkCanvasPct": 42.53300330033004,
+    "inkRealPct": 42.367986798679866
+  },
+  "reference": "parity/receipts/console-loop/tailwind/refs/toggle-switch.png",
+  "referenceSha256": "5700671b49c88002d22c9ba0289feaa5260de7415bd66b0cad787645b873a5c0",
+  "canvasShot": "parity/receipts/console-loop/tailwind/shots/toggle-switch-cell.png",
+  "canvasShotSha256": "0fa021a8dfe861ff9785528fac1107e5dd6225f4b7ca4c256f56c22dd322f5ce",
+  "diff": "parity/receipts/console-loop/tailwind/scores/toggle-switch.diff.png",
+  "fc": [
+    "FC-PSEUDO-THUMB",
+    "FC-PSEUDO-SIZE"
+  ],
+  "receipt": "parity/receipts/console-loop/tailwind/components/toggle-switch.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.01,
+  "inkDelta": 0.16501650165017168,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "near-pass (pctAAMasked=6.15; likely font-AA) — NOT a pass; tighten emit (near-pass flips are dead)",
+  "recordedAt": "2026-08-08T04:31:22.729Z"
+}

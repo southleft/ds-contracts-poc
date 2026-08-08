@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "paper",
+  "contract": "examples/mui/contracts/paper.contract.json",
+  "script": "examples/mui/figma/paper.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:00:34.280Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "83:1629",
+    "mode": "generated",
+    "page": "Paper",
+    "sectionId": "83:1630",
+    "result": {
+      "createdNodeIds": [
+        "83:1629"
+      ],
+      "results": [
+        {
+          "name": "Paper",
+          "contractId": "mui.paper",
+          "nodeId": "83:1629",
+          "key": "0aaddf1f031dd94bf66f42fbdfd8b65ad97001df",
+          "variants": 8,
+          "properties": [
+            "Content#83:0",
+            "Elevation",
+            "Variant"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot reviewed on section/node 83:1630; structure/variants look sane (slot placeholders OK).",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 8 variants on page Paper)."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:4002091254",
+    "lineCount": 170,
+    "sampleLines": [
+      ":COMPONENT_SET/Paper|fill|[]",
+      ":COMPONENT_SET/Paper|radius|5,5,5,5",
+      ":COMPONENT_SET/Paper|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Paper|description|Paper \u00e2\u0080\u0094 generated from contract mui.paper v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Paper|propdef|Content#83:0:TEXT=Paper content",
+      ":COMPONENT_SET/Paper|propdef|Elevation:VARIANT=1",
+      ":COMPONENT_SET/Paper|propdef|Variant:VARIANT=Elevation",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/paper/root/background-color\"}}}]",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.8705882430076599,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/paper/root/border-top-color/elevation\"}}}] w0",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|radius|4,4,4,4",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|effects|3",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|bound:bottomLeftRadius|imported/shared/size-4",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|bound:bottomRightRadius|imported/shared/size-4",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|bound:minHeight|imported/paper/root/min-height",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|bound:minWidth|imported/paper/root/min-width",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|bound:strokeBottomWeight|imported/paper/root/border-bottom-width/elevation",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|bound:strokeLeftWeight|imported/paper/root/border-left-width/elevation",
+      "/0:COMPONENT/Elevation=1, Variant=Elevation|bound:strokeRightWeight|imported/paper/root/border-right-width/elevation"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Elevation enum \u2192 1/0/3/8",
+      "Variant enum \u2192 Elevation/Outlined",
+      "TEXT Content",
+      "first-variant fill bound: imported/paper/root/background-color"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Elevation=1, Variant=Elevation",
+        "Elevation=1, Variant=Outlined",
+        "Elevation=0, Variant=Elevation",
+        "Elevation=0, Variant=Outlined",
+        "Elevation=3, Variant=Elevation",
+        "Elevation=3, Variant=Outlined",
+        "Elevation=8, Variant=Elevation",
+        "Elevation=8, Variant=Outlined"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#83:0",
+          "type": "TEXT",
+          "defaultValue": "Paper content",
+          "variantOptions": null
+        },
+        {
+          "name": "Elevation",
+          "type": "VARIANT",
+          "defaultValue": "1",
+          "variantOptions": [
+            "1",
+            "0",
+            "3",
+            "8"
+          ]
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Elevation",
+          "variantOptions": [
+            "Elevation",
+            "Outlined"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Elevation=1, Variant=Elevation",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 4,
+        "fillVarName": "imported/paper/root/background-color",
+        "padBound": {
+          "width": "imported/paper/root/width",
+          "topLeftRadius": "imported/shared/size-4",
+          "topRightRadius": "imported/shared/size-4",
+          "bottomLeftRadius": "imported/shared/size-4",
+          "bottomRightRadius": "imported/shared/size-4",
+          "strokeTopWeight": "imported/paper/root/border-top-width/elevation",
+          "strokeBottomWeight": "imported/paper/root/border-bottom-width/elevation",
+          "strokeLeftWeight": "imported/paper/root/border-left-width/elevation",
+          "strokeRightWeight": "imported/paper/root/border-right-width/elevation",
+          "minWidth": "imported/paper/root/min-width",
+          "minHeight": "imported/paper/root/min-height"
+        },
+        "w": 288,
+        "h": 19,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "kind": "console-loop-carbon-component",
+  "status": "completed",
+  "component": "inline-notification",
+  "contract": "examples/carbon/contracts/inlinenotification.contract.json",
+  "script": "examples/carbon/figma/inline-notification.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:05.837Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:5824",
+    "mode": "amended",
+    "page": "InlineNotification",
+    "sectionId": "1:5825",
+    "contractId": "carbon.inlinenotification",
+    "result": {
+      "createdNodeIds": [
+        "1:5824"
+      ],
+      "results": [
+        {
+          "name": "InlineNotification",
+          "contractId": "carbon.inlinenotification",
+          "nodeId": "1:5824",
+          "key": "bcedc8a2e98e9259b2418577da80f4bed886c349",
+          "variants": 12,
+          "properties": [
+            "Kind",
+            "Contrast"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-07T17:56:01.367Z",
+    "notes": [
+      "Re-synced via clientStorage chunks (n=19, total=148301); amended nodeId=1:5824; rebuiltVariants=12. matchDeveloped left false.",
+      "Re-synced via clientStorage chunks (n=25, total=149273); nodeId=1:5824; close icon lum=1.00 white on High contrast rows (created missing color/high|low vars)",
+      "Re-synced via clientStorage chunks (n=25, total=149273); nodeId=1:5824; close icon lum=1.00 fill={\"r\":1,\"g\":1,\"b\":1,\"a\":1}"
+    ],
+    "defects": [
+      "Warning/status iconography fidelity and layout artifacts not match to computed pairs — fail closed."
+    ],
+    "reference": "extract/computed/out/carbon/inlinenotification/gate-shots/error.high__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "reSyncedAt": "2026-08-08T02:13:50.609Z",
+    "canvasShot": "parity/receipts/console-loop/carbon/shots/inline-notification.png",
+    "cellShot": "parity/receipts/console-loop/carbon/shots/inline-notification-cell.png",
+    "scorecard": "parity/receipts/console-loop/carbon/scores/inline-notification.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "near-pass font-AA",
+        "matchedAt": "2026-08-08T02:57:56.939Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=6.67, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:1173442392",
+    "lineCount": 850,
+    "sampleLines": [
+      ":COMPONENT_SET/InlineNotification|fill|[]",
+      ":COMPONENT_SET/InlineNotification|radius|5,5,5,5",
+      ":COMPONENT_SET/InlineNotification|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/InlineNotification|description|InlineNotification â generated from contract carbon.inlinenotification v0.2.0 â",
+      ":COMPONENT_SET/InlineNotification|propdef|Contrast:VARIANT=High",
+      ":COMPONENT_SET/InlineNotification|propdef|Kind:VARIANT=Error",
+      "/0:COMPONENT/Kind=Error, Contrast=High|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.2235294133424759,\"g\":0.2235294133424759,\"b\":0.2235294133424759},\"boundVariables\":{\"color\":{\"var\":\"imported/inline-notification/root/background-color/error/high\"}}}]",
+      "/0:COMPONENT/Kind=Error, Contrast=High|radius|0,0,0,0",
+      "/0:COMPONENT/Kind=Error, Contrast=High|layout|HORIZONTAL MIN/MIN gap 13 pad 0,0,0,0",
+      "/0:COMPONENT/Kind=Error, Contrast=High|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Kind=Error, Contrast=High|bound:itemSpacing|imported/inline-notification/inline-notification-details/margin-right",
+      "/0:COMPONENT/Kind=Error, Contrast=High|bound:maxWidth|imported/inline-notification/root/max-width",
+      "/0:COMPONENT/Kind=Error, Contrast=High|bound:minHeight|imported/shared/size-48",
+      "/0:COMPONENT/Kind=Error, Contrast=High|bound:minWidth|imported/inline-notification/root/min-width",
+      "/0:COMPONENT/Kind=Error, Contrast=High|bound:strokeLeftWeight|imported/inline-notification/root/border-left-width",
+      "/0/0:FRAME/inline-notification__details (margin box)|fill|[]",
+      "/0/0:FRAME/inline-notification__details (margin box)|radius|0,0,0,0",
+      "/0/0:FRAME/inline-notification__details (margin box)|sizing|FIXED/FIXED AUTO",
+      "/0/0/0:FRAME/inline-notification__details|fill|[]",
+      "/0/0/0:FRAME/inline-notification__details|radius|0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Kind enum → Error/Info/Info Square/Success/Warning/Warning Alt",
+      "Contrast enum → High/Low",
+      "first-variant fill bound: imported/inline-notification/root/background-color/error/high"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Kind=Error, Contrast=High",
+        "Kind=Error, Contrast=Low",
+        "Kind=Info, Contrast=High",
+        "Kind=Info, Contrast=Low",
+        "Kind=Info Square, Contrast=High",
+        "Kind=Info Square, Contrast=Low",
+        "Kind=Success, Contrast=High",
+        "Kind=Success, Contrast=Low",
+        "Kind=Warning, Contrast=High",
+        "Kind=Warning, Contrast=Low",
+        "Kind=Warning Alt, Contrast=High",
+        "Kind=Warning Alt, Contrast=Low"
+      ],
+      "propDefs": [
+        {
+          "name": "Kind",
+          "type": "VARIANT",
+          "defaultValue": "Error",
+          "variantOptions": [
+            "Error",
+            "Info",
+            "Info Square",
+            "Success",
+            "Warning",
+            "Warning Alt"
+          ]
+        },
+        {
+          "name": "Contrast",
+          "type": "VARIANT",
+          "defaultValue": "High",
+          "variantOptions": [
+            "High",
+            "Low"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Kind=Error, Contrast=High",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": "imported/inline-notification/root/background-color/error/high",
+        "padBound": {
+          "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right",
+          "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
+          "minWidth": "imported/inline-notification/root/min-width",
+          "maxWidth": "imported/inline-notification/root/max-width",
+          "minHeight": "imported/shared/size-48",
+          "fills": "imported/inline-notification/root/background-color/error/high",
+          "strokes": "imported/inline-notification/root/border-left-color/error/high"
+        },
+        "w": 362,
+        "h": 48,
+        "childTypes": [
+          "FRAME/inline-notification__details (margin box)",
+          "FRAME/inline-notification__close-button"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T17:56:01.367Z",
+  "nodeId": "1:5824",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=25, total=149273); nodeId=1:5824; close icon lum=1.00 fill={\"r\":1,\"g\":1,\"b\":1,\"a\":1}"
+}

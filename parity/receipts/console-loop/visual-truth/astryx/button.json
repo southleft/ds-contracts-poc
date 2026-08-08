@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "astryx",
+  "stem": "button",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/astryx/components/button.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:3864",
+  "cellNodeId": "1:3836",
+  "cellName": "Variant=Primary, Size=Lg",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 98.66666666666667,
+    "pctAAUnmasked": 6.944444444444445,
+    "pctAAMasked": 6.944444444444445,
+    "maskCoveragePct": 0,
+    "canvasPx": "100x36",
+    "realPx": "100x36",
+    "inkCanvasPct": 95.75,
+    "inkRealPct": 95.91666666666666
+  },
+  "reference": "parity/receipts/console-loop/astryx/refs/button.png",
+  "referenceSha256": "db03be2d98c16778e55eb72faea677460ab73ce94c7471836ce1b7e4826c04f4",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/button.png",
+  "canvasShotSha256": "34d8c143cc96665c388e1c1ea28e8e7ced38cd6da01bb5a5ff163d5c2b181c4c",
+  "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/button.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0.1666666666666572,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=6.94 > 5)"
+}

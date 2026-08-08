@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "polaris",
+  "stem": "thumbnail",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/polaris/components/thumbnail.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:10491",
+  "cellNodeId": "1:10483",
+  "cellName": "Size=Medium",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 98.75,
+    "pctAAUnmasked": 77.47222222222221,
+    "pctAAMasked": 77.47222222222221,
+    "maskCoveragePct": 0,
+    "canvasPx": "60x60",
+    "realPx": "56x51",
+    "inkCanvasPct": 98.61111111111111,
+    "inkRealPct": 29.305555555555557
+  },
+  "reference": "parity/receipts/console-loop/polaris/refs/thumbnail.png",
+  "referenceSha256": "c4d343e3ac601f0d7ff093e1fe20f66fb8004140ceebd4c169c17d1453a47c55",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/polaris/shots/thumbnail.png",
+  "canvasShotSha256": "7cde1a8c85c7075b5a91dbae783f7ecb1705cc226c43d2fc9be40034afa99d5a",
+  "diff": "parity/receipts/console-loop/visual-truth/polaris/diffs/thumbnail.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.1764705882352942,
+  "inkDelta": 69.30555555555556,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.18, inkDelta=69.3)"
+}

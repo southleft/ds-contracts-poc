@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "checkbox",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/checkbox.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:510",
+  "cellNodeId": "1:482",
+  "cellName": "Value=Checked, Size=Medium",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 46.27921279212792,
+    "pctAAUnmasked": 29.059040590405903,
+    "pctAAMasked": 29.059040590405903,
+    "maskCoveragePct": 0,
+    "canvasPx": "244x36",
+    "realPx": "271x36",
+    "inkCanvasPct": 18.849938499384994,
+    "inkRealPct": 33.78433784337843
+  },
+  "reference": "extract/computed/out/checkbox/gate-shots/checked.disabled__default.png",
+  "referenceSha256": "05c294b7e28bed07d7fbeaa75307267f276cafbafbd545a830fa732fd087daa2",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/checkbox.png",
+  "canvasShotSha256": "06c363a9236888b5859714e386c4cb107f0a0a153f033abd5d539967b3295ac0",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/checkbox.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.110655737704918,
+  "inkDelta": 14.934399343993437,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=29.06 > 5)"
+}

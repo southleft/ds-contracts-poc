@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "menu",
+  "contract": "examples/mui/contracts/menu.contract.json",
+  "script": "examples/mui/figma/menu.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.514Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:451",
+    "mode": "existing",
+    "page": "Menu",
+    "sectionId": "21:459",
+    "result": {}
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:451).",
+      "Menu COMPONENT 21:451: 1 variant(s), 0 prop def(s). Structure looks sane; slot placeholders OK."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:226276784",
+    "lineCount": 64,
+    "sampleLines": [
+      ":COMPONENT/Menu|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: contract has empty props[] (anatomy/overlay-heavy) \u2014 OK"
+    ],
+    "matchedAxes": [
+      "first-variant fill bound: imported/menu/root/background-color"
+    ],
+    "observed": {
+      "type": "COMPONENT",
+      "variantNames": [
+        "Menu"
+      ],
+      "propDefs": [],
+      "firstRoot": {
+        "name": "Menu",
+        "type": "COMPONENT",
+        "fillVarName": "imported/menu/root/background-color",
+        "padBound": {},
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 4,
+        "w": 114.77,
+        "h": 124,
+        "childTypes": [
+          "FRAME/list-padding"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

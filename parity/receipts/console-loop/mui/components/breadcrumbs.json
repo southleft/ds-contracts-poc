@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "breadcrumbs",
+  "contract": "examples/mui/contracts/breadcrumbs.contract.json",
+  "script": "examples/mui/figma/breadcrumbs.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:00:36.193Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "83:1658",
+    "mode": "generated",
+    "page": "Breadcrumbs",
+    "sectionId": "83:1671",
+    "result": {
+      "createdNodeIds": [
+        "83:1658"
+      ],
+      "results": [
+        {
+          "name": "Breadcrumbs",
+          "contractId": "mui.breadcrumbs",
+          "nodeId": "83:1658",
+          "key": "0466c33799ff307f1ef6f04fa90b0f6cec18c06e",
+          "variants": 1,
+          "properties": []
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Structure/variants reviewed via inspect (83:1658, page Breadcrumbs); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (COMPONENT, 1 variants on page Breadcrumbs)."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:1233132133",
+    "lineCount": 65,
+    "sampleLines": [
+      ":COMPONENT/Breadcrumbs|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/Breadcrumbs|radius|0,0,0,0",
+      ":COMPONENT/Breadcrumbs|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      ":COMPONENT/Breadcrumbs|sizing|FIXED/HUG AUTO",
+      ":COMPONENT/Breadcrumbs|bound:minHeight|imported/shared/size-0",
+      ":COMPONENT/Breadcrumbs|bound:minWidth|imported/shared/size-0",
+      ":COMPONENT/Breadcrumbs|bound:width|imported/breadcrumbs/root/width",
+      ":COMPONENT/Breadcrumbs|description|Breadcrumbs \u00e2\u0080\u0094 generated from contract mui.breadcrumbs v0.2.0 \u00e2\u0080",
+      "/0:FRAME/breadcrumbs-ol|fill|[]",
+      "/0:FRAME/breadcrumbs-ol|radius|0,0,0,0",
+      "/0:FRAME/breadcrumbs-ol|layout|HORIZONTAL MIN/CENTER gap 8 pad 0,0,0,0",
+      "/0:FRAME/breadcrumbs-ol|sizing|FILL/HUG AUTO",
+      "/0:FRAME/breadcrumbs-ol|bound:itemSpacing|imported/shared/size-8",
+      "/0:FRAME/breadcrumbs-ol|bound:minHeight|imported/shared/size-0",
+      "/0:FRAME/breadcrumbs-ol|bound:minWidth|imported/shared/size-0",
+      "/0/0:FRAME/breadcrumbs-li|fill|[]",
+      "/0/0:FRAME/breadcrumbs-li|radius|0,0,0,0",
+      "/0/0:FRAME/breadcrumbs-li|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/breadcrumbs-li|sizing|HUG/HUG AUTO",
+      "/0/0/0:FRAME/label|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [],
+    "observed": {
+      "type": "COMPONENT",
+      "variantNames": [
+        "Breadcrumbs"
+      ],
+      "propDefs": [],
+      "firstRoot": {
+        "name": "Breadcrumbs",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/breadcrumbs/root/width",
+          "minWidth": "imported/shared/size-0",
+          "minHeight": "imported/shared/size-0"
+        },
+        "w": 288,
+        "h": 24,
+        "childTypes": [
+          "FRAME/breadcrumbs-ol"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

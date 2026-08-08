@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "table-pagination",
+  "contract": "examples/mui/contracts/table-pagination.contract.json",
+  "script": "examples/mui/figma/table-pagination.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.514Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:627",
+    "mode": "existing",
+    "page": "TablePagination",
+    "sectionId": "21:648",
+    "result": {}
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:627).",
+      "TablePagination COMPONENT 21:627: 1 variant(s), 0 prop def(s). Structure looks sane; slot placeholders OK."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:527762080",
+    "lineCount": 125,
+    "sampleLines": [
+      ":COMPONENT/TablePagination|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: contract has empty props[] (anatomy/overlay-heavy) \u2014 OK",
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [],
+    "observed": {
+      "type": "COMPONENT",
+      "variantNames": [
+        "TablePagination"
+      ],
+      "propDefs": [],
+      "firstRoot": {
+        "name": "TablePagination",
+        "type": "COMPONENT",
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/pagination/root/width"
+        },
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "w": 428,
+        "h": 52,
+        "childTypes": [
+          "FRAME/tablepagination-toolbar"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "radio-button",
+  "contract": "examples/polaris/contracts/radio-button.contract.json",
+  "script": "examples/polaris/figma/radio-button.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:32.776Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:10096",
+    "mode": "generated",
+    "page": "RadioButton",
+    "sectionId": "1:10097",
+    "contractId": "polaris.radio-button",
+    "result": {
+      "createdNodeIds": [
+        "1:10096"
+      ],
+      "results": [
+        {
+          "name": "RadioButton",
+          "contractId": "polaris.radio-button",
+          "nodeId": "1:10096",
+          "key": "187d52589159f941f4674999032c646515530638",
+          "variants": 2,
+          "properties": [
+            "Label Hidden#1:2347",
+            "Disabled#1:2350",
+            "Aria Described By#1:2353",
+            "Name#1:2356",
+            "Value#1:2359",
+            "Checked"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Re-synced via clientStorage chunks (n=11, total=82895); nodeId=1:10096"
+    ],
+    "defects": [
+      "Unchecked solid white disk / checked ring inverted vs Polaris radio outline+dot; labels missing."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/radio-button.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "examples/polaris/generated/html/radio-button.html#first-item-inline-css",
+    "scorecard": "parity/receipts/console-loop/polaris/scores/radio-button.json",
+    "matchDevelopedReason": "reverted — exact~39% indicates paint/layout gap beyond FC-FONT-AA"
+  },
+  "fingerprint": {
+    "v6": "v6:2212519889",
+    "lineCount": 115,
+    "sampleLines": [
+      ":COMPONENT_SET/RadioButton|fill|[]",
+      ":COMPONENT_SET/RadioButton|radius|5,5,5,5",
+      ":COMPONENT_SET/RadioButton|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/RadioButton|description|RadioButton â generated from contract polaris.radio-button v0.4.0 â",
+      ":COMPONENT_SET/RadioButton|propdef|Aria Described By#1:2353:TEXT=",
+      ":COMPONENT_SET/RadioButton|propdef|Checked:VARIANT=unchecked",
+      ":COMPONENT_SET/RadioButton|propdef|Disabled#1:2350:BOOLEAN=false",
+      ":COMPONENT_SET/RadioButton|propdef|Label Hidden#1:2347:BOOLEAN=false",
+      ":COMPONENT_SET/RadioButton|propdef|Name#1:2356:TEXT=",
+      ":COMPONENT_SET/RadioButton|propdef|Value#1:2359:TEXT=",
+      "/0:COMPONENT/Checked=unchecked|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Checked=unchecked|radius|0,0,0,0",
+      "/0:COMPONENT/Checked=unchecked|layout|HORIZONTAL MIN/CENTER gap 8 pad 4,0,4,0",
+      "/0:COMPONENT/Checked=unchecked|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Checked=unchecked|bound:height|imported/radio-button/root/height",
+      "/0:COMPONENT/Checked=unchecked|bound:itemSpacing|imported/radio-button/choice-control/margin-right",
+      "/0:COMPONENT/Checked=unchecked|bound:paddingBottom|imported/radio-button/root/padding-bottom",
+      "/0:COMPONENT/Checked=unchecked|bound:paddingTop|imported/radio-button/root/padding-top",
+      "/0:COMPONENT/Checked=unchecked|bound:width|imported/radio-button/root/width",
+      "/0/0:FRAME/choice__control|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "TEXT Aria Described By",
+      "BOOLEAN Label Hidden",
+      "Checked enum → unchecked/checked",
+      "BOOLEAN Disabled",
+      "TEXT Name",
+      "TEXT Value"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Checked=unchecked",
+        "Checked=checked"
+      ],
+      "propDefs": [
+        {
+          "name": "Label Hidden#1:2347",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Disabled#1:2350",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Aria Described By#1:2353",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Name#1:2356",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Value#1:2359",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Checked",
+          "type": "VARIANT",
+          "defaultValue": "unchecked",
+          "variantOptions": [
+            "unchecked",
+            "checked"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Checked=unchecked",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 4,
+          "r": 0,
+          "b": 4,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "imported/radio-button/choice-control/margin-right",
+          "paddingTop": "imported/radio-button/root/padding-top",
+          "paddingBottom": "imported/radio-button/root/padding-bottom",
+          "width": "imported/radio-button/root/width",
+          "height": "imported/radio-button/root/height"
+        },
+        "w": 166.3280029296875,
+        "h": 28,
+        "childTypes": [
+          "FRAME/choice__control",
+          "FRAME/choice__label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T12:03:03.242Z",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=11, total=82895); nodeId=1:10096"
+}

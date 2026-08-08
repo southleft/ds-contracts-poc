@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "button",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/button.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:452",
+  "cellNodeId": "1:364",
+  "cellName": "Variant=Primary, Size=Large, State=Default",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 95.93416735028713,
+    "pctAAUnmasked": 90.899302707137,
+    "pctAAMasked": 90.899302707137,
+    "maskCoveragePct": 0,
+    "canvasPx": "212x92",
+    "realPx": "73x20",
+    "inkCanvasPct": 95.04204265791633,
+    "inkRealPct": 3.6197703035274817
+  },
+  "reference": "extract/computed/out/button/gate-shots/monochromePlain.critical.large.off.disabled__default.png",
+  "referenceSha256": "8d13ccf38690bfa9fb5a560d180093791ae8076b8ac4ca494bd2e0e413b70922",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/button.png",
+  "canvasShotSha256": "7a978768df86659956fcf2622c7d08e45ed02d1d2d1816eea57d2eeb8313dd6c",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/button.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 4.6,
+  "inkDelta": 91.42227235438884,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=4.60, inkDelta=91.4)"
+}

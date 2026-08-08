@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "dialog",
+  "contract": "examples/mui/contracts/dialog.contract.json",
+  "script": "examples/mui/figma/dialog.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.514Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:448",
+    "mode": "existing",
+    "page": "Dialog",
+    "sectionId": "21:449",
+    "result": {}
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:448).",
+      "Dialog COMPONENT_SET 21:448: 5 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:915053960",
+    "lineCount": 221,
+    "sampleLines": [
+      ":COMPONENT_SET/Dialog|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Max width enum \u2192 Sm/Xs/Md/Lg/Xl",
+      "TEXT Content"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Max width=Sm",
+        "Max width=Xs",
+        "Max width=Md",
+        "Max width=Lg",
+        "Max width=Xl"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#21:195",
+          "type": "TEXT",
+          "defaultValue": "Dialog body copy for the molecule round.",
+          "variantOptions": null
+        },
+        {
+          "name": "Max width",
+          "type": "VARIANT",
+          "defaultValue": "Sm",
+          "variantOptions": [
+            "Sm",
+            "Xs",
+            "Md",
+            "Lg",
+            "Xl"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Max width=Sm",
+        "type": "COMPONENT",
+        "fillVarName": null,
+        "padBound": {},
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "w": 424,
+        "h": 123,
+        "childTypes": [
+          "FRAME/backdrop-root",
+          "FRAME/dialog-container"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

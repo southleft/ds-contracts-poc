@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "text-field",
+  "contract": "examples/mui/contracts/text-field.contract.json",
+  "script": "examples/mui/figma/text-field.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:26:56.332Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "84:2480",
+    "mode": "generated",
+    "page": "TextField",
+    "sectionId": "84:2481",
+    "result": {
+      "note": "created; eval may still finish/timeout"
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot reviewed on section/node 84:2481; structure/variants look sane (slot placeholders OK)."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3304990436",
+    "lineCount": 488,
+    "sampleLines": [
+      ":COMPONENT_SET/TextField|fill|[]",
+      ":COMPONENT_SET/TextField|radius|5,5,5,5",
+      ":COMPONENT_SET/TextField|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/TextField|description|TextField \u00e2\u0080\u0094 generated from contract mui.text-field v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/TextField|propdef|Helper Text#84:148:TEXT=Enter a valid amount",
+      ":COMPONENT_SET/TextField|propdef|Label#84:155:TEXT=Amount",
+      ":COMPONENT_SET/TextField|propdef|Size:VARIANT=Medium",
+      ":COMPONENT_SET/TextField|propdef|Variant:VARIANT=Outlined",
+      "/0:COMPONENT/Variant=Outlined, Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Variant=Outlined, Size=Medium|radius|0,0,0,0",
+      "/0:COMPONENT/Variant=Outlined, Size=Medium|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Outlined, Size=Medium|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Variant=Outlined, Size=Medium|bound:height|imported/text-field/root/height",
+      "/0:COMPONENT/Variant=Outlined, Size=Medium|bound:minWidth|imported/shared/size-0",
+      "/0:COMPONENT/Variant=Outlined, Size=Medium|bound:width|imported/shared/size-252-969",
+      "/0/0:FRAME/inputbase-adornedend|fill|[]",
+      "/0/0:FRAME/inputbase-adornedend|radius|4,4,4,4",
+      "/0/0:FRAME/inputbase-adornedend|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,14,0,14",
+      "/0/0:FRAME/inputbase-adornedend|sizing|FIXED/FIXED AUTO",
+      "/0/0:FRAME/inputbase-adornedend|bound:bottomLeftRadius|imported/shared/size-4"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Variant enum \u2192 Outlined/Filled/Standard",
+      "Size enum \u2192 Medium/Small",
+      "TEXT Label",
+      "TEXT Helper Text"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Outlined, Size=Medium",
+        "Variant=Outlined, Size=Small",
+        "Variant=Filled, Size=Medium",
+        "Variant=Filled, Size=Small",
+        "Variant=Standard, Size=Medium",
+        "Variant=Standard, Size=Small"
+      ],
+      "propDefs": [
+        {
+          "name": "Helper Text#84:148",
+          "type": "TEXT",
+          "defaultValue": "Enter a valid amount",
+          "variantOptions": null
+        },
+        {
+          "name": "Label#84:155",
+          "type": "TEXT",
+          "defaultValue": "Amount",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small"
+          ]
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Outlined",
+          "variantOptions": [
+            "Outlined",
+            "Filled",
+            "Standard"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Outlined, Size=Medium",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/shared/size-252-969",
+          "height": "imported/text-field/root/height",
+          "minWidth": "imported/shared/size-0"
+        },
+        "w": 252.968994140625,
+        "h": 78.90619659423828,
+        "childTypes": [
+          "FRAME/inputbase-adornedend",
+          "TEXT/label-5",
+          "FRAME/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

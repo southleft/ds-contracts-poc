@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "kind": "console-loop-carbon-component",
+  "status": "completed",
+  "component": "tag",
+  "contract": "examples/carbon/contracts/tag.contract.json",
+  "script": "examples/carbon/figma/tag.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:08.323Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:6024",
+    "mode": "amended",
+    "page": "Tag",
+    "sectionId": "1:6025",
+    "contractId": "carbon.tag",
+    "result": {
+      "createdNodeIds": [
+        "1:6024"
+      ],
+      "results": [
+        {
+          "name": "Tag",
+          "contractId": "carbon.tag",
+          "amended": true,
+          "nodeId": "1:6024",
+          "key": "71a03052430b6d3b7b47ddc293af5db42dcd88fe",
+          "addedVariants": [],
+          "rebuiltVariants": 36,
+          "extraVariants": [],
+          "addedProps": [],
+          "editedDefaults": [],
+          "wiredReactions": 0
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=76.04% (bar 5), compositionOk=false — see parity/receipts/console-loop/carbon/scores/tag.json"
+    ],
+    "reference": "parity/receipts/console-loop/carbon/refs/tag.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "pair--unset.lg__default.png#package-left-pill",
+    "scorecard": "parity/receipts/console-loop/carbon/scores/tag.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:56.356Z",
+      "was": {
+        "ok": true,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "agent AA=4.21 compositionOk vs package-left pill (FC-HUG-CEILING-HTML gate was wrong)",
+        "matchedAt": "2026-08-08T03:19:29.221Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=76.04, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard; NOTE: an earlier scorecard (recorded 2026-08-08T03:19Z) passed at pctAAMasked=4.21 against a 44x32 reference — the reference PNG on disk has since changed (now 208x32), so the pass no longer holds against pinned bytes"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:640356538",
+    "lineCount": 619,
+    "sampleLines": [
+      ":COMPONENT_SET/Tag|fill|[]",
+      ":COMPONENT_SET/Tag|radius|5,5,5,5",
+      ":COMPONENT_SET/Tag|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Tag|description|Tag â generated from contract carbon.tag v0.2.0 â",
+      ":COMPONENT_SET/Tag|propdef|Content#1:1212:TEXT=Tag",
+      ":COMPONENT_SET/Tag|propdef|Size:VARIANT=Sm",
+      ":COMPONENT_SET/Tag|propdef|Type:VARIANT=Red",
+      "/0:COMPONENT/Type=Red, Size=Sm|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":0.843137264251709,\"b\":0.8509804010391235},\"boundVariables\":{\"color\":{\"var\":\"imported/tag/root/background-color/red\"}}}]",
+      "/0:COMPONENT/Type=Red, Size=Sm|radius|16,16,16,16",
+      "/0:COMPONENT/Type=Red, Size=Sm|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,8,0,8",
+      "/0:COMPONENT/Type=Red, Size=Sm|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Type=Red, Size=Sm|bound:bottomLeftRadius|imported/shared/size-16",
+      "/0:COMPONENT/Type=Red, Size=Sm|bound:bottomRightRadius|imported/shared/size-16",
+      "/0:COMPONENT/Type=Red, Size=Sm|bound:maxWidth|imported/tag/root/max-width",
+      "/0:COMPONENT/Type=Red, Size=Sm|bound:minHeight|imported/tag/root/min-height/sm",
+      "/0:COMPONENT/Type=Red, Size=Sm|bound:minWidth|imported/tag/root/min-width",
+      "/0:COMPONENT/Type=Red, Size=Sm|bound:paddingLeft|imported/tag/root/padding-left/sm",
+      "/0:COMPONENT/Type=Red, Size=Sm|bound:paddingRight|imported/tag/root/padding-right/sm",
+      "/0:COMPONENT/Type=Red, Size=Sm|bound:topLeftRadius|imported/shared/size-16",
+      "/0:COMPONENT/Type=Red, Size=Sm|bound:topRightRadius|imported/shared/size-16"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Type enum → Red/Magenta/Purple/Blue/Cyan/Teal/Green/Gray/Cool Gray/Warm Gray/High Contrast/Outline",
+      "Size enum → Sm/Md/Lg",
+      "TEXT Content",
+      "first-variant fill bound: imported/tag/root/background-color/red"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Type=Red, Size=Sm",
+        "Type=Red, Size=Md",
+        "Type=Red, Size=Lg",
+        "Type=Magenta, Size=Sm",
+        "Type=Magenta, Size=Md",
+        "Type=Magenta, Size=Lg",
+        "Type=Purple, Size=Sm",
+        "Type=Purple, Size=Md",
+        "Type=Purple, Size=Lg",
+        "Type=Blue, Size=Sm",
+        "Type=Blue, Size=Md",
+        "Type=Blue, Size=Lg",
+        "Type=Cyan, Size=Sm",
+        "Type=Cyan, Size=Md",
+        "Type=Cyan, Size=Lg",
+        "Type=Teal, Size=Sm",
+        "Type=Teal, Size=Md",
+        "Type=Teal, Size=Lg",
+        "Type=Green, Size=Sm",
+        "Type=Green, Size=Md",
+        "Type=Green, Size=Lg",
+        "Type=Gray, Size=Sm",
+        "Type=Gray, Size=Md",
+        "Type=Gray, Size=Lg",
+        "Type=Cool Gray, Size=Sm",
+        "Type=Cool Gray, Size=Md",
+        "Type=Cool Gray, Size=Lg",
+        "Type=Warm Gray, Size=Sm",
+        "Type=Warm Gray, Size=Md",
+        "Type=Warm Gray, Size=Lg",
+        "Type=High Contrast, Size=Sm",
+        "Type=High Contrast, Size=Md",
+        "Type=High Contrast, Size=Lg",
+        "Type=Outline, Size=Sm",
+        "Type=Outline, Size=Md",
+        "Type=Outline, Size=Lg"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#1:1212",
+          "type": "TEXT",
+          "defaultValue": "Tag",
+          "variantOptions": null
+        },
+        {
+          "name": "Type",
+          "type": "VARIANT",
+          "defaultValue": "Red",
+          "variantOptions": [
+            "Red",
+            "Magenta",
+            "Purple",
+            "Blue",
+            "Cyan",
+            "Teal",
+            "Green",
+            "Gray",
+            "Cool Gray",
+            "Warm Gray",
+            "High Contrast",
+            "Outline"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Sm",
+          "variantOptions": [
+            "Sm",
+            "Md",
+            "Lg"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Type=Red, Size=Sm",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 8,
+          "b": 0,
+          "l": 8
+        },
+        "radius": 16,
+        "fillVarName": "imported/tag/root/background-color/red",
+        "padBound": {
+          "paddingLeft": "imported/tag/root/padding-left/sm",
+          "paddingRight": "imported/tag/root/padding-right/sm",
+          "topLeftRadius": "imported/shared/size-16",
+          "topRightRadius": "imported/shared/size-16",
+          "bottomLeftRadius": "imported/shared/size-16",
+          "bottomRightRadius": "imported/shared/size-16",
+          "minWidth": "imported/tag/root/min-width",
+          "maxWidth": "imported/tag/root/max-width",
+          "minHeight": "imported/tag/root/min-height/sm",
+          "fills": "imported/tag/root/background-color/red"
+        },
+        "w": 38,
+        "h": 18,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T12:10:48.663Z",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=15, total=115875); amended, rebuilt 36 variants"
+}

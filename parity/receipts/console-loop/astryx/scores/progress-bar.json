@@ -1,0 +1,40 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 38.47222222222222,
+    "pctAAUnmasked": 28.749999999999996,
+    "pctAAMasked": 28.749999999999996,
+    "maskCoveragePct": 0,
+    "canvasPx": "240x18",
+    "realPx": "68x16",
+    "inkCanvasPct": 27.569444444444446,
+    "inkRealPct": 10.671296296296298
+  },
+  "reference": "parity/receipts/console-loop/astryx/refs/progress-bar.png",
+  "referenceSha256": "f4ba3e1d1a57fe7326eeffb0681ebe142e08ee4fa5d99399065877034f2234a0",
+  "canvasShot": "parity/receipts/console-loop/astryx/shots/progress-bar-cell.png",
+  "canvasShotSha256": "b306b8a2f7e73bab62d6ef9ecda274161417b3c4aa70eda9f3ceeb502b8a58c2",
+  "diff": "parity/receipts/console-loop/astryx/scores/progress-bar.diff.png",
+  "fc": [
+    "FC-WIDTH-TOKEN",
+    "FC-METER"
+  ],
+  "receipt": "parity/receipts/console-loop/astryx/components/progress-bar.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 3.5294117647058822,
+  "inkDelta": 16.89814814814815,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=3.53, inkDelta=16.9) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T04:31:14.274Z"
+}

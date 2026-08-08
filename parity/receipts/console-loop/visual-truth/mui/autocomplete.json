@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "autocomplete",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/autocomplete.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "21:134",
+  "cellNodeId": "21:82",
+  "cellName": "Size=Medium",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 13.814484126984128,
+    "pctAAUnmasked": 8.556547619047619,
+    "pctAAMasked": 8.556547619047619,
+    "maskCoveragePct": 0,
+    "canvasPx": "288x54",
+    "realPx": "288x56",
+    "inkCanvasPct": 29.47048611111111,
+    "inkRealPct": 31.287202380952383
+  },
+  "reference": "extract/computed/out/mui/autocomplete/gate-shots/medium__default.png",
+  "referenceSha256": "139e5d0f74000e348d6e453bbd4e6bb931493daaf891d7973f75a4eae119f79b",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/autocomplete.png",
+  "canvasShotSha256": "eececa3c40b49b8314692562085a21d746879939ac6803917ff3e5d8bc182f3c",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/autocomplete.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.037037037037037,
+  "inkDelta": 1.8167162698412724,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=8.56 > 5)"
+}

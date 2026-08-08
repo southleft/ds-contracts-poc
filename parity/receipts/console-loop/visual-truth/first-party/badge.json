@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "badge",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/badge.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:309",
+  "cellNodeId": "1:299",
+  "cellName": "Variant=Info",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 97.99086757990868,
+    "pctAAUnmasked": 86.8607305936073,
+    "pctAAMasked": 86.8607305936073,
+    "maskCoveragePct": 0,
+    "canvasPx": "122x46",
+    "realPx": "146x60",
+    "inkCanvasPct": 59.269406392694066,
+    "inkRealPct": 97.99086757990868
+  },
+  "reference": "extract/computed/out/badge/gate-shots/attention-strong.complete__default.png",
+  "referenceSha256": "80b4e8590fd536e51cbea92c616f731578b06498e8d36b62a5db78df4d43f3e0",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/badge.png",
+  "canvasShotSha256": "60032002af903c699d98db2a115ac3749e9bca08493bca4ca554a47fbd3f6b0f",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/badge.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.3043478260869565,
+  "inkDelta": 38.721461187214615,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.30, inkDelta=38.7)"
+}

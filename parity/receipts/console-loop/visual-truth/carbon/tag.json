@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "carbon",
+  "stem": "tag",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/carbon/components/tag.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:6024",
+  "cellNodeId": "1:5956",
+  "cellName": "Type=Red, Size=Lg",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 78.72596153846155,
+    "pctAAUnmasked": 71.85997596153845,
+    "pctAAMasked": 71.85997596153845,
+    "maskCoveragePct": 0,
+    "canvasPx": "92x64",
+    "realPx": "104x16",
+    "inkCanvasPct": 76.171875,
+    "inkRealPct": 24.308894230769234
+  },
+  "reference": "parity/receipts/console-loop/carbon/refs/tag.png",
+  "referenceSha256": "8a841b211d8830f6e584b0ab6d2afcfce43ce109bbc8cf1f9f7a0219af12c3ce",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/carbon/shots/tag.png",
+  "canvasShotSha256": "62d3e194dec4491fdd6a5b31560612779649cb4c8e92b4ea5fc4fa08093afa53",
+  "diff": "parity/receipts/console-loop/visual-truth/carbon/diffs/tag.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 4,
+  "inkDelta": 51.86298076923077,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=4.00, inkDelta=51.9)"
+}

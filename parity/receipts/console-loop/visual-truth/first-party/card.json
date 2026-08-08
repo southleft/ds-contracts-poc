@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "card",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/card.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:459",
+  "cellNodeId": "1:459",
+  "cellName": "Card",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 4.756786040145985,
+    "pctAAUnmasked": 2.3799612226277373,
+    "pctAAMasked": 2.3799612226277373,
+    "maskCoveragePct": 0,
+    "canvasPx": "640x548",
+    "realPx": "114x56",
+    "inkCanvasPct": 2.933964416058394,
+    "inkRealPct": 1.7940237226277373
+  },
+  "reference": "extract/computed/out/card/gate-shots/blue__default.png",
+  "referenceSha256": "8f20eacc228d736da4b1176769f04f72576bf0315cccd3d3a7ee4bdf1ede0851",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/card.png",
+  "canvasShotSha256": "b140da86469c0b0d288b28591e8d48017672008b98e1284b01da7d6e1b879f60",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/card.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 9.785714285714286,
+  "inkDelta": 1.1399406934306566,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=9.79, inkDelta=1.1)"
+}

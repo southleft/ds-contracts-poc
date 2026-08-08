@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "link",
+  "contract": "examples/mui/contracts/link.contract.json",
+  "script": "examples/mui/figma/link.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:04:41.915Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "84:1832",
+    "mode": "generated",
+    "page": "Link",
+    "sectionId": "84:1847",
+    "result": {
+      "createdNodeIds": [
+        "84:1832"
+      ],
+      "results": [
+        {
+          "name": "Link",
+          "contractId": "mui.link",
+          "nodeId": "84:1832",
+          "key": "613a4e9cd6a256c870d4bc5b4ea386b57a3d7fe7",
+          "variants": 42,
+          "properties": [
+            "Label#84:59",
+            "Color",
+            "Underline",
+            "State"
+          ],
+          "wiredReactions": 7
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Structure/variants reviewed via inspect (84:1832, page Link); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 42 variants on page Link)."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3316422374",
+    "lineCount": 435,
+    "sampleLines": [
+      ":COMPONENT_SET/Link|fill|[]",
+      ":COMPONENT_SET/Link|radius|5,5,5,5",
+      ":COMPONENT_SET/Link|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Link|description|Link \u00e2\u0080\u0094 generated from contract mui.link v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Link|propdef|Color:VARIANT=Primary",
+      ":COMPONENT_SET/Link|propdef|Label#84:59:TEXT=Link",
+      ":COMPONENT_SET/Link|propdef|State:VARIANT=Default",
+      ":COMPONENT_SET/Link|propdef|Underline:VARIANT=Hover",
+      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|radius|0,0,0,0",
+      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|bound:width|imported/link/root/width",
+      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|reaction|ON_HOVER\u2192CHANGE_TO Color=Primary, Underline=Hover, State=Hover",
+      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|reaction|ON_PRESS\u2192CHANGE_TO Color=Primary, Underline=Hover, State=Active",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.09803921729326248,\"g\":0.4627451002597809,\"b\":0.8235294222831726},\"boundVariables\":{\"color\":{\"var\":\"imported/link/root/color/primary\"}}}]",
+      "/0/0:TEXT/label|radius|0,0,0,0",
+      "/0/0:TEXT/label|sizing|FILL/HUG AUTO",
+      "/0/0:TEXT/label|text|\"Link\" 16px {\"family\":\"Inter\",\"style\":\"Regular\"}",
+      "/1:COMPONENT/Color=Primary, Underline=None, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Color enum \u2192 Primary/Secondary/Error/Info/Success/Warning/Inherit",
+      "Underline enum \u2192 Hover/None/Always",
+      "TEXT Label"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Color=Primary, Underline=Hover, State=Default",
+        "Color=Primary, Underline=None, State=Default",
+        "Color=Primary, Underline=Always, State=Default",
+        "Color=Secondary, Underline=Hover, State=Default",
+        "Color=Secondary, Underline=None, State=Default",
+        "Color=Secondary, Underline=Always, State=Default",
+        "Color=Error, Underline=Hover, State=Default",
+        "Color=Error, Underline=None, State=Default",
+        "Color=Error, Underline=Always, State=Default",
+        "Color=Info, Underline=Hover, State=Default",
+        "Color=Info, Underline=None, State=Default",
+        "Color=Info, Underline=Always, State=Default",
+        "Color=Success, Underline=Hover, State=Default",
+        "Color=Success, Underline=None, State=Default",
+        "Color=Success, Underline=Always, State=Default",
+        "Color=Warning, Underline=Hover, State=Default",
+        "Color=Warning, Underline=None, State=Default",
+        "Color=Warning, Underline=Always, State=Default",
+        "Color=Inherit, Underline=Hover, State=Default",
+        "Color=Inherit, Underline=None, State=Default",
+        "Color=Inherit, Underline=Always, State=Default",
+        "Color=Primary, Underline=Hover, State=Focus Visible",
+        "Color=Secondary, Underline=Hover, State=Focus Visible",
+        "Color=Error, Underline=Hover, State=Focus Visible",
+        "Color=Info, Underline=Hover, State=Focus Visible",
+        "Color=Success, Underline=Hover, State=Focus Visible",
+        "Color=Warning, Underline=Hover, State=Focus Visible",
+        "Color=Inherit, Underline=Hover, State=Focus Visible",
+        "Color=Primary, Underline=Hover, State=Active",
+        "Color=Secondary, Underline=Hover, State=Active",
+        "Color=Error, Underline=Hover, State=Active",
+        "Color=Info, Underline=Hover, State=Active",
+        "Color=Success, Underline=Hover, State=Active",
+        "Color=Warning, Underline=Hover, State=Active",
+        "Color=Inherit, Underline=Hover, State=Active",
+        "Color=Primary, Underline=Hover, State=Hover",
+        "Color=Secondary, Underline=Hover, State=Hover",
+        "Color=Error, Underline=Hover, State=Hover",
+        "Color=Info, Underline=Hover, State=Hover",
+        "Color=Success, Underline=Hover, State=Hover",
+        "Color=Warning, Underline=Hover, State=Hover",
+        "Color=Inherit, Underline=Hover, State=Hover"
+      ],
+      "propDefs": [
+        {
+          "name": "Color",
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Error",
+            "Info",
+            "Success",
+            "Warning",
+            "Inherit"
+          ]
+        },
+        {
+          "name": "Label#84:59",
+          "type": "TEXT",
+          "defaultValue": "Link",
+          "variantOptions": null
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Focus Visible",
+            "Active",
+            "Hover"
+          ]
+        },
+        {
+          "name": "Underline",
+          "type": "VARIANT",
+          "defaultValue": "Hover",
+          "variantOptions": [
+            "Hover",
+            "None",
+            "Always"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Color=Primary, Underline=Hover, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/link/root/width"
+        },
+        "w": 30.218799591064453,
+        "h": 38,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "switch",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/switch.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:328",
+  "cellNodeId": "1:312",
+  "cellName": "Value=Off",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 53.745318352059925,
+    "pctAAUnmasked": 31.203183520599254,
+    "pctAAMasked": 31.203183520599254,
+    "maskCoveragePct": 0,
+    "canvasPx": "178x24",
+    "realPx": "178x24",
+    "inkCanvasPct": 24.976591760299627,
+    "inkRealPct": 34.55056179775281
+  },
+  "reference": "extract/computed/out/switch/gate-shots/end.isDisabled__default.png",
+  "referenceSha256": "9bc02668e787cab9b3bf439bbac88597a40b9dd1b5d61099490e26d631364662",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/switch.png",
+  "canvasShotSha256": "400909135bb1a7f37b521803208bc0d0b75bd32dc2138b278593f1c24c3468d9",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/switch.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 9.573970037453186,
+  "dprNormalized": false,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=31.20 > 5)"
+}

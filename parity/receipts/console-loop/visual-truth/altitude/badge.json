@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "altitude",
+  "stem": "badge",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/altitude/components/badge.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:2963",
+  "cellNodeId": "1:2947",
+  "cellName": "Variant=Info, Dot=Default",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 30.333333333333336,
+    "pctAAUnmasked": 6,
+    "pctAAMasked": 6,
+    "maskCoveragePct": 0,
+    "canvasPx": "45x20",
+    "realPx": "45x20",
+    "inkCanvasPct": 91.88888888888889,
+    "inkRealPct": 92.44444444444444
+  },
+  "reference": "extract/computed/out/altitude/badge/gate-shots/info.default__default.png",
+  "referenceSha256": "7ed600175241e64df782a1dead372009e62471cf088eff5a516efd882e2c1451",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/altitude/shots/badge.png",
+  "canvasShotSha256": "3b931831f8c656b8b3a2121ea5dd638e5a90b621c5408d71cf93375aaf81141a",
+  "diff": "parity/receipts/console-loop/visual-truth/altitude/diffs/badge.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0.5555555555555571,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=6.00 > 5)"
+}

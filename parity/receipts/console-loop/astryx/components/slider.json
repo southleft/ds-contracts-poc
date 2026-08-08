@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "slider",
+  "contract": "examples/astryx/contracts/slider.contract.json",
+  "script": "examples/astryx/figma/slider.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:10.926Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload + eval(async IIFE)",
+  "generate": {
+    "ok": true,
+    "nodeId": "9:831",
+    "mode": "amended",
+    "page": "Slider (astryx.slider)",
+    "sectionId": "9:832",
+    "contractId": "astryx.slider",
+    "result": {
+      "createdNodeIds": [
+        "9:831"
+      ],
+      "results": [
+        {
+          "name": "Slider",
+          "contractId": "astryx.slider",
+          "amended": true,
+          "nodeId": "9:831",
+          "key": "a7a259edc7157d44b6f9dd78de0dca8e516ced7f",
+          "rebuiltVariants": 6,
+          "properties": [
+            "Is Disabled",
+            "Is Required",
+            "Label",
+            "Orientation",
+            "Value Display"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-07T16:39:00.021Z",
+    "notes": [
+      "display:contents hoist; developed score pending",
+      "Re-synced 2026-08-06 from slider.figma.js with emit overflow:visible ancestor propagate (propagateOverflowVisible) — clipsContent=false on slider + part-1-0 FROM SCRIPT, no hand patch.",
+      "All 6 variants: slider.clipsContent===false, part-1-0.clipsContent===false; thumbs 20×20 full circles (incl. absolute left:-10).",
+      "Contract root/slider width ~49.16px — narrow vs site; not hand-patched. Developed score pending.",
+      "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — amended rebuiltVariants=6; nodeId=9:831; matchDeveloped left unset.",
+      "Re-synced via console-loop batch 2026-08-07T16:32:16.817Z — amended rebuiltVariants=6; nodeId=9:831; vertical part-1-0 width=20; thumb after fill; matchDeveloped left unset.",
+      "Re-synced via clientStorage chunks (n=13, total=100445); amended nodeId=9:831; rebuiltVariants=6; V-Text rootW=56 label-3.x=28; H-Text part-1-0.w=240; thumb after fill (track→part-1-0-1→thumb). matchDeveloped left false.",
+      "Re-synced via clientStorage chunks (n=19, total=108776); amended nodeId=9:831; rebuiltVariants=6; tooltips on Tooltip variants; V-Text label-3 top=86; part-1-0 last child thumb. matchDeveloped left false."
+    ],
+    "defects": [
+      "display:contents hoist; developed score pending"
+    ],
+    "reference": "parity/receipts/console-loop/astryx/refs/slider.png",
+    "reviewSurface": "COMPONENT_SET-9:831",
+    "observations": {
+      "thumbSize": {
+        "w": 20,
+        "h": 20
+      },
+      "thumbParent": "part-1-0",
+      "thumbParentWidth": 49.1562,
+      "part102Absent": true,
+      "fullCircularThumbs": true,
+      "sliderClipsContent": false,
+      "part10ClipsContent": false,
+      "clipsFromScript": true,
+      "rootWidthPx": 49.1562,
+      "verticalTextRootW": 56,
+      "verticalTextLabel3X": 28,
+      "horizontalTextPart10W": 240,
+      "thumbAfterFill": true,
+      "childOrder": [
+        "slider-track",
+        "part-1-0-1",
+        "slider-thumb-2"
+      ]
+    },
+    "referenceSource": "emit-html:examples/astryx/contracts/slider.contract.json#first-item"
+  },
+  "fingerprint": {
+    "v6": "v6:3600925889",
+    "specHash": "1214932373"
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "TEXT Label",
+      "Orientation enum → Horizontal/Vertical",
+      "Value Display enum → Tooltip/Text/None",
+      "BOOLEAN Is Disabled",
+      "BOOLEAN Is Required"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Orientation=Horizontal, Value Display=Tooltip",
+        "Orientation=Horizontal, Value Display=Text",
+        "Orientation=Horizontal, Value Display=None",
+        "Orientation=Vertical, Value Display=Tooltip",
+        "Orientation=Vertical, Value Display=Text",
+        "Orientation=Vertical, Value Display=None"
+      ],
+      "propDefs": [
+        {
+          "name": "Is Disabled#1:1026",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Is Required#1:1033",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:1040",
+          "type": "TEXT",
+          "defaultValue": "Volume",
+          "variantOptions": null
+        },
+        {
+          "name": "Orientation",
+          "type": "VARIANT",
+          "defaultValue": "Horizontal",
+          "variantOptions": [
+            "Horizontal",
+            "Vertical"
+          ]
+        },
+        {
+          "name": "Value Display",
+          "type": "VARIANT",
+          "defaultValue": "Tooltip",
+          "variantOptions": [
+            "Tooltip",
+            "Text",
+            "None"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Orientation=Horizontal, Value Display=Tooltip",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "spacing-1",
+          "width": "imported/slider/root/width",
+          "height": "imported/slider/root/height/horizontal/tooltip"
+        },
+        "w": 49.15620040893555,
+        "h": 44,
+        "childTypes": [
+          "FRAME/label",
+          "FRAME/slider"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T16:50:01.601Z",
+  "screenshot": "parity/receipts/console-loop/astryx/shots/slider.png",
+  "screenshotVariant": {
+    "nodeId": "9:779",
+    "name": "Orientation=Horizontal, Value Display=Tooltip",
+    "bytes": 2328
+  },
+  "nodeId": "9:831",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=19, total=108776); amended nodeId=9:831; rebuiltVariants=6; tooltips on Tooltip variants; V-Text label-3 top=86; part-1-0 last child thumb. matchDeveloped left false."
+}

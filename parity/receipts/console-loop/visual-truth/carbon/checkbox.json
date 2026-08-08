@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "carbon",
+  "stem": "checkbox",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/carbon/components/checkbox.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:5562",
+  "cellNodeId": "1:5547",
+  "cellName": "Checked=Unchecked",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 60.60606060606061,
+    "pctAAUnmasked": 41.91919191919192,
+    "pctAAMasked": 41.91919191919192,
+    "maskCoveragePct": 0,
+    "canvasPx": "33x6",
+    "realPx": "33x6",
+    "inkCanvasPct": 22.22222222222222,
+    "inkRealPct": 47.97979797979798
+  },
+  "reference": "extract/computed/out/carbon/checkbox/gate-shots/unchecked.enabled__default.png",
+  "referenceSha256": "6033b723710f985e74b3dbacf8b75418aa1a3d0fb06f0cc285737daebb9c22bd",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/carbon/shots/checkbox.png",
+  "canvasShotSha256": "989dfb616c5e9e2850eecac9bf98ac23b49df82348585369452cb4495a814c73",
+  "diff": "parity/receipts/console-loop/visual-truth/carbon/diffs/checkbox.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 25.757575757575758,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "composition mismatch (scaleRatio=1.00, inkDelta=25.8)"
+}

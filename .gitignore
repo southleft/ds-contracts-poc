@@ -58,3 +58,4 @@ conformance/.sandbox/
 # (sandbox install, drafted capture config, seed contracts). Everything a run
 # should COMMIT lands under the library's own dirs, named by its ds-library.json.
 .ds-contracts/
+.env

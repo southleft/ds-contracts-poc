@@ -1,0 +1,14 @@
+{
+  "library": "tailwind",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileUrl": "https://www.figma.com/design/GnQnjSNBXtgtd2Ht0Hs1C8/DS-Contracts-Testing",
+  "kind": "console-loop-tailwind-component",
+  "required": [
+    "alert",
+    "badge",
+    "button",
+    "card",
+    "toggle-switch"
+  ],
+  "recordedAt": "2026-08-06T05:50:06.429Z"
+}

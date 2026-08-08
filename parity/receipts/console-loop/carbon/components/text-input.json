@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "kind": "console-loop-carbon-component",
+  "status": "completed",
+  "component": "text-input",
+  "contract": "examples/carbon/contracts/textinput.contract.json",
+  "script": "examples/carbon/figma/text-input.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:08.947Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:6091",
+    "mode": "generated",
+    "page": "TextInput (carbon.textinput)",
+    "sectionId": "1:6092",
+    "contractId": "carbon.textinput",
+    "result": {
+      "createdNodeIds": [
+        "1:6091"
+      ],
+      "results": [
+        {
+          "name": "TextInput",
+          "contractId": "carbon.textinput",
+          "nodeId": "1:6091",
+          "key": "e27a777638f9c2bfc80f70c2fb508c54ceb6f81e",
+          "variants": 8,
+          "properties": [
+            "Size",
+            "State"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "matchDeveloped": true,
+    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "notes": [
+      "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — amended rebuiltVariants=8; nodeId=1:6091; matchDeveloped left unset."
+    ],
+    "defects": [],
+    "reference": "extract/computed/out/carbon/textinput/gate-shots/lg.enabled__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "scorecard": "parity/receipts/console-loop/carbon/scores/text-input.json",
+    "matchDevelopedReason": "agent score pass AA=1.49% (Size=Lg like-for-like gate-shot)",
+    "matchedAt": "2026-08-08T03:07:42.614Z",
+    "status": "scored-pass",
+    "scoreConfirmed": {
+      "at": "2026-08-08T04:31:56.356Z",
+      "pctAAMasked": 1.488095238095238,
+      "compositionOk": true,
+      "supersededDefects": [],
+      "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:2635523164",
+    "lineCount": 366,
+    "sampleLines": [
+      ":COMPONENT_SET/TextInput (carbon.textinput)|fill|[]",
+      ":COMPONENT_SET/TextInput (carbon.textinput)|radius|5,5,5,5",
+      ":COMPONENT_SET/TextInput (carbon.textinput)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/TextInput (carbon.textinput)|description|TextInput â generated from contract carbon.textinput v0.2.0 â",
+      ":COMPONENT_SET/TextInput (carbon.textinput)|propdef|Size:VARIANT=Xs",
+      ":COMPONENT_SET/TextInput (carbon.textinput)|propdef|State:VARIANT=Default",
+      "/0:COMPONENT/Size=Xs, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Size=Xs, State=Default|radius|0,0,0,0",
+      "/0:COMPONENT/Size=Xs, State=Default|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Size=Xs, State=Default|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Size=Xs, State=Default|bound:height|imported/text-input/root/height/xs",
+      "/0:COMPONENT/Size=Xs, State=Default|bound:minWidth|imported/shared/size-0",
+      "/0:COMPONENT/Size=Xs, State=Default|bound:width|imported/shared/size-288",
+      "/0/0:FRAME/text-input__label-wrapper|fill|[]",
+      "/0/0:FRAME/text-input__label-wrapper|radius|0,0,0,0",
+      "/0/0:FRAME/text-input__label-wrapper|layout|HORIZONTAL SPACE_BETWEEN/MIN gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/text-input__label-wrapper|sizing|FIXED/FIXED AUTO",
+      "/0/0:FRAME/text-input__label-wrapper|bound:height|imported/text-input/text-input-label-wrapper/height",
+      "/0/0:FRAME/text-input__label-wrapper|bound:width|imported/shared/size-288",
+      "/0/0/0:FRAME/label (margin box)|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Size enum → Xs/Sm/Md/Lg"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Xs, State=Default",
+        "Size=Sm, State=Default",
+        "Size=Md, State=Default",
+        "Size=Lg, State=Default",
+        "Size=Xs, State=Disabled",
+        "Size=Sm, State=Disabled",
+        "Size=Md, State=Disabled",
+        "Size=Lg, State=Disabled"
+      ],
+      "propDefs": [
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Xs",
+          "variantOptions": [
+            "Xs",
+            "Sm",
+            "Md",
+            "Lg"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Disabled"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Xs, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/shared/size-288",
+          "height": "imported/text-input/root/height/xs",
+          "minWidth": "imported/shared/size-0"
+        },
+        "w": 288,
+        "h": 48,
+        "childTypes": [
+          "FRAME/text-input__label-wrapper",
+          "FRAME/text-input__field-outer-wrapper"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": true
+  },
+  "reSyncedAt": "2026-08-07T12:02:33.399Z",
+  "nodeId": "1:6091"
+}

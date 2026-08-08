@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "snackbar",
+  "contract": "examples/mui/contracts/snackbar.contract.json",
+  "script": "examples/mui/figma/snackbar.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:12:51.070Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "84:2140",
+    "mode": "generated",
+    "page": "Snackbar",
+    "sectionId": "84:2141",
+    "result": {
+      "createdNodeIds": [
+        "84:2140"
+      ],
+      "results": [
+        {
+          "name": "Snackbar",
+          "contractId": "mui.snackbar",
+          "nodeId": "84:2140",
+          "key": "aac2ca43fc4df561c3353d77774061e654de1430",
+          "variants": 3,
+          "properties": [
+            "Position"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Structure/variants reviewed via inspect (84:2140, page Snackbar); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 3 variants on page Snackbar)."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:4279840767",
+    "lineCount": 95,
+    "sampleLines": [
+      ":COMPONENT_SET/Snackbar|fill|[]",
+      ":COMPONENT_SET/Snackbar|radius|5,5,5,5",
+      ":COMPONENT_SET/Snackbar|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Snackbar|description|Snackbar \u00e2\u0080\u0094 generated from contract mui.snackbar v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Snackbar|propdef|Position:VARIANT=BottomLeft",
+      "/0:COMPONENT/Position=BottomLeft|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Position=BottomLeft|radius|0,0,0,0",
+      "/0:COMPONENT/Position=BottomLeft|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Position=BottomLeft|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Position=BottomLeft|bound:minHeight|imported/snackbar/root/min-height",
+      "/0:COMPONENT/Position=BottomLeft|bound:minWidth|imported/snackbar/root/min-width",
+      "/0/0:FRAME/paper-root|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.19607843458652496,\"g\":0.19607843458652496,\"b\":0.19607843458652496},\"boundVariables\":{\"color\":{\"var\":\"imported/snackbar/paper-root/background-color\"}}}]",
+      "/0/0:FRAME/paper-root|radius|4,4,4,4",
+      "/0/0:FRAME/paper-root|layout|HORIZONTAL MIN/CENTER gap 0 pad 6,16,6,16",
+      "/0/0:FRAME/paper-root|sizing|HUG/HUG AUTO",
+      "/0/0:FRAME/paper-root|effects|3",
+      "/0/0:FRAME/paper-root|bound:bottomLeftRadius|imported/shared/size-4",
+      "/0/0:FRAME/paper-root|bound:bottomRightRadius|imported/shared/size-4",
+      "/0/0:FRAME/paper-root|bound:minWidth|imported/snackbar/paper-root/min-width",
+      "/0/0:FRAME/paper-root|bound:paddingBottom|imported/snackbar/paper-root/padding-bottom"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
+    ],
+    "matchedAxes": [
+      "Position enum \u2192 BottomLeft/BottomCenter/TopRight"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Position=BottomLeft",
+        "Position=BottomCenter",
+        "Position=TopRight"
+      ],
+      "propDefs": [
+        {
+          "name": "Position",
+          "type": "VARIANT",
+          "defaultValue": "BottomLeft",
+          "variantOptions": [
+            "BottomLeft",
+            "BottomCenter",
+            "TopRight"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Position=BottomLeft",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "minWidth": "imported/snackbar/root/min-width",
+          "minHeight": "imported/snackbar/root/min-height"
+        },
+        "w": 288,
+        "h": 49,
+        "childTypes": [
+          "FRAME/paper-root"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

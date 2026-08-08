@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "accordion",
+  "contract": "examples/mui/contracts/accordion.contract.json",
+  "script": "examples/mui/figma/accordion.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T04:51:10.513Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "21:79",
+    "mode": "existing",
+    "page": "Accordion",
+    "sectionId": "21:80",
+    "result": {}
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Existing on-canvas set inspected; structure/variants sane (21:79).",
+      "Accordion COMPONENT_SET 21:79: 4 variant(s), 3 prop def(s). Structure looks sane; slot placeholders OK."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:4119792290",
+    "lineCount": 337,
+    "sampleLines": [
+      ":COMPONENT_SET/Accordion|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant enum \u2192 Elevation/Outlined",
+      "Expanded enum \u2192 Collapsed/Expanded",
+      "BOOLEAN Disabled",
+      "first-variant fill bound: imported/accordion/root/background-color"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Elevation, Expanded=Collapsed"
+      ],
+      "propDefs": [
+        {
+          "name": "Disabled#21:0",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Expanded",
+          "type": "VARIANT",
+          "defaultValue": "Collapsed",
+          "variantOptions": [
+            "Collapsed",
+            "Expanded"
+          ]
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Elevation",
+          "variantOptions": [
+            "Elevation",
+            "Outlined"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Elevation, Expanded=Collapsed",
+        "type": "COMPONENT",
+        "fillVarName": "imported/accordion/root/background-color",
+        "padBound": {},
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 4,
+        "w": 288,
+        "h": 48,
+        "childTypes": [
+          "FRAME/accordion-heading"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

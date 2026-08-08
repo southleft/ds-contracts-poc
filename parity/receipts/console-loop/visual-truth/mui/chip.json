@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "chip",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/chip.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "21:410",
+  "cellNodeId": "21:326",
+  "cellName": "Variant=Filled, Color=Default, Size=Medium",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 22.058823529411764,
+    "pctAAUnmasked": 5.88235294117647,
+    "pctAAMasked": 5.88235294117647,
+    "maskCoveragePct": 0,
+    "canvasPx": "51x20",
+    "realPx": "49x20",
+    "inkCanvasPct": 92.15686274509804,
+    "inkRealPct": 89.41176470588236
+  },
+  "reference": "extract/computed/out/mui/chip/gate-shots/filled.default.medium__default.png",
+  "referenceSha256": "7bad7636a90b2aa1f1079c39eaa35e15a46a658b7baf40a3644befd2be216bcd",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/chip.png",
+  "canvasShotSha256": "81a054fced20ad4f4f792df3210647a231edcdbc2af63e6143e106f2fc494fa4",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/chip.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0408163265306123,
+  "inkDelta": 2.7450980392156765,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=5.88 > 5)"
+}

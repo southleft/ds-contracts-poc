@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "astryx",
+  "stem": "progress-bar",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/astryx/components/progress-bar.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:3900",
+  "cellNodeId": "1:3880",
+  "cellName": "Variant=Accent",
+  "cellPick": "first-cell",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 29.946428571428573,
+    "pctAAUnmasked": 25.38690476190476,
+    "pctAAMasked": 25.38690476190476,
+    "maskCoveragePct": 0,
+    "canvasPx": "480x35",
+    "realPx": "68x16",
+    "inkCanvasPct": 26.958333333333336,
+    "inkRealPct": 2.744047619047619
+  },
+  "reference": "parity/receipts/console-loop/astryx/refs/progress-bar.png",
+  "referenceSha256": "f4ba3e1d1a57fe7326eeffb0681ebe142e08ee4fa5d99399065877034f2234a0",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/progress-bar.png",
+  "canvasShotSha256": "ff1f6a905e3b3523e30834d78ea902d0d6763a308e5124717e7ac8f582275554",
+  "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/progress-bar.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 7.0588235294117645,
+  "inkDelta": 24.214285714285715,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=7.06, inkDelta=24.2)"
+}

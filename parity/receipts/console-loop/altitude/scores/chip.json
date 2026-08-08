@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 90.54545454545455,
+    "pctAAUnmasked": 74.90909090909092,
+    "pctAAMasked": 74.90909090909092,
+    "maskCoveragePct": 0,
+    "canvasPx": "55x30",
+    "realPx": "53x28",
+    "inkCanvasPct": 21.757575757575758,
+    "inkRealPct": 81.6969696969697
+  },
+  "reference": "extract/computed/out/altitude/chip/gate-shots/info.unset__default.png",
+  "referenceSha256": "184ce7b7d5cec25269bfed7726ee3011c2d747a09ebbb6868b35830663732551",
+  "canvasShot": "parity/receipts/console-loop/altitude/shots/chip-cell.png",
+  "canvasShotSha256": "9abc7433f0177dd422dfbb15f5780915821bf16fd18d1c802b1c3cf49a153304",
+  "diff": "parity/receipts/console-loop/altitude/scores/chip.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/altitude/components/chip.json",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0714285714285714,
+  "inkDelta": 59.939393939393945,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=1.07, inkDelta=59.9) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-08T04:31:11.150Z"
+}

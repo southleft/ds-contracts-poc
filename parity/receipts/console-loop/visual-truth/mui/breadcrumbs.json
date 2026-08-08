@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "mui",
+  "stem": "breadcrumbs",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/mui/components/breadcrumbs.json",
+  "status": "fail",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileVersion": "2384477865735882405",
+  "setNodeId": "83:1658",
+  "cellNodeId": "83:1658",
+  "cellName": "Breadcrumbs",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "gate-shots-probe",
+  "metrics": {
+    "pctExactUnmasked": 43.9,
+    "pctAAUnmasked": 25.7,
+    "pctAAMasked": 25.7,
+    "maskCoveragePct": 0,
+    "canvasPx": "125x8",
+    "realPx": "125x8",
+    "inkCanvasPct": 27.700000000000003,
+    "inkRealPct": 22.2
+  },
+  "reference": "extract/computed/out/mui/breadcrumbs/gate-shots/__default.png",
+  "referenceSha256": "e8e17b12301cd7c59c6d8ea73346232717287ebfaa00fb408aee0b620872878a",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/breadcrumbs.png",
+  "canvasShotSha256": "caf59971f09d5a4fa5e80b868a9244398590c91d47a2f959f6d4819b0c5acd66",
+  "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/breadcrumbs.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 5.5000000000000036,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=25.70 > 5)"
+}

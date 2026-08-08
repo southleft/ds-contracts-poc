@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "kind": "console-loop-polaris-component",
+  "status": "completed",
+  "component": "spinner",
+  "contract": "examples/polaris/contracts/spinner.contract.json",
+  "script": "examples/polaris/figma/spinner.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:47:33.504Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:10105",
+    "mode": "amended",
+    "page": "Spinner (polaris.spinner)",
+    "sectionId": "1:10106",
+    "contractId": "polaris.spinner",
+    "result": {
+      "createdNodeIds": [
+        "1:10105"
+      ],
+      "results": [
+        {
+          "name": "Spinner",
+          "contractId": "polaris.spinner",
+          "nodeId": "1:10105",
+          "key": "21ae20f86e9d10a42f441cd9d199181ef510ac9e",
+          "variants": 2,
+          "properties": [
+            "Has Focusable Parent#1:2362",
+            "Accessibility Label#1:2365",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-07T17:55:59.325Z",
+    "notes": [
+      "Re-synced via clientStorage chunks (n=8, total=59284); amended nodeId=1:10105; rebuiltVariants=2. matchDeveloped left false.",
+      "Re-synced via clientStorage chunks (n=11, total=60262); nodeId=1:10105; rotation=-90 type=FRAME",
+      "Re-synced via clientStorage chunks (n=11, total=60262); nodeId=1:10105; rotation=-90 type=FRAME"
+    ],
+    "defects": [
+      "Arc contrast/color not match to developed spinner receipts — fail closed."
+    ],
+    "reference": "parity/receipts/console-loop/polaris/refs/spinner.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "cellShot": "parity/receipts/console-loop/polaris/shots/spinner-cell.png",
+    "referenceSource": "examples/polaris/generated/html/spinner.html#first-item-inline-css",
+    "scorecard": "parity/receipts/console-loop/polaris/scores/spinner.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "agent AA=7.79 vs emit-html first-item",
+        "matchedAt": "2026-08-08T03:21:39.238Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=7.79, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    }
+  },
+  "fingerprint": {
+    "v6": "v6:3043290729",
+    "lineCount": 29,
+    "sampleLines": [
+      ":COMPONENT_SET/Spinner (polaris.spinner)|fill|[]",
+      ":COMPONENT_SET/Spinner (polaris.spinner)|radius|5,5,5,5",
+      ":COMPONENT_SET/Spinner (polaris.spinner)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Spinner (polaris.spinner)|description|Spinner â generated from contract polaris.spinner v0.4.0 â",
+      ":COMPONENT_SET/Spinner (polaris.spinner)|propdef|Accessibility Label#1:2365:TEXT=",
+      ":COMPONENT_SET/Spinner (polaris.spinner)|propdef|Has Focusable Parent#1:2362:BOOLEAN=false",
+      ":COMPONENT_SET/Spinner (polaris.spinner)|propdef|Size:VARIANT=Large",
+      "/0:COMPONENT/Size=Large|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Size=Large|radius|0,0,0,0",
+      "/0:COMPONENT/Size=Large|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Size=Large|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Size=Large|bound:width|imported/spinner/root/width/large",
+      "/0/0:FRAME/root-large|fill|[]",
+      "/0/0:FRAME/root-large|radius|0,0,0,0",
+      "/0/0:FRAME/root-large|sizing|FILL/FIXED AUTO",
+      "/0/0/0:VECTOR/Vector|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.1882352977991104,\"g\":0.1882352977991104,\"b\":0.1882352977991104},\"boundVariables\":{\"color\":{\"var\":\"imported/spinner/root/color\"}}}]",
+      "/0/0/0:VECTOR/Vector|radius|0,0,0,0",
+      "/0/0/0:VECTOR/Vector|sizing|FIXED/FIXED AUTO",
+      "/1:COMPONENT/Size=Small|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/1:COMPONENT/Size=Small|radius|0,0,0,0"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states)"
+    ],
+    "matchedAxes": [
+      "Size enum → Large/Small",
+      "TEXT Accessibility Label",
+      "BOOLEAN Has Focusable Parent"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Size=Large",
+        "Size=Small"
+      ],
+      "propDefs": [
+        {
+          "name": "Has Focusable Parent#1:2362",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Accessibility Label#1:2365",
+          "type": "TEXT",
+          "defaultValue": "",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Large",
+          "variantOptions": [
+            "Large",
+            "Small"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Large",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "width": "imported/spinner/root/width/large"
+        },
+        "w": 44,
+        "h": 44,
+        "childTypes": [
+          "FRAME/root-large"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T17:55:59.325Z",
+  "nodeId": "1:10105",
+  "reSyncNote": "Re-synced via clientStorage chunks (n=11, total=60262); nodeId=1:10105; rotation=-90 type=FRAME"
+}

@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "altitude",
+  "stem": "heading",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/altitude/components/heading.json",
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385140377324169403",
+  "setNodeId": "1:3047",
+  "cellNodeId": "1:3025",
+  "cellName": "Variant=Display Lg, Weight=Bold",
+  "cellPick": "variant-token-match",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 50.4753282028067,
+    "pctAAUnmasked": 13.00362154821186,
+    "pctAAMasked": 13.00362154821186,
+    "maskCoveragePct": 0,
+    "canvasPx": "188x47",
+    "realPx": "184x47",
+    "inkCanvasPct": 35.27614305115437,
+    "inkRealPct": 44.262109551833404
+  },
+  "reference": "parity/receipts/console-loop/altitude/refs/heading.png",
+  "referenceSha256": "ef02a0de0a34ffe2fd4ee7214c34bfe2ac902f05290d8bcda63b512bce2e4383",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/altitude/shots/heading.png",
+  "canvasShotSha256": "8cdc052af7942babbba3e18f08093c96846f6e6d54f3e11453f677012b269b6f",
+  "diff": "parity/receipts/console-loop/visual-truth/altitude/diffs/heading.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0217391304347827,
+  "inkDelta": 8.985966500679034,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=13.00 > 5)"
+}
