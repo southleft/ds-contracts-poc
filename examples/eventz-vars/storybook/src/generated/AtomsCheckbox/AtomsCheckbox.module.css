@@ -1,0 +1,47 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/atoms-checkbox.contract.json (ds.atoms-checkbox v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  border: 0;
+  padding-inline: var(--spacing-0);
+  padding-block: var(--spacing-0);
+  gap: var(--spacing-1);
+  width: var(--imported-atoms-checkbox-root-width);
+  height: fit-content;
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.root:focus-visible {
+  outline-color: var(--comp-border-focus-ring);
+}
+
+.root:focus-visible {
+  outline-width: var(--imported-atoms-checkbox-state-focus-visible-outline-width);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-inline: var(--spacing-0);
+  padding-block: var(--spacing-0);
+  gap: var(--spacing-0);
+}
+
+.Label {
+  color: var(--color-content-default);
+  font-size: var(--imported-text-body-sm-font-size);
+  font-weight: var(--imported-text-body-sm-font-weight);
+  line-height: var(--imported-text-body-sm-line-height);
+}

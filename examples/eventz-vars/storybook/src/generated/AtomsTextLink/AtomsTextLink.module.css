@@ -1,0 +1,14 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/atoms-text-link.contract.json (ds.atoms-text-link v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-atoms-text-link-root-width);
+  height: var(--imported-stub-atoms-text-link-root-height);
+  background-color: var(--comp-button-primary-color-content-default);
+}

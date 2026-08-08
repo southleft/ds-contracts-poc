@@ -1,0 +1,674 @@
+{
+ "atoms-badge--variant_accent_hasicon_false_haslabel_true": {
+  "out": "fid--atoms-badge--variant_accent_hasicon_false_haslabel_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 91,
+   "width": 47.71875,
+   "height": 34
+  },
+  "root": {
+   "x": 96,
+   "y": 99,
+   "width": 31.71875,
+   "height": 18
+  }
+ },
+ "atoms-badge--variant_accent_hasicon_true_haslabel_false": {
+  "out": "fid--atoms-badge--variant_accent_hasicon_true_haslabel_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 38,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 22,
+   "height": 22
+  }
+ },
+ "atoms-badge--variant_accent_hasicon_true_haslabel_true": {
+  "out": "fid--atoms-badge--variant_accent_hasicon_true_haslabel_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 62.71875,
+   "height": 34
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 46.71875,
+   "height": 18
+  }
+ },
+ "atoms-badge--variant_brand_hasicon_false_haslabel_true": {
+  "out": "fid--atoms-badge--variant_brand_hasicon_false_haslabel_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 91,
+   "width": 47.71875,
+   "height": 34
+  },
+  "root": {
+   "x": 96,
+   "y": 99,
+   "width": 31.71875,
+   "height": 18
+  }
+ },
+ "atoms-badge--variant_brand_hasicon_true_haslabel_false": {
+  "out": "fid--atoms-badge--variant_brand_hasicon_true_haslabel_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 38,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 22,
+   "height": 22
+  }
+ },
+ "atoms-badge--variant_brand_hasicon_true_haslabel_true": {
+  "out": "fid--atoms-badge--variant_brand_hasicon_true_haslabel_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 62.71875,
+   "height": 34
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 46.71875,
+   "height": 18
+  }
+ },
+ "atoms-badge--variant_featured_hasicon_false_haslabel_true": {
+  "out": "fid--atoms-badge--variant_featured_hasicon_false_haslabel_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 91,
+   "width": 47.71875,
+   "height": 34
+  },
+  "root": {
+   "x": 96,
+   "y": 99,
+   "width": 31.71875,
+   "height": 18
+  }
+ },
+ "atoms-badge--variant_featured_hasicon_true_haslabel_false": {
+  "out": "fid--atoms-badge--variant_featured_hasicon_true_haslabel_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 38,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 22,
+   "height": 22
+  }
+ },
+ "atoms-badge--variant_featured_hasicon_true_haslabel_true": {
+  "out": "fid--atoms-badge--variant_featured_hasicon_true_haslabel_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 62.71875,
+   "height": 34
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 46.71875,
+   "height": 18
+  }
+ },
+ "atoms-badge--variant_info_hasicon_false_haslabel_true": {
+  "out": "fid--atoms-badge--variant_info_hasicon_false_haslabel_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 91,
+   "width": 47.71875,
+   "height": 34
+  },
+  "root": {
+   "x": 96,
+   "y": 99,
+   "width": 31.71875,
+   "height": 18
+  }
+ },
+ "atoms-badge--variant_info_hasicon_true_haslabel_false": {
+  "out": "fid--atoms-badge--variant_info_hasicon_true_haslabel_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 38,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 22,
+   "height": 22
+  }
+ },
+ "atoms-badge--variant_info_hasicon_true_haslabel_true": {
+  "out": "fid--atoms-badge--variant_info_hasicon_true_haslabel_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 62.71875,
+   "height": 34
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 46.71875,
+   "height": 18
+  }
+ },
+ "atoms-badge--variant_warning_hasicon_false_haslabel_true": {
+  "out": "fid--atoms-badge--variant_warning_hasicon_false_haslabel_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 91,
+   "width": 47.71875,
+   "height": 34
+  },
+  "root": {
+   "x": 96,
+   "y": 99,
+   "width": 31.71875,
+   "height": 18
+  }
+ },
+ "atoms-badge--variant_warning_hasicon_true_haslabel_false": {
+  "out": "fid--atoms-badge--variant_warning_hasicon_true_haslabel_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 38,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 22,
+   "height": 22
+  }
+ },
+ "atoms-badge--variant_warning_hasicon_true_haslabel_true": {
+  "out": "fid--atoms-badge--variant_warning_hasicon_true_haslabel_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 62.71875,
+   "height": 34
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 46.71875,
+   "height": 18
+  }
+ },
+ "atoms-button--variant_bare_state_default_isdisabled_false": {
+  "out": "fid--atoms-button--variant_bare_state_default_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 93,
+   "width": 82.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 101,
+   "width": 66.265625,
+   "height": 22
+  }
+ },
+ "atoms-button--variant_bare_state_default_isdisabled_true": {
+  "out": "fid--atoms-button--variant_bare_state_default_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 93,
+   "width": 82.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 101,
+   "width": 66.265625,
+   "height": 22
+  }
+ },
+ "atoms-button--variant_knockout_state_default_isdisabled_false": {
+  "out": "fid--atoms-button--variant_knockout_state_default_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 93,
+   "width": 82.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 101,
+   "width": 66.265625,
+   "height": 22
+  }
+ },
+ "atoms-button--variant_knockout_state_default_isdisabled_true": {
+  "out": "fid--atoms-button--variant_knockout_state_default_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 93,
+   "width": 82.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 101,
+   "width": 66.265625,
+   "height": 22
+  }
+ },
+ "atoms-button--variant_primary_state_default_isdisabled_false": {
+  "out": "fid--atoms-button--variant_primary_state_default_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 93,
+   "width": 82.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 101,
+   "width": 66.265625,
+   "height": 22
+  }
+ },
+ "atoms-button--variant_primary_state_default_isdisabled_true": {
+  "out": "fid--atoms-button--variant_primary_state_default_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 93,
+   "width": 82.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 101,
+   "width": 66.265625,
+   "height": 22
+  }
+ },
+ "atoms-button--variant_secondary_state_default_isdisabled_false": {
+  "out": "fid--atoms-button--variant_secondary_state_default_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 93,
+   "width": 82.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 101,
+   "width": 66.265625,
+   "height": 22
+  }
+ },
+ "atoms-button--variant_secondary_state_default_isdisabled_true": {
+  "out": "fid--atoms-button--variant_secondary_state_default_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 93,
+   "width": 82.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 101,
+   "width": 66.265625,
+   "height": 22
+  }
+ },
+ "atoms-icon-button--variant_bare_knockout_state_default_isdisabled_false": {
+  "out": "fid--atoms-icon-button--variant_bare_knockout_state_default_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 103,
+   "width": 28,
+   "height": 18
+  },
+  "root": {
+   "x": 96,
+   "y": 111,
+   "width": 12,
+   "height": 2
+  }
+ },
+ "atoms-icon-button--variant_bare_knockout_state_default_isdisabled_true": {
+  "out": "fid--atoms-icon-button--variant_bare_knockout_state_default_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 103,
+   "width": 28,
+   "height": 18
+  },
+  "root": {
+   "x": 96,
+   "y": 111,
+   "width": 12,
+   "height": 2
+  }
+ },
+ "atoms-icon-button--variant_bare_state_default_isdisabled_false": {
+  "out": "fid--atoms-icon-button--variant_bare_state_default_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 103,
+   "width": 28,
+   "height": 18
+  },
+  "root": {
+   "x": 96,
+   "y": 111,
+   "width": 12,
+   "height": 2
+  }
+ },
+ "atoms-icon-button--variant_bare_state_default_isdisabled_true": {
+  "out": "fid--atoms-icon-button--variant_bare_state_default_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 103,
+   "width": 28,
+   "height": 18
+  },
+  "root": {
+   "x": 96,
+   "y": 111,
+   "width": 12,
+   "height": 2
+  }
+ },
+ "atoms-icon-button--variant_knockout_state_default_isdisabled_false": {
+  "out": "fid--atoms-icon-button--variant_knockout_state_default_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 103,
+   "width": 28,
+   "height": 18
+  },
+  "root": {
+   "x": 96,
+   "y": 111,
+   "width": 12,
+   "height": 2
+  }
+ },
+ "atoms-icon-button--variant_knockout_state_default_isdisabled_true": {
+  "out": "fid--atoms-icon-button--variant_knockout_state_default_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 103,
+   "width": 28,
+   "height": 18
+  },
+  "root": {
+   "x": 96,
+   "y": 111,
+   "width": 12,
+   "height": 2
+  }
+ },
+ "atoms-icon-button--variant_primary_state_default_isdisabled_false": {
+  "out": "fid--atoms-icon-button--variant_primary_state_default_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 103,
+   "width": 28,
+   "height": 18
+  },
+  "root": {
+   "x": 96,
+   "y": 111,
+   "width": 12,
+   "height": 2
+  }
+ },
+ "atoms-icon-button--variant_primary_state_default_isdisabled_true": {
+  "out": "fid--atoms-icon-button--variant_primary_state_default_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 103,
+   "width": 28,
+   "height": 18
+  },
+  "root": {
+   "x": 96,
+   "y": 111,
+   "width": 12,
+   "height": 2
+  }
+ },
+ "atoms-icon-button--variant_secondary_state_default_isdisabled_false": {
+  "out": "fid--atoms-icon-button--variant_secondary_state_default_isdisabled_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 103,
+   "width": 28,
+   "height": 18
+  },
+  "root": {
+   "x": 96,
+   "y": 111,
+   "width": 12,
+   "height": 2
+  }
+ },
+ "atoms-icon-button--variant_secondary_state_default_isdisabled_true": {
+  "out": "fid--atoms-icon-button--variant_secondary_state_default_isdisabled_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 103,
+   "width": 28,
+   "height": 18
+  },
+  "root": {
+   "x": 96,
+   "y": 111,
+   "width": 12,
+   "height": 2
+  }
+ },
+ "atoms-tag--state_default_isinteractive_false_variant_parent_isactive_false": {
+  "out": "fid--atoms-tag--state_default_isinteractive_false_variant_parent_isactive_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 77.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 61.265625,
+   "height": 22
+  }
+ },
+ "atoms-tag--state_default_isinteractive_true_variant_child_isactive_false": {
+  "out": "fid--atoms-tag--state_default_isinteractive_true_variant_child_isactive_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 77.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 61.265625,
+   "height": 22
+  }
+ },
+ "atoms-tag--state_default_isinteractive_true_variant_child_isactive_true": {
+  "out": "fid--atoms-tag--state_default_isinteractive_true_variant_child_isactive_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 77.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 61.265625,
+   "height": 22
+  }
+ },
+ "atoms-tag--state_default_isinteractive_true_variant_parent_isactive_false": {
+  "out": "fid--atoms-tag--state_default_isinteractive_true_variant_parent_isactive_false.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 77.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 61.265625,
+   "height": 22
+  }
+ },
+ "atoms-tag--state_default_isinteractive_true_variant_parent_isactive_true": {
+  "out": "fid--atoms-tag--state_default_isinteractive_true_variant_parent_isactive_true.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 77.265625,
+   "height": 38
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 61.265625,
+   "height": 22
+  }
+ },
+ "molecules-alert--variant_danger": {
+  "out": "fid--molecules-alert--variant_danger.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 406,
+   "height": 100
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 390,
+   "height": 84
+  }
+ },
+ "molecules-alert--variant_info": {
+  "out": "fid--molecules-alert--variant_info.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 406,
+   "height": 100
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 390,
+   "height": 84
+  }
+ },
+ "molecules-alert--variant_success": {
+  "out": "fid--molecules-alert--variant_success.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 406,
+   "height": 100
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 390,
+   "height": 84
+  }
+ },
+ "molecules-alert--variant_warning": {
+  "out": "fid--molecules-alert--variant_warning.png",
+  "clip": "union",
+  "box": {
+   "x": 88,
+   "y": 88,
+   "width": 406,
+   "height": 100
+  },
+  "root": {
+   "x": 96,
+   "y": 96,
+   "width": 390,
+   "height": 84
+  }
+ }
+}
