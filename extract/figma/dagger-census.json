@@ -91,6 +91,19 @@
       "astryx.switch": 1,
       "astryx.toast": 1
     },
+    "shadcn": {
+      "shadcn.alert": 1,
+      "shadcn.avatar": 1,
+      "shadcn.badge": 1,
+      "shadcn.button": 1,
+      "shadcn.card": 1,
+      "shadcn.checkbox": 1,
+      "shadcn.input": 1,
+      "shadcn.select": 1,
+      "shadcn.switch": 1,
+      "shadcn.tabs": 1,
+      "shadcn.tooltip": 1
+    },
     "polaris": {
       "polaris.avatar": 1,
       "polaris.badge": 1,

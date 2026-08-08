@@ -1,0 +1,300 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.button",
+  "name": "Button",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1).  COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "default",
+          "outline",
+          "secondary",
+          "ghost",
+          "destructive",
+          "link"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "outline": "Outline",
+            "secondary": "Secondary",
+            "ghost": "Ghost",
+            "destructive": "Destructive",
+            "link": "Link"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "default",
+          "xs",
+          "sm",
+          "lg",
+          "icon",
+          "icon-xs",
+          "icon-sm",
+          "icon-lg"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "default": "Default",
+            "xs": "Xs",
+            "sm": "Sm",
+            "lg": "Lg",
+            "icon": "Icon",
+            "icon-xs": "Icon Xs",
+            "icon-sm": "Icon Sm",
+            "icon-lg": "Icon Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "asChild",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "As Child"
+        },
+        "code": {
+          "prop": "asChild"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Button",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [
+    "active",
+    "disabled",
+    "focus-visible",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "content": {
+        "prop": "children"
+      },
+      "declared": {
+        "background-clip": "padding-box",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "text-wrap-mode": "nowrap",
+        "transition-duration": "0.15s",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "user-select": "none"
+      },
+      "declaredStates": {
+        "active": {
+          "translate": "0px 1px"
+        },
+        "disabled": {
+          "pointer-events": "none"
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-left-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "border-top-width": "{imported.shared.size-1}",
+        "flex-shrink": "{imported.button.root.flex-shrink}",
+        "font-weight": "{imported.button.root.font-weight}"
+      },
+      "states": {
+        "active": {
+          "background-color": "{imported.button.root.background-color-state-active.{variant}}"
+        },
+        "disabled": {
+          "opacity": "{imported.button.root.opacity-state-disabled}"
+        },
+        "focus-visible": {
+          "border-bottom-color": "{imported.button.root.border-bottom-color-state-focus-visible.{variant}}",
+          "border-left-color": "{imported.button.root.border-left-color-state-focus-visible.{variant}}",
+          "border-right-color": "{imported.button.root.border-right-color-state-focus-visible.{variant}}",
+          "border-top-color": "{imported.button.root.border-top-color-state-focus-visible.{variant}}",
+          "box-shadow": "{imported.button.root.box-shadow-state-focus-visible.{variant}}",
+          "outline-width": "{imported.button.root.outline-width-state-focus-visible}"
+        },
+        "hover": {
+          "background-color": "{imported.button.root.background-color-state-hover.{variant}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "default": {
+              "font-size": "{imported.button.root.font-size.default}",
+              "line-height": "{imported.button.root.line-height.default}",
+              "padding-left": "{imported.button.root.padding-left.default}",
+              "padding-right": "{imported.button.root.padding-right.default}"
+            },
+            "icon": {
+              "font-size": "{imported.button.root.font-size.icon}",
+              "line-height": "{imported.button.root.line-height.icon}",
+              "padding-left": "{imported.button.root.padding-left.icon}",
+              "padding-right": "{imported.button.root.padding-right.icon}"
+            },
+            "icon-lg": {
+              "font-size": "{imported.button.root.font-size.icon-lg}",
+              "line-height": "{imported.button.root.line-height.icon-lg}",
+              "padding-left": "{imported.button.root.padding-left.icon-lg}",
+              "padding-right": "{imported.button.root.padding-right.icon-lg}"
+            },
+            "icon-sm": {
+              "font-size": "{imported.button.root.font-size.icon-sm}",
+              "line-height": "{imported.button.root.line-height.icon-sm}",
+              "padding-left": "{imported.button.root.padding-left.icon-sm}",
+              "padding-right": "{imported.button.root.padding-right.icon-sm}"
+            },
+            "icon-xs": {
+              "font-size": "{imported.button.root.font-size.icon-xs}",
+              "line-height": "{imported.button.root.line-height.icon-xs}",
+              "padding-left": "{imported.button.root.padding-left.icon-xs}",
+              "padding-right": "{imported.button.root.padding-right.icon-xs}"
+            },
+            "lg": {
+              "font-size": "{imported.button.root.font-size.lg}",
+              "line-height": "{imported.button.root.line-height.lg}",
+              "padding-left": "{imported.button.root.padding-left.lg}",
+              "padding-right": "{imported.button.root.padding-right.lg}"
+            },
+            "sm": {
+              "font-size": "{imported.button.root.font-size.sm}",
+              "line-height": "{imported.button.root.line-height.sm}",
+              "padding-left": "{imported.button.root.padding-left.sm}",
+              "padding-right": "{imported.button.root.padding-right.sm}"
+            },
+            "xs": {
+              "font-size": "{imported.button.root.font-size.xs}",
+              "line-height": "{imported.button.root.line-height.xs}",
+              "padding-left": "{imported.button.root.padding-left.xs}",
+              "padding-right": "{imported.button.root.padding-right.xs}"
+            }
+          }
+        },
+        {
+          "prop": "variant",
+          "map": {
+            "default": {
+              "background-color": "{imported.button.root.background-color.default}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.default}",
+              "border-left-color": "{imported.button.root.border-left-color.default}",
+              "border-right-color": "{imported.button.root.border-right-color.default}",
+              "border-top-color": "{imported.button.root.border-top-color.default}",
+              "box-shadow": "{imported.button.root.box-shadow.default}",
+              "color": "{imported.button.root.color.default}"
+            },
+            "destructive": {
+              "background-color": "{imported.button.root.background-color.destructive}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.destructive}",
+              "border-left-color": "{imported.button.root.border-left-color.destructive}",
+              "border-right-color": "{imported.button.root.border-right-color.destructive}",
+              "border-top-color": "{imported.button.root.border-top-color.destructive}",
+              "box-shadow": "{imported.button.root.box-shadow.destructive}",
+              "color": "{imported.button.root.color.destructive}"
+            },
+            "ghost": {
+              "background-color": "{imported.button.root.background-color.ghost}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.ghost}",
+              "border-left-color": "{imported.button.root.border-left-color.ghost}",
+              "border-right-color": "{imported.button.root.border-right-color.ghost}",
+              "border-top-color": "{imported.button.root.border-top-color.ghost}",
+              "box-shadow": "{imported.button.root.box-shadow.ghost}",
+              "color": "{imported.button.root.color.ghost}"
+            },
+            "link": {
+              "background-color": "{imported.button.root.background-color.link}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.link}",
+              "border-left-color": "{imported.button.root.border-left-color.link}",
+              "border-right-color": "{imported.button.root.border-right-color.link}",
+              "border-top-color": "{imported.button.root.border-top-color.link}",
+              "box-shadow": "{imported.button.root.box-shadow.link}",
+              "color": "{imported.button.root.color.link}"
+            },
+            "outline": {
+              "background-color": "{imported.button.root.background-color.outline}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.outline}",
+              "border-left-color": "{imported.button.root.border-left-color.outline}",
+              "border-right-color": "{imported.button.root.border-right-color.outline}",
+              "border-top-color": "{imported.button.root.border-top-color.outline}",
+              "box-shadow": "{imported.button.root.box-shadow.outline}",
+              "color": "{imported.button.root.color.outline}"
+            },
+            "secondary": {
+              "background-color": "{imported.button.root.background-color.secondary}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.secondary}",
+              "border-left-color": "{imported.button.root.border-left-color.secondary}",
+              "border-right-color": "{imported.button.root.border-right-color.secondary}",
+              "border-top-color": "{imported.button.root.border-top-color.secondary}",
+              "box-shadow": "{imported.button.root.box-shadow.secondary}",
+              "color": "{imported.button.root.color.secondary}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Button"
+    }
+  }
+}

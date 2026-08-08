@@ -1,0 +1,351 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Badge",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "primary",
+      "varName": "--primary",
+      "anchor": {
+        "selector": ".bg-primary"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "secondary",
+      "axisValues": {
+        "variant": "secondary"
+      },
+      "token": "secondary",
+      "varName": "--secondary",
+      "anchor": {
+        "selector": ".bg-secondary"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "primary-foreground",
+      "varName": "--primary-foreground",
+      "anchor": {
+        "selector": ".text-primary-foreground"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "secondary",
+      "axisValues": {
+        "variant": "secondary"
+      },
+      "token": "secondary-foreground",
+      "varName": "--secondary-foreground",
+      "anchor": {
+        "selector": ".text-secondary-foreground"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "destructive",
+      "axisValues": {
+        "variant": "destructive"
+      },
+      "token": "destructive",
+      "varName": "--destructive",
+      "anchor": {
+        "selector": ".text-destructive"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "outline",
+      "axisValues": {
+        "variant": "outline"
+      },
+      "token": "foreground",
+      "varName": "--foreground",
+      "anchor": {
+        "selector": ".text-foreground"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "link",
+      "axisValues": {
+        "variant": "link"
+      },
+      "token": "primary",
+      "varName": "--primary",
+      "anchor": {
+        "selector": ".text-primary"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "secondary",
+      "axisValues": {
+        "variant": "secondary"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "destructive",
+      "axisValues": {
+        "variant": "destructive"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "outline",
+      "axisValues": {
+        "variant": "outline"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "ghost",
+      "axisValues": {
+        "variant": "ghost"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "link",
+      "axisValues": {
+        "variant": "link"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "secondary",
+      "axisValues": {
+        "variant": "secondary"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "destructive",
+      "axisValues": {
+        "variant": "destructive"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "outline",
+      "axisValues": {
+        "variant": "outline"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "ghost",
+      "axisValues": {
+        "variant": "ghost"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "link",
+      "axisValues": {
+        "variant": "link"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "secondary",
+      "axisValues": {
+        "variant": "secondary"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "destructive",
+      "axisValues": {
+        "variant": "destructive"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "outline",
+      "axisValues": {
+        "variant": "outline"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "ghost",
+      "axisValues": {
+        "variant": "ghost"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "link",
+      "axisValues": {
+        "variant": "link"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    }
+  ],
+  "skips": [
+    "root.height: source declares `calc(var(--spacing) * 5)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.line-height: candidate --text-xs--line-height → \"text-xs--line-height\" = calc(1 / 0.75) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.transition-duration: candidate --default-transition-duration → \"default-transition-duration\" = 150ms names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 6,
+  "shorthandSkips": [
+    "root.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-radius: SHORTHAND carrying var(--radius) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-style: SHORTHAND carrying var(--tw-border-style) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.gap: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding-block: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding-inline: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 1,
+  "calcCeiling": 1,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

@@ -1,0 +1,162 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Checkbox",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "primary",
+      "varName": "--primary",
+      "anchor": {
+        "selector": ".data-checked\\:bg-primary:where([data-state=\"checked\"]), .data-checked\\:bg-primary:where([data-checked]:not([data-checked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "primary",
+      "varName": "--primary",
+      "anchor": {
+        "selector": ".data-checked\\:bg-primary:where([data-state=\"checked\"]), .data-checked\\:bg-primary:where([data-checked]:not([data-checked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "primary-foreground",
+      "varName": "--primary-foreground",
+      "anchor": {
+        "selector": ".data-checked\\:text-primary-foreground:where([data-state=\"checked\"]), .data-checked\\:text-primary-foreground:where([data-checked]:not([data-checked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "primary-foreground",
+      "varName": "--primary-foreground",
+      "anchor": {
+        "selector": ".data-checked\\:text-primary-foreground:where([data-state=\"checked\"]), .data-checked\\:text-primary-foreground:where([data-checked]:not([data-checked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-shadow"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-shadow"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-shadow"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-shadow"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-shadow"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-shadow"
+      }
+    }
+  ],
+  "skips": [
+    "icon.height: source declares `calc(var(--spacing) * 3.5)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "icon.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "icon.width: source declares `calc(var(--spacing) * 3.5)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "part-0.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "part-0-0-0.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.box-shadow: candidates --tw-inset-ring-shadow → \"tw-inset-ring-shadow\" = 0 0 #0000 (value differs); --tw-inset-shadow → \"tw-inset-shadow\" = 0 0 #0000 (value differs); --tw-ring-offset-shadow → \"tw-ring-offset-shadow\" = 0 0 #0000 (value differs); --tw-ring-shadow → \"tw-ring-shadow\" = 0 0 #0000 (value differs); --tw-shadow → \"tw-shadow\" = 0 1px 2px 0 rgb(0 0 0 / 0.05) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "root.height: source declares `calc(var(--spacing) * 4)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.transition-duration: candidate --default-transition-duration → \"default-transition-duration\" = 150ms names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.width: source declares `calc(var(--spacing) * 4)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 6,
+  "shorthandSkips": [
+    "icon.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "part-0-0-0.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "part-0.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-color: SHORTHAND carrying var(--border, --input) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-color: SHORTHAND carrying var(--border, --input, --primary) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-style: SHORTHAND carrying var(--tw-border-style) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 4,
+  "calcCeiling": 4,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

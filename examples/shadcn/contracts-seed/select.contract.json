@@ -1,0 +1,26 @@
+{
+  "id": "shadcn.select",
+  "name": "Select",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round \u2014 HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name \u2014 RECON \u00a73's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md \u00a72.2), mounted through the @shadcn-sandbox/ui barrel (RECON \u00a72.1). Composed ROOT mount, portalCapture + openDriver {open:true} (RECON H3). The size axis lives on the CHILD SelectTrigger \u2014 child-axis limitation (docs/21 \u00a77.3), pinned default, deferred by name. SelectTrigger as its own closed component is STOPPED: witnessed Radix context throw (RECON-round capture note). states:[] pinned \u2014 portal captures take no state planes.",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Select"
+    }
+  },
+  "states": []
+}

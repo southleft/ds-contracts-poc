@@ -1,0 +1,213 @@
+{
+  "library": "shadcn",
+  "rows": [
+    {
+      "name": "alert",
+      "measured": true,
+      "floorPct": 61.40350877192982,
+      "cellsCompared": 456,
+      "cellsEqual": 280,
+      "combos": 2,
+      "pixelPerfect": "0/8",
+      "sourceFacts": 11,
+      "namedRefusals": 3,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 3,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "avatar",
+      "measured": true,
+      "floorPct": 50,
+      "cellsCompared": 360,
+      "cellsEqual": 180,
+      "combos": 3,
+      "pixelPerfect": "12/12",
+      "sourceFacts": 9,
+      "namedRefusals": 0,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 0,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "badge",
+      "measured": true,
+      "floorPct": 82.34126984126983,
+      "cellsCompared": 1008,
+      "cellsEqual": 830,
+      "combos": 6,
+      "pixelPerfect": "0/24",
+      "sourceFacts": 25,
+      "namedRefusals": 5,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 1,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 4,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "button",
+      "measured": true,
+      "floorPct": 74.51550387596899,
+      "cellsCompared": 16512,
+      "cellsEqual": 12304,
+      "combos": 96,
+      "pixelPerfect": "0/384",
+      "sourceFacts": 400,
+      "namedRefusals": 11,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 5,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 6,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "card",
+      "measured": true,
+      "floorPct": 70.37037037037037,
+      "cellsCompared": 432,
+      "cellsEqual": 304,
+      "combos": 2,
+      "pixelPerfect": "0/8",
+      "sourceFacts": 16,
+      "namedRefusals": 8,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 8,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "checkbox",
+      "measured": true,
+      "floorPct": 67.54385964912281,
+      "cellsCompared": 912,
+      "cellsEqual": 616,
+      "combos": 6,
+      "pixelPerfect": "7/24",
+      "sourceFacts": 10,
+      "namedRefusals": 7,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 5,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 2,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "input",
+      "measured": true,
+      "floorPct": 93.10344827586206,
+      "cellsCompared": 232,
+      "cellsEqual": 216,
+      "combos": 2,
+      "pixelPerfect": "0/8",
+      "sourceFacts": 4,
+      "namedRefusals": 4,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 2,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 2,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "select",
+      "measured": true,
+      "floorPct": 73.88392857142857,
+      "cellsCompared": 448,
+      "cellsEqual": 331,
+      "combos": 2,
+      "pixelPerfect": "0/8",
+      "sourceFacts": 8,
+      "namedRefusals": 9,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 8,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 1,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "switch",
+      "measured": true,
+      "floorPct": 65.55555555555556,
+      "cellsCompared": 1440,
+      "cellsEqual": 944,
+      "combos": 8,
+      "pixelPerfect": "14/32",
+      "sourceFacts": 32,
+      "namedRefusals": 6,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 5,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 1,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "tabs",
+      "measured": true,
+      "floorPct": 82.12025316455696,
+      "cellsCompared": 632,
+      "cellsEqual": 519,
+      "combos": 1,
+      "pixelPerfect": "0/4",
+      "sourceFacts": 14,
+      "namedRefusals": 7,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 6,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 1,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "tooltip",
+      "measured": true,
+      "floorPct": 57.142857142857146,
+      "cellsCompared": 84,
+      "cellsEqual": 48,
+      "combos": 1,
+      "pixelPerfect": "0/1",
+      "sourceFacts": 0,
+      "namedRefusals": 11,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 11,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    }
+  ],
+  "unmeasured": [],
+  "quarantined": [],
+  "totals": {
+    "measured": 11,
+    "weightedFloorPct": 73.60099484810802,
+    "cellsCompared": 22516,
+    "namedRefusals": 71,
+    "openQueue": 0,
+    "quarantined": 0
+  }
+}

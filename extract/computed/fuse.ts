@@ -2004,6 +2004,30 @@ export function prepareMint(
   for (const d of [...stateDeltaChannels.values()].sort((x, y) => `${x.state}|${x.part}|${x.channel}`.localeCompare(`${y.state}|${y.part}|${y.channel}`))) {
     const foldedChannel = foldedSet.has(`${d.part}|${d.channel}`);
     if (foldedChannel) foldedStateSkips.push(`fold-carries-state-delta: [${d.state}] ${d.part}.${d.channel} rides its source fact`);
+    // SHADCN ROUND — the BASE plane's custom-property door, mirrored to the
+    // STATE plane. A CSS custom property is not a styled channel (the base
+    // fusion refuses it by name: it is the library's own token PLUMBING
+    // observed on the element, not a rendered fact — the rendered fact rides
+    // the consuming channel). The state-mint path lacked the same door, so
+    // shadcn Button's `active:translate-y-px` minted `--tw-translate-y` as a
+    // state token and the enriched contract failed generator validation
+    // (TOKEN_CHANNELS has, correctly, no entry for a custom property). The
+    // rendered motion itself is carried by the `translate` channel alongside.
+    // Corpus-neutral by measurement: no committed contract carries a
+    // custom-property channel anywhere (base door held everywhere else).
+    if (d.channel.startsWith('--')) {
+      if (!foldedChannel) {
+        stateCodeOnly.push({
+          state: d.state,
+          part: d.part,
+          channel: d.channel,
+          sample: [...d.samples][0],
+          reason:
+            'CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel',
+        });
+      }
+      continue;
+    }
     if (d.kinds.has('unmintable') || d.kinds.size !== 1) {
       if (!foldedChannel) {
         // v15 declared state facts: a registry channel whose delta is

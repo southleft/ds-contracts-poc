@@ -1,0 +1,182 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "badge",
+  "anchors": [
+    {
+      "leaf": "imported.badge.root.background-color-state-active.default",
+      "token": "primary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--primary",
+      "selector": ".bg-primary"
+    },
+    {
+      "leaf": "imported.badge.root.background-color-state-active.secondary",
+      "token": "secondary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--secondary",
+      "selector": ".bg-secondary"
+    },
+    {
+      "leaf": "imported.badge.root.background-color-state-hover.default",
+      "token": "primary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--primary",
+      "selector": ".bg-primary"
+    },
+    {
+      "leaf": "imported.badge.root.background-color-state-hover.secondary",
+      "token": "secondary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--secondary",
+      "selector": ".bg-secondary"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.default",
+      "token": "primary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--primary",
+      "selector": ".bg-primary"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.secondary",
+      "token": "secondary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--secondary",
+      "selector": ".bg-secondary"
+    },
+    {
+      "leaf": "imported.badge.root.color-state-active.default",
+      "token": "primary-foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--primary-foreground",
+      "selector": ".text-primary-foreground"
+    },
+    {
+      "leaf": "imported.badge.root.color-state-active.destructive",
+      "token": "destructive",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--destructive",
+      "selector": ".text-destructive"
+    },
+    {
+      "leaf": "imported.badge.root.color-state-active.link",
+      "token": "primary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--primary",
+      "selector": ".text-primary"
+    },
+    {
+      "leaf": "imported.badge.root.color-state-active.outline",
+      "token": "foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--foreground",
+      "selector": ".text-foreground"
+    },
+    {
+      "leaf": "imported.badge.root.color-state-active.secondary",
+      "token": "secondary-foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--secondary-foreground",
+      "selector": ".text-secondary-foreground"
+    },
+    {
+      "leaf": "imported.badge.root.color-state-hover.default",
+      "token": "primary-foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--primary-foreground",
+      "selector": ".text-primary-foreground"
+    },
+    {
+      "leaf": "imported.badge.root.color-state-hover.destructive",
+      "token": "destructive",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--destructive",
+      "selector": ".text-destructive"
+    },
+    {
+      "leaf": "imported.badge.root.color-state-hover.link",
+      "token": "primary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--primary",
+      "selector": ".text-primary"
+    },
+    {
+      "leaf": "imported.badge.root.color-state-hover.outline",
+      "token": "foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--foreground",
+      "selector": ".text-foreground"
+    },
+    {
+      "leaf": "imported.badge.root.color-state-hover.secondary",
+      "token": "secondary-foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--secondary-foreground",
+      "selector": ".text-secondary-foreground"
+    },
+    {
+      "leaf": "imported.badge.root.color.default",
+      "token": "primary-foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--primary-foreground",
+      "selector": ".text-primary-foreground"
+    },
+    {
+      "leaf": "imported.badge.root.color.destructive",
+      "token": "destructive",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--destructive",
+      "selector": ".text-destructive"
+    },
+    {
+      "leaf": "imported.badge.root.color.link",
+      "token": "primary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--primary",
+      "selector": ".text-primary"
+    },
+    {
+      "leaf": "imported.badge.root.color.outline",
+      "token": "foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--foreground",
+      "selector": ".text-foreground"
+    },
+    {
+      "leaf": "imported.badge.root.color.secondary",
+      "token": "secondary-foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--secondary-foreground",
+      "selector": ".text-secondary-foreground"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight",
+      "token": "font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--font-weight-medium",
+      "selector": ".font-medium"
+    }
+  ]
+}

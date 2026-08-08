@@ -1,0 +1,140 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Avatar",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "default",
+      "axisValues": {
+        "size": "default"
+      },
+      "token": "muted",
+      "varName": "--muted",
+      "anchor": {
+        "selector": ".bg-muted"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "sm",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "muted",
+      "varName": "--muted",
+      "anchor": {
+        "selector": ".bg-muted"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "lg",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "muted",
+      "varName": "--muted",
+      "anchor": {
+        "selector": ".bg-muted"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "default",
+      "axisValues": {
+        "size": "default"
+      },
+      "token": "muted-foreground",
+      "varName": "--muted-foreground",
+      "anchor": {
+        "selector": ".text-muted-foreground"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "sm",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "muted-foreground",
+      "varName": "--muted-foreground",
+      "anchor": {
+        "selector": ".text-muted-foreground"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "lg",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "muted-foreground",
+      "varName": "--muted-foreground",
+      "anchor": {
+        "selector": ".text-muted-foreground"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "default",
+      "axisValues": {
+        "size": "default"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "sm",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".group-data-\\[size\\=sm\\]\\/avatar\\:text-xs:is(:where(.group\\/avatar)[data-size=\"sm\"] *)"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "lg",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    }
+  ],
+  "skips": [
+    "label.line-height: candidates --text-sm--line-height → \"text-sm--line-height\" = calc(1.25 / 0.875); --text-xs--line-height → \"text-xs--line-height\" = calc(1 / 0.75) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.height: source declares `calc(var(--spacing) * 10)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.width: source declares `calc(var(--spacing) * 10)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 2,
+  "shorthandSkips": [
+    "label.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 2,
+  "calcCeiling": 2,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

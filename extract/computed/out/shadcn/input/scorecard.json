@@ -1,0 +1,286 @@
+{
+  "component": "Input",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 2,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 232,
+    "cellsEqual": 216,
+    "pctEqual": 93.10344827586206,
+    "rowsFullyEqual": 0,
+    "rows": 8
+  },
+  "pixel": {
+    "pairs": 8,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 22.21842447916667,
+    "meanAA": 3.7182617187500004,
+    "maxAA": 7.981770833333333
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 17,
+    "mintedLeavesUnfolded": 15,
+    "baseBindings": 17,
+    "stateBindings": 13,
+    "codeOnlyChannels": 4,
+    "overflowBindings": 0,
+    "folds": 0
+  },
+  "worstRows": [
+    {
+      "key": "enabled__focus-visible",
+      "pctAA": 7.981770833333333,
+      "pctExact": 9.918619791666666,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "enabled__active",
+      "pctAA": 7.981770833333333,
+      "pctExact": 9.918619791666666,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "enabled__default",
+      "pctAA": 2.3274739583333335,
+      "pctExact": 9.593098958333334,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "enabled__hover",
+      "pctAA": 2.3274739583333335,
+      "pctExact": 9.593098958333334,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "disabled__default",
+      "pctAA": 2.2819010416666665,
+      "pctExact": 34.680989583333336,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "disabled__hover",
+      "pctAA": 2.2819010416666665,
+      "pctExact": 34.680989583333336,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "disabled__focus-visible",
+      "pctAA": 2.2819010416666665,
+      "pctExact": 34.680989583333336,
+      "channelsMismatched": 2
+    },
+    {
+      "key": "disabled__active",
+      "pctAA": 2.2819010416666665,
+      "pctExact": 34.680989583333336,
+      "channelsMismatched": 2
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.--tw-outline-style",
+      8
+    ],
+    [
+      "root.--tw-shadow",
+      8
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.--tw-outline-style — CSS custom property, not a styled channel — `--tw-outline-style` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `none`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+    "code-only: root.--tw-shadow — CSS custom property, not a styled channel — `--tw-shadow` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `0 1px 2px 0 rgb(0 0 0 / 0.05)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+    "code-only[active]: root.--tw-ring-shadow — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
+    "code-only[focus-visible]: root.--tw-ring-shadow — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/shadcn/tokens/shadcn-minted.dtcg.json",
+    "leavesAdded": 348,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "enabled__default",
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 9.593098958333334,
+      "pctAA": 2.3274739583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-outline-style",
+          "ours": "",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        }
+      ]
+    },
+    {
+      "key": "enabled__hover",
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 9.593098958333334,
+      "pctAA": 2.3274739583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-outline-style",
+          "ours": "",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        }
+      ]
+    },
+    {
+      "key": "enabled__focus-visible",
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 9.918619791666666,
+      "pctAA": 7.981770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-outline-style",
+          "ours": "",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        }
+      ]
+    },
+    {
+      "key": "enabled__active",
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 9.918619791666666,
+      "pctAA": 7.981770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-outline-style",
+          "ours": "",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        }
+      ]
+    },
+    {
+      "key": "disabled__default",
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 34.680989583333336,
+      "pctAA": 2.2819010416666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-outline-style",
+          "ours": "",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        }
+      ]
+    },
+    {
+      "key": "disabled__hover",
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 34.680989583333336,
+      "pctAA": 2.2819010416666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-outline-style",
+          "ours": "",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        }
+      ]
+    },
+    {
+      "key": "disabled__focus-visible",
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 34.680989583333336,
+      "pctAA": 2.2819010416666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-outline-style",
+          "ours": "",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        }
+      ]
+    },
+    {
+      "key": "disabled__active",
+      "channelsCompared": 29,
+      "channelsEqual": 27,
+      "pctExact": 34.680989583333336,
+      "pctAA": 2.2819010416666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-outline-style",
+          "ours": "",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.checkbox",
+  "name": "Checkbox",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). TRI-STATE ON ONE AXIS (MUI/Carbon precedent): Radix accepts checked='indeterminate' directly, so the axis maps to plain values — keeps the lucide CheckIcon/MinusIcon svg-content promotion single-axis. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "part-0": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch"
+          },
+          "stylesWhen": [
+            {
+              "prop": "checked",
+              "equals": "unchecked",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "icon": {
+            "asset": "checkbox-part-0",
+            "size": 14
+          },
+          "declared": {
+            "cursor": "default",
+            "pointer-events": "none",
+            "text-align": "center",
+            "transition-property": "none"
+          },
+          "tokens": {
+            "grid-template-columns": "{imported.shared.size-14}",
+            "grid-template-rows": "{imported.shared.size-14}",
+            "height": "{imported.shared.size-14}",
+            "width": "{imported.shared.size-14}"
+          }
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "position": "relative",
+        "transition-duration": "0.15s",
+        "transition-property": "box-shadow",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed"
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-4}",
+        "border-bottom-right-radius": "{imported.shared.size-4}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-left-radius": "{imported.shared.size-4}",
+        "border-top-right-radius": "{imported.shared.size-4}",
+        "border-top-width": "{imported.shared.size-1}",
+        "bottom": "{imported.shared.size-0}",
+        "box-shadow": "{imported.checkbox.root.box-shadow}",
+        "flex-shrink": "{imported.checkbox.root.flex-shrink}",
+        "height": "{imported.checkbox.root.height}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.checkbox.root.width}"
+      },
+      "states": {
+        "disabled": {
+          "opacity": "{imported.checkbox.root.opacity-state-disabled}"
+        },
+        "focus-visible": {
+          "border-bottom-color": "{imported.shared.color-a1a1a1}",
+          "border-left-color": "{imported.shared.color-a1a1a1}",
+          "border-right-color": "{imported.shared.color-a1a1a1}",
+          "border-top-color": "{imported.shared.color-a1a1a1}",
+          "box-shadow": "{imported.checkbox.root.box-shadow-state-focus-visible}",
+          "outline-width": "{imported.checkbox.root.outline-width-state-focus-visible}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "checked",
+          "map": {
+            "checked": {
+              "background-color": "{imported.checkbox.root.background-color.checked}",
+              "border-bottom-color": "{imported.checkbox.root.border-bottom-color.checked}",
+              "border-left-color": "{imported.checkbox.root.border-left-color.checked}",
+              "border-right-color": "{imported.checkbox.root.border-right-color.checked}",
+              "border-top-color": "{imported.checkbox.root.border-top-color.checked}",
+              "color": "{imported.checkbox.root.color.checked}"
+            },
+            "indeterminate": {
+              "background-color": "{imported.checkbox.root.background-color.indeterminate}",
+              "border-bottom-color": "{imported.checkbox.root.border-bottom-color.indeterminate}",
+              "border-left-color": "{imported.checkbox.root.border-left-color.indeterminate}",
+              "border-right-color": "{imported.checkbox.root.border-right-color.indeterminate}",
+              "border-top-color": "{imported.checkbox.root.border-top-color.indeterminate}",
+              "color": "{imported.checkbox.root.color.indeterminate}"
+            },
+            "unchecked": {
+              "background-color": "{imported.checkbox.root.background-color.unchecked}",
+              "border-bottom-color": "{imported.checkbox.root.border-bottom-color.unchecked}",
+              "border-left-color": "{imported.checkbox.root.border-left-color.unchecked}",
+              "border-right-color": "{imported.checkbox.root.border-right-color.unchecked}",
+              "border-top-color": "{imported.checkbox.root.border-top-color.unchecked}",
+              "color": "{imported.checkbox.root.color.unchecked}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Checkbox"
+    }
+  },
+  "figmaStatePreviews": true
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.badge",
+  "name": "Badge",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md \u00a72.2), mounted through the @shadcn-sandbox/ui barrel (RECON \u00a72.1). ",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "default",
+          "secondary",
+          "destructive",
+          "outline",
+          "ghost",
+          "link"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "secondary": "Secondary",
+            "destructive": "Destructive",
+            "outline": "Outline",
+            "ghost": "Ghost",
+            "link": "Link"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "asChild",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "As Child"
+        },
+        "code": {
+          "prop": "asChild"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Badge"
+    }
+  }
+}

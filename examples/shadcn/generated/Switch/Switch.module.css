@@ -1,0 +1,134 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/switch.contract.json (shadcn.switch v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  align-items: center;
+  border: 0;
+  border-bottom-color: var(--imported-shared-color-00000000);
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-color: var(--imported-shared-color-00000000);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-color: var(--imported-shared-color-00000000);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-color: var(--imported-shared-color-00000000);
+  border-top-left-radius: var(--imported-shared-size-9999);
+  border-top-right-radius: var(--imported-shared-size-9999);
+  border-top-width: var(--imported-shared-size-1);
+  bottom: var(--imported-shared-size-0);
+  box-shadow: var(--imported-switch-root-box-shadow);
+  flex-shrink: var(--imported-switch-root-flex-shrink);
+  left: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  position: relative;
+  transition-duration: 0.15s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.checked-checked {
+  background-color: var(--imported-switch-root-background-color-checked);
+}
+
+.checked-unchecked {
+  background-color: var(--imported-switch-root-background-color-unchecked);
+}
+
+.size-default {
+  height: var(--imported-switch-root-height-default);
+  width: var(--imported-switch-root-width-default);
+}
+
+.size-sm {
+  height: var(--imported-switch-root-height-sm);
+  width: var(--imported-switch-root-width-sm);
+}
+
+.root:disabled {
+  opacity: var(--imported-switch-root-opacity-state-disabled);
+}
+
+.root:focus-visible {
+  border-bottom-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  border-left-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  border-right-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  border-top-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  box-shadow: var(--imported-switch-root-box-shadow-state-focus-visible);
+}
+
+.root:focus-visible {
+  outline-width: var(--imported-switch-root-outline-width-state-focus-visible);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+}
+
+.part-0 {
+  background-color: var(--imported-switch-part-0-background-color);
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-top-left-radius: var(--imported-shared-size-9999);
+  border-top-right-radius: var(--imported-shared-size-9999);
+  box-shadow: var(--imported-switch-part-0-box-shadow);
+  display: block;
+  aspect-ratio: 1 / 1;
+  cursor: default;
+  pointer-events: none;
+  text-align: center;
+  transition-duration: 0.15s;
+  transition-property: transform, translate, scale, rotate;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.size-default .part-0 {
+  height: var(--imported-switch-part-0-height-default);
+}
+
+.size-default .part-0 {
+  width: var(--imported-switch-part-0-width-default);
+}
+
+.size-sm .part-0 {
+  height: var(--imported-switch-part-0-height-sm);
+}
+
+.size-sm .part-0 {
+  width: var(--imported-switch-part-0-width-sm);
+}
+
+.root:disabled .part-0 {
+  cursor: not-allowed;
+}

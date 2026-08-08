@@ -1,0 +1,22 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "checkbox",
+  "anchors": [
+    {
+      "leaf": "imported.checkbox.root.background-color.checked",
+      "token": "primary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--primary",
+      "selector": ".data-checked\\:bg-primary:where([data-state=\"checked\"]), .data-checked\\:bg-primary:where([data-checked]:not([data-checked=\"false\"]))"
+    },
+    {
+      "leaf": "imported.checkbox.root.color.checked",
+      "token": "primary-foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--primary-foreground",
+      "selector": ".data-checked\\:text-primary-foreground:where([data-state=\"checked\"]), .data-checked\\:text-primary-foreground:where([data-checked]:not([data-checked=\"false\"]))"
+    }
+  ]
+}

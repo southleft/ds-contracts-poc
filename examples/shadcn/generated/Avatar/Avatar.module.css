@@ -1,0 +1,83 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/avatar.contract.json (shadcn.avatar v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  border: 0;
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-top-left-radius: var(--imported-shared-size-9999);
+  border-top-right-radius: var(--imported-shared-size-9999);
+  bottom: var(--imported-shared-size-0);
+  flex-shrink: var(--imported-avatar-root-flex-shrink);
+  left: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  position: relative;
+  user-select: none;
+}
+
+.size-default {
+  height: var(--imported-avatar-root-height-default);
+  width: var(--imported-avatar-root-width-default);
+}
+
+.size-lg {
+  height: var(--imported-avatar-root-height-lg);
+  width: var(--imported-avatar-root-width-lg);
+}
+
+.size-sm {
+  height: var(--imported-avatar-root-height-sm);
+  width: var(--imported-avatar-root-width-sm);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  background-color: var(--imported-avatar-label-background-color);
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-top-left-radius: var(--imported-shared-size-9999);
+  border-top-right-radius: var(--imported-shared-size-9999);
+  color: var(--imported-avatar-label-color);
+  font-weight: var(--imported-avatar-label-font-weight);
+  aspect-ratio: 1 / 1;
+  user-select: none;
+}
+
+.size-default .label {
+  font-size: var(--imported-avatar-label-font-size-default);
+}
+
+.size-default .label {
+  line-height: var(--imported-avatar-label-line-height-default);
+}
+
+.size-lg .label {
+  font-size: var(--imported-avatar-label-font-size-lg);
+}
+
+.size-lg .label {
+  line-height: var(--imported-avatar-label-line-height-lg);
+}
+
+.size-sm .label {
+  font-size: var(--imported-avatar-label-font-size-sm);
+}
+
+.size-sm .label {
+  line-height: var(--imported-avatar-label-line-height-sm);
+}

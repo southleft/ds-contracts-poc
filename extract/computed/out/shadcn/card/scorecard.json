@@ -1,0 +1,1033 @@
+{
+  "component": "Card",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 2,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 432,
+    "cellsEqual": 304,
+    "pctEqual": 70.37037037037037,
+    "rowsFullyEqual": 0,
+    "rows": 8
+  },
+  "pixel": {
+    "pairs": 8,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 5.832519531250001,
+    "meanAA": 2.2615559895833335,
+    "maxAA": 2.646484375
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 32,
+    "mintedLeavesUnfolded": 34,
+    "baseBindings": 34,
+    "stateBindings": 0,
+    "codeOnlyChannels": 8,
+    "overflowBindings": 0,
+    "folds": 6
+  },
+  "worstRows": [
+    {
+      "key": "sm__hover",
+      "pctAA": 2.646484375,
+      "pctExact": 7.591145833333333,
+      "channelsMismatched": 16
+    },
+    {
+      "key": "sm__focus-visible",
+      "pctAA": 2.646484375,
+      "pctExact": 7.591145833333333,
+      "channelsMismatched": 16
+    },
+    {
+      "key": "sm__active",
+      "pctAA": 2.646484375,
+      "pctExact": 7.591145833333333,
+      "channelsMismatched": 16
+    },
+    {
+      "key": "default__default",
+      "pctAA": 2.2493489583333335,
+      "pctExact": 5.110677083333333,
+      "channelsMismatched": 16
+    },
+    {
+      "key": "default__hover",
+      "pctAA": 2.2493489583333335,
+      "pctExact": 5.104166666666667,
+      "channelsMismatched": 16
+    },
+    {
+      "key": "default__focus-visible",
+      "pctAA": 2.2493489583333335,
+      "pctExact": 5.104166666666667,
+      "channelsMismatched": 16
+    },
+    {
+      "key": "default__active",
+      "pctAA": 2.2493489583333335,
+      "pctExact": 5.104166666666667,
+      "channelsMismatched": 16
+    },
+    {
+      "key": "sm__default",
+      "pctAA": 1.1555989583333333,
+      "pctExact": 3.4635416666666665,
+      "channelsMismatched": 16
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.--tw-ring-shadow",
+      8
+    ],
+    [
+      "root.--tw-shadow",
+      8
+    ],
+    [
+      "root.background-color",
+      8
+    ],
+    [
+      "part-0.align-items",
+      8
+    ],
+    [
+      "part-0.container-name",
+      8
+    ],
+    [
+      "part-0.container-type",
+      8
+    ],
+    [
+      "part-0.display",
+      8
+    ],
+    [
+      "part-0.grid-auto-rows",
+      8
+    ],
+    [
+      "part-0.grid-template-rows",
+      8
+    ],
+    [
+      "label.line-height",
+      8
+    ],
+    [
+      "label-2.caret-color",
+      8
+    ],
+    [
+      "label-2.color",
+      8
+    ],
+    [
+      "label-2.column-rule-color",
+      8
+    ],
+    [
+      "label-2.row-rule-color",
+      8
+    ],
+    [
+      "label-2.text-decoration-color",
+      8
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.--tw-ring-shadow — CSS custom property, not a styled channel — `--tw-ring-shadow` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+    "code-only: root.--tw-shadow — CSS custom property, not a styled channel — `--tw-shadow` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `0 1px 2px 0 rgb(0 0 0 / 0.05)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+    "code-only: part-0.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.container-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.container-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.display — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: part-0.grid-auto-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/shadcn/tokens/shadcn-minted.dtcg.json",
+    "leavesAdded": 333,
+    "divergent": [
+      {
+        "token": "imported.card.label-2.color",
+        "fresh": "#737373",
+        "shipped": "{muted-foreground}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.card.label.font-weight",
+        "fresh": "500",
+        "shipped": "{font-weight-medium}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.card.root.background-color",
+        "fresh": "#ffffff",
+        "shipped": "{card}",
+        "resolvedEqual": true
+      }
+    ]
+  },
+  "rows": [
+    {
+      "key": "default__default",
+      "channelsCompared": 54,
+      "channelsEqual": 38,
+      "pctExact": 5.110677083333333,
+      "pctAA": 2.2493489583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-ring-shadow",
+          "ours": "",
+          "theirs": "0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "oklch(1 0 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "align-items",
+          "ours": "stretch",
+          "theirs": "flex-start"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-name",
+          "ours": "none",
+          "theirs": "card-header"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        },
+        {
+          "part": "part-0",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-auto-rows",
+          "ours": "auto",
+          "theirs": "min-content"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "24px 20px"
+        },
+        {
+          "part": "label",
+          "channel": "line-height",
+          "ours": "20px",
+          "theirs": "24px"
+        },
+        {
+          "part": "label-2",
+          "channel": "caret-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "column-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "row-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-decoration-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        }
+      ]
+    },
+    {
+      "key": "default__hover",
+      "channelsCompared": 54,
+      "channelsEqual": 38,
+      "pctExact": 5.104166666666667,
+      "pctAA": 2.2493489583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-ring-shadow",
+          "ours": "",
+          "theirs": "0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "oklch(1 0 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "align-items",
+          "ours": "stretch",
+          "theirs": "flex-start"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-name",
+          "ours": "none",
+          "theirs": "card-header"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        },
+        {
+          "part": "part-0",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-auto-rows",
+          "ours": "auto",
+          "theirs": "min-content"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "24px 20px"
+        },
+        {
+          "part": "label",
+          "channel": "line-height",
+          "ours": "20px",
+          "theirs": "24px"
+        },
+        {
+          "part": "label-2",
+          "channel": "caret-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "column-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "row-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-decoration-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        }
+      ]
+    },
+    {
+      "key": "default__focus-visible",
+      "channelsCompared": 54,
+      "channelsEqual": 38,
+      "pctExact": 5.104166666666667,
+      "pctAA": 2.2493489583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-ring-shadow",
+          "ours": "",
+          "theirs": "0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "oklch(1 0 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "align-items",
+          "ours": "stretch",
+          "theirs": "flex-start"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-name",
+          "ours": "none",
+          "theirs": "card-header"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        },
+        {
+          "part": "part-0",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-auto-rows",
+          "ours": "auto",
+          "theirs": "min-content"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "24px 20px"
+        },
+        {
+          "part": "label",
+          "channel": "line-height",
+          "ours": "20px",
+          "theirs": "24px"
+        },
+        {
+          "part": "label-2",
+          "channel": "caret-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "column-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "row-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-decoration-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        }
+      ]
+    },
+    {
+      "key": "default__active",
+      "channelsCompared": 54,
+      "channelsEqual": 38,
+      "pctExact": 5.104166666666667,
+      "pctAA": 2.2493489583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-ring-shadow",
+          "ours": "",
+          "theirs": "0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "oklch(1 0 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "align-items",
+          "ours": "stretch",
+          "theirs": "flex-start"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-name",
+          "ours": "none",
+          "theirs": "card-header"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        },
+        {
+          "part": "part-0",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-auto-rows",
+          "ours": "auto",
+          "theirs": "min-content"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "24px 20px"
+        },
+        {
+          "part": "label",
+          "channel": "line-height",
+          "ours": "20px",
+          "theirs": "24px"
+        },
+        {
+          "part": "label-2",
+          "channel": "caret-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "column-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "row-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-decoration-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        }
+      ]
+    },
+    {
+      "key": "sm__default",
+      "channelsCompared": 54,
+      "channelsEqual": 38,
+      "pctExact": 3.4635416666666665,
+      "pctAA": 1.1555989583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-ring-shadow",
+          "ours": "",
+          "theirs": "0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "oklch(1 0 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "align-items",
+          "ours": "stretch",
+          "theirs": "flex-start"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-name",
+          "ours": "none",
+          "theirs": "card-header"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        },
+        {
+          "part": "part-0",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-auto-rows",
+          "ours": "auto",
+          "theirs": "min-content"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "21px 20px"
+        },
+        {
+          "part": "label",
+          "channel": "line-height",
+          "ours": "20px",
+          "theirs": "21px"
+        },
+        {
+          "part": "label-2",
+          "channel": "caret-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "column-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "row-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-decoration-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        }
+      ]
+    },
+    {
+      "key": "sm__hover",
+      "channelsCompared": 54,
+      "channelsEqual": 38,
+      "pctExact": 7.591145833333333,
+      "pctAA": 2.646484375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-ring-shadow",
+          "ours": "",
+          "theirs": "0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "oklch(1 0 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "align-items",
+          "ours": "stretch",
+          "theirs": "flex-start"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-name",
+          "ours": "none",
+          "theirs": "card-header"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        },
+        {
+          "part": "part-0",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-auto-rows",
+          "ours": "auto",
+          "theirs": "min-content"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "21px 20px"
+        },
+        {
+          "part": "label",
+          "channel": "line-height",
+          "ours": "20px",
+          "theirs": "21px"
+        },
+        {
+          "part": "label-2",
+          "channel": "caret-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "column-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "row-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-decoration-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        }
+      ]
+    },
+    {
+      "key": "sm__focus-visible",
+      "channelsCompared": 54,
+      "channelsEqual": 38,
+      "pctExact": 7.591145833333333,
+      "pctAA": 2.646484375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-ring-shadow",
+          "ours": "",
+          "theirs": "0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "oklch(1 0 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "align-items",
+          "ours": "stretch",
+          "theirs": "flex-start"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-name",
+          "ours": "none",
+          "theirs": "card-header"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        },
+        {
+          "part": "part-0",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-auto-rows",
+          "ours": "auto",
+          "theirs": "min-content"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "21px 20px"
+        },
+        {
+          "part": "label",
+          "channel": "line-height",
+          "ours": "20px",
+          "theirs": "21px"
+        },
+        {
+          "part": "label-2",
+          "channel": "caret-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "column-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "row-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-decoration-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        }
+      ]
+    },
+    {
+      "key": "sm__active",
+      "channelsCompared": 54,
+      "channelsEqual": 38,
+      "pctExact": 7.591145833333333,
+      "pctAA": 2.646484375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--tw-ring-shadow",
+          "ours": "",
+          "theirs": "0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)"
+        },
+        {
+          "part": "root",
+          "channel": "--tw-shadow",
+          "ours": "",
+          "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+        },
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "oklch(1 0 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "align-items",
+          "ours": "stretch",
+          "theirs": "flex-start"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-name",
+          "ours": "none",
+          "theirs": "card-header"
+        },
+        {
+          "part": "part-0",
+          "channel": "container-type",
+          "ours": "normal",
+          "theirs": "inline-size"
+        },
+        {
+          "part": "part-0",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "grid"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-auto-rows",
+          "ours": "auto",
+          "theirs": "min-content"
+        },
+        {
+          "part": "part-0",
+          "channel": "grid-template-rows",
+          "ours": "none",
+          "theirs": "21px 20px"
+        },
+        {
+          "part": "label",
+          "channel": "line-height",
+          "ours": "20px",
+          "theirs": "21px"
+        },
+        {
+          "part": "label-2",
+          "channel": "caret-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "column-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "row-rule-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-decoration-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(115, 115, 115, 1)",
+          "theirs": "oklch(0.556 0 0)"
+        }
+      ]
+    }
+  ]
+}

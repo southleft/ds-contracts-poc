@@ -1,0 +1,107 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.button",
+  "name": "Button",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md \u00a72.2), mounted through the @shadcn-sandbox/ui barrel (RECON \u00a72.1). ",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "default",
+          "outline",
+          "secondary",
+          "ghost",
+          "destructive",
+          "link"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "outline": "Outline",
+            "secondary": "Secondary",
+            "ghost": "Ghost",
+            "destructive": "Destructive",
+            "link": "Link"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "default",
+          "xs",
+          "sm",
+          "lg",
+          "icon",
+          "icon-xs",
+          "icon-sm",
+          "icon-lg"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "default": "Default",
+            "xs": "Xs",
+            "sm": "Sm",
+            "lg": "Lg",
+            "icon": "Icon",
+            "icon-xs": "Icon Xs",
+            "icon-sm": "Icon Sm",
+            "icon-lg": "Icon Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "asChild",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "As Child"
+        },
+        "code": {
+          "prop": "asChild"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Button"
+    }
+  }
+}

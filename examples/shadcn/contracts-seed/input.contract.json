@@ -1,0 +1,26 @@
+{
+  "id": "shadcn.input",
+  "name": "Input",
+  "semantics": {
+    "element": "input"
+  },
+  "props": [],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round \u2014 HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name \u2014 RECON \u00a73's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md \u00a72.2), mounted through the @shadcn-sandbox/ui barrel (RECON \u00a72.1). v1: default text input; `type` deferred by name (attribute pass-through, not an enum prop in source \u2014 RECON \u00a74.2).",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Input"
+    }
+  },
+  "states": []
+}

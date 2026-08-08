@@ -30,7 +30,7 @@ one of 36,287 facts classified as matched, diverged, lost or invented rather tha
 Exact structured projection is separately evidenced: **0 verified exact, 15 legacy unverified, 0 refused**.
 The whole thing is pinned by 204 executable claim gates and a 266-file byte-identical
 generation manifest. **What that does not say:** those 82 components are
-8.7% of the six libraries they came from, and they were picked because they were the tractable ones.
+8.7% of the 7 libraries they came from, and they were picked because they were the tractable ones.
 
 ---
 
@@ -52,7 +52,7 @@ averages.
 | Flowbite / Tailwind (`flowbite-react@0.12.17`) | 5 | 5 | 46 | **10.9%** | `docs/22-generality.md` §8.3 |
 | **total** | **90** | **82** | **943** | **8.7%** |  |
 
-**Read every percentage on this page as "on the easy 8.7%."** The 82 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the six libraries they are 82 of 943 components (8.7%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
+**Read every percentage on this page as "on the easy 8.7%."** The 82 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 7 libraries they are 82 of 943 components (8.7%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **This table's coverage column is stricter than the one in docs/22 and docs/23, on purpose.**
 Those two print 90/943 = **9.5%** — *contracts committed* over library size.
@@ -73,7 +73,7 @@ this repo's own extractor could see, helpers included. The true denominators
 are smaller and the true percentages a little higher. The order of magnitude
 is the finding.
 
-Beyond the six foreign libraries, the corpus also holds contracts that are **not** captured from a third party and are not counted above:
+Beyond the 7 foreign libraries, the corpus also holds contracts that are **not** captured from a third party and are not counted above:
 
 | corpus | contracts | what it is | source |
 |---|---|---|---|
@@ -101,9 +101,9 @@ pipeline never opened still counts against it.
 | Polaris | 12 | **89.4** | 91.5 | 7/12 | 11/12 | 200,405 | 90.5 | `extract/computed/out/<comp>/scorecard.json` |
 | shadcn/ui | 11 | **70.7** | 70.4 | 1/11 | 3/11 | 22,516 | 73.6 | `extract/computed/out/shadcn/<comp>/scorecard.json` |
 | Flowbite / Tailwind | 5 | **86.8** | 88.9 | 2/5 | 4/5 | 10,428 | 94.2 | `extract/computed/out/tailwind/<comp>/scorecard.json` |
-| **all six** | **82** | **87.1** | 89.7 | **41/82** | **65/82** | **432,724** | **87.7** |  |
+| **all libraries** | **82** | **87.1** | 89.7 | **41/82** | **65/82** | **432,724** | **87.7** |  |
 
-**Read every percentage on this page as "on the easy 8.7%."** The 82 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the six libraries they are 82 of 943 components (8.7%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
+**Read every percentage on this page as "on the easy 8.7%."** The 82 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 7 libraries they are 82 of 943 components (8.7%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **Two means, both printed, because they answer different questions.** The
 unweighted mean (87.1%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
@@ -203,8 +203,8 @@ No component is omitted. The worst row in the corpus is at the top.
 
 ### 3.2 The frontier fixture — held out of every average above
 
-`extract/computed/out/conformance/` holds **50** more scorecards with a mean of
-**96.1%** over 2,500 cells. They are **excluded from §3 entirely** and
+`extract/computed/out/conformance/` holds **77** more scorecards with a mean of
+**93.1%** over 5,388 cells. They are **excluded from §3 entirely** and
 must never be folded into a library mean: they are *synthetic single-construct
 cases* built by this repo to probe one CSS or DOM feature each, not components
 from anyone's design system. Including them would raise the headline number by
@@ -215,7 +215,7 @@ no scorecard escaped classification.
 
 | fixture | cases | mean %equal | counted in §3? | source |
 |---|---|---|---|---|
-| synthetic CSS/DOM constructs | 50 | 96.1 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
+| synthetic CSS/DOM constructs | 77 | 93.1 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
 | real third-party components | 82 | 87.1 | yes | `extract/computed/out/**/scorecard.json` |
 
 ---
@@ -282,8 +282,8 @@ asserted in prose.
 | pin | value | what it forbids | source |
 |---|---|---|---|
 | generated source, byte-identical | 266 files hashed | a contract change altering generated code without review | `evals/golden.json` |
-| capture double-sweep identity | 132/132 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
-| browser captures behind the corpus | 7,373 | a floor quoted from a sample smaller than it claims | same files, `captures` |
+| capture double-sweep identity | 159/159 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
+| browser captures behind the corpus | 7,481 | a floor quoted from a sample smaller than it claims | same files, `captures` |
 | executable claims | 204 gates | a documented behaviour with no test | `evals/results.json` |
 | dropped-fact receipt count | 100 pinned exactly | honesty being switched off unnoticed — see §6 | `extract/figma/dagger-census.json` |
 | doc numbers vs the repo | gated | a doc quoting a number the repo no longer produces | `scripts/docs-numbers-check.mjs` |
@@ -348,7 +348,7 @@ filter that decides carriage scores 100% on a channel it never opened.
 | manifest | cases | breakdown | source |
 |---|---|---|---|
 | canvas constructs | 91 | CARRIED 72 · LEDGERED 11 · REFUSED 8 | `extract/figma/conformance/MANIFEST.json` |
-| CSS / DOM frontier | 53 | CARRIED 22 · UNSUPPORTED 18 · REFUSED 11 · LOWERED 2 | `conformance/MANIFEST.json` |
+| CSS / DOM frontier | 82 | CARRIED 42 · REFUSED 18 · UNSUPPORTED 18 · LOWERED 4 | `conformance/MANIFEST.json` |
 
 Of the 91 canvas constructs, **91** are `green`.
 A construct that is neither carried nor named-refused is a hard failure of that
@@ -460,7 +460,7 @@ earlier for a different purpose.
 | components with a computed scorecard = components pinned by the drift instrument | 82 — `extract/computed/out/**/scorecard.json` | 82 — `docs/22-generality.md §8.3, "pinned" total` | ✔ |
 | contracts committed under `examples/<lib>/contracts` = the coverage table's committed column | 90 — `examples/*/contracts/*.contract.json` | 90 — `docs/22-generality.md §8.3, "contracts committed" total` | ✔ |
 | the eval suite has as many result rows as it claims | 204 — `evals/results.json → results.length` | 204 — `same file → total` | ✔ |
-| every capture run carries the two-sweep determinism receipt | 132 — `extract/computed/out/**/numbers.json` | 132 — `count of numbers.json files` | ✔ |
+| every capture run carries the two-sweep determinism receipt | 159 — `extract/computed/out/**/numbers.json` | 159 — `count of numbers.json files` | ✔ |
 | every scorecard falls in a known corpus | 0 — `extract/computed/out/**/scorecard.json` | 0 — `the library registry in this script` | ✔ |
 | every round-trip execution reached the fact diff | 15 — `extract/figma/roundtrip-uui/report.json → totals.roundTripClosed` | 15 — `same file → totals.components` | ✔ |
 | Altitude — contracts on disk = the coverage table's committed column | 8 — `examples/altitude/contracts/*.contract.json` | 8 — `docs/22-generality.md §8.3` | ✔ |
@@ -497,13 +497,13 @@ npm run capability:fresh
 
 | artifact | sha256 (12) | bytes | what it supplied |
 |---|---|---|---|
-| `conformance/MANIFEST.json` | `3e64ae446553` | 35,201 | CSS/DOM frontier vocabulary |
-| `docs/22-generality.md` | `81849fd036e9` | 70,366 | coverage denominators (docs/22 §8.3 table) |
+| `conformance/MANIFEST.json` | `eaf9825595e2` | 74,651 | CSS/DOM frontier vocabulary |
+| `docs/22-generality.md` | `35b1dd55e6e3` | 70,449 | coverage denominators (docs/22 §8.3 table) |
 | `evals/golden.json` | `dc0193129c40` | 29,319 | generated-source golden manifest |
 | `evals/results.json` | `17bda33949d6` | 21,855 | executable claim suite |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `f164c7ffcf48` | 843,519 | capture counts + determinism receipts — 132 files |
-| `extract/computed/out/**/scorecard.json` | `76e6fecff704` | 10,792,992 | computed-equality per component — 132 files |
+| `extract/computed/out/**/numbers.json` | `8cb10cc5e558` | 911,558 | capture counts + determinism receipts — 159 files |
+| `extract/computed/out/**/scorecard.json` | `39b01ddddfe0` | 10,963,567 | computed-equality per component — 159 files |
 | `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `80258165cbaa` | 2,949 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |

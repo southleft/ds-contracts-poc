@@ -1,0 +1,195 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.badge",
+  "name": "Badge",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1).  COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "default",
+          "secondary",
+          "destructive",
+          "outline",
+          "ghost",
+          "link"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "secondary": "Secondary",
+            "destructive": "Destructive",
+            "outline": "Outline",
+            "ghost": "Ghost",
+            "link": "Link"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "asChild",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "As Child"
+        },
+        "code": {
+          "prop": "asChild"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Badge",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "content": {
+        "prop": "children"
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "text-wrap-mode": "nowrap",
+        "transition-duration": "0.15s",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-26}",
+        "border-bottom-right-radius": "{imported.shared.size-26}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-left-radius": "{imported.shared.size-26}",
+        "border-top-right-radius": "{imported.shared.size-26}",
+        "border-top-width": "{imported.shared.size-1}",
+        "column-gap": "{imported.badge.root.column-gap}",
+        "flex-shrink": "{imported.badge.root.flex-shrink}",
+        "font-size": "{imported.badge.root.font-size}",
+        "font-weight": "{imported.badge.root.font-weight}",
+        "line-height": "{imported.badge.root.line-height}",
+        "padding-bottom": "{imported.badge.root.padding-bottom}",
+        "padding-left": "{imported.badge.root.padding-left}",
+        "padding-right": "{imported.badge.root.padding-right}",
+        "padding-top": "{imported.badge.root.padding-top}",
+        "row-gap": "{imported.badge.root.row-gap}"
+      },
+      "states": {
+        "active": {
+          "background-color": "{imported.badge.root.background-color-state-active.{variant}}",
+          "color": "{imported.badge.root.color-state-active.{variant}}"
+        },
+        "hover": {
+          "background-color": "{imported.badge.root.background-color-state-hover.{variant}}",
+          "color": "{imported.badge.root.color-state-hover.{variant}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "default": {
+              "background-color": "{imported.badge.root.background-color.default}",
+              "border-bottom-color": "{imported.badge.root.border-bottom-color.default}",
+              "border-left-color": "{imported.badge.root.border-left-color.default}",
+              "border-right-color": "{imported.badge.root.border-right-color.default}",
+              "border-top-color": "{imported.badge.root.border-top-color.default}",
+              "color": "{imported.badge.root.color.default}"
+            },
+            "destructive": {
+              "background-color": "{imported.badge.root.background-color.destructive}",
+              "border-bottom-color": "{imported.badge.root.border-bottom-color.destructive}",
+              "border-left-color": "{imported.badge.root.border-left-color.destructive}",
+              "border-right-color": "{imported.badge.root.border-right-color.destructive}",
+              "border-top-color": "{imported.badge.root.border-top-color.destructive}",
+              "color": "{imported.badge.root.color.destructive}"
+            },
+            "ghost": {
+              "background-color": "{imported.badge.root.background-color.ghost}",
+              "border-bottom-color": "{imported.badge.root.border-bottom-color.ghost}",
+              "border-left-color": "{imported.badge.root.border-left-color.ghost}",
+              "border-right-color": "{imported.badge.root.border-right-color.ghost}",
+              "border-top-color": "{imported.badge.root.border-top-color.ghost}",
+              "color": "{imported.badge.root.color.ghost}"
+            },
+            "link": {
+              "background-color": "{imported.badge.root.background-color.link}",
+              "border-bottom-color": "{imported.badge.root.border-bottom-color.link}",
+              "border-left-color": "{imported.badge.root.border-left-color.link}",
+              "border-right-color": "{imported.badge.root.border-right-color.link}",
+              "border-top-color": "{imported.badge.root.border-top-color.link}",
+              "color": "{imported.badge.root.color.link}"
+            },
+            "outline": {
+              "background-color": "{imported.badge.root.background-color.outline}",
+              "border-bottom-color": "{imported.badge.root.border-bottom-color.outline}",
+              "border-left-color": "{imported.badge.root.border-left-color.outline}",
+              "border-right-color": "{imported.badge.root.border-right-color.outline}",
+              "border-top-color": "{imported.badge.root.border-top-color.outline}",
+              "color": "{imported.badge.root.color.outline}"
+            },
+            "secondary": {
+              "background-color": "{imported.badge.root.background-color.secondary}",
+              "border-bottom-color": "{imported.badge.root.border-bottom-color.secondary}",
+              "border-left-color": "{imported.badge.root.border-left-color.secondary}",
+              "border-right-color": "{imported.badge.root.border-right-color.secondary}",
+              "border-top-color": "{imported.badge.root.border-top-color.secondary}",
+              "color": "{imported.badge.root.color.secondary}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Badge"
+    }
+  }
+}

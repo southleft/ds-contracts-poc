@@ -1,0 +1,199 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.switch",
+  "name": "Switch",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). checked is a VARIANT AXIS (prop-selected Radix data-state rendering — RECON H4); the real-DOM thumb's translate question is H6. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "sm",
+          "default"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "part-0": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "aspect-ratio": "1 / 1",
+            "cursor": "default",
+            "pointer-events": "none",
+            "text-align": "center",
+            "transition-duration": "0.15s",
+            "transition-property": "transform, translate, scale, rotate",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.switch.part-0.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-9999}",
+            "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-top-left-radius": "{imported.shared.size-9999}",
+            "border-top-right-radius": "{imported.shared.size-9999}",
+            "box-shadow": "{imported.switch.part-0.box-shadow}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "height": "{imported.switch.part-0.height.default}",
+                  "width": "{imported.switch.part-0.width.default}"
+                },
+                "sm": {
+                  "height": "{imported.switch.part-0.height.sm}",
+                  "width": "{imported.switch.part-0.width.sm}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "position": "relative",
+        "transition-duration": "0.15s",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed"
+        }
+      },
+      "tokens": {
+        "border-bottom-color": "{imported.shared.color-00000000}",
+        "border-bottom-left-radius": "{imported.shared.size-9999}",
+        "border-bottom-right-radius": "{imported.shared.size-9999}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-00000000}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-00000000}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-00000000}",
+        "border-top-left-radius": "{imported.shared.size-9999}",
+        "border-top-right-radius": "{imported.shared.size-9999}",
+        "border-top-width": "{imported.shared.size-1}",
+        "bottom": "{imported.shared.size-0}",
+        "box-shadow": "{imported.switch.root.box-shadow}",
+        "flex-shrink": "{imported.switch.root.flex-shrink}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "states": {
+        "disabled": {
+          "opacity": "{imported.switch.root.opacity-state-disabled}"
+        },
+        "focus-visible": {
+          "border-bottom-color": "{imported.shared.color-a1a1a1}",
+          "border-left-color": "{imported.shared.color-a1a1a1}",
+          "border-right-color": "{imported.shared.color-a1a1a1}",
+          "border-top-color": "{imported.shared.color-a1a1a1}",
+          "box-shadow": "{imported.switch.root.box-shadow-state-focus-visible}",
+          "outline-width": "{imported.switch.root.outline-width-state-focus-visible}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "checked",
+          "map": {
+            "checked": {
+              "background-color": "{imported.switch.root.background-color.checked}"
+            },
+            "unchecked": {
+              "background-color": "{imported.switch.root.background-color.unchecked}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "default": {
+              "height": "{imported.switch.root.height.default}",
+              "width": "{imported.switch.root.width.default}"
+            },
+            "sm": {
+              "height": "{imported.switch.root.height.sm}",
+              "width": "{imported.switch.root.width.sm}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Switch"
+    }
+  },
+  "figmaStatePreviews": true
+}

@@ -1,0 +1,408 @@
+{
+  "__provenance": "Capture config resolved from examples/shadcn/out/capture-config.draft.json per examples/shadcn/RECON.md \u00a74 \u2014 reviewed and approved by coordinating session under owner delegation, 2026-08-08. Deviations from the \u00a74.2 letter are WITNESSED refusals, each recorded here and in PROVENANCE.md: (1) SelectTrigger/TabsList standalone mounts THROW Radix context errors ('`SelectTrigger` must be used within `Select`', '`TabsList` must be used within `Tabs`' \u2014 SSR-witnessed 2026-08-08), so both ride the \u00a74.2-licensed fallback: root mount with the child axis PINNED and deferred by name (docs/21 \u00a77.3). (2) Dialog showCloseButton cannot be a presenceProp \u2014 the presence grammar drives ROOT props only and showCloseButton lives on the CHILD DialogContent; pinned at its source default (true), deferral named.",
+  "library": {
+    "__note": "shadcn is copy-in source, not an installable package (RECON \u00a72.1) \u2014 @shadcn-sandbox/ui is the sandbox barrel over the vendored files; the REAL pin is the sha256 ledger in RECON \u00a72.2. classAllow ^$ keeps no classes (every class is a utility; part identity rides geometry/DOM \u2014 data-slot noted as the future signature key, not needed yet). varPrefix -- : Tailwind v4 IS a CSS-variables system; shadcn's @theme inline makes utilities reference the semantic variable directly (.bg-primary \u2192 var(--primary)), :root-scoped, no provider needed (RECON \u00a74.1 bind proof).",
+    "package": "@shadcn-sandbox/ui",
+    "version": "0.0.1",
+    "framework": "react",
+    "classPrefix": "",
+    "classAllow": "^$",
+    "varPrefix": "--"
+  },
+  "mount": {
+    "__note": "Prebuilt deterministic tailwind.css (source(none) + @source ./src \u2014 RECON \u00a71 recreate block), inlined by the harness. TooltipProvider is shadcn's own install requirement for Tooltip and is context-only \u2014 SSR-witnessed to render NO DOM box (<span>x</span> passes through verbatim); wrapper-box verified again on the review screenshot at capture.",
+    "imports": [
+      "import '../tailwind.css';",
+      "import { TooltipProvider } from '@shadcn-sandbox/ui';"
+    ],
+    "wrapperOpen": "<TooltipProvider>",
+    "wrapperClose": "</TooltipProvider>"
+  },
+  "tokens": {
+    "dtcg": [
+      "examples/shadcn/tokens/shadcn.dtcg.json"
+    ],
+    "css": "examples/shadcn/tokens/shadcn.vars.css",
+    "minted": "examples/shadcn/tokens/shadcn-minted.dtcg.json",
+    "__note:mintedBootstrap": "BOOTSTRAP FLAG REMOVED same-round (task #28 ordering guard): the first capture pass ran with a zero-leaf stub + mintedBootstrap:true (receipted 'measured without a shipped minted tree'); promote-floor then filled the tree (381 leaves) and the capture was RE-RUN against the shipped tree \u2014 the committed scorecards are the re-measured ones. Leaving the flag set once the tree has leaves is refused by name."
+  },
+  "icons": "examples/shadcn/assets/icons",
+  "fonts": {
+    "__note": "NOT A GUESS: the sandbox src/index.css @imports @fontsource-variable/inter and the vega preset's @theme declares --font-sans: 'Inter Variable', sans-serif \u2014 the library's OWN declared face. The webfont ships on npm (RECON \u00a71), so the face inlines as a data: URI from the sandboxed package; the built tailwind.css's own @font-face src URLs are relative paths that cannot resolve from the harness page, which is exactly why this substrate exists. Variable font: one file carries weight 100\u2013900.",
+    "faces": [
+      {
+        "family": "Inter Variable",
+        "weight": "100 900",
+        "style": "normal",
+        "file": "examples/shadcn/.shadcn-sandbox/node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2"
+      }
+    ]
+  },
+  "browser": {
+    "viewport": {
+      "width": 900,
+      "height": 1000
+    },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": {
+    "width": 320,
+    "height": 96,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "unset"
+  },
+  "components": [
+    {
+      "name": "Alert",
+      "importName": "Alert",
+      "contract": "examples/shadcn/contracts-seed/alert.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "AlertTitle",
+          "text": "Alert title"
+        },
+        {
+          "importName": "AlertDescription",
+          "text": "Alert description copy for the shadcn round."
+        }
+      ]
+    },
+    {
+      "__note": "Fallback-only capture BY NAME (RECON \u00a74.2/H-ledger): AvatarImage needs a remote/blob src, refused in a network-free harness. Fallback-only is Radix-canonical anyway \u2014 Image renders nothing until load.",
+      "name": "Avatar",
+      "importName": "Avatar",
+      "contract": "examples/shadcn/contracts-seed/avatar.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "AvatarFallback",
+          "text": "CN"
+        }
+      ]
+    },
+    {
+      "name": "Badge",
+      "importName": "Badge",
+      "contract": "examples/shadcn/contracts-seed/badge.contract.json",
+      "sampleText": "Badge",
+      "axes": [
+        "variant"
+      ],
+      "fixedProps": {
+        "asChild": false
+      }
+    },
+    {
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/shadcn/contracts-seed/button.contract.json",
+      "sampleText": "Button",
+      "axes": [
+        "variant",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "asChild": false
+      }
+    },
+    {
+      "__note": "Canonical composition pinned per H10 (container queries + has-data-[slot] selectors make anatomy a function of the mounted composition): CardHeader \u2283 (CardTitle, CardDescription), CardContent text. Any other composition is named out of scope.",
+      "name": "Card",
+      "importName": "Card",
+      "contract": "examples/shadcn/contracts-seed/card.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "CardHeader",
+          "children": [
+            {
+              "importName": "CardTitle",
+              "text": "Card title"
+            },
+            {
+              "importName": "CardDescription",
+              "text": "Card description"
+            }
+          ]
+        },
+        {
+          "importName": "CardContent",
+          "text": "Card content copy for the shadcn round."
+        }
+      ]
+    },
+    {
+      "__note": "TRI-STATE ON ONE AXIS (the MUI/Carbon checkbox discipline) \u2014 keeps the lucide CheckIcon/MinusIcon svg-content promotion single-axis. Radix accepts checked=\"indeterminate\" directly, so the axisValueMap is plain values, no $props expansion needed. id pinned per \u00a74.2 (house rule).",
+      "name": "Checkbox",
+      "importName": "Checkbox",
+      "contract": "examples/shadcn/contracts-seed/checkbox.contract.json",
+      "sampleText": "",
+      "axes": [
+        "checked"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true,
+          "indeterminate": "indeterminate"
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "id": "shadcn-checkbox"
+      },
+      "callbackProps": [
+        "onCheckedChange"
+      ]
+    },
+    {
+      "__note": "v1: default text input; `type` deferred by name (an attribute pass-through, not an enum prop in source \u2014 RECON \u00a74.2). defaultValue pinned '' so the double run never carries typed state.",
+      "name": "Input",
+      "importName": "Input",
+      "contract": "examples/shadcn/contracts-seed/input.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "placeholder": "Value",
+        "defaultValue": ""
+      }
+    },
+    {
+      "__note": "CLOSED-SURFACE capture (the \u00a74.2 'Trigger as a plain component for the closed surface' half, via the only mountable spelling \u2014 the composed root, closed). BOTH other \u00a74.2 spellings are WITNESSED refusals, 2026-08-08: (1) SelectTrigger standalone throws '`SelectTrigger` must be used within `Select`' (Radix scope context, SSR probe); (2) the OPEN-LIST portalCapture is a MULTI-ROOT-CAPTURE refusal (run 2: 3 portaled roots \u2014 two [data-radix-focus-guard] spans + the popper content wrapper \u2014 + 1 in-stage trigger; single-root fusion refuses, multi-root fusion is a named future class; same flat-sibling Radix portal shape that stopped Dialog). Closed, the content renders nothing and the trigger IS the in-stage surface: size axis still lives on the CHILD trigger \u2014 child-axis limitation (docs/21 \u00a77.3), pinned default, deferred by name. Placeholder shown (no value pin \u2014 a controlled value without mounted items renders an empty SelectValue in Radix; the placeholder surface is the canonical closed rendering).",
+      "name": "Select",
+      "importName": "Select",
+      "contract": "examples/shadcn/contracts-seed/select.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "callbackProps": [
+        "onValueChange"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "SelectTrigger",
+          "children": [
+            {
+              "importName": "SelectValue",
+              "props": {
+                "placeholder": "Select an option"
+              }
+            }
+          ]
+        },
+        {
+          "importName": "SelectContent",
+          "children": [
+            {
+              "importName": "SelectItem",
+              "props": {
+                "value": "option-1"
+              },
+              "text": "Option 1"
+            },
+            {
+              "importName": "SelectItem",
+              "props": {
+                "value": "option-2"
+              },
+              "text": "Option 2"
+            },
+            {
+              "importName": "SelectItem",
+              "props": {
+                "value": "option-3"
+              },
+              "text": "Option 3"
+            }
+          ]
+        }
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ]
+    },
+    {
+      "__note": "checked is a VARIANT AXIS (prop-selected rendering \u2014 H4), Size \u00d7 Checked = 4 combos. The thumb is a REAL DOM child (SwitchPrimitive.Thumb, data-slot=switch-thumb) \u2014 H6: whether translate-x-[calc(100%-2px)] resolves through the translate-longhand decomposition is THE open question; check captured-truth.json for the thumb part before promoting, refuse on translate-x by name if calc does not resolve.",
+      "name": "Switch",
+      "importName": "Switch",
+      "contract": "examples/shadcn/contracts-seed/switch.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size",
+        "checked"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "callbackProps": [
+        "onCheckedChange"
+      ]
+    },
+    {
+      "__note": "Root mount with the canonical 2-deep childrenSpec; CONTROLLED value:'tab-1' + onValueChange stub (the Carbon TabList double-run lesson \u2014 uncontrolled selection survives the focus-visible driver's Tab keypress into the next sweep). NAMED DEVIATION from \u00a74.2's letter: 'TabsList-with-children as the mount' is not mountable \u2014 witnessed '`TabsList` must be used within `Tabs`' (Radix scope context, SSR probe 2026-08-08) \u2014 so the variant axis on TabsList rides the same child-axis limitation as Select (docs/21 \u00a77.3): pinned default, deferred by name.",
+      "name": "Tabs",
+      "importName": "Tabs",
+      "contract": "examples/shadcn/contracts-seed/tabs.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "fixedProps": {
+        "value": "tab-1"
+      },
+      "callbackProps": [
+        "onValueChange"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "TabsList",
+          "children": [
+            {
+              "importName": "TabsTrigger",
+              "props": {
+                "value": "tab-1"
+              },
+              "text": "Overview"
+            },
+            {
+              "importName": "TabsTrigger",
+              "props": {
+                "value": "tab-2"
+              },
+              "text": "Activity"
+            },
+            {
+              "importName": "TabsTrigger",
+              "props": {
+                "value": "tab-3"
+              },
+              "text": "Settings"
+            }
+          ]
+        },
+        {
+          "importName": "TabsContent",
+          "props": {
+            "value": "tab-1"
+          },
+          "text": "Overview panel copy for the shadcn round."
+        }
+      ]
+    },
+    {
+      "__note": "Portal (H3): openDriver {open:true} on the Tooltip root; the Provider rides the global mount wrapper. Degraded by design \u2014 no state planes, no source names (portalSweep). tw-animate-css open animation (H7) settles inside the steady-state probe's budget.",
+      "name": "Tooltip",
+      "importName": "Tooltip",
+      "contract": "examples/shadcn/contracts-seed/tooltip.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true
+      },
+      "callbackProps": [
+        "onOpenChange"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "TooltipTrigger",
+          "text": "Hover"
+        },
+        {
+          "importName": "TooltipContent",
+          "text": "Tooltip copy for the shadcn round."
+        }
+      ]
+    }
+  ],
+  "__stopped-components": [
+    {
+      "__note": "Portal (H3): portalCapture + openDriver gets the DOM; states:[] pinned by contract, zero source facts expected (portalSweep takes no varPrefix \u2014 standing corpus-wide degradation, named, not re-litigated). NAMED DEVIATION from \u00a74.2's letter: showCloseButton was proposed as a presenceProp on Content, but the presence grammar drives ROOT props only and showCloseButton lives on the CHILD DialogContent \u2014 pinned at its source default (true) instead; the off-plane is deferred by name. Footer's canonical child is a Button (the composition every shadcn dialog example ships).",
+      "name": "Dialog",
+      "importName": "Dialog",
+      "contract": "examples/shadcn/contracts-seed/dialog.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true
+      },
+      "callbackProps": [
+        "onOpenChange"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "DialogContent",
+          "props": {
+            "showCloseButton": true
+          },
+          "children": [
+            {
+              "importName": "DialogHeader",
+              "children": [
+                {
+                  "importName": "DialogTitle",
+                  "text": "Dialog title"
+                },
+                {
+                  "importName": "DialogDescription",
+                  "text": "Dialog description copy for the shadcn round."
+                }
+              ]
+            },
+            {
+              "importName": "DialogFooter",
+              "children": [
+                {
+                  "importName": "Button",
+                  "text": "Save"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "__stopped": "STOPPED AT CAPTURE, 2026-08-08 \u2014 MULTI-ROOT-CAPTURE refusal (witnessed run 1): Radix Dialog portals the Overlay and the Content as FLAT SIBLINGS of document.body plus two [data-radix-focus-guard] spans \u2014 4 portaled roots, and single-root fusion carries exactly one (multi-root fusion is a named future class in portalSweep). Every prior modal through the pipeline (MUI, Carbon, flowbite) portals ONE wrapper root, so this is the first flat-sibling portal shape. A SURPRISE vs the recon (H3 predicted degraded-by-design, not refused). The entry is preserved here verbatim; nothing downstream ships a Dialog contract this round."
+    }
+  ]
+}

@@ -1,0 +1,477 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Switch",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "part-0",
+      "channel": "background-color",
+      "combo": "sm.unchecked.enabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "unchecked"
+      },
+      "token": "background",
+      "varName": "--background",
+      "anchor": {
+        "selector": ".bg-background"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "background-color",
+      "combo": "sm.unchecked.disabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "unchecked"
+      },
+      "token": "background",
+      "varName": "--background",
+      "anchor": {
+        "selector": ".bg-background"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "background-color",
+      "combo": "sm.checked.enabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "checked"
+      },
+      "token": "background",
+      "varName": "--background",
+      "anchor": {
+        "selector": ".bg-background"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "background-color",
+      "combo": "sm.checked.disabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "checked"
+      },
+      "token": "background",
+      "varName": "--background",
+      "anchor": {
+        "selector": ".bg-background"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "background-color",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "background",
+      "varName": "--background",
+      "anchor": {
+        "selector": ".bg-background"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "background-color",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "background",
+      "varName": "--background",
+      "anchor": {
+        "selector": ".bg-background"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "background-color",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "background",
+      "varName": "--background",
+      "anchor": {
+        "selector": ".bg-background"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "background-color",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "background",
+      "varName": "--background",
+      "anchor": {
+        "selector": ".bg-background"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "transition-timing-function",
+      "combo": "sm.unchecked.enabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "unchecked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-transform"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "transition-timing-function",
+      "combo": "sm.unchecked.disabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "unchecked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-transform"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "transition-timing-function",
+      "combo": "sm.checked.enabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "checked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-transform"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "transition-timing-function",
+      "combo": "sm.checked.disabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "checked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-transform"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "transition-timing-function",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-transform"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "transition-timing-function",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-transform"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "transition-timing-function",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-transform"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "transition-timing-function",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-transform"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "sm.unchecked.enabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "unchecked"
+      },
+      "token": "input",
+      "varName": "--input",
+      "anchor": {
+        "selector": ".data-unchecked\\:bg-input:where([data-state=\"unchecked\"]), .data-unchecked\\:bg-input:where([data-unchecked]:not([data-unchecked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "sm.unchecked.disabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "unchecked"
+      },
+      "token": "input",
+      "varName": "--input",
+      "anchor": {
+        "selector": ".data-unchecked\\:bg-input:where([data-state=\"unchecked\"]), .data-unchecked\\:bg-input:where([data-unchecked]:not([data-unchecked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "sm.checked.enabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "checked"
+      },
+      "token": "primary",
+      "varName": "--primary",
+      "anchor": {
+        "selector": ".data-checked\\:bg-primary:where([data-state=\"checked\"]), .data-checked\\:bg-primary:where([data-checked]:not([data-checked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "sm.checked.disabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "checked"
+      },
+      "token": "primary",
+      "varName": "--primary",
+      "anchor": {
+        "selector": ".data-checked\\:bg-primary:where([data-state=\"checked\"]), .data-checked\\:bg-primary:where([data-checked]:not([data-checked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "input",
+      "varName": "--input",
+      "anchor": {
+        "selector": ".data-unchecked\\:bg-input:where([data-state=\"unchecked\"]), .data-unchecked\\:bg-input:where([data-unchecked]:not([data-unchecked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "input",
+      "varName": "--input",
+      "anchor": {
+        "selector": ".data-unchecked\\:bg-input:where([data-state=\"unchecked\"]), .data-unchecked\\:bg-input:where([data-unchecked]:not([data-unchecked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "primary",
+      "varName": "--primary",
+      "anchor": {
+        "selector": ".data-checked\\:bg-primary:where([data-state=\"checked\"]), .data-checked\\:bg-primary:where([data-checked]:not([data-checked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "primary",
+      "varName": "--primary",
+      "anchor": {
+        "selector": ".data-checked\\:bg-primary:where([data-state=\"checked\"]), .data-checked\\:bg-primary:where([data-checked]:not([data-checked=\"false\"]))"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "sm.unchecked.enabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "unchecked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "sm.unchecked.disabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "unchecked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "sm.checked.enabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "checked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "sm.checked.disabled",
+      "axisValues": {
+        "size": "sm",
+        "checked": "checked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-all"
+      }
+    }
+  ],
+  "skips": [
+    "part-0.box-shadow: candidates --tw-inset-ring-shadow → \"tw-inset-ring-shadow\" = 0 0 #0000 (value differs); --tw-inset-shadow → \"tw-inset-shadow\" = 0 0 #0000 (value differs); --tw-ring-offset-shadow → \"tw-ring-offset-shadow\" = 0 0 #0000 (value differs); --tw-ring-shadow → \"tw-ring-shadow\" = 0 0 0 calc(0px + 0px) currentcolor (value differs); --tw-shadow → \"tw-shadow\" = 0 0 #0000 (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "part-0.height: source declares `calc(var(--spacing) * 4)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "part-0.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "part-0.transition-duration: candidate --default-transition-duration → \"default-transition-duration\" = 150ms names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "part-0.translate: candidates --tw-translate-x → \"tw-translate-x\" = 0px (value MATCHES the computed value); --tw-translate-y → \"tw-translate-y\" = 0 (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "part-0.width: source declares `calc(var(--spacing) * 4)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.box-shadow: candidates --tw-inset-ring-shadow → \"tw-inset-ring-shadow\" = 0 0 #0000 (value differs); --tw-inset-shadow → \"tw-inset-shadow\" = 0 0 #0000 (value differs); --tw-ring-offset-shadow → \"tw-ring-offset-shadow\" = 0 0 #0000 (value differs); --tw-ring-shadow → \"tw-ring-shadow\" = 0 0 #0000 (value differs); --tw-shadow → \"tw-shadow\" = 0 1px 2px 0 rgb(0 0 0 / 0.05) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "root.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.transition-duration: candidate --default-transition-duration → \"default-transition-duration\" = 150ms names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "part-0.--tw-ring-shadow: source declares `var(--tw-ring-inset,) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor)` — a calc() over var(--tw-ring-color, --tw-ring-inset, --tw-ring-offset-width). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 3,
+  "shorthandSkips": [
+    "part-0.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-style: SHORTHAND carrying var(--tw-border-style) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 3,
+  "calcCeiling": 3,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

@@ -49,6 +49,10 @@ const LIBRARIES = {
   // assets (examples/astryx/assets/icons), so the emit command now needs
   // --icons — without it the CLI refuses the banner contract by name.
   astryx: ['--icons', 'examples/astryx/assets/icons', '--tokens', 'examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json'],
+  // SHADCN round (library #8): checkbox/select carry floor-reconstructed
+  // lucide glyph assets (examples/shadcn/assets/icons), so the emit command
+  // needs --icons — same reason as tailwind/astryx above.
+  shadcn: ['--icons', 'examples/shadcn/assets/icons', '--tokens', 'examples/shadcn/tokens/shadcn.dtcg.json,examples/shadcn/tokens/shadcn-minted.dtcg.json'],
 };
 
 /** Libraries whose scripts are rebuilt by a DIFFERENT recorded command than

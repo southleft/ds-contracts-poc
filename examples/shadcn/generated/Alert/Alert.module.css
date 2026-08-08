@@ -1,0 +1,86 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/alert.contract.json (shadcn.alert v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 0;
+  background-color: var(--imported-alert-root-background-color);
+  border-bottom-left-radius: var(--imported-shared-size-10);
+  border-bottom-right-radius: var(--imported-shared-size-10);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-left-radius: var(--imported-shared-size-10);
+  border-top-right-radius: var(--imported-shared-size-10);
+  border-top-width: var(--imported-shared-size-1);
+  bottom: var(--imported-shared-size-0);
+  column-gap: var(--imported-alert-root-column-gap);
+  font-size: var(--imported-shared-size-14);
+  grid-template-columns: var(--imported-alert-root-grid-template-columns);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-20);
+  padding-bottom: var(--imported-alert-root-padding-bottom);
+  padding-left: var(--imported-alert-root-padding-left);
+  padding-right: var(--imported-alert-root-padding-right);
+  padding-top: var(--imported-alert-root-padding-top);
+  right: var(--imported-shared-size-0);
+  row-gap: var(--imported-alert-root-row-gap);
+  top: var(--imported-shared-size-0);
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  position: relative;
+  text-align: left;
+}
+
+.variant-default {
+  color: var(--imported-alert-root-color-default);
+}
+
+.variant-destructive {
+  color: var(--imported-alert-root-color-destructive);
+}
+
+.label {
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-alert-label-font-weight);
+  line-height: var(--imported-shared-size-20);
+  display: block;
+  text-align: left;
+}
+
+.variant-default .label {
+  color: var(--imported-alert-label-color-default);
+}
+
+.variant-destructive .label {
+  color: var(--imported-alert-label-color-destructive);
+}
+
+.label-2 {
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-alert-label-2-font-weight);
+  line-height: var(--imported-shared-size-20);
+  display: block;
+  text-align: left;
+}
+
+.variant-default .label-2 {
+  color: var(--imported-alert-label-2-color-default);
+}
+
+.variant-destructive .label-2 {
+  color: var(--imported-alert-label-2-color-destructive);
+}

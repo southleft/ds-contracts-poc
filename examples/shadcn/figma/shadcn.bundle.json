@@ -1,0 +1,4754 @@
+{
+  "type": "CONTRACTS-BUNDLE",
+  "version": 1,
+  "tokenSet": {
+    "name": "Shadcn",
+    "base": {
+      "accent": {
+        "$type": "color",
+        "$value": "#f5f5f5",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.97 0 0)"
+          }
+        }
+      },
+      "accent-foreground": {
+        "$type": "color",
+        "$value": "#171717",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.205 0 0)"
+          }
+        }
+      },
+      "background": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(1 0 0)"
+          }
+        }
+      },
+      "blur-xs": {
+        "$type": "dimension",
+        "$value": "4px"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#e5e5e5",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.922 0 0)"
+          }
+        }
+      },
+      "card": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(1 0 0)"
+          }
+        }
+      },
+      "card-foreground": {
+        "$type": "color",
+        "$value": "#0a0a0a",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.145 0 0)"
+          }
+        }
+      },
+      "chart-1": {
+        "$type": "color",
+        "$value": "#d4d4d4",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.87 0 0)"
+          }
+        }
+      },
+      "chart-2": {
+        "$type": "color",
+        "$value": "#737373",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.556 0 0)"
+          }
+        }
+      },
+      "chart-3": {
+        "$type": "color",
+        "$value": "#525252",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.439 0 0)"
+          }
+        }
+      },
+      "chart-4": {
+        "$type": "color",
+        "$value": "#404040",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.371 0 0)"
+          }
+        }
+      },
+      "chart-5": {
+        "$type": "color",
+        "$value": "#262626",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.269 0 0)"
+          }
+        }
+      },
+      "color-black": {
+        "$type": "color",
+        "$value": "#000"
+      },
+      "container-md": {
+        "$type": "dimension",
+        "$value": "28rem"
+      },
+      "container-xs": {
+        "$type": "dimension",
+        "$value": "20rem"
+      },
+      "default-font-family": {
+        "$type": "string",
+        "$value": "'Inter Variable', sans-serif"
+      },
+      "default-mono-font-family": {
+        "$type": "string",
+        "$value": "var(--font-mono)"
+      },
+      "default-transition-duration": {
+        "$type": "string",
+        "$value": "150ms"
+      },
+      "default-transition-timing-function": {
+        "$type": "string",
+        "$value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "destructive": {
+        "$type": "color",
+        "$value": "#e7000b",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.577 0.245 27.325)"
+          }
+        }
+      },
+      "font-mono": {
+        "$type": "string",
+        "$value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+      },
+      "font-sans": {
+        "$type": "string",
+        "$value": "'Inter Variable', sans-serif"
+      },
+      "font-weight-medium": {
+        "$type": "number",
+        "$value": "500"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "#0a0a0a",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.145 0 0)"
+          }
+        }
+      },
+      "input": {
+        "$type": "color",
+        "$value": "#e5e5e5",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.922 0 0)"
+          }
+        }
+      },
+      "leading-normal": {
+        "$type": "number",
+        "$value": "1.5"
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "#f5f5f5",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.97 0 0)"
+          }
+        }
+      },
+      "muted-foreground": {
+        "$type": "color",
+        "$value": "#737373",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.556 0 0)"
+          }
+        }
+      },
+      "popover": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(1 0 0)"
+          }
+        }
+      },
+      "popover-foreground": {
+        "$type": "color",
+        "$value": "#0a0a0a",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.145 0 0)"
+          }
+        }
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "#171717",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.205 0 0)"
+          }
+        }
+      },
+      "primary-foreground": {
+        "$type": "color",
+        "$value": "#fafafa",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.985 0 0)"
+          }
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "0.625rem"
+      },
+      "radius-md": {
+        "$type": "string",
+        "$value": "calc(var(--radius) - 2px)"
+      },
+      "ring": {
+        "$type": "color",
+        "$value": "#a1a1a1",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.708 0 0)"
+          }
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "#f5f5f5",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.97 0 0)"
+          }
+        }
+      },
+      "secondary-foreground": {
+        "$type": "color",
+        "$value": "#171717",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.205 0 0)"
+          }
+        }
+      },
+      "shimmer-angle": {
+        "$type": "string",
+        "$value": "20deg"
+      },
+      "sidebar": {
+        "$type": "color",
+        "$value": "#fafafa",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.985 0 0)"
+          }
+        }
+      },
+      "sidebar-accent": {
+        "$type": "color",
+        "$value": "#f5f5f5",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.97 0 0)"
+          }
+        }
+      },
+      "sidebar-accent-foreground": {
+        "$type": "color",
+        "$value": "#171717",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.205 0 0)"
+          }
+        }
+      },
+      "sidebar-border": {
+        "$type": "color",
+        "$value": "#e5e5e5",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.922 0 0)"
+          }
+        }
+      },
+      "sidebar-foreground": {
+        "$type": "color",
+        "$value": "#0a0a0a",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.145 0 0)"
+          }
+        }
+      },
+      "sidebar-primary": {
+        "$type": "color",
+        "$value": "#171717",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.205 0 0)"
+          }
+        }
+      },
+      "sidebar-primary-foreground": {
+        "$type": "color",
+        "$value": "#fafafa",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.985 0 0)"
+          }
+        }
+      },
+      "sidebar-ring": {
+        "$type": "color",
+        "$value": "#a1a1a1",
+        "$extensions": {
+          "dev.ds-contracts.source": {
+            "oklch": "oklch(0.708 0 0)"
+          }
+        }
+      },
+      "spacing": {
+        "$type": "dimension",
+        "$value": "0.25rem"
+      },
+      "text-base": {
+        "$type": "dimension",
+        "$value": "1rem"
+      },
+      "text-base--line-height": {
+        "$type": "string",
+        "$value": "calc(1.5 / 1)"
+      },
+      "text-sm": {
+        "$type": "dimension",
+        "$value": "0.875rem"
+      },
+      "text-sm--line-height": {
+        "$type": "string",
+        "$value": "calc(1.25 / 0.875)"
+      },
+      "text-xs": {
+        "$type": "dimension",
+        "$value": "0.75rem"
+      },
+      "text-xs--line-height": {
+        "$type": "string",
+        "$value": "calc(1 / 0.75)"
+      }
+    },
+    "modes": {
+      "light": {
+        "accent": {
+          "$type": "color",
+          "$value": "#f5f5f5",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.97 0 0)"
+            }
+          }
+        },
+        "accent-foreground": {
+          "$type": "color",
+          "$value": "#171717",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.205 0 0)"
+            }
+          }
+        },
+        "background": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(1 0 0)"
+            }
+          }
+        },
+        "blur-xs": {
+          "$type": "dimension",
+          "$value": "4px"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "#e5e5e5",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.922 0 0)"
+            }
+          }
+        },
+        "card": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(1 0 0)"
+            }
+          }
+        },
+        "card-foreground": {
+          "$type": "color",
+          "$value": "#0a0a0a",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.145 0 0)"
+            }
+          }
+        },
+        "chart-1": {
+          "$type": "color",
+          "$value": "#d4d4d4",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.87 0 0)"
+            }
+          }
+        },
+        "chart-2": {
+          "$type": "color",
+          "$value": "#737373",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.556 0 0)"
+            }
+          }
+        },
+        "chart-3": {
+          "$type": "color",
+          "$value": "#525252",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.439 0 0)"
+            }
+          }
+        },
+        "chart-4": {
+          "$type": "color",
+          "$value": "#404040",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.371 0 0)"
+            }
+          }
+        },
+        "chart-5": {
+          "$type": "color",
+          "$value": "#262626",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.269 0 0)"
+            }
+          }
+        },
+        "color-black": {
+          "$type": "color",
+          "$value": "#000"
+        },
+        "container-md": {
+          "$type": "dimension",
+          "$value": "28rem"
+        },
+        "container-xs": {
+          "$type": "dimension",
+          "$value": "20rem"
+        },
+        "default-font-family": {
+          "$type": "string",
+          "$value": "'Inter Variable', sans-serif"
+        },
+        "default-mono-font-family": {
+          "$type": "string",
+          "$value": "var(--font-mono)"
+        },
+        "default-transition-duration": {
+          "$type": "string",
+          "$value": "150ms"
+        },
+        "default-transition-timing-function": {
+          "$type": "string",
+          "$value": "cubic-bezier(0.4, 0, 0.2, 1)"
+        },
+        "destructive": {
+          "$type": "color",
+          "$value": "#e7000b",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.577 0.245 27.325)"
+            }
+          }
+        },
+        "font-mono": {
+          "$type": "string",
+          "$value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+        },
+        "font-sans": {
+          "$type": "string",
+          "$value": "'Inter Variable', sans-serif"
+        },
+        "font-weight-medium": {
+          "$type": "number",
+          "$value": "500"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "#0a0a0a",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.145 0 0)"
+            }
+          }
+        },
+        "input": {
+          "$type": "color",
+          "$value": "#e5e5e5",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.922 0 0)"
+            }
+          }
+        },
+        "leading-normal": {
+          "$type": "number",
+          "$value": "1.5"
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "#f5f5f5",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.97 0 0)"
+            }
+          }
+        },
+        "muted-foreground": {
+          "$type": "color",
+          "$value": "#737373",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.556 0 0)"
+            }
+          }
+        },
+        "popover": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(1 0 0)"
+            }
+          }
+        },
+        "popover-foreground": {
+          "$type": "color",
+          "$value": "#0a0a0a",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.145 0 0)"
+            }
+          }
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "#171717",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.205 0 0)"
+            }
+          }
+        },
+        "primary-foreground": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "radius": {
+          "$type": "dimension",
+          "$value": "0.625rem"
+        },
+        "radius-md": {
+          "$type": "string",
+          "$value": "calc(var(--radius) - 2px)"
+        },
+        "ring": {
+          "$type": "color",
+          "$value": "#a1a1a1",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.708 0 0)"
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "#f5f5f5",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.97 0 0)"
+            }
+          }
+        },
+        "secondary-foreground": {
+          "$type": "color",
+          "$value": "#171717",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.205 0 0)"
+            }
+          }
+        },
+        "shimmer-angle": {
+          "$type": "string",
+          "$value": "20deg"
+        },
+        "sidebar": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "sidebar-accent": {
+          "$type": "color",
+          "$value": "#f5f5f5",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.97 0 0)"
+            }
+          }
+        },
+        "sidebar-accent-foreground": {
+          "$type": "color",
+          "$value": "#171717",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.205 0 0)"
+            }
+          }
+        },
+        "sidebar-border": {
+          "$type": "color",
+          "$value": "#e5e5e5",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.922 0 0)"
+            }
+          }
+        },
+        "sidebar-foreground": {
+          "$type": "color",
+          "$value": "#0a0a0a",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.145 0 0)"
+            }
+          }
+        },
+        "sidebar-primary": {
+          "$type": "color",
+          "$value": "#171717",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.205 0 0)"
+            }
+          }
+        },
+        "sidebar-primary-foreground": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "sidebar-ring": {
+          "$type": "color",
+          "$value": "#a1a1a1",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.708 0 0)"
+            }
+          }
+        },
+        "spacing": {
+          "$type": "dimension",
+          "$value": "0.25rem"
+        },
+        "text-base": {
+          "$type": "dimension",
+          "$value": "1rem"
+        },
+        "text-base--line-height": {
+          "$type": "string",
+          "$value": "calc(1.5 / 1)"
+        },
+        "text-sm": {
+          "$type": "dimension",
+          "$value": "0.875rem"
+        },
+        "text-sm--line-height": {
+          "$type": "string",
+          "$value": "calc(1.25 / 0.875)"
+        },
+        "text-xs": {
+          "$type": "dimension",
+          "$value": "0.75rem"
+        },
+        "text-xs--line-height": {
+          "$type": "string",
+          "$value": "calc(1 / 0.75)"
+        }
+      },
+      "dark": {
+        "accent": {
+          "$type": "color",
+          "$value": "#262626",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.269 0 0)"
+            }
+          }
+        },
+        "accent-foreground": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "background": {
+          "$type": "color",
+          "$value": "#0a0a0a",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.145 0 0)"
+            }
+          }
+        },
+        "blur-xs": {
+          "$type": "dimension",
+          "$value": "4px"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "#ffffff1a",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(1 0 0 / 10%)"
+            }
+          }
+        },
+        "card": {
+          "$type": "color",
+          "$value": "#171717",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.205 0 0)"
+            }
+          }
+        },
+        "card-foreground": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "chart-1": {
+          "$type": "color",
+          "$value": "#d4d4d4",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.87 0 0)"
+            }
+          }
+        },
+        "chart-2": {
+          "$type": "color",
+          "$value": "#737373",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.556 0 0)"
+            }
+          }
+        },
+        "chart-3": {
+          "$type": "color",
+          "$value": "#525252",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.439 0 0)"
+            }
+          }
+        },
+        "chart-4": {
+          "$type": "color",
+          "$value": "#404040",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.371 0 0)"
+            }
+          }
+        },
+        "chart-5": {
+          "$type": "color",
+          "$value": "#262626",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.269 0 0)"
+            }
+          }
+        },
+        "color-black": {
+          "$type": "color",
+          "$value": "#000"
+        },
+        "container-md": {
+          "$type": "dimension",
+          "$value": "28rem"
+        },
+        "container-xs": {
+          "$type": "dimension",
+          "$value": "20rem"
+        },
+        "default-font-family": {
+          "$type": "string",
+          "$value": "'Inter Variable', sans-serif"
+        },
+        "default-mono-font-family": {
+          "$type": "string",
+          "$value": "var(--font-mono)"
+        },
+        "default-transition-duration": {
+          "$type": "string",
+          "$value": "150ms"
+        },
+        "default-transition-timing-function": {
+          "$type": "string",
+          "$value": "cubic-bezier(0.4, 0, 0.2, 1)"
+        },
+        "destructive": {
+          "$type": "color",
+          "$value": "#ff6467",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.704 0.191 22.216)"
+            }
+          }
+        },
+        "font-mono": {
+          "$type": "string",
+          "$value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+        },
+        "font-sans": {
+          "$type": "string",
+          "$value": "'Inter Variable', sans-serif"
+        },
+        "font-weight-medium": {
+          "$type": "number",
+          "$value": "500"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "input": {
+          "$type": "color",
+          "$value": "#ffffff26",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(1 0 0 / 15%)"
+            }
+          }
+        },
+        "leading-normal": {
+          "$type": "number",
+          "$value": "1.5"
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "#262626",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.269 0 0)"
+            }
+          }
+        },
+        "muted-foreground": {
+          "$type": "color",
+          "$value": "#a1a1a1",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.708 0 0)"
+            }
+          }
+        },
+        "popover": {
+          "$type": "color",
+          "$value": "#171717",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.205 0 0)"
+            }
+          }
+        },
+        "popover-foreground": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "#e5e5e5",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.922 0 0)"
+            }
+          }
+        },
+        "primary-foreground": {
+          "$type": "color",
+          "$value": "#171717",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.205 0 0)"
+            }
+          }
+        },
+        "radius": {
+          "$type": "dimension",
+          "$value": "0.625rem"
+        },
+        "radius-md": {
+          "$type": "string",
+          "$value": "calc(var(--radius) - 2px)"
+        },
+        "ring": {
+          "$type": "color",
+          "$value": "#737373",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.556 0 0)"
+            }
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "#262626",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.269 0 0)"
+            }
+          }
+        },
+        "secondary-foreground": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "shimmer-angle": {
+          "$type": "string",
+          "$value": "20deg"
+        },
+        "sidebar": {
+          "$type": "color",
+          "$value": "#171717",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.205 0 0)"
+            }
+          }
+        },
+        "sidebar-accent": {
+          "$type": "color",
+          "$value": "#262626",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.269 0 0)"
+            }
+          }
+        },
+        "sidebar-accent-foreground": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "sidebar-border": {
+          "$type": "color",
+          "$value": "#ffffff1a",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(1 0 0 / 10%)"
+            }
+          }
+        },
+        "sidebar-foreground": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "sidebar-primary": {
+          "$type": "color",
+          "$value": "#1447e6",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.488 0.243 264.376)"
+            }
+          }
+        },
+        "sidebar-primary-foreground": {
+          "$type": "color",
+          "$value": "#fafafa",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.985 0 0)"
+            }
+          }
+        },
+        "sidebar-ring": {
+          "$type": "color",
+          "$value": "#737373",
+          "$extensions": {
+            "dev.ds-contracts.source": {
+              "oklch": "oklch(0.556 0 0)"
+            }
+          }
+        },
+        "spacing": {
+          "$type": "dimension",
+          "$value": "0.25rem"
+        },
+        "text-base": {
+          "$type": "dimension",
+          "$value": "1rem"
+        },
+        "text-base--line-height": {
+          "$type": "string",
+          "$value": "calc(1.5 / 1)"
+        },
+        "text-sm": {
+          "$type": "dimension",
+          "$value": "0.875rem"
+        },
+        "text-sm--line-height": {
+          "$type": "string",
+          "$value": "calc(1.25 / 0.875)"
+        },
+        "text-xs": {
+          "$type": "dimension",
+          "$value": "0.75rem"
+        },
+        "text-xs--line-height": {
+          "$type": "string",
+          "$value": "calc(1 / 0.75)"
+        }
+      }
+    },
+    "minted": {
+      "imported": {
+        "alert": {
+          "root": {
+            "background-color": {
+              "$value": "{card}",
+              "$type": "color"
+            },
+            "color": {
+              "default": {
+                "$value": "{card-foreground}",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "{destructive}",
+                "$type": "color"
+              }
+            },
+            "column-gap": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "grid-template-columns": {
+              "$value": "254px",
+              "$type": "dimension"
+            },
+            "padding-bottom": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "padding-left": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "padding-right": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "padding-top": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "row-gap": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          },
+          "label": {
+            "color": {
+              "default": {
+                "$value": "#0a0a0a",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b",
+                "$type": "color"
+              }
+            },
+            "font-weight": {
+              "$value": "{font-weight-medium}",
+              "$type": "number"
+            }
+          },
+          "label-2": {
+            "color": {
+              "default": {
+                "$value": "{muted-foreground}",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000be6",
+                "$type": "color"
+              }
+            },
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            }
+          }
+        },
+        "shared": {
+          "size-10": {
+            "$value": "10px",
+            "$type": "dimension"
+          },
+          "size-1": {
+            "$value": "1px",
+            "$type": "dimension"
+          },
+          "size-0": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "size-14": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "size-20": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "size-9999": {
+            "$value": "9999px",
+            "$type": "dimension"
+          },
+          "size-26": {
+            "$value": "26px",
+            "$type": "dimension"
+          },
+          "size-8": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "size-4": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "color-a1a1a1": {
+            "$value": "#a1a1a1",
+            "$type": "color"
+          },
+          "color-737373": {
+            "$value": "#737373",
+            "$type": "color"
+          },
+          "size-6": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "color-00000000": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "size-3": {
+            "$value": "3px",
+            "$type": "dimension"
+          },
+          "num-1": {
+            "$value": "1",
+            "$type": "number"
+          },
+          "num-500": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "size-29": {
+            "$value": "29px",
+            "$type": "dimension"
+          },
+          "num-50": {
+            "$value": "50",
+            "$type": "number"
+          },
+          "color-0a0a0a": {
+            "$value": "#0a0a0a",
+            "$type": "color"
+          },
+          "color-ffffff": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "size-12": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "size-16": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "size-2": {
+            "$value": "2px",
+            "$type": "dimension"
+          }
+        },
+        "avatar": {
+          "root": {
+            "flex-shrink": {
+              "$value": "0",
+              "$type": "number"
+            },
+            "height": {
+              "default": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "40px",
+                "$type": "dimension"
+              }
+            },
+            "width": {
+              "default": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "40px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "label": {
+            "background-color": {
+              "$value": "{muted}",
+              "$type": "color"
+            },
+            "color": {
+              "$value": "{muted-foreground}",
+              "$type": "color"
+            },
+            "font-size": {
+              "default": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "14px",
+                "$type": "dimension"
+              }
+            },
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "line-height": {
+              "default": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "20px",
+                "$type": "dimension"
+              }
+            }
+          }
+        },
+        "badge": {
+          "root": {
+            "background-color": {
+              "default": {
+                "$value": "{primary}",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "{secondary}",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b1a",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "border-bottom-color": {
+              "default": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "border-left-color": {
+              "default": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "border-right-color": {
+              "default": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "border-top-color": {
+              "default": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "color": {
+              "default": {
+                "$value": "{primary-foreground}",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "{secondary-foreground}",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "{destructive}",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "{foreground}",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0a0a0a",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "{primary}",
+                "$type": "color"
+              }
+            },
+            "column-gap": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "flex-shrink": {
+              "$value": "0",
+              "$type": "number"
+            },
+            "font-size": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "{font-weight-medium}",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "padding-bottom": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "padding-left": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "padding-right": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "padding-top": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "row-gap": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "background-color-state-active": {
+              "ghost": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "{primary}",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "{secondary}",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b1a",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "color-state-active": {
+              "ghost": {
+                "$value": "#737373",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "{primary-foreground}",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "{secondary-foreground}",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "{destructive}",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "{foreground}",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "{primary}",
+                "$type": "color"
+              }
+            },
+            "background-color-state-hover": {
+              "ghost": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "{primary}",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "{secondary}",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b1a",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "color-state-hover": {
+              "ghost": {
+                "$value": "#737373",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "{primary-foreground}",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "{secondary-foreground}",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "{destructive}",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "{foreground}",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "{primary}",
+                "$type": "color"
+              }
+            }
+          }
+        },
+        "button": {
+          "root": {
+            "background-color": {
+              "default": {
+                "$value": "{primary}",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "{background}",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "{secondary}",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b1a",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "border-bottom-color": {
+              "default": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "border-left-color": {
+              "default": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "border-right-color": {
+              "default": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "border-top-color": {
+              "default": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "box-shadow": {
+              "default": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "outline": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+                "$type": "shadow"
+              },
+              "secondary": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "ghost": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "destructive": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "link": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "color": {
+              "default": {
+                "$value": "{primary-foreground}",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#0a0a0a",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "{secondary-foreground}",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#0a0a0a",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "{destructive}",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "{primary}",
+                "$type": "color"
+              }
+            },
+            "flex-shrink": {
+              "$value": "0",
+              "$type": "number"
+            },
+            "font-size": {
+              "default": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "xs": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "icon": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "icon-xs": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "icon-sm": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "icon-lg": {
+                "$value": "14px",
+                "$type": "dimension"
+              }
+            },
+            "font-weight": {
+              "$value": "{font-weight-medium}",
+              "$type": "number"
+            },
+            "line-height": {
+              "default": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "xs": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "icon": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "icon-xs": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "icon-sm": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "icon-lg": {
+                "$value": "20px",
+                "$type": "dimension"
+              }
+            },
+            "padding-left": {
+              "default": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "xs": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "icon": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "icon-xs": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "icon-sm": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "icon-lg": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "padding-right": {
+              "default": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "xs": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "10px",
+                "$type": "dimension"
+              },
+              "icon": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "icon-xs": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "icon-sm": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "icon-lg": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "background-color-state-active": {
+              "default": {
+                "$value": "#171717cc",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#e7e7e7",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b33",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "opacity-state-disabled": {
+              "$value": "0.5",
+              "$type": "number"
+            },
+            "border-bottom-color-state-focus-visible": {
+              "default": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b66",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              }
+            },
+            "border-left-color-state-focus-visible": {
+              "default": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b66",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              }
+            },
+            "border-right-color-state-focus-visible": {
+              "default": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b66",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              }
+            },
+            "border-top-color-state-focus-visible": {
+              "default": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b66",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#a1a1a1",
+                "$type": "color"
+              }
+            },
+            "box-shadow-state-focus-visible": {
+              "default": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "outline": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+                "$type": "shadow"
+              },
+              "secondary": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "ghost": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "destructive": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.577 0.217662 0.112464 / 0.2) 0px 0px 0px 3px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              },
+              "link": {
+                "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+                "$type": "shadow"
+              }
+            },
+            "outline-width-state-focus-visible": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "background-color-state-hover": {
+              "default": {
+                "$value": "#171717cc",
+                "$type": "color"
+              },
+              "outline": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "secondary": {
+                "$value": "#e7e7e7",
+                "$type": "color"
+              },
+              "ghost": {
+                "$value": "#f5f5f5",
+                "$type": "color"
+              },
+              "destructive": {
+                "$value": "#e7000b33",
+                "$type": "color"
+              },
+              "link": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          }
+        },
+        "card": {
+          "root": {
+            "background-color": {
+              "$value": "{card}",
+              "$type": "color"
+            },
+            "box-shadow": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.145 0 0 / 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+              "$type": "shadow"
+            },
+            "column-gap": {
+              "default": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "padding-bottom": {
+              "default": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "padding-top": {
+              "default": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "row-gap": {
+              "default": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "part-0": {
+            "column-gap": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "grid-template-columns": {
+              "default": {
+                "$value": "240px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "256px",
+                "$type": "dimension"
+              }
+            },
+            "padding-left": {
+              "default": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "padding-right": {
+              "default": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "row-gap": {
+              "$value": "4px",
+              "$type": "dimension"
+            }
+          },
+          "label": {
+            "font-size": {
+              "default": {
+                "$value": "16px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "14px",
+                "$type": "dimension"
+              }
+            },
+            "font-weight": {
+              "$value": "{font-weight-medium}",
+              "$type": "number"
+            }
+          },
+          "label-2": {
+            "color": {
+              "$value": "{muted-foreground}",
+              "$type": "color"
+            },
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            }
+          },
+          "label-3": {
+            "column-gap": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "padding-left": {
+              "default": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "padding-right": {
+              "default": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "row-gap": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "checkbox": {
+          "root": {
+            "background-color": {
+              "unchecked": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "{primary}",
+                "$type": "color"
+              },
+              "indeterminate": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "border-bottom-color": {
+              "unchecked": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#171717",
+                "$type": "color"
+              },
+              "indeterminate": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              }
+            },
+            "border-left-color": {
+              "unchecked": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#171717",
+                "$type": "color"
+              },
+              "indeterminate": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              }
+            },
+            "border-right-color": {
+              "unchecked": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#171717",
+                "$type": "color"
+              },
+              "indeterminate": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              }
+            },
+            "border-top-color": {
+              "unchecked": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "#171717",
+                "$type": "color"
+              },
+              "indeterminate": {
+                "$value": "#e5e5e5",
+                "$type": "color"
+              }
+            },
+            "box-shadow": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+              "$type": "shadow"
+            },
+            "color": {
+              "unchecked": {
+                "$value": "#0a0a0a",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "{primary-foreground}",
+                "$type": "color"
+              },
+              "indeterminate": {
+                "$value": "#0a0a0a",
+                "$type": "color"
+              }
+            },
+            "flex-shrink": {
+              "$value": "0",
+              "$type": "number"
+            },
+            "height": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "width": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "opacity-state-disabled": {
+              "$value": "0.5",
+              "$type": "number"
+            },
+            "box-shadow-state-focus-visible": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+              "$type": "shadow"
+            },
+            "outline-width-state-focus-visible": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "input": {
+          "root": {
+            "box-shadow": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+              "$type": "shadow"
+            },
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "line-height": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "min-width": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "padding-bottom": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "padding-left": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "padding-right": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "padding-top": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "width": {
+              "$value": "288px",
+              "$type": "dimension"
+            },
+            "box-shadow-state-active": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+              "$type": "shadow"
+            },
+            "outline-width-state-active": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "opacity-state-disabled": {
+              "$value": "0.5",
+              "$type": "number"
+            },
+            "box-shadow-state-focus-visible": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+              "$type": "shadow"
+            },
+            "outline-width-state-focus-visible": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "select": {
+          "root": {
+            "box-shadow": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+              "$type": "shadow"
+            },
+            "padding-left": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "opacity-state-disabled": {
+              "$value": "0.5",
+              "$type": "number"
+            },
+            "box-shadow-state-focus-visible": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+              "$type": "shadow"
+            },
+            "outline-width-state-focus-visible": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "label": {
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            }
+          },
+          "icon": {
+            "flex-shrink": {
+              "$value": "0",
+              "$type": "number"
+            },
+            "stroke-width": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "switch": {
+          "root": {
+            "background-color": {
+              "unchecked": {
+                "$value": "{input}",
+                "$type": "color"
+              },
+              "checked": {
+                "$value": "{primary}",
+                "$type": "color"
+              }
+            },
+            "box-shadow": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+              "$type": "shadow"
+            },
+            "flex-shrink": {
+              "$value": "0",
+              "$type": "number"
+            },
+            "height": {
+              "sm": {
+                "$value": "14px",
+                "$type": "dimension"
+              },
+              "default": {
+                "$value": "18.3906px",
+                "$type": "dimension"
+              }
+            },
+            "width": {
+              "sm": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "default": {
+                "$value": "32px",
+                "$type": "dimension"
+              }
+            },
+            "opacity-state-disabled": {
+              "$value": "0.5",
+              "$type": "number"
+            },
+            "box-shadow-state-focus-visible": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+              "$type": "shadow"
+            },
+            "outline-width-state-focus-visible": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "part-0": {
+            "background-color": {
+              "$value": "{background}",
+              "$type": "color"
+            },
+            "box-shadow": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.145 0 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            },
+            "height": {
+              "sm": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "default": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "width": {
+              "sm": {
+                "$value": "12px",
+                "$type": "dimension"
+              },
+              "default": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            }
+          }
+        },
+        "tabs": {
+          "root": {
+            "height": {
+              "$value": "64px",
+              "$type": "dimension"
+            },
+            "width": {
+              "$value": "285.578px",
+              "$type": "dimension"
+            }
+          },
+          "part-0": {
+            "background-color": {
+              "$value": "{muted}",
+              "$type": "color"
+            },
+            "color": {
+              "$value": "{muted-foreground}",
+              "$type": "color"
+            },
+            "height": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "width": {
+              "$value": "229.297px",
+              "$type": "dimension"
+            }
+          },
+          "label": {
+            "background-color": {
+              "$value": "{background}",
+              "$type": "color"
+            },
+            "box-shadow": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px",
+              "$type": "shadow"
+            },
+            "width": {
+              "$value": "81.5312px",
+              "$type": "dimension"
+            },
+            "box-shadow-state-focus-visible": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px",
+              "$type": "shadow"
+            },
+            "outline-width-state-focus-visible": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "label-2": {
+            "color": {
+              "$value": "#0a0a0a99",
+              "$type": "color"
+            },
+            "width": {
+              "$value": "68.8594px",
+              "$type": "dimension"
+            },
+            "color-state-active": {
+              "$value": "#0a0a0a",
+              "$type": "color"
+            },
+            "color-state-hover": {
+              "$value": "#0a0a0a",
+              "$type": "color"
+            }
+          },
+          "label-3": {
+            "color": {
+              "$value": "#0a0a0a99",
+              "$type": "color"
+            },
+            "width": {
+              "$value": "72.9062px",
+              "$type": "dimension"
+            }
+          },
+          "label-4": {
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            }
+          }
+        },
+        "tooltip": {
+          "root": {
+            "height": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "translate-y": {
+              "$value": "50px",
+              "$type": "dimension"
+            },
+            "width": {
+              "$value": "219.031px",
+              "$type": "dimension"
+            }
+          },
+          "label": {
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "max-width": {
+              "$value": "320px",
+              "$type": "dimension"
+            }
+          },
+          "part-0-0": {
+            "bottom": {
+              "$value": "18px",
+              "$type": "dimension"
+            },
+            "left": {
+              "$value": "33.5861px",
+              "$type": "dimension"
+            },
+            "right": {
+              "$value": "175.453px",
+              "$type": "dimension"
+            }
+          }
+        }
+      }
+    }
+  },
+  "icons": {
+    "checkbox-part-0": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+    "select-icon": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6 9 L 12 15 L 18 9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+  },
+  "contracts": [
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.alert",
+      "name": "Alert",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1).  COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": {
+            "enum": [
+              "default",
+              "destructive"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Variant",
+              "values": {
+                "default": "Default",
+                "destructive": "Destructive"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch"
+          },
+          "parts": {
+            "label": {
+              "text": "Alert title",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "text-align": "left"
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.alert.label.font-weight}",
+                "line-height": "{imported.shared.size-20}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "variant",
+                  "map": {
+                    "default": {
+                      "color": "{imported.alert.label.color.default}"
+                    },
+                    "destructive": {
+                      "color": "{imported.alert.label.color.destructive}"
+                    }
+                  }
+                }
+              ]
+            },
+            "label-2": {
+              "text": "Alert description copy for the shadcn round.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "text-align": "left"
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.alert.label-2.font-weight}",
+                "line-height": "{imported.shared.size-20}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "variant",
+                  "map": {
+                    "default": {
+                      "color": "{imported.alert.label-2.color.default}"
+                    },
+                    "destructive": {
+                      "color": "{imported.alert.label-2.color.destructive}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "position": "relative",
+            "text-align": "left"
+          },
+          "tokens": {
+            "background-color": "{imported.alert.root.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-10}",
+            "border-bottom-right-radius": "{imported.shared.size-10}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-left-radius": "{imported.shared.size-10}",
+            "border-top-right-radius": "{imported.shared.size-10}",
+            "border-top-width": "{imported.shared.size-1}",
+            "bottom": "{imported.shared.size-0}",
+            "column-gap": "{imported.alert.root.column-gap}",
+            "font-size": "{imported.shared.size-14}",
+            "grid-template-columns": "{imported.alert.root.grid-template-columns}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-20}",
+            "padding-bottom": "{imported.alert.root.padding-bottom}",
+            "padding-left": "{imported.alert.root.padding-left}",
+            "padding-right": "{imported.alert.root.padding-right}",
+            "padding-top": "{imported.alert.root.padding-top}",
+            "right": "{imported.shared.size-0}",
+            "row-gap": "{imported.alert.root.row-gap}",
+            "top": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "default": {
+                  "color": "{imported.alert.root.color.default}"
+                },
+                "destructive": {
+                  "color": "{imported.alert.root.color.destructive}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Alert"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.avatar",
+      "name": "Avatar",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Fallback-only capture by name (AvatarImage refused in a network-free harness — RECON §4.2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "default",
+              "sm",
+              "lg"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "default": "Default",
+                "sm": "Sm",
+                "lg": "Lg"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex"
+          },
+          "parts": {
+            "label": {
+              "text": "CN",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "grow": true,
+                "align": "center",
+                "justify": "center"
+              },
+              "declared": {
+                "aspect-ratio": "1 / 1",
+                "user-select": "none"
+              },
+              "tokens": {
+                "background-color": "{imported.avatar.label.background-color}",
+                "border-bottom-left-radius": "{imported.shared.size-9999}",
+                "border-bottom-right-radius": "{imported.shared.size-9999}",
+                "border-top-left-radius": "{imported.shared.size-9999}",
+                "border-top-right-radius": "{imported.shared.size-9999}",
+                "color": "{imported.avatar.label.color}",
+                "font-weight": "{imported.avatar.label.font-weight}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "default": {
+                      "font-size": "{imported.avatar.label.font-size.default}",
+                      "line-height": "{imported.avatar.label.line-height.default}"
+                    },
+                    "lg": {
+                      "font-size": "{imported.avatar.label.font-size.lg}",
+                      "line-height": "{imported.avatar.label.line-height.lg}"
+                    },
+                    "sm": {
+                      "font-size": "{imported.avatar.label.font-size.sm}",
+                      "line-height": "{imported.avatar.label.line-height.sm}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "position": "relative",
+            "user-select": "none"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-9999}",
+            "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-top-left-radius": "{imported.shared.size-9999}",
+            "border-top-right-radius": "{imported.shared.size-9999}",
+            "bottom": "{imported.shared.size-0}",
+            "flex-shrink": "{imported.avatar.root.flex-shrink}",
+            "left": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "height": "{imported.avatar.root.height.default}",
+                  "width": "{imported.avatar.root.width.default}"
+                },
+                "lg": {
+                  "height": "{imported.avatar.root.height.lg}",
+                  "width": "{imported.avatar.root.width.lg}"
+                },
+                "sm": {
+                  "height": "{imported.avatar.root.height.sm}",
+                  "width": "{imported.avatar.root.width.sm}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Avatar"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.badge",
+      "name": "Badge",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1).  COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": {
+            "enum": [
+              "default",
+              "secondary",
+              "destructive",
+              "outline",
+              "ghost",
+              "link"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Variant",
+              "values": {
+                "default": "Default",
+                "secondary": "Secondary",
+                "destructive": "Destructive",
+                "outline": "Outline",
+                "ghost": "Ghost",
+                "link": "Link"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "As Child"
+            },
+            "code": {
+              "prop": "asChild"
+            }
+          }
+        },
+        {
+          "name": "children",
+          "type": "text",
+          "default": "Badge",
+          "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Content"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [
+        "active",
+        "hover"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "content": {
+            "prop": "children"
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-wrap-mode": "nowrap",
+            "transition-duration": "0.15s",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-26}",
+            "border-bottom-right-radius": "{imported.shared.size-26}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-left-radius": "{imported.shared.size-26}",
+            "border-top-right-radius": "{imported.shared.size-26}",
+            "border-top-width": "{imported.shared.size-1}",
+            "column-gap": "{imported.badge.root.column-gap}",
+            "flex-shrink": "{imported.badge.root.flex-shrink}",
+            "font-size": "{imported.badge.root.font-size}",
+            "font-weight": "{imported.badge.root.font-weight}",
+            "line-height": "{imported.badge.root.line-height}",
+            "padding-bottom": "{imported.badge.root.padding-bottom}",
+            "padding-left": "{imported.badge.root.padding-left}",
+            "padding-right": "{imported.badge.root.padding-right}",
+            "padding-top": "{imported.badge.root.padding-top}",
+            "row-gap": "{imported.badge.root.row-gap}"
+          },
+          "states": {
+            "active": {
+              "background-color": "{imported.badge.root.background-color-state-active.{variant}}",
+              "color": "{imported.badge.root.color-state-active.{variant}}"
+            },
+            "hover": {
+              "background-color": "{imported.badge.root.background-color-state-hover.{variant}}",
+              "color": "{imported.badge.root.color-state-hover.{variant}}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "default": {
+                  "background-color": "{imported.badge.root.background-color.default}",
+                  "border-bottom-color": "{imported.badge.root.border-bottom-color.default}",
+                  "border-left-color": "{imported.badge.root.border-left-color.default}",
+                  "border-right-color": "{imported.badge.root.border-right-color.default}",
+                  "border-top-color": "{imported.badge.root.border-top-color.default}",
+                  "color": "{imported.badge.root.color.default}"
+                },
+                "destructive": {
+                  "background-color": "{imported.badge.root.background-color.destructive}",
+                  "border-bottom-color": "{imported.badge.root.border-bottom-color.destructive}",
+                  "border-left-color": "{imported.badge.root.border-left-color.destructive}",
+                  "border-right-color": "{imported.badge.root.border-right-color.destructive}",
+                  "border-top-color": "{imported.badge.root.border-top-color.destructive}",
+                  "color": "{imported.badge.root.color.destructive}"
+                },
+                "ghost": {
+                  "background-color": "{imported.badge.root.background-color.ghost}",
+                  "border-bottom-color": "{imported.badge.root.border-bottom-color.ghost}",
+                  "border-left-color": "{imported.badge.root.border-left-color.ghost}",
+                  "border-right-color": "{imported.badge.root.border-right-color.ghost}",
+                  "border-top-color": "{imported.badge.root.border-top-color.ghost}",
+                  "color": "{imported.badge.root.color.ghost}"
+                },
+                "link": {
+                  "background-color": "{imported.badge.root.background-color.link}",
+                  "border-bottom-color": "{imported.badge.root.border-bottom-color.link}",
+                  "border-left-color": "{imported.badge.root.border-left-color.link}",
+                  "border-right-color": "{imported.badge.root.border-right-color.link}",
+                  "border-top-color": "{imported.badge.root.border-top-color.link}",
+                  "color": "{imported.badge.root.color.link}"
+                },
+                "outline": {
+                  "background-color": "{imported.badge.root.background-color.outline}",
+                  "border-bottom-color": "{imported.badge.root.border-bottom-color.outline}",
+                  "border-left-color": "{imported.badge.root.border-left-color.outline}",
+                  "border-right-color": "{imported.badge.root.border-right-color.outline}",
+                  "border-top-color": "{imported.badge.root.border-top-color.outline}",
+                  "color": "{imported.badge.root.color.outline}"
+                },
+                "secondary": {
+                  "background-color": "{imported.badge.root.background-color.secondary}",
+                  "border-bottom-color": "{imported.badge.root.border-bottom-color.secondary}",
+                  "border-left-color": "{imported.badge.root.border-left-color.secondary}",
+                  "border-right-color": "{imported.badge.root.border-right-color.secondary}",
+                  "border-top-color": "{imported.badge.root.border-top-color.secondary}",
+                  "color": "{imported.badge.root.color.secondary}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Badge"
+        }
+      },
+      "figmaStatePreviews": true
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.button",
+      "name": "Button",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1).  COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "button"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": {
+            "enum": [
+              "default",
+              "outline",
+              "secondary",
+              "ghost",
+              "destructive",
+              "link"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Variant",
+              "values": {
+                "default": "Default",
+                "outline": "Outline",
+                "secondary": "Secondary",
+                "ghost": "Ghost",
+                "destructive": "Destructive",
+                "link": "Link"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "default",
+              "xs",
+              "sm",
+              "lg",
+              "icon",
+              "icon-xs",
+              "icon-sm",
+              "icon-lg"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "default": "Default",
+                "xs": "Xs",
+                "sm": "Sm",
+                "lg": "Lg",
+                "icon": "Icon",
+                "icon-xs": "Icon Xs",
+                "icon-sm": "Icon Sm",
+                "icon-lg": "Icon Lg"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "As Child"
+            },
+            "code": {
+              "prop": "asChild"
+            }
+          }
+        },
+        {
+          "name": "children",
+          "type": "text",
+          "default": "Button",
+          "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Content"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [
+        "active",
+        "disabled",
+        "focus-visible",
+        "hover"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "content": {
+            "prop": "children"
+          },
+          "declared": {
+            "background-clip": "padding-box",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "text-wrap-mode": "nowrap",
+            "transition-duration": "0.15s",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "user-select": "none"
+          },
+          "declaredStates": {
+            "active": {
+              "translate": "0px 1px"
+            },
+            "disabled": {
+              "pointer-events": "none"
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "border-top-width": "{imported.shared.size-1}",
+            "flex-shrink": "{imported.button.root.flex-shrink}",
+            "font-weight": "{imported.button.root.font-weight}"
+          },
+          "states": {
+            "active": {
+              "background-color": "{imported.button.root.background-color-state-active.{variant}}"
+            },
+            "disabled": {
+              "opacity": "{imported.button.root.opacity-state-disabled}"
+            },
+            "focus-visible": {
+              "border-bottom-color": "{imported.button.root.border-bottom-color-state-focus-visible.{variant}}",
+              "border-left-color": "{imported.button.root.border-left-color-state-focus-visible.{variant}}",
+              "border-right-color": "{imported.button.root.border-right-color-state-focus-visible.{variant}}",
+              "border-top-color": "{imported.button.root.border-top-color-state-focus-visible.{variant}}",
+              "box-shadow": "{imported.button.root.box-shadow-state-focus-visible.{variant}}",
+              "outline-width": "{imported.button.root.outline-width-state-focus-visible}"
+            },
+            "hover": {
+              "background-color": "{imported.button.root.background-color-state-hover.{variant}}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "font-size": "{imported.button.root.font-size.default}",
+                  "line-height": "{imported.button.root.line-height.default}",
+                  "padding-left": "{imported.button.root.padding-left.default}",
+                  "padding-right": "{imported.button.root.padding-right.default}"
+                },
+                "icon": {
+                  "font-size": "{imported.button.root.font-size.icon}",
+                  "line-height": "{imported.button.root.line-height.icon}",
+                  "padding-left": "{imported.button.root.padding-left.icon}",
+                  "padding-right": "{imported.button.root.padding-right.icon}"
+                },
+                "icon-lg": {
+                  "font-size": "{imported.button.root.font-size.icon-lg}",
+                  "line-height": "{imported.button.root.line-height.icon-lg}",
+                  "padding-left": "{imported.button.root.padding-left.icon-lg}",
+                  "padding-right": "{imported.button.root.padding-right.icon-lg}"
+                },
+                "icon-sm": {
+                  "font-size": "{imported.button.root.font-size.icon-sm}",
+                  "line-height": "{imported.button.root.line-height.icon-sm}",
+                  "padding-left": "{imported.button.root.padding-left.icon-sm}",
+                  "padding-right": "{imported.button.root.padding-right.icon-sm}"
+                },
+                "icon-xs": {
+                  "font-size": "{imported.button.root.font-size.icon-xs}",
+                  "line-height": "{imported.button.root.line-height.icon-xs}",
+                  "padding-left": "{imported.button.root.padding-left.icon-xs}",
+                  "padding-right": "{imported.button.root.padding-right.icon-xs}"
+                },
+                "lg": {
+                  "font-size": "{imported.button.root.font-size.lg}",
+                  "line-height": "{imported.button.root.line-height.lg}",
+                  "padding-left": "{imported.button.root.padding-left.lg}",
+                  "padding-right": "{imported.button.root.padding-right.lg}"
+                },
+                "sm": {
+                  "font-size": "{imported.button.root.font-size.sm}",
+                  "line-height": "{imported.button.root.line-height.sm}",
+                  "padding-left": "{imported.button.root.padding-left.sm}",
+                  "padding-right": "{imported.button.root.padding-right.sm}"
+                },
+                "xs": {
+                  "font-size": "{imported.button.root.font-size.xs}",
+                  "line-height": "{imported.button.root.line-height.xs}",
+                  "padding-left": "{imported.button.root.padding-left.xs}",
+                  "padding-right": "{imported.button.root.padding-right.xs}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "map": {
+                "default": {
+                  "background-color": "{imported.button.root.background-color.default}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.default}",
+                  "border-left-color": "{imported.button.root.border-left-color.default}",
+                  "border-right-color": "{imported.button.root.border-right-color.default}",
+                  "border-top-color": "{imported.button.root.border-top-color.default}",
+                  "box-shadow": "{imported.button.root.box-shadow.default}",
+                  "color": "{imported.button.root.color.default}"
+                },
+                "destructive": {
+                  "background-color": "{imported.button.root.background-color.destructive}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.destructive}",
+                  "border-left-color": "{imported.button.root.border-left-color.destructive}",
+                  "border-right-color": "{imported.button.root.border-right-color.destructive}",
+                  "border-top-color": "{imported.button.root.border-top-color.destructive}",
+                  "box-shadow": "{imported.button.root.box-shadow.destructive}",
+                  "color": "{imported.button.root.color.destructive}"
+                },
+                "ghost": {
+                  "background-color": "{imported.button.root.background-color.ghost}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.ghost}",
+                  "border-left-color": "{imported.button.root.border-left-color.ghost}",
+                  "border-right-color": "{imported.button.root.border-right-color.ghost}",
+                  "border-top-color": "{imported.button.root.border-top-color.ghost}",
+                  "box-shadow": "{imported.button.root.box-shadow.ghost}",
+                  "color": "{imported.button.root.color.ghost}"
+                },
+                "link": {
+                  "background-color": "{imported.button.root.background-color.link}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.link}",
+                  "border-left-color": "{imported.button.root.border-left-color.link}",
+                  "border-right-color": "{imported.button.root.border-right-color.link}",
+                  "border-top-color": "{imported.button.root.border-top-color.link}",
+                  "box-shadow": "{imported.button.root.box-shadow.link}",
+                  "color": "{imported.button.root.color.link}"
+                },
+                "outline": {
+                  "background-color": "{imported.button.root.background-color.outline}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.outline}",
+                  "border-left-color": "{imported.button.root.border-left-color.outline}",
+                  "border-right-color": "{imported.button.root.border-right-color.outline}",
+                  "border-top-color": "{imported.button.root.border-top-color.outline}",
+                  "box-shadow": "{imported.button.root.box-shadow.outline}",
+                  "color": "{imported.button.root.color.outline}"
+                },
+                "secondary": {
+                  "background-color": "{imported.button.root.background-color.secondary}",
+                  "border-bottom-color": "{imported.button.root.border-bottom-color.secondary}",
+                  "border-left-color": "{imported.button.root.border-left-color.secondary}",
+                  "border-right-color": "{imported.button.root.border-right-color.secondary}",
+                  "border-top-color": "{imported.button.root.border-top-color.secondary}",
+                  "box-shadow": "{imported.button.root.box-shadow.secondary}",
+                  "color": "{imported.button.root.color.secondary}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Button"
+        }
+      },
+      "figmaStatePreviews": true
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.card",
+      "name": "Card",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1).  COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "default",
+              "sm"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "default": "Default",
+                "sm": "Sm"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "column"
+          },
+          "parts": {
+            "part-0": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "align": "stretch"
+              },
+              "parts": {
+                "label": {
+                  "text": "Card title",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "tokens": {
+                    "font-weight": "{imported.card.label.font-weight}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "default": {
+                          "font-size": "{imported.card.label.font-size.default}"
+                        },
+                        "sm": {
+                          "font-size": "{imported.card.label.font-size.sm}"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "label-2": {
+                  "text": "Card description",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "tokens": {
+                    "color": "{imported.card.label-2.color}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.card.label-2.font-weight}",
+                    "line-height": "{imported.shared.size-20}"
+                  }
+                }
+              },
+              "tokens": {
+                "border-top-left-radius": "{imported.shared.size-14}",
+                "border-top-right-radius": "{imported.shared.size-14}",
+                "column-gap": "{imported.card.part-0.column-gap}",
+                "font-size": "{imported.shared.size-14}",
+                "line-height": "{imported.shared.size-20}",
+                "row-gap": "{imported.card.part-0.row-gap}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "default": {
+                      "grid-template-columns": "{imported.card.part-0.grid-template-columns.default}",
+                      "padding-left": "{imported.card.part-0.padding-left.default}",
+                      "padding-right": "{imported.card.part-0.padding-right.default}"
+                    },
+                    "sm": {
+                      "grid-template-columns": "{imported.card.part-0.grid-template-columns.sm}",
+                      "padding-left": "{imported.card.part-0.padding-left.sm}",
+                      "padding-right": "{imported.card.part-0.padding-right.sm}"
+                    }
+                  }
+                }
+              ]
+            },
+            "label-3": {
+              "text": "Card content copy for the shadcn round.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column"
+              },
+              "tokens": {
+                "column-gap": "{imported.card.label-3.column-gap}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.card.label-3.font-weight}",
+                "line-height": "{imported.shared.size-20}",
+                "row-gap": "{imported.card.label-3.row-gap}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "default": {
+                      "padding-left": "{imported.card.label-3.padding-left.default}",
+                      "padding-right": "{imported.card.label-3.padding-right.default}"
+                    },
+                    "sm": {
+                      "padding-left": "{imported.card.label-3.padding-left.sm}",
+                      "padding-right": "{imported.card.label-3.padding-right.sm}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "overflow-x": "hidden",
+            "overflow-y": "hidden"
+          },
+          "tokens": {
+            "background-color": "{imported.card.root.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-14}",
+            "border-bottom-right-radius": "{imported.shared.size-14}",
+            "border-top-left-radius": "{imported.shared.size-14}",
+            "border-top-right-radius": "{imported.shared.size-14}",
+            "box-shadow": "{imported.card.root.box-shadow}",
+            "font-size": "{imported.shared.size-14}",
+            "line-height": "{imported.shared.size-20}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "column-gap": "{imported.card.root.column-gap.default}",
+                  "padding-bottom": "{imported.card.root.padding-bottom.default}",
+                  "padding-top": "{imported.card.root.padding-top.default}",
+                  "row-gap": "{imported.card.root.row-gap.default}"
+                },
+                "sm": {
+                  "column-gap": "{imported.card.root.column-gap.sm}",
+                  "padding-bottom": "{imported.card.root.padding-bottom.sm}",
+                  "padding-top": "{imported.card.root.padding-top.sm}",
+                  "row-gap": "{imported.card.root.row-gap.sm}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Card"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.checkbox",
+      "name": "Checkbox",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). TRI-STATE ON ONE AXIS (MUI/Carbon precedent): Radix accepts checked='indeterminate' directly, so the axis maps to plain values — keeps the lucide CheckIcon/MinusIcon svg-content promotion single-axis. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "button"
+      },
+      "props": [
+        {
+          "name": "checked",
+          "type": {
+            "enum": [
+              "unchecked",
+              "checked",
+              "indeterminate"
+            ]
+          },
+          "default": "unchecked",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Checked",
+              "values": {
+                "unchecked": "Unchecked",
+                "checked": "Checked",
+                "indeterminate": "Indeterminate"
+              }
+            },
+            "code": {
+              "prop": "checked"
+            }
+          }
+        }
+      ],
+      "states": [
+        "disabled",
+        "focus-visible"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "parts": {
+            "part-0": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "align": "stretch"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "checked",
+                  "equals": "unchecked",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "icon": {
+                "asset": "checkbox-part-0",
+                "size": 14
+              },
+              "declared": {
+                "cursor": "default",
+                "pointer-events": "none",
+                "text-align": "center",
+                "transition-property": "none"
+              },
+              "tokens": {
+                "grid-template-columns": "{imported.shared.size-14}",
+                "grid-template-rows": "{imported.shared.size-14}",
+                "height": "{imported.shared.size-14}",
+                "width": "{imported.shared.size-14}"
+              }
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "position": "relative",
+            "transition-duration": "0.15s",
+            "transition-property": "box-shadow",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-4}",
+            "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-left-radius": "{imported.shared.size-4}",
+            "border-top-right-radius": "{imported.shared.size-4}",
+            "border-top-width": "{imported.shared.size-1}",
+            "bottom": "{imported.shared.size-0}",
+            "box-shadow": "{imported.checkbox.root.box-shadow}",
+            "flex-shrink": "{imported.checkbox.root.flex-shrink}",
+            "height": "{imported.checkbox.root.height}",
+            "left": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.checkbox.root.width}"
+          },
+          "states": {
+            "disabled": {
+              "opacity": "{imported.checkbox.root.opacity-state-disabled}"
+            },
+            "focus-visible": {
+              "border-bottom-color": "{imported.shared.color-a1a1a1}",
+              "border-left-color": "{imported.shared.color-a1a1a1}",
+              "border-right-color": "{imported.shared.color-a1a1a1}",
+              "border-top-color": "{imported.shared.color-a1a1a1}",
+              "box-shadow": "{imported.checkbox.root.box-shadow-state-focus-visible}",
+              "outline-width": "{imported.checkbox.root.outline-width-state-focus-visible}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "background-color": "{imported.checkbox.root.background-color.checked}",
+                  "border-bottom-color": "{imported.checkbox.root.border-bottom-color.checked}",
+                  "border-left-color": "{imported.checkbox.root.border-left-color.checked}",
+                  "border-right-color": "{imported.checkbox.root.border-right-color.checked}",
+                  "border-top-color": "{imported.checkbox.root.border-top-color.checked}",
+                  "color": "{imported.checkbox.root.color.checked}"
+                },
+                "indeterminate": {
+                  "background-color": "{imported.checkbox.root.background-color.indeterminate}",
+                  "border-bottom-color": "{imported.checkbox.root.border-bottom-color.indeterminate}",
+                  "border-left-color": "{imported.checkbox.root.border-left-color.indeterminate}",
+                  "border-right-color": "{imported.checkbox.root.border-right-color.indeterminate}",
+                  "border-top-color": "{imported.checkbox.root.border-top-color.indeterminate}",
+                  "color": "{imported.checkbox.root.color.indeterminate}"
+                },
+                "unchecked": {
+                  "background-color": "{imported.checkbox.root.background-color.unchecked}",
+                  "border-bottom-color": "{imported.checkbox.root.border-bottom-color.unchecked}",
+                  "border-left-color": "{imported.checkbox.root.border-left-color.unchecked}",
+                  "border-right-color": "{imported.checkbox.root.border-right-color.unchecked}",
+                  "border-top-color": "{imported.checkbox.root.border-top-color.unchecked}",
+                  "color": "{imported.checkbox.root.color.unchecked}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Checkbox"
+        }
+      },
+      "figmaStatePreviews": true
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.input",
+      "name": "Input",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). v1: default text input; `type` deferred by name (attribute pass-through, not an enum prop in source — RECON §4.2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "input"
+      },
+      "props": [],
+      "states": [
+        "disabled",
+        "active",
+        "focus-visible"
+      ],
+      "anatomy": {
+        "root": {
+          "declared": {
+            "display": "block",
+            "appearance": "auto",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "cursor": "text",
+            "overflow-x": "clip",
+            "overflow-y": "clip",
+            "transition-duration": "0.15s",
+            "transition-property": "color, box-shadow",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed",
+              "pointer-events": "none"
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "border-top-width": "{imported.shared.size-1}",
+            "box-shadow": "{imported.input.root.box-shadow}",
+            "font-size": "{imported.input.root.font-size}",
+            "line-height": "{imported.input.root.line-height}",
+            "min-width": "{imported.input.root.min-width}",
+            "padding-bottom": "{imported.input.root.padding-bottom}",
+            "padding-left": "{imported.input.root.padding-left}",
+            "padding-right": "{imported.input.root.padding-right}",
+            "padding-top": "{imported.input.root.padding-top}",
+            "width": "{imported.input.root.width}"
+          },
+          "states": {
+            "active": {
+              "border-bottom-color": "{imported.shared.color-a1a1a1}",
+              "border-left-color": "{imported.shared.color-a1a1a1}",
+              "border-right-color": "{imported.shared.color-a1a1a1}",
+              "border-top-color": "{imported.shared.color-a1a1a1}",
+              "box-shadow": "{imported.input.root.box-shadow-state-active}",
+              "outline-width": "{imported.input.root.outline-width-state-active}"
+            },
+            "disabled": {
+              "opacity": "{imported.input.root.opacity-state-disabled}"
+            },
+            "focus-visible": {
+              "border-bottom-color": "{imported.shared.color-a1a1a1}",
+              "border-left-color": "{imported.shared.color-a1a1a1}",
+              "border-right-color": "{imported.shared.color-a1a1a1}",
+              "border-top-color": "{imported.shared.color-a1a1a1}",
+              "box-shadow": "{imported.input.root.box-shadow-state-focus-visible}",
+              "outline-width": "{imported.input.root.outline-width-state-focus-visible}"
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Input"
+        }
+      },
+      "figmaStatePreviews": true
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.select",
+      "name": "Select",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Composed ROOT mount, portalCapture + openDriver {open:true} (RECON H3). The size axis lives on the CHILD SelectTrigger — child-axis limitation (docs/21 §7.3), pinned default, deferred by name. SelectTrigger as its own closed component is STOPPED: witnessed Radix context throw (RECON-round capture note). states:[] pinned — portal captures take no state planes. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [],
+      "states": [
+        "active",
+        "disabled",
+        "focus-visible"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "space-between"
+          },
+          "parts": {
+            "label": {
+              "text": "Select an option",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center"
+              },
+              "declared": {
+                "cursor": "default",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "pointer-events": "none",
+                "text-align": "center",
+                "text-wrap-mode": "nowrap"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "color": "{imported.shared.color-737373}",
+                "column-gap": "{imported.shared.size-6}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.select.label.font-weight}",
+                "line-height": "{imported.shared.size-20}",
+                "row-gap": "{imported.shared.size-6}"
+              }
+            },
+            "icon": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "default",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "pointer-events": "none",
+                "text-align": "center",
+                "text-wrap-mode": "nowrap"
+              },
+              "icon": {
+                "asset": "select-icon",
+                "size": 16
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "color": "{imported.shared.color-737373}",
+                "flex-shrink": "{imported.select.icon.flex-shrink}",
+                "font-size": "{imported.shared.size-14}",
+                "line-height": "{imported.shared.size-20}",
+                "stroke": "{imported.shared.color-737373}",
+                "stroke-width": "{imported.select.icon.stroke-width}"
+              }
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "text-wrap-mode": "nowrap",
+            "transition-duration": "0.15s",
+            "transition-property": "color, box-shadow",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "declaredStates": {
+            "active": {
+              "pointer-events": "none"
+            },
+            "disabled": {
+              "cursor": "not-allowed",
+              "pointer-events": "none"
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "border-top-width": "{imported.shared.size-1}",
+            "box-shadow": "{imported.select.root.box-shadow}",
+            "color": "{imported.shared.color-737373}",
+            "column-gap": "{imported.shared.size-6}",
+            "font-size": "{imported.shared.size-14}",
+            "line-height": "{imported.shared.size-20}",
+            "padding-bottom": "{imported.shared.size-8}",
+            "padding-left": "{imported.select.root.padding-left}",
+            "padding-right": "{imported.shared.size-8}",
+            "padding-top": "{imported.shared.size-8}",
+            "row-gap": "{imported.shared.size-6}"
+          },
+          "states": {
+            "disabled": {
+              "opacity": "{imported.select.root.opacity-state-disabled}"
+            },
+            "focus-visible": {
+              "border-bottom-color": "{imported.shared.color-a1a1a1}",
+              "border-left-color": "{imported.shared.color-a1a1a1}",
+              "border-right-color": "{imported.shared.color-a1a1a1}",
+              "border-top-color": "{imported.shared.color-a1a1a1}",
+              "box-shadow": "{imported.select.root.box-shadow-state-focus-visible}",
+              "outline-width": "{imported.select.root.outline-width-state-focus-visible}"
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Select"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.switch",
+      "name": "Switch",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). checked is a VARIANT AXIS (prop-selected Radix data-state rendering — RECON H4); the real-DOM thumb's translate question is H6. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "button"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "sm",
+              "default"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Size",
+              "values": {
+                "sm": "Sm",
+                "default": "Default"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        },
+        {
+          "name": "checked",
+          "type": {
+            "enum": [
+              "unchecked",
+              "checked"
+            ]
+          },
+          "default": "unchecked",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Checked",
+              "values": {
+                "unchecked": "Unchecked",
+                "checked": "Checked"
+              }
+            },
+            "code": {
+              "prop": "checked"
+            }
+          }
+        }
+      ],
+      "states": [
+        "disabled",
+        "focus-visible"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "part-0": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "aspect-ratio": "1 / 1",
+                "cursor": "default",
+                "pointer-events": "none",
+                "text-align": "center",
+                "transition-duration": "0.15s",
+                "transition-property": "transform, translate, scale, rotate",
+                "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.switch.part-0.background-color}",
+                "border-bottom-left-radius": "{imported.shared.size-9999}",
+                "border-bottom-right-radius": "{imported.shared.size-9999}",
+                "border-top-left-radius": "{imported.shared.size-9999}",
+                "border-top-right-radius": "{imported.shared.size-9999}",
+                "box-shadow": "{imported.switch.part-0.box-shadow}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "default": {
+                      "height": "{imported.switch.part-0.height.default}",
+                      "width": "{imported.switch.part-0.width.default}"
+                    },
+                    "sm": {
+                      "height": "{imported.switch.part-0.height.sm}",
+                      "width": "{imported.switch.part-0.width.sm}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "position": "relative",
+            "transition-duration": "0.15s",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-00000000}",
+            "border-bottom-left-radius": "{imported.shared.size-9999}",
+            "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-00000000}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-00000000}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-00000000}",
+            "border-top-left-radius": "{imported.shared.size-9999}",
+            "border-top-right-radius": "{imported.shared.size-9999}",
+            "border-top-width": "{imported.shared.size-1}",
+            "bottom": "{imported.shared.size-0}",
+            "box-shadow": "{imported.switch.root.box-shadow}",
+            "flex-shrink": "{imported.switch.root.flex-shrink}",
+            "left": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          },
+          "states": {
+            "disabled": {
+              "opacity": "{imported.switch.root.opacity-state-disabled}"
+            },
+            "focus-visible": {
+              "border-bottom-color": "{imported.shared.color-a1a1a1}",
+              "border-left-color": "{imported.shared.color-a1a1a1}",
+              "border-right-color": "{imported.shared.color-a1a1a1}",
+              "border-top-color": "{imported.shared.color-a1a1a1}",
+              "box-shadow": "{imported.switch.root.box-shadow-state-focus-visible}",
+              "outline-width": "{imported.switch.root.outline-width-state-focus-visible}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "background-color": "{imported.switch.root.background-color.checked}"
+                },
+                "unchecked": {
+                  "background-color": "{imported.switch.root.background-color.unchecked}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "height": "{imported.switch.root.height.default}",
+                  "width": "{imported.switch.root.width.default}"
+                },
+                "sm": {
+                  "height": "{imported.switch.root.height.sm}",
+                  "width": "{imported.switch.root.width.sm}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Switch"
+        }
+      },
+      "figmaStatePreviews": true
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.tabs",
+      "name": "Tabs",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Root mount with the canonical 2-deep childrenSpec, CONTROLLED value (Carbon Tabs double-run lesson). The variant axis lives on the CHILD TabsList — child-axis limitation (docs/21 §7.3), pinned default, deferred by name ('TabsList-with-children as the mount' is not mountable: witnessed Radix context throw). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [],
+      "states": [
+        "focus-visible",
+        "active",
+        "hover"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "column"
+          },
+          "parts": {
+            "part-0": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "center"
+              },
+              "parts": {
+                "label": {
+                  "element": "button",
+                  "text": "Overview",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "position": "relative",
+                    "text-wrap-mode": "nowrap",
+                    "transition-duration": "0.15s",
+                    "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+                  },
+                  "declaredStates": {
+                    "focus-visible": {
+                      "outline-style": "solid"
+                    }
+                  },
+                  "tokens": {
+                    "background-color": "{imported.tabs.label.background-color}",
+                    "border-bottom-color": "{imported.shared.color-00000000}",
+                    "border-bottom-left-radius": "{imported.shared.size-8}",
+                    "border-bottom-right-radius": "{imported.shared.size-8}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "border-left-color": "{imported.shared.color-00000000}",
+                    "border-left-width": "{imported.shared.size-1}",
+                    "border-right-color": "{imported.shared.color-00000000}",
+                    "border-right-width": "{imported.shared.size-1}",
+                    "border-top-color": "{imported.shared.color-00000000}",
+                    "border-top-left-radius": "{imported.shared.size-8}",
+                    "border-top-right-radius": "{imported.shared.size-8}",
+                    "border-top-width": "{imported.shared.size-1}",
+                    "bottom": "{imported.shared.size-0}",
+                    "box-shadow": "{imported.tabs.label.box-shadow}",
+                    "column-gap": "{imported.shared.size-6}",
+                    "flex-grow": "{imported.shared.num-1}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "height": "{imported.shared.size-29}",
+                    "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-20}",
+                    "padding-bottom": "{imported.shared.size-4}",
+                    "padding-left": "{imported.shared.size-8}",
+                    "padding-right": "{imported.shared.size-8}",
+                    "padding-top": "{imported.shared.size-4}",
+                    "right": "{imported.shared.size-0}",
+                    "row-gap": "{imported.shared.size-6}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.tabs.label.width}"
+                  }
+                },
+                "label-2": {
+                  "element": "button",
+                  "text": "Activity",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "position": "relative",
+                    "text-wrap-mode": "nowrap",
+                    "transition-duration": "0.15s",
+                    "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-00000000}",
+                    "border-bottom-left-radius": "{imported.shared.size-8}",
+                    "border-bottom-right-radius": "{imported.shared.size-8}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "border-left-color": "{imported.shared.color-00000000}",
+                    "border-left-width": "{imported.shared.size-1}",
+                    "border-right-color": "{imported.shared.color-00000000}",
+                    "border-right-width": "{imported.shared.size-1}",
+                    "border-top-color": "{imported.shared.color-00000000}",
+                    "border-top-left-radius": "{imported.shared.size-8}",
+                    "border-top-right-radius": "{imported.shared.size-8}",
+                    "border-top-width": "{imported.shared.size-1}",
+                    "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.tabs.label-2.color}",
+                    "column-gap": "{imported.shared.size-6}",
+                    "flex-grow": "{imported.shared.num-1}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "height": "{imported.shared.size-29}",
+                    "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-20}",
+                    "padding-bottom": "{imported.shared.size-4}",
+                    "padding-left": "{imported.shared.size-8}",
+                    "padding-right": "{imported.shared.size-8}",
+                    "padding-top": "{imported.shared.size-4}",
+                    "right": "{imported.shared.size-0}",
+                    "row-gap": "{imported.shared.size-6}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.tabs.label-2.width}"
+                  },
+                  "states": {
+                    "active": {
+                      "color": "{imported.tabs.label-2.color-state-active}"
+                    },
+                    "hover": {
+                      "color": "{imported.tabs.label-2.color-state-hover}"
+                    }
+                  }
+                },
+                "label-3": {
+                  "element": "button",
+                  "text": "Settings",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "position": "relative",
+                    "text-wrap-mode": "nowrap",
+                    "transition-duration": "0.15s",
+                    "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-00000000}",
+                    "border-bottom-left-radius": "{imported.shared.size-8}",
+                    "border-bottom-right-radius": "{imported.shared.size-8}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "border-left-color": "{imported.shared.color-00000000}",
+                    "border-left-width": "{imported.shared.size-1}",
+                    "border-right-color": "{imported.shared.color-00000000}",
+                    "border-right-width": "{imported.shared.size-1}",
+                    "border-top-color": "{imported.shared.color-00000000}",
+                    "border-top-left-radius": "{imported.shared.size-8}",
+                    "border-top-right-radius": "{imported.shared.size-8}",
+                    "border-top-width": "{imported.shared.size-1}",
+                    "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.tabs.label-3.color}",
+                    "column-gap": "{imported.shared.size-6}",
+                    "flex-grow": "{imported.shared.num-1}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-500}",
+                    "height": "{imported.shared.size-29}",
+                    "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-20}",
+                    "padding-bottom": "{imported.shared.size-4}",
+                    "padding-left": "{imported.shared.size-8}",
+                    "padding-right": "{imported.shared.size-8}",
+                    "padding-top": "{imported.shared.size-4}",
+                    "right": "{imported.shared.size-0}",
+                    "row-gap": "{imported.shared.size-6}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.tabs.label-3.width}"
+                  }
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.tabs.part-0.background-color}",
+                "border-bottom-left-radius": "{imported.shared.size-10}",
+                "border-bottom-right-radius": "{imported.shared.size-10}",
+                "border-top-left-radius": "{imported.shared.size-10}",
+                "border-top-right-radius": "{imported.shared.size-10}",
+                "color": "{imported.tabs.part-0.color}",
+                "height": "{imported.tabs.part-0.height}",
+                "padding-bottom": "{imported.shared.size-3}",
+                "padding-left": "{imported.shared.size-3}",
+                "padding-right": "{imported.shared.size-3}",
+                "padding-top": "{imported.shared.size-3}",
+                "width": "{imported.tabs.part-0.width}"
+              }
+            },
+            "label-4": {
+              "text": "Overview panel copy for the shadcn round.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              },
+              "tokens": {
+                "flex-grow": "{imported.shared.num-1}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.tabs.label-4.font-weight}",
+                "line-height": "{imported.shared.size-20}"
+              }
+            }
+          },
+          "tokens": {
+            "column-gap": "{imported.shared.size-8}",
+            "height": "{imported.tabs.root.height}",
+            "row-gap": "{imported.shared.size-8}",
+            "width": "{imported.tabs.root.width}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Tabs"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "shadcn.tooltip",
+      "name": "Tooltip",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Portal (RECON H3): degraded by design — no state planes, no source names (portalSweep takes no varPrefix). Provider rides the global mount wrapper. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "declared": {
+            "display": "block",
+            "transform": "matrix(1, 0, 0, 1, 0, 50)"
+          },
+          "parts": {
+            "label": {
+              "text": "Tooltip copy for the shadcn round.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "inline-flex",
+                "align": "center"
+              },
+              "parts": {
+                "part-0-0": {
+                  "element": "span",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "position": "absolute"
+                  },
+                  "parts": {
+                    "icon": {
+                      "element": "svg",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "overflow-x": "hidden",
+                        "overflow-y": "hidden"
+                      },
+                      "parts": {
+                        "part-0-0-0-0": {
+                          "element": "polygon",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy polygon| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "declared": {
+                            "display": "inline"
+                          },
+                          "tokens": {
+                            "color": "{imported.shared.color-ffffff}",
+                            "fill": "{imported.shared.color-0a0a0a}",
+                            "font-size": "{imported.shared.size-12}",
+                            "line-height": "{imported.shared.size-16}",
+                            "min-height": "{imported.shared.size-0}",
+                            "min-width": "{imported.shared.size-0}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "background-color": "{imported.shared.color-0a0a0a}",
+                        "border-bottom-left-radius": "{imported.shared.size-2}",
+                        "border-bottom-right-radius": "{imported.shared.size-2}",
+                        "border-top-left-radius": "{imported.shared.size-2}",
+                        "border-top-right-radius": "{imported.shared.size-2}",
+                        "color": "{imported.shared.color-ffffff}",
+                        "fill": "{imported.shared.color-0a0a0a}",
+                        "font-size": "{imported.shared.size-12}",
+                        "height": "{imported.shared.size-10}",
+                        "line-height": "{imported.shared.size-16}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}",
+                        "width": "{imported.shared.size-10}",
+                        "z-index": "{imported.shared.num-50}"
+                      }
+                    }
+                  },
+                  "tokens": {
+                    "bottom": "{imported.tooltip.part-0-0.bottom}",
+                    "color": "{imported.shared.color-ffffff}",
+                    "font-size": "{imported.shared.size-12}",
+                    "height": "{imported.shared.size-10}",
+                    "left": "{imported.tooltip.part-0-0.left}",
+                    "line-height": "{imported.shared.size-16}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.tooltip.part-0-0.right}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-10}"
+                  }
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.shared.color-0a0a0a}",
+                "border-bottom-left-radius": "{imported.shared.size-8}",
+                "border-bottom-right-radius": "{imported.shared.size-8}",
+                "border-top-left-radius": "{imported.shared.size-8}",
+                "border-top-right-radius": "{imported.shared.size-8}",
+                "color": "{imported.shared.color-ffffff}",
+                "column-gap": "{imported.shared.size-6}",
+                "font-size": "{imported.shared.size-12}",
+                "font-weight": "{imported.tooltip.label.font-weight}",
+                "line-height": "{imported.shared.size-16}",
+                "max-width": "{imported.tooltip.label.max-width}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "padding-bottom": "{imported.shared.size-6}",
+                "padding-left": "{imported.shared.size-12}",
+                "padding-right": "{imported.shared.size-12}",
+                "padding-top": "{imported.shared.size-6}",
+                "row-gap": "{imported.shared.size-6}",
+                "z-index": "{imported.shared.num-50}"
+              },
+              "hugsBelowMaxWidth": true
+            }
+          },
+          "tokens": {
+            "height": "{imported.tooltip.root.height}",
+            "min-height": "{imported.shared.size-0}",
+            "translate-x": "{imported.shared.size-0}",
+            "translate-y": "{imported.tooltip.root.translate-y}",
+            "width": "{imported.tooltip.root.width}",
+            "z-index": "{imported.shared.num-50}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "@shadcn-sandbox/ui",
+          "export": "Tooltip"
+        }
+      }
+    }
+  ]
+}

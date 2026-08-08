@@ -2,8 +2,8 @@
 
 > **Path:** this is the deep recipe for **path B — code-first** ([Choose Your Path](00-choose-your-path.md)): your code, captured in a real browser, into contracts and Figma sets.
 
-*The onboarding path for a stranger's library. Seven distinct libraries across
-eight rounds have now gone through this pipeline — five styling methods —
+*The onboarding path for a stranger's library. Eight distinct libraries across
+nine rounds have now gone through this pipeline — five styling methods —
 and **not one of them was special-cased in the engine**. This page is the recipe
 those rounds actually followed, written so the next one can follow it without an
 engine change — and honest about the three places where it is still craft rather
@@ -398,8 +398,9 @@ name** rather than folded into an average.
 
 Source of truth: the `CaptureConfig` / `ComponentConfig` interfaces in
 [`extract/computed/capture.ts`](../extract/computed/capture.ts). Worked
-examples: the 7 committed capture configs in `extract/computed/configs/`
-(`carbon`, `mui`, `tailwind`, `astryx`, `polaris`, `polaris-depth`, `altitude`)
+examples: the 8 committed capture configs in `extract/computed/configs/`
+(`carbon`, `mui`, `tailwind`, `astryx`, `polaris`, `polaris-depth`, `altitude`,
+`shadcn`)
 — read the one whose styling method is closest to yours before writing a line
 of your own.
 

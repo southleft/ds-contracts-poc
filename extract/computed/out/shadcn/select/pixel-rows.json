@@ -1,0 +1,42 @@
+[
+  {
+    "key": "enabled__default",
+    "pctExact": 2.822265625,
+    "pctAA": 1.19140625
+  },
+  {
+    "key": "enabled__hover",
+    "pctExact": 2.822265625,
+    "pctAA": 1.19140625
+  },
+  {
+    "key": "enabled__focus-visible",
+    "pctExact": 2.822265625,
+    "pctAA": 1.19140625
+  },
+  {
+    "key": "enabled__active",
+    "pctExact": 21.30859375,
+    "pctAA": 2.0540364583333335
+  },
+  {
+    "key": "disabled__default",
+    "pctExact": 9.814453125,
+    "pctAA": 2.0638020833333335
+  },
+  {
+    "key": "disabled__hover",
+    "pctExact": 9.814453125,
+    "pctAA": 2.0638020833333335
+  },
+  {
+    "key": "disabled__focus-visible",
+    "pctExact": 9.814453125,
+    "pctAA": 2.0638020833333335
+  },
+  {
+    "key": "disabled__active",
+    "pctExact": 2.7701822916666665,
+    "pctAA": 0.947265625
+  }
+]

@@ -18,7 +18,7 @@
     },
     {
       "library": "eventz-vars",
-      "leaves": 44,
+      "leaves": 49,
       "unreferenced": 4
     },
     {
@@ -30,6 +30,11 @@
       "library": "polaris",
       "leaves": 1298,
       "unreferenced": 619
+    },
+    {
+      "library": "shadcn",
+      "leaves": 365,
+      "unreferenced": 2
     },
     {
       "library": "tailwind",

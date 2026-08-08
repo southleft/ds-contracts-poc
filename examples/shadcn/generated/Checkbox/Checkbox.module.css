@@ -1,0 +1,135 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/checkbox.contract.json (shadcn.checkbox v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-bottom-left-radius: var(--imported-shared-size-4);
+  border-bottom-right-radius: var(--imported-shared-size-4);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-left-radius: var(--imported-shared-size-4);
+  border-top-right-radius: var(--imported-shared-size-4);
+  border-top-width: var(--imported-shared-size-1);
+  bottom: var(--imported-shared-size-0);
+  box-shadow: var(--imported-checkbox-root-box-shadow);
+  flex-shrink: var(--imported-checkbox-root-flex-shrink);
+  height: var(--imported-checkbox-root-height);
+  left: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-checkbox-root-width);
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  position: relative;
+  transition-duration: 0.15s;
+  transition-property: box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.checked-checked {
+  background-color: var(--imported-checkbox-root-background-color-checked);
+  border-bottom-color: var(--imported-checkbox-root-border-bottom-color-checked);
+  border-left-color: var(--imported-checkbox-root-border-left-color-checked);
+  border-right-color: var(--imported-checkbox-root-border-right-color-checked);
+  border-top-color: var(--imported-checkbox-root-border-top-color-checked);
+  color: var(--imported-checkbox-root-color-checked);
+}
+
+.checked-indeterminate {
+  background-color: var(--imported-checkbox-root-background-color-indeterminate);
+  border-bottom-color: var(--imported-checkbox-root-border-bottom-color-indeterminate);
+  border-left-color: var(--imported-checkbox-root-border-left-color-indeterminate);
+  border-right-color: var(--imported-checkbox-root-border-right-color-indeterminate);
+  border-top-color: var(--imported-checkbox-root-border-top-color-indeterminate);
+  color: var(--imported-checkbox-root-color-indeterminate);
+}
+
+.checked-unchecked {
+  background-color: var(--imported-checkbox-root-background-color-unchecked);
+  border-bottom-color: var(--imported-checkbox-root-border-bottom-color-unchecked);
+  border-left-color: var(--imported-checkbox-root-border-left-color-unchecked);
+  border-right-color: var(--imported-checkbox-root-border-right-color-unchecked);
+  border-top-color: var(--imported-checkbox-root-border-top-color-unchecked);
+  color: var(--imported-checkbox-root-color-unchecked);
+}
+
+.root:disabled {
+  opacity: var(--imported-checkbox-root-opacity-state-disabled);
+}
+
+.root:focus-visible {
+  border-bottom-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  border-left-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  border-right-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  border-top-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  box-shadow: var(--imported-checkbox-root-box-shadow-state-focus-visible);
+}
+
+.root:focus-visible {
+  outline-width: var(--imported-checkbox-root-outline-width-state-focus-visible);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+}
+
+.part-0 svg {
+  width: 14px;
+  height: 14px;
+}
+
+.part-0 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  display: inline-flex;
+  flex-shrink: 0;
+  grid-template-columns: var(--imported-shared-size-14);
+  grid-template-rows: var(--imported-shared-size-14);
+  height: var(--imported-shared-size-14);
+  width: var(--imported-shared-size-14);
+  cursor: default;
+  pointer-events: none;
+  text-align: center;
+  transition-property: none;
+}
+
+.checked-unchecked .part-0 {
+  display: none;
+}
+
+.part-0Glyph {
+  display: inline-flex;
+}

@@ -1,0 +1,155 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.alert",
+  "name": "Alert",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1).  COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "default",
+          "destructive"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "default": "Default",
+            "destructive": "Destructive"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "parts": {
+        "label": {
+          "text": "Alert title",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "text-align": "left"
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-14}",
+            "font-weight": "{imported.alert.label.font-weight}",
+            "line-height": "{imported.shared.size-20}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "default": {
+                  "color": "{imported.alert.label.color.default}"
+                },
+                "destructive": {
+                  "color": "{imported.alert.label.color.destructive}"
+                }
+              }
+            }
+          ]
+        },
+        "label-2": {
+          "text": "Alert description copy for the shadcn round.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "text-align": "left"
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-14}",
+            "font-weight": "{imported.alert.label-2.font-weight}",
+            "line-height": "{imported.shared.size-20}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "default": {
+                  "color": "{imported.alert.label-2.color.default}"
+                },
+                "destructive": {
+                  "color": "{imported.alert.label-2.color.destructive}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "position": "relative",
+        "text-align": "left"
+      },
+      "tokens": {
+        "background-color": "{imported.alert.root.background-color}",
+        "border-bottom-left-radius": "{imported.shared.size-10}",
+        "border-bottom-right-radius": "{imported.shared.size-10}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-left-radius": "{imported.shared.size-10}",
+        "border-top-right-radius": "{imported.shared.size-10}",
+        "border-top-width": "{imported.shared.size-1}",
+        "bottom": "{imported.shared.size-0}",
+        "column-gap": "{imported.alert.root.column-gap}",
+        "font-size": "{imported.shared.size-14}",
+        "grid-template-columns": "{imported.alert.root.grid-template-columns}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.shared.size-20}",
+        "padding-bottom": "{imported.alert.root.padding-bottom}",
+        "padding-left": "{imported.alert.root.padding-left}",
+        "padding-right": "{imported.alert.root.padding-right}",
+        "padding-top": "{imported.alert.root.padding-top}",
+        "right": "{imported.shared.size-0}",
+        "row-gap": "{imported.alert.root.row-gap}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "default": {
+              "color": "{imported.alert.root.color.default}"
+            },
+            "destructive": {
+              "color": "{imported.alert.root.color.destructive}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Alert"
+    }
+  }
+}

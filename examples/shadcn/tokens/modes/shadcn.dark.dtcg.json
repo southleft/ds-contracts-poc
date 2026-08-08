@@ -1,0 +1,369 @@
+{
+  "accent": {
+    "$type": "color",
+    "$value": "#262626",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.269 0 0)"
+      }
+    }
+  },
+  "accent-foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.985 0 0)"
+      }
+    }
+  },
+  "background": {
+    "$type": "color",
+    "$value": "#0a0a0a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.145 0 0)"
+      }
+    }
+  },
+  "blur-xs": {
+    "$type": "dimension",
+    "$value": "4px"
+  },
+  "border": {
+    "$type": "color",
+    "$value": "#ffffff1a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(1 0 0 / 10%)"
+      }
+    }
+  },
+  "card": {
+    "$type": "color",
+    "$value": "#171717",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.205 0 0)"
+      }
+    }
+  },
+  "card-foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.985 0 0)"
+      }
+    }
+  },
+  "chart-1": {
+    "$type": "color",
+    "$value": "#d4d4d4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.87 0 0)"
+      }
+    }
+  },
+  "chart-2": {
+    "$type": "color",
+    "$value": "#737373",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.556 0 0)"
+      }
+    }
+  },
+  "chart-3": {
+    "$type": "color",
+    "$value": "#525252",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.439 0 0)"
+      }
+    }
+  },
+  "chart-4": {
+    "$type": "color",
+    "$value": "#404040",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.371 0 0)"
+      }
+    }
+  },
+  "chart-5": {
+    "$type": "color",
+    "$value": "#262626",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.269 0 0)"
+      }
+    }
+  },
+  "color-black": {
+    "$type": "color",
+    "$value": "#000"
+  },
+  "container-md": {
+    "$type": "dimension",
+    "$value": "28rem"
+  },
+  "container-xs": {
+    "$type": "dimension",
+    "$value": "20rem"
+  },
+  "default-font-family": {
+    "$type": "string",
+    "$value": "'Inter Variable', sans-serif"
+  },
+  "default-mono-font-family": {
+    "$type": "string",
+    "$value": "var(--font-mono)"
+  },
+  "default-transition-duration": {
+    "$type": "string",
+    "$value": "150ms"
+  },
+  "default-transition-timing-function": {
+    "$type": "string",
+    "$value": "cubic-bezier(0.4, 0, 0.2, 1)"
+  },
+  "destructive": {
+    "$type": "color",
+    "$value": "#ff6467",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.704 0.191 22.216)"
+      }
+    }
+  },
+  "font-mono": {
+    "$type": "string",
+    "$value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+  },
+  "font-sans": {
+    "$type": "string",
+    "$value": "'Inter Variable', sans-serif"
+  },
+  "font-weight-medium": {
+    "$type": "number",
+    "$value": "500"
+  },
+  "foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.985 0 0)"
+      }
+    }
+  },
+  "input": {
+    "$type": "color",
+    "$value": "#ffffff26",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(1 0 0 / 15%)"
+      }
+    }
+  },
+  "leading-normal": {
+    "$type": "number",
+    "$value": "1.5"
+  },
+  "muted": {
+    "$type": "color",
+    "$value": "#262626",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.269 0 0)"
+      }
+    }
+  },
+  "muted-foreground": {
+    "$type": "color",
+    "$value": "#a1a1a1",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.708 0 0)"
+      }
+    }
+  },
+  "popover": {
+    "$type": "color",
+    "$value": "#171717",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.205 0 0)"
+      }
+    }
+  },
+  "popover-foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.985 0 0)"
+      }
+    }
+  },
+  "primary": {
+    "$type": "color",
+    "$value": "#e5e5e5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.922 0 0)"
+      }
+    }
+  },
+  "primary-foreground": {
+    "$type": "color",
+    "$value": "#171717",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.205 0 0)"
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "$value": "0.625rem"
+  },
+  "radius-md": {
+    "$type": "string",
+    "$value": "calc(var(--radius) - 2px)"
+  },
+  "ring": {
+    "$type": "color",
+    "$value": "#737373",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.556 0 0)"
+      }
+    }
+  },
+  "secondary": {
+    "$type": "color",
+    "$value": "#262626",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.269 0 0)"
+      }
+    }
+  },
+  "secondary-foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.985 0 0)"
+      }
+    }
+  },
+  "shimmer-angle": {
+    "$type": "string",
+    "$value": "20deg"
+  },
+  "sidebar": {
+    "$type": "color",
+    "$value": "#171717",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.205 0 0)"
+      }
+    }
+  },
+  "sidebar-accent": {
+    "$type": "color",
+    "$value": "#262626",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.269 0 0)"
+      }
+    }
+  },
+  "sidebar-accent-foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.985 0 0)"
+      }
+    }
+  },
+  "sidebar-border": {
+    "$type": "color",
+    "$value": "#ffffff1a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(1 0 0 / 10%)"
+      }
+    }
+  },
+  "sidebar-foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.985 0 0)"
+      }
+    }
+  },
+  "sidebar-primary": {
+    "$type": "color",
+    "$value": "#1447e6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.488 0.243 264.376)"
+      }
+    }
+  },
+  "sidebar-primary-foreground": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.985 0 0)"
+      }
+    }
+  },
+  "sidebar-ring": {
+    "$type": "color",
+    "$value": "#737373",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "oklch": "oklch(0.556 0 0)"
+      }
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "$value": "0.25rem"
+  },
+  "text-base": {
+    "$type": "dimension",
+    "$value": "1rem"
+  },
+  "text-base--line-height": {
+    "$type": "string",
+    "$value": "calc(1.5 / 1)"
+  },
+  "text-sm": {
+    "$type": "dimension",
+    "$value": "0.875rem"
+  },
+  "text-sm--line-height": {
+    "$type": "string",
+    "$value": "calc(1.25 / 0.875)"
+  },
+  "text-xs": {
+    "$type": "dimension",
+    "$value": "0.75rem"
+  },
+  "text-xs--line-height": {
+    "$type": "string",
+    "$value": "calc(1 / 0.75)"
+  }
+}

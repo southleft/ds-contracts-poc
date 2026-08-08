@@ -1,0 +1,70 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Input",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "enabled",
+      "axisValues": {},
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".md\\:text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "disabled",
+      "axisValues": {},
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".md\\:text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "enabled",
+      "axisValues": {},
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-\\[color\\,box-shadow\\]"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "transition-timing-function",
+      "combo": "disabled",
+      "axisValues": {},
+      "token": "default-transition-timing-function",
+      "varName": "--default-transition-timing-function",
+      "anchor": {
+        "selector": ".transition-\\[color\\,box-shadow\\]"
+      }
+    }
+  ],
+  "skips": [
+    "root.box-shadow: candidates --tw-inset-ring-shadow → \"tw-inset-ring-shadow\" = 0 0 #0000 (value differs); --tw-inset-shadow → \"tw-inset-shadow\" = 0 0 #0000 (value differs); --tw-ring-offset-shadow → \"tw-ring-offset-shadow\" = 0 0 #0000 (value differs); --tw-ring-shadow → \"tw-ring-shadow\" = 0 0 #0000 (value differs); --tw-shadow → \"tw-shadow\" = 0 1px 2px 0 rgb(0 0 0 / 0.05) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "root.height: source declares `calc(var(--spacing) * 9)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.line-height: candidates --text-base--line-height → \"text-base--line-height\" = calc(1.5 / 1); --text-sm--line-height → \"text-sm--line-height\" = calc(1.25 / 0.875) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.transition-duration: candidate --default-transition-duration → \"default-transition-duration\" = 150ms names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 5,
+  "shorthandSkips": [
+    "root.border-color: SHORTHAND carrying var(--border, --input) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-radius: SHORTHAND carrying var(--radius) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-style: SHORTHAND carrying var(--tw-border-style) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding-block: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding-inline: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 1,
+  "calcCeiling": 1,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

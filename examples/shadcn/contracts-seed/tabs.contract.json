@@ -1,0 +1,26 @@
+{
+  "id": "shadcn.tabs",
+  "name": "Tabs",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round \u2014 HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name \u2014 RECON \u00a73's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md \u00a72.2), mounted through the @shadcn-sandbox/ui barrel (RECON \u00a72.1). Root mount with the canonical 2-deep childrenSpec, CONTROLLED value (Carbon Tabs double-run lesson). The variant axis lives on the CHILD TabsList \u2014 child-axis limitation (docs/21 \u00a77.3), pinned default, deferred by name ('TabsList-with-children as the mount' is not mountable: witnessed Radix context throw).",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Tabs"
+    }
+  },
+  "states": []
+}

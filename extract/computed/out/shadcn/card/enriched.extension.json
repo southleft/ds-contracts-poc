@@ -1,0 +1,390 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@shadcn-sandbox/ui@0.0.1",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "card": {
+        "root": {
+          "background-color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "box-shadow": {
+            "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.145 0 0 / 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+            "$type": "shadow"
+          },
+          "column-gap": {
+            "default": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "default": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "default": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "row-gap": {
+            "default": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "part-0": {
+          "column-gap": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "grid-template-columns": {
+            "default": {
+              "$value": "240px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "256px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "default": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "default": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "row-gap": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "font-size": {
+            "default": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "14px",
+              "$type": "dimension"
+            }
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          }
+        },
+        "label-2": {
+          "color": {
+            "$value": "#737373",
+            "$type": "color"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          }
+        },
+        "label-3": {
+          "column-gap": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "padding-left": {
+            "default": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "default": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "row-gap": {
+            "$value": "12px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-20": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label",
+      "channel": "line-height",
+      "foldedInto": "font-size",
+      "ratio": 1.5,
+      "class": "em-tracking"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "label-3",
+        "field": "direction",
+        "value": "column"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "--tw-ring-shadow",
+      "reason": "CSS custom property, not a styled channel — `--tw-ring-shadow` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "0 0 0 calc(1px + 0px) color-mix(in oklab, oklch(0.145 0 0) 10%, transparent)",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "--tw-shadow",
+      "reason": "CSS custom property, not a styled channel — `--tw-shadow` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `0 1px 2px 0 rgb(0 0 0 / 0.05)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "flex-start",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "container-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "card-header",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "container-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "inline-size",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "grid",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "grid-auto-rows",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "min-content",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "grid-template-rows",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "24px 20px",
+      "distinctValues": 2
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (label-2); -webkit-text-stroke-color (label-2)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: label-2.caret-color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: label-2.font-size equals ancestor \"part-0\" on all 8 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.line-height equals ancestor \"part-0\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.font-size equals ancestor \"root\" on all 8 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.line-height equals ancestor \"root\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.font-size equals ancestor \"root\" on all 8 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.line-height equals ancestor \"root\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "label",
+      "label-2",
+      "label-3"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "grid-lowering: part-0 grid 1×2 → flex column, cross-axis stretch from justify-items:normal (measured track counts)",
+      "literal-text-carried: label = \"Card title\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-2 = \"Card description\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-3 = \"Card content copy for the shadcn round.\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-3.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

@@ -55,7 +55,11 @@ npx shadcn@4.16.2 add button badge card alert checkbox switch input select \
   tabs tooltip dialog avatar --yes --overwrite
 node -e "…re-pin every caret dep to its resolved version…" && npm install   # exact pins, committed-shape lockfile
 npm i -E ./ui-pkg        # the barrel package — §2.1
-# deterministic capture CSS (src/index.css with source(none) + @source "./src"):
+# deterministic capture CSS (src/index.css with source(none) + @source "./src",
+# and the @fontsource-variable/inter @import STRIPPED — its @font-face src URLs
+# are package-relative paths the harness bundler cannot resolve and must not
+# fetch; the real face rides the capture config's fonts.faces data: URI
+# substrate instead. Capture-time amendment, 2026-08-08 — see PROVENANCE.md):
 npx @tailwindcss/cli -i capture-input.css -o tailwind.css
 ```
 
@@ -228,6 +232,20 @@ oklch→hex path): the ~30-leaf shadcn semantic block (`--background` …
 total). `.dark` block → `modes/shadcn.dark.dtcg.json` for the bundle (capture
 itself is single-mode light).
 
+### §4 addendum — review disposition
+
+**Reviewed and approved by coordinating session under owner delegation,
+2026-08-08.** The resolved config is `extract/computed/configs/shadcn.json`
+(draft markers deleted there; this file's §4 stands as the review record).
+Capture-time witnessed amendments, within §4.2's own licensed fallbacks:
+SelectTrigger and TabsList **cannot mount standalone** (Radix scope context —
+"`SelectTrigger` must be used within `Select`", "`TabsList` must be used
+within `Tabs`", SSR-witnessed), so both child axes ride the named child-axis
+deferral (docs/21 §7.3) on root mounts; Dialog's `showCloseButton` cannot be
+a presenceProp (the presence grammar drives root props only; it lives on the
+child `DialogContent`) — pinned at its source default `true`, off-plane
+deferred by name. Details in `examples/shadcn/PROVENANCE.md`.
+
 ---
 
 ## 5 · Hazard ledger — predicted refusal classes, defect-first
@@ -297,20 +315,20 @@ itself is single-mode light).
 
 ### Per-component captureability prediction (docs/22 matrix idiom)
 
-| component | prediction | why |
-|---|---|---|
-| Button | **full** | 54 combos, 4 state planes, semantic vars bind; hover plane literals (H2) |
-| Badge | **full** | tw-round Badge was the 100%-pixel row; same shape |
-| Card | **good, spacing residue** | tw-round Card floor was 72.4%; shadcn Card adds container-query context (H10) |
-| Alert | **full** | 2 variants, composed text children |
-| Checkbox | **full incl. tri-state glyphs** | one-axis discipline keeps svg-content promotion legal |
-| Switch | **full box/color; thumb offset = the H6 question** | real-DOM thumb is strictly better than the Flowbite counterpart |
-| Input | **full** | single element, real `:disabled`/`:focus-visible` |
-| Select | **split**: Trigger full · open list degraded (H3) | child-axis limitation on `size` if root-mounted |
-| Tabs | **good** | controlled value pin mandatory (Carbon lesson) |
-| Tooltip | **degraded by design** | portal: no states, no source names (H3) |
-| Dialog | **degraded by design** | portal + full-bleed overlay; `showCloseButton` presenceProp |
-| Avatar | **fallback-only, by name** | AvatarImage refused in a network-free harness |
+| component | prediction | why | **measured (capture 2026-08-08)** |
+|---|---|---|---|
+| Button | **full** | 54 combos, 4 state planes, semantic vars bind; hover plane literals (H2) | as predicted — 96 combos (8 sizes, not 9), floor 74.5%, 400 source facts; PLUS a surprise: `active:translate-y-px` minted `--tw-translate-y` as a state token → engine fix #1 (state-plane custom-property door) |
+| Badge | **full** | tw-round Badge was the 100%-pixel row; same shape | full — floor 82.3%, 25 source facts |
+| Card | **good, spacing residue** | tw-round Card floor was 72.4%; shadcn Card adds container-query context (H10) | as predicted — floor 70.4% |
+| Alert | **full** | 2 variants, composed text children | captured — floor 61.4% (icon-grid anatomy residue) |
+| Checkbox | **full incl. tri-state glyphs** | one-axis discipline keeps svg-content promotion legal | full incl. glyph asset — floor 67.5%, receipt-pinned real path geometry |
+| Switch | **full box/color; thumb offset = the H6 question** | real-DOM thumb is strictly better than the Flowbite counterpart | H6 answered: `translate: calc(100% - 2px)` does NOT resolve — named refusal; knob box/color promoted; floor 65.6% |
+| Input | **full** | single element, real `:disabled`/`:focus-visible` | full — the round's best floor, 93.1% |
+| Select | **split**: Trigger full · open list degraded (H3) | child-axis limitation on `size` if root-mounted | **worse than predicted**: Trigger-standalone UNMOUNTABLE (Radix context throw) and the open list a MULTI-ROOT refusal — ships the CLOSED root surface only (floor 73.9%); PLUS surprise: lucide stroke channels → engine fix #2 (TOKEN_CHANNELS stroke/stroke-width) |
+| Tabs | **good** | controlled value pin mandatory (Carbon lesson) | good — floor 82.1%; `variant` deferred (TabsList-as-mount unmountable, child-axis by name) |
+| Tooltip | **degraded by design** | portal: no states, no source names (H3) | as predicted — floor 57.1%, 0 source facts; arrow `<polygon>` outside the svg v1 grammar (named) |
+| Dialog | **degraded by design** | portal + full-bleed overlay; `showCloseButton` presenceProp | **STOPPED — surprise refusal class**: Radix portals Overlay+Content as flat body siblings (+2 focus guards) = 4 portaled roots; single-root fusion refuses; no contract ships (see PROVENANCE.md) |
+| Avatar | **fallback-only, by name** | AvatarImage refused in a network-free harness | fallback-only as pinned — and the corpus's first pixel-AA-perfect row (12/12, real Inter via fonts.faces) at computed 50% |
 
 ---
 

@@ -1,0 +1,70 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "button",
+  "anchors": [
+    {
+      "leaf": "imported.button.root.background-color.default",
+      "token": "primary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--primary",
+      "selector": ".bg-primary"
+    },
+    {
+      "leaf": "imported.button.root.background-color.outline",
+      "token": "background",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--background",
+      "selector": ".bg-background"
+    },
+    {
+      "leaf": "imported.button.root.background-color.secondary",
+      "token": "secondary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--secondary",
+      "selector": ".bg-secondary"
+    },
+    {
+      "leaf": "imported.button.root.color.default",
+      "token": "primary-foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--primary-foreground",
+      "selector": ".text-primary-foreground"
+    },
+    {
+      "leaf": "imported.button.root.color.destructive",
+      "token": "destructive",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--destructive",
+      "selector": ".text-destructive"
+    },
+    {
+      "leaf": "imported.button.root.color.link",
+      "token": "primary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--primary",
+      "selector": ".text-primary"
+    },
+    {
+      "leaf": "imported.button.root.color.secondary",
+      "token": "secondary-foreground",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--secondary-foreground",
+      "selector": ".text-secondary-foreground"
+    },
+    {
+      "leaf": "imported.button.root.font-weight",
+      "token": "font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--font-weight-medium",
+      "selector": ".font-medium"
+    }
+  ]
+}

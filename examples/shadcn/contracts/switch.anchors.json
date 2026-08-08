@@ -1,0 +1,30 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "switch",
+  "anchors": [
+    {
+      "leaf": "imported.switch.part-0.background-color",
+      "token": "background",
+      "part": "part-0",
+      "cssProperty": "background-color",
+      "varName": "--background",
+      "selector": ".bg-background"
+    },
+    {
+      "leaf": "imported.switch.root.background-color.checked",
+      "token": "primary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--primary",
+      "selector": ".data-checked\\:bg-primary:where([data-state=\"checked\"]), .data-checked\\:bg-primary:where([data-checked]:not([data-checked=\"false\"]))"
+    },
+    {
+      "leaf": "imported.switch.root.background-color.unchecked",
+      "token": "input",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--input",
+      "selector": ".data-unchecked\\:bg-input:where([data-state=\"unchecked\"]), .data-unchecked\\:bg-input:where([data-unchecked]:not([data-unchecked=\"false\"]))"
+    }
+  ]
+}

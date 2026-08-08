@@ -1,0 +1,138 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.tooltip",
+  "name": "Tooltip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Portal (RECON H3): degraded by design — no state planes, no source names (portalSweep takes no varPrefix). Provider rides the global mount wrapper. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "transform": "matrix(1, 0, 0, 1, 0, 50)"
+      },
+      "parts": {
+        "label": {
+          "text": "Tooltip copy for the shadcn round.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "inline-flex",
+            "align": "center"
+          },
+          "parts": {
+            "part-0-0": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute"
+              },
+              "parts": {
+                "icon": {
+                  "element": "svg",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden"
+                  },
+                  "parts": {
+                    "part-0-0-0-0": {
+                      "element": "polygon",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy polygon| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "inline"
+                      },
+                      "tokens": {
+                        "color": "{imported.shared.color-ffffff}",
+                        "fill": "{imported.shared.color-0a0a0a}",
+                        "font-size": "{imported.shared.size-12}",
+                        "line-height": "{imported.shared.size-16}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}"
+                      }
+                    }
+                  },
+                  "tokens": {
+                    "background-color": "{imported.shared.color-0a0a0a}",
+                    "border-bottom-left-radius": "{imported.shared.size-2}",
+                    "border-bottom-right-radius": "{imported.shared.size-2}",
+                    "border-top-left-radius": "{imported.shared.size-2}",
+                    "border-top-right-radius": "{imported.shared.size-2}",
+                    "color": "{imported.shared.color-ffffff}",
+                    "fill": "{imported.shared.color-0a0a0a}",
+                    "font-size": "{imported.shared.size-12}",
+                    "height": "{imported.shared.size-10}",
+                    "line-height": "{imported.shared.size-16}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-10}",
+                    "z-index": "{imported.shared.num-50}"
+                  }
+                }
+              },
+              "tokens": {
+                "bottom": "{imported.tooltip.part-0-0.bottom}",
+                "color": "{imported.shared.color-ffffff}",
+                "font-size": "{imported.shared.size-12}",
+                "height": "{imported.shared.size-10}",
+                "left": "{imported.tooltip.part-0-0.left}",
+                "line-height": "{imported.shared.size-16}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "right": "{imported.tooltip.part-0-0.right}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-10}"
+              }
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-0a0a0a}",
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "color": "{imported.shared.color-ffffff}",
+            "column-gap": "{imported.shared.size-6}",
+            "font-size": "{imported.shared.size-12}",
+            "font-weight": "{imported.tooltip.label.font-weight}",
+            "line-height": "{imported.shared.size-16}",
+            "max-width": "{imported.tooltip.label.max-width}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-bottom": "{imported.shared.size-6}",
+            "padding-left": "{imported.shared.size-12}",
+            "padding-right": "{imported.shared.size-12}",
+            "padding-top": "{imported.shared.size-6}",
+            "row-gap": "{imported.shared.size-6}",
+            "z-index": "{imported.shared.num-50}"
+          },
+          "hugsBelowMaxWidth": true
+        }
+      },
+      "tokens": {
+        "height": "{imported.tooltip.root.height}",
+        "min-height": "{imported.shared.size-0}",
+        "translate-x": "{imported.shared.size-0}",
+        "translate-y": "{imported.tooltip.root.translate-y}",
+        "width": "{imported.tooltip.root.width}",
+        "z-index": "{imported.shared.num-50}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Tooltip"
+    }
+  }
+}

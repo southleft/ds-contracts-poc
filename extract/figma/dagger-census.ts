@@ -70,6 +70,10 @@ const CORPORA: Corpus[] = [
   // whole-corpus refusal masks every per-component receipt row.
   { id: 'tailwind', contractsDir: 'examples/tailwind/contracts', tokens: ['examples/tailwind/tokens/tailwind.dtcg.json', 'examples/tailwind/tokens/tailwind-minted.dtcg.json'], icons: 'examples/tailwind/assets/icons' },
   { id: 'astryx', contractsDir: 'examples/astryx/contracts', tokens: ['examples/astryx/tokens/astryx.dtcg.json', 'examples/astryx/tokens/astryx-minted.dtcg.json'], icons: 'examples/astryx/assets/icons' },
+  // SHADCN round (library #8): 11 registry-default contracts (Dialog stopped —
+  // multi-root portal refusal, see examples/shadcn/PROVENANCE.md); icon assets
+  // are the floor-reconstructed lucide glyphs (checkbox check, select chevron).
+  { id: 'shadcn', contractsDir: 'examples/shadcn/contracts', tokens: ['examples/shadcn/tokens/shadcn.dtcg.json', 'examples/shadcn/tokens/shadcn-minted.dtcg.json'], icons: 'examples/shadcn/assets/icons' },
   { id: 'polaris', contractsDir: 'examples/polaris/contracts', tokens: ['examples/polaris/tokens/polaris-light.dtcg.json', 'examples/polaris/tokens/polaris-minted.dtcg.json'], icons: 'examples/polaris/assets/icons' },
 ];
 

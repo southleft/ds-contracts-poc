@@ -116,7 +116,7 @@ const FID_CARRIAGE = FID_UNSCORED - FID_INTERACTION;
 // Derived from extract/computed/out/**/scorecard.json + the docs/22 §8.3
 // total row — NEVER from docs/24 itself, which is a generated consumer of the
 // same artifacts and would make the check circular.
-const LIB_DIRS = new Set(['altitude', 'astryx', 'carbon', 'mui', 'polaris', 'tailwind']);
+const LIB_DIRS = new Set(['altitude', 'astryx', 'carbon', 'mui', 'polaris', 'shadcn', 'tailwind']);
 const scorecards = (() => {
   const outDir = path.join(ROOT, 'extract/computed/out');
   const acc = [];

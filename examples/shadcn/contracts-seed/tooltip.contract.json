@@ -1,0 +1,26 @@
+{
+  "id": "shadcn.tooltip",
+  "name": "Tooltip",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round \u2014 HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name \u2014 RECON \u00a73's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md \u00a72.2), mounted through the @shadcn-sandbox/ui barrel (RECON \u00a72.1). Portal (RECON H3): degraded by design \u2014 no state planes, no source names (portalSweep takes no varPrefix). Provider rides the global mount wrapper.",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Tooltip"
+    }
+  },
+  "states": []
+}

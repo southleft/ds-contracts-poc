@@ -1,0 +1,148 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.select",
+  "name": "Select",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Composed ROOT mount, portalCapture + openDriver {open:true} (RECON H3). The size axis lives on the CHILD SelectTrigger — child-axis limitation (docs/21 §7.3), pinned default, deferred by name. SelectTrigger as its own closed component is STOPPED: witnessed Radix context throw (RECON-round capture note). states:[] pinned — portal captures take no state planes. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [
+    "active",
+    "disabled",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "space-between"
+      },
+      "parts": {
+        "label": {
+          "text": "Select an option",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "declared": {
+            "cursor": "default",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "pointer-events": "none",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "color": "{imported.shared.color-737373}",
+            "column-gap": "{imported.shared.size-6}",
+            "font-size": "{imported.shared.size-14}",
+            "font-weight": "{imported.select.label.font-weight}",
+            "line-height": "{imported.shared.size-20}",
+            "row-gap": "{imported.shared.size-6}"
+          }
+        },
+        "icon": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "default",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "pointer-events": "none",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap"
+          },
+          "icon": {
+            "asset": "select-icon",
+            "size": 16
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "color": "{imported.shared.color-737373}",
+            "flex-shrink": "{imported.select.icon.flex-shrink}",
+            "font-size": "{imported.shared.size-14}",
+            "line-height": "{imported.shared.size-20}",
+            "stroke": "{imported.shared.color-737373}",
+            "stroke-width": "{imported.select.icon.stroke-width}"
+          }
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "text-wrap-mode": "nowrap",
+        "transition-duration": "0.15s",
+        "transition-property": "color, box-shadow",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "declaredStates": {
+        "active": {
+          "pointer-events": "none"
+        },
+        "disabled": {
+          "cursor": "not-allowed",
+          "pointer-events": "none"
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-left-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "border-top-width": "{imported.shared.size-1}",
+        "box-shadow": "{imported.select.root.box-shadow}",
+        "color": "{imported.shared.color-737373}",
+        "column-gap": "{imported.shared.size-6}",
+        "font-size": "{imported.shared.size-14}",
+        "line-height": "{imported.shared.size-20}",
+        "padding-bottom": "{imported.shared.size-8}",
+        "padding-left": "{imported.select.root.padding-left}",
+        "padding-right": "{imported.shared.size-8}",
+        "padding-top": "{imported.shared.size-8}",
+        "row-gap": "{imported.shared.size-6}"
+      },
+      "states": {
+        "disabled": {
+          "opacity": "{imported.select.root.opacity-state-disabled}"
+        },
+        "focus-visible": {
+          "border-bottom-color": "{imported.shared.color-a1a1a1}",
+          "border-left-color": "{imported.shared.color-a1a1a1}",
+          "border-right-color": "{imported.shared.color-a1a1a1}",
+          "border-top-color": "{imported.shared.color-a1a1a1}",
+          "box-shadow": "{imported.select.root.box-shadow-state-focus-visible}",
+          "outline-width": "{imported.select.root.outline-width-state-focus-visible}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Select"
+    }
+  }
+}

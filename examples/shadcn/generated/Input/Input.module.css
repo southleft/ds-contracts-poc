@@ -1,0 +1,109 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/input.contract.json (shadcn.input v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-bottom-left-radius: var(--imported-shared-size-8);
+  border-bottom-right-radius: var(--imported-shared-size-8);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-left-radius: var(--imported-shared-size-8);
+  border-top-right-radius: var(--imported-shared-size-8);
+  border-top-width: var(--imported-shared-size-1);
+  box-shadow: var(--imported-input-root-box-shadow);
+  font-size: var(--imported-input-root-font-size);
+  line-height: var(--imported-input-root-line-height);
+  min-width: var(--imported-input-root-min-width);
+  padding-bottom: var(--imported-input-root-padding-bottom);
+  padding-left: var(--imported-input-root-padding-left);
+  padding-right: var(--imported-input-root-padding-right);
+  padding-top: var(--imported-input-root-padding-top);
+  width: var(--imported-input-root-width);
+  display: block;
+  appearance: auto;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  cursor: text;
+  overflow-x: clip;
+  overflow-y: clip;
+  transition-duration: 0.15s;
+  transition-property: color, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.root:active:not(:disabled) {
+  border-bottom-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:active:not(:disabled) {
+  border-left-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:active:not(:disabled) {
+  border-right-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:active:not(:disabled) {
+  border-top-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:active:not(:disabled) {
+  box-shadow: var(--imported-input-root-box-shadow-state-active);
+}
+
+.root:active:not(:disabled) {
+  outline-width: var(--imported-input-root-outline-width-state-active);
+}
+
+.root:disabled {
+  opacity: var(--imported-input-root-opacity-state-disabled);
+}
+
+.root:focus-visible {
+  border-bottom-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  border-left-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  border-right-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  border-top-color: var(--imported-shared-color-a1a1a1);
+}
+
+.root:focus-visible {
+  box-shadow: var(--imported-input-root-box-shadow-state-focus-visible);
+}
+
+.root:focus-visible {
+  outline-width: var(--imported-input-root-outline-width-state-focus-visible);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}

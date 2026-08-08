@@ -159,6 +159,10 @@ const LIBRARIES = [
   { dir: 'carbon', label: 'Carbon', pkg: '@carbon/react@1.112.0', contracts: 'examples/carbon/contracts' },
   { dir: 'mui', label: 'MUI', pkg: '@mui/material@9.2.0', contracts: 'examples/mui/contracts' },
   { dir: 'polaris', label: 'Polaris', pkg: '@shopify/polaris@13.9.5', contracts: 'examples/polaris/contracts' },
+  // shadcn is copy-in source, not an npm package — the pkg id is the sandbox
+  // barrel; the real pin is the vendored-source sha256 ledger in
+  // examples/shadcn/RECON.md §2.2 (fetched via shadcn CLI 4.16.2, radix-vega).
+  { dir: 'shadcn', label: 'shadcn/ui', pkg: '@shadcn-sandbox/ui@0.0.1', contracts: 'examples/shadcn/contracts' },
   { dir: 'tailwind', label: 'Flowbite / Tailwind', pkg: 'flowbite-react@0.12.17', contracts: 'examples/tailwind/contracts' },
 ];
 
@@ -400,7 +404,7 @@ const COVERAGE_CAVEAT =
   `**Read every percentage on this page as "on the easy ${COV_TOTAL ? f1(pct(COV_TOTAL.pinned, COV_TOTAL.size)) : '?'}%."** ` +
   `The ${fmt(REAL_N)} components measured here were chosen because they were **tractable**, not at random — ` +
   `they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. ` +
-  `Across the six libraries they are ${fmt(COV_TOTAL?.pinned ?? REAL_N)} of ${fmt(COV_TOTAL?.size ?? 0)} components ` +
+  `Across the ${LIBRARIES.length} libraries they are ${fmt(COV_TOTAL?.pinned ?? REAL_N)} of ${fmt(COV_TOTAL?.size ?? 0)} components ` +
   `(${COV_TOTAL ? f1(pct(COV_TOTAL.pinned, COV_TOTAL.size)) : '?'}%). Data grid, tree, virtualized list, date picker, rich text and charts ` +
   `appear in **zero** committed contracts. A mean over this slice is a statement about this slice.`;
 
@@ -441,7 +445,7 @@ P(
   `Exact structured projection is separately evidenced: **${fmt(RT.exactVerified ?? 0)} verified exact, ${fmt(RT.exactLegacyUnverified ?? 0)} legacy unverified, ${fmt(RT.exactRefused ?? 0)} refused**.`,
   `The whole thing is pinned by ${fmt(evals.total)} executable claim gates and a ${fmt(GOLDEN_FILES)}-file byte-identical`,
   `generation manifest. **What that does not say:** those ${fmt(REAL_N)} components are`,
-  `${COV_TOTAL ? f1(pct(COV_TOTAL.pinned, COV_TOTAL.size)) : '?'}% of the six libraries they came from, and they were picked because they were the tractable ones.`,
+  `${COV_TOTAL ? f1(pct(COV_TOTAL.pinned, COV_TOTAL.size)) : '?'}% of the ${LIBRARIES.length} libraries they came from, and they were picked because they were the tractable ones.`,
 );
 P('---');
 
@@ -497,7 +501,7 @@ if (covRows && COV_TOTAL) {
 } else {
   P('**The coverage table in `docs/22-generality.md` §8.3 did not parse.** No coverage fraction is printed. Every mean below is therefore an average over an *unstated* slice, which is exactly the failure this section exists to prevent — fix the parse before trusting anything under §3.');
 }
-P('Beyond the six foreign libraries, the corpus also holds contracts that are **not** captured from a third party and are not counted above:');
+P(`Beyond the ${LIBRARIES.length} foreign libraries, the corpus also holds contracts that are **not** captured from a third party and are not counted above:`);
 P(...table(['corpus', 'contracts', 'what it is', 'source'], [
   ['this repo\'s own library', fmt(OWN_CONTRACTS), 'hand-authored here; the code→design direction\'s fixture', '`contracts/*.contract.json`'],
   ['Untitled UI (Figma kit)', fmt(UUI_CONTRACTS), 'proposed FROM a canvas, not extracted from code — see §4', '`examples/untitled-ui/storybook/contracts/`'],
@@ -530,7 +534,7 @@ P(...table(
       `\`extract/computed/out/${rows[0].flat ? '<comp>' : `${l.dir}/<comp>`}/scorecard.json\``,
     ];
   }).concat([[
-    '**all six**', `**${fmt(REAL_N)}**`, `**${f1(REAL_MEAN)}**`, f1(REAL_MEDIAN),
+    '**all libraries**', `**${fmt(REAL_N)}**`, `**${f1(REAL_MEAN)}**`, f1(REAL_MEDIAN),
     `**${REAL_GE90}/${REAL_N}**`, `**${REAL_GE80}/${REAL_N}**`, `**${fmt(REAL_CELLS)}**`, `**${f1(REAL_WEIGHTED)}**`, '',
   ]]),
 ));

@@ -1,0 +1,124 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/card.contract.json (shadcn.card v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  background-color: var(--imported-card-root-background-color);
+  border-bottom-left-radius: var(--imported-shared-size-14);
+  border-bottom-right-radius: var(--imported-shared-size-14);
+  border-top-left-radius: var(--imported-shared-size-14);
+  border-top-right-radius: var(--imported-shared-size-14);
+  box-shadow: var(--imported-card-root-box-shadow);
+  font-size: var(--imported-shared-size-14);
+  line-height: var(--imported-shared-size-20);
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.size-default {
+  column-gap: var(--imported-card-root-column-gap-default);
+  padding-bottom: var(--imported-card-root-padding-bottom-default);
+  padding-top: var(--imported-card-root-padding-top-default);
+  row-gap: var(--imported-card-root-row-gap-default);
+}
+
+.size-sm {
+  column-gap: var(--imported-card-root-column-gap-sm);
+  padding-bottom: var(--imported-card-root-padding-bottom-sm);
+  padding-top: var(--imported-card-root-padding-top-sm);
+  row-gap: var(--imported-card-root-row-gap-sm);
+}
+
+.part-0 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-top-left-radius: var(--imported-shared-size-14);
+  border-top-right-radius: var(--imported-shared-size-14);
+  column-gap: var(--imported-card-part-0-column-gap);
+  font-size: var(--imported-shared-size-14);
+  line-height: var(--imported-shared-size-20);
+  row-gap: var(--imported-card-part-0-row-gap);
+}
+
+.size-default .part-0 {
+  grid-template-columns: var(--imported-card-part-0-grid-template-columns-default);
+}
+
+.size-default .part-0 {
+  padding-left: var(--imported-card-part-0-padding-left-default);
+}
+
+.size-default .part-0 {
+  padding-right: var(--imported-card-part-0-padding-right-default);
+}
+
+.size-sm .part-0 {
+  grid-template-columns: var(--imported-card-part-0-grid-template-columns-sm);
+}
+
+.size-sm .part-0 {
+  padding-left: var(--imported-card-part-0-padding-left-sm);
+}
+
+.size-sm .part-0 {
+  padding-right: var(--imported-card-part-0-padding-right-sm);
+}
+
+.label {
+  font-weight: var(--imported-card-label-font-weight);
+  display: block;
+}
+
+.size-default .label {
+  font-size: var(--imported-card-label-font-size-default);
+}
+
+.size-sm .label {
+  font-size: var(--imported-card-label-font-size-sm);
+}
+
+.label-2 {
+  color: var(--imported-card-label-2-color);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-card-label-2-font-weight);
+  line-height: var(--imported-shared-size-20);
+  display: block;
+}
+
+.label-3 {
+  display: flex;
+  flex-direction: column;
+  column-gap: var(--imported-card-label-3-column-gap);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-card-label-3-font-weight);
+  line-height: var(--imported-shared-size-20);
+  row-gap: var(--imported-card-label-3-row-gap);
+}
+
+.size-default .label-3 {
+  padding-left: var(--imported-card-label-3-padding-left-default);
+}
+
+.size-default .label-3 {
+  padding-right: var(--imported-card-label-3-padding-right-default);
+}
+
+.size-sm .label-3 {
+  padding-left: var(--imported-card-label-3-padding-left-sm);
+}
+
+.size-sm .label-3 {
+  padding-right: var(--imported-card-label-3-padding-right-sm);
+}

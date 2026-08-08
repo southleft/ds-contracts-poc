@@ -1,0 +1,172 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Alert",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "destructive",
+      "axisValues": {
+        "variant": "destructive"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "muted-foreground",
+      "varName": "--muted-foreground",
+      "anchor": {
+        "selector": ".text-muted-foreground"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "destructive",
+      "axisValues": {
+        "variant": "destructive"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "card",
+      "varName": "--card",
+      "anchor": {
+        "selector": ".bg-card"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "destructive",
+      "axisValues": {
+        "variant": "destructive"
+      },
+      "token": "card",
+      "varName": "--card",
+      "anchor": {
+        "selector": ".bg-card"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "card-foreground",
+      "varName": "--card-foreground",
+      "anchor": {
+        "selector": ".text-card-foreground"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "destructive",
+      "axisValues": {
+        "variant": "destructive"
+      },
+      "token": "destructive",
+      "varName": "--destructive",
+      "anchor": {
+        "selector": ".text-destructive"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default",
+      "axisValues": {
+        "variant": "default"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "destructive",
+      "axisValues": {
+        "variant": "destructive"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    }
+  ],
+  "skips": [
+    "label.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-2.line-height: candidate --text-sm--line-height → \"text-sm--line-height\" = calc(1.25 / 0.875) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-2.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.line-height: candidate --text-sm--line-height → \"text-sm--line-height\" = calc(1.25 / 0.875) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.outline-color: candidate --ring → \"ring\" = oklch(0.708 0 0) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 8,
+  "shorthandSkips": [
+    "label-2.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "label.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-color: SHORTHAND carrying var(--border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-radius: SHORTHAND carrying var(--radius) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-style: SHORTHAND carrying var(--tw-border-style) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.gap: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding-block: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding-inline: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

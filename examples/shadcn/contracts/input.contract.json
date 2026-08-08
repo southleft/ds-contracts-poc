@@ -1,0 +1,92 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.input",
+  "name": "Input",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round — HAND-AUTHORED at capture-config time from the Radix prop surface (the react-tsx adapter refuses purely Radix-typed components by name — RECON §3's structural law). Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). v1: default text input; `type` deferred by name (attribute pass-through, not an enum prop in source — RECON §4.2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/shadcn/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to shadcn's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "input"
+  },
+  "props": [],
+  "states": [
+    "disabled",
+    "active",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "appearance": "auto",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "cursor": "text",
+        "overflow-x": "clip",
+        "overflow-y": "clip",
+        "transition-duration": "0.15s",
+        "transition-property": "color, box-shadow",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed",
+          "pointer-events": "none"
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-left-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "border-top-width": "{imported.shared.size-1}",
+        "box-shadow": "{imported.input.root.box-shadow}",
+        "font-size": "{imported.input.root.font-size}",
+        "line-height": "{imported.input.root.line-height}",
+        "min-width": "{imported.input.root.min-width}",
+        "padding-bottom": "{imported.input.root.padding-bottom}",
+        "padding-left": "{imported.input.root.padding-left}",
+        "padding-right": "{imported.input.root.padding-right}",
+        "padding-top": "{imported.input.root.padding-top}",
+        "width": "{imported.input.root.width}"
+      },
+      "states": {
+        "active": {
+          "border-bottom-color": "{imported.shared.color-a1a1a1}",
+          "border-left-color": "{imported.shared.color-a1a1a1}",
+          "border-right-color": "{imported.shared.color-a1a1a1}",
+          "border-top-color": "{imported.shared.color-a1a1a1}",
+          "box-shadow": "{imported.input.root.box-shadow-state-active}",
+          "outline-width": "{imported.input.root.outline-width-state-active}"
+        },
+        "disabled": {
+          "opacity": "{imported.input.root.opacity-state-disabled}"
+        },
+        "focus-visible": {
+          "border-bottom-color": "{imported.shared.color-a1a1a1}",
+          "border-left-color": "{imported.shared.color-a1a1a1}",
+          "border-right-color": "{imported.shared.color-a1a1a1}",
+          "border-top-color": "{imported.shared.color-a1a1a1}",
+          "box-shadow": "{imported.input.root.box-shadow-state-focus-visible}",
+          "outline-width": "{imported.input.root.outline-width-state-focus-visible}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Input"
+    }
+  },
+  "figmaStatePreviews": true
+}

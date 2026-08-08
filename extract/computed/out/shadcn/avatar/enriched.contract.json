@@ -1,0 +1,134 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "shadcn.avatar",
+  "name": "Avatar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the SHADCN round — props/axes only; anatomy is promoted from captured DOM truth. Subject: shadcn registry defaults vendored via CLI 4.16.2 (radix-vega, sha256 ledger in examples/shadcn/RECON.md §2.2), mounted through the @shadcn-sandbox/ui barrel (RECON §2.1). Fallback-only capture by name (AvatarImage refused in a network-free harness — RECON §4.2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shadcn-sandbox/ui@0.0.1 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "default",
+          "sm",
+          "lg"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "default": "Default",
+            "sm": "Sm",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "label": {
+          "text": "CN",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "grow": true,
+            "align": "center",
+            "justify": "center"
+          },
+          "declared": {
+            "aspect-ratio": "1 / 1",
+            "user-select": "none"
+          },
+          "tokens": {
+            "background-color": "{imported.avatar.label.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-9999}",
+            "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-top-left-radius": "{imported.shared.size-9999}",
+            "border-top-right-radius": "{imported.shared.size-9999}",
+            "color": "{imported.avatar.label.color}",
+            "font-weight": "{imported.avatar.label.font-weight}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "font-size": "{imported.avatar.label.font-size.default}",
+                  "line-height": "{imported.avatar.label.line-height.default}"
+                },
+                "lg": {
+                  "font-size": "{imported.avatar.label.font-size.lg}",
+                  "line-height": "{imported.avatar.label.line-height.lg}"
+                },
+                "sm": {
+                  "font-size": "{imported.avatar.label.font-size.sm}",
+                  "line-height": "{imported.avatar.label.line-height.sm}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "position": "relative",
+        "user-select": "none"
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-9999}",
+        "border-bottom-right-radius": "{imported.shared.size-9999}",
+        "border-top-left-radius": "{imported.shared.size-9999}",
+        "border-top-right-radius": "{imported.shared.size-9999}",
+        "bottom": "{imported.shared.size-0}",
+        "flex-shrink": "{imported.avatar.root.flex-shrink}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "default": {
+              "height": "{imported.avatar.root.height.default}",
+              "width": "{imported.avatar.root.width.default}"
+            },
+            "lg": {
+              "height": "{imported.avatar.root.height.lg}",
+              "width": "{imported.avatar.root.width.lg}"
+            },
+            "sm": {
+              "height": "{imported.avatar.root.height.sm}",
+              "width": "{imported.avatar.root.width.sm}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@shadcn-sandbox/ui",
+      "export": "Avatar"
+    }
+  }
+}

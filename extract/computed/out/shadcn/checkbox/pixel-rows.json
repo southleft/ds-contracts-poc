@@ -1,0 +1,122 @@
+[
+  {
+    "key": "unchecked.enabled__default",
+    "pctExact": 0.032552083333333336,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked.enabled__hover",
+    "pctExact": 0.032552083333333336,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked.enabled__focus-visible",
+    "pctExact": 0.006510416666666667,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked.enabled__active",
+    "pctExact": 0.032552083333333336,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked.disabled__default",
+    "pctExact": 0.006510416666666667,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked.disabled__hover",
+    "pctExact": 0.006510416666666667,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked.disabled__focus-visible",
+    "pctExact": 0.006510416666666667,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked.disabled__active",
+    "pctExact": 0.006510416666666667,
+    "pctAA": 0
+  },
+  {
+    "key": "checked.enabled__default",
+    "pctExact": 0.13671875,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "checked.enabled__hover",
+    "pctExact": 0.13671875,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "checked.enabled__focus-visible",
+    "pctExact": 0.09440104166666667,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "checked.enabled__active",
+    "pctExact": 0.13671875,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "checked.disabled__default",
+    "pctExact": 0.09765625,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "checked.disabled__hover",
+    "pctExact": 0.09765625,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "checked.disabled__focus-visible",
+    "pctExact": 0.09765625,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "checked.disabled__active",
+    "pctExact": 0.09765625,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "indeterminate.enabled__default",
+    "pctExact": 0.1171875,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "indeterminate.enabled__hover",
+    "pctExact": 0.1171875,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "indeterminate.enabled__focus-visible",
+    "pctExact": 0.09114583333333333,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "indeterminate.enabled__active",
+    "pctExact": 0.1171875,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "indeterminate.disabled__default",
+    "pctExact": 0.08463541666666667,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "indeterminate.disabled__hover",
+    "pctExact": 0.08463541666666667,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "indeterminate.disabled__focus-visible",
+    "pctExact": 0.08463541666666667,
+    "pctAA": 0.026041666666666668
+  },
+  {
+    "key": "indeterminate.disabled__active",
+    "pctExact": 0.08463541666666667,
+    "pctAA": 0.026041666666666668
+  }
+]

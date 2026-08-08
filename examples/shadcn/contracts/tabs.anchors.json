@@ -1,0 +1,30 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "tabs",
+  "anchors": [
+    {
+      "leaf": "imported.tabs.label.background-color",
+      "token": "background",
+      "part": "label",
+      "cssProperty": "background-color",
+      "varName": "--background",
+      "selector": ".data-active\\:bg-background:where([data-state=\"active\"]), .data-active\\:bg-background:where([data-active]:not([data-active=\"false\"]))"
+    },
+    {
+      "leaf": "imported.tabs.part-0.background-color",
+      "token": "muted",
+      "part": "part-0",
+      "cssProperty": "background-color",
+      "varName": "--muted",
+      "selector": ".bg-muted"
+    },
+    {
+      "leaf": "imported.tabs.part-0.color",
+      "token": "muted-foreground",
+      "part": "part-0",
+      "cssProperty": "color",
+      "varName": "--muted-foreground",
+      "selector": ".text-muted-foreground"
+    }
+  ]
+}

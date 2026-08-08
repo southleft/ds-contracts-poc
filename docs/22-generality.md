@@ -42,6 +42,7 @@ The measurement to date:
 | MUI (Emotion) | `82d312f` + six live-paste rounds | 14 | many, across six rounds | new reader + eight distinct engine classes (§5) |
 | Flowbite / Tailwind v4 | `7b6f01b` | 5 | several (CSSOM grouping-rule recursion, oklch, pill sentinel) | new *styling method*, reusing the CSS-vars reader |
 | Carbon | `28f4d85` | 10 | **1** | a latent pre-existing bug (empty-string children) |
+| shadcn/ui | *(this round)* | 11 of 12 (Dialog **stopped**, named) | **2** | two first-library gaps, each fixed by the refusal's own named remedy: the state-plane custom-property door (`fuse.ts` — the base plane had it, the state plane did not) and `stroke`/`stroke-width` in TOKEN_CHANNELS (first stroke-drawn icon set). The surprise class was Radix's FLAT-SIBLING portals (Dialog/Select-open → `MULTI-ROOT-CAPTURE` refusal, a named future class) — see `examples/shadcn/PROVENANCE.md` |
 
 Carbon was run deliberately as the **control case** — a recon predicted a
 config-only round, and the round was executed to test that prediction rather
@@ -62,9 +63,10 @@ better, and Altitude (§9) is the next one.
 
 ## 2. The test vectors
 
-**Seven distinct libraries across eight rounds** (Polaris runs twice: a census
-config and a depth/Modal config). **Six** are in the standing offline drift
-instrument, 54 rows in total; the newest — a shadow-DOM library — is §9.
+**Eight distinct libraries across nine rounds** (Polaris runs twice: a census
+config and a depth/Modal config). **Seven** are in the standing offline drift
+instrument, 65 rows in total; the shadow-DOM library is §9 and the newest —
+shadcn/ui, the copy-in-source round — is row 9 of the matrix below.
 
 ### The styling-architecture matrix
 
@@ -78,6 +80,7 @@ instrument, 54 rows in total; the newest — a shadow-DOM library — is §9.
 | 6 | `@shopify/polaris@13.9.5` (depth config) | as #2 | as #2 | as #2 | — | — |
 | 7 | `@carbon/react@1.112.0` + `@carbon/styles@1.111.0` | **precompiled CSS** (955 KB, no build step) | 366 `--cds-*` in theme *class scopes* | the same CSS-vars reader | `--cds-` | `^cds--(?!.*--)` |
 | 8 | `altitude-web-components@1.0.2` | **Lit 3 SHADOW DOM** — every component's CSS in `shadowRoot.adoptedStyleSheets` | 323 `--al-*` at light-DOM `:root`, inherited across the shadow boundary | the same CSS-vars reader, made **per-root** | `--al-` | `^al-(c\|u)-(?!.*--)[a-z_-]+$` |
+| 9 | shadcn/ui registry defaults, CLI 4.16.2 (`@shadcn-sandbox/ui@0.0.1` barrel — **copy-in source**, sha256-ledgered in `examples/shadcn/RECON.md` §2.2) | **Tailwind v4 utilities over Radix primitives** | `@theme inline` → the SEMANTIC `:root` vars themselves (`--primary`, `--radius`, oklch) — utilities reference them in ONE hop | the same CSS-vars reader | `--` | `^$` (keep nothing) |
 
 Five distinct styling architectures — build-time atomic, runtime CSS-in-JS,
 utility-first, precompiled stylesheets, and **shadow DOM** — plus three
@@ -116,6 +119,7 @@ Counted from the committed token trees (`examples/<lib>/tokens/*.dtcg.json`):
 | mui | 150 | 1,498 | 73 | 1,425 | shadows serialize differently (value verification refuses); `calc(var(--mui-spacing)*N)` excluded by name |
 | tailwind | 68 | 276 | 21 | 255 | Flowbite's `primary` palette is `@theme inline` — utilities compile to literal `#1A56DB`, by the library's own choice |
 | carbon | 339 | 1,120 | 94 | 1,026 | **the family split** (below) |
+| shadcn | 53 | 381 | 48 | 333 | **the alpha-modifier wall** — every `/NN` utility (`hover:bg-primary/80`, `ring-ring/50`) compiles to `color-mix(in oklab, var(--primary) 80%, transparent)`, whose computed value can never string-equal any candidate var's resolved value; hover/destructive planes mint anonymous literals with correct pixels BY DESIGN, base planes bind (`examples/shadcn/PROVENANCE.md`) |
 | altitude | 323 | 349 | 41 | 310 | **the shorthand ceiling** — the reader carries LONGHAND facts only, and 95 of Altitude's 231 `var()`-carrying declarations are shorthands (`font` ×36, `background` ×19, `border-radius` ×14, `padding`, `gap`, `transition`…). This one is a READER gap, not a library property; measured and named in `examples/altitude/PROVENANCE.md` |
 
 *Astryx's 54 are **not** extraction facts. They are a human review ledger
@@ -194,6 +198,7 @@ also added general reader rules to the engine, which is §9's point.
 | config | lines |
 |---|---|
 | `polaris.json` | 475 |
+| `shadcn.json` | 408 |
 | `mui.json` | 391 |
 | `carbon.json` | 189 |
 | `altitude.json` | 127 |
@@ -455,7 +460,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
-| **Offline drift instrument** | 54 rows across 6 libraries, per component: `pctEqual` within tolerance, `cellsCompared` **exactly** (a moved denominator is a vocabulary change and must be acknowledged), `unresolvedTokenRefs` exactly, and a hard fail if a component stops fusing | `npm run extract:computed:drift` |
+| **Offline drift instrument** | 65 rows across 7 libraries, per component: `pctEqual` within tolerance, `cellsCompared` **exactly** (a moved denominator is a vocabulary change and must be acknowledged), `unresolvedTokenRefs` exactly, and a hard fail if a component stops fusing | `npm run extract:computed:drift` |
 | **Double-run byte identity** | every capture is swept twice in one session; unstable channels fail the run and the refusal **names its witness** (capture key, element path + signature, both values) | part of `npm run extract:computed` |
 | **Shipped-contract refs resolve** | every shipped contract resolves every token ref against its library's inventory | `shipped-contract-refs-resolve` eval |
 | **Gate inventory = shipped inventory** | the gate measures against the token set the shipped contract can actually see; withholding the shipped tree must bring the unresolved refs back (the falsification half) | `gate-inventory-shipped-minted` eval |
@@ -464,7 +469,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 | **Child-wider-than-parent ratchet** | a committed per-library count of in-flow children wider than their parent, TWO-SIDED (an unrecorded improvement fails too — a stale high baseline is room to regrow in silence). Text-caused and negative-margin paint-outside are counted as separate exempted classes so neither can flatter the first number | `npm run child-wider` |
 
 The drift baseline is what makes cross-library damage a number rather than a
-vibe. Its 54 rows: mui 14, polaris 12, carbon 10, altitude 8, astryx 5,
+vibe. Its 65 rows: mui 14, polaris 12, shadcn 11, carbon 10, altitude 8, astryx 5,
 tailwind 5. `28f4d85` reported "drift 46/46 with **zero pre-existing rows
 moved**" for library #7; the shadow-DOM round repeated it for library #8 — 45 of
 the 46 pre-existing rows came back EXACT, and the one that moved is `carbon/Button`,
@@ -645,7 +650,8 @@ denominator. Here it is.
 | Polaris (`@shopify/polaris@13.9.5`) | 12 | 12 | 180 | **6.7%** | **this repo's own extractor** over the whole library — `extract/pilots/ENTERPRISE-GAUNTLET.md` (180 extracted, 15 named-skipped) |
 | Carbon (`@carbon/react@1.112.0`) | 10 | 10 | 243 | **4.1%** | **this repo's own extractor** over the whole library — same table (243 extracted, 62 named-skipped) |
 | Astryx (`@astryxdesign/core@0.1.6`) | 13 | **5** | 222 | **5.9%** (2.3% computed-captured) | **this repo's own extractor** over the whole library — `examples/astryx/extraction/CENSUS.md` (222 extracted, 15 named-skipped) |
-| **total** | **79** | **71** | **893** | **8.0%** | |
+| shadcn/ui (`@shadcn-sandbox/ui@0.0.1`) | 11 | 11 | 50 | **22.0%** | **this repo's own extractor** over the VENDORED slice — `examples/shadcn/RECON.md` §3 (10 extracted, 40 seen-but-not-extractable, all named). The slice is 12 registry items of a ~50+ item live registry (RECON §7), so this row's denominator is the vendored exports, not the registry — the registry itself has no offline-measurable index |
+| **total** | **90** | **82** | **943** | **8.7%** | |
 
 **How to read it — both halves are true, and the second is the one usually
 left out:**
@@ -666,7 +672,7 @@ left out:**
   Chip, Card, Checkbox, Tag, Avatar, Divider. The hardest thing in the corpus is
   MUI's `Table`, and the hardest classes (data grid, tree, virtualized list,
   date picker, rich text, charts) are captured **nowhere**. Read every floor
-  percentage as "on the easy 8.0%".
+  percentage as "on the easy 8.7%".
 - **The denominators do not lean against us. They are INCOHERENT** — which is
   a different thing, and this document said the wrong one until 2026-08-03.
   MUI's 135 counts every capitalised directory including utilities (`NoSsr`,
