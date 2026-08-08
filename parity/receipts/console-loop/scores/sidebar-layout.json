@@ -20,7 +20,7 @@
   "reference": "parity/receipts/console-loop/refs/sidebar-layout.png",
   "referenceSha256": "3fe79f773e07f91933a62005cf5d50521d2c245544903929e97408379e476665",
   "canvasShot": "parity/receipts/console-loop/shots/sidebar-layout-cell.png",
-  "canvasShotSha256": "72ce2ab54c671d05a0b3a9383b9f735aea2badecd841345d3163e030511ea223",
+  "canvasShotSha256": "5e67d68f854ef1caa9fd66c25383f0f5dd3e474a192e8a96ef3716e315513c31",
   "diff": "parity/receipts/console-loop/scores/sidebar-layout.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/components/sidebar-layout.json",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T19:08:07.859Z"
+  "recordedAt": "2026-08-08T21:32:32.696Z"
 }

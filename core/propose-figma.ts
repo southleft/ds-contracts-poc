@@ -20,7 +20,7 @@
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { arcMaskCss, ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
+import { arcMaskCss, ContractSchema, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -3457,11 +3457,11 @@ interface ParentModes {
 }
 
 /** The per-variant parent-mode witness for a parent's children. */
-function parentModesOf(m: Merged): ParentModes {
+function parentModesOf(m: Merged, mint: boolean): ParentModes {
   const byVariant = new Map<string, 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null>();
   for (const o of m.occ) byVariant.set(o.variant, o.node.layout?.mode ?? null);
   const base = m.occ[0]?.node.layout?.mode ?? null;
-  const grid = gridCarriageOf(m); // undefined unless the base layout is GRID
+  const grid = gridCarriageOf(m, mint); // undefined unless the base layout is GRID
   return { base, byVariant, ...(grid ? { grid } : {}) };
 }
 
@@ -3502,7 +3502,7 @@ interface GridCarriage {
  *     v7 grammar, a different fact), cells must sit inside the declared
  *     tracks (grid-implicit-tracks, P9) and must not overlap (P3's occupancy
  *     throw, refused contract-side). */
-function gridCarriageOf(m: Merged): GridCarriage | undefined {
+function gridCarriageOf(m: Merged, mint: boolean): GridCarriage | undefined {
   // The BASE layout is the first occurrence that has one — the same rule
   // invertLayout's `layouts[0]` applies to the flex path.
   const l = m.occ.map((o) => o.node.layout).find((x) => x !== undefined);
@@ -3531,50 +3531,86 @@ function gridCarriageOf(m: Merged): GridCarriage | undefined {
     return { carried: false, flow, reason: 'empty declared track list — a grid contract requires declared tracks (G1)' };
   }
   if (flow) {
-    const derived = Math.max(1, Math.ceil(m.children.length / g.columns.length));
-    if (g.rows.length !== derived || !g.rows.every((t) => t.fr === 1)) {
+    // G5′ (2026-08-08) — declared rows under flow are CARRIED. GP6/GP6b measured
+    // gridItemsPositioning='ROW_AUTO_FLOW' and declared gridRowSizes coexisting
+    // natively, in either write order, with anchors still computed row-major
+    // from child order (P5). The old gate admitted flow ONLY when the drawn rows
+    // already equalled the emitter's derivation, and refused every other flow
+    // grid rather than silently redraw its tracks — a restriction inferred from
+    // P9 (which is about OVERFLOW) and over-applied. What survives from it is
+    // the OVERFLOW bound: GP10 measured 5 children over 2 columns with 2
+    // declared rows reaching anchor row 2 while gridRowCount stayed 2 and
+    // gridRowSizes stayed two entries — P9's lossy readback, reproduced under
+    // declared rows.
+    const needed = Math.max(1, Math.ceil(m.children.length / g.columns.length));
+    if (g.rows.length < needed) {
       return {
         carried: false,
         flow,
         reason:
-          `ROW_AUTO_FLOW grid whose declared rows (${g.rows.length}: ${JSON.stringify(g.rows)}) are not the derivable ` +
-          `ceil(children/columns) × {fr:1} = ${derived} × {fr:1} — under flow the contract derives rows from child count ` +
-          '(G5, stampGridCells) and carrying these tracks would silently redraw them on the round trip (P9)',
+          `ROW_AUTO_FLOW grid whose ${g.rows.length} declared row track(s) do not cover the flow — ` +
+          `${m.children.length} child(ren) over ${g.columns.length} column(s) occupy ${needed} row(s), so children ` +
+          'flow PAST the declared list while gridRowCount stays put (GP10; the grid-implicit-tracks refusal, P9)',
       };
     }
     return { carried: true, flow };
   }
+  // G9.2 (2026-08-08) — an ABSOLUTE child no longer takes the whole grid down.
+  // `abs` (dump v1.7) is POSITIVE evidence the child is layoutPositioning
+  // ABSOLUTE: the dump gates `cell` capture on exactly that (P13 — absolute
+  // children still REPORT anchors 0,0), so the missing cell is the gate working,
+  // not a capture gap. What is genuinely missing is only the abs→Part.overlay
+  // EDGE inversion, and that is refused PERMANENTLY on arity
+  // (`grid-overlay-edge-inversion`, G9.1): the enum is four values with no
+  // offset channel while the canvas fact is a point in R². But the overlay
+  // spelling was never the only out-of-flow door — carryAbsPlacement inverts
+  // `abs` into position:absolute + minted insets, losing no coordinate, and it
+  // is how absolute children are carried under every OTHER parent kind. So the
+  // child rides that door and the grid, its tracks and every sibling placement
+  // are carried whole. The grid still refuses when THAT door is shut, and the
+  // refusal names which condition shut it — carryAbsPlacement's own three:
+  // partial capture, a wrapper-union synthetic clone, or minting off.
+  const outOfFlow = new Set<string>();
   for (const c of m.children) {
-    if (!c.occ.some((o) => o.node.cell !== undefined)) {
-      // TWO different facts used to share one message. `abs` (dump v1.7) is
-      // POSITIVE evidence that the child is layoutPositioning ABSOLUTE — the
-      // dump gates `cell` capture on exactly that (P13: absolute children
-      // still REPORT anchors 0,0), so the missing cell is the gate working,
-      // not a capture gap. G2 says such a child IS carriable as an overlay
-      // part; what stops it here is that Part.overlay's vocabulary is the
-      // v7 EDGE enum (top|bottom|start|end) and the canvas fact is a raw
-      // x/y inside a cell — deriving an edge from it would be a guess. So
-      // the grid refuses, and the refusal names the missing INVERSION rather
-      // than blaming the child for a cell the dump was right not to capture.
-      const abs = c.occ.some((o) => o.node.abs !== undefined);
+    if (c.occ.some((o) => o.node.cell !== undefined)) continue;
+    const absOcc = c.occ.filter((o) => o.node.abs !== undefined);
+    if (absOcc.length === 0) {
       return {
         carried: false,
         flow,
-        reason: abs
-          ? `child "${c.name}" is an ABSOLUTE overlay inside the grid (dump \`abs\` present, no \`cell\` — P13's gate working as designed). ` +
-            'G2 admits overlays in a grid parent, but the proposer has NO abs→overlay inversion: Part.overlay spells attachment ' +
-            'as the v7 EDGE enum (top|bottom|start|end) while the canvas fact is a raw x/y inside a cell, and picking an edge ' +
-            'from that would be an invented fact. Grid not carried — the missing inversion is the named cause, not the child'
-          : `child "${c.name}" carries no grid cell and no \`abs\` — a pre-v1.17 capture (the producer predates the cell ` +
-            'channel), which is NOT the same fact as "cell 0,0": a manual grid contract must place every in-flow child (G2), ' +
-            'and inventing anchors for an unmeasured child is exactly what this refusal exists to prevent; grid not carried',
+        reason:
+          `child "${c.name}" carries no grid cell and no \`abs\` — a pre-v1.17 capture (the producer predates the cell ` +
+          'channel), which is NOT the same fact as "cell 0,0": a manual grid contract must place every in-flow child (G2), ' +
+          'and inventing anchors for an unmeasured child is exactly what this refusal exists to prevent; grid not carried',
       };
     }
+    const shut =
+      absOcc.length !== c.occ.length
+        ? `its \`abs\` box is captured on ${absOcc.length}/${c.occ.length} variant(s) only`
+        : c.occ.some((o) => (o.node as { __synthetic?: boolean }).__synthetic === true)
+          ? 'its box rides a wrapper-union SYNTHETIC clone (a clone is not an observation)'
+          : !mint
+            ? 'minting is off, so the per-variant px offsets have no carrier'
+            : null;
+    if (shut) {
+      return {
+        carried: false,
+        flow,
+        reason:
+          `child "${c.name}" is an ABSOLUTE overlay inside the grid (dump \`abs\` present, no \`cell\` — P13's gate ` +
+          `working as designed) and the out-of-flow door is shut: ${shut}. It would therefore render IN FLOW, in a grid ` +
+          'that must place every in-flow child (G2), so the grid is not carried. The edge spelling is not the blocker — ' +
+          'that is refused permanently and separately (grid-overlay-edge-inversion, G9.1)',
+      };
+    }
+    outOfFlow.add(c.name);
   }
-  const rects = m.children.map((c) => {
-    const cell = c.occ.find((o) => o.node.cell !== undefined)!.node.cell!;
-    return { name: c.name, r: cell.row, c: cell.column, rs: cell.rowSpan ?? 1, cs: cell.columnSpan ?? 1 };
-  });
+  const rects = m.children
+    .filter((c) => !outOfFlow.has(c.name))
+    .map((c) => {
+      const cell = c.occ.find((o) => o.node.cell !== undefined)!.node.cell!;
+      return { name: c.name, r: cell.row, c: cell.column, rs: cell.rowSpan ?? 1, cs: cell.columnSpan ?? 1 };
+    });
   for (const x of rects) {
     if (x.r + x.rs > g.rows.length || x.c + x.cs > g.columns.length) {
       return {
@@ -3615,7 +3651,7 @@ function invertGridLayout(
   ctx: Ctx,
   where: string,
 ): Record<string, unknown> | undefined {
-  const c = carriage ?? gridCarriageOf(m);
+  const c = carriage ?? gridCarriageOf(m, ctx.mint !== undefined);
   if (!c) return undefined;
   // Per-variant grid variance has NO carrier: layoutByProp is refused on grid
   // parts (P10 — a mode switch physically destroys tracks) — the DEFAULT
@@ -3640,7 +3676,24 @@ function invertGridLayout(
   const toTrack = (t: NonNullable<typeof g.rows>[number]): Record<string, unknown> =>
     t.fit === true ? { fit: true } : t.px !== undefined ? { px: t.px } : { fr: t.fr as number };
   const out: Record<string, unknown> = { display: 'grid' };
-  if (!c.flow) out.rows = g.rows.map(toTrack);
+  // G5′: declared rows under flow ARE a contract fact now — but the emitter's
+  // OWN derivation (ceil(children/columns) × {fr:1}) is not. Carrying that back
+  // would turn a derived track list into a declared one and the round trip
+  // would stop being identity, so it stays omitted; anything else is the
+  // author's and is carried verbatim.
+  const derivedRows = Math.max(1, Math.ceil(m.children.length / Math.max(1, g.columns.length)));
+  const rowsAreTheDerivation =
+    g.rows.length === derivedRows && g.rows.every((t) => t.fr === 1);
+  if (!c.flow || !rowsAreTheDerivation) out.rows = g.rows.map(toTrack);
+  // G9.1 — the permanent refusal, receipted on every grid that carries an
+  // absolute child through the abs door instead of Part.overlay.
+  for (const ch of m.children) {
+    if (ch.occ.some((o) => o.node.cell !== undefined)) continue;
+    if (!ch.occ.some((o) => o.node.abs !== undefined)) continue;
+    ctx.notes.push(
+      `${where}/${ch.name}: ABSOLUTE child inside the grid carried OUT OF FLOW through the abs door (position: absolute + minted insets), NOT as Part.overlay — ${GRID_REFUSALS['grid-overlay-edge-inversion']}`,
+    );
+  }
   out.columns = g.columns.map(toTrack);
   const bound = m.occ[0].node.bound ?? {};
   const rowGap = bound['gridRowGap'] ? ref(bound['gridRowGap']) : g.rowGap;
@@ -3648,6 +3701,89 @@ function invertGridLayout(
   if (rowGap !== 0 || columnGap !== 0) out.gap = { row: rowGap, column: columnGap };
   if (c.flow) out.flow = 'row';
   return out;
+}
+
+/** G8 (2026-08-08) — THE PROPOSER'S DEFINITE-AXIS OBLIGATION.
+ *
+ *  A grid part must make each axis definite (`grid-axis-indefinite`): the two
+ *  surfaces resolve silence differently, because primary/counterAxisSizingMode
+ *  are INERT on a GRID frame (GP1b/GP8) so the canvas keeps createFrame's FIXED
+ *  100 while CSS takes content height. The canvas has the answer for every grid
+ *  it drew — a sizing mode per axis — so the reader states it instead of
+ *  leaving the schema to guess:
+ *
+ *    · AUTO (hug)  -> literals[axis] = "fit-content" (the CSS twin, the same
+ *                     keyword invertRootFixedSize already mints for an all-HUG
+ *                     root — ONE spelling, not two).
+ *    · FIXED       -> literals[axis] = "<drawn>px" from fixedSize ?? bbox ?? abs.
+ *
+ *  Idempotent: an axis another door already made definite (mintFixedSize,
+ *  carryAbsPlacement, a width token, layout.grow) is left alone. When an axis
+ *  reads FIXED and NO box was captured, nothing is invented — the caller is
+ *  told, by name, that the grid cannot be carried on that evidence.
+ *
+ *  NOTE the axis mapping: on a GRID frame the PRIMARY axis is HORIZONTAL
+ *  (GP1b: primaryAxisSizingMode='AUTO' reads back as layoutSizingHorizontal
+ *  'HUG'), like a HORIZONTAL auto-layout frame — not vertical. */
+function carryGridAxisSizing(
+  m: Merged,
+  part: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+): void {
+  const layout = part.layout as Record<string, unknown> | undefined;
+  if (layout?.display !== 'grid') return;
+  const l = m.occ.map((o) => o.node.layout).find((x) => x !== undefined);
+  if (!l) return;
+  const tokens = (part.tokens ?? {}) as Record<string, string>;
+  const lits = (part.literals ?? {}) as Record<string, string>;
+  const hasFr = (tracks: unknown): boolean =>
+    Array.isArray(tracks) && tracks.some((t) => t !== null && typeof t === 'object' && 'fr' in (t as object));
+  const missing: string[] = [];
+  for (const axis of ['width', 'height'] as const) {
+    // THE BOUND, mirrored from the schema referee (checkGridAxesDefinite): only
+    // an axis whose declared tracks carry NO {fr} is at stake. A fraction
+    // resolves against a size supplied from OUTSIDE the part on both surfaces,
+    // so an fr-bearing axis is not a silence to close — and `fit-content` is
+    // refused on it anyway (G8.2, `grid-hug-flex-axis`).
+    const rowsDerived = layout.flow === 'row' && layout.rows === undefined;
+    const axisHasFr =
+      axis === 'width' ? hasFr(layout.columns) : rowsDerived || hasFr(layout.rows);
+    if (axisHasFr) continue;
+    if (lits[axis] !== undefined || tokens[axis] !== undefined) continue;
+    if (axis === 'width' && layout.grow === true) continue;
+    // GRID: primary = horizontal (GP1b).
+    const mode = axis === 'width' ? l.primarySizing : l.counterSizing;
+    if (mode === 'AUTO') {
+      lits[axis] = 'fit-content';
+      ctx.notes.push(
+        `${where}: grid ${axis} axis drawn HUG — carried as literals.${axis} "fit-content" (G8: the CSS twin of Figma HUG; absence would resolve as FIXED 100 on canvas and content-size in CSS — FC-GRID-ROOT-VSIZE)`,
+      );
+      continue;
+    }
+    const box = m.occ.map((o) => o.node.fixedSize?.[axis] ?? o.node.bbox?.[axis] ?? o.node.abs?.[axis]).find((v) => typeof v === 'number');
+    if (typeof box === 'number') {
+      lits[axis] = `${Math.round(box)}px`;
+      ctx.notes.push(
+        `${where}: grid ${axis} axis drawn FIXED — carried as literals.${axis} ${lits[axis]} (G8: a grid axis must be definite; the drawn box is the evidence)`,
+      );
+      continue;
+    }
+    missing.push(`${axis}: drawn ${String(mode ?? 'UNKNOWN')} with no captured box (fixedSize/bbox/abs all absent)`);
+  }
+  if (missing.length > 0) {
+    ctx.notes.push(
+      `${where}: GRID drawn but NOT carried — ${GRID_REFUSALS['grid-axis-indefinite']}; unresolved: ${missing.join('; ')}`,
+    );
+    delete part.layout;
+    // A dropped grid takes its children's cells with it: `placement` is a
+    // grid-cell fact and is schema-invalid without a grid parent (G2).
+    for (const child of Object.values((part.parts ?? {}) as Record<string, Record<string, unknown>>)) {
+      delete child.placement;
+    }
+    return;
+  }
+  if (Object.keys(lits).length > 0) part.literals = lits;
 }
 
 /** G2 placement attach — runs where the part was built (buildChildParts), so
@@ -5743,7 +5879,17 @@ function buildPart(
   }
 
   // FRAME (or COMPONENT root)
-  if (isSpacer(m)) {
+  // G9.2: an ABSOLUTELY placed child of a CARRIED grid is never a spacer. A
+  // spacer's whole job is in-flow growth, and the spacer branch therefore
+  // ledgers `abs` away without carrying it — a standing choice under flex
+  // parents, and a wrong one under a grid: the grid's all-or-none placement
+  // rule (G2) then counts the child IN FLOW with no cell and the whole grid is
+  // lost. Scoped to carried grid parents, so no flex spacer anywhere moves.
+  const absUnderGrid =
+    parentMode?.grid?.carried === true &&
+    !parentMode.grid.flow &&
+    m.occ.some((o) => o.node.abs !== undefined);
+  if (isSpacer(m) && !absUnderGrid) {
     const layout = invertLayout(m, false, parentMode, ctx, where);
     if (layout) part.layout = layout;
     applyLayoutSplit(part, invertLayoutByProp(m, ctx, where));
@@ -5817,6 +5963,7 @@ function buildPart(
     invertNodeOpacity(m, part, tokens, ctx, where);
     invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
+    carryGridAxisSizing(m, part, ctx, where); // G8
     const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
     applySlotAccepts(slot, soleSwap, ctx, where);
     applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where);
@@ -5854,9 +6001,10 @@ function buildPart(
   // with `abs` by dump construction — exact no-op on older dumps).
   mintFixedSize(m, part, tokens, ctx, where);
   attachTokens(ctx, part, tokens);
+  carryGridAxisSizing(m, part, ctx, where); // G8
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
-  const mode = parentModesOf(m);
+  const mode = parentModesOf(m, ctx.mint !== undefined);
   // Pre-order key claiming + P9 run detection — see buildChildParts.
   const parts = buildChildParts(m.children, mode, ctx, where, selfKey);
   if (Object.keys(parts).length > 0) part.parts = parts;
@@ -7693,7 +7841,7 @@ export function proposeFromDump(
       `${where}/label: sole root text node named "label" is the generator's auto-injected children label — hoisted to root tokens, bound prop proposed as \`children\``,
     );
   } else {
-    const mode = parentModesOf(merged);
+    const mode = parentModesOf(merged, ctx.mint !== undefined);
     // Pre-order key claiming + P9 run detection — see buildChildParts.
     // rootKeyByChildName maps drawn depth-1 names onto their claimed keys —
     // the part-level state diff (v13) resolves parts through it.
@@ -7710,6 +7858,10 @@ export function proposeFromDump(
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
   invertNodeEffects(merged, rootTokens, ctx, where);
   invertRootFixedSize(merged, root, rootTokens, ctx, where);
+  // G8: a grid ROOT states each axis too. Runs AFTER invertRootFixedSize so an
+  // axis that door already made definite (px mint, or its own 'fit-content'
+  // all-HUG branch) is left exactly as it found it.
+  carryGridAxisSizing(merged, root, ctx, where);
   attachByProp(root, rootTokensByProp);
   attachTokens(ctx, root, rootTokens);
 

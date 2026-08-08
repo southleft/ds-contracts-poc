@@ -215,7 +215,46 @@ async function main() {
     // refusal actionable — a determinism refusal without a location is a
     // half-receipt.
     const witnesses: string[] = [];
-    for (let i = 0; i < run1.captures.length; i++) {
+    // THE STRUCTURAL HALF OF THE SAME RULE. The loop below only ever compared
+    // STYLE values at matching indices, so a run whose two sweeps differ in
+    // SHAPE — a different capture count, a different element count, a
+    // different tag or class set — produced no witness at all and the refusal
+    // read `UNSTABLE channels across double-run: (structural)`: a determinism
+    // failure that names neither the component nor the difference, which is
+    // precisely the half-receipt the comment above forbids. Measured on the
+    // Fluent round, where it sent the investigation to the wrong component.
+    // Structural witnesses are collected FIRST because a shape difference is
+    // the cause and any style difference downstream of it is a consequence.
+    if (run1.captures.length !== run2.captures.length) {
+      witnesses.push(
+        `CAPTURE COUNT: sweep 1 produced ${run1.captures.length} captures, sweep 2 produced ${run2.captures.length}`,
+      );
+    }
+    for (let i = 0; i < Math.min(run1.captures.length, run2.captures.length); i++) {
+      if (witnesses.length >= 8) break;
+      const a = flatten(run1.captures[i].root);
+      const b = flatten(run2.captures[i].root);
+      const where = `${run1.captures[i].combo}__${run1.captures[i].interaction}`;
+      if (a.length !== b.length) {
+        unstable.add('(element count)');
+        witnesses.push(`${where}: ELEMENT COUNT ${a.length} vs ${b.length} — the captured tree changed SHAPE between sweeps`);
+        continue;
+      }
+      for (let j = 0; j < a.length; j++) {
+        if (witnesses.length >= 8) break;
+        if (a[j].sig !== b[j].sig) {
+          unstable.add('(signature)');
+          witnesses.push(`${where} @${a[j].path || 'root'}: SIGNATURE "${a[j].sig}" vs "${b[j].sig}" — tag/class identity changed between sweeps`);
+        }
+        const at = a[j].node.nodes.filter((n) => n.t === 'text').map((n) => (n as { v: string }).v).join('');
+        const bt = b[j].node.nodes.filter((n) => n.t === 'text').map((n) => (n as { v: string }).v).join('');
+        if (at !== bt) {
+          unstable.add('(text)');
+          witnesses.push(`${where} @${a[j].path || 'root'}: TEXT "${at}" vs "${bt}"`);
+        }
+      }
+    }
+    for (let i = 0; i < Math.min(run1.captures.length, run2.captures.length); i++) {
       const a = flatten(run1.captures[i].root);
       const b = flatten(run2.captures[i].root);
       for (let j = 0; j < Math.min(a.length, b.length); j++) {

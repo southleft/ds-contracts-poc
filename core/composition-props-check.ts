@@ -29,7 +29,7 @@
  *
  * Reads only committed artifacts. No browser, no network.
  */
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -82,8 +82,22 @@ console.log('\n2. CODE surface — the placeholder becomes a real prop reference
 
 console.log('\n3. CANVAS surface — the placeholder is RESOLVED per variant, not passed through');
 {
-  const js = 'figma-sync/42-table.js';
-  if (!existsSync(path.join(REPO, js))) bad(`${js} is missing — the emitted canvas surface cannot be checked`);
+  // The emitted file names carry a DEPENDENCY-ORDER INDEX, so the prefix moves
+  // whenever the emitted set or its accepts/component-ref graph changes. This
+  // check hardcoded `42-table.js`, which stopped existing when the order last
+  // shifted — and the gate then failed with "is missing", a message that names a
+  // FILE rather than the rule it guards, so it read as a missing artifact
+  // instead of a stale locator. Resolve the stem instead of the index.
+  const jsName = readdirSync(path.join(REPO, 'figma-sync'))
+    .filter((f) => /^\d+-table\.js$/.test(f))
+    .sort()[0];
+  const js = `figma-sync/${jsName ?? '<none>'}`;
+  if (!jsName || !existsSync(path.join(REPO, js))) {
+    bad(
+      'figma-sync/<index>-table.js is missing — no dependency-ordered emission for the `table` stem was found, ' +
+      'so the emitted canvas surface cannot be checked (run `npm run figma:plan`)',
+    );
+  }
   else {
     const src = read(js);
     // No placeholder may survive into the emitted script.

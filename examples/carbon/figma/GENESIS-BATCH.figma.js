@@ -1709,7 +1709,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -7377,7 +7378,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -9072,7 +9074,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -9128,7 +9131,10 @@ function applyFrameSpec(node, spec) {
     }
     if (li.width !== undefined || li.height !== undefined) {
       node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
-      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
       if (li.width !== undefined) {
         if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
       }
@@ -11997,7 +12003,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -14968,7 +14975,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -17830,7 +17838,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -19984,7 +19993,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -22972,7 +22982,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -23028,7 +23039,10 @@ function applyFrameSpec(node, spec) {
     }
     if (li.width !== undefined || li.height !== undefined) {
       node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
-      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
       if (li.width !== undefined) {
         if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
       }
@@ -25489,7 +25503,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -27406,7 +27421,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -27461,7 +27477,10 @@ function applyFrameSpec(node, spec) {
     }
     if (li.width !== undefined || li.height !== undefined) {
       node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
-      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
       if (li.width !== undefined) {
         if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
       }

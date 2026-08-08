@@ -61,6 +61,8 @@ function convertPart(part: ExtractedPart, prefix: string, notes: string[]): Reco
   if (part.placement) out.placement = part.placement;
   if (part.overlay) out.overlay = part.overlay;
   if (part.tokens && Object.keys(part.tokens).length > 0) out.tokens = part.tokens;
+  /** G8: literal channels the adapter states (grid definite axis). */
+  if (part.literals && Object.keys(part.literals).length > 0) out.literals = part.literals;
   if (part.states && Object.keys(part.states).length > 0) out.states = part.states;
   if (part.content) out.content = part.content;
   if (part.text !== undefined) out.text = part.text;

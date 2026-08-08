@@ -42,6 +42,7 @@ import {
   boolProps,
   enumProps,
   gridCellPlan,
+  gridChildCrossAxisDecls,
   gridParentDecls,
   isArrayType,
   isEnum,
@@ -193,6 +194,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // from the shared plan; sizing stays unspelled (stretch is the CSS grid
     // default, the pinned spelling of canvas FILL, G3).
     applyDeclStrings(s, gridPlan.cells.get(partName) ?? []);
+    // G11/FC-SLOT-CROSS-AXIS-STRETCH — the grid-cell cross-axis default, spelled
+    // on the INLINE surface too (it shipped on the CSS-Module path only, so a
+    // preview rendered through this emitter still stretched a child down its
+    // whole cell while the canvas left it at the top). One spelling, all three.
+    if (gridPlan.gridChildren.has(partName)) {
+      applyDeclStrings(s, gridChildCrossAxisDecls(part));
+    }
     if (isRoot) {
       if (part.layout) {
         if (part.layout.display === 'grid') {

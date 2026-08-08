@@ -1578,45 +1578,35 @@
       "id": "grid-auto-flow-row",
       "construct": "a ROW_AUTO_FLOW grid whose declared row tracks are two 16px FIXED tracks",
       "expect": "CARRIED",
-      "why": "G5: under flow the placement fact is CHILD ORDER (P5 — the API refuses position setters there), so the contract carries flow \"row\", omits rows, and the emitter re-derives ceil(children/columns) explicit tracks itself (P9: the API under-reports implicit rows)",
+      "why": "G5′ (2026-08-08): declared rows under flow are the contract fact and are carried verbatim — GP6/GP6b measured gridItemsPositioning='ROW_AUTO_FLOW' and declared gridRowSizes coexisting natively, in either write order, with anchors still computed row-major from child order (P5). The old omit-only rule was inferred from P9 (which is about OVERFLOW) and over-applied; what survives from it is the coverage bound (rows.length >= ceil(children/columns), GP10). Rows OMITTED still derive as before, so no pre-G5′ flow contract moves.",
       "check": {
         "carried": [
           "\"flow\":\"row\"",
-          "\"display\":\"grid\""
+          "\"display\":\"grid\"",
+          "\"rows\":\\[\\{\"px\":16\\},\\{\"px\":16\\}\\]"
         ],
         "absent": [
           "\"placement\""
         ]
       },
-      "status": "red",
-      "observed": "The reader REFUSES this grid by name. G5 lets the contract carry flow ONLY with `rows` OMITTED, so the two declared 16px row tracks have nowhere to land: carrying flow would silently redraw them as the emitter derivation ({fr:1} x ceil(children/columns)) on the next round trip — the P9 rewrite the grammar exists to prevent. The reader therefore admits flow only when the drawn rows ALREADY equal that derivation, and a flow grid that does round-trips exactly (grid-roundtrip-identity eval, section 4). Pinned red because the construct is real and the doc model calls it CARRIED, while the only carriage available today would lose the drawn track sizes. Closing it needs a grammar decision (a flow spelling that can carry declared rows), not a reader patch — so the loss is pinned, named and visible instead of absorbed.",
-      "observedCheck": {
-        "note": "not the derivable ceil\\(children/columns\\)",
-        "absent": [
-          "\"display\":\"grid\"",
-          "\"flow\":\"row\""
-        ]
-      }
+      "status": "green"
     },
     {
       "id": "grid-absolute-overlay",
       "construct": "an ABSOLUTE-positioned overlay child inside a MANUAL grid, alongside a normally placed child",
       "expect": "CARRIED",
-      "why": "G2/P13: layoutPositioning ABSOLUTE works inside grid parents and the existing overlay grammar survives; the reader must gate anchor reads on it (absolute children still REPORT anchors 0,0) and carry the grid with the overlay out of flow",
+      "why": "G9.2 (2026-08-08): the grid is carried WHOLE and the absolute child rides the EXISTING abs door (position:absolute + minted insets), which loses no coordinate. The abs→Part.overlay EDGE inversion is refused PERMANENTLY and separately (grid-overlay-edge-inversion, G9.1: four enum values with no offset channel cannot represent a point in R²), and that refusal is receipted on the part rather than taking the parent's tracks and every sibling placement down with it. P13's dump gate is unchanged — the absolute child still carries no cell, so no 0,0 placement is invented.",
       "check": {
         "carried": [
           "\"display\":\"grid\"",
-          "\"placement\":\\{\"row\":0,\"column\":0\\}"
+          "\"placement\":\\{\"row\":0,\"column\":0\\}",
+          "\"position\":\"absolute\""
+        ],
+        "note": [
+          "grid-overlay-edge-inversion"
         ]
       },
-      "status": "red",
-      "observed": "The dump gate works exactly as P13 requires — the absolute child carries `abs` and NO cell, so no 0,0 placement is invented. But the reader then refuses the WHOLE grid, because it has no abs->overlay inversion: Part.overlay spells attachment as the v7 EDGE enum (top|bottom|start|end) while the canvas fact is a raw x/y inside a cell, and choosing an edge from that would be an invented fact (the dump types have carried \"not yet consumed by the proposer\" for `abs` since v1.7). Pinned red: the grid is lost rather than the overlay being guessed. Closing it needs the overlay inversion, a separate grammar item; the refusal now names THAT cause instead of blaming the child for a cell the dump was right not to capture.",
-      "observedCheck": {
-        "note": "NO abs.overlay inversion",
-        "absent": [
-          "\"display\":\"grid\""
-        ]
-      }
+      "status": "green"
     }
   ]
 }

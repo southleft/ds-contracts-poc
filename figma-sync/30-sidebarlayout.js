@@ -44,7 +44,8 @@ const COMPONENTS = [
                 }
               ],
               "rowGap": 16,
-              "columnGap": 24
+              "columnGap": 24,
+              "hugHeight": true
             }
           },
           "lits": {
@@ -415,11 +416,31 @@ function slotKeyOf(slotNode) {
 function slotPreferredValues(spec) {
   const out = [];
   for (const depRef of spec.slotAccepts || []) {
+    // G10 (2026-08-08) — `accepts` IS a HARD EMISSION-ORDER DEPENDENCY, and
+    // this is where that was discovered: resolving a preferred value needs the
+    // accepted component to ALREADY EXIST IN THE FILE, so an accepts list
+    // silently defines a build order. The order itself is handled (contracts
+    // emit in topological order of the accepts graph, sortByDependencies), but
+    // a PARTIAL emission legitimately cannot see outside its own subset — and
+    // throwing there made the whole component unshippable over a picker hint.
+    // The accepted component is not required for the slot to work: preferredValues
+    // is a sort order and Figma refuses nothing (probe 2b). So an unresolvable
+    // entry is a NAMED DEFERRAL, never a throw — the slot ships without that one
+    // preferred value and says which one and why.
     const target = resolveComponentIdentity(
       { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
       'Slot "' + spec.slotProperty + '" preferred value',
-      false,
+      true,
     );
+    if (!target) {
+      console.log(
+        'slot-accepts-deferred: Slot "' + spec.slotProperty + '" accepts "' + depRef.contractId +
+        '", which is not in this file (a partial emission cannot carry a slot constraint pointing ' +
+        'outside the emitted subset) — the slot ships WITHOUT that preferred value; emit "' +
+        depRef.contractId + '" first to carry it (G10)'
+      );
+      continue;
+    }
     out.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
   }
   return out;
@@ -554,7 +575,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';
@@ -609,7 +631,10 @@ function applyFrameSpec(node, spec) {
     }
     if (li.width !== undefined || li.height !== undefined) {
       node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
-      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
       if (li.width !== undefined) {
         if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
       }
@@ -664,22 +689,36 @@ function applyGridFrame(node, l) {
   node.gridRowGap = g.rowGap;
   node.gridColumnGap = g.columnGap;
   if (g.flow) node.gridItemsPositioning = g.flow;
-  // FC-GRID-ROOT-VSIZE — KNOWN, NAMED, DELIBERATELY UNFIXED (A3 corpus).
-  // primaryAxisSizingMode/counterAxisSizingMode = 'AUTO' (the flex spelling
-  // of hug, applied by the caller) are INERT on a GRID frame, so a grid frame
-  // keeps createFrame's FIXED 100x100 default on any axis the contract did
-  // not pin with a width/height fact: ds.two-column, whose single row HUGS,
-  // renders 640x100 on canvas with 77px of dead space under a 23px row while
-  // the same contract hugs to 640x23 in CSS.
-  //
-  // The obvious repair — writing layoutSizing*='HUG' here — is WORSE than the
-  // defect and was measured, not reasoned: a GRID frame set to hug NORMALIZES
-  // its FLEX tracks to HUG, and the fr RATIO does not survive. The canonical
-  // bento's [80px, 1fr, 2fr] came back [FIXED:80, FLEX:1, FLEX:1] and its
-  // main/footer regions both rendered 192px tall instead of 128/256. Trading
-  // an honest 77px of dead space for a silently destroyed span matrix is not
-  // a fix, so this stays named and open rather than papered over. A real fix
-  // must hug ONLY axes that carry no FLEX track and must run after resize().
+  // FC-GRID-ROOT-VSIZE — CLOSED by G8 (2026-08-08). NOT here: see applyGridHug,
+  // which runs LAST. primaryAxisSizingMode/counterAxisSizingMode = 'AUTO' (the
+  // flex spelling of hug, applied by the caller) are INERT on a GRID frame
+  // (GP1b/GP8: they read back HUG while the frame keeps its FIXED size), so a
+  // grid frame kept createFrame's FIXED 100 on any unpinned axis. The contract
+  // now states the fact — literals width/height "fit-content" — and the ONLY
+  // faithful lowering is layoutSizing{Horizontal,Vertical}='HUG', written after
+  // resize() and after every child (GP4b: a later resize of a hugged axis
+  // silently reverts BOTH the sizing mode and the track list).
+}
+
+// G8 — the LAST write on a grid frame. Deliberately separate from
+// applyGridFrame: hug must follow resize() and every child append (GP4b), so
+// applyGridChildren calls it at its own tail. Hugging an axis that carries an
+// {fr} track destroys the ratio silently (GP1/GP5/GP12), so the schema refuses
+// that combination BY NAME (grid-hug-flex-axis) and this function asserts it
+// rather than trusting the compile step.
+function applyGridHug(node, l) {
+  const g = l.grid;
+  if (!g) return;
+  if (g.hugWidth) {
+    if (g.columns.some(function (t) { return t.type === 'FLEX'; }))
+      throw new Error('grid-hug-flex-axis: refusing to hug the width of a grid whose column tracks contain FLEX — the ratio would be silently normalized to HUG (GP1/GP12)');
+    node.layoutSizingHorizontal = 'HUG';
+  }
+  if (g.hugHeight) {
+    if (g.rows.some(function (t) { return t.type === 'FLEX'; }))
+      throw new Error('grid-hug-flex-axis: refusing to hug the height of a grid whose row tracks contain FLEX — the ratio would be silently normalized to HUG (GP1/GP5)');
+    node.layoutSizingVertical = 'HUG';
+  }
 }
 
 // A2 grid: children were appended by the caller — now the probe-pinned tail:
@@ -778,17 +817,43 @@ function applyGridChildren(parent, spec, built) {
   for (const p of inFlow) {
     const cs = p[0], cn = p[1];
     if (cs.type === 'text') continue; // text hugs its glyphs (P4's fence)
-    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
+    // G8: a child that declares its OWN intrinsic axis keeps it — FILL would
+    // silently overwrite the hug applied by that child's own applyGridHug.
+    const childGrid = cs.layout && cs.layout.grid ? cs.layout.grid : null;
+    // G3′ (2026-08-08, probe GP14) — FILL AND HUG ON THE SAME AXIS IS CIRCULAR.
+    // G3's default is that a placed part fills both axes of its cell. On an axis
+    // the PARENT hugs, that makes the track's size a function of the child and
+    // the child's size a function of the track: Figma resolves the loop by
+    // FREEZING whatever box the node already had. Measured live: a hugging
+    // two-column root with two FILL slots reported layoutSizingVertical 'HUG'
+    // and stayed 640x100; the instant its children stopped filling, the root
+    // collapsed to the real content height, and restoring FILL did not undo it.
+    // A frozen box is worse than a wrong one — it is a stale box that reads as
+    // a measurement. So on a hugged axis the child HUGS (its own content is what
+    // the track must measure) and never fills. CSS agrees: against a
+    // fit-content track, align-self:stretch resolves to the content size — the
+    // track is sized first and the child stretches into the RESULT.
+    // A non-auto-layout frame refuses HUG (P4) and keeps its drawn box, which is
+    // exactly the right contribution.
+    const hugW = !!(l.grid.hugWidth || (childGrid && childGrid.hugWidth));
+    const hugH = !!(l.grid.hugHeight || (childGrid && childGrid.hugHeight));
+    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined) && !hugW) {
       try { cn.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+    } else if (l.grid.hugWidth && !cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
+      try { cn.layoutSizingHorizontal = 'HUG'; } catch (e) { /* keeps its drawn box */ }
     }
-    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
+    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined) && !hugH) {
       try { cn.layoutSizingVertical = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+    } else if (l.grid.hugHeight && !cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
+      try { cn.layoutSizingVertical = 'HUG'; } catch (e) { /* keeps its drawn box */ }
     }
   }
   for (const p of placed) {
     if (p[0].cell.hAlign) p[1].gridChildHorizontalAlign = p[0].cell.hAlign;
     if (p[0].cell.vAlign) p[1].gridChildVerticalAlign = p[0].cell.vAlign;
   }
+  // G8 — LAST, after resize and after every child (GP4b).
+  applyGridHug(parent, spec.layout);
 }
 
 async function buildNode(spec, registry) {

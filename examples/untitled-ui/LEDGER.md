@@ -15,7 +15,7 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 | instrument | what it holds the tool to | current reading | artifact |
 |---|---|---|---|
 | Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **92.7%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst tooltip 81.2%) | `renders/fidelity.json` |
-| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **114/116** green, 2 pinned red — 93 constructs expected CARRIED, 9 REFUSED, 14 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
+| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **116/116** green, 0 pinned red — 93 constructs expected CARRIED, 9 REFUSED, 14 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
 | Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** executed to fact diff · **0/15 verified exact** · 11,400 matched · 1,857 diverged · 7,671 loss · 15,359 invented | `extract/figma/roundtrip-uui/report.json` |
 | The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 23 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
@@ -43,7 +43,7 @@ Method, quoted from `renders/FIDELITY.md`: *Score = % of pixels REPRODUCED, meas
 
 ## 2. What carries
 
-The document-model fixture is the answer to "will it survive the boundary at all". It is 116 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **91 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
+The document-model fixture is the answer to "will it survive the boundary at all". It is 116 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **93 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
 
 | construct family | carried | case ids |
 |---|---|---|
@@ -51,7 +51,7 @@ The document-model fixture is the answer to "will it survive the boundary at all
 | Boolean property defaults | 2 | `bool-default-from-set` `bool-default-hidden` |
 | Effects (shadows, blurs) | 2 | `effect-shadow-single` `effect-shadow-two` |
 | Fills and paints | 6 | `fill-alpha` `fill-image-bool` `fill-image-hash` `fill-solid-and-image-mixed` `fill-solid-raw` `fill-solid-var` |
-| `grid-*` | 19 | `grid-2d` `grid-area-slot-native` `grid-bento-span-matrix` `grid-child-align` `grid-child-fill-cell` `grid-child-grow-invalid` `grid-child-text-hug` `grid-col-span` `grid-explicit-anchor` `grid-gap-row-column` `grid-gap-shorthand` `grid-in-flex-fill` `grid-instance-child` `grid-on-component-variant` `grid-row-span` `grid-sidebar-px-fr` `grid-track-fit-content` `grid-tracks-mixed-fractional` `grid-two-column` |
+| `grid-*` | 21 | `grid-2d` `grid-absolute-overlay` `grid-area-slot-native` `grid-auto-flow-row` `grid-bento-span-matrix` `grid-child-align` `grid-child-fill-cell` `grid-child-grow-invalid` `grid-child-text-hug` `grid-col-span` `grid-explicit-anchor` `grid-gap-row-column` `grid-gap-shorthand` `grid-in-flex-fill` `grid-instance-child` `grid-on-component-variant` `grid-row-span` `grid-sidebar-px-fr` `grid-track-fit-content` `grid-tracks-mixed-fractional` `grid-two-column` |
 | Nested instances and their linkage | 7 | `instance-absent-stub` `instance-override-size-carried` `instance-props-fixed` `instance-props-thread` `instance-resolvable-key` `instance-resolvable-name` `instance-stub-no-bbox` |
 | Auto-layout (direction, gap, padding, alignment, sizing) | 10 | `layout-align-baseline` `layout-column` `layout-fill-width-column` `layout-fill-width-row` `layout-gap-literal` `layout-justify-space-between` `layout-padding-asymmetric-bound` `layout-root-default-elided` `layout-root-fixed-bbox` `layout-width-bound-root` |
 | Min/max sizing | 1 | `minmax-size` |
@@ -215,23 +215,11 @@ Carried, but not carried perfectly. These are the classes an adopter will actual
 
 ---
 
-## 5. The pinned reds, and the work order
+## 5. The work order
 
 ### 5.1 The pinned reds
 
-2 of the 116 conformance cases are FAIL-EXPECTED-RED: the documentation model says CARRIED, the engine does not deliver it, and the gap is pinned so it cannot be forgotten or quietly closed. Each is verbatim from the manifest.
-
-#### `grid-absolute-overlay` — expected CARRIED, inversion-side
-
-- **Construct:** an ABSOLUTE-positioned overlay child inside a MANUAL grid, alongside a normally placed child
-- **Why it should carry:** G2/P13: layoutPositioning ABSOLUTE works inside grid parents and the existing overlay grammar survives; the reader must gate anchor reads on it (absolute children still REPORT anchors 0,0) and carry the grid with the overlay out of flow
-- **What actually happens:** The dump gate works exactly as P13 requires — the absolute child carries `abs` and NO cell, so no 0,0 placement is invented. But the reader then refuses the WHOLE grid, because it has no abs->overlay inversion: Part.overlay spells attachment as the v7 EDGE enum (top\|bottom\|start\|end) while the canvas fact is a raw x/y inside a cell, and choosing an edge from that would be an invented fact (the dump types have carried "not yet consumed by the proposer" for `abs` since v1.7). Pinned red: the grid is lost rather than the overlay being guessed. Closing it needs the overlay inversion, a separate grammar item; the refusal now names THAT cause instead of blaming the child for a cell the dump was right not to capture.
-
-#### `grid-auto-flow-row` — expected CARRIED, inversion-side
-
-- **Construct:** a ROW_AUTO_FLOW grid whose declared row tracks are two 16px FIXED tracks
-- **Why it should carry:** G5: under flow the placement fact is CHILD ORDER (P5 — the API refuses position setters there), so the contract carries flow "row", omits rows, and the emitter re-derives ceil(children/columns) explicit tracks itself (P9: the API under-reports implicit rows)
-- **What actually happens:** The reader REFUSES this grid by name. G5 lets the contract carry flow ONLY with `rows` OMITTED, so the two declared 16px row tracks have nowhere to land: carrying flow would silently redraw them as the emitter derivation ({fr:1} x ceil(children/columns)) on the next round trip — the P9 rewrite the grammar exists to prevent. The reader therefore admits flow only when the drawn rows ALREADY equal that derivation, and a flow grid that does round-trips exactly (grid-roundtrip-identity eval, section 4). Pinned red because the construct is real and the doc model calls it CARRIED, while the only carriage available today would lose the drawn track sizes. Closing it needs a grammar decision (a flow spelling that can carry declared rows), not a reader patch — so the loss is pinned, named and visible instead of absorbed.
+NONE. All 116 conformance cases are green: every construct the documentation model says is CARRIED is carried, and every refusal is named. This section stays in the ledger because an empty pinned-red list is a reading, not a formatting accident — when a red returns it is printed here verbatim from the manifest.
 
 ### 5.2 The round-1 audit, re-checked
 
@@ -270,12 +258,11 @@ Named holes, so that no reader mistakes an absence for a zero.
 ### 5.4 The work order, in the order it pays
 
 1. **The paste door is OPEN** (§3.4) — closed for two rounds, and the two blockers that held it (an empty `base` tokenSet refused outright, and `social-button`'s `{platform}` icon ref read as a literal filename) are both fixed and pinned by `npm run paste:check`, which drives the REAL referee for this kit and for a variable-publishing one. An adopter can now take these 15 contracts through the shipping path unaided. What ranks first NOW is below.
-2. **The 2 pinned reds** (§5.1) — `grid-absolute-overlay`, `grid-auto-flow-row`. A pinned red outranks every OPEN class below it: the documentation model says the construct is CARRIED and the engine does not deliver it, which is the one failure this project treats as a bug rather than a boundary.
-3. **variant-name-transliteration-api** — OPEN, mint stage (inversion-side). 1 reserved-name collision (SocialIcon.style); 13 props whose enum still spells `'false'` instead of absence/boolean; 3 numeric-valued string enums (ProgressBar.progress, Slider.leftControl, Slider.rightControl).
-4. **duplicate-parts-from-wrapper-union** — PARTIAL, propose-invert stage (inversion-side). 3 numbered part names whose base name is also a part of the same contract (progress-bar.Progress2, slider.leftControl2, slider.rightControl2); the audited duplicates (ProgressCircle's four label parts, DropdownListItem's Text2/Checkbox×2/circle×2, InputFieldBase's tripled trailing icons) are all absent. The probe cannot prove the residuals are not genuine sibling nodes.
-5. **ua-default-leakage** — PARTIAL, emit-react stage (emitter-side). global `box-sizing: border-box` reset in tokens.css: present; 8/32 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files).
-6. **story-space-mismatch** — PARTIAL, story-gen stage (emitter-side). 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 32 emitted components ship stories).
-7. **Classify the 0 untagged round-trip facts** (§5.3) — until divergence and loss are classified the way invention already is, no blast-radius number in §4 can claim to be complete.
+2. **variant-name-transliteration-api** — OPEN, mint stage (inversion-side). 1 reserved-name collision (SocialIcon.style); 13 props whose enum still spells `'false'` instead of absence/boolean; 3 numeric-valued string enums (ProgressBar.progress, Slider.leftControl, Slider.rightControl).
+3. **duplicate-parts-from-wrapper-union** — PARTIAL, propose-invert stage (inversion-side). 3 numbered part names whose base name is also a part of the same contract (progress-bar.Progress2, slider.leftControl2, slider.rightControl2); the audited duplicates (ProgressCircle's four label parts, DropdownListItem's Text2/Checkbox×2/circle×2, InputFieldBase's tripled trailing icons) are all absent. The probe cannot prove the residuals are not genuine sibling nodes.
+4. **ua-default-leakage** — PARTIAL, emit-react stage (emitter-side). global `box-sizing: border-box` reset in tokens.css: present; 8/32 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files).
+5. **story-space-mismatch** — PARTIAL, story-gen stage (emitter-side). 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 32 emitted components ship stories).
+6. **Classify the 0 untagged round-trip facts** (§5.3) — until divergence and loss are classified the way invention already is, no blast-radius number in §4 can claim to be complete.
 
 ---
 
@@ -287,7 +274,7 @@ npx tsx extract/figma/ledger/build.ts
 
 # 2 · the document-model fixture — fast, read-only, no engine changes
 npm run conformance:canvas
-#    expect: 116 case(s): 114 PASS, 2 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
+#    expect: 116 case(s): 116 PASS, 0 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
 
 # 3 · the canvas→code→canvas round trip (rewrites REPORT.md + report.json)
 npm run extract:figma:roundtrip:uui
@@ -312,7 +299,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/storybook/contracts/` | `63f093f001fb` | 129,887 | proposed contracts (30 files) |
 | `examples/untitled-ui/storybook/src/generated/` | `256e2627c802` | 275,910 | emitted components (32 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `8c31938a1627` | 674,804 | emitted global tokens |
-| `extract/figma/conformance/MANIFEST.json` | `c43ae501d516` | 68,895 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `71392fbbb21e` | 67,755 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `61f5c58f7f20` | 144,788 | round-trip narrative |
 

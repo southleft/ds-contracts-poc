@@ -14,6 +14,8 @@ single most misleading thing this repo could publish. The companion document
 is not optional reading: [23 — Known Limitations](23-known-limitations.md) is
 the complete inventory of what this does not do, and it is longer than this one.
 
+> **⚠ 1 CROSS-CHECK(S) DISAGREE.** Two artifacts that should report the same number do not. The disagreements are listed in [§8](#8-cross-checks--two-artifacts-that-must-agree) and are **not** resolved in this document's favour. Treat every figure below as suspect until they are reconciled.
+
 ---
 
 ## 1. The one-paragraph version
@@ -282,8 +284,8 @@ asserted in prose.
 | pin | value | what it forbids | source |
 |---|---|---|---|
 | generated source, byte-identical | 291 files hashed | a contract change altering generated code without review | `evals/golden.json` |
-| capture double-sweep identity | 162/162 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
-| browser captures behind the corpus | 7,493 | a floor quoted from a sample smaller than it claims | same files, `captures` |
+| capture double-sweep identity | 164/164 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
+| browser captures behind the corpus | 7,753 | a floor quoted from a sample smaller than it claims | same files, `captures` |
 | executable claims | 215 gates | a documented behaviour with no test | `evals/results.json` |
 | dropped-fact receipt count | 100 pinned exactly | honesty being switched off unnoticed — see §6 | `extract/figma/dagger-census.json` |
 | doc numbers vs the repo | gated | a doc quoting a number the repo no longer produces | `scripts/docs-numbers-check.mjs` |
@@ -350,7 +352,7 @@ filter that decides carriage scores 100% on a channel it never opened.
 | canvas constructs | 116 | CARRIED 93 · LEDGERED 14 · REFUSED 9 | `extract/figma/conformance/MANIFEST.json` |
 | CSS / DOM frontier | 82 | CARRIED 42 · REFUSED 18 · UNSUPPORTED 18 · LOWERED 4 | `conformance/MANIFEST.json` |
 
-Of the 116 canvas constructs, **114** are `green`, **2** are `red`.
+Of the 116 canvas constructs, **116** are `green`.
 A construct that is neither carried nor named-refused is a hard failure of that
 suite — "it silently did nothing" is not an allowed outcome.
 
@@ -460,8 +462,8 @@ earlier for a different purpose.
 | components with a computed scorecard = components pinned by the drift instrument | 82 — `extract/computed/out/**/scorecard.json` | 82 — `docs/22-generality.md §8.3, "pinned" total` | ✔ |
 | contracts committed under `examples/<lib>/contracts` = the coverage table's committed column | 90 — `examples/*/contracts/*.contract.json` | 90 — `docs/22-generality.md §8.3, "contracts committed" total` | ✔ |
 | the eval suite has as many result rows as it claims | 215 — `evals/results.json → results.length` | 215 — `same file → total` | ✔ |
-| every capture run carries the two-sweep determinism receipt | 162 — `extract/computed/out/**/numbers.json` | 162 — `count of numbers.json files` | ✔ |
-| every scorecard falls in a known corpus | 0 — `extract/computed/out/**/scorecard.json` | 0 — `the library registry in this script` | ✔ |
+| every capture run carries the two-sweep determinism receipt | 164 — `extract/computed/out/**/numbers.json` | 164 — `count of numbers.json files` | ✔ |
+| every scorecard falls in a known corpus | 2 — `extract/computed/out/**/scorecard.json` | 0 — `the library registry in this script` | **✘ DISAGREE** |
 | every round-trip execution reached the fact diff | 15 — `extract/figma/roundtrip-uui/report.json → totals.roundTripClosed` | 15 — `same file → totals.components` | ✔ |
 | Altitude — contracts on disk = the coverage table's committed column | 8 — `examples/altitude/contracts/*.contract.json` | 8 — `docs/22-generality.md §8.3` | ✔ |
 | Altitude — components with a scorecard = the coverage table's pinned column | 8 — `extract/computed/out/altitude/<comp>/scorecard.json` | 8 — `docs/22-generality.md §8.3` | ✔ |
@@ -478,7 +480,7 @@ earlier for a different purpose.
 | Flowbite / Tailwind — contracts on disk = the coverage table's committed column | 5 — `examples/tailwind/contracts/*.contract.json` | 5 — `docs/22-generality.md §8.3` | ✔ |
 | Flowbite / Tailwind — components with a scorecard = the coverage table's pinned column | 5 — `extract/computed/out/tailwind/<comp>/scorecard.json` | 5 — `docs/22-generality.md §8.3` | ✔ |
 
-All 20 agree.
+**1 of 20 disagree.** Reconcile the artifacts, not this document.
 
 ---
 
@@ -497,14 +499,14 @@ npm run capability:fresh
 
 | artifact | sha256 (12) | bytes | what it supplied |
 |---|---|---|---|
-| `conformance/MANIFEST.json` | `4414d908b2fe` | 75,681 | CSS/DOM frontier vocabulary |
+| `conformance/MANIFEST.json` | `8231a2e8b195` | 76,456 | CSS/DOM frontier vocabulary |
 | `docs/22-generality.md` | `6defb6d4d5b0` | 71,156 | coverage denominators (docs/22 §8.3 table) |
-| `evals/golden.json` | `fd49fdeca4a1` | 32,157 | generated-source golden manifest |
-| `evals/results.json` | `c67b3d6a49f6` | 23,003 | executable claim suite |
+| `evals/golden.json` | `ce6abd29249c` | 32,157 | generated-source golden manifest |
+| `evals/results.json` | `f90e9bbfa1c4` | 31,768 | executable claim suite |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `8cb00a60f240` | 918,901 | capture counts + determinism receipts — 162 files |
-| `extract/computed/out/**/scorecard.json` | `5d2e4f8d18c4` | 10,961,309 | computed-equality per component — 162 files |
-| `extract/figma/conformance/MANIFEST.json` | `c43ae501d516` | 68,895 | canvas construct vocabulary |
+| `extract/computed/out/**/numbers.json` | `bff2a4ca6033` | 932,737 | capture counts + determinism receipts — 164 files |
+| `extract/computed/out/**/scorecard.json` | `daba020737e6` | 11,583,655 | computed-equality per component — 164 files |
+| `extract/figma/conformance/MANIFEST.json` | `71392fbbb21e` | 67,755 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `80258165cbaa` | 2,949 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 

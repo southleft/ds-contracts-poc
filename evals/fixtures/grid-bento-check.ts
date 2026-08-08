@@ -230,8 +230,122 @@ expectRefusal('span beyond tracks', 'Column span exceeds grid column count', () 
 expectRefusal('occupancy overlap', 'overlap on the grid', () =>
   PartSchema.safeParse({ layout: { display: 'grid', rows: [{ px: 10 }, { fr: 1 }], columns: [{ fr: 1 }] }, parts: { a: { placement: { row: 0, column: 0, rowSpan: 2 } }, b: { placement: { row: 1, column: 0 } } } }));
 
+// ---- 7. G8 / G3' / G5' — the composition round's amendments, pinned --------
+// Probes GP1-GP15 (docs/research/layout-grammar-proposal.md), measured live on
+// 2026-08-08. Each row below is a decision that cost a live probe to make.
+
+// G8.2 — `fit-content` on an axis carrying an {fr} track. NO write order
+// satisfies both: hugging AFTER the tracks destroys the ratio (GP1/GP5/GP12),
+// hugging BEFORE them leaves the hug INERT — the node reports HUG and keeps its
+// FIXED size (GP8/GP1b). Refused BY NAME so the emitter can never trigger it.
+expectRefusal('fit-content on an fr ROW axis', 'grid-hug-flex-axis', () =>
+  PartSchema.safeParse({
+    parts: { g: { layout: { display: 'grid', rows: [{ px: 10 }, { fr: 1 }], columns: [{ px: 100 }] }, literals: { width: 'fit-content', height: 'fit-content' } } },
+  }));
+expectRefusal('fit-content on an fr COLUMN axis', 'grid-hug-flex-axis', () =>
+  PartSchema.safeParse({
+    parts: { g: { layout: { display: 'grid', rows: [{ px: 10 }], columns: [{ px: 100 }, { fr: 1 }] }, literals: { width: 'fit-content', height: 'fit-content' } } },
+  }));
+
+// G8.1 — silence on an axis whose tracks carry no {fr} is refused: the canvas
+// keeps createFrame's FIXED 100 and CSS takes content height (FC-GRID-ROOT-VSIZE).
+expectRefusal('indefinite grid axis', 'grid-axis-indefinite', () =>
+  PartSchema.safeParse({
+    parts: { g: { layout: { display: 'grid', rows: [{ px: 10 }], columns: [{ px: 100 }] } } },
+  }));
+
+// ...and an fr-bearing axis is EXEMPT: a fraction is sized from OUTSIDE the
+// part on both surfaces, so silence there is not a divergence to close.
+{
+  const r = PartSchema.safeParse({
+    parts: { g: { layout: { display: 'grid', rows: [{ fr: 1 }], columns: [{ fr: 1 }] } } },
+  });
+  if (!r.success) fail(`an fr-bearing grid axis must NOT require a definite size: ${JSON.stringify(r.error.issues.map((i) => i.message))}`);
+}
+
+// G5' — declared rows under flow are legal (GP6/GP6b: ROW_AUTO_FLOW and
+// declared gridRowSizes coexist natively on the canvas, in either write order).
+{
+  const r = LayoutSchema.safeParse({ display: 'grid', columns: [{ fr: 1 }, { fr: 1 }], flow: 'row', rows: [{ px: 16 }, { px: 16 }] });
+  if (!r.success) fail(`G5-prime: declared rows under flow must parse: ${JSON.stringify(r.error.issues.map((i) => i.message))}`);
+}
+// ...but they must COVER the flow (GP10: children flow PAST the declared list
+// while gridRowCount stays put — P9's lossy readback, under declared rows).
+expectRefusal('flow rows that do not cover the children', 'grid-implicit-tracks', () =>
+  PartSchema.safeParse({
+    layout: { display: 'grid', columns: [{ fr: 1 }, { fr: 1 }], flow: 'row', rows: [{ px: 16 }] },
+    literals: { width: '100px', height: '32px' },
+    parts: { a: {}, b: {}, c: {} },
+  }));
+
+// ---- 8. G8 + G3' through the REAL compile path and the strict mock ---------
+// The two halves only building the component could separate: the hug must be
+// the LAST write (GP4b — a later resize reverts BOTH the sizing mode and the
+// track list), and a child must not FILL the hugged axis (GP14 — that pair is
+// circular and the canvas resolves it by FREEZING the stale box, so the node
+// reports HUG and never moves).
+{
+  const hugging = ContractSchema.parse({
+    id: 'ds.eval-grid-hug',
+    name: 'EvalGridHug',
+    version: '0.1.0',
+    status: 'draft',
+    description: 'G8/G3-prime — an intrinsically sized grid axis, end to end',
+    semantics: { element: 'div' },
+    props: [],
+    states: [],
+    anatomy: {
+      root: {
+        layout: { display: 'grid', rows: [{ fit: true }], columns: [{ fr: 1 }, { fr: 1 }] },
+        literals: { width: '640px', height: 'fit-content' },
+        parts: {
+          start: { placement: { row: 0, column: 0 }, literals: { 'background-color': '#eeeeee' } },
+          end: { placement: { row: 0, column: 1 }, literals: { 'background-color': '#dddddd' } },
+        },
+      },
+    },
+    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalGridHug' } },
+  }) as Contract;
+  const hugScript = emit(hugging);
+
+  // (a) the hug is emitted, and it is emitted LAST — after the FILL pass, in
+  //     applyGridChildren's own tail, because a later resize would revert it.
+  if (!hugScript.includes('function applyGridHug(')) fail('G8: applyGridHug is not emitted for a hugging grid');
+  const iFill = hugScript.indexOf("layoutSizingHorizontal = 'FILL'");
+  const iHugCall = hugScript.indexOf('applyGridHug(parent, spec.layout)');
+  if (iFill < 0 || iHugCall < 0 || iHugCall < iFill) {
+    fail(`G8/GP4b: the hug must be written AFTER the FILL pass (fill@${iFill}, hug@${iHugCall})`);
+  }
+  // (b) the emitted hug guards the fr axis at RUNTIME too — belt and braces
+  //     over the schema, because the silent normalization is unrecoverable.
+  if (!hugScript.includes('grid-hug-flex-axis:')) fail('G8.2: the runtime hug guard is not emitted');
+
+  // (c) run it through the strict mock and read the canvas back.
+  const hugMock = createFigmaMock();
+  const hugCtx = vm.createContext({ figma: hugMock.figma, console: { log() {}, warn() {}, error() {} } });
+  await vm.runInContext(`(async () => {\n${hugScript}\n})()`, hugCtx, { timeout: 120_000 });
+  const hugComp = hugMock.root.findAll((n: any) => n.type === 'COMPONENT')[0];
+  if (!hugComp) fail('G8: the hugging component was not built by the mock');
+  if (hugComp.layoutSizingVertical !== 'HUG') fail(`G8: root layoutSizingVertical is ${hugComp.layoutSizingVertical}, wanted HUG`);
+  if (hugComp.layoutSizingHorizontal === 'HUG') fail('G8: the WIDTH axis carries {fr} tracks and a 640px literal — it must NOT hug');
+  eq(hugComp.gridRowSizes.map((t: any) => t.type), ['HUG'], 'G8: the hug must not rewrite its own row track list');
+  eq(hugComp.gridColumnSizes.map((t: any) => t.type), ['FLEX', 'FLEX'],
+     'G8/GP1: hugging the HEIGHT must not normalize the COLUMN tracks — the destruction is axis-local');
+  // G3': on the hugged axis the children HUG; on the other axis they still FILL.
+  for (const c of hugComp.children as Array<any>) {
+    if (c.layoutSizingVertical === 'FILL') {
+      fail(`G3-prime/GP14: child "${c.name}" FILLs the hugged axis — that pair is circular and the canvas freezes the stale box`);
+    }
+    if (c.layoutSizingHorizontal !== 'FILL') {
+      fail(`G3: child "${c.name}" must still FILL the axis the parent does NOT hug (got ${c.layoutSizingHorizontal})`);
+    }
+  }
+}
+
 console.log(
-  'grid-bento ok: byte-deterministic ×2; every track/anchor/span/gap fact carried through the compiled ' +
+  'grid-bento ok: byte-deterministic x2; every track/anchor/span/gap fact carried through the compiled ' +
     'spec AND the strict-mock readback (P8 geometry math exact); runtime text carries the probe-pinned ' +
-    'order + the P9/P10 declaration guard; 14 G7/P3 constructs refused by name at the schema',
+    'order + the P9/P10 declaration guard; 17 G7/P3 constructs refused by name at the schema; G8 hugs an ' +
+    'intrinsic axis LAST without touching the other axis fr tracks, G3-prime keeps grid children off the ' +
+    'circular FILL/HUG pair, and G5-prime carries declared rows under flow within their coverage bound',
 );

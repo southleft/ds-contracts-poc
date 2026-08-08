@@ -2,7 +2,7 @@
  "_provenance": {
   "fileKey": null,
   "dumpVersion": "1.17",
-  "note": "canvas conformance fixture - MECHANICALLY EXPANDED from the CSS-suite design-side snippet conformance/cases/grid-two-column/dump.snippet.json (the hand-authored A1 artifact) into the full dump v1.17 grammar the shipping reader consumes. The expansion adds NO grid fact: `layout:\"grid\"` becomes {mode:'GRID', padding 0, sizing FIXED, grid:<the snippet's own grid block verbatim>}, `layout:\"row\"` becomes the flex-era HORIZONTAL block, `cell` rides verbatim, `sizing.horizontal:FILL` becomes the dump's `fillWidth`, and `characters` becomes a TEXT node on the repo's `badge` derived style. Channels the dump grammar deliberately does NOT carry are named per case below rather than invented."
+  "note": "canvas conformance fixture - MECHANICALLY EXPANDED from the CSS-suite design-side snippet conformance/cases/grid-two-column/dump.snippet.json (the hand-authored A1 artifact) into the full dump v1.17 grammar the shipping reader consumes. The expansion adds NO grid fact: `layout:\"grid\"` becomes {mode:'GRID', padding 0, sizing per axis (G8, 2026-08-08: a GRID frame's primary axis is HORIZONTAL, GP1b — an axis whose declared tracks carry no {fr} is AUTO/hug, which is what the canvas draws and what the reader carries as literals \"fit-content\"; an fr-bearing axis is FIXED, sized from outside), grid:<the snippet's own grid block verbatim>}, `layout:\"row\"` becomes the flex-era HORIZONTAL block, `cell` rides verbatim, `sizing.horizontal:FILL` becomes the dump's `fillWidth`, and `characters` becomes a TEXT node on the repo's `badge` derived style. Channels the dump grammar deliberately does NOT carry are named per case below rather than invented."
  },
  "Case": {
   "setName": "CaseGridTwoColumn",
@@ -20,7 +20,7 @@
       0
      ],
      "primarySizing": "FIXED",
-     "counterSizing": "FIXED",
+     "counterSizing": "AUTO",
      "grid": {
       "rows": [
        {

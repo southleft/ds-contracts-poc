@@ -25,6 +25,14 @@
             "fr": 1
           }
         ],
+        "rows": [
+          {
+            "fit": true
+          },
+          {
+            "fit": true
+          }
+        ],
         "flow": "row",
         "gap": {
           "row": "{space.gap.md}",
@@ -32,7 +40,8 @@
         }
       },
       "literals": {
-        "width": "640px"
+        "width": "640px",
+        "height": "fit-content"
       },
       "parts": {
         "item1": {

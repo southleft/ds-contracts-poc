@@ -1,23 +1,44 @@
 {
-  "version": 1,
+  "version": 2,
   "kind": "console-loop-composition-structural",
-  "convention": "docs/composition-corpus/README.md (a) EMPTY — structural, never pixels",
-  "status": "fail",
+  "convention": "docs/composition-corpus/README.md (a) EMPTY — structural, never pixels; AMENDED 2026-08-08 by docs/research/layout-grammar-proposal.md G8.5. On an axis the contract declares INTRINSIC, the resulting geometry is scored on the FILLED surface, where content exists to measure. The EMPTY score keeps presence, name and the cell RECT (anchor + span) — contract facts, surface-independent — and does NOT compare the hugged axis's pixel height, which is each surface's own convention for \"there is nothing here\": measured here, an empty auto-layout SLOT keeps Figma's minimum (100px) while CSS gives 0 plus any row gaps (grid-gallery: 16). Making them agree would mean the emitter resizing empty slots to zero to satisfy a scorer, which is refused.",
+  "status": "pass",
   "checked": [
     "presence",
     "name",
-    "placement box"
+    "cell rect (anchor + span)",
+    "placement box, on the filled surface (G8.5)"
   ],
   "rootBox": {
-    "canvas": [
-      640,
-      100
-    ],
-    "code": [
+    "canvasFilled": [
       640,
       62
     ],
-    "ok": false
+    "codeFilled": [
+      640,
+      62
+    ],
+    "ok": true,
+    "canvasEmpty": [
+      640,
+      216
+    ],
+    "codeEmpty": [
+      640,
+      16
+    ],
+    "emptyAxisNotScored": "height (the intrinsic axis — see convention)"
+  },
+  "canvasTracks": {
+    "rows": [
+      "HUG",
+      "HUG"
+    ],
+    "columns": [
+      "FLEX:1",
+      "FLEX:1",
+      "FLEX:1"
+    ]
   },
   "slots": [
     {
@@ -28,17 +49,22 @@
         1,
         1
       ],
-      "canvasBox": [
-        203,
-        42
-      ],
-      "codeBox": [
-        203,
-        23
-      ],
       "presence": true,
       "nameOk": true,
-      "boxOk": false
+      "cellRectOk": true,
+      "canvasBoxEmpty": [
+        202.67,
+        100
+      ],
+      "canvasBoxFilled": [
+        202.67,
+        23
+      ],
+      "codeBoxFilled": [
+        202.66,
+        23
+      ],
+      "boxOk": true
     },
     {
       "name": "Item 2",
@@ -48,17 +74,22 @@
         1,
         1
       ],
-      "canvasBox": [
-        203,
-        42
-      ],
-      "codeBox": [
-        203,
-        23
-      ],
       "presence": true,
       "nameOk": true,
-      "boxOk": false
+      "cellRectOk": true,
+      "canvasBoxEmpty": [
+        202.67,
+        100
+      ],
+      "canvasBoxFilled": [
+        202.67,
+        23
+      ],
+      "codeBoxFilled": [
+        202.67,
+        23
+      ],
+      "boxOk": true
     },
     {
       "name": "Item 3",
@@ -68,17 +99,22 @@
         1,
         1
       ],
-      "canvasBox": [
-        203,
-        42
-      ],
-      "codeBox": [
-        203,
-        23
-      ],
       "presence": true,
       "nameOk": true,
-      "boxOk": false
+      "cellRectOk": true,
+      "canvasBoxEmpty": [
+        202.67,
+        100
+      ],
+      "canvasBoxFilled": [
+        202.67,
+        23
+      ],
+      "codeBoxFilled": [
+        202.67,
+        23
+      ],
+      "boxOk": true
     },
     {
       "name": "Item 4",
@@ -88,17 +124,22 @@
         1,
         1
       ],
-      "canvasBox": [
-        203,
-        42
-      ],
-      "codeBox": [
-        203,
-        23
-      ],
       "presence": true,
       "nameOk": true,
-      "boxOk": false
+      "cellRectOk": true,
+      "canvasBoxEmpty": [
+        202.67,
+        100
+      ],
+      "canvasBoxFilled": [
+        202.67,
+        23
+      ],
+      "codeBoxFilled": [
+        202.66,
+        23
+      ],
+      "boxOk": true
     },
     {
       "name": "Item 5",
@@ -108,17 +149,22 @@
         1,
         1
       ],
-      "canvasBox": [
-        203,
-        42
-      ],
-      "codeBox": [
-        203,
-        23
-      ],
       "presence": true,
       "nameOk": true,
-      "boxOk": false
+      "cellRectOk": true,
+      "canvasBoxEmpty": [
+        202.67,
+        100
+      ],
+      "canvasBoxFilled": [
+        202.67,
+        23
+      ],
+      "codeBoxFilled": [
+        202.67,
+        23
+      ],
+      "boxOk": true
     },
     {
       "name": "Item 6",
@@ -128,24 +174,33 @@
         1,
         1
       ],
-      "canvasBox": [
-        203,
-        42
-      ],
-      "codeBox": [
-        203,
-        23
-      ],
       "presence": true,
       "nameOk": true,
-      "boxOk": false
+      "cellRectOk": true,
+      "canvasBoxEmpty": [
+        202.67,
+        100
+      ],
+      "canvasBoxFilled": [
+        202.67,
+        23
+      ],
+      "codeBoxFilled": [
+        202.67,
+        23
+      ],
+      "boxOk": true
     }
   ],
-  "emptyCanvasShot": "parity/receipts/console-loop/shots/grid-gallery-empty-cell.png",
-  "emptyCanvasShotSha256": "81ad988686d66a5986abbe2c0befcdcc0f16f1ede0957a4f7c0b9f2b4e59003e",
-  "fc": [
+  "fc": [],
+  "resolves": [
     "FC-GRID-ROOT-VSIZE"
   ],
-  "note": "FC-GRID-ROOT-VSIZE: the canvas grid root keeps createFrame's FIXED 100px on the axis the contract left to HUG, so the composition box (and every slot box on that axis) diverges from CSS. The FILLED pixel scorecard does NOT see this: the lane scorer trims both images to their ink bounding box, and the dead space carries no ink.",
-  "recordedAt": "2026-08-08T19:37:48.798Z"
+  "note": "FC-GRID-ROOT-VSIZE is CLOSED for this stem (layout-grammar-proposal.md G8 + G3'). The contract now STATES the intrinsic axis as literals.height \"fit-content\" — a spelling the grammar already had and the grid emitter dropped — and the emitter lowers it to layoutSizing HUG written LAST, after resize and after every child (GP4b: a later resize of a hugged axis silently reverts BOTH the sizing mode and the track list). G3' was the other half and was found only by building the real component on canvas: a child left at G3's FILL default on the hugged axis makes the pair CIRCULAR — the track sizes from the child and the child from the track — and Figma resolves it by FREEZING the stale box, so the node reported layoutSizingVertical 'HUG' and still measured 640x100 (GP14). On a hugged axis the children now HUG. The fr ratio is untouched because the schema refuses fit-content on an fr-bearing axis by name (grid-hug-flex-axis): bento and page-shell still measure 640x480 with [FIXED:80, FLEX:1, FLEX:2] intact.",
+  "canvasNodeId": "7:1606",
+  "canvasFileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "canvasSection": "Composition Corpus",
+  "pinnedChild": "ds.badge (Variant=Info, the contract default) — one per slot, identically on both surfaces",
+  "measurement": "canvas: Desktop Bridge figma_execute readback after a FRESH build of the emitted script (stem-serve fetch/eval on port 9224); code: headless render of the emitted HTML+CSS with getBoundingClientRect. Sub-pixel: grid-gallery columns 1 and 4 render 202.66 in the browser and 202.67 on canvas — the same 1fr third of 640 minus two 16px gaps, rounded differently.",
+  "recordedAt": "2026-08-08T21:30:34.000Z"
 }

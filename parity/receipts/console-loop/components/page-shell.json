@@ -4,9 +4,9 @@
   "status": "completed",
   "component": "page-shell",
   "contract": "contracts/page-shell.contract.json",
-  "script": "parity/receipts/console-loop/emitted/06-pageshell.js",
+  "script": "figma-sync/32-pageshell.js",
   "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
-  "recordedAt": "2026-08-08T19:37:48.799Z",
+  "recordedAt": "2026-08-08T21:32:21.000Z",
   "transport": "figma-console-mcp figma_execute + stem-serve fetch/eval on port 9224 (9223 is held by the figma-console MCP server itself; the Desktop Bridge allowlist covers localhost:9223-9232)",
   "corpus": {
     "lane": "A3 composition corpus",
@@ -23,7 +23,7 @@
   },
   "generate": {
     "ok": true,
-    "nodeId": "4:1409",
+    "nodeId": "7:1674",
     "page": "Composition Corpus",
     "sectionId": "4:1416"
   },
@@ -32,7 +32,8 @@
     "notes": [
       "Built on the playground file BMjUA2ue5CaZXU4kufxL0z inside the \"Composition Corpus\" section via stem-serve fetch/eval; COMPONENT exported at scale 1, empty and filled.",
       "EMPTY is scored STRUCTURALLY (presence + name + placement box), never by pixels — an empty native slot renders as Figma's own frame with zero chrome (native-slots-proposal.md §2), and the empty scale-1 export is a 404-byte blank. Scorecard: scores/page-shell.structural.json.",
-      "FILLED pins the SAME child on both surfaces (one ds.badge per slot) and is scored by the lane scorer under the standard bar. Scorecard: scores/page-shell.json."
+      "FILLED pins the SAME child on both surfaces (one ds.badge per slot) and is scored by the lane scorer under the standard bar. Scorecard: scores/page-shell.json.",
+      "Re-measured 2026-08-08 after the composition round's grammar amendments (G8/G3'/G5'/G9): rebuilt fresh and re-scored to prove the amendments moved NOTHING here. Geometry unchanged (640x480, every cell box identical) and pctAAMasked 0.08% — the fr-bearing axes are exempt from G8 by construction and grid-hug-flex-axis refuses the combination that would have destroyed them."
     ],
     "defects": [],
     "empty": {
@@ -45,7 +46,9 @@
       "status": "pass",
       "pctAAMasked": 0.07904078363291202,
       "compositionOk": true,
-      "scorecard": "parity/receipts/console-loop/scores/page-shell.json"
+      "scorecard": "parity/receipts/console-loop/scores/page-shell.json",
+      "canvasPx": "317x447",
+      "realPx": "317x447"
     },
     "reference": "parity/receipts/console-loop/refs/page-shell.png",
     "referenceSource": "scripts/console-loop-render-composition-ref.mts (src/components render, every slot filled with the pinned ds.badge; Inter v20 latin face pinned from extract/computed/fonts/inter/)",

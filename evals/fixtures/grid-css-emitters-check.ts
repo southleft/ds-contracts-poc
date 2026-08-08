@@ -176,6 +176,7 @@ const soloMap = (c: Contract): Map<string, Contract> => new Map([[c.id, c]]);
             content: { row: 1, column: 1 },
           },
         },
+        literals: { width: '640px', height: '400px' },
         parts: {
           header: { literals: { 'background-color': '#eee' } },
           content: { literals: { 'background-color': '#fff' } },
@@ -221,6 +222,7 @@ const soloMap = (c: Contract): Map<string, Contract> => new Map([[c.id, c]]);
           gap: { row: 4, column: 4 },
           flow: 'row',
         },
+        literals: { width: '480px', height: '240px' },
         parts: {
           a: { literals: { 'background-color': '#111' } },
           b: { literals: { 'background-color': '#222' } },
@@ -257,6 +259,7 @@ const soloMap = (c: Contract): Map<string, Contract> => new Map([[c.id, c]]);
           columns: [{ fr: 1 }, { fr: 1 }],
           gap: { row: '{space.200}', column: 4.5 },
         },
+        literals: { width: '320px', height: '120px' },
         parts: {
           a: { placement: { row: 0, column: 0 } },
           b: { placement: { row: 0, column: 1 } },
@@ -298,6 +301,7 @@ const soloMap = (c: Contract): Map<string, Contract> => new Map([[c.id, c]]);
           columns: [{ fr: 1 }],
           gap: { row: '{space.{size}}', column: 4 },
         },
+        literals: { width: '320px', height: '120px' },
         parts: { a: { placement: { row: 0, column: 0 } } },
       },
     },
@@ -333,6 +337,7 @@ const soloMap = (c: Contract): Map<string, Contract> => new Map([[c.id, c]]);
           rows: [{ fr: 1 }],
           columns: [{ px: 100 }, { fr: 1 }],
         },
+        literals: { width: '320px', height: '120px' },
         parts: {
           label: { placement: { row: 0, column: 0 }, literals: { color: '#000' } },
           widget: { placement: { row: 0, column: 1 }, component: { id: 'ds.eval-cell-dep' } },

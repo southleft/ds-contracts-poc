@@ -2,10 +2,10 @@
   "id": "grid-absolute-overlay",
   "feature": "grid-composition",
   "construct": "Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent",
-  "why": "The existing overlay grammar must survive under grid parents unchanged.",
+  "why": "The existing overlay grammar must survive under grid parents unchanged — and the GRID must survive the overlay. G9.2 (2026-08-08): the child carries out-of-flow through the abs door; only the abs -> Part.overlay EDGE inversion is refused, by name and permanently (grid-overlay-edge-inversion, G9.1).",
   "expect": "CARRIED",
   "expectName": "",
-  "expectWhere": "anatomy.root.parts.b (Part.overlay / layoutPositioning ABSOLUTE surviving unchanged under a grid parent, P13). QUIRK the reader must honor: absolute children still REPORT anchors (0,0) — anchor reads gate on layoutPositioning !== ABSOLUTE or a placement is invented.",
+  "expectWhere": "anatomy.root.layout.display = \"grid\" WITH the sibling's placement intact, and anatomy.root.parts.b out of flow as declared.position \"absolute\" + minted insets. QUIRK the reader must honor: absolute children still REPORT anchors (0,0) — anchor reads gate on layoutPositioning !== ABSOLUTE or a placement is invented.",
   "observable": {
     "part": "b",
     "channel": "position",
@@ -23,9 +23,9 @@
     },
     "canvasToCode": {
       "expect": "CARRIED",
-      "note": "QUIRK: absolute children still REPORT anchors (0,0) — readers must gate anchor reads on layoutPositioning !== 'ABSOLUTE' or they invent a placement"
+      "note": "QUIRK: absolute children still REPORT anchors (0,0) — readers gate anchor reads on layoutPositioning !== 'ABSOLUTE'. The grid carries whole; the child carries out-of-flow via `abs`; the edge spelling is refused by name (G9.1)"
     }
   },
-  "probe": "P13",
+  "probe": "P13 + G9 (the arity argument: four edge values with no offset channel cannot represent a point in R²)",
   "dumpSnippet": "dump.snippet.json"
 }

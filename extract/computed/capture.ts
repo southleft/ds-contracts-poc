@@ -1883,6 +1883,11 @@ export interface PortalWrapperNote {
   width: number;
   height: number;
   elementChildren: number;
+  /** E2(a): how many of `elementChildren` were INERT plumbing (classless,
+   *  boxless, empty focus-manager sentinels) and therefore excluded from the
+   *  "exactly ONE element child" test. Omitted when zero, so a library with
+   *  no sentinels reproduces its committed receipt bytes exactly. */
+  inertElementChildren?: number;
   drawsBox: boolean;
 }
 
@@ -2226,18 +2231,49 @@ const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
   // Tooltip popper is the near miss — boxless with one element child — and it
   // is kept because it is \`position:absolute\` and 72.6×39, i.e. it really is
   // doing the positioning.
-  const measureWrapper = (el) => {
+  // E2(b) — A ZERO-AREA BOX PAINTS NO INK, WHATEVER ITS background-color.
+  // \`drawsBox\` used to be a pure DECLARATION test, so a wrapper that declares
+  // an opaque fill but renders 900×0 counted as "draws a box" and refused to
+  // be unwrapped — the wrapper then became the captured root and nothing
+  // downstream could screenshot it (a zero-area element is never "visible";
+  // measured on Fluent's Tooltip as four \`locator.screenshot: Timeout\`
+  // receipts). Measuring against the RENDERED RECT is the honest test and it
+  // is general: unwrapping a box that paints nothing cannot lose ink, which is
+  // the only thing condition 1 was ever protecting.
+  const drawsBoxEl = (el) => {
     const wcs = getComputedStyle(el);
     const r = el.getBoundingClientRect();
+    if (r.width === 0 || r.height === 0) return false;
     const bg = wcs.getPropertyValue('background-color');
-    const drawsBox =
+    return (
       (bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') ||
       wcs.getPropertyValue('background-image') !== 'none' ||
       ['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']
         .some((p) => wcs.getPropertyValue(p) !== '0px') ||
-      wcs.getPropertyValue('box-shadow') !== 'none';
+      wcs.getPropertyValue('box-shadow') !== 'none'
+    );
+  };
+  // E2(a) — THE IN-PAGE MIRROR of \`isInertPlumbing\` (Node side). The wrapper
+  // unwrap counts ELEMENT CHILDREN to decide whether there is exactly one
+  // candidate to descend to; a focus-trap sentinel sitting beside the real
+  // surface made that count 2 and the unwrap refused. The strip has to happen
+  // HERE, before the measurement, because by the time the Node-side strip runs
+  // the wrapper has already been chosen as the root. Same three tests, same
+  // order: no kept class stem, draws no box, contains nothing.
+  const inertEl = (k) =>
+    stemsOf([...k.classList]).length === 0 &&
+    k.children.length === 0 &&
+    ![...k.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim() !== '') &&
+    !drawsBoxEl(k);
+  const liveChildren = (el) => [...el.children].filter((k) => !inertEl(k));
+  const measureWrapper = (el) => {
+    const wcs = getComputedStyle(el);
+    const r = el.getBoundingClientRect();
+    const drawsBox = drawsBoxEl(el);
     const textish = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim() !== '');
     const round = (v) => Math.round(v * 100) / 100;
+    const live = liveChildren(el);
+    const inertKids = el.children.length - live.length;
     return {
       tag: el.tagName.toLowerCase(),
       id: el.id || '',
@@ -2247,8 +2283,9 @@ const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
       width: round(r.width),
       height: round(r.height),
       elementChildren: el.children.length,
+      ...(inertKids > 0 ? { inertElementChildren: inertKids } : {}),
       drawsBox: drawsBox,
-      fires: !drawsBox && el.children.length === 1 && !textish && (r.width === 0 || r.height === 0 || wcs.getPropertyValue('position') === 'static'),
+      fires: !drawsBox && live.length === 1 && !textish && (r.width === 0 || r.height === 0 || wcs.getPropertyValue('position') === 'static'),
     };
   };
   const unwrapRoot = (el) => {
@@ -2262,7 +2299,10 @@ const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
       if (!m.fires) break;
       delete m.fires;
       chain.push(m);
-      node = node.children[0];
+      // E2(a): descend to the ONE LIVE child, not children[0] — with an
+      // inert sentinel first in document order the old index would have
+      // descended into the sentinel itself.
+      node = liveChildren(node)[0];
     }
     return { el: node, chain: chain };
   };
@@ -2510,11 +2550,21 @@ export function demoteFullBleedScrim(
  *  live Dialog carried two). Drop a DIRECT child of a portal root that draws
  *  no box, has no class-stem, no element children and no text. Anything that
  *  could ever paint, or that contains anything, is kept. */
+/** The INERT-PLUMBING predicate, factored out of `stripInertPortalChildren` so
+ *  the SAME rule can be applied to a portaled ROOT (E1 below) and not only to
+ *  a portal root's CHILD. A node that carries no library class, draws no box,
+ *  and contains nothing — no elements, no text — cannot be anatomy: there is
+ *  no ink to lose and no content to drop. Focus managers are the reason this
+ *  shape exists at all (React-ARIA and MUI render `<div tabindex="0">`
+ *  sentinels as portal CHILDREN; tabster renders `<i data-tabster-dummy>`
+ *  sentinels as siblings appended to `document.body`), and the rule docs/22 §6
+ *  already states — *a focus-trap sentinel is DOM plumbing, not anatomy* —
+ *  never depended on WHERE the sentinel was attached. */
+export const isInertPlumbing = (k: CapturedNode): boolean =>
+  k.classes.length === 0 && !capturedDrawsBox(k) && k.nodes.length === 0;
+
 export function stripInertPortalChildren(n: CapturedNode): { root: CapturedNode; dropped: number } {
-  const inert = (k: CapturedNode): boolean =>
-    k.classes.length === 0 &&
-    !capturedDrawsBox(k) &&
-    k.nodes.length === 0;
+  const inert = isInertPlumbing;
   const kept = n.nodes.filter((c) => c.t !== 'el' || !inert((c as { el: CapturedNode }).el));
   if (kept.length === n.nodes.length) return { root: n, dropped: 0 };
   return { root: { ...n, nodes: kept }, dropped: n.nodes.length - kept.length };
@@ -2558,8 +2608,39 @@ export async function portalSweep(
         );
       }
     }, opts.classPrefix);
-    const portaled = pc.roots.filter((r) => r.location === 'portaled');
-    const inStage = pc.roots.filter((r) => r.location === 'in-stage');
+    // E1 — AN INERT BODY-LEVEL ROOT IS PLUMBING, NOT A SECOND ROOT.
+    //
+    // `stripInertPortalChildren` has dropped classless, boxless, empty
+    // focus-trap sentinels since round 6 — but only where React-ARIA and MUI
+    // put them, INSIDE the portal root. TABSTER (Fluent's focus manager)
+    // appends its sentinels to `document.body` instead:
+    //   `<i tabindex role="none" data-tabster-dummy aria-hidden="true">`,
+    //   1×1, position:fixed, transparent, no classes, no children — two of
+    //   them, one before and one after the trapping surface.
+    // Measured on @fluentui/react-components@9.74.5: Dialog produces
+    // `3 portaled + 1 in-stage new roots`, of which TWO are those sentinels,
+    // so the single-root policy refused MULTI-ROOT-CAPTURE and the component
+    // shipped nothing — over DOM that carries no ink and no content.
+    //
+    // The predicate is not widened, only RE-AIMED: the identical
+    // `isInertPlumbing` test now runs over the new-root list BEFORE the
+    // single-root policy. This is general, not a Fluent accommodation — any
+    // focus manager that appends document-level sentinels (tabster,
+    // focus-trap, Reach) presents the same shape, and a node with no class,
+    // no box and no content is plumbing wherever it is attached. Every drop
+    // is RECEIPTED with its measurements: silently discarding a root is
+    // exactly the invisible substitution these rules exist to avoid.
+    const inertRoots = pc.roots.filter((r) => isInertPlumbing(r.node));
+    if (inertRoots.length > 0) {
+      receipts.push(
+        `portal-inert-roots-dropped: ${combo.key} — ${inertRoots.length} new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: ${inertRoots
+          .map((r) => `<${r.node.tag}> ${r.location}`)
+          .join(', ')}`,
+      );
+    }
+    const live = pc.roots.filter((r) => !isInertPlumbing(r.node));
+    const portaled = live.filter((r) => r.location === 'portaled');
+    const inStage = live.filter((r) => r.location === 'in-stage');
     let picked: CapturedRoot;
     if (portaled.length === 1) {
       picked = portaled[0];
@@ -2580,7 +2661,7 @@ export async function portalSweep(
         `portal-wrapper-unwrapped: ${combo.key} — ${picked.unwrapped.length} pass-through portal WRAPPER element(s) between document.body and the overlay were unwrapped BEFORE the single-root policy ran; the captured root is the wrapper's one element child (${picked.node.tag}|${picked.node.classes.join('.')}). Decided by MEASUREMENT, never by attribute name: ${picked.unwrapped
           .map(
             (w) =>
-              `<${w.tag}${w.id ? ` id="${w.id}"` : ''}${w.attrs.length ? ` [${w.attrs.join(' ')}]` : ''}> position:${w.position}; display:${w.display}; ${w.width}×${w.height}; ${w.elementChildren} element child; draws no box`,
+              `<${w.tag}${w.id ? ` id="${w.id}"` : ''}${w.attrs.length ? ` [${w.attrs.join(' ')}]` : ''}> position:${w.position}; display:${w.display}; ${w.width}×${w.height}; ${w.elementChildren} element child${w.inertElementChildren ? ` (${w.inertElementChildren} inert focus-manager sentinel(s) excluded from the one-child test)` : ''}; draws no box`,
           )
           .join(' · ')}`,
       );

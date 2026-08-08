@@ -2023,8 +2023,15 @@ function refereeGridParts(name: string, part: ExtractedPart, notes: string[]): v
   const placedCount = inFlow.filter(([n, c]) => c.placement !== undefined || areas[n] !== undefined).length;
   const problems: string[] = [];
   let flowRow = l.flow === 'row';
-  if (flowRow && l.rows) {
-    problems.push('flow: "row" derives rows as ceil(children / columns.length) — an explicit grid-template-rows alongside auto-flow relies on the implicit-track interplay (G5; P9: implicit readback is lossy)');
+  // G5′ (2026-08-08): declared rows under flow are CARRIED — GP6/GP6b measured
+  // ROW_AUTO_FLOW and declared gridRowSizes coexisting natively. They must
+  // COVER the flow, though: GP10 measured children flowing past the declared
+  // list while gridRowCount stayed put (P9's lossy readback under declared rows).
+  if (flowRow && l.rows && l.columns) {
+    const needed = Math.max(1, Math.ceil(inFlow.length / l.columns.length));
+    if (l.rows.length < needed) {
+      problems.push(`flow: "row" over ${l.columns.length} column(s) with ${inFlow.length} child(ren) needs ${needed} declared row track(s), found ${l.rows.length} — children would flow past the declared list (grid-implicit-tracks, P9/GP10; G5′)`);
+    }
   }
   if (!l.columns) {
     problems.push('no carriageable grid-template-columns (see the track receipts above)');
@@ -2080,6 +2087,30 @@ function refereeGridParts(name: string, part: ExtractedPart, notes: string[]): v
           }
         }
       }
+    }
+  }
+  // ---- G8 (2026-08-08): a grid part STATES each axis whose declared tracks
+  //      carry no {fr}. That is exactly where the two surfaces disagree about
+  //      silence — CSS content-sizes, the canvas keeps createFrame's FIXED 100
+  //      because primary/counterAxisSizingMode are inert on GRID (GP1b/GP8) —
+  //      and it is exactly where `fit-content` is the correct answer: CSS's own
+  //      `height: auto` on a grid container IS the content height. An axis
+  //      carrying {fr} is sized from OUTSIDE the part and is left alone.
+  if (problems.length === 0) {
+    const hasFr = (tracks: Array<Record<string, unknown>> | undefined): boolean =>
+      (tracks ?? []).some((t) => t !== null && typeof t === 'object' && 'fr' in t);
+    const rowsAreFlex = flowRow && !l.rows ? true : hasFr(l.rows as Array<Record<string, unknown>> | undefined);
+    for (const [axis, axisHasFr] of [
+      ['width', hasFr(l.columns as Array<Record<string, unknown>> | undefined)],
+      ['height', rowsAreFlex],
+    ] as const) {
+      if (axisHasFr) continue;
+      const declared = part.literals?.[axis] !== undefined || part.tokens?.[axis] !== undefined;
+      if (declared) continue;
+      part.literals = { ...(part.literals ?? {}), [axis]: 'fit-content' };
+      notes.push(
+        `css: part "${name}" — grid ${axis} carried as literals.${axis} "fit-content" (G8): the stylesheet declares no ${axis} and every declared ${axis === 'width' ? 'column' : 'row'} track is fixed or content-sized, so the CSS box IS its content — stated so the canvas hugs instead of keeping its FIXED 100 default (FC-GRID-ROOT-VSIZE)`,
+      );
     }
   }
   if (problems.length > 0) {

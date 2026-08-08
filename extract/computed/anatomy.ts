@@ -154,6 +154,76 @@ const gridAlign = (v: string | undefined): 'start' | 'center' | 'end' | 'stretch
   return 'stretch'; // 'normal' / 'stretch' — a grid item's default IS stretch
 };
 
+/** G8 (2026-08-08) — THE COMPUTED READER'S DEFINITE-AXIS OBLIGATION.
+ *
+ *  A grid part must make each axis definite on the axes where the two surfaces
+ *  disagree about silence — an axis whose declared tracks carry NO {fr}
+ *  (`grid-axis-indefinite`; an fr-bearing axis is sized from outside on both
+ *  surfaces and is exempt). This reader has the strongest evidence of the
+ *  three: the USED size, in px, straight off computed style. So it does not
+ *  guess:
+ *
+ *    · used size == the intrinsic track sum (tracks + gaps + padding)
+ *        -> `fit-content`: the box IS its content, exactly, and the canvas can
+ *           hug it (layoutSizing HUG, the G8 lowering).
+ *    · used size  > that sum
+ *        -> the observed px: the box is established from OUTSIDE and hugging it
+ *           would silently shrink the component.
+ *
+ *  Mutates `literals` in place; an axis another door already stated is left
+ *  alone. Returns the receipts, never throws. */
+export function gridDefiniteAxisLiterals(
+  layout: NonNullable<Part['layout']>,
+  style: Record<string, string>,
+  literals: Record<string, string>,
+  label: string,
+): string[] {
+  const out: string[] = [];
+  if (layout.display !== 'grid') return out;
+  const px = (v: string | undefined): number | null => {
+    const m = /^(-?\d*\.?\d+)px$/.exec((v ?? '').trim());
+    return m ? Number(m[1]) : null;
+  };
+  const hasFr = (tracks: ReadonlyArray<Record<string, unknown>> | undefined): boolean =>
+    (tracks ?? []).some((t) => t !== null && typeof t === 'object' && 'fr' in t);
+  const rowsDerived = layout.flow === 'row' && layout.rows === undefined;
+  for (const axis of ['width', 'height'] as const) {
+    const tracks = axis === 'width' ? layout.columns : layout.rows;
+    if (axis === 'width' ? hasFr(tracks) : rowsDerived || hasFr(tracks)) continue;
+    if (literals[axis] !== undefined) continue;
+    const used = px(style[axis]);
+    const gap = axis === 'width' ? layout.gap?.column : layout.gap?.row;
+    const gapPx = typeof gap === 'number' ? gap : 0;
+    const pad = axis === 'width'
+      ? (px(style['padding-left']) ?? 0) + (px(style['padding-right']) ?? 0)
+      : (px(style['padding-top']) ?? 0) + (px(style['padding-bottom']) ?? 0);
+    let sum: number | null = 0;
+    for (const t of tracks ?? []) {
+      const v = (t as { px?: number }).px;
+      if (typeof v !== 'number') { sum = null; break; }
+      sum += v;
+    }
+    if (sum !== null) sum += gapPx * Math.max(0, (tracks ?? []).length - 1) + pad;
+    if (used !== null && sum !== null && Math.abs(used - sum) <= 0.5) {
+      literals[axis] = 'fit-content';
+      out.push(
+        `grid-axis-definite: ${label} ${axis} carried as literals.${axis} "fit-content" (G8) — the used box ${used}px equals the intrinsic track sum (${sum}px), so the box IS its content and the canvas can hug it instead of keeping createFrame's FIXED 100 default (FC-GRID-ROOT-VSIZE)`,
+      );
+    } else if (used !== null) {
+      literals[axis] = `${Math.round(used * 100) / 100}px`;
+      out.push(
+        `grid-axis-definite: ${label} ${axis} carried as literals.${axis} ${literals[axis]} (G8) — the used box${sum !== null ? ` exceeds the intrinsic track sum (${sum}px)` : ' cannot be summed from the declared tracks'}, so the size is established from OUTSIDE the part and "fit-content" would silently shrink it`,
+      );
+    } else {
+      literals[axis] = 'fit-content';
+      out.push(
+        `grid-axis-definite: ${label} ${axis} carried as literals.${axis} "fit-content" (G8) — no used ${axis} in computed style; every declared ${axis === 'width' ? 'column' : 'row'} track is fixed or content-sized, so content sizing is the CSS truth`,
+      );
+    }
+  }
+  return out;
+}
+
 export function lowerGridDisplay(
   display: string,
   style: Record<string, string>,
@@ -2900,9 +2970,15 @@ export function promoteAnatomy(
         } else if (low) {
           part.layout = { ...low.layout, ...part.layout };
           receipts.push(`grid-lowering: ${e.partName} ${low.note}`);
+          part.literals = part.literals ?? {};
+          receipts.push(...gridDefiniteAxisLiterals(part.layout, e.rep.style, part.literals as Record<string, string>, e.partName));
+          if (Object.keys(part.literals).length === 0) delete part.literals;
         }
       } else {
         part.layout = g.layout;
+        part.literals = part.literals ?? {};
+        receipts.push(...gridDefiniteAxisLiterals(part.layout, e.rep.style, part.literals as Record<string, string>, e.partName));
+        if (Object.keys(part.literals).length === 0) delete part.literals;
         for (const [childName, pl] of g.placements) {
           const cp = childParts[childName];
           if (cp) cp.placement = pl;
@@ -3053,6 +3129,9 @@ export function promoteAnatomy(
       else if (low) {
         newRoot.layout = { ...low.layout, ...newRoot.layout };
         receipts.push(`grid-lowering: root ${low.note}`);
+        newRoot.literals = newRoot.literals ?? {};
+        receipts.push(...gridDefiniteAxisLiterals(newRoot.layout, rootEntry.rep.style, newRoot.literals as Record<string, string>, 'root'));
+        if (Object.keys(newRoot.literals).length === 0) delete newRoot.literals;
       }
     } else {
       if (newRoot.layout && Object.keys(newRoot.layout).length > 0) {
@@ -3061,6 +3140,9 @@ export function promoteAnatomy(
         );
       }
       newRoot.layout = g.layout;
+      newRoot.literals = newRoot.literals ?? {};
+      receipts.push(...gridDefiniteAxisLiterals(newRoot.layout, rootEntry.rep.style, newRoot.literals as Record<string, string>, 'root'));
+      if (Object.keys(newRoot.literals).length === 0) delete newRoot.literals;
       for (const [childName, pl] of g.placements) {
         const cp = rootChildren[childName];
         if (cp) cp.placement = pl;

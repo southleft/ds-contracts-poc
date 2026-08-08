@@ -42,6 +42,7 @@ import {
   boolProps,
   enumProps,
   gridCellPlan,
+  gridChildCrossAxisDecls,
   gridParentDecls,
   isEnum,
   isMultiRoot,
@@ -113,8 +114,14 @@ const isStructural = (part: Part) =>
   !part.content &&
   !part.component;
 
-function layoutDecls(part: Part, gridWhere: string): string[] {
+function layoutDecls(part: Part, gridWhere: string, isGridChild = false): string[] {
   const d: string[] = [];
+  // G11/FC-SLOT-CROSS-AXIS-STRETCH — the grid-cell cross-axis default, spelled
+  // on THIS surface too. It shipped on the CSS-Module path only, so the HTML
+  // surface (which the computed scorecard and stretch:check both render
+  // through) still stretched a 23px child down its whole cell while the canvas
+  // left it at the top. One spelling, all three surfaces (G11).
+  if (isGridChild) d.push(...gridChildCrossAxisDecls(part));
   if (isStructural(part)) {
     if (part.layout?.display === 'grid') {
       // A2 grid (G1): tracks/gaps/areas/flow — the shared pinned spellings
@@ -182,7 +189,7 @@ function componentCss(contract: Contract): string[] {
         if (cell) pushRule(partCls(name), [...cell, 'display: grid']);
         continue; // instances style themselves via their own contract
       }
-      const decls: string[] = layoutDecls(part, gridWhere(name));
+      const decls: string[] = layoutDecls(part, gridWhere(name), gridPlan.gridChildren.has(name));
       // A2 grid (G2/G4): this part's cell under its grid parent.
       decls.push(...(gridPlan.cells.get(name) ?? []));
       if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
@@ -532,7 +539,7 @@ function componentCss(contract: Contract): string[] {
       if (cell) rule(partCls(name), [...cell, 'display: grid']);
       continue; // instances style themselves via their own contract
     }
-    const decls: string[] = layoutDecls(part, gridWhere(name));
+    const decls: string[] = layoutDecls(part, gridWhere(name), gridPlan.gridChildren.has(name));
     // A2 grid (G2/G4): this part's cell under its grid parent — grid-area
     // for area-anchored names, grid-row/grid-column (+ self aligns) for
     // explicit placement; sizing stays unspelled (stretch is the CSS grid

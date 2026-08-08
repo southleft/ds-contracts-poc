@@ -111,6 +111,12 @@ export interface ExtractedPart {
   };
   overlay?: { placement: "top" | "bottom" | "start" | "end" };
   tokens?: Record<string, string>;
+  /** G8 (2026-08-08) — literal CSS channels the adapter states rather than
+   *  binds. Today's one producer is the grid definite-axis obligation
+   *  (`width`/`height`: "fit-content"): the stylesheet's own content-sizing,
+   *  said out loud so the canvas hugs instead of keeping its FIXED 100
+   *  default (FC-GRID-ROOT-VSIZE). LITERAL_CHANNELS-gated on parse. */
+  literals?: Record<string, string>;
   /** Root-level interaction states: state → (css prop → token ref). */
   states?: Record<string, Record<string, string>>;
   content?: { prop: string };

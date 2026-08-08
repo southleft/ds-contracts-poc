@@ -427,10 +427,10 @@
       "id": "grid-absolute-overlay",
       "feature": "grid-composition",
       "construct": "Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent",
-      "why": "The existing overlay grammar must survive under grid parents unchanged.",
+      "why": "The existing overlay grammar must survive under grid parents unchanged — and the GRID must survive the overlay. G9.2 (2026-08-08): the child carries out-of-flow through the abs door; only the abs -> Part.overlay EDGE inversion is refused, by name and permanently (grid-overlay-edge-inversion, G9.1).",
       "expect": "CARRIED",
       "expectName": "",
-      "expectWhere": "anatomy.root.parts.b (Part.overlay / layoutPositioning ABSOLUTE surviving unchanged under a grid parent, P13). QUIRK the reader must honor: absolute children still REPORT anchors (0,0) — anchor reads gate on layoutPositioning !== ABSOLUTE or a placement is invented.",
+      "expectWhere": "anatomy.root.layout.display = \"grid\" WITH the sibling's placement intact, and anatomy.root.parts.b out of flow as declared.position \"absolute\" + minted insets. QUIRK the reader must honor: absolute children still REPORT anchors (0,0) — anchor reads gate on layoutPositioning !== ABSOLUTE or a placement is invented.",
       "observable": {
         "part": "b",
         "channel": "position",
@@ -448,10 +448,10 @@
         },
         "canvasToCode": {
           "expect": "CARRIED",
-          "note": "QUIRK: absolute children still REPORT anchors (0,0) — readers must gate anchor reads on layoutPositioning !== 'ABSOLUTE' or they invent a placement"
+          "note": "QUIRK: absolute children still REPORT anchors (0,0) — readers gate anchor reads on layoutPositioning !== 'ABSOLUTE'. The grid carries whole; the child carries out-of-flow via `abs`; the edge spelling is refused by name (G9.1)"
         }
       },
-      "probe": "P13",
+      "probe": "P13 + G9 (the arity argument: four edge values with no offset channel cannot represent a point in R²)",
       "dumpSnippet": "dump.snippet.json"
     },
     {
@@ -551,11 +551,11 @@
     {
       "id": "grid-auto-flow-row",
       "feature": "grid-flow",
-      "construct": "grid-auto-flow: row over declared columns, placement by child order",
-      "why": "The one bounded auto-flow the canvas has; placement fact = order, and rows must be DECLARED (derived ceil(n/cols)), never implicit.",
+      "construct": "grid-auto-flow: row over declared columns AND declared row tracks, placement by child order",
+      "why": "The one bounded auto-flow the canvas has; placement fact = order. G5′ (2026-08-08): declared row tracks coexist with ROW_AUTO_FLOW natively (GP6/GP6b) and are carried verbatim; rows OMITTED still derive as ceil(n/cols), and either way the declared list must COVER the flow (GP10).",
       "expect": "CARRIED",
       "expectName": "",
-      "expectWhere": "anatomy.root.layout.flow = \"row\" (G5: placement fact is CHILD ORDER — no anchors carried; the derived explicit row list ceil(3/2)=2 is a CANVAS obligation, P9, never spelled in CSS)",
+      "expectWhere": "anatomy.root.layout.flow = \"row\" WITH anatomy.root.layout.rows carried verbatim (G5′). Placement is still CHILD ORDER — no anchors carried. When `rows` is omitted the emitter's derived ceil(n/cols) x {fr:1} list is a CANVAS obligation (P9) and is never carried back.",
       "observable": {
         "part": "root",
         "channel": "grid-auto-flow",
@@ -573,10 +573,10 @@
         },
         "canvasToCode": {
           "expect": "CARRIED",
-          "note": "anchors read back computed row-major from order — deterministic; carriage conditional on occupied rows == declared rows, else grid-implicit-tracks fires"
+          "note": "anchors read back computed row-major from order — deterministic; declared rows carried verbatim (G5′/GP6), conditional on rows.length >= ceil(children/columns) else grid-implicit-tracks fires (GP10)"
         }
       },
-      "probe": "P5/P5b: enum ROW_AUTO_FLOW; setGridChildPosition refused under flow; anchors deterministic",
+      "probe": "P5/P5b (enum, order-is-the-fact) + GP6/GP6b (declared rows coexist) + GP10 (the coverage bound)",
       "dumpSnippet": "dump.snippet.json"
     },
     {

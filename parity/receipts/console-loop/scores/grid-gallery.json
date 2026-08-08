@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 22.97186966525644,
-    "pctAAUnmasked": 3.411761795195329,
-    "pctAAMasked": 3.411761795195329,
+    "pctExactUnmasked": 6.018488590083393,
+    "pctAAUnmasked": 0.3361561833344108,
+    "pctAAMasked": 0.3361561833344108,
     "maskCoveragePct": 0,
-    "canvasPx": "499x81",
+    "canvasPx": "499x62",
     "realPx": "498x62",
-    "inkCanvasPct": 19.44135183948143,
-    "inkRealPct": 19.347336648605854
+    "inkCanvasPct": 25.39918546770961,
+    "inkRealPct": 25.276359169952812
   },
   "reference": "parity/receipts/console-loop/refs/grid-gallery.png",
   "referenceSha256": "859f58aee8278688306e1fc6e3057683bdfffd33024b475fb43f978c5fb030e9",
   "canvasShot": "parity/receipts/console-loop/shots/grid-gallery-cell.png",
-  "canvasShotSha256": "c97e7a706b99f1fbcd7fcbf55760171f53565674875a276d87f7911b63c588d0",
+  "canvasShotSha256": "d2b3b88121d4ce23d7f04029ffbadd53252581f7503100f8456beacf39770661",
   "diff": "parity/receipts/console-loop/scores/grid-gallery.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/components/grid-gallery.json",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.3064516129032258,
-  "inkDelta": 0.0940151908755773,
+  "scaleRatio": 1.002008032128514,
+  "inkDelta": 0.12282629775679865,
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T19:08:08.152Z"
+  "recordedAt": "2026-08-08T21:32:33.013Z"
 }

@@ -294,7 +294,10 @@ console.log('\n4. G5 — under flow the placement fact is CHILD ORDER, both ways
     anatomy: {
       root: {
         layout: { display: 'grid', columns: [{ fr: 1 }, { fr: 1 }, { fr: 1 }], flow: 'row', gap: { row: 8, column: 8 } },
-        literals: { width: '480px' },
+        // G8: rows are OMITTED here, so the emitter derives {fr:1} tracks — an
+        // fr axis needs a definite size, so the height is px, not fit-content
+        // (`grid-hug-flex-axis` would refuse the pair).
+        literals: { width: '480px', height: '240px' },
         parts: {
           a: { literals: { 'background-color': '#e0e0e0' } },
           b: { literals: { 'background-color': '#d0d0d0' } },

@@ -196,7 +196,39 @@ export const GRID_REFUSALS: Record<string, string> = {
     "grid-child-grow: layout.grow on a child of a grid parent is refused — the Plugin API silently " +
     "ACCEPTS layoutGrow on grid children with no layout effect (P4); the schema refuses what the " +
     "platform would silently swallow",
+  // --- G7′, added by the composition round (2026-08-08, probes GP1–GP15) ---
+  "grid-hug-flex-axis":
+    "grid-hug-flex-axis: an intrinsically-sized axis (literals width/height \"fit-content\") is refused " +
+    "on an axis whose declared track list contains an {fr} track — NO write order satisfies both " +
+    "(GP1/GP5/GP12: hugging AFTER the tracks normalizes every FLEX track on that axis to HUG and the " +
+    "ratio is silently gone; GP8/GP1b: hugging BEFORE the tracks preserves the ratio but the hug is " +
+    "INERT — the node reports layoutSizing HUG and stays its FIXED size, a readback that lies to the " +
+    "differ). CSS agrees: 1fr resolves against a definite size, so this fact exists on neither surface",
+  "grid-axis-indefinite":
+    "grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, " +
+    "\"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves " +
+    "DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so " +
+    "the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE " +
+    "defect the composition corpus measured on three of five stems",
+  "grid-overlay-edge-inversion":
+    "grid-overlay-edge-inversion: inverting a captured absolute child (dump `abs`: x/y inside a cell) " +
+    "into Part.overlay is refused PERMANENTLY — not a Plugin API dead end but a VOCABULARY one: " +
+    "OverlaySchema is four edge values with NO offset channel, while the canvas fact is a point in R² " +
+    "plus a 3×3 constraints lattice, so every total map either drops the offsets (a silent geometry " +
+    "rewrite) or invents a channel the schema does not have (G9.1). The child is carried out-of-flow " +
+    "through the existing abs door (position:absolute + minted insets) and the GRID is carried whole",
+  "slot-accepts-cycle":
+    "slot-accepts-cycle: a cycle in the slot.accepts dependency graph is refused — accepts is a HARD " +
+    "emission-order dependency (a slot naming an absent component throws at compile), so the emitted " +
+    "set is ordered topologically (G10); a cycle cannot be satisfied in one pass and dropping an edge " +
+    "to break it would make the constraint depend on iteration order",
 };
+
+/** G8 — the one spelling for an intrinsically-sized axis. `fit-content` is
+ *  already a legal Part literal and already the CSS truth; the canvas twin is
+ *  layoutSizing{Horizontal,Vertical} = 'HUG'. No new field: a second spelling
+ *  for a fact the grammar already has is the disease this round cures. */
+export const HUG_KEYWORD = "fit-content";
 
 /** G1 — a TRACK is exactly one of {"px": n}, {"fr": n}, {"fit": true}: the
  *  three spellings the API round-trips (P2/P2b: FIXED | FLEX | HUG; HUG's
@@ -379,15 +411,14 @@ export const LayoutSchema = z
         });
       }
       if (l.flow === "row") {
-        if (l.rows) {
-          ctx.addIssue({
-            code: "custom",
-            path: ["rows"],
-            message:
-              'flow: "row" derives rows as ceil(children / columns.length) and the emitter declares ' +
-              'them itself (G5; P9: implicit-track readback is lossy) — omit "rows"',
-          });
-        }
+        // G5′ (2026-08-08): `rows` MAY be declared under flow. GP6/GP6b measured
+        // gridItemsPositioning='ROW_AUTO_FLOW' and declared gridRowSizes coexisting
+        // natively, in either write order, with anchors still computed row-major
+        // from child order (P5). The old omit-only rule was inferred from P9
+        // (which is about OVERFLOW) and over-applied. When `rows` IS omitted the
+        // emitter still derives ceil(children/columns) × {fr:1}, so no existing
+        // flow contract moves; the count bound lives in the part-level referee,
+        // which is the only place the child count is visible.
         if (l.areas) {
           ctx.addIssue({
             code: "custom",
@@ -1612,11 +1643,120 @@ export interface Part {
  *  every part: the cross-child rules a field schema cannot see. Both P3
  *  canvas throws (span > track count; occupancy collision) are refused HERE,
  *  contract-side, so the compiled canvas write can never throw mid-script. */
+/** G9.2 — a part that renders OUT OF FLOW under a grid parent: an `overlay`
+ *  part, or one that declares `position: absolute` (the abs door the proposer
+ *  uses when `grid-overlay-edge-inversion` refuses the edge spelling). P13's
+ *  dump gate already skips both when capturing cells; the referee now matches
+ *  the instrument instead of knowing only about `overlay`. */
+export function isOutOfFlowPart(part: Part): boolean {
+  if (part.overlay) return true;
+  return (
+    part.declared?.position === "absolute" || part.literals?.position === "absolute"
+  );
+}
+
+/** G8 — is this axis of a part DEFINITE, and if so how? Returns the spelling
+ *  found so the referee can name it, or undefined when the axis is silent
+ *  (`grid-axis-indefinite`). `fit-content` is the intrinsic spelling and is
+ *  reported separately because it is the one that fights `fr` tracks (G8.2). */
+export function gridAxisSizing(
+  part: Part,
+  axis: "width" | "height",
+): "hug" | "definite" | undefined {
+  const byProp = [
+    ...(part.literalsByProp ?? []),
+    ...(part.tokensByProp === undefined
+      ? []
+      : Array.isArray(part.tokensByProp)
+        ? part.tokensByProp
+        : [part.tokensByProp]),
+  ];
+  const seen: Array<string | undefined> = [
+    part.literals?.[axis],
+    part.tokens?.[axis],
+    ...byProp.flatMap((e) =>
+      Object.values(e.map ?? {}).map((m) => (m as Record<string, string>)[axis]),
+    ),
+  ];
+  let definite = false;
+  for (const v of seen) {
+    if (v === undefined) continue;
+    if (v === HUG_KEYWORD) return "hug";
+    definite = true;
+  }
+  if (definite) return "definite";
+  // FILL is a definite axis too: the parent establishes the box (P11).
+  if (axis === "width" && part.layout?.grow) return "definite";
+  return undefined;
+}
+
+/** G8 — the definite-axis referee for ONE grid part. Called from the part's
+ *  PARENT (and from the contract root) rather than from the part's own
+ *  superRefine, because the exemption needs parent context: a grid part placed
+ *  in a parent grid CELL already has a definite box on both surfaces (G3 —
+ *  FILL on the canvas, stretch in CSS), so its own axes need no spelling. */
+export function checkGridAxesDefinite(
+  part: Part,
+  path: Array<string | number>,
+  ctx: z.core.$RefinementCtx,
+): void {
+  const l = part.layout;
+  if (l?.display !== "grid") return;
+  const hasFr = (tracks: GridTrack[] | undefined): boolean =>
+    (tracks ?? []).some((t) => "fr" in t);
+  // Under flow with `rows` OMITTED the emitter derives ceil(n/cols) × {fr:1},
+  // so the ROW axis carries fr even though the contract spells no track.
+  const rowsAreFlex = l.flow === "row" && l.rows === undefined ? true : hasFr(l.rows);
+  for (const [axis, axisHasFr] of [
+    ["width", hasFr(l.columns)],
+    ["height", rowsAreFlex],
+  ] as const) {
+    const sizing = gridAxisSizing(part, axis);
+    // THE BOUND (G8.1). Silence is refused exactly where `fit-content` is both
+    // AVAILABLE and CORRECT: an axis whose declared tracks are all fixed or
+    // content-sized has an intrinsic answer, and the two surfaces resolve
+    // silence differently (canvas FIXED 100 vs CSS content). An axis carrying
+    // an {fr} track is a different fact — a fraction resolves against a size
+    // supplied from OUTSIDE the part, on both surfaces, so a definite box there
+    // is the requirement rather than a divergence, and `fit-content` is
+    // refused on it anyway (G8.2). Refusing silence there would demand a size
+    // the composition, not the part, owns.
+    if (sizing === undefined) {
+      if (!axisHasFr) {
+        ctx.addIssue({
+          code: "custom",
+          path: [...path, "literals", axis],
+          message: GRID_REFUSALS["grid-axis-indefinite"],
+        });
+      }
+    } else if (sizing === "hug" && axisHasFr) {
+      ctx.addIssue({
+        code: "custom",
+        path: [...path, "literals", axis],
+        message: GRID_REFUSALS["grid-hug-flex-axis"],
+      });
+    }
+  }
+}
+
 function validateGridPart(part: Part, ctx: z.core.$RefinementCtx): void {
   const issue = (path: Array<string | number>, message: string) =>
     ctx.addIssue({ code: "custom", path, message });
   const l = part.layout;
   const children = Object.entries(part.parts ?? {});
+  // G8 child sweep — runs for EVERY part, grid or not: a nested grid states
+  // its own axes unless this part's grid cell already defines its box.
+  {
+    const areaNames = new Set(Object.keys(l?.areas ?? {}));
+    for (const [name, child] of children) {
+      if (child.layout?.display !== "grid") continue;
+      const inCell =
+        l?.display === "grid" &&
+        !isOutOfFlowPart(child) &&
+        (child.placement !== undefined || areaNames.has(name) || l.flow === "row");
+      if (!inCell) checkGridAxesDefinite(child, ["parts", name], ctx);
+    }
+  }
   if (l?.display !== "grid") {
     for (const [name, child] of children) {
       if (child.placement) {
@@ -1642,13 +1782,15 @@ function validateGridPart(part: Part, ctx: z.core.$RefinementCtx): void {
   const cols = l.columns?.length ?? 0;
   const flow = l.flow === "row";
   const areas = l.areas ?? {};
-  const inFlow = children.filter(([, c]) => !c.overlay);
+  const inFlow = children.filter(([, c]) => !isOutOfFlowPart(c));
+
   for (const [name, child] of children) {
-    if (child.overlay && child.placement) {
+    if (isOutOfFlowPart(child) && child.placement) {
       issue(
         ["parts", name, "placement"],
-        `overlay part "${name}" may not carry placement — overlays keep the out-of-flow grammar ` +
-          "(P13: absolute children even report bogus 0,0 anchors, which readers must gate)",
+        `out-of-flow part "${name}" may not carry placement — overlays and absolutely positioned ` +
+          "parts keep the out-of-flow grammar (P13: absolute children even report bogus 0,0 anchors, " +
+          "which readers must gate; G9.2)",
       );
     }
     if (child.layout?.grow) {
@@ -1669,6 +1811,21 @@ function validateGridPart(part: Part, ctx: z.core.$RefinementCtx): void {
           ["parts", name, "placement"],
           `flow: "row" places by CHILD ORDER — part "${name}" may not carry placement ` +
             "(P5: setGridChildPosition is refused under auto-flow)",
+        );
+      }
+    }
+    // G5′ — declared rows are legal under flow (GP6/GP6b: ROW_AUTO_FLOW and
+    // declared gridRowSizes coexist natively), but they must COVER the flow.
+    // GP10 measured 5 children over 2 columns with 2 declared rows: anchors
+    // reached row 2 while gridRowCount stayed 2 and gridRowSizes stayed two
+    // entries — P9's lossy readback, reproduced under declared rows.
+    if (l.rows !== undefined && cols > 0) {
+      const needed = Math.max(1, Math.ceil(inFlow.length / cols));
+      if (rows < needed) {
+        issue(
+          ["rows"],
+          `${GRID_REFUSALS["grid-implicit-tracks"]} — flow: "row" over ${cols} column(s) with ` +
+            `${inFlow.length} in-flow child(ren) needs ${needed} declared row track(s), found ${rows} (G5′)`,
         );
       }
     }
@@ -1968,6 +2125,13 @@ export const ContractSchema = z.strictObject({
   }),
   /** v1 provenance is optional for backward compatibility. */
   provenance: ContractProvenanceSchema.optional(),
+}).superRefine((c, ctx) => {
+  // G8 — the ROOT half of the definite-axis referee. A top-level anatomy part
+  // has no parent cell to define its box, so a grid root always states both
+  // axes (the nested half runs from each part's own child sweep).
+  for (const [name, part] of Object.entries(c.anatomy ?? {})) {
+    checkGridAxesDefinite(part as Part, ["anatomy", name], ctx);
+  }
 });
 
 export type Contract = z.infer<typeof ContractSchema>;
@@ -2239,11 +2403,17 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
   const byId = new Map(contracts.map((c) => [c.id, c]));
   const sorted: Contract[] = [];
   const state = new Map<string, "visiting" | "done">();
+  /** G10: which ids are on the current chain because of an `accepts` edge —
+   *  so a cycle closed by one refuses under its own name. */
+  const viaAccepts = new Set<string>();
   const visit = (c: Contract, chain: string[]) => {
     if (state.get(c.id) === "done") return;
     if (state.get(c.id) === "visiting") {
+      const path = [...chain, c.id].join(" → ");
       throw new Error(
-        `Circular contract dependency: ${[...chain, c.id].join(" → ")}`,
+        viaAccepts.has(c.id)
+          ? `${GRID_REFUSALS["slot-accepts-cycle"]} — cycle: ${path}`
+          : `Circular contract dependency: ${path}`,
       );
     }
     state.set(c.id, "visiting");
@@ -2261,10 +2431,16 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
             `${c.id}: slot "${slot.name}" accepts unknown contract "${acceptedId}"`,
           );
         }
-        // accepts is a BUILD-ORDER dependency: the canvas slot's preferred
-        // values resolve through the accepted component's key, so it must
-        // exist first. (Found by the 2026-07-06 fresh-file rebuild — masked
-        // in the original file where every component already existed.)
+        // G10 — THE `accepts` ORDERING PROPERTY, stated. `accepts` induces a
+        // directed edge referenced → referencing over the emitted set, and the
+        // emission runs in topological order of that graph: the canvas slot's
+        // preferred values resolve through the accepted component's KEY, so it
+        // must exist first. (Found by the 2026-07-06 fresh-file rebuild —
+        // masked in the original file, where every component already existed.)
+        // Runtime-side, an entry pointing OUTSIDE the emitted subset is a named
+        // DEFERRAL (`slot-accepts-deferred`, emit-figma-script slotPreferredValues),
+        // never a throw — preferredValues is a picker hint and refuses nothing.
+        viaAccepts.add(acceptedId);
         visit(dep, [...chain, c.id]);
       }
       for (const item of slot.defaultContent ?? []) {

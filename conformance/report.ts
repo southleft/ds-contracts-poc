@@ -210,6 +210,24 @@ export function renderReport(rows: Measured[]): string {
   L.push('  not a measurement: nothing in this round runs the emitted Figma script and');
   L.push('  checks that a construct declared PRESENT actually reaches a node. Until it');
   L.push('  does, "carried" means "reached the contract", not "reached the canvas".');
+  // 2026-08-08: this qualifier lived as a HAND EDIT in the generated
+  // EXPECTATIONS.md and was silently erased the next time the file was
+  // rebuilt — a hand edit to a generated file is a landmine, so it lives in
+  // the generator now, where regeneration preserves it.
+  L.push('  *This limit is about `canvas:`, not about `directions`.* The');
+  L.push('  `directions.canvasToCode` half of the A2 layout cases IS measured: each');
+  L.push("  case's `dumpSnippet` is expanded into the dump v1.17 grammar under");
+  L.push('  `extract/figma/conformance/cases/` and run through the real reader against');
+  L.push("  that fixture's hand-authored MANIFEST, gated by the registered eval");
+  L.push('  `grid-canvas-conformance`; the closed loop (contract → emitted script →');
+  L.push("  strict Figma mock → the plugin's own dump script → contract, asserted for");
+  L.push('  identity) is gated by `grid-roundtrip-identity`. As of the composition');
+  L.push('  grammar round (2026-08-08) that suite is 116/116 with NO pinned');
+  L.push('  FAIL-EXPECTED-RED: the two that were red — `grid-absolute-overlay` and');
+  L.push('  `grid-auto-flow-row` — are decided outcomes now, carried on live probe');
+  L.push('  evidence (docs/research/layout-grammar-proposal.md G5′/G9, probes');
+  L.push('  GP6/GP10/GP13), with the abs→Part.overlay EDGE inversion refused by name');
+  L.push('  and permanently (`grid-overlay-edge-inversion`) rather than pinned.');
   L.push('- **State planes and axes.** Every case is one combo with no variant axes, so');
   L.push('  per-state and per-axis correlation — where the MUI and Carbon rounds found');
   L.push('  most of their defects — is untested here.');

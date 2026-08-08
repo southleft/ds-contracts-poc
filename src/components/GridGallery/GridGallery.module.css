@@ -12,12 +12,14 @@
 
 .root {
   display: grid;
+  grid-template-rows: fit-content(100%) fit-content(100%);
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-flow: row;
   row-gap: var(--space-gap-md);
   column-gap: var(--space-gap-md);
   border: 0;
   width: 640px;
+  height: fit-content;
 }
 
 .item1 {

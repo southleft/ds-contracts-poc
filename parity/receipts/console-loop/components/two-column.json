@@ -4,9 +4,9 @@
   "status": "completed",
   "component": "two-column",
   "contract": "contracts/two-column.contract.json",
-  "script": "parity/receipts/console-loop/emitted/05-twocolumn.js",
+  "script": "figma-sync/31-twocolumn.js",
   "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
-  "recordedAt": "2026-08-08T19:37:48.797Z",
+  "recordedAt": "2026-08-08T21:32:21.000Z",
   "transport": "figma-console-mcp figma_execute + stem-serve fetch/eval on port 9224 (9223 is held by the figma-console MCP server itself; the Desktop Bridge allowlist covers localhost:9223-9232)",
   "corpus": {
     "lane": "A3 composition corpus",
@@ -21,24 +21,23 @@
   },
   "generate": {
     "ok": true,
-    "nodeId": "4:1404",
+    "nodeId": "7:1625",
     "page": "Composition Corpus",
     "sectionId": "4:1416"
   },
   "visual": {
-    "ok": false,
+    "ok": true,
     "notes": [
-      "Built on the playground file BMjUA2ue5CaZXU4kufxL0z inside the \"Composition Corpus\" section via stem-serve fetch/eval; COMPONENT exported at scale 1, empty and filled.",
-      "EMPTY is scored STRUCTURALLY (presence + name + placement box), never by pixels — an empty native slot renders as Figma's own frame with zero chrome (native-slots-proposal.md §2), and the empty scale-1 export is a 404-byte blank. Scorecard: scores/two-column.structural.json.",
-      "FILLED pins the SAME child on both surfaces (one ds.badge per slot) and is scored by the lane scorer under the standard bar. Scorecard: scores/two-column.json.",
-      "FAIL-CLOSED on the structural half: FC-GRID-ROOT-VSIZE — canvas box 640x100 vs code box 640x23. The filled pixel scorecard PASSES (0.63%) but cannot see this: the lane scorer trims to the ink bounding box and the dead space carries no ink. A pass-claim here would be an instrument artifact, not a result."
+      "Rebuilt FRESH on the playground file BMjUA2ue5CaZXU4kufxL0z inside the \"Composition Corpus\" section (stem-serve fetch/eval on port 9224); the prior component was removed first so nothing here is a stale amend. COMPONENT exported at scale 1 with every slot filled.",
+      "EMPTY is scored STRUCTURALLY (presence + name + cell rect), never by pixels — an empty native slot renders as Figma's own frame with zero chrome (native-slots-proposal.md §2). Scorecard: scores/two-column.structural.json.",
+      "FILLED pins the SAME child on both surfaces (one ds.badge, Variant=Info) and is scored by the lane scorer under the standard bar. Scorecard: scores/two-column.json.",
+      "FC-GRID-ROOT-VSIZE IS CLOSED (layout-grammar-proposal.md G8 + G3', probes GP1-GP15 run live 2026-08-08). The contract STATES the intrinsic axis as literals.height \"fit-content\" and the emitter lowers it to layoutSizing HUG written LAST (GP4b: a later resize of a hugged axis silently reverts both the sizing mode and the track list). G3' was the half that only building the real component could find: a child left at G3's FILL default on the hugged axis makes the pair CIRCULAR and Figma FREEZES the stale box — the node reported HUG and still measured 640x100 (GP14). On a hugged axis the children now HUG. Re-measured with the same pinned child on both surfaces: canvas 640x23 vs code 640x23 — EXACT, and every slot box matches.",
+      "The fr ratio is untouched: fit-content on an fr-bearing axis is refused BY NAME (grid-hug-flex-axis) because NO write order preserves both (GP1/GP5/GP12 destroy the ratio; GP8/GP1b keep it but never hug). bento-grid and page-shell still measure 640x480 with [FIXED:80, FLEX:1, FLEX:2] intact."
     ],
-    "defects": [
-      "FC-GRID-ROOT-VSIZE"
-    ],
+    "defects": [],
     "empty": {
       "convention": "structural",
-      "status": "fail",
+      "status": "pass",
       "scorecard": "parity/receipts/console-loop/scores/two-column.structural.json",
       "canvasShot": "parity/receipts/console-loop/shots/two-column-empty-cell.png"
     },
@@ -46,13 +45,15 @@
       "status": "pass",
       "pctAAMasked": 0.6259081256287023,
       "compositionOk": true,
-      "scorecard": "parity/receipts/console-loop/scores/two-column.json"
+      "scorecard": "parity/receipts/console-loop/scores/two-column.json",
+      "canvasPx": "389x23",
+      "realPx": "389x23"
     },
     "reference": "parity/receipts/console-loop/refs/two-column.png",
     "referenceSource": "scripts/console-loop-render-composition-ref.mts (src/components render, every slot filled with the pinned ds.badge; Inter v20 latin face pinned from extract/computed/fonts/inter/)",
     "canvasShot": "parity/receipts/console-loop/shots/two-column-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed"
+    "matchDeveloped": true,
+    "status": "scored-pass"
   },
   "fingerprint": {
     "v6": "v6:3635936707",

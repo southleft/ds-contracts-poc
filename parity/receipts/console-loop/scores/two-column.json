@@ -20,7 +20,7 @@
   "reference": "parity/receipts/console-loop/refs/two-column.png",
   "referenceSha256": "7e956f44aaa56d74842555ca1f9110503d6d561cd80cab400d40bdd97157921a",
   "canvasShot": "parity/receipts/console-loop/shots/two-column-cell.png",
-  "canvasShotSha256": "c9aacef66aa0d1d4fc42b2582c6ac3fb9ac28cfd6900c0fe8fc844b130b05ee9",
+  "canvasShotSha256": "c09a32838372c9c8081c39211e0c559e17a98c38f5c58623e24c906b0f6827a2",
   "diff": "parity/receipts/console-loop/scores/two-column.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/components/two-column.json",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T19:08:07.452Z"
+  "recordedAt": "2026-08-08T21:32:32.387Z"
 }

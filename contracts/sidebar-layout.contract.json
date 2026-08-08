@@ -33,7 +33,8 @@
         }
       },
       "literals": {
-        "width": "640px"
+        "width": "640px",
+        "height": "fit-content"
       },
       "parts": {
         "sidebar": {

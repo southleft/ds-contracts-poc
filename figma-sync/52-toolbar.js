@@ -591,11 +591,31 @@ function slotKeyOf(slotNode) {
 function slotPreferredValues(spec) {
   const out = [];
   for (const depRef of spec.slotAccepts || []) {
+    // G10 (2026-08-08) — `accepts` IS a HARD EMISSION-ORDER DEPENDENCY, and
+    // this is where that was discovered: resolving a preferred value needs the
+    // accepted component to ALREADY EXIST IN THE FILE, so an accepts list
+    // silently defines a build order. The order itself is handled (contracts
+    // emit in topological order of the accepts graph, sortByDependencies), but
+    // a PARTIAL emission legitimately cannot see outside its own subset — and
+    // throwing there made the whole component unshippable over a picker hint.
+    // The accepted component is not required for the slot to work: preferredValues
+    // is a sort order and Figma refuses nothing (probe 2b). So an unresolvable
+    // entry is a NAMED DEFERRAL, never a throw — the slot ships without that one
+    // preferred value and says which one and why.
     const target = resolveComponentIdentity(
       { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
       'Slot "' + spec.slotProperty + '" preferred value',
-      false,
+      true,
     );
+    if (!target) {
+      console.log(
+        'slot-accepts-deferred: Slot "' + spec.slotProperty + '" accepts "' + depRef.contractId +
+        '", which is not in this file (a partial emission cannot carry a slot constraint pointing ' +
+        'outside the emitted subset) — the slot ships WITHOUT that preferred value; emit "' +
+        depRef.contractId + '" first to carry it (G10)'
+      );
+      continue;
+    }
     out.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
   }
   return out;
@@ -726,7 +746,8 @@ function applyFrameSpec(node, spec) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
     const h = spec.fixedHeight ? spec.fixedHeight.px : node.height;
     node.resize(w, h);
-    const horizontalIsPrimary = l.mode === 'HORIZONTAL';
+    // GRID's primary axis is HORIZONTAL (GP1b), like a HORIZONTAL frame.
+    const horizontalIsPrimary = l.mode === 'HORIZONTAL' || l.mode === 'GRID';
     if (spec.fixedWidth) {
       if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED';
       else node.counterAxisSizingMode = 'FIXED';

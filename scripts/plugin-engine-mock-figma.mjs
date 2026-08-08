@@ -139,8 +139,8 @@ export function createFigmaMock() {
       this.paddingRight = 0;
       this.paddingBottom = 0;
       this.paddingLeft = 0;
-      this.layoutSizingHorizontal = 'HUG';
-      this.layoutSizingVertical = 'HUG';
+      this._lsH = 'HUG';
+      this._lsV = 'HUG';
       this.layoutPositioning = 'AUTO';
       this.constraints = { horizontal: 'MIN', vertical: 'MIN' };
       this.minWidth = null;
@@ -326,6 +326,21 @@ export function createFigmaMock() {
     }
 
     resize(w, h) {
+      // G8/GP4b — on a GRID frame a resize that CHANGES a hugged axis silently
+      // reverts BOTH the sizing mode (HUG -> FIXED) and that axis's HUG tracks
+      // (-> FLEX). Measured live 2026-08-08. A width-only resize leaves a
+      // hugged height alone (GP4c), so the revert is per-axis and value-gated:
+      // this is what forces the emitter to write the hug LAST.
+      if (this._layoutMode === 'GRID') {
+        if (this._lsH === 'HUG' && w !== this.width) {
+          this._lsH = 'FIXED';
+          this._gridCols = this._gridCols.map((t) => (t.type === 'HUG' ? { type: 'FLEX', value: 1 } : t));
+        }
+        if (this._lsV === 'HUG' && h !== this.height) {
+          this._lsV = 'FIXED';
+          this._gridRows = this._gridRows.map((t) => (t.type === 'HUG' ? { type: 'FLEX', value: 1 } : t));
+        }
+      }
       this._w = w;
       this._h = h;
       this._resized = true;
@@ -557,14 +572,71 @@ export function createFigmaMock() {
     // its share of the free space (P2's minmax(0,Nfr) semantics), HUG = 0
     // (content sizing is out of the mock's scope). Gap-corrected exactly as
     // P4 verified ((500-10)/2 × (240-10)/2).
-    _gridTrackPx(tracks, total, gap) {
-      const fixed = tracks.reduce((a, t) => a + (t.type === 'FIXED' ? t.value : 0), 0);
+    _gridTrackPx(tracks, total, gap, hugPx) {
+      const hug = hugPx ?? tracks.map(() => 0);
+      const fixed = tracks.reduce(
+        (a, t, i) => a + (t.type === 'FIXED' ? t.value : t.type === 'HUG' ? hug[i] : 0),
+        0,
+      );
       const frTotal = tracks.reduce((a, t) => a + (t.type === 'FLEX' ? t.value : 0), 0);
       const free = Math.max(0, total - fixed - gap * Math.max(0, tracks.length - 1));
-      return tracks.map((t) =>
-        t.type === 'FIXED' ? t.value : t.type === 'FLEX' && frTotal > 0 ? (free * t.value) / frTotal : 0,
+      return tracks.map((t, i) =>
+        t.type === 'FIXED' ? t.value
+        : t.type === 'HUG' ? hug[i]
+        : t.type === 'FLEX' && frTotal > 0 ? (free * t.value) / frTotal
+        : 0,
       );
     }
+    // --- G8: an INTRINSICALLY SIZED grid axis (probes GP1-GP13, 2026-08-08) --
+    // layoutSizing{Horizontal,Vertical} were plain assignable fields, so the
+    // canvas's two hard facts about hugging a GRID frame were both invisible
+    // headlessly: (a) hugging an axis that carries a FLEX track NORMALIZES
+    // every FLEX track on that axis to HUG and the fr ratio is silently gone
+    // (GP1/GP5/GP12), and (b) an axis with no FLEX track hugs exactly, leaving
+    // the OTHER axis's tracks untouched (GP2/GP3/GP13). Modeled as accessors so
+    // an emitter that hugs the wrong axis produces a visibly wrong track list
+    // instead of a green field write.
+    set layoutSizingHorizontal(v) {
+      if (v === 'HUG' && this._layoutMode === 'GRID') {
+        this._gridCols = this._gridCols.map((t) => (t.type === 'FLEX' ? { type: 'HUG', value: 1 } : t));
+      }
+      this._lsH = v;
+    }
+    get layoutSizingHorizontal() {
+      return this._lsH;
+    }
+    set layoutSizingVertical(v) {
+      if (v === 'HUG' && this._layoutMode === 'GRID') {
+        this._gridRows = this._gridRows.map((t) => (t.type === 'FLEX' ? { type: 'HUG', value: 1 } : t));
+      }
+      this._lsV = v;
+    }
+    get layoutSizingVertical() {
+      return this._lsV;
+    }
+
+    // A HUG track measures the tallest/widest child anchored in it. The child's
+    // INTRINSIC size is used, never its cell size — a cell lookup would close the
+    // loop the canvas itself refuses to solve (GP14: FILL on a hugged axis is
+    // circular and Figma freezes the stale box, which is why the emitter hugs
+    // such children instead of filling them, G3′). A FILL child that reaches
+    // here contributes its own last measure, exactly as the canvas fixed point
+    // does, rather than the 0 the flex rule in _intrinsicSize would give.
+    _gridHugTrackPx(axis, depth) {
+      const tracks = axis === 'w' ? this._gridCols : this._gridRows;
+      const out = tracks.map(() => 0);
+      for (const ch of this.children ?? []) {
+        if (ch.visible === false || ch.layoutPositioning === 'ABSOLUTE') continue;
+        const anchor = axis === 'w' ? ch.gridColumnAnchorIndex : ch.gridRowAnchorIndex;
+        if (typeof anchor !== 'number') continue;
+        const span = axis === 'w' ? (ch._gridColSpan ?? 1) : (ch._gridRowSpan ?? 1);
+        if (span !== 1) continue; // a spanning child sizes no single track alone
+        if (tracks[anchor]?.type !== 'HUG') continue;
+        out[anchor] = Math.max(out[anchor], ch._intrinsicSize(axis, (depth ?? 0) + 1));
+      }
+      return out;
+    }
+
     _gridCellSize(axis) {
       const p = this.parent;
       const tracks = axis === 'w' ? p._gridCols : p._gridRows;
@@ -572,7 +644,7 @@ export function createFigmaMock() {
       const total = axis === 'w' ? p.width : p.height;
       const anchor = axis === 'w' ? this.gridColumnAnchorIndex : this.gridRowAnchorIndex;
       const span = axis === 'w' ? (this._gridColSpan ?? 1) : (this._gridRowSpan ?? 1);
-      const px = this._gridTrackPx(tracks, total, gap);
+      const px = this._gridTrackPx(tracks, total, gap, p._gridHugTrackPx(axis, 0));
       let size = gap * Math.max(0, span - 1);
       for (let i = anchor; i < Math.min(anchor + span, px.length); i++) size += px[i];
       return size;
@@ -618,7 +690,21 @@ export function createFigmaMock() {
       const fillField = axis === 'w' ? 'layoutSizingHorizontal' : 'layoutSizingVertical';
       // A GRID frame's box is its own (tracks divide it; children never sum
       // into it) — the flex hug math below would be an invented fact here.
-      if (this.layoutMode === 'NONE' || this.layoutMode === 'GRID' || !this.children || this.children.length === 0) {
+      // EXCEPT on an axis the contract declared intrinsic (G8): there the box
+      // IS the resolved track list plus gaps plus padding (GP2/GP3/GP13).
+      if (this.layoutMode === 'GRID') {
+        const hugged = axis === 'w' ? this._lsH === 'HUG' : this._lsV === 'HUG';
+        if (!hugged) return axis === 'w' ? this._w : this._h;
+        const tracks = axis === 'w' ? this._gridCols : this._gridRows;
+        const gap = axis === 'w' ? this.gridColumnGap : this.gridRowGap;
+        const pad = axis === 'w'
+          ? this.paddingLeft + this.paddingRight
+          : this.paddingTop + this.paddingBottom;
+        const px = this._gridTrackPx(tracks, 0, gap, this._gridHugTrackPx(axis, depth));
+        const sum = px.reduce((a, b) => a + b, 0) + gap * Math.max(0, tracks.length - 1);
+        return sum + pad;
+      }
+      if (this.layoutMode === 'NONE' || !this.children || this.children.length === 0) {
         return axis === 'w' ? this._w : this._h;
       }
       const horizontalIsPrimary = this.layoutMode === 'HORIZONTAL';

@@ -261,7 +261,7 @@
       "blockStage": true
     },
     {
-      "__case": "grid-flow: grid-auto-flow: row over declared columns, placement by child order — declared CARRIED",
+      "__case": "grid-flow: grid-auto-flow: row over declared columns AND declared row tracks, placement by child order — declared CARRIED",
       "name": "CaseGridAutoFlowRow",
       "importName": "CaseGridAutoFlowRow",
       "contract": "conformance/seeds/grid-auto-flow-row.contract.json",
