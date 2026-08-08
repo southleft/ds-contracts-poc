@@ -14,24 +14,20 @@
  * they are verb-shape illustrations verified against the shipping USAGE block
  * in packages/cli/src/cli.ts, which the /cli/ page renders verbatim.
  *
- * Package versions are read from the packages' package.json files at build
- * time, never transcribed.
+ * Package versions rendered as PUBLISHED are read from
+ * scripts/registry-truth.json — the hand-maintained record of what is
+ * actually on npm — never from the source tree's package.json files, whose
+ * working-tree versions may never have been published (the build guard in
+ * site/src/registry-truth.ts refuses the lie by name).
  */
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
 import { layout, codeBlock, PLAYGROUND_URL, REPO_URL } from '../html.js';
 import { journeyStep, MANIFEST_REL } from '../journeys.js';
 import { whatWorksData, docUrl, LIMITS_REL } from '../what-works.js';
-
-function pkgVersion(rel: string): string {
-  const pkg = JSON.parse(readFileSync(path.join(process.cwd(), rel), 'utf8')) as { version?: string };
-  if (!pkg.version) throw new Error(`${rel}: no version field`);
-  return pkg.version;
-}
+import { published } from '../registry-truth.js';
 
 export function getStartedPage(): { route: string; html: string } {
-  const cliVersion = pkgVersion('packages/cli/package.json');
-  const schemaVersion = pkgVersion('packages/schema/package.json');
+  const cli = published('@ds-contracts/cli');
+  const schema = published('@ds-contracts/schema');
   // The expectations section quotes the measured pair; both halves are read
   // from the generated report, never typed in here.
   const w = whatWorksData().n;
@@ -186,7 +182,7 @@ ${codeBlock(designerEmit.command, 'bash', designerEmit.doc)}
 <p class="receipt-line">Every <code>npx @ds-contracts/cli</code> command line above is rendered from <a href="${REPO_URL}/blob/main/${MANIFEST_REL}"><code>${MANIFEST_REL}</code></a> — the same manifest the <code>journey-engineer</code> and <code>journey-designer</code> evals <em>execute</em> end-to-end against the CLI build. The site build fails on any hand-typed command, and both evals refuse if the manifest drifts from what actually runs. Documented commands and tested commands cannot diverge. The remaining verb-shape lines (written <code>ds-contracts …</code>) are checked against the shipping usage block, which <a href="/cli/#usage">the CLI page</a> renders verbatim from source at build time. The CI recipes are held to the same bar: every <code>run:</code> step in <a href="${REPO_URL}/tree/main/examples/ci">examples/ci/</a> has been executed verbatim against the published CLI (<a href="${REPO_URL}/blob/main/examples/ci/VALIDATION.md">VALIDATION.md</a>).</p>
 
 <h2 id="adopt">The packages</h2>
-<p>Everything above is published and MIT-licensed: <code>@ds-contracts/cli@${cliVersion}</code> (the whole engine, esbuild-bundled, zero required runtime dependencies) and <code>@ds-contracts/schema@${schemaVersion}</code> (the contract schema, its generated JSON Schema, and the <code>validateContract</code> referee). Point the extraction at what you already have — proposals only, nothing overwritten:</p>
+<p>Everything above is published and MIT-licensed: <code>@ds-contracts/cli@${cli.latest}</code> — published stable; the release candidate on the <code>next</code> tag is <code>${cli.next}</code> — (the whole engine, esbuild-bundled, zero required runtime dependencies) and <code>@ds-contracts/schema@${schema.latest}</code> — published stable, <code>${schema.next}</code> on <code>next</code> — (the contract schema, its generated JSON Schema, and the <code>validateContract</code> referee). These versions are read from the repo's registry-truth manifest — the record of what is actually on npm — never from the source tree's <code>package.json</code>, which may carry a newer, not-yet-published candidate. Point the extraction at what you already have — proposals only, nothing overwritten:</p>
 ${codeBlock(`npm i -g @ds-contracts/cli
 ds-contracts init --detect   # writes ds-contracts.config.json — confirm code.root and tokens
 ds-contracts extract         # your components → schema-valid PROPOSED contracts

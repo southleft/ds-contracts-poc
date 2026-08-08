@@ -8,6 +8,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { layout, codeBlock, badge, REPO_URL } from '../html.js';
+import { published } from '../registry-truth.js';
 
 /** Slice a source region and refuse by name when the pattern stops matching. */
 function slice(relPath: string, pattern: RegExp, label: string): string {
@@ -29,14 +30,15 @@ function evalLiteral<T>(literal: string, label: string): T {
 }
 
 export function cliPage(): { route: string; html: string } {
-  const cliVersion = (
-    JSON.parse(readFileSync(path.join(process.cwd(), 'packages/cli/package.json'), 'utf8')) as { version: string }
-  ).version;
+  // The version printed beside install commands is REGISTRY truth (what npm
+  // actually serves), never the source tree's package.json — the working tree
+  // may carry a release candidate that was never published.
+  const cli = published('@ds-contracts/cli');
 
   // The usage block IS the reference (cli.ts says so itself) — render it verbatim.
   const usage = slice('packages/cli/src/cli.ts', /const USAGE = `([\s\S]*?)`;\n/, 'USAGE block').replace(
     '${VERSION}',
-    cliVersion,
+    cli.latest,
   );
 
   // The exact config `init` writes: the TEMPLATE literal, JSON-stringified the
@@ -60,10 +62,10 @@ export function cliPage(): { route: string; html: string } {
 <p class="eyebrow">Reference</p>
 <h1>The CLI — <code>@ds-contracts/cli</code></h1>
 <p class="lede">Every verb is a thin shell over the same engine the reference repository runs — esbuild-bundled, zero required runtime dependencies, Node ≥ 20. Install it globally or run it with <code>npx</code>; the three paths on <a href="/get-started/">Get started</a> are built from these verbs.</p>
-${codeBlock(`npm i -g @ds-contracts/cli     # or: npx --yes @ds-contracts/cli@${cliVersion} <command>`, 'bash')}
+${codeBlock(`npm i -g @ds-contracts/cli     # or: npx --yes @ds-contracts/cli@${cli.latest} <command>`, 'bash', `published stable v${cli.latest}; the release candidate on the next tag is v${cli.next}`)}
 
 <h2 id="usage">Usage ${badge('generated', 'Extracted verbatim from packages/cli/src/cli.ts at build time — the CLI names this block its own reference.')}</h2>
-${codeBlock(usage.trimEnd(), 'text', `packages/cli/src/cli.ts — the shipping usage block, v${cliVersion}; extracted at build time`)}
+${codeBlock(usage.trimEnd(), 'text', `packages/cli/src/cli.ts — the usage block, extracted from source at build time; published stable is v${cli.latest}`)}
 <p class="section-note">Each verb also prints its own section via <code>ds-contracts &lt;command&gt; --help</code>. This page and the top-level help block remain the full reference.</p>
 
 <h2 id="onboard">onboard — the whole code→canvas pipeline, in two phases</h2>
