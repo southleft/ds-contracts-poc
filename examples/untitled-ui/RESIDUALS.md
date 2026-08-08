@@ -304,7 +304,7 @@ What each would need in order to stop costing pixels, quoted from the receipt th
 
 ### 5.4 Refusals that are structural given the contract vocabulary
 
-The conformance manifest names **8 constructs REFUSED** and **11 LEDGERED** — the vocabulary boundary itself, hand-authored from Figma's documentation model rather than from engine output. A refusal is closable only by a VOCABULARY change, which is a different kind of round from a defect fix.
+The conformance manifest names **9 constructs REFUSED** and **14 LEDGERED** — the vocabulary boundary itself, hand-authored from Figma's documentation model rather than from engine output. A refusal is closable only by a VOCABULARY change, which is a different kind of round from a defect fix.
 
 | case | the construct | the vocabulary change it would need |
 |---|---|---|
@@ -316,6 +316,10 @@ The conformance manifest names **8 constructs REFUSED** and **11 LEDGERED** — 
 | `effect-text-shadow` | a drop shadow on a TEXT node | a text shadow has no contract vocabulary (box-shadow is a box channel) - named, not proposed |
 | `fill-gradient` | a gradient fill (capture-boundary: dump v1 carries solid paints only) | the capture receipts paint-unsupported; no paint may be invented in the contract |
 | `fill-multi-paint-stack` | a multi-paint fill stack (capture carries the first SOLID; the rest receipt paint-stack-truncated) | truncation to the first solid is a declared limit with a receipt; the surviving solid still carries |
+| `grid-area-empty-slot` | an empty area cell drawn as the SUPERSEDED dashed-placeholder frame rather than a native slot | the rect carries as a placement, but a placeholder FRAME is name-less on the canvas, so no area name returns — the same G4 ledger as grid-named-area-slots. The native spelling that DOES recover the name is measured by grid-area-slot-native (native-slots-proposal S2 superseded this drawing on 2026-08-08) |
+| `grid-area-nonrectangular` | placed rects that leave a declared cell unoccupied — occupancy grid-template-areas cannot tile | the canvas has no rectangularity constraint, so the read is geometrically exact; what is lowered is the code-side SPELLING (grid-row/grid-column longhands instead of grid-template-areas + grid-area), which the named disposition grid-area-nonrectangular covers |
+| `grid-implicit-tracks` | a child anchored at row 1 of a grid that declares ONE row track — the occupancy the canvas absorbs by rewriting the declaration | P9, the lossy edge: when occupied cells exceed the declared track lists the declaration and the occupancy disagree, and carrying either would be a fact the contract never made. Refused BY NAME (grid-implicit-tracks) with no track or placement leaking |
+| `grid-named-area-slots` | three children occupying what a contract would have declared as three NAMED areas, drawn as ordinary frames | G4: Figma has no native area names — the canvas carries only the rect. The geometry is CARRIED exactly as per-child placement, and the NAME loss must be NAMED rather than silent; an area name survives only through a part that already has a name on the canvas (a SLOT node — see grid-area-slot-native) |
 | `instance-name-key-contradict` | an instance named like an in-scope contract whose key CONTRADICTS that contract's anchor | a foreign kit's Badge must not link to ds.badge on name coincidence - the link is refused BY NAME and an honest stub (suffixed id) takes its place |
 | `instance-override-paint-observed` | an observed subtree paint on an instance LINKED to a real contract (classic path, no instanceOverrides ledger) | the child contract owns its paint; a per-usage override is not representable on a component ref without the opt-in override machinery - ledgered by name |
 | `placement-constraints-scale` | an ABSOLUTE child whose constraints are SCALE x SCALE | SCALE placement has no carried offset spelling (a stretch percentage, not an offset); must be a named refusal, the part renders in flow |
@@ -453,7 +457,7 @@ None of the three steps rewrites `renders/FIDELITY.md`, `renders/fidelity.json` 
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | fidelity table |
 | `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
 | `examples/untitled-ui/storybook/contracts/` | `63f093f001fb` | 129,887 | proposed contracts (30 files) |
-| `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `c43ae501d516` | 68,895 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering.

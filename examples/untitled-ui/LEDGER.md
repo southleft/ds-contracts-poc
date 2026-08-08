@@ -15,9 +15,9 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 | instrument | what it holds the tool to | current reading | artifact |
 |---|---|---|---|
 | Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **92.7%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst tooltip 81.2%) | `renders/fidelity.json` |
-| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **91/91** green, 0 pinned red — 72 constructs expected CARRIED, 8 REFUSED, 11 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
+| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **114/116** green, 2 pinned red — 93 constructs expected CARRIED, 9 REFUSED, 14 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
 | Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** executed to fact diff · **0/15 verified exact** · 11,400 matched · 1,857 diverged · 7,671 loss · 15,359 invented | `extract/figma/roundtrip-uui/report.json` |
-| The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 19 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
+| The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 23 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
 ### The one sentence
 
@@ -43,7 +43,7 @@ Method, quoted from `renders/FIDELITY.md`: *Score = % of pixels REPRODUCED, meas
 
 ## 2. What carries
 
-The document-model fixture is the answer to "will it survive the boundary at all". It is 91 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **72 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
+The document-model fixture is the answer to "will it survive the boundary at all". It is 116 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **91 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
 
 | construct family | carried | case ids |
 |---|---|---|
@@ -51,6 +51,7 @@ The document-model fixture is the answer to "will it survive the boundary at all
 | Boolean property defaults | 2 | `bool-default-from-set` `bool-default-hidden` |
 | Effects (shadows, blurs) | 2 | `effect-shadow-single` `effect-shadow-two` |
 | Fills and paints | 6 | `fill-alpha` `fill-image-bool` `fill-image-hash` `fill-solid-and-image-mixed` `fill-solid-raw` `fill-solid-var` |
+| `grid-*` | 19 | `grid-2d` `grid-area-slot-native` `grid-bento-span-matrix` `grid-child-align` `grid-child-fill-cell` `grid-child-grow-invalid` `grid-child-text-hug` `grid-col-span` `grid-explicit-anchor` `grid-gap-row-column` `grid-gap-shorthand` `grid-in-flex-fill` `grid-instance-child` `grid-on-component-variant` `grid-row-span` `grid-sidebar-px-fr` `grid-track-fit-content` `grid-tracks-mixed-fractional` `grid-two-column` |
 | Nested instances and their linkage | 7 | `instance-absent-stub` `instance-override-size-carried` `instance-props-fixed` `instance-props-thread` `instance-resolvable-key` `instance-resolvable-name` `instance-stub-no-bbox` |
 | Auto-layout (direction, gap, padding, alignment, sizing) | 10 | `layout-align-baseline` `layout-column` `layout-fill-width-column` `layout-fill-width-row` `layout-gap-literal` `layout-justify-space-between` `layout-padding-asymmetric-bound` `layout-root-default-elided` `layout-root-fixed-bbox` `layout-width-bound-root` |
 | Min/max sizing | 1 | `minmax-size` |
@@ -121,13 +122,16 @@ The 15 non-stub contracts carry their own standing refusal, which an adopter sho
 
 ### 3.3 Named refusals in the document model
 
-8 constructs are refused **by name** — the proposal must produce a note, never a guess. 11 more are LEDGERED: carried as a receipt while the contract stays honest and invents nothing. All 19 are green, meaning the refusal itself is what the fixture verifies. Side is derived from the manifest's own wording (a case whose text says "capture-boundary" or "the capture receipts …" is capture-side; everything else is inversion-side).
+9 constructs are refused **by name** — the proposal must produce a note, never a guess. 14 more are LEDGERED: carried as a receipt while the contract stays honest and invents nothing. All 23 are green, meaning the refusal itself is what the fixture verifies. Side is derived from the manifest's own wording (a case whose text says "capture-boundary" or "the capture receipts …" is capture-side; everything else is inversion-side).
 
 | case | disposition | side | the construct | why it is refused |
 |---|---|---|---|---|
 | `blend-mode-multiply` | LEDGERED | capture-side | a non-NORMAL blendMode on the root (capture-boundary: no dump v1 field) | blend modes have no dump projection; the capture receipts blend-mode-unsupported and nothing blend-shaped may appear in the contract |
 | `fill-gradient` | LEDGERED | capture-side | a gradient fill (capture-boundary: dump v1 carries solid paints only) | the capture receipts paint-unsupported; no paint may be invented in the contract |
 | `fill-multi-paint-stack` | LEDGERED | inversion-side | a multi-paint fill stack (capture carries the first SOLID; the rest receipt paint-stack-truncated) | truncation to the first solid is a declared limit with a receipt; the surviving solid still carries |
+| `grid-area-empty-slot` | LEDGERED | inversion-side | an empty area cell drawn as the SUPERSEDED dashed-placeholder frame rather than a native slot | the rect carries as a placement, but a placeholder FRAME is name-less on the canvas, so no area name returns — the same G4 ledger as grid-named-area-slots. The native spelling that DOES recover the name is measured by grid-area-slot-native (native-slots-proposal S2 superseded this drawing on 2026-08-08) |
+| `grid-area-nonrectangular` | LEDGERED | inversion-side | placed rects that leave a declared cell unoccupied — occupancy grid-template-areas cannot tile | the canvas has no rectangularity constraint, so the read is geometrically exact; what is lowered is the code-side SPELLING (grid-row/grid-column longhands instead of grid-template-areas + grid-area), which the named disposition grid-area-nonrectangular covers |
+| `grid-named-area-slots` | LEDGERED | inversion-side | three children occupying what a contract would have declared as three NAMED areas, drawn as ordinary frames | G4: Figma has no native area names — the canvas carries only the rect. The geometry is CARRIED exactly as per-child placement, and the NAME loss must be NAMED rather than silent; an area name survives only through a part that already has a name on the canvas (a SLOT node — see grid-area-slot-native) |
 | `instance-override-paint-observed` | LEDGERED | inversion-side | an observed subtree paint on an instance LINKED to a real contract (classic path, no instanceOverrides ledger) | the child contract owns its paint; a per-usage override is not representable on a component ref without the opt-in override machinery - ledgered by name |
 | `radius-per-corner` | LEDGERED | capture-side | per-corner (non-uniform) radii (capture-boundary: dump v1 carries a uniform radius only) | the capture receipts radii-nonuniform; nothing corner-shaped may be invented |
 | `rotation-nonshape` | LEDGERED | capture-side | rotation on a non-decor node (capture-boundary: rotation rides shape decor only) | the capture receipts rotation-unsupported; the node renders unrotated and nothing rotation-shaped may be invented |
@@ -141,6 +145,7 @@ The 15 non-stub contracts carry their own standing refusal, which an adopter sho
 | `effect-inner-shadow` | REFUSED | inversion-side | an INNER_SHADOW effect on the root | inner shadows are outside the DROP_SHADOW-stack grammar (a stack of DROP_SHADOW layers carries comma-separated; INNER_SHADOW does not) - the channel is NAMED by kind, not proposed |
 | `effect-layer-blur` | REFUSED | inversion-side | a LAYER_BLUR effect on the root | blur types carry type/radius only so the gap can be NAMED - no filter/box-shadow may be proposed |
 | `effect-text-shadow` | REFUSED | inversion-side | a drop shadow on a TEXT node | a text shadow has no contract vocabulary (box-shadow is a box channel) - named, not proposed |
+| `grid-implicit-tracks` | REFUSED | inversion-side | a child anchored at row 1 of a grid that declares ONE row track — the occupancy the canvas absorbs by rewriting the declaration | P9, the lossy edge: when occupied cells exceed the declared track lists the declaration and the occupancy disagree, and carrying either would be a fact the contract never made. Refused BY NAME (grid-implicit-tracks) with no track or placement leaking |
 | `instance-name-key-contradict` | REFUSED | inversion-side | an instance named like an in-scope contract whose key CONTRADICTS that contract's anchor | a foreign kit's Badge must not link to ds.badge on name coincidence - the link is refused BY NAME and an honest stub (suffixed id) takes its place |
 | `placement-constraints-scale` | REFUSED | inversion-side | an ABSOLUTE child whose constraints are SCALE x SCALE | SCALE placement has no carried offset spelling (a stretch percentage, not an offset); must be a named refusal, the part renders in flow |
 | `slot-preferred-unresolvable` | REFUSED | inversion-side | preferredValues naming a key with NO in-scope contract | unresolvable keys are named, never guessed into ids - accepts stays unauthored |
@@ -210,11 +215,23 @@ Carried, but not carried perfectly. These are the classes an adopter will actual
 
 ---
 
-## 5. The work order
+## 5. The pinned reds, and the work order
 
 ### 5.1 The pinned reds
 
-NONE. All 91 conformance cases are green: every construct the documentation model says is CARRIED is carried, and every refusal is named. This section stays in the ledger because an empty pinned-red list is a reading, not a formatting accident — when a red returns it is printed here verbatim from the manifest.
+2 of the 116 conformance cases are FAIL-EXPECTED-RED: the documentation model says CARRIED, the engine does not deliver it, and the gap is pinned so it cannot be forgotten or quietly closed. Each is verbatim from the manifest.
+
+#### `grid-absolute-overlay` — expected CARRIED, inversion-side
+
+- **Construct:** an ABSOLUTE-positioned overlay child inside a MANUAL grid, alongside a normally placed child
+- **Why it should carry:** G2/P13: layoutPositioning ABSOLUTE works inside grid parents and the existing overlay grammar survives; the reader must gate anchor reads on it (absolute children still REPORT anchors 0,0) and carry the grid with the overlay out of flow
+- **What actually happens:** The dump gate works exactly as P13 requires — the absolute child carries `abs` and NO cell, so no 0,0 placement is invented. But the reader then refuses the WHOLE grid, because it has no abs->overlay inversion: Part.overlay spells attachment as the v7 EDGE enum (top\|bottom\|start\|end) while the canvas fact is a raw x/y inside a cell, and choosing an edge from that would be an invented fact (the dump types have carried "not yet consumed by the proposer" for `abs` since v1.7). Pinned red: the grid is lost rather than the overlay being guessed. Closing it needs the overlay inversion, a separate grammar item; the refusal now names THAT cause instead of blaming the child for a cell the dump was right not to capture.
+
+#### `grid-auto-flow-row` — expected CARRIED, inversion-side
+
+- **Construct:** a ROW_AUTO_FLOW grid whose declared row tracks are two 16px FIXED tracks
+- **Why it should carry:** G5: under flow the placement fact is CHILD ORDER (P5 — the API refuses position setters there), so the contract carries flow "row", omits rows, and the emitter re-derives ceil(children/columns) explicit tracks itself (P9: the API under-reports implicit rows)
+- **What actually happens:** The reader REFUSES this grid by name. G5 lets the contract carry flow ONLY with `rows` OMITTED, so the two declared 16px row tracks have nowhere to land: carrying flow would silently redraw them as the emitter derivation ({fr:1} x ceil(children/columns)) on the next round trip — the P9 rewrite the grammar exists to prevent. The reader therefore admits flow only when the drawn rows ALREADY equal that derivation, and a flow grid that does round-trips exactly (grid-roundtrip-identity eval, section 4). Pinned red because the construct is real and the doc model calls it CARRIED, while the only carriage available today would lose the drawn track sizes. Closing it needs a grammar decision (a flow spelling that can carry declared rows), not a reader patch — so the loss is pinned, named and visible instead of absorbed.
 
 ### 5.2 The round-1 audit, re-checked
 
@@ -253,11 +270,12 @@ Named holes, so that no reader mistakes an absence for a zero.
 ### 5.4 The work order, in the order it pays
 
 1. **The paste door is OPEN** (§3.4) — closed for two rounds, and the two blockers that held it (an empty `base` tokenSet refused outright, and `social-button`'s `{platform}` icon ref read as a literal filename) are both fixed and pinned by `npm run paste:check`, which drives the REAL referee for this kit and for a variable-publishing one. An adopter can now take these 15 contracts through the shipping path unaided. What ranks first NOW is below.
-2. **variant-name-transliteration-api** — OPEN, mint stage (inversion-side). 1 reserved-name collision (SocialIcon.style); 13 props whose enum still spells `'false'` instead of absence/boolean; 3 numeric-valued string enums (ProgressBar.progress, Slider.leftControl, Slider.rightControl).
-3. **duplicate-parts-from-wrapper-union** — PARTIAL, propose-invert stage (inversion-side). 3 numbered part names whose base name is also a part of the same contract (progress-bar.Progress2, slider.leftControl2, slider.rightControl2); the audited duplicates (ProgressCircle's four label parts, DropdownListItem's Text2/Checkbox×2/circle×2, InputFieldBase's tripled trailing icons) are all absent. The probe cannot prove the residuals are not genuine sibling nodes.
-4. **ua-default-leakage** — PARTIAL, emit-react stage (emitter-side). global `box-sizing: border-box` reset in tokens.css: present; 8/32 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files).
-5. **story-space-mismatch** — PARTIAL, story-gen stage (emitter-side). 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 32 emitted components ship stories).
-6. **Classify the 0 untagged round-trip facts** (§5.3) — until divergence and loss are classified the way invention already is, no blast-radius number in §4 can claim to be complete.
+2. **The 2 pinned reds** (§5.1) — `grid-absolute-overlay`, `grid-auto-flow-row`. A pinned red outranks every OPEN class below it: the documentation model says the construct is CARRIED and the engine does not deliver it, which is the one failure this project treats as a bug rather than a boundary.
+3. **variant-name-transliteration-api** — OPEN, mint stage (inversion-side). 1 reserved-name collision (SocialIcon.style); 13 props whose enum still spells `'false'` instead of absence/boolean; 3 numeric-valued string enums (ProgressBar.progress, Slider.leftControl, Slider.rightControl).
+4. **duplicate-parts-from-wrapper-union** — PARTIAL, propose-invert stage (inversion-side). 3 numbered part names whose base name is also a part of the same contract (progress-bar.Progress2, slider.leftControl2, slider.rightControl2); the audited duplicates (ProgressCircle's four label parts, DropdownListItem's Text2/Checkbox×2/circle×2, InputFieldBase's tripled trailing icons) are all absent. The probe cannot prove the residuals are not genuine sibling nodes.
+5. **ua-default-leakage** — PARTIAL, emit-react stage (emitter-side). global `box-sizing: border-box` reset in tokens.css: present; 8/32 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files).
+6. **story-space-mismatch** — PARTIAL, story-gen stage (emitter-side). 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 32 emitted components ship stories).
+7. **Classify the 0 untagged round-trip facts** (§5.3) — until divergence and loss are classified the way invention already is, no blast-radius number in §4 can claim to be complete.
 
 ---
 
@@ -269,7 +287,7 @@ npx tsx extract/figma/ledger/build.ts
 
 # 2 · the document-model fixture — fast, read-only, no engine changes
 npm run conformance:canvas
-#    expect: 91 case(s): 91 PASS, 0 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
+#    expect: 116 case(s): 114 PASS, 2 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
 
 # 3 · the canvas→code→canvas round trip (rewrites REPORT.md + report.json)
 npm run extract:figma:roundtrip:uui
@@ -294,7 +312,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/storybook/contracts/` | `63f093f001fb` | 129,887 | proposed contracts (30 files) |
 | `examples/untitled-ui/storybook/src/generated/` | `256e2627c802` | 275,910 | emitted components (32 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `8c31938a1627` | 674,804 | emitted global tokens |
-| `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `c43ae501d516` | 68,895 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `61f5c58f7f20` | 144,788 | round-trip narrative |
 
