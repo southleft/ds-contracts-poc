@@ -1,0 +1,410 @@
+{
+  "_marker": "DRAFT — in-advance dispositions for the grid-2d channel (A1 deliverable 3). Hand-authored BEFORE any engine work, in the same independent-denominator discipline as conformance/MANIFEST.json: no field here is derived from engine filters. NOT read by conformance/build.ts — promotion into conformance/cases/ is an A2 act and a subset-v0.1 draft bump (the frozen subset names grid-2d REFUSED; opening the channel is a declared widen, never silent). Every disposition cites the probe that justifies it: docs/research/grid-recon-probes.md (P1-P14), run live 2026-08-08 against fileKey BMjUA2ue5CaZXU4kufxL0z, section 'Grid Recon Probes' (4:1107). Directions: codeToCanvas = CSS/contract fact -> emit-figma-script -> canvas readback; canvasToCode = canvas grid -> dump/propose-figma -> contract/CSS. expect UNREACHABLE means the source surface cannot construct the case (proved by the cited probe error) and the direction exists to prove the reader never invents it.",
+  "generatedBy": "hand-authored (A1 grid recon)",
+  "status": "draft",
+  "grammar": "docs/research/layout-grammar-proposal.md",
+  "probes": "docs/research/grid-recon-probes.md",
+  "count": 30,
+  "byExpectation": { "CARRIED": 19, "LOWERED": 2, "REFUSED": 9 },
+  "cases": [
+    {
+      "id": "grid-two-column",
+      "feature": "grid-tracks",
+      "construct": "display: grid; grid-template-columns: 1fr 1fr",
+      "why": "The minimal 2-D layout; the exact construct the frozen grid-2d REFUSED case measures today.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "gridColumnSizes [{FLEX,1},{FLEX,1}] is the grid DEFAULT and reads back exactly" },
+        "canvasToCode": { "expect": "CARRIED", "note": "structured gridColumnSizes -> grid-template-columns: 1fr 1fr" }
+      },
+      "probe": "P1 (defaults are exactly this), P8 (readback exactness)",
+      "canvas": { "expect": "PRESENT", "note": "supersedes the frozen grid-2d ABSENT declaration — the platform grew the spelling" }
+    },
+    {
+      "id": "grid-sidebar-px-fr",
+      "feature": "grid-tracks",
+      "construct": "grid-template-columns: 240px 1fr",
+      "why": "The sidebar archetype — one fixed rail, one flexible content column.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED" },
+        "canvasToCode": { "expect": "CARRIED" }
+      },
+      "probe": "P2: cols [{FIXED,200},{FLEX,1},{FLEX,2}] read back exactly; CSS '200px minmax(0,1fr) minmax(0,2fr)'",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-tracks-mixed-fractional",
+      "feature": "grid-tracks",
+      "construct": "grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values)",
+      "why": "Proves the track list is carried as typed values, not re-derived — fractional px and fr must survive byte-exact.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "FIXED 33.5 and FLEX 2.5 read back exactly" },
+        "canvasToCode": { "expect": "CARRIED" }
+      },
+      "probe": "P2b: {FIXED,33.5} ok exact; {FLEX,2.5} ok exact",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-track-fit-content",
+      "feature": "grid-tracks",
+      "construct": "grid-template-columns: fit-content(100%) 1fr",
+      "why": "The one content-sized track the canvas can spell; anything else content-sized is refused.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "{type:'HUG'} track; ONLY fit-content(100%) maps — other fit-content args are grid-track-minmax territory" },
+        "canvasToCode": { "expect": "CARRIED", "note": "HUG -> fit-content(100%), the API's own CSS spelling" }
+      },
+      "probe": "P14: gridColumnSizingCSS reads 'fit-content(100%) minmax(0,1fr)' for a HUG track",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-track-zero-value",
+      "feature": "grid-tracks",
+      "construct": "a 0px or 0fr track written to the canvas",
+      "why": "The API silently REWRITES zero tracks (0px snaps to rendered size, 0fr clamps to 1fr) — a silent-invention hazard the schema must fence out.",
+      "expect": "REFUSED",
+      "expectName": "grid-track-zero",
+      "directions": {
+        "codeToCanvas": { "expect": "REFUSED", "note": "schema-invalid before emit; emitting would trigger the silent normalization (N-DISP-02)" },
+        "canvasToCode": { "expect": "UNREACHABLE", "note": "the canvas cannot HOLD a zero track — the write is rewritten on entry (P2b), so no canvas artifact exists to read" }
+      },
+      "probe": "P2b: {FIXED,0} read back as {FIXED,200}; {FLEX,0} read back as {FLEX,1} — accepted, silently rewritten",
+      "canvas": { "expect": "ABSENT", "note": "unrepresentable: normalized away at write time" }
+    },
+    {
+      "id": "grid-gap-row-column",
+      "feature": "grid-gaps",
+      "construct": "row-gap: 8px; column-gap: 16px (distinct values)",
+      "why": "Two independent gap facts; flex wrap only carries a distinct row gap as an exception — grid carries both natively.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "gridRowGap/gridColumnGap independent setters" },
+        "canvasToCode": { "expect": "CARRIED" }
+      },
+      "probe": "P2: gaps 16/8 read back exactly; P8: 12/16 exact",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-gap-shorthand",
+      "feature": "grid-gaps",
+      "construct": "gap: 12px 16px (and one-value gap: 12px)",
+      "why": "The common authored spelling; the contract stores only the pair.",
+      "expect": "LOWERED",
+      "directions": {
+        "codeToCanvas": { "expect": "LOWERED", "note": "shorthand -> {row, column} pair; named normalization, not silent" },
+        "canvasToCode": { "expect": "CARRIED", "note": "canvas only has the pair; emitting longhands is exact" }
+      },
+      "probe": "P2 (pair carriage); lowering is proposer-side by construction",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-col-span",
+      "feature": "grid-placement",
+      "construct": "grid-column: 1 / span 2 (child spans 2 columns)",
+      "why": "The task's frontier question verbatim: can a child span 2 columns. Yes, with occupancy validation.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "gridColumnSpan=2 after placement; compiler must order place-then-span (P3 occupancy throw) and bound-check spans (P3 'Column span exceeds grid column count')" },
+        "canvasToCode": { "expect": "CARRIED", "note": "gridColumnSpan reads back exactly (P3, P8)" }
+      },
+      "probe": "P3: colSpan ok after occupancy cleared; P8: header colSpan 4 exact",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-row-span",
+      "feature": "grid-placement",
+      "construct": "grid-row: 2 / span 2 (child spans 2 rows)",
+      "why": "Row spans are the sidebar/rail half of every bento.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED" },
+        "canvasToCode": { "expect": "CARRIED" }
+      },
+      "probe": "P3: gridRowSpan=2 ok -> reads 2; P8: sidebar/rail rowSpan 2 exact",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-explicit-anchor",
+      "feature": "grid-placement",
+      "construct": "grid-row: 3; grid-column: 2 (explicit cell placement, 0-based contract / 1-based CSS)",
+      "why": "Explicit placement is the manual-mode core; anchors must survive the 0/1-base translation exactly.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "child.setGridChildPosition(row, col) — child-side method, the only setter (P3)" },
+        "canvasToCode": { "expect": "CARRIED", "note": "gridRow/ColumnAnchorIndex read-only getters read back exactly" }
+      },
+      "probe": "P3b: setGridChildPosition(2,1) -> row=2 col=1; P8: all five anchors exact",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-bento-span-matrix",
+      "feature": "grid-placement",
+      "construct": "3x4 grid, rows [80px,1fr,2fr], cols [160px,1fr,1fr,120px], gaps 12/16, header 1x4 + sidebar 2x1 + main 1x2 + rail 2x1 + footer 1x2, all cells FILL",
+      "why": "The whole grammar in one artifact — the canonical round-trip receipt.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "written live; screenshot receipt assets/grid-recon/p8-bento-roundtrip.png" },
+        "canvasToCode": { "expect": "CARRIED", "note": "every track, gap, anchor, span and sizing read back EXACTLY (p8Match true); REST carries the same facts (tracks as CSS strings gridColumnsSizing/gridRowsSizing)" }
+      },
+      "probe": "P8 (plugin round trip) + live REST /v1/files nodes fetch of 4:1134",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-named-area-slots",
+      "feature": "grid-areas",
+      "construct": "grid-template-areas: 'header header' 'nav content' + grid-area: header on children",
+      "why": "Area name IS slot anchor (grammar G4): name->slot name, rect->slot placement. The contract owns the names; both surfaces carry the rects.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "areas compile to setGridChildPosition + spans; Figma has no native area names — names live in the contract, same rule as anatomy part names" },
+        "canvasToCode": { "expect": "CARRIED", "note": "rects read back; names re-attach from the contract via slot-name matching, never invented from canvas" }
+      },
+      "probe": "P3/P8 (rect carriage is placement carriage); name ownership is grammar G4, not a canvas fact",
+      "canvas": { "expect": "PRESENT", "note": "rects only; names are contract-side" }
+    },
+    {
+      "id": "grid-area-empty-slot",
+      "feature": "grid-areas",
+      "construct": "a declared grid area with NO children (empty slot)",
+      "why": "Dual slot-scoring convention: empty = shared placeholder on BOTH surfaces, carrying the area's placement so the grid shape stays visible.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "placeholder frame, slot-named, placed at the area rect" },
+        "canvasToCode": { "expect": "CARRIED", "note": "placeholder element with slot class at the same rect; placeholder-vs-filled state must match across surfaces or it is a DIFF" }
+      },
+      "probe": "grammar G4 (dual convention); placement carriage per P3/P8",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-area-nonrectangular",
+      "feature": "grid-areas",
+      "construct": "area occupancy that cannot tile grid-template-areas (gapped or non-rectangular per CSS rules)",
+      "why": "grid-template-areas requires rectangles; the contract's rect list is more general.",
+      "expect": "LOWERED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "canvas placement is per-child rects — no rectangularity constraint" },
+        "canvasToCode": { "expect": "LOWERED", "note": "emitted as grid-row/grid-column longhands instead of grid-template-areas; named lowering" }
+      },
+      "probe": "grammar G4; CSS-side constraint, not a canvas limit",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-child-align",
+      "feature": "grid-alignment",
+      "construct": "justify-self: center; align-self: end on a fixed-size child",
+      "why": "Per-cell alignment is the align/justify half the task names; 4-value vocabulary only.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "gridChildHorizontalAlign CENTER / Vertical MAX; real geometry (x 255->327.5, y 0->15)" },
+        "canvasToCode": { "expect": "CARRIED", "note": "both enums read back; AUTO|MIN|CENTER|MAX only" }
+      },
+      "probe": "P3 (enum fence: STRETCH/BASELINE rejected), P4 align geometry",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-child-fill-cell",
+      "feature": "grid-sizing",
+      "construct": "grid child stretching to its cell (CSS default; canvas FILL both axes)",
+      "why": "The default cell behavior both grammars share; the bento uses it throughout.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "layoutSizingHorizontal/Vertical FILL after append; child fills exactly (gap-corrected cell math verified)" },
+        "canvasToCode": { "expect": "CARRIED", "note": "FILL reads back; CSS emits nothing (stretch is the CSS grid default)" }
+      },
+      "probe": "P4: 245x115 = exactly (500-10)/2 x (240-10)/2; P8 all children FILL exact",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-child-text-hug",
+      "feature": "grid-sizing",
+      "construct": "a TEXT child hugging its content inside a grid cell",
+      "why": "HUG is legal ONLY on text and layout-bearing children — same fence as flex, re-proved under grid.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "text HUG ok (w=43); plain-frame HUG throws 'HUG can only be set on auto-layout frames or text children' — the schema mirrors the fence" },
+        "canvasToCode": { "expect": "CARRIED" }
+      },
+      "probe": "P4: text HUG ok, empty-frame HUG refused with named error",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-child-grow-invalid",
+      "feature": "grid-sizing",
+      "construct": "layout.grow / flex-grow on a child of a grid parent",
+      "why": "The API silently ACCEPTS layoutGrow on grid children with no effect — a silent-accept trap; the contract refuses it so no dead fact rides along.",
+      "expect": "REFUSED",
+      "expectName": "grid-child-grow",
+      "directions": {
+        "codeToCanvas": { "expect": "REFUSED", "note": "schema-invalid: grow is a flex fact; inside grid it would be carried-but-inert (N-DISP-02 silent invention of meaning)" },
+        "canvasToCode": { "expect": "REFUSED", "note": "reader must NOT emit flex-grow from layoutGrow when parent mode is GRID" }
+      },
+      "probe": "P4: kids[2].layoutGrow = 1 accepted without error, no layout effect",
+      "canvas": { "expect": "ABSENT", "note": "settable but meaningless — dead state, not a fact" }
+    },
+    {
+      "id": "grid-in-flex-fill",
+      "feature": "grid-composition",
+      "construct": "a grid frame as a FILL child of a flex (auto-layout) parent",
+      "why": "Grids must compose into the existing flex grammar as ordinary children.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "layoutSizingHorizontal FILL on the grid frame: w 100 -> 400 (parent width)" },
+        "canvasToCode": { "expect": "CARRIED" }
+      },
+      "probe": "P11",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-on-component-variant",
+      "feature": "grid-composition",
+      "construct": "layoutMode GRID on a COMPONENT node (canvas variants are components)",
+      "why": "If components could not be grids, no contract variant could carry the grammar at all.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "createComponent + GRID + tracks ok, reads back exactly" },
+        "canvasToCode": { "expect": "CARRIED" }
+      },
+      "probe": "P12",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-instance-child",
+      "feature": "grid-composition",
+      "construct": "a component INSTANCE placed in a cell with position + FILL",
+      "why": "N-ANAT-02: nested instances keep contract identity — they must slot into cells natively.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "inst.setGridChildPosition(0,1) + FILL ok" },
+        "canvasToCode": { "expect": "CARRIED" }
+      },
+      "probe": "P12",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-absolute-overlay",
+      "feature": "grid-composition",
+      "construct": "Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent",
+      "why": "The existing overlay grammar must survive under grid parents unchanged.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "ABSOLUTE + x/y honored inside GRID" },
+        "canvasToCode": { "expect": "CARRIED", "note": "QUIRK: absolute children still REPORT anchors (0,0) — readers must gate anchor reads on layoutPositioning !== 'ABSOLUTE' or they invent a placement" }
+      },
+      "probe": "P13",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-auto-flow-row",
+      "feature": "grid-flow",
+      "construct": "grid-auto-flow: row over declared columns, placement by child order",
+      "why": "The one bounded auto-flow the canvas has; placement fact = order, and rows must be DECLARED (derived ceil(n/cols)), never implicit.",
+      "expect": "CARRIED",
+      "directions": {
+        "codeToCanvas": { "expect": "CARRIED", "note": "gridItemsPositioning ROW_AUTO_FLOW; emitter declares all row tracks itself (grammar G5) — position setters are refused under flow, order IS the fact" },
+        "canvasToCode": { "expect": "CARRIED", "note": "anchors read back computed row-major from order — deterministic; carriage conditional on occupied rows == declared rows, else grid-implicit-tracks fires" }
+      },
+      "probe": "P5/P5b: enum ROW_AUTO_FLOW; setGridChildPosition refused under flow; anchors deterministic",
+      "canvas": { "expect": "PRESENT" }
+    },
+    {
+      "id": "grid-implicit-tracks",
+      "feature": "grid-flow",
+      "construct": "auto-placement beyond the declared track list (implicit rows; grid-auto-rows reliance)",
+      "why": "The canvas under-reports implicit rows: children read anchors at row 3 while gridRowCount and gridRowSizes still say 3 tracks — the declaration and the occupancy DISAGREE. Lossy readback is the refusal criterion.",
+      "expect": "REFUSED",
+      "expectName": "grid-implicit-tracks",
+      "directions": {
+        "codeToCanvas": { "expect": "REFUSED", "note": "in MANUAL mode the canvas absorbs overflow by REWRITING gridRowCount (2->3 on the 5th child) — a declaration edit the contract did not make (N-DISP-02)" },
+        "canvasToCode": { "expect": "REFUSED", "note": "detectable: max(anchor+span) > declared track count -> refuse by name; dump degrade grid-implicit-tracks-lossy" }
+      },
+      "probe": "P9 both halves: MANUAL overflow grew explicit rowCount; ROW_AUTO_FLOW anchors exceeded rowCount 3 with 8 children over 2 cols",
+      "canvas": { "expect": "ABSENT", "note": "representable only as a rewritten declaration or an unreported track — both are losses" }
+    },
+    {
+      "id": "grid-auto-fit-minmax",
+      "feature": "grid-responsive",
+      "construct": "grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))",
+      "why": "A viewport-responsive TRACK COUNT is a reflow family; one canvas frame carries one member. No repeat-to-fit exists in the API at all.",
+      "expect": "REFUSED",
+      "expectName": "grid-auto-fit-minmax",
+      "directions": {
+        "codeToCanvas": { "expect": "REFUSED", "note": "no API surface (track count is a plain number) AND minmax is rejected — double dead end" },
+        "canvasToCode": { "expect": "UNREACHABLE", "note": "the canvas cannot construct a responsive track count; reader must never emit repeat(auto-fit,...) from any grid readback" }
+      },
+      "probe": "P1 reflection (no repeat concept) + P6 minmax rejection; same family as the media-non-matching conformance finding (one frame, one branch)",
+      "canvas": { "expect": "ABSENT" }
+    },
+    {
+      "id": "grid-track-minmax",
+      "feature": "grid-responsive",
+      "construct": "grid-template-columns: minmax(100px, 300px) 1fr",
+      "why": "Per-track min/max constraints have no canvas spelling — the exact API refusal is on record.",
+      "expect": "REFUSED",
+      "expectName": "grid-track-minmax",
+      "directions": {
+        "codeToCanvas": { "expect": "REFUSED", "note": "exact error: \"in set_gridColumnSizes: Property 'gridColumnSizes' failed validation: Unrecognized key(s) in object: 'min', 'max' at index 0\"" },
+        "canvasToCode": { "expect": "UNREACHABLE", "note": "unconstructible on canvas; child minWidth/maxWidth DO exist (P6) but are child facts, not track facts — a reader must not launder them into minmax()" }
+      },
+      "probe": "P6",
+      "canvas": { "expect": "ABSENT" }
+    },
+    {
+      "id": "grid-track-percent",
+      "feature": "grid-responsive",
+      "construct": "grid-template-columns: 50% 1fr",
+      "why": "Percent tracks are not in the track-type enum; percent-of-parent is not a canvas track fact.",
+      "expect": "REFUSED",
+      "expectName": "grid-track-percent",
+      "directions": {
+        "codeToCanvas": { "expect": "REFUSED", "note": "exact error: \"Invalid enum value. Expected 'FLEX' | 'FIXED' | 'HUG', received 'PERCENT'\"" },
+        "canvasToCode": { "expect": "UNREACHABLE" }
+      },
+      "probe": "P2b",
+      "canvas": { "expect": "ABSENT" }
+    },
+    {
+      "id": "grid-flow-dense",
+      "feature": "grid-flow",
+      "construct": "grid-auto-flow: dense",
+      "why": "Dense packing is SOLVER OUTPUT, not a declared fact — and the enum rejects it anyway.",
+      "expect": "REFUSED",
+      "expectName": "grid-flow-dense",
+      "directions": {
+        "codeToCanvas": { "expect": "REFUSED", "note": "gridItemsPositioning enum is 'MANUAL' | 'ROW_AUTO_FLOW'; DENSE rejected" },
+        "canvasToCode": { "expect": "UNREACHABLE" }
+      },
+      "probe": "P5",
+      "canvas": { "expect": "ABSENT" }
+    },
+    {
+      "id": "grid-flow-column",
+      "feature": "grid-flow",
+      "construct": "grid-auto-flow: column",
+      "why": "There is no column flow on the canvas; refusing beats transposing (a transpose would be silent invention).",
+      "expect": "REFUSED",
+      "expectName": "grid-flow-column",
+      "directions": {
+        "codeToCanvas": { "expect": "REFUSED", "note": "COLUMN_AUTO_FLOW rejected by the gridItemsPositioning enum" },
+        "canvasToCode": { "expect": "UNREACHABLE" }
+      },
+      "probe": "P5b",
+      "canvas": { "expect": "ABSENT" }
+    },
+    {
+      "id": "grid-subgrid",
+      "feature": "grid-responsive",
+      "construct": "grid-template-columns: subgrid on a nested grid",
+      "why": "Track inheritance across nesting has no API surface — no property in the full reflected inventory. A nested grid with COPIED literal tracks is a different fact (it does not follow the parent) and must not be passed off as subgrid.",
+      "expect": "REFUSED",
+      "expectName": "grid-subgrid",
+      "directions": {
+        "codeToCanvas": { "expect": "REFUSED", "note": "no canvas analogue proved; the probe found no subgrid-shaped property anywhere" },
+        "canvasToCode": { "expect": "UNREACHABLE" }
+      },
+      "probe": "P1 reflection: full grid-prop inventory contains no subgrid/track-inheritance surface",
+      "canvas": { "expect": "ABSENT" }
+    }
+  ]
+}
