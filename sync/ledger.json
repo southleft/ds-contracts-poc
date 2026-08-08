@@ -1,0 +1,2174 @@
+{
+  "version": 1,
+  "_doc": "SYNC LEDGER (lockfile) — one record per synced component: the contract hash and canvas fingerprint last known to agree. Written by sync verbs (figma receive --apply, figma publish, sync record/seed, sync observe --update); read by `npm run sync:observe`. Deterministic serialization — regenerate with sync/cli.ts, never hand-order. See sync/README.md.",
+  "records": [
+    {
+      "contractId": "altitude.avatar",
+      "contractPath": "examples/altitude/contracts/avatar.contract.json",
+      "contractHash": "sha256:4adbcad370284ca3366b8a17fd91733c0260b7eb16159f44232a165e05f058e2",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:10498",
+      "canvasFingerprint": "v6:923243794",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:49:25.504Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3149716910",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/altitude/components/avatar.json"
+    },
+    {
+      "contractId": "altitude.badge",
+      "contractPath": "examples/altitude/contracts/badge.contract.json",
+      "contractHash": "sha256:42693246bc95a9fdcb34a06edca990fff6903ace039fdd01ec53788fead20322",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "60:10083",
+      "canvasFingerprint": "v6:3192606537",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:43:10.768Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/altitude/components/badge.json"
+    },
+    {
+      "contractId": "altitude.button",
+      "contractPath": "examples/altitude/contracts/button.contract.json",
+      "contractHash": "sha256:c535887b34f3a9b797f35fa7ff7f443c1e6b798732cc4b74e70ecdfd85ea0270",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "60:10151",
+      "canvasFingerprint": "v6:3196882528",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:43:11.810Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/altitude/components/button.json"
+    },
+    {
+      "contractId": "altitude.chip",
+      "contractPath": "examples/altitude/contracts/chip.contract.json",
+      "contractHash": "sha256:d9a844ec9ff819bf7c0a266f06599b16beaf84723c681002ae259aa627c98b6b",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "60:10126",
+      "canvasFingerprint": "v6:2414831033",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:43:13.030Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/altitude/components/chip.json"
+    },
+    {
+      "contractId": "altitude.divider",
+      "contractPath": "examples/altitude/contracts/divider.contract.json",
+      "contractHash": "sha256:f7aa750a69c0eee18cf0dce137bfc9bf9e49a4b0c7f62544e92ead9d361d784c",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "59:9713",
+      "canvasFingerprint": "v6:3296776669",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:43:13.347Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/altitude/components/divider.json"
+    },
+    {
+      "contractId": "altitude.heading",
+      "contractPath": "examples/altitude/contracts/heading.contract.json",
+      "contractHash": "sha256:3055234e8a343491f962d27d4d552724dd3cbe09a790c33081f8fa0424295d2a",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:3047",
+      "canvasFingerprint": "v6:3593476120",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:43:13.859Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/altitude/components/heading.json"
+    },
+    {
+      "contractId": "altitude.iconclose",
+      "contractPath": "examples/altitude/contracts/iconclose.contract.json",
+      "contractHash": "sha256:dfe8c8afc6ff9ade50fb951d2e969af2f10da920c7bd796233332a6f9e93a991",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:3071",
+      "canvasFingerprint": "v6:163654327",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:43:14.336Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:319884819",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/altitude/components/icon-close.json"
+    },
+    {
+      "contractId": "altitude.link",
+      "contractPath": "examples/altitude/contracts/link.contract.json",
+      "contractHash": "sha256:087a8ea0ac60bca207bbe23d2723b6949ac5923a3a20e4ad375bfc175f2c9b93",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "60:10102",
+      "canvasFingerprint": "v6:2052539233",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:43:14.695Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/altitude/components/link.json"
+    },
+    {
+      "contractId": "astryx.badge",
+      "contractPath": "examples/astryx/contracts/badge.contract.json",
+      "contractHash": "sha256:faba6d2b51f80611d714a07ec261b7236fd2868b7bc98db03e09483ce9201930",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:3794",
+      "canvasFingerprint": "v6:1192491616",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:07.010Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/badge.json"
+    },
+    {
+      "contractId": "astryx.banner",
+      "contractPath": "examples/astryx/contracts/banner.contract.json",
+      "contractHash": "sha256:e29986a07bce8ec76aa3419023635c6fd22a8571522e087a2180464aa3b2c83d",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:3813",
+      "canvasFingerprint": "v6:3231585800",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:07.801Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/banner.json"
+    },
+    {
+      "contractId": "astryx.button",
+      "contractPath": "examples/astryx/contracts/button.contract.json",
+      "contractHash": "sha256:0dc07f49258767a34e488765a926eebf5e73ca471253a16c7eaee6418be661d5",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:3864",
+      "canvasFingerprint": "v6:1886612596",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:08.324Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/button.json"
+    },
+    {
+      "contractId": "astryx.card",
+      "contractPath": "examples/astryx/contracts/card.contract.json",
+      "contractHash": "sha256:80ea595484fda25ed0e2c09cb51283077e4f55ad80ed9439ca7d12932abf7af0",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:4047",
+      "canvasFingerprint": "v6:3092228042",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:13.994Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2509439330",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/card.json"
+    },
+    {
+      "contractId": "astryx.checkbox-input",
+      "contractPath": "examples/astryx/contracts/checkbox-input.contract.json",
+      "contractHash": "sha256:7d6f7ebfdcd0319ffe1849481f3b3a9c0b9843c471903785861c5dff27aa7e3a",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:3873",
+      "canvasFingerprint": "v6:2853217606",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:08.786Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2910373000",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/checkbox-input.json"
+    },
+    {
+      "contractId": "astryx.dropdown-menu-item",
+      "contractPath": "examples/astryx/contracts/dropdown-menu-item.contract.json",
+      "contractHash": "sha256:b09f5ada2e40c9ddfbc3d478ccae7e3b6387d0194e01f684a4d9df6dc06d4133",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:3876",
+      "canvasFingerprint": "v6:2766064663",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:09.106Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3617510417",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/dropdown-menu-item.json"
+    },
+    {
+      "contractId": "astryx.dropdown-menu",
+      "contractPath": "examples/astryx/contracts/dropdown-menu.contract.json",
+      "contractHash": "sha256:f27062fa6f52fa44da757fc9164c5db0b32fda29b90f3a3b549e8449805edadd",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:4050",
+      "canvasFingerprint": "v6:253339315",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:14.392Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3472638879",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/dropdown-menu.json"
+    },
+    {
+      "contractId": "astryx.progress-bar",
+      "contractPath": "examples/astryx/contracts/progress-bar.contract.json",
+      "contractHash": "sha256:3d9a79b241287bb9dea61f32e405c39ce144622080747e2675a85f2de2049cb2",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:3900",
+      "canvasFingerprint": "v6:1229328490",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:09.675Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/progress-bar.json"
+    },
+    {
+      "contractId": "astryx.slider",
+      "contractPath": "examples/astryx/contracts/slider.contract.json",
+      "contractHash": "sha256:d21039151cfbf169ccdf91d4002ef6d141a50b99e2e40481e0f633b1ef18e1b1",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "9:831",
+      "canvasFingerprint": "v6:3600925889",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:10.926Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/slider.json"
+    },
+    {
+      "contractId": "astryx.switch",
+      "contractPath": "examples/astryx/contracts/switch.contract.json",
+      "contractHash": "sha256:e84066e6d20b47358fe6dd96206ff9d8b12d2c797ece18cac0be7619eb32b4d2",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:3964",
+      "canvasFingerprint": "v6:204491426",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:11.441Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/switch.json"
+    },
+    {
+      "contractId": "astryx.text-input",
+      "contractPath": "examples/astryx/contracts/text-input.contract.json",
+      "contractHash": "sha256:f7f615cff0fe664d8f3dc064b95df8bfbfb2f5be673b4526a91061cbe855ce2f",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:4003",
+      "canvasFingerprint": "v6:1777886922",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:12.948Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/text-input.json"
+    },
+    {
+      "contractId": "astryx.toast",
+      "contractPath": "examples/astryx/contracts/toast.contract.json",
+      "contractHash": "sha256:5660d165d188d8827c08af7accdd81ecde1ef0b824a882bb9e7dc16cb99a77f0",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:4006",
+      "canvasFingerprint": "v6:4236041702",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:13.449Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3360096880",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/toast.json"
+    },
+    {
+      "contractId": "astryx.token",
+      "contractPath": "examples/astryx/contracts/token.contract.json",
+      "contractHash": "sha256:55e43ffae33aa7c345def3bd6ab0a7851e34e88157938ce4eaa29e800f110916",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:3763",
+      "canvasFingerprint": "v6:1746840295",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:44:06.476Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3708527189",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/astryx/components/token.json"
+    },
+    {
+      "contractId": "carbon.accordion",
+      "contractPath": "examples/carbon/contracts/accordion.contract.json",
+      "contractHash": "sha256:8dcad949eda95b991097b2977e96149c17bc4b7d773bac5ff6d1eba75c34ac1d",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "60:10429",
+      "canvasFingerprint": "v6:1242425722",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:02.201Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/carbon/components/accordion.json"
+    },
+    {
+      "contractId": "carbon.button",
+      "contractPath": "examples/carbon/contracts/button.contract.json",
+      "contractHash": "sha256:7201cf38f4fff0d0df63ddb751a664cf9e6c629ea7301bdd187b26b47bcc058d",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:5528",
+      "canvasFingerprint": "v6:310064922",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:03.732Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2265055463",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/carbon/components/button.json"
+    },
+    {
+      "contractId": "carbon.checkbox",
+      "contractPath": "examples/carbon/contracts/checkbox.contract.json",
+      "contractHash": "sha256:b6f53e11dd43a40df9006ec27829387004b50038803c675c1e9138662627cf5d",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:5562",
+      "canvasFingerprint": "v6:4163950863",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:04.230Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/carbon/components/checkbox.json"
+    },
+    {
+      "contractId": "carbon.iconbutton",
+      "contractPath": "examples/carbon/contracts/iconbutton.contract.json",
+      "contractHash": "sha256:0071459893503bedf4d129d6a385c094a6ce26371a10be620b5f9250522f4815",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:5645",
+      "canvasFingerprint": "v6:1501913482",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:04.887Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/carbon/components/icon-button.json"
+    },
+    {
+      "contractId": "carbon.inlinenotification",
+      "contractPath": "examples/carbon/contracts/inlinenotification.contract.json",
+      "contractHash": "sha256:8b2d7973e2e91e460e108d291cdeb472868a5c8476969228091b5ac2b57ec80a",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "60:10344",
+      "canvasFingerprint": "v6:1173442392",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:05.837Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/carbon/components/inline-notification.json"
+    },
+    {
+      "contractId": "carbon.modal",
+      "contractPath": "examples/carbon/contracts/modal.contract.json",
+      "contractHash": "sha256:961426a606f5ad15f35dbdbf7146a9558ec19f28084945dbb83e235e4775312a",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:5911",
+      "canvasFingerprint": "v6:2103121654",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:06.733Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/carbon/components/modal.json"
+    },
+    {
+      "contractId": "carbon.tabs",
+      "contractPath": "examples/carbon/contracts/tabs.contract.json",
+      "contractHash": "sha256:95005cfd23acf9bc0b70407aa6f8a87d5d198d52e5ec074978c5634d3261f1fc",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:5947",
+      "canvasFingerprint": "v6:3251309082",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:07.520Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/carbon/components/tabs.json"
+    },
+    {
+      "contractId": "carbon.tag",
+      "contractPath": "examples/carbon/contracts/tag.contract.json",
+      "contractHash": "sha256:cc32412dface202225c3f74a0c9b28dab085beee0d82b7ab6a9f6860f5ab529c",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:6024",
+      "canvasFingerprint": "v6:640356538",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:08.323Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/carbon/components/tag.json"
+    },
+    {
+      "contractId": "carbon.textinput",
+      "contractPath": "examples/carbon/contracts/textinput.contract.json",
+      "contractHash": "sha256:6bfc15841935800569bb1d4716136a32a1bfefca57436ec1d594d2dcfa17247f",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:6091",
+      "canvasFingerprint": "v6:2635523164",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:08.947Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/carbon/components/text-input.json"
+    },
+    {
+      "contractId": "carbon.toggle",
+      "contractPath": "examples/carbon/contracts/toggle.contract.json",
+      "contractHash": "sha256:e76d86ffe3c81226b01c435cb2ca90a2874a31ce6b9237a0294c6d21c0ea0623",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:6126",
+      "canvasFingerprint": "v6:756328093",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:09.501Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3506480767",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/carbon/components/toggle.json"
+    },
+    {
+      "contractId": "ds.accordion-item",
+      "contractPath": "contracts/accordion-item.contract.json",
+      "contractHash": "sha256:fed66585aebea07275fae3d68c06e585b1ac180997aae0b29fafd1f976106e7e",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:908",
+      "canvasFingerprint": "v6:362055825",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:41.724Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2279062718",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/accordion-item.json"
+    },
+    {
+      "contractId": "ds.avatar-group",
+      "contractPath": "contracts/avatar-group.contract.json",
+      "contractHash": "sha256:d859c01820125a9c5573f5192b799fc1b55c952167cf74f1bbf1836457d0a51a",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1442",
+      "canvasFingerprint": "v6:73520369",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:04.824Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2272707179",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/avatar-group.json"
+    },
+    {
+      "contractId": "ds.avatar",
+      "contractPath": "contracts/avatar.contract.json",
+      "contractHash": "sha256:b446ab8c8a4b6c6133053265ab835ed1b1cc5dd44bd052f49b765ee5e405d2e6",
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "setNodeId": "4:300",
+      "canvasFingerprint": "v6:1644631224",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3778221867",
+        "fileVersionId": "2385318059580510974",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/avatar.json"
+    },
+    {
+      "contractId": "ds.badge",
+      "contractPath": "contracts/badge.contract.json",
+      "contractHash": "sha256:70a28298b1353637d7e97abb2fab2b0558a79eb8e311f2ebeb4d8421ce5c7fa1",
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "setNodeId": "4:313",
+      "canvasFingerprint": "v6:4254819976",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3750294563",
+        "fileVersionId": "2385318059580510974",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/badge.json"
+    },
+    {
+      "contractId": "ds.banner",
+      "contractPath": "contracts/banner.contract.json",
+      "contractHash": "sha256:0dff56b704a0d4f25a1b799e275779f79166d8dfdd6506cb29df6d40d6a707ad",
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "setNodeId": "4:540",
+      "canvasFingerprint": "v6:2032049522",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2412317579",
+        "fileVersionId": "2385318059580510974",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/banner.json"
+    },
+    {
+      "contractId": "ds.blockquote",
+      "contractPath": "contracts/blockquote.contract.json",
+      "contractHash": "sha256:f7f4c969b399105f2bca01f4bd50690345add1cc3e12f14e79a9b9607900174c",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:958",
+      "canvasFingerprint": "v6:4276955563",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:58:58.465Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2354359567",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/blockquote.json"
+    },
+    {
+      "contractId": "ds.breadcrumb-item",
+      "contractPath": "contracts/breadcrumb-item.contract.json",
+      "contractHash": "sha256:f4e24f544a8ab429589ea3720166e821bdcefd4f0f436f3df197828cf7a5c84f",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1274",
+      "canvasFingerprint": "v6:1787875132",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:02.831Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3566764418",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/breadcrumb-item.json"
+    },
+    {
+      "contractId": "ds.breadcrumbs",
+      "contractPath": "contracts/breadcrumbs.contract.json",
+      "contractHash": "sha256:6338ce0a2003cc40925cf0fac7f40d4390db5e2d5e21359b6bd77b4ae4a85e6a",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1280",
+      "canvasFingerprint": "v6:649210368",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:03.091Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3672305563",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/breadcrumbs.json"
+    },
+    {
+      "contractId": "ds.button",
+      "contractPath": "contracts/button.contract.json",
+      "contractHash": "sha256:cb8c6dd3a6be620f97beceef934681b42cf806d26559c3443e4cab5ea06fd2bf",
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "setNodeId": "4:412",
+      "canvasFingerprint": "v6:3495939700",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1357660242",
+        "fileVersionId": "2385318059580510974",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/button.json"
+    },
+    {
+      "contractId": "ds.card",
+      "contractPath": "contracts/card.contract.json",
+      "contractHash": "sha256:b3e71b595d0ec29757b506664543316f5fe0dde74cb0c8fdc5d1a969ddef0178",
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "setNodeId": "4:543",
+      "canvasFingerprint": "v6:2202853943",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:784848269",
+        "fileVersionId": "2385318059580510974",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/card.json"
+    },
+    {
+      "contractId": "ds.chat-message-metadata",
+      "contractPath": "contracts/chat-message-metadata.contract.json",
+      "contractHash": "sha256:aa35fd43306d214bc33de8411b72b570ec55c3ee6eca77d648e9e3a570f90b9a",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1724",
+      "canvasFingerprint": "v6:3272099092",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:09.647Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2516269458",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/chat-message-metadata.json"
+    },
+    {
+      "contractId": "ds.chat-message",
+      "contractPath": "contracts/chat-message.contract.json",
+      "contractHash": "sha256:1c966d877b437d0c806c29d15cc8f314e6cb0a959ac69a723200493b233716b3",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1778",
+      "canvasFingerprint": "v6:2328098173",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:10.652Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2028778432",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/chat-message.json"
+    },
+    {
+      "contractId": "ds.chat-system-message",
+      "contractPath": "contracts/chat-system-message.contract.json",
+      "contractHash": "sha256:7ae85d66c117479f7ac51f4cd621c0781811c7a00d84d82e035f360f0ed3bfc1",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1739",
+      "canvasFingerprint": "v6:1239964147",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:10.042Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3272616708",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/chat-system-message.json"
+    },
+    {
+      "contractId": "ds.checkbox",
+      "contractPath": "contracts/checkbox.contract.json",
+      "contractHash": "sha256:8da993a80bf82696318b13fda375c68da53b6abbcb5d649b1f6ead1bf619701e",
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "setNodeId": "4:594",
+      "canvasFingerprint": "v6:2238650114",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1948266487",
+        "fileVersionId": "2385318059580510974",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/checkbox.json"
+    },
+    {
+      "contractId": "ds.citation",
+      "contractPath": "contracts/citation.contract.json",
+      "contractHash": "sha256:d5e05fb0bf7292b23093d8cc4593a35caafff3d45fe177d9beb90623a6af41b4",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:971",
+      "canvasFingerprint": "v6:3382273654",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:58:58.731Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1662996363",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/citation.json"
+    },
+    {
+      "contractId": "ds.code",
+      "contractPath": "contracts/code.contract.json",
+      "contractHash": "sha256:a09ecd24db48505ec2e351ec456a505de1cef7e4d5628658732d32d1b6b734ca",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:954",
+      "canvasFingerprint": "v6:475555880",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:58:58.228Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3637466021",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/code.json"
+    },
+    {
+      "contractId": "ds.divider",
+      "contractPath": "contracts/divider.contract.json",
+      "contractHash": "sha256:b89303e381c239c9dff527234d01fb97b617bb721b2fbab390beb5d9bb9b803b",
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "setNodeId": "4:599",
+      "canvasFingerprint": "v6:3338360677",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1794851804",
+        "fileVersionId": "2385318059580510974",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/divider.json"
+    },
+    {
+      "contractId": "ds.empty-state",
+      "contractPath": "contracts/empty-state.contract.json",
+      "contractHash": "sha256:5bf6bd732708b7a01066d71d6b0356d21a18ba53d21816c79fd8e2fdfd8de988",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1457",
+      "canvasFingerprint": "v6:1979502124",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:05.193Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3491784799",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/empty-state.json"
+    },
+    {
+      "contractId": "ds.field",
+      "contractPath": "contracts/field.contract.json",
+      "contractHash": "sha256:cb9051cd6d49f979dcd564bbbf81f7c540ae86812c007826bc848736072d9b53",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:742",
+      "canvasFingerprint": "v6:615833569",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:39.093Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2980351814",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/field.json"
+    },
+    {
+      "contractId": "ds.heading",
+      "contractPath": "contracts/heading.contract.json",
+      "contractHash": "sha256:1c1c8753bda8042baf34c19b028deddd55d8c4782428943ffa5e496ca642d41f",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:947",
+      "canvasFingerprint": "v6:822703176",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:58:57.762Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2668007609",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/heading.json"
+    },
+    {
+      "contractId": "ds.icon-button",
+      "contractPath": "contracts/icon-button.contract.json",
+      "contractHash": "sha256:13363f4fbf4b07347d09cb5ca58da4d82e4bf65a3c128a183750cede526e8d1a",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:739",
+      "canvasFingerprint": "v6:1073239359",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:38.656Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2720964517",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/icon-button.json"
+    },
+    {
+      "contractId": "ds.kbd",
+      "contractPath": "contracts/kbd.contract.json",
+      "contractHash": "sha256:14b886eb4fa98103e3738b12f200dc5513630fdc87b1ef8b45ad7ca484e7e355",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:950",
+      "canvasFingerprint": "v6:1502495576",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:58:58.032Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:794530658",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/kbd.json"
+    },
+    {
+      "contractId": "ds.list-item",
+      "contractPath": "contracts/list-item.contract.json",
+      "contractHash": "sha256:986ed24139e4d4750e51d0795dbdbe1f8db4ad0a954f137b199b0e91e5a182f3",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1296",
+      "canvasFingerprint": "v6:3305958002",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:03.390Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:4236786016",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/list-item.json"
+    },
+    {
+      "contractId": "ds.list",
+      "contractPath": "contracts/list.contract.json",
+      "contractHash": "sha256:b81e1437689beafdc19106994bbefe945f11c8aaf84b9e68240a6b4165d1bbae",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1404",
+      "canvasFingerprint": "v6:2994839928",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:03.856Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:4264804022",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/list.json"
+    },
+    {
+      "contractId": "ds.metadata-list-item",
+      "contractPath": "contracts/metadata-list-item.contract.json",
+      "contractHash": "sha256:4b3c81b3f318fc902d0faed8549145d36053866733a750f7a480231d0f14c365",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1407",
+      "canvasFingerprint": "v6:108085772",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:04.195Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1011744786",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/metadata-list-item.json"
+    },
+    {
+      "contractId": "ds.metadata-list",
+      "contractPath": "contracts/metadata-list.contract.json",
+      "contractHash": "sha256:baed9cf3606794ac80fb5213c5f0ad150027aee72bfb7313ceec2468e14defd3",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1416",
+      "canvasFingerprint": "v6:4200369828",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:04.501Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:464061610",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/metadata-list.json"
+    },
+    {
+      "contractId": "ds.pagination",
+      "contractPath": "contracts/pagination.contract.json",
+      "contractHash": "sha256:d97462631c44273537e747f173fa33783ac0a4a05bf8f1e326d93878b837a70e",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:838",
+      "canvasFingerprint": "v6:3346344777",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:40.683Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:992075153",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/pagination.json"
+    },
+    {
+      "contractId": "ds.progress-bar",
+      "contractPath": "contracts/progress-bar.contract.json",
+      "contractHash": "sha256:8a5b717ccd43919a31090980b8fdf803bd88cf967339341e294b7edf80f62acb",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:659",
+      "canvasFingerprint": "v6:3162590889",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:24.165Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3511886852",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/progress-bar.json"
+    },
+    {
+      "contractId": "ds.section",
+      "contractPath": "contracts/section.contract.json",
+      "contractHash": "sha256:dcccc6fba217c16e463e211b3a44f0637b94a3ab21ed32ef1da3d31bc019cc62",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1476",
+      "canvasFingerprint": "v6:3994772349",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:05.633Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1557040614",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/section.json"
+    },
+    {
+      "contractId": "ds.side-nav-item",
+      "contractPath": "contracts/side-nav-item.contract.json",
+      "contractHash": "sha256:6fcc87a3c47d9625011bfa2b2abd52fc83010be39d2e910dc0ee5366a08ab59e",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1495",
+      "canvasFingerprint": "v6:4041151291",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:06.107Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2930226781",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/side-nav-item.json"
+    },
+    {
+      "contractId": "ds.skeleton",
+      "contractPath": "contracts/skeleton.contract.json",
+      "contractHash": "sha256:6e3302cb9216e68a4e38d7a5fa8503044267dff23158e1b3281263a38f0db9d8",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:679",
+      "canvasFingerprint": "v6:2572131761",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:24.616Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3818082324",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/skeleton.json"
+    },
+    {
+      "contractId": "ds.slider",
+      "contractPath": "contracts/slider.contract.json",
+      "contractHash": "sha256:b0221bd574ac25381097c2783d2b054cea74a153519b62d1406a598db8cf6369",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:682",
+      "canvasFingerprint": "v6:1021231104",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:38.270Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3823760448",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/slider.json"
+    },
+    {
+      "contractId": "ds.spinner",
+      "contractPath": "contracts/spinner.contract.json",
+      "contractHash": "sha256:fa5db35f0879326ce05537b9aaf9bfd8557ca99fa3b73543adecce3f32f0669b",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:639",
+      "canvasFingerprint": "v6:592169333",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:23.903Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3269269541",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.600Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/spinner.json"
+    },
+    {
+      "contractId": "ds.status-dot",
+      "contractPath": "contracts/status-dot.contract.json",
+      "contractHash": "sha256:b0999fa31c9d2dfe0db7ee57b5bd1a2f66cb65b0c4ba16a2d9160c434d0e6c74",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:667",
+      "canvasFingerprint": "v6:938381755",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:24.416Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3888203497",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/status-dot.json"
+    },
+    {
+      "contractId": "ds.switch",
+      "contractPath": "contracts/switch.contract.json",
+      "contractHash": "sha256:6043693e8160abc8c6c32ac0f153121a54403d2c45f8fb818c099af7795183c4",
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "setNodeId": "4:618",
+      "canvasFingerprint": "v6:2653995724",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3135940853",
+        "fileVersionId": "2385318059580510974",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/switch.json"
+    },
+    {
+      "contractId": "ds.tab-list",
+      "contractPath": "contracts/tab-list.contract.json",
+      "contractHash": "sha256:c2b90a701865a29b4d8a42f80ee48e4e2ade4779602377c9692155f34faa656c",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:860",
+      "canvasFingerprint": "v6:2665649309",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:41.390Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:215814069",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/tab-list.json"
+    },
+    {
+      "contractId": "ds.tab",
+      "contractPath": "contracts/tab.contract.json",
+      "contractHash": "sha256:48da5adc170ba095f9e0d7b512de701a32ea06d4459416191554a60af0d623fd",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:857",
+      "canvasFingerprint": "v6:2164586031",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:41.057Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1417138273",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/tab.json"
+    },
+    {
+      "contractId": "ds.table-cell",
+      "contractPath": "contracts/table-cell.contract.json",
+      "contractHash": "sha256:bfb64aa9bed5e439bca204025053e78c053b0a47a48f13a45b559cb531a8f9a6",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1511",
+      "canvasFingerprint": "v6:3685392620",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:06.888Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:323340422",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/table-cell.json"
+    },
+    {
+      "contractId": "ds.table-header-cell",
+      "contractPath": "contracts/table-header-cell.contract.json",
+      "contractHash": "sha256:2e7f8839b5494e5c2af932e12f4a7e7584895d97c1e66132c7dbeb434fdda795",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1518",
+      "canvasFingerprint": "v6:768570304",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:07.214Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3362513651",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/table-header-cell.json"
+    },
+    {
+      "contractId": "ds.table-row",
+      "contractPath": "contracts/table-row.contract.json",
+      "contractHash": "sha256:fed41fde52c9eba646707a807e9d0338498bf11fecf86ccf0e8da6a2fb9db3e3",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1537",
+      "canvasFingerprint": "v6:3502734612",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:07.553Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2406069605",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/table-row.json"
+    },
+    {
+      "contractId": "ds.table",
+      "contractPath": "contracts/table.contract.json",
+      "contractHash": "sha256:7c687e7372b3b393400e48b780dcbf59bd5e0ef7e8b2f9cf67c95f44ce3566cf",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1623",
+      "canvasFingerprint": "v6:772848675",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:08.063Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:479657509",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/table.json"
+    },
+    {
+      "contractId": "ds.text-area",
+      "contractPath": "contracts/text-area.contract.json",
+      "contractHash": "sha256:f61a79804e5b22095d906552a333b12e9338438cda0cc6ad807e4086e2d9e28b",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1271",
+      "canvasFingerprint": "v6:1681029316",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:02.492Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1671773342",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/text-area.json"
+    },
+    {
+      "contractId": "ds.text-field",
+      "contractPath": "contracts/text-field.contract.json",
+      "contractHash": "sha256:81e248a95ad3af107a1e9e29675090a486d92762088e93ea9350b9461e7acadd",
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "setNodeId": "4:651",
+      "canvasFingerprint": "v6:1181024118",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:560682207",
+        "fileVersionId": "2385318059580510974",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/text-field.json"
+    },
+    {
+      "contractId": "ds.toast",
+      "contractPath": "contracts/toast.contract.json",
+      "contractHash": "sha256:91c8c233834a9754f8d7ecdbb4c890ed22a23085b1af09508f80274ea828f3e6",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:802",
+      "canvasFingerprint": "v6:3355364986",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:55:40.054Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2140310206",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/toast.json"
+    },
+    {
+      "contractId": "ds.token",
+      "contractPath": "contracts/token.contract.json",
+      "contractHash": "sha256:d2cce8b506e783f1298521e248cb2b8396285454e7c6435cb1d529a58e936473",
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "setNodeId": "4:918",
+      "canvasFingerprint": "v6:2438401982",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:878597391",
+        "fileVersionId": "2385318059580510974",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/token.json"
+    },
+    {
+      "contractId": "ds.toolbar",
+      "contractPath": "contracts/toolbar.contract.json",
+      "contractHash": "sha256:08f43d20e7dfd887ae4a226f58c4f7516071b2a520162d8d09b0e0eb6bcbd1b6",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1656",
+      "canvasFingerprint": "v6:700448191",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:08.439Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:702474289",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/toolbar.json"
+    },
+    {
+      "contractId": "ds.top-nav-item",
+      "contractPath": "contracts/top-nav-item.contract.json",
+      "contractHash": "sha256:d7842527971f7aa303252c8c55ecd6fe6c7198df9cfd07b2d14585fc41f4ad60",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1669",
+      "canvasFingerprint": "v6:2704633324",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:08.837Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1883901480",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/top-nav-item.json"
+    },
+    {
+      "contractId": "ds.top-nav",
+      "contractPath": "contracts/top-nav.contract.json",
+      "contractHash": "sha256:2ca77d2b4a95498839d4a27dab6d58bbc671e09cd8d3c48a313a31e14dabfcbb",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1672",
+      "canvasFingerprint": "v6:3533008205",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:09.096Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3573897948",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/top-nav.json"
+    },
+    {
+      "contractId": "ds.typeahead-item",
+      "contractPath": "contracts/typeahead-item.contract.json",
+      "contractHash": "sha256:0809df76911528cd2da922075a7f375bf5b5c0df2b32c46d265e6f532d215ced",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:1498",
+      "canvasFingerprint": "v6:599440583",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T03:59:06.447Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1390565902",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/components/typeahead-item.json"
+    },
+    {
+      "contractId": "flowbite.alert",
+      "contractPath": "examples/tailwind/contracts/alert.contract.json",
+      "contractHash": "sha256:521cb938e29c97ac7d3c87324d3be479f6c326267dab36193c65b637d0e6686f",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:2098",
+      "canvasFingerprint": "v6:438794735",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:42:56.094Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/tailwind/components/alert.json"
+    },
+    {
+      "contractId": "flowbite.badge",
+      "contractPath": "examples/tailwind/contracts/badge.contract.json",
+      "contractHash": "sha256:264068df0c0a086b0f39893030b3dec3b31205550286a00b450eb049efe9b85e",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:2149",
+      "canvasFingerprint": "v6:2933199349",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:42:56.743Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3551633168",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/tailwind/components/badge.json"
+    },
+    {
+      "contractId": "flowbite.button",
+      "contractPath": "examples/tailwind/contracts/button.contract.json",
+      "contractHash": "sha256:df201d733953aa23d7442f6597c90713418620e51d0323d1bf3b7d42388b9707",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:2254",
+      "canvasFingerprint": "v6:2297298321",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:42:57.761Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/tailwind/components/button.json"
+    },
+    {
+      "contractId": "flowbite.card",
+      "contractPath": "examples/tailwind/contracts/card.contract.json",
+      "contractHash": "sha256:d9b5bcbefb68dfb9074ea58a3db312c9ac8c3d4343e42839bea75e4895f143df",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:2267",
+      "canvasFingerprint": "v6:3067143140",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:42:58.099Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:980311055",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/tailwind/components/card.json"
+    },
+    {
+      "contractId": "flowbite.toggleswitch",
+      "contractPath": "examples/tailwind/contracts/toggleswitch.contract.json",
+      "contractHash": "sha256:7ed734b05addbda0e1ad91f277ab039657f0f7cdfa8adfc919d9f4ab51d572e2",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:2296",
+      "canvasFingerprint": "v6:3468428338",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:42:58.542Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3619871677",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/tailwind/components/toggle-switch.json"
+    },
+    {
+      "contractId": "mui.accordion",
+      "contractPath": "examples/mui/contracts/accordion.contract.json",
+      "contractHash": "sha256:12cd68b52a37559bc51fa0500b31d2f34cc6bae6409b89744624644f9cf54d0b",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:79",
+      "canvasFingerprint": "v6:4119792290",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.513Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:28072018",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/accordion.json"
+    },
+    {
+      "contractId": "mui.alert",
+      "contractPath": "examples/mui/contracts/alert.contract.json",
+      "contractHash": "sha256:a827ed80ead670b9c7cf60ebfb27f319a173f7d95583ad3bbf7bbde0776e0c9e",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "84:2264",
+      "canvasFingerprint": "v6:1383530075",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:17:13.440Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:381823219",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/alert.json"
+    },
+    {
+      "contractId": "mui.autocomplete",
+      "contractPath": "examples/mui/contracts/autocomplete.contract.json",
+      "contractHash": "sha256:0e74f5f37b35a79e986df4e65980869d24f31db25b0382f906a2bd036a5a3112",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:134",
+      "canvasFingerprint": "v6:1521385897",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.513Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3440285766",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/autocomplete.json"
+    },
+    {
+      "contractId": "mui.avatar",
+      "contractPath": "examples/mui/contracts/avatar.contract.json",
+      "contractHash": "sha256:3fd3173e5d45cf398aca9c58fa63d345412aab7cf09fb2141584440f9507d723",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "83:1638",
+      "canvasFingerprint": "v6:2993664762",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:00:34.663Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2673474047",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/avatar.json"
+    },
+    {
+      "contractId": "mui.badge",
+      "contractPath": "examples/mui/contracts/badge.contract.json",
+      "contractHash": "sha256:a2bf3e9944986df607453b9e981edf76253059489d5895f87ac6b52ae6f56eaf",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "84:2376",
+      "canvasFingerprint": "v6:3419500101",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:22:31.359Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1650325718",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/badge.json"
+    },
+    {
+      "contractId": "mui.breadcrumbs",
+      "contractPath": "examples/mui/contracts/breadcrumbs.contract.json",
+      "contractHash": "sha256:da354a3d8124319adcd1497684e7186717f3e98d893c6b60b0dcf35d27bbb2f2",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "83:1658",
+      "canvasFingerprint": "v6:1233132133",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:00:36.193Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:805478728",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/breadcrumbs.json"
+    },
+    {
+      "contractId": "mui.button",
+      "contractPath": "examples/mui/contracts/button.contract.json",
+      "contractHash": "sha256:941dc92b327dff855577583d6bd3ce659d5169ba445918d41ea7282de153e9fa",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:287",
+      "canvasFingerprint": "v6:437388687",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.510Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3123763879",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/button.json"
+    },
+    {
+      "contractId": "mui.card",
+      "contractPath": "examples/mui/contracts/card.contract.json",
+      "contractHash": "sha256:ce6e431d950484f70284d5f5747f03b7ea7a0095ebea5c7f1c43af4c604b23ce",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:308",
+      "canvasFingerprint": "v6:2926211222",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.511Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2028771623",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/card.json"
+    },
+    {
+      "contractId": "mui.checkbox",
+      "contractPath": "examples/mui/contracts/checkbox.contract.json",
+      "contractHash": "sha256:6238d32beb7c365528f2154aff9c1feb6648224cd7737ee27fa2d299fab7137c",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:323",
+      "canvasFingerprint": "v6:820111622",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.514Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:833124426",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/checkbox.json"
+    },
+    {
+      "contractId": "mui.chip",
+      "contractPath": "examples/mui/contracts/chip.contract.json",
+      "contractHash": "sha256:161992c91320471b5341565a42bda1f1d94545ebabd637492aaeb7c587703e16",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:410",
+      "canvasFingerprint": "v6:1499592056",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.511Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:503719763",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/chip.json"
+    },
+    {
+      "contractId": "mui.circular-progress",
+      "contractPath": "examples/mui/contracts/circular-progress.contract.json",
+      "contractHash": "sha256:308cf77329cb9542b1160cec3aeec65a32ffc55907c665789e890d973a2fd6cc",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "83:1647",
+      "canvasFingerprint": "v6:3509931486",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:00:35.254Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2896218865",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/circular-progress.json"
+    },
+    {
+      "contractId": "mui.dialog",
+      "contractPath": "examples/mui/contracts/dialog.contract.json",
+      "contractHash": "sha256:498709c8ffc98ea8b5d2ac22da003d82e54d57fc4ac5d39e418da3350d07883b",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:448",
+      "canvasFingerprint": "v6:915053960",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.514Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:495750069",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/dialog.json"
+    },
+    {
+      "contractId": "mui.divider",
+      "contractPath": "examples/mui/contracts/divider.contract.json",
+      "contractHash": "sha256:c0538b3161f7557ff4164c5d43fcbd2bc608328abc58ea812a889018f2052d68",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "83:1610",
+      "canvasFingerprint": "v6:1949352536",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:00:33.498Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1559198692",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/divider.json"
+    },
+    {
+      "contractId": "mui.drawer",
+      "contractPath": "examples/mui/contracts/drawer.contract.json",
+      "contractHash": "sha256:e51c7a5878423cf038bf1d0480384500f45e514e5af009b4ddc0798e50579ae6",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "83:1680",
+      "canvasFingerprint": "v6:415446264",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:00:36.655Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3428439317",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/drawer.json"
+    },
+    {
+      "contractId": "mui.fab",
+      "contractPath": "examples/mui/contracts/fab.contract.json",
+      "contractHash": "sha256:2fda49f14c1d69dc7dae58c4961bab8a58afa9b1588f1daf901ba7790e6dc127",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "84:1743",
+      "canvasFingerprint": "v6:2082406472",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:17:13.326Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3084139766",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/fab.json"
+    },
+    {
+      "contractId": "mui.icon-button",
+      "contractPath": "examples/mui/contracts/icon-button.contract.json",
+      "contractHash": "sha256:06b9858a921510144e5809adaf31a91a0a3d3ab2ab2849e5b525cc443c73c58a",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "83:1708",
+      "canvasFingerprint": "v6:1946274529",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:00:37.497Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:68632039",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/icon-button.json"
+    },
+    {
+      "contractId": "mui.input-adornment",
+      "contractPath": "examples/mui/contracts/input-adornment.contract.json",
+      "contractHash": "sha256:73f9ebc30b36d116a34116c146119dc805e275f738c680ecce246b908017791f",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "83:1687",
+      "canvasFingerprint": "v6:3114867968",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:00:37.029Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2734101850",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/input-adornment.json"
+    },
+    {
+      "contractId": "mui.linear-progress",
+      "contractPath": "examples/mui/contracts/linear-progress.contract.json",
+      "contractHash": "sha256:15589f23b2384b58b73fd839755909eea6d1fd2a9219910d3b8134ca4811f9be",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "83:1655",
+      "canvasFingerprint": "v6:3801840436",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:00:35.671Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:138171495",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/linear-progress.json"
+    },
+    {
+      "contractId": "mui.link",
+      "contractPath": "examples/mui/contracts/link.contract.json",
+      "contractHash": "sha256:701ea90d3889df766c902871d388ea701df6db7e23f0743384d12480685eca81",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "84:1832",
+      "canvasFingerprint": "v6:3316422374",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:04:41.915Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3780408933",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/link.json"
+    },
+    {
+      "contractId": "mui.menu",
+      "contractPath": "examples/mui/contracts/menu.contract.json",
+      "contractHash": "sha256:9efc0e8a2917753d66123781fb868d7175973a1ec0d7b18fb9de6c0a46268354",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:451",
+      "canvasFingerprint": "v6:226276784",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.514Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1451531493",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/menu.json"
+    },
+    {
+      "contractId": "mui.paper",
+      "contractPath": "examples/mui/contracts/paper.contract.json",
+      "contractHash": "sha256:7001491a7e1634789d2cc8376938d6a87405eb0a9fa655328e6f29a7132f8584",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "83:1629",
+      "canvasFingerprint": "v6:4002091254",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:00:34.280Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1549941020",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/paper.json"
+    },
+    {
+      "contractId": "mui.radio",
+      "contractPath": "examples/mui/contracts/radio.contract.json",
+      "contractHash": "sha256:7a09dc0bc93e23ca6a29a3ead898d543b750b4921feb2f9ce4ad596923b45ae8",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "84:1933",
+      "canvasFingerprint": "v6:4150206674",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:04:42.510Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:465181063",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/radio.json"
+    },
+    {
+      "contractId": "mui.select",
+      "contractPath": "examples/mui/contracts/select.contract.json",
+      "contractHash": "sha256:8f648951bc408efcad955b3e5d553d4bc967146bb505faa609ec78edf4ac789a",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "84:2125",
+      "canvasFingerprint": "v6:273231726",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:12:50.620Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3634141290",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/select.json"
+    },
+    {
+      "contractId": "mui.slider",
+      "contractPath": "examples/mui/contracts/slider.contract.json",
+      "contractHash": "sha256:3795be8866239e48ac668cc400e60e321603ac1ba1e322a3e5f4d419f8812274",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:509",
+      "canvasFingerprint": "v6:1845442048",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.512Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:635612365",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/slider.json"
+    },
+    {
+      "contractId": "mui.snackbar",
+      "contractPath": "examples/mui/contracts/snackbar.contract.json",
+      "contractHash": "sha256:3146d41ef4e06d03d356acd737175aecb86e3bbad97a00670753484886c1b3c7",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "84:2140",
+      "canvasFingerprint": "v6:4279840767",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:12:51.070Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1794723124",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/snackbar.json"
+    },
+    {
+      "contractId": "mui.switch",
+      "contractPath": "examples/mui/contracts/switch.contract.json",
+      "contractHash": "sha256:e0fffea813f4c3b6a5246808b40a5a32a1cc0bfa60916654ace9ba5c6ed23f3d",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:624",
+      "canvasFingerprint": "v6:2381775060",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.511Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1573175479",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/switch.json"
+    },
+    {
+      "contractId": "mui.table-pagination",
+      "contractPath": "examples/mui/contracts/table-pagination.contract.json",
+      "contractHash": "sha256:146bfc2adcdf56c7e5f5f1b10da5f4ec6983ba05eaa3992332ecf6bd7a2e9d98",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:627",
+      "canvasFingerprint": "v6:527762080",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.514Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1908555103",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/table-pagination.json"
+    },
+    {
+      "contractId": "mui.table",
+      "contractPath": "examples/mui/contracts/table.contract.json",
+      "contractHash": "sha256:49ab68570d76c6f2e299325aadecc40f65f9398ae0ed66ee06d680d5a2d80d4f",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:744",
+      "canvasFingerprint": "v6:966664822",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.515Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1275646288",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/table.json"
+    },
+    {
+      "contractId": "mui.tabs",
+      "contractPath": "examples/mui/contracts/tabs.contract.json",
+      "contractHash": "sha256:66fc863aa079cde868356449fdf17bf4cc701d179bd56766aece04df0e66331b",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:807",
+      "canvasFingerprint": "v6:2607696146",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.512Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2373902012",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/tabs.json"
+    },
+    {
+      "contractId": "mui.text-field",
+      "contractPath": "examples/mui/contracts/text-field.contract.json",
+      "contractHash": "sha256:3b5acafdc9399390eb0e66ec27a9182d972cb37bb4cfc29c3bec723ba58920fe",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "84:2480",
+      "canvasFingerprint": "v6:3304990436",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:26:56.332Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3699061567",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/text-field.json"
+    },
+    {
+      "contractId": "mui.tooltip",
+      "contractPath": "examples/mui/contracts/tooltip.contract.json",
+      "contractHash": "sha256:180012c2f6315b158f85de72c1564fc028398eca8524d5ae3bffaab2d5b30b08",
+      "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+      "setNodeId": "21:810",
+      "canvasFingerprint": "v6:1221797663",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T04:51:10.514Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2853288222",
+        "fileVersionId": "2384477865735882405",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/mui/components/tooltip.json"
+    },
+    {
+      "contractId": "polaris.avatar",
+      "contractPath": "examples/polaris/contracts/avatar.contract.json",
+      "contractHash": "sha256:257a87e37e99c5fcb9421bdd218d703f7b87f3c5f76fd168a641ee2534638174",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:7849",
+      "canvasFingerprint": "v6:635946300",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:17.394Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/avatar.json"
+    },
+    {
+      "contractId": "polaris.badge",
+      "contractPath": "examples/polaris/contracts/badge.contract.json",
+      "contractHash": "sha256:3943a73bcabdc61672a1bf816a27a40593d711683c071ca5875952226be24475",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:8216",
+      "canvasFingerprint": "v6:68910415",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:19.080Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/badge.json"
+    },
+    {
+      "contractId": "polaris.banner",
+      "contractPath": "examples/polaris/contracts/banner.contract.json",
+      "contractHash": "sha256:fa937dfd70d9ae60621bf18cbe8ecac7e012e102475b90e6bfd3a8fc33123ee4",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:8463",
+      "canvasFingerprint": "v6:75310864",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:20.654Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/banner.json"
+    },
+    {
+      "contractId": "polaris.button",
+      "contractPath": "examples/polaris/contracts/button.contract.json",
+      "contractHash": "sha256:df73d3678dfe48f3fefd76e0e4d1d6acb530cb6cf037828328e31d6f5a824f04",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:10006",
+      "canvasFingerprint": "v6:3705147195",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:30.153Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/button.json"
+    },
+    {
+      "contractId": "polaris.checkbox",
+      "contractPath": "examples/polaris/contracts/checkbox.contract.json",
+      "contractHash": "sha256:922cdc8d3274a0e546b7c916b7d37a9884a089633b23eab3d0ff9d881f7f94a1",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:10049",
+      "canvasFingerprint": "v6:1753212640",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:31.032Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/checkbox.json"
+    },
+    {
+      "contractId": "polaris.progress-bar",
+      "contractPath": "examples/polaris/contracts/progress-bar.contract.json",
+      "contractHash": "sha256:58f89b49ab61217e1f6566f16684f6a403c0ae55f84a8a155717fa5a479925dc",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:10076",
+      "canvasFingerprint": "v6:3437476105",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:31.926Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/progress-bar.json"
+    },
+    {
+      "contractId": "polaris.radio-button",
+      "contractPath": "examples/polaris/contracts/radio-button.contract.json",
+      "contractHash": "sha256:17df1c0e0916d40bc039faaf941866241851b0febf3c69feeb22a62ac3c940f9",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:10096",
+      "canvasFingerprint": "v6:2212519889",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:32.776Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/radio-button.json"
+    },
+    {
+      "contractId": "polaris.spinner",
+      "contractPath": "examples/polaris/contracts/spinner.contract.json",
+      "contractHash": "sha256:88ee8b7817c897a4db9ebf6dbc4d52cc0405a00788ace891f449c83b18eda8b0",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:10105",
+      "canvasFingerprint": "v6:3043290729",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:33.504Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/spinner.json"
+    },
+    {
+      "contractId": "polaris.tag",
+      "contractPath": "examples/polaris/contracts/tag.contract.json",
+      "contractHash": "sha256:09e54199b33efa1637e7a5d55d9db3e9d5b6e7dd056b006d6bee14bc512c2868",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:10192",
+      "canvasFingerprint": "v6:2986545534",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:34.491Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/tag.json"
+    },
+    {
+      "contractId": "polaris.text-field",
+      "contractPath": "examples/polaris/contracts/text-field.contract.json",
+      "contractHash": "sha256:6f6e308923452afbdae6c738f76045cbbf9e8fdcf1b974a9692901004a16fa6c",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:10365",
+      "canvasFingerprint": "v6:3489765104",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:35.867Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/text-field.json"
+    },
+    {
+      "contractId": "polaris.text",
+      "contractPath": "examples/polaris/contracts/text.contract.json",
+      "contractHash": "sha256:1e561e02a7d84ea2b5b4de238b9eb5193be654b311b4029ff1aeced5c6c4e306",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:10480",
+      "canvasFingerprint": "v6:3918753726",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:38.221Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:922913781",
+        "fileVersionId": "2385311290720626690",
+        "observedAt": "2026-08-08T13:51:42.601Z"
+      },
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/text.json"
+    },
+    {
+      "contractId": "polaris.thumbnail",
+      "contractPath": "examples/polaris/contracts/thumbnail.contract.json",
+      "contractHash": "sha256:f79bc2b2496968ebc6db8c8407f39b31eeba668ffbff66268e825aca624004da",
+      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+      "setNodeId": "1:10491",
+      "canvasFingerprint": "v6:2374750881",
+      "lastSyncedVersionId": null,
+      "lastSyncedAt": "2026-08-06T05:47:39.023Z",
+      "direction": "code→canvas",
+      "observed": null,
+      "provenance": "seeded-from-receipts",
+      "note": "receipt parity/receipts/console-loop/polaris/components/thumbnail.json"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "_doc": "SYNC LEDGER (lockfile) — one record per synced component: the contract hash and canvas fingerprint last known to agree. Written by sync verbs (figma receive --apply, figma publish, sync record/seed, sync observe --update); read by `npm run sync:observe`. Deterministic serialization — regenerate with sync/cli.ts, never hand-order. See sync/README.md.",
+  "records": [
+    {
+      "contractId": "fixture.alpha",
+      "contractPath": "sync/fixtures/contracts/alpha.contract.json",
+      "contractHash": "sha256:f36a00dd9b670528ba286d428d406aa9e008df63bea7fa0763492ea1df088848",
+      "fileKey": "SYNCFIXTUREFILE0",
+      "setNodeId": "9:1",
+      "canvasFingerprint": "v6:1111",
+      "lastSyncedVersionId": "41",
+      "lastSyncedAt": "2026-08-07T00:00:00.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2497296723",
+        "fileVersionId": "41",
+        "observedAt": "2026-08-07T00:00:00.000Z"
+      },
+      "provenance": "sync-record",
+      "note": "fixture — see sync/README.md"
+    },
+    {
+      "contractId": "fixture.beta",
+      "contractPath": "sync/fixtures/contracts/beta.contract.json",
+      "contractHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "fileKey": "SYNCFIXTUREFILE0",
+      "setNodeId": "9:2",
+      "canvasFingerprint": "v6:2222",
+      "lastSyncedVersionId": "41",
+      "lastSyncedAt": "2026-08-07T00:00:00.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3471646910",
+        "fileVersionId": "41",
+        "observedAt": "2026-08-07T00:00:00.000Z"
+      },
+      "provenance": "sync-record",
+      "note": "fixture — see sync/README.md"
+    },
+    {
+      "contractId": "fixture.delta",
+      "contractPath": "sync/fixtures/contracts/delta.contract.json",
+      "contractHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "fileKey": "SYNCFIXTUREFILE0",
+      "setNodeId": "9:4",
+      "canvasFingerprint": "v6:4444",
+      "lastSyncedVersionId": "41",
+      "lastSyncedAt": "2026-08-07T00:00:00.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1",
+        "fileVersionId": "41",
+        "observedAt": "2026-08-07T00:00:00.000Z"
+      },
+      "provenance": "sync-record",
+      "note": "fixture — see sync/README.md"
+    },
+    {
+      "contractId": "fixture.gamma",
+      "contractPath": "sync/fixtures/contracts/gamma.contract.json",
+      "contractHash": "sha256:d9dbdf560d2a5db01be5781f2fee97f8adc59b4e2dccb22d99b0fd4a000719ca",
+      "fileKey": "SYNCFIXTUREFILE0",
+      "setNodeId": "9:3",
+      "canvasFingerprint": "v6:3333",
+      "lastSyncedVersionId": "41",
+      "lastSyncedAt": "2026-08-07T00:00:00.000Z",
+      "direction": "code→canvas",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1",
+        "fileVersionId": "41",
+        "observedAt": "2026-08-07T00:00:00.000Z"
+      },
+      "provenance": "sync-record",
+      "note": "fixture — see sync/README.md"
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "fileKey": "SYNCFIXTUREFILE0",
+  "fileVersionId": "42",
+  "response": {
+    "name": "Sync Observe Fixture",
+    "nodes": {
+      "9:1": {
+        "document": {
+          "id": "9:1",
+          "name": "Alpha",
+          "type": "COMPONENT_SET",
+          "sharedPluginData": {
+            "ds_contracts": {
+              "canvasFingerprint": "v6:1111"
+            }
+          },
+          "componentPropertyDefinitions": {
+            "Variant": {
+              "type": "VARIANT",
+              "defaultValue": "Default",
+              "variantOptions": [
+                "Default"
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": "9:1:0",
+              "name": "Variant=Default",
+              "type": "COMPONENT",
+              "layoutMode": "HORIZONTAL",
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "itemSpacing": 0,
+              "paddingTop": 4,
+              "paddingRight": 12,
+              "paddingBottom": 4,
+              "paddingLeft": 12,
+              "cornerRadius": 8,
+              "fills": [
+                {
+                  "blendMode": "NORMAL",
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.1,
+                    "g": 0.5,
+                    "b": 0.5,
+                    "a": 1
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        "components": {},
+        "componentSets": {},
+        "styles": {}
+      },
+      "9:2": {
+        "document": {
+          "id": "9:2",
+          "name": "Beta",
+          "type": "COMPONENT_SET",
+          "sharedPluginData": {
+            "ds_contracts": {
+              "canvasFingerprint": "v6:2222"
+            }
+          },
+          "componentPropertyDefinitions": {
+            "Variant": {
+              "type": "VARIANT",
+              "defaultValue": "Default",
+              "variantOptions": [
+                "Default"
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": "9:2:0",
+              "name": "Variant=Default",
+              "type": "COMPONENT",
+              "layoutMode": "HORIZONTAL",
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "itemSpacing": 0,
+              "paddingTop": 4,
+              "paddingRight": 12,
+              "paddingBottom": 4,
+              "paddingLeft": 12,
+              "cornerRadius": 8,
+              "fills": [
+                {
+                  "blendMode": "NORMAL",
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.2,
+                    "g": 0.5,
+                    "b": 0.5,
+                    "a": 1
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        "components": {},
+        "componentSets": {},
+        "styles": {}
+      },
+      "9:3": {
+        "document": {
+          "id": "9:3",
+          "name": "Gamma",
+          "type": "COMPONENT_SET",
+          "sharedPluginData": {
+            "ds_contracts": {
+              "canvasFingerprint": "v6:3333"
+            }
+          },
+          "componentPropertyDefinitions": {
+            "Variant": {
+              "type": "VARIANT",
+              "defaultValue": "Default",
+              "variantOptions": [
+                "Default"
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": "9:3:0",
+              "name": "Variant=Default",
+              "type": "COMPONENT",
+              "layoutMode": "HORIZONTAL",
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "itemSpacing": 0,
+              "paddingTop": 4,
+              "paddingRight": 12,
+              "paddingBottom": 4,
+              "paddingLeft": 12,
+              "cornerRadius": 8,
+              "fills": [
+                {
+                  "blendMode": "NORMAL",
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.9,
+                    "g": 0.5,
+                    "b": 0.5,
+                    "a": 1
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        "components": {},
+        "componentSets": {},
+        "styles": {}
+      },
+      "9:4": {
+        "document": {
+          "id": "9:4",
+          "name": "Delta",
+          "type": "COMPONENT_SET",
+          "sharedPluginData": {
+            "ds_contracts": {
+              "canvasFingerprint": "v6:4444"
+            }
+          },
+          "componentPropertyDefinitions": {
+            "Variant": {
+              "type": "VARIANT",
+              "defaultValue": "Default",
+              "variantOptions": [
+                "Default"
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": "9:4:0",
+              "name": "Variant=Default",
+              "type": "COMPONENT",
+              "layoutMode": "HORIZONTAL",
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "itemSpacing": 0,
+              "paddingTop": 4,
+              "paddingRight": 12,
+              "paddingBottom": 4,
+              "paddingLeft": 12,
+              "cornerRadius": 8,
+              "fills": [
+                {
+                  "blendMode": "NORMAL",
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.9,
+                    "g": 0.5,
+                    "b": 0.5,
+                    "a": 1
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        "components": {},
+        "componentSets": {},
+        "styles": {}
+      },
+      "9:5": {
+        "document": {
+          "id": "9:5",
+          "name": "Epsilon",
+          "type": "COMPONENT_SET",
+          "sharedPluginData": {
+            "ds_contracts": {
+              "canvasFingerprint": "v6:5555"
+            }
+          },
+          "componentPropertyDefinitions": {
+            "Variant": {
+              "type": "VARIANT",
+              "defaultValue": "Default",
+              "variantOptions": [
+                "Default"
+              ]
+            }
+          },
+          "children": [
+            {
+              "id": "9:5:0",
+              "name": "Variant=Default",
+              "type": "COMPONENT",
+              "layoutMode": "HORIZONTAL",
+              "primaryAxisAlignItems": "CENTER",
+              "counterAxisAlignItems": "CENTER",
+              "itemSpacing": 0,
+              "paddingTop": 4,
+              "paddingRight": 12,
+              "paddingBottom": 4,
+              "paddingLeft": 12,
+              "cornerRadius": 8,
+              "fills": [
+                {
+                  "blendMode": "NORMAL",
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5,
+                    "a": 1
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        "components": {},
+        "componentSets": {},
+        "styles": {}
+      }
+    }
+  }
+}

@@ -76,6 +76,17 @@ import {
 import { reconstructCaptures as fuseReconstruct } from '../extract/computed/replay.js';
 import { mintTokens as coreMintTokens } from '../core/mint-tokens.js';
 import { applyDecisions as computedApplyDecisions, type AckedDecision } from '../extract/computed/decisions.js';
+// SYNC LAYER STEP 1 pins (pure — the ledger lockfile arithmetic; no I/O at import):
+import {
+  classifyRecord as syncClassifyRecord,
+  recordCodeToCanvasSync as syncRecordCodeToCanvas,
+  serializeLedger as syncSerializeLedger,
+  parseLedger as syncParseLedger,
+  validateLedger as syncValidateLedger,
+  emptyLedger as syncEmptyLedger,
+  type LedgerRecord as SyncLedgerRecord,
+  type SetObservation as SyncSetObservation,
+} from '../sync/ledger.js';
 
 const ROOT = process.cwd();
 const SCRATCH = path.join(ROOT, 'evals', '.scratch');
@@ -10340,6 +10351,145 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error('trap-corpus-check did not print summary');
       }
       console.log('trap-corpus-check: frozen adversarial stems structural/compile markers green');
+    },
+  },
+
+  {
+    // SYNC LAYER STEP 1 — the repo sync-ledger lockfile (sync/ledger.json).
+    // Red-tests the drift arithmetic BY NAME: a hand-edited canvas fingerprint
+    // (simulated designer edit) flips observe to canvas-ahead naming the
+    // component; a contract-hash bump flips to code-ahead; both → conflict;
+    // and the ECHO-LOOP invariant — a code→canvas amend that records its new
+    // fingerprint at write time classifies the follow-up observation as
+    // self-inflicted (in-sync), while a ledger the writer forgot to update
+    // raises the canvas-ahead false alarm the invariant exists to prevent.
+    // Then runs the offline gate (schema + deterministic bytes + seeded
+    // records vs their READ-ONLY receipts + the committed-fixture drift table).
+    id: 'sync-ledger-lockfile',
+    claim: 'C3-detection',
+    run: () => {
+      const AT = '2026-08-07T00:00:00.000Z';
+      const HASH_A = `sha256:${'a'.repeat(64)}`;
+      const HASH_B = `sha256:${'b'.repeat(64)}`;
+      const record: SyncLedgerRecord = {
+        contractId: 'ds.probe',
+        contractPath: 'contracts/probe.contract.json',
+        contractHash: HASH_A,
+        fileKey: 'FILEKEY',
+        setNodeId: '1:1',
+        canvasFingerprint: 'v6:100',
+        lastSyncedVersionId: '41',
+        lastSyncedAt: AT,
+        direction: 'code→canvas',
+        observed: { dumpFingerprint: 'dumpv1:10', fileVersionId: '41', observedAt: AT },
+        provenance: 'sync-record',
+      };
+      const obs = (stamp: string, dump: string): SyncSetObservation => ({
+        fileKey: 'FILEKEY',
+        setNodeId: '1:1',
+        setName: 'Probe',
+        stamp,
+        dumpFingerprint: dump,
+        fileVersionId: '42',
+      });
+
+      // In-sync control — hash matches, stamp matches, baseline matches.
+      const clean = syncClassifyRecord(record, HASH_A, obs('v6:100', 'dumpv1:10'));
+      if (clean.status !== 'in-sync') throw new Error(`control row must be in-sync (got ${clean.status})`);
+
+      // RED 1: simulated canvas edit (dump fingerprint moved, stamp did not).
+      const canvasEdit = syncClassifyRecord(record, HASH_A, obs('v6:100', 'dumpv1:99'));
+      if (canvasEdit.status !== 'canvas-ahead')
+        throw new Error(`hand-edited canvas fingerprint must classify canvas-ahead (got ${canvasEdit.status})`);
+      if (canvasEdit.contractId !== 'ds.probe' || !canvasEdit.notes.some((n) => n.includes('dumpv1:99')))
+        throw new Error('canvas-ahead row must name the component and the drifted fingerprint');
+
+      // Cross-version stamps are two instruments, not drift (live finding,
+      // MUI Test 1: v5-era canvas stamps vs v6 receipt records raised 13
+      // false canvas-ahead alarms). With the baseline agreeing, the row must
+      // classify in-sync and NAME the incomparability.
+      const crossVersion = syncClassifyRecord(record, HASH_A, obs('v5:77', 'dumpv1:10'));
+      if (crossVersion.status !== 'in-sync' || !crossVersion.notes.some((n) => n.includes('incomparable')))
+        throw new Error(
+          `a v5 stamp vs a v6 record with an agreeing baseline must be in-sync with a named incomparability note (got ${crossVersion.status})`,
+        );
+
+      // RED 2: contract-hash bump → code-ahead.
+      const codeBump = syncClassifyRecord(record, HASH_B, obs('v6:100', 'dumpv1:10'));
+      if (codeBump.status !== 'code-ahead')
+        throw new Error(`contract-hash bump must classify code-ahead (got ${codeBump.status})`);
+
+      // RED 3: both → conflict.
+      const both = syncClassifyRecord(record, HASH_B, obs('v6:100', 'dumpv1:99'));
+      if (both.status !== 'conflict') throw new Error(`both halves drifting must classify conflict (got ${both.status})`);
+
+      // ECHO-LOOP INVARIANT. The amend records its new v6 at write time…
+      const ledger0 = { ...syncEmptyLedger(), records: [record] };
+      const ledger1 = syncRecordCodeToCanvas(ledger0, {
+        contractId: 'ds.probe',
+        contractHash: HASH_B,
+        fileKey: 'FILEKEY',
+        setNodeId: '1:1',
+        canvasFingerprint: 'v6:200',
+        at: AT,
+      });
+      const amended = ledger1.records.find((r) => r.contractId === 'ds.probe')!;
+      if (amended.observed !== null)
+        throw new Error('recordCodeToCanvasSync must drop the stale observation baseline (it describes the replaced canvas)');
+      const echo = syncClassifyRecord(amended, HASH_B, obs('v6:200', 'dumpv1:99'));
+      if (echo.status !== 'in-sync')
+        throw new Error(
+          `echo case: the observation after a RECORDED amend must classify self-inflicted/in-sync (got ${echo.status})`,
+        );
+      // …and the ledger the writer FORGOT to update raises the false alarm.
+      const forgot = syncClassifyRecord(record, HASH_A, obs('v6:200', 'dumpv1:99'));
+      if (forgot.status !== 'canvas-ahead')
+        throw new Error(`unrecorded amend must surface as canvas-ahead (got ${forgot.status}) — the invariant is falsifiable`);
+      // The writer cannot even CLAIM a code→canvas sync without the fingerprint.
+      let refusal = '';
+      try {
+        syncRecordCodeToCanvas(ledger0, {
+          contractId: 'ds.probe',
+          contractHash: HASH_B,
+          fileKey: 'FILEKEY',
+          setNodeId: '1:1',
+          canvasFingerprint: '',
+          at: AT,
+        });
+      } catch (e) {
+        refusal = String(e);
+      }
+      if (!refusal.includes('echo-loop'))
+        throw new Error('a code→canvas record without a v6 fingerprint must refuse naming the echo-loop invariant');
+
+      // Deterministic serialization + schema refusal by name.
+      const bytes = syncSerializeLedger(ledger1);
+      if (syncSerializeLedger(syncParseLedger(bytes)) !== bytes)
+        throw new Error('serializeLedger(parseLedger(bytes)) must reproduce the bytes exactly');
+      let schemaRefusal = '';
+      try {
+        syncValidateLedger({ version: 1, records: [{ ...record, direction: 'sideways' }] });
+      } catch (e) {
+        schemaRefusal = String(e);
+      }
+      if (!schemaRefusal.includes('direction'))
+        throw new Error('an invalid direction must refuse naming the field');
+
+      // The offline gate over the COMMITTED ledger + fixture (receipts READ-ONLY).
+      const r = spawnSync(TSX, [path.join(ROOT, 'sync', 'ledger-check.ts')], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) throw new Error(`sync:ledger:check failed:\n${out}`);
+      if (!/\d+ record\(s\) ok/.test(out) || !out.includes('seeded-from-receipts'))
+        throw new Error('sync:ledger:check did not report record/seed verification');
+      if (!out.includes('in-sync / code-ahead / canvas-ahead / conflict / untracked'))
+        throw new Error('sync:ledger:check did not report the five-status fixture drift table');
+      console.log(
+        'sync-ledger-lockfile: canvas-edit→canvas-ahead, hash-bump→code-ahead, both→conflict, recorded-amend echo→in-sync ' +
+          '(unrecorded amend raises the named false alarm); serialization deterministic; offline gate green over the committed ledger',
+      );
     },
   },
 ];

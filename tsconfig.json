@@ -27,6 +27,7 @@
     ".storybook",
     "extract",
     "parity",
+    "sync",
     "evals",
     "conformance",
     "figma-sync/plugin/engine"

@@ -78,6 +78,17 @@ import {
   type ProvenancedContract,
 } from "../../../../core/contract-provenance.js";
 import {
+  contractHashOf,
+  recordCanvasToCodeSync,
+  recordPublish,
+  type SyncLedger,
+} from "../../../../sync/ledger.js";
+import {
+  DEFAULT_LEDGER_PATH,
+  loadOrInitLedger,
+  saveLedger,
+} from "../../../../sync/ledger-io.js";
+import {
   buildEmitterCtxWithRouting,
   CliUsageError,
   expandContractArgs,
@@ -98,6 +109,32 @@ import {
 
 export const DEFAULT_BRIDGE_URL =
   "https://ds-contracts-assist.southleft-llc.workers.dev";
+
+/** SYNC LEDGER (sync/ledger.json — the code↔canvas lockfile, sync/README.md).
+ *  OPT-IN: records are written only when the repo already carries the
+ *  lockfile, or DS_CONTRACTS_SYNC_LEDGER names one (created if absent). Every
+ *  sync verb records what it just did; a recording failure is LOUD but never
+ *  undoes the completed operation — the warning names exactly what was
+ *  missed so the ledger can be repaired instead of silently drifting. */
+function updateSyncLedger(
+  label: string,
+  mutate: (ledger: SyncLedger) => SyncLedger,
+): void {
+  const envPath = process.env.DS_CONTRACTS_SYNC_LEDGER;
+  const ledgerPath = envPath
+    ? path.resolve(envPath)
+    : path.join(process.cwd(), DEFAULT_LEDGER_PATH);
+  if (!envPath && !existsSync(ledgerPath)) return; // no lockfile = not opted in
+  try {
+    saveLedger(ledgerPath, mutate(loadOrInitLedger(ledgerPath)));
+    console.log(`✔ sync ledger updated (${label}): ${ledgerPath}`);
+  } catch (e) {
+    console.error(
+      `⚠ sync ledger NOT updated (${label}) — ${String(e instanceof Error ? e.message : e)}. ` +
+        "The operation itself completed; repair sync/ledger.json (sync/README.md) so the next observe does not misclassify this write.",
+    );
+  }
+}
 
 /** The bundle envelope the bridge and the plugin agree on. */
 export const CONTRACTS_BUNDLE_TYPE = "CONTRACTS-BUNDLE";
@@ -753,6 +790,23 @@ async function publishCommand(argv: string[]): Promise<number> {
             .join(" · ")}`
         : "\n  No provenance attached (not a GitHub Actions run) — the plugin will show this delivery as unattributed.") +
       `\n  The designer's plugin finds it on its next "Check for updates". Nothing applies without their review.`,
+  );
+  // The code half of the sync is now on the channel; the canvas half is
+  // PENDING until a designer applies. recordPublish models that honestly
+  // (pendingApply: true — cleared by the apply-side record or a confirming
+  // `sync observe --update`).
+  updateSyncLedger("figma publish", (ledger) =>
+    bundle.contracts.reduce<SyncLedger>((acc, c) => {
+      const doc = c as Record<string, unknown>;
+      return typeof doc.id === "string" && doc.id.length > 0
+        ? recordPublish(acc, {
+            contractId: doc.id,
+            contractHash: contractHashOf(doc),
+            at: new Date().toISOString(),
+            note: `figma publish delivery #${answer.seq ?? "?"}`,
+          })
+        : acc;
+    }, ledger),
   );
   return 0;
 }
@@ -1570,6 +1624,31 @@ async function receiveCommand(argv: string[]): Promise<number> {
   const proposalSaved = () =>
     console.log(`✔ Proposal saved: ${path.join(out, plan.proposalFileName)}`);
 
+  // canvas→code landed under --apply: record contractHash + the envelope's
+  // canvas provenance in the sync ledger. The envelope carries no
+  // fileKey/setNodeId/v6 stamp — recorded as null (honestly), with the
+  // set's specHash marker (baseFreshness.canvasSpecHash) kept when present.
+  const recordAppliedSync = () => {
+    if (!apply) return;
+    const rawEnvelope = delivered!.dump as {
+      baseFreshness?: { canvasSpecHash?: unknown };
+    };
+    updateSyncLedger("figma receive --apply", (ledger) =>
+      recordCanvasToCodeSync(ledger, {
+        contractId: plan.contractId,
+        contractHash: contractHashOf(
+          JSON.parse(plan.newText) as Record<string, unknown>,
+        ),
+        canvasSpecHash:
+          typeof rawEnvelope.baseFreshness?.canvasSpecHash === "string"
+            ? rawEnvelope.baseFreshness.canvasSpecHash
+            : null,
+        at: new Date().toISOString(),
+        note: `figma receive --apply${proposal.setName ? ` (set ${proposal.setName})` : ""}`,
+      }),
+    );
+  };
+
   if (proposal.summary.length > 0) {
     console.log(`\nProposed change — ${proposal.setName ?? plan.contractId}:`);
     for (const line of proposal.summary) console.log(`  ${line}`);
@@ -1655,6 +1734,7 @@ async function receiveCommand(argv: string[]): Promise<number> {
       `\n${plan.fileName} already matches the proposal byte-for-byte — nothing to apply to it.`,
     );
     writeExtras();
+    recordAppliedSync(); // byte-identical IS the synced state — record it
     return 0;
   }
   console.log(
@@ -1724,6 +1804,7 @@ async function receiveCommand(argv: string[]): Promise<number> {
     `\n✔ Wrote ${path.join(out, plan.contractWrite.fileName)} — review the diff and commit it yourself (ds-contracts never touches git).`,
   );
   writeExtras();
+  recordAppliedSync();
   if (!rc.ok) {
     console.log(`\nNo component code generated — ${rc.reason}`);
   } else {

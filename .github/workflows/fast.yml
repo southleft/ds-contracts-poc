@@ -234,6 +234,15 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run console-loop:all:evidence:check
 
+      # The sync-ledger lockfile (sync/ledger.json): schema, deterministic
+      # bytes, seed-vs-receipt agreement, and the OFFLINE drift table over the
+      # committed fixture (all five statuses). The live half — `npm run
+      # sync:observe` against real Figma files — needs FIGMA_TOKEN and is not
+      # a lane; this gate is its committed-fixture twin.
+      - name: sync:ledger:check (sync lockfile + offline observe drift table)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run sync:ledger:check
+
       - name: visual-truth:check (headless scorecard pins + per-lane RATCHET floors)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run visual-truth:check

@@ -1,0 +1,18 @@
+{
+  "id": "fixture.delta",
+  "name": "Delta",
+  "version": "1.0.0",
+  "description": "sync observe fixture contract.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [],
+  "anatomy": {
+    "root": {
+      "element": "span",
+      "tokens": {
+        "background": "{color.delta}"
+      }
+    }
+  }
+}
