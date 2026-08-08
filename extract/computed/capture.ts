@@ -1048,8 +1048,21 @@ export const captureJs = (selector: string, classAllow?: string, varPrefix?: str
     //   defs: custom-property decls whose value references var(--<prefix>…)
     //   chans: channel decls whose value references ANY var()
     const out = [];
-    const muiRe = new RegExp('var\\\\(\\\\s*(' + vp + '[a-zA-Z0-9-]+)');
-    const anyRe = new RegExp('var\\\\(\\\\s*(--[a-zA-Z0-9-]+)');
+    // FLUENT 2 (H3, second half) — THE CHARACTER CLASS TRUNCATED THE NAME.
+    // A CSS custom-property ident may contain \`_\`; this class did not, so
+    // \`var(--fui-Checkbox__indicator--borderColor)\` captured
+    // \`--fui-Checkbox\` — a property nothing declares, which resolves to the
+    // empty string and is dropped by \`push\`. The channel then reached the
+    // Node side with NO candidate at all and the skip said "the matching
+    // rules reference no var() the reader could resolve", which is false:
+    // the rule referenced one and the reader mis-read its name. Without this
+    // widening the one-hop fix below cannot fire on Fluent's local variables
+    // at all, because the truncated name is never a \`defs\` key. Additive
+    // for every other library: a truncated ident almost never names a
+    // declared property, so what changes is names RECOVERED, not names moved.
+    const IDENT = '[A-Za-z0-9_-]+';
+    const muiRe = new RegExp('var\\\\(\\\\s*(' + vp + IDENT + ')');
+    const anyRe = new RegExp('var\\\\(\\\\s*(--' + IDENT + ')');
     // Tailwind round: v4 nests every rule inside @layer blocks (and @media)
     // — grouping rules have no selectorText and must be RECURSED into, or
     // the reader sees ~zero style rules.
@@ -1265,13 +1278,35 @@ export const captureJs = (selector: string, classAllow?: string, varPrefix?: str
     const out = {};
     for (const prop of Object.keys(chans)) {
       const cands = [];
-      const push = (name, sel) => {
+      const push = (name, sel, hop) => {
         const raw = cs.getPropertyValue(name).trim();
-        if (raw && !cands.some((c) => c[0] === name)) cands.push([name, raw, sel]);
+        if (raw && !cands.some((c) => c[0] === name)) cands.push(hop ? [name, raw, sel, 1] : [name, raw, sel]);
       };
+      // FLUENT 2 (H3) — THE BARE \`--\` PREFIX MADE THE ONE-HOP BRANCH DEAD CODE.
+      // This was \`if (startsWith(vp)) push(direct); ELSE follow defs\`. With
+      // \`varPrefix: "--"\` — the Tailwind/shadcn/Fluent spelling, because those
+      // theme names carry no vendor prefix — EVERY custom property starts with
+      // the prefix, so the else branch can never run and the one-hop
+      // resolution is unreachable BY CONSTRUCTION. A channel written
+      // \`border-color: var(--fui-Checkbox__indicator--borderColor)\` then
+      // yielded exactly one candidate: the component-local variable, which
+      // names no DTCG leaf and is dropped. The theme token behind it
+      // (\`var(--colorCompoundBrandStroke)\`) was never a candidate at all.
+      // Measured on Fluent's 12-component slice: 31 rules across 11 local
+      // variables, INCLUDING every one of Checkbox's indicator colours on all
+      // four interaction planes. Silent NAME loss — the pixels stay right and
+      // the contract mints an anonymous literal where a real token existed.
+      //
+      // The direct name is still pushed under exactly its old condition, and
+      // the hop targets are now ALWAYS offered as ADDITIONAL candidates,
+      // flagged \`1\` so the Node side can prefer the direct name. Strictly a
+      // superset: any channel that bound a name before binds the SAME name,
+      // and channels that bound nothing can now recover one. Verification
+      // against the captured computed value still decides, so an extra
+      // candidate can never mint a wrong binding.
       for (const { name, sel } of chans[prop]) {
-        if (name.startsWith(vp)) push(name, sel);
-        else for (const mui of (defs[name] || [])) push(mui, sel);
+        if (name.startsWith(vp)) push(name, sel, 0);
+        for (const mui of (defs[name] || [])) push(mui, sel, 1);
       }
       if (cands.length) out[prop] = cands;
     }

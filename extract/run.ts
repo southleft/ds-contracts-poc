@@ -65,8 +65,18 @@ export function runExtractCommand(
     console.log(`Config: ${from}`);
     const extracted = runExtract();
     if (extracted.length === 0) {
+      // The adapter refuses BY NAME when it opened no file at all (see the
+      // zero-candidate refusal in adapters/react-tsx.ts). Reaching here means
+      // files WERE opened and every component in them was skipped — so the
+      // skip ledger is the diagnosis, and dropping it (as this message used
+      // to) leaves the same nothing-named silence one layer up: proposals.md,
+      // which normally carries the ledger, is never written on this path.
       throw new Error(
-        "No components found — check code.root / code.manifest and that props are visible in source.",
+        "No components found — check code.root / code.manifest and that props are visible in source." +
+          (skipped.length > 0
+            ? `\n${skipped.length} component(s) were SEEN and skipped by name:\n` +
+              skipped.map((s) => `  · ${s.name} (${s.source}): ${s.reason}`).join("\n")
+            : "\nThe walker opened source files but found no exported PascalCase component in any of them — nothing was skipped by name, so there is no component-level ledger to show."),
       );
     }
     // A normal extraction writes PROPOSALS and must remain repeatable over its

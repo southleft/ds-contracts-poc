@@ -1,0 +1,5 @@
+{
+  "code": { "adapter": "react-tsx", "root": "extract/fixtures/rollup-only" },
+  "idPrefix": "acme",
+  "out": "extract/fixtures/.out-rollup-only"
+}

@@ -632,10 +632,18 @@ async function main() {
             // value AND names an existing DTCG leaf (specificity is not
             // document order; verification decides). Ties are value-identical
             // by construction — sorted-first, deterministic.
+            // FLUENT 2 (H3): a ONE-HOP candidate (4th element `1`) is offered
+            // in ADDITION to the direct name, never instead of it, and sorts
+            // AFTER every direct candidate. So recovering a name behind a
+            // component-local variable can only fill a channel that bound
+            // nothing — it can never demote a semantic alias the library
+            // named directly to the primitive sitting behind it. Committed
+            // captures carry no 4th element, so this key is 0 for all of them
+            // and the existing alphabetical order is untouched.
             const verified = cands
-              .map(([varName, raw, selector]) => ({ token: tokenName(varName), varName, raw, selector: selector ?? '' }))
+              .map(([varName, raw, selector, hop]) => ({ token: tokenName(varName), varName, raw, selector: selector ?? '', hop: hop ? 1 : 0 }))
               .filter((c) => dtcgNames.has(c.token) && valueEq(c.raw, el.node.style[ch]))
-              .sort((a, b) => a.token.localeCompare(b.token));
+              .sort((a, b) => a.hop - b.hop || a.token.localeCompare(b.token));
             chans.get(ch)!.set(combo.key, verified.length > 0 ? { token: verified[0].token, varName: verified[0].varName, selector: verified[0].selector } : null);
           }
         }

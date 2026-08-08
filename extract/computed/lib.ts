@@ -47,8 +47,15 @@ export interface CapturedNode {
    *  reference `var(--<varPrefix>…)`. SOURCE evidence — the library's own
    *  emitted CSS names the token it binds. Captured only when the config
    *  declares `library.varPrefix`; undefined (and omitted by normalizeNode)
-   *  everywhere else, keeping committed captures byte-identical. */
-  vrefs?: Record<string, Array<[string, string, string]>>;
+   *  everywhere else, keeping committed captures byte-identical.
+   *
+   *  FLUENT 2 (H3): a candidate reached through the reader's ONE-HOP
+   *  indirection (the channel referenced a component-local custom property
+   *  whose own definition names the theme token) carries a 4th element `1`.
+   *  Direct candidates omit it, so every committed capture — none of which
+   *  has ever carried a hop candidate — normalizes byte-identically, and the
+   *  Node side prefers a direct name over a hopped one when both verify. */
+  vrefs?: Record<string, Array<[string, string, string] | [string, string, string, 1]>>;
   /** SILENT-LOSS ROUND (task #33, fix 1): property → var names for source
    *  declarations that are SHORTHANDS carrying a var(). Chromium stores such a
    *  declaration as a pending-substitution value and enumerates its longhands

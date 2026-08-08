@@ -255,6 +255,58 @@ function jsDocText(node: ts.Node): string | undefined {
   return typeof c === 'string' ? c : undefined;
 }
 
+/** THE DOCUMENTED DEFAULT (Fluent 2 recon §3a / H9).
+ *
+ * Fluent 2 documents EVERY prop default in JSDoc — and in TWO tag spellings,
+ * both present in the same library (`@default 'secondary'` on Button,
+ * `@defaultvalue medium` on Badge; measured on the 12 probed packages: 80
+ * `@default` + 5 `@defaultvalue`). The extractor kept the prose and dropped
+ * the tag, so all 42 enum axes read DEFAULTLESS and the capture-config
+ * drafter pinned each one to its FIRST enum value — measurably wrong on
+ * `Badge.size` (pinned `tiny`, documented `medium`) and `Avatar.active`
+ * (pinned `active`, documented `unset`). Nothing errored: the whole variant
+ * grid would have been captured around a base combo the library never
+ * renders. A silent wrong answer, which is worse than a refusal.
+ *
+ * TypeScript parses both spellings into `jsDoc[*].tags` with the value as the
+ * tag's `comment`, and the description (`jsDoc[0].comment`) is unaffected —
+ * so reading the tag adds a field and changes no existing one.
+ *
+ * Returns the parsed literal, or `{ unparsed }` when the tag carries PROSE
+ * rather than a literal (Fluent has one: "`PersonRegular` (the default icon's
+ * size depends on the Avatar's size)"). Prose is never guessed into a value;
+ * it is receipted by name at the call site. */
+type JsDocDefault = { value: string | number | boolean; tag: string } | { unparsed: string; tag: string };
+
+function jsDocDefault(node: ts.Node): JsDocDefault | undefined {
+  const blocks = (node as { jsDoc?: { tags?: readonly ts.JSDocTag[] }[] }).jsDoc;
+  if (!blocks) return undefined;
+  for (const block of blocks) {
+    for (const t of block.tags ?? []) {
+      const tag = t.tagName.text.toLowerCase();
+      if (tag !== 'default' && tag !== 'defaultvalue') continue;
+      const raw = typeof t.comment === 'string' ? t.comment.trim() : '';
+      if (!raw) continue;
+      // `@default undefined` / `@default null` DOCUMENT THE ABSENCE of a
+      // default. The absent `default` field already says exactly that, so
+      // there is nothing to record and nothing lost — not a silent drop.
+      if (raw === 'undefined' || raw === 'null') return undefined;
+      const unquoted = /^(['"`])([\s\S]*)\1$/.exec(raw);
+      const body = unquoted ? unquoted[2] : raw;
+      if (!unquoted) {
+        if (body === 'true') return { value: true, tag };
+        if (body === 'false') return { value: false, tag };
+        if (/^-?\d+(\.\d+)?$/.test(body)) return { value: Number(body), tag };
+      }
+      // A literal default is ONE token. Anything with whitespace or a
+      // sentence in it is prose about the default, not the default.
+      if (/^[A-Za-z0-9_$@./-]+$/.test(body)) return { value: body, tag };
+      return { unparsed: raw, tag };
+    }
+  }
+  return undefined;
+}
+
 /** cva('base', { variants: {...}, defaultVariants: {...} }) tables — the
  *  shadcn-era convention. The variant axes and defaults are fully syntactic
  *  in the config object, so `VariantProps<typeof buttonVariants>` resolves
@@ -784,12 +836,38 @@ export function extractFromSource(
       const propName = m.name.text;
       const cls = classifyMember(m, table, (note) => componentNotes.push(`prop \`${propName}\`: ${note}`));
       if (!cls) continue;
+      // DEFAULT PRECEDENCE, and the disagreement is RECEIPTED, never merged.
+      // An initializer/defaultProps value is what the component RUNS; a JSDoc
+      // tag is what the library SAYS. When both exist and differ, the runtime
+      // fact wins and the documentation gap is named — silently reconciling
+      // them would hide a real drift between a library's docs and its code.
+      const runtimeDefault = defaults.has(propName) ? defaults.get(propName) : undefined;
+      const doc = jsDocDefault(m);
+      let docDefault: string | number | boolean | undefined;
+      if (doc) {
+        if ('unparsed' in doc) {
+          componentNotes.push(
+            `prop \`${propName}\`: JSDoc @${doc.tag} carries PROSE, not a literal ("${doc.unparsed}") — no default carried (a documented default is only read when it is a single literal token)`,
+          );
+        } else if (cls.kind === 'enum' && cls.values !== undefined && !cls.values.includes(String(doc.value))) {
+          componentNotes.push(
+            `prop \`${propName}\`: JSDoc @${doc.tag} documents "${String(doc.value)}", which is NOT one of the declared enum values [${cls.values.join(', ')}] — not carried as the default (a default outside its own value set is a contradiction, named rather than absorbed)`,
+          );
+        } else if (runtimeDefault !== undefined && runtimeDefault !== doc.value) {
+          componentNotes.push(
+            `prop \`${propName}\`: JSDoc @${doc.tag} documents ${JSON.stringify(doc.value)} but the initializer/defaultProps sets ${JSON.stringify(runtimeDefault)} — the INITIALIZER wins (it is what the component runs); the documented default is recorded here, never silently reconciled`,
+          );
+        } else {
+          docDefault = doc.value;
+        }
+      }
+      const propDefault = runtimeDefault !== undefined ? runtimeDefault : docDefault;
       props.push({
         name: m.name.text,
         optional: !!m.questionToken || (forceOptional?.has(m.name.text) ?? false),
         ...(jsDocText(m) ? { description: jsDocText(m) } : {}),
         ...cls,
-        ...(defaults.has(m.name.text) ? { default: defaults.get(m.name.text) } : {}),
+        ...(propDefault !== undefined ? { default: propDefault } : {}),
       });
     }
     let cssVars: string[] | undefined;
