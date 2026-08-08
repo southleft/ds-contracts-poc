@@ -117,8 +117,8 @@ for (const c of contracts) {
     c.anchors.figma = {
       ...c.anchors.figma,
       fileKey: FILE_KEY,
-      nodeId: null as unknown as string,
-      componentKey: null as unknown as string,
+      nodeId: null,
+      componentSetKey: null,
     };
   }
 }

@@ -54,6 +54,7 @@ import {
   buildMultiRootUnion,
   descendToRealRoots,
   nameUnion as depthNameUnion,
+  pathDataExtent,
   promoteAnatomy as depthPromoteAnatomy,
   promoteMultiRootAnatomy,
 } from '../extract/computed/anatomy.js';
@@ -6185,18 +6186,25 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     claim: 'C3-detection',
     run: () => {
       const fig = (f: string) => readFileSync(path.join(ROOT, 'examples/polaris/figma', f), 'utf8');
-      for (const f of ['badge.figma.js']) {
+      // button carries icon margins + Show WithIcon (left-gap finding); badge
+      // still exercises the same runtime via any re-emitted Polaris script.
+      for (const f of ['button.figma.js']) {
         const s = fig(f);
         if (!s.includes('function applyMarginBox(')) throw new Error(`${f}: no margin-box runtime`);
-        // create path (buildNode): applyMarginBox(node, childNode, child)
-        if (!s.includes('applyMarginBox(node, childNode, child)')) throw new Error(`${f}: buildNode create path lost applyMarginBox`);
-        // amend path (amendSet): applyMarginBox(comp, childNode, childSpec) —
+        // create path (buildNode): applyMarginBox(node, childNode, child, registry)
+        if (!s.includes('applyMarginBox(node, childNode, child, registry)')) {
+          throw new Error(`${f}: buildNode create path lost applyMarginBox(…, registry)`);
+        }
+        // amend path (amendSet): applyMarginBox(comp, childNode, childSpec, registry)
         // the B5E-finding-1 fix; without it top-level margins vanish on re-amend
-        if (!s.includes('applyMarginBox(comp, childNode, childSpec)')) {
+        if (!s.includes('applyMarginBox(comp, childNode, childSpec, registry)')) {
           throw new Error(`${f}: amendSet top-level child loop is MISSING applyMarginBox — B5E finding 1 regressed (Badge pip would measure 24px on re-amend, spec/gate say 20px)`);
         }
+        if (!s.includes('vis.node === childNode') || !s.includes('vis.node = box')) {
+          throw new Error(`${f}: applyMarginBox must retarget Show bindings onto the margin-box wrapper (Polaris Button left-gap finding)`);
+        }
       }
-      console.log('amend-margin-box: badge script carries applyMarginBox on BOTH the create (buildNode) and re-amend (amendSet) top-level child loops — margins now survive a re-amend at source, not a canvas correction');
+      console.log('amend-margin-box: button script carries applyMarginBox on create+amend with Show→wrapper retarget (Polaris icon left-gap)');
     },
   },
   {
@@ -9018,6 +9026,943 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       console.log(
         'console-loop-evidence-receipt: Console MCP generate→screenshot→audit→round-trip receipts pinned for required Testing-file components',
       );
+    },
+  },
+
+  {
+    // MUI denominator (31) on MUI Test 1 — same Console MCP loop, foreign corpus.
+    id: 'console-loop-mui-evidence-receipt',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(process.execPath, ['scripts/console-loop-mui-evidence-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`console-loop-mui-evidence-check failed:\n${out}`);
+      }
+      if (!out.includes('31/31')) {
+        throw new Error('console-loop-mui-evidence-check did not report 31/31');
+      }
+      console.log(
+        'console-loop-mui-evidence-receipt: MUI DENOMINATOR-50 stems receipted via Console MCP on MUI Test 1',
+      );
+    },
+  },
+
+  ...(['tailwind', 'altitude', 'astryx', 'carbon', 'polaris'] as const).map((lib) => ({
+    id: `console-loop-${lib}-evidence-receipt`,
+    claim: 'C3-detection' as const,
+    run: () => {
+      const r = spawnSync(
+        process.execPath,
+        ['scripts/console-loop-lib-evidence-check.mjs', lib],
+        { cwd: ROOT, encoding: 'utf8' },
+      );
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`console-loop-${lib}-evidence-check failed:\n${out}`);
+      }
+      if (!out.includes('stems ok')) {
+        throw new Error(`console-loop-${lib}-evidence-check did not report stems ok`);
+      }
+      console.log(
+        `console-loop-${lib}-evidence-receipt: ${lib} Console MCP loop receipts pinned on DS-Contracts-Testing`,
+      );
+    },
+  })),
+
+  // -------------------------------------------------------------------------
+  // CODE → CANVAS HILL-CLIMB — Wave A emit pins (FC-* failure classes).
+  // Deterministic + browser-free: createFigmaEngine over synthesized fixtures
+  // (same shape as checkbox-center). Empty/minimal token trees.
+  // -------------------------------------------------------------------------
+  {
+    id: 'code-to-canvas-wave-a-emit-pins',
+    claim: 'C3-detection',
+    run: () => {
+      const emptyTokens = { primitives: {}, semantic: {}, light: {}, dark: {}, brands: { default: {} } };
+      const engine = createFigmaEngine({ tokens: emptyTokens, icons: new Map() });
+      const find = (s: any, name: string): any =>
+        s.name === name ? s : (s.children ?? []).map((c: any) => find(c, name)).find(Boolean);
+      const baseAnchors = { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'Fx' } };
+      const variantProp = {
+        name: 'variant', type: { enum: ['a'] }, default: 'a',
+        bindings: { figma: { kind: 'VARIANT', property: 'V' }, code: { prop: 'variant' } },
+      };
+
+      // FC-LH-RATIO — unitless ratio 1.4286 → PERCENT 142.86 (not 1.4px clip)
+      {
+        const fixture: any = {
+          id: 'fixture.lh-ratio', name: 'LhRatio', version: '0.0.0', status: 'draft',
+          description: 'Wave A FC-LH-RATIO pin', semantics: { element: 'span' },
+          props: [variantProp], states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                label: {
+                  element: 'span',
+                  text: 'Toast body',
+                  literals: { 'line-height': '1.4286', 'font-size': '14px' },
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const label = find(data.variants[0].spec, 'label');
+        if (!label) throw new Error('FC-LH-RATIO: text node missing');
+        const lh = label.lineHeight;
+        if (!lh || typeof lh !== 'object' || lh.unit !== 'PERCENT') {
+          throw new Error(`FC-LH-RATIO: expected PERCENT lineHeight, got ${JSON.stringify(lh)}`);
+        }
+        if (Math.abs(lh.value - 142.86) > 0.01) {
+          throw new Error(`FC-LH-RATIO: expected ~142.86 PERCENT, got ${lh.value}`);
+        }
+        const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+        if (!script.includes("unit === 'PERCENT'") && !script.includes('PERCENT')) {
+          throw new Error('FC-LH-RATIO: emitted runtime missing PERCENT lineHeight handling');
+        }
+      }
+
+      // FC-PLACEHOLDER — unresolved `{placeholder}` must not paint on canvas
+      {
+        const fixture: any = {
+          id: 'fixture.placeholder', name: 'PlaceholderFx', version: '0.0.0', status: 'draft',
+          description: 'Wave A FC-PLACEHOLDER pin', semantics: { element: 'div' },
+          props: [
+            variantProp,
+            {
+              name: 'placeholder', type: 'text',
+              // intentionally no default — brace form must not leak
+              bindings: { figma: { kind: 'TEXT', property: 'Placeholder' }, code: { prop: 'placeholder' } },
+            },
+          ],
+          states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                input: { element: 'input', attrs: { placeholder: '{placeholder}' } },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const input = find(data.variants[0].spec, 'input');
+        const ph = (input?.children ?? []).find((c: any) => c.name === 'placeholder');
+        if (!ph) throw new Error('FC-PLACEHOLDER: placeholder text child missing');
+        if (ph.characters === '{placeholder}' || /\{[a-z][\w-]*\}/.test(String(ph.characters ?? ''))) {
+          throw new Error(`FC-PLACEHOLDER: unresolved brace leaked onto canvas: ${JSON.stringify(ph.characters)}`);
+        }
+        if (ph.characters !== '' && ph.characters != null && String(ph.characters).includes('{')) {
+          throw new Error(`FC-PLACEHOLDER: characters still contain braces: ${JSON.stringify(ph.characters)}`);
+        }
+      }
+
+      // FC-BLOCK-ROW — display:block + layout.align without direction → VERTICAL
+      {
+        const fixture: any = {
+          id: 'fixture.block-row', name: 'BlockRow', version: '0.0.0', status: 'draft',
+          description: 'Wave A FC-BLOCK-ROW pin', semantics: { element: 'div' },
+          props: [variantProp], states: [],
+          anatomy: {
+            root: {
+              declared: { display: 'block' },
+              layout: { align: 'center' },
+              parts: {
+                label: { element: 'span', text: 'Label' },
+                field: { element: 'span', text: 'Field' },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const mode = data.variants[0].spec.layout?.mode;
+        if (mode !== 'VERTICAL') {
+          throw new Error(`FC-BLOCK-ROW: expected VERTICAL root (block stack), got ${mode} — label would sit beside field`);
+        }
+      }
+
+      // FC-SLOT-DEFAULT — optional slot Show BOOLEAN defaults false (not true)
+      {
+        const fixture: any = {
+          id: 'fixture.slot-default', name: 'SlotDefault', version: '0.0.0', status: 'draft',
+          description: 'Wave A FC-SLOT-DEFAULT pin', semantics: { element: 'div' },
+          props: [
+            variantProp,
+            {
+              name: 'body', type: 'text', default: 'Hello',
+              bindings: { figma: { kind: 'TEXT', property: 'Body' }, code: { prop: 'body' } },
+            },
+          ],
+          states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex', direction: 'row' },
+              parts: {
+                bodyText: { element: 'span', content: { prop: 'body' } },
+                end: {
+                  element: 'div',
+                  slot: { name: 'endContent' },
+                  optional: true,
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+        if (!script.includes("'BOOLEAN', false") && !script.includes('"BOOLEAN", false')) {
+          throw new Error("FC-SLOT-DEFAULT: emitted script missing BOOLEAN', false for optional Show");
+        }
+        // Show mint sites must default false — never true for optional slots
+        const showMintTrue = /Show ' \+ sl\.spec\.slotProperty,\s*'BOOLEAN',\s*true/.test(script)
+          || /'Show ' \+ s\.spec\.slotProperty,\s*'BOOLEAN',\s*true/.test(script)
+          || /mintOnce\('Show ' \+ s\.spec\.slotProperty,\s*'BOOLEAN',\s*true\)/.test(script);
+        if (showMintTrue) {
+          throw new Error('FC-SLOT-DEFAULT: optional slot Show defaults to true — dashed Slot chrome would show');
+        }
+        if (!script.includes("Show ' + sl.spec.slotProperty, 'BOOLEAN', false")
+          && !script.includes("mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false)")) {
+          throw new Error('FC-SLOT-DEFAULT: Show + BOOLEAN false mint site missing from emitted runtime');
+        }
+      }
+
+      // FC-ABS-SIZE — applyInsetOverlay keeps fixedW/H (fw != null guard)
+      {
+        const fixture: any = {
+          id: 'fixture.abs-size', name: 'AbsSize', version: '0.0.0', status: 'draft',
+          description: 'Wave A FC-ABS-SIZE pin', semantics: { element: 'span' },
+          props: [variantProp], states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                track: {
+                  element: 'span',
+                  declared: { position: 'relative' },
+                  literals: { width: '100px', height: '20px' },
+                  parts: {
+                    // absolute parent-bound overlay WITH fixed size — must emit
+                    // applyInsetOverlay + fw!=null guard (aspect-ratio → inset-0)
+                    thumb: {
+                      element: 'span',
+                      declared: { position: 'absolute', 'aspect-ratio': '1 / 1' },
+                      literals: { width: '20px', height: '20px' },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+        if (!script.includes('function applyInsetOverlay')) {
+          throw new Error('FC-ABS-SIZE: applyInsetOverlay runtime not emitted (inset overlay missing from compile)');
+        }
+        if (!script.includes('fw != null')) {
+          throw new Error('FC-ABS-SIZE: fixedWidth/fixedHeight guard (fw != null) missing from applyInsetOverlay');
+        }
+        if (!script.includes('clipsContent = false')) {
+          throw new Error('FC-ABS-SIZE: inset/absolute hosts must unclip (clipsContent = false)');
+        }
+      }
+
+      // FC-ABS-SIZE residual — display:contents parents hoist children (no
+      // clipped hug wrapper that half-cuts a fixed-size absolute thumb).
+      {
+        const fixture: any = {
+          id: 'fixture.contents-hoist', name: 'ContentsHoist', version: '0.0.0', status: 'draft',
+          description: 'Wave B.4 display:contents hoist pin', semantics: { element: 'div' },
+          props: [variantProp], states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              literals: { width: '100px', height: '20px' },
+              parts: {
+                wrapper: {
+                  element: 'div',
+                  declared: { display: 'contents' },
+                  parts: {
+                    thumb: {
+                      element: 'span',
+                      declared: { position: 'absolute' },
+                      literals: { width: '20px', height: '20px', left: '10px', top: '0px' },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const root = data.variants[0].spec;
+        const names = (root.children ?? []).map((c: any) => c.name);
+        if (names.includes('wrapper')) {
+          throw new Error('FC-ABS-SIZE contents: display:contents wrapper must be hoisted away, not emitted');
+        }
+        if (!names.includes('thumb')) {
+          throw new Error(`FC-ABS-SIZE contents: expected hoisted thumb among root children, got ${JSON.stringify(names)}`);
+        }
+      }
+
+      // FC-PSEUDO-SIZE / ELLIPSE stroke — emitted runtime must guard per-side
+      // stroke weights (ELLIPSE has strokeWeight only).
+      {
+        const fixture: any = {
+          id: 'fixture.ellipse-stroke', name: 'EllipseStroke', version: '0.0.0', status: 'draft',
+          description: 'Wave B.1 ELLIPSE strokeSides guard pin', semantics: { element: 'span' },
+          props: [
+            {
+              name: 'sizing', type: { enum: ['sm', 'md'] }, default: 'md',
+              bindings: { figma: { kind: 'VARIANT', property: 'Sizing', values: { sm: 'Sm', md: 'Md' } }, code: { prop: 'sizing' } },
+            },
+          ],
+          states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                thumb: {
+                  element: 'span',
+                  shape: { kind: 'ellipse', width: 20, height: 20 },
+                  declared: { position: 'absolute' },
+                  literals: {
+                    'background-color': 'rgba(255, 255, 255, 1)',
+                    'border-top-width': '1px',
+                    'border-right-width': '1px',
+                    'border-bottom-width': '1px',
+                    'border-left-width': '1px',
+                    'border-top-color': 'rgba(209, 213, 219, 1)',
+                    width: '20px',
+                    height: '20px',
+                    top: '2px',
+                    left: '2px',
+                  },
+                  literalsByProp: [
+                    {
+                      prop: 'sizing',
+                      map: {
+                        sm: { width: '16px', height: '16px' },
+                        md: { width: '20px', height: '20px' },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const sm = data.variants.find((v: any) => v.name.includes('Sm'));
+        const md = data.variants.find((v: any) => v.name.includes('Md'));
+        if (!sm || !md) throw new Error('FC-PSEUDO-SIZE: Sm/Md variants missing');
+        const smThumb = find(sm.spec, 'thumb');
+        const mdThumb = find(md.spec, 'thumb');
+        if (smThumb?.shape?.width !== 16 || mdThumb?.shape?.width !== 20) {
+          throw new Error(
+            `FC-PSEUDO-SIZE: expected shape widths 16/20, got ${smThumb?.shape?.width}/${mdThumb?.shape?.width}`,
+          );
+        }
+        const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+        if (!script.includes("'strokeTopWeight' in node") && !script.includes('"strokeTopWeight" in node')) {
+          throw new Error('FC-PSEUDO-SIZE: emitted runtime missing ELLIPSE strokeTopWeight guard');
+        }
+      }
+
+      // FC-PSEUDO-STROKE-GLYPH — adjacent two-side border L → ROUND polyline SVG
+      // (not a fillClear rect with strokeLeft+strokeBottom — the thin-V failure).
+      {
+        const fixture: any = {
+          id: 'fixture.l-stroke-glyph', name: 'LStrokeGlyph', version: '0.0.0', status: 'draft',
+          description: 'Wave B FC-PSEUDO-STROKE-GLYPH pin', semantics: { element: 'span' },
+          props: [variantProp],
+          states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                box: {
+                  element: 'span',
+                  shape: { kind: 'rect', width: 16, height: 16 },
+                  declared: { position: 'absolute' },
+                  literals: {
+                    'background-color': 'rgba(22, 22, 22, 1)',
+                    width: '16px',
+                    height: '16px',
+                    top: '2px',
+                    left: '0px',
+                  },
+                },
+                mark: {
+                  element: 'span',
+                  shape: { kind: 'rect', width: 10, height: 6 },
+                  declared: { position: 'absolute' },
+                  literals: {
+                    'background-color': 'transparent',
+                    'border-top-width': '0px',
+                    'border-right-width': '0px',
+                    'border-bottom-width': '2px',
+                    'border-left-width': '2px',
+                    'border-bottom-color': 'rgba(255, 255, 255, 1)',
+                    'border-left-color': 'rgba(255, 255, 255, 1)',
+                    width: '10px',
+                    height: '6px',
+                    top: '4px',
+                    left: '7px',
+                  },
+                  stylesWhen: [
+                    {
+                      prop: 'variant',
+                      equals: 'a',
+                      styles: {
+                        position: 'absolute',
+                        top: '4px',
+                        left: '7px',
+                        transform: 'rotate(-45deg)',
+                      },
+                    },
+                  ],
+                },
+                bar: {
+                  element: 'span',
+                  shape: { kind: 'rect', width: 8, height: 5 },
+                  declared: { position: 'absolute' },
+                  literals: {
+                    'background-color': 'transparent',
+                    'border-top-width': '0px',
+                    'border-right-width': '0px',
+                    'border-bottom-width': '2px',
+                    'border-left-width': '0px',
+                    'border-bottom-color': 'rgba(255, 255, 255, 1)',
+                    width: '8px',
+                    height: '5px',
+                    top: '8px',
+                    left: '4px',
+                  },
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const mark = find(data.variants[0].spec, 'mark');
+        if (!mark) throw new Error('FC-PSEUDO-STROKE-GLYPH: mark missing');
+        if (!mark.svg || !String(mark.svg).includes('polyline')) {
+          throw new Error(`FC-PSEUDO-STROKE-GLYPH: expected polyline SVG, got ${JSON.stringify(mark.svg)?.slice(0, 120)}`);
+        }
+        if (!String(mark.svg).includes('stroke-linecap="round"')) {
+          throw new Error('FC-PSEUDO-STROKE-GLYPH: polyline missing ROUND stroke-linecap');
+        }
+        if (mark.lits?.strokeSides) {
+          throw new Error('FC-PSEUDO-STROKE-GLYPH: strokeSides should be cleared after L→SVG collapse');
+        }
+        if (mark.shape?.rotation !== -45) {
+          throw new Error(`FC-PSEUDO-STROKE-GLYPH: expected rotation -45, got ${mark.shape?.rotation}`);
+        }
+        // Host-centering: left:7 in a 16×16 box at (0,2) → center on (8,10) →
+        // left=3 top=7, then -45° optical nudge top -= min(10,6)*0.2 = 1.2 → 5.8
+        if (mark.absolute?.left !== 3 || Math.abs((mark.absolute?.top ?? 0) - 5.8) > 0.01) {
+          throw new Error(
+            `FC-PSEUDO-STROKE-GLYPH: expected host-centered absolute (3,5.8), got (${mark.absolute?.left},${mark.absolute?.top})`,
+          );
+        }
+        if (/points="[^"]*,0 |points="0,/.test(String(mark.svg))) {
+          throw new Error('FC-PSEUDO-STROKE-GLYPH: polyline endpoints must be inset so ROUND caps stay in viewBox');
+        }
+        const bar = find(data.variants[0].spec, 'bar');
+        if (!bar) throw new Error('FC-PSEUDO-STROKE-GLYPH: single-side bar control missing');
+        if (bar.svg) throw new Error('FC-PSEUDO-STROKE-GLYPH: single-side bar must NOT become SVG polyline');
+        if (!bar.lits?.fillColor || bar.lits.height !== 2) {
+          throw new Error(
+            `FC-PSEUDO-STROKE-GLYPH: single-side control should stay filled-bar collapse, got height=${bar.lits?.height} fill=${!!bar.lits?.fillColor}`,
+          );
+        }
+        const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
+        if (!script.includes('createNodeFromSvg(spec.svg)')) {
+          throw new Error('FC-PSEUDO-STROKE-GLYPH: shapeRuntime missing createNodeFromSvg(spec.svg) path');
+        }
+      }
+
+      // FC-MISSING-AXIS residual — literalsByProp on VARIANT-bound boolean
+      // (Astryx Switch On thumb: true → 20×20 @ left 18).
+      {
+        const fixture: any = {
+          id: 'fixture.variant-bool-lbp', name: 'VariantBoolLbp', version: '0.0.0', status: 'draft',
+          description: 'Wave B literalsByProp on VARIANT-bound boolean', semantics: { element: 'div' },
+          props: [
+            {
+              name: 'value', type: 'boolean', default: false,
+              bindings: {
+                figma: { kind: 'VARIANT', property: 'Value', values: { false: 'Off', true: 'On' } },
+                code: { prop: 'value' },
+              },
+            },
+          ],
+          states: [],
+          anatomy: {
+            root: {
+              layout: { display: 'flex' },
+              parts: {
+                thumb: {
+                  element: 'span',
+                  declared: { position: 'absolute' },
+                  literals: { width: '16px', height: '16px', left: '4px', top: '4px' },
+                  literalsByProp: [
+                    {
+                      prop: 'value',
+                      map: {
+                        false: { width: '16px', height: '16px', left: '4px', top: '4px' },
+                        true: { width: '20px', height: '20px', left: '18px', top: '2px' },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          anchors: baseAnchors,
+        };
+        ContractSchema.parse(fixture);
+        const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
+        const on = data.variants.find((v: any) => /Value=On/.test(v.name));
+        const off = data.variants.find((v: any) => /Value=Off/.test(v.name));
+        if (!on || !off) throw new Error('FC-VARIANT-BOOL-LBP: Off/On variants missing');
+        const onThumb = find(on.spec, 'thumb');
+        const offThumb = find(off.spec, 'thumb');
+        if (offThumb?.absolute?.left !== 4 || offThumb?.lits?.width !== 16) {
+          throw new Error(`FC-VARIANT-BOOL-LBP: Off expected 16@4, got w=${offThumb?.lits?.width} left=${offThumb?.absolute?.left}`);
+        }
+        if (onThumb?.absolute?.left !== 18 || onThumb?.lits?.width !== 20) {
+          throw new Error(`FC-VARIANT-BOOL-LBP: On expected 20@18, got w=${onThumb?.lits?.width} left=${onThumb?.absolute?.left}`);
+        }
+      }
+
+      // FC-CARBON-TABS-LABEL — tab labels HUG full strings; no textTruncation
+      {
+        const carbonTokens = {
+          primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon.dtcg.json'), 'utf8')),
+          semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon-minted.dtcg.json'), 'utf8')),
+          light: {},
+          dark: {},
+          brands: { default: {} },
+        };
+        const carbonIcons = new Map<string, string>();
+        const carbonIconsDir = path.join(ROOT, 'examples/carbon/assets/icons');
+        if (existsSync(carbonIconsDir)) {
+          for (const f of readdirSync(carbonIconsDir)) {
+            if (f.endsWith('.svg')) {
+              carbonIcons.set(f.replace(/\.svg$/, ''), readFileSync(path.join(carbonIconsDir, f), 'utf8').trim());
+            }
+          }
+        }
+        const carbonEngine = createFigmaEngine({ tokens: carbonTokens, icons: carbonIcons });
+        const tabsPath = path.join(ROOT, 'examples/carbon/contracts/tabs.contract.json');
+        const tabsContract = ContractSchema.parse(JSON.parse(readFileSync(tabsPath, 'utf8')));
+        const tabsById = new Map([[tabsContract.id, tabsContract]]);
+        const tabsData = carbonEngine.compileComponentData(tabsContract, tabsById);
+        const tabsScript = carbonEngine.buildComponentScript(tabsContract, tabsById);
+        const walkSpecs = (s: any, fn: (n: any) => void) => {
+          fn(s);
+          for (const c of s.children ?? []) walkSpecs(c, fn);
+        };
+        const textNodes: any[] = [];
+        for (const v of [...tabsData.variants, ...(tabsData.stateVariants ?? [])]) {
+          walkSpecs(v.spec, (n) => { if (n.type === 'text') textNodes.push(n); });
+        }
+        if (textNodes.length === 0) throw new Error('FC-CARBON-TABS-LABEL: no text nodes in carbon.tabs emit');
+        for (const t of textNodes) {
+          if (t.textTruncation) {
+            throw new Error(`FC-CARBON-TABS-LABEL: textTruncation on ${t.name} — labels must not truncate`);
+          }
+          if (t.fillW) {
+            throw new Error(`FC-CARBON-TABS-LABEL: fillW on ${t.name} — labels must HUG without truncation`);
+          }
+          if (typeof t.characters === 'string' && t.characters.length <= 5 && /^(Overv|Activ|Setti)$/.test(t.characters)) {
+            throw new Error(`FC-CARBON-TABS-LABEL: clipped label characters ${JSON.stringify(t.characters)}`);
+          }
+        }
+        const fullLabels = textNodes.filter((t) => /^(Overview|Activity|Settings)$/.test(String(t.characters ?? '')));
+        if (fullLabels.length < 3) {
+          throw new Error(`FC-CARBON-TABS-LABEL: expected Overview/Activity/Settings labels, got ${textNodes.map((t) => t.characters).join(', ')}`);
+        }
+        for (const name of ['tabs__nav-item-label-wrapper', 'tabs__nav-item-label-wrapper-2', 'tabs__nav-item-label-wrapper-3']) {
+          const wrap = find(tabsData.variants[0].spec, name);
+          if (wrap?.fixedWidth) {
+            throw new Error(`FC-CARBON-TABS-LABEL: ${name} still has fixedWidth ${wrap.fixedWidth.px}px — wrapper must HUG text`);
+          }
+        }
+        if (tabsScript.includes('textTruncation') && /textTruncation:\s*true/.test(tabsScript)) {
+          throw new Error('FC-CARBON-TABS-LABEL: emitted script carries textTruncation:true on tab labels');
+        }
+        // FC-FIGMA-CLIP-DEFAULT — frames unclip unless clipsContent:true
+        if (!/clipsContent = spec\.clipsContent === true/.test(tabsScript) && !/node\.clipsContent = spec\.clipsContent === true/.test(tabsScript)) {
+          throw new Error('FC-FIGMA-CLIP-DEFAULT: applyFrameSpec must set clipsContent from spec (default false)');
+        }
+        if (!tabsScript.includes('wrap.clipsContent = false')) {
+          throw new Error('FC-FIGMA-CLIP-DEFAULT: text wrappers must set clipsContent = false');
+        }
+        if (!tabsScript.includes('RUNTIME_EMIT_REV')) {
+          throw new Error('FC-FIGMA-CLIP-DEFAULT: RUNTIME_EMIT_REV must salt specHash so runtime-only fixes force amend');
+        }
+      }
+
+      // FC-ASTRYX-SLIDER-TOOLTIP — Value Display=Tooltip restores the bubble
+      {
+        const astryxTokens = {
+          primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/astryx/tokens/astryx-docs.dtcg.json'), 'utf8')),
+          semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/astryx/tokens/astryx-minted.dtcg.json'), 'utf8')),
+          light: {},
+          dark: {},
+          brands: { default: {} },
+        };
+        const astryxEngine = createFigmaEngine({ tokens: astryxTokens, icons: new Map() });
+        const sliderPath = path.join(ROOT, 'examples/astryx/contracts/slider.contract.json');
+        const sliderContract = ContractSchema.parse(JSON.parse(readFileSync(sliderPath, 'utf8')));
+        const sliderById = new Map([[sliderContract.id, sliderContract]]);
+        const sliderData = astryxEngine.compileComponentData(sliderContract, sliderById);
+        const tipVar = sliderData.variants.find((v: any) => /Value Display=Tooltip/.test(v.name));
+        const noneVar = sliderData.variants.find((v: any) => /Value Display=None/.test(v.name));
+        const textV = sliderData.variants.find((v: any) => /Orientation=Vertical, Value Display=Text/.test(v.name));
+        if (!tipVar || !noneVar) throw new Error('FC-ASTRYX-SLIDER-TOOLTIP: Tooltip/None variants missing');
+        const hasTip = (s: any): boolean => {
+          if (s.name === 'tooltip') return true;
+          return (s.children ?? []).some(hasTip);
+        };
+        if (!hasTip(tipVar.spec)) {
+          throw new Error('FC-ASTRYX-SLIDER-TOOLTIP: tooltip part missing on Tooltip variant — need stylesWhen display restore');
+        }
+        if (hasTip(noneVar.spec)) {
+          throw new Error('FC-ASTRYX-SLIDER-TOOLTIP: tooltip must stay omitted on None');
+        }
+        const findAbs = (s: any, name: string): any => {
+          if (s.name === name) return s;
+          for (const c of s.children ?? []) {
+            const hit = findAbs(c, name);
+            if (hit) return hit;
+          }
+          return null;
+        };
+        const vLabel = textV && findAbs(textV.spec, 'label-3');
+        if (!vLabel?.absolute || vLabel.absolute.top !== 86) {
+          throw new Error(
+            `FC-ASTRYX-SLIDER-TOOLTIP: vertical Text label-3 must pin beside thumb (top=86), got ${JSON.stringify(vLabel?.absolute)}`,
+          );
+        }
+      }
+
+      // FC-SVG-VIEWBOX — elliptical-arc radii must not inflate viewBox
+      {
+        const d =
+          'M 10 3.5 A 449.26 449.26 0 0 1 5.843 8.794 L 16.1 15.316 A 429.497 429.497 0 0 1 12.152 4.947 Z';
+        const extent = pathDataExtent(d);
+        if (extent > 40) {
+          throw new Error(`FC-SVG-VIEWBOX: pathDataExtent leaked arc radii (got ${extent})`);
+        }
+        const warnSvg = readFileSync(
+          path.join(ROOT, 'examples/polaris/assets/icons/banner-icon-warning.svg'),
+          'utf8',
+        );
+        if (!/viewBox="0 0 20 20"/.test(warnSvg)) {
+          throw new Error('FC-SVG-VIEWBOX: banner-icon-warning.svg must be viewBox 0 0 20 20');
+        }
+        const polarisIcons = new Map<string, string>();
+        const polarisIconsDir = path.join(ROOT, 'examples/polaris/assets/icons');
+        if (existsSync(polarisIconsDir)) {
+          for (const f of readdirSync(polarisIconsDir)) {
+            if (f.endsWith('.svg')) {
+              polarisIcons.set(f.replace(/\.svg$/, ''), readFileSync(path.join(polarisIconsDir, f), 'utf8').trim());
+            }
+          }
+        }
+        const polarisTokens = {
+          primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/tokens/polaris-light.dtcg.json'), 'utf8')),
+          semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/tokens/polaris-minted.dtcg.json'), 'utf8')),
+          light: {},
+          dark: {},
+          brands: { default: {} },
+        };
+        const bannerEngine = createFigmaEngine({ tokens: polarisTokens, icons: polarisIcons });
+        const bannerContract = ContractSchema.parse(
+          JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/banner.contract.json'), 'utf8')),
+        );
+        const bannerScript = bannerEngine.buildComponentScript(
+          bannerContract,
+          new Map([[bannerContract.id, bannerContract]]),
+          undefined,
+        );
+        if (/banner-icon-warning[\s\S]{0,200}viewBox=\\"0 0 450 450\\"/.test(bannerScript) || /viewBox=\\"0 0 450 450\\"[\s\S]{0,80}449\.26/.test(bannerScript)) {
+          throw new Error('FC-SVG-VIEWBOX: banner emit still embeds 450×450 warning glyph');
+        }
+        if (!bannerScript.includes('viewBox=\\"0 0 20 20\\"') && !bannerScript.includes('viewBox="0 0 20 20"')) {
+          // warning asset must appear with 20×20 — at least one 20 viewBox in script
+          throw new Error('FC-SVG-VIEWBOX: banner emit missing 20×20 viewBox (warning icon)');
+        }
+      }
+
+      // FC-FLEX-BASIS / modal footer grow
+      {
+        const carbonTokens = {
+          primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon.dtcg.json'), 'utf8')),
+          semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon-minted.dtcg.json'), 'utf8')),
+          light: {},
+          dark: {},
+          brands: { default: {} },
+        };
+        const carbonIcons = new Map<string, string>();
+        const carbonIconsDir = path.join(ROOT, 'examples/carbon/assets/icons');
+        if (existsSync(carbonIconsDir)) {
+          for (const f of readdirSync(carbonIconsDir)) {
+            if (f.endsWith('.svg')) {
+              carbonIcons.set(f.replace(/\.svg$/, ''), readFileSync(path.join(carbonIconsDir, f), 'utf8').trim());
+            }
+          }
+        }
+        const carbonEngine = createFigmaEngine({ tokens: carbonTokens, icons: carbonIcons });
+        const modalContract = ContractSchema.parse(
+          JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/contracts/modal.contract.json'), 'utf8')),
+        );
+        const modalData = carbonEngine.compileComponentData(
+          modalContract,
+          new Map([[modalContract.id, modalContract]]),
+        );
+        const find = (s: any, name: string): any => {
+          if (s.name === name) return s;
+          for (const c of s.children ?? []) {
+            const hit = find(c, name);
+            if (hit) return hit;
+          }
+          return null;
+        };
+        const btn6 = find(modalData.variants[0].spec, 'label-6');
+        const btn7 = find(modalData.variants[0].spec, 'label-7');
+        if (!btn6?.grow && !btn6?.fillW) {
+          throw new Error('FC-FLEX-BASIS: modal Cancel (label-6) must grow/fillW for 50/50 footer');
+        }
+        if (!btn7?.grow && !btn7?.fillW) {
+          throw new Error('FC-FLEX-BASIS: modal Save (label-7) must grow/fillW for 50/50 footer');
+        }
+      }
+
+      // FC-SVG-ROTATION — declared transform rotate on icon → spec.rotation
+      {
+        const spinnerContract = ContractSchema.parse(
+          JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/contracts/spinner.contract.json'), 'utf8')),
+        );
+        const polarisIcons = (() => {
+          const m = new Map<string, string>();
+          const dir = path.join(ROOT, 'examples/polaris/assets/icons');
+          if (existsSync(dir)) {
+            for (const f of readdirSync(dir)) {
+              if (f.endsWith('.svg')) m.set(f.replace(/\.svg$/, ''), readFileSync(path.join(dir, f), 'utf8').trim());
+            }
+          }
+          return m;
+        })();
+        const spinnerEngine = createFigmaEngine({
+          tokens: {
+            primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/tokens/polaris-light.dtcg.json'), 'utf8')),
+            semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/polaris/tokens/polaris-minted.dtcg.json'), 'utf8')),
+            light: {},
+            dark: {},
+            brands: { default: {} },
+          },
+          icons: polarisIcons,
+        });
+        const spinnerData = spinnerEngine.compileComponentData(
+          spinnerContract,
+          new Map([[spinnerContract.id, spinnerContract]]),
+        );
+        const findRot = (s: any): any => {
+          if (s.type === 'svg' && typeof s.rotation === 'number') return s;
+          for (const c of s.children ?? []) {
+            const hit = findRot(c);
+            if (hit) return hit;
+          }
+          return null;
+        };
+        const rotated = findRot(spinnerData.variants[0].spec);
+        if (!rotated || rotated.rotation !== 90) {
+          throw new Error('FC-SVG-ROTATION: spinner icon must compile rotation: 90 (CSS clockwise)');
+        }
+        const spinnerScript = spinnerEngine.buildComponentScript(
+          spinnerContract,
+          new Map([[spinnerContract.id, spinnerContract]]),
+          undefined,
+        );
+        if (!spinnerScript.includes('spec.rotation') || !spinnerScript.includes('rt4-svg-rotation')) {
+          throw new Error('FC-SVG-ROTATION: runtime must apply spec.rotation and salt RUNTIME_EMIT_REV');
+        }
+      }
+
+      // FC-WIDTH-TOKEN — text-field showcase width (not hug "Example")
+      {
+        const tfRaw = readFileSync(path.join(ROOT, 'examples/polaris/contracts/text-field.contract.json'), 'utf8');
+        if (!tfRaw.includes('imported.text-field.connected.width.off.off')) {
+          throw new Error('FC-WIDTH-TOKEN: text-field contract must bind connected.width.off.off');
+        }
+        const tfScriptPath = path.join(ROOT, 'examples/polaris/figma/text-field.figma.js');
+        if (existsSync(tfScriptPath)) {
+          const tfScript = readFileSync(tfScriptPath, 'utf8');
+          if (!/"px":\s*211/.test(tfScript) && !/"px":211/.test(tfScript)) {
+            throw new Error('FC-WIDTH-TOKEN: text-field emit must include fixedWidth ~211px');
+          }
+        }
+      }
+
+      // FC-PSEUDO-OVERFLOW — inline-notification must not emit fixed 425px red root-before
+      {
+        const inlPath = path.join(ROOT, 'examples/carbon/contracts/inlinenotification.contract.json');
+        const inlRaw = readFileSync(inlPath, 'utf8');
+        if (inlRaw.includes('root-before') || inlRaw.includes('425')) {
+          throw new Error('FC-PSEUDO-OVERFLOW: inline-notification must drop overflow root-before (425px red spur)');
+        }
+        if (!inlRaw.includes('border-top-width.{contrast}')) {
+          throw new Error('FC-PSEUDO-OVERFLOW: low-contrast box border must bind border-*-width.{contrast}');
+        }
+        const inlScriptPath = path.join(ROOT, 'examples/carbon/figma/inline-notification.figma.js');
+        if (existsSync(inlScriptPath)) {
+          const inlScript = readFileSync(inlScriptPath, 'utf8');
+          if (inlScript.includes('"name": "root-before"') || /"width":\s*425/.test(inlScript)) {
+            throw new Error('FC-PSEUDO-OVERFLOW: emit still contains root-before / 425px decor');
+          }
+        }
+      }
+
+      // FC-ENUM-HOLE — altitude chip Type must include Default (pill), not Squared-only
+      {
+        const chip = JSON.parse(
+          readFileSync(path.join(ROOT, 'examples/altitude/contracts/chip.contract.json'), 'utf8'),
+        ) as { props?: Array<{ name: string; type?: { enum?: string[] } }> };
+        const typeProp = chip.props?.find((p) => p.name === 'type');
+        if (!typeProp?.type?.enum?.includes('default') || !typeProp.type.enum.includes('squared')) {
+          throw new Error('FC-ENUM-HOLE: altitude.chip type must enum [default, squared] (pill + squared)');
+        }
+        if (typeProp.type.enum.includes('unset')) {
+          throw new Error('FC-ENUM-HOLE: altitude.chip must not use capture-side unset as enum value');
+        }
+        const chipScriptPath = path.join(ROOT, 'examples/altitude/figma/chip.figma.js');
+        if (existsSync(chipScriptPath)) {
+          const chipScript = readFileSync(chipScriptPath, 'utf8');
+          if (!/Type=Default/.test(chipScript) || !/Type=Squared/.test(chipScript)) {
+            throw new Error('FC-ENUM-HOLE: chip emit must include Type=Default and Type=Squared variants');
+          }
+          if (!chipScript.includes('border-top-left-radius/unset')) {
+            throw new Error('FC-ENUM-HOLE: chip Default must bind pill radius token (.../unset)');
+          }
+          if (!chipScript.includes('border-top-left-radius/squared')) {
+            throw new Error('FC-ENUM-HOLE: chip Squared must bind squared radius token');
+          }
+        }
+      }
+
+      // FC-CONTRAST-ICON — high-contrast close glyph uses inverse/white paint
+      {
+        const inlContract = ContractSchema.parse(
+          JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/contracts/inlinenotification.contract.json'), 'utf8')),
+        );
+        const inlEngine = createFigmaEngine({
+          tokens: {
+            primitives: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon.dtcg.json'), 'utf8')),
+            semantic: JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens/carbon-minted.dtcg.json'), 'utf8')),
+            light: {},
+            dark: {},
+            brands: { default: {} },
+          },
+          icons: (() => {
+            const m = new Map<string, string>();
+            const dir = path.join(ROOT, 'examples/carbon/assets/icons');
+            if (existsSync(dir)) {
+              for (const f of readdirSync(dir)) {
+                if (f.endsWith('.svg')) m.set(f.replace(/\.svg$/, ''), readFileSync(path.join(dir, f), 'utf8').trim());
+              }
+            }
+            return m;
+          })(),
+        });
+        const inlData = inlEngine.compileComponentData(
+          inlContract,
+          new Map([[inlContract.id, inlContract]]),
+        );
+        const high = inlData.variants.find((v: any) => /Contrast=High/i.test(v.name) || /contrast.*high/i.test(v.name));
+        const low = inlData.variants.find((v: any) => /Contrast=Low/i.test(v.name) || /contrast.*low/i.test(v.name));
+        const findClosePaint = (s: any): string | null => {
+          if (s.name?.includes('close-button') && s.svgPaintVar) return s.svgPaintVar;
+          for (const c of s.children ?? []) {
+            const hit = findClosePaint(c);
+            if (hit) return hit;
+          }
+          return null;
+        };
+        const highPaint = high ? findClosePaint(high.spec) : null;
+        const lowPaint = low ? findClosePaint(low.spec) : null;
+        if (!highPaint || !/color\/high/.test(highPaint)) {
+          throw new Error(`FC-CONTRAST-ICON: high-contrast close svgPaintVar must end color/high (got ${highPaint})`);
+        }
+        if (!lowPaint || !/color\/low/.test(lowPaint)) {
+          throw new Error(`FC-CONTRAST-ICON: low-contrast close svgPaintVar must end color/low (got ${lowPaint})`);
+        }
+      }
+
+      // FC-STATE-PREVIEW-NOISE — altitude chip Default-only canvas (no Focus Visible grid)
+      {
+        const chip = JSON.parse(
+          readFileSync(path.join(ROOT, 'examples/altitude/contracts/chip.contract.json'), 'utf8'),
+        ) as { figmaStatePreviews?: boolean };
+        if (chip.figmaStatePreviews) {
+          throw new Error('FC-STATE-PREVIEW-NOISE: altitude.chip figmaStatePreviews must be false (focus blue rings clutter showcase)');
+        }
+        const chipScriptPath = path.join(ROOT, 'examples/altitude/figma/chip.figma.js');
+        if (existsSync(chipScriptPath)) {
+          const chipScript = readFileSync(chipScriptPath, 'utf8');
+          if (/State=Focus Visible/.test(chipScript)) {
+            throw new Error('FC-STATE-PREVIEW-NOISE: chip emit must not include Focus Visible variants');
+          }
+        }
+      }
+
+      console.log(
+        'code-to-canvas-wave-a-emit-pins: FC-LH-RATIO PERCENT, FC-PLACEHOLDER empty, FC-BLOCK-ROW VERTICAL, FC-SLOT-DEFAULT Show=false, FC-ABS-SIZE fw!=null, FC-PSEUDO-SIZE ellipse stroke, FC-PSEUDO-STROKE-GLYPH L→SVG, FC-VARIANT-BOOL-LBP, FC-CARBON-TABS-LABEL, FC-FIGMA-CLIP-DEFAULT, FC-ASTRYX-SLIDER-TOOLTIP, FC-SVG-VIEWBOX, FC-FLEX-BASIS, FC-SVG-ROTATION, FC-WIDTH-TOKEN, FC-CONTRAST-ICON, FC-ENUM-HOLE chip, FC-PSEUDO-OVERFLOW, FC-STATE-PREVIEW-NOISE — all green',
+      );
+    },
+  },
+
+  {
+    // Trap corpus structural gate — contracts/scripts/refs + emit markers.
+    // Does NOT require matchDeveloped / pixel scores (those stay warn/pending).
+    id: 'trap-corpus-check',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(process.execPath, ['scripts/trap-corpus-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`trap-corpus-check failed:\n${out}`);
+      }
+      if (!out.includes('trap-corpus-check')) {
+        throw new Error('trap-corpus-check did not print summary');
+      }
+      console.log('trap-corpus-check: frozen adversarial stems structural/compile markers green');
     },
   },
 ];
