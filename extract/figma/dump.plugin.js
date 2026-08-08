@@ -1,4 +1,4 @@
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.13).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.17).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -17,6 +17,16 @@
 //                      already means). The emitter has written layoutWrap from a
 //                      contract's `layout.wrap` since v15 and nothing read it back,
 //                      so a wrapping row returned as a single line with no receipt.
+//                      dump v1.17: mode 'GRID' (A2 layout grammar, probes P1–P14)
+//                      — the flex-era primary/counter/spacing are NOT emitted
+//                      (inert defaults on GRID frames, invented facts); instead
+//                      `grid: { rows, columns, rowGap, columnGap, flow? }` carries
+//                      normalized tracks ({px}|{fr}|{fit:true} ← FIXED/FLEX/HUG),
+//                      both gaps, and 'row' auto-flow. Per-child placement rides
+//                      `cell` (anchors/spans/aligns, ABSOLUTE-gated per P13; not
+//                      captured under ROW_AUTO_FLOW — order is the fact, P5).
+//                      Occupancy beyond the declared tracks degrades under
+//                      grid-implicit-tracks-lossy (P9).
 //   bound              variable bindings: Plugin-API field → variable name
 //                      (slash-form, e.g. paddingLeft: "space/inset-x/sm")
 //   minWidth/minHeight/maxWidth/maxHeight
@@ -566,7 +576,49 @@ async function dumpNode(node, nodePath, parent) {
     degrade('vector-geometry-unsupported', nodePath, node.type + ' geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)');
   }
 
-  if ('layoutMode' in node && node.layoutMode !== 'NONE') {
+  // dump v1.17: GRID layout capture (A2 layout grammar; probes P1–P14).
+  // The flex-era fields (primary/counter/spacing) are NOT emitted on GRID
+  // frames — they read as inert defaults there and would be invented facts
+  // (the probe doc's "captures zero grid facts" hole, closed). Padding and
+  // sizing modes ARE grid facts (P6/P7) and stay. Tracks come from the
+  // STRUCTURED gridRowSizes/gridColumnSizes arrays, normalized to the
+  // contract's three spellings (FIXED→{px}, FLEX→{fr}, HUG→{fit:true} —
+  // P2b: the enum is exactly those three; values verbatim, fractional ok).
+  if ('layoutMode' in node && node.layoutMode === 'GRID') {
+    const toTrack = (t) => (t.type === 'FIXED' ? { px: t.value } : t.type === 'FLEX' ? { fr: t.value } : { fit: true });
+    const grid = {
+      rows: (node.gridRowSizes || []).map(toTrack),
+      columns: (node.gridColumnSizes || []).map(toTrack),
+      rowGap: node.gridRowGap,
+      columnGap: node.gridColumnGap,
+    };
+    if (node.gridItemsPositioning === 'ROW_AUTO_FLOW') grid.flow = 'row';
+    out.layout = {
+      mode: 'GRID',
+      padding: [node.paddingTop, node.paddingRight, node.paddingBottom, node.paddingLeft],
+      primarySizing: node.primaryAxisSizingMode,
+      counterSizing: node.counterAxisSizingMode,
+      grid,
+    };
+    // P9 — the lossy edge, receipted BY NAME: occupied cells beyond the
+    // declared track lists mean the canvas absorbed overflow by rewriting
+    // the declaration (MANUAL append) or under-reports it (ROW_AUTO_FLOW
+    // anchors exceed gridRowCount). The declared list and the occupancy
+    // disagree — a contract must never rely on implicit tracks, so the
+    // disagreement degrades under its own code instead of passing silently.
+    try {
+      let maxRow = 0, maxCol = 0;
+      for (const child of node.children || []) {
+        if (child.layoutPositioning === 'ABSOLUTE') continue; // P13 gate
+        if (typeof child.gridRowAnchorIndex !== 'number') continue;
+        maxRow = Math.max(maxRow, child.gridRowAnchorIndex + (child.gridRowSpan || 1));
+        maxCol = Math.max(maxCol, child.gridColumnAnchorIndex + (child.gridColumnSpan || 1));
+      }
+      if (maxRow > grid.rows.length || maxCol > grid.columns.length) {
+        degrade('grid-implicit-tracks-lossy', nodePath, 'occupied cells (' + maxRow + '×' + maxCol + ') exceed the declared track lists (' + grid.rows.length + '×' + grid.columns.length + ') — implicit-track readback is LOSSY (P9); the declared tracks are captured, the overflowing placements are not contract-expressible (grid-implicit-tracks refusal downstream)');
+      }
+    } catch (e) { /* occupancy scan is a receipt pass — capture stands */ }
+  } else if ('layoutMode' in node && node.layoutMode !== 'NONE') {
     out.layout = {
       mode: node.layoutMode,
       primary: node.primaryAxisAlignItems,
@@ -599,6 +651,23 @@ async function dumpNode(node, nodePath, parent) {
         degrade('wrap-align-content-unsupported', nodePath, 'counterAxisAlignContent SPACE_BETWEEN on a WRAPPING stack is not captured (dump v1.12 carries layoutWrap and a distinct counterAxisSpacing only) — the wrapped LINES render packed rather than distributed');
       }
     }
+  }
+  // dump v1.17: GRID-cell placement — captured on every IN-FLOW child of a
+  // MANUAL GRID parent. Anchors are the read-only getters (P3), spans carry
+  // only when > 1, aligns only when not AUTO (the API's MIN|CENTER|MAX —
+  // STRETCH/BASELINE do not exist, P3). Gated on layoutPositioning !==
+  // 'ABSOLUTE' (P13 quirk: absolute children still REPORT anchors 0,0 —
+  // reading them would invent a placement the overlay grammar owns). Under
+  // ROW_AUTO_FLOW no cell is captured: the placement fact is CHILD ORDER
+  // (P5), and computed anchors are solver output, not declared facts.
+  if (parent && parent.layoutMode === 'GRID' && parent.gridItemsPositioning !== 'ROW_AUTO_FLOW'
+      && node.layoutPositioning !== 'ABSOLUTE' && typeof node.gridRowAnchorIndex === 'number') {
+    const cell = { row: node.gridRowAnchorIndex, column: node.gridColumnAnchorIndex };
+    if (typeof node.gridRowSpan === 'number' && node.gridRowSpan > 1) cell.rowSpan = node.gridRowSpan;
+    if (typeof node.gridColumnSpan === 'number' && node.gridColumnSpan > 1) cell.columnSpan = node.gridColumnSpan;
+    if (node.gridChildHorizontalAlign && node.gridChildHorizontalAlign !== 'AUTO') cell.alignX = node.gridChildHorizontalAlign;
+    if (node.gridChildVerticalAlign && node.gridChildVerticalAlign !== 'AUTO') cell.alignY = node.gridChildVerticalAlign;
+    out.cell = cell;
   }
   if ('cornerRadius' in node && typeof node.cornerRadius === 'number' && node.cornerRadius !== 0) {
     out.cornerRadius = node.cornerRadius;
@@ -903,8 +972,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.16) for design→contract proposal.',
-    dumpVersion: '1.16',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.17) for design→contract proposal.',
+    dumpVersion: '1.17',
   },
 };
 dumps._degradations = degradations;

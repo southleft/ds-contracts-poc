@@ -1,0 +1,32 @@
+{
+  "id": "grid-two-column",
+  "feature": "grid-tracks",
+  "construct": "display: grid; grid-template-columns: 1fr 1fr",
+  "why": "The minimal 2-D layout; the exact construct the frozen grid-2d REFUSED case measures today.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.columns",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-columns",
+    "capturedValue": "100px 100px",
+    "carriedValue": "1fr 1fr"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "supersedes the frozen grid-2d ABSENT declaration — the platform grew the spelling"
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "gridColumnSizes [{FLEX,1},{FLEX,1}] is the grid DEFAULT and reads back exactly"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "structured gridColumnSizes -> grid-template-columns: 1fr 1fr"
+    }
+  },
+  "probe": "P1 (defaults are exactly this), P8 (readback exactness)",
+  "dumpSnippet": "dump.snippet.json"
+}

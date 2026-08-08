@@ -330,43 +330,203 @@ export function compareContracts(
     comparePart(w, p);
   }
 
+  /** Part name (path tail) — the G4 area key for effective placement.
+   *  (Function declarations: comparePart is called above these definitions
+   *  and function hoisting is what makes that legal.) */
+  function nameOf(w: WalkedPart): string {
+    return w.path.split("/").pop() ?? w.path;
+  }
+  /** Effective cell rect of a part under a grid parent: its own explicit
+   *  placement, or the parent area rect its NAME anchors to (G4 — the area
+   *  name IS the placement anchor; the contract owns the name, both
+   *  surfaces carry the rect). */
+  function effPlacement(w: WalkedPart): J | undefined {
+    const own = w.part.placement as J | undefined;
+    if (own) return own;
+    const parent = w.chain.length >= 2 ? w.chain[w.chain.length - 2] : undefined;
+    const areas = (parent?.layout as J | undefined)?.areas as
+      | Record<string, J>
+      | undefined;
+    return areas?.[nameOf(w)];
+  }
+  /** Is this part's PARENT a declared grid (on either contract)? */
+  function parentIsGrid(w: WalkedPart): boolean {
+    const parent = w.chain.length >= 2 ? w.chain[w.chain.length - 2] : undefined;
+    return (parent?.layout as J | undefined)?.display === "grid";
+  }
+  /** Gap component comparison by the canvas the facts draw: a token ref and
+   *  the px it resolves to are the SAME canvas gap. */
+  function gapEqual(a: unknown, b: unknown): boolean {
+    if (deepEqual(a, b)) return true;
+    const lit = (v: unknown): number | null => {
+      if (typeof v === "number") return v;
+      if (typeof v === "string" && v.startsWith("{") && v.endsWith("}")) {
+        try {
+          const r = corpus.resolveLiteral(v.slice(1, -1));
+          const n = typeof r === "number" ? r : parseFloat(String(r));
+          return Number.isNaN(n) ? null : n;
+        } catch {
+          return null;
+        }
+      }
+      return null;
+    };
+    const la = lit(a);
+    const lb = lit(b);
+    return la !== null && lb !== null && la === lb;
+  }
+
+  /** A2 grid fact buckets (proposal G6 differ row): grid-track-list,
+   *  grid-gap (×2), grid-area-map, grid-flow — parent side; grid-placement
+   *  and grid-align land per child below. Named buckets ALWAYS — a grid
+   *  fact never falls through to the flex projection or uncategorized. */
+  function compareGridLayout(at: string, s: WalkedPart, p: WalkedPart) {
+    const sl = (s.part.layout as J | undefined) ?? {};
+    const pl = (p.part.layout as J | undefined) ?? {};
+    for (const axis of ["rows", "columns"] as const) {
+      if (sl[axis] === undefined && pl[axis] === undefined) continue;
+      if (deepEqual(sl[axis], pl[axis])) matched(`${at} grid-track-list ${axis}`);
+      else
+        mismatch(
+          `${at} grid-track-list ${axis}`,
+          `${JSON.stringify(sl[axis])} vs ${JSON.stringify(pl[axis])} (ordered, typed — a track edit is ONE fact, a reorder a different fact)`,
+        );
+    }
+    const sGap = (sl.gap as J | undefined) ?? {};
+    const pGap = (pl.gap as J | undefined) ?? {};
+    for (const axis of ["row", "column"] as const) {
+      if (sGap[axis] === undefined && pGap[axis] === undefined) continue;
+      if (gapEqual(sGap[axis], pGap[axis]))
+        matched(`${at} grid-gap ${axis}`);
+      else
+        mismatch(
+          `${at} grid-gap ${axis}`,
+          `${JSON.stringify(sGap[axis])} vs ${JSON.stringify(pGap[axis])}`,
+        );
+    }
+    const sAreas = sl.areas as Record<string, J> | undefined;
+    const pAreas = pl.areas as Record<string, J> | undefined;
+    if (sAreas || pAreas) {
+      if (deepEqual(sAreas, pAreas)) matched(`${at} grid-area-map`);
+      else if (sAreas && !pAreas) {
+        // G4: Figma has no native area names — the CONTRACT owns them; the
+        // canvas carries only rects, which the per-child grid-placement
+        // buckets referee (effective placement = own placement ?? area rect).
+        absent(
+          `${at} grid-area-map`,
+          `area NAMES (${Object.keys(sAreas).join(", ")}) are contract-owned — the canvas carries only the rects (G4); rect fidelity referees per child in the grid-placement buckets`,
+        );
+      } else {
+        mismatch(
+          `${at} grid-area-map`,
+          `${JSON.stringify(sAreas)} vs ${JSON.stringify(pAreas)}`,
+        );
+      }
+    }
+    if (sl.flow !== undefined || pl.flow !== undefined) {
+      if (sl.flow === pl.flow) matched(`${at} grid-flow`);
+      else
+        mismatch(
+          `${at} grid-flow`,
+          `${JSON.stringify(sl.flow)} vs ${JSON.stringify(pl.flow)}`,
+        );
+    }
+  }
+
   function comparePart(s: WalkedPart, p: WalkedPart) {
     const at = `part ${s.path}`;
     const isRoot = s.path === "root";
-    const sl = normLayout(s.part.layout as J | undefined, isRoot);
-    const pl = normLayout(p.part.layout as J | undefined, isRoot);
-    if ((s.part.layout as J | undefined)?.display === "inline-flex") {
-      absent(
-        `${at} layout.display`,
-        "inline vs block flex has no canvas projection",
-      );
-    }
+    const sGrid = (s.part.layout as J | undefined)?.display === "grid";
+    const pGrid = (p.part.layout as J | undefined)?.display === "grid";
     if (s.part.layoutByProp)
       absent(
         `${at} layoutByProp`,
         "per-variant layout overrides not inverted in dump v1",
       );
-    if (
-      sl.mode === pl.mode &&
-      sl.primary === pl.primary &&
-      sl.counter === pl.counter &&
-      sl.grow === pl.grow
-    ) {
-      if (sl.stretch === pl.stretch) matched(`${at} layout`);
-      else if (sl.stretch && !pl.stretch) {
-        matched(`${at} layout`, "canvas-equal; see stretch note");
-        absent(
-          `${at} layout align:stretch`,
-          "stretch leaves no artifact here (children are instances/slots — excluded from the generator fill-width path)",
+    if (sGrid || pGrid) {
+      // A2 grid — the mode-switch-is-structural rule (P10): grid vs flex is
+      // never a field-level layout diff. The canvas physically destroys
+      // tracks on a layout.mode switch, so the whole grid fact family is
+      // surfaced as ONE named structural loss — never absorbed into the
+      // flex projection's defaults.
+      if (sGrid !== pGrid) {
+        mismatch(
+          `${at} layout.mode`,
+          `${sGrid ? "grid" : "flex-family"} vs ${pGrid ? "grid" : "flex-family"} — STRUCTURAL LOSS (P10: a layout.mode switch physically destroys tracks; every track/gap/area/placement fact under this part is invalidated, not individually diffed)`,
         );
       } else {
-        mismatch(`${at} layout align:stretch`, "proposal invented stretch");
+        compareGridLayout(at, s, p);
       }
     } else {
-      mismatch(
-        `${at} layout`,
-        `${JSON.stringify(sl)} vs ${JSON.stringify(pl)}`,
-      );
+      const sl = normLayout(s.part.layout as J | undefined, isRoot);
+      const pl = normLayout(p.part.layout as J | undefined, isRoot);
+      if ((s.part.layout as J | undefined)?.display === "inline-flex") {
+        absent(
+          `${at} layout.display`,
+          "inline vs block flex has no canvas projection",
+        );
+      }
+      if (
+        sl.mode === pl.mode &&
+        sl.primary === pl.primary &&
+        sl.counter === pl.counter &&
+        sl.grow === pl.grow
+      ) {
+        if (sl.stretch === pl.stretch) matched(`${at} layout`);
+        else if (sl.stretch && !pl.stretch) {
+          matched(`${at} layout`, "canvas-equal; see stretch note");
+          absent(
+            `${at} layout align:stretch`,
+            "stretch leaves no artifact here (children are instances/slots — excluded from the generator fill-width path)",
+          );
+        } else {
+          mismatch(`${at} layout align:stretch`, "proposal invented stretch");
+        }
+      } else {
+        mismatch(
+          `${at} layout`,
+          `${JSON.stringify(sl)} vs ${JSON.stringify(pl)}`,
+        );
+      }
+    }
+
+    // A2 grid child buckets: grid-placement (anchor+span, ONE fact) and
+    // grid-align (per-part alignment) — compared by EFFECTIVE rect so a
+    // contract area rect and a proposal explicit placement of the same
+    // cells are the same canvas fact (G4).
+    if (parentIsGrid(s) || parentIsGrid(p)) {
+      const se = effPlacement(s);
+      const pe = effPlacement(p);
+      if (se || pe) {
+        const cellOf = (x: J | undefined): J | null =>
+          x
+            ? {
+                row: x.row,
+                column: x.column,
+                ...(x.rowSpan !== undefined ? { rowSpan: x.rowSpan } : {}),
+                ...(x.columnSpan !== undefined
+                  ? { columnSpan: x.columnSpan }
+                  : {}),
+              }
+            : null;
+        if (deepEqual(cellOf(se), cellOf(pe)))
+          matched(`${at} grid-placement`);
+        else
+          mismatch(
+            `${at} grid-placement`,
+            `${JSON.stringify(cellOf(se))} vs ${JSON.stringify(cellOf(pe))}`,
+          );
+        const alignOf = (x: J | undefined): string =>
+          `${(x?.alignX as string) ?? "auto"}/${(x?.alignY as string) ?? "auto"}`;
+        if (se?.alignX !== undefined || se?.alignY !== undefined || pe?.alignX !== undefined || pe?.alignY !== undefined) {
+          if (alignOf(se) === alignOf(pe)) matched(`${at} grid-align`);
+          else
+            mismatch(
+              `${at} grid-align`,
+              `${alignOf(se)} vs ${alignOf(pe)}`,
+            );
+        }
+      }
     }
 
     // Non-cascade tokens: exact at the declaration site.

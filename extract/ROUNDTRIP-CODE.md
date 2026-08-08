@@ -55,7 +55,7 @@ css-module anatomy adapter: **round-trip identity**. Verdicts:
 | `anatomy.root.track.spacerEnd` | MATCHED | visibleWhen {"prop":"value","equals":"off"} |
 | `anatomy.root.textCol` | MATCHED | 1 token binding(s) |
 | `anatomy.root.textCol.labelText` | MATCHED | content ← label, 2 token binding(s) |
-| `anatomy.root.textCol.descriptionText` | MATCHED | content ← description, 2 token binding(s) |
+| `anatomy.root.textCol.descriptionText` | MATCHED | content ← description, 3 token binding(s) |
 
 ## Card — 9 matched · 10 code-absent · 0 mismatched
 

@@ -17,17 +17,17 @@
   "cellPick": "standalone-node",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 37.76978417266187,
-    "pctAAUnmasked": 17.535971223021583,
-    "pctAAMasked": 17.535971223021583,
+    "pctExactUnmasked": 40.58098591549296,
+    "pctAAUnmasked": 18.30985915492958,
+    "pctAAMasked": 18.30985915492958,
     "maskCoveragePct": 0,
-    "canvasPx": "139x8",
-    "realPx": "139x8",
-    "inkCanvasPct": 17.805755395683455,
-    "inkRealPct": 26.169064748201436
+    "canvasPx": "142x8",
+    "realPx": "142x8",
+    "inkCanvasPct": 17.6056338028169,
+    "inkRealPct": 31.690140845070424
   },
   "reference": "parity/receipts/console-loop/mui/refs/table-pagination.png",
-  "referenceSha256": "ca1b769694b181d59df1fd4c38a43ec876c1a9549e975437ceec8b740ed75014",
+  "referenceSha256": "eeb604a471ad4717070b8c557871c8a589f8e38e1dabbd876f44da961882672c",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/table-pagination.png",
   "canvasShotSha256": "f4d8451d9160f247ccc3a18de303ffbbf0de255014ef38743724fa675ad909af",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/table-pagination.diff.png",
@@ -36,8 +36,8 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 8.36330935251798,
+  "inkDelta": 14.084507042253524,
   "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=17.54 > 5)"
+  "note": "pixel bar missed (pctAAMasked=18.31 > 5)"
 }

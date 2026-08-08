@@ -1,0 +1,31 @@
+{
+  "id": "grid-child-fill-cell",
+  "feature": "grid-sizing",
+  "construct": "grid child stretching to its cell (CSS default; canvas FILL both axes)",
+  "why": "The default cell behavior both grammars share; the bento uses it throughout.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.placement — the cell anchor; cell-FILL itself is stretch-by-ABSENCE (no justify-self/align-self, no width/height: the G3 spelling both grammars share). The fill geometry (100×40 here) is pinned canvas-side by grid-bento-check (every bento child FILL/FILL, gap-corrected cell math).",
+  "observable": {
+    "part": "a",
+    "channel": "grid-row-start",
+    "capturedValue": "1"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "The default cell behavior both grammars share; the bento uses it throughout."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "layoutSizingHorizontal/Vertical FILL after append; child fills exactly (gap-corrected cell math verified)"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "FILL reads back; CSS emits nothing (stretch is the CSS grid default)"
+    }
+  },
+  "probe": "P4: 245x115 = exactly (500-10)/2 x (240-10)/2; P8 all children FILL exact",
+  "dumpSnippet": "dump.snippet.json"
+}

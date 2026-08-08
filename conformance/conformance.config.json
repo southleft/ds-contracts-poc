@@ -225,10 +225,281 @@
       "blockStage": true
     },
     {
-      "__case": "layout: grid-auto-rows: 24px + grid-auto-flow: column — declared REFUSED",
+      "__case": "grid-composition: Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent — declared CARRIED",
+      "name": "CaseGridAbsoluteOverlay",
+      "importName": "CaseGridAbsoluteOverlay",
+      "contract": "conformance/seeds/grid-absolute-overlay.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-areas: a declared grid area with NO children (empty slot) — declared CARRIED",
+      "name": "CaseGridAreaEmptySlot",
+      "importName": "CaseGridAreaEmptySlot",
+      "contract": "conformance/seeds/grid-area-empty-slot.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-areas: area occupancy that cannot tile grid-template-areas (gapped or non-rectangular per CSS rules) — declared LOWERED",
+      "name": "CaseGridAreaNonrectangular",
+      "importName": "CaseGridAreaNonrectangular",
+      "contract": "conformance/seeds/grid-area-nonrectangular.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-responsive: grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) — declared REFUSED",
+      "name": "CaseGridAutoFitMinmax",
+      "importName": "CaseGridAutoFitMinmax",
+      "contract": "conformance/seeds/grid-auto-fit-minmax.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-flow: grid-auto-flow: row over declared columns, placement by child order — declared CARRIED",
+      "name": "CaseGridAutoFlowRow",
+      "importName": "CaseGridAutoFlowRow",
+      "contract": "conformance/seeds/grid-auto-flow-row.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-placement: 3x4 grid, rows [80px,1fr,2fr], cols [160px,1fr,1fr,120px], gaps 12/16, header 1x4 + sidebar 2x1 + main 1x2 + rail 2x1 + footer 1x2, all cells FILL — declared CARRIED",
+      "name": "CaseGridBentoSpanMatrix",
+      "importName": "CaseGridBentoSpanMatrix",
+      "contract": "conformance/seeds/grid-bento-span-matrix.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true,
+      "stage": {
+        "width": 680,
+        "height": 520,
+        "padding": 16
+      }
+    },
+    {
+      "__case": "grid-alignment: justify-self: center; align-self: end on a fixed-size child — declared CARRIED",
+      "name": "CaseGridChildAlign",
+      "importName": "CaseGridChildAlign",
+      "contract": "conformance/seeds/grid-child-align.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-sizing: grid child stretching to its cell (CSS default; canvas FILL both axes) — declared CARRIED",
+      "name": "CaseGridChildFillCell",
+      "importName": "CaseGridChildFillCell",
+      "contract": "conformance/seeds/grid-child-fill-cell.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-sizing: layout.grow / flex-grow on a child of a grid parent — declared REFUSED",
+      "name": "CaseGridChildGrowInvalid",
+      "importName": "CaseGridChildGrowInvalid",
+      "contract": "conformance/seeds/grid-child-grow-invalid.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-sizing: a TEXT child hugging its content inside a grid cell — declared CARRIED",
+      "name": "CaseGridChildTextHug",
+      "importName": "CaseGridChildTextHug",
+      "contract": "conformance/seeds/grid-child-text-hug.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-placement: grid-column: 1 / span 2 (child spans 2 columns) — declared CARRIED",
+      "name": "CaseGridColSpan",
+      "importName": "CaseGridColSpan",
+      "contract": "conformance/seeds/grid-col-span.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-placement: grid-row: 3; grid-column: 2 (explicit cell placement, 0-based contract / 1-based CSS) — declared CARRIED",
+      "name": "CaseGridExplicitAnchor",
+      "importName": "CaseGridExplicitAnchor",
+      "contract": "conformance/seeds/grid-explicit-anchor.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-flow: grid-auto-flow: column — declared REFUSED",
+      "name": "CaseGridFlowColumn",
+      "importName": "CaseGridFlowColumn",
+      "contract": "conformance/seeds/grid-flow-column.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-flow: grid-auto-flow: dense — declared REFUSED",
+      "name": "CaseGridFlowDense",
+      "importName": "CaseGridFlowDense",
+      "contract": "conformance/seeds/grid-flow-dense.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-gaps: row-gap: 8px; column-gap: 16px (distinct values) — declared CARRIED",
+      "name": "CaseGridGapRowColumn",
+      "importName": "CaseGridGapRowColumn",
+      "contract": "conformance/seeds/grid-gap-row-column.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-gaps: gap: 12px 16px (and one-value gap: 12px) — declared LOWERED",
+      "name": "CaseGridGapShorthand",
+      "importName": "CaseGridGapShorthand",
+      "contract": "conformance/seeds/grid-gap-shorthand.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-flow: auto-placement beyond the declared track list (implicit rows; grid-auto-rows reliance) — declared REFUSED",
       "name": "CaseGridImplicitTracks",
       "importName": "CaseGridImplicitTracks",
       "contract": "conformance/seeds/grid-implicit-tracks.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-composition: a grid frame as a FILL child of a flex (auto-layout) parent — declared CARRIED",
+      "name": "CaseGridInFlexFill",
+      "importName": "CaseGridInFlexFill",
+      "contract": "conformance/seeds/grid-in-flex-fill.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-composition: a component INSTANCE placed in a cell with position + FILL — declared CARRIED",
+      "name": "CaseGridInstanceChild",
+      "importName": "CaseGridInstanceChild",
+      "contract": "conformance/seeds/grid-instance-child.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-areas: grid-template-areas: 'header header' 'nav content' + grid-area: header on children — declared CARRIED",
+      "name": "CaseGridNamedAreaSlots",
+      "importName": "CaseGridNamedAreaSlots",
+      "contract": "conformance/seeds/grid-named-area-slots.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-composition: layoutMode GRID on a COMPONENT node (canvas variants are components) — declared CARRIED",
+      "name": "CaseGridOnComponentVariant",
+      "importName": "CaseGridOnComponentVariant",
+      "contract": "conformance/seeds/grid-on-component-variant.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-placement: grid-row: 2 / span 2 (child spans 2 rows) — declared CARRIED",
+      "name": "CaseGridRowSpan",
+      "importName": "CaseGridRowSpan",
+      "contract": "conformance/seeds/grid-row-span.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-tracks: grid-template-columns: 240px 1fr — declared CARRIED",
+      "name": "CaseGridSidebarPxFr",
+      "importName": "CaseGridSidebarPxFr",
+      "contract": "conformance/seeds/grid-sidebar-px-fr.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true,
+      "stage": {
+        "width": 460,
+        "height": 96,
+        "padding": 16
+      }
+    },
+    {
+      "__case": "grid-responsive: grid-template-columns: subgrid on a nested grid — declared REFUSED",
+      "name": "CaseGridSubgrid",
+      "importName": "CaseGridSubgrid",
+      "contract": "conformance/seeds/grid-subgrid.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-tracks: grid-template-columns: fit-content(100%) 1fr — declared CARRIED",
+      "name": "CaseGridTrackFitContent",
+      "importName": "CaseGridTrackFitContent",
+      "contract": "conformance/seeds/grid-track-fit-content.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-responsive: grid-template-columns: minmax(100px, 300px) 1fr — declared REFUSED",
+      "name": "CaseGridTrackMinmax",
+      "importName": "CaseGridTrackMinmax",
+      "contract": "conformance/seeds/grid-track-minmax.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-responsive: grid-template-columns: 50% 1fr — declared REFUSED",
+      "name": "CaseGridTrackPercent",
+      "importName": "CaseGridTrackPercent",
+      "contract": "conformance/seeds/grid-track-percent.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-tracks: a 0px or 0fr track written to the canvas — declared REFUSED",
+      "name": "CaseGridTrackZeroValue",
+      "importName": "CaseGridTrackZeroValue",
+      "contract": "conformance/seeds/grid-track-zero-value.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-tracks: grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values) — declared CARRIED",
+      "name": "CaseGridTracksMixedFractional",
+      "importName": "CaseGridTracksMixedFractional",
+      "contract": "conformance/seeds/grid-tracks-mixed-fractional.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
+      "__case": "grid-tracks: display: grid; grid-template-columns: 1fr 1fr — declared CARRIED",
+      "name": "CaseGridTwoColumn",
+      "importName": "CaseGridTwoColumn",
+      "contract": "conformance/seeds/grid-two-column.contract.json",
       "sampleText": "",
       "axes": [],
       "blockStage": true

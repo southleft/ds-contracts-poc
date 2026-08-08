@@ -1,0 +1,31 @@
+{
+  "id": "grid-area-empty-slot",
+  "feature": "grid-areas",
+  "construct": "a declared grid area with NO children (empty slot)",
+  "why": "Dual slot-scoring convention: empty = shared placeholder on BOTH surfaces, carrying the area's placement so the grid shape stays visible.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.areas — area \"b\" declared with NO occupant (dual convention: both surfaces render a slot placeholder at the rect, G4)",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-areas",
+    "capturedValue": "\"a b\""
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Dual slot-scoring convention: empty = shared placeholder on BOTH surfaces, carrying the area's placement so the grid shape stays visible."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "placeholder frame, slot-named, placed at the area rect"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "placeholder element with slot class at the same rect; placeholder-vs-filled state must match across surfaces or it is a DIFF"
+    }
+  },
+  "probe": "grammar G4 (dual convention); placement carriage per P3/P8",
+  "dumpSnippet": "dump.snippet.json"
+}

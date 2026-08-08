@@ -1,0 +1,30 @@
+{
+  "id": "grid-child-text-hug",
+  "feature": "grid-sizing",
+  "construct": "a TEXT child hugging its content inside a grid cell",
+  "why": "HUG is legal ONLY on text and layout-bearing children — same fence as flex, re-proved under grid.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.text — a TEXT child hugging its content in a cell; HUG is legal ONLY on text and layout-bearing children (P4: plain-frame HUG throws by name)",
+  "observable": {
+    "part": "a",
+    "channel": "__text",
+    "capturedValue": "Hug"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "HUG is legal ONLY on text and layout-bearing children — same fence as flex, re-proved under grid."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "text HUG ok (w=43); plain-frame HUG throws 'HUG can only be set on auto-layout frames or text children' — the schema mirrors the fence"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED"
+    }
+  },
+  "probe": "P4: text HUG ok, empty-frame HUG refused with named error",
+  "dumpSnippet": "dump.snippet.json"
+}

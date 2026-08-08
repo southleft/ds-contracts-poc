@@ -1,0 +1,32 @@
+{
+  "id": "grid-track-minmax",
+  "feature": "grid-responsive",
+  "construct": "grid-template-columns: minmax(100px, 300px) 1fr",
+  "why": "Per-track min/max constraints have no canvas spelling — the exact API refusal is on record.",
+  "expect": "REFUSED",
+  "expectName": "grid-track-minmax",
+  "expectWhere": "LEDGER.md / refusal receipts (grid-track-minmax — P6 exact API error on gridColumnSizes: Unrecognized key(s) min, max). Child minWidth/maxWidth DO exist (P6) but are child facts — a reader must not launder them into minmax().",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-columns",
+    "capturedValue": "120px 80px",
+    "carriedValue": "120px"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "Per-track min/max constraints have no canvas spelling — the exact API refusal is on record."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "REFUSED",
+      "note": "exact error: \"in set_gridColumnSizes: Property 'gridColumnSizes' failed validation: Unrecognized key(s) in object: 'min', 'max' at index 0\""
+    },
+    "canvasToCode": {
+      "expect": "UNREACHABLE",
+      "note": "unconstructible on canvas; child minWidth/maxWidth DO exist (P6) but are child facts, not track facts — a reader must not launder them into minmax()"
+    }
+  },
+  "probe": "P6",
+  "dumpSnippet": null
+}

@@ -1,0 +1,31 @@
+{
+  "id": "grid-auto-flow-row",
+  "feature": "grid-flow",
+  "construct": "grid-auto-flow: row over declared columns, placement by child order",
+  "why": "The one bounded auto-flow the canvas has; placement fact = order, and rows must be DECLARED (derived ceil(n/cols)), never implicit.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.flow = \"row\" (G5: placement fact is CHILD ORDER — no anchors carried; the derived explicit row list ceil(3/2)=2 is a CANVAS obligation, P9, never spelled in CSS)",
+  "observable": {
+    "part": "root",
+    "channel": "grid-auto-flow",
+    "capturedValue": "row"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "The one bounded auto-flow the canvas has; placement fact = order, and rows must be DECLARED (derived ceil(n/cols)), never implicit."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "gridItemsPositioning ROW_AUTO_FLOW; emitter declares all row tracks itself (grammar G5) — position setters are refused under flow, order IS the fact"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "anchors read back computed row-major from order — deterministic; carriage conditional on occupied rows == declared rows, else grid-implicit-tracks fires"
+    }
+  },
+  "probe": "P5/P5b: enum ROW_AUTO_FLOW; setGridChildPosition refused under flow; anchors deterministic",
+  "dumpSnippet": "dump.snippet.json"
+}

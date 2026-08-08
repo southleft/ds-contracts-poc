@@ -1,0 +1,31 @@
+{
+  "id": "grid-child-align",
+  "feature": "grid-alignment",
+  "construct": "justify-self: center; align-self: end on a fixed-size child",
+  "why": "Per-cell alignment is the align/justify half the task names; 4-value vocabulary only.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.placement.alignX/alignY (4-value vocabulary only — AUTO|MIN|CENTER|MAX, P3 enum fence)",
+  "observable": {
+    "part": "a",
+    "channel": "justify-self",
+    "capturedValue": "center"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Per-cell alignment is the align/justify half the task names; 4-value vocabulary only."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "gridChildHorizontalAlign CENTER / Vertical MAX; real geometry (x 255->327.5, y 0->15)"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "both enums read back; AUTO|MIN|CENTER|MAX only"
+    }
+  },
+  "probe": "P3 (enum fence: STRETCH/BASELINE rejected), P4 align geometry",
+  "dumpSnippet": "dump.snippet.json"
+}

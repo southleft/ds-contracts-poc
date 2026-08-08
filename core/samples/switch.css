@@ -1,4 +1,4 @@
-/* Switch — from ds.switch v2.0.0 (core/emit-html.ts) */
+/* Switch — from ds.switch v2.0.1 (core/emit-html.ts) */
 
 .switch, .switch *, .switch *::before, .switch *::after {
   box-sizing: border-box;
@@ -85,6 +85,7 @@
 .switch__descriptionText {
   font-size: var(--font-control-size-sm);
   color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
 }
 
 /* showcase chrome */

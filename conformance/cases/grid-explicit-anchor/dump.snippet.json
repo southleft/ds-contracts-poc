@@ -1,0 +1,53 @@
+{
+  "_marker": "design-side fixture for the canvasToCode direction of \"grid-explicit-anchor\" (dump v1.17 grammar — extract/figma/types.ts DumpGrid/cell). Hand-authored from the same A1 probe receipts as the case declaration (docs/research/grid-recon-probes.md). The canvasToCode surface is eval-gated today (grid-code-proposer-check / grid-bento-check); the conformance gate measures the computed code side — this snippet is the pinned canvas artifact the canvas-half instrument reads when it lands (EXPECTATIONS.md \"The canvas half\" limitation).",
+  "direction": {
+    "expect": "CARRIED",
+    "note": "gridRow/ColumnAnchorIndex read-only getters read back exactly"
+  },
+  "node": {
+    "name": "CaseGridExplicitAnchor",
+    "type": "COMPONENT",
+    "layout": "grid",
+    "grid": {
+      "rows": [
+        {
+          "px": 16
+        },
+        {
+          "px": 16
+        },
+        {
+          "px": 16
+        }
+      ],
+      "columns": [
+        {
+          "fr": 1
+        },
+        {
+          "fr": 1
+        }
+      ],
+      "rowGap": 0,
+      "columnGap": 0
+    },
+    "children": [
+      {
+        "name": "a",
+        "type": "FRAME",
+        "cell": {
+          "row": 2,
+          "column": 1
+        }
+      },
+      {
+        "name": "b",
+        "type": "FRAME",
+        "cell": {
+          "row": 0,
+          "column": 0
+        }
+      }
+    ]
+  }
+}

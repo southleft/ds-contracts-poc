@@ -1,0 +1,3 @@
+[data-cf="grid-instance-child"] { display: grid; grid-template-columns: 60px 1fr; grid-template-rows: 24px; width: 200px; background: rgb(244, 238, 242); }
+[data-cf="grid-instance-child"] .cf-a { grid-row: 1; grid-column: 2; background: rgb(232, 212, 224); }
+[data-cf="grid-instance-child"] .cf-b { grid-row: 1; grid-column: 1; background: rgb(238, 220, 230); }

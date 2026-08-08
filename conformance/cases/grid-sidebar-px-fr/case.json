@@ -1,0 +1,35 @@
+{
+  "id": "grid-sidebar-px-fr",
+  "feature": "grid-tracks",
+  "construct": "grid-template-columns: 240px 1fr",
+  "why": "The sidebar archetype — one fixed rail, one flexible content column.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.columns",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-columns",
+    "capturedValue": "240px 160px",
+    "carriedValue": "240px 1fr"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "The sidebar archetype — one fixed rail, one flexible content column."
+  },
+  "blockStage": true,
+  "stage": {
+    "width": 460,
+    "height": 96,
+    "padding": 16
+  },
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED"
+    }
+  },
+  "probe": "P2: cols [{FIXED,200},{FLEX,1},{FLEX,2}] read back exactly; CSS '200px minmax(0,1fr) minmax(0,2fr)'",
+  "dumpSnippet": "dump.snippet.json"
+}

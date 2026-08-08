@@ -1,7 +1,7 @@
 {
   "component": "CaseGrid2d",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
@@ -22,7 +22,7 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 37.001953125,
+    "meanExact": 25.543619791666668,
     "meanAA": 0.146484375,
     "maxAA": 0.146484375
   },
@@ -42,25 +42,25 @@
     {
       "key": "__default",
       "pctAA": 0.146484375,
-      "pctExact": 37.001953125,
+      "pctExact": 25.543619791666668,
       "channelsMismatched": 3
     },
     {
       "key": "__hover",
       "pctAA": 0.146484375,
-      "pctExact": 37.001953125,
+      "pctExact": 25.543619791666668,
       "channelsMismatched": 3
     },
     {
       "key": "__focus-visible",
       "pctAA": 0.146484375,
-      "pctExact": 37.001953125,
+      "pctExact": 25.543619791666668,
       "channelsMismatched": 3
     },
     {
       "key": "__active",
       "pctAA": 0.146484375,
-      "pctExact": 37.001953125,
+      "pctExact": 25.543619791666668,
       "channelsMismatched": 3
     }
   ],
@@ -100,7 +100,7 @@
       "key": "__default",
       "channelsCompared": 19,
       "channelsEqual": 16,
-      "pctExact": 37.001953125,
+      "pctExact": 25.543619791666668,
       "pctAA": 0.146484375,
       "mismatches": [
         {
@@ -113,7 +113,7 @@
           "part": "root",
           "channel": "grid-template-columns",
           "ours": "none",
-          "theirs": "144px 144px"
+          "theirs": "100px 100px"
         },
         {
           "part": "root",
@@ -127,7 +127,7 @@
       "key": "__hover",
       "channelsCompared": 19,
       "channelsEqual": 16,
-      "pctExact": 37.001953125,
+      "pctExact": 25.543619791666668,
       "pctAA": 0.146484375,
       "mismatches": [
         {
@@ -140,7 +140,7 @@
           "part": "root",
           "channel": "grid-template-columns",
           "ours": "none",
-          "theirs": "144px 144px"
+          "theirs": "100px 100px"
         },
         {
           "part": "root",
@@ -154,7 +154,7 @@
       "key": "__focus-visible",
       "channelsCompared": 19,
       "channelsEqual": 16,
-      "pctExact": 37.001953125,
+      "pctExact": 25.543619791666668,
       "pctAA": 0.146484375,
       "mismatches": [
         {
@@ -167,7 +167,7 @@
           "part": "root",
           "channel": "grid-template-columns",
           "ours": "none",
-          "theirs": "144px 144px"
+          "theirs": "100px 100px"
         },
         {
           "part": "root",
@@ -181,7 +181,7 @@
       "key": "__active",
       "channelsCompared": 19,
       "channelsEqual": 16,
-      "pctExact": 37.001953125,
+      "pctExact": 25.543619791666668,
       "pctAA": 0.146484375,
       "mismatches": [
         {
@@ -194,7 +194,7 @@
           "part": "root",
           "channel": "grid-template-columns",
           "ours": "none",
-          "theirs": "144px 144px"
+          "theirs": "100px 100px"
         },
         {
           "part": "root",

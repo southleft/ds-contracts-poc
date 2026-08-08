@@ -9,5 +9,7 @@
   "shorthandCeiling": 0,
   "shorthandSkips": [],
   "calcDeclarations": 1,
-  "calcCeiling": 1
+  "calcCeiling": 1,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
 }

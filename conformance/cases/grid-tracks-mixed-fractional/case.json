@@ -1,0 +1,31 @@
+{
+  "id": "grid-tracks-mixed-fractional",
+  "feature": "grid-tracks",
+  "construct": "grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values)",
+  "why": "Proves the track list is carried as typed values, not re-derived — fractional px and fr must survive byte-exact.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.columns",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-columns",
+    "capturedValue": "33.5px 150px 60px",
+    "carriedValue": "33.5px 2.5fr 1fr"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Proves the track list is carried as typed values, not re-derived — fractional px and fr must survive byte-exact."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "FIXED 33.5 and FLEX 2.5 read back exactly"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED"
+    }
+  },
+  "probe": "P2b: {FIXED,33.5} ok exact; {FLEX,2.5} ok exact",
+  "dumpSnippet": "dump.snippet.json"
+}

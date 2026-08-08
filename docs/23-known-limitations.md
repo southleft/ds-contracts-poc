@@ -69,9 +69,32 @@ Refused **by name** — the engine says the word rather than dropping the fact
 silently — and unlikely ever to change, because the target medium has no
 equivalent:
 
-- **A genuine 2-D grid** (>1 column AND >1 row) — `grid-two-dimensional`
-  (`extract/computed/anatomy.ts:168`). CSS Grid *does* lower to the flex
-  vocabulary from measured track counts when it is effectively 1-D.
+- **CSS Grid — no longer irreducible, but only half-landed.** The A1 recon
+  (docs/research/grid-recon-probes.md) found the canvas grew `layoutMode:
+  "GRID"` with byte-exact track readback, and the A2 engine now CARRIES the
+  declared-track subset: px/fr/`fit-content(100%)` tracks (fractional ok),
+  the row/column gap pair, **explicitly-placed** children (0-based anchors,
+  spans, per-cell align), named areas as contract-owned slot anchors,
+  absolute overlays inside grids, grids on component variants, instance
+  children, and grid-in-flex composition (conformance: `grid-bento-span-matrix`
+  and 15 sibling cases green). Two bounded classes remain:
+  - **REFUSED by name — the 9 solver-half constructs** (each with its probe
+    dead-end, `GRID_REFUSALS` registry): `grid-track-percent` (track enum is
+    FLEX|FIXED|HUG — no PERCENT, P2b), `grid-track-minmax` (`minmax()` has no
+    canvas spelling — "Unrecognized key(s) 'min','max'", P6),
+    `grid-track-zero` (0px/0fr tracks are SILENTLY REWRITTEN by the API —
+    refused so the emitter can never trigger the rewrite, P2b),
+    `grid-auto-fit-minmax` (no repeat-to-fit concept — a viewport-responsive
+    track COUNT is a reflow family one frame cannot carry, P1),
+    `grid-flow-column` (`COLUMN_AUTO_FLOW` rejected, P5),
+    `grid-flow-dense` (dense packing is solver output, enum rejects it, P5),
+    `grid-subgrid` (no track-inheritance property anywhere in the reflected
+    API, P1), `grid-implicit-tracks` (the canvas absorbs overflow by
+    REWRITING the declaration or under-reports it — lossy readback, P9), and
+    `grid-child-grow` (`layoutGrow` inside a grid is silently accepted with
+    no effect — refused so a dead fact is never minted, P4).
+  - **NOT BUILT YET — auto-placed grids** (no explicit per-child placement):
+    see [§B.22](#b22-auto-placed-grids-g5-placement-from-order-promotion-is-not-built).
 - **`position: fixed`, `position: sticky`** — refused. Confirmed REFUSED in
   today's `npm run conformance`.
 - **`transform`, and the independent `rotate` property** — refused. This is
@@ -921,6 +944,35 @@ install git-ignored). The other five libraries' sandbox recipes remain
 PROVENANCE prose.
 
 **What it would take — five small rounds.** Named follow-up.
+
+## B.22 Auto-placed grids: G5 placement-from-order promotion is not built
+
+The A2 layout landing carries **explicitly-placed** declared-track grids (see
+the reclassified grid entry in [§A.1](#a1-css-constructs-with-no-canvas-spelling)).
+It deliberately did NOT land G5 of the pinned grammar
+(`docs/research/layout-grammar-proposal.md`): a grid whose children carry no
+explicit `grid-row`/`grid-column` — the single most common way CSS authors
+write a grid — abandons promotion with the named receipt
+`grid-promotion-fallback: … auto-placed … (G5) is not promoted from the
+computed floor this round` and falls back to the flex-era path: a 2-D grid
+refuses (`grid-two-dimensional`), a 1-D grid lowers to a flex row/column from
+measured track counts.
+
+**Measured, recorded open** in `conformance/BASELINE.json` (the two-sided
+ratchet keeps them visible, never absorbed): `grid-2d`, `grid-two-column`,
+`grid-sidebar-px-fr`, `grid-track-fit-content`, `grid-tracks-mixed-fractional`
+(WRONG-NAME: declared CARRIED by the manifest per the pinned grammar, engine
+lowers instead) and `grid-auto-flow-row` (the flow channel's order fact is
+named in the fallback receipt but not carried). The frozen spec subset keeps
+`grid-2d` REFUSED until the engine measures it CARRIED — a **staged widen**,
+per `spec/README.md`'s no-silent-widen rule.
+
+**What it would take — an engine round, not research.** The grammar is pinned
+(G5: placement fact = child order; rows derived `ceil(children / columns)`
+declared explicitly by the emitter, never implicit, P9), the canvas half is
+probed (`ROW_AUTO_FLOW`, P5/P5b), and the conformance cases already exist and
+are red. Implementation is `promoteGridLayout` learning order-derived
+placement plus the P9 occupied-vs-declared fence.
 
 ---
 

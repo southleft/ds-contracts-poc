@@ -41,6 +41,16 @@ import type {
   RawValueFinding,
 } from '../extract/types.js';
 import type { CodeMintFinding } from './mint-code.js';
+import { GRID_REFUSALS } from '../scripts/contract-schema.js';
+import {
+  GRID_STRUCTURAL_PROPS,
+  parseGapPair,
+  parseGridAutoFlow,
+  parseGridLine,
+  parseGridSelfAlign,
+  parseGridTemplateAreas,
+  parseGridTrackList,
+} from './grid-css.js';
 
 /** Capture sink for unbindable styled declarations (raw literals + foreign
  *  var()s) — already bound to the selector/part/state/axis context of the
@@ -337,6 +347,12 @@ interface PartStyle {
   overlay?: ExtractedPart['overlay'];
   tokens: Record<string, string>;
   animation?: 'spin' | 'pulse';
+  /** A2 grid (G2) — cell placement read from grid-row/grid-column (+
+   *  justify-self/align-self); attached only under a grid parent. */
+  placement?: NonNullable<ExtractedPart['placement']>;
+  /** A2 grid (G4) — `grid-area: name` on a child rule. The area name IS the
+   *  slot anchor, so it must EQUAL the part name; the attach step referees. */
+  gridAreaName?: string;
 }
 
 /** Resolve one var(--x) against the token tree. Returns the dot path, or
@@ -378,12 +394,143 @@ function invertDecls(
   const hasMaxWidthVar = decls.some((d) => d.prop === 'max-width' && VAR_RE.test(d.value));
   const insets = new Map<string, string>();
   let absolute = false;
+  // A2 grid: is THIS rule a grid container? Gates the gap-pair inversion
+  // (grid gap is a layout fact pair, flex gap stays a token binding).
+  const isGrid = decls.some((d) => d.prop === 'display' && d.value === 'grid');
+  // A2 grid (G2): per-child cell accumulator — carried only when BOTH
+  // anchors are declared (a half-anchored cell is order-dependent).
+  const cell: Partial<NonNullable<ExtractedPart['placement']>> = {};
+  /** Resolve one gap component: `Npx` literal → number, `var(--x)` → token
+   *  ref via the real token tree, anything else → named note, null. */
+  const gapComponent = (raw: string, which: string): number | string | null => {
+    const pxm = raw.match(/^(\d*\.?\d+)px$/);
+    if (pxm) return Number(pxm[1]);
+    if (raw === '0') return 0;
+    const vm = raw.match(VAR_RE);
+    if (vm) {
+      const path = resolveVar(vm[1], `${selector} { ${which} }`, index, notes, () => mint(which, raw));
+      return path ? `{${path}}` : null;
+    }
+    notes.push(`css: ${selector} { ${which}: ${raw} } — grid gap carries px numbers or token refs (G1); not extracted`);
+    return null;
+  };
 
   for (const { prop, value } of decls) {
     if (GENERATOR_ARTIFACTS.has(`${prop}:${value}`)) continue;
     if (prop === 'width' && value === '100%' && hasMaxWidthVar) continue; // fluid-root artifact of the max-width binding
     if (prop === 'display' && (value === 'flex' || value === 'inline-flex')) {
       layout.display = value;
+      continue;
+    }
+    // ---------------------------------------------------------------------
+    // A2 grid — the pinned layout grammar's code-side inversion (G1/G2/G4/
+    // G5), every non-carriageable construct a NAMED receipt (G7), never a
+    // silent drop. Parsers live in core/grid-css.ts.
+    // ---------------------------------------------------------------------
+    if (prop === 'display' && value === 'grid') {
+      layout.display = 'grid';
+      continue;
+    }
+    if (prop === 'display' && value === 'inline-grid') {
+      notes.push(`css: ${selector} { display: inline-grid } — the pinned grid grammar has one display spelling ("grid", G1); inline-grid is not extracted, review`);
+      continue;
+    }
+    if (
+      isGrid &&
+      ['flex-direction', 'align-items', 'justify-content', 'flex-wrap', 'justify-items', 'align-content', 'place-items', 'place-content'].includes(prop)
+    ) {
+      // Flex-only fields are schema-invalid together with display: "grid"
+      // (G1); container-level content/items distribution is not in the
+      // pinned grammar (per-child alignX/alignY is, G2).
+      notes.push(
+        `css: ${selector} { ${prop}: ${value} } — container-level distribution on a grid is not in the pinned grammar (G1: flex-only fields are schema-invalid with display: "grid"; per-CHILD alignment carries via justify-self/align-self, G2); not extracted`,
+      );
+      continue;
+    }
+    if (prop === 'grid-template-columns' || prop === 'grid-template-rows') {
+      const { tracks, receipts } = parseGridTrackList(value);
+      for (const r of receipts.refusals) notes.push(`css: ${selector} { ${prop}: ${value} } — ${r}`);
+      for (const l of receipts.lowered) notes.push(`css: ${selector} { ${prop} } — LOWERED: ${l}`);
+      if (tracks) {
+        if (prop === 'grid-template-columns') layout.columns = tracks;
+        else layout.rows = tracks;
+      } else if (receipts.refusals.length === 0) {
+        notes.push(`css: ${selector} { ${prop}: ${value} } — no carriageable track list parsed; not extracted`);
+      }
+      continue;
+    }
+    if (prop === 'grid-template-areas') {
+      const parsed = parseGridTemplateAreas(value);
+      if (parsed.areas) layout.areas = parsed.areas;
+      else if (parsed.refusal) notes.push(`css: ${selector} — ${parsed.refusal}`);
+      continue;
+    }
+    if (prop === 'grid-auto-flow') {
+      const parsed = parseGridAutoFlow(value);
+      if (parsed.flow) layout.flow = parsed.flow;
+      else if (parsed.refusal) notes.push(`css: ${selector} { grid-auto-flow: ${value} } — ${parsed.refusal}`);
+      continue;
+    }
+    if (prop === 'grid-auto-rows' || prop === 'grid-auto-columns') {
+      notes.push(`css: ${selector} { ${prop}: ${value} } — ${GRID_REFUSALS['grid-implicit-tracks']}`);
+      continue;
+    }
+    if (isGrid && (prop === 'gap' || prop === 'row-gap' || prop === 'column-gap')) {
+      if (prop === 'gap') {
+        const pair = parseGapPair(value);
+        if (!pair) {
+          notes.push(`css: ${selector} { gap: ${value} } — not a one- or two-value gap; not extracted`);
+          continue;
+        }
+        const row = gapComponent(pair.row, 'row-gap');
+        const column = gapComponent(pair.column, 'column-gap');
+        if (row !== null && column !== null) layout.gap = { row, column };
+      } else {
+        const component = gapComponent(value, prop);
+        if (component !== null) {
+          const existing = layout.gap ?? { row: 0, column: 0 };
+          layout.gap = prop === 'row-gap' ? { ...existing, row: component } : { ...existing, column: component };
+        }
+      }
+      continue;
+    }
+    if (prop === 'grid-row' || prop === 'grid-column') {
+      const parsed = parseGridLine(value);
+      if (parsed.refusal) {
+        notes.push(`css: ${selector} { ${prop}: ${value} } — ${parsed.refusal}`);
+        continue;
+      }
+      if (prop === 'grid-row') {
+        cell.row = parsed.anchor;
+        if ((parsed.span ?? 1) > 1) cell.rowSpan = parsed.span;
+      } else {
+        cell.column = parsed.anchor;
+        if ((parsed.span ?? 1) > 1) cell.columnSpan = parsed.span;
+      }
+      continue;
+    }
+    if (prop === 'grid-area') {
+      if (/^[a-zA-Z][\w-]*$/.test(value.trim())) {
+        out.gridAreaName = value.trim();
+      } else {
+        notes.push(`css: ${selector} { grid-area: ${value} } — only the named-area form carries (the area name IS the slot anchor, G4); line shorthands belong on grid-row/grid-column, not extracted`);
+      }
+      continue;
+    }
+    if (prop === 'justify-self' || prop === 'align-self') {
+      const parsed = parseGridSelfAlign(value);
+      if (parsed.refusal) {
+        notes.push(`css: ${selector} { ${prop}: ${value} } — ${parsed.refusal}`);
+        continue;
+      }
+      if (parsed.lowered) {
+        notes.push(`css: ${selector} { ${prop}: stretch } — LOWERED: ${parsed.lowered}`);
+        continue;
+      }
+      if (parsed.align) {
+        if (prop === 'justify-self') cell.alignX = parsed.align;
+        else cell.alignY = parsed.align;
+      }
       continue;
     }
     if (prop === 'flex-direction') {
@@ -451,6 +598,25 @@ function invertDecls(
     };
     if (PLACEMENTS[key]) out.overlay = { placement: PLACEMENTS[key] };
     else notes.push(`css: ${selector} position:absolute with insets (${key}) — not a generator overlay placement, not extracted`);
+  }
+  // A2 grid (G2): a cell carries only with BOTH anchors — a half-anchored
+  // placement is auto-placement-order-dependent, refused by name.
+  if (cell.row !== undefined || cell.column !== undefined) {
+    if (cell.row !== undefined && cell.column !== undefined) {
+      out.placement = { row: cell.row, column: cell.column };
+      if (cell.rowSpan !== undefined) out.placement.rowSpan = cell.rowSpan;
+      if (cell.columnSpan !== undefined) out.placement.columnSpan = cell.columnSpan;
+      if (cell.alignX !== undefined) out.placement.alignX = cell.alignX;
+      if (cell.alignY !== undefined) out.placement.alignY = cell.alignY;
+    } else {
+      notes.push(
+        `css: ${selector} — grid placement declares only ${cell.row !== undefined ? 'grid-row' : 'grid-column'}; the missing axis is auto-placement-order-dependent (G2 requires both anchors, or child order under flow: "row", G5) — placement not extracted`,
+      );
+    }
+  } else if (cell.alignX !== undefined || cell.alignY !== undefined) {
+    notes.push(
+      `css: ${selector} — justify-self/align-self without grid-row + grid-column anchors has no contract cell to ride (G2; area-named parts carry no per-part alignment) — alignment not extracted`,
+    );
   }
   if (Object.keys(layout).length > 0) out.layout = layout;
   return out;
@@ -625,6 +791,17 @@ function analyzeCss(
       } else if (value.includes('var(')) {
         if (splitTopLevel(value).length === 1 && value.startsWith('var(')) mint(prop, value);
         notes.push(`css: ${rule.selector} { ${prop}: ${value} } — var() inside a shorthand is not invertible to a single binding, not extracted`);
+      } else if (
+        GRID_STRUCTURAL_PROPS.has(prop) ||
+        (prop === 'display' && (value === 'grid' || value === 'inline-grid'))
+      ) {
+        // A2 grid: a per-variant grid declaration is never a layoutByProp
+        // override — a layout.mode change physically DESTROYS tracks on the
+        // canvas (P10) and validateGridPart refuses layoutByProp on grid
+        // parts; per-variant grids are separate parts.
+        notes.push(
+          `css: ${rule.selector} { ${prop}: ${value} } — a per-variant GRID declaration is STRUCTURAL, not an override (P10: the canvas physically destroys tracks on a layout.mode switch; the contract refuses layoutByProp on grid parts) — not extracted, model per-variant grids as separate parts`,
+        );
       } else if (LAYOUT_PROPS.has(prop)) {
         notes.push(
           `css: ${rule.selector} { ${prop}: ${value} } — a per-variant layout override (contract layoutByProp); not extracted, author it against design intent`,
@@ -686,6 +863,8 @@ function analyzeCss(
           if (style.layout) existing.layout = { ...existing.layout, ...style.layout };
           if (style.overlay) existing.overlay = style.overlay;
           if (style.animation) existing.animation = style.animation;
+          if (style.placement) existing.placement = { ...existing.placement, ...style.placement };
+          if (style.gridAreaName) existing.gridAreaName = style.gridAreaName;
         }
         continue;
       }
@@ -1037,6 +1216,8 @@ function analyzeStylex(
       if (existing) {
         existing.tokens = { ...style.tokens, ...existing.tokens };
         existing.layout = { ...style.layout, ...existing.layout };
+        if (style.placement) existing.placement = { ...style.placement, ...existing.placement };
+        if (style.gridAreaName && !existing.gridAreaName) existing.gridAreaName = style.gridAreaName;
       } else {
         partStyles.set(partName, style);
       }
@@ -1819,6 +2000,103 @@ function extractEventWiring(
 // Entry point
 // ---------------------------------------------------------------------------
 
+/**
+ * A2 grid — the CODE-SIDE grid referee, run once after style attachment.
+ * Mirrors the contract's validateGridPart (G1/G2/G4/G5 + P3's two canvas
+ * throws) so a proposal either carries a FULLY-carriageable grid or carries
+ * NO grid — with the failure receipted by name. A partial grid is a
+ * different grid; refusing beats guessing, and dropping the block here (with
+ * the receipt) keeps the proposal schema-valid instead of dying at parse.
+ *
+ * One LOWERED disposition lives here: a grid with declared columns, NO
+ * declared rows and NO child anchors is exactly the emitter's own flow-row
+ * output (G5 — CSS's default `grid-auto-flow: row` with derived rows), so it
+ * carries as flow: "row" with a named lowering receipt.
+ */
+function refereeGridParts(name: string, part: ExtractedPart, notes: string[]): void {
+  for (const [childName, child] of Object.entries(part.parts ?? {})) refereeGridParts(childName, child, notes);
+  const l = part.layout;
+  if (l?.display !== 'grid') return;
+  const kids = Object.entries(part.parts ?? {});
+  const inFlow = kids.filter(([, c]) => !c.overlay);
+  const areas = l.areas ?? {};
+  const placedCount = inFlow.filter(([n, c]) => c.placement !== undefined || areas[n] !== undefined).length;
+  const problems: string[] = [];
+  let flowRow = l.flow === 'row';
+  if (flowRow && l.rows) {
+    problems.push('flow: "row" derives rows as ceil(children / columns.length) — an explicit grid-template-rows alongside auto-flow relies on the implicit-track interplay (G5; P9: implicit readback is lossy)');
+  }
+  if (!l.columns) {
+    problems.push('no carriageable grid-template-columns (see the track receipts above)');
+  }
+  if (!flowRow && !l.rows) {
+    if (placedCount === 0 && inFlow.length > 0 && Object.keys(areas).length === 0) {
+      // CSS's default auto-flow IS row flow — the G5 lowering.
+      flowRow = true;
+      l.flow = 'row';
+      notes.push(
+        `css: part "${name}" — LOWERED: columns-only grid with unanchored children carries as flow: "row" (G5 — CSS's default grid-auto-flow; rows derive as ceil(children / columns.length), the emitter declares them itself)`,
+      );
+    } else {
+      problems.push('no carriageable grid-template-rows (a manual grid declares both track lists, G1)');
+    }
+  }
+  if (flowRow) {
+    const placed = inFlow.filter(([, c]) => c.placement !== undefined).map(([n]) => n);
+    if (placed.length > 0) {
+      problems.push(`flow: "row" places by CHILD ORDER but ${placed.join(', ')} carr${placed.length === 1 ? 'ies' : 'y'} explicit anchors (P5: position setters are refused under auto-flow; mixing is schema-invalid)`);
+    }
+  } else if (l.rows && l.columns) {
+    if (placedCount === 0 && inFlow.length > 0) {
+      problems.push('manual grid with declared rows but no child anchors — placement would be auto-slot order (a fact this contract cannot spell with declared row sizes: G2 anchors or G5 derived rows, not both)');
+    } else if (placedCount < inFlow.length) {
+      const unplaced = inFlow.filter(([n, c]) => c.placement === undefined && areas[n] === undefined).map(([n]) => n);
+      problems.push(`manual grid: every child must carry placement (or take an area's rect), or none may — unplaced: ${unplaced.join(', ')} (G2)`);
+    } else {
+      // Bounds + occupancy — the contract-side spellings of P3's two canvas
+      // throws, checked over child placements AND area rects (empty areas
+      // occupy too, G4).
+      const rows = l.rows.length;
+      const cols = l.columns.length;
+      const rects: Array<{ who: string; r: number; c: number; rs: number; cs: number }> = [];
+      for (const [n, c] of inFlow) {
+        const p = c.placement ?? areas[n];
+        if (p) rects.push({ who: `part "${n}"`, r: p.row, c: p.column, rs: p.rowSpan ?? 1, cs: p.columnSpan ?? 1 });
+      }
+      const childNames = new Set(inFlow.map(([n]) => n));
+      for (const [n, a] of Object.entries(areas)) {
+        if (!childNames.has(n)) rects.push({ who: `area "${n}"`, r: a.row, c: a.column, rs: a.rowSpan ?? 1, cs: a.columnSpan ?? 1 });
+      }
+      for (const x of rects) {
+        if (x.r + x.rs > rows) problems.push(`${x.who}: row anchor ${x.r} + span ${x.rs} exceeds the ${rows} declared rows (P3/P9)`);
+        if (x.c + x.cs > cols) problems.push(`${x.who}: column anchor ${x.c} + span ${x.cs} exceeds the ${cols} declared columns (P3)`);
+      }
+      for (let i = 0; i < rects.length; i++) {
+        for (let j = i + 1; j < rects.length; j++) {
+          const a = rects[i];
+          const b = rects[j];
+          if (a.r < b.r + b.rs && b.r < a.r + a.rs && a.c < b.c + b.cs && b.c < a.c + a.cs) {
+            problems.push(`${a.who} and ${b.who} overlap on the grid (P3: the canvas occupancy throw, refused contract-side)`);
+          }
+        }
+      }
+    }
+  }
+  if (problems.length > 0) {
+    notes.push(
+      `css: part "${name}" — GRID LAYOUT NOT PROPOSED (refuse, don't guess): ${problems.join('; ')}. The grid facts are dropped with this receipt — resolve it and re-extract.`,
+    );
+    delete l.display;
+    delete l.rows;
+    delete l.columns;
+    delete l.gap;
+    delete l.areas;
+    delete l.flow;
+    if (Object.keys(l).length === 0) delete part.layout;
+    for (const [, c] of kids) delete c.placement;
+  }
+}
+
 export interface AnatomyInput {
   sf: ts.SourceFile;
   src: string;
@@ -1946,9 +2224,12 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
     ? analyzeStylex(ctx.stylexTables!, ctx, input.tokens, notes, rawValues)
     : analyzeCss(input.css, enumProps, input.tokens, notes, rawValues, ctx.bem, mintables);
 
-  // Attach styles per part name across the JSX tree.
+  // Attach styles per part name across the JSX tree. Grid cell facts (G2/G4)
+  // attach only under a parent that DECLARES display: grid — a placement on a
+  // non-grid parent is a schema-invalid fact the referee would refuse; the
+  // named note here keeps the receipt at the reading site.
   const jsxPartNames = new Set<string>(['root']);
-  const attach = (name: string, part: ExtractedPart) => {
+  const attach = (name: string, part: ExtractedPart, parentIsGrid: boolean) => {
     jsxPartNames.add(name);
     const style = model.partStyles.get(name);
     if (style) {
@@ -1956,15 +2237,43 @@ export function extractAnatomy(input: AnatomyInput): ExtractedAnatomy | null {
       if (style.layout) part.layout = { ...style.layout, ...part.layout };
       if (style.overlay) part.overlay = style.overlay;
       if (style.animation) part.animation = style.animation;
+      if (style.placement) {
+        if (!parentIsGrid) {
+          notes.push(
+            `css: part "${name}" declares grid-row/grid-column placement but its parent part does not declare display: grid — placement is a grid-cell fact (G2), not extracted`,
+          );
+        } else if (part.overlay || style.overlay) {
+          notes.push(
+            `css: overlay part "${name}" also declares grid placement — overlays keep the out-of-flow grammar (P13: absolute grid children report bogus 0,0 anchors); placement not extracted`,
+          );
+        } else {
+          part.placement = { ...style.placement, ...part.placement };
+        }
+      }
+      if (style.gridAreaName) {
+        if (!parentIsGrid) {
+          notes.push(
+            `css: part "${name}" declares grid-area "${style.gridAreaName}" but its parent part does not declare display: grid — not extracted (G4)`,
+          );
+        } else if (style.gridAreaName !== name) {
+          notes.push(
+            `css: part "${name}" declares grid-area "${style.gridAreaName}" — the area name IS the slot anchor and must equal the part name (G4); rename the part or the area, not extracted`,
+          );
+        }
+        // gridAreaName === name carries NOTHING extra: the parent's
+        // layout.areas rect is the single source of truth (G4).
+      }
     }
     const overlapRef = model.overlapGap.get(name);
     if (overlapRef) {
       part.layout = { ...part.layout, overlap: true };
       part.tokens = { ...part.tokens, gap: overlapRef };
     }
-    for (const [childName, child] of Object.entries(part.parts ?? {})) attach(childName, child);
+    const isGrid = part.layout?.display === 'grid';
+    for (const [childName, child] of Object.entries(part.parts ?? {})) attach(childName, child, isGrid);
   };
-  attach('root', root);
+  attach('root', root, false);
+  refereeGridParts('root', root, notes);
   if (Object.keys(model.rootStates).length > 0) root.states = model.rootStates;
 
   for (const cssName of model.cssPartNames) {

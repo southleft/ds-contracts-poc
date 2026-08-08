@@ -1,0 +1,31 @@
+{
+  "id": "grid-gap-shorthand",
+  "feature": "grid-gaps",
+  "construct": "gap: 12px 16px (and one-value gap: 12px)",
+  "why": "The common authored spelling; the contract stores only the pair.",
+  "expect": "LOWERED",
+  "expectName": "grid-gap-shorthand",
+  "expectWhere": "anatomy.root.layout.gap — shorthand LOWERED to the {row, column} pair, receipted by the name grid-gap-shorthand",
+  "observable": {
+    "part": "root",
+    "channel": "row-gap",
+    "capturedValue": "12px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "The common authored spelling; the contract stores only the pair."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "LOWERED",
+      "note": "shorthand -> {row, column} pair; named normalization, not silent"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "canvas only has the pair; emitting longhands is exact"
+    }
+  },
+  "probe": "P2 (pair carriage); lowering is proposer-side by construction",
+  "dumpSnippet": "dump.snippet.json"
+}

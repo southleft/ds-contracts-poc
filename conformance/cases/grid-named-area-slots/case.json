@@ -1,0 +1,31 @@
+{
+  "id": "grid-named-area-slots",
+  "feature": "grid-areas",
+  "construct": "grid-template-areas: 'header header' 'nav content' + grid-area: header on children",
+  "why": "Area name IS slot anchor (grammar G4): name->slot name, rect->slot placement. The contract owns the names; both surfaces carry the rects.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.areas (G4: the area name IS the slot anchor; names are contract-owned)",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-areas",
+    "capturedValue": "\"a a\" \"b c\""
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "rects only; names are contract-side"
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "areas compile to setGridChildPosition + spans; Figma has no native area names — names live in the contract, same rule as anatomy part names"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "rects read back; names re-attach from the contract via slot-name matching, never invented from canvas"
+    }
+  },
+  "probe": "P3/P8 (rect carriage is placement carriage); name ownership is grammar G4, not a canvas fact",
+  "dumpSnippet": "dump.snippet.json"
+}

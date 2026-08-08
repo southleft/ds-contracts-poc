@@ -1,0 +1,30 @@
+{
+  "id": "grid-on-component-variant",
+  "feature": "grid-composition",
+  "construct": "layoutMode GRID on a COMPONENT node (canvas variants are components)",
+  "why": "If components could not be grids, no contract variant could carry the grammar at all.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout — the component ROOT itself is the grid (canvas: layoutMode GRID on a COMPONENT node, P12 — variants are components; if components could not be grids no contract variant could carry the grammar)",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-rows",
+    "capturedValue": "16px 16px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "If components could not be grids, no contract variant could carry the grammar at all."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "createComponent + GRID + tracks ok, reads back exactly"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED"
+    }
+  },
+  "probe": "P12",
+  "dumpSnippet": "dump.snippet.json"
+}

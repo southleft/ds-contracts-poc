@@ -1,0 +1,89 @@
+{
+  "_marker": "design-side fixture for the canvasToCode direction of \"grid-bento-span-matrix\" (dump v1.17 grammar — extract/figma/types.ts DumpGrid/cell). Hand-authored from the same A1 probe receipts as the case declaration (docs/research/grid-recon-probes.md). The canvasToCode surface is eval-gated today (grid-code-proposer-check / grid-bento-check); the conformance gate measures the computed code side — this snippet is the pinned canvas artifact the canvas-half instrument reads when it lands (EXPECTATIONS.md \"The canvas half\" limitation).",
+  "direction": {
+    "expect": "CARRIED",
+    "note": "every track, gap, anchor, span and sizing read back EXACTLY (p8Match true); REST carries the same facts (tracks as CSS strings gridColumnsSizing/gridRowsSizing)"
+  },
+  "note": "The FULL P8 bento (five children) — the dump side has no class fence.",
+  "node": {
+    "name": "CaseGridBentoSpanMatrix",
+    "type": "COMPONENT",
+    "layout": "grid",
+    "grid": {
+      "rows": [
+        {
+          "px": 80
+        },
+        {
+          "fr": 1
+        },
+        {
+          "fr": 2
+        }
+      ],
+      "columns": [
+        {
+          "px": 160
+        },
+        {
+          "fr": 1
+        },
+        {
+          "fr": 1
+        },
+        {
+          "px": 120
+        }
+      ],
+      "rowGap": 12,
+      "columnGap": 16
+    },
+    "children": [
+      {
+        "name": "header",
+        "type": "FRAME",
+        "cell": {
+          "row": 0,
+          "column": 0,
+          "columnSpan": 4
+        }
+      },
+      {
+        "name": "sidebar",
+        "type": "FRAME",
+        "cell": {
+          "row": 1,
+          "column": 0,
+          "rowSpan": 2
+        }
+      },
+      {
+        "name": "main",
+        "type": "FRAME",
+        "cell": {
+          "row": 1,
+          "column": 1,
+          "columnSpan": 2
+        }
+      },
+      {
+        "name": "rail",
+        "type": "FRAME",
+        "cell": {
+          "row": 1,
+          "column": 3,
+          "rowSpan": 2
+        }
+      },
+      {
+        "name": "footer",
+        "type": "FRAME",
+        "cell": {
+          "row": 2,
+          "column": 1,
+          "columnSpan": 2
+        }
+      }
+    ]
+  }
+}

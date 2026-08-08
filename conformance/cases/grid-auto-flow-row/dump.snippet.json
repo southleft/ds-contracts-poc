@@ -1,0 +1,48 @@
+{
+  "_marker": "design-side fixture for the canvasToCode direction of \"grid-auto-flow-row\" (dump v1.17 grammar — extract/figma/types.ts DumpGrid/cell). Hand-authored from the same A1 probe receipts as the case declaration (docs/research/grid-recon-probes.md). The canvasToCode surface is eval-gated today (grid-code-proposer-check / grid-bento-check); the conformance gate measures the computed code side — this snippet is the pinned canvas artifact the canvas-half instrument reads when it lands (EXPECTATIONS.md \"The canvas half\" limitation).",
+  "direction": {
+    "expect": "CARRIED",
+    "note": "anchors read back computed row-major from order — deterministic; carriage conditional on occupied rows == declared rows, else grid-implicit-tracks fires"
+  },
+  "note": "ROW_AUTO_FLOW: no cells captured — order IS the fact (P5); carriage conditional on occupied rows == declared rows else grid-implicit-tracks fires.",
+  "node": {
+    "name": "CaseGridAutoFlowRow",
+    "type": "COMPONENT",
+    "layout": "grid",
+    "grid": {
+      "rows": [
+        {
+          "px": 16
+        },
+        {
+          "px": 16
+        }
+      ],
+      "columns": [
+        {
+          "fr": 1
+        },
+        {
+          "fr": 1
+        }
+      ],
+      "rowGap": 0,
+      "columnGap": 0,
+      "flow": "row"
+    },
+    "children": [
+      {
+        "name": "a",
+        "type": "FRAME"
+      },
+      {
+        "name": "b",
+        "type": "FRAME"
+      },
+      {
+        "name": "c",
+        "type": "FRAME"
+      }
+    ]
+  }
+}

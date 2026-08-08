@@ -1,7 +1,7 @@
 {
   "component": "CasePercentagePadding",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
@@ -22,9 +22,9 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 2.4283854166666665,
-    "meanAA": 1.0026041666666667,
-    "maxAA": 1.0026041666666667
+    "meanExact": 13.125,
+    "meanAA": 0.4036458333333333,
+    "maxAA": 0.4036458333333333
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -41,26 +41,26 @@
   "worstRows": [
     {
       "key": "__default",
-      "pctAA": 1.0026041666666667,
-      "pctExact": 2.4283854166666665,
+      "pctAA": 0.4036458333333333,
+      "pctExact": 13.125,
       "channelsMismatched": 0
     },
     {
       "key": "__hover",
-      "pctAA": 1.0026041666666667,
-      "pctExact": 2.4283854166666665,
+      "pctAA": 0.4036458333333333,
+      "pctExact": 13.125,
       "channelsMismatched": 0
     },
     {
       "key": "__focus-visible",
-      "pctAA": 1.0026041666666667,
-      "pctExact": 2.4283854166666665,
+      "pctAA": 0.4036458333333333,
+      "pctExact": 13.125,
       "channelsMismatched": 0
     },
     {
       "key": "__active",
-      "pctAA": 1.0026041666666667,
-      "pctExact": 2.4283854166666665,
+      "pctAA": 0.4036458333333333,
+      "pctExact": 13.125,
       "channelsMismatched": 0
     }
   ],
@@ -82,33 +82,35 @@
       "key": "__default",
       "channelsCompared": 9,
       "channelsEqual": 9,
-      "pctExact": 2.4283854166666665,
-      "pctAA": 1.0026041666666667,
+      "pctExact": 13.125,
+      "pctAA": 0.4036458333333333,
       "mismatches": []
     },
     {
       "key": "__hover",
       "channelsCompared": 9,
       "channelsEqual": 9,
-      "pctExact": 2.4283854166666665,
-      "pctAA": 1.0026041666666667,
-      "mismatches": []
+      "pctExact": 13.125,
+      "pctAA": 0.4036458333333333,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "__focus-visible",
       "channelsCompared": 9,
       "channelsEqual": 9,
-      "pctExact": 2.4283854166666665,
-      "pctAA": 1.0026041666666667,
+      "pctExact": 13.125,
+      "pctAA": 0.4036458333333333,
       "mismatches": []
     },
     {
       "key": "__active",
       "channelsCompared": 9,
       "channelsEqual": 9,
-      "pctExact": 2.4283854166666665,
-      "pctAA": 1.0026041666666667,
-      "mismatches": []
+      "pctExact": 13.125,
+      "pctAA": 0.4036458333333333,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     }
   ]
 }

@@ -1,0 +1,2 @@
+[data-cf="grid-auto-fit-minmax"] { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); width: 200px; background: rgb(242, 242, 238); }
+[data-cf="grid-auto-fit-minmax"] .cf-a, [data-cf="grid-auto-fit-minmax"] .cf-b { height: 16px; background: rgb(226, 226, 208); }

@@ -1,0 +1,26 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.grid-explicit-anchor",
+  "name": "CaseGridExplicitAnchor",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"grid-explicit-anchor\" (grid-placement). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: grid-row: 3; grid-column: 2 (explicit cell placement, 0-based contract / 1-based CSS)",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@ds-contracts/conformance",
+      "export": "CaseGridExplicitAnchor"
+    }
+  }
+}

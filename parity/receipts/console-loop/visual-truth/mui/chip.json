@@ -8,7 +8,7 @@
     "compositionOk": true
   },
   "receipt": "parity/receipts/console-loop/mui/components/chip.json",
-  "status": "fail",
+  "status": "pass",
   "fileKey": "59mLQlOMiD5w5za6SUcoO5",
   "fileVersion": "2384477865735882405",
   "setNodeId": "21:410",
@@ -17,27 +17,27 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 26.47058823529412,
-    "pctAAUnmasked": 6.470588235294119,
-    "pctAAMasked": 6.470588235294119,
+    "pctExactUnmasked": 21.176470588235293,
+    "pctAAUnmasked": 1.1764705882352942,
+    "pctAAMasked": 1.1764705882352942,
     "maskCoveragePct": 0,
     "canvasPx": "51x20",
-    "realPx": "49x20",
+    "realPx": "50x20",
     "inkCanvasPct": 93.23529411764706,
-    "inkRealPct": 89.41176470588236
+    "inkRealPct": 91.37254901960785
   },
   "reference": "parity/receipts/console-loop/mui/refs/chip.png",
-  "referenceSha256": "7bad7636a90b2aa1f1079c39eaa35e15a46a658b7baf40a3644befd2be216bcd",
+  "referenceSha256": "10599845374653837b842cdeb8dc08126967831483edb78583594811c964d80b",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/chip.png",
   "canvasShotSha256": "f0a1305e19b212531d53dc0131d16dbea0181482ed85271dc552df98e17879be",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/chip.diff.png",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.0408163265306123,
-  "inkDelta": 3.823529411764696,
+  "scaleRatio": 1.02,
+  "inkDelta": 1.8627450980392126,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=6.47 > 5)"
+  "note": "pixel bar met (headless REST render vs code reference)"
 }

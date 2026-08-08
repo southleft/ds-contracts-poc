@@ -41,6 +41,8 @@ import {
   arrayProps,
   boolProps,
   enumProps,
+  gridCellPlan,
+  gridParentDecls,
   isArrayType,
   isEnum,
   isMultiRoot,
@@ -114,6 +116,21 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     return typeof v === 'number' ? v : String(v);
   };
 
+  // A2 grid: the ONE compiled cell plan (core/emit-react.ts gridCellPlan).
+  // This surface resolves token gaps to LITERALS (its whole claim) and
+  // camelCases the shared canonical decl strings into style objects.
+  const gridPlan = gridCellPlan(contract);
+  const gridTokenRefCss = (refPath: string): string => {
+    const v = resolveValue(refPath);
+    return typeof v === 'number' ? `${v}px` : v;
+  };
+  const applyDeclStrings = (s: StyleRecord, decls: string[]): void => {
+    for (const decl of decls) {
+      const i = decl.indexOf(': ');
+      s[camel(decl.slice(0, i))] = decl.slice(i + 2);
+    }
+  };
+
   const name = contract.name;
   const enums = enumProps(contract);
   const bools = boolProps(contract);
@@ -172,13 +189,25 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
 
   const compilePart = (partName: string, part: Part, isRoot: boolean) => {
     const s: StyleRecord = {};
+    // A2 grid (G2/G4): this part's cell under its grid parent — resolved
+    // from the shared plan; sizing stays unspelled (stretch is the CSS grid
+    // default, the pinned spelling of canvas FILL, G3).
+    applyDeclStrings(s, gridPlan.cells.get(partName) ?? []);
     if (isRoot) {
       if (part.layout) {
-        s.display = part.layout.display ?? 'flex';
-        if (part.layout.direction) s.flexDirection = part.layout.direction;
-        if (part.layout.wrap) s.flexWrap = 'wrap';
-        if (part.layout.align) s.alignItems = ALIGN_CSS[part.layout.align];
-        if (part.layout.justify) s.justifyContent = JUSTIFY_CSS[part.layout.justify];
+        if (part.layout.display === 'grid') {
+          // A2 grid (G1): tracks/gaps/areas/flow, token gaps as literals.
+          applyDeclStrings(
+            s,
+            gridParentDecls(part.layout, gridTokenRefCss, `${contract.id}.anatomy.${partName}.layout.gap`),
+          );
+        } else {
+          s.display = part.layout.display ?? 'flex';
+          if (part.layout.direction) s.flexDirection = part.layout.direction;
+          if (part.layout.wrap) s.flexWrap = 'wrap';
+          if (part.layout.align) s.alignItems = ALIGN_CSS[part.layout.align];
+          if (part.layout.justify) s.justifyContent = JUSTIFY_CSS[part.layout.justify];
+        }
       } else {
         s.display = 'inline-flex';
         s.alignItems = 'center';
@@ -222,11 +251,19 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       }
     } else {
       if (isStructural(part)) {
-        s.display = part.layout?.display ?? 'flex';
-        if (part.layout?.direction) s.flexDirection = part.layout.direction;
-        if (part.layout?.wrap) s.flexWrap = 'wrap';
-        if (part.layout?.align) s.alignItems = ALIGN_CSS[part.layout.align];
-        if (part.layout?.justify) s.justifyContent = JUSTIFY_CSS[part.layout.justify];
+        if (part.layout?.display === 'grid') {
+          // A2 grid (G1): a nested grid parent — tracks/gaps/areas/flow.
+          applyDeclStrings(
+            s,
+            gridParentDecls(part.layout, gridTokenRefCss, `${contract.id}.anatomy.${partName}.layout.gap`),
+          );
+        } else {
+          s.display = part.layout?.display ?? 'flex';
+          if (part.layout?.direction) s.flexDirection = part.layout.direction;
+          if (part.layout?.wrap) s.flexWrap = 'wrap';
+          if (part.layout?.align) s.alignItems = ALIGN_CSS[part.layout.align];
+          if (part.layout?.justify) s.justifyContent = JUSTIFY_CSS[part.layout.justify];
+        }
       }
       if (part.layout?.grow) { s.flex = '1 1 auto'; s.minWidth = 0; }
       if (part.overlay) Object.assign(s, { position: 'absolute' }, OVERLAY_CSS[part.overlay.placement]);
@@ -372,6 +409,20 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     // the sole "root"; multi-root: each of dialog/backdrop/… (each gets the
     // root layout treatment). Byte-identical for single-root.
     compilePart(partName, part, p.length === 1);
+  }
+  // A2 grid: style entries the anatomy walk cannot produce — EMPTY areas'
+  // placeholder elements (G4's dual-slot convention: the placement is
+  // visible with nothing in it) and the wrapper an instance cell rides
+  // (display: grid stretches the lone instance into the cell — the CSS
+  // spelling of canvas FILL, G3/P12).
+  for (const areas of gridPlan.placeholders.values()) {
+    for (const area of areas) baseStyles[area] = { gridArea: area };
+  }
+  for (const wrapped of gridPlan.wrappedInstances) {
+    const s: StyleRecord = {};
+    applyDeclStrings(s, gridPlan.cells.get(wrapped) ?? []);
+    s.display = 'grid';
+    baseStyles[wrapped] = s;
   }
 
   // Disabled-state tokens apply via the disabled prop (the one interaction
@@ -696,9 +747,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         (!childrenApplied && !depSelfDefaults && typeof depChildren?.default === 'string'
           ? depChildren.default
           : undefined);
-      return text !== undefined
+      const instance = text !== undefined
         ? `<${dep.name}${attrs}>${text}</${dep.name}>`
         : `<${dep.name}${attrs} />`;
+      // A2 grid (G3/P12): an instance cell rides a wrapper span whose style
+      // carries the placement (see the baseStyles entries above).
+      return gridPlan.wrappedInstances.has(partName)
+        ? `<span style=${styleExpr(partName, false, [])}>${instance}</span>`
+        : instance;
     }
     if (part.slot) {
       const el = part.element ?? 'div';
@@ -739,9 +795,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       );
     }
     const el = part.element ?? 'div';
-    const inner = Object.entries(part.parts ?? {})
-      .map(([childName, child]) => renderPart(childName, child))
-      .join('\n');
+    // A2 grid (G4): a grid parent's EMPTY areas render placeholder elements
+    // after the declared children (their styles carry the placement).
+    const inner = [
+      ...Object.entries(part.parts ?? {}).map(([childName, child]) => renderPart(childName, child)),
+      ...(gridPlan.placeholders.get(partName) ?? []).map(
+        (area) => `<div style=${styleExpr(area, false, [])} />`,
+      ),
+    ].join('\n');
     return wrapVisibleWhen(
       part,
       `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}${eventAttrsFor(partName, part, el)}>\n${inner}\n</${el}>`,
@@ -752,10 +813,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // is unused in that case (the isMultiRoot branch returns before the template
   // is assembled), so these reads are guarded rather than duplicated.
   const root = contract.anatomy.root;
-  const rootInner = root?.parts
-    ? Object.entries(root.parts)
-        .map(([childName, child]) => renderPart(childName, child))
-        .join('\n')
+  const rootInner = root?.parts || gridPlan.placeholders.has('root')
+    ? [
+        ...Object.entries(root?.parts ?? {}).map(([childName, child]) => renderPart(childName, child)),
+        // A2 grid (G4): empty root-grid areas render placeholders too.
+        ...(gridPlan.placeholders.get('root') ?? []).map(
+          (area) => `<div style=${styleExpr(area, false, [])} />`,
+        ),
+      ].join('\n')
     : '{children}';
 
   const el = elementByProp ? 'Tag' : contract.semantics.element;

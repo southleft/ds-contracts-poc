@@ -1,0 +1,2 @@
+[data-cf="grid-sidebar-px-fr"] { display: grid; grid-template-columns: 240px 1fr; width: 400px; background: rgb(240, 240, 240); }
+[data-cf="grid-sidebar-px-fr"] .cf-a, [data-cf="grid-sidebar-px-fr"] .cf-b { height: 16px; background: rgb(215, 225, 215); }

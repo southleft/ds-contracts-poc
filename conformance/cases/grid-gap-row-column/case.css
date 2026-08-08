@@ -1,0 +1,4 @@
+[data-cf="grid-gap-row-column"] { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 16px 16px; row-gap: 8px; column-gap: 16px; width: 200px; background: rgb(238, 240, 244); }
+[data-cf="grid-gap-row-column"] .cf-a { grid-row: 1; grid-column: 1; background: rgb(206, 216, 232); }
+[data-cf="grid-gap-row-column"] .cf-b { grid-row: 1; grid-column: 2; background: rgb(212, 222, 238); }
+[data-cf="grid-gap-row-column"] .cf-c { grid-row: 2; grid-column: 1; background: rgb(218, 228, 244); }

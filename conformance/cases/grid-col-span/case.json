@@ -1,0 +1,31 @@
+{
+  "id": "grid-col-span",
+  "feature": "grid-placement",
+  "construct": "grid-column: 1 / span 2 (child spans 2 columns)",
+  "why": "The task's frontier question verbatim: can a child span 2 columns. Yes, with occupancy validation.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.placement.columnSpan (CSS 1-based line + span → 0-based cell)",
+  "observable": {
+    "part": "a",
+    "channel": "grid-column-end",
+    "capturedValue": "span 2"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "The task's frontier question verbatim: can a child span 2 columns. Yes, with occupancy validation."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "gridColumnSpan=2 after placement; compiler must order place-then-span (P3 occupancy throw) and bound-check spans (P3 'Column span exceeds grid column count')"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "gridColumnSpan reads back exactly (P3, P8)"
+    }
+  },
+  "probe": "P3: colSpan ok after occupancy cleared; P8: header colSpan 4 exact",
+  "dumpSnippet": "dump.snippet.json"
+}

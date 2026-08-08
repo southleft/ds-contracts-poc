@@ -1,0 +1,4 @@
+[data-cf="grid-in-flex-fill"] { display: flex; width: 240px; background: rgb(238, 244, 244); }
+[data-cf="grid-in-flex-fill"] .cf-a { display: grid; grid-template-columns: 1fr 1fr; flex: 1 1 auto; height: 24px; background: rgb(208, 226, 226); }
+[data-cf="grid-in-flex-fill"] .cf-a .cf-b { grid-row: 1; grid-column: 1; background: rgb(216, 234, 234); }
+[data-cf="grid-in-flex-fill"] .cf-a .cf-c { grid-row: 1; grid-column: 2; background: rgb(224, 242, 242); }

@@ -1,0 +1,3 @@
+[data-cf="grid-child-text-hug"] { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 24px; width: 200px; background: rgb(244, 242, 238); }
+[data-cf="grid-child-text-hug"] .cf-a { grid-row: 1; grid-column: 1; justify-self: start; align-self: start; background: rgb(232, 226, 210); }
+[data-cf="grid-child-text-hug"] .cf-b { grid-row: 1; grid-column: 2; background: rgb(238, 234, 220); }

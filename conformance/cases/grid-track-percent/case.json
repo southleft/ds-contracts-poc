@@ -1,0 +1,31 @@
+{
+  "id": "grid-track-percent",
+  "feature": "grid-responsive",
+  "construct": "grid-template-columns: 50% 1fr",
+  "why": "Percent tracks are not in the track-type enum; percent-of-parent is not a canvas track fact.",
+  "expect": "REFUSED",
+  "expectName": "grid-track-percent",
+  "expectWhere": "LEDGER.md / refusal receipts (grid-track-percent — P2b exact enum error: Expected FLEX | FIXED | HUG, received PERCENT)",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-columns",
+    "capturedValue": "100px 100px",
+    "carriedValue": "100px"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "Percent tracks are not in the track-type enum; percent-of-parent is not a canvas track fact."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "REFUSED",
+      "note": "exact error: \"Invalid enum value. Expected 'FLEX' | 'FIXED' | 'HUG', received 'PERCENT'\""
+    },
+    "canvasToCode": {
+      "expect": "UNREACHABLE"
+    }
+  },
+  "probe": "P2b",
+  "dumpSnippet": null
+}

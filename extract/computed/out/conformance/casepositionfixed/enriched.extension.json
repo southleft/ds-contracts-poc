@@ -2,7 +2,7 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
       "case-position-fixed": {
@@ -25,24 +25,8 @@
             "$value": "#147814",
             "$type": "color"
           },
-          "bottom": {
-            "$value": "988px",
-            "$type": "dimension"
-          },
           "font-size": {
             "$value": "12px",
-            "$type": "dimension"
-          },
-          "left": {
-            "$value": "2px",
-            "$type": "dimension"
-          },
-          "right": {
-            "$value": "888px",
-            "$type": "dimension"
-          },
-          "top": {
-            "$value": "2px",
             "$type": "dimension"
           }
         }
@@ -108,9 +92,13 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
+    "viewport-derived-geometry-refused: a (position:fixed) — bottom, left, right, top NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 2px + box 10px + right 888px = 900px = browser.viewport.width (900px); top 2px + box 10px + bottom 988px = 1000px = browser.viewport.height (1000px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
     "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "block-root-width-source: root — the admitted width 120px is NOT the stage content box (288px) and NOT the viewport (900px); this block root did not fill anything, it took its own intrinsic/shrink-to-fit size (a flex stage makes a block child a flex item). The admission stands — the number is the library's — but the sentence above names a container this measurement did not come from.",
     "inheritance-only: a.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [

@@ -1,0 +1,30 @@
+{
+  "id": "grid-instance-child",
+  "feature": "grid-composition",
+  "construct": "a component INSTANCE placed in a cell with position + FILL",
+  "why": "N-ANAT-02: nested instances keep contract identity — they must slot into cells natively.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.placement — the wrapper-cell fact an INSTANCE rides (P12/N-ANAT-02: nested instances keep contract identity and slot into cells natively; the CSS spelling is a display:grid wrapper class taking the placement)",
+  "observable": {
+    "part": "a",
+    "channel": "grid-column-start",
+    "capturedValue": "2"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "N-ANAT-02: nested instances keep contract identity — they must slot into cells natively."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "inst.setGridChildPosition(0,1) + FILL ok"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED"
+    }
+  },
+  "probe": "P12",
+  "dumpSnippet": "dump.snippet.json"
+}

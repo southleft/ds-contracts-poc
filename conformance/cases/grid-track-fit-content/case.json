@@ -1,0 +1,32 @@
+{
+  "id": "grid-track-fit-content",
+  "feature": "grid-tracks",
+  "construct": "grid-template-columns: fit-content(100%) 1fr",
+  "why": "The one content-sized track the canvas can spell; anything else content-sized is refused.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.columns (the {fit:true} track — P14 exact spelling)",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-columns",
+    "capturedValue": "40px 160px",
+    "carriedValue": "fit-content(100%) 1fr"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "The one content-sized track the canvas can spell; anything else content-sized is refused."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "{type:'HUG'} track; ONLY fit-content(100%) maps — other fit-content args are grid-track-minmax territory"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "HUG -> fit-content(100%), the API's own CSS spelling"
+    }
+  },
+  "probe": "P14: gridColumnSizingCSS reads 'fit-content(100%) minmax(0,1fr)' for a HUG track",
+  "dumpSnippet": "dump.snippet.json"
+}

@@ -75,6 +75,17 @@ const isStructural = (part: Json): boolean =>
 
 function canonLayout(part: Json, isRoot: boolean): Json {
   const l = part.layout ?? {};
+  // A2 grid: grid facts compare VERBATIM in their own named buckets — none of
+  // the flex-era normalizations (N1/N2) apply, because flex fields are
+  // schema-invalid together with display: grid (G1). grid↔flex is the
+  // STRUCTURAL case, surfaced by name in compareParts (P10).
+  if (l.display === 'grid') {
+    const out: Json = { display: 'grid' };
+    for (const k of ['rows', 'columns', 'gap', 'areas', 'flow'] as const) {
+      if (l[k] !== undefined) out[k] = l[k];
+    }
+    return out;
+  }
   if (isRoot && !part.layout) return { display: 'inline-flex', align: 'center', justify: 'center' }; // N1
   if (!isRoot && !isStructural(part)) return { ...(l.grow ? { grow: true } : {}), ...(l.overlap ? { overlap: true } : {}) };
   const out: Json = { display: l.display ?? 'flex' }; // N2
@@ -156,8 +167,26 @@ function compareParts(component: string, partPath: string, contract: Json, propo
   if (canonElement(contract, isRoot) !== canonElement(proposed, isRoot)) {
     issues.push(`element: ${canonElement(contract, isRoot)} vs ${canonElement(proposed, isRoot)}`);
   }
-  if (!deepEqual(canonLayout(contract, isRoot), canonLayout(proposed, isRoot))) {
-    issues.push(`layout: ${JSON.stringify(canonLayout(contract, isRoot))} vs ${JSON.stringify(canonLayout(proposed, isRoot))}`);
+  {
+    // A2 grid — the mode-switch-is-structural rule (P10): grid vs flex-family
+    // is never a per-field layout edit; the canvas physically destroys tracks
+    // on a layout.mode switch, so the whole grid fact family is named as one
+    // structural loss instead of dissolving into field diffs.
+    const cGrid = (contract.layout as Json | undefined)?.display === 'grid';
+    const pGrid = (proposed.layout as Json | undefined)?.display === 'grid';
+    if (cGrid !== pGrid) {
+      issues.push(
+        `layout.mode: ${cGrid ? 'grid' : 'flex-family'} vs ${pGrid ? 'grid' : 'flex-family'} — STRUCTURAL (P10: a layout.mode switch destroys tracks; every track/gap/area/placement fact is invalidated, never absorbed)`,
+      );
+    } else if (!deepEqual(canonLayout(contract, isRoot), canonLayout(proposed, isRoot))) {
+      issues.push(`layout: ${JSON.stringify(canonLayout(contract, isRoot))} vs ${JSON.stringify(canonLayout(proposed, isRoot))}`);
+    }
+  }
+  // A2 grid (G2): explicit cell placement is its own fact bucket — anchor+
+  // span+align compare verbatim (0-based cells, the proposer's −1 of the
+  // emitter's +1).
+  if (!deepEqual(contract.placement ?? null, proposed.placement ?? null)) {
+    issues.push(`placement: ${JSON.stringify(contract.placement ?? null)} vs ${JSON.stringify(proposed.placement ?? null)}`);
   }
   if (!deepEqual(contract.tokens ?? {}, proposed.tokens ?? {})) {
     const c = contract.tokens ?? {}, p = proposed.tokens ?? {};

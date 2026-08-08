@@ -1,0 +1,2 @@
+[data-cf="grid-two-column"] { display: grid; grid-template-columns: 1fr 1fr; width: 200px; background: rgb(238, 238, 238); }
+[data-cf="grid-two-column"] .cf-a, [data-cf="grid-two-column"] .cf-b { height: 16px; background: rgb(210, 220, 230); }

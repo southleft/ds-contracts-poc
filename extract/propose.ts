@@ -56,6 +56,9 @@ function convertPart(part: ExtractedPart, prefix: string, notes: string[]): Reco
   const out: Record<string, unknown> = {};
   if (part.element) out.element = part.element;
   if (part.layout) out.layout = part.layout;
+  /** A2 grid (G2): explicit cell placement — already gated to grid parents
+   *  by the adapter's attach step; validateGridPart re-referees on parse. */
+  if (part.placement) out.placement = part.placement;
   if (part.overlay) out.overlay = part.overlay;
   if (part.tokens && Object.keys(part.tokens).length > 0) out.tokens = part.tokens;
   if (part.states && Object.keys(part.states).length > 0) out.states = part.states;

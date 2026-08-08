@@ -1,1 +1,4 @@
-[data-cf="grid-implicit-tracks"] { display: grid; grid-auto-rows: 24px; grid-auto-flow: column; background: rgb(236, 236, 236); }
+[data-cf="grid-implicit-tracks"] { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 16px; width: 200px; background: rgb(236, 236, 236); }
+[data-cf="grid-implicit-tracks"] .cf-a { grid-row: 1; grid-column: 1; background: rgb(210, 210, 210); }
+[data-cf="grid-implicit-tracks"] .cf-b { grid-row: 1; grid-column: 2; background: rgb(216, 216, 216); }
+[data-cf="grid-implicit-tracks"] .cf-c { grid-row: 2; grid-column: 1; height: 16px; background: rgb(222, 222, 222); }

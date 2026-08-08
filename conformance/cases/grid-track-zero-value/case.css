@@ -1,0 +1,2 @@
+[data-cf="grid-track-zero-value"] { display: grid; grid-template-columns: 0px 1fr; width: 200px; background: rgb(244, 238, 238); }
+[data-cf="grid-track-zero-value"] .cf-a, [data-cf="grid-track-zero-value"] .cf-b { height: 16px; background: rgb(226, 210, 210); }

@@ -1281,6 +1281,82 @@ export const captureJs = (selector: string, classAllow?: string, varPrefix?: str
       calcs: Object.keys(calcs).length ? calcs : undefined,
     };
   };
+  // A2 GRID (G7) — DECLARED-TRACK READ. getComputedStyle on a grid container
+  // returns USED track sizes: minmax(60px, 120px) 1fr computes to
+  // "120px 80px", 50% 1fr to "100px 100px". The constructs the pinned
+  // grammar refuses BY NAME (docs/research/layout-grammar-proposal.md G7:
+  // grid-track-minmax P6, grid-track-percent P2b, grid-auto-fit-minmax) are
+  // therefore INVISIBLE in computed truth — the same fact class as the
+  // shorthand ceiling above: the declared text still holds the truth, so
+  // read it. Grid containers (computed display grid/inline-grid ONLY — every
+  // non-grid capture stays byte-identical) record each matching rule's
+  // authored grid-template-columns/rows verbatim. NOT gated on varPrefix:
+  // track lists are structural facts, not token bindings. Unreadable sheets
+  // push the SAME named SHEET_SKIPS entries as the vrules read; the readback
+  // string-dedups, so a sheet skipped by both reads is named once.
+  const GDECL_PROPS = ['grid-template-columns', 'grid-template-rows'];
+  const GRULES_BY_ROOT = new Map();
+  const buildGrules = (root) => {
+    const grules = [];
+    const flatRules = [];
+    const collectRules = (list) => {
+      for (const r of list) {
+        if (r.selectorText && r.style) flatRules.push(r);
+        else if (r.cssRules) {
+          try { collectRules(r.cssRules); }
+          catch (e) { SHEET_SKIPS.push({ kind: 'group', href: null, reason: String((e && e.message) || e) }); }
+        }
+      }
+    };
+    const sheets = [];
+    if (root === document) {
+      for (const sh of document.styleSheets) sheets.push(sh);
+      for (const sh of (document.adoptedStyleSheets || [])) sheets.push(sh);
+    } else {
+      for (const sh of (root.adoptedStyleSheets || [])) sheets.push(sh);
+      for (const sh of (root.styleSheets || [])) sheets.push(sh);
+    }
+    for (const sh of sheets) {
+      let rules;
+      try { rules = sh.cssRules; }
+      catch (e) { SHEET_SKIPS.push({ kind: 'sheet', href: sh.href || null, reason: String((e && e.message) || e) }); continue; }
+      collectRules(rules);
+    }
+    for (const r of flatRules) {
+      const decls = [];
+      for (const prop of GDECL_PROPS) {
+        let v = '';
+        try { v = r.style.getPropertyValue(prop); } catch {}
+        if (v) decls.push([prop, v.trim()]);
+      }
+      if (decls.length) grules.push([r.selectorText, decls]);
+    }
+    return grules;
+  };
+  const gdeclOf = (el) => {
+    const root = el.getRootNode();
+    let GRULES = GRULES_BY_ROOT.get(root);
+    if (!GRULES) { GRULES = buildGrules(root); GRULES_BY_ROOT.set(root, GRULES); }
+    const acc = {};
+    const push = (prop, v) => {
+      const list = (acc[prop] = acc[prop] || []);
+      if (!list.includes(v)) list.push(v);
+    };
+    for (const [sel, decls] of GRULES) {
+      let hit = false;
+      if (sel.indexOf(':host') === 0) hit = hostMatch(el, sel, root);
+      else { try { hit = el.matches(sel); } catch {} }
+      if (!hit) continue;
+      for (const [prop, v] of decls) push(prop, v);
+    }
+    // The style attribute is a declared source too (highest cascade origin).
+    for (const prop of GDECL_PROPS) {
+      let v = '';
+      try { v = el.style.getPropertyValue(prop); } catch {}
+      if (v) push(prop, v.trim());
+    }
+    return Object.keys(acc).length ? acc : undefined;
+  };
   // SHADOW-DOM ROUND — read \`tagName\` off Element.prototype, never off the
   // instance. A custom element can DEFINE A REACTIVE PROPERTY THAT SHADOWS IT:
   // altitude's al-heading declares \`accessor tagName: 'h1'|…|'h6' = 'h2'\`, so
@@ -1303,6 +1379,14 @@ export const captureJs = (selector: string, classAllow?: string, varPrefix?: str
     if (vr) out.vrefs = vr;
     if (vrPair.shorthands) out.vshorthands = vrPair.shorthands;
     if (vrPair.calcs) out.vcalcs = vrPair.calcs;
+    // A2 GRID — declared-track read, grid containers only (see gdeclOf).
+    {
+      const disp = ecs.getPropertyValue('display');
+      if (disp === 'grid' || disp === 'inline-grid') {
+        const gd = gdeclOf(el);
+        if (gd) out.gdecl = gd;
+      }
+    }
     // CONFORMANCE FRONTIER (R7) — the reader's pseudo frontier is DECLARED in
     // lib.ts (READ_PSEUDOS) and injected here, so the census reader, the
     // portal reader and the replay reconstruction cannot drift apart.

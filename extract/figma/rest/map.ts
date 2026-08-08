@@ -14,7 +14,12 @@
  *
  *   REST field                                      dump v1 field
  *   ─────────────────────────────────────────────   ──────────────────────────
- *   layoutMode HORIZONTAL|VERTICAL                  layout.mode (NONE/GRID → no layout block; GRID is a named degradation)
+ *   layoutMode HORIZONTAL|VERTICAL|GRID             layout.mode (NONE → no layout block). GRID (dump v1.17): tracks parsed
+ *     + gridRowsSizing/gridColumnsSizing (CSS str)    from the CSS-string spellings into normalized {px}|{fr}|{fit:true}
+ *     + gridRowGap/gridColumnGap                      (the REST divergence — no structured sizes array over REST), both
+ *     + gridItemsPositioning                          gaps, flow 'row'; per-child cell from gridRow/ColumnAnchorIndex,
+ *     + per-child anchors/spans/aligns                spans, gridChild*Align (ABSOLUTE-gated, P13); unparseable tracks →
+ *                                                     grid-track-unparsed, occupancy overflow → grid-implicit-tracks-lossy (P9)
  *   primaryAxisAlignItems (omitted at default)      layout.primary, default MIN
  *   counterAxisAlignItems (omitted at default)      layout.counter, default MIN
  *   itemSpacing (omitted at 0)                      layout.spacing, default 0
@@ -65,7 +70,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import type { DumpEffect, DumpFile, DumpGradient, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpSet, DumpShape, DumpText } from '../types.js';
+import type { DumpEffect, DumpFile, DumpGradient, DumpGridTrack, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpSet, DumpShape, DumpText } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // REST shapes (trimmed to the consumed fields; figma/rest-api-spec names)
@@ -177,6 +182,27 @@ export interface RestNode {
   paddingRight?: number;
   paddingBottom?: number;
   paddingLeft?: number;
+  // GRID parent facts (dump v1.17 — grid-recon-probes.md "What the two
+  // readers see today"): counts/gaps/positioning ride structured fields, but
+  // track SIZES come ONLY as CSS strings named gridColumnsSizing /
+  // gridRowsSizing (NOT the plugin's gridColumnSizingCSS spelling) — the REST
+  // divergence this mapper parses back into normalized tracks.
+  gridRowCount?: number;
+  gridColumnCount?: number;
+  gridRowGap?: number;
+  gridColumnGap?: number;
+  gridRowsSizing?: string;
+  gridColumnsSizing?: string;
+  gridAutoTracks?: 'NONE' | 'ROWS';
+  gridItemsPositioning?: 'MANUAL' | 'ROW_AUTO_FLOW';
+  // GRID child facts (same REST verification): 0-based anchors, spans,
+  // 4-value aligns — the per-child `cell` channel's source.
+  gridRowAnchorIndex?: number;
+  gridColumnAnchorIndex?: number;
+  gridRowSpan?: number;
+  gridColumnSpan?: number;
+  gridChildHorizontalAlign?: 'AUTO' | 'MIN' | 'CENTER' | 'MAX';
+  gridChildVerticalAlign?: 'AUTO' | 'MIN' | 'CENTER' | 'MAX';
   // CornerTrait
   cornerRadius?: number;
   /** [top-left, top-right, bottom-right, bottom-left] per api_types.ts. */
@@ -249,7 +275,12 @@ export type MapDegradationCode =
   // 'paint-alpha-dropped' retired in dump v1.1: solid-paint opacity is
   // CAPTURED ({ hex, alpha }) instead of degraded away.
   | 'paint-unsupported'
-  | 'layout-grid-unsupported'
+  // 'layout-grid-unsupported' retired in dump v1.17: GRID layouts are
+  // CAPTURED (normalized tracks parsed from gridRowsSizing/gridColumnsSizing,
+  // both gaps, flow, per-child cells) instead of degraded away. Two named
+  // codes fence the remaining grid loss:
+  | 'grid-track-unparsed'
+  | 'grid-implicit-tracks-lossy'
   | 'radii-nonuniform'
   // dump v1.2 (STYLE-FIDELITY audit): every channel the capture reads but
   // cannot carry is a RECEIPT now — the silent-loss census hit zero.
@@ -539,16 +570,114 @@ function mapBound(node: RestNode, ctx: Ctx, nodePath: string): Record<string, st
 // Node mapping
 // ---------------------------------------------------------------------------
 
+/** Parse ONE REST grid-track spelling (a token of gridRowsSizing /
+ *  gridColumnsSizing) into the normalized DumpGridTrack. The REST surface's
+ *  observed vocabulary (grid-recon-probes.md, verified live):
+ *    "Npx"            → {px: N}      (FIXED — fractional ok, P2b)
+ *    "minmax(0,Nfr)"  → {fr: N}      (FLEX — the API's own CSS spelling, P2)
+ *    "Nfr"            → {fr: N}      (defensive: the plain spelling)
+ *    "fit-content(100%)" → {fit: true} (HUG — P14's exact spelling)
+ *  Anything else returns undefined — the caller refuses BY NAME
+ *  (grid-track-unparsed), never a silent drop. */
+function parseGridTrack(token: string): DumpGridTrack | undefined {
+  const t = token.trim();
+  let m = /^(\d+(?:\.\d+)?)px$/.exec(t);
+  if (m) return { px: Number(m[1]) };
+  m = /^minmax\(\s*0(?:px)?\s*,\s*(\d+(?:\.\d+)?)fr\s*\)$/.exec(t);
+  if (m) return { fr: Number(m[1]) };
+  m = /^(\d+(?:\.\d+)?)fr$/.exec(t);
+  if (m) return { fr: Number(m[1]) };
+  if (/^fit-content\(\s*100%\s*\)$/.test(t)) return { fit: true };
+  return undefined;
+}
+
+/** Split a REST track-sizing CSS string into top-level tokens (parens-aware:
+ *  "200px minmax(0,1fr) fit-content(100%)" → 3 tokens) and expand
+ *  integer-literal repeat(N, X) — the API's own read-back spelling for
+ *  uniform tracks (P1: a fresh grid reads "repeat(2,minmax(0,1fr))"). */
+function parseGridTracks(css: string): DumpGridTrack[] | undefined {
+  const tokens: string[] = [];
+  let depth = 0;
+  let cur = '';
+  for (const ch of css) {
+    if (ch === '(') depth++;
+    if (ch === ')') depth--;
+    if (/\s/.test(ch) && depth === 0) {
+      if (cur) tokens.push(cur);
+      cur = '';
+    } else cur += ch;
+  }
+  if (cur) tokens.push(cur);
+  const out: DumpGridTrack[] = [];
+  for (const token of tokens) {
+    const rep = /^repeat\(\s*(\d+)\s*,\s*(.+)\)$/.exec(token);
+    if (rep) {
+      const inner = parseGridTrack(rep[2]);
+      if (!inner) return undefined;
+      for (let i = 0; i < Number(rep[1]); i++) out.push({ ...inner });
+      continue;
+    }
+    const track = parseGridTrack(token);
+    if (!track) return undefined;
+    out.push(track);
+  }
+  return out.length > 0 ? out : undefined;
+}
+
 function mapLayout(node: RestNode, ctx: Ctx, nodePath: string): DumpLayout | undefined {
   const mode = node.layoutMode;
   if (mode === undefined || mode === 'NONE') return undefined;
   if (mode === 'GRID') {
-    ctx.report.degradations.push({
-      code: 'layout-grid-unsupported',
-      nodePath,
-      message: 'layoutMode GRID has no dump v1 projection — no layout block emitted; anatomy under it is order-only',
-    });
-    return undefined;
+    // dump v1.17 (A2 layout grammar): GRID is CAPTURED. Counts/gaps/flow ride
+    // structured REST fields; track sizes come ONLY as the CSS strings
+    // gridRowsSizing / gridColumnsSizing (the one REST divergence — no
+    // structured sizes array exists over REST), parsed back into the same
+    // normalized {px}|{fr}|{fit:true} facts the plugin dump emits. The
+    // flex-era primary/counter/spacing are NOT emitted (inert defaults on
+    // GRID frames — invented facts). An unparseable track spelling refuses
+    // the WHOLE grid by name (grid-track-unparsed): a partial track list
+    // would be a different grid, not a degraded one.
+    const rows = parseGridTracks(node.gridRowsSizing ?? '');
+    const columns = parseGridTracks(node.gridColumnsSizing ?? '');
+    if (!rows || !columns) {
+      ctx.report.degradations.push({
+        code: 'grid-track-unparsed',
+        nodePath,
+        message:
+          `GRID track sizing not parseable into px/fr/fit tracks (gridRowsSizing "${node.gridRowsSizing ?? '(absent)'}", ` +
+          `gridColumnsSizing "${node.gridColumnsSizing ?? '(absent)'}") — the carriable vocabulary is Npx | minmax(0,Nfr) | ` +
+          'fit-content(100%) | integer repeat() thereof (P2/P14); no layout block emitted, anatomy under it is order-only',
+      });
+      return undefined;
+    }
+    // P9 receipt — the declared counts disagreeing with the parsed lists is
+    // the implicit-track under-report shape; parsed lists still carry.
+    if (
+      (typeof node.gridRowCount === 'number' && node.gridRowCount !== rows.length) ||
+      (typeof node.gridColumnCount === 'number' && node.gridColumnCount !== columns.length)
+    ) {
+      ctx.report.degradations.push({
+        code: 'grid-implicit-tracks-lossy',
+        nodePath,
+        message:
+          `declared grid counts (${node.gridRowCount ?? '?'}×${node.gridColumnCount ?? '?'}) disagree with the parsed track lists ` +
+          `(${rows.length}×${columns.length}) — implicit-track readback is LOSSY (P9); the parsed tracks are captured`,
+      });
+    }
+    const grid: NonNullable<DumpLayout['grid']> = {
+      rows,
+      columns,
+      rowGap: node.gridRowGap ?? 0,
+      columnGap: node.gridColumnGap ?? 0,
+      ...(node.gridItemsPositioning === 'ROW_AUTO_FLOW' ? { flow: 'row' as const } : {}),
+    };
+    return {
+      mode: 'GRID',
+      padding: [node.paddingTop ?? 0, node.paddingRight ?? 0, node.paddingBottom ?? 0, node.paddingLeft ?? 0],
+      primarySizing: node.primaryAxisSizingMode ?? 'AUTO',
+      counterSizing: node.counterAxisSizingMode ?? 'AUTO',
+      grid,
+    };
   }
   // REST omits fields at their defaults; the defaults below are the spec's.
   return {
@@ -794,8 +923,32 @@ function mapNode(
   ctx: Ctx,
   nodePath: string,
   parentBox: { x: number; y: number; width: number; height: number } | null = null,
+  /** The PARENT RestNode (dump v1.17) — grid-cell capture needs the parent's
+   *  layoutMode/gridItemsPositioning, not just its box. Null at the root. */
+  parent: RestNode | null = null,
 ): RestDumpNode {
   const out: RestDumpNode = { name: node.name, type: node.type };
+
+  // dump v1.17: GRID-cell placement — the same rule as dump.plugin.js: every
+  // IN-FLOW child of a MANUAL GRID parent carries its cell (0-based anchors,
+  // spans > 1, non-AUTO aligns), gated on layoutPositioning !== 'ABSOLUTE'
+  // (P13: absolute children still report anchors 0,0). Not captured under
+  // ROW_AUTO_FLOW — the placement fact there is CHILD ORDER (P5).
+  if (
+    parent?.layoutMode === 'GRID' &&
+    parent.gridItemsPositioning !== 'ROW_AUTO_FLOW' &&
+    node.layoutPositioning !== 'ABSOLUTE'
+  ) {
+    const cell: NonNullable<DumpNode['cell']> = {
+      row: node.gridRowAnchorIndex ?? 0,
+      column: node.gridColumnAnchorIndex ?? 0,
+    };
+    if (typeof node.gridRowSpan === 'number' && node.gridRowSpan > 1) cell.rowSpan = node.gridRowSpan;
+    if (typeof node.gridColumnSpan === 'number' && node.gridColumnSpan > 1) cell.columnSpan = node.gridColumnSpan;
+    if (node.gridChildHorizontalAlign && node.gridChildHorizontalAlign !== 'AUTO') cell.alignX = node.gridChildHorizontalAlign;
+    if (node.gridChildVerticalAlign && node.gridChildVerticalAlign !== 'AUTO') cell.alignY = node.gridChildVerticalAlign;
+    out.cell = cell;
+  }
 
   // dump v1.14 structured-axis addition. The REST component-properties map
   // carries each direct variant row's realized values; preserve its verbatim
@@ -818,6 +971,28 @@ function mapNode(
 
   const layout = mapLayout(node, ctx, nodePath);
   if (layout) out.layout = layout;
+  // P9 receipt, occupancy shape: children whose anchors+spans reach beyond
+  // the captured track lists mean the canvas grew/under-reported the
+  // declaration — LOSSY readback, receipted BY NAME (dump.plugin.js parity).
+  if (layout?.grid) {
+    let maxRow = 0;
+    let maxCol = 0;
+    for (const child of node.children ?? []) {
+      if (child.layoutPositioning === 'ABSOLUTE') continue; // P13 gate
+      maxRow = Math.max(maxRow, (child.gridRowAnchorIndex ?? 0) + (child.gridRowSpan ?? 1));
+      maxCol = Math.max(maxCol, (child.gridColumnAnchorIndex ?? 0) + (child.gridColumnSpan ?? 1));
+    }
+    if (maxRow > layout.grid.rows.length || maxCol > layout.grid.columns.length) {
+      ctx.report.degradations.push({
+        code: 'grid-implicit-tracks-lossy',
+        nodePath,
+        message:
+          `occupied cells (${maxRow}×${maxCol}) exceed the declared track lists ` +
+          `(${layout.grid.rows.length}×${layout.grid.columns.length}) — implicit-track readback is LOSSY (P9); ` +
+          'the declared tracks are captured, the overflowing placements are not contract-expressible (grid-implicit-tracks refusal downstream)',
+      });
+    }
+  }
   const cornerRadius = mapCornerRadius(node, ctx, nodePath);
   if (cornerRadius !== undefined) out.cornerRadius = cornerRadius;
   const bound = mapBound(node, ctx, nodePath);
@@ -923,7 +1098,7 @@ function mapNode(
 
   if (Array.isArray(node.children)) {
     out.children = node.children.map((child) =>
-      mapNode(child, ctx, `${nodePath}/${child.name}`, node.absoluteBoundingBox ?? null),
+      mapNode(child, ctx, `${nodePath}/${child.name}`, node.absoluteBoundingBox ?? null, node),
     );
   }
   return out;

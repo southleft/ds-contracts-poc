@@ -765,7 +765,7 @@ async function main() {
     console.log(`    bound: ${boundConfirmed}/${boundRows.length} confirmed · ${contradictions.length} contradictions (${untriaged.length} untriaged) · ${folds.length} folds`);
 
     const layout = enrichLayout(aligned, space, styled, promotion.contract);
-    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts, new Set(promotion.partIndex.keys()));
+    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts, new Set(promotion.partIndex.keys()), promotion.gridMintRefusals);
     // ORPHAN-LEAF ROUND (task #42): the refusals ride the styled-channel
     // receipt channel into the extension block AND the ledger, so the count of
     // leaves a refused part did NOT mint is legible per component. A silent

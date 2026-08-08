@@ -1,0 +1,31 @@
+{
+  "id": "grid-flow-dense",
+  "feature": "grid-flow",
+  "construct": "grid-auto-flow: dense",
+  "why": "Dense packing is SOLVER OUTPUT, not a declared fact — and the enum rejects it anyway.",
+  "expect": "REFUSED",
+  "expectName": "grid-flow-dense",
+  "expectWhere": "LEDGER.md / refusal receipts (grid-flow-dense — dense packing is SOLVER OUTPUT, not a declared fact; gridItemsPositioning enum is MANUAL | ROW_AUTO_FLOW, P5)",
+  "observable": {
+    "part": "root",
+    "channel": "grid-auto-flow",
+    "capturedValue": "dense",
+    "carriedValue": "dense"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "Dense packing is SOLVER OUTPUT, not a declared fact — and the enum rejects it anyway."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "REFUSED",
+      "note": "gridItemsPositioning enum is 'MANUAL' | 'ROW_AUTO_FLOW'; DENSE rejected"
+    },
+    "canvasToCode": {
+      "expect": "UNREACHABLE"
+    }
+  },
+  "probe": "P5",
+  "dumpSnippet": null
+}

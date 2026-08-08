@@ -1,0 +1,37 @@
+{
+  "id": "grid-bento-span-matrix",
+  "feature": "grid-placement",
+  "construct": "3x4 grid, rows [80px,1fr,2fr], cols [160px,1fr,1fr,120px], gaps 12/16, header 1x4 + sidebar 2x1 + main 1x2 + rail 2x1 + footer 1x2, all cells FILL",
+  "why": "The whole grammar in one artifact — the canonical round-trip receipt.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout (tracks + gap pair) and parts.*.placement — the CODE-SIDE half of the P8 receipt. The class fence (cf-root/a/b/c only) bounds this fixture at THREE children (header/sidebar/main); the full five-child bento incl. rail+footer is pinned by evals/fixtures/grid-bento-check.ts and the design-side snippet here.",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-columns",
+    "capturedValue": "160px 156px 156px 120px",
+    "carriedValue": "160px 1fr 1fr 120px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "The whole grammar in one artifact — the canonical round-trip receipt."
+  },
+  "blockStage": true,
+  "stage": {
+    "width": 680,
+    "height": 520,
+    "padding": 16
+  },
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "written live; screenshot receipt assets/grid-recon/p8-bento-roundtrip.png"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "every track, gap, anchor, span and sizing read back EXACTLY (p8Match true); REST carries the same facts (tracks as CSS strings gridColumnsSizing/gridRowsSizing)"
+    }
+  },
+  "probe": "P8 (plugin round trip) + live REST /v1/files nodes fetch of 4:1134",
+  "dumpSnippet": "dump.snippet.json"
+}

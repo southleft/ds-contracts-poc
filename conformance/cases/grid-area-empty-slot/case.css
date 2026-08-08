@@ -1,0 +1,2 @@
+[data-cf="grid-area-empty-slot"] { display: grid; grid-template-rows: 24px; grid-template-columns: 60px 1fr; grid-template-areas: "a b"; width: 200px; background: rgb(238, 244, 242); }
+[data-cf="grid-area-empty-slot"] .cf-a { grid-area: a; background: rgb(210, 228, 222); }

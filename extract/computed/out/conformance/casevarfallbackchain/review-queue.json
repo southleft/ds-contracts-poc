@@ -3,6 +3,6 @@
   "component": "CaseVarFallbackChain",
   "contract": "conformance/seeds/var-fallback-chain.contract.json",
   "generatedBy": "extract/computed/run.ts",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "items": []
 }

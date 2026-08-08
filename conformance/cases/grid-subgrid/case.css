@@ -1,0 +1,4 @@
+[data-cf="grid-subgrid"] { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 24px; width: 200px; background: rgb(242, 238, 244); }
+[data-cf="grid-subgrid"] .cf-a { display: grid; grid-column: 1 / span 2; grid-row: 1; grid-template-columns: subgrid; background: rgb(224, 214, 232); }
+[data-cf="grid-subgrid"] .cf-a .cf-b { grid-row: 1; grid-column: 1; background: rgb(230, 222, 238); }
+[data-cf="grid-subgrid"] .cf-a .cf-c { grid-row: 1; grid-column: 2; background: rgb(236, 230, 244); }

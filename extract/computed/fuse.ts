@@ -54,7 +54,7 @@ import {
   type FlatEl,
   type StyleMap,
 } from './lib.js';
-import { buildUnion, nameUnion, rejoinStaticParts } from './anatomy.js';
+import { buildUnion, nameUnion, rejoinStaticParts, renameGridAreaParts } from './anatomy.js';
 
 // ---------------------------------------------------------------------------
 // Alignment across the sweep (§4)
@@ -102,6 +102,11 @@ export function alignSweep(
   const structureReceipts = [...union.receipts];
   nameUnion(union.entries, comp.name, classPrefix);
   rejoinStaticParts(union.entries, space.contract, comp, structureReceipts);
+  // A2 (G4): a grid child anchored to a declared area takes the area's NAME
+  // as its part name (the area name IS the slot anchor) — before partNames
+  // materialize, so captured-truth anatomy, minting and the promoted
+  // contract agree on the one name.
+  renameGridAreaParts(union.entries, structureReceipts);
   const baseFlat: FlatEl[] = union.entries.map((e) => ({
     path: e.repPath,
     sig: e.sig,
@@ -1260,6 +1265,17 @@ export function carriedChannels(part: Part | undefined): Set<string> {
   for (const m of Object.values(part.declaredStates ?? {})) {
     for (const ch of Object.keys(m)) for (const cp of CHANNEL_TO_COMPUTED[ch] ?? [ch]) out.add(cp);
   }
+  // A2 grid: a STRUCTURED grid part carries these computed longhands through
+  // layout.rows/columns/gap/areas (the pinned G6 CSS spellings) and a placed
+  // child carries its lines/aligns through Part.placement — the mint pass
+  // must neither re-mint them as tokens nor name them as residue. Gated on
+  // display === "grid" so no committed flex-library artifact moves a byte.
+  if (part.layout?.display === 'grid') {
+    for (const ch of ['display', 'grid-template-rows', 'grid-template-columns', 'grid-template-areas', 'grid-auto-flow', 'row-gap', 'column-gap']) out.add(ch);
+  }
+  if (part.placement) {
+    for (const ch of ['grid-row-start', 'grid-row-end', 'grid-column-start', 'grid-column-end', 'justify-self', 'align-self']) out.add(ch);
+  }
   return out;
 }
 
@@ -1490,6 +1506,13 @@ export function prepareMint(
    *  is derived from `contract` itself, which is the same set whenever the
    *  caller passes the PROMOTED contract (both callers do). */
   promotedParts?: Set<string>,
+  /** A2 grid — `part|channel` → named reason (PromotionResult
+   *  .gridMintRefusals): channels the mint pass REFUSES BY NAME instead of
+   *  minting — flex-grow on grid children (grid-child-grow, P4) and the
+   *  placement longhands of children whose parent grid was not promoted
+   *  (grid-implicit-tracks etc., P9). The refusal lands in codeOnly so the
+   *  ledger/extension carry the name; a dead fact never rides as a token. */
+  gridMintRefusals?: Map<string, string>,
 ): MintPrep {
   const axes: MintAxis[] = space.axes.map((ax) => ({ propName: ax.prop, values: [...ax.values] }));
   const partByName = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
@@ -1688,6 +1711,25 @@ export function prepareMint(
           const k = kindOf(channel, v);
           if (!k) { unk ??= v; continue; } // no break: declared detection needs the full value set
           occurrences.push({ variant: combo.key, axisValues: combo.axisValues, value: k.value });
+        }
+        // A2 grid — a channel the grid promotion refused BY NAME never mints,
+        // whatever its value shape: flex-grow on a grid child is dead on both
+        // surfaces (P4, grid-child-grow), and the placement longhands of a
+        // grid the contract does not carry are P9's rewritten-declaration
+        // facts (grid-implicit-tracks). The named reason lands in codeOnly
+        // (ledger + extension), so the loss is greppable by its G7 name.
+        {
+          const gridReason = gridMintRefusals?.get(`${partName}|${channel}`);
+          if (gridReason) {
+            codeOnly.push({
+              part: partName,
+              channel,
+              reason: gridReason,
+              sample: [...values][0] ?? '<no default-state observation>',
+              distinctValues: values.size,
+            });
+            continue;
+          }
         }
         if (values.size === 0) {
           // MUI round: interaction-only union parts (-active, -focusVisible

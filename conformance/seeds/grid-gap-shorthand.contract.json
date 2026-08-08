@@ -1,0 +1,26 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.grid-gap-shorthand",
+  "name": "CaseGridGapShorthand",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"grid-gap-shorthand\" (grid-gaps). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: gap: 12px 16px (and one-value gap: 12px)",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@ds-contracts/conformance",
+      "export": "CaseGridGapShorthand"
+    }
+  }
+}

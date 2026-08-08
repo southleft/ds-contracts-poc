@@ -1,0 +1,31 @@
+{
+  "id": "grid-absolute-overlay",
+  "feature": "grid-composition",
+  "construct": "Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent",
+  "why": "The existing overlay grammar must survive under grid parents unchanged.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.b (Part.overlay / layoutPositioning ABSOLUTE surviving unchanged under a grid parent, P13). QUIRK the reader must honor: absolute children still REPORT anchors (0,0) — anchor reads gate on layoutPositioning !== ABSOLUTE or a placement is invented.",
+  "observable": {
+    "part": "b",
+    "channel": "position",
+    "capturedValue": "absolute"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "The existing overlay grammar must survive under grid parents unchanged."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "ABSOLUTE + x/y honored inside GRID"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "QUIRK: absolute children still REPORT anchors (0,0) — readers must gate anchor reads on layoutPositioning !== 'ABSOLUTE' or they invent a placement"
+    }
+  },
+  "probe": "P13",
+  "dumpSnippet": "dump.snippet.json"
+}

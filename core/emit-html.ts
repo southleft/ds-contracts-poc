@@ -41,6 +41,8 @@ import { kebab } from '../extract/types.js';
 import {
   boolProps,
   enumProps,
+  gridCellPlan,
+  gridParentDecls,
   isEnum,
   isMultiRoot,
   rootElementsOf,
@@ -50,6 +52,7 @@ import {
   UA_MARGIN_ELEMENTS,
   validateContract,
   type EmitCtx,
+  type GridCellPlan,
 } from './emit-react.js';
 
 const stripBraces = (ref: string) => ref.slice(1, -1);
@@ -110,14 +113,20 @@ const isStructural = (part: Part) =>
   !part.content &&
   !part.component;
 
-function layoutDecls(part: Part): string[] {
+function layoutDecls(part: Part, gridWhere: string): string[] {
   const d: string[] = [];
   if (isStructural(part)) {
-    d.push(`display: ${part.layout?.display ?? 'flex'}`);
-    if (part.layout?.direction) d.push(`flex-direction: ${part.layout.direction}`);
-    if (part.layout?.wrap) d.push('flex-wrap: wrap');
-    if (part.layout?.align) d.push(`align-items: ${ALIGN_CSS[part.layout.align]}`);
-    if (part.layout?.justify) d.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
+    if (part.layout?.display === 'grid') {
+      // A2 grid (G1): tracks/gaps/areas/flow — the shared pinned spellings
+      // (core/emit-react.ts gridParentDecls; token gaps ride var(--…)).
+      d.push(...gridParentDecls(part.layout, cssVar, gridWhere));
+    } else {
+      d.push(`display: ${part.layout?.display ?? 'flex'}`);
+      if (part.layout?.direction) d.push(`flex-direction: ${part.layout.direction}`);
+      if (part.layout?.wrap) d.push('flex-wrap: wrap');
+      if (part.layout?.align) d.push(`align-items: ${ALIGN_CSS[part.layout.align]}`);
+      if (part.layout?.justify) d.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
+    }
   }
   if (part.layout?.grow) d.push('flex: 1 1 auto', 'min-width: 0');
   return d;
@@ -133,6 +142,12 @@ function componentCss(contract: Contract): string[] {
   const partCls = (name: string) => `.${k}__${name}`;
   const enumCls = (prop: string, value: string) => `.${k}--${prop}-${value}`;
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
+  // A2 grid: the ONE compiled cell plan (core/emit-react.ts gridCellPlan) —
+  // child placements, empty-area placeholders, instance wrappers.
+  const gridPlan = gridCellPlan(contract);
+  const gridWhere = (name: string) => `${contract.id}.anatomy.${name}.layout.gap`;
+  const gridPlaceholderRules = (name: string): Array<[string, string[]]> =>
+    (gridPlan.placeholders.get(name) ?? []).map((area) => [partCls(area), [`grid-area: ${area}`]]);
   const lines: string[] = [
     `/* ${contract.name} — from ${contract.id} v${contract.version} (core/emit-html.ts) */`,
     // Figma boxes are border-box (a bound 32px width IS 32px outside,
@@ -159,8 +174,17 @@ function componentCss(contract: Contract): string[] {
       lines.push('', `${selector} {`, ...decls.map((d) => `  ${d};`), '}');
     };
     for (const { name, part } of walkAnatomy(contract)) {
-      if (part.component) continue; // instances style themselves via their own contract
-      const decls: string[] = layoutDecls(part);
+      if (part.component) {
+        // A2 grid (G3/P12): an instance cell rides a wrapper element whose
+        // class takes the placement; display: grid stretches the lone
+        // instance into the cell (the CSS spelling of canvas FILL).
+        const cell = gridPlan.cells.get(name);
+        if (cell) pushRule(partCls(name), [...cell, 'display: grid']);
+        continue; // instances style themselves via their own contract
+      }
+      const decls: string[] = layoutDecls(part, gridWhere(name));
+      // A2 grid (G2/G4): this part's cell under its grid parent.
+      decls.push(...(gridPlan.cells.get(name) ?? []));
       if (part.element && UA_MARGIN_ELEMENTS.has(part.element)) decls.push('margin: 0');
       if (part.overlay) decls.push('position: absolute', ...OVERLAY_CSS[part.overlay.placement]);
       if (part.shape) decls.push(...shapeCssDecls(part.shape));
@@ -182,6 +206,9 @@ function componentCss(contract: Contract): string[] {
       for (const [cssProp, lit] of Object.entries(part.literals ?? {})) decls.push(`${cssProp}: ${lit}`);
       for (const [cssProp, value] of Object.entries(part.declared ?? {})) decls.push(`${cssProp}: ${value}`);
       pushRule(partCls(name), decls);
+      // A2 grid (G4): empty areas own placeholder rules right after their
+      // parent's rule — the placement is visible with nothing in it.
+      for (const [sel, d] of gridPlaceholderRules(name)) pushRule(sel, d);
     }
     return lines;
   }
@@ -189,11 +216,16 @@ function componentCss(contract: Contract): string[] {
   const root = contract.anatomy.root;
   const rootDecls: string[] = [];
   if (root.layout) {
-    rootDecls.push(`display: ${root.layout.display ?? 'flex'}`);
-    if (root.layout.direction) rootDecls.push(`flex-direction: ${root.layout.direction}`);
-    if (root.layout.wrap) rootDecls.push('flex-wrap: wrap');
-    if (root.layout.align) rootDecls.push(`align-items: ${ALIGN_CSS[root.layout.align]}`);
-    if (root.layout.justify) rootDecls.push(`justify-content: ${JUSTIFY_CSS[root.layout.justify]}`);
+    if (root.layout.display === 'grid') {
+      // A2 grid (G1): the root is a grid parent — tracks/gaps/areas/flow.
+      rootDecls.push(...gridParentDecls(root.layout, cssVar, gridWhere('root')));
+    } else {
+      rootDecls.push(`display: ${root.layout.display ?? 'flex'}`);
+      if (root.layout.direction) rootDecls.push(`flex-direction: ${root.layout.direction}`);
+      if (root.layout.wrap) rootDecls.push('flex-wrap: wrap');
+      if (root.layout.align) rootDecls.push(`align-items: ${ALIGN_CSS[root.layout.align]}`);
+      if (root.layout.justify) rootDecls.push(`justify-content: ${JUSTIFY_CSS[root.layout.justify]}`);
+    }
   } else {
     rootDecls.push('display: inline-flex', 'align-items: center', 'justify-content: center');
   }
@@ -396,6 +428,9 @@ function componentCss(contract: Contract): string[] {
     rootDecls.push('position: relative');
   }
   rule(rootCls, rootDecls);
+  // A2 grid (G4): a root grid's EMPTY areas own placeholder rules right
+  // after the root rule — the placement is visible with nothing in it.
+  for (const [sel, d] of gridPlaceholderRules('root')) rule(sel, d);
   for (const [sel, d] of rootSubRules) rule(sel, d);
   if (typeof minHitArea === 'number') {
     rule(`${rootCls}::before`, [
@@ -489,8 +524,20 @@ function componentCss(contract: Contract): string[] {
   const usedAnimations = new Set<string>();
   for (const { name, part, path: p } of walkAnatomy(contract)) {
     if (p[0] === 'root' && p.length === 1) continue;
-    if (part.component) continue; // instances style themselves via their own contract
-    const decls: string[] = layoutDecls(part);
+    if (part.component) {
+      // A2 grid (G3/P12): an instance cell rides a wrapper element whose
+      // class takes the placement; display: grid stretches the lone
+      // instance into the cell (the CSS spelling of canvas FILL).
+      const cell = gridPlan.cells.get(name);
+      if (cell) rule(partCls(name), [...cell, 'display: grid']);
+      continue; // instances style themselves via their own contract
+    }
+    const decls: string[] = layoutDecls(part, gridWhere(name));
+    // A2 grid (G2/G4): this part's cell under its grid parent — grid-area
+    // for area-anchored names, grid-row/grid-column (+ self aligns) for
+    // explicit placement; sizing stays unspelled (stretch is the CSS grid
+    // default — the pinned spelling of canvas FILL, G3).
+    decls.push(...(gridPlan.cells.get(name) ?? []));
     // UA-margin neutralization on NESTED parts (round 4): a promoted h2/p/ul
     // part would leak UA margins the real component resets — same discipline
     // as the root rule; captured nonzero margins arrive as minted overrides.
@@ -621,6 +668,9 @@ function componentCss(contract: Contract): string[] {
       ]);
     }
     rule(partCls(name), decls);
+    // A2 grid (G4): a nested grid parent's EMPTY areas own placeholder
+    // rules right after the parent's rule.
+    for (const [sel, d] of gridPlaceholderRules(name)) rule(sel, d);
     for (const [sel, d] of subRules) rule(sel, d);
     // v10 tokensByProp on a nested part: descendant rule under the root's
     // enum modifier class — the nested-token-substitution rule shape.
@@ -805,6 +855,15 @@ function renderComponentHtml(
 ): string {
   const k = kebab(contract.name);
   const root = contract.anatomy.root;
+  // A2 grid: the same compiled cell plan the CSS consulted — the markup owes
+  // the OTHER half of the G4 dual-slot convention (placeholder elements for
+  // empty areas) and the wrapper elements instance cells ride.
+  const gridPlan: GridCellPlan = gridCellPlan(contract);
+  const gridPlaceholderHtml = (partName: string, pad: string): string[] =>
+    (gridPlan.placeholders.get(partName) ?? []).map(
+      (area) =>
+        `${pad}<div class="${k}__${area}"><!-- ${escapeHtmlComment(area)} area: empty (grid placeholder) --></div>`,
+    );
   const textDefaultOf = (c: Contract): string => {
     const t = textProps(c).find((p) => p.bindings.code.prop === 'children');
     // A contract name is a useful showcase fallback only when the component
@@ -913,6 +972,12 @@ function renderComponentHtml(
         const parentRef = v.match(/^\{([a-z][\w-]*)\}$/);
         depState.subst[pn] = parentRef ? (propValue(parentRef[1]) ?? v) : v;
       }
+      // A2 grid (G3/P12): an instance cell rides a wrapper element — its
+      // class carries the placement (see componentCss).
+      if (gridPlan.wrappedInstances.has(name)) {
+        const inner = renderComponentHtml(dep, ctx, depState, pad + '  ', part.component.text ?? undefined);
+        return `${pad}<div class="${cls}">\n${inner}\n${pad}</div>`;
+      }
       return renderComponentHtml(dep, ctx, depState, pad, part.component.text ?? undefined);
     }
     if (part.slot) {
@@ -996,8 +1061,15 @@ function renderComponentHtml(
       return `${pad}<input class="${cls}"${attrString(part)}${checked}>${note}`;
     }
     const el = part.element ?? 'div';
-    const inner = Object.entries(part.parts ?? {})
-      .map(([childName, child]) => renderPart(childName, child, pad + '  ', el))
+    // A2 grid (G4): a grid parent's EMPTY areas render placeholder elements
+    // after the declared children — the slot class carries the placement,
+    // so the grid's shape is visible with nothing in it.
+    const inner = [
+      ...Object.entries(part.parts ?? {}).map(([childName, child]) =>
+        renderPart(childName, child, pad + '  ', el),
+      ),
+      ...gridPlaceholderHtml(name, pad + '  '),
+    ]
       .filter(Boolean)
       .join('\n');
     return inner
@@ -1104,9 +1176,16 @@ function renderComponentHtml(
   // content. (Authored anatomies should carry explicit element:"option"
   // parts; this covers the part-less text fallback.)
   const rootText = escapeHtml(extraText ?? textDefaultOf(contract));
-  const rootInner = root.parts
-    ? Object.entries(root.parts)
-        .map(([childName, child]) => renderPart(childName, child, indent + '  ', el))
+  // A2 grid (G4): empty root-grid areas render placeholder elements after
+  // the declared children (a grid root whose areas are ALL empty renders
+  // only placeholders — the grid's shape, nothing invented in it).
+  const rootInner = root.parts || gridPlan.placeholders.has('root')
+    ? [
+        ...Object.entries(root.parts ?? {}).map(([childName, child]) =>
+          renderPart(childName, child, indent + '  ', el),
+        ),
+        ...gridPlaceholderHtml('root', indent + '  '),
+      ]
         .filter(Boolean)
         .join('\n')
     : el === 'select'

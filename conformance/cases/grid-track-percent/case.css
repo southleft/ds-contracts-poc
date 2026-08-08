@@ -1,0 +1,2 @@
+[data-cf="grid-track-percent"] { display: grid; grid-template-columns: 50% 1fr; width: 200px; background: rgb(244, 240, 242); }
+[data-cf="grid-track-percent"] .cf-a, [data-cf="grid-track-percent"] .cf-b { height: 16px; background: rgb(230, 216, 224); }

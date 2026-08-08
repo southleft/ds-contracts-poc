@@ -232,6 +232,62 @@ export function readCarriage(outDir: string): Map<string, Array<{ part: string; 
       }
     }
   };
+  // A2 LAYOUT PROMOTION — the contract's STRUCTURED grid facts (layout.rows/
+  // columns/gap/areas/flow, Part.placement), serialized into their pinned G6
+  // CSS spellings so carriage is measurable value-for-value against the
+  // browser's own channels. The spellings are MIRRORED here (px / fr /
+  // fit-content(100%); 1-based grid-row/column lines with span-1 unspelled;
+  // the areas matrix with `.` holes), never imported from the emitters — the
+  // gate stays independent of the engine, the same rule as `outDirFor`.
+  const gridTrack = (t: unknown): string => {
+    if (t && typeof t === 'object') {
+      const o = t as Record<string, unknown>;
+      if (typeof o.px === 'number') return `${o.px}px`;
+      if (typeof o.fr === 'number') return `${o.fr}fr`;
+      if (o.fit === true) return 'fit-content(100%)';
+    }
+    return String(t);
+  };
+  const eatGrid = (name: string, part: Record<string, unknown>): void => {
+    const lay = part.layout as Record<string, unknown> | null | undefined;
+    if (lay && typeof lay === 'object') {
+      if (Array.isArray(lay.rows)) push('grid-template-rows', name, 'layout.rows', (lay.rows as unknown[]).map(gridTrack).join(' '));
+      if (Array.isArray(lay.columns)) push('grid-template-columns', name, 'layout.columns', (lay.columns as unknown[]).map(gridTrack).join(' '));
+      const gap = lay.gap as Record<string, unknown> | null | undefined;
+      if (gap && typeof gap === 'object') {
+        for (const [axis, ch] of [['row', 'row-gap'], ['column', 'column-gap']] as const) {
+          const v = gap[axis];
+          if (typeof v === 'number') push(ch, name, `layout.gap.${axis}`, `${v}px`);
+          else if (typeof v === 'string') push(ch, name, `layout.gap.${axis}`, v); // token refs resolve in push
+        }
+      }
+      if (typeof lay.flow === 'string') push('grid-auto-flow', name, 'layout.flow', lay.flow);
+      const areas = lay.areas as Record<string, { row: number; column: number; rowSpan?: number; columnSpan?: number }> | null | undefined;
+      if (areas && typeof areas === 'object' && !Array.isArray(areas)) {
+        const rects = Object.values(areas);
+        const rc = Array.isArray(lay.rows) ? (lay.rows as unknown[]).length : Math.max(0, ...rects.map((a) => a.row + (a.rowSpan ?? 1)));
+        const cc = Array.isArray(lay.columns) ? (lay.columns as unknown[]).length : Math.max(0, ...rects.map((a) => a.column + (a.columnSpan ?? 1)));
+        if (rc > 0 && cc > 0) {
+          const m = Array.from({ length: rc }, () => Array.from({ length: cc }, () => '.'));
+          for (const [areaName, a] of Object.entries(areas)) {
+            for (let r = a.row; r < Math.min(a.row + (a.rowSpan ?? 1), rc); r++) {
+              for (let col = a.column; col < Math.min(a.column + (a.columnSpan ?? 1), cc); col++) m[r][col] = areaName;
+            }
+          }
+          push('grid-template-areas', name, 'layout.areas', m.map((row) => `"${row.join(' ')}"`).join(' '));
+        }
+      }
+    }
+    const pl = part.placement as Record<string, unknown> | null | undefined;
+    if (pl && typeof pl === 'object') {
+      if (typeof pl.row === 'number') push('grid-row-start', name, 'placement.row', String(pl.row + 1));
+      if (typeof pl.column === 'number') push('grid-column-start', name, 'placement.column', String(pl.column + 1));
+      if (typeof pl.rowSpan === 'number' && pl.rowSpan > 1) push('grid-row-end', name, 'placement.rowSpan', `span ${pl.rowSpan}`);
+      if (typeof pl.columnSpan === 'number' && pl.columnSpan > 1) push('grid-column-end', name, 'placement.columnSpan', `span ${pl.columnSpan}`);
+      if (typeof pl.alignX === 'string') push('justify-self', name, 'placement.alignX', pl.alignX);
+      if (typeof pl.alignY === 'string') push('align-self', name, 'placement.alignY', pl.alignY);
+    }
+  };
   const walkPart = (name: string, part: Record<string, unknown>): void => {
     eatMap(name, 'tokens', part.tokens);
     eatMap(name, 'declared', part.declared);
@@ -239,6 +295,7 @@ export function readCarriage(outDir: string): Map<string, Array<{ part: string; 
     eatMap(name, 'states', part.states);
     eatMap(name, 'literals', part.literals);
     eatMap(name, 'layout', part.layout);
+    eatGrid(name, part);
     if (typeof part.text === 'string') push('__text', name, 'text', part.text);
     if (typeof part.element === 'string') push('__element', name, 'element', part.element);
     for (const [n, p] of Object.entries((part.parts ?? {}) as Record<string, Record<string, unknown>>)) walkPart(n, p);

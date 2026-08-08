@@ -223,7 +223,7 @@ async function main() {
     const boundConfirmed = boundRows.filter((r) => r.verdict === 'confirmed').length;
     const contradictions = boundRows.filter((r) => r.verdict === 'contradiction');
     const layout = enrichLayout(aligned, space, styled, promotion.contract);
-    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts, new Set(promotion.partIndex.keys()));
+    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts, new Set(promotion.partIndex.keys()), promotion.gridMintRefusals);
     // mirror run.ts: re-mint + inheritance-refusal receipts ride the styled
     // channel receipts into the extension block (`?? []` — pre-v15 builds).
     styledReceipts.push(...(prep.remintReceipts ?? []), ...(prep.inheritanceReceipts ?? []), ...(prep.orphanRefusals ?? []));

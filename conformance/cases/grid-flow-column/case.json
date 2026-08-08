@@ -1,0 +1,31 @@
+{
+  "id": "grid-flow-column",
+  "feature": "grid-flow",
+  "construct": "grid-auto-flow: column",
+  "why": "There is no column flow on the canvas; refusing beats transposing (a transpose would be silent invention).",
+  "expect": "REFUSED",
+  "expectName": "grid-flow-column",
+  "expectWhere": "LEDGER.md / refusal receipts (grid-flow-column — no column flow on the canvas, P5b; refusing beats transposing, which would be silent invention)",
+  "observable": {
+    "part": "root",
+    "channel": "grid-auto-flow",
+    "capturedValue": "column",
+    "carriedValue": "column"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "There is no column flow on the canvas; refusing beats transposing (a transpose would be silent invention)."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "REFUSED",
+      "note": "COLUMN_AUTO_FLOW rejected by the gridItemsPositioning enum"
+    },
+    "canvasToCode": {
+      "expect": "UNREACHABLE"
+    }
+  },
+  "probe": "P5b",
+  "dumpSnippet": null
+}

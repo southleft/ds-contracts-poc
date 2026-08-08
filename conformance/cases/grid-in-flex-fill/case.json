@@ -1,0 +1,30 @@
+{
+  "id": "grid-in-flex-fill",
+  "feature": "grid-composition",
+  "construct": "a grid frame as a FILL child of a flex (auto-layout) parent",
+  "why": "Grids must compose into the existing flex grammar as ordinary children.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.layout.display — a grid frame composing into the flex grammar as an ordinary FILL child (P11)",
+  "observable": {
+    "part": "a",
+    "channel": "display",
+    "capturedValue": "grid"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Grids must compose into the existing flex grammar as ordinary children."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "layoutSizingHorizontal FILL on the grid frame: w 100 -> 400 (parent width)"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED"
+    }
+  },
+  "probe": "P11",
+  "dumpSnippet": "dump.snippet.json"
+}

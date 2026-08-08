@@ -1,11 +1,11 @@
 {
   "component": "CaseTextOverflowEllipsis",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "captures": 4,
   "combos": 1,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 476,
+  "channelsEnumerated": 479,
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
@@ -52,8 +52,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 1896,
-    "cellsMatched": 1896,
+    "cellsCompared": 1908,
+    "cellsMatched": 1908,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -72,21 +72,16 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.042317708333333336,
-      "max": 0.16927083333333334,
-      "perfect": 3
+      "mean": 0,
+      "max": 0,
+      "perfect": 4
     },
     "aa": {
-      "mean": 0.022786458333333332,
-      "max": 0.09114583333333333,
-      "perfect": 3
+      "mean": 0,
+      "max": 0,
+      "perfect": 4
     },
     "worst": [
-      {
-        "key": "__active",
-        "pctExact": 0.16927083333333334,
-        "pctAA": 0.09114583333333333
-      },
       {
         "key": "__default",
         "pctExact": 0,
@@ -99,6 +94,11 @@
       },
       {
         "key": "__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "__active",
         "pctExact": 0,
         "pctAA": 0
       }

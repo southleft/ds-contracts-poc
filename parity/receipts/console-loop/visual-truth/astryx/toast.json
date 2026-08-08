@@ -8,6 +8,36 @@
     "compositionOk": true
   },
   "receipt": "parity/receipts/console-loop/astryx/components/toast.json",
-  "status": "skip",
-  "skipReason": "no-reference"
+  "status": "fail",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileVersion": "2385311290720626690",
+  "setNodeId": "1:4006",
+  "cellNodeId": "1:4006",
+  "cellName": "Toast (astryx.toast)",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "trap-corpus-manifest",
+  "metrics": {
+    "pctExactUnmasked": 19.489981785063755,
+    "pctAAUnmasked": 5.573770491803279,
+    "pctAAMasked": 5.573770491803279,
+    "maskCoveragePct": 0,
+    "canvasPx": "305x17",
+    "realPx": "184x36",
+    "inkCanvasPct": 8.934426229508198,
+    "inkRealPct": 11.04735883424408
+  },
+  "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/toast/default__default.png",
+  "referenceSha256": "b52569d8cace895f3ac4bd0722b7406a986dd5af8378730a8b72c4e68c113894",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/toast.png",
+  "canvasShotSha256": "8f979fe5cc8a6a3cd2baaeebd39db303a578fc74bcaee669d27deadfd293b56b",
+  "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/toast.diff.png",
+  "compositionOk": false,
+  "strictCompositionOk": false,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 2.1176470588235294,
+  "inkDelta": 2.1129326047358816,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=2.12, inkDelta=2.1)"
 }

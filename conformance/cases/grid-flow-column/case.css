@@ -1,0 +1,2 @@
+[data-cf="grid-flow-column"] { display: grid; grid-auto-flow: column; grid-template-rows: 16px 16px; width: 200px; background: rgb(238, 238, 242); }
+[data-cf="grid-flow-column"] .cf-a, [data-cf="grid-flow-column"] .cf-b, [data-cf="grid-flow-column"] .cf-c { background: rgb(216, 216, 234); }

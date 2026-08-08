@@ -1,0 +1,4 @@
+[data-cf="grid-named-area-slots"] { display: grid; grid-template-rows: 24px 40px; grid-template-columns: 60px 1fr; grid-template-areas: "a a" "b c"; width: 200px; background: rgb(242, 242, 238); }
+[data-cf="grid-named-area-slots"] .cf-a { grid-area: a; background: rgb(228, 228, 212); }
+[data-cf="grid-named-area-slots"] .cf-b { grid-area: b; background: rgb(220, 220, 204); }
+[data-cf="grid-named-area-slots"] .cf-c { grid-area: c; background: rgb(236, 236, 220); }

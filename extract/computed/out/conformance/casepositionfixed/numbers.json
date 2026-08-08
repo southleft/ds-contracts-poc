@@ -1,22 +1,22 @@
 {
   "component": "CasePositionFixed",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "captures": 4,
   "combos": 1,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 476,
+  "channelsEnumerated": 479,
   "elementsPerCapture": 2,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 7,
-    "a": 11
+    "a": 7
   },
   "folds": {
     "count": 0,
     "receipts": [],
-    "mintedLeavesUnfolded": 10,
-    "mintedLeavesFolded": 10
+    "mintedLeavesUnfolded": 6,
+    "mintedLeavesFolded": 6
   },
   "bound": {
     "cellsChecked": 0,
@@ -25,11 +25,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 10,
-    "baseBindings": 13,
+    "leaves": 6,
+    "baseBindings": 9,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 13,
+      "uniform": 9,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -53,8 +53,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 3792,
-    "cellsMatched": 3792,
+    "cellsCompared": 3816,
+    "cellsMatched": 3816,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -106,7 +106,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 94.11764705882354,
+    "computedPctEqual": 92.3076923076923,
     "rowsFullyEqual": 0,
     "rows": 4,
     "pixelPerfectExact": 0,

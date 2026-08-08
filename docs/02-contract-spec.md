@@ -119,6 +119,58 @@ Five features from the second schema gauntlet, each shipped with a consuming con
 
 **Structured props.** `type: { arrayOf: Record<field, 'text' | 'number' | 'boolean'> }` declares a list-of-records prop (Breadcrumbs items, Select options). Code-only by declared fidelity limit — the canvas has no list-of-records property type — so the design binding is `{ "kind": "NONE" }` with no `property`, and every design-side consumer (figma generator, differ, diagnose) skips the prop rather than reporting it behind. Code renders `items?: Array<{ … }>`: no default destructure (undefined means "not provided", never a silent `[]`) and excluded from `...rest`. Guardrails: `arrayOf` ⇔ `kind: "NONE"` in both directions, no defaults, at least one field.
 
+## Grid layout (A2 — the declared-track grammar)
+
+`layout.display: "grid"` joins the flex vocabulary, carrying the **declared-track
+subset** of CSS grid — the half the canvas round-trips byte-exactly
+(`layoutMode: "GRID"`, probed in [docs/research/grid-recon-probes.md](research/grid-recon-probes.md);
+grammar pinned in [docs/research/layout-grammar-proposal.md](research/layout-grammar-proposal.md), G1–G7).
+
+**Tracks and gaps (G1).** `layout.rows` / `layout.columns` are REQUIRED arrays of
+track objects — exactly one of `{"px": n}`, `{"fr": n}` (both may be fractional),
+or `{"fit": true}` (the canvas HUG track; its exact code spelling is
+`fit-content(100%)`, P14). Zero and negative values are schema-invalid: the
+Plugin API *silently rewrites* 0px/0fr tracks (P2b), so the schema refuses what
+the platform would corrupt. `layout.gap` is the independent `{row, column}` px
+pair (or token refs) — there is deliberately NO single-`gap` shorthand in the
+contract; proposers lower the CSS shorthand into the pair with a named receipt.
+The flex-only fields (`direction`/`justify`/`align`/`wrap`) are schema-invalid
+together with `display: "grid"`.
+
+**Child placement (G2/G3).** A part whose parent declares grid carries
+`placement: { row, column, rowSpan?, columnSpan?, alignX?, alignY? }` — 0-based
+anchors (CSS emission adds the +1; contracts never store 1-based lines), spans
+validated against track count and occupancy *before* emit (the two P3 canvas
+throw classes, checked contract-side), and a 4-value align vocabulary
+(`auto | start | center | end` → `AUTO | MIN | CENTER | MAX`; STRETCH/BASELINE
+are refused — stretch is spelled as fill sizing, the canvas default for placed
+parts). `grow` is schema-invalid inside a grid parent (the API silently ignores
+it — a dead fact is never minted). Overlay parts keep the out-of-flow grammar
+inside grid parents (P13) and must not also carry `placement`.
+
+**Named areas are slot anchors (G4).** `layout.areas: { name: rect }` makes each
+area name simultaneously a slot name and a placement rect — the CONTRACT owns
+the names (the canvas has no native area names; both surfaces carry the rect).
+Emitted as `grid-template-areas` + `grid-area: name` when the areas tile
+rectangles per CSS rules, lowered to `grid-row`/`grid-column` longhands
+otherwise (named LOWERED). An empty area renders the shared placeholder
+convention on both surfaces so the grid's shape stays visible.
+
+**Refusals by name (G7).** The solver half of CSS grid is refused, each with its
+probe dead-end, via the `GRID_REFUSALS` registry
+(`packages/schema/src/contract-schema.ts`): `grid-track-percent`,
+`grid-track-minmax`, `grid-track-zero`, `grid-auto-fit-minmax`,
+`grid-flow-column`, `grid-flow-dense`, `grid-subgrid`, `grid-implicit-tracks`,
+`grid-align-stretch-keyword`, `grid-baseline-align`, `grid-negative-line`,
+`grid-child-grow`. Conformance pins nine of these as measured cases
+(`conformance/MANIFEST.json`, `grid-*` REFUSED rows).
+
+**Honest boundary.** Canvas→code and code→contract promotion currently require
+**explicit** child placement: auto-placed grids (G5, placement-from-order) are
+not promoted yet and fall back to the named flex-era lowering — an open,
+measured gap ([docs/23 §B.22](23-known-limitations.md)), and the reason the
+frozen conformance subset still declares `grid-2d` REFUSED.
+
 ## State previews (`figmaStatePreviews`, v8)
 
 Interaction states are declared once (`states` + per-state token overrides on `anatomy.root.states`) and rendered per surface at that surface's fidelity: code gets real `:hover`/`:focus-visible`/`:disabled` CSS; the canvas — which cannot run pseudo-classes — gets nothing by default. Real systems hand-build "State=Hover" variant axes to fill that gap, and those rot (all four drift-research pilots carry them). `figmaStatePreviews: true` makes the design generator own that axis instead: a `State` variant axis (`Default`, `Hover`, `Focus Visible`, …) where each non-default state applies the state's token overrides on top of the variant's base bindings. This is the mirror image of code-only events: events are code-only, state previews are canvas-only, and the code surface is completely unaffected.

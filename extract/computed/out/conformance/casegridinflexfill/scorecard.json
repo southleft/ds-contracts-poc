@@ -1,0 +1,150 @@
+{
+  "component": "CaseGridInFlexFill",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 116,
+    "cellsEqual": 112,
+    "pctEqual": 96.55172413793103,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 18.75,
+    "meanAA": 9.375,
+    "maxAA": 9.375
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 8,
+    "mintedLeavesUnfolded": 8,
+    "baseBindings": 11,
+    "stateBindings": 0,
+    "codeOnlyChannels": 2,
+    "overflowBindings": 0,
+    "folds": 0
+  },
+  "worstRows": [
+    {
+      "key": "__default",
+      "pctAA": 9.375,
+      "pctExact": 18.75,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__hover",
+      "pctAA": 9.375,
+      "pctExact": 18.75,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__focus-visible",
+      "pctAA": 9.375,
+      "pctExact": 18.75,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "__active",
+      "pctAA": 9.375,
+      "pctExact": 18.75,
+      "channelsMismatched": 1
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "a.grid-template-columns",
+      4
+    ]
+  ],
+  "namedLosses": [
+    "code-only: b.font-style — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <i>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <i> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: c.font-style — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <i>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <i> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 29,
+      "channelsEqual": 28,
+      "pctExact": 18.75,
+      "pctAA": 9.375,
+      "mismatches": [
+        {
+          "part": "a",
+          "channel": "grid-template-columns",
+          "ours": "0px 0px",
+          "theirs": "120px 120px"
+        }
+      ]
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 29,
+      "channelsEqual": 28,
+      "pctExact": 18.75,
+      "pctAA": 9.375,
+      "mismatches": [
+        {
+          "part": "a",
+          "channel": "grid-template-columns",
+          "ours": "0px 0px",
+          "theirs": "120px 120px"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 29,
+      "channelsEqual": 28,
+      "pctExact": 18.75,
+      "pctAA": 9.375,
+      "mismatches": [
+        {
+          "part": "a",
+          "channel": "grid-template-columns",
+          "ours": "0px 0px",
+          "theirs": "120px 120px"
+        }
+      ]
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 29,
+      "channelsEqual": 28,
+      "pctExact": 18.75,
+      "pctAA": 9.375,
+      "mismatches": [
+        {
+          "part": "a",
+          "channel": "grid-template-columns",
+          "ours": "0px 0px",
+          "theirs": "120px 120px"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    }
+  ]
+}

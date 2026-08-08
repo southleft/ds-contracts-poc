@@ -1,0 +1,31 @@
+{
+  "id": "grid-child-grow-invalid",
+  "feature": "grid-sizing",
+  "construct": "layout.grow / flex-grow on a child of a grid parent",
+  "why": "The API silently ACCEPTS layoutGrow on grid children with no effect — a silent-accept trap; the contract refuses it so no dead fact rides along.",
+  "expect": "REFUSED",
+  "expectName": "grid-child-grow",
+  "expectWhere": "LEDGER.md / refusal receipts — grow is a flex fact; under a grid parent it is carried-but-inert on the canvas (P4 silent-accept), so the contract refuses it by name (grid-child-grow) rather than shipping a dead fact",
+  "observable": {
+    "part": "a",
+    "channel": "flex-grow",
+    "capturedValue": "1"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "settable but meaningless — dead state, not a fact"
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "REFUSED",
+      "note": "schema-invalid: grow is a flex fact; inside grid it would be carried-but-inert (N-DISP-02 silent invention of meaning)"
+    },
+    "canvasToCode": {
+      "expect": "REFUSED",
+      "note": "reader must NOT emit flex-grow from layoutGrow when parent mode is GRID"
+    }
+  },
+  "probe": "P4: kids[2].layoutGrow = 1 accepted without error, no layout effect",
+  "dumpSnippet": "dump.snippet.json"
+}

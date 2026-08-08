@@ -1,0 +1,32 @@
+{
+  "id": "grid-track-zero-value",
+  "feature": "grid-tracks",
+  "construct": "a 0px or 0fr track written to the canvas",
+  "why": "The API silently REWRITES zero tracks (0px snaps to rendered size, 0fr clamps to 1fr) — a silent-invention hazard the schema must fence out.",
+  "expect": "REFUSED",
+  "expectName": "grid-track-zero",
+  "expectWhere": "LEDGER.md / refusal receipts (schema fence: GRID_REFUSALS grid-track-zero)",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-columns",
+    "capturedValue": "0px 200px",
+    "carriedValue": "0px 1fr"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "unrepresentable: normalized away at write time"
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "REFUSED",
+      "note": "schema-invalid before emit; emitting would trigger the silent normalization (N-DISP-02)"
+    },
+    "canvasToCode": {
+      "expect": "UNREACHABLE",
+      "note": "the canvas cannot HOLD a zero track — the write is rewritten on entry (P2b), so no canvas artifact exists to read"
+    }
+  },
+  "probe": "P2b: {FIXED,0} read back as {FIXED,200}; {FLEX,0} read back as {FLEX,1} — accepted, silently rewritten",
+  "dumpSnippet": null
+}

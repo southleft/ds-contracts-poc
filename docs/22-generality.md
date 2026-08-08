@@ -591,7 +591,13 @@ captured at all*, and it is the largest qualifier in this document.
   inline-grid | list-item` reached the emitter with NO display fact at all and
   took the HORIZONTAL default — Carbon's Modal drew header/body/footer side by
   side and its accordion panel sat beside the heading. A genuine 2-D grid
-  (>1 column AND >1 row) is refused by name.
+  (>1 column AND >1 row) was refused by name. *Updated 2026-08-08 (A2 layout
+  landing):* the lowering is now the FALLBACK, not the frontier — declared-track
+  grids with explicit child placement promote as structured `layout.rows/columns/
+  gap/areas` + `Part.placement` (conformance `grid-bento-span-matrix` et al.),
+  the 9 solver-half constructs refuse by `GRID_REFUSALS` name, and AUTO-PLACED
+  grids still take this fallback pending G5 promotion
+  ([docs/23 §B.22](23-known-limitations.md)).
 - **The two-axis decor product has no spelling.** Flowbite's toggle knob offset
   is a function of `Sizing × Checked`; `stylesWhen` conditions are single-prop
   and `literals`/`shape` are scalars, so no decor grammar can express it. On

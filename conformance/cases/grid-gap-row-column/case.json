@@ -1,0 +1,30 @@
+{
+  "id": "grid-gap-row-column",
+  "feature": "grid-gaps",
+  "construct": "row-gap: 8px; column-gap: 16px (distinct values)",
+  "why": "Two independent gap facts; flex wrap only carries a distinct row gap as an exception — grid carries both natively.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.gap (independent {row, column} pair — P2)",
+  "observable": {
+    "part": "root",
+    "channel": "row-gap",
+    "capturedValue": "8px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Two independent gap facts; flex wrap only carries a distinct row gap as an exception — grid carries both natively."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "gridRowGap/gridColumnGap independent setters"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED"
+    }
+  },
+  "probe": "P2: gaps 16/8 read back exactly; P8: 12/16 exact",
+  "dumpSnippet": "dump.snippet.json"
+}

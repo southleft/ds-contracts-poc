@@ -1996,7 +1996,7 @@ function invertNodeTokens(
   ) {
     const spacings = m.occ.map((o) => o.node.layout?.spacing ?? 0);
     const negatives = spacings.filter((s) => s < 0).length;
-    reportUnbound(ctx, where, 'itemSpacing', firstNode((n) => n.layout?.spacing, 0).layout!.spacing);
+    reportUnbound(ctx, where, 'itemSpacing', firstNode((n) => n.layout?.spacing, 0).layout!.spacing ?? 0);
     if (negatives > 0 && negatives < spacings.length) {
       // P21, mixed-sign spacing (owner field case: Avatar group's
       // type=space 4px vs type=overlap -8px): children overlap only in SOME
@@ -3390,16 +3390,257 @@ function stretchEvidence(m: Merged): boolean {
  *  and its meaning is unchanged, so a parent with ONE mode across every
  *  variant proposes exactly the bytes it always did. */
 interface ParentModes {
-  base: 'HORIZONTAL' | 'VERTICAL' | null;
+  base: 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null;
   /** variant name → that variant's parent auto-layout mode. */
-  byVariant: Map<string, 'HORIZONTAL' | 'VERTICAL' | null>;
+  byVariant: Map<string, 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null>;
+  /** A2 grid (dump v1.17): the parent's grid-carriage decision — a PURE
+   *  function of the dump (gridCarriageOf), computed once here so the parent
+   *  layout (invertGridLayout) and the children's placement attach
+   *  (attachGridPlacement) can never disagree. Set exactly when base is
+   *  'GRID'. */
+  grid?: GridCarriage;
 }
 
 /** The per-variant parent-mode witness for a parent's children. */
 function parentModesOf(m: Merged): ParentModes {
-  const byVariant = new Map<string, 'HORIZONTAL' | 'VERTICAL' | null>();
+  const byVariant = new Map<string, 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null>();
   for (const o of m.occ) byVariant.set(o.variant, o.node.layout?.mode ?? null);
-  return { base: m.occ[0]?.node.layout?.mode ?? null, byVariant };
+  const base = m.occ[0]?.node.layout?.mode ?? null;
+  const grid = gridCarriageOf(m); // undefined unless the base layout is GRID
+  return { base, byVariant, ...(grid ? { grid } : {}) };
+}
+
+// ---------------------------------------------------------------------------
+// A2 grid inversion (dump v1.17 → layout.display: "grid" — the G6 propose row)
+// ---------------------------------------------------------------------------
+
+/** Canvas align enum → contract vocabulary (P3/P4: exactly these three plus
+ *  AUTO, which the dump omits — STRETCH/BASELINE do not exist on the API). */
+const GRID_ALIGN_INV: Record<string, 'start' | 'center' | 'end'> = {
+  MIN: 'start',
+  CENTER: 'center',
+  MAX: 'end',
+};
+
+interface GridCarriage {
+  carried: boolean;
+  /** ROW_AUTO_FLOW (G5) — placement fact is CHILD ORDER; children carry no
+   *  placement and repeat runs stay legal. */
+  flow: boolean;
+  /** Set when carried is false — the NAMED refusal invertGridLayout notes.
+   *  Silence is never an option: every uncarried grid states its construct. */
+  reason?: string;
+}
+
+/** The PURE grid-carriage decision for a parent Merged whose default variant
+ *  draws layoutMode GRID. Writes nothing — invertGridLayout turns the reason
+ *  into the proposal note; parentModesOf caches the result for the children.
+ *  Rules (refuse-dont-guess, each refusal names its probe):
+ *   · no `grid` facts → pre-v1.17 producer, refuse (not an empty grid);
+ *   · track outside {px>0}|{fr>0}|{fit:true} → refuse (P2b fence);
+ *   · flow: declared rows must be EXACTLY the emitter's derivation —
+ *     ceil(children/columns) × {fr:1} (stampGridCells) — or the round trip
+ *     would silently redraw the tracks (P9);
+ *   · manual: every child must carry a captured cell (an ABSOLUTE overlay
+ *     child has no grid-part spelling contract-side — validateGridPart counts
+ *     any non-overlay child as in-flow, and Part.overlay is the edge-attached
+ *     v7 grammar, a different fact), cells must sit inside the declared
+ *     tracks (grid-implicit-tracks, P9) and must not overlap (P3's occupancy
+ *     throw, refused contract-side). */
+function gridCarriageOf(m: Merged): GridCarriage | undefined {
+  // The BASE layout is the first occurrence that has one — the same rule
+  // invertLayout's `layouts[0]` applies to the flex path.
+  const l = m.occ.map((o) => o.node.layout).find((x) => x !== undefined);
+  if (!l || l.mode !== 'GRID') return undefined;
+  const g = l.grid;
+  if (!g) {
+    return {
+      carried: false,
+      flow: false,
+      reason:
+        'layoutMode GRID captured WITHOUT grid facts (pre-v1.17 producer) — no layout block proposed; anatomy under it is order-only',
+    };
+  }
+  const flow = g.flow === 'row';
+  const badTrack = [...g.rows, ...g.columns].find(
+    (t) => !(t.fit === true || (typeof t.px === 'number' && t.px > 0) || (typeof t.fr === 'number' && t.fr > 0)),
+  );
+  if (badTrack) {
+    return {
+      carried: false,
+      flow,
+      reason: `captured track ${JSON.stringify(badTrack)} is outside the carriable vocabulary ({px>0} | {fr>0} | {fit:true} — the grid-track-zero/grid-track-percent fence, P2b)`,
+    };
+  }
+  if (g.columns.length === 0 || (!flow && g.rows.length === 0)) {
+    return { carried: false, flow, reason: 'empty declared track list — a grid contract requires declared tracks (G1)' };
+  }
+  if (flow) {
+    const derived = Math.max(1, Math.ceil(m.children.length / g.columns.length));
+    if (g.rows.length !== derived || !g.rows.every((t) => t.fr === 1)) {
+      return {
+        carried: false,
+        flow,
+        reason:
+          `ROW_AUTO_FLOW grid whose declared rows (${g.rows.length}: ${JSON.stringify(g.rows)}) are not the derivable ` +
+          `ceil(children/columns) × {fr:1} = ${derived} × {fr:1} — under flow the contract derives rows from child count ` +
+          '(G5, stampGridCells) and carrying these tracks would silently redraw them on the round trip (P9)',
+      };
+    }
+    return { carried: true, flow };
+  }
+  for (const c of m.children) {
+    if (!c.occ.some((o) => o.node.cell !== undefined)) {
+      return {
+        carried: false,
+        flow,
+        reason:
+          `child "${c.name}" carries no grid cell (an ABSOLUTE overlay — P13's gate — or a pre-v1.17 capture): a manual ` +
+          'grid contract must place every in-flow child (G2) and the proposer has no grid-overlay spelling (Part.overlay ' +
+          'is the edge-attached v7 grammar); grid not carried',
+      };
+    }
+  }
+  const rects = m.children.map((c) => {
+    const cell = c.occ.find((o) => o.node.cell !== undefined)!.node.cell!;
+    return { name: c.name, r: cell.row, c: cell.column, rs: cell.rowSpan ?? 1, cs: cell.columnSpan ?? 1 };
+  });
+  for (const x of rects) {
+    if (x.r + x.rs > g.rows.length || x.c + x.cs > g.columns.length) {
+      return {
+        carried: false,
+        flow,
+        reason:
+          `child "${x.name}" occupies beyond the declared tracks (anchor ${x.r},${x.c} span ${x.rs}×${x.cs} vs ` +
+          `${g.rows.length}×${g.columns.length} declared) — implicit tracks are refused BY NAME (grid-implicit-tracks, P9)`,
+      };
+    }
+  }
+  for (let i = 0; i < rects.length; i++) {
+    for (let j = i + 1; j < rects.length; j++) {
+      const a = rects[i];
+      const b = rects[j];
+      if (a.r < b.r + b.rs && b.r < a.r + a.rs && a.c < b.c + b.cs && b.c < a.c + a.cs) {
+        return {
+          carried: false,
+          flow,
+          reason:
+            `children "${a.name}" and "${b.name}" overlap on the grid — placements+spans may not occupy the same cell ` +
+            "(P3's occupancy throw, refused contract-side)",
+        };
+      }
+    }
+  }
+  return { carried: true, flow };
+}
+
+/** GRID layout inversion (the G6 propose obligation): tracks verbatim
+ *  ({px}|{fr}|{fit:true} — the dump already speaks the normalized spelling),
+ *  the independent gap pair (bound gap variables become token refs — P2:
+ *  gridRowGap/gridColumnGap are separate facts), flow 'row' with rows OMITTED
+ *  (the schema derives them, G5). Every uncarried grid is a NAMED note. */
+function invertGridLayout(
+  m: Merged,
+  carriage: GridCarriage | undefined,
+  ctx: Ctx,
+  where: string,
+): Record<string, unknown> | undefined {
+  const c = carriage ?? gridCarriageOf(m);
+  if (!c) return undefined;
+  // Per-variant grid variance has NO carrier: layoutByProp is refused on grid
+  // parts (P10 — a mode switch physically destroys tracks) — the DEFAULT
+  // variant's grid stands, and the collapse is named (the invertLayout
+  // uncorrelated-spread precedent).
+  const spellings = new Set(
+    m.occ
+      .filter((o) => o.node.layout !== undefined)
+      .map((o) => JSON.stringify([o.node.layout!.mode, o.node.layout!.grid ?? null])),
+  );
+  if (spellings.size > 1) {
+    ctx.notes.push(
+      `${where}: GRID layout differs across variants (mode or grid facts) — a grid part has no per-variant layout vocabulary (layoutByProp is refused on grid parts; P10: a mode switch destroys tracks), so the DEFAULT variant's grid is carried for every variant; review`,
+    );
+  }
+  if (!c.carried) {
+    ctx.notes.push(`${where}: GRID drawn but NOT carried — ${c.reason}`);
+    return undefined;
+  }
+  const l = m.occ.map((o) => o.node.layout).find((x) => x !== undefined)!;
+  const g = l.grid!;
+  const toTrack = (t: NonNullable<typeof g.rows>[number]): Record<string, unknown> =>
+    t.fit === true ? { fit: true } : t.px !== undefined ? { px: t.px } : { fr: t.fr as number };
+  const out: Record<string, unknown> = { display: 'grid' };
+  if (!c.flow) out.rows = g.rows.map(toTrack);
+  out.columns = g.columns.map(toTrack);
+  const bound = m.occ[0].node.bound ?? {};
+  const rowGap = bound['gridRowGap'] ? ref(bound['gridRowGap']) : g.rowGap;
+  const columnGap = bound['gridColumnGap'] ? ref(bound['gridColumnGap']) : g.columnGap;
+  if (rowGap !== 0 || columnGap !== 0) out.gap = { row: rowGap, column: columnGap };
+  if (c.flow) out.flow = 'row';
+  return out;
+}
+
+/** G2 placement attach — runs where the part was built (buildChildParts), so
+ *  every part class (text, spacer, slot wrapper, instance ref, frame) takes
+ *  its cell through ONE door. No-op unless the parent's grid carried in
+ *  MANUAL mode (under flow the placement fact is child order, P5). Spans of 1
+ *  and AUTO aligns are omitted (the emitter's own minimal-spec rule). */
+function attachGridPlacement(
+  m: Merged,
+  parentModes: ParentModes | null,
+  part: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+): void {
+  const g = parentModes?.grid;
+  if (!g || !g.carried || g.flow) return;
+  const cells = m.occ.map((o) => o.node.cell).filter((cell) => cell !== undefined);
+  const cell = cells[0];
+  if (!cell) return; // carriage refused grids with un-celled children — unreachable, kept safe
+  if (new Set(cells.map((x) => JSON.stringify(x))).size > 1) {
+    ctx.notes.push(
+      `${where}: grid cell differs across variants — placement is a per-part invariant (layoutByProp is refused on grid parts, P10), so the DEFAULT variant's cell is carried; review`,
+    );
+  }
+  const placement: Record<string, unknown> = { row: cell.row, column: cell.column };
+  if (cell.rowSpan && cell.rowSpan > 1) placement.rowSpan = cell.rowSpan;
+  if (cell.columnSpan && cell.columnSpan > 1) placement.columnSpan = cell.columnSpan;
+  if (cell.alignX && GRID_ALIGN_INV[cell.alignX]) placement.alignX = GRID_ALIGN_INV[cell.alignX];
+  if (cell.alignY && GRID_ALIGN_INV[cell.alignY]) placement.alignY = GRID_ALIGN_INV[cell.alignY];
+  part.placement = placement;
+}
+
+/** G4 area→slot reconstruction: area NAMES cannot be read from the canvas
+ *  (Figma has no native area names — the CONTRACT owns them), so the
+ *  proposer re-enters them through the one place a name already exists: a
+ *  SLOT part under a grid parent. Its placement rect hoists to
+ *  layout.areas[<part key>] — the area name IS the slot anchor (G4) — and
+ *  the explicit placement is removed (one source of truth; declaring both is
+ *  schema-invalid). A slot whose cell carries non-AUTO aligns keeps explicit
+ *  placement instead: GridAreaSchema has no alignment fields, and dropping
+ *  an observed align would be silent loss. */
+function hoistGridAreas(holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const layout = holder.layout as Record<string, unknown> | undefined;
+  if (!layout || layout.display !== 'grid' || layout.flow === 'row') return;
+  const parts = holder.parts as Record<string, Record<string, unknown>> | undefined;
+  if (!parts) return;
+  const areas: Record<string, Record<string, unknown>> = {};
+  for (const [key, child] of Object.entries(parts)) {
+    const placement = child.placement as Record<string, unknown> | undefined;
+    if (!child.slot || !placement) continue;
+    if (placement.alignX !== undefined || placement.alignY !== undefined) {
+      ctx.notes.push(
+        `${where}/${key}: slot part under a grid parent keeps EXPLICIT placement — its cell carries alignment, which an area rect cannot spell (GridAreaSchema is row/column/spans only); not hoisted to layout.areas`,
+      );
+      continue;
+    }
+    areas[key] = { ...placement };
+    delete child.placement;
+    ctx.notes.push(
+      `${where}/${key}: slot part's grid cell hoisted to layout.areas["${key}"] — the area name IS the slot anchor (G4); the canvas cannot carry area names, the contract owns them`,
+    );
+  }
+  if (Object.keys(areas).length > 0) layout.areas = areas;
 }
 
 /** The CROSS-AXIS half of a per-variant FILL, carried inside the EXISTING
@@ -3439,7 +3680,7 @@ function crossAxisFillByProp(
   if (!m.occ.every((o) => o.node.fillWidth === true)) return;
   for (const axis of ctx.axes) {
     if (isBoolAxis(axis.values)) continue;
-    const byValue = new Map<string, 'HORIZONTAL' | 'VERTICAL' | null>();
+    const byValue = new Map<string, 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null>();
     let fits = true;
     for (const x of modes) {
       const value = axisValuesOf(x.variant)[axis.property];
@@ -3505,6 +3746,20 @@ function invertLayout(
     parentMode === 'HORIZONTAL' && m.occ.every((o) => o.node.fillWidth === true) ? true : undefined;
   if (!l) return grow ? { grow } : undefined;
 
+  // A2 grid (dump v1.17): a GRID base layout inverts through its own door —
+  // tracks/gaps/flow, refusals named. The grid part itself still composes as
+  // an ordinary child of a flex parent (P11), so a computed `grow` rides the
+  // grid block (grow is NOT in the schema's flex-only fence — G3/P11).
+  if (l.mode === 'GRID') {
+    // Carriage is recomputed here for THIS node (parentModes describes the
+    // node's PARENT); gridCarriageOf is pure, so this and the children's
+    // parentModesOf(m).grid can never disagree.
+    const gridOut = invertGridLayout(m, undefined, ctx, where);
+    if (!gridOut) return grow ? { grow } : undefined;
+    if (grow) gridOut.grow = grow;
+    return gridOut;
+  }
+
   const hasChildren = m.children.length > 0;
   // P21 overlap collections (AvatarGroup shape): negative itemSpacing in
   // EVERY variant means the children OVERLAP — the existing `layout.overlap`
@@ -3524,8 +3779,11 @@ function invertLayout(
   }
   const out: Record<string, unknown> = {};
   const direction = l.mode === 'VERTICAL' ? 'column' : 'row';
-  const justify = JUSTIFY_INV[l.primary];
-  const align = ALIGN_INV[l.counter] ?? (stretchEvidence(m) ? 'stretch' : undefined);
+  // `?? 'MIN'` — primary/counter are OMITTED on GRID captures (dump v1.17);
+  // this path is flex-only (the GRID delegate returned above), so an absent
+  // field can only be a hand-authored fixture and MIN is the API default.
+  const justify = JUSTIFY_INV[l.primary ?? 'MIN'];
+  const align = ALIGN_INV[l.counter ?? 'MIN'] ?? (stretchEvidence(m) ? 'stretch' : undefined);
   // WRAPPING (dump v1.12) — COUNTED BEFORE THE isRoot EARLY RETURN, and that
   // ordering is the whole point. The emitter has written `node.layoutWrap =
   // 'WRAP'` from `layout.wrap` since v15 while the dump never read it back, so
@@ -3638,6 +3896,12 @@ function invertLayoutByProp(
   ctx: Ctx,
   where: string,
 ): LayoutSplit | undefined {
+  // A2 grid: a GRID occurrence has no (direction, justify, align) tuple —
+  // its facts are tracks/gaps/placements, and a per-variant grid difference
+  // has NO carrier (layoutByProp is refused on grid parts; P10: a mode
+  // switch physically destroys tracks). invertGridLayout already names the
+  // collapse to the default variant's grid — nothing to split here.
+  if (m.occ.some((o) => o.node.layout?.mode === 'GRID')) return undefined;
   interface Tuple {
     direction: string;
     justify: string;
@@ -3659,8 +3923,8 @@ function invertLayoutByProp(
     }
     return {
       direction,
-      justify: JUSTIFY_INV[l.primary] ?? 'start',
-      align: ALIGN_INV[l.counter] ?? 'start',
+      justify: JUSTIFY_INV[l.primary ?? 'MIN'] ?? 'start',
+      align: ALIGN_INV[l.counter ?? 'MIN'] ?? 'start',
     };
   };
   const tuples = m.occ.map((o) => ({ variant: o.variant, tuple: tupleOf(o) }));
@@ -4816,10 +5080,16 @@ function buildChildParts(
   keyByName?: Map<string, string>,
 ): Record<string, unknown> {
   const parts: Record<string, unknown> = {};
+  // A2 grid: under a CARRIED manual grid every sibling is an individually
+  // PLACED cell — a repeat template collapses siblings into one part and
+  // cannot carry per-sibling placements (G2), so run detection is bypassed
+  // and each sibling builds as its own placed part. Under flow: "row" the
+  // placement fact is child order (G5) and repeat runs stay legal.
+  const manualGrid = mode?.grid?.carried === true && !mode.grid.flow;
   let i = 0;
   while (i < children.length) {
     const child = children[i];
-    const run = repeatRunAt(children, i, ctx);
+    const run = manualGrid ? undefined : repeatRunAt(children, i, ctx);
     if (run) {
       // Claim the key BEFORE building (pre-order, the partKey discipline).
       const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
@@ -4845,7 +5115,12 @@ function buildChildParts(
     const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
     if (keyByName && !keyByName.has(child.name)) keyByName.set(child.name, key);
     const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
-    if (built) parts[key] = wrapPositionedRefPart(child, built, ctx, `${where}/${child.name}`, key);
+    if (built) {
+      // A2 grid (G2): the ONE placement door — every part class takes its
+      // captured cell here (no-op unless the parent's grid carried, manual).
+      attachGridPlacement(child, mode, built, ctx, `${where}/${child.name}`);
+      parts[key] = wrapPositionedRefPart(child, built, ctx, `${where}/${child.name}`, key);
+    }
     i++;
   }
   return parts;
@@ -5452,6 +5727,9 @@ function buildPart(
   // Pre-order key claiming + P9 run detection — see buildChildParts.
   const parts = buildChildParts(m.children, mode, ctx, where, selfKey);
   if (Object.keys(parts).length > 0) part.parts = parts;
+  // A2 grid (G4): slot parts' cells hoist to layout.areas — the area name IS
+  // the slot anchor; no-op unless this part carried a manual grid.
+  hoistGridAreas(part, ctx, where);
   // A parent that owns positioned children is their positioning context.
   declareRelativeIfPositionedChildren(part, parts, m);
   if (visibleWhen) part.visibleWhen = visibleWhen;
@@ -7287,6 +7565,9 @@ export function proposeFromDump(
     // the part-level state diff (v13) resolves parts through it.
     const parts = buildChildParts(merged.children, mode, ctx, where, 'root', rootKeyByChildName);
     if (Object.keys(parts).length > 0) root.parts = parts;
+    // A2 grid (G4): slot parts' cells hoist to layout.areas — the area name
+    // IS the slot anchor; no-op unless the root carried a manual grid.
+    hoistGridAreas(root, ctx, where);
     // Overlay-flattened class: a root that owns positioned children is their
     // positioning context (position: relative — emit-react folds it into its
     // own overlay chrome when both apply).

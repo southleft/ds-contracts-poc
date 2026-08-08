@@ -1,19 +1,32 @@
 {
   "id": "grid-implicit-tracks",
-  "feature": "layout",
-  "construct": "grid-auto-rows: 24px + grid-auto-flow: column",
-  "why": "Implicit tracks are how card galleries auto-place; the track sizes exist only in the layout engine.",
+  "feature": "grid-flow",
+  "construct": "auto-placement beyond the declared track list (implicit rows; grid-auto-rows reliance)",
+  "why": "The canvas under-reports implicit rows: children read anchors at row 3 while gridRowCount and gridRowSizes still say 3 tracks — the declaration and the occupancy DISAGREE. Lossy readback is the refusal criterion.",
   "expect": "REFUSED",
-  "expectName": "grid-auto-rows",
-  "expectWhere": "LEDGER.md",
+  "expectName": "grid-implicit-tracks",
+  "expectWhere": "LEDGER.md / refusal receipts — the placement exceeds the declared track list (max(anchor+span) > declared rows): on canvas the write REWRITES gridRowCount (P9, N-DISP-02) and readback under-reports, so the construct refuses by name (grid-implicit-tracks)",
   "observable": {
-    "part": "root",
-    "channel": "grid-auto-rows",
-    "capturedValue": "24px"
+    "part": "c",
+    "channel": "grid-row-start",
+    "capturedValue": "2",
+    "carriedValue": "2"
   },
   "canvas": {
     "expect": "ABSENT",
-    "note": "no implicit-track concept on the canvas"
+    "note": "representable only as a rewritten declaration or an unreported track — both are losses"
   },
-  "blockStage": true
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "REFUSED",
+      "note": "in MANUAL mode the canvas absorbs overflow by REWRITING gridRowCount (2->3 on the 5th child) — a declaration edit the contract did not make (N-DISP-02)"
+    },
+    "canvasToCode": {
+      "expect": "REFUSED",
+      "note": "detectable: max(anchor+span) > declared track count -> refuse by name; dump degrade grid-implicit-tracks-lossy"
+    }
+  },
+  "probe": "P9 both halves: MANUAL overflow grew explicit rowCount; ROW_AUTO_FLOW anchors exceeded rowCount 3 with 8 children over 2 cols",
+  "dumpSnippet": "dump.snippet.json"
 }

@@ -75,12 +75,39 @@ export type ContractRelevantExtraction = Omit<
 export interface ExtractedPart {
   element?: string;
   layout?: {
-    display?: "flex" | "inline-flex";
+    display?: "flex" | "inline-flex" | "grid";
     direction?: "row" | "column";
     align?: "start" | "center" | "end" | "stretch" | "baseline";
     justify?: "start" | "center" | "end" | "space-between";
     grow?: boolean;
     overlap?: boolean;
+    /** A2 grid (G1) — declared track lists, inverted from
+     *  grid-template-rows/columns by core/grid-css.ts: the three
+     *  carriageable spellings only ({px}/{fr}/{fit}); everything else is a
+     *  named refusal receipt, never a silent drop. */
+    rows?: Array<{ px: number } | { fr: number } | { fit: true }>;
+    columns?: Array<{ px: number } | { fr: number } | { fit: true }>;
+    /** G1 — the independent gap pair (px number or resolved token ref). */
+    gap?: { row: number | string; column: number | string };
+    /** G4 — named areas from grid-template-areas; the NAME is the slot
+     *  anchor and enters the contract from THIS surface (code owns it). */
+    areas?: Record<
+      string,
+      { row: number; column: number; rowSpan?: number; columnSpan?: number }
+    >;
+    /** G5 — the one bounded auto-flow (grid-auto-flow: row). */
+    flow?: "row";
+  };
+  /** A2 grid (G2) — explicit cell placement inverted from grid-row /
+   *  grid-column (+ justify-self/align-self) on a part whose parent
+   *  declares display: grid. CSS 1-based lines land here 0-based. */
+  placement?: {
+    row: number;
+    column: number;
+    rowSpan?: number;
+    columnSpan?: number;
+    alignX?: "auto" | "start" | "center" | "end";
+    alignY?: "auto" | "start" | "center" | "end";
   };
   overlay?: { placement: "top" | "bottom" | "start" | "end" };
   tokens?: Record<string, string>;

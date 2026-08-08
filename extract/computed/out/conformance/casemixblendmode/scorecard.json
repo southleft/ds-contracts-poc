@@ -1,7 +1,7 @@
 {
   "component": "CaseMixBlendMode",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 1,
   "interactions": 4,
@@ -22,9 +22,9 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 4.117838541666667,
-    "meanAA": 3.1022135416666665,
-    "maxAA": 3.1022135416666665
+    "meanExact": 1.9596354166666667,
+    "meanAA": 1.6341145833333333,
+    "maxAA": 1.6341145833333333
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -41,26 +41,26 @@
   "worstRows": [
     {
       "key": "__default",
-      "pctAA": 3.1022135416666665,
-      "pctExact": 4.117838541666667,
+      "pctAA": 1.6341145833333333,
+      "pctExact": 1.9596354166666667,
       "channelsMismatched": 1
     },
     {
       "key": "__hover",
-      "pctAA": 3.1022135416666665,
-      "pctExact": 4.117838541666667,
+      "pctAA": 1.6341145833333333,
+      "pctExact": 1.9596354166666667,
       "channelsMismatched": 1
     },
     {
       "key": "__focus-visible",
-      "pctAA": 3.1022135416666665,
-      "pctExact": 4.117838541666667,
+      "pctAA": 1.6341145833333333,
+      "pctExact": 1.9596354166666667,
       "channelsMismatched": 1
     },
     {
       "key": "__active",
-      "pctAA": 3.1022135416666665,
-      "pctExact": 4.117838541666667,
+      "pctAA": 1.6341145833333333,
+      "pctExact": 1.9596354166666667,
       "channelsMismatched": 1
     }
   ],
@@ -88,8 +88,8 @@
       "key": "__default",
       "channelsCompared": 8,
       "channelsEqual": 7,
-      "pctExact": 4.117838541666667,
-      "pctAA": 3.1022135416666665,
+      "pctExact": 1.9596354166666667,
+      "pctAA": 1.6341145833333333,
       "mismatches": [
         {
           "part": "root",
@@ -103,8 +103,8 @@
       "key": "__hover",
       "channelsCompared": 8,
       "channelsEqual": 7,
-      "pctExact": 4.117838541666667,
-      "pctAA": 3.1022135416666665,
+      "pctExact": 1.9596354166666667,
+      "pctAA": 1.6341145833333333,
       "mismatches": [
         {
           "part": "root",
@@ -112,14 +112,15 @@
           "ours": "normal",
           "theirs": "multiply"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "__focus-visible",
       "channelsCompared": 8,
       "channelsEqual": 7,
-      "pctExact": 4.117838541666667,
-      "pctAA": 3.1022135416666665,
+      "pctExact": 1.9596354166666667,
+      "pctAA": 1.6341145833333333,
       "mismatches": [
         {
           "part": "root",
@@ -133,8 +134,8 @@
       "key": "__active",
       "channelsCompared": 8,
       "channelsEqual": 7,
-      "pctExact": 4.117838541666667,
-      "pctAA": 3.1022135416666665,
+      "pctExact": 1.9596354166666667,
+      "pctAA": 1.6341145833333333,
       "mismatches": [
         {
           "part": "root",
@@ -142,7 +143,8 @@
           "ours": "normal",
           "theirs": "multiply"
         }
-      ]
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     }
   ]
 }

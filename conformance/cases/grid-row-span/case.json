@@ -1,0 +1,29 @@
+{
+  "id": "grid-row-span",
+  "feature": "grid-placement",
+  "construct": "grid-row: 2 / span 2 (child spans 2 rows)",
+  "why": "Row spans are the sidebar/rail half of every bento.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.placement.rowSpan",
+  "observable": {
+    "part": "a",
+    "channel": "grid-row-end",
+    "capturedValue": "span 2"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Row spans are the sidebar/rail half of every bento."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED"
+    }
+  },
+  "probe": "P3: gridRowSpan=2 ok -> reads 2; P8: sidebar/rail rowSpan 2 exact",
+  "dumpSnippet": "dump.snippet.json"
+}

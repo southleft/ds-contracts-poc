@@ -1,0 +1,4 @@
+[data-cf="grid-row-span"] { display: grid; grid-template-rows: 16px 16px 16px; grid-template-columns: 60px 1fr; width: 200px; background: rgb(242, 238, 240); }
+[data-cf="grid-row-span"] .cf-a { grid-column: 1; grid-row: 2 / span 2; background: rgb(226, 208, 218); }
+[data-cf="grid-row-span"] .cf-b { grid-row: 1; grid-column: 1; background: rgb(232, 216, 224); }
+[data-cf="grid-row-span"] .cf-c { grid-row: 1; grid-column: 2; background: rgb(238, 224, 230); }

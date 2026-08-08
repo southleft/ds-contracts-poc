@@ -11,6 +11,8 @@ import { diffChannelLines, type ChannelChange } from './channel-diff.js';
 
 export type AnatomyPartNode = {
   layout?: Record<string, unknown>;
+  /** A2 grid (G2) — explicit cell placement on children of grid parts. */
+  placement?: Record<string, unknown>;
   tokens?: Record<string, unknown>;
   declared?: Record<string, unknown>;
   parts?: Record<string, AnatomyPartNode>;
@@ -66,6 +68,26 @@ function walkPart(partPath: string, node: AnatomyPartNode, out: string[]): void 
     out.push(`${partPath}|component|${JSON.stringify(node.component)}`);
   }
   flattenBindings(partPath, node.layout as Record<string, unknown> | undefined, 'layout', out);
+  // A2 grid fact classes (proposal G6 differ row). The layout flatten above
+  // already yields the parent-side buckets: `layout.rows` / `layout.columns`
+  // (one ORDERED, TYPED line each — a track edit is ONE fact, a reorder a
+  // different fact), `layout.gap.row` / `layout.gap.column` (two facts),
+  // `layout.areas.<name>` (name→rect map, one line per name), `layout.flow`.
+  // Placement is the child-side family, split per the pinned classes:
+  //   grid-placement — anchor+span, ONE fact per part
+  //   grid-align     — per-part alignment, its own fact
+  if (isPlainObject(node.placement)) {
+    const p = node.placement;
+    const cell: Record<string, unknown> = { row: p.row, column: p.column };
+    if (p.rowSpan !== undefined) cell.rowSpan = p.rowSpan;
+    if (p.columnSpan !== undefined) cell.columnSpan = p.columnSpan;
+    out.push(`${partPath}|placement.cell|${JSON.stringify(cell)}`);
+    if (p.alignX !== undefined || p.alignY !== undefined) {
+      out.push(
+        `${partPath}|placement.align|${String(p.alignX ?? 'auto')}/${String(p.alignY ?? 'auto')}`,
+      );
+    }
+  }
   flattenBindings(partPath, node.tokens as Record<string, unknown> | undefined, 'tokens', out);
   flattenBindings(partPath, node.declared as Record<string, unknown> | undefined, 'declared', out);
   if (node.states) {
@@ -99,12 +121,45 @@ export function anatomyChannelLines(contract: Contract): string[] {
   return out.sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 }
 
-/** Diff two contracts' anatomies with the shared channel vocabulary. */
+/** A2 grid — the P10 STRUCTURAL rule (proposal G6 differ row): a
+ *  `layout.display` change into or out of "grid" is never an ordinary
+ *  channel edit. The canvas physically DESTROYS tracks on a layout.mode
+ *  switch (probe P10: GRID→HORIZONTAL→GRID lost a declared track), so every
+ *  track/gap/area/placement fact under the switched part is invalidated —
+ *  the differ surfaces that as ONE named structural finding on top of the
+ *  per-fact removals, never absorbs it. */
+export function gridModeSwitchFindings(changes: ChannelChange[]): ChannelChange[] {
+  const out: ChannelChange[] = [];
+  for (const c of changes) {
+    if (c.channel !== 'layout.display') continue;
+    const wasGrid = c.was === 'grid';
+    const nowGrid = c.now === 'grid';
+    if (wasGrid === nowGrid) continue;
+    out.push({
+      what: c.what,
+      channel: 'layout.mode-switch',
+      part: c.part,
+      was: wasGrid
+        ? 'grid (tracks, gaps, areas, placements)'
+        : String(c.was),
+      now:
+        `STRUCTURAL LOSS — layout.mode changed ${wasGrid ? `grid → ${c.now}` : `${c.was} → grid`}: ` +
+        'the canvas physically destroys tracks on a mode switch (P10); every grid fact under this part is invalidated, not individually edited',
+    });
+  }
+  return out;
+}
+
+/** Diff two contracts' anatomies with the shared channel vocabulary. A
+ *  grid↔flex display change additionally yields the P10 structural finding
+ *  (see gridModeSwitchFindings) — appended, so per-fact removals stay
+ *  visible AND the loss is named as one structural event. */
 export function diffContractAnatomy(
   before: Contract,
   after: Contract,
 ): ChannelChange[] {
-  return diffChannelLines(anatomyChannelLines(before), anatomyChannelLines(after));
+  const changes = diffChannelLines(anatomyChannelLines(before), anatomyChannelLines(after));
+  return [...changes, ...gridModeSwitchFindings(changes)];
 }
 
 /** Token refs (`{a.b.c}`) → CSS custom-property names (`a-b-c`). */

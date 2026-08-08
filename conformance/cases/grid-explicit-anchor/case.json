@@ -1,0 +1,31 @@
+{
+  "id": "grid-explicit-anchor",
+  "feature": "grid-placement",
+  "construct": "grid-row: 3; grid-column: 2 (explicit cell placement, 0-based contract / 1-based CSS)",
+  "why": "Explicit placement is the manual-mode core; anchors must survive the 0/1-base translation exactly.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.placement (contract row 2 / column 1, 0-based — the ±1 translation IS the measured fact)",
+  "observable": {
+    "part": "a",
+    "channel": "grid-row-start",
+    "capturedValue": "3"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Explicit placement is the manual-mode core; anchors must survive the 0/1-base translation exactly."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "child.setGridChildPosition(row, col) — child-side method, the only setter (P3)"
+    },
+    "canvasToCode": {
+      "expect": "CARRIED",
+      "note": "gridRow/ColumnAnchorIndex read-only getters read back exactly"
+    }
+  },
+  "probe": "P3b: setGridChildPosition(2,1) -> row=2 col=1; P8: all five anchors exact",
+  "dumpSnippet": "dump.snippet.json"
+}

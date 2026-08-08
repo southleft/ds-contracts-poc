@@ -219,6 +219,7 @@ export {
 export {
   anatomyChannelLines,
   diffContractAnatomy,
+  gridModeSwitchFindings,
   expectedCssVarsFromAnatomy,
   tokenRefToCssVar,
   type AnatomyPartNode,

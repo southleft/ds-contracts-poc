@@ -1,0 +1,2 @@
+[data-cf="grid-tracks-mixed-fractional"] { display: grid; grid-template-columns: 33.5px 2.5fr 1fr; width: 243.5px; background: rgb(242, 240, 236); }
+[data-cf="grid-tracks-mixed-fractional"] .cf-a, [data-cf="grid-tracks-mixed-fractional"] .cf-b, [data-cf="grid-tracks-mixed-fractional"] .cf-c { height: 16px; background: rgb(220, 216, 226); }

@@ -1,0 +1,32 @@
+{
+  "id": "grid-auto-fit-minmax",
+  "feature": "grid-responsive",
+  "construct": "grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))",
+  "why": "A viewport-responsive TRACK COUNT is a reflow family; one canvas frame carries one member. No repeat-to-fit exists in the API at all.",
+  "expect": "REFUSED",
+  "expectName": "grid-auto-fit-minmax",
+  "expectWhere": "LEDGER.md / refusal receipts (grid-auto-fit-minmax — no repeat-to-fit concept in the API, P1; minmax rejected, P6; a viewport-responsive track COUNT is a reflow family one frame cannot carry)",
+  "observable": {
+    "part": "root",
+    "channel": "grid-template-columns",
+    "capturedValue": "100px 100px",
+    "carriedValue": "100px"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "A viewport-responsive TRACK COUNT is a reflow family; one canvas frame carries one member. No repeat-to-fit exists in the API at all."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "REFUSED",
+      "note": "no API surface (track count is a plain number) AND minmax is rejected — double dead end"
+    },
+    "canvasToCode": {
+      "expect": "UNREACHABLE",
+      "note": "the canvas cannot construct a responsive track count; reader must never emit repeat(auto-fit,...) from any grid readback"
+    }
+  },
+  "probe": "P1 reflection (no repeat concept) + P6 minmax rejection; same family as the media-non-matching conformance finding (one frame, one branch)",
+  "dumpSnippet": null
+}

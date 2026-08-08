@@ -1,0 +1,31 @@
+{
+  "id": "grid-area-nonrectangular",
+  "feature": "grid-areas",
+  "construct": "area occupancy that cannot tile grid-template-areas (gapped or non-rectangular per CSS rules)",
+  "why": "grid-template-areas requires rectangles; the contract's rect list is more general.",
+  "expect": "LOWERED",
+  "expectName": "grid-area-nonrectangular",
+  "expectWhere": "anatomy — the L-shaped occupancy has NO grid-template-areas spelling (rectangles only, invalid CSS otherwise), so the code side carries it as grid-row/grid-column LONGHANDS: the named lowering grid-area-nonrectangular. The fixture IS the lowered spelling — authoring the unlowered form is impossible in CSS, which is the point.",
+  "observable": {
+    "part": "a",
+    "channel": "grid-column-end",
+    "capturedValue": "span 2"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "grid-template-areas requires rectangles; the contract's rect list is more general."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "CARRIED",
+      "note": "canvas placement is per-child rects — no rectangularity constraint"
+    },
+    "canvasToCode": {
+      "expect": "LOWERED",
+      "note": "emitted as grid-row/grid-column longhands instead of grid-template-areas; named lowering"
+    }
+  },
+  "probe": "grammar G4; CSS-side constraint, not a canvas limit",
+  "dumpSnippet": "dump.snippet.json"
+}

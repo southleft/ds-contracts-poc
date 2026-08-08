@@ -1,0 +1,31 @@
+{
+  "id": "grid-subgrid",
+  "feature": "grid-responsive",
+  "construct": "grid-template-columns: subgrid on a nested grid",
+  "why": "Track inheritance across nesting has no API surface — no property in the full reflected inventory. A nested grid with COPIED literal tracks is a different fact (it does not follow the parent) and must not be passed off as subgrid.",
+  "expect": "REFUSED",
+  "expectName": "grid-subgrid",
+  "expectWhere": "LEDGER.md / refusal receipts (grid-subgrid — no track-inheritance surface anywhere in the reflected API inventory, P1). A nested grid with COPIED literal tracks is a DIFFERENT fact (it does not follow the parent) and must not be passed off as subgrid.",
+  "observable": {
+    "part": "a",
+    "channel": "grid-template-columns",
+    "capturedValue": "subgrid",
+    "carriedValue": "subgrid"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "Track inheritance across nesting has no API surface — no property in the full reflected inventory. A nested grid with COPIED literal tracks is a different fact (it does not follow the parent) and must not be passed off as subgrid."
+  },
+  "blockStage": true,
+  "directions": {
+    "codeToCanvas": {
+      "expect": "REFUSED",
+      "note": "no canvas analogue proved; the probe found no subgrid-shaped property anywhere"
+    },
+    "canvasToCode": {
+      "expect": "UNREACHABLE"
+    }
+  },
+  "probe": "P1 reflection: full grid-prop inventory contains no subgrid/track-inheritance surface",
+  "dumpSnippet": null
+}

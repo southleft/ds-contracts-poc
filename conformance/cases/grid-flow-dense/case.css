@@ -1,0 +1,2 @@
+[data-cf="grid-flow-dense"] { display: grid; grid-auto-flow: dense; grid-template-columns: 1fr 1fr; grid-template-rows: 16px; width: 200px; background: rgb(240, 244, 240); }
+[data-cf="grid-flow-dense"] .cf-a, [data-cf="grid-flow-dense"] .cf-b { background: rgb(214, 232, 214); }

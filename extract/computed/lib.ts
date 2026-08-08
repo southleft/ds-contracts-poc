@@ -63,6 +63,20 @@ export interface CapturedNode {
    *  what lets the skip say `calc` when the arithmetic makes verification
    *  impossible by construction. */
   vcalcs?: Record<string, Array<[string[], string]>>;
+  /** A2 GRID (G7) — DECLARED grid track lists, read from matching source
+   *  rules (+ the style attribute), recorded ONLY on elements whose computed
+   *  display is grid/inline-grid. getComputedStyle on a grid container
+   *  returns USED track sizes — `minmax(60px, 120px) 1fr` computes to
+   *  "120px 80px", `50% 1fr` to "100px 100px" — so the constructs the pinned
+   *  grammar refuses BY NAME (docs/research/layout-grammar-proposal.md G7:
+   *  grid-track-minmax P6, grid-track-percent P2b, grid-auto-fit-minmax)
+   *  are INVISIBLE in computed truth; the declared text still holds them.
+   *  property → declared values from every matching rule, verbatim, in
+   *  cascade-source order. Census reader only for now (the portal reader
+   *  does not yet make this read — a named reader gap, not a carriage).
+   *  Undefined on every non-grid element, so committed captures of the
+   *  grid-free libraries are byte-identical. */
+  gdecl?: Record<string, string[]>;
 }
 
 export interface Capture {
@@ -349,6 +363,11 @@ export function normalizeNode(n: CapturedNode): CapturedNode {
       : {}),
     ...(n.vcalcs !== undefined
       ? { vcalcs: Object.fromEntries(Object.keys(n.vcalcs).sort().map((k) => [k, n.vcalcs![k]])) }
+      : {}),
+    // A2 GRID — `gdecl` is on the preserve list FROM BIRTH: the vshorthands
+    // defect above is exactly what happens to a capture field that is not.
+    ...(n.gdecl !== undefined
+      ? { gdecl: Object.fromEntries(Object.keys(n.gdecl).sort().map((k) => [k, n.gdecl![k]])) }
       : {}),
   };
 }

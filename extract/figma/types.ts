@@ -13,13 +13,51 @@
  * dumps of the contract-generated Badge / Switch / Card sets).
  */
 
+/** One declared grid track (dump v1.17) — the NORMALIZED spelling shared by
+ *  both producers (the plugin dump reads the structured
+ *  gridRowSizes/gridColumnSizes arrays, the REST mapper parses the CSS-string
+ *  gridRowsSizing/gridColumnsSizing) and by the contract grammar
+ *  (GridTrackSchema): exactly one of {px}, {fr}, {fit: true}. Values are
+ *  captured VERBATIM (fractional ok — P2b: 33.5px / 2.5fr carried exactly);
+ *  the proposer, not the capture, refuses invalid values by name. */
+export interface DumpGridTrack {
+  px?: number;
+  fr?: number;
+  fit?: true;
+}
+
+/** GRID layout facts (dump v1.17, additive — the A2 layout grammar's
+ *  design-side capture; docs/research/grid-recon-probes.md P1–P14).
+ *  Declared-track grids only: tracks, the independent gap pair, and the one
+ *  bounded auto-flow. Absence on a `mode: 'GRID'` layout means the producer
+ *  predates v1.17 — NOT an empty grid; consumers refuse by name. */
+export interface DumpGrid {
+  rows: DumpGridTrack[];
+  columns: DumpGridTrack[];
+  /** Literal gridRowGap / gridColumnGap (px) — INDEPENDENT facts (P2).
+   *  Bound gap variables ride `bound.gridRowGap` / `bound.gridColumnGap`. */
+  rowGap: number;
+  columnGap: number;
+  /** gridItemsPositioning === 'ROW_AUTO_FLOW' → 'row' (P5: the enum is
+   *  exactly MANUAL | ROW_AUTO_FLOW — no column, no dense). Absent = MANUAL.
+   *  Under auto-flow the placement fact is CHILD ORDER, so children carry no
+   *  `cell` (P5: position setters are refused there). */
+  flow?: 'row';
+}
+
 /** Auto-layout facts, as the Plugin API spells them. */
 export interface DumpLayout {
-  mode: 'HORIZONTAL' | 'VERTICAL';
-  primary: 'MIN' | 'CENTER' | 'MAX' | 'SPACE_BETWEEN';
-  counter: 'MIN' | 'CENTER' | 'MAX' | 'BASELINE';
-  /** Literal itemSpacing (px). The bound variable, if any, is in `bound.itemSpacing`. */
-  spacing: number;
+  /** dump v1.17: 'GRID' joins the flex modes. A GRID layout carries `grid`
+   *  and OMITS the flex-era `primary`/`counter`/`spacing` fields — they read
+   *  as inert defaults on GRID frames and would be invented facts. */
+  mode: 'HORIZONTAL' | 'VERTICAL' | 'GRID';
+  /** Absent exactly when mode is 'GRID' (dump v1.17). */
+  primary?: 'MIN' | 'CENTER' | 'MAX' | 'SPACE_BETWEEN';
+  /** Absent exactly when mode is 'GRID' (dump v1.17). */
+  counter?: 'MIN' | 'CENTER' | 'MAX' | 'BASELINE';
+  /** Literal itemSpacing (px). The bound variable, if any, is in
+   *  `bound.itemSpacing`. Absent exactly when mode is 'GRID' (dump v1.17). */
+  spacing?: number;
   /** Literal padding in CSS order: [top, right, bottom, left]. */
   padding: [number, number, number, number];
   /** dump v1.12: layoutWrap === 'WRAP'. Absent means a single line. */
@@ -30,6 +68,9 @@ export interface DumpLayout {
   rowSpacing?: number;
   primarySizing: 'FIXED' | 'AUTO';
   counterSizing: 'FIXED' | 'AUTO';
+  /** GRID facts (dump v1.17) — present exactly when mode is 'GRID' and the
+   *  producer captures grid (see DumpGrid). */
+  grid?: DumpGrid;
 }
 
 /** A solid paint: bound to a variable (`var`, slash-form name) or raw (`hex`). */
@@ -324,6 +365,24 @@ export interface DumpNode {
    *  of it by construction. Absence = no override observed (or a pre-v1.10
    *  producer); consumers never invent text from it. */
   textOverrides?: Record<string, string>;
+  /** GRID-cell placement (dump v1.17, additive) — captured on every IN-FLOW
+   *  child of a MANUAL GRID parent: 0-based anchors
+   *  (gridRowAnchorIndex/gridColumnAnchorIndex — read-only getters, P3),
+   *  spans only when > 1 (gridRowSpan/gridColumnSpan), aligns only when not
+   *  AUTO (gridChildHorizontalAlign/gridChildVerticalAlign — the API's own
+   *  MIN | CENTER | MAX spelling; P3/P4: STRETCH and BASELINE do not exist).
+   *  GATED on layoutPositioning !== 'ABSOLUTE' (P13 quirk: absolute children
+   *  still report anchors 0,0 — reading them would invent a placement).
+   *  Absent under ROW_AUTO_FLOW (placement fact = child order, P5) and on
+   *  pre-v1.17 dumps (not captured, never "cell 0,0"). */
+  cell?: {
+    row: number;
+    column: number;
+    rowSpan?: number;
+    columnSpan?: number;
+    alignX?: 'MIN' | 'CENTER' | 'MAX';
+    alignY?: 'MIN' | 'CENTER' | 'MAX';
+  };
   children?: DumpNode[];
 }
 

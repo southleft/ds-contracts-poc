@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 23.333333333333332,
-    "pctAAUnmasked": 15.476190476190476,
-    "pctAAMasked": 15.476190476190476,
+    "pctExactUnmasked": 21.698943661971832,
+    "pctAAUnmasked": 9.991197183098592,
+    "pctAAMasked": 9.991197183098592,
     "maskCoveragePct": 0,
-    "canvasPx": "140x15",
-    "realPx": "140x15",
-    "inkCanvasPct": 16.61904761904762,
-    "inkRealPct": 18.619047619047617
+    "canvasPx": "142x16",
+    "realPx": "142x16",
+    "inkCanvasPct": 16.41725352112676,
+    "inkRealPct": 21.258802816901408
   },
   "reference": "parity/receipts/console-loop/mui/refs/tabs.png",
-  "referenceSha256": "50694d61f5bde8253e69d68d1d744b64800a3bea68ff79843cf908279037a082",
+  "referenceSha256": "c554407ebc0de7fbdf9abf60314c33a1f216b43c0b7b39d513319f73af5e822e",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/tabs.png",
   "canvasShotSha256": "0bca1e2b0fc4105d33e519418da235376d43f6436d302f5e1b7cc6684f162eb5",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/tabs.diff.png",
@@ -36,8 +36,8 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 1.9999999999999964,
+  "inkDelta": 4.841549295774648,
   "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=15.48 > 5)"
+  "note": "pixel bar missed (pctAAMasked=9.99 > 5)"
 }

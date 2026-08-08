@@ -30,7 +30,8 @@
  * Pure module (no fs, no browser): run.ts writes the asset files.
  */
 import type { Contract, Part } from '../../scripts/contract-schema.js';
-import { walkAnatomy } from '../../scripts/contract-schema.js';
+import { GRID_REFUSALS, walkAnatomy } from '../../scripts/contract-schema.js';
+import { parseGridAutoFlow, parseGridLine, parseGridSelfAlign, parseGridTemplateAreas, parseGridTrackList, type GridAreaIR, type GridTrackIR } from '../../core/grid-css.js';
 import { PRESENCE_ON, PRESENCE_OFF, type ComponentConfig, type PropSpace } from './capture.js';
 import { DECOR_PSEUDOS, isAbsurdRadius, PILL_RADIUS_SENTINEL, signature, stems, type Capture, type CapturedNode, type Combo, type FlatEl } from './lib.js';
 
@@ -156,8 +157,50 @@ const gridAlign = (v: string | undefined): 'start' | 'center' | 'end' | 'stretch
 export function lowerGridDisplay(
   display: string,
   style: Record<string, string>,
+  declared?: Record<string, string[]>,
 ): GridLowering | { refusal: string } | null {
   if (display !== 'grid' && display !== 'inline-grid') return null;
+  // A2 (G7) — THE NAMED-REFUSAL FENCE RUNS BEFORE THE FLEX LOWERING.
+  // docs/research/layout-grammar-proposal.md pins these constructs as
+  // REFUSED BY NAME (each with its probe dead-end); the lowering below used
+  // to absorb them into a flex row/column with a generic `grid-lowering`
+  // receipt, which is exactly the receipt-drift the conformance gate's
+  // WRONG-NAME verdict exists to catch. Two evidence planes:
+  //   · computed truth — grid-auto-flow keeps `dense`/`column` verbatim, and
+  //     grid-template-* keeps `subgrid` verbatim, so those three refuse from
+  //     the computed read alone.
+  //   · declared truth (`gdecl`, the capture's grid declared-track read) —
+  //     minmax()/percent/auto-fit tracks resolve to USED px in computed
+  //     style (P6/P2b constructs invisible after resolution), so their
+  //     refusal reads the authored declaration.
+  const flow = parseGridAutoFlow(style['grid-auto-flow'] || 'row');
+  if (flow.refusal) return { refusal: flow.refusal }; // grid-flow-column (P5b) / grid-flow-dense (P5)
+  if (/^subgrid\b/.test((style['grid-template-columns'] ?? '').trim()) || /^subgrid\b/.test((style['grid-template-rows'] ?? '').trim())) {
+    return { refusal: GRID_REFUSALS['grid-subgrid'] }; // P1: no track-inheritance surface
+  }
+  for (const prop of ['grid-template-columns', 'grid-template-rows']) {
+    for (const v of declared?.[prop] ?? []) {
+      // auto-fit/fill BEFORE minmax: `repeat(auto-fit, minmax(…))` is the
+      // responsive-count family, not the per-track-clamp family (G7 rows are
+      // distinct constructs and must not collapse into one message).
+      if (/repeat\(\s*auto-(fit|fill)\b/.test(v)) return { refusal: GRID_REFUSALS['grid-auto-fit-minmax'] };
+      if (v.includes('minmax(')) return { refusal: GRID_REFUSALS['grid-track-minmax'] }; // P6
+      if (/^subgrid\b/.test(v.trim())) return { refusal: GRID_REFUSALS['grid-subgrid'] };
+      // Percent TRACK tokens only — fit-content(100%) is the HUG spelling
+      // (P14) and must not misfire the percent refusal.
+      for (const tok of v.split(/\s+/)) {
+        if (/^-?\d*\.?\d+%$/.test(tok)) return { refusal: GRID_REFUSALS['grid-track-percent'] }; // P2b
+        // Zero tracks are their own G7 row (grid-track-zero, P2b silent-rewrite
+        // hazard) and were the one pinned track refusal this fence did not
+        // mirror from parseTrackToken: a declared `0px 1fr` used to fall
+        // through to the generic flex lowering, so the registry name never
+        // appeared in any artifact — the conformance gate's WRONG-NAME verdict
+        // on grid-track-zero-value measured exactly that drift (2026-08-08).
+        const zm = /^(-?\d*\.?\d+)(px|fr)$/.exec(tok);
+        if ((zm && Number(zm[1]) === 0) || tok === '0') return { refusal: GRID_REFUSALS['grid-track-zero'] }; // P2b
+      }
+    }
+  }
   const cols = gridTracks(style['grid-template-columns']);
   const rows = gridTracks(style['grid-template-rows']);
   const d = display === 'inline-grid' ? 'inline-flex' : 'flex';
@@ -177,6 +220,340 @@ export function lowerGridDisplay(
     layout: { display: d, direction: 'row', align: gridAlign(style['align-items']) },
     note: `${display} ${cols}×${rows || 1} → flex row, cross-axis ${gridAlign(style['align-items'])} from align-items:${style['align-items'] ?? 'normal'} (measured track counts)`,
   };
+}
+
+// ---------------------------------------------------------------------------
+// A2 GRID PROMOTION (G1/G2/G4) — the computed floor's half of the pinned
+// layout grammar (docs/research/layout-grammar-proposal.md). A display:grid
+// part whose declared-track list, child anchors/spans and per-cell aligns are
+// all readable promotes as a STRUCTURED grid: layout.rows/columns/gap/areas +
+// Part.placement — the same contract facts the code proposer
+// (core/propose-code.ts) and the emitters (core/emit-react gridParentDecls /
+// gridPlacementDecls) already speak. Anything the grammar cannot carry
+// ABANDONS the promotion with a receipt and falls back to the existing
+// lowerGridDisplay path, whose G7 fence names every refusal — the promotion
+// never invents a fact and never absorbs a refusal.
+//
+// Track truth has two evidence planes (same split as lowerGridDisplay):
+//   · gdecl (the capture's declared-track read) carries fr/fit spellings that
+//     computed style resolves to USED px ("160px 1fr 1fr 120px" computes to
+//     "160px 156px 156px 120px") — a declared candidate is used ONLY when it
+//     agrees with the computed geometry (same track count; every px track
+//     equal within 0.5px), receipted;
+//   · computed truth alone carries all-px grids exactly.
+// Area names enter from the computed floor itself: an area-anchored child's
+// computed grid-row/column-start/end serialize as the area IDENT (Chromium),
+// and renameGridAreaParts (alignSweep) has already given such parts the area
+// name, so the G4 "the area name IS the slot anchor" rule holds by name.
+// ---------------------------------------------------------------------------
+export interface GridPromotionOk {
+  layout: NonNullable<Part['layout']>;
+  /** child part name → explicit placement (area-anchored children get none —
+   *  the area rect IS their placement, G4). */
+  placements: Map<string, NonNullable<Part['placement']>>;
+  receipts: string[];
+}
+export interface GridPromotionAbandoned {
+  abandon: string;
+  receipts: string[];
+}
+
+const GRID_AREA_IDENT_RE = /^[A-Za-z_][A-Za-z0-9_-]*$/;
+const isAreaIdent = (v: string | undefined): v is string =>
+  v !== undefined && v !== 'auto' && !v.startsWith('span') && !/^-?\d+$/.test(v) && GRID_AREA_IDENT_RE.test(v);
+
+export function promoteGridLayout(
+  label: string,
+  rep: CapturedNode,
+  children: Array<{ partName: string; rep: CapturedNode }>,
+  childParts: Record<string, Part>,
+): GridPromotionOk | GridPromotionAbandoned {
+  const receipts: string[] = [];
+  const abandon = (why: string): GridPromotionAbandoned => ({ abandon: why, receipts });
+
+  // -- tracks (G1): declared candidate verified against computed geometry --
+  const pxList = (raw: string): number[] | null => {
+    const out: number[] = [];
+    for (const tok of raw.trim().split(/\s+/)) {
+      const m = /^(-?\d*\.?\d+)px$/.exec(tok);
+      if (!m) return null;
+      out.push(parseFloat(m[1]));
+    }
+    return out.length > 0 ? out : null;
+  };
+  const trackAxis = (axis: 'rows' | 'columns'): { tracks: GridTrackIR[] } | GridPromotionAbandoned => {
+    const ch = axis === 'rows' ? 'grid-template-rows' : 'grid-template-columns';
+    const computedRaw = (rep.style[ch] ?? 'none').trim();
+    const computedPx = pxList(computedRaw);
+    /** P9 / N-DISP-02 — a parseable DECLARED list with FEWER tracks than the
+     *  resolved list is the implicit-track signature: Chromium's resolved
+     *  grid-template-* includes implicitly-created tracks, so "declared 16px,
+     *  resolved 16px 16px" means the browser grew the grid beyond the
+     *  declaration. Carrying the resolved list would rewrite the author's
+     *  declaration inside the contract — the exact silent absorption the
+     *  grammar refuses BY NAME (grid-implicit-tracks). Recorded during the
+     *  candidate walk; abandons only if NO candidate verifies (a longer
+     *  matching rule that agrees with the geometry wins the cascade). */
+    let implicitEvidence: { declared: string; declaredCount: number } | null = null;
+    for (const dv of [...(rep.gdecl?.[ch] ?? [])].reverse()) {
+      // later matching rules approximate the higher cascade; the geometry
+      // check below is what actually admits a candidate.
+      if (dv.trim() === computedRaw) continue; // all-px declaration — computed carries it below
+      const parsed = parseGridTrackList(dv);
+      if (parsed.receipts.refusals.length > 0) {
+        // a declared G7 construct (minmax/percent/auto-fit/…) — abandon so
+        // lowerGridDisplay's fence names the refusal (one naming source).
+        return abandon(`declared ${ch} "${dv}" is a refused track construct — the G7 fence names it`);
+      }
+      if (!parsed.tracks) continue;
+      const agrees =
+        computedPx !== null &&
+        parsed.tracks.length === computedPx.length &&
+        parsed.tracks.every((t, i) => !('px' in t) || Math.abs(t.px - computedPx[i]) <= 0.5);
+      if (agrees) {
+        receipts.push(
+          `grid-tracks-declared: ${label}.${ch} carries the DECLARED list "${dv}" — verified against computed "${computedRaw}" (${parsed.tracks.length} tracks; every px track agrees ≤0.5px; fr/fit spellings resolve to used px in computed style and are carried from source)`,
+        );
+        receipts.push(...parsed.receipts.lowered.map((l) => `grid-tracks-lowered: ${label}.${ch} ${l}`));
+        return { tracks: parsed.tracks };
+      }
+      if (computedPx !== null && parsed.tracks.length < computedPx.length) {
+        implicitEvidence = { declared: dv, declaredCount: parsed.tracks.length };
+        continue; // named below — a later-verifying candidate may still win
+      }
+      receipts.push(
+        `grid-tracks-declared-unverified: ${label}.${ch} declared "${dv}" does not agree with computed "${computedRaw}" — declared candidate dropped; computed truth decides`,
+      );
+    }
+    if (implicitEvidence !== null) {
+      return abandon(
+        `${GRID_REFUSALS['grid-implicit-tracks']} — measured on ${label}.${ch}: the declaration "${implicitEvidence.declared}" lists ${implicitEvidence.declaredCount} track(s) while the resolved grid reads "${computedRaw}" (${computedPx?.length ?? '?'} tracks, implicit tracks included in Chromium's resolved value) — the occupancy grew the grid beyond the declared list, and carrying the resolved list would rewrite the declaration inside the contract (P9/N-DISP-02)`,
+      );
+    }
+    const computed = parseGridTrackList(computedRaw);
+    if (computed.receipts.refusals.length > 0 || !computed.tracks) {
+      return abandon(`computed ${ch} "${computedRaw}" yields no carriageable track list`);
+    }
+    return { tracks: computed.tracks };
+  };
+  const rowsR = trackAxis('rows');
+  if ('abandon' in rowsR) return rowsR;
+  const colsR = trackAxis('columns');
+  if ('abandon' in colsR) return colsR;
+  const rows = rowsR.tracks;
+  const columns = colsR.tracks;
+
+  // -- flow fence (G5/G7): dense/column refuse via the fallback's fence;
+  //    auto-flow placement-from-order is NOT promoted from the computed floor
+  //    this round (children under auto-flow read `auto` anchors below and
+  //    abandon there) --
+  const flow = parseGridAutoFlow(rep.style['grid-auto-flow'] || 'row');
+  if (flow.refusal) return abandon('grid-auto-flow is a refused flow — the G7 fence names it');
+
+  // -- gap pair (G1) --
+  const gapOf = (ch: 'row-gap' | 'column-gap'): number | GridPromotionAbandoned => {
+    const v = (rep.style[ch] ?? 'normal').trim();
+    if (v === 'normal' || v === '') return 0;
+    const m = /^(-?\d*\.?\d+)px$/.exec(v);
+    if (!m) return abandon(`${ch} "${v}" has no carriageable px spelling`);
+    return Math.max(0, parseFloat(m[1]));
+  };
+  const gapRow = gapOf('row-gap');
+  if (typeof gapRow !== 'number') return gapRow;
+  const gapColumn = gapOf('column-gap');
+  if (typeof gapColumn !== 'number') return gapColumn;
+
+  // -- areas (G4): computed grid-template-areas serializes the full matrix --
+  let areas: Record<string, GridAreaIR> | undefined;
+  const areasRaw = (rep.style['grid-template-areas'] ?? 'none').trim();
+  if (areasRaw !== 'none' && areasRaw !== '') {
+    const parsed = parseGridTemplateAreas(areasRaw);
+    if (!parsed.areas) return abandon(parsed.refusal ?? `grid-template-areas "${areasRaw}" unparseable`);
+    if (parsed.rowCount !== rows.length || parsed.columnCount !== columns.length) {
+      return abandon(
+        `grid-template-areas matrix is ${parsed.rowCount}×${parsed.columnCount} but the declared tracks are ${rows.length}×${columns.length} — the two facts disagree`,
+      );
+    }
+    areas = parsed.areas;
+  }
+
+  // -- children (G2): every promoted in-flow child places explicitly or is
+  //    named by the area it occupies; anything else abandons --
+  const entryNames = new Set(children.map((c) => c.partName));
+  for (const [name, p] of Object.entries(childParts)) {
+    if (!entryNames.has(name) && !p.overlay) {
+      return abandon(`child part "${name}" has no captured grid anchors (synthetic/decor part) and is not an overlay — it cannot take a cell`);
+    }
+  }
+  const placements = new Map<string, NonNullable<Part['placement']>>();
+  const rects: Array<{ who: string; r: number; c: number; rs: number; cs: number }> = [];
+  for (const c of children) {
+    const part = childParts[c.partName];
+    if (!part) continue; // refused by the promotion — not a contract child
+    if (part.overlay) continue; // out-of-flow grammar (P13)
+    if (part.declared?.['display'] === 'none') {
+      return abandon(`child "${c.partName}" is carried as display:none (sr-only) — a hidden box has no cell to take`);
+    }
+    const s = c.rep.style;
+    const rs = (s['grid-row-start'] ?? 'auto').trim();
+    const re = (s['grid-row-end'] ?? 'auto').trim();
+    const cs = (s['grid-column-start'] ?? 'auto').trim();
+    const ce = (s['grid-column-end'] ?? 'auto').trim();
+    if (isAreaIdent(rs)) {
+      // area-anchored child: all four computed lines carry the area ident
+      if (re !== rs || cs !== rs || ce !== rs) {
+        return abandon(`child "${c.partName}" mixes the area ident "${rs}" with explicit lines (${re}/${cs}/${ce})`);
+      }
+      if (!areas?.[rs]) return abandon(`child "${c.partName}" is anchored to area "${rs}" which grid-template-areas does not declare`);
+      if (c.partName !== rs) {
+        return abandon(`child "${c.partName}" occupies area "${rs}" but could not take its name (G4: the area name IS the slot anchor; see grid-area-name receipts)`);
+      }
+      continue; // the area rect IS the placement (validateGridPart reads areas[name])
+    }
+    if (rs === 'auto') {
+      // Name the CONSTRUCT, not just the child: the fact being dropped is the
+      // grid-auto-flow order-placement fact (G5) — without the channel name
+      // here the drop measured as SILENT-LOSS on grid-auto-flow-row
+      // (conformance, 2026-08-08); the loss stays OPEN but must stay NAMED.
+      return abandon(`child "${c.partName}" is auto-placed — the grid-auto-flow (${(rep.style['grid-auto-flow'] || 'row').trim()}) placement-from-order fact (G5) is not promoted from the computed floor this round; the flow channel's order fact is dropped with the promotion`);
+    }
+    const lineOf = (startRaw: string, endRaw: string, axis: string): { anchor: number; span: number } | GridPromotionAbandoned => {
+      const spec = endRaw === 'auto' || endRaw === '' ? startRaw : `${startRaw} / ${endRaw}`;
+      const p = parseGridLine(spec);
+      if (p.refusal || p.anchor === undefined) return abandon(`child "${c.partName}" ${axis} "${spec}": ${p.refusal ?? 'no anchor'}`);
+      return { anchor: p.anchor, span: p.span ?? 1 };
+    };
+    const rowLine = lineOf(rs, re, 'grid-row');
+    if ('abandon' in rowLine) return rowLine;
+    const colLine = lineOf(cs, ce, 'grid-column');
+    if ('abandon' in colLine) return colLine;
+    const alignOf = (raw: string | undefined, ch: string): { align?: 'start' | 'center' | 'end' } | GridPromotionAbandoned => {
+      const v = (raw ?? 'auto').trim();
+      if (v === 'auto' || v === 'normal') return {};
+      const p = parseGridSelfAlign(v);
+      if (p.refusal) return abandon(`child "${c.partName}" ${ch}: ${p.refusal}`);
+      if (p.lowered) {
+        receipts.push(`grid-align-lowered: ${c.partName}.${ch} — ${p.lowered}`);
+        return {};
+      }
+      return { align: p.align };
+    };
+    const ax = alignOf(s['justify-self'], 'justify-self');
+    if ('abandon' in ax) return ax;
+    const ay = alignOf(s['align-self'], 'align-self');
+    if ('abandon' in ay) return ay;
+    placements.set(c.partName, {
+      row: rowLine.anchor,
+      column: colLine.anchor,
+      ...(rowLine.span > 1 ? { rowSpan: rowLine.span } : {}),
+      ...(colLine.span > 1 ? { columnSpan: colLine.span } : {}),
+      ...(ax.align ? { alignX: ax.align } : {}),
+      ...(ay.align ? { alignY: ay.align } : {}),
+    });
+    rects.push({ who: `part "${c.partName}"`, r: rowLine.anchor, c: colLine.anchor, rs: rowLine.span, cs: colLine.span });
+  }
+  // area rects occupy too (empty areas keep their cells — G4's shared
+  // placeholder convention); the placed-child rects above must not collide
+  // with them or each other, and nothing may exceed the declared tracks —
+  // the same two P3 throw classes validateGridPart refuses.
+  const placedNames = new Set(placements.keys());
+  for (const [name, a] of Object.entries(areas ?? {})) {
+    if (!placedNames.has(name)) rects.push({ who: `area "${name}"`, r: a.row, c: a.column, rs: a.rowSpan ?? 1, cs: a.columnSpan ?? 1 });
+  }
+  for (const x of rects) {
+    if (x.r + x.rs > rows.length || x.c + x.cs > columns.length) {
+      return abandon(`${x.who} exceeds the declared tracks (${GRID_REFUSALS['grid-implicit-tracks']})`);
+    }
+  }
+  for (let i = 0; i < rects.length; i++) {
+    for (let j = i + 1; j < rects.length; j++) {
+      const a = rects[i];
+      const b = rects[j];
+      if (a.r < b.r + b.rs && b.r < a.r + a.rs && a.c < b.c + b.cs && b.c < a.c + a.cs) {
+        return abandon(`${a.who} and ${b.who} overlap on the grid — the P3 occupancy class`);
+      }
+    }
+  }
+
+  const layout: NonNullable<Part['layout']> = {
+    display: 'grid',
+    rows,
+    columns,
+    ...(gapRow > 0 || gapColumn > 0 ? { gap: { row: gapRow, column: gapColumn } } : {}),
+    ...(areas ? { areas } : {}),
+  };
+  if (layout.gap) {
+    // G1: the contract deliberately has NO single-`gap` shorthand — the pair
+    // is the carried spelling, and the shorthand's lowering into it must be
+    // RECEIPTED BY NAME. The authored spelling is not recoverable at this
+    // layer: CSSOM re-serializes `gap: R C` and `row-gap: R; column-gap: C`
+    // to the SAME declaration (probed 2026-08-08 in the pinned Chromium:
+    // both spellings read back `gap: 12px 16px` from rule cssText), so the
+    // browser has already lowered any authored shorthand into the longhand
+    // pair before this reader looks — the receipt covers the construct
+    // class, never silently.
+    receipts.push(
+      `grid-gap-shorthand: ${label} row-gap/column-gap carried as the independent {row: ${gapRow}, column: ${gapColumn}} pair (G1/P2: gridRowGap and gridColumnGap are separate canvas facts) — an authored \`gap\` shorthand (\`gap: R C\` / one-value \`gap: R\`) is LOWERED into this pair; the two authored spellings are indistinguishable in CSSOM (rule cssText re-serializes both as the shorthand — probe 2026-08-08), so the lowering is receipted here by name`,
+    );
+  }
+  // G4's other half: per-child LONGHAND rects that leave declared cells
+  // unoccupied have no total grid-template-areas tiling (and longhand-
+  // authored CSS declares no area names for the contract to own) — the
+  // occupancy is carried as Part.placement rects, the named LOWERED
+  // disposition `grid-area-nonrectangular`.
+  if (placements.size > 0 && !areas) {
+    const totalCells = rows.length * columns.length;
+    const coveredCells = rects.reduce((n, x) => n + x.rs * x.cs, 0);
+    if (coveredCells < totalCells) {
+      receipts.push(
+        `grid-area-nonrectangular: ${label} — the ${rects.length} placed rect(s) occupy ${coveredCells} of ${totalCells} declared cells (gapped occupancy) and declare no area names, so no grid-template-areas + grid-area spelling exists for the code side (G4: areas require contract-owned names tiling rectangles); the occupancy is carried as per-child grid-row/grid-column LONGHAND rects (Part.placement) — the named LOWERED disposition`,
+      );
+    }
+  }
+  receipts.push(
+    `grid-promoted: ${label} — ${rows.length}×${columns.length} declared tracks carried as layout.rows/columns${gapRow > 0 || gapColumn > 0 ? `, gap ${gapRow}/${gapColumn}` : ''}${areas ? `, ${Object.keys(areas).length} named area(s) (G4: names are contract-owned slot anchors)` : ''}; ${placements.size} child placement(s) (0-based cells, spans, per-cell align — A2 G1/G2/G4)`,
+  );
+  return { layout, placements, receipts };
+}
+
+/** A2 (G4) — AREA NAMES ENTER FROM THE COMPUTED FLOOR. A grid child whose
+ *  four computed grid lines all serialize as one area IDENT (Chromium's
+ *  computed form for `grid-area: header`) occupies that declared area, and
+ *  under the pinned grammar "the area name IS the slot anchor": the part
+ *  takes the area's NAME as its contract name, exactly as rejoinStaticParts
+ *  lets the reviewed static layer win names. Runs inside alignSweep (after
+ *  nameUnion + rejoinStaticParts) so partNames, captured-truth anatomy, the
+ *  mint pass and the promoted contract all agree on the one name. */
+export function renameGridAreaParts(entries: UnionNode[], receipts: string[]): void {
+  const taken = new Set(entries.map((e) => e.partName));
+  for (const e of entries) {
+    const parent = e.parent;
+    if (!parent) continue;
+    const pd = parent.rep.style['display'];
+    if (pd !== 'grid' && pd !== 'inline-grid') continue;
+    const tpl = (parent.rep.style['grid-template-areas'] ?? 'none').trim();
+    if (tpl === 'none' || tpl === '') continue;
+    const parsed = parseGridTemplateAreas(tpl);
+    if (!parsed.areas) continue;
+    const s = e.rep.style;
+    const ident = (s['grid-row-start'] ?? '').trim();
+    if (!isAreaIdent(ident)) continue;
+    if ((s['grid-row-end'] ?? '').trim() !== ident || (s['grid-column-start'] ?? '').trim() !== ident || (s['grid-column-end'] ?? '').trim() !== ident) continue;
+    if (!parsed.areas[ident]) continue;
+    if (e.partName === ident) continue;
+    if (taken.has(ident)) {
+      receipts.push(
+        `grid-area-name-collision: ${e.partName} occupies declared area "${ident}" but a sibling part already claims that name — captured name kept; the grid promotion will abandon rather than double-book the name (named)`,
+      );
+      continue;
+    }
+    receipts.push(
+      `grid-area-part-renamed: ${e.partName} → "${ident}" — all four computed grid lines carry the area ident, so the part occupies the declared area and takes its name (G4: the area name IS the slot anchor; contract-owned, same rule as anatomy part names)`,
+    );
+    taken.delete(e.partName);
+    taken.add(ident);
+    e.partName = ident;
+  }
 }
 
 /** The ARIA role a lowered table box keeps (the table box model's meaning,
@@ -1043,6 +1420,16 @@ export interface PromotionResult {
   receipts: string[];
   /** Parts refused promotion, with named reasons. */
   refusals: string[];
+  /** A2 grid — `part|channel` keys the MINT PASS must refuse BY NAME instead
+   *  of minting, with the named reason as the value:
+   *    · `flex-grow` on any child of a display:grid parent — the Plugin API
+   *      silently accepts layoutGrow on grid children with no effect (P4)
+   *      AND the real grid layout ignores it, so a minted flex-grow token
+   *      would be a dead canvas-inexpressible fact (grid-child-grow);
+   *    · the grid placement longhands of children whose parent grid was NOT
+   *      promoted (abandoned/refused — grid-implicit-tracks etc.): anchors
+   *      of a grid the contract does not carry are dead facts (P9). */
+  gridMintRefusals: Map<string, string>;
 }
 
 const isEnabledCombo = (c: Combo): boolean => Object.values(c.stateFlags).every((f) => !f);
@@ -1071,6 +1458,36 @@ export function promoteAnatomy(
 ): PromotionResult {
   const receipts: string[] = [];
   const refusals: string[] = [];
+  /** A2 grid — see PromotionResult.gridMintRefusals. */
+  const gridMintRefusals = new Map<string, string>();
+  const GRID_PLACEMENT_CHANNELS = ['grid-row-start', 'grid-row-end', 'grid-column-start', 'grid-column-end'] as const;
+  /** Every child of a display:grid parent refuses a `flex-grow` mint by name
+   *  (grid-child-grow): on the real DOM a grid item ignores flex-grow, and on
+   *  the canvas layoutGrow is silently accepted with no effect (P4) — minted,
+   *  it would be a dead fact riding as an imported.* token (N-DISP-02). */
+  const refuseGridChildGrow = (parent: UnionNode): void => {
+    for (const c of parent.children) {
+      gridMintRefusals.set(
+        `${c.partName}|flex-grow`,
+        `${GRID_REFUSALS['grid-child-grow']} — observed on ${c.partName} under grid parent ${parent.partName || 'root'}; the real grid layout ignores it too, so a minted token would carry a dead fact (P4/N-DISP-02)`,
+      );
+    }
+  };
+  /** When a display:grid parent is NOT promoted (structured promotion
+   *  abandoned or G7-refused), its children's placement longhands describe a
+   *  grid the contract does not carry — refused from minting BY NAME with the
+   *  abandoning reason (for placement beyond the declared track list that
+   *  reason is the grid-implicit-tracks refusal, P9/N-DISP-02). */
+  const refuseGridPlacementMint = (parent: UnionNode, reason: string): void => {
+    for (const c of parent.children) {
+      for (const ch of GRID_PLACEMENT_CHANNELS) {
+        gridMintRefusals.set(
+          `${c.partName}|${ch}`,
+          `grid placement not carried: parent ${parent.partName || 'root'} declined structured grid promotion — ${reason}; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted`,
+        );
+      }
+    }
+  };
   const assets = new Map<string, string>();
   /** ORPHAN-ASSET ROUND (task #42, second half) — asset name -> the union part
    *  that hosts it. The svg-asset door runs at the TOP of this function and the
@@ -2087,6 +2504,10 @@ export function promoteAnatomy(
       }
     }
 
+    // A2: set when the uniform computed display is `grid` — resolved AFTER
+    // the children are built (placements are child facts), either into the
+    // structured grid promotion or the named fallback lowering.
+    let gridPromotionPending = false;
     // Display fact: every promoted part carries its computed display
     // EXPLICITLY — the emitters default structural parts to flex, but the
     // real tree mixes block/inline containers, and a wrong container display
@@ -2117,12 +2538,22 @@ export function promoteAnatomy(
           part.declared = { display: d, ...part.declared };
           receipts.push(`block-level-display-carried: ${e.partName} = "${d}" — a block-level box in CSS block flow; carried in the declared registry so the canvas lowers it as a stack rather than the emitter's row default`);
         } else if (d === 'grid' || d === 'inline-grid') {
-          const low = lowerGridDisplay(d, e.rep.style);
-          if (low && 'refusal' in low) {
-            refusals.push(`${low.refusal} (part ${e.partName})`);
-          } else if (low) {
-            part.layout = { ...low.layout, ...part.layout };
-            receipts.push(`grid-lowering: ${e.partName} ${low.note}`);
+          // A2: display:grid DEFERS to the structured grid promotion, which
+          // needs the children built first (placements are child facts) —
+          // see the post-children block below. inline-grid stays on the
+          // lowering path (the pinned grammar's display vocabulary is
+          // flex | inline-flex | grid, G1).
+          if (d === 'grid') {
+            gridPromotionPending = true;
+          } else {
+            refuseGridChildGrow(e); // inline-grid children are grid items too (P4)
+            const low = lowerGridDisplay(d, e.rep.style, e.rep.gdecl);
+            if (low && 'refusal' in low) {
+              refusals.push(`${low.refusal} (part ${e.partName})`);
+            } else if (low) {
+              part.layout = { ...low.layout, ...part.layout };
+              receipts.push(`grid-lowering: ${e.partName} ${low.note}`);
+            }
           }
         } else if (TABLE_DISPLAYS.has(d)) {
           // ORGANISM round: the CSS table box model lowered to the flex
@@ -2303,6 +2734,36 @@ export function promoteAnatomy(
       for (const [decorName, decor] of pseudoDecorParts(e, i, false)) childParts[decorName] = decor;
     }
     if (Object.keys(childParts).length > 0) part.parts = childParts;
+    // A2 — resolve the deferred display:grid fact now that children exist:
+    // structured grid promotion first; on abandonment, the SAME fallback path
+    // the display block used to take (flex lowering / G7 named refusal).
+    if (gridPromotionPending) {
+      refuseGridChildGrow(e); // P4: flex-grow is dead on grid children — promoted or not
+      const g = promoteGridLayout(
+        e.partName,
+        e.rep,
+        e.children.map((c) => ({ partName: c.partName, rep: c.rep })),
+        childParts,
+      );
+      receipts.push(...g.receipts);
+      if ('abandon' in g) {
+        receipts.push(`grid-promotion-fallback: ${e.partName} — ${g.abandon}; the flex-era lowering decides (named)`);
+        refuseGridPlacementMint(e, g.abandon);
+        const low = lowerGridDisplay('grid', e.rep.style, e.rep.gdecl);
+        if (low && 'refusal' in low) {
+          refusals.push(`${low.refusal} (part ${e.partName})`);
+        } else if (low) {
+          part.layout = { ...low.layout, ...part.layout };
+          receipts.push(`grid-lowering: ${e.partName} ${low.note}`);
+        }
+      } else {
+        part.layout = g.layout;
+        for (const [childName, pl] of g.placements) {
+          const cp = childParts[childName];
+          if (cp) cp.placement = pl;
+        }
+      }
+    }
     // CARBON LIVE-DEFECT ROUND (D6) — INERT OVERLAY WRAPPER.
     //
     // In Carbon an icon button IS a tooltip trigger, so its captured anatomy
@@ -2353,6 +2814,9 @@ export function promoteAnatomy(
   // captured nesting; unmatched static parts are re-attached afterwards.
   const newRoot = structuredClone(rootPart);
   delete newRoot.parts;
+  // A2: set when the root's uniform computed display is `grid` — resolved
+  // after rootChildren are built (placements are child facts).
+  let rootGridPromotionPending = false;
   // Root display fact: computed truth wins the display channel (the static
   // extraction's layout.display is a source-reading guess; TextField's root
   // is a block in the browser, and a flex guess put the label beside the
@@ -2382,11 +2846,19 @@ export function promoteAnatomy(
         newRoot.declared = { display: d, ...newRoot.declared };
         receipts.push(`root-display-carried: ${d} via declared (a block-level box in CSS block flow)`);
       } else if (d === 'grid' || d === 'inline-grid') {
-        const low = lowerGridDisplay(d, rootEntry.rep.style);
-        if (low && 'refusal' in low) refusals.push(`${low.refusal} (root)`);
-        else if (low) {
-          newRoot.layout = { ...low.layout, ...newRoot.layout };
-          receipts.push(`grid-lowering: root ${low.note}`);
+        // A2: display:grid defers to the structured grid promotion, resolved
+        // after rootChildren are built (see the post-children block below);
+        // inline-grid stays on the lowering path (G1 vocabulary).
+        if (d === 'grid') {
+          rootGridPromotionPending = true;
+        } else {
+          refuseGridChildGrow(rootEntry); // inline-grid children are grid items too (P4)
+          const low = lowerGridDisplay(d, rootEntry.rep.style, rootEntry.rep.gdecl);
+          if (low && 'refusal' in low) refusals.push(`${low.refusal} (root)`);
+          else if (low) {
+            newRoot.layout = { ...low.layout, ...newRoot.layout };
+            receipts.push(`grid-lowering: root ${low.note}`);
+          }
         }
       } else if (TABLE_DISPLAYS.has(d)) {
         // ORGANISM round: a display:table ROOT (the Table organism) lowers
@@ -2417,6 +2889,39 @@ export function promoteAnatomy(
   }
   for (const [decorName, decor] of pseudoDecorParts(rootEntry, idxOf.get(rootEntry.id)!, false)) rootChildren[decorName] = decor;
   if (Object.keys(rootChildren).length > 0) newRoot.parts = rootChildren;
+  // A2 — resolve the root's deferred display:grid fact (see buildPart's
+  // twin block): structured promotion first, the named fallback on abandon.
+  if (rootGridPromotionPending) {
+    refuseGridChildGrow(rootEntry); // P4: flex-grow is dead on grid children — promoted or not
+    const g = promoteGridLayout(
+      'root',
+      rootEntry.rep,
+      rootEntry.children.map((c) => ({ partName: c.partName, rep: c.rep })),
+      rootChildren,
+    );
+    receipts.push(...g.receipts);
+    if ('abandon' in g) {
+      receipts.push(`grid-promotion-fallback: root — ${g.abandon}; the flex-era lowering decides (named)`);
+      refuseGridPlacementMint(rootEntry, g.abandon);
+      const low = lowerGridDisplay('grid', rootEntry.rep.style, rootEntry.rep.gdecl);
+      if (low && 'refusal' in low) refusals.push(`${low.refusal} (root)`);
+      else if (low) {
+        newRoot.layout = { ...low.layout, ...newRoot.layout };
+        receipts.push(`grid-lowering: root ${low.note}`);
+      }
+    } else {
+      if (newRoot.layout && Object.keys(newRoot.layout).length > 0) {
+        receipts.push(
+          `root-grid-overrides-reviewed-layout: computed truth promotes a structured grid; the reviewed layout (${Object.keys(newRoot.layout).join(', ')}) is replaced — flex-only fields are schema-invalid with display: "grid" (G1), receipted, never silent`,
+        );
+      }
+      newRoot.layout = g.layout;
+      for (const [childName, pl] of g.placements) {
+        const cp = rootChildren[childName];
+        if (cp) cp.placement = pl;
+      }
+    }
+  }
   // MUI round (Card live finding): the ROOT itself can hold direct text runs
   // — MUI's Card renders children as a BARE text node (no wrapping element,
   // so no child part exists to carry content, and the text silently vanished
@@ -2535,7 +3040,7 @@ export function promoteAnatomy(
     );
   }
 
-  return { contract, assets, consumed, partIndex, receipts, refusals };
+  return { contract, assets, consumed, partIndex, receipts, refusals, gridMintRefusals };
 }
 
 // ===========================================================================

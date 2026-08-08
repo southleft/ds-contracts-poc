@@ -56,6 +56,25 @@ export interface CaseEntry {
   blockStage?: boolean;
   stage?: { width: number; height: number; padding: number };
   sampleText?: string;
+  /** A2 LAYOUT PROMOTION (conformance/layout-cases-draft): the case's
+   *  TWO-DIRECTION disposition spec, carried VERBATIM from the hand-authored
+   *  draft. `codeToCanvas` is the direction this fixture's gate measures
+   *  (CSS/DOM → computed capture → contract); `canvasToCode` is the dump →
+   *  propose-figma direction, eval-gated today (grid-code-proposer-check /
+   *  grid-bento-check) and declared here so the manifest names BOTH halves of
+   *  the frontier. `UNREACHABLE` means the source surface cannot construct
+   *  the case (proved by the cited probe) — the direction exists to prove the
+   *  reader never invents it, and such cases ship NO dump.snippet.json by
+   *  declaration. */
+  directions?: Record<string, { expect: string; note?: string }>;
+  /** The A1 probe receipt that justifies the disposition (docs/research/
+   *  grid-recon-probes.md P1–P14). */
+  probe?: string;
+  /** Design-side fixture file in the case directory ('dump.snippet.json'),
+   *  or null when the canvasToCode direction is UNREACHABLE (the canvas
+   *  cannot hold the construct — absence is the declaration, not an
+   *  omission). Absent entirely on pre-A2 cases. */
+  dumpSnippet?: string | null;
 }
 
 /** PascalCase export name for a case id. PascalCase is not cosmetic: the
@@ -85,6 +104,9 @@ export function loadCases(): CaseEntry[] {
     if (!e.observable?.channel) throw new Error(`${id}: observable.channel is required — it is what the gate measures`);
     for (const f of ['Case.tsx', 'case.css']) {
       if (!existsSync(path.join(dir, id, f))) throw new Error(`${id}: missing ${f}`);
+    }
+    if (e.dumpSnippet && !existsSync(path.join(dir, id, e.dumpSnippet))) {
+      throw new Error(`${id}: declares design-side fixture ${e.dumpSnippet} but the file is missing — a declared direction with no artifact is decoration`);
     }
     out.push(e);
   }

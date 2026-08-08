@@ -1,0 +1,2 @@
+[data-cf="grid-track-minmax"] { display: grid; grid-template-columns: minmax(60px, 120px) 1fr; width: 200px; background: rgb(238, 242, 242); }
+[data-cf="grid-track-minmax"] .cf-a, [data-cf="grid-track-minmax"] .cf-b { height: 16px; background: rgb(208, 224, 224); }

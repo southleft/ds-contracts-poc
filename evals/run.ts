@@ -112,10 +112,20 @@ function resetScratch() {
   // figma-sync rides along for the plugin-engine evals: the engine entry,
   // ui.html (embedded dump script + engine slot), and the committed
   // engine.receipt.json the zip build drift-guards against.
-  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground', 'workers', 'packages', 'figma-sync']) {
+  // sync rides along because packages/cli/src/commands/figma.ts imports
+  // sync/ledger.ts + sync/ledger-io.ts (the sync-ledger lockfile) — without it
+  // the CLI evals' esbuild in scratch cannot resolve the import and every
+  // C7-cli case dies on the build step, not on the thing it pins (measured
+  // 2026-08-08: emitter-plugin-loads / wc-emitter-roundtrip red for exactly
+  // this). sync/out is the drift spine's transient surface and stays out,
+  // same discipline as packages/dist.
+  for (const dir of ['contracts', 'tokens', 'scripts', 'core', 'parity', 'src', 'catalog', 'context', 'assets', 'extract', 'playground', 'workers', 'packages', 'figma-sync', 'sync']) {
     cpSync(path.join(ROOT, dir), path.join(SCRATCH, dir), {
       recursive: true,
-      filter: dir === 'packages' ? (src) => path.basename(src) !== 'dist' : undefined,
+      filter:
+        dir === 'packages' ? (src) => path.basename(src) !== 'dist'
+        : dir === 'sync' ? (src) => path.basename(src) !== 'out'
+        : undefined,
     });
   }
   cpSync(path.join(ROOT, 'evals', 'fixtures'), path.join(SCRATCH, 'evals', 'fixtures'), {
