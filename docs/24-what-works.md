@@ -26,7 +26,7 @@ Chromium, exact string comparison with no tolerance, over 410,192 compared style
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
 canvas→code→canvas executes through the fact diff on **15 of 15** components with every
-one of 36,264 facts classified as matched, diverged, lost or invented rather than dropped in silence.
+one of 36,287 facts classified as matched, diverged, lost or invented rather than dropped in silence.
 Exact structured projection is separately evidenced: **0 verified exact, 15 legacy unverified, 0 refused**.
 The whole thing is pinned by 199 executable claim gates and a 266-file byte-identical
 generation manifest. **What that does not say:** those 71 components are
@@ -349,10 +349,10 @@ is a row in a table rather than an absence.
 
 | bucket | facts | share of all facts | source |
 |---|---|---|---|
-| matched | 11,399 | 31.4% | `extract/figma/roundtrip-uui/report.json` |
-| diverged | 1,845 | 5.1% | same file |
-| loss | 7,684 | 21.2% | same file |
-| invented | 15,336 | 42.3% | same file |
+| matched | 11,400 | 31.4% | `extract/figma/roundtrip-uui/report.json` |
+| diverged | 1,857 | 5.1% | same file |
+| loss | 7,671 | 21.1% | same file |
+| invented | 15,359 | 42.3% | same file |
 | **components executed to fact diff** | **15 / 15** |  | same file, `totals` |
 | **verified exact projections** | **0 / 15** |  | same file, `totals.exactVerified` |
 | legacy-unverified projections | 15 |  | same file, `totals.exactLegacyUnverified` |
@@ -362,7 +362,7 @@ instrument is the classification, not the ratio — and the largest single
 category is an artifact of the comparison rather than a loss:
 
 - **`auto-layout-inert` — 934 of the 954 `layout.mode` divergences**
-  (50.6% of all divergence). A frame with one child, or with children the
+  (50.3% of all divergence). A frame with one child, or with children the
   designer positioned absolutely, has no observable auto-layout direction to
   read back; the engine writes a direction that the original canvas did not
   record. It is tagged as its own class precisely so it cannot be counted as a
@@ -374,16 +374,16 @@ Every bucket is tagged, and the untagged remainder is reported as untagged:
 |---|---|---|---|
 | diverged | `auto-layout-inert` | 934 | `extract/figma/roundtrip-uui/report.json` |
 | diverged | `layout-projection-loss` | 242 | `extract/figma/roundtrip-uui/report.json` |
+| diverged | `geometry-projection-loss` | 185 | `extract/figma/roundtrip-uui/report.json` |
 | diverged | `instance-target-loss` | 182 | `extract/figma/roundtrip-uui/report.json` |
-| diverged | `geometry-projection-loss` | 173 | `extract/figma/roundtrip-uui/report.json` |
 | diverged | `shape-kind-loss` | 170 | `extract/figma/roundtrip-uui/report.json` |
 | diverged | `variant-projection-loss` | 90 | `extract/figma/roundtrip-uui/report.json` |
 | diverged | `vector-glyph` | 32 | `extract/figma/roundtrip-uui/report.json` |
 | diverged | `instance-ink-loss` | 16 | `extract/figma/roundtrip-uui/report.json` |
 | diverged | `text-content-projection-loss` | 6 | `extract/figma/roundtrip-uui/report.json` |
-| loss | `restructured` | 3,408 | `extract/figma/roundtrip-uui/report.json` |
+| loss | `restructured` | 3,419 | `extract/figma/roundtrip-uui/report.json` |
 | loss | `interaction-states` | 1,920 | `extract/figma/roundtrip-uui/report.json` |
-| loss | `geometry-projection-loss` | 875 | `extract/figma/roundtrip-uui/report.json` |
+| loss | `geometry-projection-loss` | 851 | `extract/figma/roundtrip-uui/report.json` |
 | loss | `paint-effect-projection-loss` | 708 | `extract/figma/roundtrip-uui/report.json` |
 | loss | `vector-glyph` | 297 | `extract/figma/roundtrip-uui/report.json` |
 | loss | `instance-ink-loss` | 173 | `extract/figma/roundtrip-uui/report.json` |
@@ -393,12 +393,12 @@ Every bucket is tagged, and the untagged remainder is reported as untagged:
 | loss | `url-image` | 54 | `extract/figma/roundtrip-uui/report.json` |
 | loss | `instance-target-loss` | 32 | `extract/figma/roundtrip-uui/report.json` |
 | loss | `shape-kind-loss` | 20 | `extract/figma/roundtrip-uui/report.json` |
-| invented | `cartesian-fill` | 5,270 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `cartesian-fill` | 5,282 | `extract/figma/roundtrip-uui/report.json` |
 | invented | `layout-mode-derivative` | 3,736 | `extract/figma/roundtrip-uui/report.json` |
-| invented | `restructured` | 3,408 | `extract/figma/roundtrip-uui/report.json` |
-| invented | `structure-wrapper-invention` | 2,146 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `restructured` | 3,419 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `structure-wrapper-invention` | 2,156 | `extract/figma/roundtrip-uui/report.json` |
 | invented | `duplicate-sibling-expansion` | 492 | `extract/figma/roundtrip-uui/report.json` |
-| invented | `hug-vs-fixed` | 72 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `hug-vs-fixed` | 62 | `extract/figma/roundtrip-uui/report.json` |
 | invented | `zero-stroke` | 60 | `extract/figma/roundtrip-uui/report.json` |
 | invented | `zero-fill` | 54 | `extract/figma/roundtrip-uui/report.json` |
 | invented | `text-style-identity` | 45 | `extract/figma/roundtrip-uui/report.json` |
@@ -483,14 +483,14 @@ npm run capability:fresh
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `3e64ae446553` | 35,201 | CSS/DOM frontier vocabulary |
 | `docs/22-generality.md` | `b9ec0da5df8a` | 68,406 | coverage denominators (docs/22 §8.3 table) |
-| `evals/golden.json` | `c60de06bfbbc` | 29,319 | generated-source golden manifest |
+| `evals/golden.json` | `207a9431565e` | 29,319 | generated-source golden manifest |
 | `evals/results.json` | `08da7a852ace` | 21,305 | executable claim suite |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `8c5a40535128` | 792,028 | capture counts + determinism receipts — 121 files |
 | `extract/computed/out/**/scorecard.json` | `8f60a0f974f5` | 9,630,267 | computed-equality per component — 121 files |
 | `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `a33d7589b76d` | 2,587 | dropped-fact receipt census |
-| `extract/figma/roundtrip-uui/report.json` | `bfa75534250d` | 7,696,283 | canvas→code→canvas round trip |
+| `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 
 Same bytes in, same file out: this build reads no clock, no git state and no
 environment, and sorts every collection before rendering.

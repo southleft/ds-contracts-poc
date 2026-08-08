@@ -220,6 +220,7 @@
       "disposition": "DEFECT",
       "appliesTo": ["invented"],
       "channels": [
+        "abs",
         "fillWidth",
         "height",
         "kind",

@@ -101,7 +101,7 @@ in your repo — plus the contract that produced them, in the same change.
   **92.70% mean visual fidelity** over the 537 statically scorable variants of
   a 599-variant community kit (best set 98.0%, worst 81.2%); the
   canvas→code→canvas round trip **closes on 15 of 15** components with every
-  one of 36,264 facts classified rather than dropped in silence; and the
+  one of 36,287 facts classified rather than dropped in silence; and the
   generate step is **byte-identical on any machine** — 266 generated files
   hashed against a golden manifest, no model in the path.
 - **What it costs** ([23](23-known-limitations.md)): only the sets you import
@@ -124,8 +124,8 @@ in your repo — plus the contract that produced them, in the same change.
   them against your real token system; the proposal says so per token.
 - **The measured round trip, on a real kit** ([the full report](../extract/figma/roundtrip-uui/REPORT.md)):
   all 15 Untitled UI sets that were run closed the loop, and the set-level
-  fact diff across them is **11,399 matched · 1,845 diverged · 7,684 lost ·
-  15,336 invented** — with 934 of the 954 `layout.mode` divergences
+  fact diff across them is **11,400 matched · 1,857 diverged · 7,671 lost ·
+  15,359 invented** — with 934 of the 954 `layout.mode` divergences
   reclassified as `auto-layout-inert` (a mode added to a frame whose
   children are all absolutely placed changes nothing that is drawn). Those
   are the honest proportions behind "reviewable starting point".

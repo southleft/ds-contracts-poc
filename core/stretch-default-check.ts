@@ -100,6 +100,11 @@ const probe = (body: BodyLayout): Contract =>
             parts: {
               lineA: { element: 'span', text: 'A' },
               lineB: { element: 'span', text: 'B' },
+              // The July defect's ACTUAL subject: the bubble was a BOX (a div
+              // with a background), and boxes are what the stretch default
+              // must keep lowering to `fillW`. Text is asserted separately —
+              // see case 1 and FC-TEXT-FILL-ALIGNMENT below.
+              bubble: { element: 'div', parts: { inner: { element: 'span', text: 'B' } } },
             },
           },
         },
@@ -249,6 +254,21 @@ const COL_START: BodyLayout = { display: 'flex', direction: 'column', grow: true
 const ROW_UNSET: BodyLayout = { display: 'flex', direction: 'row', grow: true };
 
 // 1. CANVAS — silence stretches. This is the July defect's mechanism.
+//
+// WHAT "LOWERS" CHANGED IN THE EXACT-CONVERSION WAVE (c924c9c,
+// FC-TEXT-FILL-ALIGNMENT), AND WHY THIS CASE CHANGED WITH IT. The original
+// assertion demanded `fillW` on the TEXT children too. The wave refined
+// annotateFillW: non-truncating TEXT hugs whenever hugging is
+// ALIGNMENT-SAFE — the box's horizontal packing agrees with the glyphs' own
+// textAlignH (here: a MIN-packed column holding LEFT text), so hug and fill
+// paint the glyphs at identical pixels on every surface. That hug is the fix
+// for a MEASURED live defect (Carbon Tabs: FILL in a snug box truncates
+// glyph overhang under font substitution), and text that hugging WOULD
+// displace (MUI accordion title: LEFT text in a CENTER-packed row) still
+// fills and carries `fillText` as the runtime's proof. The invariant this
+// file states is untouched: silence ≡ `align: stretch` (cases 2 and 6 assert
+// whole-spec equality), and the stretch still LOWERS onto every BOX child —
+// the July bubble was a box, and a box that hugs here redraws it at 71px.
 {
   const b = body(probe(COL_UNSET));
   if (b.layout?.stretchChildren !== true) {
@@ -258,13 +278,22 @@ const ROW_UNSET: BodyLayout = { display: 'flex', direction: 'row', grow: true };
     );
   } else ok('canvas: column, align unset → stretchChildren true');
   const kids = b.children ?? [];
-  const notFilled = kids.filter((k) => k.fillW !== true).map((k) => k.name);
-  if (kids.length !== 2 || notFilled.length) {
+  const texts = kids.filter((k) => k.type === 'text');
+  const boxes = kids.filter((k) => k.type !== 'text');
+  const boxesNotFilled = boxes.filter((k) => k.fillW !== true).map((k) => k.name);
+  if (kids.length !== 3 || boxes.length !== 1 || boxesNotFilled.length) {
     bad(
-      `CANVAS: the stretch did not LOWER — children ${JSON.stringify(kids.map((k) => `${k.name}:fillW=${k.fillW}`))}. ` +
-        `\`stretchChildren\` that never reaches \`fillW\` resizes nothing on the canvas.`,
+      `CANVAS: the stretch did not LOWER onto the BOX child — children ${JSON.stringify(kids.map((k) => `${k.name}:${k.type}:fillW=${k.fillW}`))}. ` +
+        `\`stretchChildren\` that never reaches \`fillW\` on a box resizes nothing on the canvas — this is the July bubble collapse.`,
     );
-  } else ok('canvas: column, align unset → both children lowered to fillW');
+  } else ok('canvas: column, align unset → box child lowered to fillW (the bubble class)');
+  const textFilled = texts.filter((k) => k.fillW === true).map((k) => k.name);
+  if (texts.length !== 2 || textFilled.length) {
+    bad(
+      `CANVAS: alignment-safe LEFT text in a MIN-packed column took FILL — ${JSON.stringify(texts.map((k) => `${k.name}:fillW=${k.fillW}`))}. ` +
+        `FC-TEXT-FILL-ALIGNMENT: hug and fill paint these glyphs identically, and FILL here re-opens the Carbon Tabs truncation defect.`,
+    );
+  } else ok('canvas: column, align unset → alignment-safe text hugs (FC-TEXT-FILL-ALIGNMENT)');
 }
 
 // 2. CANVAS — silence and `stretch` are the SAME BOX. Whole-spec equality.

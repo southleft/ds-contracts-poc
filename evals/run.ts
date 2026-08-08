@@ -630,6 +630,46 @@ const cases: Case[] = [
     },
   },
   {
+    // B.16 (docs/23) — THE DEFAULTLESS-AXIS "__unset" WALL, closed. The old
+    // capture-config drafter shipped `unsetLabel: "__unset"`; fusion minted
+    // that sentinel into every defaultless-axis token path and the token-ref
+    // grammar (which forbids underscores) refused each ref with ~40 "must be
+    // brace-wrapped" errors, NONE naming the underscore. Two pins here:
+    // (a) an underscore-bearing ref is refused naming the ACTUAL rule + the
+    //     sentinel + the fix (a reviewed default in the capture config);
+    // (b) the shipped drafter never writes the sentinel again — its draft's
+    //     unsetLabel passes the token-ref grammar as a path segment, and every
+    //     defaultless enum axis gets a reviewed first-enum baseCombo pin.
+    id: 'refuse-underscore-ref-names-unset-sentinel',
+    claim: 'C2-refusal',
+    run: () => {
+      const BADGE = 'contracts/badge.contract.json';
+      const pristine = readFileSync(path.join(SCRATCH, BADGE), 'utf8');
+      editJson(BADGE, (c: any) => {
+        c.anatomy.root.tokens['background-color'] = '{color.badge.__unset.background}';
+      });
+      const r = generate();
+      writeFileSync(path.join(SCRATCH, BADGE), pristine);
+      if (r.status === 0) throw new Error('underscore-bearing token ref was ACCEPTED (must refuse)');
+      for (const needle of [
+        'may not contain underscores',
+        '__unset',
+        'reviewed default in the capture config',
+      ]) {
+        if (!r.out.includes(needle)) {
+          throw new Error(`refused, but the actual rule is not named — wanted "${needle}" in:\n${r.out.slice(0, 800)}`);
+        }
+      }
+      // (b) drafter half: the sentinel never ships. Red-test discipline — this
+      // fails on the pre-fix drafter (unsetLabel '__unset') by construction.
+      const drafterUnit = run(TSX, ['--test', 'packages/cli/test/draft-capture-config.test.ts']);
+      if (drafterUnit.status !== 0) {
+        throw new Error(`draft-capture-config unit pins failed (B.16 drafter half):\n${drafterUnit.out.slice(0, 1200)}`);
+      }
+      console.log('refuse-underscore-ref-names-unset-sentinel: underscore refs refused naming the rule/sentinel/fix; drafter ships a token-legal unsetLabel + reviewed baseCombo');
+    },
+  },
+  {
     // Brownfield (roadmap Phase 2): both extraction adapters must read a
     // FOREIGN library — conventions this repo's generator never emits — into
     // schema-valid proposals with correct kinds, values, defaults, events.
@@ -5794,6 +5834,29 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
       }
       console.log('plugin-propose-dry-run: dump→proposal→bounded diff round-trip + exact PR dry-run plan');
+    },
+  },
+  {
+    // G3 STALE-BASE GUARD (partial) — docs/18 Flow 7 step 4. The Send tab
+    // used to diff the canvas against WHATEVER base was pasted, with no check
+    // that the base is what the canvas was last synced from — a canvas N
+    // syncs behind main proposed the engineer's merged changes back out as
+    // the designer's "edits" (a silent revert the PR then blamed on her).
+    // The guard compares the provided base's spec fingerprint against the
+    // set's stored ds_contracts sync markers and WARNS by name — in the
+    // summary (→ PR body + export envelope) and as a structured verdict —
+    // while a matching base stays silent and absent markers verdict
+    // 'unverifiable' rather than a silent 'match'. Pinned through the built
+    // bundle in plugin-engine-check §5b (stale fixture + fresh fixture).
+    id: 'plugin-stale-base-guard',
+    claim: 'C2-refusal',
+    run: () => {
+      const check = run(process.execPath, ['scripts/plugin-engine-check.mjs']);
+      if (check.status !== 0) throw new Error(`plugin-engine-check failed:\n${check.out}`);
+      const want =
+        '✔ G3 stale-base guard (partial): a base matching the stored sync fingerprint stays silent; the pre-sync v1 base WARNS by name ("may contain reverts") in summary + envelope; absent markers verdict "unverifiable", never a silent match';
+      if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
+      console.log('plugin-stale-base-guard: stale base warns by name in UI summary + PR/export envelope; fresh base silent; absent markers named unverifiable');
     },
   },
   {

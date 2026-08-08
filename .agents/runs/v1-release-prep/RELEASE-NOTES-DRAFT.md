@@ -41,19 +41,19 @@ dist-tag only.
 | Package | RC version | Registry state at freeze | Tarball SHA-256 |
 |---|---|---|---|
 | `@ds-contracts/cli` | `0.5.0-rc.2` | **to be published** to `next` via `publish-rc.yml` (`next` currently `0.5.0-rc.1`) | `<SHA256-AT-FREEZE>` |
-| `@ds-contracts/schema` | `16.1.0-rc.1` | **already published** on `next`; publish job byte-compares registry vs sealed local tarball | `<SHA256-AT-FREEZE>` |
-| `@ds-contracts/emitter-web-components` | `0.4.0-rc.1` | **already published** on `next`; publish job byte-compares registry vs sealed local tarball | `<SHA256-AT-FREEZE>` |
+| `@ds-contracts/schema` | `16.1.0-rc.2` | **to be published** to `next` via `publish-rc.yml` (`next` currently `16.1.0-rc.1`) | `<SHA256-AT-FREEZE>` |
+| `@ds-contracts/emitter-web-components` | `0.4.0-rc.2` | **to be published** to `next` via `publish-rc.yml` (`next` currently `0.4.0-rc.1`) | `<SHA256-AT-FREEZE>` |
 
 Registry links:
 
 - https://www.npmjs.com/package/@ds-contracts/cli/v/0.5.0-rc.2
-- https://www.npmjs.com/package/@ds-contracts/schema/v/16.1.0-rc.1
-- https://www.npmjs.com/package/@ds-contracts/emitter-web-components/v/0.4.0-rc.1
+- https://www.npmjs.com/package/@ds-contracts/schema/v/16.1.0-rc.2
+- https://www.npmjs.com/package/@ds-contracts/emitter-web-components/v/0.4.0-rc.2
 
 Install the exact RC while evaluating (do not rely on ranges):
 
 ```bash
-npm i -E @ds-contracts/cli@0.5.0-rc.2 @ds-contracts/schema@16.1.0-rc.1 @ds-contracts/emitter-web-components@0.4.0-rc.1
+npm i -E @ds-contracts/cli@0.5.0-rc.2 @ds-contracts/schema@16.1.0-rc.2 @ds-contracts/emitter-web-components@0.4.0-rc.2
 ```
 
 ## Attestation
@@ -74,8 +74,8 @@ Verify independently:
 
 ```bash
 npm view @ds-contracts/cli@0.5.0-rc.2 dist.integrity dist.tarball --json
-npm view @ds-contracts/schema@16.1.0-rc.1 dist.integrity dist.tarball --json
-npm view @ds-contracts/emitter-web-components@0.4.0-rc.1 dist.integrity dist.tarball --json
+npm view @ds-contracts/schema@16.1.0-rc.2 dist.integrity dist.tarball --json
+npm view @ds-contracts/emitter-web-components@0.4.0-rc.2 dist.integrity dist.tarball --json
 ```
 
 ## What changed since the last release (v0.6.0 tag / 0.7.0 entry)
@@ -132,9 +132,9 @@ Full detail: [CHANGELOG.md](https://github.com/southleft/ds-contracts-poc/blob/v
 - **Static extraction may refuse or leave geometry-only content empty** instead
   of inventing visible text. Review proposals that previously depended on a
   placeholder.
-- **Schema `16.1.0-rc.1` remains spec v16.** Consumers must test validation and
+- **Schema `16.1.0-rc.2` remains spec v16.** Consumers must test validation and
   generated types against the RC before changing their range.
-- **Emitter `0.4.0-rc.1`** is newer than stable `0.3.0`. Install the exact RC,
+- **Emitter `0.4.0-rc.2`** is newer than stable `0.3.0`. Install the exact RC,
   regenerate in a disposable output directory, and compare emitted Custom
   Elements, CSS, demos, and Custom Elements Manifest output before adopting.
 - **npm `latest` remains the stable line** during RC evaluation. Examples and

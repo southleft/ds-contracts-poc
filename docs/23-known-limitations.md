@@ -1199,7 +1199,7 @@ community kit this project does not own, all **15 sets that were run closed
 the round trip** (canvas dump → contract → the plugin engine's Generate path
 → re-dump → set-level fact diff), and the totals across them are:
 
-> **11399 matched, 1845 diverged, 7684 one-way loss, 15336 invented**
+> **11400 matched, 1857 diverged, 7671 one-way loss, 15359 invented**
 
 Quoted byte-exact from `extract/figma/roundtrip-uui/REPORT.md:25` — "loss" is
 in the original and not the round trip; "invented" is in the round trip and

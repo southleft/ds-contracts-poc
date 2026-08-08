@@ -1,7 +1,7 @@
 # Coordinated RC release checklist
 
 Release candidate: repository `1.0.0-rc.1` · CLI `0.5.0-rc.2` · schema
-`16.1.0-rc.1` · emitter `0.4.0-rc.1`
+`16.1.0-rc.2` · emitter `0.4.0-rc.2`
 
 Follow [docs/27 — Release Process](docs/27-release-process.md). Check a box only
 when its evidence is linked or pasted into the release PR. Use `N/A` with an
@@ -21,7 +21,7 @@ explicitly chosen. See
 - [x] Working-tree disposition: clean at evidence SHA; handoff/checklist follow-on commits are docs-only
 - [x] Node and npm versions: Node `v20.19.4`, npm `10.8.2` (local macOS arm64 Darwin 26.3); CI uses Node `20.19.4`
 - [x] `package-lock.json` SHA-256: `01c0f67634f98bb41eb97bdb17e68e841b54496d5604b4df80673582eefbb7ec`
-- [x] Manifest versions reviewed: root `1.0.0-rc.1`, CLI `0.5.0-rc.2`, schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`
+- [x] Manifest versions reviewed: root `1.0.0-rc.1`, CLI `0.5.0-rc.2`, schema `16.1.0-rc.2`, emitter `0.4.0-rc.2`
 - [ ] npm registry/dist-tag query attached: **blocked — human/release** (publish path)
 - [ ] Existing-version collision check passed: **blocked — human/release** (publish path)
 

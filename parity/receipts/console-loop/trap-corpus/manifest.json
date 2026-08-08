@@ -1,21 +1,26 @@
 {
   "version": 1,
   "kind": "code-to-canvas-trap-corpus",
-  "description": "Frozen adversarial stems for code→canvas hill-climb (CODE-TO-CANVAS-HILLCLIMB.md §3.2 / §4 Phase M2). Structural CI only until developed scores land.",
+  "description": "Frozen adversarial stems for code\u2192canvas hill-climb (CODE-TO-CANVAS-HILLCLIMB.md \u00a73.2 / \u00a74 Phase M2). Structural CI only until developed scores land.",
   "stems": [
     {
       "lib": "astryx",
       "stem": "slider",
-      "fc": ["FC-ABS-SIZE"],
+      "fc": [
+        "FC-ABS-SIZE"
+      ],
       "contract": "examples/astryx/contracts/slider.contract.json",
       "script": "examples/astryx/figma/slider.figma.js",
-      "reference": "extract/computed/out/astryx/slider/gate-shots/horizontal.none__default.png",
+      "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/slider/horizontal.none__default.png",
       "pendingRef": false
     },
     {
       "lib": "astryx",
       "stem": "toast",
-      "fc": ["FC-LH-RATIO", "FC-SLOT-DEFAULT"],
+      "fc": [
+        "FC-LH-RATIO",
+        "FC-SLOT-DEFAULT"
+      ],
       "contract": "examples/astryx/contracts/toast.contract.json",
       "script": "examples/astryx/figma/toast.figma.js",
       "reference": "examples/astryx/receipts/site/Toast.png",
@@ -24,7 +29,10 @@
     {
       "lib": "astryx",
       "stem": "progress-bar",
-      "fc": ["FC-WIDTH-TOKEN", "FC-METER"],
+      "fc": [
+        "FC-WIDTH-TOKEN",
+        "FC-METER"
+      ],
       "contract": "examples/astryx/contracts/progress-bar.contract.json",
       "script": "examples/astryx/figma/progress-bar.figma.js",
       "reference": "examples/astryx/receipts/site/ProgressBar.png",
@@ -33,7 +41,10 @@
     {
       "lib": "polaris",
       "stem": "text-field",
-      "fc": ["FC-PLACEHOLDER", "FC-BLOCK-ROW"],
+      "fc": [
+        "FC-PLACEHOLDER",
+        "FC-BLOCK-ROW"
+      ],
       "contract": "examples/polaris/contracts/text-field.contract.json",
       "script": "examples/polaris/figma/text-field.figma.js",
       "reference": "examples/polaris/receipts/text-field/default.png",
@@ -42,43 +53,57 @@
     {
       "lib": "altitude",
       "stem": "badge",
-      "fc": ["FC-CSS-ONLY-HIDE"],
+      "fc": [
+        "FC-CSS-ONLY-HIDE"
+      ],
       "contract": "examples/altitude/contracts/badge.contract.json",
       "script": "examples/altitude/figma/badge.figma.js",
-      "reference": "extract/computed/out/altitude/badge/gate-shots/info.default__default.png",
+      "reference": "parity/receipts/console-loop/trap-corpus/refs/altitude/badge/info.default__default.png",
       "pendingRef": false
     },
     {
       "lib": "tailwind",
       "stem": "toggle-switch",
-      "fc": ["FC-PSEUDO-THUMB", "FC-PSEUDO-SIZE"],
+      "fc": [
+        "FC-PSEUDO-THUMB",
+        "FC-PSEUDO-SIZE"
+      ],
       "contract": "examples/tailwind/contracts/toggleswitch.contract.json",
       "script": "examples/tailwind/figma/toggle-switch.figma.js",
-      "reference": "extract/computed/out/tailwind/toggleswitch/gate-shots/md.unchecked__default.png",
+      "reference": "parity/receipts/console-loop/trap-corpus/refs/tailwind/toggle-switch/md.unchecked__default.png",
       "pendingRef": false
     },
     {
       "lib": "astryx",
       "stem": "switch",
-      "fc": ["FC-MISSING-AXIS", "FC-FONT-AA"],
+      "fc": [
+        "FC-MISSING-AXIS",
+        "FC-FONT-AA"
+      ],
       "contract": "examples/astryx/contracts/switch.contract.json",
       "script": "examples/astryx/figma/switch.figma.js",
-      "reference": "extract/computed/out/astryx/switch/gate-shots/end.no-isDisabled__default.png",
+      "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/switch/end.no-isDisabled__default.png",
       "pendingRef": false
     },
     {
       "lib": "carbon",
       "stem": "checkbox",
-      "fc": ["FC-PSEUDO-THUMB", "FC-PSEUDO-STROKE-GLYPH", "FC-WIDTH-TOKEN"],
+      "fc": [
+        "FC-PSEUDO-THUMB",
+        "FC-PSEUDO-STROKE-GLYPH",
+        "FC-WIDTH-TOKEN"
+      ],
       "contract": "examples/carbon/contracts/checkbox.contract.json",
       "script": "examples/carbon/figma/checkbox.figma.js",
-      "reference": "extract/computed/out/carbon/checkbox/gate-shots/unchecked.enabled__default.png",
+      "reference": "parity/receipts/console-loop/trap-corpus/refs/carbon/checkbox/unchecked.enabled__default.png",
       "pendingRef": false
     },
     {
       "lib": "polaris",
       "stem": "button",
-      "fc": ["FC-ENUM-HOLE"],
+      "fc": [
+        "FC-ENUM-HOLE"
+      ],
       "contract": "examples/polaris/contracts/button.contract.json",
       "script": "examples/polaris/figma/button.figma.js",
       "reference": "examples/polaris/receipts/canvas-gate/button--representative.png",
@@ -87,10 +112,12 @@
     {
       "lib": "astryx",
       "stem": "button",
-      "fc": ["FC-THEME-ISO"],
+      "fc": [
+        "FC-THEME-ISO"
+      ],
       "contract": "examples/astryx/contracts/button.contract.json",
       "script": "examples/astryx/figma/button.figma.js",
-      "reference": "extract/computed/out/astryx/button/gate-shots/primary.md.no-isDisabled__default.png",
+      "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/button/primary.md.no-isDisabled__default.png",
       "pendingRef": false
     }
   ]

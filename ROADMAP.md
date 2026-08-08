@@ -21,7 +21,8 @@ treating a manifest edit as a release. Repository `1.0.0-rc.1`, CLI
 `0.5.0-rc.1`, schema `16.1.0-rc.1`, and emitter `0.4.0-rc.1` were published as
 the coordinated candidate under npm `next`; `latest` remains on the stable
 line. The current conversion program advances CLI source to unpublished
-`0.5.0-rc.2`. The coordinated verification and approval sequence is
+`0.5.0-rc.2`, schema source to unpublished `16.1.0-rc.2`, and emitter source
+to unpublished `0.4.0-rc.2`. The coordinated verification and approval sequence is
 [docs/27](docs/27-release-process.md).
 Every open product limitation below has its symptom and status in
 [docs/23](docs/23-known-limitations.md).
@@ -58,7 +59,7 @@ Every open product limitation below has its symptom and status in
 
 - ✅ **A CSS/DOM conformance fixture exists** ([conformance/](conformance/README.md)) — 53 synthetic cases whose expected dispositions are authored *independently* of the engine, so a construct that is neither carried nor named-refused is a hard failure rather than an absence. 50 green, 3 red, 0 yellow, on a decrease-only ratchet.
 - ⚠️ **It is not Phase 3's conformance kit and should not be read as one.** It measures *this* engine's CSS/DOM frontier; Phase 3 asks for the eval suite repackaged to run against *any* implementation, which is a different artifact. Two things must also close before it could become one: the fixture's **canvas half is declared, not measured** ("carried" means "reached the contract", not "reached the canvas"), and every case is **one combo with no state axes** — precisely where the MUI and Carbon rounds found most of their defects.
-- 🟡 The `spec/` draft, namespacing, normative compatibility rules and the extension model — **draft started 2026-08-05** (`spec/normative.md` + `spec/conformance/`). Second independent implementation and black-box harness remain open. `@ds-contracts/schema@16.0.0` is the latest published stable schema; the source tree's `16.1.0-rc.1` is not registry evidence until publication.
+- 🟡 The `spec/` draft, namespacing, normative compatibility rules and the extension model — **draft started 2026-08-05** (`spec/normative.md` + `spec/conformance/`). Second independent implementation and black-box harness remain open. `@ds-contracts/schema@16.0.0` is the latest published stable schema; the source tree's `16.1.0-rc.2` is not registry evidence until publication.
 
 **Phase 4 — Community & governance.** Unstarted, as designed — it follows a second implementation.
 

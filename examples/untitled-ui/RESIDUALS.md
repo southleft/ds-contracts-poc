@@ -369,16 +369,16 @@ The largest single block left is **social-button** at 1.498 points — 22.55% of
 
 - **176 of 537 scored variants render at a root box that disagrees with the box the canvas drew** (mean score 90.34 against 93.86 for the 361 that agree). The `size-to-drawn` diagnostic in §4 measures the whole class at once. What is NOT known is which contract mechanism produces each disagreement — hug-vs-fixed, a frozen first observation, or a UA default — so it cannot be split into fixable rounds from this evidence alone.
 
-- **The round trip corroborates the shape of the residue but cannot price it.** Its 24,865 non-matching facts are counted per (variant ▸ node ▸ channel), not per pixel; 0 of them carry no class tag at all. There is no committed mapping from a structural fact to a pixel, so no round-trip class can be converted into points here.
+- **The round trip corroborates the shape of the residue but cannot price it.** Its 24,887 non-matching facts are counted per (variant ▸ node ▸ channel), not per pixel; 0 of them carry no class tag at all. There is no committed mapping from a structural fact to a pixel, so no round-trip class can be converted into points here.
 
 | round-trip class | facts | what it would cost in points |
 |---|---|---|
-| `restructured` | 6,816 | not derivable from any committed artifact |
-| `cartesian-fill` | 5,270 | not derivable from any committed artifact |
+| `restructured` | 6,838 | not derivable from any committed artifact |
+| `cartesian-fill` | 5,282 | not derivable from any committed artifact |
 | `layout-mode-derivative` | 3,736 | not derivable from any committed artifact |
-| `structure-wrapper-invention` | 2,146 | not derivable from any committed artifact |
+| `structure-wrapper-invention` | 2,156 | not derivable from any committed artifact |
 | `interaction-states` | 1,920 | not derivable from any committed artifact |
-| `geometry-projection-loss` | 1,048 | not derivable from any committed artifact |
+| `geometry-projection-loss` | 1,036 | not derivable from any committed artifact |
 | `auto-layout-inert` | 934 | not derivable from any committed artifact |
 | `paint-effect-projection-loss` | 708 | not derivable from any committed artifact |
 | `duplicate-sibling-expansion` | 492 | not derivable from any committed artifact |
@@ -389,7 +389,7 @@ The largest single block left is **social-button** at 1.498 points — 22.55% of
 | `instance-ink-loss` | 189 | not derivable from any committed artifact |
 | `variant-projection-loss` | 148 | not derivable from any committed artifact |
 | `text-style-identity` | 100 | not derivable from any committed artifact |
-| `hug-vs-fixed` | 72 | not derivable from any committed artifact |
+| `hug-vs-fixed` | 62 | not derivable from any committed artifact |
 | `zero-stroke` | 60 | not derivable from any committed artifact |
 | `url-image` | 54 | not derivable from any committed artifact |
 | `zero-fill` | 54 | not derivable from any committed artifact |
@@ -454,6 +454,6 @@ None of the three steps rewrites `renders/FIDELITY.md`, `renders/fidelity.json` 
 | `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
 | `examples/untitled-ui/storybook/contracts/` | `63f093f001fb` | 129,887 | proposed contracts (30 files) |
 | `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | conformance denominator |
-| `extract/figma/roundtrip-uui/report.json` | `bfa75534250d` | 7,696,283 | round-trip facts |
+| `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering.

@@ -14,11 +14,13 @@ This repository is the working proof, and the candidate reference implementation
 ## Release-candidate status
 
 The coordinated release candidate is repository `1.0.0-rc.1`, schema
-`16.1.0-rc.1`, and web-components emitter `0.4.0-rc.1`. Those exact package
-RCs were published under npm's `next` tag. The current conversion work advances
-the CLI source to `0.5.0-rc.2`; it is source-ahead and unpublished. npm's
-`latest` tags remain on the stable line. Use an exact version when evaluating
-an RC; do not assume `latest` or `next` points to the current source tree.
+`16.1.0-rc.2`, and web-components emitter `0.4.0-rc.2`. The previous package
+RCs (schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`) were published under npm's
+`next` tag. The current conversion work advances the CLI source to
+`0.5.0-rc.2` and the schema and emitter sources to their `rc.2` versions; all
+three are source-ahead and unpublished. npm's `latest` tags remain on the
+stable line. Use an exact version when evaluating an RC; do not assume
+`latest` or `next` points to the current source tree.
 
 Publication, tagging, the GitHub release, and deployment remain explicit human
 approvals. The repeatable procedure, verification matrix, migration notes, and
@@ -116,9 +118,9 @@ Every PR states which of these it is, in the body — the tool does not let you 
 
 For a set **this tool generated** (it carries a `ds_contracts/contractId` marker), Journey A is a **true round trip**: re-running the emitters reproduces the component **byte for byte** from the contract in the PR, and this repo's own components re-extract to zero mismatches in both directions.
 
-For a **hand-built** set, it is **an inversion**, not a reproduction. The proposal is what can be read off the canvas: real structure, real variants, real bound variables — but a canvas cannot tell you about a `useEffect`, a keyboard handler, or why a value is what it is. **Treat the generated component as a reviewable starting point, not as your finished component**, and review it as new code. The measured shape of that claim, on a real kit this project does not own: all 15 Untitled UI sets that were run executed through the set-level fact diff, and the totals across them are **11,399 matched · 1,845 diverged · 7,684 lost · 15,336 invented**.
+For a **hand-built** set, it is **an inversion**, not a reproduction. The proposal is what can be read off the canvas: real structure, real variants, real bound variables — but a canvas cannot tell you about a `useEffect`, a keyboard handler, or why a value is what it is. **Treat the generated component as a reviewable starting point, not as your finished component**, and review it as new code. The measured shape of that claim, on a real kit this project does not own: all 15 Untitled UI sets that were run executed through the set-level fact diff, and the totals across them are **11,400 matched · 1,857 diverged · 7,671 lost · 15,359 invented**.
 
-**Read those four numbers with their context, and do not expect the context to rescue them.** They are 36,264 facts, so matched is **31.4%** — and the claim is *not* that the round trip is lossless, because at 31.4% it plainly is not. The claim is that it **closes**: it ran to completion on 15 of 15 components and every fact landed in exactly one of four named buckets, so a loss is a row in a table rather than an absence. One caveat cuts the other way — the largest single divergence class is an artifact of the comparison, not a loss: **934 of the 954** `layout.mode` divergences are tagged `auto-layout-inert` (a frame whose children are all absolutely placed has no observable auto-layout direction to read back), which changes nothing that is drawn; the remaining 20 are real. The bucket-and-tag accounting, including the untagged remainder it does not explain, is [docs/24 §6.3](docs/24-what-works.md) — and the tagged detail is in [the full report](extract/figma/roundtrip-uui/REPORT.md).
+**Read those four numbers with their context, and do not expect the context to rescue them.** They are 36,287 facts, so matched is **31.4%** — and the claim is *not* that the round trip is lossless, because at 31.4% it plainly is not. The claim is that it **closes**: it ran to completion on 15 of 15 components and every fact landed in exactly one of four named buckets, so a loss is a row in a table rather than an absence. One caveat cuts the other way — the largest single divergence class is an artifact of the comparison, not a loss: **934 of the 954** `layout.mode` divergences are tagged `auto-layout-inert` (a frame whose children are all absolutely placed has no observable auto-layout direction to read back), which changes nothing that is drawn; the remaining 20 are real. The bucket-and-tag accounting, including the untagged remainder it does not explain, is [docs/24 §6.3](docs/24-what-works.md) — and the tagged detail is in [the full report](extract/figma/roundtrip-uui/REPORT.md).
 
 What the *drawing* scores is a separate measurement, and a higher one: the end-to-end proof of this path is [`examples/untitled-ui`](examples/untitled-ui/LEDGER.md) — 15 sets driven through [`uui-pipeline.mts`](examples/untitled-ui/uui-pipeline.mts), pixel fidelity **92.7% mean over 537 scored variants**, per-set 98.0% at best and 81.2% at worst ([docs/24 §4](docs/24-what-works.md)) — and it is exactly what "reviewable starting point" means: a faithful specification, an approximate drawing.
 

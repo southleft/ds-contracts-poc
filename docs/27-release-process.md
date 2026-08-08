@@ -10,8 +10,8 @@ never mistaken for a published release.
 | --- | --- | --- | --- |
 | Repository/reference implementation | `1.0.0-rc.1` | private root package; not published to npm | signed Git tag and GitHub prerelease |
 | `@ds-contracts/cli` | `0.5.0-rc.2` | `latest` is `0.4.0` · `next` is `0.5.0-rc.1` | publish exact RC under `next` |
-| `@ds-contracts/schema` | `16.1.0-rc.1` | `latest` is `16.0.0` · `next` is `16.1.0-rc.1` (already published) | verify published bytes match source |
-| `@ds-contracts/emitter-web-components` | `0.4.0-rc.1` | `latest` is `0.3.0` · `next` is `0.4.0-rc.1` (already published) | verify published bytes match source |
+| `@ds-contracts/schema` | `16.1.0-rc.2` | `latest` is `16.0.0` · `next` is `16.1.0-rc.1` | publish exact RC under `next` |
+| `@ds-contracts/emitter-web-components` | `0.4.0-rc.2` | `latest` is `0.3.0` · `next` is `0.4.0-rc.1` | publish exact RC under `next` |
 
 Manifest versions are source state only. The candidate is not released until
 the release checklist records all applicable human approvals and post-release
@@ -133,9 +133,9 @@ Release notes must tell adopters:
 - Static extraction may refuse or leave geometry-only content empty instead of
   inventing visible text. Review proposals that previously depended on a
   placeholder.
-- Schema `16.1.0-rc.1` remains spec v16. Consumers must test validation and
+- Schema `16.1.0-rc.2` remains spec v16. Consumers must test validation and
   generated types against the RC before changing their range.
-- Emitter `0.4.0-rc.1` is newer than stable `0.3.0`. Consumers must install the
+- Emitter `0.4.0-rc.2` is newer than stable `0.3.0`. Consumers must install the
   exact RC, regenerate in a disposable output directory, and compare emitted
   Custom Elements, CSS, demos, and Custom Elements Manifest output before
   adopting it.
@@ -223,8 +223,8 @@ release notes.
 After the workflow completes, verify independently of it:
 
 ```bash
-npm view @ds-contracts/schema@16.1.0-rc.1 version dist.tarball dist.integrity --json
-npm view @ds-contracts/emitter-web-components@0.4.0-rc.1 version dist.tarball dist.integrity --json
+npm view @ds-contracts/schema@16.1.0-rc.2 version dist.tarball dist.integrity --json
+npm view @ds-contracts/emitter-web-components@0.4.0-rc.2 version dist.tarball dist.integrity --json
 npm view @ds-contracts/cli@0.5.0-rc.2 version dist.tarball dist.integrity --json
 npm view @ds-contracts/schema dist-tags --json
 npm view @ds-contracts/emitter-web-components dist-tags --json

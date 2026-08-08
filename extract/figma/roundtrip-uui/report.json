@@ -3,12 +3,12 @@
   "totals": {
     "components": 15,
     "roundTripClosed": 15,
-    "matched": 11399,
-    "diverged": 1845,
-    "loss": 7684,
-    "invented": 15336,
+    "matched": 11400,
+    "diverged": 1857,
+    "loss": 7671,
+    "invented": 15359,
     "originalFacts": 20928,
-    "roundTripFacts": 28580,
+    "roundTripFacts": 28616,
     "exactVerified": 0,
     "exactSourceMatrixVerified": 0,
     "exactLegacyUnverified": 15,
@@ -98450,8 +98450,8 @@
       "originalVariants": 10,
       "roundTripVariants": 10,
       "originalFacts": 855,
-      "roundTripFacts": 812,
-      "matched": 559,
+      "roundTripFacts": 792,
+      "matched": 549,
       "diverged": [
         {
           "variant": "Destructive=False, Type=Default",
@@ -98947,6 +98947,13 @@
           "tag": "paint-effect-projection-loss"
         },
         {
+          "variant": "Destructive=False, Type=Default",
+          "path": "hinttext",
+          "channel": "fillWidth",
+          "value": "true",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Destructive=False, Type=Payment input",
           "path": "inputwithlabel/input",
           "channel": "stroke",
@@ -99151,6 +99158,13 @@
           "tag": "paint-effect-projection-loss"
         },
         {
+          "variant": "Destructive=False, Type=Payment input",
+          "path": "hinttext",
+          "channel": "fillWidth",
+          "value": "true",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Destructive=True, Type=Default",
           "path": "inputwithlabel/input",
           "channel": "stroke",
@@ -99290,6 +99304,13 @@
           "channel": "fill",
           "value": "#ef4444",
           "tag": "paint-effect-projection-loss"
+        },
+        {
+          "variant": "Destructive=True, Type=Default",
+          "path": "hinttext",
+          "channel": "fillWidth",
+          "value": "true",
+          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Destructive=True, Type=Payment input",
@@ -99473,6 +99494,13 @@
           "channel": "fill",
           "value": "#ef4444",
           "tag": "paint-effect-projection-loss"
+        },
+        {
+          "variant": "Destructive=True, Type=Payment input",
+          "path": "hinttext",
+          "channel": "fillWidth",
+          "value": "true",
+          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Destructive=False, Type=Leading dropdown",
@@ -99691,6 +99719,13 @@
           "tag": "paint-effect-projection-loss"
         },
         {
+          "variant": "Destructive=False, Type=Leading dropdown",
+          "path": "hinttext",
+          "channel": "fillWidth",
+          "value": "true",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Destructive=True, Type=Leading dropdown",
           "path": "inputwithlabel/input",
           "channel": "stroke",
@@ -99884,6 +99919,13 @@
           "channel": "fill",
           "value": "#ef4444",
           "tag": "paint-effect-projection-loss"
+        },
+        {
+          "variant": "Destructive=True, Type=Leading dropdown",
+          "path": "hinttext",
+          "channel": "fillWidth",
+          "value": "true",
+          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Destructive=False, Type=Leading text",
@@ -100116,6 +100158,13 @@
           "tag": "paint-effect-projection-loss"
         },
         {
+          "variant": "Destructive=False, Type=Leading text",
+          "path": "hinttext",
+          "channel": "fillWidth",
+          "value": "true",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Destructive=True, Type=Leading text",
           "path": "inputwithlabel/input",
           "channel": "stroke",
@@ -100325,6 +100374,13 @@
           "tag": "paint-effect-projection-loss"
         },
         {
+          "variant": "Destructive=True, Type=Leading text",
+          "path": "hinttext",
+          "channel": "fillWidth",
+          "value": "true",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Destructive=False, Type=Trailing dropdown",
           "path": "inputwithlabel/input",
           "channel": "stroke",
@@ -100486,6 +100542,13 @@
           "tag": "paint-effect-projection-loss"
         },
         {
+          "variant": "Destructive=False, Type=Trailing dropdown",
+          "path": "hinttext",
+          "channel": "fillWidth",
+          "value": "true",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Destructive=True, Type=Trailing dropdown",
           "path": "inputwithlabel/input",
           "channel": "stroke",
@@ -100624,16 +100687,16 @@
           "channel": "fill",
           "value": "#ef4444",
           "tag": "paint-effect-projection-loss"
+        },
+        {
+          "variant": "Destructive=True, Type=Trailing dropdown",
+          "path": "hinttext",
+          "channel": "fillWidth",
+          "value": "true",
+          "tag": "geometry-projection-loss"
         }
       ],
       "invented": [
-        {
-          "variant": "Destructive=False, Type=Default",
-          "path": "inputwithlabel/label",
-          "channel": "fillWidth",
-          "value": "true",
-          "tag": "hug-vs-fixed"
-        },
         {
           "variant": "Destructive=False, Type=Default",
           "path": "inputwithlabel/input/content/mail",
@@ -100783,13 +100846,6 @@
         },
         {
           "variant": "Destructive=True, Type=Default",
-          "path": "inputwithlabel/label",
-          "channel": "fillWidth",
-          "value": "true",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Destructive=True, Type=Default",
           "path": "inputwithlabel/input/content/mail",
           "channel": "layout.align",
           "value": "CENTER/CENTER",
@@ -100934,13 +100990,6 @@
           "channel": "text.style",
           "value": "Text md/Regular",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Destructive=False, Type=Payment input",
-          "path": "inputwithlabel/label",
-          "channel": "fillWidth",
-          "value": "true",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Destructive=False, Type=Payment input",
@@ -101091,13 +101140,6 @@
         },
         {
           "variant": "Destructive=True, Type=Payment input",
-          "path": "inputwithlabel/label",
-          "channel": "fillWidth",
-          "value": "true",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Destructive=True, Type=Payment input",
           "path": "inputwithlabel/input/content/paymentmethodicon",
           "channel": "layout.align",
           "value": "CENTER/CENTER",
@@ -101242,13 +101284,6 @@
           "channel": "text.style",
           "value": "Text md/Regular",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Destructive=False, Type=Leading dropdown",
-          "path": "inputwithlabel/label",
-          "channel": "fillWidth",
-          "value": "true",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Destructive=False, Type=Leading dropdown",
@@ -101455,13 +101490,6 @@
         },
         {
           "variant": "Destructive=True, Type=Leading dropdown",
-          "path": "inputwithlabel/label",
-          "channel": "fillWidth",
-          "value": "true",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Destructive=True, Type=Leading dropdown",
           "path": "inputwithlabel/input/dropdown/chevrondown",
           "channel": "layout.align",
           "value": "CENTER/CENTER",
@@ -101665,13 +101693,6 @@
         },
         {
           "variant": "Destructive=False, Type=Leading text",
-          "path": "inputwithlabel/label",
-          "channel": "fillWidth",
-          "value": "true",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Destructive=False, Type=Leading text",
           "path": "inputwithlabel/input/content",
           "channel": "kind",
           "value": "box",
@@ -101844,13 +101865,6 @@
           "channel": "text.style",
           "value": "Text md/Regular",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Destructive=True, Type=Leading text",
-          "path": "inputwithlabel/label",
-          "channel": "fillWidth",
-          "value": "true",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Destructive=True, Type=Leading text",
@@ -102029,13 +102043,6 @@
         },
         {
           "variant": "Destructive=False, Type=Trailing dropdown",
-          "path": "inputwithlabel/label",
-          "channel": "fillWidth",
-          "value": "true",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Destructive=False, Type=Trailing dropdown",
           "path": "inputwithlabel/input/content/textinput/textinputtext",
           "channel": "kind",
           "value": "text",
@@ -102124,13 +102131,6 @@
           "channel": "layout.sizing",
           "value": "FIXED/FIXED",
           "tag": "layout-mode-derivative"
-        },
-        {
-          "variant": "Destructive=True, Type=Trailing dropdown",
-          "path": "inputwithlabel/label",
-          "channel": "fillWidth",
-          "value": "true",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Destructive=True, Type=Trailing dropdown",
@@ -117389,8 +117389,8 @@
       "originalVariants": 16,
       "roundTripVariants": 16,
       "originalFacts": 634,
-      "roundTripFacts": 800,
-      "matched": 320,
+      "roundTripFacts": 824,
+      "matched": 321,
       "diverged": [
         {
           "variant": "Label=True, Shape=Circle, Size=md",
@@ -117883,6 +117883,13 @@
           "tag": "auto-layout-inert"
         },
         {
+          "variant": "Label=False, Shape=Half circle, Size=sm",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "0,0 → 67,89",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Label=True, Shape=Half circle, Size=sm",
           "path": "",
           "channel": "layout.mode",
@@ -117937,6 +117944,13 @@
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL",
           "tag": "auto-layout-inert"
+        },
+        {
+          "variant": "Label=True, Shape=Half circle, Size=sm",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "3.5,17 → 67,89",
+          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=False, Shape=Half circle, Size=xs",
@@ -118120,7 +118134,8 @@
           "path": "label",
           "channel": "abs",
           "value": "78.5,89",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=md ▸ label ⇄ group3/label ▸ abs ▸ 78.5,89"
         },
         {
           "variant": "Label=True, Shape=Circle, Size=md",
@@ -118190,7 +118205,8 @@
           "path": "number",
           "channel": "abs",
           "value": "82,109",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=md ▸ number ⇄ group3/number ▸ abs ▸ 82,109"
         },
         {
           "variant": "Label=False, Shape=Circle, Size=md",
@@ -118358,7 +118374,8 @@
           "path": "label",
           "channel": "abs",
           "value": "99,99",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=lg ▸ label ⇄ group3/label ▸ abs ▸ 99,99"
         },
         {
           "variant": "Label=True, Shape=Circle, Size=lg",
@@ -118428,7 +118445,8 @@
           "path": "number",
           "channel": "abs",
           "value": "89.5,121",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=lg ▸ number ⇄ group3/number ▸ abs ▸ 89.5,121"
         },
         {
           "variant": "Label=False, Shape=Circle, Size=lg",
@@ -118596,7 +118614,8 @@
           "path": "label",
           "channel": "abs",
           "value": "63.5,72",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=sm ▸ label ⇄ group3/label ▸ abs ▸ 63.5,72"
         },
         {
           "variant": "Label=True, Shape=Circle, Size=sm",
@@ -118666,7 +118685,8 @@
           "path": "number",
           "channel": "abs",
           "value": "67,89",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=sm ▸ number ⇄ group3/number ▸ abs ▸ 67,89"
         },
         {
           "variant": "Label=False, Shape=Circle, Size=sm",
@@ -118834,7 +118854,8 @@
           "path": "label",
           "channel": "abs",
           "value": "43.5,53",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=xs ▸ label ⇄ group3/label ▸ abs ▸ 43.5,53"
         },
         {
           "variant": "Label=True, Shape=Circle, Size=xs",
@@ -118904,7 +118925,8 @@
           "path": "number",
           "channel": "abs",
           "value": "54,72",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=xs ▸ number ⇄ group3/number ▸ abs ▸ 54,72"
         },
         {
           "variant": "Label=False, Shape=Circle, Size=xs",
@@ -119142,7 +119164,8 @@
           "path": "label",
           "channel": "abs",
           "value": "78.5,64",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Half circle, Size=md ▸ label ⇄ group3/label ▸ abs ▸ 78.5,64"
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=md",
@@ -119366,7 +119389,8 @@
           "path": "label",
           "channel": "abs",
           "value": "94.5,72",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Half circle, Size=lg ▸ label ⇄ group3/label ▸ abs ▸ 94.5,72"
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=lg",
@@ -119467,13 +119491,6 @@
           "tag": "geometry-projection-loss"
         },
         {
-          "variant": "Label=False, Shape=Half circle, Size=sm",
-          "path": "group3/number",
-          "channel": "abs",
-          "value": "0,0",
-          "tag": "geometry-projection-loss"
-        },
-        {
           "variant": "Label=True, Shape=Half circle, Size=sm",
           "path": "ring/line",
           "channel": "shape.arc",
@@ -119499,20 +119516,6 @@
           "path": "group3",
           "channel": "height",
           "value": "55",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=True, Shape=Half circle, Size=sm",
-          "path": "group3/label",
-          "channel": "abs",
-          "value": "0,0",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=True, Shape=Half circle, Size=sm",
-          "path": "group3/number",
-          "channel": "abs",
-          "value": "3.5,17",
           "tag": "geometry-projection-loss"
         },
         {
@@ -119667,7 +119670,8 @@
           "path": "label",
           "channel": "abs",
           "value": "44,35",
-          "tag": "geometry-projection-loss"
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Half circle, Size=xs ▸ label ⇄ group3/label ▸ abs ▸ 44,35"
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=xs",
@@ -119882,6 +119886,14 @@
         },
         {
           "variant": "Label=True, Shape=Circle, Size=md",
+          "path": "group3/label",
+          "channel": "abs",
+          "value": "78.5,89",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=md ▸ label ⇄ group3/label ▸ abs ▸ 78.5,89"
+        },
+        {
+          "variant": "Label=True, Shape=Circle, Size=md",
           "path": "group3/number",
           "channel": "kind",
           "value": "text",
@@ -119942,6 +119954,14 @@
           "channel": "text.style",
           "value": "Display md/Semibold",
           "tag": "text-style-identity"
+        },
+        {
+          "variant": "Label=True, Shape=Circle, Size=md",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "82,109",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=md ▸ number ⇄ group3/number ▸ abs ▸ 82,109"
         },
         {
           "variant": "Label=True, Shape=Circle, Size=md",
@@ -120112,6 +120132,14 @@
         },
         {
           "variant": "Label=False, Shape=Circle, Size=md",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "82,109",
+          "tag": "structure-wrapper-invention",
+          "basis": "ancestor-of:same-leaf:Label=False, Shape=Circle, Size=md ▸ number ⇄ group3/number ▸ kind ▸ text"
+        },
+        {
+          "variant": "Label=False, Shape=Circle, Size=md",
           "path": "ring",
           "channel": "layout.align",
           "value": "MIN/MIN",
@@ -120279,6 +120307,14 @@
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=md",
+          "path": "group3/label",
+          "channel": "abs",
+          "value": "78.5,64",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Half circle, Size=md ▸ label ⇄ group3/label ▸ abs ▸ 78.5,64"
+        },
+        {
+          "variant": "Label=True, Shape=Half circle, Size=md",
           "path": "group3/number",
           "channel": "kind",
           "value": "text",
@@ -120339,6 +120375,14 @@
           "channel": "text.style",
           "value": "Display md/Semibold",
           "tag": "text-style-identity"
+        },
+        {
+          "variant": "Label=True, Shape=Half circle, Size=md",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "82,109",
+          "tag": "structure-wrapper-invention",
+          "basis": "ancestor-of:same-leaf:Label=True, Shape=Half circle, Size=md ▸ number ⇄ group3/number ▸ kind ▸ text"
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=md",
@@ -120509,6 +120553,14 @@
         },
         {
           "variant": "Label=False, Shape=Half circle, Size=md",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "82,109",
+          "tag": "structure-wrapper-invention",
+          "basis": "ancestor-of:same-leaf:Label=False, Shape=Half circle, Size=md ▸ number ⇄ group3/number ▸ kind ▸ text"
+        },
+        {
+          "variant": "Label=False, Shape=Half circle, Size=md",
           "path": "ring",
           "channel": "layout.align",
           "value": "MIN/MIN",
@@ -120676,6 +120728,14 @@
         },
         {
           "variant": "Label=True, Shape=Circle, Size=lg",
+          "path": "group3/label",
+          "channel": "abs",
+          "value": "99,99",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=lg ▸ label ⇄ group3/label ▸ abs ▸ 99,99"
+        },
+        {
+          "variant": "Label=True, Shape=Circle, Size=lg",
           "path": "group3/number",
           "channel": "kind",
           "value": "text",
@@ -120736,6 +120796,14 @@
           "channel": "text.style",
           "value": "Display lg/Semibold",
           "tag": "text-style-identity"
+        },
+        {
+          "variant": "Label=True, Shape=Circle, Size=lg",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "89.5,121",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=lg ▸ number ⇄ group3/number ▸ abs ▸ 89.5,121"
         },
         {
           "variant": "Label=True, Shape=Circle, Size=lg",
@@ -120906,6 +120974,14 @@
         },
         {
           "variant": "Label=False, Shape=Circle, Size=lg",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "89.5,121",
+          "tag": "structure-wrapper-invention",
+          "basis": "ancestor-of:same-leaf:Label=False, Shape=Circle, Size=lg ▸ number ⇄ group3/number ▸ kind ▸ text"
+        },
+        {
+          "variant": "Label=False, Shape=Circle, Size=lg",
           "path": "ring",
           "channel": "layout.align",
           "value": "MIN/MIN",
@@ -121073,6 +121149,14 @@
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=lg",
+          "path": "group3/label",
+          "channel": "abs",
+          "value": "94.5,72",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Half circle, Size=lg ▸ label ⇄ group3/label ▸ abs ▸ 94.5,72"
+        },
+        {
+          "variant": "Label=True, Shape=Half circle, Size=lg",
           "path": "group3/number",
           "channel": "kind",
           "value": "text",
@@ -121133,6 +121217,14 @@
           "channel": "text.style",
           "value": "Display lg/Semibold",
           "tag": "text-style-identity"
+        },
+        {
+          "variant": "Label=True, Shape=Half circle, Size=lg",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "89.5,121",
+          "tag": "structure-wrapper-invention",
+          "basis": "ancestor-of:same-leaf:Label=True, Shape=Half circle, Size=lg ▸ number ⇄ group3/number ▸ kind ▸ text"
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=lg",
@@ -121303,6 +121395,14 @@
         },
         {
           "variant": "Label=False, Shape=Half circle, Size=lg",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "89.5,121",
+          "tag": "structure-wrapper-invention",
+          "basis": "ancestor-of:same-leaf:Label=False, Shape=Half circle, Size=lg ▸ number ⇄ group3/number ▸ kind ▸ text"
+        },
+        {
+          "variant": "Label=False, Shape=Half circle, Size=lg",
           "path": "ring",
           "channel": "layout.align",
           "value": "MIN/MIN",
@@ -121470,6 +121570,14 @@
         },
         {
           "variant": "Label=True, Shape=Circle, Size=sm",
+          "path": "group3/label",
+          "channel": "abs",
+          "value": "63.5,72",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=sm ▸ label ⇄ group3/label ▸ abs ▸ 63.5,72"
+        },
+        {
+          "variant": "Label=True, Shape=Circle, Size=sm",
           "path": "group3/number",
           "channel": "kind",
           "value": "text",
@@ -121530,6 +121638,14 @@
           "channel": "text.style",
           "value": "Display sm/Semibold",
           "tag": "text-style-identity"
+        },
+        {
+          "variant": "Label=True, Shape=Circle, Size=sm",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "67,89",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=sm ▸ number ⇄ group3/number ▸ abs ▸ 67,89"
         },
         {
           "variant": "Label=True, Shape=Circle, Size=sm",
@@ -121697,6 +121813,14 @@
           "channel": "text.style",
           "value": "Display sm/Semibold",
           "tag": "text-style-identity"
+        },
+        {
+          "variant": "Label=False, Shape=Circle, Size=sm",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "67,89",
+          "tag": "structure-wrapper-invention",
+          "basis": "ancestor-of:same-leaf:Label=False, Shape=Circle, Size=sm ▸ number ⇄ group3/number ▸ kind ▸ text"
         },
         {
           "variant": "Label=False, Shape=Circle, Size=sm",
@@ -122035,6 +122159,14 @@
         },
         {
           "variant": "Label=True, Shape=Circle, Size=xs",
+          "path": "group3/label",
+          "channel": "abs",
+          "value": "43.5,53",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=xs ▸ label ⇄ group3/label ▸ abs ▸ 43.5,53"
+        },
+        {
+          "variant": "Label=True, Shape=Circle, Size=xs",
           "path": "group3/number",
           "channel": "kind",
           "value": "text",
@@ -122095,6 +122227,14 @@
           "channel": "text.style",
           "value": "Display xs/Semibold",
           "tag": "text-style-identity"
+        },
+        {
+          "variant": "Label=True, Shape=Circle, Size=xs",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "54,72",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Circle, Size=xs ▸ number ⇄ group3/number ▸ abs ▸ 54,72"
         },
         {
           "variant": "Label=True, Shape=Circle, Size=xs",
@@ -122265,6 +122405,14 @@
         },
         {
           "variant": "Label=False, Shape=Circle, Size=xs",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "54,72",
+          "tag": "structure-wrapper-invention",
+          "basis": "ancestor-of:same-leaf:Label=False, Shape=Circle, Size=xs ▸ number ⇄ group3/number ▸ kind ▸ text"
+        },
+        {
+          "variant": "Label=False, Shape=Circle, Size=xs",
           "path": "ring",
           "channel": "layout.align",
           "value": "MIN/MIN",
@@ -122432,6 +122580,14 @@
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=xs",
+          "path": "group3/label",
+          "channel": "abs",
+          "value": "44,35",
+          "tag": "restructured",
+          "basis": "same-leaf:Label=True, Shape=Half circle, Size=xs ▸ label ⇄ group3/label ▸ abs ▸ 44,35"
+        },
+        {
+          "variant": "Label=True, Shape=Half circle, Size=xs",
           "path": "group3/number",
           "channel": "kind",
           "value": "text",
@@ -122492,6 +122648,14 @@
           "channel": "text.style",
           "value": "Display xs/Semibold",
           "tag": "text-style-identity"
+        },
+        {
+          "variant": "Label=True, Shape=Half circle, Size=xs",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "54,72",
+          "tag": "structure-wrapper-invention",
+          "basis": "ancestor-of:same-leaf:Label=True, Shape=Half circle, Size=xs ▸ number ⇄ group3/number ▸ kind ▸ text"
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=xs",
@@ -122662,6 +122826,14 @@
         },
         {
           "variant": "Label=False, Shape=Half circle, Size=xs",
+          "path": "group3/number",
+          "channel": "abs",
+          "value": "54,72",
+          "tag": "structure-wrapper-invention",
+          "basis": "ancestor-of:same-leaf:Label=False, Shape=Half circle, Size=xs ▸ number ⇄ group3/number ▸ kind ▸ text"
+        },
+        {
+          "variant": "Label=False, Shape=Half circle, Size=xs",
           "path": "ring",
           "channel": "layout.align",
           "value": "MIN/MIN",
@@ -122701,8 +122873,8 @@
       "originalVariants": 40,
       "roundTripVariants": 64,
       "originalFacts": 2860,
-      "roundTripFacts": 6528,
-      "matched": 1300,
+      "roundTripFacts": 6560,
+      "matched": 1310,
       "diverged": [
         {
           "variant": "Label=Bottom, Left control=0%, Right control=25%",
@@ -122761,6 +122933,13 @@
           "tag": "auto-layout-inert"
         },
         {
+          "variant": "Label=Bottom, Left control=0%, Right control=25%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "-4,32 → 0,32",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Label=Bottom floating, Left control=0%, Right control=25%",
           "path": "",
           "channel": "layout.mode",
@@ -122983,6 +123162,13 @@
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL",
           "tag": "auto-layout-inert"
+        },
+        {
+          "variant": "Label=Bottom, Left control=0%, Right control=50%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "-5,32 → 0,32",
+          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
@@ -123209,6 +123395,13 @@
           "tag": "auto-layout-inert"
         },
         {
+          "variant": "Label=Bottom, Left control=25%, Right control=50%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "-5,32 → 0,32",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
           "path": "",
           "channel": "layout.mode",
@@ -123431,6 +123624,13 @@
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL",
           "tag": "auto-layout-inert"
+        },
+        {
+          "variant": "Label=Bottom, Left control=0%, Right control=75%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "-4,32 → 0,32",
+          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
@@ -123657,6 +123857,13 @@
           "tag": "auto-layout-inert"
         },
         {
+          "variant": "Label=Bottom, Left control=25%, Right control=75%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "-4,32 → 0,32",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
           "path": "",
           "channel": "layout.mode",
@@ -123879,6 +124086,13 @@
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL",
           "tag": "auto-layout-inert"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=75%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "-4,32 → 0,32",
+          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
@@ -124105,6 +124319,13 @@
           "tag": "auto-layout-inert"
         },
         {
+          "variant": "Label=Bottom, Left control=0%, Right control=100%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "-18,32 → -14,32",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
           "path": "",
           "channel": "layout.mode",
@@ -124329,6 +124550,13 @@
           "tag": "auto-layout-inert"
         },
         {
+          "variant": "Label=Bottom, Left control=25%, Right control=100%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "-18,32 → -14,32",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
           "path": "",
           "channel": "layout.mode",
@@ -124553,6 +124781,13 @@
           "tag": "auto-layout-inert"
         },
         {
+          "variant": "Label=Bottom, Left control=50%, Right control=100%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "-18,32 → -14,32",
+          "tag": "geometry-projection-loss"
+        },
+        {
           "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
           "path": "",
           "channel": "layout.mode",
@@ -124775,6 +125010,13 @@
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL",
           "tag": "auto-layout-inert"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=100%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "-18,32 → -14,32",
+          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
@@ -125580,13 +125822,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=0%, Right control=25%",
-          "path": "progress/leftcontrol/leftnumber",
-          "channel": "abs",
-          "value": "0,32",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=25%",
           "path": "progress/rightcontrol/rightcontrol",
           "channel": "kind",
           "value": "ellipse",
@@ -125656,13 +125891,6 @@
           "value": "24",
           "tag": "restructured",
           "basis": "same-parent:Label=Bottom, Left control=0%, Right control=25% ▸ progress/rightcontrol/rightcontrol ⇄ progress/rightcontrol/rightcontrol2 ▸ height ▸ 24"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=25%",
-          "path": "progress/rightcontrol/rightnumber",
-          "channel": "abs",
-          "value": "-4,32",
-          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=25%",
@@ -126352,13 +126580,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=0%, Right control=50%",
-          "path": "progress/leftcontrol/leftnumber",
-          "channel": "abs",
-          "value": "0,32",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=50%",
           "path": "progress/rightcontrol/rightcontrol",
           "channel": "kind",
           "value": "ellipse",
@@ -126428,13 +126649,6 @@
           "value": "24",
           "tag": "restructured",
           "basis": "same-parent:Label=Bottom, Left control=0%, Right control=50% ▸ progress/rightcontrol/rightcontrol ⇄ progress/rightcontrol/rightcontrol2 ▸ height ▸ 24"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=50%",
-          "path": "progress/rightcontrol/rightnumber",
-          "channel": "abs",
-          "value": "-5,32",
-          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
@@ -127124,13 +127338,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=50%",
-          "path": "progress/leftcontrol/leftnumber",
-          "channel": "abs",
-          "value": "-4,32",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=Bottom, Left control=25%, Right control=50%",
           "path": "progress/rightcontrol/rightcontrol",
           "channel": "kind",
           "value": "ellipse",
@@ -127200,13 +127407,6 @@
           "value": "24",
           "tag": "restructured",
           "basis": "same-parent:Label=Bottom, Left control=25%, Right control=50% ▸ progress/rightcontrol/rightcontrol ⇄ progress/rightcontrol/rightcontrol2 ▸ height ▸ 24"
-        },
-        {
-          "variant": "Label=Bottom, Left control=25%, Right control=50%",
-          "path": "progress/rightcontrol/rightnumber",
-          "channel": "abs",
-          "value": "-5,32",
-          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
@@ -127896,13 +128096,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=0%, Right control=75%",
-          "path": "progress/leftcontrol/leftnumber",
-          "channel": "abs",
-          "value": "0,32",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=75%",
           "path": "progress/rightcontrol/rightcontrol",
           "channel": "kind",
           "value": "ellipse",
@@ -127972,13 +128165,6 @@
           "value": "24",
           "tag": "restructured",
           "basis": "same-parent:Label=Bottom, Left control=0%, Right control=75% ▸ progress/rightcontrol/rightcontrol ⇄ progress/rightcontrol/rightcontrol2 ▸ height ▸ 24"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=75%",
-          "path": "progress/rightcontrol/rightnumber",
-          "channel": "abs",
-          "value": "-4,32",
-          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
@@ -128668,13 +128854,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=75%",
-          "path": "progress/leftcontrol/leftnumber",
-          "channel": "abs",
-          "value": "-4,32",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=Bottom, Left control=25%, Right control=75%",
           "path": "progress/rightcontrol/rightcontrol",
           "channel": "kind",
           "value": "ellipse",
@@ -128744,13 +128923,6 @@
           "value": "24",
           "tag": "restructured",
           "basis": "same-parent:Label=Bottom, Left control=25%, Right control=75% ▸ progress/rightcontrol/rightcontrol ⇄ progress/rightcontrol/rightcontrol2 ▸ height ▸ 24"
-        },
-        {
-          "variant": "Label=Bottom, Left control=25%, Right control=75%",
-          "path": "progress/rightcontrol/rightnumber",
-          "channel": "abs",
-          "value": "-4,32",
-          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
@@ -129440,13 +129612,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=50%, Right control=75%",
-          "path": "progress/leftcontrol/leftnumber",
-          "channel": "abs",
-          "value": "-5,32",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=Bottom, Left control=50%, Right control=75%",
           "path": "progress/rightcontrol/rightcontrol",
           "channel": "kind",
           "value": "ellipse",
@@ -129516,13 +129681,6 @@
           "value": "24",
           "tag": "restructured",
           "basis": "same-parent:Label=Bottom, Left control=50%, Right control=75% ▸ progress/rightcontrol/rightcontrol ⇄ progress/rightcontrol/rightcontrol2 ▸ height ▸ 24"
-        },
-        {
-          "variant": "Label=Bottom, Left control=50%, Right control=75%",
-          "path": "progress/rightcontrol/rightnumber",
-          "channel": "abs",
-          "value": "-4,32",
-          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
@@ -130212,13 +130370,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=0%, Right control=100%",
-          "path": "progress/leftcontrol/leftnumber",
-          "channel": "abs",
-          "value": "0,32",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol",
           "channel": "kind",
           "value": "ellipse",
@@ -130288,13 +130439,6 @@
           "value": "24",
           "tag": "restructured",
           "basis": "same-parent:Label=Bottom, Left control=0%, Right control=100% ▸ progress/rightcontrol/rightcontrol ⇄ progress/rightcontrol/rightcontrol2 ▸ height ▸ 24"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=100%",
-          "path": "progress/rightcontrol/rightnumber",
-          "channel": "abs",
-          "value": "-18,32",
-          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
@@ -130984,13 +131128,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=100%",
-          "path": "progress/leftcontrol/leftnumber",
-          "channel": "abs",
-          "value": "-4,32",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=Bottom, Left control=25%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol",
           "channel": "kind",
           "value": "ellipse",
@@ -131060,13 +131197,6 @@
           "value": "24",
           "tag": "restructured",
           "basis": "same-parent:Label=Bottom, Left control=25%, Right control=100% ▸ progress/rightcontrol/rightcontrol ⇄ progress/rightcontrol/rightcontrol2 ▸ height ▸ 24"
-        },
-        {
-          "variant": "Label=Bottom, Left control=25%, Right control=100%",
-          "path": "progress/rightcontrol/rightnumber",
-          "channel": "abs",
-          "value": "-18,32",
-          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
@@ -131756,13 +131886,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=50%, Right control=100%",
-          "path": "progress/leftcontrol/leftnumber",
-          "channel": "abs",
-          "value": "-5,32",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=Bottom, Left control=50%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol",
           "channel": "kind",
           "value": "ellipse",
@@ -131832,13 +131955,6 @@
           "value": "24",
           "tag": "restructured",
           "basis": "same-parent:Label=Bottom, Left control=50%, Right control=100% ▸ progress/rightcontrol/rightcontrol ⇄ progress/rightcontrol/rightcontrol2 ▸ height ▸ 24"
-        },
-        {
-          "variant": "Label=Bottom, Left control=50%, Right control=100%",
-          "path": "progress/rightcontrol/rightnumber",
-          "channel": "abs",
-          "value": "-18,32",
-          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
@@ -132528,13 +132644,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=75%, Right control=100%",
-          "path": "progress/leftcontrol/leftnumber",
-          "channel": "abs",
-          "value": "-4,32",
-          "tag": "geometry-projection-loss"
-        },
-        {
-          "variant": "Label=Bottom, Left control=75%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol",
           "channel": "kind",
           "value": "ellipse",
@@ -132604,13 +132713,6 @@
           "value": "24",
           "tag": "restructured",
           "basis": "same-parent:Label=Bottom, Left control=75%, Right control=100% ▸ progress/rightcontrol/rightcontrol ⇄ progress/rightcontrol/rightcontrol2 ▸ height ▸ 24"
-        },
-        {
-          "variant": "Label=Bottom, Left control=75%, Right control=100%",
-          "path": "progress/rightcontrol/rightnumber",
-          "channel": "abs",
-          "value": "-18,32",
-          "tag": "geometry-projection-loss"
         },
         {
           "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
@@ -135451,6 +135553,13 @@
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=25%",
+          "path": "progress/leftcontrol/leftnumber",
+          "channel": "abs",
+          "value": "-4,32",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=25%",
           "path": "progress/rightcontrol",
           "channel": "kind",
           "value": "box",
@@ -135629,6 +135738,13 @@
           "path": "progress/rightcontrol/rightnumber",
           "channel": "text.style",
           "value": "Text md/Medium",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=25%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "0,32",
           "tag": "cartesian-fill"
         },
         {
@@ -136102,6 +136218,13 @@
         },
         {
           "variant": "Label=Bottom, Left control=50%, Right control=25%",
+          "path": "progress/leftcontrol/leftnumber",
+          "channel": "abs",
+          "value": "-5,32",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=25%",
           "path": "progress/rightcontrol",
           "channel": "kind",
           "value": "box",
@@ -136280,6 +136403,13 @@
           "path": "progress/rightcontrol/rightnumber",
           "channel": "text.style",
           "value": "Text md/Medium",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=25%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "0,32",
           "tag": "cartesian-fill"
         },
         {
@@ -136753,6 +136883,13 @@
         },
         {
           "variant": "Label=Bottom, Left control=75%, Right control=25%",
+          "path": "progress/leftcontrol/leftnumber",
+          "channel": "abs",
+          "value": "-4,32",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=25%",
           "path": "progress/rightcontrol",
           "channel": "kind",
           "value": "box",
@@ -136931,6 +137068,13 @@
           "path": "progress/rightcontrol/rightnumber",
           "channel": "text.style",
           "value": "Text md/Medium",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=25%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "0,32",
           "tag": "cartesian-fill"
         },
         {
@@ -138028,6 +138172,13 @@
         },
         {
           "variant": "Label=Bottom, Left control=50%, Right control=50%",
+          "path": "progress/leftcontrol/leftnumber",
+          "channel": "abs",
+          "value": "-5,32",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=50%",
           "path": "progress/rightcontrol",
           "channel": "kind",
           "value": "box",
@@ -138206,6 +138357,13 @@
           "path": "progress/rightcontrol/rightnumber",
           "channel": "text.style",
           "value": "Text md/Medium",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=50%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "0,32",
           "tag": "cartesian-fill"
         },
         {
@@ -138679,6 +138837,13 @@
         },
         {
           "variant": "Label=Bottom, Left control=75%, Right control=50%",
+          "path": "progress/leftcontrol/leftnumber",
+          "channel": "abs",
+          "value": "-4,32",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=50%",
           "path": "progress/rightcontrol",
           "channel": "kind",
           "value": "box",
@@ -138857,6 +139022,13 @@
           "path": "progress/rightcontrol/rightnumber",
           "channel": "text.style",
           "value": "Text md/Medium",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=50%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "0,32",
           "tag": "cartesian-fill"
         },
         {
@@ -140266,6 +140438,13 @@
         },
         {
           "variant": "Label=Bottom, Left control=75%, Right control=75%",
+          "path": "progress/leftcontrol/leftnumber",
+          "channel": "abs",
+          "value": "-4,32",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=75%",
           "path": "progress/rightcontrol",
           "channel": "kind",
           "value": "box",
@@ -140444,6 +140623,13 @@
           "path": "progress/rightcontrol/rightnumber",
           "channel": "text.style",
           "value": "Text md/Medium",
+          "tag": "cartesian-fill"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=75%",
+          "path": "progress/rightcontrol/rightnumber",
+          "channel": "abs",
+          "value": "0,32",
           "tag": "cartesian-fill"
         },
         {
