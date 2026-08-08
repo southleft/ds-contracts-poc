@@ -1,0 +1,8 @@
+{
+  "code": {
+    "adapter": "react-tsx",
+    "root": "examples/fluent/.fluent-sandbox/types-src"
+  },
+  "idPrefix": "fluent",
+  "out": "examples/fluent/out"
+}

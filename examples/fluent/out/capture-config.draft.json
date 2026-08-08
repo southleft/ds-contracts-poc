@@ -1,0 +1,437 @@
+{
+  "__unreviewed-draft": "DRAFT capture config, machine-generated from the static extract pass. Review every \"__review:*\" field (they mark what the tool could NOT infer), fix the values, DELETE each marker you have reviewed, then delete THIS key. The capture runner refuses any config still carrying this key — draft is not approved.",
+  "library": {
+    "package": "ds-contracts-poc",
+    "version": "1.0.0-rc.1",
+    "framework": "react",
+    "classPrefix": "",
+    "__review:version": "detected from package.json, NOT confirmed — the harness must carry ds-contracts-poc@1.0.0-rc.1 exactly (the runner refuses version drift)",
+    "__review:classPrefix": "CSS class prefix stripped for part naming/signatures (Polaris uses \"Polaris-\"); \"\" keeps full class names",
+    "__review:classAllow": "OPTIONAL regex of class names KEPT in captured signatures — required for hashed/atomic class systems (StyleX keeps only its stable per-component class; Tailwind uses \"^$\" to keep none); absent keeps every class (CSS-Modules behavior)",
+    "__review:varPrefix": "OPTIONAL custom-property prefix for the CSS-vars source-binding reader (\"--mui-\" for Emotion cssVariables themes, \"--\" for Tailwind v4); absent = reader off — pixels stay correct, token NAMES degrade to literals (docs/16 graceful degradation)"
+  },
+  "mount": {
+    "imports": [],
+    "wrapperOpen": "<>",
+    "wrapperClose": "</>",
+    "__review:mount": "the mount recipe the library needs on EVERY stage — stylesheet import (Tailwind: the built CSS, inlined by the harness), ThemeProvider/locale wrappers (MUI: createTheme({cssVariables:true})); see extract/computed/configs/{mui,tailwind}.json for worked examples"
+  },
+  "tokens": {
+    "dtcg": [],
+    "css": "",
+    "__review:tokens": "dtcg prefilled from the extract config (empty = none found — build a DTCG token file first); \"css\" must point at the stylesheet that defines those tokens as custom properties"
+  },
+  "browser": {
+    "viewport": {
+      "width": 900,
+      "height": 1000
+    },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": {
+    "width": 320,
+    "height": 96,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "unset"
+  },
+  "components": [
+    {
+      "name": "Avatar",
+      "importName": "Avatar",
+      "contract": "examples/fluent/out/contracts/avatar.contract.json",
+      "sampleText": "Avatar",
+      "axes": [
+        "active",
+        "activeAppearance",
+        "shape"
+      ],
+      "baseCombo": {
+        "active": "active",
+        "activeAppearance": "ring",
+        "shape": "circular"
+      },
+      "__review:baseCombo": "enum axis(es) active, activeAppearance, shape declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "AvatarGroup",
+      "importName": "AvatarGroup",
+      "contract": "examples/fluent/out/contracts/avatar-group.contract.json",
+      "sampleText": "AvatarGroup",
+      "axes": [
+        "layout"
+      ],
+      "baseCombo": {
+        "layout": "spread"
+      },
+      "__review:baseCombo": "enum axis(es) layout declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "AvatarGroupPopover",
+      "importName": "AvatarGroupPopover",
+      "contract": "examples/fluent/out/contracts/avatar-group-popover.contract.json",
+      "sampleText": "AvatarGroupPopover",
+      "axes": [
+        "indicator"
+      ],
+      "__review:fixedProps": "required prop(s) children — pin each to a deterministic value (\"fixedProps\": {\"children\": \"…\"}); an unpinned required prop makes every mount fail or drift",
+      "baseCombo": {
+        "indicator": "count"
+      },
+      "__review:baseCombo": "enum axis(es) indicator declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "AvatarGroupProvider",
+      "importName": "AvatarGroupProvider",
+      "contract": "examples/fluent/out/contracts/avatar-group-provider.contract.json",
+      "sampleText": "AvatarGroupProvider",
+      "axes": [],
+      "__review:stateProps": "boolean prop(s) isOverflow — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default"
+    },
+    {
+      "name": "Badge",
+      "importName": "Badge",
+      "contract": "examples/fluent/out/contracts/badge.contract.json",
+      "sampleText": "Badge",
+      "axes": [
+        "appearance",
+        "color",
+        "iconPosition",
+        "shape",
+        "size"
+      ],
+      "baseCombo": {
+        "appearance": "filled",
+        "color": "brand",
+        "iconPosition": "before",
+        "shape": "circular",
+        "size": "tiny"
+      },
+      "__review:baseCombo": "enum axis(es) appearance, color, iconPosition, shape, size declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/fluent/out/contracts/button.contract.json",
+      "sampleText": "Button",
+      "axes": [
+        "appearance",
+        "iconPosition",
+        "shape",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "__review:stateProps": "boolean prop(s) disabledFocusable — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "baseCombo": {
+        "appearance": "secondary",
+        "iconPosition": "before",
+        "shape": "rounded",
+        "size": "small"
+      },
+      "__review:baseCombo": "enum axis(es) appearance, iconPosition, shape, size declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "Card",
+      "importName": "Card",
+      "contract": "examples/fluent/out/contracts/card.contract.json",
+      "sampleText": "Card",
+      "axes": [
+        "appearance",
+        "focusMode",
+        "orientation",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "__review:stateProps": "boolean prop(s) selected, defaultSelected — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "__review:callbackProps": "function prop(s) onSelectionChange — list any the library REQUIRES at mount under \"callbackProps\" (each is stubbed to () => {})",
+      "baseCombo": {
+        "appearance": "filled",
+        "focusMode": "off",
+        "orientation": "horizontal",
+        "size": "small"
+      },
+      "__review:baseCombo": "enum axis(es) appearance, focusMode, orientation, size declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "Checkbox",
+      "importName": "Checkbox",
+      "contract": "examples/fluent/out/contracts/checkbox.contract.json",
+      "sampleText": "Checkbox",
+      "axes": [
+        "labelPosition",
+        "shape",
+        "size"
+      ],
+      "__review:callbackProps": "function prop(s) onChange — list any the library REQUIRES at mount under \"callbackProps\" (each is stubbed to () => {})",
+      "baseCombo": {
+        "labelPosition": "before",
+        "shape": "square",
+        "size": "medium"
+      },
+      "__review:baseCombo": "enum axis(es) labelPosition, shape, size declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "CounterBadge",
+      "importName": "CounterBadge",
+      "contract": "examples/fluent/out/contracts/counter-badge.contract.json",
+      "sampleText": "CounterBadge",
+      "axes": [
+        "appearance",
+        "shape"
+      ],
+      "__review:stateProps": "boolean prop(s) dot, showZero — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "baseCombo": {
+        "appearance": "filled",
+        "shape": "circular"
+      },
+      "__review:baseCombo": "enum axis(es) appearance, shape declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "Dialog",
+      "importName": "Dialog",
+      "contract": "examples/fluent/out/contracts/dialog.contract.json",
+      "sampleText": "Dialog",
+      "axes": [
+        "modalType"
+      ],
+      "__review:stateProps": "boolean prop(s) open, defaultOpen, inertTrapFocus, unmountOnClose — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "baseCombo": {
+        "modalType": "modal"
+      },
+      "__review:baseCombo": "enum axis(es) modalType declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "DialogActions",
+      "importName": "DialogActions",
+      "contract": "examples/fluent/out/contracts/dialog-actions.contract.json",
+      "sampleText": "DialogActions",
+      "axes": [
+        "position"
+      ],
+      "__review:stateProps": "boolean prop(s) fluid — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "baseCombo": {
+        "position": "start"
+      },
+      "__review:baseCombo": "enum axis(es) position declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "DialogTrigger",
+      "importName": "DialogTrigger",
+      "contract": "examples/fluent/out/contracts/dialog-trigger.contract.json",
+      "sampleText": "DialogTrigger",
+      "axes": [
+        "action"
+      ],
+      "__review:stateProps": "boolean prop(s) disableButtonEnhancement — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "baseCombo": {
+        "action": "open"
+      },
+      "__review:baseCombo": "enum axis(es) action declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "Input",
+      "importName": "Input",
+      "contract": "examples/fluent/out/contracts/input.contract.json",
+      "sampleText": "Input",
+      "axes": [
+        "size",
+        "appearance",
+        "type"
+      ],
+      "__review:callbackProps": "function prop(s) onChange — list any the library REQUIRES at mount under \"callbackProps\" (each is stubbed to () => {})",
+      "baseCombo": {
+        "size": "small",
+        "appearance": "outline",
+        "type": "text"
+      },
+      "__review:baseCombo": "enum axis(es) size, appearance, type declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "MessageBar",
+      "importName": "MessageBar",
+      "contract": "examples/fluent/out/contracts/message-bar.contract.json",
+      "sampleText": "MessageBar",
+      "axes": [
+        "intent",
+        "politeness",
+        "shape"
+      ],
+      "baseCombo": {
+        "intent": "info",
+        "politeness": "assertive",
+        "shape": "square"
+      },
+      "__review:baseCombo": "enum axis(es) intent, politeness, shape declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "MessageBarGroup",
+      "importName": "MessageBarGroup",
+      "contract": "examples/fluent/out/contracts/message-bar-group.contract.json",
+      "sampleText": "MessageBarGroup",
+      "axes": [
+        "animate"
+      ],
+      "baseCombo": {
+        "animate": "exit-only"
+      },
+      "__review:baseCombo": "enum axis(es) animate declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "PresenceBadge",
+      "importName": "PresenceBadge",
+      "contract": "examples/fluent/out/contracts/presence-badge.contract.json",
+      "sampleText": "PresenceBadge",
+      "axes": [
+        "status"
+      ],
+      "__review:stateProps": "boolean prop(s) outOfOffice — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "baseCombo": {
+        "status": "busy"
+      },
+      "__review:baseCombo": "enum axis(es) status declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "Spinner",
+      "importName": "Spinner",
+      "contract": "examples/fluent/out/contracts/spinner.contract.json",
+      "sampleText": "Spinner",
+      "axes": [
+        "appearance",
+        "labelPosition",
+        "size"
+      ],
+      "baseCombo": {
+        "appearance": "primary",
+        "labelPosition": "above",
+        "size": "extra-tiny"
+      },
+      "__review:baseCombo": "enum axis(es) appearance, labelPosition, size declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "Switch",
+      "importName": "Switch",
+      "contract": "examples/fluent/out/contracts/switch.contract.json",
+      "sampleText": "Switch",
+      "axes": [
+        "labelPosition",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "checked",
+          "state": "checked"
+        }
+      ],
+      "__review:stateProps": "boolean prop(s) disabledFocusable, defaultChecked — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "__review:callbackProps": "function prop(s) onChange — list any the library REQUIRES at mount under \"callbackProps\" (each is stubbed to () => {})",
+      "baseCombo": {
+        "labelPosition": "above",
+        "size": "small"
+      },
+      "__review:baseCombo": "enum axis(es) labelPosition, size declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "Tab",
+      "importName": "Tab",
+      "contract": "examples/fluent/out/contracts/tab.contract.json",
+      "sampleText": "Tab",
+      "axes": [],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ]
+    },
+    {
+      "name": "TabList",
+      "importName": "TabList",
+      "contract": "examples/fluent/out/contracts/tab-list.contract.json",
+      "sampleText": "TabList",
+      "axes": [
+        "appearance",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "__review:stateProps": "boolean prop(s) reserveSelectedTabSpace, selectTabOnFocus, vertical — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "baseCombo": {
+        "appearance": "transparent",
+        "size": "small"
+      },
+      "__review:baseCombo": "enum axis(es) appearance, size declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "TabListProvider",
+      "importName": "TabListProvider",
+      "contract": "examples/fluent/out/contracts/tab-list-provider.contract.json",
+      "sampleText": "TabListProvider",
+      "axes": [],
+      "__review:callbackProps": "function prop(s) getRegisteredTabs — list any the library REQUIRES at mount under \"callbackProps\" (each is stubbed to () => {})"
+    },
+    {
+      "name": "ToggleButton",
+      "importName": "ToggleButton",
+      "contract": "examples/fluent/out/contracts/toggle-button.contract.json",
+      "sampleText": "ToggleButton",
+      "axes": [
+        "appearance",
+        "iconPosition",
+        "shape",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        },
+        {
+          "prop": "checked",
+          "state": "checked"
+        }
+      ],
+      "__review:stateProps": "boolean prop(s) disabledFocusable, defaultChecked, isAccessible — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "baseCombo": {
+        "appearance": "secondary",
+        "iconPosition": "before",
+        "shape": "rounded",
+        "size": "small"
+      },
+      "__review:baseCombo": "enum axis(es) appearance, iconPosition, shape, size declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    },
+    {
+      "name": "Tooltip",
+      "importName": "Tooltip",
+      "contract": "examples/fluent/out/contracts/tooltip.contract.json",
+      "sampleText": "Tooltip",
+      "axes": [
+        "appearance",
+        "relationship"
+      ],
+      "__review:stateProps": "boolean prop(s) visible, withArrow — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {\"prop\",\"state\"} here; otherwise pin it under fixedProps or leave it at its default",
+      "__review:callbackProps": "function prop(s) onVisibleChange — list any the library REQUIRES at mount under \"callbackProps\" (each is stubbed to () => {})",
+      "baseCombo": {
+        "appearance": "normal",
+        "relationship": "label"
+      },
+      "__review:baseCombo": "enum axis(es) appearance, relationship declare no default — baseCombo pins each to its FIRST enum value so the base combo mounts a real value; review each pick (or add a default to the contract). A defaultless axis still enumerates an extra \"unset\" pseudo-value plane (enumeration.unsetLabel), and that label becomes a token-path segment — keep it token-ref-legal (letters/digits/./- only; the old \"__unset\" sentinel broke fusion by name of the brace-wrap rule, never the underscore)"
+    }
+  ]
+}
