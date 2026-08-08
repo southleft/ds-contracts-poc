@@ -81,12 +81,16 @@ export function observationsFromFixture(fixture: ObservationFixture): SetObserva
 
 const CHUNK = 40; // ids per /nodes call — well under URL limits
 
-export async function fetchObservation(
+/** The raw fetch half of a live observation: file version + the chunked
+ *  `/nodes?plugin_data=shared` responses, RETURNED whole so a caller that
+ *  needs the full node subtrees (sync pull maps them to dump v1) does not
+ *  fetch the same bytes twice. */
+export async function fetchNodesResponses(
   fileKey: string,
   nodeIds: readonly string[],
   token: string,
   opts: { fetchImpl?: FetchLike; apiBase?: string } = {},
-): Promise<{ observations: SetObservation[]; fileVersionId: string | null }> {
+): Promise<{ responses: RestNodesResponse[]; fileVersionId: string | null }> {
   const fetchImpl = opts.fetchImpl ?? (fetch as unknown as FetchLike);
   const base = opts.apiBase ?? FIGMA_API_BASE;
   const get = async (p: string): Promise<unknown> => {
@@ -99,12 +103,25 @@ export async function fetchObservation(
   };
   const file = (await get(`/v1/files/${fileKey}?depth=1`)) as { version?: unknown };
   const fileVersionId = typeof file.version === 'string' ? file.version : null;
-  const observations: SetObservation[] = [];
+  const responses: RestNodesResponse[] = [];
   for (let i = 0; i < nodeIds.length; i += CHUNK) {
     const ids = encodeURIComponent(nodeIds.slice(i, i + CHUNK).join(','));
-    const response = (await get(
-      `/v1/files/${fileKey}/nodes?ids=${ids}&plugin_data=shared`,
-    )) as RestNodesResponse;
+    responses.push(
+      (await get(`/v1/files/${fileKey}/nodes?ids=${ids}&plugin_data=shared`)) as RestNodesResponse,
+    );
+  }
+  return { responses, fileVersionId };
+}
+
+export async function fetchObservation(
+  fileKey: string,
+  nodeIds: readonly string[],
+  token: string,
+  opts: { fetchImpl?: FetchLike; apiBase?: string } = {},
+): Promise<{ observations: SetObservation[]; fileVersionId: string | null }> {
+  const { responses, fileVersionId } = await fetchNodesResponses(fileKey, nodeIds, token, opts);
+  const observations: SetObservation[] = [];
+  for (const response of responses) {
     observations.push(...observationsFromRestNodes(response, fileKey, fileVersionId));
   }
   return { observations, fileVersionId };

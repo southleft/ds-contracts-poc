@@ -75,6 +75,8 @@
     "snapshot:schema:check": "tsx parity/snapshot-schema-check.ts",
     "sync": "tsx sync/cli.ts",
     "sync:observe": "tsx sync/cli.ts observe",
+    "sync:pull": "tsx sync/cli.ts pull",
+    "sync:spine": "tsx sync/spine.ts",
     "sync:ledger:check": "tsx sync/ledger-check.ts",
     "static:empty-content:check": "tsx core/static-empty-content-check.ts",
     "static:html-security:check": "tsx core/static-html-security-check.ts",

@@ -1,0 +1,85 @@
+# SYNC SPINE — the scheduled drift run (SYNC LAYER STEP 2).
+#
+# Every two hours (and on demand) this lane runs the headless drift spine
+# (sync/spine.ts): observe the Figma canvas against sync/ledger.json, PULL
+# every canvas-ahead set into a reviewable proposal bundle (proposed contract
+# + diff + per-property classification), and surface every code-ahead record
+# as a "canvas is behind: publish+apply needed" row. Report-only by default —
+# the run uploads its sync/out/<runId>/ bundle as an artifact and FAILS
+# VISIBLY when drift exists (exit 1), which is the point: a red run here IS
+# the drift signal, not a broken build.
+#
+# SECRET REQUIRED, DEGRADES BY NAME. The spine needs the repository secret
+# FIGMA_TOKEN (a Figma personal access token with file read scope; the owner
+# configures it under Settings → Secrets → Actions). When the secret is
+# absent the run SKIPS with a named notice and exits green — a missing
+# credential must never masquerade as canvas drift (no red herrings in CI).
+#
+# OPT-IN PR CREATION. Set the repository VARIABLE SYNC_SPINE_OPEN_PR=true to
+# let the spine open pull requests for canvas-ahead drift (capped at 1 per
+# run; the sync/out/state.json cursor + the fingerprint marker in each PR
+# body prevent duplicate PRs for the same drift). Default: plan/report only.
+#
+# NOT A PR GATE. This lane is scheduled, needs a secret and the live Figma
+# API, and its red means "the canvas moved", not "this commit is wrong" — so
+# `sync:spine` is EXCLUDED by name in .github/scripts/lane-coverage.ts and the
+# spine is invoked via tsx here. The committed twin that DOES gate every PR
+# is the fixture-mode eval `sync-spine-drift` (npm run eval -- --only
+# sync-spine) plus sync:ledger:check in the fast lane.
+name: sync-spine
+
+on:
+  schedule:
+    - cron: '23 */2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-spine
+  cancel-in-progress: false
+
+jobs:
+  spine:
+    name: drift spine (report-only unless SYNC_SPINE_OPEN_PR=true)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20.19.4"
+          cache: npm
+      - run: npm ci
+
+      - name: sync spine (observe + pull)
+        id: spine
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPEN_PR: ${{ vars.SYNC_SPINE_OPEN_PR }}
+        run: |
+          if [ -z "$FIGMA_TOKEN" ]; then
+            echo "::notice title=sync-spine skipped::FIGMA_TOKEN secret is not configured — the drift spine needs a Figma personal access token (repository Settings → Secrets → Actions → FIGMA_TOKEN). Skipping by name; this is NOT a drift result."
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          mkdir -p sync/out
+          if [ "$OPEN_PR" = "true" ]; then
+            echo "SYNC_SPINE_OPEN_PR=true — the spine may open at most 1 PR this run (cursor-deduplicated)."
+            npx tsx sync/spine.ts --run-id "gh-${GITHUB_RUN_ID}" --open-pr --max-prs 1
+          else
+            npx tsx sync/spine.ts --run-id "gh-${GITHUB_RUN_ID}"
+          fi
+
+      - name: upload drift report
+        if: ${{ !cancelled() && steps.spine.outputs.skipped != 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: sync-spine-${{ github.run_id }}
+          path: sync/out/
+          if-no-files-found: warn
+          retention-days: 14

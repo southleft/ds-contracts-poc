@@ -10492,6 +10492,130 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       );
     },
   },
+
+  {
+    // SYNC LAYER STEP 2 — the drift spine (sync/spine.ts) over the SAME
+    // committed fixture canvas the ledger gate rides. Red tests, by name:
+    //   1. canvas-ahead fixture (Gamma) → the spine plan CONTAINS the pulled
+    //      proposal bundle: proposed contract + unified diff + per-property
+    //      classification + the inversion-honesty copy + a PR body whose
+    //      marker records the ledger fingerprints it was based on, and the
+    //      code-ahead record (Beta) gets its "canvas is behind" row.
+    //   2. in-sync scope (--only fixture.alpha) → the spine plans NOTHING
+    //      and exits 0.
+    //   3. echo safety: a cursor (state.json) recording run 1's observed
+    //      fingerprints makes the rerun SKIP Gamma by name — no duplicate
+    //      PR bundle for a drift already on review.
+    // The live spine (FIGMA_TOKEN + network + gh) is this run's twin —
+    // EXCLUDED by name in .github/scripts/lane-coverage.ts; this fixture-mode
+    // eval is the committed gate.
+    id: 'sync-spine-drift',
+    claim: 'C3-detection',
+    run: () => {
+      const outRoot = path.join(SCRATCH, 'spine-out');
+      const spine = (extra: string[]): { status: number | null; out: string } => {
+        const r = spawnSync(
+          TSX,
+          [
+            path.join(ROOT, 'sync', 'spine.ts'),
+            '--fixture',
+            'sync/fixtures/canvas.rest.fixture.json',
+            '--ledger',
+            'sync/fixtures/ledger.fixture.json',
+            '--out',
+            outRoot,
+            ...extra,
+          ],
+          { cwd: ROOT, encoding: 'utf8' },
+        );
+        return { status: r.status, out: `${r.stdout ?? ''}${r.stderr ?? ''}` };
+      };
+
+      // RED 1: the canvas-ahead fixture must land in the plan as a full bundle.
+      const run1 = spine(['--run-id', 'run1']);
+      if (run1.status !== 1)
+        throw new Error(`fixture spine must exit 1 (drift present) — got ${run1.status}:\n${run1.out}`);
+      if (!run1.out.includes('canvas-ahead') || !run1.out.includes('fixture.gamma'))
+        throw new Error('spine plan must classify and name the canvas-ahead record');
+      const gammaDir = path.join(outRoot, 'run1', 'fixture-gamma');
+      for (const f of [
+        'fixture-gamma.contract.proposed.json',
+        'fixture-gamma.contract.diff',
+        'drift.json',
+        'DRIFT.md',
+        'PR.md',
+        'plan.json',
+      ]) {
+        if (!existsSync(path.join(gammaDir, f)))
+          throw new Error(`spine plan must write ${f} for the canvas-ahead record (missing in ${gammaDir})`);
+      }
+      const driftMd = readFileSync(path.join(gammaDir, 'DRIFT.md'), 'utf8');
+      if (!driftMd.includes('mismatch') || !driftMd.includes('REVIEWABLE INVERSION'))
+        throw new Error('DRIFT.md must carry the per-property classification and the inversion-honesty copy');
+      const prBody = readFileSync(path.join(gammaDir, 'PR.md'), 'utf8');
+      if (
+        !prBody.includes('ds-contracts sync-spine: key=fixture.gamma@SYNCFIXTUREFILE0') ||
+        !prBody.includes('ledger-stamp=v6:3333')
+      )
+        throw new Error('the PR body must record the ledger fingerprints it was based on (the echo-safety marker)');
+      if (!prBody.includes('inversion, not a round trip') && !prBody.includes('reviewable inversion'))
+        throw new Error('the PR body must carry the inversion-vs-roundtrip honesty copy');
+      const plan1 = JSON.parse(readFileSync(path.join(gammaDir, 'plan.json'), 'utf8')) as {
+        branch: string;
+        basedOn: Record<string, string | null>;
+      };
+      if (plan1.branch !== 'sync-spine/fixture-gamma')
+        throw new Error(`PR plan must suggest the sync-spine/<stem> branch (got ${plan1.branch})`);
+      const diffText = readFileSync(path.join(gammaDir, 'fixture-gamma.contract.diff'), 'utf8');
+      if (!/^\+/m.test(diffText) || !/^-/m.test(diffText))
+        throw new Error('the proposed-contract diff must contain actual +/- lines');
+      if (!run1.out.includes('canvas is behind: publish+apply needed') || !run1.out.includes('fixture.beta'))
+        throw new Error('the code-ahead record must surface as the "canvas is behind: publish+apply needed" row');
+      if (!existsSync(path.join(outRoot, 'run1', 'fixture-beta', 'fixture-beta.bundle.json')))
+        throw new Error('the code-ahead record must get a regenerated CONTRACTS-BUNDLE');
+
+      // RED 2: an in-sync scope plans nothing.
+      const run2 = spine(['--run-id', 'run2', '--only', 'fixture.alpha']);
+      if (run2.status !== 0)
+        throw new Error(`--only fixture.alpha (in-sync) must exit 0 — got ${run2.status}:\n${run2.out}`);
+      if (!run2.out.includes('nothing to pull'))
+        throw new Error('an in-sync scope must say it plans nothing');
+      if (existsSync(path.join(outRoot, 'run2', 'fixture-alpha')))
+        throw new Error('an in-sync record must produce NO proposal bundle');
+
+      // RED 3: the cursor skips a drift that is already PR'd — by name.
+      const statePath = path.join(outRoot, 'state.json');
+      writeFileSync(
+        statePath,
+        JSON.stringify(
+          {
+            version: 1,
+            entries: {
+              'fixture.gamma@SYNCFIXTUREFILE0': {
+                branch: plan1.branch,
+                prUrl: 'https://github.com/example/repo/pull/999',
+                openedAt: new Date().toISOString(),
+                basedOn: plan1.basedOn,
+              },
+            },
+          },
+          null,
+          2,
+        ) + '\n',
+      );
+      const run3 = spine(['--run-id', 'run3', '--state', statePath]);
+      if (!run3.out.includes("already PR'd") || !run3.out.includes('fixture.gamma@SYNCFIXTUREFILE0'))
+        throw new Error('a cursor hit must skip the record BY NAME (no duplicate PR per drift)');
+      if (existsSync(path.join(outRoot, 'run3', 'fixture-gamma')))
+        throw new Error('a cursor-skipped record must not be pulled again');
+      if (!existsSync(path.join(outRoot, 'run3', 'fixture-delta')))
+        throw new Error('the cursor must skip ONLY the PR-d record — the conflict record still pulls');
+      console.log(
+        'sync-spine-drift: canvas-ahead fixture → plan carries proposal+diff+classification+marker PR body; ' +
+          'in-sync scope plans nothing; cursor skips the already-PR-d drift by name (conflict sibling still pulls)',
+      );
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

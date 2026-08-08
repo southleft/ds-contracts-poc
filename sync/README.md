@@ -1,4 +1,4 @@
-# sync/ — the code↔canvas sync ledger (SYNC LAYER STEP 1)
+# sync/ — the code↔canvas sync ledger (STEP 1) + drift spine (STEP 2)
 
 `sync/ledger.json` is a **committed lockfile**: one record per synced
 component, holding the contract hash and the canvas fingerprint that were
@@ -92,6 +92,71 @@ the current contract hashes, and classifies every record:
 Exit codes are gate-style: **0 clean, 1 drift, 2 usage/config error**. This is
 the arithmetic step 2's scheduled spine runs.
 
+## `sync pull` — the canvas→code half of the spine (STEP 2)
+
+```
+npm run sync:pull                                # live: pull every canvas-ahead record
+npm run sync:pull -- --only polaris.avatar       # one component
+npm run sync:pull -- --fixture sync/fixtures/canvas.rest.fixture.json \
+                     --ledger sync/fixtures/ledger.fixture.json        # offline twin
+```
+
+For each **canvas-ahead** (and conflict) record: the set's headless REST dump
+(the same `extract/figma/rest/map.ts` mapper observe rides), the
+design→contract proposer in **reviewable-inversion** mode (`mintUnbound` —
+unresolved canvas values become provisional `imported.*` tokens, never
+guesses), and the disagreement report against the current contract as base:
+`compareContracts` per-property classification (`matched | canvas-absent |
+mismatch`) + a unified diff + the observation an adoption would record
+(previewed in `drift.json.proposedLedgerRecord`, **never applied**). Output is
+files under `sync/out/<runId>/<slug>/`; contracts/ and the ledger are never
+touched. The proposal's identity (id/name/$schema) is pinned to the ledger
+record — the record IS the set↔contract link.
+
+## `sync:spine` — the one-shot drift spine (STEP 2)
+
+```
+npm run sync:spine                               # live plan (report-only)
+npm run sync:spine -- --only polaris.avatar --open-pr   # ONE real PR (gh CLI auth)
+npm run sync:spine -- --fixture sync/fixtures/canvas.rest.fixture.json \
+                      --ledger sync/fixtures/ledger.fixture.json        # offline twin
+```
+
+observe → pull → a **PR-shaped bundle** per canvas-ahead record: branch
+suggestion `sync-spine/<slug>`, the commit-ready file set (proposed contract
+at its real path + envelope-v2 sidecars: minted DTCG tree, auto-proposed
+child stubs), and a PR body draft (drift table + per-property classification
++ the inversion-vs-roundtrip honesty copy). For **code-ahead** records the
+canvas is *behind*: the spine regenerates the JSON bundle (+ the .figma.js
+via the first-party engine where it can; example libraries are pointed at
+their own generate pipeline by name) and prints the
+`canvas is behind: publish+apply needed` row — the existing publish/apply
+transport does the rest.
+
+- **Plan mode is the default.** `--open-pr` (capped by `--max-prs`, default
+  1) creates branch + commits + PR via the authenticated `gh` CLI against the
+  current branch (fallback: the repo default branch; override `--base`) — the
+  local checkout is never touched.
+- **Echo safety — no duplicate PR per drift.** Every spine PR body carries an
+  HTML-comment marker recording the ledger + observed fingerprints it was
+  based on; the spine keeps a cursor (`sync/out/state.json`) and skips, by
+  name, any record whose current observed fingerprints it already PR'd. In CI
+  (fresh checkout, no cursor) the branch-exists check is the durable half: an
+  unresolved `sync-spine/<slug>` branch refuses a second PR by name.
+- Exit codes mirror observe: 0 clean, 1 drift, 2 usage.
+
+### The scheduled lane (.github/workflows/sync-spine.yml)
+
+Cron every 2 h + `workflow_dispatch`: report-only spine run, drift report
+uploaded as an artifact, **fails visibly** on drift (a red scheduled run IS
+the drift signal). Needs the `FIGMA_TOKEN` repository secret — the owner
+configures it; when absent the lane **skips by name** and stays green (a
+missing credential must never impersonate drift). Set the repository variable
+`SYNC_SPINE_OPEN_PR=true` to let the scheduled run open PRs (1 per run,
+cursor/branch-deduplicated). `sync:spine` itself is EXCLUDED by name in
+`.github/scripts/lane-coverage.ts`; the committed twin is the fixture-mode
+eval below.
+
 ## Gates
 
 - `npm run sync:ledger:check` (fast lane) — offline: schema + deterministic
@@ -103,8 +168,15 @@ the arithmetic step 2's scheduled spine runs.
   contract-hash bump → code-ahead, both → conflict, recorded-amend echo →
   in-sync, unrecorded amend → the named false alarm, serialization
   determinism, schema refusals by name.
-- Live observation (`npm run sync:observe`) needs `FIGMA_TOKEN` and is run by
-  hand — the fixture gate above is its committed twin.
+- eval `sync-spine-drift` (`npm run eval -- --only sync-spine`) — the spine's
+  red tests over the same committed fixture canvas: canvas-ahead fixture →
+  the plan contains the proposed contract + diff + classification + the
+  fingerprint-marker PR body; in-sync scope → the spine plans nothing;
+  already-PR'd cursor → skipped by name (the conflict sibling still pulls);
+  code-ahead → the "canvas is behind" row + regenerated bundle.
+- Live observation/pull/spine (`npm run sync:observe|sync:pull|sync:spine`)
+  need `FIGMA_TOKEN` and are run by hand or on the scheduled lane — the
+  fixture gates above are their committed twins.
 
 ## Files
 
@@ -115,8 +187,14 @@ the arithmetic step 2's scheduled spine runs.
   writers, `classifyRecord`/`driftReport` (browser-safe; the CLI bundles it).
 - `ledger-io.ts` — the node-bound load/save half.
 - `observe.ts` — observations from a REST nodes response (fixture or live).
-- `cli.ts` — `record | seed | observe`.
+- `pull.ts` — the canvas→code pull: REST dump → reviewable-inversion
+  proposal → per-property drift report, as files only.
+- `spine.ts` — the one-shot drift spine (observe → pull → PR-shaped bundles
+  + the code-behind rows + the echo-safety cursor).
+- `cli.ts` — `record | seed | observe | pull`.
 - `ledger-check.ts` — the offline gate.
+- `out/` — gitignored working dir: per-run bundles + `state.json` (the PR
+  cursor).
 - `fixtures/` — the committed observation fixture: a five-set REST canvas +
   fixture ledger + fixture contracts crafted so the drift table exercises
   every status (Alpha in-sync, Beta code-ahead, Gamma canvas-ahead, Delta

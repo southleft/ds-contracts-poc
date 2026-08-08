@@ -24,8 +24,20 @@
  *       Exit gate-style: 0 clean, 1 drift, 2 usage/config error.
  *       --update records observation baselines for in-sync rows (and adopts
  *       a post-publish restamp, clearing pendingApply — noted loudly).
+ *
+ *   pull     [--fixture <fixture.json>] [--file-key K] [--only id[,id…]]
+ *            [--out sync/out] [--run-id id] [--ledger <path>]
+ *       THE CANVAS→CODE HALF OF THE DRIFT SPINE (step 2). For every
+ *       canvas-ahead (and conflict) record: headless REST dump of the set
+ *       (the same mapper observe rides), the design→contract proposer in
+ *       reviewable-inversion mode against the current contract as base, and
+ *       a per-component drift bundle — proposed contract + unified diff +
+ *       per-property classification (matched | canvas-absent | mismatch) +
+ *       the observation an adoption would record. Files land under
+ *       sync/out/<runId>/ and are NEVER applied to contracts/. Exit is
+ *       gate-style like observe: 0 clean, 1 drift(s) pulled, 2 usage.
  */
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import {
   contractHashOf,
@@ -38,7 +50,16 @@ import {
   type SyncLedger,
 } from './ledger.js';
 import { DEFAULT_LEDGER_PATH, loadLedger, loadOrInitLedger, saveLedger } from './ledger-io.js';
-import { fetchObservation, observationsFromFixture, type ObservationFixture } from './observe.js';
+import {
+  fetchNodesResponses,
+  fetchObservation,
+  observationsFromFixture,
+  observationsFromRestNodes,
+  type ObservationFixture,
+} from './observe.js';
+import { fetchVariables } from '../extract/figma/rest/fetch.js';
+import type { RestNodesResponse, RestVariablesResponse } from '../extract/figma/rest/map.js';
+import { pullRecord } from './pull.js';
 
 const ROOT = process.cwd();
 
@@ -50,7 +71,7 @@ const has = (args: string[], name: string): boolean => args.includes(`--${name}`
 
 function usage(msg?: string): never {
   if (msg) console.error(`✘ ${msg}`);
-  console.error('Usage: sync/cli.ts record|seed|observe — see the header of sync/cli.ts');
+  console.error('Usage: sync/cli.ts record|seed|observe|pull — see the header of sync/cli.ts');
   process.exit(2);
 }
 
@@ -326,6 +347,117 @@ async function observeCommand(args: string[]): Promise<number> {
 }
 
 // ---------------------------------------------------------------------------
+// pull — the canvas→code half of the drift spine (sync/pull.ts does the work)
+// ---------------------------------------------------------------------------
+
+async function pullCommand(args: string[]): Promise<number> {
+  const ledgerPath = flag(args, 'ledger') ?? DEFAULT_LEDGER_PATH;
+  if (!existsSync(ledgerPath)) usage(`no ledger at ${ledgerPath} — run \`sync seed\` first`);
+  const ledger = loadLedger(ledgerPath);
+  const fixturePath = flag(args, 'fixture');
+  const fileKeyFilter = flag(args, 'file-key');
+  const only = flag(args, 'only')?.split(',').map((s) => s.trim()).filter(Boolean);
+  const outRoot = path.resolve(ROOT, flag(args, 'out') ?? path.join('sync', 'out'));
+  const runId =
+    flag(args, 'run-id') ?? new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const runDir = path.join(outRoot, runId);
+
+  const responsesByFile = new Map<string, RestNodesResponse[]>();
+  const versionByFile = new Map<string, string | null>();
+  const variablesByFile = new Map<string, RestVariablesResponse | undefined>();
+  let observations: SetObservation[] = [];
+  let fileKeys: Set<string> | undefined;
+  let token: string | undefined;
+  if (fixturePath) {
+    const fixture = JSON.parse(
+      readFileSync(path.resolve(ROOT, fixturePath), 'utf8'),
+    ) as ObservationFixture;
+    observations = observationsFromFixture(fixture);
+    responsesByFile.set(fixture.fileKey ?? '(no-file)', [fixture.response]);
+    versionByFile.set(fixture.fileKey ?? '(no-file)', fixture.fileVersionId);
+    fileKeys = fixture.fileKey ? new Set([fixture.fileKey]) : undefined;
+  } else {
+    token = process.env.FIGMA_TOKEN;
+    if (!token)
+      usage('live pull needs FIGMA_TOKEN (source .env) — or pass --fixture <file> for the offline path');
+    const byFile = new Map<string, string[]>();
+    for (const r of ledger.records) {
+      if (!r.fileKey || !r.setNodeId) continue;
+      if (fileKeyFilter && r.fileKey !== fileKeyFilter) continue;
+      const ids = byFile.get(r.fileKey) ?? [];
+      ids.push(r.setNodeId);
+      byFile.set(r.fileKey, ids);
+    }
+    if (byFile.size === 0) usage(`no ledger records carry a fileKey${fileKeyFilter ? ` matching ${fileKeyFilter}` : ''}`);
+    for (const [fk, ids] of byFile) {
+      const { responses, fileVersionId } = await fetchNodesResponses(fk, ids, token);
+      responsesByFile.set(fk, responses);
+      versionByFile.set(fk, fileVersionId);
+      for (const response of responses)
+        observations.push(...observationsFromRestNodes(response, fk, fileVersionId));
+    }
+    fileKeys = new Set(byFile.keys());
+  }
+
+  const scoped = fileKeys
+    ? ledger.records.filter((r) => r.fileKey !== null && fileKeys!.has(r.fileKey))
+    : ledger.records;
+  const hashes = currentContractHashes(scoped);
+  const report = driftReport(ledger, hashes, observations, fileKeys ? { fileKeys } : {});
+  const rows = only ? report.rows.filter((r) => only.includes(r.contractId)) : report.rows;
+  const recordByKey = new Map(ledger.records.map((r) => [recordKey(r), r]));
+
+  const canvasRows = rows.filter((r) => r.status === 'canvas-ahead' || r.status === 'conflict');
+  if (canvasRows.length === 0) {
+    console.log('sync pull: no canvas-ahead record in scope — nothing to pull');
+    return rows.every((r) => r.status === 'in-sync') ? 0 : 1;
+  }
+  mkdirSync(runDir, { recursive: true });
+  let pulled = 0;
+  let refused = 0;
+  for (const row of canvasRows) {
+    const record = recordByKey.get(row.key)!;
+    const fk = record.fileKey ?? '(no-file)';
+    const response = (responsesByFile.get(fk) ?? []).find(
+      (r) => record.setNodeId !== null && r.nodes?.[record.setNodeId],
+    );
+    if (!response) {
+      console.log(`✘ ${record.contractId}: set node absent from every fetched nodes response — skipped`);
+      refused++;
+      continue;
+    }
+    if (token && !variablesByFile.has(fk) && record.fileKey) {
+      variablesByFile.set(fk, await fetchVariables(record.fileKey, token).catch(() => undefined));
+    }
+    const outcome = pullRecord({
+      record,
+      row,
+      response,
+      fileVersionId: versionByFile.get(fk) ?? null,
+      variables: variablesByFile.get(fk),
+      root: ROOT,
+      runDir,
+    });
+    if (outcome.status === 'pulled') {
+      pulled++;
+      const mm = outcome.findings.filter((f) => f.status === 'mismatch').length;
+      console.log(
+        `✔ pulled ${record.contractId} → ${path.relative(ROOT, outcome.dir)}/ ` +
+          `(${outcome.findings.length} findings, ${mm} mismatch, ${outcome.minted?.count ?? 0} minted)`,
+      );
+    } else {
+      refused++;
+      console.log(`✘ ${record.contractId}: pull refused — ${outcome.refusal}`);
+    }
+  }
+  console.log(
+    `\nsync pull: ${canvasRows.length} canvas-ahead record(s) — ${pulled} pulled, ${refused} refused → ${path.relative(ROOT, runDir)}/`,
+  );
+  console.log('  (proposals are reviewable files only — nothing was applied to contracts/ or the ledger)');
+  return 1; // canvas-ahead records existed — the drift exit mirrors observe
+}
+
+// ---------------------------------------------------------------------------
 
 async function main(): Promise<number> {
   const [verb, ...rest] = process.argv.slice(2);
@@ -336,6 +468,8 @@ async function main(): Promise<number> {
       return seedCommand(rest);
     case 'observe':
       return observeCommand(rest);
+    case 'pull':
+      return pullCommand(rest);
     default:
       usage(verb ? `unknown verb "${verb}"` : undefined);
   }

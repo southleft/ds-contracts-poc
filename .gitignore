@@ -20,6 +20,10 @@ private/
 # worst-10 triptychs are committed under extract/figma/visual-parity/report-assets/)
 extract/figma/visual-parity/out/
 
+# sync spine working dir: per-run pull bundles + the local PR cursor
+# (sync/spine.ts — proposals are reviewable files, never repo state)
+sync/out/
+
 # built at playground build time (scripts/build-plugin-zip.mjs)
 playground/public/ds-contracts-sync-runner-plugin.zip
 
