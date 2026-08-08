@@ -62,6 +62,14 @@ function fingerprint(node, varNameById, styleNameById) {
       // construction; the identity they point at is covered by the rest of
       // the tree. Everything else must match byte-for-byte.
       if (typeof v === 'string' && /^\d+:\d+$/.test(v)) return '<node-ref>';
+      // Component PUBLISH KEYS are the same class: real Figma keys are stable
+      // across sessions, but the mock derives them from the run-scoped node id
+      // (`key-<id>`), so two runs of the same pure emission legitimately
+      // disagree on them. They arrived in this fingerprint when native slots
+      // gave an INSTANCE's componentProperties a `preferredValues` array (a
+      // SLOT property exposes no value — its accepts list is what it exposes).
+      // The identity they point at is covered by the rest of the tree.
+      if (typeof v === 'string' && /^key-\d+:\d+$/.test(v)) return '<component-key>';
       if (typeof v === 'string') return stripKeyId(v);
       return v;
     }

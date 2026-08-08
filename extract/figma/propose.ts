@@ -59,20 +59,29 @@
  *               is a compatible code-side binding. propRefs.characters →
  *               TEXT props (default = the bound node's characters).
  *
- *   SLOTS       A frame whose sole child is a Slot-utility instance bound to
- *               an INSTANCE_SWAP property is a slot part; the utility
- *               instance's own styling (stroke/padding/radius) is the
- *               utility's, and is elided. A "Show <Property>" visibility
- *               binding on the wrapper marks the part optional (and is NOT an
- *               API prop). preferredValues (dump v1.5 swapPreferredValues)
- *               resolve by component key into `accepts` (acceptsMode
- *               'prefer'); unresolvable keys stay a NAMED note — older dumps
- *               keep the "author accepts manually" note, never invented.
- *               Drawn design-time content becomes defaultContent: LINKED
- *               when the child resolves, else a geometry STUB (dump v1.5
- *               bbox). Native SLOT nodes (Schema 2025) map to the same slot
- *               part with a provenance note. The first non-optional slot in
- *               tree order is judged the default slot (name "children").
+ *   SLOTS       A NATIVE SLOT node (Schema 2025) is a slot part: its layer
+ *               name IS its SLOT property's display name, its drawn INSTANCE
+ *               child is design-time `defaultContent`, and a "Show
+ *               <Property>" visibility binding marks the part optional (and
+ *               is NOT an API prop). preferredValues (dump v1.18 carries them
+ *               for SLOT as well as INSTANCE_SWAP) resolve by component key
+ *               into `accepts` (acceptsMode 'prefer'); unresolvable keys stay
+ *               a NAMED note. Uncaptured preferredValues degrade BY NAME with
+ *               the reason — REST returns componentPropertyDefinitions EMPTY
+ *               for SLOT properties (live probe), so over that transport
+ *               accepts is invisible, never "unconstrained". The SLOT
+ *               `description` (dump v1.18 slotDescriptions) is read back as a
+ *               NOTE where it names a constraint Figma refuses to enforce
+ *               (min/max/required/restrict) — the canvas holds the words, not
+ *               the rule, so nothing is re-derived from it. The LEGACY
+ *               spelling still inverts: a frame whose sole child is a
+ *               Slot-utility instance bound to an INSTANCE_SWAP property is
+ *               the same slot part (the utility instance's own styling is
+ *               elided), which is what lets a pre-native canvas round-trip.
+ *               Drawn content becomes defaultContent: LINKED when the child
+ *               resolves, else a geometry STUB (dump v1.5 bbox). The first
+ *               non-optional slot in tree order is judged the default slot
+ *               (name "children").
  *
  *   COMPOSITION A non-Slot INSTANCE child → anatomy `component` ref, id
  *               resolved by componentSetKey FIRST (dump v1.5 instanceSetKey/

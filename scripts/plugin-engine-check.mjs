@@ -226,18 +226,37 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   };
   let ordinary = parentNode.findOne((n) => n.type === 'INSTANCE' && n.name === 'chosen');
   assert(ordinary && (await ownerOf(ordinary)) === childBNode, 'same-name distinct-ID parent targets the authoritative child');
-  const choiceDef = Object.values(parentNode.componentPropertyDefinitions).find(
-    (d) => d.type === 'INSTANCE_SWAP' && Array.isArray(d.preferredValues),
+  // NATIVE SLOTS: the slot is a real SlotNode whose LAYER NAME is the SLOT
+  // property's display name (the contract's slot.figmaProperty), and
+  // `accepts` rides preferredValues on the SLOT definition — not an
+  // INSTANCE_SWAP property pointing at a dashed placeholder.
+  const choiceEntry = Object.entries(parentNode.componentPropertyDefinitions).find(
+    ([key, d]) => d.type === 'SLOT' && key.split('#')[0] === 'Choice',
   );
+  assert(choiceEntry, 'the contract slot minted a native SLOT property named Choice');
+  const choiceDef = choiceEntry[1];
   assert(
     choiceDef?.preferredValues?.some((v) => v.key === childBNode.key) &&
       !choiceDef.preferredValues.some((v) => v.key === childANode.key),
     'slot preferred values resolve the authoritative child identity',
   );
-  const choiceWrapper = parentNode.findOne((n) => n.type === 'FRAME' && n.name === 'choice');
-  const slotDefault = choiceWrapper?.findOne((n) => n.type === 'INSTANCE');
+  assert(
+    typeof choiceDef.description === 'string' && choiceDef.description.includes('REFUSED BY FIGMA'),
+    'the SLOT description names the constraint Figma cannot enforce (this fixture declares required: true)',
+  );
+  const choiceSlot = parentNode.findOne((n) => n.type === 'SLOT' && n.name === 'Choice');
+  assert(
+    choiceSlot && choiceSlot.componentPropertyReferences.slotContentId === choiceEntry[0],
+    'the slot node is bound to that property id (slotContentId)',
+  );
+  const slotDefault = choiceSlot?.findOne((n) => n.type === 'INSTANCE');
   assert(slotDefault && (await ownerOf(slotDefault)) === childBNode, 'slot default resolves the authoritative child identity');
-  console.log('✔ nested semantic identity: fresh ordinary refs, slot defaults, and slot preferred values bind same-name children by contractId, never canvas name');
+  assert(
+    !parentNode.findOne((n) => n.name === 'Slot') &&
+      !identityMock.root.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot'),
+    'no dashed "Slot" utility component or instance is minted anywhere',
+  );
+  console.log('✔ nested semantic identity: ordinary refs, NATIVE slot defaults, and SLOT preferredValues bind same-name children by contractId, never canvas name');
 
   // Anchor adoption is rename-stable and amends the existing node/key. Clear
   // the semantic marker to force the second resolver tier explicitly.

@@ -323,6 +323,11 @@ export interface DumpNode {
    *  characters → TEXT property, mainComponent → INSTANCE_SWAP property,
    *  visible → BOOLEAN property (the "Show X" optional-part convention). */
   propRefs?: Record<string, string>;
+  /** For SLOT nodes (dump v1.18, additive): the UNSTRIPPED slotContentId —
+   *  the SLOT property's id. Slot identity IS the id (instance content is
+   *  stored against it, live probe 2d), so two same-named slots are only
+   *  distinguishable here. Absence means an older dump, never "unbound". */
+  slotKey?: string;
   /** For INSTANCE nodes: the main component's owning set/component name. */
   instanceOf?: string;
   /** For INSTANCE nodes (dump v1.5, additive): the main COMPONENT's publish
@@ -443,6 +448,12 @@ export interface DumpSet {
    *  dumps means not captured (their proposals note "author `accepts`
    *  manually"), never "no preferred values". */
   swapPreferredValues?: Record<string, DumpPreferredValue[]>;
+  /** SLOT property `description` strings (dump v1.18, additive), keyed by
+   *  suffix-stripped property name. Figma cannot enforce `min`/`max`/
+   *  `required`/`acceptsMode: "restrict"`, so the emitter writes them here in
+   *  words — the description is the only carriage, which makes reading it the
+   *  only way propose can NAME the limit rather than lose it. */
+  slotDescriptions?: Record<string, string>;
   /** BOOLEAN property definitions' defaultValues (dump v1.5, additive),
    *  keyed by suffix-stripped property name. The one property default the
    *  variants alone cannot recover (TEXT defaults ride characters, VARIANT

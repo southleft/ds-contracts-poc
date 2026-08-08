@@ -24,6 +24,18 @@
  *     "Badge instance text not applied" bug). Instances deep-clone their
  *     main's subtree and setProperties REFLECTS TEXT/BOOLEAN values onto the
  *     cloned nodes via componentPropertyReferences; unknown keys THROW.
+ *   - NATIVE SLOTS (2026-08-08, native-slots round) are modeled from the live
+ *     probes in docs/research/slots-recon-probes.md, refusals included:
+ *     `createSlot` exists on COMPONENT nodes only; the auto-minted SLOT
+ *     property renames with its layer; slot properties LIFT to the set on
+ *     combineAsVariants, MERGING same-named ones into one new id (measured
+ *     live) while a post-combine `createSlot()` mints a duplicate — the trap
+ *     the amend path must unify; `layoutMode = 'GRID'` on a slot throws Figma's verbatim
+ *     message; `setProperties` refuses a SLOT key verbatim; and instance slot
+ *     content is stored AGAINST THE PROPERTY ID, so it survives the slot node
+ *     being rebuilt exactly when the rebuilt node is rebound to the same id.
+ *     That last one is the amend-survival invariant — the mock is where it
+ *     must fail forever if the emitter stops rebinding.
  *   - createNodeFromSvg validates (non-empty, no duplicate attributes) and
  *     returns an empty 16×16 frame (vector internals out of scope).
  *   - Fonts always "load"; text style application is exact (textStyleId).
@@ -59,7 +71,21 @@ export function createFigmaMock() {
       this.type = type;
       this.id = newId();
       this.key = `key-${this.id}`;
-      this.name = type;
+      // `name` is an ACCESSOR, because renaming a SLOT layer renames its
+      // linked SLOT property (probe 2b) — a plain field could not carry that.
+      // Defined per node and ENUMERABLE so everything that walks own keys
+      // still sees `name` exactly where it was; the backing `_name` is
+      // deliberately non-enumerable so no walker sees the name twice.
+      Object.defineProperty(this, '_name', { value: type, writable: true, enumerable: false });
+      Object.defineProperty(this, 'name', {
+        enumerable: true,
+        configurable: true,
+        get() { return this._name; },
+        set(v) {
+          this._name = v;
+          if (this.type === 'SLOT') this._renameSlotProperty(v);
+        },
+      });
       this.parent = null;
       this.removed = false;
       this.visible = true;
@@ -156,6 +182,82 @@ export function createFigmaMock() {
         this._propDefs = {};
         this._propSeq = 0;
       }
+      if (type === 'SLOT') {
+        // createSlot()'s own defaults, verbatim from probe 2b: 100×100, no
+        // auto-layout, and a SOLID WHITE fill (NOT the empty fills a
+        // createFrame starts with — an emitter that forgets to clear it ships
+        // a white box where the contract asked for nothing).
+        this.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
+      }
+    }
+
+    // --- NATIVE SLOTS (Figma Schema 2025) ----------------------------------
+    // Modeled from docs/research/slots-recon-probes.md, refusals included.
+    // The three facts this harness must never let regress:
+    //   · createSlot lives on ComponentNode ONLY (2a)
+    //   · a slot layer RENAME renames its linked SLOT property (2b)
+    //   · instance slot content rides the PROPERTY ID, not the slot node —
+    //     it survives node replacement when the rebuilt slot is rebound (2d)
+    createSlot() {
+      if (this.type !== 'COMPONENT') {
+        throw new Error(
+          `createSlot is not a function on a ${this.type} — SlotNode can only be created on a ComponentNode ` +
+          '(probe 2a: typeof frame.createSlot / set.createSlot === "undefined")',
+        );
+      }
+      const slot = new MockNode('SLOT');
+      slot._name = 'Slot';
+      this.appendChild(slot);
+      const owner = this._slotPropertyOwner();
+      const key = owner.addComponentProperty('Slot', 'SLOT', '');
+      // A SLOT definition carries no defaultValue — its keys are exactly
+      // type/description/preferredValues (probe 2b readback).
+      owner._propDefs[key] = { type: 'SLOT', description: null, preferredValues: [] };
+      slot.componentPropertyReferences = { slotContentId: key };
+      return slot;
+    }
+
+    /** The node that OWNS component properties for this component: the set
+     *  when it is a variant (probe 2c — slots lift to set level), else itself. */
+    _slotPropertyOwner() {
+      return this.parent?.type === 'COMPONENT_SET' ? this.parent : this;
+    }
+
+    resetSlot() {
+      if (this.type !== 'SLOT') throw new Error(`resetSlot is not a function on a ${this.type}`);
+      this.children = [];
+    }
+
+    /** The INSTANCE this node lives inside, if any (slot fills are recorded
+     *  per instance, keyed by property id — probe 2d's parentless backing
+     *  frame, modeled as a map). */
+    _owningInstance() {
+      for (let n = this; n; n = n.parent) if (n.type === 'INSTANCE') return n;
+      return null;
+    }
+
+    /** Renaming a SLOT layer renames the linked property, keeping its ID
+     *  (probe 2b: `Slot#4:378` → `Content#4:378`). Every node bound to the old
+     *  key follows — in real Figma the key is derived, here it is rewritten. */
+    _renameSlotProperty(next) {
+      const key = this.componentPropertyReferences?.slotContentId;
+      if (!key || !key.includes('#')) return;
+      const id = key.slice(key.indexOf('#') + 1);
+      const nextKey = `${next}#${id}`;
+      if (nextKey === key) return;
+      let owner = null;
+      for (let n = this.parent; n; n = n.parent) {
+        if ((n.type === 'COMPONENT' || n.type === 'COMPONENT_SET') && n._propDefs?.[key]) { owner = n; break; }
+        if (n.type === 'COMPONENT' && n._slotPropertyOwner()._propDefs?.[key]) { owner = n._slotPropertyOwner(); break; }
+      }
+      if (!owner) return;
+      owner._propDefs[nextKey] = owner._propDefs[key];
+      delete owner._propDefs[key];
+      for (const n of [owner, ...owner.findAll()]) {
+        if (n.componentPropertyReferences?.slotContentId === key) {
+          n.componentPropertyReferences = { ...n.componentPropertyReferences, slotContentId: nextKey };
+        }
+      }
     }
 
     appendChild(node) {
@@ -190,6 +292,20 @@ export function createFigmaMock() {
           this._gridRows.push({ type: 'FLEX', value: 1 }); // P9 absorption
           node._gridRow = rows;
           node._gridCol = 0;
+        }
+      }
+      // INSTANCE SLOT FILL (probe 2d): content appended into an instance's
+      // slot is stored against the slot's PROPERTY ID — Figma keeps it in a
+      // parentless backing frame, which is why it survives the slot node
+      // being replaced and reappears the moment a rebuilt slot is rebound to
+      // the same id. Modeled as a per-instance map so the survival invariant
+      // is measurable headlessly instead of asserted.
+      if (this.type === 'SLOT' && !this._restoringSlotFill) {
+        const inst = this._owningInstance();
+        const key = this.componentPropertyReferences?.slotContentId;
+        if (inst && key) {
+          inst._slotFills = inst._slotFills ?? {};
+          inst._slotFills[key] = (inst._slotFills[key] ?? []).concat([node]);
         }
       }
     }
@@ -234,6 +350,10 @@ export function createFigmaMock() {
     //   · P10 mode-switch destruction (tracks reset on entering GRID, clear
     //     on leaving) and P9 overflow absorption (see appendChild).
     set layoutMode(v) {
+      // Probe 2b, verbatim: a slot's own interior cannot be a grid.
+      if (v === 'GRID' && this.type === 'SLOT') {
+        throw new Error('in set_layoutMode: GRID layoutMode cannot be applied to Slot frames');
+      }
       const prev = this._layoutMode;
       this._layoutMode = v;
       if (v === 'GRID' && prev !== 'GRID') {
@@ -705,6 +825,20 @@ export function createFigmaMock() {
       return key;
     }
 
+    deleteComponentProperty(key) {
+      if (this._propDefs?.[key]) {
+        delete this._propDefs[key];
+        return;
+      }
+      for (const ch of this.children ?? []) {
+        if (ch._propDefs?.[key]) {
+          delete ch._propDefs[key];
+          return;
+        }
+      }
+      throw new Error(`deleteComponentProperty: no property ${key}`);
+    }
+
     editComponentProperty(key, patch) {
       if (this._propDefs[key]) {
         Object.assign(this._propDefs[key], patch);
@@ -795,8 +929,14 @@ export function createFigmaMock() {
       // exposes the possibly-lagged view — the harness sets
       // `_hideNonVariantOnInstances` on a set to simulate the lag.
       inst._allProps = {};
+      inst._slotFills = {};
       for (const [key, def] of Object.entries(source.componentPropertyDefinitions ?? {})) {
-        inst._allProps[key] = { type: def.type, value: def.defaultValue };
+        // A SLOT property has NO value on an instance (probe 2d:
+        // `{ "type": "SLOT", "preferredValues": [] }` — no value field). Its
+        // content is children, not a value.
+        inst._allProps[key] = def.type === 'SLOT'
+          ? { type: 'SLOT', preferredValues: def.preferredValues ?? [] }
+          : { type: def.type, value: def.defaultValue };
       }
       const lagged = source._hideNonVariantOnInstances === true;
       Object.defineProperty(inst, 'componentProperties', {
@@ -816,6 +956,12 @@ export function createFigmaMock() {
       inst.setProperties = (props) => {
         for (const [key, value] of Object.entries(props)) {
           const def = inst._allProps[key];
+          // Probe 2d, verbatim: slot content is never a property VALUE. Any
+          // tool path that writes slot content goes through the slot node's
+          // children.
+          if (def && def.type === 'SLOT') {
+            throw new Error('in setProperties: Slot component property values cannot be edited');
+          }
           if (!def) {
             throw new Error(
               `in setProperties: "${key}" is not a component property on this instance (available: ${Object.keys(inst._allProps).join(', ') || 'none'})`,
@@ -836,6 +982,33 @@ export function createFigmaMock() {
         }
       };
       inst.getMainComponentAsync = async () => inst._mainComponent;
+      // HARNESS-ONLY (underscore, like `_hideNonVariantOnInstances`): real
+      // instances re-derive from their main continuously; this mock clones
+      // once at creation. `_refreshFromMain()` is that re-derivation, made
+      // explicit so a test can ask what a designer would SEE after an amend.
+      // Slot content is re-attached BY PROPERTY ID — a fill whose id no
+      // longer exists on the set does not come back (probe 2d: it orphans
+      // into a parentless backing frame, unrecoverable from the designer's
+      // view). That asymmetry is the whole point of the rebind rule.
+      inst._refreshFromMain = () => {
+        for (const child of [...inst.children]) child.remove();
+        for (const child of inst._mainComponent.children ?? []) inst.appendChild(child._cloneForInstance());
+        const owner = inst._mainComponent.parent?.type === 'COMPONENT_SET'
+          ? inst._mainComponent.parent
+          : inst._mainComponent;
+        const live = owner.componentPropertyDefinitions ?? {};
+        for (const node of [inst, ...inst.findAll()]) {
+          if (node.type !== 'SLOT') continue;
+          const key = node.componentPropertyReferences?.slotContentId;
+          if (!key || !live[key]) continue;
+          for (const fill of inst._slotFills[key] ?? []) {
+            node._restoringSlotFill = true;
+            node.appendChild(fill);
+            node._restoringSlotFill = false;
+          }
+        }
+        return inst;
+      };
       return inst;
     }
 
@@ -992,6 +1165,42 @@ export function createFigmaMock() {
       const set = new MockNode('COMPONENT_SET');
       page.appendChild(set);
       for (const n of nodes) set.appendChild(n);
+      // SLOT properties minted on a component BEFORE combining LIFT to set
+      // level — and same-named ones MERGE into ONE property with a NEW id,
+      // with every slot node re-pointed at it. Measured live 2026-08-08 on
+      // `Latest DS Contracts Tests`: two variants minted `Body#4:391` and
+      // `Body#4:392`, and after combineAsVariants the set carried exactly
+      // `Body#4:393` with both slot nodes referencing it.
+      //
+      // This corrects a first cut of this mock that kept the duplicates. That
+      // version was not merely wrong, it was an ALIBI: it made the emitter's
+      // create-path unification look load-bearing when Figma does that work
+      // itself. The duplicate-property trap is REAL, but it lives on the
+      // AMEND path — `createSlot()` on an already-combined variant mints a
+      // second set-level property under the same name (probe 2c, and
+      // re-confirmed live), which is modeled by createSlot minting on the
+      // parent set. That is where the emitter's rebind actually earns its
+      // keep, and where the eval red-tests it.
+      const merged = new Map();
+      for (const n of nodes) {
+        for (const [key, def] of Object.entries(n._propDefs ?? {})) {
+          if (def.type !== 'SLOT') continue;
+          delete n._propDefs[key];
+          const display = key.split('#')[0];
+          if (!merged.has(display)) {
+            merged.set(display, `${display}#${set.id}:${set._propSeq++}`);
+            set._propDefs[merged.get(display)] = def;
+          }
+        }
+      }
+      for (const [display, mergedKey] of merged) {
+        for (const n of [set, ...set.findAll()]) {
+          const ref = n.componentPropertyReferences?.slotContentId;
+          if (ref && ref.split('#')[0] === display) {
+            n.componentPropertyReferences = { ...n.componentPropertyReferences, slotContentId: mergedKey };
+          }
+        }
+      }
       return set;
     },
     viewport: {

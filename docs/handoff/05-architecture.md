@@ -61,7 +61,8 @@ The concepts you must understand:
 - **Tokens** are DTCG; contracts reference them as `{group.name}`; the emitters
   resolve them (variables on the Figma side, CSS custom properties in code).
 - **Composition channels**: `component` (a fixed nested instance), `repeat +
-  component` (a repeated collection), `slot + accepts` (an INSTANCE_SWAP slot).
+  component` (a repeated collection), `slot + accepts` (a NATIVE Figma SLOT
+  property; `accepts` → its `preferredValues`, a soft picker hint).
 
 ## The emitters (`core/emitter.ts` + `core/emit-*.ts`)
 

@@ -1096,6 +1096,9 @@ interface Ctx {
   swapPreferredValues?: Record<string, DumpPreferredValue[]>;
   /** Set-level BOOLEAN property defaults (dump v1.5). */
   boolDefaults?: Record<string, boolean>;
+  /** Set-level SLOT property descriptions (dump v1.18) — the words carrying
+   *  what Figma refuses to enforce (min/max/required/restrict). */
+  slotDescriptions?: Record<string, string>;
   /** The dump's producer captures `hidden` (dump v1.1+) — see
    *  dumpCapturesHidden; callers derive it from the dump's _provenance. */
   hiddenCaptured?: boolean;
@@ -4521,11 +4524,18 @@ function carryTextOverrides(
  *  (acceptsMode 'prefer' — Figma's own preferredValues tier); unresolved
  *  keys stay a NAMED note carrying the keys verbatim. Pre-v1.5 dumps keep
  *  the classic "author `accepts` manually" note. */
-function applySlotAccepts(slot: Record<string, unknown>, property: string, ctx: Ctx, where: string) {
+function applySlotAccepts(slot: Record<string, unknown>, property: string, ctx: Ctx, where: string, native = false) {
   const prefs = ctx.swapPreferredValues?.[property];
   if (!prefs || prefs.length === 0) {
     ctx.notes.push(
-      `${where}: slot "${property}" accepts (INSTANCE_SWAP preferredValues) is not captured in dump v1 — author \`accepts\` manually`,
+      native
+        // The REST dead end, named where it bites (live probe 2e): REST
+        // serializes the SLOT node and its slotContentId but returns
+        // componentPropertyDefinitions EMPTY, so preferredValues never arrive
+        // over that transport. "Not captured" here means the READER could not
+        // see it — never "this slot accepts anything".
+        ? `${where}: slot "${property}" accepts (SLOT preferredValues) is not captured in this dump — the plugin dump is the authoritative slot reader (REST returns componentPropertyDefinitions EMPTY for SLOT properties, so accepts is INVISIBLE over REST); author \`accepts\` manually or re-dump through the plugin`
+        : `${where}: slot "${property}" accepts (INSTANCE_SWAP preferredValues) is not captured in dump v1 — author \`accepts\` manually`,
     );
     return;
   }
@@ -5199,16 +5209,47 @@ function buildPart(
   }
 
   if (m.type === 'SLOT') {
-    // NATIVE Figma slot node (Schema 2025, dump v1.5) — maps to the SAME
-    // contract slot part the INSTANCE_SWAP spelling maps to; the drawn
-    // spelling is provenance (regeneration should reproduce it).
+    // NATIVE Figma slot node (Schema 2025) — the spelling the emitter writes
+    // since the native-slots round. Its LAYER NAME is its SLOT property's
+    // display name (renaming the layer renames the property, live probe 2b),
+    // so `m.name` is the property and the part's slot name canonicalizes from
+    // it exactly as the INSTANCE_SWAP path canonicalizes its property.
     const nativeSlot: Record<string, unknown> = { name: canonicalPropName(m.name) };
-    applySlotAccepts(nativeSlot, m.name, ctx, where);
+    applySlotAccepts(nativeSlot, m.name, ctx, where, true);
+    // The slot's DRAWN CHILDREN are its design-time content (instances
+    // inherit them; resetSlot returns to them) — the native spelling of what
+    // the swap convention held as one swapped instance.
+    const drawn = m.children.filter((c) => c.type === 'INSTANCE');
+    if (drawn.length === 1) {
+      applySlotDefaultContent(nativeSlot, m.name, drawn[0], ctx, where);
+    } else if (drawn.length > 1) {
+      ctx.notes.push(
+        `${where}: native slot "${m.name}" holds ${drawn.length} drawn instances as design-time content — defaultContent not proposed (a multi-child default is carriable, but which children are DEFAULT content and which are a designer's fill is not readable from the canvas), review`,
+      );
+    }
+    // What the canvas cannot enforce, the emitter wrote in words on the SLOT
+    // property. Read it back BY NAME rather than re-deriving (or losing) it:
+    // an `accepts` that says "restrict" on the code surface is invisible in
+    // preferredValues, and inventing `restrict` from a soft hint would be a
+    // guess. The description is carried as a note, never as a constraint.
+    const described = ctx.slotDescriptions?.[m.name];
+    if (described && described.includes('REFUSED BY FIGMA')) {
+      ctx.notes.push(
+        `${where}: native slot "${m.name}" carries a SLOT description naming a constraint the canvas cannot enforce — "${described}". The contract-side constraint (min/max/required/acceptsMode "restrict") is NOT proposed from it: the canvas holds the words, not the rule; re-declare it in the contract if it still applies`,
+      );
+    }
     part.slot = nativeSlot;
+    // Same visibility conventions as every other slot path: the "Show X"
+    // convention marks the part optional; any other BOOLEAN visibility
+    // binding is a real boolean prop driving the part.
+    const slotVisibleRef = unifiedPropRef(m, 'visible', ctx, where);
+    const slotOptional = slotVisibleRef === `Show ${m.name}`;
+    if (slotOptional) part.optional = true;
+    else if (slotVisibleRef) applyVisibleBinding(part, slotVisibleRef, ctx, where, m);
     ctx.notes.push(
-      `${where}: NATIVE Figma slot node "${m.name}" (Schema 2025) — proposed as slot part (native-slot spelling, dump v1.5; regeneration should reproduce a native slot, not an INSTANCE_SWAP)`,
+      `${where}: NATIVE Figma slot node "${m.name}" (Schema 2025) — proposed as slot part; regeneration reproduces a native slot, never an INSTANCE_SWAP placeholder`,
     );
-    ctx.slots.push({ part, property: m.name, optional: false });
+    ctx.slots.push({ part, property: m.name, optional: slotOptional || slotVisibleRef !== undefined });
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
   }
@@ -7399,6 +7440,7 @@ export function proposeFromDump(
     contractIdByKey: opts.contractIdByKey,
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
+    slotDescriptions: set.slotDescriptions,
     hiddenCaptured: opts.hiddenCaptured,
     capturedValues: opts.capturedValues,
     iconAssets: opts.iconAssets,

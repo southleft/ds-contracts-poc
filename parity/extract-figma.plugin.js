@@ -363,6 +363,39 @@ for (const page of figma.root.children) {
         if (!nestedInstances.includes(owner)) nestedInstances.push(owner);
       }
     }
+    // NATIVE SLOT CONTENT (2026-08-08, native-slots round). `accepts` maps to
+    // the SLOT property's preferredValues, which Figma treats as a PICKER
+    // HINT — off-list content is accepted by the canvas without complaint
+    // (live probe 2b). The canvas therefore cannot refuse a violation, which
+    // is precisely why the differ owes a finding: this is what it needs to
+    // see. Captured per PROPERTY ID (slot identity is the id) with the
+    // component key of each drawn child, so diff.ts can compare keys instead
+    // of names.
+    //
+    // DECLARED LIMIT: this walks the MAIN components — design-time slot
+    // content. A designer's fill on an INSTANCE elsewhere in the file is not
+    // in this transport, so an accepts violation there is not measured here
+    // (absence of an entry is never evidence of compliance).
+    const slotContent = {};
+    for (const probe of probes) {
+      for (const slot of probe.findAll((n) => n.type === 'SLOT')) {
+        const slotKey = (slot.componentPropertyReferences || {}).slotContentId;
+        if (!slotKey) continue;
+        if (!slotContent[slotKey]) slotContent[slotKey] = [];
+        for (const child of slot.children) {
+          const entry = { variant: probe.name, name: child.name };
+          if (child.type === 'INSTANCE') {
+            const main = await child.getMainComponentAsync();
+            if (main) {
+              const owner = main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent : main;
+              entry.name = owner.name;
+              entry.key = owner.key;
+            }
+          }
+          slotContent[slotKey].push(entry);
+        }
+      }
+    }
     // THE TRANSPORT. Mirrors core/emit-figma-script.ts's dsStampFingerprints:
     // a SET stamps each variant child, a standalone COMPONENT stamps itself.
     const variants = (node.type === 'COMPONENT_SET' ? node.children : [node]).map(fingerprintRow);
@@ -375,6 +408,7 @@ for (const page of figma.root.children) {
       variantCount: node.type === 'COMPONENT_SET' ? node.children.length : 1,
       properties: defs,
       nestedInstances,
+      ...(Object.keys(slotContent).length > 0 ? { slotContent } : {}),
       // The contract this set was generated from, when the plugin marked it —
       // diff.ts falls back to key then name, and this is the unambiguous one.
       contractId: node.getSharedPluginData('ds_contracts', 'contractId') || null,

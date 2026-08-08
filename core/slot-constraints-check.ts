@@ -17,15 +17,16 @@
  * because the corpus contains nothing to point at. Saying that plainly is part
  * of the measurement: a gate whose corpus is zero must not imply otherwise.
  *
- * THE ASYMMETRY THIS FILE ALSO PINS. `accepts` maps to Figma's INSTANCE_SWAP
- * `preferredValues`, which is a PICKER HINT — it sorts the listed components to
- * the top of the swap menu and does not prevent any other choice. So `prefer`
- * maps exactly, `open` maps by carrying nothing, and `restrict` — the only tier
- * with teeth — HAS NO CANVAS SPELLING. §3 proves that by driving the real
- * emitter rather than asserting it: a restrict slot and a prefer slot produce
- * byte-identical canvas output. The restriction is real on the code surface and
- * absent on canvas, and that is now a measured, stated fact instead of a
- * silent downgrade.
+ * THE ASYMMETRY THIS FILE ALSO PINS. `accepts` maps to the SLOT property's
+ * `preferredValues` (INSTANCE_SWAP's, before the native-slots round), which is
+ * a PICKER HINT — it sorts the listed components to the top of the picker and
+ * does not prevent any other choice. So `prefer` maps exactly, `open` maps by
+ * carrying nothing, and `restrict` — the only tier with teeth — HAS NO CANVAS
+ * SPELLING. §4 proves that by driving the real emitter rather than asserting
+ * it: a restrict slot and a prefer slot emit the SAME preferredValues and
+ * differ in exactly one line — the SLOT property's `description`, where the
+ * emitter names the refusal in words for the designer to read. The restriction
+ * is real on the code surface and unenforced on canvas, stated on both.
  *
  * Pure functions over synthetic contracts. No browser, no capture data.
  */
@@ -123,10 +124,20 @@ console.log('\n3. NO OVER-APPLICATION — the legal shapes still pass');
 
 console.log('\n4. THE CANVAS CANNOT HOLD `restrict` — proven by emission, not asserted');
 {
-  // Figma's INSTANCE_SWAP carries preferredValues, a picker hint. If `restrict`
-  // had a canvas spelling, a restrict contract and a prefer contract would emit
-  // DIFFERENTLY. They do not — and that byte-identity is the evidence that the
-  // constraint lives on the code surface alone.
+  // Figma's preferredValues (INSTANCE_SWAP's, and since the native-slots round
+  // the SLOT property's) is a picker hint. If `restrict` had a canvas spelling,
+  // a restrict contract and a prefer contract would emit a DIFFERENT
+  // CONSTRAINT. They do not.
+  //
+  // REVISED 2026-08-08 (native slots). Until this round the pin was
+  // byte-identity of the two emitted scripts. Native slots gave the constraint
+  // one honest surface — the SLOT property's `description`, which Figma shows
+  // in the property panel — so the emitter now WRITES the refusal there in
+  // words ("REFUSED BY FIGMA: acceptsMode \"restrict\" has no canvas
+  // enforcement"). That is a stronger receipt than silence, and it means the
+  // two scripts differ. What must stay identical is everything that ENFORCES:
+  // this now diffs the scripts line by line and refuses any difference outside
+  // the description string.
   // Driven on a REAL committed contract, not a synthetic one. A hand-built
   // fixture kept failing on corpus shape ($type, then figma bindings), and
   // fighting that would have been fighting the fixture rather than measuring
@@ -175,8 +186,26 @@ console.log('\n4. THE CANVAS CANNOT HOLD `restrict` — proven by emission, not 
   if (threw) {
     console.log(`  – §4 could not drive the emitter (${threw}); the asymmetry is recorded in the header and in docs/08 rather than pinned here.`);
   } else if (a && b) {
-    if (a !== b) bad('a restrict slot and a prefer slot emitted DIFFERENT canvas output — if the canvas can now express restrict, this file\'s central claim is stale and docs/08 must be corrected');
-    else ok('restrict and prefer emit byte-identical canvas output — the restriction is code-surface-only, as documented');
+    const aLines = a.split('\n');
+    const bLines = b.split('\n');
+    if (aLines.length !== bLines.length) {
+      bad(`a restrict slot and a prefer slot emitted a DIFFERENT NUMBER OF LINES (${aLines.length} vs ${bLines.length}) — if the canvas can now express restrict, this file's central claim is stale and docs/23 must be corrected`);
+    } else {
+      const differing = aLines
+        .map((line, i) => [line, bLines[i]] as const)
+        .filter(([x, y]) => x !== y);
+      const enforcing = differing.filter(([x, y]) => !(x.includes('slotDescription') && y.includes('slotDescription')));
+      if (enforcing.length > 0) {
+        bad(`restrict vs prefer changed ${enforcing.length} line(s) OUTSIDE the SLOT description — the canvas may now be expressing restrict, which this file and docs/23 both deny: ${JSON.stringify(enforcing.slice(0, 2))}`);
+      } else if (differing.length === 0) {
+        bad('restrict and prefer emitted byte-identical scripts — the emitter is no longer NAMING the refusal in the SLOT description, so a designer meets the restriction only by violating it');
+      } else {
+        ok(`restrict and prefer differ in exactly ${differing.length} line(s), all of them the SLOT property description — the constraint is carried as WORDS in Figma's property panel and enforced only on the code surface`);
+        const restrictDesc = differing.find(([x]) => x.includes('REFUSED BY FIGMA'));
+        if (!restrictDesc) bad('the restrict emission does not name the refusal ("REFUSED BY FIGMA") in its SLOT description');
+        else ok('the restrict description names the refusal verbatim, on the canvas, where the designer reads it');
+      }
+    }
   }
 }
 

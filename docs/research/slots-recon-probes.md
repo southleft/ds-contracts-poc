@@ -241,6 +241,29 @@ on the component/set).
 
 ---
 
+## Probe 3 — the EMITTER's own call sequence, live (2026-08-08, native-slots round)
+
+Run against the same file (`BMjUA2ue5CaZXU4kufxL0z`, page **Slots Recon**) in a
+throwaway section `EMITTER VERIFY — native slots`, deleted immediately after.
+It replays exactly what `core/emit-figma-script.ts` now emits, including the one
+call §2 never exercised: `editComponentProperty` on the SET, post-combine.
+
+| Step | Live result |
+|---|---|
+| `createSlot()` on two pre-combine variants, both renamed `Body` | ids `Body#4:391`, `Body#4:392` |
+| `combineAsVariants([v1, v2], section)` | set CPD = **`["Body#4:393", "Size"]`** — same-named slot properties **MERGE into ONE NEW id**, and BOTH slot nodes come back re-pointed at it (`slotContentId: Body#4:393`) |
+| `set.editComponentProperty(Body#4:393, { preferredValues, description })` | **OK** — both persist on the SLOT definition at set level (the previously unprobed call) |
+| interior rebuild: remove children, `v1.createSlot()`, rename `Body` | mints `Body#4:394`; set CPD = `["Body#4:393", "Body#4:394", "Size"]` — **the duplicate trap, live, on the AMEND path** |
+| rebind to `Body#4:393` + `set.deleteComponentProperty('Body#4:394')` | set CPD back to `["Body#4:393", "Size"]`, and the designer instance's slot reads back **`children: ["DESIGNER FILL"]`** — the fill survived the interior rebuild |
+
+**This corrected the headless model.** `scripts/plugin-engine-mock-figma.mjs`
+first modelled combineAsVariants as *keeping* both pre-combine properties, which
+made the create path's unification look load-bearing when Figma performs that
+merge itself. The mock now merges on combine (live-matched) and mints a
+duplicate for a post-combine `createSlot()` (probe 2c, re-confirmed above), so
+the emitter's rebind is exercised where it actually earns its keep: the amend
+path. The unification code still runs on the create path and is a no-op there.
+
 ## Probe inventory on canvas (all inside section `4:1161`)
 
 | Node | Id | Purpose |

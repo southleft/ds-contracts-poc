@@ -56,6 +56,18 @@ const baseSetSchema = z
     variantCount: z.number().int().nonnegative(),
     properties: z.record(z.string(), propertySchema),
     nestedInstances: z.array(z.string()).optional(),
+    /** Native-slot transport (2026-08-08): SLOT property id → the content
+     *  drawn inside that slot, with each instance child's component key. The
+     *  differ compares it against the contract's `accepts` — Figma's
+     *  preferredValues is a picker hint that refuses nothing, so an accepts
+     *  violation can only be a FINDING. Optional: snapshots taken before the
+     *  native-slot round carry none, and absence means NOT CAPTURED. */
+    slotContent: z
+      .record(
+        z.string(),
+        z.array(z.object({ variant: z.string(), name: z.string(), key: z.string().optional() }).passthrough()),
+      )
+      .optional(),
     variants: z.array(variantSchema).optional(),
     setFingerprint: nullableString.optional(),
     setSnapshot: stringLines.nullable().optional(),

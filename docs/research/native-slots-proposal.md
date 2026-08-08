@@ -1,10 +1,20 @@
 # Native Slots — Pinned Emission Proposal
 
-**Status:** pinned by the 2026-08-08 slots recon (probe receipts:
-[slots-recon-probes.md](./slots-recon-probes.md)). **No engine edits ship with
-this document** — `core/emit-figma-script.ts` and `extract/figma` are mid-rework
-in the live ultracode workflow; this is the design they land against,
-**sequenced AFTER the live grid workflow lands**.
+**Status: IMPLEMENTED 2026-08-08** (native-slots round). Pinned by the
+2026-08-08 slots recon (probe receipts:
+[slots-recon-probes.md](./slots-recon-probes.md)); the engine now emits native
+slots and this document is the specification it was built to. What landed,
+against the sections below:
+
+| § | Landed as |
+|---|---|
+| §1 mapping | `core/emit-figma-script.ts` — the `slot` spec compiles to `owner.createSlot()`; the slot LAYER carries `slot.figmaProperty` (the property follows the layer name); `slotRuntime` is feature-gated, so a slot-less contract emits a byte-identical script |
+| §1 sets | `bindSlot` unifies per-variant duplicates: the first id seen is canonical, every other slot node rebinds and its duplicate is deleted. **Live re-measurement (probe 3)** refined the recipe: Figma MERGES same-named slot properties itself at `combineAsVariants` (two pre-combine ids → one new id, both nodes re-pointed), so unification is a no-op on the create path; the duplicate trap is real on the AMEND path, where `createSlot()` on an already-combined variant mints a second set-level property. `bindSlot` reads the node's live reference rather than a cached id, which is why the create path stays correct through the merge |
+| §2 rendering | the dashed "Slot" utility is never minted again; `createSlot`'s default white fill is cleared unless the contract paints the part. G4's slot-scoring convention is revised to STRUCTURAL in [layout-grammar-proposal.md](./layout-grammar-proposal.md) |
+| §3 amend | the same `bindSlot` rebinds every rebuilt slot to the PRESERVED property id (`defKey` name match over the pre-rebuild definitions) and deletes the auto-minted temporary — the amend-survival invariant, red-tested in `evals/fixtures/native-slots-check.ts` |
+| §4 readers | `extract/figma/dump.plugin.js` v1.18 (SLOT preferredValues + `slotDescriptions` + `slotKey`); `core/propose-figma.ts` inverts a native slot incl. defaultContent, optionality and the REST dead end BY NAME; `parity/diff.ts` gains the accepts-violation finding |
+| §5 refusals | GRID-in-slot and slot-in-slot refuse at compile; `min`/`max`/`required`/`restrict` carry as words in the SLOT `description` (`REFUSED BY FIGMA: …`) |
+| §6 migration | `migrateLegacySlotProperty` retires an INSTANCE_SWAP slot property inside a normal amend, reports `migratedSlots` + `strandedSwapOverrides` by name, and `retireSlotUtility` deletes the utility LAST (only when nothing points at it); `RUNTIME_EMIT_REV` = `rt6-native-slots` |
 
 **Verdict: native slots are carriageable — PARTIAL.** Structure, per-variant
 survival, instance fills, grid-cell placement, and plugin-side readback are all

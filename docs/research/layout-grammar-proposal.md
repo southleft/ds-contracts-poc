@@ -125,13 +125,20 @@ On any part whose PARENT declares `display: "grid"`:
   G2 — Figma has no native area names; the CONTRACT carries the name, both
   surfaces carry the rect. Round trip through canvas preserves names because
   the contract, not the canvas, owns them (same rule as anatomy part names).
-- **Dual slot-scoring convention** (compositions gate on this, so it is part
-  of the grammar, not tooling etiquette):
-  - An **empty** area/slot renders the SHARED PLACEHOLDER convention on BOTH
-    surfaces — the canvas gets the placeholder frame (dashed slot frame,
-    slot-named), the code gets the placeholder element with the slot class;
-    both carry the area's placement so the grid's shape is visible with
-    nothing in it.
+- **Slot-scoring convention** (compositions gate on this, so it is part of
+  the grammar, not tooling etiquette). **REVISED 2026-08-08 by the native-slots
+  round** ([native-slots-proposal.md](./native-slots-proposal.md) §2): the old
+  rule scored an empty area by a SHARED PLACEHOLDER on both surfaces — canvas
+  dashed frame ↔ code placeholder element. A native Figma slot renders as
+  Figma's own thing: an ordinary frame with the contract's part styling, zero
+  chrome, and exports carry no slot affordance at all (live probe: an empty
+  slot exports as a blank frame). Placeholder-pixel parity is therefore
+  impossible BY DESIGN, and the convention becomes **structural, not visual**:
+  - An **empty** area/slot scores on PRESENCE + NAME + PLACEMENT BOX — the
+    canvas carries a SLOT node named for the area, placed/spanned per the
+    contract with the contract's own styling (usually no fill); the code
+    carries the placeholder element with the slot class, unchanged. Never
+    compare placeholder pixels: there are none on canvas to compare.
   - A **filled** area/slot pins its children on BOTH sides: the same child
     set, same order, contract-identified where they are component instances
     (P12: instances place, span and fill in cells natively). A slot filled on

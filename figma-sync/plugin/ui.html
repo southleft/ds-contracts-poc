@@ -2093,7 +2093,15 @@
 //                      honest geometry for child STUBS (a correctly-sized box;
 //                      instance internals still never recursed)
 //   swapPreferredValues set-level (dump v1.5): INSTANCE_SWAP preferredValues
-//                      (component keys) → slot `accepts` where the keys resolve
+//                      (component keys) → slot `accepts` where the keys resolve.
+//                      dump v1.18: NATIVE SLOT definitions carry the SAME
+//                      channel — an emitted slot's `accepts` now lives on a
+//                      SLOT property, and reading only INSTANCE_SWAP made the
+//                      constraint invisible the moment slots went native
+//   slotDescriptions   set-level (dump v1.18): the SLOT property `description`
+//                      — the ONE surface carrying what Figma cannot enforce
+//                      (min/max/required/acceptsMode "restrict"). Captured so
+//                      propose can NAME the limit instead of inventing one
 //   boolDefaults       set-level (dump v1.5): BOOLEAN property defaultValues —
 //                      visibility-bound boolean prop defaults, captured evidence
 //   fixedSize          in-flow fixed-size box (dump v1.8): drawn w/h from
@@ -2108,7 +2116,18 @@
 //                      a hashless image paint keeps the v1.7 boolean marker
 //   SLOT nodes         native Figma slots (Schema 2025, dump v1.5): carried
 //                      verbatim (type 'SLOT', children walked) — propose maps
-//                      them to the same contract slot part as INSTANCE_SWAP
+//                      them to the same contract slot part as INSTANCE_SWAP.
+//                      dump v1.18: `slotKey` carries the UNSTRIPPED property id
+//                      (propRefs strips the "#id" suffix, and slot identity IS
+//                      the id — instance content is stored against it, so a
+//                      name-only read cannot tell two same-named slots apart)
+//
+// REST DEAD END (probed 2026-08-08, docs/research/slots-recon-probes.md 2e):
+// the REST file-nodes endpoint serializes SLOT nodes and their
+// slotContentId, but returns componentPropertyDefinitions EMPTY — so
+// preferredValues/description (the whole `accepts` carriage) are INVISIBLE
+// over REST. This plugin dump is the authoritative slot reader; a REST-side
+// lane must treat slot constraints as NOT READABLE, by name.
 //
 // NOT captured in v1 (declared limits, noted by propose.ts): element
 // semantics, events. Read-only — mutates nothing.
@@ -2834,6 +2853,15 @@ async function dumpNode(node, nodePath, parent) {
   }
   if (Object.keys(propRefs).length > 0) out.propRefs = propRefs;
 
+  // dump v1.18: a native slot's identity is its PROPERTY ID, not its name —
+  // instance content is stored against the id (live probe 2d), and the whole
+  // amend-survival rule turns on it. propRefs keeps the stripped display name
+  // (every other reader wants that); slotKey keeps the id verbatim.
+  if (node.type === 'SLOT') {
+    const slotRef = (node.componentPropertyReferences || {}).slotContentId;
+    if (slotRef) out.slotKey = slotRef;
+  }
+
   if (node.type === 'INSTANCE') {
     const main = await node.getMainComponentAsync();
     if (main) {
@@ -2925,7 +2953,7 @@ async function dumpNode(node, nodePath, parent) {
 // boolean props). Definitions can throw on broken sets — tolerated, the
 // channels are additive.
 function dumpPropertyDefinitions(node) {
-  const out = { propertyDefinitions: {}, swapPreferredValues: {}, boolDefaults: {} };
+  const out = { propertyDefinitions: {}, swapPreferredValues: {}, boolDefaults: {}, slotDescriptions: {} };
   try {
     for (const [propName, def] of Object.entries(node.componentPropertyDefinitions || {})) {
       const name = propName.split('#')[0];
@@ -2941,8 +2969,16 @@ function dumpPropertyDefinitions(node) {
         if (def.slotSettings && typeof def.slotSettings === 'object') captured.slotSettings = def.slotSettings;
       }
       out.propertyDefinitions[propName] = captured;
-      if (def.type === 'INSTANCE_SWAP' && Array.isArray(def.preferredValues) && def.preferredValues.length > 0) {
+      // dump v1.18: SLOT joins INSTANCE_SWAP on the `accepts` channel. Native
+      // slots carry preferredValues on a SLOT definition, and a reader that
+      // only looked at INSTANCE_SWAP would report "accepts not captured" for
+      // every slot the current emitter writes — a silent downgrade dressed as
+      // a declared limit.
+      if ((def.type === 'INSTANCE_SWAP' || def.type === 'SLOT') && Array.isArray(def.preferredValues) && def.preferredValues.length > 0) {
         out.swapPreferredValues[name] = def.preferredValues.map((v) => ({ type: v.type, key: v.key }));
+      }
+      if (def.type === 'SLOT' && typeof def.description === 'string' && def.description !== '') {
+        out.slotDescriptions[name] = def.description;
       }
       if (def.type === 'BOOLEAN' && typeof def.defaultValue === 'boolean') {
         out.boolDefaults[name] = def.defaultValue;
@@ -2959,8 +2995,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.17) for design→contract proposal.',
-    dumpVersion: '1.17',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.18) for design→contract proposal.',
+    dumpVersion: '1.18',
   },
 };
 dumps._degradations = degradations;
@@ -2987,6 +3023,7 @@ for (const page of figma.root.children) {
     if (Object.keys(defs.propertyDefinitions).length > 0) dumps[node.name].propertyDefinitions = defs.propertyDefinitions;
     if (Object.keys(defs.swapPreferredValues).length > 0) dumps[node.name].swapPreferredValues = defs.swapPreferredValues;
     if (Object.keys(defs.boolDefaults).length > 0) dumps[node.name].boolDefaults = defs.boolDefaults;
+    if (Object.keys(defs.slotDescriptions).length > 0) dumps[node.name].slotDescriptions = defs.slotDescriptions;
   }
 }
 return dumps;

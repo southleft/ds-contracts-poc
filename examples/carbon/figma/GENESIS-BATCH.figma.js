@@ -1667,40 +1667,6 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
-  // the lookup-only version threw in a blank file).
-  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
-  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
-  utilPage.appendChild(util);
-  util.x = 100; util.y = 100;
-  _slotUtil = util;
-  return util;
-}
 
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
@@ -1917,35 +1883,38 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
-    node = figma.createFrame();
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
     applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = resolveComponentIdentity(
-          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-          'Slot "' + spec.name + '" default',
-          false,
-        );
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props, target);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
       }
     }
+    registry.slots.push({ spec, slot: node });
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -2194,7 +2163,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
+const RUNTIME_EMIT_REV = 'rt6-native-slots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2332,31 +2301,44 @@ async function amendSet(set, C) {
       t.node.componentPropertyReferences = { characters: k };
     }
     for (const sl of registry.slots) {
-      const util = await ensureSlotUtility();
       let k = defKey(sl.spec.slotProperty);
-      if (!k) {
-        const preferred = [];
-        for (const depRef of sl.spec.slotAccepts || []) {
-          const target = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + sl.spec.slotProperty + '" preferred value',
-            false,
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
           );
-          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
-        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined);
-        newKeys[sl.spec.slotProperty] = k;
-        report.addedProps.push(sl.spec.slotProperty);
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
       }
-      sl.instance.componentPropertyReferences = { mainComponent: k };
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — dashed "Slot" chrome must not be the
-        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
         if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        sl.wrapper.componentPropertyReferences = { visible: vk };
-        sl.wrapper.visible = false;
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -2486,29 +2468,29 @@ async function amendComponent(comp, C) {
     t.node.componentPropertyReferences = { characters: k };
   }
   for (const sl of registry.slots) {
-    const util = await ensureSlotUtility();
     let k = defKey(sl.spec.slotProperty);
-    if (!k) {
-      const preferred = [];
-      for (const depRef of sl.spec.slotAccepts || []) {
-        const target = resolveComponentIdentity(
-          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-          'Slot "' + sl.spec.slotProperty + '" preferred value',
-          false,
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
         );
-        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
-      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined);
-      newKeys[sl.spec.slotProperty] = k;
-      report.addedProps.push(sl.spec.slotProperty);
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
     }
-    sl.instance.componentPropertyReferences = { mainComponent: k };
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
       if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.wrapper.componentPropertyReferences = { visible: vk };
-      sl.wrapper.visible = false;
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -2602,32 +2584,20 @@ async function syncOne(C) {
       t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
     }
     for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      let key = keys[s.spec.slotProperty];
-      if (!key) {
-        const preferred = [];
-        for (const depRef of s.spec.slotAccepts || []) {
-          const dep = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + s.spec.slotProperty + '" preferred value',
-            false,
-          );
-          preferred.push({
-            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-            key: dep.key,
-          });
-        }
-        key = mintOnce(
-          s.spec.slotProperty,
-          'INSTANCE_SWAP',
-          s.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined,
-        );
-      }
-      s.instance.componentPropertyReferences = { mainComponent: key };
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
-        s.wrapper.visible = false;
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -7267,40 +7237,6 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
-  // the lookup-only version threw in a blank file).
-  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
-  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
-  utilPage.appendChild(util);
-  util.x = 100; util.y = 100;
-  _slotUtil = util;
-  return util;
-}
 
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
@@ -7483,35 +7419,38 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
-    node = figma.createFrame();
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
     applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = resolveComponentIdentity(
-          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-          'Slot "' + spec.name + '" default',
-          false,
-        );
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props, target);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
       }
     }
+    registry.slots.push({ spec, slot: node });
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -7759,7 +7698,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
+const RUNTIME_EMIT_REV = 'rt6-native-slots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -7896,31 +7835,44 @@ async function amendSet(set, C) {
       t.node.componentPropertyReferences = { characters: k };
     }
     for (const sl of registry.slots) {
-      const util = await ensureSlotUtility();
       let k = defKey(sl.spec.slotProperty);
-      if (!k) {
-        const preferred = [];
-        for (const depRef of sl.spec.slotAccepts || []) {
-          const target = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + sl.spec.slotProperty + '" preferred value',
-            false,
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
           );
-          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
-        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined);
-        newKeys[sl.spec.slotProperty] = k;
-        report.addedProps.push(sl.spec.slotProperty);
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
       }
-      sl.instance.componentPropertyReferences = { mainComponent: k };
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — dashed "Slot" chrome must not be the
-        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
         if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        sl.wrapper.componentPropertyReferences = { visible: vk };
-        sl.wrapper.visible = false;
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -8050,29 +8002,29 @@ async function amendComponent(comp, C) {
     t.node.componentPropertyReferences = { characters: k };
   }
   for (const sl of registry.slots) {
-    const util = await ensureSlotUtility();
     let k = defKey(sl.spec.slotProperty);
-    if (!k) {
-      const preferred = [];
-      for (const depRef of sl.spec.slotAccepts || []) {
-        const target = resolveComponentIdentity(
-          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-          'Slot "' + sl.spec.slotProperty + '" preferred value',
-          false,
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
         );
-        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
-      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined);
-      newKeys[sl.spec.slotProperty] = k;
-      report.addedProps.push(sl.spec.slotProperty);
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
     }
-    sl.instance.componentPropertyReferences = { mainComponent: k };
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
       if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.wrapper.componentPropertyReferences = { visible: vk };
-      sl.wrapper.visible = false;
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -8166,32 +8118,20 @@ async function syncOne(C) {
       t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
     }
     for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      let key = keys[s.spec.slotProperty];
-      if (!key) {
-        const preferred = [];
-        for (const depRef of s.spec.slotAccepts || []) {
-          const dep = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + s.spec.slotProperty + '" preferred value',
-            false,
-          );
-          preferred.push({
-            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-            key: dep.key,
-          });
-        }
-        key = mintOnce(
-          s.spec.slotProperty,
-          'INSTANCE_SWAP',
-          s.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined,
-        );
-      }
-      s.instance.componentPropertyReferences = { mainComponent: key };
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
-        s.wrapper.visible = false;
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -8995,40 +8935,6 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
-  // the lookup-only version threw in a blank file).
-  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
-  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
-  utilPage.appendChild(util);
-  util.x = 100; util.y = 100;
-  _slotUtil = util;
-  return util;
-}
 
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
@@ -9383,35 +9289,38 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
-    node = figma.createFrame();
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
     applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = resolveComponentIdentity(
-          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-          'Slot "' + spec.name + '" default',
-          false,
-        );
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props, target);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
       }
     }
+    registry.slots.push({ spec, slot: node });
   } else if (spec.type === 'shape') {
     // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
     // ROUND-cap polyline SVG (see collapseTwoSideStrokeGlyph). Keep type
@@ -9728,7 +9637,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
+const RUNTIME_EMIT_REV = 'rt6-native-slots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -9869,31 +9778,44 @@ async function amendSet(set, C) {
       t.node.componentPropertyReferences = { characters: k };
     }
     for (const sl of registry.slots) {
-      const util = await ensureSlotUtility();
       let k = defKey(sl.spec.slotProperty);
-      if (!k) {
-        const preferred = [];
-        for (const depRef of sl.spec.slotAccepts || []) {
-          const target = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + sl.spec.slotProperty + '" preferred value',
-            false,
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
           );
-          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
-        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined);
-        newKeys[sl.spec.slotProperty] = k;
-        report.addedProps.push(sl.spec.slotProperty);
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
       }
-      sl.instance.componentPropertyReferences = { mainComponent: k };
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — dashed "Slot" chrome must not be the
-        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
         if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        sl.wrapper.componentPropertyReferences = { visible: vk };
-        sl.wrapper.visible = false;
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -10026,29 +9948,29 @@ async function amendComponent(comp, C) {
     t.node.componentPropertyReferences = { characters: k };
   }
   for (const sl of registry.slots) {
-    const util = await ensureSlotUtility();
     let k = defKey(sl.spec.slotProperty);
-    if (!k) {
-      const preferred = [];
-      for (const depRef of sl.spec.slotAccepts || []) {
-        const target = resolveComponentIdentity(
-          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-          'Slot "' + sl.spec.slotProperty + '" preferred value',
-          false,
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
         );
-        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
-      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined);
-      newKeys[sl.spec.slotProperty] = k;
-      report.addedProps.push(sl.spec.slotProperty);
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
     }
-    sl.instance.componentPropertyReferences = { mainComponent: k };
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
       if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.wrapper.componentPropertyReferences = { visible: vk };
-      sl.wrapper.visible = false;
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -10142,32 +10064,20 @@ async function syncOne(C) {
       t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
     }
     for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      let key = keys[s.spec.slotProperty];
-      if (!key) {
-        const preferred = [];
-        for (const depRef of s.spec.slotAccepts || []) {
-          const dep = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + s.spec.slotProperty + '" preferred value',
-            false,
-          );
-          preferred.push({
-            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-            key: dep.key,
-          });
-        }
-        key = mintOnce(
-          s.spec.slotProperty,
-          'INSTANCE_SWAP',
-          s.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined,
-        );
-      }
-      s.instance.componentPropertyReferences = { mainComponent: key };
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
-        s.wrapper.visible = false;
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -11944,40 +11854,6 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
-  // the lookup-only version threw in a blank file).
-  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
-  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
-  utilPage.appendChild(util);
-  util.x = 100; util.y = 100;
-  _slotUtil = util;
-  return util;
-}
 
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
@@ -12134,35 +12010,38 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
-    node = figma.createFrame();
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
     applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = resolveComponentIdentity(
-          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-          'Slot "' + spec.name + '" default',
-          false,
-        );
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props, target);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
       }
     }
+    registry.slots.push({ spec, slot: node });
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -12410,7 +12289,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
+const RUNTIME_EMIT_REV = 'rt6-native-slots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -12547,31 +12426,44 @@ async function amendSet(set, C) {
       t.node.componentPropertyReferences = { characters: k };
     }
     for (const sl of registry.slots) {
-      const util = await ensureSlotUtility();
       let k = defKey(sl.spec.slotProperty);
-      if (!k) {
-        const preferred = [];
-        for (const depRef of sl.spec.slotAccepts || []) {
-          const target = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + sl.spec.slotProperty + '" preferred value',
-            false,
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
           );
-          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
-        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined);
-        newKeys[sl.spec.slotProperty] = k;
-        report.addedProps.push(sl.spec.slotProperty);
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
       }
-      sl.instance.componentPropertyReferences = { mainComponent: k };
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — dashed "Slot" chrome must not be the
-        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
         if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        sl.wrapper.componentPropertyReferences = { visible: vk };
-        sl.wrapper.visible = false;
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -12701,29 +12593,29 @@ async function amendComponent(comp, C) {
     t.node.componentPropertyReferences = { characters: k };
   }
   for (const sl of registry.slots) {
-    const util = await ensureSlotUtility();
     let k = defKey(sl.spec.slotProperty);
-    if (!k) {
-      const preferred = [];
-      for (const depRef of sl.spec.slotAccepts || []) {
-        const target = resolveComponentIdentity(
-          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-          'Slot "' + sl.spec.slotProperty + '" preferred value',
-          false,
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
         );
-        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
-      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined);
-      newKeys[sl.spec.slotProperty] = k;
-      report.addedProps.push(sl.spec.slotProperty);
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
     }
-    sl.instance.componentPropertyReferences = { mainComponent: k };
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
       if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.wrapper.componentPropertyReferences = { visible: vk };
-      sl.wrapper.visible = false;
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -12817,32 +12709,20 @@ async function syncOne(C) {
       t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
     }
     for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      let key = keys[s.spec.slotProperty];
-      if (!key) {
-        const preferred = [];
-        for (const depRef of s.spec.slotAccepts || []) {
-          const dep = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + s.spec.slotProperty + '" preferred value',
-            false,
-          );
-          preferred.push({
-            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-            key: dep.key,
-          });
-        }
-        key = mintOnce(
-          s.spec.slotProperty,
-          'INSTANCE_SWAP',
-          s.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined,
-        );
-      }
-      s.instance.componentPropertyReferences = { mainComponent: key };
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
-        s.wrapper.visible = false;
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -14915,40 +14795,6 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
-  // the lookup-only version threw in a blank file).
-  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
-  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
-  utilPage.appendChild(util);
-  util.x = 100; util.y = 100;
-  _slotUtil = util;
-  return util;
-}
 
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
@@ -15165,35 +15011,38 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
-    node = figma.createFrame();
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
     applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = resolveComponentIdentity(
-          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-          'Slot "' + spec.name + '" default',
-          false,
-        );
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props, target);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
       }
     }
+    registry.slots.push({ spec, slot: node });
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -15442,7 +15291,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
+const RUNTIME_EMIT_REV = 'rt6-native-slots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -15580,31 +15429,44 @@ async function amendSet(set, C) {
       t.node.componentPropertyReferences = { characters: k };
     }
     for (const sl of registry.slots) {
-      const util = await ensureSlotUtility();
       let k = defKey(sl.spec.slotProperty);
-      if (!k) {
-        const preferred = [];
-        for (const depRef of sl.spec.slotAccepts || []) {
-          const target = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + sl.spec.slotProperty + '" preferred value',
-            false,
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
           );
-          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
-        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined);
-        newKeys[sl.spec.slotProperty] = k;
-        report.addedProps.push(sl.spec.slotProperty);
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
       }
-      sl.instance.componentPropertyReferences = { mainComponent: k };
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — dashed "Slot" chrome must not be the
-        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
         if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        sl.wrapper.componentPropertyReferences = { visible: vk };
-        sl.wrapper.visible = false;
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -15734,29 +15596,29 @@ async function amendComponent(comp, C) {
     t.node.componentPropertyReferences = { characters: k };
   }
   for (const sl of registry.slots) {
-    const util = await ensureSlotUtility();
     let k = defKey(sl.spec.slotProperty);
-    if (!k) {
-      const preferred = [];
-      for (const depRef of sl.spec.slotAccepts || []) {
-        const target = resolveComponentIdentity(
-          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-          'Slot "' + sl.spec.slotProperty + '" preferred value',
-          false,
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
         );
-        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
-      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined);
-      newKeys[sl.spec.slotProperty] = k;
-      report.addedProps.push(sl.spec.slotProperty);
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
     }
-    sl.instance.componentPropertyReferences = { mainComponent: k };
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
       if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.wrapper.componentPropertyReferences = { visible: vk };
-      sl.wrapper.visible = false;
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -15850,32 +15712,20 @@ async function syncOne(C) {
       t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
     }
     for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      let key = keys[s.spec.slotProperty];
-      if (!key) {
-        const preferred = [];
-        for (const depRef of s.spec.slotAccepts || []) {
-          const dep = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + s.spec.slotProperty + '" preferred value',
-            false,
-          );
-          preferred.push({
-            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-            key: dep.key,
-          });
-        }
-        key = mintOnce(
-          s.spec.slotProperty,
-          'INSTANCE_SWAP',
-          s.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined,
-        );
-      }
-      s.instance.componentPropertyReferences = { mainComponent: key };
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
-        s.wrapper.visible = false;
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -17769,40 +17619,6 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
-  // the lookup-only version threw in a blank file).
-  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
-  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
-  utilPage.appendChild(util);
-  util.x = 100; util.y = 100;
-  _slotUtil = util;
-  return util;
-}
 
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
@@ -18130,35 +17946,38 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
-    node = figma.createFrame();
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
     applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = resolveComponentIdentity(
-          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-          'Slot "' + spec.name + '" default',
-          false,
-        );
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props, target);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
       }
     }
+    registry.slots.push({ spec, slot: node });
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -18410,7 +18229,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
+const RUNTIME_EMIT_REV = 'rt6-native-slots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -18551,31 +18370,44 @@ async function amendSet(set, C) {
       t.node.componentPropertyReferences = { characters: k };
     }
     for (const sl of registry.slots) {
-      const util = await ensureSlotUtility();
       let k = defKey(sl.spec.slotProperty);
-      if (!k) {
-        const preferred = [];
-        for (const depRef of sl.spec.slotAccepts || []) {
-          const target = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + sl.spec.slotProperty + '" preferred value',
-            false,
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
           );
-          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
-        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined);
-        newKeys[sl.spec.slotProperty] = k;
-        report.addedProps.push(sl.spec.slotProperty);
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
       }
-      sl.instance.componentPropertyReferences = { mainComponent: k };
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — dashed "Slot" chrome must not be the
-        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
         if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        sl.wrapper.componentPropertyReferences = { visible: vk };
-        sl.wrapper.visible = false;
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -18708,29 +18540,29 @@ async function amendComponent(comp, C) {
     t.node.componentPropertyReferences = { characters: k };
   }
   for (const sl of registry.slots) {
-    const util = await ensureSlotUtility();
     let k = defKey(sl.spec.slotProperty);
-    if (!k) {
-      const preferred = [];
-      for (const depRef of sl.spec.slotAccepts || []) {
-        const target = resolveComponentIdentity(
-          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-          'Slot "' + sl.spec.slotProperty + '" preferred value',
-          false,
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
         );
-        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
-      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined);
-      newKeys[sl.spec.slotProperty] = k;
-      report.addedProps.push(sl.spec.slotProperty);
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
     }
-    sl.instance.componentPropertyReferences = { mainComponent: k };
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
       if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.wrapper.componentPropertyReferences = { visible: vk };
-      sl.wrapper.visible = false;
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -18824,32 +18656,20 @@ async function syncOne(C) {
       t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
     }
     for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      let key = keys[s.spec.slotProperty];
-      if (!key) {
-        const preferred = [];
-        for (const depRef of s.spec.slotAccepts || []) {
-          const dep = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + s.spec.slotProperty + '" preferred value',
-            false,
-          );
-          preferred.push({
-            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-            key: dep.key,
-          });
-        }
-        key = mintOnce(
-          s.spec.slotProperty,
-          'INSTANCE_SWAP',
-          s.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined,
-        );
-      }
-      s.instance.componentPropertyReferences = { mainComponent: key };
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
-        s.wrapper.visible = false;
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -19950,40 +19770,6 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
-  // the lookup-only version threw in a blank file).
-  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
-  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
-  utilPage.appendChild(util);
-  util.x = 100; util.y = 100;
-  _slotUtil = util;
-  return util;
-}
 
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
@@ -20154,35 +19940,38 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
-    node = figma.createFrame();
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
     applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = resolveComponentIdentity(
-          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-          'Slot "' + spec.name + '" default',
-          false,
-        );
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props, target);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
       }
     }
+    registry.slots.push({ spec, slot: node });
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -20430,7 +20219,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
+const RUNTIME_EMIT_REV = 'rt6-native-slots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -20567,31 +20356,44 @@ async function amendSet(set, C) {
       t.node.componentPropertyReferences = { characters: k };
     }
     for (const sl of registry.slots) {
-      const util = await ensureSlotUtility();
       let k = defKey(sl.spec.slotProperty);
-      if (!k) {
-        const preferred = [];
-        for (const depRef of sl.spec.slotAccepts || []) {
-          const target = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + sl.spec.slotProperty + '" preferred value',
-            false,
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
           );
-          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
-        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined);
-        newKeys[sl.spec.slotProperty] = k;
-        report.addedProps.push(sl.spec.slotProperty);
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
       }
-      sl.instance.componentPropertyReferences = { mainComponent: k };
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — dashed "Slot" chrome must not be the
-        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
         if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        sl.wrapper.componentPropertyReferences = { visible: vk };
-        sl.wrapper.visible = false;
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -20721,29 +20523,29 @@ async function amendComponent(comp, C) {
     t.node.componentPropertyReferences = { characters: k };
   }
   for (const sl of registry.slots) {
-    const util = await ensureSlotUtility();
     let k = defKey(sl.spec.slotProperty);
-    if (!k) {
-      const preferred = [];
-      for (const depRef of sl.spec.slotAccepts || []) {
-        const target = resolveComponentIdentity(
-          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-          'Slot "' + sl.spec.slotProperty + '" preferred value',
-          false,
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
         );
-        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
-      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined);
-      newKeys[sl.spec.slotProperty] = k;
-      report.addedProps.push(sl.spec.slotProperty);
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
     }
-    sl.instance.componentPropertyReferences = { mainComponent: k };
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
       if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.wrapper.componentPropertyReferences = { visible: vk };
-      sl.wrapper.visible = false;
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -20837,32 +20639,20 @@ async function syncOne(C) {
       t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
     }
     for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      let key = keys[s.spec.slotProperty];
-      if (!key) {
-        const preferred = [];
-        for (const depRef of s.spec.slotAccepts || []) {
-          const dep = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + s.spec.slotProperty + '" preferred value',
-            false,
-          );
-          preferred.push({
-            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-            key: dep.key,
-          });
-        }
-        key = mintOnce(
-          s.spec.slotProperty,
-          'INSTANCE_SWAP',
-          s.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined,
-        );
-      }
-      s.instance.componentPropertyReferences = { mainComponent: key };
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
-        s.wrapper.visible = false;
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -22926,40 +22716,6 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
-  // the lookup-only version threw in a blank file).
-  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
-  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
-  utilPage.appendChild(util);
-  util.x = 100; util.y = 100;
-  _slotUtil = util;
-  return util;
-}
 
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
@@ -23183,35 +22939,38 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
-    node = figma.createFrame();
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
     applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = resolveComponentIdentity(
-          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-          'Slot "' + spec.name + '" default',
-          false,
-        );
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props, target);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
       }
     }
+    registry.slots.push({ spec, slot: node });
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -23459,7 +23218,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
+const RUNTIME_EMIT_REV = 'rt6-native-slots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -23596,31 +23355,44 @@ async function amendSet(set, C) {
       t.node.componentPropertyReferences = { characters: k };
     }
     for (const sl of registry.slots) {
-      const util = await ensureSlotUtility();
       let k = defKey(sl.spec.slotProperty);
-      if (!k) {
-        const preferred = [];
-        for (const depRef of sl.spec.slotAccepts || []) {
-          const target = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + sl.spec.slotProperty + '" preferred value',
-            false,
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
           );
-          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
-        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined);
-        newKeys[sl.spec.slotProperty] = k;
-        report.addedProps.push(sl.spec.slotProperty);
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
       }
-      sl.instance.componentPropertyReferences = { mainComponent: k };
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — dashed "Slot" chrome must not be the
-        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
         if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        sl.wrapper.componentPropertyReferences = { visible: vk };
-        sl.wrapper.visible = false;
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -23750,29 +23522,29 @@ async function amendComponent(comp, C) {
     t.node.componentPropertyReferences = { characters: k };
   }
   for (const sl of registry.slots) {
-    const util = await ensureSlotUtility();
     let k = defKey(sl.spec.slotProperty);
-    if (!k) {
-      const preferred = [];
-      for (const depRef of sl.spec.slotAccepts || []) {
-        const target = resolveComponentIdentity(
-          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-          'Slot "' + sl.spec.slotProperty + '" preferred value',
-          false,
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
         );
-        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
-      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined);
-      newKeys[sl.spec.slotProperty] = k;
-      report.addedProps.push(sl.spec.slotProperty);
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
     }
-    sl.instance.componentPropertyReferences = { mainComponent: k };
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
       if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.wrapper.componentPropertyReferences = { visible: vk };
-      sl.wrapper.visible = false;
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -23866,32 +23638,20 @@ async function syncOne(C) {
       t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
     }
     for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      let key = keys[s.spec.slotProperty];
-      if (!key) {
-        const preferred = [];
-        for (const depRef of s.spec.slotAccepts || []) {
-          const dep = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + s.spec.slotProperty + '" preferred value',
-            false,
-          );
-          preferred.push({
-            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-            key: dep.key,
-          });
-        }
-        key = mintOnce(
-          s.spec.slotProperty,
-          'INSTANCE_SWAP',
-          s.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined,
-        );
-      }
-      s.instance.componentPropertyReferences = { mainComponent: key };
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
-        s.wrapper.visible = false;
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -25451,40 +25211,6 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
-  // the lookup-only version threw in a blank file).
-  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
-  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
-  utilPage.appendChild(util);
-  util.x = 100; util.y = 100;
-  _slotUtil = util;
-  return util;
-}
 
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
@@ -25692,35 +25418,38 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
-    node = figma.createFrame();
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
     applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = resolveComponentIdentity(
-          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-          'Slot "' + spec.name + '" default',
-          false,
-        );
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props, target);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
       }
     }
+    registry.slots.push({ spec, slot: node });
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -25969,7 +25698,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
+const RUNTIME_EMIT_REV = 'rt6-native-slots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -26107,31 +25836,44 @@ async function amendSet(set, C) {
       t.node.componentPropertyReferences = { characters: k };
     }
     for (const sl of registry.slots) {
-      const util = await ensureSlotUtility();
       let k = defKey(sl.spec.slotProperty);
-      if (!k) {
-        const preferred = [];
-        for (const depRef of sl.spec.slotAccepts || []) {
-          const target = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + sl.spec.slotProperty + '" preferred value',
-            false,
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
           );
-          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
-        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined);
-        newKeys[sl.spec.slotProperty] = k;
-        report.addedProps.push(sl.spec.slotProperty);
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
       }
-      sl.instance.componentPropertyReferences = { mainComponent: k };
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — dashed "Slot" chrome must not be the
-        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
         if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        sl.wrapper.componentPropertyReferences = { visible: vk };
-        sl.wrapper.visible = false;
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -26261,29 +26003,29 @@ async function amendComponent(comp, C) {
     t.node.componentPropertyReferences = { characters: k };
   }
   for (const sl of registry.slots) {
-    const util = await ensureSlotUtility();
     let k = defKey(sl.spec.slotProperty);
-    if (!k) {
-      const preferred = [];
-      for (const depRef of sl.spec.slotAccepts || []) {
-        const target = resolveComponentIdentity(
-          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-          'Slot "' + sl.spec.slotProperty + '" preferred value',
-          false,
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
         );
-        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
-      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined);
-      newKeys[sl.spec.slotProperty] = k;
-      report.addedProps.push(sl.spec.slotProperty);
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
     }
-    sl.instance.componentPropertyReferences = { mainComponent: k };
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
       if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.wrapper.componentPropertyReferences = { visible: vk };
-      sl.wrapper.visible = false;
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -26377,32 +26119,20 @@ async function syncOne(C) {
       t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
     }
     for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      let key = keys[s.spec.slotProperty];
-      if (!key) {
-        const preferred = [];
-        for (const depRef of s.spec.slotAccepts || []) {
-          const dep = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + s.spec.slotProperty + '" preferred value',
-            false,
-          );
-          preferred.push({
-            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-            key: dep.key,
-          });
-        }
-        key = mintOnce(
-          s.spec.slotProperty,
-          'INSTANCE_SWAP',
-          s.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined,
-        );
-      }
-      s.instance.componentPropertyReferences = { mainComponent: key };
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
-        s.wrapper.visible = false;
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {
@@ -27384,40 +27114,6 @@ function ensureHostSection(page, target, displayName) {
   return section;
 }
 
-let _slotUtil = null;
-async function ensureSlotUtility() {
-  if (_slotUtil) return _slotUtil;
-  for (const page of figma.root.children) {
-    const hit = page.findOne((n) => n.type === 'COMPONENT' && n.name === 'Slot');
-    if (hit) { _slotUtil = hit; return hit; }
-  }
-  // Fresh file: create it (found by the 2026-07-06 fresh-file rebuild test —
-  // the lookup-only version threw in a blank file).
-  await figma.loadFontAsync({ family: 'Inter', style: 'Medium' });
-  const util = figma.createComponent();
-  util.name = 'Slot';
-  util.layoutMode = 'HORIZONTAL';
-  util.primaryAxisAlignItems = 'CENTER';
-  util.counterAxisAlignItems = 'CENTER';
-  util.paddingLeft = util.paddingRight = 12;
-  util.paddingTop = util.paddingBottom = 8;
-  util.cornerRadius = 4;
-  util.fills = [];
-  util.strokes = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.dashPattern = [4, 4];
-  const t = figma.createText();
-  t.fontName = { family: 'Inter', style: 'Medium' };
-  t.fontSize = 12;
-  t.characters = 'Slot';
-  t.fills = [{ type: 'SOLID', color: { r: 0.6, g: 0.62, b: 0.68 } }];
-  util.appendChild(t);
-  let utilPage = figma.root.children.find((p) => p.name === 'Utilities');
-  if (!utilPage) { utilPage = figma.createPage(); utilPage.name = 'Utilities'; }
-  utilPage.appendChild(util);
-  util.x = 100; util.y = 100;
-  _slotUtil = util;
-  return util;
-}
 
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
@@ -27734,35 +27430,38 @@ async function buildNode(spec, registry) {
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
   } else if (spec.type === 'slot') {
-    node = figma.createFrame();
+    // NATIVE SLOT. createSlot() exists on ComponentNode only (probe 2a), so
+    // the slot is minted by the variant component that owns it and moved into
+    // place by the ordinary child append below — a slot in a nested frame
+    // keeps its property binding (probe 2f).
+    if (!registry.owner) {
+      throw new Error(
+        'Slot "' + spec.slotProperty + '": no owning COMPONENT in scope — figma.createSlot is a ComponentNode method ' +
+        '(never on a frame or a component SET); a slot outside a component build is refused',
+      );
+    }
+    node = registry.owner.createSlot();
     applyFrameSpec(node, spec);
-    const defaults = spec.slotDefault || [];
-    if (defaults.length === 0) {
-      const util = await ensureSlotUtility();
-      const inst = util.createInstance();
+    // An empty native slot renders as Figma's own thing: no dashed chrome, no
+    // "Slot" text, no placeholder instance (proposal §2). createSlot's default
+    // solid-white fill is Figma's, not the contract's — the part's own styling
+    // (usually nothing) is the truth.
+    if (!spec.fill) node.fills = [];
+    for (const item of spec.slotDefault || []) {
+      const target = resolveComponentIdentity(
+        { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+        'Slot "' + spec.name + '" default',
+        false,
+      );
+      const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
+      const inst = main.createInstance();
+      if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
-      registry.slots.push({ spec, wrapper: node, instance: inst, defaultId: null });
-    } else {
-      const instances = [];
-      for (const item of defaults) {
-        const target = resolveComponentIdentity(
-          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
-          'Slot "' + spec.name + '" default',
-          false,
-        );
-        const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
-        const inst = main.createInstance();
-        if (item.props) setInstanceProps(inst, item.props, target);
-        node.appendChild(inst);
-        if (spec.layout && spec.layout.stretchChildren) {
-          try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
-        }
-        instances.push({ inst, main });
-      }
-      if (defaults.length === 1) {
-        registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
+      if (spec.layout && spec.layout.stretchChildren) {
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
       }
     }
+    registry.slots.push({ spec, slot: node });
   } else if (spec.type === 'shape') {
     // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
     // ROUND-cap polyline SVG (see collapseTwoSideStrokeGlyph). Keep type
@@ -28055,7 +27754,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt5-text-fill-alignment';
+const RUNTIME_EMIT_REV = 'rt6-native-slots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -28195,31 +27894,44 @@ async function amendSet(set, C) {
       t.node.componentPropertyReferences = { characters: k };
     }
     for (const sl of registry.slots) {
-      const util = await ensureSlotUtility();
       let k = defKey(sl.spec.slotProperty);
-      if (!k) {
-        const preferred = [];
-        for (const depRef of sl.spec.slotAccepts || []) {
-          const target = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + sl.spec.slotProperty + '" preferred value',
-            false,
+      // MIGRATION (proposal §6.2): the same display name carried by the OLD
+      // INSTANCE_SWAP convention is the same slot — but the two property
+      // types cannot share an id, so the legacy one retires here (reported)
+      // and the natively minted SLOT property takes over. ANY OTHER type
+      // sharing the name is not a slot in disguise: deleting a TEXT/BOOLEAN
+      // property to make room would destroy every instance override bound to
+      // it, so that refuses by name instead.
+      if (k && defs[k] && defs[k].type !== 'SLOT') {
+        if (defs[k].type !== 'INSTANCE_SWAP') {
+          throw new Error(
+            'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
           );
-          preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
-        k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined);
-        newKeys[sl.spec.slotProperty] = k;
-        report.addedProps.push(sl.spec.slotProperty);
+        await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
+        k = null;
       }
-      sl.instance.componentPropertyReferences = { mainComponent: k };
+      const bound = bindSlot(set, sl, k);
+      if (!k) {
+        newKeys[sl.spec.slotProperty] = bound.key;
+        report.addedProps.push(sl.spec.slotProperty);
+      } else if (bound.rebound) {
+        // The headline invariant: the rebuilt slot went back onto the
+        // PRESERVED property id, so every instance fill keyed to it survives
+        // this amend (probe 2d.3).
+        report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+      }
       if (sl.spec.slotOptional) {
         let vk = defKey('Show ' + sl.spec.slotProperty);
-        // Optional slots default hidden — dashed "Slot" chrome must not be the
-        // showcase default (Toast/ChatMessage live finding). Designers opt in.
+        // Optional slots default hidden — an empty slot still occupies its box
+        // (Toast/ChatMessage live finding). Designers opt in.
         if (!vk) { vk = set.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-        sl.wrapper.componentPropertyReferences = { visible: vk };
-        sl.wrapper.visible = false;
+        // BOTH references in one write: componentPropertyReferences is
+        // replaced wholesale, and dropping slotContentId here would unbind
+        // the slot (and strand its content) to gain a visibility toggle.
+        sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+        sl.slot.visible = false;
       }
     }
     for (const vis of registry.visibles) {
@@ -28352,29 +28064,29 @@ async function amendComponent(comp, C) {
     t.node.componentPropertyReferences = { characters: k };
   }
   for (const sl of registry.slots) {
-    const util = await ensureSlotUtility();
     let k = defKey(sl.spec.slotProperty);
-    if (!k) {
-      const preferred = [];
-      for (const depRef of sl.spec.slotAccepts || []) {
-        const target = resolveComponentIdentity(
-          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-          'Slot "' + sl.spec.slotProperty + '" preferred value',
-          false,
+    if (k && defs[k] && defs[k].type !== 'SLOT') {
+      if (defs[k].type !== 'INSTANCE_SWAP') {
+        throw new Error(
+          'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
         );
-        preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
-      k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
-        preferred.length > 0 ? { preferredValues: preferred } : undefined);
-      newKeys[sl.spec.slotProperty] = k;
-      report.addedProps.push(sl.spec.slotProperty);
+      await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
+      k = null;
     }
-    sl.instance.componentPropertyReferences = { mainComponent: k };
+    const bound = bindSlot(comp, sl, k);
+    if (!k) {
+      newKeys[sl.spec.slotProperty] = bound.key;
+      report.addedProps.push(sl.spec.slotProperty);
+    } else if (bound.rebound) {
+      report.preservedSlots = (report.preservedSlots || []).concat([sl.spec.slotProperty]);
+    }
     if (sl.spec.slotOptional) {
       let vk = defKey('Show ' + sl.spec.slotProperty);
       if (!vk) { vk = comp.addComponentProperty('Show ' + sl.spec.slotProperty, 'BOOLEAN', false); newKeys['Show ' + sl.spec.slotProperty] = vk; }
-      sl.wrapper.componentPropertyReferences = { visible: vk };
-      sl.wrapper.visible = false;
+      sl.slot.componentPropertyReferences = { slotContentId: bound.key, visible: vk };
+      sl.slot.visible = false;
     }
   }
   for (const vis of registry.visibles) {
@@ -28468,32 +28180,20 @@ async function syncOne(C) {
       t.node.componentPropertyReferences = { characters: mintOnce(t.prop, 'TEXT', t.default) };
     }
     for (const s of b.registry.slots) {
-      const util = await ensureSlotUtility();
-      let key = keys[s.spec.slotProperty];
-      if (!key) {
-        const preferred = [];
-        for (const depRef of s.spec.slotAccepts || []) {
-          const dep = resolveComponentIdentity(
-            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
-            'Slot "' + s.spec.slotProperty + '" preferred value',
-            false,
-          );
-          preferred.push({
-            type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
-            key: dep.key,
-          });
-        }
-        key = mintOnce(
-          s.spec.slotProperty,
-          'INSTANCE_SWAP',
-          s.defaultId || util.id,
-          preferred.length > 0 ? { preferredValues: preferred } : undefined,
-        );
-      }
-      s.instance.componentPropertyReferences = { mainComponent: key };
+      // UNIFICATION (probe 2c): each variant's createSlot() minted its OWN
+      // property; after combineAsVariants they all sit on the set under the
+      // same display name. The first variant's id is canonical — every other
+      // slot node rebinds to it and its duplicate is deleted, so the set ends
+      // with ONE SLOT property that instance fills can ride across a variant
+      // switch.
+      const bound = bindSlot(target, s, keys[s.spec.slotProperty] || null);
+      keys[s.spec.slotProperty] = bound.key;
       if (s.spec.slotOptional) {
-        s.wrapper.componentPropertyReferences = { visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false) };
-        s.wrapper.visible = false;
+        s.slot.componentPropertyReferences = {
+          slotContentId: bound.key,
+          visible: mintOnce('Show ' + s.spec.slotProperty, 'BOOLEAN', false),
+        };
+        s.slot.visible = false;
       }
     }
     for (const vis of b.registry.visibles) {

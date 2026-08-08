@@ -137,6 +137,11 @@ interface FigmaSet {
   variantCount: number;
   properties: Record<string, FigmaPropertyDef>;
   nestedInstances?: string[];
+  /** Native-slot transport: SLOT property id → the content drawn inside that
+   *  slot in the main component(s), with each child's component key where it
+   *  is an instance. ABSENT on every snapshot taken before the native-slot
+   *  round — absence means NOT CAPTURED, never "the slot is empty". */
+  slotContent?: Record<string, Array<{ variant: string; name: string; key?: string }>>;
   /** v4 transport (parity/extract-figma.plugin.js): the per-variant v6 stamp
    *  read back off the canvas plus a same-session recompute. ABSENT on every
    *  snapshot taken before that version — absence is reported as NOT
@@ -549,16 +554,27 @@ for (const contract of contracts) {
     }
   }
 
-  // Slots: INSTANCE_SWAP property per slot; optional slots additionally get a
-  // "Show X" BOOLEAN. `accepts` must round-trip as preferredValues whose keys
-  // are the accepted contracts' componentSetKey anchors.
+  // Slots: a NATIVE SLOT property per slot (the contract's slot.figmaProperty
+  // is its display name); optional slots additionally get a "Show X" BOOLEAN.
+  // `accepts` must round-trip as preferredValues whose keys are the accepted
+  // contracts' componentSetKey anchors.
+  //
+  // THE PRE-NATIVE SPELLING. Every canvas synced before the native-slots round
+  // carries an INSTANCE_SWAP property (defaulting to a dashed "Slot"
+  // placeholder) instead — and a MULTI-CHILD slot carries no property at all,
+  // because one INSTANCE_SWAP holds one instance. Neither is drift: migration
+  // is amend-gated and reaches a set on its next sync. Both are reported as
+  // NOT MEASURED — the differ cannot compare a native slot against a canvas
+  // that has not been given one — never as agreement.
   const byIdAll = new Map(contracts.map((c) => [c.id, c]));
+  const preNative: string[] = [];
   for (const { slot, part } of slotsOf(contract)) {
     const propertyName = slotFigmaProperty(slot);
-    // Multi-child slot (defaultContent > 1): inexpressible as INSTANCE_SWAP —
-    // no property expected; instead the content components must exist as
-    // nested instances. (Native SLOT property is the migration target.)
-    if ((slot.defaultContent?.length ?? 0) > 1) {
+    expectedNames.add(propertyName);
+    const def = figmaProps.get(propertyName);
+    if (!def && (slot.defaultContent?.length ?? 0) > 1) {
+      // Pre-native multi-child slot: it had NO canvas property by construction.
+      preNative.push(`${propertyName} (multi-child — had no pre-native property)`);
       for (const id of new Set(slot.defaultContent!.map((i) => i.id))) {
         const dep = byIdAll.get(id)!;
         if (!(set.nestedInstances ?? []).includes(dep.name)) {
@@ -571,19 +587,26 @@ for (const contract of contracts) {
           });
         }
       }
-      continue;
-    }
-    expectedNames.add(propertyName);
-    const def = figmaProps.get(propertyName);
-    if (!def) {
+    } else if (!def) {
       add({
         surface: 'figma',
         classification: 'behind',
         subject: `${contract.name}.${propertyName}`,
-        detail: `Contract slot "${slot.name}" has no INSTANCE_SWAP property on the Figma component`,
+        detail: `Contract slot "${slot.name}" has no SLOT property on the Figma component`,
         remedy: 'Re-run the component sync script',
       });
-    } else if (slot.accepts && slot.accepts.length > 0) {
+    } else if (def.type === 'INSTANCE_SWAP') {
+      preNative.push(`${propertyName} (INSTANCE_SWAP)`);
+    } else if (def.type !== 'SLOT') {
+      add({
+        surface: 'figma',
+        classification: 'mismatch',
+        subject: `${contract.name}.${propertyName} (kind)`,
+        detail: `Contract slot "${slot.name}" must be a native SLOT property, figma has ${def.type}`,
+        remedy: 'Re-run the component sync script',
+      });
+    }
+    if (def && slot.accepts && slot.accepts.length > 0) {
       const expectedKeys = slot.accepts
         .map((id) => byIdAll.get(id)?.anchors.figma.componentSetKey)
         .filter((k): k is string => Boolean(k))
@@ -596,6 +619,34 @@ for (const contract of contracts) {
           subject: `${contract.name}.${propertyName} (accepts)`,
           detail: `Slot accepts [${slot.accepts.join(', ')}] but Figma preferredValues keys differ`,
           remedy: 'Adopt into contract (promotion) or re-sync preferredValues',
+        });
+      }
+      // ACCEPTS VIOLATIONS — the differ's native-slot obligation. Figma's
+      // preferredValues is a picker hint: it CANNOT refuse off-list content
+      // (and `acceptsMode: "restrict"` has no canvas spelling at all), so
+      // content violating the contract is a DIFF FINDING, not a canvas
+      // impossibility. Compared by component key against the accepted
+      // contracts' anchors; a child whose key is unknown to this snapshot is
+      // named as unresolved rather than judged.
+      const slotKey = Object.keys(set.properties).find((k) => k.split('#')[0] === propertyName);
+      const drawn = slotKey ? set.slotContent?.[slotKey] : undefined;
+      for (const child of drawn ?? []) {
+        if (child.key && expectedKeys.includes(child.key)) continue;
+        const known = child.key
+          ? contracts.find((c) => c.anchors.figma.componentSetKey === child.key)
+          : undefined;
+        add({
+          surface: 'figma',
+          classification: 'mismatch',
+          subject: `${contract.name}.${propertyName} (accepts violation)`,
+          detail:
+            `Slot "${slot.name}" accepts [${slot.accepts.join(', ')}] but the canvas draws "${child.name}"` +
+            `${known ? ` (${known.id})` : child.key ? ` (component key ${child.key}, no contract in scope)` : ' (not an instance — a drawn node)'}` +
+            ` in variant "${child.variant}". Figma's preferredValues is a picker hint and cannot refuse it — which is why this is reported here.`,
+          remedy:
+            slot.acceptsMode === 'restrict'
+              ? 'Remove the off-list content on canvas (acceptsMode "restrict" admits only the listed contracts), or widen accepts and bump the contract'
+              : "Widen the slot's accepts (and bump the contract) or replace the canvas content",
         });
       }
     }
@@ -612,6 +663,20 @@ for (const contract of contracts) {
         });
       }
     }
+  }
+  if (preNative.length > 0) {
+    unmeasured.push({
+      subject: `${contract.name} — native slots`,
+      driftKind: 'slot-pre-native',
+      detail:
+        `This snapshot predates native slots: ${preNative.join(', ')}. The canvas carries the pre-native spelling ` +
+        `(an INSTANCE_SWAP property defaulting to the dashed "Slot" placeholder, and no property at all for a ` +
+        `multi-child slot), so native-slot parity — the SLOT property, its preferredValues, and the content drawn ` +
+        `inside it — was NOT COMPARED. Absence of findings here is not agreement.`,
+      remedy:
+        'Re-run the component sync (migration is amend-gated: the native slot is minted, the INSTANCE_SWAP property ' +
+        'retired, and any stranded swap override reported BY NAME), then re-run parity/extract-figma.plugin.js',
+    });
   }
 
   // Nested component refs: the composing instance must exist in Figma.
