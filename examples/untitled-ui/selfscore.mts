@@ -56,11 +56,13 @@
  *    npx tsx examples/untitled-ui/selfscore.mts        # all 537
  *    SELFSCORE_ONLY=badge-base npx tsx …               # one set (a slice)
  */
-const ROOT = '/Users/tjpitre/Sites/ds-contracts-poc';
+import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const { chromium } = await import(ROOT + '/node_modules/playwright-core/index.mjs');
 const { build } = await import(ROOT + '/node_modules/esbuild/lib/main.js');
 const { chromiumExecutable } = await import(ROOT + '/extract/figma/visual-parity/render.js');
-import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
 const UI = `${ROOT}/examples/untitled-ui`;
 const SCRATCH = process.env.SCRATCH || '/tmp';
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '');

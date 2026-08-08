@@ -275,6 +275,12 @@
       "valuePattern": "(@0$|^0$)"
     }
   },
+  "fidelity": {
+    "source": "examples/untitled-ui/renders/fidelity.json",
+    "metric": "per-set mean of v2.1 canvas→code fidelity scores over scored variants",
+    "tolerance": 0.3,
+    "policy": "decrease-only floors: each set's current mean must stay at or above its baseline meanScore minus tolerance, and its scored-variant count must not shrink; floors are re-seeded only upward, by committing a higher meanScore after a real fidelity gain"
+  },
   "variantRecoveryRefusals": [
     "EXACT_DEFINITIONS_MISSING",
     "EXACT_DEFINITION_CONTRADICTORY",

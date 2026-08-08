@@ -19,12 +19,12 @@
  *  box + 8px, 16px page gutter, 900x700 viewport) so the metric change can be
  *  measured against itself.
  */
-const ROOT0='/Users/tjpitre/Sites/ds-contracts-poc';
-const { build } = await import(ROOT0+'/node_modules/esbuild/lib/main.js');
-const { chromium } = await import(ROOT0+'/node_modules/playwright-core/index.mjs');
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
-const ROOT = '/Users/tjpitre/Sites/ds-contracts-poc';
+import { fileURLToPath } from 'node:url';
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const { build } = await import(ROOT+'/node_modules/esbuild/lib/main.js');
+const { chromium } = await import(ROOT+'/node_modules/playwright-core/index.mjs');
 const { chromiumExecutable } = await import(ROOT + '/extract/figma/visual-parity/render.js');
 const [comp, propsJson, outName] = process.argv.slice(2);
 const props = JSON.parse(propsJson || '{}');
@@ -80,7 +80,11 @@ const box = CLIP === 'root'
       x1 = Math.min(${VW}, x1 + M); y1 = Math.min(${VH}, y1 + M);
       return { x: x0, y: y0, width: x1 - x0, height: y1 - y0 };
     })()`);
-const out = `${ROOT}/examples/untitled-ui/renders/${outName || comp}.png`;
+// FIDELITY_RENDERS_DIR redirects the PNG (fresh-check runs score into a temp
+// dir instead of mutating the committed renders); default is the committed dir.
+const RENDERS = process.env.FIDELITY_RENDERS_DIR || `${ROOT}/examples/untitled-ui/renders`;
+mkdirSync(RENDERS, { recursive: true });
+const out = `${RENDERS}/${outName || comp}.png`;
 if (box && box.width > 4 && box.height > 4) await p.screenshot({ path: out, clip: box });
 else await p.screenshot({ path: out });
 const errs = [];

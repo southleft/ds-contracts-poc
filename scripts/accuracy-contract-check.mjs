@@ -382,6 +382,22 @@ export function deriveRoundTripMetrics(report, grammar) {
   };
 }
 
+export function deriveFidelityMetrics(fidelity) {
+  const perSet = {};
+  for (const row of fidelity) {
+    if (typeof row.score !== "number") continue;
+    const entry = (perSet[row.set] ??= { scoredVariants: 0, sum: 0 });
+    entry.scoredVariants += 1;
+    entry.sum += row.score;
+  }
+  return Object.fromEntries(
+    Object.entries(perSet).map(([set, { scoredVariants, sum }]) => [
+      set,
+      { scoredVariants, meanScore: sum / scoredVariants },
+    ]),
+  );
+}
+
 export function validateAccuracyContract({
   grammar,
   baseline,
@@ -390,6 +406,7 @@ export function validateAccuracyContract({
   canvas,
   closure,
   packageJson,
+  fidelity,
   sourceDumps = {},
 }) {
   const errors = [];
@@ -874,6 +891,61 @@ export function validateAccuracyContract({
     );
   }
 
+  // Untitled UI canvas→code fidelity — decrease-only per-set floors.
+  // The floor for a set is its committed mean minus the declared tolerance
+  // (0.3, for the harness's measured sub-point rasterisation jitter — worst
+  // reproduction disagreement on the self-score control is 0.68 across a
+  // re-mount, 0.00 across the committed render path). Scored-variant counts
+  // may grow (an axis newly carried) but never shrink: a mean over fewer
+  // rows is a different, gameable denominator.
+  const fidelityGrammar = grammar.fidelity;
+  const fidelityBaseline = baseline.metrics.fidelity;
+  if (
+    !fidelityGrammar ||
+    typeof fidelityGrammar.tolerance !== "number" ||
+    !fidelityBaseline ||
+    typeof fidelityBaseline.tolerance !== "number" ||
+    !fidelityBaseline.perSet
+  ) {
+    errors.push(
+      "accuracy grammar and baseline must both declare the Untitled UI fidelity ratchet (fidelity.tolerance, metrics.fidelity.perSet)",
+    );
+  } else {
+    if (fidelityGrammar.tolerance !== fidelityBaseline.tolerance) {
+      errors.push(
+        `fidelity tolerance drift: grammar ${fidelityGrammar.tolerance}, baseline ${fidelityBaseline.tolerance}`,
+      );
+    }
+    const current = deriveFidelityMetrics(fidelity ?? []);
+    const floors = fidelityBaseline.perSet;
+    for (const set of Object.keys(floors)) {
+      const floor = floors[set];
+      const actual = current[set];
+      if (!actual) {
+        errors.push(`fidelity set disappeared from the scored table: ${set}`);
+        continue;
+      }
+      if (actual.scoredVariants < floor.scoredVariants) {
+        errors.push(
+          `fidelity denominator shrank for ${set}: ${actual.scoredVariants} scored variant(s) below baseline ${floor.scoredVariants}`,
+        );
+      }
+      const minimum = floor.meanScore - fidelityBaseline.tolerance;
+      if (actual.meanScore < minimum - 1e-9) {
+        errors.push(
+          `fidelity regressed for ${set}: mean ${actual.meanScore.toFixed(2)} below floor ${minimum.toFixed(2)} (baseline ${floor.meanScore} − tolerance ${fidelityBaseline.tolerance})`,
+        );
+      }
+    }
+    for (const set of Object.keys(current)) {
+      if (!floors[set]) {
+        errors.push(
+          `fidelity set has no committed floor: ${set} — seed accuracy/baseline.json metrics.fidelity.perSet`,
+        );
+      }
+    }
+  }
+
   return { errors, metrics };
 }
 
@@ -896,6 +968,7 @@ export function loadAccuracyInputs(root = ROOT) {
     canvas: readJson(root, "extract/figma/conformance/MANIFEST.json"),
     closure: readJson(root, "extract/figma/channel-closure.json"),
     packageJson: readJson(root, "package.json"),
+    fidelity: readJson(root, "examples/untitled-ui/renders/fidelity.json"),
     sourceDumps,
   };
 }

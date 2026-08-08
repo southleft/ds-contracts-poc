@@ -55,7 +55,7 @@ The drawing, the scale rule, the root anchor, the 3×3 escape and the 10-per-cha
 
 | check | result |
 |---|---|
-| the harness reproduces the committed score from the committed bytes | 339 of 537 rows exactly; every disagreement is sub-point (worst 50.88, mean 5.222 over all rows), and the kit mean comes out 92.70 against the committed 87.52 |
+| the harness reproduces the committed score from the committed bytes | 339 of 537 rows exactly against the table committed when the control was shot; every disagreement is sub-point (worst 0.68, mean 0.031 over all rows), and the control's kit mean comes out 87.53 against its contemporaneous committed 87.52. 394 of 537 scores have since moved with the engine (§1 note), so this row validates the instrument, not today's table |
 | a flat-edged drawing should cost nothing to resample | 49 rows return a ceiling of exactly 100.00, including all 16 toggle-base rows; the 80 rows with neither a glyph run nor a vector box average 98.93 — not 100, because a ring or a rounded corner still has an antialiased edge |
 | a ceiling of 100 should be achievable in practice, not only in theory | 11 rows actually score 100.00 |
 | the probe path must not move a score by itself | re-shooting 68 rows with the component untouched and the committed 8px margin moves the set mean by -5.69 (87.59 → 81.90) |

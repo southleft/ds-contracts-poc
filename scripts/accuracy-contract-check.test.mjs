@@ -350,3 +350,49 @@ test("rejects an internally inconsistent R1 baseline", () => {
   });
   assert.ok(hasError(result, "R1 count-equal + count-mismatched"));
 });
+
+test("rejects a fidelity per-set mean below its floor", () => {
+  const result = validate(({ fidelity }) => {
+    for (const row of fidelity) {
+      if (row.set === "tooltip" && typeof row.score === "number") {
+        row.score -= 0.5;
+      }
+    }
+  });
+  assert.ok(hasError(result, "fidelity regressed for tooltip"));
+});
+
+test("tolerates fidelity jitter inside the declared tolerance", () => {
+  const result = validate(({ fidelity }) => {
+    for (const row of fidelity) {
+      if (row.set === "tooltip" && typeof row.score === "number") {
+        row.score -= 0.2;
+      }
+    }
+  });
+  assert.ok(!hasError(result, "fidelity regressed"));
+});
+
+test("rejects a shrunken fidelity denominator", () => {
+  const result = validate(({ fidelity }) => {
+    const index = fidelity.findIndex(
+      (row) => row.set === "avatar" && typeof row.score === "number",
+    );
+    fidelity.splice(index, 1);
+  });
+  assert.ok(hasError(result, "fidelity denominator shrank for avatar"));
+});
+
+test("rejects a scored fidelity set with no committed floor", () => {
+  const result = validate(({ fidelity }) => {
+    fidelity.push({ set: "brand-new-set", variant: "v", score: 99 });
+  });
+  assert.ok(hasError(result, "fidelity set has no committed floor"));
+});
+
+test("rejects a missing fidelity ratchet declaration", () => {
+  const result = validate(({ baseline }) => {
+    delete baseline.metrics.fidelity;
+  });
+  assert.ok(hasError(result, "fidelity ratchet"));
+});

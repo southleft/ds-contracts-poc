@@ -293,7 +293,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
 | `examples/untitled-ui/storybook/contracts/` | `63f093f001fb` | 129,887 | proposed contracts (30 files) |
 | `examples/untitled-ui/storybook/src/generated/` | `256e2627c802` | 275,910 | emitted components (32 dirs) |
-| `examples/untitled-ui/storybook/src/tokens.css` | `382f2ec19c51` | 674,510 | emitted global tokens |
+| `examples/untitled-ui/storybook/src/tokens.css` | `8c31938a1627` | 674,804 | emitted global tokens |
 | `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `bfa75534250d` | 7,696,283 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `bdf9b0d6b3ce` | 143,795 | round-trip narrative |

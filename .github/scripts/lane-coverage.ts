@@ -87,6 +87,14 @@ const EXCLUDED: Record<string, string> = {
     "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
   "root:console-loop:tailwind:evidence:check":
     "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:fidelity:uui:fresh":
+    "Byte-compares renders/fidelity.json against a re-derivation whose kernel runs canvas drawImage " +
+    "resampling inside Chromium, so its byte-identity across OSes is UNVERIFIED (catalog-visual keeps " +
+    "a separate baseline.linux.json for exactly this class of platform-sensitive score). Verified " +
+    "0-exit and drift-detecting on the recording platform (macOS arm64, 5.4s); it joins the " +
+    "catalog-visual lane the moment one Linux run reproduces the committed table byte-for-byte. The " +
+    "per-set fidelity FLOORS are already CI-enforced in the fast lane: accuracy:check reads the same " +
+    "committed fidelity.json and holds each set's mean above baseline minus 0.3.",
   "root:visual-truth:check":
     "Deliberately out of CI until the altitude lane reconverges: the headless sweep scored the LIVE " +
     "canvas after it drifted from the bridge run (one set deleted, two stems hit the odd-pixel " +

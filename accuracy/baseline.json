@@ -59,6 +59,27 @@
     "R6": {
       "unclassifiedInventedFacts": 0,
       "maxUnclassifiedInventedFacts": 0
+    },
+    "fidelity": {
+      "source": "examples/untitled-ui/renders/fidelity.json",
+      "tolerance": 0.3,
+      "perSet": {
+        "avatar": { "scoredVariants": 162, "meanScore": 96.17 },
+        "avatar-add-button": { "scoredVariants": 6, "meanScore": 96.69 },
+        "avatar-group": { "scoredVariants": 12, "meanScore": 84.9 },
+        "avatar-label-group": { "scoredVariants": 12, "meanScore": 91.48 },
+        "badge-base": { "scoredVariants": 8, "meanScore": 91.33 },
+        "button-base": { "scoredVariants": 20, "meanScore": 91.97 },
+        "button-group-base": { "scoredVariants": 32, "meanScore": 92.24 },
+        "dropdown-list-item": { "scoredVariants": 12, "meanScore": 90.91 },
+        "input-field-base": { "scoredVariants": 10, "meanScore": 91.63 },
+        "progress-bar": { "scoredVariants": 55, "meanScore": 94.02 },
+        "progress-circle": { "scoredVariants": 16, "meanScore": 85.85 },
+        "slider": { "scoredVariants": 40, "meanScore": 91.18 },
+        "social-button": { "scoredVariants": 108, "meanScore": 92.06 },
+        "toggle-base": { "scoredVariants": 16, "meanScore": 98 },
+        "tooltip": { "scoredVariants": 28, "meanScore": 81.21 }
+      }
     }
   }
 }

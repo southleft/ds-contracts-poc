@@ -160,12 +160,22 @@ const axisGap = unscored.filter((r) => (r.note ?? '').startsWith('axis not carri
 
 /* --------------------------------------- the ceiling: control + envelope */
 
-// The control's own validation, computed not asserted.
-const reproduce = self.filter((r) => r.agrees).length;
-const worstRepro = Math.max(...self.map((r) => Math.abs((r.score as number) - (r.committed as number))));
-const meanRepro = mean(self.map((r) => Math.abs((r.score as number) - (r.committed as number))));
-const kitSelf = mean(self.map((r) => r.score as number));
-const kitCommitted = mean(self.map((r) => r.committed as number));
+// The control's own validation, computed not asserted. REPRODUCTION IS A
+// PROPERTY OF THE CONTROL SHOT, so it is computed over the control's OWN pair
+// — its re-derived score against the fidelity table that was committed WHEN
+// IT WAS SHOT (both frozen in fidelity-selfscore.json). This file used to mix
+// denominators here: `agrees` counted against the contemporaneous table while
+// worst/mean were computed after the scores had been remapped to the CURRENT
+// fidelity.json, so the row read "every disagreement is sub-point (worst
+// 50.88, mean 5.222)" — the 50.88 was the ENGINE moving between the two runs
+// (322 rows, measured), not the harness failing to reproduce a score. The
+// true reproduction stats are sub-point everywhere: worst 0.68, mean 0.031.
+const reproduce = selfRaw.filter((r) => r.agrees).length;
+const reproDiffs = selfRaw.map((r) => Math.abs((r.score as number) - (r.committed as number)));
+const worstRepro = Math.max(...reproDiffs);
+const meanRepro = mean(reproDiffs);
+const kitSelfShot = mean(selfRaw.map((r) => r.score as number));
+const kitCommittedShot = mean(selfRaw.map((r) => r.committed as number));
 
 // ACHIEVED ENVELOPE — the second, independent ceiling estimate. A variant's
 // ceiling cannot be below the best score any variant of at-least-as-much text
@@ -407,7 +417,7 @@ P('The scorer compares a FIGMA rasterisation of the canvas at scale S, resampled
 P('> A′ = the committed render, rasterised by Chrome at the SAME derived scale S and resampled to 1x by the SAME canvas path\n> B  = the committed render PNG, byte-for-byte\n\nThe drawing, the scale rule, the root anchor, the 3×3 escape and the 10-per-channel tolerance are all held fixed. The shortfall from 100 is what the metric charges for rasterising one identical drawing at two scales.');
 P('### The control validates against four independent checks');
 P(...table(['check', 'result'], [
-  ['the harness reproduces the committed score from the committed bytes', `${fmt(reproduce)} of ${fmt(rows.length)} rows exactly; every disagreement is sub-point (worst ${f2(worstRepro)}, mean ${f3(meanRepro)} over all rows), and the kit mean comes out ${f2(kitSelf)} against the committed ${f2(kitCommitted)}`],
+  ['the harness reproduces the committed score from the committed bytes', `${fmt(reproduce)} of ${fmt(selfRaw.length)} rows exactly against the table committed when the control was shot; every disagreement is sub-point (worst ${f2(worstRepro)}, mean ${f3(meanRepro)} over all rows), and the control's kit mean comes out ${f2(kitSelfShot)} against its contemporaneous committed ${f2(kitCommittedShot)}. ${fmt(movedSinceControl)} of ${fmt(selfRaw.length)} scores have since moved with the engine (§1 note), so this row validates the instrument, not today's table`],
   ['a flat-edged drawing should cost nothing to resample', `${fmt(exact100.length)} rows return a ceiling of exactly 100.00, including all ${fmt(rows.filter((r) => r.set === 'toggle-base').length)} toggle-base rows; the ${fmt(pureShape.length)} rows with neither a glyph run nor a vector box average ${f2(mean(pureShape.map((r) => r.ceiling as number)))} — not 100, because a ring or a rounded corner still has an antialiased edge`],
   ['a ceiling of 100 should be achievable in practice, not only in theory', `${fmt(rows.filter((r) => (r.score as number) >= 99.995).length)} rows actually score 100.00`],
   ['the probe path must not move a score by itself', probeStats.filter((p) => p.kind === 'control').map((p) => `re-shooting ${fmt(p.n)} rows with the component untouched and the committed 8px margin moves the set mean by ${sgn(p.delta)} (${f2(p.before)} → ${f2(p.after)})`).join('; ') || '(no null probe in this build)'],

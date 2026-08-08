@@ -594,11 +594,9 @@
   --imported-progress-circle-root-width-xs: 160px;
   --imported-shared-color-737373: #737373;
   --imported-shared-color-7f56d9: #7f56d9;
-  --imported-shared-num-400: 400;
   --imported-shared-size-0: 0px;
   --imported-shared-size-12: 12px;
   --imported-shared-size-14: 14px;
-  --imported-shared-size-16: 16px;
   --imported-shared-size-24: 24px;
   --imported-shared-size-8: 8px;
   --imported-slider-background-background-color: #e5e5e5;
@@ -922,12 +920,18 @@
   --imported-stub-x-root-width: 12px;
   --imported-text-text-md-medium-font-size: 16px;
   --imported-text-text-md-medium-font-weight: 500;
+  --imported-text-text-md-medium-line-height: 24px;
+  --imported-text-text-md-regular-font-size: 16px;
+  --imported-text-text-md-regular-font-weight: 400;
+  --imported-text-text-md-regular-line-height: 24px;
   --imported-text-text-md-semibold-font-size: 16px;
   --imported-text-text-md-semibold-font-weight: 600;
   --imported-text-text-md-semibold-line-height: 24px;
   --imported-text-text-sm-medium-font-size: 14px;
   --imported-text-text-sm-medium-font-weight: 500;
   --imported-text-text-sm-medium-line-height: 20px;
+  --imported-text-text-sm-regular-font-size: 14px;
+  --imported-text-text-sm-regular-font-weight: 400;
   --imported-text-text-sm-regular-line-height: 20px;
   --imported-text-text-sm-semibold-font-size: 14px;
   --imported-text-text-sm-semibold-font-weight: 600;
@@ -938,6 +942,7 @@
   --imported-text-text-xs-regular-font-size: 12px;
   --imported-text-text-xs-regular-font-weight: 400;
   --imported-text-text-xs-regular-line-height: 18px;
+  --imported-text-text-xs-semibold-font-size: 12px;
   --imported-text-text-xs-semibold-font-weight: 600;
   --imported-text-text-xs-semibold-line-height: 18px;
   --imported-toggle-base-button-background-color: #ffffff;
