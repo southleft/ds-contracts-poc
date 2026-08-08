@@ -23,9 +23,9 @@ human clicking Apply.
 [24 — What Works](24-what-works.md) is what the path *delivers*, measured, with
 every number carrying the artifact it was read from.
 [23 — Known Limitations](23-known-limitations.md) is what it *costs*. They
-share one denominator — the 54 measured components are **6.0%** of the 893 in
+share one denominator — the 71 measured components are **8.0%** of the 893 in
 the six libraries they came from ([24 §2](24-what-works.md)) — so read every
-percentage on either page as *"on the easy 6.0%."*
+percentage on either page as *"on the easy 8.0%."*
 
 ---
 
@@ -98,13 +98,13 @@ in your repo — plus the contract that produced them, in the same change.
   **92.70% mean visual fidelity** over the 537 statically scorable variants of
   a 599-variant community kit (best set 98.0%, worst 81.2%); the
   canvas→code→canvas round trip **closes on 15 of 15** components with every
-  one of 23,414 facts classified rather than dropped in silence; and the
-  generate step is **byte-identical on any machine** — 265 generated files
+  one of 36,264 facts classified rather than dropped in silence; and the
+  generate step is **byte-identical on any machine** — 266 generated files
   hashed against a golden manifest, no model in the path.
 - **What it costs** ([23](23-known-limitations.md)): only the sets you import
   exist — the kit's un-imported sets do not appear as low scores, they do not
   appear; 62 of 599 rows are unscored and named as such (58 interaction-state,
-  4 a carriage gap); and 47.4% of round-trip facts *matched* — "closes" is not
+  4 a carriage gap); and 31.4% of round-trip facts *matched* — "closes" is not
   "lossless", and the bucket-by-bucket accounting is
   [24 §6.3](24-what-works.md).
 - **What "review" means here:** nothing writes without `--apply` or a PR.
@@ -121,8 +121,8 @@ in your repo — plus the contract that produced them, in the same change.
   them against your real token system; the proposal says so per token.
 - **The measured round trip, on a real kit** ([the full report](../extract/figma/roundtrip-uui/REPORT.md)):
   all 15 Untitled UI sets that were run closed the loop, and the set-level
-  fact diff across them is **11,104 matched · 1,857 diverged · 4,088 lost ·
-  6,365 invented** — with 940 of the 960 `layout.mode` divergences
+  fact diff across them is **11,399 matched · 1,845 diverged · 7,684 lost ·
+  15,336 invented** — with 934 of the 954 `layout.mode` divergences
   reclassified as `auto-layout-inert` (a mode added to a frame whose
   children are all absolutely placed changes nothing that is drawn). Those
   are the honest proportions behind "reviewable starting point".
@@ -177,13 +177,13 @@ their component-property overrides.
 
 **Honest expectations.**
 
-- **What it delivers, measured** ([24 §3](24-what-works.md)): **89.6% mean
+- **What it delivers, measured** ([24 §3](24-what-works.md)): **89.7% mean
   computed-style equality** for a captured component, against the original npm
   package rendering in the same pinned Chromium — an exact string match over
   the browser's full longhand set, no tolerance, no whitelist, so a channel the
-  pipeline never opened still counts against it. 54 components across six
-  libraries and five styling architectures: 88.6% cell-weighted over 379,861
-  cells, 31 of 54 at ≥90%, 47 of 54 at ≥80%. Every one of the 54 is listed
+  pipeline never opened still counts against it. 71 components across six
+  libraries and five styling architectures: 88.5% cell-weighted over 410,192
+  cells, 40 of 71 at ≥90%, 62 of 71 at ≥80%. Every one of the 71 is listed
   worst-first in [24 §3.1](24-what-works.md) — the worst is 69.8%.
 - **What it costs** ([23](23-known-limitations.md)): hours of expert
   configuration per library (below), and breadth — see the coverage bullet.
@@ -200,15 +200,15 @@ their component-property overrides.
   empty, that is why, and the fix is the computed capture.
 - **Coverage per library is partial, and it is the number that decides
   whether this is worth it.** Each foreign-library round in this repo
-  committed a dozen or so components out of libraries of one to two hundred.
-  On the *contracts committed* denominator that is about 4% to 12% per library
+  committed between 5 and 31 components out of libraries of 46 to 243.
+  On the *contracts committed* denominator that is about 4% to 23% per library
   ([docs/22 §8.3](22-generality.md)); on the stricter *components with a
-  measured scorecard* denominator it is **2.3% to 11.9%**, and **6.0%** across
+  measured scorecard* denominator it is **2.3% to 23.0%**, and **8.0%** across
   all six libraries ([24 §2](24-what-works.md), which prints that table before
   any fidelity average, for exactly this reason). Data grid, tree, virtualized
   list, date picker, rich text and charts appear in **zero** committed
   contracts. Fidelity per *captured* component is high; breadth is the honest
-  limit, and the 89.6% above describes only the tractable 6.0%.
+  limit, and the 89.7% above describes only the tractable 8.0%.
 - **What will look broken but is a named limit:** text wrapping is not
   implemented (a hugging text node inside a narrower fixed ancestor clips);
   no webfonts load in the harness; overlay components declare `states: []`

@@ -5,7 +5,7 @@
  * committed artifacts and its freshness is gated by `npm run capability:fresh`,
  * which is one of the evals. So the site reads THAT file rather than
  * re-deriving the same means from `extract/computed/out/**` a second time: two
- * independent computations of "89.6%" can disagree, and the flattering one
+ * independent computations of "89.7%" can disagree, and the flattering one
  * would win by accident. One number, one derivation, one source.
  *
  * Nothing here is transcribed. Every value the /what-works/ page prints is a

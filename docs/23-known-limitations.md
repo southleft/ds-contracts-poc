@@ -1184,10 +1184,11 @@ community kit this project does not own, all **15 sets that were run closed
 the round trip** (canvas dump → contract → the plugin engine's Generate path
 → re-dump → set-level fact diff), and the totals across them are:
 
-> **11,104 matched · 1,857 diverged · 4,088 lost (in the original, not the
-> round trip) · 6,365 invented (in the round trip, not the original)**
+> **11399 matched, 1845 diverged, 7684 one-way loss, 15336 invented**
 
-Quoted byte-exact from `extract/figma/roundtrip-uui/REPORT.md:25`. **No
+Quoted byte-exact from `extract/figma/roundtrip-uui/REPORT.md:25` — "loss" is
+in the original and not the round trip; "invented" is in the round trip and
+not the original. **No
 preservation percentage is quoted here on purpose.** Depending on which
 denominator you pick the same four numbers yield very different headlines, and
 this repo has already published one number ("92.5%") that a later audit
@@ -1197,7 +1198,7 @@ the fact; a ratio over them is an argument.
 Two qualifiers, one in each direction
 ([the full report](../extract/figma/roundtrip-uui/REPORT.md)):
 
-- **940 of the 960 `layout.mode` divergences are `auto-layout-inert`** — a
+- **934 of the 954 `layout.mode` divergences are `auto-layout-inert`** — a
   frame drawn with *no* auto-layout comes back *with* one, but every child is
   absolutely placed (or there are no children), and Figma auto-layout excludes
   absolutely-positioned children — so the tree differs while the drawing does
@@ -1205,9 +1206,10 @@ Two qualifiers, one in each direction
 - **The remaining 20 are a REAL axis flip** — `VERTICAL → HORIZONTAL`, all on
   one part (`slider ▸ progress/leftcontrol/tooltip`), which the dump draws
   VERTICAL in the floating-label variants while the contract carries no layout
-  for that part at all. Reported undifferentiated, the 940 inert rows buried
+  for that part at all. Reported undifferentiated, the 934 inert rows buried
   these 20 real ones — which is why the classes are now separated
-  (`REPORT.md:1416`).
+  (`auto-layout-inert` is its own tag in `report.json`; per-tag table in
+  [docs/24 §6.3](24-what-works.md)).
 
 The loss and invention columns are dominated by named structural classes
 (`restructured`, `text-style-identity`), itemised per set in the report and

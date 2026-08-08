@@ -1,19 +1,19 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes eight falsifiable claims. Each is backed by an automated eval (`npm run eval`, 191 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **191/191 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes eight falsifiable claims. Each is backed by an automated eval (`npm run eval`, 199 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **199/199 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
 
 The suite tags every case with the claim it defends, so the rollup below is derived from `evals/results.json`, not asserted:
 
 | Claim | Cases | What it holds |
 |---|---|---|
-| C1 — determinism | 28 | byte-identical regeneration, golden-output manifests |
-| C2 — refusal | 21 | illegal contracts fail by name, on both surfaces |
-| C3 — detection | 40 | every claimed drift class has a failing test |
-| C4 — convergence | 3 | promotion round-trips instead of ping-ponging |
-| C5 — extraction | 54 | foreign libraries read into schema-valid proposals; round-trips hold |
+| C1 — determinism | 32 | byte-identical regeneration, golden-output manifests |
+| C2 — refusal | 30 | illegal contracts fail by name, on both surfaces |
+| C3 — detection | 56 | every claimed drift class has a failing test |
+| C4 — convergence | 4 | promotion round-trips instead of ping-ponging |
+| C5 — extraction | 58 | foreign libraries read into schema-valid proposals; round-trips hold |
 | C6 — theming | 1 | a brand is a token-layer dimension and nothing else |
-| C7 — CLI | 4 | the published CLI's verbs, consumer-style (`cli-smoke`, `propose-pr-live-shape`, `emitter-plugin-loads`, `wc-emitter-roundtrip`) |
-| C8 — journeys | 11 | both end-to-end directions and every example library's Figma genesis (`journey-engineer`, `journey-designer`, `reverse-bridge-dev-door`, `channel-round-trip`, `{astryx,mui,tailwind,carbon}-figma-genesis`, …) |
+| C7 — CLI | 5 | the published CLI's verbs, consumer-style (`cli-smoke`, `propose-pr-live-shape`, `emitter-plugin-loads`, `wc-emitter-roundtrip`, …) |
+| C8 — journeys | 13 | both end-to-end directions and every example library's Figma genesis (`journey-engineer`, `journey-designer`, `reverse-bridge-dev-door`, `channel-round-trip`, `{astryx,mui,tailwind,carbon}-figma-genesis`, …) |
 
 `npm run docs:check` re-derives the total from `evals/results.json` and fails if any doc on this page — or in the README — quotes a different number.
 
@@ -197,7 +197,7 @@ Harness design:
 ```bash
 npm install
 npm run build     # C1/C2 gates run here too
-npm run eval      # 191 deterministic evals → evals/results.json
+npm run eval      # 199 deterministic evals → evals/results.json
 npm run docs:check # cheap: re-derive every number this page quotes (no browser, no eval run)
 npm run parity    # current three-surface drift report
 ```

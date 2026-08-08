@@ -14,8 +14,8 @@ Wave 11 packaging (A/B/D) is READY; Candidate waits on a named second implementa
 
 | Gate | Result | Evidence |
 |---|---|---|
-| `npm run eval` | **191/191** (incl. live-figma, console-loop, human-gate inventory) | local + full lane |
-| `npm run console-loop:evidence:check` | pass — **49/49** first-party components on Testing file | `parity/receipts/console-loop/components/` |
+| `npm run eval` | see tip / `evals/results.json` (incl. live-figma + all console-loop corpora + human-gate inventory) | local + full lane |
+| `npm run console-loop:all:evidence:check` | pass — **128** stems (49 first-party + 31 MUI + 48 foreign) | `parity/receipts/console-loop/` |
 | `npm run docs:check` | pass | local + fast lane |
 | `npm run accuracy:check` | pass (ratchets not shrunk) | local + fast lane |
 | `npm run v1:definition:check` | pass | local + fast lane |
@@ -36,11 +36,11 @@ Live Figma V1-EVID-04: edit→detect→restore proven on
 (local Desktop Bridge `figma_execute`, port 9224) — same stamps as the earlier
 cloud `use_figma` session. Replay scripts: `parity/receipts/console-mcp/`.
 
-Console MCP library loop: **49** first-party contracts (all except native
-`inline`/`stack`) generated → screenshot → audit → v6 fingerprint → light
-round-trip on the Testing file; receipts under
-`parity/receipts/console-loop/components/`; gated by
-`npm run console-loop:evidence:check` + eval `console-loop-evidence-receipt`.
+Console MCP library loops (see `parity/receipts/console-loop/CORPORA.md`):
+**128** stems across first-party, MUI denominator, Tailwind, Altitude, Astryx,
+Carbon, Polaris — generate→screenshot→audit→fingerprint→round-trip, eval-gated.
+Not looped without further emit/kit access: eventz-vars, untitled-ui storybook
+anchors, contract files lacking committed `.figma.js`.
 
 Wave ledgers: `PLAN.md`, `wave6/`…`wave11/`.
 
@@ -68,4 +68,6 @@ Wave ledgers: `PLAN.md`, `wave6/`…`wave11/`.
 3. Run pilot acceptance and Wave 8 confirmation.
 4. Only after a real second implementation exists: mark W11-C and reconsider Phase 3 Candidate — never from packaging alone.
 
-Agent stop condition met for Figma-automatable work: live evidence is receipted and eval-gated. Remaining rows are human/release/second-impl only.
+Agent stop condition met for Figma-automatable work with committed scripts:
+128 stems receipted and eval-gated. Remaining rows are human/release/second-impl
+only (plus corpora that lack figma emit scripts or require foreign kit access).
