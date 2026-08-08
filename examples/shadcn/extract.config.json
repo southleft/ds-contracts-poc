@@ -1,0 +1,8 @@
+{
+  "code": {
+    "adapter": "react-tsx",
+    "root": "examples/shadcn/.shadcn-sandbox/src/components/ui"
+  },
+  "idPrefix": "shadcn",
+  "out": "examples/shadcn/out"
+}
