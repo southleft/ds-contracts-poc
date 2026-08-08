@@ -1,0 +1,96 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.grid-gallery",
+  "name": "GridGallery",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Three equal fr columns filled by row auto-flow (G5) — the placement fact is CHILD ORDER, not an anchor. Six repeated slots flow into two derived rows.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "grid",
+        "columns": [
+          {
+            "fr": 1
+          },
+          {
+            "fr": 1
+          },
+          {
+            "fr": 1
+          }
+        ],
+        "flow": "row",
+        "gap": {
+          "row": "{space.gap.md}",
+          "column": "{space.gap.md}"
+        }
+      },
+      "literals": {
+        "width": "640px"
+      },
+      "parts": {
+        "item1": {
+          "description": "Gallery cell 1 — placed by order, not by anchor.",
+          "slot": {
+            "name": "item1",
+            "figmaProperty": "Item 1"
+          }
+        },
+        "item2": {
+          "description": "Gallery cell 2 — placed by order, not by anchor.",
+          "slot": {
+            "name": "item2",
+            "figmaProperty": "Item 2"
+          }
+        },
+        "item3": {
+          "description": "Gallery cell 3 — placed by order, not by anchor.",
+          "slot": {
+            "name": "item3",
+            "figmaProperty": "Item 3"
+          }
+        },
+        "item4": {
+          "description": "Gallery cell 4 — wraps to the second derived row.",
+          "slot": {
+            "name": "item4",
+            "figmaProperty": "Item 4"
+          }
+        },
+        "item5": {
+          "description": "Gallery cell 5 — wraps to the second derived row.",
+          "slot": {
+            "name": "item5",
+            "figmaProperty": "Item 5"
+          }
+        },
+        "item6": {
+          "description": "Gallery cell 6 — wraps to the second derived row.",
+          "slot": {
+            "name": "item6",
+            "figmaProperty": "Item 6"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "src/components/GridGallery",
+      "export": "GridGallery"
+    }
+  }
+}

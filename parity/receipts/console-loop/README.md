@@ -59,8 +59,41 @@ Upload parts with `figma_execute` into `clientStorage['ds_loop_script']`, then
 ## Per-component receipts
 
 `components/<stem>.json` + `.md` — one completed receipt per synced contract
-(49 first-party stems; `inline` / `stack` are native and skipped).
-Gate requires all 49 (override with `CONSOLE_LOOP_REQUIRED=a,b,c`).
+(49 lower-order first-party stems; `inline` / `stack` are native and skipped,
+plus the 5 A3 composition stems below = **54**).
+Gate requires all 54 (override with `CONSOLE_LOOP_REQUIRED=a,b,c`).
+
+### A3 composition corpus (2026-08-08)
+
+`two-column`, `sidebar-layout`, `grid-gallery`, `bento-grid`, `page-shell` —
+the first stems in this lane whose subject is **layout with slots** rather than
+a lower-order component. They are scored **twice**, and the convention is
+pinned in [docs/composition-corpus/README.md](../../../docs/composition-corpus/README.md):
+
+- **EMPTY → structural, never pixels.** A native empty slot is Figma's own
+  frame with zero chrome, so an empty composition exports as a blank PNG
+  (measured: 404 bytes). Presence + name + placement box only, recorded in
+  `scores/<stem>.structural.json`.
+- **FILLED → pixels under the standard bar**, with the SAME child pinned on
+  both surfaces (one `ds.badge` per slot), recorded in `scores/<stem>.json`.
+
+A receipt may claim a pass only when BOTH halves pass. `bento-grid` (0.10%) and
+`page-shell` (0.08%) are `scored-pass`; the other three are honest fail-closed
+on **FC-GRID-ROOT-VSIZE** even though their pixel scorecards pass — the lane
+scorer trims to the ink bounding box, so it cannot see the canvas root's dead
+space. The RATCHET floor was **not** raised: these stems have no headless
+visual-truth card, so only one instrument backs them.
+
+Code-side references come from
+`scripts/console-loop-render-composition-ref.mts` (the compositions' sibling of
+`console-loop-render-ref.mts` — it takes a slot FILL SPEC instead of a JSON prop
+bag, and clips to the composition ROOT's box).
+
+> **Transport:** the `localhost:9223` pattern below no longer reaches the
+> plugin — the figma-console MCP server itself binds `[::1]:9223` and the
+> plugin's `localhost` resolves to IPv6, so every fetch gets that server's 404.
+> The Desktop Bridge allowlist covers **9223–9232**; run stem-serve on **9224**.
+> A port outside that range is blocked by the plugin CSP.
 
 Regenerate scripts anytime with `npm run console-loop:emit` — `emitted/*.js` is
 gitignored (replay from emit + receipts).

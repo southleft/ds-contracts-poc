@@ -2,7 +2,7 @@
 
 *The success-side counterpart to [23 — Known Limitations](23-known-limitations.md). Written for a design engineer deciding whether to adopt this: what is **proven**, and **how it was measured**.*
 
-> **This file is generated. Do not edit it.** `npm run capability:report` rebuilds it; `npm run capability:fresh` refuses if the committed bytes differ from a rebuild, and one of the 213 evals runs that refusal.
+> **This file is generated. Do not edit it.** `npm run capability:report` rebuilds it; `npm run capability:fresh` refuses if the committed bytes differ from a rebuild, and one of the 215 evals runs that refusal.
 
 This is the most dangerous document in the repository, because its output is
 flattering numbers, and it is built to be read with that in mind. Every number
@@ -28,7 +28,7 @@ In the other direction, a 599-variant Figma kit converted to code scores
 canvas→code→canvas executes through the fact diff on **15 of 15** components with every
 one of 36,287 facts classified as matched, diverged, lost or invented rather than dropped in silence.
 Exact structured projection is separately evidenced: **0 verified exact, 15 legacy unverified, 0 refused**.
-The whole thing is pinned by 213 executable claim gates and a 266-file byte-identical
+The whole thing is pinned by 215 executable claim gates and a 291-file byte-identical
 generation manifest. **What that does not say:** those 82 components are
 8.7% of the 7 libraries they came from, and they were picked because they were the tractable ones.
 
@@ -77,7 +77,7 @@ Beyond the 7 foreign libraries, the corpus also holds contracts that are **not**
 
 | corpus | contracts | what it is | source |
 |---|---|---|---|
-| this repo's own library | 51 | hand-authored here; the code→design direction's fixture | `contracts/*.contract.json` |
+| this repo's own library | 56 | hand-authored here; the code→design direction's fixture | `contracts/*.contract.json` |
 | Untitled UI (Figma kit) | 30 | proposed FROM a canvas, not extracted from code — see §4 | `examples/untitled-ui/storybook/contracts/` |
 | Eventz (Figma kit) | 17 | a designer's own file with real variable names | `examples/eventz-vars/contracts/` |
 
@@ -281,17 +281,17 @@ asserted in prose.
 
 | pin | value | what it forbids | source |
 |---|---|---|---|
-| generated source, byte-identical | 266 files hashed | a contract change altering generated code without review | `evals/golden.json` |
+| generated source, byte-identical | 291 files hashed | a contract change altering generated code without review | `evals/golden.json` |
 | capture double-sweep identity | 162/162 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
 | browser captures behind the corpus | 7,493 | a floor quoted from a sample smaller than it claims | same files, `captures` |
-| executable claims | 213 gates | a documented behaviour with no test | `evals/results.json` |
+| executable claims | 215 gates | a documented behaviour with no test | `evals/results.json` |
 | dropped-fact receipt count | 100 pinned exactly | honesty being switched off unnoticed — see §6 | `extract/figma/dagger-census.json` |
 | doc numbers vs the repo | gated | a doc quoting a number the repo no longer produces | `scripts/docs-numbers-check.mjs` |
 | this document vs its sources | `--check` | this page going stale while still reading as current | `scripts/build-capability-report.mjs` |
 
 ### 5.1 The claim suite by class
 
-The 213 evals are not all "does it work". They are classified by what they
+The 215 evals are not all "does it work". They are classified by what they
 claim, and the largest classes after extraction are **detection** and
 **refusal** — gates that fail if the engine *stops* saying no. That balance is
 the point: an engine that carries everything is not a better engine, it is one
@@ -303,7 +303,7 @@ that has stopped telling you what it could not do.
 | `C2-refusal` | 35 | the engine refuses BY NAME rather than guessing | `evals/results.json` |
 | `C3-detection` | 58 | a defect or drift is caught, not silently absorbed | `evals/results.json` |
 | `C4-convergence` | 4 | a round trip settles instead of oscillating | `evals/results.json` |
-| `C5-extraction` | 62 | a fact is carried out of a real library correctly | `evals/results.json` |
+| `C5-extraction` | 64 | a fact is carried out of a real library correctly | `evals/results.json` |
 | `C6-theming` | 1 | a mode/brand switch resolves to the right values | `evals/results.json` |
 | `C7-cli` | 5 | the command-line surface behaves as documented | `evals/results.json` |
 | `C8-journey` | 13 | an end-to-end adopter path completes | `evals/results.json` |
@@ -347,10 +347,10 @@ filter that decides carriage scores 100% on a channel it never opened.
 
 | manifest | cases | breakdown | source |
 |---|---|---|---|
-| canvas constructs | 91 | CARRIED 72 · LEDGERED 11 · REFUSED 8 | `extract/figma/conformance/MANIFEST.json` |
+| canvas constructs | 116 | CARRIED 93 · LEDGERED 14 · REFUSED 9 | `extract/figma/conformance/MANIFEST.json` |
 | CSS / DOM frontier | 82 | CARRIED 42 · REFUSED 18 · UNSUPPORTED 18 · LOWERED 4 | `conformance/MANIFEST.json` |
 
-Of the 91 canvas constructs, **91** are `green`.
+Of the 116 canvas constructs, **114** are `green`, **2** are `red`.
 A construct that is neither carried nor named-refused is a hard failure of that
 suite — "it silently did nothing" is not an allowed outcome.
 
@@ -459,7 +459,7 @@ earlier for a different purpose.
 |---|---|---|---|
 | components with a computed scorecard = components pinned by the drift instrument | 82 — `extract/computed/out/**/scorecard.json` | 82 — `docs/22-generality.md §8.3, "pinned" total` | ✔ |
 | contracts committed under `examples/<lib>/contracts` = the coverage table's committed column | 90 — `examples/*/contracts/*.contract.json` | 90 — `docs/22-generality.md §8.3, "contracts committed" total` | ✔ |
-| the eval suite has as many result rows as it claims | 213 — `evals/results.json → results.length` | 213 — `same file → total` | ✔ |
+| the eval suite has as many result rows as it claims | 215 — `evals/results.json → results.length` | 215 — `same file → total` | ✔ |
 | every capture run carries the two-sweep determinism receipt | 162 — `extract/computed/out/**/numbers.json` | 162 — `count of numbers.json files` | ✔ |
 | every scorecard falls in a known corpus | 0 — `extract/computed/out/**/scorecard.json` | 0 — `the library registry in this script` | ✔ |
 | every round-trip execution reached the fact diff | 15 — `extract/figma/roundtrip-uui/report.json → totals.roundTripClosed` | 15 — `same file → totals.components` | ✔ |
@@ -499,12 +499,12 @@ npm run capability:fresh
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `4414d908b2fe` | 75,681 | CSS/DOM frontier vocabulary |
 | `docs/22-generality.md` | `813b804a8e9e` | 71,156 | coverage denominators (docs/22 §8.3 table) |
-| `evals/golden.json` | `c758d2a68d77` | 29,319 | generated-source golden manifest |
-| `evals/results.json` | `e9b05d229c79` | 22,797 | executable claim suite |
+| `evals/golden.json` | `fd49fdeca4a1` | 32,157 | generated-source golden manifest |
+| `evals/results.json` | `dc305e913ef4` | 23,592 | executable claim suite |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `8cb00a60f240` | 918,901 | capture counts + determinism receipts — 162 files |
 | `extract/computed/out/**/scorecard.json` | `5d2e4f8d18c4` | 10,961,309 | computed-equality per component — 162 files |
-| `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | canvas construct vocabulary |
+| `extract/figma/conformance/MANIFEST.json` | `c43ae501d516` | 68,895 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `80258165cbaa` | 2,949 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 

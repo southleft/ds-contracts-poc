@@ -1390,11 +1390,16 @@ const cases: Case[] = [
     // them — yet conformance/build.ts and 23 dump.snippet.json markers claimed
     // the canvasToCode surface was "eval-gated today (grid-code-proposer-check
     // / grid-bento-check)". The code was sound; the CLAIM was false. Both
-    // fixtures are registered here, and the markers were ALSO narrowed: the
-    // canvasToCode direction (dump grid facts → contract layout.grid) has no
-    // reader at all in extract/figma/propose.ts, so no eval could have gated
-    // it — what these three evals gate is contract→canvas carriage, CSS
-    // emission, and CSS→contract inversion.
+    // fixtures are registered here. The marker narrowing that shipped with
+    // them was itself wrong in the same class: it said the canvasToCode
+    // direction "has no reader at all in extract/figma/propose.ts" six
+    // commits after the reader landed (0161ef9f), because the absence was
+    // measured with a plain `grep` that silently SKIPS core/propose-figma.ts
+    // (three literal NUL bytes make file(1) call it binary; `grep -a` finds
+    // 63 hits). That direction is now gated for real by
+    // `grid-canvas-conformance` and `grid-roundtrip-identity` below; what
+    // these three evals gate is contract→canvas carriage, CSS emission, and
+    // CSS→contract inversion.
     id: 'grid-css-emitters',
     claim: 'C1-determinism',
     run: () => {
@@ -1426,6 +1431,52 @@ const cases: Case[] = [
       const r = run(TSX, ['evals/fixtures/grid-code-proposer-check.ts']);
       if (r.status !== 0 || !r.out.includes('grid-code-proposer ok:')) {
         throw new Error(`grid-code-proposer check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
+    // A2 layout grammar (grid), the CANVAS→CONTRACT direction — the leg none
+    // of the three evals above measures. extract/figma/conformance is the
+    // canvas-side twin of the CSS conformance fixture: a hand-authored
+    // MANIFEST as the denominator, the real proposeBatchFromDump path, and a
+    // two-sided ratchet (a green case that breaks fails; a pinned red that
+    // goes green ALSO fails until re-recorded).
+    //
+    // INSTRUMENT HONESTY, the second occurrence of this repo's own class:
+    // that harness existed with 91 cases and was run by NO eval, NO CI lane
+    // and no npm script anybody called — and it was RED when this eval was
+    // wired in (instance-override-size-carried's fixture declared a
+    // standalone COMPONENT carrying two variants, which Figma spells
+    // COMPONENT_SET; the proposer refused the set as a duplicate tuple and
+    // the case's whole assertion had been dark). Registering it here is what
+    // makes the 23 conformance dump.snippet.json markers TRUE: the design
+    // side of the grid grammar is now gated, 25 grid cases among them.
+    id: 'grid-canvas-conformance',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/conformance/run.ts']);
+      if (r.status !== 0 || !r.out.includes('CANVAS CONFORMANCE: GREEN')) {
+        throw new Error(`canvas conformance failed:\n${r.out}`);
+      }
+    },
+  },
+  {
+    // A2 layout grammar (grid), the CLOSED LOOP. The three evals above each
+    // measure one leg and none of them reads a CANVAS back into a contract:
+    // contract → emitFigmaScript → strict Figma mock → THE PLUGIN'S OWN dump
+    // script (ui.html #dump-source) → proposeFromDump → the contract again,
+    // asserted for IDENTITY on the P8 bento. Red-tested on the canvas half —
+    // a span rewritten on the built node before the dump must change the
+    // recovered contract, or the "identity" would be the contract echoing
+    // itself. Also pins G4 (a native SLOT in a grid cell carries its area
+    // name home while name-less areas lower WITH a receipt) and G5 (a flow
+    // grid returns as flow, rows omitted, no anchors).
+    id: 'grid-roundtrip-identity',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['evals/fixtures/grid-roundtrip-identity-check.ts']);
+      if (r.status !== 0 || !r.out.includes('grid-roundtrip-identity ok:')) {
+        throw new Error(`grid-roundtrip-identity check failed:\n${r.out}`);
       }
     },
   },

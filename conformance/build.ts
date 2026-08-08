@@ -60,20 +60,28 @@ export interface CaseEntry {
    *  TWO-DIRECTION disposition spec, carried VERBATIM from the hand-authored
    *  draft. `codeToCanvas` is the direction this fixture's gate measures
    *  (CSS/DOM → computed capture → contract); `canvasToCode` is the dump →
-   *  propose-figma direction, which has NO INSTRUMENT TODAY — extract/figma/
-   *  propose.ts reads no grid facts at all — and is declared here so the
-   *  manifest names BOTH halves of the frontier: a DECLARATION, not a
-   *  measurement. What the A2 grammar actually gates today are three
-   *  registered evals (`npm run eval`): grid-bento-carriage (contract →
-   *  .figma.js → strict-mock readback — the codeToCanvas half),
-   *  grid-css-emitters (the canonical G6 spellings on all three CSS
-   *  surfaces) and grid-code-proposer (CSS → contract inversion, the G7
-   *  refusals by name, the round-trip comparator's grid buckets). Until
-   *  2026-08-08 this comment said canvasToCode was "eval-gated today
-   *  (grid-code-proposer-check / grid-bento-check)" while the first of those
-   *  fixtures was run by no eval and no npm script whatsoever — the repo's
-   *  own "measure the instrument" class, corrected by wiring the fixtures
-   *  AND by narrowing this sentence to what they actually prove.
+   *  propose-figma direction, and as of 2026-08-08 it is MEASURED, not merely
+   *  declared: each case's `dumpSnippet` is expanded into the full dump v1.17
+   *  grammar under extract/figma/conformance/cases/ and run through the real
+   *  reader (core/propose-figma.ts gridCarriageOf / invertGridLayout /
+   *  attachGridPlacement / hoistGridAreas) against that fixture's own
+   *  hand-authored MANIFEST — gated by the registered eval
+   *  `grid-canvas-conformance`, with the closed loop (contract → canvas →
+   *  contract, identity-asserted, red-tested on the canvas half) gated by
+   *  `grid-roundtrip-identity`. The A2 grammar's other three registered evals
+   *  (`npm run eval`) remain: grid-bento-carriage (contract → .figma.js →
+   *  strict-mock readback — the codeToCanvas half), grid-css-emitters (the
+   *  canonical G6 spellings on all three CSS surfaces) and grid-code-proposer
+   *  (CSS → contract inversion, the G7 refusals by name, the round-trip
+   *  comparator's grid buckets).
+   *  This comment has been wrong twice, both times in the same class. First it
+   *  claimed canvasToCode was "eval-gated today" while the named fixtures were
+   *  run by no eval at all. Then it claimed the reader did not exist — six
+   *  commits AFTER it landed (0161ef9f) — an absence measured with a plain
+   *  `grep` that silently skips core/propose-figma.ts: the file holds three
+   *  literal NUL bytes as composite-key separators, so file(1) calls it binary
+   *  data and grep reports no match for patterns with 63 real hits. Use
+   *  `grep -a` on that file, and prefer a gate to a sentence.
    *  `UNREACHABLE` means the source surface cannot construct
    *  the case (proved by the cited probe) — the direction exists to prove the
    *  reader never invents it, and such cases ship NO dump.snippet.json by

@@ -1,6 +1,6 @@
 {
   "passed": 213,
-  "total": 213,
+  "total": 215,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -229,6 +229,16 @@
     },
     {
       "id": "grid-code-proposer",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "grid-canvas-conformance",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "grid-roundtrip-identity",
       "claim": "C5-extraction",
       "pass": true
     },
@@ -610,12 +620,14 @@
     {
       "id": "ledger-and-residuals-are-fresh",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: LEDGER.md is STALE vs a rebuild from its committed sources:\nSTALE: LEDGER.md does not match a rebuild from its committed sources.\nEvery number in it is READ from an artifact; one of those artifacts moved.\nRebuild it and commit:  npm run ledger:uui\n"
     },
     {
       "id": "capability-report-is-fresh",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: docs/24-what-works.md is STALE vs a rebuild from its committed sources:\nSTALE: docs/24-what-works.md does not match a rebuild from its committed sources.\nEvery number in it is READ from an artifact; one of those artifacts moved.\nRebuild it and commit:  npm run capability:report\n"
     },
     {
       "id": "no-receipt-names-a-door-that-drops-it",

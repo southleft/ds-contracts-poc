@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "kind": "console-loop-composition-structural",
+  "convention": "docs/composition-corpus/README.md (a) EMPTY — structural, never pixels",
+  "status": "fail",
+  "checked": [
+    "presence",
+    "name",
+    "placement box"
+  ],
+  "rootBox": {
+    "canvas": [
+      640,
+      100
+    ],
+    "code": [
+      640,
+      62
+    ],
+    "ok": false
+  },
+  "slots": [
+    {
+      "name": "Item 1",
+      "cell": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "canvasBox": [
+        203,
+        42
+      ],
+      "codeBox": [
+        203,
+        23
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": false
+    },
+    {
+      "name": "Item 2",
+      "cell": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "canvasBox": [
+        203,
+        42
+      ],
+      "codeBox": [
+        203,
+        23
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": false
+    },
+    {
+      "name": "Item 3",
+      "cell": [
+        0,
+        2,
+        1,
+        1
+      ],
+      "canvasBox": [
+        203,
+        42
+      ],
+      "codeBox": [
+        203,
+        23
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": false
+    },
+    {
+      "name": "Item 4",
+      "cell": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "canvasBox": [
+        203,
+        42
+      ],
+      "codeBox": [
+        203,
+        23
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": false
+    },
+    {
+      "name": "Item 5",
+      "cell": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "canvasBox": [
+        203,
+        42
+      ],
+      "codeBox": [
+        203,
+        23
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": false
+    },
+    {
+      "name": "Item 6",
+      "cell": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "canvasBox": [
+        203,
+        42
+      ],
+      "codeBox": [
+        203,
+        23
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": false
+    }
+  ],
+  "emptyCanvasShot": "parity/receipts/console-loop/shots/grid-gallery-empty-cell.png",
+  "emptyCanvasShotSha256": "81ad988686d66a5986abbe2c0befcdcc0f16f1ede0957a4f7c0b9f2b4e59003e",
+  "fc": [
+    "FC-GRID-ROOT-VSIZE"
+  ],
+  "note": "FC-GRID-ROOT-VSIZE: the canvas grid root keeps createFrame's FIXED 100px on the axis the contract left to HUG, so the composition box (and every slot box on that axis) diverges from CSS. The FILLED pixel scorecard does NOT see this: the lane scorer trims both images to their ink bounding box, and the dead space carries no ink.",
+  "recordedAt": "2026-08-08T19:37:48.798Z"
+}

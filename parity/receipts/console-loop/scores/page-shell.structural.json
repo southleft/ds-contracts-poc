@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "kind": "console-loop-composition-structural",
+  "convention": "docs/composition-corpus/README.md (a) EMPTY — structural, never pixels",
+  "status": "pass",
+  "checked": [
+    "presence",
+    "name",
+    "placement box"
+  ],
+  "rootBox": {
+    "canvas": [
+      640,
+      480
+    ],
+    "code": [
+      640,
+      480
+    ],
+    "ok": true
+  },
+  "slots": [
+    {
+      "name": "Header",
+      "cell": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "canvasBox": [
+        640,
+        64
+      ],
+      "codeBox": [
+        640,
+        64
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": true
+    },
+    {
+      "name": "Aside",
+      "cell": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "canvasBox": [
+        240,
+        344
+      ],
+      "codeBox": [
+        240,
+        344
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": true
+    },
+    {
+      "name": "Main",
+      "cell": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "canvasBox": [
+        384,
+        344
+      ],
+      "codeBox": [
+        384,
+        344
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": true
+    },
+    {
+      "name": "Footer",
+      "cell": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "canvasBox": [
+        640,
+        56
+      ],
+      "codeBox": [
+        640,
+        56
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": true
+    }
+  ],
+  "emptyCanvasShot": "parity/receipts/console-loop/shots/page-shell-empty-cell.png",
+  "emptyCanvasShotSha256": "d61ac6e96a3c1d3b62e659f3a827204920ca5c75167ae9d051fab799b31683a7",
+  "fc": [],
+  "note": "presence + name + placement box hold for every slot AND for the composition root box",
+  "recordedAt": "2026-08-08T19:37:48.799Z"
+}

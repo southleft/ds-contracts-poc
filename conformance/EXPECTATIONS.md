@@ -166,6 +166,18 @@ Named, not skipped:
   not a measurement: nothing in this round runs the emitted Figma script and
   checks that a construct declared PRESENT actually reaches a node. Until it
   does, "carried" means "reached the contract", not "reached the canvas".
+  *Amended 2026-08-08 — this limit is about `canvas:`, not about `directions`.*
+  The `directions.canvasToCode` half of the A2 layout cases IS measured now:
+  each case's `dumpSnippet` is expanded into the dump v1.17 grammar under
+  `extract/figma/conformance/cases/` and run through the real reader against
+  that fixture's hand-authored MANIFEST, gated by the registered eval
+  `grid-canvas-conformance`; the closed loop (contract → emitted script →
+  strict Figma mock → the plugin's own dump script → contract, asserted for
+  identity) is gated by `grid-roundtrip-identity`. Two of those cases are
+  pinned FAIL-EXPECTED-RED rather than passing — `grid-absolute-overlay` (no
+  abs→overlay inversion exists) and `grid-auto-flow-row` (a flow grid with
+  declared row sizes has no carriable spelling under G5) — so the frontier
+  stays visible instead of being absorbed.
 - **State planes and axes.** Every case is one combo with no variant axes, so
   per-state and per-axis correlation — where the MUI and Carbon rounds found
   most of their defects — is untested here.

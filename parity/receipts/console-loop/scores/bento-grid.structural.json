@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "kind": "console-loop-composition-structural",
+  "convention": "docs/composition-corpus/README.md (a) EMPTY — structural, never pixels",
+  "status": "pass",
+  "checked": [
+    "presence",
+    "name",
+    "placement box"
+  ],
+  "rootBox": {
+    "canvas": [
+      640,
+      480
+    ],
+    "code": [
+      640,
+      480
+    ],
+    "ok": true
+  },
+  "slots": [
+    {
+      "name": "Header",
+      "cell": [
+        0,
+        0,
+        1,
+        4
+      ],
+      "canvasBox": [
+        640,
+        80
+      ],
+      "codeBox": [
+        640,
+        80
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": true
+    },
+    {
+      "name": "Sidebar",
+      "cell": [
+        1,
+        0,
+        2,
+        1
+      ],
+      "canvasBox": [
+        160,
+        392
+      ],
+      "codeBox": [
+        160,
+        392
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": true
+    },
+    {
+      "name": "Main",
+      "cell": [
+        1,
+        1,
+        1,
+        2
+      ],
+      "canvasBox": [
+        328,
+        128
+      ],
+      "codeBox": [
+        328,
+        128
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": true
+    },
+    {
+      "name": "Rail",
+      "cell": [
+        1,
+        3,
+        2,
+        1
+      ],
+      "canvasBox": [
+        120,
+        392
+      ],
+      "codeBox": [
+        120,
+        392
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": true
+    },
+    {
+      "name": "Footer",
+      "cell": [
+        2,
+        1,
+        1,
+        2
+      ],
+      "canvasBox": [
+        328,
+        256
+      ],
+      "codeBox": [
+        328,
+        256
+      ],
+      "presence": true,
+      "nameOk": true,
+      "boxOk": true
+    }
+  ],
+  "emptyCanvasShot": "parity/receipts/console-loop/shots/bento-grid-empty-cell.png",
+  "emptyCanvasShotSha256": "d61ac6e96a3c1d3b62e659f3a827204920ca5c75167ae9d051fab799b31683a7",
+  "fc": [],
+  "note": "presence + name + placement box hold for every slot AND for the composition root box",
+  "recordedAt": "2026-08-08T19:37:48.798Z"
+}

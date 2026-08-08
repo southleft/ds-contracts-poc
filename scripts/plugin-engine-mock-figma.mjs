@@ -404,7 +404,19 @@ export function createFigmaMock() {
         // FLEX 0 clamps to 1fr. HUG's value reads back as noise 1.
         if (t.type === 'FIXED' && t.value === 0) return { type: 'FIXED', value: 100 };
         if (t.type === 'FLEX' && t.value === 0) return { type: 'FLEX', value: 1 };
-        return { type: t.type, value: t.type === 'HUG' ? 1 : t.value };
+        // FC-GRID-HUG-VALUE (live probe, 2026-08-08): READ and WRITE are not
+        // symmetric. {type:'HUG'} round-trips as {type:'HUG', value:1} — but
+        // WRITING {type:'HUG', value:1} makes the API reinterpret the entry
+        // as FIXED at that value, and no later HUG write recovers it. The
+        // mock modeled only the read noise, so every emitter that mirrored
+        // the read shape back into a write looked correct headlessly while
+        // silently shipping a 1px fixed track to the canvas.
+        if (t.type === 'HUG') {
+          return Object.prototype.hasOwnProperty.call(t, 'value') && t.value !== undefined
+            ? { type: 'FIXED', value: t.value }
+            : { type: 'HUG', value: 1 };
+        }
+        return { type: t.type, value: t.value };
       });
     }
 
@@ -450,6 +462,26 @@ export function createFigmaMock() {
       if (p.gridItemsPositioning === 'ROW_AUTO_FLOW') {
         throw new Error(
           'cannot set grid child position directly inside of a grid with automatically positioned items, use parent.insertChild() instead',
+        );
+      }
+      // FC-GRID-APPEND-AUTOPLACE (live probe, 2026-08-08): appendChild does
+      // NOT park a grid child nowhere — the canvas auto-places it row-major
+      // into the next free cell, so by the time an emitter places anything
+      // every sibling already OCCUPIES a cell. A one-pass "place them all in
+      // contract order" therefore hits P3's occupancy throw on the canonical
+      // bento's SECOND child. The mock previously defaulted unplaced anchors
+      // to (0,0) and never collided, so the bento eval was green against a
+      // canvas that could not build it.
+      const holder = p.children.find(
+        (c) =>
+          c !== this &&
+          c.layoutPositioning !== 'ABSOLUTE' &&
+          c.gridRowAnchorIndex === rowIndex &&
+          c.gridColumnAnchorIndex === columnIndex,
+      );
+      if (holder) {
+        throw new Error(
+          "in setGridChildPosition: Cannot set grid child position: Can't place child at this position because it is occupied by another node",
         );
       }
       this._gridRow = rowIndex;

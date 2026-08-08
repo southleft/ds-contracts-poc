@@ -1,51 +1,31 @@
 {
   "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
   "fileUrl": "https://www.figma.com/design/BMjUA2ue5CaZXU4kufxL0z/DS-Contracts-Testing",
-  "emittedAt": "2026-08-08T13:22:00.150Z",
+  "emittedAt": "2026-08-08T18:49:18.342Z",
   "scripts": [
     {
       "name": "01-tokens.js",
       "bytes": 52569
     },
     {
-      "name": "02-avatar.js",
-      "bytes": 64062
+      "name": "02-bentogrid.js",
+      "bytes": 77110
     },
     {
-      "name": "03-badge.js",
-      "bytes": 67592
+      "name": "03-gridgallery.js",
+      "bytes": 76608
     },
     {
-      "name": "04-button.js",
-      "bytes": 106977
+      "name": "04-sidebarlayout.js",
+      "bytes": 75337
     },
     {
-      "name": "05-banner.js",
-      "bytes": 97080
+      "name": "05-twocolumn.js",
+      "bytes": 75296
     },
     {
-      "name": "06-card.js",
-      "bytes": 65433
-    },
-    {
-      "name": "07-checkbox.js",
-      "bytes": 80090
-    },
-    {
-      "name": "08-divider.js",
-      "bytes": 61554
-    },
-    {
-      "name": "09-switch.js",
-      "bytes": 69834
-    },
-    {
-      "name": "10-textfield.js",
-      "bytes": 73755
-    },
-    {
-      "name": "11-token.js",
-      "bytes": 130008
+      "name": "06-pageshell.js",
+      "bytes": 77670
     }
   ],
   "skipped": [

@@ -385,12 +385,40 @@ export interface GridCellPlan {
    *  single instance stretches into the cell — the CSS spelling of the
    *  canvas FILL default, G3/P12). */
   wrappedInstances: Set<string>;
+  /** Every in-flow direct child of a grid parent, manual OR auto-flow. A grid
+   *  child is the one place the CSS and canvas cross-axis DEFAULTS disagree
+   *  visibly (FC-SLOT-CROSS-AXIS-STRETCH) — see gridChildCrossAxisDecls. */
+  gridChildren: Set<string>;
 }
+
+/** FC-SLOT-CROSS-AXIS-STRETCH. A part with no declared `layout.align` gets
+ *  the surface's own default on each side, and the two defaults are not the
+ *  same fact: CSS `display:flex` means `align-items: stretch`, while the
+ *  canvas frame this emitter builds carries `counterAxisAlignItems: 'MIN'`.
+ *  Everywhere else that difference is invisible, because a hugging parent is
+ *  exactly as tall as its child. Inside a GRID CELL it is not: the cell gives
+ *  the slot a definite box, so CSS stretched a 23px badge to the full 392px
+ *  sidebar while the canvas left it 23px at the top — same contract, same
+ *  child, two renderings. The contract's own spec says MIN, so CSS is the
+ *  side that must spell its default out. Scoped to grid children: no
+ *  pre-existing contract declares a grid, so this cannot move a single
+ *  committed byte of the 51 lower-order components. */
+export const gridChildCrossAxisDecls = (part: { layout?: { align?: string; display?: string } }): string[] =>
+  part.layout?.align || part.layout?.display === 'grid' ? [] : ['align-items: flex-start'];
 
 export function gridCellPlan(contract: Contract): GridCellPlan {
   const cells = new Map<string, string[]>();
   const placeholders = new Map<string, string[]>();
   const wrappedInstances = new Set<string>();
+  const gridChildren = new Set<string>();
+  for (const { part } of walkAnatomy(contract)) {
+    // Auto-flow grids place by child ORDER and so carry no cell decls, but
+    // their children are still grid children for cross-axis purposes.
+    if (part.layout?.display !== 'grid') continue;
+    for (const [childName, child] of Object.entries(part.parts ?? {})) {
+      if (!child.overlay) gridChildren.add(childName);
+    }
+  }
   for (const { name, part } of walkAnatomy(contract)) {
     const l = part.layout;
     if (l?.display !== 'grid' || l.flow === 'row') continue;
@@ -411,7 +439,7 @@ export function gridCellPlan(contract: Contract): GridCellPlan {
     const empty = Object.keys(areas).filter((a) => !childNames.has(a));
     if (empty.length > 0) placeholders.set(name, empty);
   }
-  return { cells, placeholders, wrappedInstances };
+  return { cells, placeholders, wrappedInstances, gridChildren };
 }
 
 // ---------------------------------------------------------------------------
@@ -1605,6 +1633,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
           if (part.layout?.direction) decls.push(`flex-direction: ${part.layout.direction}`);
           if (part.layout?.wrap) decls.push('flex-wrap: wrap');
           if (part.layout?.align) decls.push(`align-items: ${ALIGN_CSS[part.layout.align]}`);
+          else if (gridPlan.gridChildren.has(name)) decls.push(...gridChildCrossAxisDecls(part));
           if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
         }
       }
@@ -2207,6 +2236,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         if (part.layout?.direction) decls.push(`flex-direction: ${part.layout.direction}`);
         if (part.layout?.wrap) decls.push('flex-wrap: wrap');
         if (part.layout?.align) decls.push(`align-items: ${ALIGN_CSS[part.layout.align]}`);
+        else if (gridPlan.gridChildren.has(name)) decls.push(...gridChildCrossAxisDecls(part));
         if (part.layout?.justify) decls.push(`justify-content: ${JUSTIFY_CSS[part.layout.justify]}`);
       }
     }

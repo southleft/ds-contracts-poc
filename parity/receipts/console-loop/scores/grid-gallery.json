@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "pass",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": true,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 22.97186966525644,
+    "pctAAUnmasked": 3.411761795195329,
+    "pctAAMasked": 3.411761795195329,
+    "maskCoveragePct": 0,
+    "canvasPx": "499x81",
+    "realPx": "498x62",
+    "inkCanvasPct": 19.44135183948143,
+    "inkRealPct": 19.347336648605854
+  },
+  "reference": "parity/receipts/console-loop/refs/grid-gallery.png",
+  "referenceSha256": "859f58aee8278688306e1fc6e3057683bdfffd33024b475fb43f978c5fb030e9",
+  "canvasShot": "parity/receipts/console-loop/shots/grid-gallery-cell.png",
+  "canvasShotSha256": "c97e7a706b99f1fbcd7fcbf55760171f53565674875a276d87f7911b63c588d0",
+  "diff": "parity/receipts/console-loop/scores/grid-gallery.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/components/grid-gallery.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.3064516129032258,
+  "inkDelta": 0.0940151908755773,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-08T19:08:08.152Z"
+}

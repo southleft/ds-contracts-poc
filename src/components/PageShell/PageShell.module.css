@@ -1,0 +1,47 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/page-shell.contract.json (ds.page-shell v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: grid;
+  grid-template-rows: 64px 1fr 56px;
+  grid-template-columns: 240px 1fr;
+  grid-template-areas: 'header header' 'aside main' 'footer footer';
+  row-gap: var(--space-gap-sm);
+  column-gap: var(--space-gap-md);
+  border: 0;
+  width: 640px;
+  height: 480px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  grid-area: header;
+}
+
+.aside {
+  display: flex;
+  align-items: flex-start;
+  grid-area: aside;
+}
+
+.main {
+  display: flex;
+  align-items: flex-start;
+  grid-area: main;
+}
+
+.footer {
+  display: flex;
+  align-items: flex-start;
+  grid-area: footer;
+}

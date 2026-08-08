@@ -1,0 +1,35 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/two-column.contract.json (ds.two-column v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: grid;
+  grid-template-rows: fit-content(100%);
+  grid-template-columns: 1fr 1fr;
+  row-gap: var(--space-gap-md);
+  column-gap: var(--space-gap-md);
+  border: 0;
+  width: 640px;
+}
+
+.start {
+  display: flex;
+  align-items: flex-start;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.end {
+  display: flex;
+  align-items: flex-start;
+  grid-row: 1;
+  grid-column: 2;
+}

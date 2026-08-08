@@ -106,6 +106,14 @@ const DEFAULT_REQUIRED = [
   "top-nav",
   "top-nav-item",
   "typeahead-item",
+  // A3 composition corpus (2026-08-08) — the first contracts in this lane whose
+  // subject is LAYOUT rather than a lower-order component. Each is scored TWICE
+  // (docs/composition-corpus/README.md): EMPTY structurally, FILLED by pixels.
+  "two-column",
+  "sidebar-layout",
+  "grid-gallery",
+  "bento-grid",
+  "page-shell",
 ];
 const REQUIRED = (process.env.CONSOLE_LOOP_REQUIRED ?? DEFAULT_REQUIRED.join(","))
   .split(",")

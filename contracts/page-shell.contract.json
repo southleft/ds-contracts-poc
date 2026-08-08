@@ -1,0 +1,129 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.page-shell",
+  "name": "PageShell",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Composition of compositions: header/aside/main/footer named areas (G4) whose slots accept the other layout contracts. The main slot's accepts list is the nested-composition constraint.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "grid",
+        "rows": [
+          {
+            "px": 64
+          },
+          {
+            "fr": 1
+          },
+          {
+            "px": 56
+          }
+        ],
+        "columns": [
+          {
+            "px": 240
+          },
+          {
+            "fr": 1
+          }
+        ],
+        "gap": {
+          "row": "{space.gap.sm}",
+          "column": "{space.gap.md}"
+        },
+        "areas": {
+          "header": {
+            "row": 0,
+            "column": 0,
+            "columnSpan": 2
+          },
+          "aside": {
+            "row": 1,
+            "column": 0
+          },
+          "main": {
+            "row": 1,
+            "column": 1
+          },
+          "footer": {
+            "row": 2,
+            "column": 0,
+            "columnSpan": 2
+          }
+        }
+      },
+      "literals": {
+        "width": "640px",
+        "height": "480px"
+      },
+      "parts": {
+        "header": {
+          "description": "Masthead band spanning both columns.",
+          "element": "header",
+          "slot": {
+            "name": "header",
+            "figmaProperty": "Header"
+          }
+        },
+        "aside": {
+          "description": "Stationary 240px navigation column.",
+          "element": "aside",
+          "slot": {
+            "name": "aside",
+            "figmaProperty": "Aside",
+            "accepts": [
+              "ds.sidebar-layout"
+            ],
+            "acceptsMode": "prefer"
+          }
+        },
+        "main": {
+          "description": "Primary region — accepts the other layout contracts, so a composition nests inside a composition.",
+          "element": "main",
+          "slot": {
+            "name": "main",
+            "figmaProperty": "Main",
+            "accepts": [
+              "ds.two-column",
+              "ds.sidebar-layout",
+              "ds.grid-gallery",
+              "ds.bento-grid"
+            ],
+            "acceptsMode": "prefer"
+          }
+        },
+        "footer": {
+          "description": "Footer band spanning both columns.",
+          "element": "footer",
+          "slot": {
+            "name": "footer",
+            "figmaProperty": "Footer",
+            "accepts": [
+              "ds.two-column"
+            ],
+            "acceptsMode": "prefer"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "src/components/PageShell",
+      "export": "PageShell"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.two-column",
+  "name": "TwoColumn",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Two equal fr columns, each a slot. The simplest declared-track grid: G1 tracks, G2 explicit placement, one row that hugs its content.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "grid",
+        "rows": [
+          {
+            "fit": true
+          }
+        ],
+        "columns": [
+          {
+            "fr": 1
+          },
+          {
+            "fr": 1
+          }
+        ],
+        "gap": {
+          "row": "{space.gap.md}",
+          "column": "{space.gap.md}"
+        }
+      },
+      "literals": {
+        "width": "640px"
+      },
+      "parts": {
+        "start": {
+          "description": "Leading column slot.",
+          "placement": {
+            "row": 0,
+            "column": 0
+          },
+          "slot": {
+            "name": "start",
+            "figmaProperty": "Start"
+          }
+        },
+        "end": {
+          "description": "Trailing column slot.",
+          "placement": {
+            "row": 0,
+            "column": 1
+          },
+          "slot": {
+            "name": "end",
+            "figmaProperty": "End"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "src/components/TwoColumn",
+      "export": "TwoColumn"
+    }
+  }
+}

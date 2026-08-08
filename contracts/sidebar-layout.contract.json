@@ -1,0 +1,79 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.sidebar-layout",
+  "name": "SidebarLayout",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "A stationary px sidebar column beside an fr main column — mixed track kinds in one declared list (G1). The sidebar never reflows; main absorbs the remainder.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "grid",
+        "rows": [
+          {
+            "fit": true
+          }
+        ],
+        "columns": [
+          {
+            "px": 240
+          },
+          {
+            "fr": 1
+          }
+        ],
+        "gap": {
+          "row": "{space.gap.md}",
+          "column": "{space.gap.lg}"
+        }
+      },
+      "literals": {
+        "width": "640px"
+      },
+      "parts": {
+        "sidebar": {
+          "description": "Stationary 240px column — a FIXED track, never redistributed.",
+          "element": "aside",
+          "placement": {
+            "row": 0,
+            "column": 0
+          },
+          "slot": {
+            "name": "sidebar",
+            "figmaProperty": "Sidebar"
+          }
+        },
+        "main": {
+          "description": "Fluid main column — the single fr track absorbs all remaining width.",
+          "element": "main",
+          "placement": {
+            "row": 0,
+            "column": 1
+          },
+          "slot": {
+            "name": "main",
+            "figmaProperty": "Main"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "src/components/SidebarLayout",
+      "export": "SidebarLayout"
+    }
+  }
+}

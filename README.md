@@ -7,7 +7,7 @@
 
 **A design system's source of truth should be neither the design file nor the code — but a machine-readable *contract* that sits between them and generates both.**
 
-This repository is the working proof, and the candidate reference implementation for a vendor-neutral component contract specification. 51 component contracts and 282 DTCG tokens generate two surfaces — a typed React library and a native design-tool library — that are continuously proven to match the contracts by a three-way differ. Nothing is hand-maintained twice, and nothing pretends to be in sync when it isn't.
+This repository is the working proof, and the candidate reference implementation for a vendor-neutral component contract specification. 56 component contracts and 282 DTCG tokens generate two surfaces — a typed React library and a native design-tool library — that are continuously proven to match the contracts by a three-way differ. Nothing is hand-maintained twice, and nothing pretends to be in sync when it isn't.
 
 **→ The spec site: [ds-contracts-spec.pages.dev](https://ds-contracts-spec.pages.dev)** · **The playground: [ds-contracts-playground.pages.dev](https://ds-contracts-playground.pages.dev)** · **New here? [Which journey are you on?](#which-journey-are-you-on)**
 
@@ -375,7 +375,7 @@ All of it is gated by **213 executable checks** (`npm run eval`) that run the re
 
 | Path | What it is | Edit by hand? |
 |---|---|---|
-| `contracts/` | **The source of truth.** 51 component contracts — buttons through banners, form fields, chat messages, navigation, progress meters, switches. APIs mirror a shipping industry component library ([coverage map](docs/research/astryx-coverage.md)) on this system's own tokens. | ✅ This is where changes happen |
+| `contracts/` | **The source of truth.** 56 component contracts — buttons through banners, form fields, chat messages, navigation, progress meters, switches, plus the A3 composition corpus (two-column, sidebar, gallery, bento, page shell). APIs mirror a shipping industry component library ([coverage map](docs/research/astryx-coverage.md)) on this system's own tokens. | ✅ This is where changes happen |
 | `tokens/` | 282 DTCG design tokens: primitives → **brand modes** (accent ramp + control radius per brand) → semantic aliases → light/dark mode files. One pipeline compiles them to CSS custom properties *and* design-tool variable collections. Adding a brand touches ONLY this directory — eval-proven. | ✅ |
 | `core/` | **The engine as a library** — schema, token corpus, both extraction proposers, and four emitters (`react`, `html`, `react-inline`, `figma-script`) behind a pluggable `Emitter` interface. Browser-importable, zero node globals; the CLI scripts are thin shells over it. | ✅ |
 | `src/components/` | The generated React library — typed, accessible, CSF3 stories, publishable package build. | ❌ Generated, never edited |

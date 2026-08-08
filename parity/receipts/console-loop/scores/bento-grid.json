@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "pass",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": true,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 1.013887824287317,
+    "pctAAUnmasked": 0.09755621676991366,
+    "pctAAMasked": 0.09755621676991366,
+    "maskCoveragePct": 0,
+    "canvasPx": "581x247",
+    "realPx": "581x247",
+    "inkCanvasPct": 4.567721435191315,
+    "inkRealPct": 4.567721435191315
+  },
+  "reference": "parity/receipts/console-loop/refs/bento-grid.png",
+  "referenceSha256": "429f5876a27db8aa6eabf29ff5d4eec0784be6b0558ebc7fc23ecefcc06fcb46",
+  "canvasShot": "parity/receipts/console-loop/shots/bento-grid-cell.png",
+  "canvasShotSha256": "aa127fdc622797e5fb4a469e3f68115fefb872e61984810e3db46cffaf9916fa",
+  "diff": "parity/receipts/console-loop/scores/bento-grid.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/components/bento-grid.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-08T19:08:06.541Z"
+}

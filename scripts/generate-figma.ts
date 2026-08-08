@@ -13,7 +13,7 @@
  *
  * Output is byte-guarded by evals/golden.json (golden covers figma-sync/*.js).
  */
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, sortByDependencies } from './contract-schema.js';
 import { createFigmaEngine, type ComponentData } from '../core/emit-figma-script.js';
@@ -101,4 +101,23 @@ batches.forEach((batch, i) => {
   emitted.push(name);
 });
 
+// PRUNE stale emissions. The file names carry a dependency-order INDEX, so
+// adding or removing one contract renumbers every script after it. Without a
+// prune the previous numbering survives as orphan duplicates of the same
+// components (a 5-contract composition round left 43 of them), and those
+// orphans are real: scripts/update-golden.mjs walks this directory, so a
+// stale script silently becomes part of the golden it is supposed to guard.
+// `arrange.js` is hand-maintained (README + update-golden both name it) and
+// the plugin/ subdirectory is not ours — everything else here is emitted by
+// this script and nothing else, so "not emitted this run" means "stale".
+const kept = new Set([...emitted, 'arrange.js']);
+const pruned = readdirSync(OUT, { withFileTypes: true })
+  .filter((e) => e.isFile() && e.name.endsWith('.js') && !kept.has(e.name))
+  .map((e) => e.name)
+  .sort();
+for (const name of pruned) rmSync(path.join(OUT, name));
+
 console.log(`✔ Emitted figma-sync scripts (dependency order): ${emitted.join(', ')}`);
+if (pruned.length > 0) {
+  console.log(`✔ Pruned ${pruned.length} stale script(s) left by a previous numbering: ${pruned.join(', ')}`);
+}

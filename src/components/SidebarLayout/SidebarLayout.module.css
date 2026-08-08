@@ -1,0 +1,35 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/sidebar-layout.contract.json (ds.sidebar-layout v1.0.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: grid;
+  grid-template-rows: fit-content(100%);
+  grid-template-columns: 240px 1fr;
+  row-gap: var(--space-gap-md);
+  column-gap: var(--space-gap-lg);
+  border: 0;
+  width: 640px;
+}
+
+.sidebar {
+  display: flex;
+  align-items: flex-start;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.main {
+  display: flex;
+  align-items: flex-start;
+  grid-row: 1;
+  grid-column: 2;
+}

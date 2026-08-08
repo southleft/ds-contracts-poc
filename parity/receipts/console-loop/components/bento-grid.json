@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "bento-grid",
+  "contract": "contracts/bento-grid.contract.json",
+  "script": "parity/receipts/console-loop/emitted/02-bentogrid.js",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "recordedAt": "2026-08-08T19:37:48.799Z",
+  "transport": "figma-console-mcp figma_execute + stem-serve fetch/eval on port 9224 (9223 is held by the figma-console MCP server itself; the Desktop Bridge allowlist covers localhost:9223-9232)",
+  "corpus": {
+    "lane": "A3 composition corpus",
+    "section": "Composition Corpus",
+    "sectionId": "4:1416",
+    "exercises": "G2 span matrix addressed through G4 named areas — the P8 canonical 3x4 bento; mixed px/fr on both axes; independent row/column gaps",
+    "slots": [
+      "Header@0,0 span 1x4",
+      "Sidebar@1,0 span 2x1",
+      "Main@1,1 span 1x2",
+      "Rail@1,3 span 2x1",
+      "Footer@2,1 span 1x2"
+    ],
+    "filledPins": "one ds.badge instance (Variant=Info, the contract default) in EVERY slot, identically on both surfaces"
+  },
+  "generate": {
+    "ok": true,
+    "nodeId": "4:1382",
+    "page": "Composition Corpus",
+    "sectionId": "4:1416"
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Built on the playground file BMjUA2ue5CaZXU4kufxL0z inside the \"Composition Corpus\" section via stem-serve fetch/eval; COMPONENT exported at scale 1, empty and filled.",
+      "EMPTY is scored STRUCTURALLY (presence + name + placement box), never by pixels — an empty native slot renders as Figma's own frame with zero chrome (native-slots-proposal.md §2), and the empty scale-1 export is a 404-byte blank. Scorecard: scores/bento-grid.structural.json.",
+      "FILLED pins the SAME child on both surfaces (one ds.badge per slot) and is scored by the lane scorer under the standard bar. Scorecard: scores/bento-grid.json."
+    ],
+    "defects": [],
+    "empty": {
+      "convention": "structural",
+      "status": "pass",
+      "scorecard": "parity/receipts/console-loop/scores/bento-grid.structural.json",
+      "canvasShot": "parity/receipts/console-loop/shots/bento-grid-empty-cell.png"
+    },
+    "filled": {
+      "status": "pass",
+      "pctAAMasked": 0.09755621676991366,
+      "compositionOk": true,
+      "scorecard": "parity/receipts/console-loop/scores/bento-grid.json"
+    },
+    "reference": "parity/receipts/console-loop/refs/bento-grid.png",
+    "referenceSource": "scripts/console-loop-render-composition-ref.mts (src/components render, every slot filled with the pinned ds.badge; Inter v20 latin face pinned from extract/computed/fonts/inter/)",
+    "canvasShot": "parity/receipts/console-loop/shots/bento-grid-cell.png",
+    "matchDeveloped": true,
+    "status": "scored-pass"
+  },
+  "fingerprint": {
+    "v6": "v6:1998161685",
+    "lineCount": 30,
+    "sampleLines": [
+      ":COMPONENT/BentoGrid"
+    ],
+    "note": "stamped on the CONTRACT state (slots empty, as emitted) — the filled slots are a scoring fixture and are removed after the filled shot is captured, so the stamp describes what the contract builds, not the measurement"
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no Variant axis — a layout contract declares no enum props — OK",
+      "canvas-absent: Figma has no native grid AREA names; the CONTRACT owns the names and both surfaces carry the rects (G4) — OK"
+    ],
+    "matchedAxes": [
+      "grid track lists (rows + columns) carried exactly, including mixed px/fr and HUG",
+      "row and column gaps carried as independent facts",
+      "per-slot anchor + span carried exactly",
+      "one native SLOT property per contract slot"
+    ]
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

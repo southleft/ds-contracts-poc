@@ -1,0 +1,134 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.bento-grid",
+  "name": "BentoGrid",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "The span matrix (G2) addressed through named areas (G4): a 3x4 bento whose five regions span rows and columns and whose area names ARE the slot anchors. Mixed px/fr tracks on both axes and independent row/column gaps.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "grid",
+        "rows": [
+          {
+            "px": 80
+          },
+          {
+            "fr": 1
+          },
+          {
+            "fr": 2
+          }
+        ],
+        "columns": [
+          {
+            "px": 160
+          },
+          {
+            "fr": 1
+          },
+          {
+            "fr": 1
+          },
+          {
+            "px": 120
+          }
+        ],
+        "gap": {
+          "row": "{space.gap.sm}",
+          "column": "{space.gap.md}"
+        },
+        "areas": {
+          "header": {
+            "row": 0,
+            "column": 0,
+            "columnSpan": 4
+          },
+          "sidebar": {
+            "row": 1,
+            "column": 0,
+            "rowSpan": 2
+          },
+          "main": {
+            "row": 1,
+            "column": 1,
+            "columnSpan": 2
+          },
+          "rail": {
+            "row": 1,
+            "column": 3,
+            "rowSpan": 2
+          },
+          "footer": {
+            "row": 2,
+            "column": 1,
+            "columnSpan": 2
+          }
+        }
+      },
+      "literals": {
+        "width": "640px",
+        "height": "480px"
+      },
+      "parts": {
+        "header": {
+          "description": "Full-bleed banner region — one row, all four columns.",
+          "element": "header",
+          "slot": {
+            "name": "header",
+            "figmaProperty": "Header"
+          }
+        },
+        "sidebar": {
+          "description": "Stationary 160px rail on the left, spanning both content rows.",
+          "element": "aside",
+          "slot": {
+            "name": "sidebar",
+            "figmaProperty": "Sidebar"
+          }
+        },
+        "main": {
+          "description": "Primary region — the 1fr row across the two fr columns.",
+          "element": "main",
+          "slot": {
+            "name": "main",
+            "figmaProperty": "Main"
+          }
+        },
+        "rail": {
+          "description": "Stationary 120px rail on the right, spanning both content rows.",
+          "slot": {
+            "name": "rail",
+            "figmaProperty": "Rail"
+          }
+        },
+        "footer": {
+          "description": "Deep region on the 2fr row, under main.",
+          "element": "footer",
+          "slot": {
+            "name": "footer",
+            "figmaProperty": "Footer"
+          }
+        }
+      }
+    }
+  },
+  "a11y": {
+    "contrast": "AA"
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "src/components/BentoGrid",
+      "export": "BentoGrid"
+    }
+  }
+}

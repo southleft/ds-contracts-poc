@@ -4948,16 +4948,42 @@ function applyGridFrame(node, l) {
   node.layoutMode = 'GRID';
   node.gridRowCount = g.rows.length;
   node.gridColumnCount = g.columns.length;
-  node.gridRowSizes = g.rows.map((t) => ({ type: t.type, value: t.value }));
-  node.gridColumnSizes = g.columns.map((t) => ({ type: t.type, value: t.value }));
+  // FC-GRID-HUG-VALUE. READ and WRITE are not symmetric here. P2b observed a
+  // HUG track reading back as {type:'HUG', value:1} and this emitter mirrored
+  // that shape into the WRITE — but writing {type:'HUG', value:1} makes the
+  // API reinterpret the entry as FIXED at that value, so every "fit" track
+  // silently became a 1px fixed track (live probe: {type:'HUG'} round-trips
+  // as HUG; {type:'HUG', value:1} reads back FIXED, and re-setting it with a
+  // value can never recover). HUG is written as the bare type, never valued.
+  const trackWrite = (t) => (t.type === 'HUG' ? { type: 'HUG' } : { type: t.type, value: t.value });
+  node.gridRowSizes = g.rows.map(trackWrite);
+  node.gridColumnSizes = g.columns.map(trackWrite);
   node.gridRowGap = g.rowGap;
   node.gridColumnGap = g.columnGap;
   if (g.flow) node.gridItemsPositioning = g.flow;
+  // FC-GRID-ROOT-VSIZE — KNOWN, NAMED, DELIBERATELY UNFIXED (A3 corpus).
+  // primaryAxisSizingMode/counterAxisSizingMode = 'AUTO' (the flex spelling
+  // of hug, applied by the caller) are INERT on a GRID frame, so a grid frame
+  // keeps createFrame's FIXED 100x100 default on any axis the contract did
+  // not pin with a width/height fact: ds.two-column, whose single row HUGS,
+  // renders 640x100 on canvas with 77px of dead space under a 23px row while
+  // the same contract hugs to 640x23 in CSS.
+  //
+  // The obvious repair — writing layoutSizing*='HUG' here — is WORSE than the
+  // defect and was measured, not reasoned: a GRID frame set to hug NORMALIZES
+  // its FLEX tracks to HUG, and the fr RATIO does not survive. The canonical
+  // bento's [80px, 1fr, 2fr] came back [FIXED:80, FLEX:1, FLEX:1] and its
+  // main/footer regions both rendered 192px tall instead of 128/256. Trading
+  // an honest 77px of dead space for a silently destroyed span matrix is not
+  // a fix, so this stays named and open rather than papered over. A real fix
+  // must hug ONLY axes that carry no FLEX track and must run after resize().
 }
 
 // A2 grid: children were appended by the caller — now the probe-pinned tail:
 // place ALL children (child.setGridChildPosition, the child-side setter, P3)
-// BEFORE any span (the occupancy throw), then FILL (G3: a placed part fills
+// BEFORE any span (the occupancy throw) — but placement is a PERMUTATION,
+// not a loop, because appendChild already auto-placed every child row-major
+// (FC-GRID-APPEND-AUTOPLACE, see below) — then FILL (G3: a placed part fills
 // both axes of its cell; fixed channels keep their box; TEXT hugs — the flex
 // fence re-proved under grid, P4), then per-child aligns (P3's four-value
 // fence). Out-of-flow children are skipped throughout (P13).
@@ -4978,7 +5004,69 @@ function applyGridChildren(parent, spec, built) {
   const inFlow = built.filter((p) => !p[0].overlay && !p[0].insetOverlay && !p[0].absolute && p[1].layoutPositioning !== 'ABSOLUTE');
   const placed = inFlow.filter((p) => p[0].cell);
   if (!l.grid.flow) {
-    for (const p of placed) p[1].setGridChildPosition(p[0].cell.row, p[0].cell.column);
+    // FC-GRID-APPEND-AUTOPLACE. appendChild does not park a grid child
+    // nowhere — the canvas AUTO-PLACES it row-major into the next free cell
+    // (live probe: five appends land (0,0)(0,1)(0,2)(0,3)(1,0)). So by the
+    // time this runs every child already OCCUPIES a cell, and a naive
+    // one-pass "place them all in contract order" throws P3's occupancy
+    // error the moment a target cell is still held by a sibling that has not
+    // been moved yet — which the canonical bento hits on its SECOND child.
+    // Placement is therefore a PERMUTATION problem, not a loop: repeatedly
+    // place every child whose target is free, and when only cycles remain,
+    // park one child in a spare cell to break the cycle. Spans stay in the
+    // second pass (all children at span 1 while the permutation resolves —
+    // the probe-pinned place-before-span rule is what makes that sound).
+    const rowCount = l.grid.rows.length;
+    const colCount = l.grid.columns.length;
+    const cellKey = (r, c) => r + ',' + c;
+    const liveOccupancy = () => {
+      const m = {};
+      for (const p of placed) m[cellKey(p[1].gridRowAnchorIndex, p[1].gridColumnAnchorIndex)] = p;
+      return m;
+    };
+    const moveTo = (p, r, c) => { p[1].setGridChildPosition(r, c); };
+    const remaining = placed.slice();
+    let guard = remaining.length * remaining.length + remaining.length + 8;
+    while (remaining.length > 0) {
+      if (guard-- <= 0) {
+        throw new Error(
+          'grid-placement-unresolvable: could not sequence ' + remaining.length +
+          ' grid placement(s) without an occupancy collision (FC-GRID-APPEND-AUTOPLACE guard)'
+        );
+      }
+      const occ = liveOccupancy();
+      let moved = false;
+      for (let i = remaining.length - 1; i >= 0; i--) {
+        const p = remaining[i];
+        const t = cellKey(p[0].cell.row, p[0].cell.column);
+        const holder = occ[t];
+        if (holder && holder !== p) continue; // still blocked by a sibling
+        moveTo(p, p[0].cell.row, p[0].cell.column);
+        remaining.splice(i, 1);
+        moved = true;
+      }
+      if (moved || remaining.length === 0) continue;
+      // Every remaining target is blocked by another remaining child — a
+      // permutation CYCLE. Park one of them in a cell nobody wants and that
+      // nobody currently holds; the next pass then has a free target.
+      const occ2 = liveOccupancy();
+      const wanted = {};
+      for (const p of remaining) wanted[cellKey(p[0].cell.row, p[0].cell.column)] = true;
+      let spare = null;
+      for (let r = 0; r < rowCount && !spare; r++) {
+        for (let c = 0; c < colCount && !spare; c++) {
+          const k = cellKey(r, c);
+          if (!occ2[k] && !wanted[k]) spare = { r: r, c: c };
+        }
+      }
+      if (!spare) {
+        throw new Error(
+          'grid-placement-cycle-no-spare: the declared ' + rowCount + 'x' + colCount +
+          ' grid has no free cell to break a placement cycle through — refusing rather than throwing P3 mid-script'
+        );
+      }
+      moveTo(remaining[0], spare.r, spare.c);
+    }
     for (const p of placed) {
       if (p[0].cell.rowSpan) p[1].gridRowSpan = p[0].cell.rowSpan;
       if (p[0].cell.columnSpan) p[1].gridColumnSpan = p[0].cell.columnSpan;
