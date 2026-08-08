@@ -1,0 +1,144 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.17",
+  "note": "canvas conformance fixture - CAPTURED, not hand-authored: a contract carrying G4 layout.areas with a NATIVE SLOT part in the \"content\" cell was emitted by core/emit-figma-script.ts, executed in the strict Figma mock, and read back by the plugin's OWN dump script (figma-sync/plugin/ui.html #dump-source). This is the canvas a G4 areas contract actually produces today (native-slots-proposal S2 supersedes the dashed placeholder), so the reader is measured against the real artifact rather than against what this fixture believes it looks like."
+ },
+ "Case": {
+  "setName": "CaseGridAreaSlotNative",
+  "type": "COMPONENT",
+  "nodeId": "4:5",
+  "key": "key-4:5",
+  "variants": [
+   {
+    "name": "CaseGridAreaSlotNative",
+    "type": "COMPONENT",
+    "bbox": {
+     "width": 640,
+     "height": 400
+    },
+    "layout": {
+     "mode": "GRID",
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED",
+     "grid": {
+      "rows": [
+       {
+        "px": 64
+       },
+       {
+        "fr": 1
+       }
+      ],
+      "columns": [
+       {
+        "px": 240
+       },
+       {
+        "fr": 1
+       }
+      ],
+      "rowGap": 0,
+      "columnGap": 0
+     }
+    },
+    "children": [
+     {
+      "name": "header",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "cell": {
+       "row": 0,
+       "column": 0,
+       "columnSpan": 2
+      },
+      "fill": {
+       "hex": "e0e0e0"
+      },
+      "fillWidth": true,
+      "children": []
+     },
+     {
+      "name": "nav",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "cell": {
+       "row": 1,
+       "column": 0
+      },
+      "fill": {
+       "hex": "d0d0d0"
+      },
+      "fillWidth": true,
+      "children": []
+     },
+     {
+      "name": "Content",
+      "type": "SLOT",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 0,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "cell": {
+       "row": 1,
+       "column": 1
+      },
+      "fillWidth": true,
+      "propRefs": {
+       "slotContentId": "Content"
+      },
+      "slotKey": "Content#4:5:0",
+      "children": []
+     }
+    ]
+   }
+  ],
+  "propertyDefinitions": {
+   "Content#4:5:0": {
+    "type": "SLOT"
+   }
+  }
+ }
+}

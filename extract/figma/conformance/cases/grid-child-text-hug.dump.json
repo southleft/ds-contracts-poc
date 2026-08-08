@@ -1,0 +1,71 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.17",
+  "note": "canvas conformance fixture - MECHANICALLY EXPANDED from the CSS-suite design-side snippet conformance/cases/grid-child-text-hug/dump.snippet.json (the hand-authored A1 artifact) into the full dump v1.17 grammar the shipping reader consumes. The expansion adds NO grid fact: `layout:\"grid\"` becomes {mode:'GRID', padding 0, sizing FIXED, grid:<the snippet's own grid block verbatim>}, `layout:\"row\"` becomes the flex-era HORIZONTAL block, `cell` rides verbatim, `sizing.horizontal:FILL` becomes the dump's `fillWidth`, and `characters` becomes a TEXT node on the repo's `badge` derived style. Channels the dump grammar deliberately does NOT carry are named per case below rather than invented. EXPANSION NOTES: child \"a\" draws layoutSizingHorizontal HUG: dump v1 carries FILL only (`fillWidth`); HUG is the ABSENCE of that flag, so nothing is written - not an invented channel. child \"a\" draws layoutSizingVertical HUG: dump v1 has NO vertical-sizing channel at all, so the vertical fact does not reach the reader (declared capture limit, not a loss the reader chose)."
+ },
+ "Case": {
+  "setName": "CaseGridChildTextHug",
+  "type": "COMPONENT",
+  "variants": [
+   {
+    "name": "CaseGridChildTextHug",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "GRID",
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED",
+     "grid": {
+      "rows": [
+       {
+        "px": 24
+       }
+      ],
+      "columns": [
+       {
+        "fr": 1
+       },
+       {
+        "fr": 1
+       }
+      ],
+      "rowGap": 0,
+      "columnGap": 0
+     }
+    },
+    "children": [
+     {
+      "name": "a",
+      "type": "TEXT",
+      "cell": {
+       "row": 0,
+       "column": 0,
+       "alignX": "MIN",
+       "alignY": "MIN"
+      },
+      "text": {
+       "characters": "Hug",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge"
+      }
+     },
+     {
+      "name": "b",
+      "type": "FRAME",
+      "cell": {
+       "row": 0,
+       "column": 1
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

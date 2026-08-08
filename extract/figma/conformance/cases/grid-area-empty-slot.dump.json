@@ -1,0 +1,63 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.17",
+  "note": "canvas conformance fixture - MECHANICALLY EXPANDED from the CSS-suite design-side snippet conformance/cases/grid-area-empty-slot/dump.snippet.json (the hand-authored A1 artifact) into the full dump v1.17 grammar the shipping reader consumes. The expansion adds NO grid fact: `layout:\"grid\"` becomes {mode:'GRID', padding 0, sizing FIXED, grid:<the snippet's own grid block verbatim>}, `layout:\"row\"` becomes the flex-era HORIZONTAL block, `cell` rides verbatim, `sizing.horizontal:FILL` becomes the dump's `fillWidth`, and `characters` becomes a TEXT node on the repo's `badge` derived style. Channels the dump grammar deliberately does NOT carry are named per case below rather than invented. EXPANSION NOTES: child \"b\" is the snippet's empty-area PLACEHOLDER frame - the convention G4 SUPERSEDED on 2026-08-08 (native-slots-proposal S2: an empty area is a native SLOT node, not a dashed placeholder). It expands as a plain FRAME, which is what that canvas actually holds; the native spelling is measured by the sibling case grid-area-slot-native."
+ },
+ "Case": {
+  "setName": "CaseGridAreaEmptySlot",
+  "type": "COMPONENT",
+  "variants": [
+   {
+    "name": "CaseGridAreaEmptySlot",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "GRID",
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED",
+     "grid": {
+      "rows": [
+       {
+        "px": 24
+       }
+      ],
+      "columns": [
+       {
+        "px": 60
+       },
+       {
+        "fr": 1
+       }
+      ],
+      "rowGap": 0,
+      "columnGap": 0
+     }
+    },
+    "children": [
+     {
+      "name": "a",
+      "type": "FRAME",
+      "cell": {
+       "row": 0,
+       "column": 0
+      }
+     },
+     {
+      "name": "b",
+      "type": "FRAME",
+      "cell": {
+       "row": 0,
+       "column": 1
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

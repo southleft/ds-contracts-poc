@@ -3546,13 +3546,28 @@ function gridCarriageOf(m: Merged): GridCarriage | undefined {
   }
   for (const c of m.children) {
     if (!c.occ.some((o) => o.node.cell !== undefined)) {
+      // TWO different facts used to share one message. `abs` (dump v1.7) is
+      // POSITIVE evidence that the child is layoutPositioning ABSOLUTE — the
+      // dump gates `cell` capture on exactly that (P13: absolute children
+      // still REPORT anchors 0,0), so the missing cell is the gate working,
+      // not a capture gap. G2 says such a child IS carriable as an overlay
+      // part; what stops it here is that Part.overlay's vocabulary is the
+      // v7 EDGE enum (top|bottom|start|end) and the canvas fact is a raw
+      // x/y inside a cell — deriving an edge from it would be a guess. So
+      // the grid refuses, and the refusal names the missing INVERSION rather
+      // than blaming the child for a cell the dump was right not to capture.
+      const abs = c.occ.some((o) => o.node.abs !== undefined);
       return {
         carried: false,
         flow,
-        reason:
-          `child "${c.name}" carries no grid cell (an ABSOLUTE overlay — P13's gate — or a pre-v1.17 capture): a manual ` +
-          'grid contract must place every in-flow child (G2) and the proposer has no grid-overlay spelling (Part.overlay ' +
-          'is the edge-attached v7 grammar); grid not carried',
+        reason: abs
+          ? `child "${c.name}" is an ABSOLUTE overlay inside the grid (dump \`abs\` present, no \`cell\` — P13's gate working as designed). ` +
+            'G2 admits overlays in a grid parent, but the proposer has NO abs→overlay inversion: Part.overlay spells attachment ' +
+            'as the v7 EDGE enum (top|bottom|start|end) while the canvas fact is a raw x/y inside a cell, and picking an edge ' +
+            'from that would be an invented fact. Grid not carried — the missing inversion is the named cause, not the child'
+          : `child "${c.name}" carries no grid cell and no \`abs\` — a pre-v1.17 capture (the producer predates the cell ` +
+            'channel), which is NOT the same fact as "cell 0,0": a manual grid contract must place every in-flow child (G2), ' +
+            'and inventing anchors for an unmeasured child is exactly what this refusal exists to prevent; grid not carried',
       };
     }
   }
@@ -3696,6 +3711,31 @@ function hoistGridAreas(holder: Record<string, unknown>, ctx: Ctx, where: string
     );
   }
   if (Object.keys(areas).length > 0) layout.areas = areas;
+  // G4's OTHER half, previously silent. Area NAMES are contract-owned — the
+  // canvas holds rects only — so every non-slot child of a carried manual
+  // grid comes back as an explicit `placement` longhand instead of an area.
+  // That is the named LOWERED disposition `grid-area-nonrectangular` on the
+  // code side (grid-template-areas cannot spell gapped or unnamed occupancy),
+  // and until now the read side dropped the area spelling with no receipt at
+  // all: a contract that went out with `layout.areas` came back with
+  // placements and nothing said so. One note per grid, naming the parts.
+  const placed = Object.entries(parts)
+    .filter(([, child]) => child.placement !== undefined)
+    .map(([key]) => key);
+  if (placed.length > 0) {
+    const hoisted = Object.keys(areas);
+    ctx.notes.push(
+      `${where}: ${placed.length} grid child(ren) (${placed.join(', ')}) carry EXPLICIT placement rects, not named areas — ` +
+        'Figma has no native area names (G4: the CONTRACT owns them, the canvas carries only the rect), so an area name ' +
+        'survives the round trip ONLY through a part that already has a name on the canvas: a SLOT node' +
+        (hoisted.length > 0
+          ? ` (${hoisted.length} did — ${hoisted.join(', ')})`
+          : ' (none here did)') +
+        '. The code side emits these as grid-row/grid-column LONGHANDS rather than grid-template-areas + grid-area — the ' +
+        'named LOWERED disposition `grid-area-nonrectangular`. Nothing is lost geometrically; the NAMES are, and they are ' +
+        're-authored contract-side, never invented from the canvas',
+    );
+  }
 }
 
 /** The CROSS-AXIS half of a per-variant FILL, carried inside the EXISTING

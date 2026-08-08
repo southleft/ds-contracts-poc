@@ -6,7 +6,7 @@
   },
   "Case": {
     "setName": "Case",
-    "type": "COMPONENT",
+    "type": "COMPONENT_SET",
     "variants": [
       {
         "name": "Size=Sm",

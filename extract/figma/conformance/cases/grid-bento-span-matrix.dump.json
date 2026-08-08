@@ -1,0 +1,104 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.17",
+  "note": "canvas conformance fixture - MECHANICALLY EXPANDED from the CSS-suite design-side snippet conformance/cases/grid-bento-span-matrix/dump.snippet.json (the hand-authored A1 artifact) into the full dump v1.17 grammar the shipping reader consumes. The expansion adds NO grid fact: `layout:\"grid\"` becomes {mode:'GRID', padding 0, sizing FIXED, grid:<the snippet's own grid block verbatim>}, `layout:\"row\"` becomes the flex-era HORIZONTAL block, `cell` rides verbatim, `sizing.horizontal:FILL` becomes the dump's `fillWidth`, and `characters` becomes a TEXT node on the repo's `badge` derived style. Channels the dump grammar deliberately does NOT carry are named per case below rather than invented."
+ },
+ "Case": {
+  "setName": "CaseGridBentoSpanMatrix",
+  "type": "COMPONENT",
+  "variants": [
+   {
+    "name": "CaseGridBentoSpanMatrix",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "GRID",
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED",
+     "grid": {
+      "rows": [
+       {
+        "px": 80
+       },
+       {
+        "fr": 1
+       },
+       {
+        "fr": 2
+       }
+      ],
+      "columns": [
+       {
+        "px": 160
+       },
+       {
+        "fr": 1
+       },
+       {
+        "fr": 1
+       },
+       {
+        "px": 120
+       }
+      ],
+      "rowGap": 12,
+      "columnGap": 16
+     }
+    },
+    "children": [
+     {
+      "name": "header",
+      "type": "FRAME",
+      "cell": {
+       "row": 0,
+       "column": 0,
+       "columnSpan": 4
+      }
+     },
+     {
+      "name": "sidebar",
+      "type": "FRAME",
+      "cell": {
+       "row": 1,
+       "column": 0,
+       "rowSpan": 2
+      }
+     },
+     {
+      "name": "main",
+      "type": "FRAME",
+      "cell": {
+       "row": 1,
+       "column": 1,
+       "columnSpan": 2
+      }
+     },
+     {
+      "name": "rail",
+      "type": "FRAME",
+      "cell": {
+       "row": 1,
+       "column": 3,
+       "rowSpan": 2
+      }
+     },
+     {
+      "name": "footer",
+      "type": "FRAME",
+      "cell": {
+       "row": 2,
+       "column": 1,
+       "columnSpan": 2
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

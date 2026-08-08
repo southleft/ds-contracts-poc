@@ -1247,6 +1247,376 @@
         ]
       },
       "status": "green"
+    },
+    {
+      "id": "grid-2d",
+      "construct": "a 2x2 GRID frame: two px row tracks, two fr column tracks, both children explicitly anchored",
+      "expect": "CARRIED",
+      "why": "layoutMode GRID inverts through its own door (G1/G6): structured gridRowSizes/gridColumnSizes become layout.rows/columns and per-child anchors become Part.placement — the two-dimensional construct auto-layout could never express",
+      "check": {
+        "carried": [
+          "\"display\":\"grid\"",
+          "\"rows\":\\[\\{\"px\":20\\},\\{\"px\":20\\}\\]",
+          "\"columns\":\\[\\{\"fr\":1\\},\\{\"fr\":1\\}\\]",
+          "\"placement\":\\{\"row\":0,\"column\":1\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-two-column",
+      "construct": "a GRID frame declaring two equal fr column tracks",
+      "expect": "CARRIED",
+      "why": "the fr spelling round-trips exactly (P2b): {type:FLEX,value:1} tracks invert to {\"fr\":1}, never to a resolved px width",
+      "check": {
+        "carried": [
+          "\"columns\":\\[\\{\"fr\":1\\},\\{\"fr\":1\\}\\]"
+        ],
+        "absent": [
+          "\"columns\":\\[\\{\"px\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-sidebar-px-fr",
+      "construct": "a GRID frame mixing one FIXED px track with one FLEX fr track",
+      "expect": "CARRIED",
+      "why": "mixed px+fr is native to the API (P2) and both spellings survive the read — the sidebar/main shape that has no faithful flex fallback",
+      "check": {
+        "carried": [
+          "\"columns\":\\[\\{\"px\":240\\},\\{\"fr\":1\\}\\]"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-tracks-mixed-fractional",
+      "construct": "FRACTIONAL track values: a 33.5px FIXED track and a 2.5fr FLEX track",
+      "expect": "CARRIED",
+      "why": "P2b proved subpixel px and fractional fr are carried EXACTLY by the API; the reader must not round them",
+      "check": {
+        "carried": [
+          "\\{\"px\":33.5\\}",
+          "\\{\"fr\":2.5\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-track-fit-content",
+      "construct": "a HUG track alongside an fr track",
+      "expect": "CARRIED",
+      "why": "HUG is the third and last track type (P2b enum) and its code spelling is fit-content(100%) (P14); the dump normalizes it to {fit:true} and the reader carries that verbatim",
+      "check": {
+        "carried": [
+          "\\{\"fit\":true\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-gap-row-column",
+      "construct": "independent gridRowGap 8 and gridColumnGap 16",
+      "expect": "CARRIED",
+      "why": "P2: the two gaps are separate API facts, so the contract carries the PAIR and never a single-gap shorthand (G1)",
+      "check": {
+        "carried": [
+          "\"gap\":\\{\"row\":8,\"column\":16\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-gap-shorthand",
+      "construct": "a gap pair (12/16) that CSS would have authored as the `gap: 12px 16px` shorthand",
+      "expect": "CARRIED",
+      "why": "the canvas only ever holds the pair, so reading it back is EXACT — the shorthand is a code-side authoring spelling, not a canvas fact, and nothing is lowered on this direction",
+      "check": {
+        "carried": [
+          "\"gap\":\\{\"row\":12,\"column\":16\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-explicit-anchor",
+      "construct": "a child explicitly anchored to cell (2,1) — not the row-major slot its child order would give it",
+      "expect": "CARRIED",
+      "why": "gridRowAnchorIndex/gridColumnAnchorIndex are read-only getters that read back exactly (P3); the 0-based anchor IS the contract fact",
+      "check": {
+        "carried": [
+          "\"placement\":\\{\"row\":2,\"column\":1\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-col-span",
+      "construct": "a child spanning two column tracks",
+      "expect": "CARRIED",
+      "why": "gridColumnSpan reads back exactly (P3/P8); spans of 1 are omitted as the minimal deterministic spelling",
+      "check": {
+        "carried": [
+          "\"columnSpan\":2"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-row-span",
+      "construct": "a child spanning two row tracks",
+      "expect": "CARRIED",
+      "why": "gridRowSpan reads back exactly (P3/P8)",
+      "check": {
+        "carried": [
+          "\"rowSpan\":2"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-bento-span-matrix",
+      "construct": "THE P8 bento: 3x4 declared tracks, both gaps, five children with five different anchor+span rects",
+      "expect": "CARRIED",
+      "why": "the live probe round-tripped this exact frame with p8Match true (P8) — the headline carriage receipt, now measured on the READ side too",
+      "check": {
+        "carried": [
+          "\"rows\":\\[\\{\"px\":80\\},\\{\"fr\":1\\},\\{\"fr\":2\\}\\]",
+          "\"columns\":\\[\\{\"px\":160\\},\\{\"fr\":1\\},\\{\"fr\":1\\},\\{\"px\":120\\}\\]",
+          "\"gap\":\\{\"row\":12,\"column\":16\\}",
+          "\"placement\":\\{\"row\":0,\"column\":0,\"columnSpan\":4\\}",
+          "\"placement\":\\{\"row\":1,\"column\":0,\"rowSpan\":2\\}",
+          "\"placement\":\\{\"row\":2,\"column\":1,\"columnSpan\":2\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-child-align",
+      "construct": "per-cell alignment: gridChildHorizontalAlign CENTER and gridChildVerticalAlign MAX on one child",
+      "expect": "CARRIED",
+      "why": "the align enum is exactly AUTO|MIN|CENTER|MAX (P3/P4 — STRETCH and BASELINE are refused by the API itself); MIN/CENTER/MAX invert to start/center/end and AUTO is spelled by ABSENCE",
+      "check": {
+        "carried": [
+          "\"alignX\":\"center\"",
+          "\"alignY\":\"end\""
+        ],
+        "absent": [
+          "\"alignX\":\"stretch\"",
+          "\"alignY\":\"stretch\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-child-fill-cell",
+      "construct": "both children drawn layoutSizingHorizontal/Vertical FILL inside their cells",
+      "expect": "CARRIED",
+      "why": "G3: filling the cell is the DEFAULT for a placed part and CSS spells it by absence (stretch is the CSS grid default), so the reader carries the placement and writes no sizing channel — and specifically no layout.grow, which is schema-invalid under a grid parent",
+      "check": {
+        "carried": [
+          "\"display\":\"grid\"",
+          "\"placement\":\\{\"row\":0,\"column\":1\\}"
+        ],
+        "absent": [
+          "\"grow\":true"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-child-text-hug",
+      "construct": "a TEXT child hugging inside its cell, with MIN/MIN per-cell alignment",
+      "expect": "CARRIED",
+      "why": "P4: HUG is legal on TEXT children inside a GRID parent (the same rule as flex); the cell placement and its aligns carry, and the hug rides the absence of fillWidth",
+      "check": {
+        "carried": [
+          "\"display\":\"grid\"",
+          "\"alignX\":\"start\"",
+          "\"alignY\":\"start\""
+        ],
+        "absent": [
+          "\"grow\":true"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-child-grow-invalid",
+      "construct": "layoutGrow 1 set on a child of a GRID parent — the API accepts it silently with no layout effect (P4)",
+      "expect": "CARRIED",
+      "why": "the grid itself carries; the GROW fact must not. P4 pinned layoutGrow on a grid child as a SILENT-ACCEPT hazard, so the dump grammar gives it no channel at all — the fact cannot reach the reader — and G3 makes layout.grow schema-invalid under a grid parent. The absent probe measures that no flex-grow was invented from anything else",
+      "check": {
+        "carried": [
+          "\"display\":\"grid\"",
+          "\"placement\":\\{\"row\":0,\"column\":0\\}"
+        ],
+        "absent": [
+          "\"grow\":true"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-instance-child",
+      "construct": "a component INSTANCE placed in a grid cell and filling it",
+      "expect": "CARRIED",
+      "why": "P12: instances place, span and fill in cells natively — a contract-identity child slots into the grid exactly like a frame, so the placement rides the instance part",
+      "check": {
+        "carried": [
+          "\"placement\":\\{\"row\":0,\"column\":1\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-in-flex-fill",
+      "construct": "a GRID frame nested inside a HORIZONTAL auto-layout parent, drawn FILL",
+      "expect": "CARRIED",
+      "why": "P11: grid frames compose into the existing flex grammar as ordinary children, so the part carries BOTH its own grid layout and the parent-relative grow — grow is a flex-parent fact here, not a grid-child one",
+      "check": {
+        "carried": [
+          "\"display\":\"grid\"",
+          "\"grow\":true"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-on-component-variant",
+      "construct": "layoutMode GRID on the COMPONENT node itself, not on an inner frame",
+      "expect": "CARRIED",
+      "why": "P12: canvas variants can BE grids, so the ROOT layout block inverts the same way an inner frame does",
+      "check": {
+        "carried": [
+          "\"display\":\"grid\"",
+          "\"rows\":\\[\\{\"px\":16\\},\\{\"px\":16\\}\\]"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-implicit-tracks",
+      "construct": "a child anchored at row 1 of a grid that declares ONE row track — the occupancy the canvas absorbs by rewriting the declaration",
+      "expect": "REFUSED",
+      "why": "P9, the lossy edge: when occupied cells exceed the declared track lists the declaration and the occupancy disagree, and carrying either would be a fact the contract never made. Refused BY NAME (grid-implicit-tracks) with no track or placement leaking",
+      "check": {
+        "note": "grid-implicit-tracks",
+        "absent": [
+          "\"display\":\"grid\"",
+          "\"placement\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-area-slot-native",
+      "construct": "a G4 areas contract emitted to canvas: two frames in named area cells and a NATIVE SLOT node in the third",
+      "expect": "CARRIED",
+      "why": "G4 (revised 2026-08-08 by the native-slots round): the area name IS the slot anchor, and a SLOT node is the one child that carries its own NAME on the canvas — so its cell hoists back to layout.areas while name-less frames keep explicit placements. This case is CAPTURED from the real emitter through the real dump script, so it measures the round trip, not a belief about it",
+      "check": {
+        "carried": [
+          "\"areas\":\\{\"Content\":\\{\"row\":1,\"column\":1\\}\\}",
+          "\"slot\""
+        ],
+        "note": "hoisted to layout.areas"
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-named-area-slots",
+      "construct": "three children occupying what a contract would have declared as three NAMED areas, drawn as ordinary frames",
+      "expect": "LEDGERED",
+      "why": "G4: Figma has no native area names — the canvas carries only the rect. The geometry is CARRIED exactly as per-child placement, and the NAME loss must be NAMED rather than silent; an area name survives only through a part that already has a name on the canvas (a SLOT node — see grid-area-slot-native)",
+      "check": {
+        "carried": [
+          "\"placement\":\\{\"row\":0,\"column\":0,\"columnSpan\":2\\}",
+          "\"placement\":\\{\"row\":1,\"column\":1\\}"
+        ],
+        "note": "Figma has no native area names",
+        "absent": [
+          "\"areas\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-area-nonrectangular",
+      "construct": "placed rects that leave a declared cell unoccupied — occupancy grid-template-areas cannot tile",
+      "expect": "LEDGERED",
+      "why": "the canvas has no rectangularity constraint, so the read is geometrically exact; what is lowered is the code-side SPELLING (grid-row/grid-column longhands instead of grid-template-areas + grid-area), which the named disposition grid-area-nonrectangular covers",
+      "check": {
+        "carried": [
+          "\"placement\":\\{\"row\":0,\"column\":0,\"columnSpan\":2\\}",
+          "\"placement\":\\{\"row\":1,\"column\":0\\}"
+        ],
+        "note": "grid-area-nonrectangular",
+        "absent": [
+          "\"areas\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-area-empty-slot",
+      "construct": "an empty area cell drawn as the SUPERSEDED dashed-placeholder frame rather than a native slot",
+      "expect": "LEDGERED",
+      "why": "the rect carries as a placement, but a placeholder FRAME is name-less on the canvas, so no area name returns — the same G4 ledger as grid-named-area-slots. The native spelling that DOES recover the name is measured by grid-area-slot-native (native-slots-proposal S2 superseded this drawing on 2026-08-08)",
+      "check": {
+        "carried": [
+          "\"placement\":\\{\"row\":0,\"column\":1\\}"
+        ],
+        "note": "Figma has no native area names",
+        "absent": [
+          "\"areas\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "grid-auto-flow-row",
+      "construct": "a ROW_AUTO_FLOW grid whose declared row tracks are two 16px FIXED tracks",
+      "expect": "CARRIED",
+      "why": "G5: under flow the placement fact is CHILD ORDER (P5 — the API refuses position setters there), so the contract carries flow \"row\", omits rows, and the emitter re-derives ceil(children/columns) explicit tracks itself (P9: the API under-reports implicit rows)",
+      "check": {
+        "carried": [
+          "\"flow\":\"row\"",
+          "\"display\":\"grid\""
+        ],
+        "absent": [
+          "\"placement\""
+        ]
+      },
+      "status": "red",
+      "observed": "The reader REFUSES this grid by name. G5 lets the contract carry flow ONLY with `rows` OMITTED, so the two declared 16px row tracks have nowhere to land: carrying flow would silently redraw them as the emitter derivation ({fr:1} x ceil(children/columns)) on the next round trip — the P9 rewrite the grammar exists to prevent. The reader therefore admits flow only when the drawn rows ALREADY equal that derivation, and a flow grid that does round-trips exactly (grid-roundtrip-identity eval, section 4). Pinned red because the construct is real and the doc model calls it CARRIED, while the only carriage available today would lose the drawn track sizes. Closing it needs a grammar decision (a flow spelling that can carry declared rows), not a reader patch — so the loss is pinned, named and visible instead of absorbed.",
+      "observedCheck": {
+        "note": "not the derivable ceil\\(children/columns\\)",
+        "absent": [
+          "\"display\":\"grid\"",
+          "\"flow\":\"row\""
+        ]
+      }
+    },
+    {
+      "id": "grid-absolute-overlay",
+      "construct": "an ABSOLUTE-positioned overlay child inside a MANUAL grid, alongside a normally placed child",
+      "expect": "CARRIED",
+      "why": "G2/P13: layoutPositioning ABSOLUTE works inside grid parents and the existing overlay grammar survives; the reader must gate anchor reads on it (absolute children still REPORT anchors 0,0) and carry the grid with the overlay out of flow",
+      "check": {
+        "carried": [
+          "\"display\":\"grid\"",
+          "\"placement\":\\{\"row\":0,\"column\":0\\}"
+        ]
+      },
+      "status": "red",
+      "observed": "The dump gate works exactly as P13 requires — the absolute child carries `abs` and NO cell, so no 0,0 placement is invented. But the reader then refuses the WHOLE grid, because it has no abs->overlay inversion: Part.overlay spells attachment as the v7 EDGE enum (top|bottom|start|end) while the canvas fact is a raw x/y inside a cell, and choosing an edge from that would be an invented fact (the dump types have carried \"not yet consumed by the proposer\" for `abs` since v1.7). Pinned red: the grid is lost rather than the overlay being guessed. Closing it needs the overlay inversion, a separate grammar item; the refusal now names THAT cause instead of blaming the child for a cell the dump was right not to capture.",
+      "observedCheck": {
+        "note": "NO abs.overlay inversion",
+        "absent": [
+          "\"display\":\"grid\""
+        ]
+      }
     }
   ]
 }
