@@ -44,11 +44,13 @@
     "matchDeveloped": false,
     "reviewedAt": "2026-08-06T13:32:20.271Z",
     "notes": [
-      "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — amended rebuiltVariants=9; nodeId=1:4003; matchDeveloped left unset."
+      "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — amended rebuiltVariants=9; nodeId=1:4003; matchDeveloped left unset.",
+      "2026-08-08: canvas framing verified correct on the live bridge — shot 336x66 is VARIANT cell 1:3967 (Type=Text, Size=Md) 320x50 + 8px margin."
     ],
     "defects": [
       "Missing light-gray border / leading-icon treatments shown in TextInput docs.",
-      "Placeholder hierarchy not demonstrated vs examples/astryx/receipts/site/TextInput.png."
+      "Placeholder hierarchy not demonstrated vs examples/astryx/receipts/site/TextInput.png.",
+      "FC-REF-WHOLE-PAGE: the developed reference is examples/astryx/receipts/site/TextInput.png — a 1440x2200 FULL-PAGE documentation-site screenshot (content box 1424x2192) standing in for a single-cell reference. scaleRatio 45.67 is entirely the reference. Note the measured consequence: this stem's pixel bar is ALREADY met (pctAAMasked=1.72 <= 5) and compositionOk is the only thing failing it — a correctly framed single-cell astryx TextInput reference is the one artifact between this stem and a genuine scored pass."
     ],
     "reference": "examples/astryx/receipts/site/TextInput.png",
     "reviewSurface": "cream-#F8F4ED-component-set"

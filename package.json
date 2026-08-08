@@ -60,6 +60,8 @@
     "console-loop:carbon:evidence:check": "node scripts/console-loop-lib-evidence-check.mjs carbon",
     "console-loop:polaris:evidence:check": "node scripts/console-loop-lib-evidence-check.mjs polaris",
     "console-loop:all:evidence:check": "node scripts/console-loop-all-evidence-check.mjs",
+    "console-loop:capture-framing": "node scripts/console-loop-capture-framing-check.mjs",
+    "test:console-loop-capture-framing": "node --test scripts/console-loop-capture-framing-check.test.mjs",
     "trap-corpus:check": "node scripts/trap-corpus-check.mjs",
     "console-loop:developed-score": "tsx scripts/console-loop-developed-score.mjs",
     "visual-truth:run": "tsx scripts/visual-truth-run.mjs",

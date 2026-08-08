@@ -50,12 +50,14 @@
       "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — amended rebuiltVariants=6; nodeId=9:831; matchDeveloped left unset.",
       "Re-synced via console-loop batch 2026-08-07T16:32:16.817Z — amended rebuiltVariants=6; nodeId=9:831; vertical part-1-0 width=20; thumb after fill; matchDeveloped left unset.",
       "Re-synced via clientStorage chunks (n=13, total=100445); amended nodeId=9:831; rebuiltVariants=6; V-Text rootW=56 label-3.x=28; H-Text part-1-0.w=240; thumb after fill (track→part-1-0-1→thumb). matchDeveloped left false.",
-      "Re-synced via clientStorage chunks (n=19, total=108776); amended nodeId=9:831; rebuiltVariants=6; tooltips on Tooltip variants; V-Text label-3 top=86; part-1-0 last child thumb. matchDeveloped left false."
+      "Re-synced via clientStorage chunks (n=19, total=108776); amended nodeId=9:831; rebuiltVariants=6; tooltips on Tooltip variants; V-Text label-3 top=86; part-1-0 last child thumb. matchDeveloped left false.",
+      "2026-08-08: reference re-pointed from the emit-html first-item render to the astryx computed gate-shot for the same variant tokens as the shot cell 9:779 (Orientation=Horizontal, Value Display=Tooltip). The framing excuse is gone; FC-ABS-SIZE is the honest cause."
     ],
     "defects": [
-      "display:contents hoist; developed score pending"
+      "display:contents hoist; developed score pending",
+      "FC-ABS-SIZE: canvas track is 240px wide; the developed astryx Slider at contract defaults renders ~49px wide (gate-shot content 49x50). scaleRatio 4.90 against the correct same-library, same-variant, Figtree-substrate reference — this is a real width defect in the emitted set, not a framing artifact."
     ],
-    "reference": "parity/receipts/console-loop/astryx/refs/slider.png",
+    "reference": "extract/computed/out/astryx/slider/gate-shots/horizontal.tooltip__default.png",
     "reviewSurface": "COMPONENT_SET-9:831",
     "observations": {
       "thumbSize": {
@@ -80,7 +82,9 @@
         "slider-thumb-2"
       ]
     },
-    "referenceSource": "emit-html:examples/astryx/contracts/slider.contract.json#first-item"
+    "referenceSource": "extract/computed/out/astryx/slider/gate-shots/horizontal.tooltip__default.png",
+    "referencePrevious": "parity/receipts/console-loop/astryx/refs/slider.png",
+    "referenceSourcePrevious": "emit-html:examples/astryx/contracts/slider.contract.json#first-item"
   },
   "fingerprint": {
     "v6": "v6:3600925889",

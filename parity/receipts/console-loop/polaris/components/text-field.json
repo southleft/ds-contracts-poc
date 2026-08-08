@@ -33,8 +33,8 @@
     }
   },
   "visual": {
-    "ok": false,
-    "matchDeveloped": false,
+    "ok": true,
+    "matchDeveloped": true,
     "reviewedAt": "2026-08-07T17:56:00.340Z",
     "notes": [
       "Re-synced 2026-08-06 from surgically patched text-field.figma.js via Console MCP (35×8KB clientStorage chunk append). Amended 1:10365; rebuilt 8 variants.",
@@ -42,12 +42,12 @@
       "Developed score pending — do not treat as visual pass.",
       "Re-synced via clientStorage chunks (n=21, total=163475); nodeId=1:10365",
       "Re-synced via clientStorage chunks (n=28, total=167262); nodeId=1:10365; connected/textfield width=211px",
-      "Re-synced via clientStorage chunks (n=28, total=167262); nodeId=1:10365; connected/textfield width=211px"
+      "Re-synced via clientStorage chunks (n=28, total=167262); nodeId=1:10365; connected/textfield width=211px",
+      "FC-REF-FRAMING closed 2026-08-08: reference re-pointed from the emit-html first-item render (69x47 content, Times fallback, shrink-to-fit) to the Polaris computed gate-shot for the SAME variant tokens as the canvas cell 1:10197 (Variant=Inherit, Size=Medium, State=Default). Capture-framing pin: scaleRatio 3.06 -> 1.00, aspectRatio 2.61 -> 1.00. The canvas shot was never wrong — measured live on the bridge it is exactly the 211x60 VARIANT cell.",
+      "Scored pass 2026-08-08 (FC-REF-FRAMING round): 9.56 comp=false -> 4.11 comp=true. NOTHING about the canvas changed — the live bridge confirmed the committed shot is exactly VARIANT cell 1:10197 (211x60). Only the reference moved, from a Times-substrate emit-html first-item render (69x47) to the like-for-like 1x gate-shot."
     ],
-    "defects": [
-      "re-synced from patched script; border/radius/padding vs developed receipt not scored — FAIL closed / matchDeveloped false"
-    ],
-    "reference": "parity/receipts/console-loop/polaris/refs/text-field.png",
+    "defects": [],
+    "reference": "extract/computed/out/textfield/gate-shots/inherit.medium.off.off.off.enabled__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
     "observations": {
       "rootVertical": true,
@@ -57,8 +57,8 @@
     },
     "cellShot": "parity/receipts/console-loop/polaris/shots/text-field-cell.png",
     "scorecard": "parity/receipts/console-loop/polaris/scores/text-field.json",
-    "referenceSource": "examples/polaris/generated/html/text-field.html#first-item-inline-css",
-    "status": "fail-closed",
+    "referenceSource": "extract/computed/out/textfield/gate-shots/inherit.medium.off.off.off.enabled__default.png",
+    "status": "scored-pass",
     "revoked": {
       "at": "2026-08-08T04:31:03.484Z",
       "was": {
@@ -68,6 +68,15 @@
         "matchedAt": "2026-08-08T03:06:48.091Z"
       },
       "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=9.56, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+    },
+    "referencePrevious": "parity/receipts/console-loop/polaris/refs/text-field.png",
+    "referenceSourcePrevious": "examples/polaris/generated/html/text-field.html#first-item-inline-css",
+    "defectsRevoked": {
+      "at": "2026-08-08T23:36:59.410Z",
+      "were": [
+        "re-synced from patched script; border/radius/padding vs developed receipt not scored — FAIL closed / matchDeveloped false"
+      ],
+      "reason": "the un-scored condition is now scored: scores/text-field.json status=pass, pctAAMasked=4.11 <= 5, strictCompositionOk=true, reliedOnFramingTolerant=false, against the Polaris computed gate-shot for the same variant tokens as canvas cell 1:10197."
     }
   },
   "fingerprint": {
@@ -445,7 +454,7 @@
     "screenshotReviewed": true,
     "zeroMismatch": true,
     "canvasProjectionDocumented": true,
-    "visualMatchDeveloped": false
+    "visualMatchDeveloped": true
   },
   "reSyncedAt": "2026-08-07T17:56:00.340Z",
   "screenshot": "parity/receipts/console-loop/polaris/shots/text-field.png",

@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "kind": "console-loop-capture-framing-pin",
+  "lane": "polaris",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileName": "DS Contracts Testing",
+  "note": "CAPTURE-FRAMING PIN. cellW/cellH are the LIVE Figma VARIANT-cell dimensions, minted from the Desktop Bridge (figma-console figma_execute, fileKey pinned) — NOT derived from the committed PNGs. scripts/console-loop-capture-framing-check.mjs asserts that every committed canvas shot is that cell plus ONE uniform margin, and that the shot's content box is comparable to the reference the scorer resolves. A whole-set shot, a hand crop, or a shot of a different component set fails BY NAME at check time instead of surfacing later as a mystery low score.",
+  "mintedFrom": {
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge)",
+    "mintedAt": "2026-08-08",
+    "method": "COMPONENT_SET children walk; cell dimensions read from node.width/node.height"
+  },
+  "guard": {
+    "marginMinPx": -1,
+    "marginMaxPx": 17,
+    "marginSkewMaxPx": 2,
+    "scaleRatioMax": 1.35,
+    "aspectRatioMax": 1.35,
+    "dprBand": [
+      1.7,
+      2.4
+    ],
+    "framingCauses": [
+      "FC-REF-FRAMING",
+      "FC-REF-WHOLE-PAGE",
+      "FC-REF-BROKEN-ASSET",
+      "FC-REF-CROSS-LIBRARY",
+      "FC-FONT-SUBSTRATE",
+      "FC-ABS-SIZE",
+      "FC-WIDTH-TOKEN"
+    ],
+    "framingCausesNote": "C2 (reference comparability) is waived on a fail-closed receipt by naming ANY of these in visual.defects. A stem already retargeted to a correct like-for-like reference that still sits outside the guard names the real emit defect (FC-ABS-SIZE / FC-WIDTH-TOKEN), not the generic framing code."
+  },
+  "refAllow": [
+    "parity/receipts/console-loop/polaris/refs/",
+    "extract/computed/out/avatar/",
+    "extract/computed/out/badge/",
+    "extract/computed/out/banner/",
+    "extract/computed/out/button/",
+    "extract/computed/out/checkbox/",
+    "extract/computed/out/progressbar/",
+    "extract/computed/out/radiobutton/",
+    "extract/computed/out/spinner/",
+    "extract/computed/out/tag/",
+    "extract/computed/out/text/",
+    "extract/computed/out/textfield/",
+    "extract/computed/out/thumbnail/",
+    "examples/polaris/"
+  ],
+  "stems": {
+    "avatar": {
+      "setNodeId": "1:7849",
+      "cellNodeId": "1:7824",
+      "cellName": "Size=Md",
+      "cellW": 28,
+      "cellH": 28
+    },
+    "badge": {
+      "setNodeId": "1:8216",
+      "cellNodeId": "1:8190",
+      "cellName": "Tone=enabled, Progress=none",
+      "cellW": 61,
+      "cellH": 20
+    },
+    "banner": {
+      "setNodeId": "1:8463",
+      "cellNodeId": "1:8219",
+      "cellName": "Tone=Info, State=Default",
+      "cellW": 319,
+      "cellH": 88
+    },
+    "button": {
+      "setNodeId": "1:10006",
+      "cellNodeId": "14:1396",
+      "cellName": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+      "cellW": 63,
+      "cellH": 32
+    },
+    "checkbox": {
+      "setNodeId": "1:10049",
+      "cellNodeId": "1:10019",
+      "cellName": "Checked=unchecked",
+      "cellW": 160,
+      "cellH": 28
+    },
+    "progress-bar": {
+      "setNodeId": "1:10076",
+      "cellNodeId": "1:10052",
+      "cellName": "Size=Medium, Tone=Highlight",
+      "cellW": 288,
+      "cellH": 16
+    },
+    "radio-button": {
+      "setNodeId": "1:10096",
+      "cellNodeId": "1:10079",
+      "cellName": "Checked=unchecked",
+      "cellW": 166,
+      "cellH": 28
+    },
+    "spinner": {
+      "setNodeId": "1:10105",
+      "cellNodeId": "1:10099",
+      "cellName": "Size=Large",
+      "cellW": 44,
+      "cellH": 44
+    },
+    "tag": {
+      "setNodeId": "1:10192",
+      "cellNodeId": "1:10108",
+      "cellName": "Size=none, State=Default",
+      "cellW": 72,
+      "cellH": 20
+    },
+    "text": {
+      "setNodeId": "1:10480",
+      "cellNodeId": "1:10372",
+      "cellName": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Sm",
+      "cellW": 146,
+      "cellH": 20
+    },
+    "text-field": {
+      "setNodeId": "1:10365",
+      "cellNodeId": "1:10197",
+      "cellName": "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Default",
+      "cellW": 211,
+      "cellH": 60
+    },
+    "thumbnail": {
+      "setNodeId": "1:10491",
+      "cellNodeId": "1:10483",
+      "cellName": "Size=Medium",
+      "cellW": 60,
+      "cellH": 60
+    }
+  }
+}

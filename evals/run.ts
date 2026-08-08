@@ -9483,6 +9483,51 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       );
     },
   },
+  {
+    // Capture-framing pin: every committed canvas shot must BE the 1x VARIANT
+    // cell its <lane>/framing.json pins (dims minted from the live Desktop
+    // Bridge, not from the PNG), and must be comparable to the reference the
+    // scorer resolves. Before this pin a wrongly-framed shot could be committed
+    // and only ever surfaced later as an unexplained compositionOk=false — and
+    // an astryx Banner was being scored against a Shopify Polaris Banner.
+    // Red half: point a stem at a whole-COMPONENT_SET screenshot — the pin must
+    // exit 1 naming that stem and FC-CELL-FRAMING.
+    id: 'console-loop-capture-framing-pin',
+    claim: 'C3-detection',
+    run: () => {
+      const green = spawnSync(process.execPath, ['scripts/console-loop-capture-framing-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const gOut = `${green.stdout ?? ''}${green.stderr ?? ''}`;
+      if ((green.status ?? -1) !== 0) {
+        throw new Error(`console-loop-capture-framing-check failed on the committed tree:\n${gOut}`);
+      }
+      if (!gOut.includes('every committed shot is its 1x VARIANT cell')) {
+        throw new Error('capture-framing pin did not report the cell-framing assertion');
+      }
+      const red = spawnSync(
+        process.execPath,
+        [
+          'scripts/console-loop-capture-framing-check.mjs',
+          'astryx',
+          '--red-test',
+          'astryx/slider=parity/receipts/console-loop/astryx/shots/slider.png',
+        ],
+        { cwd: ROOT, encoding: 'utf8' },
+      );
+      const rOut = `${red.stdout ?? ''}${red.stderr ?? ''}`;
+      if ((red.status ?? 0) === 0) {
+        throw new Error(`capture-framing pin ACCEPTED a whole-set shot:\n${rOut}`);
+      }
+      if (!rOut.includes('astryx/slider:') || !rOut.includes('FC-CELL-FRAMING')) {
+        throw new Error(`capture-framing pin refused without naming the stem/cause:\n${rOut}`);
+      }
+      console.log(
+        'console-loop-capture-framing-pin: pinned stems hold; a whole-set shot is refused by name (FC-CELL-FRAMING)',
+      );
+    },
+  },
 
   {
     // MUI denominator (31) on MUI Test 1 — same Console MCP loop, foreign corpus.

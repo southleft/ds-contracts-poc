@@ -39,13 +39,16 @@
     "reviewedAt": "2026-08-06T15:19:44.562Z",
     "notes": [
       "Re-synced 2026-08-06 from re-emitted toast.figma.js via Console MCP (fetch :9228, 62819 bytes). Amended 1:4006.",
-      "Show EndContent default false \u2014 Slot/endContent hidden by default.",
+      "Show EndContent default false — Slot/endContent hidden by default.",
       "Body text unclipped (lineHeight PERCENT 142.86); Dismiss fully visible; height 64.",
-      "Developed score pending \u2014 do not treat as visual pass.",
-      "Re-synced via clientStorage chunks (n=8, total=63284); nodeId=1:4006; unchanged skip"
+      "Developed score pending — do not treat as visual pass.",
+      "Re-synced via clientStorage chunks (n=8, total=63284); nodeId=1:4006; unchanged skip",
+      "2026-08-08: canvas shot replaced with the true astryx Toast node 1:4006 (360x64) exported at scale 1."
     ],
     "defects": [
-      "re-synced from contract; developed score pending"
+      "re-synced from contract; developed score pending",
+      "FC-CELL-FRAMING: the committed canvas shot was 336x132 — the 320x116 Type=Info cell of the UNRELATED \"Toast\" component set 1:802, not the astryx Toast. The astryx node 1:4006 is 360x64 (the receipt's own visual.observations.size records exactly that). Re-exported at scale 1 from the live canvas via the Desktop Bridge. Found by the new capture-framing pin; the scorer never saw it because this stem has no reference and is therefore never scored.",
+      "FC-REF-FRAMING: no developed reference exists for astryx Toast (visual.reference is \"none\"), so the stem cannot be pixel-scored at all."
     ],
     "reference": "none",
     "reviewSurface": "cream-#F8F4ED-component-set",
@@ -80,7 +83,7 @@
       ":COMPONENT/Toast (astryx.toast)|bound:paddingTop|spacing-4",
       ":COMPONENT/Toast (astryx.toast)|bound:topLeftRadius|radius-container",
       ":COMPONENT/Toast (astryx.toast)|bound:topRightRadius|radius-container",
-      ":COMPONENT/Toast (astryx.toast)|description|Toast \u00e2\u0080\u0094 generated from contract astryx.toast v0.2.0 \u00e2\u0080",
+      ":COMPONENT/Toast (astryx.toast)|description|Toast â generated from contract astryx.toast v0.2.0 â",
       ":COMPONENT/Toast (astryx.toast)|propdef|Body#1:1106:TEXT=Saved successfully",
       ":COMPONENT/Toast (astryx.toast)|propdef|EndContent#1:1107:INSTANCE_SWAP=1:347",
       ":COMPONENT/Toast (astryx.toast)|propdef|Show EndContent#1:1108:BOOLEAN=true",

@@ -40,7 +40,8 @@
     "reviewedAt": "2026-08-06T13:32:20.271Z",
     "notes": [],
     "defects": [
-      "Not a COMPONENT_SET; missing hover/selected/destructive variants; no developed site reference — fail closed."
+      "Not a COMPONENT_SET; missing hover/selected/destructive variants; no developed site reference — fail closed.",
+      "FC-REF-FRAMING: no developed reference exists for astryx DropdownMenuItem (visual.reference is \"none\") — the committed 87x33 canvas shot is the correct standalone COMPONENT 1:3876, but there is nothing to frame or score it against."
     ],
     "reference": "none",
     "reviewSurface": "cream-#F8F4ED-component-set"

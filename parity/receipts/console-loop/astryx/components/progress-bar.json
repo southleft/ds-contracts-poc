@@ -48,10 +48,12 @@
     "notes": [
       "Re-synced 2026-08-06 from re-emitted progress-bar.figma.js via Console MCP (ds_loop_script 72214, djb2 verified). Amended 1:3900; track 240px with fill/meter ~96px present.",
       "Developed score pending — do not treat as visual pass.",
-      "Re-synced via clientStorage chunks (n=10, total=72679); nodeId=1:3900; unchanged skip"
+      "Re-synced via clientStorage chunks (n=10, total=72679); nodeId=1:3900; unchanged skip",
+      "2026-08-08: canvas framing verified correct on the live bridge — shot 256x36 is VARIANT cell 1:3880 (Variant=Accent) 240x20 + 8px margin."
     ],
     "defects": [
-      "re-synced from contract; developed score pending"
+      "re-synced from contract; developed score pending",
+      "FC-REF-FRAMING: reference is an emit-html first-item render at shrink-to-fit width (68x16 content) against a 240x18 canvas track. No astryx ProgressBar in extract/computed/configs/astryx.json, so there is no correctly-widthed 1x gate-shot to retarget to; scaleRatio 3.53 measures the reference's mount width, not the emit."
     ],
     "reviewSurface": "cream-#F8F4ED-component-set",
     "reference": "parity/receipts/console-loop/astryx/refs/progress-bar.png",

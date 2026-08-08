@@ -47,16 +47,19 @@
     "notes": [
       "Re-synced via clientStorage chunks (n=12, total=92682); nodeId=1:10049",
       "Re-synced via console-loop batch 2026-08-07T16:32:44.350Z — amended rebuiltVariants=3; nodeId=1:10049; label \"Save this information\"; absolute glyph present; matchDeveloped left unset.",
-      "Re-synced via clientStorage chunks (n=16, total=92980); eval skipped unchanged nodeId=1:10049; label \"Save this information\". matchDeveloped left false."
+      "Re-synced via clientStorage chunks (n=16, total=92980); eval skipped unchanged nodeId=1:10049; label \"Save this information\". matchDeveloped left false.",
+      "FC-CELL-FRAMING closed 2026-08-08: the committed canvas shot was a 16x20 hand crop of the checkbox BOX only; the VARIANT cell 1:10019 (Checked=unchecked) is 160x28 and includes its label. Re-exported at scale 1 from the live canvas via the Desktop Bridge (fileKey GnQnjSNBXtgtd2Ht0Hs1C8) and the reference re-pointed to the matching Polaris gate-shot. Found by the new capture-framing pin, not by the scorer."
     ],
     "defects": [
       "Unchecked/indeterminate geometry inverted vs Polaris checkbox; labels missing vs developed receipt."
     ],
-    "reference": "parity/receipts/console-loop/polaris/refs/checkbox.png",
+    "reference": "extract/computed/out/checkbox/gate-shots/unchecked.enabled__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "examples/polaris/generated/html/checkbox.html#first-item-inline-css",
+    "referenceSource": "extract/computed/out/checkbox/gate-shots/unchecked.enabled__default.png",
     "scorecard": "parity/receipts/console-loop/polaris/scores/checkbox.json",
-    "matchDevelopedReason": "reverted — exact~39% indicates paint/layout gap beyond FC-FONT-AA"
+    "matchDevelopedReason": "reverted — exact~39% indicates paint/layout gap beyond FC-FONT-AA",
+    "referencePrevious": "parity/receipts/console-loop/polaris/refs/checkbox.png",
+    "referenceSourcePrevious": "examples/polaris/generated/html/checkbox.html#first-item-inline-css"
   },
   "fingerprint": {
     "v6": "v6:1753212640",

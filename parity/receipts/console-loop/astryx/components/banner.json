@@ -51,11 +51,13 @@
     "matchDeveloped": false,
     "reviewedAt": "2026-08-06T13:32:20.271Z",
     "notes": [
-      "Re-synced via clientStorage chunks (n=12, total=89278); nodeId=1:3813; rebuilt 8 variants; added Title/Description props"
+      "Re-synced via clientStorage chunks (n=12, total=89278); nodeId=1:3813; rebuilt 8 variants; added Title/Description props",
+      "2026-08-08: named by the new capture-framing pin (reference-provenance check). Canvas framing verified correct on the live bridge: shot 347x104 is VARIANT cell 1:3797 (Status=Info, Container=Card) 331x88 + 8px margin."
     ],
     "defects": [
       "Pastel fills improved on cream, but still dense pill chips without status icons / title+body hierarchy of developed Banner docs.",
-      "Not full-width alert banners as in examples/astryx/receipts/site/Banner.png."
+      "Not full-width alert banners as in examples/astryx/receipts/site/Banner.png.",
+      "FC-REF-CROSS-LIBRARY: the committed developed reference is a POLARIS Banner — visual.referenceSource is extract/computed/out/banner/gate-shots/info.off.off__default.png, which is the Polaris lane's computed output (extract/computed/configs/polaris.json), not astryx. The astryx cell is scored against another design system, so pctAAMasked=63.31 is meaningless. astryx has no Banner in extract/computed/configs/astryx.json (Button/Badge/Card/Switch/Slider only) — this stem cannot be scored until astryx Banner is added to the computed corpus."
     ],
     "reference": "parity/receipts/console-loop/astryx/refs/banner.png",
     "reviewSurface": "cream-#F8F4ED-component-set",

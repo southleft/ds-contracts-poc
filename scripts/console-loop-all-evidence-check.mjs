@@ -13,6 +13,9 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const lanes = [
+  // Runs FIRST: a wrongly-framed canvas shot poisons every number downstream,
+  // so the capture-framing pin refuses it by name before any lane is scored.
+  ["capture-framing", ["scripts/console-loop-capture-framing-check.mjs"]],
   ["first-party", ["scripts/console-loop-evidence-check.mjs"]],
   ["mui", ["scripts/console-loop-mui-evidence-check.mjs"]],
   ...["tailwind", "altitude", "astryx", "carbon", "polaris"].map((lib) => [

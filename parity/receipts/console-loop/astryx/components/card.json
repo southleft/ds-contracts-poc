@@ -39,15 +39,21 @@
     "matchDeveloped": false,
     "reviewedAt": "2026-08-06T13:32:20.271Z",
     "notes": [
-      "Cream surface improved text contrast."
+      "Cream surface improved text contrast.",
+      "2026-08-08: reference provenance corrected — visual.referenceSource claimed an emit-html first-item render; the PNG is in fact the astryx computed gate-shot. Re-pointed at the gate-shot directly so the sha pin means something.",
+      "2026-08-08: reference PROVENANCE corrected (was falsely labelled an emit-html first-item render); the PNG is a tight 1x crop of the astryx computed gate-shot. Retargeting the scorer at the padded 320x96 stage was measured and REVERTED - same 114x56 content box, but inkRealPct collapsed 68.4 -> 9.3 and AA 33.27 -> 86.30, which is an artifact of the scorer's ink metric, not a truth about the card."
     ],
     "defects": [
       "Color variants still lack developed title/body hierarchy and elevation/border cues from Card docs.",
-      "Body-only placeholder aesthetic — fail closed."
+      "Body-only placeholder aesthetic — fail closed.",
+      "FC-REF-FRAMING: canvas cell 1:4021 (Variant=Default) is 114x80 against a 114x56 developed reference — the canvas card wraps \"Card content\" onto two lines. The reference gate-shot still carries the pre-Theme-mount Times substrate (see extract/computed/configs/astryx.json mount note), which fits the string on ONE line, so the height delta is manufactured by the stale reference; re-gate astryx Card under the fixed <Theme> mount before treating 1.43 as a geometry defect."
     ],
     "reference": "parity/receipts/console-loop/astryx/refs/card.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "emit-html:examples/astryx/contracts/card.contract.json#first-item"
+    "referenceSource": "extract/computed/out/astryx/card/gate-shots/default__default.png",
+    "referencePrevious": "parity/receipts/console-loop/astryx/refs/card.png",
+    "referenceSourcePrevious": "emit-html:examples/astryx/contracts/card.contract.json#first-item",
+    "referenceNote": "refs/card.png is a TIGHT 1x crop (118x60) of the astryx computed gate-shot default__default.png (320x96 stage, same 114x56 content box). The crop is kept as the scored reference: pointing the scorer at the padded stage collapsed inkRealPct 68.4 -> 9.3 for an identical content box, i.e. the lane scorer's ink metric is not stage-padding invariant for pale fills. Provenance now names the real source instead of the previously-claimed emit-html first-item render."
   },
   "fingerprint": {
     "v6": "v6:3092228042",

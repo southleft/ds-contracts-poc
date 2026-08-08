@@ -46,12 +46,17 @@
     "ok": false,
     "matchDeveloped": false,
     "reviewedAt": "2026-08-06T13:32:20.271Z",
-    "notes": [],
+    "notes": [
+      "FC-REF-FRAMING closed 2026-08-08: the old reference was a 949x23 strip carrying the sample string TWICE (a comparison strip, not a single-cell render) against a 144x11 canvas cell. Re-pointed to the Polaris computed gate-shot matching the shot cell 1:10372 (Variant=Heading Sm, Tone=Base, Font Weight=Regular). scaleRatio 6.59 -> 1.05."
+    ],
     "defects": [
       "Ultra-wide set illegible at review scale; type-scale match to minted styles / developed text receipts not confirmed — fail closed."
     ],
-    "reference": "parity/receipts/console-loop/polaris/refs/text.png",
-    "reviewSurface": "cream-#F8F4ED-component-set"
+    "reference": "extract/computed/out/text/gate-shots/headingSm.base.regular__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referencePrevious": "parity/receipts/console-loop/polaris/refs/text.png",
+    "referenceSourcePrevious": null,
+    "referenceSource": "extract/computed/out/text/gate-shots/headingSm.base.regular__default.png"
   },
   "fingerprint": {
     "v6": "v6:3918753726",

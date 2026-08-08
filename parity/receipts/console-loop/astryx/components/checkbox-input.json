@@ -41,10 +41,13 @@
     "ok": false,
     "matchDeveloped": false,
     "reviewedAt": "2026-08-06T13:32:20.271Z",
-    "notes": [],
+    "notes": [
+      "2026-08-08: canvas framing verified correct on the live bridge — shot 130x44 is VARIANT cell 1:3867 (Size=Md) 114x28 + 8px margin."
+    ],
     "defects": [
       "Only Size axis; missing checked/indeterminate visual states vs typical Astryx checkbox UX.",
-      "No developed site Checkbox receipt — fail closed on matchDeveloped."
+      "No developed site Checkbox receipt — fail closed on matchDeveloped.",
+      "FC-REF-FRAMING: reference is an emit-html first-item render in the Times fallback substrate (91x16 content: a solid black square plus serif \"Accept terms\") against a 57x14 canvas content box. No astryx CheckboxInput exists in extract/computed/configs/astryx.json, so no correctly-themed 1x gate-shot is available to retarget to; scaleRatio 1.61 is a reference artifact and the stem cannot be honestly scored yet."
     ],
     "reference": "parity/receipts/console-loop/astryx/refs/checkbox-input.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
