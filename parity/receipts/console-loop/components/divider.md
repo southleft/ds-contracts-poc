@@ -1,32 +1,12 @@
-# Divider — console-loop receipt
+# Console loop — Divider (ds.divider)
 
-**Status:** completed  
-**File:** `GnQnjSNBXtgtd2Ht0Hs1C8` (DS Contracts Testing)  
-**Recorded:** 2026-08-06T03:55:23.627Z
+2026-08-08 first-party visual loop on the blank playground file
+`BMjUA2ue5CaZXU4kufxL0z` ("Latest DS Contracts Tests") via Desktop Bridge
+figma_execute + stem-serve fetch/eval. Earlier provenance for this stem
+(DS-Contracts-Testing) is superseded by this receipt; the receipt's
+`fileKey` field records where THIS evidence came from.
 
-## Generate
-
-Uploaded `09-divider.js` via `ds_loop_script` clientStorage chunks, then eval’d.
-
-- **nodeId:** `1:636` (COMPONENT_SET on page **Divider**, section `1:637`)
-- **variants:** 2
-- **properties:** Variant
-
-## Screenshot
-
-Screenshot of section/node 1:637 captured (ok). Divider: 2 variant(s); type COMPONENT_SET; page Divider. Props: Variant. First root fill bound to color/divider/subtle.
-
-## Fingerprint (v6)
-
-- **hash:** `v6:3338360677`
-- **lineCount:** 17
-
-## Round-trip
-
-Compared canvas props to `contracts/divider.contract.json`.
-
-- **MISMATCH:** none
-
-## Acceptance
-
-generated ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+- Component set `4:599` on page "Divider" (section 4:600), 2 variant(s).
+- Fingerprint: `v6:3338360677` (stamp == recompute, 17 snapshot lines).
+- Round-trip: 0 mismatch(es), 1 matched axes, 2 named gap(s).
+- Pixel evidence: PASS pctAAMasked=0.00 against the contract-default `src/components` render (`refs/divider.png`, scale-1 cell shot `shots/divider-cell.png`, scorecard `scores/divider.json`).

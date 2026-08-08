@@ -1,32 +1,12 @@
-# Banner — console-loop receipt
+# Console loop — Banner (ds.banner)
 
-**Status:** completed  
-**File:** `GnQnjSNBXtgtd2Ht0Hs1C8` (DS Contracts Testing)  
-**Recorded:** 2026-08-06T03:55:23.359Z
+2026-08-08 first-party visual loop on the blank playground file
+`BMjUA2ue5CaZXU4kufxL0z` ("Latest DS Contracts Tests") via Desktop Bridge
+figma_execute + stem-serve fetch/eval. Earlier provenance for this stem
+(DS-Contracts-Testing) is superseded by this receipt; the receipt's
+`fileKey` field records where THIS evidence came from.
 
-## Generate
-
-Uploaded `06-banner.js` via `ds_loop_script` clientStorage chunks, then eval’d.
-
-- **nodeId:** `1:631` (COMPONENT_SET on page **Banner**, section `1:632`)
-- **variants:** 8
-- **properties:** Dismissable#1:110, Title#1:119, Description#1:128, EndContent#1:137, Show EndContent#1:146, Status, Container
-
-## Screenshot
-
-Screenshot of section/node 1:632 captured (ok). Banner: 8 variant(s); type COMPONENT_SET; page Banner. Props: Dismissable, Title, Description, EndContent, Show EndContent, Status, Container. First root fill bound to color/feedback/info/background.
-
-## Fingerprint (v6)
-
-- **hash:** `v6:3392425332`
-- **lineCount:** 575
-
-## Round-trip
-
-Compared canvas props to `contracts/banner.contract.json`.
-
-- **MISMATCH:** none
-
-## Acceptance
-
-generated ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+- Component set `4:540` on page "Banner" (section 4:541), 8 variant(s).
+- Fingerprint: `v6:2032049522` (stamp == recompute, 583 snapshot lines).
+- Round-trip: 0 mismatch(es), 5 matched axes, 3 named gap(s).
+- Pixel evidence: PASS pctAAMasked=4.69 against the contract-default `src/components` render (`refs/banner.png`, scale-1 cell shot `shots/banner-cell.png`, scorecard `scores/banner.json`).

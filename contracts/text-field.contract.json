@@ -2,9 +2,9 @@
   "$schema": "./contract.schema.json",
   "id": "ds.text-field",
   "name": "TextField",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "status": "draft",
-  "description": "Single-line text input for short-form values — names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. Disabled fields dim and drop pointer interaction via stylesWhen (code-side conditional styling; a declared canvas fidelity limit).",
+  "description": "Single-line text input for short-form values \u2014 names, emails, search queries. API mirrors industry convention (Astryx TextInput): required label, description, size scale. The wrapping-label anatomy gives implicit label association. Disabled fields dim and drop pointer interaction via stylesWhen (code-side conditional styling; a declared canvas fidelity limit).",
   "semantics": {
     "element": "label"
   },
@@ -37,7 +37,7 @@
     },
     {
       "name": "isRequired",
-      "description": "Marks the field required — shows the indicator beside the label.",
+      "description": "Marks the field required \u2014 shows the indicator beside the label.",
       "type": "boolean",
       "default": false,
       "bindings": {
@@ -67,7 +67,7 @@
     },
     {
       "name": "label",
-      "description": "Field label — always rendered; placeholders are not labels.",
+      "description": "Field label \u2014 always rendered; placeholders are not labels.",
       "type": "text",
       "default": "Label",
       "required": true,
@@ -100,7 +100,7 @@
       "name": "placeholder",
       "description": "Hint shown when the field is empty. Never a substitute for the label.",
       "type": "text",
-      "default": "Enter a value…",
+      "default": "Enter a value\u2026",
       "bindings": {
         "figma": {
           "kind": "TEXT",
@@ -155,7 +155,7 @@
               }
             },
             "requiredMark": {
-              "description": "Required indicator — shown only when isRequired.",
+              "description": "Required indicator \u2014 shown only when isRequired.",
               "icon": {
                 "asset": "asterisk",
                 "size": 10
@@ -176,7 +176,8 @@
           },
           "tokens": {
             "font-size": "{font.control.size.sm}",
-            "color": "{color.text.secondary}"
+            "color": "{color.text.secondary}",
+            "font-weight": "{font.weight.regular}"
           }
         },
         "input": {

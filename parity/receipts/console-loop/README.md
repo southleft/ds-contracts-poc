@@ -30,10 +30,17 @@ npm run console-loop:developed-score     # pixel-score a stem vs its developed r
   not failed — the branch stays green while the visual hill-climb proceeds.
   Current genuine scorecard passes: tailwind 3/5, altitude 4/8, carbon 2/10,
   astryx 0/13, polaris 0/12 (9/48 foreign; see `CORPORA.md`).
-- **Attested-only (first-party + MUI).** Those corpora have no pixel
-  scorecards yet; their visual claims are legal but printed loudly as
-  ATTESTED-ONLY until the pixel-score job lands. Once a scorecard exists the
-  claim is enforced strictly.
+- **Attested-only (first-party remainder).** MUI went strict 2026-08-08;
+  the first-party lane BEGAN its strict transition the same day on the blank
+  playground file `BMjUA2ue5CaZXU4kufxL0z` — 10 stems carry pixel scorecards
+  under `scores/` (5 scored-pass: avatar, badge, banner, divider, switch;
+  5 honest fail-closed: button, card, checkbox, text-field, token), scored
+  at scale 1 against contract-default `src/components` renders committed
+  under `refs/` (`scripts/console-loop-render-ref.mts`, Inter face pinned).
+  The remaining 39 first-party stems stay attested-only (printed loudly)
+  until their refs + scorecards land; once a scorecard exists the claim is
+  enforced strictly. `fileKey` is per-receipt — the gate accepts the known
+  evidence-file allowlist, not a lane constant.
 - **Ratchet.** `RATCHET.json` pins per-lane minimum scorecard-passed counts;
   a lane fails if its count drops below its floor.
 - **Hash pinning.** Scorecards record `sha256` of the reference and canvas

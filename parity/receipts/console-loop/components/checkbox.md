@@ -1,35 +1,16 @@
-# Checkbox — console-loop receipt
+# Console loop — Checkbox (ds.checkbox)
 
-**Status:** completed  
-**File:** `GnQnjSNBXtgtd2Ht0Hs1C8` (DS Contracts Testing)  
-**Recorded:** 2026-08-06T03:54:41.169Z
+2026-08-08 first-party visual loop on the blank playground file
+`BMjUA2ue5CaZXU4kufxL0z` ("Latest DS Contracts Tests") via Desktop Bridge
+figma_execute + stem-serve fetch/eval. Earlier provenance for this stem
+(DS-Contracts-Testing) is superseded by this receipt; the receipt's
+`fileKey` field records where THIS evidence came from.
 
-## Generate
+- Component set `4:594` on page "Checkbox" (section 4:595), 6 variant(s).
+- Fingerprint: `v6:2238650114` (stamp == recompute, 234 snapshot lines).
+- Round-trip: 0 mismatch(es), 4 matched axes, 2 named gap(s).
+- Pixel evidence: FAIL — honest fail-closed against the contract-default `src/components` render (`refs/checkbox.png`, scale-1 cell shot `shots/checkbox-cell.png`, scorecard `scores/checkbox.json`).
 
-Uploaded `08-checkbox.js` (76081 bytes) via `ds_loop_script` clientStorage chunks (10× ~8KB), then eval’d.
+Named defect (FC-classified):
 
-- **nodeId:** `1:510` (COMPONENT_SET on page **Checkbox**, section `1:511`)
-- **variants:** 6
-- **properties:** Label, Description (TEXT), Value, Size (VARIANT)
-
-## Screenshot
-
-Captured section `1:511`. Six checkbox rows: Unchecked/Checked/Indeterminate × Medium/Small with label + description. Box tokens and spacing look consistent. No visual defects flagged.
-
-## Fingerprint (v6)
-
-- **hash:** `v6:3433570960`
-- **lineCount:** 234
-- Sample includes Value/Size propdefs, unchecked box fill/stroke bindings to checkbox tokens, gap `space/gap/sm`.
-
-## Round-trip
-
-Compared canvas to `contracts/checkbox.contract.json`.
-
-- **MATCH:** Value/Size axes, Label/Description TEXT, gap + unchecked box token bindings.
-- **GAPS:** no State axis (contract empty) — OK.
-- **MISMATCH:** none
-
-## Acceptance
-
-generated ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+- FC-TEXT-RASTER near-pass: pctAAMasked 5.16 vs the 5 bar AFTER the FC-WEIGHT-DEFAULT contract fix (descriptionText pinned to font.weight.regular) and the FC-BOX-MODEL generator fix took it from 14.69; the residue is label/description glyph AA at scale 1 — near-pass is a fail, not flipped

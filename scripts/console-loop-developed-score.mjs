@@ -52,6 +52,17 @@ function argValue(flag) {
 
 const onlyLib = argValue("--lib");
 const onlyStem = argValue("--stem");
+
+/**
+ * Lane root: the FIRST-PARTY lane lives at the console-loop root
+ * (components/, shots/, refs/, scores/ directly under
+ * parity/receipts/console-loop — the layout console-loop-evidence-check.mjs
+ * reads); foreign lanes are nested one directory deeper under their lib name.
+ */
+const laneRoot = (lib) =>
+  lib === "first-party"
+    ? path.join(ROOT, "parity/receipts/console-loop")
+    : path.join(ROOT, "parity/receipts/console-loop", lib);
 const useManifest =
   process.argv.includes("--manifest") || (!onlyLib && !onlyStem);
 
@@ -59,13 +70,7 @@ const useManifest =
 let rows = [];
 
 if (onlyLib && onlyStem) {
-  const receiptPath = path.join(
-    ROOT,
-    "parity/receipts/console-loop",
-    onlyLib,
-    "components",
-    `${onlyStem}.json`,
-  );
+  const receiptPath = path.join(laneRoot(onlyLib), "components", `${onlyStem}.json`);
   let reference;
   let fc = [];
   // Prefer receipt.visual.reference (hill-climb may retarget to cropped /
@@ -130,13 +135,7 @@ async function loadScorer() {
 
 function resolveCanvasShot(lib, stem, receipt) {
   // Prefer like-for-like cell shot when present (set screenshots fail composition guard).
-  const cellPreferred = path.join(
-    ROOT,
-    "parity/receipts/console-loop",
-    lib,
-    "shots",
-    `${stem}-cell.png`,
-  );
+  const cellPreferred = path.join(laneRoot(lib), "shots", `${stem}-cell.png`);
   if (existsSync(cellPreferred)) return cellPreferred;
   // Carbon checkbox trap pairs against unchecked.enabled__default — use that cell.
   if (lib === "carbon" && stem === "checkbox") {
@@ -146,13 +145,7 @@ function resolveCanvasShot(lib, stem, receipt) {
     );
     if (existsSync(unchecked)) return unchecked;
   }
-  const preferred = path.join(
-    ROOT,
-    "parity/receipts/console-loop",
-    lib,
-    "shots",
-    `${stem}.png`,
-  );
+  const preferred = path.join(laneRoot(lib), "shots", `${stem}.png`);
   if (existsSync(preferred)) return preferred;
   const fromReceipt = receipt.visual?.canvasShot;
   if (typeof fromReceipt === "string") {
@@ -232,13 +225,7 @@ const notes = [];
 for (const row of rows) {
   const { lib, stem } = row;
   const tag = `${lib}/${stem}`;
-  const receiptPath = path.join(
-    ROOT,
-    "parity/receipts/console-loop",
-    lib,
-    "components",
-    `${stem}.json`,
-  );
+  const receiptPath = path.join(laneRoot(lib), "components", `${stem}.json`);
   const refRel = row.reference;
   const refPath = refRel ? path.join(ROOT, refRel) : null;
   const hasRef = Boolean(refPath && existsSync(refPath));
@@ -263,7 +250,7 @@ for (const row of rows) {
   }
 
   const canvasPath = resolveCanvasShot(lib, stem, receipt);
-  const scoreDir = path.join(ROOT, "parity/receipts/console-loop", lib, "scores");
+  const scoreDir = path.join(laneRoot(lib), "scores");
   mkdirSync(scoreDir, { recursive: true });
   const outPath = path.join(scoreDir, `${stem}.json`);
   const matchDevelopedReceipt = receipt.visual?.matchDeveloped === true;

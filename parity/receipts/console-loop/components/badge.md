@@ -1,35 +1,12 @@
-# Badge — console-loop receipt
+# Console loop — Badge (ds.badge)
 
-**Status:** completed  
-**File:** `GnQnjSNBXtgtd2Ht0Hs1C8` (DS Contracts Testing)  
-**Recorded:** 2026-08-06T03:39:58.190Z
+2026-08-08 first-party visual loop on the blank playground file
+`BMjUA2ue5CaZXU4kufxL0z` ("Latest DS Contracts Tests") via Desktop Bridge
+figma_execute + stem-serve fetch/eval. Earlier provenance for this stem
+(DS-Contracts-Testing) is superseded by this receipt; the receipt's
+`fileKey` field records where THIS evidence came from.
 
-## Generate
-
-Uploaded `04-badge.js` (62942 bytes) via `ds_loop_script` clientStorage chunks (8× ~8KB), then eval’d.
-
-- **nodeId:** `1:309` (COMPONENT_SET on page **Badge**, section `1:310`)
-- **variants:** 5
-- **properties:** `Label#1:0` (TEXT), `Variant` (VARIANT)
-
-## Screenshot
-
-Captured section `1:310`. Five stacked pills with label “Badge”: blue / green / amber / red / red. Spacing and padding look consistent. Danger vs Error are close in hue (token-driven), not a structural defect. No visual defects flagged.
-
-## Fingerprint (v6)
-
-- **hash:** `v6:4215075650`
-- **lineCount:** 86
-- Sample includes set propdefs, per-variant fills bound to `color/feedback/{variant}/background`, layout `HORIZONTAL CENTER/CENTER … pad 4,12,4,12`, and padding/radius bindings.
-
-## Round-trip
-
-Compared canvas Variant options and first-variant bindings to `contracts/badge.contract.json`.
-
-- **MATCH:** Variant axis (Info/Success/Warning/Danger/Error), Label TEXT, feedback fill + inset/radius bindings on Info.
-- **GAPS (canvas-absent, OK):** no State axis; font/anatomy beyond bound fills/padding/radius not exposed as component properties.
-- **MISMATCH:** none
-
-## Acceptance
-
-generated ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+- Component set `4:313` on page "Badge" (section 4:314), 5 variant(s).
+- Fingerprint: `v6:4254819976` (stamp == recompute, 86 snapshot lines).
+- Round-trip: 0 mismatch(es), 2 matched axes, 2 named gap(s).
+- Pixel evidence: PASS pctAAMasked=2.00 against the contract-default `src/components` render (`refs/badge.png`, scale-1 cell shot `shots/badge-cell.png`, scorecard `scores/badge.json`).

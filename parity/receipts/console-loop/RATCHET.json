@@ -5,7 +5,7 @@
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
-  "note": "Per-lane minimum scorecard-passed counts. The evidence gates fail a lane when its count of genuine pixel-scorecard passes (scores/<stem>.json with status pass, pctAAMasked<=5, compositionOk) drops below its floor \u2014 honesty cannot decay. Raise a floor when a new stem genuinely passes; never lower one without owner sign-off. first-party has no pixel scorecards yet (attested-only lane), so its floor is 0. 2026-08-08: altitude 4\u21926 (chip, link converted by the FC-FONT-SUBSTRATE font-loading harness \u2014 cfg.fonts loads the library's true faces in the gate render; passes hold on BOTH instruments: bridge cell shots and the headless REST lane). 2026-08-08: mui lane went STRICT \u2014 31/31 stems pixel-scored headlessly (REST cell @1x vs committed developed refs under mui/refs/); floor seeded at 4 from the both-instrument passes (checkbox, divider, snackbar, table; alert passes the lane scorer only after dpr+size normalization while the headless card fails it 6.49 \u2014 instruments disagree, not seeded, receipt stays fail-closed).",
+  "note": "Per-lane minimum scorecard-passed counts. The evidence gates fail a lane when its count of genuine pixel-scorecard passes (scores/<stem>.json with status pass, pctAAMasked<=5, compositionOk) drops below its floor \u2014 honesty cannot decay. Raise a floor when a new stem genuinely passes; never lower one without owner sign-off. first-party has no pixel scorecards yet (attested-only lane), so its floor is 0. 2026-08-08: altitude 4\u21926 (chip, link converted by the FC-FONT-SUBSTRATE font-loading harness \u2014 cfg.fonts loads the library's true faces in the gate render; passes hold on BOTH instruments: bridge cell shots and the headless REST lane). 2026-08-08: mui lane went STRICT \u2014 31/31 stems pixel-scored headlessly (REST cell @1x vs committed developed refs under mui/refs/); floor seeded at 4 from the both-instrument passes (checkbox, divider, snackbar, table; alert passes the lane scorer only after dpr+size normalization while the headless card fails it 6.49 \u2014 instruments disagree, not seeded, receipt stays fail-closed). 2026-08-08 (blank-file loop): first-party went from attested-only to 5 strict scorecard passes \u2014 avatar/badge/banner/divider/switch scored on BOTH instruments (bridge scale-1 cell exports scored by the lane scorer AND headless REST visual-truth cards) against contract-default src/components renders (refs/); floor seeded 0->5. Fixes that produced the passes: FC-WEIGHT-DEFAULT (descriptionText font-weight pinned to font.weight.regular in switch/checkbox/banner/text-field contracts) and FC-BOX-MODEL (generated module.css now ships a scoped border-box reset, matching the Figma emitter's border-box frames). button/card/checkbox/text-field/token stay honest fail-closed with named FC causes.",
   "seededAt": "2026-08-07",
   "seededFrom": {
     "altitude": [
@@ -31,10 +31,17 @@
       "divider",
       "snackbar",
       "table"
+    ],
+    "first-party": [
+      "avatar",
+      "badge",
+      "banner",
+      "divider",
+      "switch"
     ]
   },
   "floors": {
-    "first-party": 0,
+    "first-party": 5,
     "mui": 4,
     "tailwind": 3,
     "altitude": 6,

@@ -1,7 +1,14 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/checkbox.contract.json (ds.checkbox v2.0.0)
+ * Source of truth: contracts/checkbox.contract.json (ds.checkbox v2.0.1)
  * Regenerate with: npm run generate
  */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
 
 .root {
   display: flex;
@@ -117,4 +124,5 @@
 .descriptionText {
   font-size: var(--font-control-size-sm);
   color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
 }

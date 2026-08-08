@@ -9,13 +9,14 @@
  * EVIDENCE SEMANTICS (first-party lane — contrast with the foreign-lib gate
  * console-loop-lib-evidence-check.mjs, which is STRICT):
  *
- *   - First-party receipts have NO pixel scorecards yet. A visual pass-claim
- *     (visual.ok:true / visual.matchDeveloped:true) WITHOUT a scorecard is
- *     "attested-only": legal for now, but counted and printed loudly. The
- *     owner will pixel-score these in a later job; once a scorecard exists at
- *     parity/receipts/console-loop/scores/<stem>.json the claim is enforced
- *     strictly against the one bar (pctAAMasked <= 5 AND compositionOk) plus
- *     sha256 pins, exactly like foreign lanes.
+ *   - STRICT TRANSITION IN PROGRESS (began 2026-08-08, blank-file visual
+ *     loop): stems WITH a scorecard at
+ *     parity/receipts/console-loop/scores/<stem>.json are enforced strictly
+ *     against the one bar (pctAAMasked <= 5 AND compositionOk) plus sha256
+ *     pins, exactly like foreign lanes. A visual pass-claim (visual.ok:true /
+ *     visual.matchDeveloped:true) WITHOUT a scorecard is "attested-only":
+ *     still legal for the unscored remainder, but counted and printed
+ *     loudly until its ref + scorecard land.
  *   - Honest fail-closed (no pass-claims + non-empty named visual.defects)
  *     is legal and does not fail CI.
  *   - RATCHET.json floor for lane "first-party" must hold.
@@ -36,7 +37,19 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIR = path.join(ROOT, "parity/receipts/console-loop/components");
 const SCORES_DIR = path.join(ROOT, "parity/receipts/console-loop/scores");
-const FILE_KEY = "GnQnjSNBXtgtd2Ht0Hs1C8";
+/**
+ * fileKey is PER-RECEIPT, not a lane constant: each receipt's fileKey records
+ * where THAT stem's evidence came from. The lane started on
+ * DS-Contracts-Testing (GnQn…) and the 2026-08-08 first-party visual loop
+ * re-generated a subset on the blank playground file (BMjU…) — receipts from
+ * both provenances coexist. The gate pins an ALLOWLIST of known evidence
+ * files so a typo'd/foreign fileKey still fails by name, and requires each
+ * receipt's markdown to mention its OWN fileKey.
+ */
+const KNOWN_FILE_KEYS = new Set([
+  "GnQnjSNBXtgtd2Ht0Hs1C8", // DS-Contracts-Testing (original lane file)
+  "BMjUA2ue5CaZXU4kufxL0z", // Latest DS Contracts Tests (blank-file visual loop, 2026-08-08)
+]);
 
 /**
  * Required completed receipts — every first-party contract except
@@ -137,8 +150,10 @@ for (const stem of REQUIRED) {
   if (receipt.status !== "completed") {
     errors.push(`${stem}: status must be completed (got ${JSON.stringify(receipt.status)})`);
   }
-  if (receipt.fileKey !== FILE_KEY) {
-    errors.push(`${stem}: fileKey must be ${FILE_KEY}`);
+  if (typeof receipt.fileKey !== "string" || !KNOWN_FILE_KEYS.has(receipt.fileKey)) {
+    errors.push(
+      `${stem}: fileKey ${JSON.stringify(receipt.fileKey)} is not a known first-party evidence file (${[...KNOWN_FILE_KEYS].join(", ")})`,
+    );
   }
   if (receipt.component !== stem) {
     errors.push(`${stem}: component field must match filename stem`);
@@ -199,7 +214,10 @@ for (const stem of REQUIRED) {
     errors.push(`${stem}: narrative markdown missing`);
   } else {
     const md = readFileSync(mdPath, "utf8");
-    if (!md.includes(FILE_KEY)) errors.push(`${stem}: markdown must mention fileKey`);
+    // The markdown must mention THIS receipt's own fileKey (per-receipt provenance).
+    if (typeof receipt.fileKey === "string" && receipt.fileKey && !md.includes(receipt.fileKey)) {
+      errors.push(`${stem}: markdown must mention fileKey ${receipt.fileKey}`);
+    }
     if (fp && !md.includes(fp)) errors.push(`${stem}: markdown must mention fingerprint`);
   }
 }
@@ -234,5 +252,5 @@ for (const stem of failClosed) {
   console.log(`  fail-closed first-party/${stem} (named defects; visual hill-climb open)`);
 }
 console.log(
-  `✔ console-loop-evidence-check: ${REQUIRED.length} required ok; ${completed.length} completed receipt(s) on ${FILE_KEY} — ${scoredPass.length} scored-pass, ${attestedOnly.length} attested-only, ${failClosed.length} fail-closed; scorecard passes ${genuinePasses.length} hold ratchet floor`,
+  `✔ console-loop-evidence-check: ${REQUIRED.length} required ok; ${completed.length} completed receipt(s) across ${KNOWN_FILE_KEYS.size} known evidence file(s) — ${scoredPass.length} scored-pass, ${attestedOnly.length} attested-only, ${failClosed.length} fail-closed; scorecard passes ${genuinePasses.length} hold ratchet floor`,
 );

@@ -1,7 +1,14 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/banner.contract.json (ds.banner v1.0.0)
+ * Source of truth: contracts/banner.contract.json (ds.banner v1.0.1)
  * Regenerate with: npm run generate
  */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
 
 .root {
   display: flex;
@@ -66,6 +73,7 @@
 .descriptionText {
   font-family: var(--font-control-family);
   font-size: var(--font-control-size-sm);
+  font-weight: var(--font-weight-regular);
 }
 
 .endArea {

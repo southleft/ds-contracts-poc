@@ -1,35 +1,12 @@
-# Avatar — console-loop receipt
+# Console loop — Avatar (ds.avatar)
 
-**Status:** completed  
-**File:** `GnQnjSNBXtgtd2Ht0Hs1C8` (DS Contracts Testing)  
-**Recorded:** 2026-08-06T03:48:31.671Z
+2026-08-08 first-party visual loop on the blank playground file
+`BMjUA2ue5CaZXU4kufxL0z` ("Latest DS Contracts Tests") via Desktop Bridge
+figma_execute + stem-serve fetch/eval. Earlier provenance for this stem
+(DS-Contracts-Testing) is superseded by this receipt; the receipt's
+`fileKey` field records where THIS evidence came from.
 
-## Generate
-
-Uploaded `03-avatar.js` (59412 bytes) via `ds_loop_script` clientStorage chunks (8× ~8KB), then eval’d.
-
-- **nodeId:** `1:338` (COMPONENT_SET on page **Avatar**, section `1:339`)
-- **variants:** 2
-- **properties:** `Initials#1:12` (TEXT), `Size` (VARIANT)
-
-## Screenshot
-
-Captured section `1:339`. Two stacked circular avatars with initials “AB”: Small above Medium. Identity blue fill + dark initials; spacing and centering look consistent. No visual defects flagged.
-
-## Fingerprint (v6)
-
-- **hash:** `v6:1787641672`
-- **lineCount:** 34
-- Sample includes set propdefs, Size=Small fill bound to `color/identity/background`, layout `HORIZONTAL CENTER/CENTER`, and width/height/radius bindings.
-
-## Round-trip
-
-Compared canvas Size options and first-variant bindings to `contracts/avatar.contract.json`.
-
-- **MATCH:** Size axis (Small/Medium), Initials TEXT, identity fill + size/radius bindings, text fill `color/identity/foreground`.
-- **GAPS (canvas-absent, OK):** no State axis; font family/weight/size token channels not all exposed as component properties.
-- **MISMATCH:** none
-
-## Acceptance
-
-generated ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+- Component set `4:300` on page "Avatar" (section 4:301), 2 variant(s).
+- Fingerprint: `v6:1644631224` (stamp == recompute, 34 snapshot lines).
+- Round-trip: 0 mismatch(es), 2 matched axes, 2 named gap(s).
+- Pixel evidence: PASS pctAAMasked=4.17 against the contract-default `src/components` render (`refs/avatar.png`, scale-1 cell shot `shots/avatar-cell.png`, scorecard `scores/avatar.json`).

@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 15.446428571428573,
+    "pctAAUnmasked": 5.844155844155844,
+    "pctAAMasked": 5.844155844155844,
+    "maskCoveragePct": 0,
+    "canvasPx": "320x76",
+    "realPx": "320x77",
+    "inkCanvasPct": 12.256493506493507,
+    "inkRealPct": 12.280844155844155
+  },
+  "reference": "parity/receipts/console-loop/refs/text-field.png",
+  "referenceSha256": "152d7bfa48706d1d250531632d5f45c719c4e2f8b72e7ad488cc9e4fb412bf7a",
+  "canvasShot": "parity/receipts/console-loop/shots/text-field-cell.png",
+  "canvasShotSha256": "26ad79f50fde62991e4379b7a157bf8776385bbe0311fe54e9fc2dfdef0ed925",
+  "diff": "parity/receipts/console-loop/scores/text-field.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/components/text-field.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.013157894736842,
+  "inkDelta": 0.024350649350648013,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "near-pass (pctAAMasked=5.84; likely font-AA) — NOT a pass; tighten emit (near-pass flips are dead)",
+  "recordedAt": "2026-08-08T13:33:09.202Z"
+}

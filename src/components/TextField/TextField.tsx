@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/text-field.contract.json (ds.text-field v1.1.0)
+ * Source of truth: contracts/text-field.contract.json (ds.text-field v1.1.1)
  * Regenerate with: npm run generate
  */
 import { forwardRef } from 'react';

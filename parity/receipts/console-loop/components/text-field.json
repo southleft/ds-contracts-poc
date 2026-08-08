@@ -4,32 +4,32 @@
   "status": "completed",
   "component": "text-field",
   "contract": "contracts/text-field.contract.json",
-  "script": "parity/receipts/console-loop/emitted/21-textfield.js",
-  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
-  "recordedAt": "2026-08-06T03:55:39.748Z",
-  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "script": "parity/receipts/console-loop/emitted/10-textfield.js",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "recordedAt": "2026-08-08T13:32:57.000Z",
+  "transport": "figma-console-mcp figma_execute + stem-serve fetch/eval (dual-stack localhost)",
   "generate": {
     "ok": true,
-    "nodeId": "1:785",
+    "nodeId": "4:651",
     "page": "TextField",
-    "sectionId": "1:786",
+    "sectionId": "4:652",
     "result": {
       "createdNodeIds": [
-        "1:785"
+        "4:651"
       ],
       "results": [
         {
           "name": "TextField",
           "contractId": "ds.text-field",
-          "nodeId": "1:785",
-          "key": "0da8889d15586ed26a4f4e3786a3ef1e79b1d5b6",
+          "nodeId": "4:651",
+          "key": "94f6c7a0c7a9aea261c0d978e606c102ce04280d",
           "variants": 3,
           "properties": [
-            "Required#1:227",
-            "Disabled#1:231",
-            "Label#1:235",
-            "Description#1:239",
-            "Placeholder#1:243",
+            "Required#4:153",
+            "Disabled#4:157",
+            "Label#4:161",
+            "Description#4:165",
+            "Placeholder#4:169",
             "Size"
           ]
         }
@@ -37,52 +37,42 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
-      "Section screenshot: three stacked Text Field sizes (sm/md/lg) with Label, helper text, and bordered input showing placeholder \"Enter a value...\".",
-      "Height and placeholder type scale increase with size; alignment consistent.",
-      "No visual defects flagged."
+      "Generated on the blank playground file BMjUA2ue5CaZXU4kufxL0z via stem-serve fetch/eval; default VARIANT cell exported at scale 1 (like-for-like) and scored against the contract-default src/components render (scripts/console-loop-render-ref.mts, Inter face pinned).",
+      "2026-08-08 pixel scorecard FAIL (scores/text-field.json status=fail); honest fail-closed with named FC cause \u2014 visual hill-climb open."
     ],
-    "defects": []
+    "defects": [
+      "FC-TEXT-RASTER near-pass: pctAAMasked 5.84 vs the 5 bar; three 14px text lines (label, helper, placeholder) dominate the ink and carry cumulative mid-line glyph-position drift between rasterizers; was 10.42 headless against the stale pre-loop reference"
+    ],
+    "reference": "parity/receipts/console-loop/refs/text-field.png",
+    "referenceSource": "scripts/console-loop-render-ref.mts (src/components contract-default render; Inter v20 latin face pinned from extract/computed/fonts/inter/)",
+    "canvasShot": "parity/receipts/console-loop/shots/text-field-cell.png",
+    "status": "fail-closed"
   },
   "fingerprint": {
-    "v6": "v6:2130468756",
+    "v6": "v6:1181024118",
     "lineCount": 178,
     "sampleLines": [
-      ":COMPONENT_SET/TextField|fill|[]",
-      ":COMPONENT_SET/TextField|radius|5,5,5,5",
-      ":COMPONENT_SET/TextField|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/TextField|description|TextField — generated from contract ds.text-field v1.1.0",
-      ":COMPONENT_SET/TextField|propdef|Description#1:239:TEXT=Helper text that explains the expected value.",
-      ":COMPONENT_SET/TextField|propdef|Disabled#1:231:BOOLEAN=false",
-      ":COMPONENT_SET/TextField|propdef|Label#1:235:TEXT=Label",
-      ":COMPONENT_SET/TextField|propdef|Placeholder#1:243:TEXT=Enter a value…",
-      ":COMPONENT_SET/TextField|propdef|Required#1:227:BOOLEAN=false",
-      ":COMPONENT_SET/TextField|propdef|Size:VARIANT=Medium",
-      "/0:COMPONENT/Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/0:COMPONENT/Size=Medium|radius|0,0,0,0",
-      "/0:COMPONENT/Size=Medium|layout|VERTICAL MIN/MIN gap 4 pad 0,0,0,0",
-      "/0:COMPONENT/Size=Medium|sizing|FIXED/HUG AUTO",
-      "/0:COMPONENT/Size=Medium|bound:itemSpacing|space/inset-y/sm",
-      "/0:COMPONENT/Size=Medium|bound:width|size/card/width",
-      "/0/0:FRAME/labelRow|fill|[]",
-      "/0/0:FRAME/labelRow|radius|0,0,0,0",
-      "/0/0:FRAME/labelRow|layout|HORIZONTAL MIN/CENTER gap 4 pad 0,0,0,0",
-      "/0/0:FRAME/labelRow|sizing|FILL/HUG AUTO"
+      ":COMPONENT_SET/TextField|fill|[]"
     ]
   },
   "roundtrip": {
     "mismatches": [],
-    "gaps": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty states[]) \u2014 OK",
+      "canvas-absent: anatomy token channels beyond fills/padding/radius are not separate component properties (font via text style / raw props) \u2014 OK to note"
+    ],
     "matchedAxes": [
-      "Size",
-      "Required",
-      "Disabled",
-      "Label",
-      "Description",
-      "Placeholder"
+      "size enum -> Size Small/Medium/Large",
+      "BOOLEAN Required",
+      "BOOLEAN Disabled",
+      "TEXT Label (default matches contract)",
+      "TEXT Description (default matches contract)",
+      "TEXT Placeholder (default matches contract)"
     ],
     "observed": {
+      "type": "COMPONENT_SET",
       "variantNames": [
         "Size=Medium",
         "Size=Small",
@@ -90,33 +80,33 @@
       ],
       "propDefs": [
         {
-          "name": "Required#1:227",
+          "name": "Required#4:153",
           "type": "BOOLEAN",
           "defaultValue": false,
           "variantOptions": null
         },
         {
-          "name": "Disabled#1:231",
+          "name": "Disabled#4:157",
           "type": "BOOLEAN",
           "defaultValue": false,
           "variantOptions": null
         },
         {
-          "name": "Label#1:235",
+          "name": "Label#4:161",
           "type": "TEXT",
           "defaultValue": "Label",
           "variantOptions": null
         },
         {
-          "name": "Description#1:239",
+          "name": "Description#4:165",
           "type": "TEXT",
           "defaultValue": "Helper text that explains the expected value.",
           "variantOptions": null
         },
         {
-          "name": "Placeholder#1:243",
+          "name": "Placeholder#4:169",
           "type": "TEXT",
-          "defaultValue": "Enter a value…",
+          "defaultValue": "Enter a value\u2026",
           "variantOptions": null
         },
         {
@@ -132,7 +122,6 @@
       ],
       "firstRoot": {
         "name": "Size=Medium",
-        "type": "COMPONENT",
         "layoutMode": "VERTICAL",
         "padding": {
           "t": 0,
@@ -141,35 +130,9 @@
           "l": 0
         },
         "radius": 0,
-        "fillVarName": null,
-        "padBound": {
-          "itemSpacing": "space/inset-y/sm",
-          "width": "size/card/width"
-        },
-        "textChild": [
-          {
-            "name": "labelText",
-            "chars": "Label",
-            "fontSize": 14
-          },
-          {
-            "name": "descriptionText",
-            "chars": "Helper text that explains the expected value.",
-            "fontSize": 14
-          },
-          {
-            "name": "placeholder",
-            "chars": "Enter a value…",
-            "fontSize": 16
-          }
-        ],
         "w": 320,
         "h": 79,
-        "childNames": [
-          "labelRow:FRAME",
-          "descriptionText:TEXT",
-          "input:FRAME"
-        ]
+        "fillVarName": null
       }
     }
   },

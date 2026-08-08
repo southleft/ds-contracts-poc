@@ -1,35 +1,16 @@
-# Card — console-loop receipt
+# Console loop — Card (ds.card)
 
-**Status:** completed  
-**File:** `GnQnjSNBXtgtd2Ht0Hs1C8` (DS Contracts Testing)  
-**Recorded:** 2026-08-06T03:50:38.679Z
+2026-08-08 first-party visual loop on the blank playground file
+`BMjUA2ue5CaZXU4kufxL0z` ("Latest DS Contracts Tests") via Desktop Bridge
+figma_execute + stem-serve fetch/eval. Earlier provenance for this stem
+(DS-Contracts-Testing) is superseded by this receipt; the receipt's
+`fileKey` field records where THIS evidence came from.
 
-## Generate
+- Component set `4:543` on page "Card" (section 4:554), 1 variant(s).
+- Fingerprint: `v6:2202853943` (stamp == recompute, 83 snapshot lines).
+- Round-trip: 0 mismatch(es), 1 matched axes, 3 named gap(s).
+- Pixel evidence: FAIL — honest fail-closed against the contract-default `src/components` render (`refs/card.png`, scale-1 cell shot `shots/card-cell.png`, scorecard `scores/card.json`).
 
-Prerequisite: synced `ds.avatar` (`1:338`) then `ds.button` (`1:452`) — Card Actions preferred value requires Button. Cleared empty/partial Card leftovers, uploaded `07-card.js` (61011 bytes) via `ds_loop_script` clientStorage chunks (8× ~8KB), then eval’d.
+Named defect (FC-classified):
 
-- **nodeId:** `1:459` (COMPONENT on page **Card**, section `1:470`)
-- **variants:** 1 (single component; no variant axes)
-- **properties:** `Title#1:92` (TEXT), `Body#1:93` / `Actions#1:94` (INSTANCE_SWAP), `Show Actions#1:95` (BOOLEAN)
-
-## Screenshot
-
-Captured section `1:470`. Card shows Avatar (AB) + "Card title" header, Body slot and Actions slot placeholders, raised white surface with subtle border. Layout and composition look correct. No visual defects flagged.
-
-## Fingerprint (v6)
-
-- **hash:** `v6:3317660404`
-- **lineCount:** 82
-- Sample includes root fill/stroke bindings, radius/width/border-width bindings, propdefs, and avatar instance bindings.
-
-## Round-trip
-
-Compared canvas props/anatomy bindings to `contracts/card.contract.json`.
-
-- **MATCH:** Title TEXT; Body/Actions swaps + Show Actions; avatar → ds.avatar sm; surface/border/radius/width tokens; header/body/footer inset + gap tokens.
-- **GAPS (canvas-absent, OK):** no State axis; slot defaults are Slot utility; fonts via text styles.
-- **MISMATCH:** none
-
-## Acceptance
-
-generated ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+- FC-SLOT-PLACEHOLDER: the single default cell renders the dashed body Slot placeholder (320x158) while the code-side default body is empty (320x58) — compositionOk false (scaleRatio 2.01); placeholder stage furniture has no code equivalent, so the default cell can never pixel-match the contract-default code render

@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 23.167358229598893,
+    "pctAAUnmasked": 5.16366989396035,
+    "pctAAMasked": 5.16366989396035,
+    "maskCoveragePct": 0,
+    "canvasPx": "241x36",
+    "realPx": "240x36",
+    "inkCanvasPct": 20.79299216228677,
+    "inkRealPct": 21.023513139695712
+  },
+  "reference": "parity/receipts/console-loop/refs/checkbox.png",
+  "referenceSha256": "3e1b0a5cee38d9908f3782e0418dc70a6ed558f066f589f5f84b65713fb319fd",
+  "canvasShot": "parity/receipts/console-loop/shots/checkbox-cell.png",
+  "canvasShotSha256": "71ab990c714e8ded458d249ebd1d6a8231107e60c034918ae30cb5af6b8ae93c",
+  "diff": "parity/receipts/console-loop/scores/checkbox.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/components/checkbox.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0041666666666667,
+  "inkDelta": 0.2305209774089434,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "near-pass (pctAAMasked=5.16; likely font-AA) — NOT a pass; tighten emit (near-pass flips are dead)",
+  "recordedAt": "2026-08-08T13:33:08.417Z"
+}

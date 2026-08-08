@@ -1,32 +1,16 @@
-# Text Field — console-loop receipt
+# Console loop — TextField (ds.text-field)
 
-**Status:** completed  
-**File:** `GnQnjSNBXtgtd2Ht0Hs1C8` (DS Contracts Testing)  
-**Recorded:** 2026-08-06T03:55:39.748Z
+2026-08-08 first-party visual loop on the blank playground file
+`BMjUA2ue5CaZXU4kufxL0z` ("Latest DS Contracts Tests") via Desktop Bridge
+figma_execute + stem-serve fetch/eval. Earlier provenance for this stem
+(DS-Contracts-Testing) is superseded by this receipt; the receipt's
+`fileKey` field records where THIS evidence came from.
 
-## Generate
+- Component set `4:651` on page "TextField" (section 4:652), 3 variant(s).
+- Fingerprint: `v6:1181024118` (stamp == recompute, 178 snapshot lines).
+- Round-trip: 0 mismatch(es), 6 matched axes, 2 named gap(s).
+- Pixel evidence: FAIL — honest fail-closed against the contract-default `src/components` render (`refs/text-field.png`, scale-1 cell shot `shots/text-field-cell.png`, scorecard `scores/text-field.json`).
 
-Uploaded `21-textfield.js` via `ds_loop_script` clientStorage chunks, then eval’d.
+Named defect (FC-classified):
 
-- **nodeId:** `1:785` (COMPONENT_SET on page **TextField**, section `1:786`)
-- **variants:** 3
-- **properties:** Required#1:227, Disabled#1:231, Label#1:235, Description#1:239, Placeholder#1:243, Size
-
-## Screenshot
-
-Screenshot of section/node 1:786 captured (ok). Text Field: 3 variant(s); type COMPONENT_SET; page TextField. Props: Required, Disabled, Label, Description, Placeholder, Size.
-
-## Fingerprint (v6)
-
-- **hash:** `v6:2130468756`
-- **lineCount:** 178
-
-## Round-trip
-
-Compared canvas props to `contracts/text-field.contract.json`.
-
-- **MISMATCH:** none
-
-## Acceptance
-
-generated ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+- FC-TEXT-RASTER near-pass: pctAAMasked 5.84 vs the 5 bar; three 14px text lines (label, helper, placeholder) dominate the ink and carry cumulative mid-line glyph-position drift between rasterizers; was 10.42 headless against the stale pre-loop reference

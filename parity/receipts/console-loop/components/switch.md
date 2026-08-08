@@ -1,35 +1,12 @@
-# Switch — console-loop receipt
+# Console loop — Switch (ds.switch)
 
-**Status:** completed  
-**File:** `GnQnjSNBXtgtd2Ht0Hs1C8` (DS Contracts Testing)  
-**Recorded:** 2026-08-06T03:46:01.569Z
+2026-08-08 first-party visual loop on the blank playground file
+`BMjUA2ue5CaZXU4kufxL0z` ("Latest DS Contracts Tests") via Desktop Bridge
+figma_execute + stem-serve fetch/eval. Earlier provenance for this stem
+(DS-Contracts-Testing) is superseded by this receipt; the receipt's
+`fileKey` field records where THIS evidence came from.
 
-## Generate
-
-Uploaded `18-switch.js` (65385 bytes) via `ds_loop_script` clientStorage chunks (9× ~8KB), then eval’d.
-
-- **nodeId:** `1:328` (COMPONENT_SET on page **Switch**, section `1:329`)
-- **variants:** 2
-- **properties:** `Label#1:6` (TEXT), `Description#1:9` (TEXT), `Value` (VARIANT)
-
-## Screenshot
-
-Captured section `1:329`. Off (gray track, thumb left) stacked above On (blue track, thumb right). Label + description present; spacing looks consistent. Thin blue fringe on On thumb treated as AA, not a defect. No visual defects flagged.
-
-## Fingerprint (v6)
-
-- **hash:** `v6:4045282924`
-- **lineCount:** 99
-- Sample includes set propdefs, Off/On track fills bound to `color/switch/{value}/track`, thumb `color/switch/thumb`, size/padding/radius bindings.
-
-## Round-trip
-
-Compared canvas Value options and bindings to `contracts/switch.contract.json`.
-
-- **MATCH:** Value Off/On, Label + Description TEXT defaults, track/thumb/size/radius/gap bindings.
-- **GAPS (canvas-absent, OK):** no State axis; native checkbox semantics not drawn on canvas; font via text style.
-- **MISMATCH:** none
-
-## Acceptance
-
-generated ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+- Component set `4:618` on page "Switch" (section 4:619), 2 variant(s).
+- Fingerprint: `v6:2653995724` (stamp == recompute, 99 snapshot lines).
+- Round-trip: 0 mismatch(es), 3 matched axes, 2 named gap(s).
+- Pixel evidence: PASS pctAAMasked=4.14 against the contract-default `src/components` render (`refs/switch.png`, scale-1 cell shot `shots/switch-cell.png`, scorecard `scores/switch.json`).

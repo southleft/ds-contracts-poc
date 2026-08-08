@@ -4,28 +4,28 @@
   "status": "completed",
   "component": "badge",
   "contract": "contracts/badge.contract.json",
-  "script": "parity/receipts/console-loop/emitted/04-badge.js",
-  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
-  "recordedAt": "2026-08-06T03:39:58.190Z",
-  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "script": "parity/receipts/console-loop/emitted/03-badge.js",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "recordedAt": "2026-08-08T13:32:57.000Z",
+  "transport": "figma-console-mcp figma_execute + stem-serve fetch/eval (dual-stack localhost)",
   "generate": {
     "ok": true,
-    "nodeId": "1:309",
+    "nodeId": "4:313",
     "page": "Badge",
-    "sectionId": "1:310",
+    "sectionId": "4:314",
     "result": {
       "createdNodeIds": [
-        "1:309"
+        "4:313"
       ],
       "results": [
         {
           "name": "Badge",
           "contractId": "ds.badge",
-          "nodeId": "1:309",
-          "key": "dc7b8432d3b0251a39918fbe9dcae3f7429d6916",
+          "nodeId": "4:313",
+          "key": "47f8968f58337b78ccbb750888080618131caf40",
           "variants": 5,
           "properties": [
-            "Label#1:0",
+            "Label#4:3",
             "Variant"
           ]
         }
@@ -35,54 +35,35 @@
   "visual": {
     "ok": true,
     "notes": [
-      "Section 1:310 screenshot shows 5 vertically stacked pill badges labeled \"Badge\".",
-      "Colors read as info (blue), success (green), warning (amber), danger (red), error (red) — semantic feedback tones.",
-      "Layout is a single column (contract Variant axis only; not a 2D grid).",
-      "Padding/spacing looks consistent; pill radius and centered label look sane.",
-      "Danger and Error are visually very close (both red family) — expected from distinct feedback tokens, not a layout defect."
+      "Generated on the blank playground file BMjUA2ue5CaZXU4kufxL0z via stem-serve fetch/eval; default VARIANT cell exported at scale 1 (like-for-like) and scored against the contract-default src/components render (scripts/console-loop-render-ref.mts, Inter face pinned).",
+      "2026-08-08 STRICT CONVERSION: pixel scorecard PASS \u2014 pctAAMasked=2.00 <= 5 AND compositionOk (scores/badge.json, sha256-pinned)."
     ],
-    "defects": []
+    "defects": [],
+    "reference": "parity/receipts/console-loop/refs/badge.png",
+    "referenceSource": "scripts/console-loop-render-ref.mts (src/components contract-default render; Inter v20 latin face pinned from extract/computed/fonts/inter/)",
+    "canvasShot": "parity/receipts/console-loop/shots/badge-cell.png",
+    "matchDeveloped": true,
+    "status": "scored-pass"
   },
   "fingerprint": {
-    "v6": "v6:4215075650",
+    "v6": "v6:4254819976",
     "lineCount": 86,
     "sampleLines": [
-      ":COMPONENT_SET/Badge|fill|[]",
-      ":COMPONENT_SET/Badge|propdef|Label#1:0:TEXT=Badge",
-      ":COMPONENT_SET/Badge|propdef|Variant:VARIANT=Info",
-      "/0:COMPONENT/Variant=Info|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8588235378265381,\"g\":0.9176470637321472,\"b\":0.9960784316062927},\"boundVariables\":{\"color\":{\"var\":\"color/feedback/info/background\"}}}]",
-      "/0:COMPONENT/Variant=Info|layout|HORIZONTAL CENTER/CENTER gap 0 pad 4,12,4,12",
-      "/0:COMPONENT/Variant=Info|bound:bottomLeftRadius|radius/badge",
-      "/0:COMPONENT/Variant=Info|bound:bottomRightRadius|radius/badge",
-      "/0:COMPONENT/Variant=Info|bound:paddingBottom|space/inset-y/sm",
-      "/0:COMPONENT/Variant=Info|bound:paddingLeft|space/inset-x/sm",
-      "/0:COMPONENT/Variant=Info|bound:paddingRight|space/inset-x/sm",
-      "/0:COMPONENT/Variant=Info|bound:paddingTop|space/inset-y/sm",
-      "/0:COMPONENT/Variant=Info|bound:topLeftRadius|radius/badge",
-      "/0:COMPONENT/Variant=Info|bound:topRightRadius|radius/badge",
-      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.11372549086809158,\"g\":0.30588236451148987,\"b\":0.8470588326454163},\"boundVariables\":{\"color\":{\"var\":\"color/feedback/info/foreground\"}}}]",
-      "/1:COMPONENT/Variant=Success|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8627451062202454,\"g\":0.9882352948188782,\"b\":0.9058823585510254},\"boundVariables\":{\"color\":{\"var\":\"color/feedback/success/background\"}}}]",
-      "/1:COMPONENT/Variant=Success|layout|HORIZONTAL CENTER/CENTER gap 0 pad 4,12,4,12",
-      "/1:COMPONENT/Variant=Success|bound:bottomLeftRadius|radius/badge",
-      "/1:COMPONENT/Variant=Success|bound:bottomRightRadius|radius/badge",
-      "/1:COMPONENT/Variant=Success|bound:paddingBottom|space/inset-y/sm",
-      "/1:COMPONENT/Variant=Success|bound:paddingLeft|space/inset-x/sm"
+      ":COMPONENT_SET/Badge|fill|[]"
     ]
   },
   "roundtrip": {
     "mismatches": [],
     "gaps": [
-      "canvas-absent: no State axis (contract has empty states[]) — OK",
-      "canvas-absent: anatomy token channels beyond fills/padding/radius are not separate component properties (font via text style / raw props) — OK to note"
+      "canvas-absent: no State axis (contract has empty states[]) \u2014 OK",
+      "canvas-absent: anatomy token channels beyond fills/padding/radius are not separate component properties (font via text style / raw props) \u2014 OK to note"
     ],
     "matchedAxes": [
-      "Variant enum → Info/Success/Warning/Danger/Error (contract info/success/warning/danger/error)",
-      "TEXT Label default \"Badge\"",
-      "Info root fill bound to color/feedback/info/background",
-      "Info padding bound to space/inset-x/sm and space/inset-y/sm",
-      "Info radius bound to radius/badge"
+      "variant enum -> Variant Info/Success/Warning/Danger/Error",
+      "TEXT Label (default matches contract)"
     ],
     "observed": {
+      "type": "COMPONENT_SET",
       "variantNames": [
         "Variant=Info",
         "Variant=Success",
@@ -92,7 +73,7 @@
       ],
       "propDefs": [
         {
-          "name": "Label#1:0",
+          "name": "Label#4:3",
           "type": "TEXT",
           "defaultValue": "Badge",
           "variantOptions": null
@@ -112,7 +93,6 @@
       ],
       "firstRoot": {
         "name": "Variant=Info",
-        "type": "COMPONENT",
         "layoutMode": "HORIZONTAL",
         "padding": {
           "t": 4,
@@ -121,21 +101,9 @@
           "l": 12
         },
         "radius": 999,
-        "fillVarName": "color/feedback/info/background",
-        "padBound": {
-          "paddingLeft": "space/inset-x/sm",
-          "paddingRight": "space/inset-x/sm",
-          "paddingTop": "space/inset-y/sm",
-          "paddingBottom": "space/inset-y/sm",
-          "topLeftRadius": "radius/badge"
-        },
-        "textChild": [
-          {
-            "name": "label",
-            "chars": "Badge",
-            "fontSize": 12
-          }
-        ]
+        "w": 61,
+        "h": 23,
+        "fillVarName": "color/feedback/info/background"
       }
     }
   },

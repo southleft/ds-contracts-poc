@@ -1364,6 +1364,27 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     ` */`,
   ];
 
+  // ONE BOX MODEL ACROSS SURFACES (FC-BOX-MODEL, 2026-08-08 first-party
+  // visual loop). The Figma emitter binds width/max-width tokens straight to
+  // frame widths, and Figma frames are border-box by construction — padding
+  // and (inside-aligned) strokes live INSIDE the bound width; its declared
+  // `box-sizing: content-box` branch is the exception, not the rule. The
+  // generated CSS previously inherited the UA default (content-box), so a
+  // padded root with a width token rendered its padding OUTSIDE the token
+  // width — measured: banner 672px outer in code vs the bound 640px
+  // ({size.banner.width}) cell on canvas; card 322px vs 320px. Scoped reset
+  // (CSS-modules-safe: anchored on the root classes), the same shape the
+  // exact-conversion sample kits ship.
+  const rootClasses = Object.keys(contract.anatomy);
+  lines.push(
+    '',
+    rootClasses
+      .flatMap((c) => [`.${c}`, `.${c} *`, `.${c} *::before`, `.${c} *::after`])
+      .join(',\n') + ' {',
+    '  box-sizing: border-box;',
+    '}',
+  );
+
   const checkToken = (tokenPath: string, context: string): boolean => {
     if (!tokenInventory.has(tokenPath)) {
       errors.push(

@@ -1,36 +1,16 @@
-# Token — console-loop receipt
+# Console loop — Token (ds.token)
 
-**Status:** completed  
-**File:** `GnQnjSNBXtgtd2Ht0Hs1C8` (DS Contracts Testing)  
-**Recorded:** 2026-08-06T03:59:01.580Z
+2026-08-08 first-party visual loop on the blank playground file
+`BMjUA2ue5CaZXU4kufxL0z` ("Latest DS Contracts Tests") via Desktop Bridge
+figma_execute + stem-serve fetch/eval. Earlier provenance for this stem
+(DS-Contracts-Testing) is superseded by this receipt; the receipt's
+`fileKey` field records where THIS evidence came from.
 
-## Generate
+- Component set `4:918` on page "Token" (section 4:919), 33 variant(s).
+- Fingerprint: `v6:2438401982` (stamp == recompute, 1497 snapshot lines).
+- Round-trip: 0 mismatch(es), 4 matched axes, 3 named gap(s).
+- Pixel evidence: FAIL — honest fail-closed against the contract-default `src/components` render (`refs/token.png`, scale-1 cell shot `shots/token-cell.png`, scorecard `scores/token.json`).
 
-Uploaded `46-token.js` via `ds_loop_script` clientStorage chunks, then eval’d.
+Named defect (FC-classified):
 
-- **nodeId:** `1:1238` (COMPONENT_SET on page **Token**, section `1:1239`)
-- **variants:** 33
-- **properties:** Disabled#1:318, Label#1:352, Icon#1:386, Show Icon#1:420, EndContent#1:454, Show EndContent#1:488, Color, Size
-
-## Screenshot
-
-Spot-check: dense Color×Size matrix of pill tokens with Label + dashed Slot placeholders; semantic color rows (default/danger/warning/…); consistent radius and slot anatomy; no visual defects.
-
-Screenshot of section/node 1:1239 captured (ok). Token: 33 variant(s); type COMPONENT_SET; page Token. Props: Disabled, Label, Icon, Show Icon, EndContent, Show EndContent, Color, Size. First root fill bound to color/token/default/background. Sample text: "Slot", "Token", "Slot".
-
-## Fingerprint (v6)
-
-- **hash:** `v6:65099164`
-- **lineCount:** 1431
-
-## Round-trip
-
-Compared canvas props to `contracts/token.contract.json`.
-
-- **MATCH axes:** Color, Size, Disabled, Label
-- **GAPS:** canvas-absent: no State axis (contract has empty/absent states) — OK; canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note
-- **MISMATCH:** none
-
-## Acceptance
-
-generated ✓ · screenshotReviewed ✓ · zeroMismatch ✓
+- FC-TEXT-RASTER-TINY: the white-trim content box reduces BOTH images to the bare 26x10 glyph run ('Token') because pill background and border are lighter than the 250 trim threshold; pctAAMasked 11.15 over that tiny ink area is rasterizer AA, not geometry — pill size, radius, padding and token fills match

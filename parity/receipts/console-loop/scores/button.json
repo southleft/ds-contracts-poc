@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 18.105756358768406,
+    "pctAAUnmasked": 7.295850066934404,
+    "pctAAMasked": 7.295850066934404,
+    "maskCoveragePct": 0,
+    "canvasPx": "83x35",
+    "realPx": "82x36",
+    "inkCanvasPct": 93.47389558232932,
+    "inkRealPct": 94.54484605087015
+  },
+  "reference": "parity/receipts/console-loop/refs/button.png",
+  "referenceSha256": "3e74f5b238981d837c426d1ea686d7e3dd709a91e4b8d4a2df1ab83862c28e70",
+  "canvasShot": "parity/receipts/console-loop/shots/button-cell.png",
+  "canvasShotSha256": "4ec2c60a8b2a45321b4c28c08a710e38b12e2f9ec64fe967afaca293fe2e6990",
+  "diff": "parity/receipts/console-loop/scores/button.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/components/button.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0285714285714285,
+  "inkDelta": 1.070950468540829,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=7.30 > 5)",
+  "recordedAt": "2026-08-08T13:33:07.559Z"
+}

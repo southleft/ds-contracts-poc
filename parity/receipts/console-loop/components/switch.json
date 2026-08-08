@@ -4,29 +4,29 @@
   "status": "completed",
   "component": "switch",
   "contract": "contracts/switch.contract.json",
-  "script": "parity/receipts/console-loop/emitted/18-switch.js",
-  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
-  "recordedAt": "2026-08-06T03:46:01.569Z",
-  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "script": "parity/receipts/console-loop/emitted/09-switch.js",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "recordedAt": "2026-08-08T13:32:57.000Z",
+  "transport": "figma-console-mcp figma_execute + stem-serve fetch/eval (dual-stack localhost)",
   "generate": {
     "ok": true,
-    "nodeId": "1:328",
+    "nodeId": "4:618",
     "page": "Switch",
-    "sectionId": "1:329",
+    "sectionId": "4:619",
     "result": {
       "createdNodeIds": [
-        "1:328"
+        "4:618"
       ],
       "results": [
         {
           "name": "Switch",
           "contractId": "ds.switch",
-          "nodeId": "1:328",
-          "key": "8e45886a21508bf19f92a1d3641898f2ed81bc87",
+          "nodeId": "4:618",
+          "key": "1a174ed109a4f98a2bdd48f6509cf18f06a6d75b",
           "variants": 2,
           "properties": [
-            "Label#1:6",
-            "Description#1:9",
+            "Label#4:147",
+            "Description#4:150",
             "Value"
           ]
         }
@@ -36,72 +36,51 @@
   "visual": {
     "ok": true,
     "notes": [
-      "Section 1:329 shows Value=Off (gray track, thumb left) above Value=On (blue track, thumb right).",
-      "Label \"Enable notifications\" and description \"Takes effect immediately.\" present on both variants.",
-      "Layout is a single column (Value axis only); spacing between track and text looks consistent.",
-      "On-state thumb may show a thin blue fringe against the blue track (anti-aliasing) — not treated as a layout defect."
+      "Generated on the blank playground file BMjUA2ue5CaZXU4kufxL0z via stem-serve fetch/eval; default VARIANT cell exported at scale 1 (like-for-like) and scored against the contract-default src/components render (scripts/console-loop-render-ref.mts, Inter face pinned).",
+      "2026-08-08 STRICT CONVERSION: pixel scorecard PASS \u2014 pctAAMasked=4.14 <= 5 AND compositionOk (scores/switch.json, sha256-pinned)."
     ],
-    "defects": []
+    "defects": [],
+    "reference": "parity/receipts/console-loop/refs/switch.png",
+    "referenceSource": "scripts/console-loop-render-ref.mts (src/components contract-default render; Inter v20 latin face pinned from extract/computed/fonts/inter/)",
+    "canvasShot": "parity/receipts/console-loop/shots/switch-cell.png",
+    "matchDeveloped": true,
+    "status": "scored-pass"
   },
   "fingerprint": {
-    "v6": "v6:4045282924",
+    "v6": "v6:2653995724",
     "lineCount": 99,
     "sampleLines": [
-      ":COMPONENT_SET/Switch|fill|[]",
-      ":COMPONENT_SET/Switch|radius|5,5,5,5",
-      ":COMPONENT_SET/Switch|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Switch|description|Switch — generated from contract ds.switch v2.0.0 †",
-      ":COMPONENT_SET/Switch|propdef|Description#1:9:TEXT=Takes effect immediately.",
-      ":COMPONENT_SET/Switch|propdef|Label#1:6:TEXT=Enable notifications",
-      ":COMPONENT_SET/Switch|propdef|Value:VARIANT=Off",
-      "/0:COMPONENT/Value=Off|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/0:COMPONENT/Value=Off|radius|0,0,0,0",
-      "/0:COMPONENT/Value=Off|layout|HORIZONTAL MIN/MIN gap 8 pad 0,0,0,0",
-      "/0:COMPONENT/Value=Off|sizing|HUG/HUG AUTO",
-      "/0:COMPONENT/Value=Off|bound:itemSpacing|space/gap/sm",
-      "/0/0:FRAME/track|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8196078538894653,\"g\":0.8352941274642944,\"b\":0.8588235378265381},\"boundVariables\":{\"color\":{\"var\":\"color/switch/off/track\"}}}]",
-      "/0/0:FRAME/track|radius|999,999,999,999",
-      "/0/0:FRAME/track|layout|HORIZONTAL MIN/CENTER gap 0 pad 2,2,2,2",
-      "/0/0:FRAME/track|sizing|FIXED/FIXED AUTO",
-      "/0/0:FRAME/track|bound:bottomLeftRadius|radius/pill",
-      "/0/0:FRAME/track|bound:bottomRightRadius|radius/pill",
-      "/0/0:FRAME/track|bound:height|size/switch/height",
-      "/0/0:FRAME/track|bound:paddingBottom|space/inset-y/xs"
+      ":COMPONENT_SET/Switch|fill|[]"
     ]
   },
   "roundtrip": {
     "mismatches": [],
     "gaps": [
-      "canvas-absent: no State axis (contract has empty states[]) — OK",
-      "canvas-absent: native input[type=checkbox] role=switch is DOM-only (contract notes canvas not drawn) — OK",
-      "canvas-absent: font via text style / raw props not separate component properties — OK to note"
+      "canvas-absent: no State axis (contract has empty states[]) \u2014 OK",
+      "canvas-absent: anatomy token channels beyond fills/padding/radius are not separate component properties (font via text style / raw props) \u2014 OK to note"
     ],
     "matchedAxes": [
-      "Value enum → Off/On (contract off/on)",
-      "TEXT Label default \"Enable notifications\"",
-      "TEXT Description default \"Takes effect immediately.\"",
-      "Off track fill bound to color/switch/off/track",
-      "On track fill bound to color/switch/on/track",
-      "Thumb fill bound to color/switch/thumb",
-      "Track size/padding/radius bound to size/switch/* , space/inset-y/xs , radius/pill",
-      "Root itemSpacing bound to space/gap/sm"
+      "value enum -> Value Off/On",
+      "TEXT Label (default matches contract)",
+      "TEXT Description (default matches contract)"
     ],
     "observed": {
+      "type": "COMPONENT_SET",
       "variantNames": [
         "Value=Off",
         "Value=On"
       ],
       "propDefs": [
         {
-          "name": "Description#1:9",
+          "name": "Label#4:147",
           "type": "TEXT",
-          "defaultValue": "Takes effect immediately.",
+          "defaultValue": "Enable notifications",
           "variantOptions": null
         },
         {
-          "name": "Label#1:6",
+          "name": "Description#4:150",
           "type": "TEXT",
-          "defaultValue": "Enable notifications",
+          "defaultValue": "Takes effect immediately.",
           "variantOptions": null
         },
         {
@@ -114,98 +93,20 @@
           ]
         }
       ],
-      "variants": [
-        {
-          "name": "Value=Off",
-          "rootLayout": "HORIZONTAL",
-          "rootBound": {
-            "itemSpacing": "space/gap/sm"
-          },
-          "track": {
-            "fillVar": "color/switch/off/track",
-            "bound": {
-              "topLeftRadius": "radius/pill",
-              "topRightRadius": "radius/pill",
-              "bottomLeftRadius": "radius/pill",
-              "bottomRightRadius": "radius/pill",
-              "paddingLeft": "space/inset-y/xs",
-              "paddingRight": "space/inset-y/xs",
-              "paddingTop": "space/inset-y/xs",
-              "paddingBottom": "space/inset-y/xs",
-              "width": "size/switch/width",
-              "height": "size/switch/height"
-            },
-            "w": 32,
-            "h": 20
-          },
-          "thumb": {
-            "fillVar": "color/switch/thumb",
-            "bound": {
-              "topLeftRadius": "radius/pill",
-              "topRightRadius": "radius/pill",
-              "bottomLeftRadius": "radius/pill",
-              "bottomRightRadius": "radius/pill",
-              "width": "size/switch/thumb",
-              "height": "size/switch/thumb"
-            },
-            "w": 16,
-            "h": 16
-          },
-          "label": {
-            "chars": "Enable notifications",
-            "fillVar": "color/surface/foreground"
-          },
-          "description": {
-            "chars": "Takes effect immediately.",
-            "fillVar": "color/text/secondary"
-          }
+      "firstRoot": {
+        "name": "Value=Off",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
         },
-        {
-          "name": "Value=On",
-          "rootLayout": "HORIZONTAL",
-          "rootBound": {
-            "itemSpacing": "space/gap/sm"
-          },
-          "track": {
-            "fillVar": "color/switch/on/track",
-            "bound": {
-              "topLeftRadius": "radius/pill",
-              "topRightRadius": "radius/pill",
-              "bottomLeftRadius": "radius/pill",
-              "bottomRightRadius": "radius/pill",
-              "paddingLeft": "space/inset-y/xs",
-              "paddingRight": "space/inset-y/xs",
-              "paddingTop": "space/inset-y/xs",
-              "paddingBottom": "space/inset-y/xs",
-              "width": "size/switch/width",
-              "height": "size/switch/height"
-            },
-            "w": 32,
-            "h": 20
-          },
-          "thumb": {
-            "fillVar": "color/switch/thumb",
-            "bound": {
-              "topLeftRadius": "radius/pill",
-              "topRightRadius": "radius/pill",
-              "bottomLeftRadius": "radius/pill",
-              "bottomRightRadius": "radius/pill",
-              "width": "size/switch/thumb",
-              "height": "size/switch/thumb"
-            },
-            "w": 16,
-            "h": 16
-          },
-          "label": {
-            "chars": "Enable notifications",
-            "fillVar": "color/surface/foreground"
-          },
-          "description": {
-            "chars": "Takes effect immediately.",
-            "fillVar": "color/text/secondary"
-          }
-        }
-      ]
+        "radius": 0,
+        "w": 209,
+        "h": 36,
+        "fillVarName": null
+      }
     }
   },
   "acceptance": {

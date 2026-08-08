@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "pass",
+  "matchDeveloped": true,
+  "recommendMatchDeveloped": true,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 24.078525641025642,
+    "pctAAUnmasked": 4.139957264957265,
+    "pctAAMasked": 4.139957264957265,
+    "maskCoveragePct": 0,
+    "canvasPx": "208x36",
+    "realPx": "208x36",
+    "inkCanvasPct": 27.524038461538463,
+    "inkRealPct": 27.79113247863248
+  },
+  "reference": "parity/receipts/console-loop/refs/switch.png",
+  "referenceSha256": "aa56836ea30555b7b8c4a4c19621a7a3042d7f6ee0554d556cb97808f8f90e5c",
+  "canvasShot": "parity/receipts/console-loop/shots/switch-cell.png",
+  "canvasShotSha256": "6660cb9a816038e3f25b0b851580a2e129941515fac21e2151f80d885a96f045",
+  "diff": "parity/receipts/console-loop/scores/switch.diff.png",
+  "fc": [],
+  "receipt": "parity/receipts/console-loop/components/switch.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0.26709401709401703,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-08T13:33:08.937Z"
+}

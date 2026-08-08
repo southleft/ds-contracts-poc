@@ -111,6 +111,24 @@ const server = createServer(async (req, res) => {
     });
   }
 
+  // Raw JSON receiver — lets an in-Figma probe (fingerprint / round-trip
+  // observation) land its result on disk for deterministic receipt building.
+  const jsonMatch = url.pathname.match(/^\/json\/([^/]+)$/);
+  if (jsonMatch && req.method === "POST") {
+    const name = decodeURIComponent(jsonMatch[1]).replace(/[^A-Za-z0-9._-]/g, "_");
+    const chunks = [];
+    for await (const c of req) chunks.push(c);
+    const buf = Buffer.concat(chunks);
+    try {
+      JSON.parse(buf.toString("utf8"));
+    } catch {
+      return json(res, 400, { ok: false, error: "expected JSON body" });
+    }
+    const out = path.join(DIR, `${name}.json`);
+    writeFileSync(out, buf);
+    return json(res, 200, { ok: true, path: out, bytes: buf.length });
+  }
+
   const shotMatch = url.pathname.match(/^\/shot\/([^/]+)\/([^/]+)$/);
   if (shotMatch && req.method === "POST") {
     const lib = decodeURIComponent(shotMatch[1]);
@@ -121,7 +139,13 @@ const server = createServer(async (req, res) => {
     if (buf.length < 8 || buf[0] !== 0x89) {
       return json(res, 400, { ok: false, error: "expected raw PNG body", got: buf.length });
     }
-    const outDir = path.join(ROOT, "parity/receipts/console-loop", lib, "shots");
+    // first-party lane lives at the console-loop ROOT (shots/ directly under
+    // parity/receipts/console-loop), matching console-loop-developed-score's
+    // laneRoot(); foreign lanes nest under their lib name.
+    const outDir =
+      lib === "first-party"
+        ? path.join(ROOT, "parity/receipts/console-loop", "shots")
+        : path.join(ROOT, "parity/receipts/console-loop", lib, "shots");
     mkdirSync(outDir, { recursive: true });
     const out = path.join(outDir, `${stem}.png`);
     writeFileSync(out, buf);

@@ -4,29 +4,29 @@
   "status": "completed",
   "component": "checkbox",
   "contract": "contracts/checkbox.contract.json",
-  "script": "parity/receipts/console-loop/emitted/08-checkbox.js",
-  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
-  "recordedAt": "2026-08-06T03:54:41.169Z",
-  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "script": "parity/receipts/console-loop/emitted/07-checkbox.js",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "recordedAt": "2026-08-08T13:32:57.000Z",
+  "transport": "figma-console-mcp figma_execute + stem-serve fetch/eval (dual-stack localhost)",
   "generate": {
     "ok": true,
-    "nodeId": "1:510",
+    "nodeId": "4:594",
     "page": "Checkbox",
-    "sectionId": "1:511",
+    "sectionId": "4:595",
     "result": {
       "createdNodeIds": [
-        "1:510"
+        "4:594"
       ],
       "results": [
         {
           "name": "Checkbox",
           "contractId": "ds.checkbox",
-          "nodeId": "1:510",
-          "key": "2a807d45d8da0a6638e70a9d3e3a2f41a64bf650",
+          "nodeId": "4:594",
+          "key": "6b5d47371cb840f6813971b84e6679e52b330b3a",
           "variants": 6,
           "properties": [
-            "Label#1:96",
-            "Description#1:103",
+            "Label#4:133",
+            "Description#4:140",
             "Value",
             "Size"
           ]
@@ -35,70 +35,57 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
-      "Section 1:511: 2×3 grid Unchecked/Checked/Indeterminate × Medium/Small.",
-      "Unchecked empty border box; Checked blue+checkmark; Indeterminate blue+dash; label+description present.",
-      "No visual defects flagged."
+      "Generated on the blank playground file BMjUA2ue5CaZXU4kufxL0z via stem-serve fetch/eval; default VARIANT cell exported at scale 1 (like-for-like) and scored against the contract-default src/components render (scripts/console-loop-render-ref.mts, Inter face pinned).",
+      "2026-08-08 pixel scorecard FAIL (scores/checkbox.json status=fail); honest fail-closed with named FC cause \u2014 visual hill-climb open."
     ],
-    "defects": []
+    "defects": [
+      "FC-TEXT-RASTER near-pass: pctAAMasked 5.16 vs the 5 bar AFTER the FC-WEIGHT-DEFAULT contract fix (descriptionText pinned to font.weight.regular) and the FC-BOX-MODEL generator fix took it from 14.69; the residue is label/description glyph AA at scale 1 \u2014 near-pass is a fail, not flipped"
+    ],
+    "reference": "parity/receipts/console-loop/refs/checkbox.png",
+    "referenceSource": "scripts/console-loop-render-ref.mts (src/components contract-default render; Inter v20 latin face pinned from extract/computed/fonts/inter/)",
+    "canvasShot": "parity/receipts/console-loop/shots/checkbox-cell.png",
+    "status": "fail-closed"
   },
   "fingerprint": {
-    "v6": "v6:3433570960",
+    "v6": "v6:2238650114",
     "lineCount": 234,
     "sampleLines": [
-      ":COMPONENT_SET/Checkbox|fill|[]",
-      ":COMPONENT_SET/Checkbox|radius|5,5,5,5",
-      ":COMPONENT_SET/Checkbox|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Checkbox|description|Checkbox — generated from contract ds.checkbox v2.0.0 †",
-      ":COMPONENT_SET/Checkbox|propdef|Description#1:103:TEXT=Supporting detail for this option.",
-      ":COMPONENT_SET/Checkbox|propdef|Label#1:96:TEXT=Checkbox label",
-      ":COMPONENT_SET/Checkbox|propdef|Size:VARIANT=Medium",
-      ":COMPONENT_SET/Checkbox|propdef|Value:VARIANT=Unchecked",
-      "/0:COMPONENT/Value=Unchecked, Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/0:COMPONENT/Value=Unchecked, Size=Medium|radius|0,0,0,0",
-      "/0:COMPONENT/Value=Unchecked, Size=Medium|layout|HORIZONTAL MIN/MIN gap 8 pad 0,0,0,0",
-      "/0:COMPONENT/Value=Unchecked, Size=Medium|sizing|HUG/HUG AUTO",
-      "/0:COMPONENT/Value=Unchecked, Size=Medium|bound:itemSpacing|space/gap/sm",
-      "/0/0:FRAME/box|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/checkbox/unchecked/background\"}}}]",
-      "/0/0:FRAME/box|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6117647290229797,\"g\":0.6392157077789307,\"b\":0.686274528503418},\"boundVariables\":{\"color\":{\"var\":\"color/checkbox/unchecked/border\"}}}] w1",
-      "/0/0:FRAME/box|radius|4,4,4,4",
-      "/0/0:FRAME/box|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
-      "/0/0:FRAME/box|sizing|FIXED/FIXED AUTO",
-      "/0/0:FRAME/box|bound:bottomLeftRadius|radius/100",
-      "/0/0:FRAME/box|bound:bottomRightRadius|radius/100"
+      ":COMPONENT_SET/Checkbox|fill|[]"
     ]
   },
   "roundtrip": {
     "mismatches": [],
     "gaps": [
-      "canvas-absent: no State axis (contract states[]) — OK"
+      "canvas-absent: no State axis (contract has empty states[]) \u2014 OK",
+      "canvas-absent: anatomy token channels beyond fills/padding/radius are not separate component properties (font via text style / raw props) \u2014 OK to note"
     ],
     "matchedAxes": [
-      "Value → Unchecked/Checked/Indeterminate",
-      "Size → Small/Medium",
-      "TEXT Label + Description defaults",
-      "root gap bound to space/gap/sm",
-      "box fill bound to color/checkbox/unchecked/background"
+      "value enum -> Value Unchecked/Checked/Indeterminate",
+      "size enum -> Size Small/Medium",
+      "TEXT Label (default matches contract)",
+      "TEXT Description (default matches contract)"
     ],
     "observed": {
-      "found": {
-        "page": "Checkbox",
-        "nodeId": "1:510",
-        "type": "COMPONENT_SET",
-        "sectionId": "1:511",
-        "key": "2a807d45d8da0a6638e70a9d3e3a2f41a64bf650",
-        "variants": 6
-      },
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Value=Unchecked, Size=Medium",
+        "Value=Unchecked, Size=Small",
+        "Value=Checked, Size=Medium",
+        "Value=Checked, Size=Small",
+        "Value=Indeterminate, Size=Medium",
+        "Value=Indeterminate, Size=Small"
+      ],
       "propDefs": [
         {
-          "name": "Label#1:96",
+          "name": "Label#4:133",
           "type": "TEXT",
           "defaultValue": "Checkbox label",
           "variantOptions": null
         },
         {
-          "name": "Description#1:103",
+          "name": "Description#4:140",
           "type": "TEXT",
           "defaultValue": "Supporting detail for this option.",
           "variantOptions": null
@@ -123,36 +110,19 @@
           ]
         }
       ],
-      "variantNames": [
-        "Value=Unchecked, Size=Medium",
-        "Value=Unchecked, Size=Small",
-        "Value=Checked, Size=Medium",
-        "Value=Checked, Size=Small",
-        "Value=Indeterminate, Size=Medium",
-        "Value=Indeterminate, Size=Small"
-      ],
       "firstRoot": {
         "name": "Value=Unchecked, Size=Medium",
         "layoutMode": "HORIZONTAL",
-        "padBound": {
-          "itemSpacing": "space/gap/sm"
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
         },
-        "textChild": [
-          {
-            "name": "labelText",
-            "chars": "Checkbox label",
-            "fontSize": 14
-          },
-          {
-            "name": "descriptionText",
-            "chars": "Supporting detail for this option.",
-            "fontSize": 14
-          }
-        ],
-        "childNames": [
-          "box:FRAME",
-          "textCol:FRAME"
-        ]
+        "radius": 0,
+        "w": 242,
+        "h": 36,
+        "fillVarName": null
       }
     }
   },

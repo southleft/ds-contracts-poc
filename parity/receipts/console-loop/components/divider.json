@@ -4,25 +4,25 @@
   "status": "completed",
   "component": "divider",
   "contract": "contracts/divider.contract.json",
-  "script": "parity/receipts/console-loop/emitted/09-divider.js",
-  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
-  "recordedAt": "2026-08-06T03:55:23.627Z",
-  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "script": "parity/receipts/console-loop/emitted/08-divider.js",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "recordedAt": "2026-08-08T13:32:57.000Z",
+  "transport": "figma-console-mcp figma_execute + stem-serve fetch/eval (dual-stack localhost)",
   "generate": {
     "ok": true,
-    "nodeId": "1:636",
+    "nodeId": "4:599",
     "page": "Divider",
-    "sectionId": "1:637",
+    "sectionId": "4:600",
     "result": {
       "createdNodeIds": [
-        "1:636"
+        "4:599"
       ],
       "results": [
         {
           "name": "Divider",
           "contractId": "ds.divider",
-          "nodeId": "1:636",
-          "key": "8d9a56799449c8be708ad7f18cfc09f44ddc15fc",
+          "nodeId": "4:599",
+          "key": "9717d509284e4ac04597ea318ca2a30b43bc2d04",
           "variants": 2,
           "properties": [
             "Variant"
@@ -34,43 +34,34 @@
   "visual": {
     "ok": true,
     "notes": [
-      "Screenshot of section/node 1:637 captured (ok).",
-      "Divider: 2 variant(s); type COMPONENT_SET; page Divider.",
-      "Props: Variant.",
-      "First root fill bound to color/divider/subtle."
+      "Generated on the blank playground file BMjUA2ue5CaZXU4kufxL0z via stem-serve fetch/eval; default VARIANT cell exported at scale 1 (like-for-like) and scored against the contract-default src/components render (scripts/console-loop-render-ref.mts, Inter face pinned).",
+      "2026-08-08 STRICT CONVERSION: pixel scorecard PASS \u2014 pctAAMasked=0.00 <= 5 AND compositionOk (scores/divider.json, sha256-pinned)."
     ],
-    "defects": []
+    "defects": [],
+    "reference": "parity/receipts/console-loop/refs/divider.png",
+    "referenceSource": "scripts/console-loop-render-ref.mts (src/components contract-default render; Inter v20 latin face pinned from extract/computed/fonts/inter/)",
+    "canvasShot": "parity/receipts/console-loop/shots/divider-cell.png",
+    "matchDeveloped": true,
+    "status": "scored-pass"
   },
   "fingerprint": {
     "v6": "v6:3338360677",
     "lineCount": 17,
     "sampleLines": [
-      ":COMPONENT_SET/Divider|fill|[]",
-      ":COMPONENT_SET/Divider|radius|5,5,5,5",
-      ":COMPONENT_SET/Divider|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Divider|description|Divider — generated from contract ds.divider v1.0.0",
-      ":COMPONENT_SET/Divider|propdef|Variant:VARIANT=Subtle",
-      "/0:COMPONENT/Variant=Subtle|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/divider/subtle\"}}}]",
-      "/0:COMPONENT/Variant=Subtle|radius|0,0,0,0",
-      "/0:COMPONENT/Variant=Subtle|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
-      "/0:COMPONENT/Variant=Subtle|sizing|FIXED/FIXED AUTO",
-      "/0:COMPONENT/Variant=Subtle|bound:height|border/width/divider/subtle",
-      "/0:COMPONENT/Variant=Subtle|bound:width|size/divider/length",
-      "/1:COMPONENT/Variant=Strong|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6117647290229797,\"g\":0.6392157077789307,\"b\":0.686274528503418},\"boundVariables\":{\"color\":{\"var\":\"color/divider/strong\"}}}]",
-      "/1:COMPONENT/Variant=Strong|radius|0,0,0,0",
-      "/1:COMPONENT/Variant=Strong|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
-      "/1:COMPONENT/Variant=Strong|sizing|FIXED/FIXED AUTO",
-      "/1:COMPONENT/Variant=Strong|bound:height|border/width/divider/strong",
-      "/1:COMPONENT/Variant=Strong|bound:width|size/divider/length"
+      ":COMPONENT_SET/Divider|fill|[]"
     ]
   },
   "roundtrip": {
     "mismatches": [],
-    "gaps": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty states[]) \u2014 OK",
+      "canvas-absent: anatomy token channels beyond fills/padding/radius are not separate component properties (font via text style / raw props) \u2014 OK to note"
+    ],
     "matchedAxes": [
-      "Variant"
+      "variant enum -> Variant Subtle/Strong"
     ],
     "observed": {
+      "type": "COMPONENT_SET",
       "variantNames": [
         "Variant=Subtle",
         "Variant=Strong"
@@ -88,7 +79,6 @@
       ],
       "firstRoot": {
         "name": "Variant=Subtle",
-        "type": "COMPONENT",
         "layoutMode": "HORIZONTAL",
         "padding": {
           "t": 0,
@@ -97,16 +87,9 @@
           "l": 0
         },
         "radius": 0,
-        "fillVarName": "color/divider/subtle",
-        "padBound": {
-          "width": "size/divider/length",
-          "height": "border/width/divider/subtle",
-          "fills": "color/divider/subtle"
-        },
-        "textChild": [],
         "w": 320,
         "h": 1,
-        "childNames": []
+        "fillVarName": "color/divider/subtle"
       }
     }
   },
