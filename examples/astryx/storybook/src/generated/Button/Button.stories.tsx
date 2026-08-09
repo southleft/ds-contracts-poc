@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (astryx.button v0.1.0)
+ * Source of truth: contracts/button.contract.json (astryx.button v0.3.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,7 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Astryx Button — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Button/Button.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). Visual/structural API is verbatim; HTML passthrough (type, name, form, target, rel), href link-mode, isInterruptible and tooltip are dropped (documented in DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).',
+          'Astryx Button — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Button/Button.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). Visual/structural API is verbatim; HTML passthrough (type, name, form, target, rel), href link-mode, isInterruptible and tooltip are dropped (documented in DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/button/decisions.md); extension sidecar carries the named overflow.',
       },
     },
   },

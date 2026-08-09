@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/switch.contract.json (astryx.switch v0.1.0)
+ * Source of truth: contracts/switch.contract.json (astryx.switch v0.2.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,12 +14,13 @@ const meta = {
     docs: {
       description: {
         component:
-          'Astryx Switch — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; value, description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. STRUCTURAL: the track renders as a styled box, not a native role=switch input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).',
+          'Astryx Switch — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. Wave B.3: `value` is a VARIANT AXIS (off/on) — FC-MISSING-AXIS. On thumb geometry from Switch.tsx source constants (20×20, travel 14px) — not harness-captured. STRUCTURAL: the track renders as a styled box, not a native role=switch input.',
       },
     },
   },
   argTypes: {
     label: { control: 'text', description: 'The switch label.' },
+    value: { control: 'boolean', description: 'Whether the switch is on or off.' },
     labelPosition: {
       control: 'select',
       options: ['start', 'end'],
@@ -30,6 +31,7 @@ const meta = {
   },
   args: {
     label: 'Enable notifications',
+    value: false,
     labelPosition: 'end',
     isDisabled: false,
     isRequired: false,

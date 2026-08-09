@@ -48,7 +48,10 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
     >
       <span className={styles.label}>{label}</span>
       <div className={styles.track}>
-        <div className={styles.fill}></div>
+        <div
+          className={styles.fill}
+          style={{ width: `${Math.min(100, Math.max(0, (value / max) * 100))}%` }}
+        />
       </div>
     </div>
   );

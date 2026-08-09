@@ -1,29 +1,313 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/slider.contract.json (astryx.slider v0.1.0)
+ * Source of truth: contracts/slider.contract.json (astryx.slider v0.4.0)
  * Regenerate with: npm run generate
  */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
 
 .root {
   display: flex;
   flex-direction: column;
   border: 0;
-  color: var(--color-text-secondary);
-  gap: var(--spacing-2);
-  width: var(--spacing-12);
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-xs);
+  position: relative;
+  column-gap: var(--imported-shared-size-4);
+  row-gap: var(--imported-shared-size-4);
+  color: var(--color-on-light);
+  gap: var(--spacing-1);
+  font-size: 16px;
 }
 
-.track {
+.orientation-horizontal {
+  width: 240px;
+}
+
+.orientation-vertical {
+  width: 56px;
+}
+
+.label {
+  color: var(--imported-slider-label-color);
+  column-gap: var(--imported-shared-size-4);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-slider-label-font-weight);
+  line-height: var(--imported-shared-size-20-0004);
+  row-gap: var(--imported-shared-size-4);
+  cursor: pointer;
+  font-family: -apple-system, 'system-ui', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.slider {
   display: flex;
-  background-color: var(--color-track);
-  border-radius: var(--radius-full);
-  height: var(--spacing-1);
+  align-items: center;
+  column-gap: var(--imported-shared-size-8);
+  row-gap: var(--imported-shared-size-8);
 }
 
-.thumb {
+.valueDisplay-none.orientation-horizontal .slider {
+  height: var(--imported-slider-slider-height-horizontal-none);
+}
+
+.valueDisplay-none.orientation-vertical .slider {
+  height: var(--imported-slider-slider-height-vertical-none);
+}
+
+.valueDisplay-text.orientation-horizontal .slider {
+  height: var(--imported-slider-slider-height-horizontal-text);
+}
+
+.valueDisplay-text.orientation-vertical .slider {
+  height: var(--imported-slider-slider-height-vertical-text);
+}
+
+.valueDisplay-tooltip.orientation-horizontal .slider {
+  height: var(--imported-slider-slider-height-horizontal-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-vertical .slider {
+  height: var(--imported-slider-slider-height-vertical-tooltip);
+}
+
+.part-1-0 {
+  display: flex;
+  align-items: center;
+  bottom: var(--imported-shared-size-0);
+  left: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  cursor: pointer;
+  isolation: isolate;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+}
+
+.orientation-horizontal .part-1-0 {
+  width: 240px;
+  height: 20px;
+}
+
+.orientation-vertical .part-1-0 {
+  width: 20px;
+  height: 160px;
+}
+
+.slider-track {
+  background-color: var(--imported-slider-slider-track-background-color);
+  border-bottom-left-radius: var(--radius-full);
+  border-bottom-right-radius: var(--radius-full);
+  border-top-left-radius: var(--radius-full);
+  border-top-right-radius: var(--radius-full);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
+  position: absolute;
+  cursor: pointer;
+  user-select: none;
+}
+
+.orientation-horizontal .slider-track {
+  left: 0px;
+  right: 0px;
+  height: 4px;
+  top: 8px;
+}
+
+.orientation-vertical .slider-track {
+  top: 0px;
+  bottom: 0px;
+  width: 4px;
+  left: 8px;
+  height: 160px;
+}
+
+.part-1-0-1 {
   background-color: var(--color-accent);
-  border-radius: var(--radius-full);
-  width: var(--spacing-4);
-  height: var(--spacing-4);
+  border-bottom-left-radius: var(--radius-full);
+  border-bottom-right-radius: var(--radius-full);
+  border-top-left-radius: var(--radius-full);
+  border-top-right-radius: var(--radius-full);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
+  position: absolute;
+  cursor: pointer;
+  user-select: none;
+}
+
+.orientation-horizontal .part-1-0-1 {
+  left: 0px;
+  width: 96px;
+  height: 4px;
+  top: 8px;
+}
+
+.orientation-vertical .part-1-0-1 {
+  top: 96px;
+  height: 64px;
+  width: 4px;
+  left: 8px;
+}
+
+.slider-thumb-2 {
+  background-color: var(--color-accent);
+  border-bottom-left-radius: var(--radius-full);
+  border-bottom-right-radius: var(--radius-full);
+  border-top-left-radius: var(--radius-full);
+  border-top-right-radius: var(--radius-full);
+  z-index: var(--imported-shared-num-1);
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  cursor: grab;
+  transition-duration: 0.175s;
+  transition-property: background-color, box-shadow;
+  transition-timing-function: cubic-bezier(0.24, 1, 0.4, 1);
+  user-select: none;
+}
+
+.orientation-horizontal .slider-thumb-2 {
+  left: 86px;
+  top: 0px;
+}
+
+.orientation-vertical .slider-thumb-2 {
+  left: 0px;
+  top: 86px;
+}
+
+.tooltip {
+  display: flex;
+  background-color: var(--imported-slider-tooltip-background-color);
+  border-bottom-left-radius: var(--imported-shared-size-12);
+  border-bottom-right-radius: var(--imported-shared-size-12);
+  border-top-left-radius: var(--imported-shared-size-12);
+  border-top-right-radius: var(--imported-shared-size-12);
+  color: var(--imported-slider-tooltip-color);
+  font-size: var(--imported-shared-size-14);
+  line-height: var(--imported-shared-size-20-0004);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: none;
+  position: absolute;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  cursor: pointer;
+  font-family: -apple-system, 'system-ui', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  user-select: none;
+}
+
+.orientation-horizontal .tooltip {
+  margin-bottom: var(--imported-slider-tooltip-margin-bottom-horizontal);
+}
+
+.orientation-horizontal .tooltip {
+  margin-left: var(--imported-slider-tooltip-margin-left-horizontal);
+}
+
+.orientation-horizontal .tooltip {
+  margin-right: var(--imported-slider-tooltip-margin-right-horizontal);
+}
+
+.orientation-horizontal .tooltip {
+  margin-top: var(--imported-slider-tooltip-margin-top-horizontal);
+}
+
+.orientation-vertical .tooltip {
+  margin-bottom: var(--imported-slider-tooltip-margin-bottom-vertical);
+}
+
+.orientation-vertical .tooltip {
+  margin-left: var(--imported-slider-tooltip-margin-left-vertical);
+}
+
+.orientation-vertical .tooltip {
+  margin-right: var(--imported-slider-tooltip-margin-right-vertical);
+}
+
+.orientation-vertical .tooltip {
+  margin-top: var(--imported-slider-tooltip-margin-top-vertical);
+}
+
+.orientation-horizontal .tooltip {
+  left: 79px;
+  top: -36px;
+}
+
+.orientation-vertical .tooltip {
+  left: -40px;
+  top: 78px;
+}
+
+.valueDisplay-tooltip .tooltip {
+  display: flex;
+}
+
+.valueDisplay-text .tooltip {
+  display: none;
+}
+
+.valueDisplay-none .tooltip {
+  display: none;
+}
+
+.label-2 {
+  color: var(--imported-slider-label-2-color);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-slider-label-2-font-weight);
+  line-height: var(--imported-shared-size-20-0004);
+  max-width: var(--imported-slider-label-2-max-width);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  padding-bottom: var(--imported-shared-size-4);
+  padding-left: var(--imported-shared-size-8);
+  padding-right: var(--imported-shared-size-8);
+  padding-top: var(--imported-shared-size-4);
+  display: block;
+  cursor: pointer;
+  font-family: -apple-system, 'system-ui', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  user-select: none;
+}
+
+.valueDisplay-text .label-2 {
+  display: none;
+}
+
+.valueDisplay-none .label-2 {
+  display: none;
+}
+
+.label-3 {
+  color: var(--imported-slider-label-3-color);
+  flex-shrink: var(--imported-slider-label-3-flex-shrink);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-slider-label-3-font-weight);
+  line-height: var(--imported-slider-label-3-line-height);
+  display: block;
+  font-family: -apple-system, 'system-ui', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  text-wrap-mode: nowrap;
+}
+
+.orientation-vertical .label-3 {
+  left: 28px;
+  top: 86px;
+}
+
+.valueDisplay-tooltip .label-3 {
+  display: none;
+}
+
+.valueDisplay-none .label-3 {
+  display: none;
+}
+
+.orientation-vertical .label-3 {
+  position: absolute;
 }

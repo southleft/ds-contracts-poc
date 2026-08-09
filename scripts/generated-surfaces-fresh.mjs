@@ -65,6 +65,20 @@ const NOT_GENERATOR_OUTPUT = new Set(['.gitkeep']);
  *  emitting something subtly different, so a wrong row reads as REBUILD-REFUSED
  *  (loud) and never as a false "fresh". */
 const SURFACES = {
+  // astryx was a NAMED HOLE until its storybook token generator was taught to
+  // read `astryx-minted.dtcg.json` and to resolve `{ref}` aliases to
+  // `var(--target)`. Before that, `tokens.css` defined ZERO of the 34
+  // `--imported-*` variables the committed components referenced, so the
+  // fixture was invalid in the browser and a regen would have taken that to
+  // 312. With the generator fixed the tree regenerates to 0 undefined
+  // references, so the hole closed by work rather than by forgetting.
+  astryx: {
+    contracts: 'examples/astryx/contracts',
+    args: [
+      '--icons', 'examples/astryx/assets/icons',
+      '--tokens', 'examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json',
+    ],
+  },
   'eventz-vars': {
     contracts: 'examples/eventz-vars/contracts',
     // No --icons: this kit's icons ARE contracts (icons-*.contract.json), not
@@ -89,16 +103,7 @@ const SURFACES = {
  *  It is emphatically NOT a baseline. Recording astryx's current byte-state as
  *  "expected" would freeze a fixture that is already broken. */
 const NAMED_HOLES = {
-  astryx:
-    'REBUILD WOULD SHIP IT WORSE. `examples/astryx/scripts/build-storybook-tokens.ts:28-29` reads only ' +
-    '`tokens/astryx.dtcg.json` + `tokens/modes/astryx.dark.dtcg.json` and NEVER `tokens/astryx-minted.dtcg.json`, ' +
-    'so it emits ZERO `--imported-*` variables. Measured: the committed storybook CSS already references 34 ' +
-    'distinct `--imported-*` vars and `storybook/src/tokens.css` defines 0 of them — those declarations are ' +
-    'invalid at computed-value time and fall back TODAY — and a regen raises that to 312. Regenerating ' +
-    'tokens.css is not the way out either: the same script does not resolve `{ref}` aliases, leaking ~35 ' +
-    'literals like `--text-body-size: {font-size-base};`. CLOSE BY: teaching build-storybook-tokens.ts the ' +
-    'minted tree and `{ref}` resolution, THEN regenerating the components (24 stale + 3 missing components, ' +
-    'a v0.1.0→v0.4.0 review) and re-shooting RENDER-PROOF.md, whose asserted colours are themselves dead.',
+  // (empty — astryx was the last one; see its SURFACES row for what closed it.)
 };
 
 const failures = [];

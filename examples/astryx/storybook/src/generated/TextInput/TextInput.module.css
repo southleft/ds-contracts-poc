@@ -1,7 +1,14 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/text-input.contract.json (astryx.text-input v0.1.0)
+ * Source of truth: contracts/text-input.contract.json (astryx.text-input v0.2.0)
  * Regenerate with: npm run generate
  */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
 
 .root {
   display: flex;
@@ -11,6 +18,7 @@
   gap: var(--spacing-1);
   font-family: var(--font-family-body);
   font-size: var(--font-size-sm);
+  width: 320px;
 }
 
 .label {
@@ -19,11 +27,14 @@
 }
 
 .field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   background-color: var(--color-background-surface);
-  border-color: var(--color-border);
+  border-color: var(--color-border-emphasized);
   border-width: var(--border-width);
   border-radius: var(--radius-element);
-  color: var(--color-text-secondary);
+  gap: var(--spacing-2);
   padding-block: var(--spacing-2);
   padding-inline: var(--spacing-3);
   border-style: solid;
@@ -51,4 +62,47 @@
 
 .size-lg .field {
   padding-inline: var(--spacing-4);
+}
+
+.start-icon {
+  display: flex;
+  align-items: center;
+}
+
+.icon-text svg {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-text {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-icon-secondary);
+}
+
+.icon-email svg {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-email {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-icon-secondary);
+}
+
+.icon-password svg {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-password {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-icon-secondary);
+}
+
+.placeholder-text {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
 }

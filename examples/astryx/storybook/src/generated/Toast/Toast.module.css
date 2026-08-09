@@ -1,0 +1,41 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/toast.contract.json (astryx.toast v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border: 0;
+  gap: var(--spacing-3);
+  padding-block: var(--spacing-4);
+  padding-inline: var(--spacing-4);
+  background-color: var(--color-background-surface);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-med);
+  font-family: var(--font-family-body);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
+  width: 360px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.endContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

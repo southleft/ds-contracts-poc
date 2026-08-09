@@ -46,7 +46,7 @@ const meta = {
   },
   args: {
     variant: 'neutral',
-    children: 'Badge',
+    children: 'New',
   },
 } satisfies Meta<typeof Badge>;
 
@@ -123,20 +123,20 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <Badge variant="neutral">Badge</Badge>
-      <Badge variant="info">Badge</Badge>
-      <Badge variant="success">Badge</Badge>
-      <Badge variant="warning">Badge</Badge>
-      <Badge variant="error">Badge</Badge>
-      <Badge variant="blue">Badge</Badge>
-      <Badge variant="cyan">Badge</Badge>
-      <Badge variant="green">Badge</Badge>
-      <Badge variant="orange">Badge</Badge>
-      <Badge variant="pink">Badge</Badge>
-      <Badge variant="purple">Badge</Badge>
-      <Badge variant="red">Badge</Badge>
-      <Badge variant="teal">Badge</Badge>
-      <Badge variant="yellow">Badge</Badge>
+      <Badge variant="neutral">New</Badge>
+      <Badge variant="info">New</Badge>
+      <Badge variant="success">New</Badge>
+      <Badge variant="warning">New</Badge>
+      <Badge variant="error">New</Badge>
+      <Badge variant="blue">New</Badge>
+      <Badge variant="cyan">New</Badge>
+      <Badge variant="green">New</Badge>
+      <Badge variant="orange">New</Badge>
+      <Badge variant="pink">New</Badge>
+      <Badge variant="purple">New</Badge>
+      <Badge variant="red">New</Badge>
+      <Badge variant="teal">New</Badge>
+      <Badge variant="yellow">New</Badge>
     </div>
   ),
 };

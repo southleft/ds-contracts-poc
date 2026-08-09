@@ -1,21 +1,49 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/button.contract.json (astryx.button v0.1.0)
+ * Source of truth: contracts/button.contract.json (astryx.button v0.3.0)
  * Regenerate with: npm run generate
  */
 
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
 .root {
-  display: inline-flex;
-  flex-direction: row;
+  display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
-  cursor: pointer;
-  color: var(--color-text-primary);
-  border-radius: var(--radius-element);
-  gap: var(--spacing-1);
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  border-bottom-left-radius: var(--imported-shared-size-8);
+  border-bottom-right-radius: var(--imported-shared-size-8);
+  border-top-left-radius: var(--imported-shared-size-8);
+  border-top-right-radius: var(--imported-shared-size-8);
+  bottom: var(--imported-shared-size-0);
+  column-gap: var(--imported-shared-size-8);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-20-0004);
+  padding-bottom: var(--imported-shared-size-8);
+  padding-left: var(--imported-button-root-padding-left);
+  padding-right: var(--imported-button-root-padding-right);
+  padding-top: var(--imported-shared-size-8);
+  right: var(--imported-shared-size-0);
+  row-gap: var(--imported-shared-size-8);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-button-root-width);
+  gap: var(--spacing-2);
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  position: relative;
+  text-wrap-mode: nowrap;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  transition-duration: 0.175s;
+  transition-property: background-image, background-color, color, opacity, transform;
+  transition-timing-function: cubic-bezier(0.24, 1, 0.4, 1);
 }
 
 .root:focus-visible {
@@ -23,47 +51,215 @@
   outline-offset: 2px;
 }
 
-.variant-primary {
-  background-color: var(--color-accent);
-  color: var(--color-on-accent);
-}
-
-.variant-secondary {
-  background-color: var(--color-background-muted);
-  color: var(--color-text-primary);
-}
-
-.variant-ghost {
-  color: var(--color-text-primary);
-}
-
-.variant-destructive {
-  background-color: var(--color-error);
-  color: var(--color-on-error);
-}
-
-.size-sm {
-  padding-block: var(--spacing-1);
-  padding-inline: var(--spacing-2);
-  min-height: var(--size-element-sm);
+.size-lg {
+  height: var(--imported-button-root-height-lg);
+  padding-block: var(--spacing-2);
+  padding-inline: var(--spacing-3);
 }
 
 .size-md {
+  height: var(--imported-button-root-height-md);
+}
+
+.size-sm {
+  height: var(--imported-button-root-height-sm);
   padding-block: var(--spacing-2);
   padding-inline: var(--spacing-3);
-  min-height: var(--size-element-md);
 }
 
-.size-lg {
-  padding-block: var(--spacing-3);
-  padding-inline: var(--spacing-4);
-  min-height: var(--size-element-lg);
+.variant-destructive {
+  background-color: var(--imported-button-root-background-color-destructive);
+  color: var(--imported-button-root-color-destructive);
+  outline-color: var(--imported-button-root-outline-color-destructive);
+}
+
+.variant-ghost {
+  background-color: var(--imported-button-root-background-color-ghost);
+  color: var(--imported-button-root-color-ghost);
+  outline-color: var(--imported-button-root-outline-color-ghost);
+}
+
+.variant-primary {
+  background-color: var(--imported-button-root-background-color-primary);
+  color: var(--imported-button-root-color-primary);
+  outline-color: var(--imported-button-root-outline-color-primary);
+}
+
+.variant-secondary {
+  background-color: var(--color-neutral);
+  color: var(--imported-button-root-color-secondary);
+  outline-color: var(--imported-button-root-outline-color-secondary);
+}
+
+.root:active:not(:disabled) {
+  background-image: var(--imported-button-root-background-image-state-active);
+}
+
+.root:disabled {
+  opacity: var(--imported-button-root-opacity-state-disabled);
+}
+
+.variant-primary:focus-visible {
+  outline-color: var(--imported-button-root-outline-color-state-focus-visible-primary);
+}
+
+.variant-secondary:focus-visible {
+  outline-color: var(--imported-button-root-outline-color-state-focus-visible-secondary);
+}
+
+.variant-ghost:focus-visible {
+  outline-color: var(--imported-button-root-outline-color-state-focus-visible-ghost);
+}
+
+.variant-destructive:focus-visible {
+  outline-color: var(--imported-button-root-outline-color-state-focus-visible-destructive);
 }
 
 .root:focus-visible {
-  outline-color: var(--color-accent);
+  outline-offset: var(--imported-button-root-outline-offset-state-focus-visible);
 }
 
 .root:focus-visible {
-  outline-width: var(--border-width);
+  outline-width: var(--imported-button-root-outline-width-state-focus-visible);
+}
+
+.root:hover:not(:disabled) {
+  background-image: var(--imported-button-root-background-image-state-hover);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+}
+
+.root:focus-visible {
+  outline-style: solid;
+}
+
+.part-0 {
+  display: flex;
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-shared-num-500);
+  line-height: var(--imported-shared-size-20-0004);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: contents;
+  cursor: pointer;
+  text-align: center;
+  text-wrap-mode: nowrap;
+}
+
+.variant-destructive .part-0 {
+  color: var(--imported-button-part-0-color-destructive);
+}
+
+.variant-ghost .part-0 {
+  color: var(--imported-button-part-0-color-ghost);
+}
+
+.variant-primary .part-0 {
+  color: var(--imported-button-part-0-color-primary);
+}
+
+.variant-secondary .part-0 {
+  color: var(--imported-button-part-0-color-secondary);
+}
+
+.root:disabled .part-0 {
+  cursor: not-allowed;
+}
+
+.label {
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-shared-num-500);
+  line-height: var(--imported-shared-size-20-0004);
+  min-width: var(--imported-shared-size-0);
+  display: block;
+  cursor: pointer;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-wrap-mode: nowrap;
+}
+
+.variant-destructive .label {
+  color: var(--imported-button-label-color-destructive);
+}
+
+.variant-ghost .label {
+  color: var(--imported-button-label-color-ghost);
+}
+
+.variant-primary .label {
+  color: var(--imported-button-label-color-primary);
+}
+
+.variant-secondary .label {
+  color: var(--imported-button-label-color-secondary);
+}
+
+.root:disabled .label {
+  cursor: not-allowed;
+}
+
+.part-1 {
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-shared-num-500);
+  height: var(--imported-button-part-1-height);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-20-0004);
+  margin-bottom: var(--imported-shared-size-neg-1);
+  margin-left: var(--imported-shared-size-neg-1);
+  margin-right: var(--imported-shared-size-neg-1);
+  margin-top: var(--imported-shared-size-neg-1);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-button-part-1-right);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-button-part-1-width);
+  display: none;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  cursor: pointer;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  text-wrap-mode: nowrap;
+  user-select: none;
+}
+
+.size-lg .part-1 {
+  bottom: var(--imported-button-part-1-bottom-lg);
+}
+
+.size-md .part-1 {
+  bottom: var(--imported-button-part-1-bottom-md);
+}
+
+.size-sm .part-1 {
+  bottom: var(--imported-button-part-1-bottom-sm);
+}
+
+.variant-destructive .part-1 {
+  color: var(--imported-button-part-1-color-destructive);
+}
+
+.variant-ghost .part-1 {
+  color: var(--imported-button-part-1-color-ghost);
+}
+
+.variant-primary .part-1 {
+  color: var(--imported-button-part-1-color-primary);
+}
+
+.variant-secondary .part-1 {
+  color: var(--imported-button-part-1-color-secondary);
+}
+
+.root:disabled .part-1 {
+  cursor: not-allowed;
 }

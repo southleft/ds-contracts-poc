@@ -1,0 +1,27 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/dropdown-menu.contract.json (astryx.dropdown-menu v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.trigger,
+.trigger *,
+.trigger *::before,
+.trigger *::after,
+.menu,
+.menu *,
+.menu *::before,
+.menu *::after {
+  box-sizing: border-box;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+  padding-block: var(--spacing-1);
+  padding-inline: var(--spacing-1);
+  background-color: var(--color-background-surface);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-med);
+  width: 240px;
+}

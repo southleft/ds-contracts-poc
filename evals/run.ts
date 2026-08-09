@@ -3610,15 +3610,21 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       for (const required of ['eventz-vars', 'untitled-ui', 'astryx']) {
         if (!out.includes(required)) throw new Error(`generated-surfaces-fresh no longer reports ${required} — a surface stopped being measured`);
       }
-      // A NAMED HOLE MUST STAY VISIBLY A HOLE. astryx cannot be rebuilt today
-      // (its storybook token generator never reads the minted DTCG, so a regen
-      // would raise undefined `--imported-*` references from 34 to 312). If it
-      // ever silently reads as "fresh" without that script being fixed, the
-      // hole was closed by forgetting rather than by work.
-      if (!out.includes('NAMED HOLE')) throw new Error('astryx is no longer reported as a named hole — either it was genuinely closed (update this pin) or the hole stopped being printed');
+      // THE HOLE CLOSED BY WORK, AND THE PIN MOVED WITH IT. astryx was a NAMED
+      // HOLE for exactly one round: its storybook token generator never read
+      // `astryx-minted.dtcg.json`, so `tokens.css` defined none of the 34
+      // `--imported-*` variables the components referenced. Teaching that
+      // generator the minted tree (and `{ref}` → `var(--target)` resolution)
+      // made the tree rebuildable, so astryx is now a gated row, not a hole.
+      //
+      // The pin is inverted rather than deleted: a hole must never come BACK
+      // silently either. If one reappears, this fails and the reviewer has to
+      // say which surface stopped being rebuildable and why.
+      if (out.includes('NAMED HOLE')) throw new Error(`a storybook tree became a NAMED HOLE — a surface stopped being rebuildable, which must be a reviewed decision:\n${out}`);
+      if (!out.includes('0 named holes')) throw new Error(`generated-surfaces-fresh no longer reports its hole count — the count of gated trees could be read as the count of trees:\n${out}`);
 
       console.log(
-        `generated-storybook-trees-are-fresh: every committed examples/*/storybook/src/generated tree is byte-identical to a fresh run of its own generator, with STALE / MISSING / ORPHANED reported as three separate classes (an orphan means DELETE, and "differs" would hide that). astryx stays a NAMED HOLE, not a pass — a rebuild today would raise its undefined \`--imported-*\` refs from 34 to 312, because examples/astryx/scripts/build-storybook-tokens.ts never reads astryx-minted.dtcg.json. The gap this closes: astryx-dev-journey already ran the generator twice and hashed the two FRESH outputs against each other, which is byte-stability, not freshness of the committed bytes.`,
+        `generated-storybook-trees-are-fresh: all three committed examples/*/storybook/src/generated trees are byte-identical to a fresh run of their own generator, with ZERO named holes, and with STALE / MISSING / ORPHANED reported as three separate classes (an orphan means DELETE, and "differs" would hide that). astryx was the last hole and closed by WORK, not by forgetting: its storybook token generator never read astryx-minted.dtcg.json, so tokens.css defined 0 of the 34 \`--imported-*\` variables its own components referenced — the fixture was invalid in the browser, and a naive regen would have taken that to 312. The gap this whole gate closes: astryx-dev-journey already ran the generator twice and hashed the two FRESH outputs against each other, which is byte-stability, not freshness of the committed bytes.`,
       );
     },
   },

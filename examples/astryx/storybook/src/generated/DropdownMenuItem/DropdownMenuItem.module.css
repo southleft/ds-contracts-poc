@@ -1,0 +1,27 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/dropdown-menu-item.contract.json (astryx.dropdown-menu-item v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  padding-block: var(--spacing-2);
+  padding-inline: var(--spacing-2);
+  border-radius: var(--radius-element);
+  font-family: var(--font-family-body);
+  font-size: var(--text-label-size);
+  color: var(--color-text-primary);
+}

@@ -3,15 +3,22 @@
  * Regenerate with: npm run generate
  */
 
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
 .root {
   display: flex;
   flex-direction: column;
   border: 0;
   color: var(--color-text-secondary);
   gap: var(--spacing-1);
-  width: var(--spacing-12);
   font-family: var(--font-family-body);
   font-size: var(--font-size-xs);
+  width: 240px;
 }
 
 .track {
@@ -19,6 +26,7 @@
   background-color: var(--color-track);
   border-radius: var(--radius-full);
   height: var(--spacing-1);
+  width: 240px;
 }
 
 .fill {

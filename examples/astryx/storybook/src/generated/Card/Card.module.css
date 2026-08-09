@@ -1,70 +1,240 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/card.contract.json (astryx.card v0.1.0)
+ * Source of truth: contracts/card.contract.json (astryx.card v0.3.0)
  * Regenerate with: npm run generate
  */
 
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
 .root {
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
-  background-color: var(--color-background-card);
-  color: var(--color-text-primary);
-  padding-block: var(--spacing-4);
-  padding-inline: var(--spacing-4);
-  border-radius: var(--radius-container);
-  gap: var(--spacing-3);
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-base);
-}
-
-.variant-default {
-  background-color: var(--color-background-card);
-}
-
-.variant-transparent {
-  background-color: var(--color-background-body);
-}
-
-.variant-muted {
-  background-color: var(--color-background-muted);
+  border-bottom-left-radius: var(--imported-shared-size-12);
+  border-bottom-right-radius: var(--imported-shared-size-12);
+  border-top-left-radius: var(--imported-shared-size-12);
+  border-top-right-radius: var(--imported-shared-size-12);
+  font-weight: var(--imported-card-root-font-weight);
+  line-height: var(--imported-card-root-line-height);
+  width: var(--imported-card-root-width);
+  color: var(--color-on-light);
+  font-size: 16px;
+  display: block;
+  overflow-x: clip;
+  overflow-y: clip;
 }
 
 .variant-blue {
-  background-color: var(--color-background-blue);
+  background-color: var(--imported-card-root-background-color-blue);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-blue);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-blue);
+  border-left-color: var(--imported-card-root-border-left-color-blue);
+  border-left-width: var(--imported-card-root-border-left-width-blue);
+  border-right-color: var(--imported-card-root-border-right-color-blue);
+  border-right-width: var(--imported-card-root-border-right-width-blue);
+  border-top-color: var(--imported-card-root-border-top-color-blue);
+  border-top-width: var(--imported-card-root-border-top-width-blue);
+  padding-bottom: var(--imported-card-root-padding-bottom-blue);
+  padding-left: var(--imported-card-root-padding-left-blue);
+  padding-right: var(--imported-card-root-padding-right-blue);
+  padding-top: var(--imported-card-root-padding-top-blue);
 }
 
 .variant-cyan {
-  background-color: var(--color-background-cyan);
+  background-color: var(--imported-card-root-background-color-cyan);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-cyan);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-cyan);
+  border-left-color: var(--imported-card-root-border-left-color-cyan);
+  border-left-width: var(--imported-card-root-border-left-width-cyan);
+  border-right-color: var(--imported-card-root-border-right-color-cyan);
+  border-right-width: var(--imported-card-root-border-right-width-cyan);
+  border-top-color: var(--imported-card-root-border-top-color-cyan);
+  border-top-width: var(--imported-card-root-border-top-width-cyan);
+  padding-bottom: var(--imported-card-root-padding-bottom-cyan);
+  padding-left: var(--imported-card-root-padding-left-cyan);
+  padding-right: var(--imported-card-root-padding-right-cyan);
+  padding-top: var(--imported-card-root-padding-top-cyan);
+}
+
+.variant-default {
+  background-color: var(--imported-card-root-background-color-default);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-default);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-default);
+  border-left-color: var(--imported-card-root-border-left-color-default);
+  border-left-width: var(--imported-card-root-border-left-width-default);
+  border-right-color: var(--imported-card-root-border-right-color-default);
+  border-right-width: var(--imported-card-root-border-right-width-default);
+  border-top-color: var(--imported-card-root-border-top-color-default);
+  border-top-width: var(--imported-card-root-border-top-width-default);
+  padding-bottom: var(--imported-card-root-padding-bottom-default);
+  padding-left: var(--imported-card-root-padding-left-default);
+  padding-right: var(--imported-card-root-padding-right-default);
+  padding-top: var(--imported-card-root-padding-top-default);
+  padding-block: 15px;
+  padding-inline: 15px;
 }
 
 .variant-gray {
-  background-color: var(--color-background-gray);
+  background-color: var(--imported-card-root-background-color-gray);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-gray);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-gray);
+  border-left-color: var(--imported-card-root-border-left-color-gray);
+  border-left-width: var(--imported-card-root-border-left-width-gray);
+  border-right-color: var(--imported-card-root-border-right-color-gray);
+  border-right-width: var(--imported-card-root-border-right-width-gray);
+  border-top-color: var(--imported-card-root-border-top-color-gray);
+  border-top-width: var(--imported-card-root-border-top-width-gray);
+  padding-bottom: var(--imported-card-root-padding-bottom-gray);
+  padding-left: var(--imported-card-root-padding-left-gray);
+  padding-right: var(--imported-card-root-padding-right-gray);
+  padding-top: var(--imported-card-root-padding-top-gray);
 }
 
 .variant-green {
-  background-color: var(--color-background-green);
+  background-color: var(--imported-card-root-background-color-green);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-green);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-green);
+  border-left-color: var(--imported-card-root-border-left-color-green);
+  border-left-width: var(--imported-card-root-border-left-width-green);
+  border-right-color: var(--imported-card-root-border-right-color-green);
+  border-right-width: var(--imported-card-root-border-right-width-green);
+  border-top-color: var(--imported-card-root-border-top-color-green);
+  border-top-width: var(--imported-card-root-border-top-width-green);
+  padding-bottom: var(--imported-card-root-padding-bottom-green);
+  padding-left: var(--imported-card-root-padding-left-green);
+  padding-right: var(--imported-card-root-padding-right-green);
+  padding-top: var(--imported-card-root-padding-top-green);
+}
+
+.variant-muted {
+  background-color: var(--imported-card-root-background-color-muted);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-muted);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-muted);
+  border-left-color: var(--imported-card-root-border-left-color-muted);
+  border-left-width: var(--imported-card-root-border-left-width-muted);
+  border-right-color: var(--imported-card-root-border-right-color-muted);
+  border-right-width: var(--imported-card-root-border-right-width-muted);
+  border-top-color: var(--imported-card-root-border-top-color-muted);
+  border-top-width: var(--imported-card-root-border-top-width-muted);
+  padding-bottom: var(--imported-card-root-padding-bottom-muted);
+  padding-left: var(--imported-card-root-padding-left-muted);
+  padding-right: var(--imported-card-root-padding-right-muted);
+  padding-top: var(--imported-card-root-padding-top-muted);
 }
 
 .variant-orange {
-  background-color: var(--color-background-orange);
+  background-color: var(--imported-card-root-background-color-orange);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-orange);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-orange);
+  border-left-color: var(--imported-card-root-border-left-color-orange);
+  border-left-width: var(--imported-card-root-border-left-width-orange);
+  border-right-color: var(--imported-card-root-border-right-color-orange);
+  border-right-width: var(--imported-card-root-border-right-width-orange);
+  border-top-color: var(--imported-card-root-border-top-color-orange);
+  border-top-width: var(--imported-card-root-border-top-width-orange);
+  padding-bottom: var(--imported-card-root-padding-bottom-orange);
+  padding-left: var(--imported-card-root-padding-left-orange);
+  padding-right: var(--imported-card-root-padding-right-orange);
+  padding-top: var(--imported-card-root-padding-top-orange);
 }
 
 .variant-pink {
-  background-color: var(--color-background-pink);
+  background-color: var(--imported-card-root-background-color-pink);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-pink);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-pink);
+  border-left-color: var(--imported-card-root-border-left-color-pink);
+  border-left-width: var(--imported-card-root-border-left-width-pink);
+  border-right-color: var(--imported-card-root-border-right-color-pink);
+  border-right-width: var(--imported-card-root-border-right-width-pink);
+  border-top-color: var(--imported-card-root-border-top-color-pink);
+  border-top-width: var(--imported-card-root-border-top-width-pink);
+  padding-bottom: var(--imported-card-root-padding-bottom-pink);
+  padding-left: var(--imported-card-root-padding-left-pink);
+  padding-right: var(--imported-card-root-padding-right-pink);
+  padding-top: var(--imported-card-root-padding-top-pink);
 }
 
 .variant-purple {
-  background-color: var(--color-background-purple);
+  background-color: var(--imported-card-root-background-color-purple);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-purple);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-purple);
+  border-left-color: var(--imported-card-root-border-left-color-purple);
+  border-left-width: var(--imported-card-root-border-left-width-purple);
+  border-right-color: var(--imported-card-root-border-right-color-purple);
+  border-right-width: var(--imported-card-root-border-right-width-purple);
+  border-top-color: var(--imported-card-root-border-top-color-purple);
+  border-top-width: var(--imported-card-root-border-top-width-purple);
+  padding-bottom: var(--imported-card-root-padding-bottom-purple);
+  padding-left: var(--imported-card-root-padding-left-purple);
+  padding-right: var(--imported-card-root-padding-right-purple);
+  padding-top: var(--imported-card-root-padding-top-purple);
 }
 
 .variant-red {
-  background-color: var(--color-background-red);
+  background-color: var(--imported-card-root-background-color-red);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-red);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-red);
+  border-left-color: var(--imported-card-root-border-left-color-red);
+  border-left-width: var(--imported-card-root-border-left-width-red);
+  border-right-color: var(--imported-card-root-border-right-color-red);
+  border-right-width: var(--imported-card-root-border-right-width-red);
+  border-top-color: var(--imported-card-root-border-top-color-red);
+  border-top-width: var(--imported-card-root-border-top-width-red);
+  padding-bottom: var(--imported-card-root-padding-bottom-red);
+  padding-left: var(--imported-card-root-padding-left-red);
+  padding-right: var(--imported-card-root-padding-right-red);
+  padding-top: var(--imported-card-root-padding-top-red);
 }
 
 .variant-teal {
-  background-color: var(--color-background-teal);
+  background-color: var(--imported-card-root-background-color-teal);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-teal);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-teal);
+  border-left-color: var(--imported-card-root-border-left-color-teal);
+  border-left-width: var(--imported-card-root-border-left-width-teal);
+  border-right-color: var(--imported-card-root-border-right-color-teal);
+  border-right-width: var(--imported-card-root-border-right-width-teal);
+  border-top-color: var(--imported-card-root-border-top-color-teal);
+  border-top-width: var(--imported-card-root-border-top-width-teal);
+  padding-bottom: var(--imported-card-root-padding-bottom-teal);
+  padding-left: var(--imported-card-root-padding-left-teal);
+  padding-right: var(--imported-card-root-padding-right-teal);
+  padding-top: var(--imported-card-root-padding-top-teal);
+}
+
+.variant-transparent {
+  background-color: var(--imported-card-root-background-color-transparent);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-transparent);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-transparent);
+  border-left-color: var(--imported-card-root-border-left-color-transparent);
+  border-left-width: var(--imported-card-root-border-left-width-transparent);
+  border-right-color: var(--imported-card-root-border-right-color-transparent);
+  border-right-width: var(--imported-card-root-border-right-width-transparent);
+  border-top-color: var(--imported-card-root-border-top-color-transparent);
+  border-top-width: var(--imported-card-root-border-top-width-transparent);
+  padding-bottom: var(--imported-card-root-padding-bottom-transparent);
+  padding-left: var(--imported-card-root-padding-left-transparent);
+  padding-right: var(--imported-card-root-padding-right-transparent);
+  padding-top: var(--imported-card-root-padding-top-transparent);
 }
 
 .variant-yellow {
-  background-color: var(--color-background-yellow);
+  background-color: var(--imported-card-root-background-color-yellow);
+  border-bottom-color: var(--imported-card-root-border-bottom-color-yellow);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-yellow);
+  border-left-color: var(--imported-card-root-border-left-color-yellow);
+  border-left-width: var(--imported-card-root-border-left-width-yellow);
+  border-right-color: var(--imported-card-root-border-right-color-yellow);
+  border-right-width: var(--imported-card-root-border-right-width-yellow);
+  border-top-color: var(--imported-card-root-border-top-color-yellow);
+  border-top-width: var(--imported-card-root-border-top-width-yellow);
+  padding-bottom: var(--imported-card-root-padding-bottom-yellow);
+  padding-left: var(--imported-card-root-padding-left-yellow);
+  padding-right: var(--imported-card-root-padding-right-yellow);
+  padding-top: var(--imported-card-root-padding-top-yellow);
 }
