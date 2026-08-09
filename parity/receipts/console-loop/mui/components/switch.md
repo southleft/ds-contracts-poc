@@ -35,3 +35,22 @@ Compared canvas axes/prop defs to `examples/mui/contracts/switch.contract.json`.
 generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 
 **2026-08-08 pixel scorecard (strict-lane conversion):** fail-closed — pctAAMasked=49.88%, compositionOk=True (headless REST cell @1x vs committed developed ref `parity/receipts/console-loop/mui/refs/switch.png`; card `parity/receipts/console-loop/mui/scores/switch.json`).
+
+## 2026-08-09 — CROSS-PLANE ROUND: 23.44 → 10.89, still an honest fail
+
+Reference re-pinned off the unexpressible `disabled` plane onto
+`orig-shots/default.medium.checked.enabled__default.png` by
+`scripts/console-loop-ref-plane-probe.mts --repin`. Both instruments agree at **10.89** (lane scorer
+`scores/switch.json`; headless REST `visual-truth/mui/switch.json`, cell `21:612`
+"Color=Default, Size=Medium, Checked=Checked", fileVersion 2384477865735882405). The bar is 5, so this
+stays **fail-closed** — the prior 23.44 is void, not improved.
+
+The residual is geometry and paint inside a correctly-identified variant: canvas 37x22 vs library 38x19.
+
+**RETRACTED from this receipt:** "the MUI harness emits BYTE-IDENTICAL gate-shots for .enabled and
+.disabled on switch, accordion and checkbox … so the disabled/enabled token carries no information here."
+The byte-identity is real and verified — but it is a property of the **contract renders**. Every
+`orig-shots` enabled/disabled pair for switch (all 16), accordion (all 4), checkbox (all 3) and radio
+**differs**. The old basis could not see the difference; that is what it was blind to.
+
+**Unmeasured, named:** the `disabled` plane — see `visual.defects`.

@@ -139,3 +139,105 @@ agreed with it — is 20. Same class as astryx/text-input's 1.72. `FC-ABS-SIZE`.
 25 of the 30 captured components reproduce their committed `gate-shots/` byte-for-byte
 at HEAD. `autocomplete` (8/8), `select` (8/8), `table` (8/8), `tabs` (24/24) and
 `textfield` (4/4) do not.
+
+## 2026-08-09 — CROSS-PLANE ROUND: the worst number on the board was the instrument
+
+**2 → 4 scored-pass.** `checkbox` **81.48 → 0.00**, `accordion` **94.63 → 2.88**, both on BOTH
+instruments (lane scorer `scores/` and headless REST `visual-truth/mui/`, fileVersion
+2384477865735882405). `switch` **23.44 → 10.89**, still an honest fail.
+
+### The checkbox root cause, and which side it lives on
+
+**The 81.48 was NOT a canvas defect and NOT an emitter defect. It was a cross-plane reference pin.**
+
+`extract/computed/configs/mui.json` declares `disabled` as a **state plane** (`stateProps`) for seven MUI
+components. The capture key spells that plane as the LAST segment of the variant part —
+`checked.enabled__default` / `checked.disabled__default`. `visual-truth-run.mjs`'s `pickGateShot` pins the
+**alphabetically first** `*__default.png` in the capture directory, and *"disabled" sorts before
+"enabled"*. Meanwhile the contract binds `disabled` as a Figma **BOOLEAN** property, so **no cell anywhere
+in the emitted set is disabled** and `chooseCell` can only ever return an enabled cell. The scorer was
+therefore comparing two different points in prop space, and its `pctAAMasked` measured the missing plane.
+
+Localised with `scripts/console-loop-ref-plane-probe.mts` (the generalised successor to
+`polaris-ref-triangle.mts`: that probe asked *"is the reference stale?"*, this one asks *"does the
+reference name a plane the canvas cell IS?"*). It scores each committed canvas cell against **every**
+`orig-shots`/`gate-shots` `__default` render and prints the matrix beside the pinned key. Re-pinning is
+**not** done by argmin — `--repin` computes the target from the capture config's `stateProps` plus the
+contract's own Figma binding kind, so it is deterministic and score-blind.
+
+Exactly **three** stems were cross-plane (`checkbox`, `accordion`, `switch`). `button`, `fab`,
+`icon-button`, `radio` carry the same state plane and were already pinned to `enabled`.
+
+### The disabled plane IS genuinely absent from the canvas — named, not closed
+
+The brief's premise ("a disabled-state colour is not reaching the canvas") is **true as a fact** and
+**false as the cause of the 81.48**. Evidence, on the contract → emitter → canvas triangle:
+
+| leg | finding |
+|---|---|
+| contract (capture/promote) | **CLEAN.** `states.disabled.color = {imported.shared.color-00000042}` on both `root` and `icon`. `#00000042` = `rgba(0,0,0,.26)` = **189,189,189** on white — exactly the library's paint. |
+| emit-html | lowers it to `.checkbox:disabled { color: var(--imported-shared-color-00000042) }` — a pseudo-class that can never match the emitted `<span>` root (MUI itself uses a `.Mui-disabled` class). |
+| capture gate | `extract/computed/gate.ts:367` admits this: it can only apply the plane via `el.disabled = true`, and stamps `data-gate-disabled-unsupported` when the root has no `disabled` IDL attribute. |
+| emit-figma-script | compiles no `State=` axis (the contract sets no `figmaStatePreviews`), and a Figma BOOLEAN property cannot repaint a fill. |
+
+**Consequence, measured:** `gate-shots/*.enabled__default.png` and `*.disabled__default.png` are
+**byte-identical by sha256** for checkbox, switch and accordion, while every `orig-shots` enabled/disabled
+pair for those components (and radio) **differs**. That byte-identity is exactly why the pre-`orig-shots`
+basis scored checkbox 0.00 — both renders were the enabled picture.
+
+**RETRACTED** from the switch/accordion receipts: *"the disabled/enabled token carries no information
+here."* True of the contract renders, false of the library renders.
+
+Closing the plane needs a canvas write (a `State=` axis) on `59mLQlOMiD5w5za6SUcoO5`, which was **not**
+connected to the Desktop Bridge this round (`figma_list_open_files`: only `GnQnjSNBXtgtd2Ht0Hs1C8`,
+`BMjUA2ue5CaZXU4kufxL0z`, `HherkaLt11JSCFJVAoyWlO`). Carried as `visual.unmeasured` /
+`FC-STATE-PLANE-ABSENT`.
+
+### The class cannot recur in this lane
+
+`scripts/console-loop-mui-evidence-check.mjs` now **refuses** a scorecard whose reference names the
+non-base value of a state plane the contract cannot express — in *either* direction, because a
+fail-closed number is as void as a pass-claim when the pair is cross-plane. Covered by a new unit test
+(`test:console-loop-mui-evidence`, 5/5). A read-only scan of astryx/carbon/polaris/tailwind/first-party
+found **no** other cross-plane pin today; the alphabetical `pickGateShot` rule can still reintroduce one
+in any lane whose receipt has no explicit `visual.reference`.
+
+### Second group, by measured gap: FC-GEOMETRY-EXCLUDED (4 stems, one cause, refused by name)
+
+| stem | canvas | library | root height/width token |
+|---|---|---|---|
+| chip | 51x20 | 50x32 | absent |
+| avatar | 14x20 | 40x40 | absent |
+| fab | 16x41 | 72x74 | absent |
+| icon-button | 13x23 | 14x13 | absent |
+
+The capture **did** record the box (`captured-truth.json` `base.root.style`: chip `height 32px`, avatar
+`40x40`, fab `56x56`, icon-button `52x40`); `extract/computed/fuse.ts:555-565` excludes geometry channels
+from fusion as environment-dependent, admitting them only for absolute-cluster parts, table cells and the
+block-root/overlay doors. None of these roots qualify, so the contract gives them no box and the emitted
+Figma root hugs its content. The computed gate cannot see the loss either — chip's row compares 61
+channels for 0.20 pctAA and `height` is not among them.
+
+**Not patched here on purpose.** Relaxing the geometry exclusion is the change that previously minted the
+capture WINDOW as tokens in four of six libraries; it needs its own round with
+`fuse.ts viewportDerivedRefusals` held. `badge` is NOT in this group — its root *does* carry
+`{imported.badge.root.height/width}` and its 40x20-vs-20x20 gap has a different cause.
+
+### Premises that died on re-measurement
+
+1. **"The canvas paints the enabled blue into `checked.disabled`."** There is no `checked.disabled` cell
+   on the canvas at all. The canvas painted the enabled blue into the **enabled** cell, correctly, and
+   matches `@mui/material@9.2.0` at **0.00**.
+2. **`accordion` FC-REF-WRONG-VARIANT** — "no correctly-collapsed MUI accordion reference exists". That
+   was measured on the contract render. The library render `elevation.collapsed.enabled__default.png` is
+   a correctly collapsed **290x50** header, exactly the canvas cell's box.
+3. **"card/paper look like an elevation off-by-one"** (card scores 3.76 against library elevation-1 vs
+   31.48 against elevation-0). REFUTED before acting: the elevation-1 render is 290x60 against a 98x13
+   canvas cell and `compositionOk` is **false** — the lower AA is alignment noise on grossly mismatched
+   boxes. The `0__default` pin is correct and the 31.48 is real.
+
+### Floor
+
+`RATCHET.json` floor for mui is **2** and was **not** edited by this round (owner's to move).
+**Recommendation: 2 → 4** — `accordion` and `checkbox` pass on BOTH instruments against real
+`@mui/material@9.2.0` pixels, which is the lane's stated rule for a floor move.

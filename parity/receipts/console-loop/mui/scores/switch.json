@@ -8,30 +8,30 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 76.79425837320574,
-    "pctAAUnmasked": 23.444976076555022,
-    "pctAAMasked": 23.444976076555022,
+    "pctExactUnmasked": 52.511961722488046,
+    "pctAAUnmasked": 10.885167464114833,
+    "pctAAMasked": 10.885167464114833,
     "maskCoveragePct": 0,
     "canvasPx": "37x22",
-    "realPx": "38x22",
+    "realPx": "38x19",
     "inkCanvasPct": 36.124401913875595,
-    "inkRealPct": 71.88995215311004
+    "inkRealPct": 36.124401913875595
   },
-  "reference": "extract/computed/out/mui/switch/orig-shots/default.medium.checked.disabled__default.png",
-  "referenceSha256": "328daba7ff36e344bfe0c231ca9a53e71e567f6739b52a02d3cb4d2a1da1c61e",
+  "reference": "extract/computed/out/mui/switch/orig-shots/default.medium.checked.enabled__default.png",
+  "referenceSha256": "5c1f496eef13d44db39c3a76241c9c4679a27ebc3fb492ce5c2dde376833ec7e",
   "canvasShot": "parity/receipts/console-loop/mui/shots/switch-cell.png",
   "canvasShotSha256": "238d069e11e2764091637f57dfa76684ae470e7c42c8b6dc62026858dd053cd2",
   "diff": "parity/receipts/console-loop/mui/scores/switch.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/switch.json",
-  "compositionOk": false,
-  "strictCompositionOk": false,
+  "compositionOk": true,
+  "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.027027027027027,
-  "inkDelta": 35.76555023923445,
+  "scaleRatio": 1.1578947368421053,
+  "inkDelta": 0,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.03, inkDelta=35.8) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-09T03:33:18.519Z"
+  "note": "pixel bar missed (pctAAMasked=10.89 > 5)",
+  "recordedAt": "2026-08-09T05:45:21.104Z"
 }

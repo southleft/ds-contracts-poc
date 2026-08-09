@@ -21,14 +21,15 @@
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:410).",
       "Chip COMPONENT_SET 21:410: 28 variant(s), 4 prop def(s). Structure looks sane; slot placeholders OK.",
-      "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot.",
-      "CONVERTED 2026-08-08: pctAAMasked 6.47 -> 1.18 (lane scorer) / 1.18 (headless visual-truth) — both instruments pass against the SAME canvas cell shot."
+      "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts \u2014 Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine \u2014 the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot.",
+      "CONVERTED 2026-08-08: pctAAMasked 6.47 -> 1.18 (lane scorer) / 1.18 (headless visual-truth) \u2014 both instruments pass against the SAME canvas cell shot."
     ],
     "defects": [
-      "FC-ABS-SIZE: 1.18 against the CONTRACT RENDER, 0.74 against the real MUI Chip — but compositionOk is FALSE: canvas 51x20 vs library 50x32. MUI's medium Chip is 32px tall; the canvas (and the contract render that agreed with it) is 20px. The low AA is union-pad whitespace, exactly the class that made astryx/text-input read 1.72."
+      "FC-ABS-SIZE: 0.74 pctAAMasked against the real MUI Chip but compositionOk is FALSE \u2014 canvas 51x20 vs library 50x32. MUI's medium Chip is `height: 32px`; the canvas hugs to the label's 19.5px line-height box. The low AA is union-pad whitespace, exactly the class that made astryx/text-input read 1.72.",
+      "LOCALISED 2026-08-09 \u2014 FC-GEOMETRY-EXCLUDED (capture/promote side, and a DELIBERATE refusal, not a leak). The capture DID record the height: extract/computed/out/mui/chip/captured-truth.json `base.root.style.height` is \"32px\" at base key filled.default.medium__default. It never reaches examples/mui/contracts/chip.contract.json, whose root `tokens` carry background-color/border/radius/color/font-size/line-height/outline-width and NO height and NO per-`size` tokensByProp entry (tokensByProp props: [\"variant\"] only). Cause: extract/computed/fuse.ts:555-565 excludes geometry channels (width/height/insets) from fusion as environment-dependent, admitting them only for absolute-cluster parts, table cells and the block-root/overlay doors \u2014 Chip's root is none of those. The computed gate cannot see the loss either: scorecard.json's row for this key compares 61 channels for 0.20 pctAA, and `height` is not among them. THE FIX IS NOT A CHIP PATCH: relaxing the geometry exclusion is the change that previously minted the capture WINDOW as tokens in four of six libraries, so it needs its own round with the viewport-derived refusal (fuse.ts viewportDerivedRefusals) held. Refused here by name."
     ],
     "reference": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png",
-    "referenceSource": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (refs/chip.png, byte-identical copy of chip/gate-shots/filled.default.medium__default.png)): parity/receipts/console-loop/mui/refs/chip.png [declared source: extract/computed/out/mui/chip/gate-shots/filled.default.medium__default.png].",
+    "referenceSource": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png \u2014 REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (refs/chip.png, byte-identical copy of chip/gate-shots/filled.default.medium__default.png)): parity/receipts/console-loop/mui/refs/chip.png [declared source: extract/computed/out/mui/chip/gate-shots/filled.default.medium__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/chip-cell.png",
     "matchDeveloped": false,
     "status": "fail-closed",
@@ -55,9 +56,9 @@
     "mismatches": [],
     "gaps": [],
     "matchedAxes": [
-      "Variant enum → Filled/Outlined",
-      "Color enum → Default/Primary/Secondary/Error/Success/Warning/Info",
-      "Size enum → Medium/Small",
+      "Variant enum \u2192 Filled/Outlined",
+      "Color enum \u2192 Default/Primary/Secondary/Error/Success/Warning/Info",
+      "Size enum \u2192 Medium/Small",
       "TEXT Label",
       "first-variant fill bound: imported/chip/root/background-color/filled/default"
     ],

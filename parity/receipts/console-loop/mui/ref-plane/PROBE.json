@@ -1,0 +1,3925 @@
+{
+  "recordedAt": "2026-08-09T05:58:21.256Z",
+  "lane": "mui",
+  "full": false,
+  "results": [
+    {
+      "stem": "accordion",
+      "cellName": "Variant=Elevation, Expanded=Collapsed",
+      "cellTokens": [
+        "elevation",
+        "collapsed"
+      ],
+      "pinned": "elevation.collapsed.enabled__default",
+      "pinnedPct": 2.882758620689655,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": false,
+        "how": "figma binding BOOLEAN"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "elevation.collapsed.enabled__default",
+        "pctAAMasked": 2.882758620689655,
+        "pass": true
+      },
+      "contractDefaults": [
+        "elevation",
+        "collapsed",
+        "not-disabled"
+      ],
+      "defaultsKey": "elevation.collapsed.enabled__default",
+      "defaultsPct": 2.882758620689655,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "elevation.collapsed.disabled__default",
+          "pctAAMasked": 94.63448275862069,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "290x50"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "elevation.collapsed.enabled__default",
+          "pctAAMasked": 2.882758620689655,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "290x50",
+          "realPx": "290x50"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "elevation.expanded.disabled__default",
+          "pctAAMasked": 93.50027367268746,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "290x126"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "elevation.expanded.enabled__default",
+          "pctAAMasked": 4.296661193212917,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "290x126"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "outlined.collapsed.disabled__default",
+          "pctAAMasked": 93.78620689655173,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "288x50"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "outlined.collapsed.enabled__default",
+          "pctAAMasked": 6.055172413793104,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "288x50"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "outlined.expanded.disabled__default",
+          "pctAAMasked": 94.3240284619595,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "288x126"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "outlined.expanded.enabled__default",
+          "pctAAMasked": 5.333880678708265,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "288x126"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "elevation.collapsed.disabled__default",
+          "pctAAMasked": 7.344827586206897,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "146x43"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "elevation.collapsed.enabled__default",
+          "pctAAMasked": 7.344827586206897,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "146x43"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "elevation.expanded.disabled__default",
+          "pctAAMasked": 4.296661193212917,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "290x126"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "elevation.expanded.enabled__default",
+          "pctAAMasked": 4.296661193212917,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "290x126"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "outlined.collapsed.disabled__default",
+          "pctAAMasked": 5.704433497536946,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "225x70"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "outlined.collapsed.enabled__default",
+          "pctAAMasked": 5.704433497536946,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "225x70"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "outlined.expanded.disabled__default",
+          "pctAAMasked": 5.083996463306808,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "225x78"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "outlined.expanded.enabled__default",
+          "pctAAMasked": 5.083996463306808,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "290x50",
+          "realPx": "225x78"
+        }
+      ]
+    },
+    {
+      "stem": "alert",
+      "cellName": "Severity=Error, Variant=Filled",
+      "cellTokens": [
+        "error",
+        "filled"
+      ],
+      "pinned": "error.filled__default",
+      "pinnedPct": 8.246527777777777,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "error.filled__default",
+        "pctAAMasked": 8.246527777777777,
+        "pass": false
+      },
+      "contractDefaults": [
+        "info",
+        "standard",
+        "This is an alert — check it out!"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "error.filled__default",
+          "pctAAMasked": 8.246527777777777,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "144x24",
+          "realPx": "144x24"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.filled__default",
+          "pctAAMasked": 7.235142118863049,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "129x24",
+          "realPx": "129x24"
+        }
+      ],
+      "rowsElided": 23
+    },
+    {
+      "stem": "autocomplete",
+      "cellName": "Size=Medium",
+      "cellTokens": [
+        "medium"
+      ],
+      "pinned": "medium__default",
+      "pinnedPct": 8.934771825396826,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "medium__default",
+        "pctAAMasked": 8.934771825396826,
+        "pass": false
+      },
+      "contractDefaults": [
+        "medium"
+      ],
+      "defaultsKey": "medium__default",
+      "defaultsPct": 8.934771825396826,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "medium__default",
+          "pctAAMasked": 8.934771825396826,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "288x54",
+          "realPx": "288x56"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium__default",
+          "pctAAMasked": 8.141121031746032,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "288x54",
+          "realPx": "288x56"
+        }
+      ],
+      "rowsElided": 3
+    },
+    {
+      "stem": "avatar",
+      "cellName": "Variant=Circular",
+      "cellTokens": [
+        "circular"
+      ],
+      "pinned": "circular__default",
+      "pinnedPct": 59.12500000000001,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "circular__default",
+        "pctAAMasked": 59.12500000000001,
+        "pass": false
+      },
+      "contractDefaults": [
+        "circular",
+        "A"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "circular__default",
+          "pctAAMasked": 59.12500000000001,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "14x20",
+          "realPx": "40x40"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "circular__default",
+          "pctAAMasked": 5.714285714285714,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "14x20",
+          "realPx": "13x20"
+        }
+      ],
+      "rowsElided": 5
+    },
+    {
+      "stem": "badge",
+      "cellName": "Color=Default, Variant=Dot",
+      "cellTokens": [
+        "default",
+        "dot"
+      ],
+      "pinned": "default.dot__default",
+      "pinnedPct": 63.24999999999999,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "secondary.standard__default",
+        "pctAAMasked": 59.65909090909091,
+        "pass": false
+      },
+      "contractDefaults": [
+        "default",
+        "standard"
+      ],
+      "defaultsKey": "default.standard__default",
+      "defaultsPct": 63.24999999999999,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "default.dot__default",
+          "pctAAMasked": 63.24999999999999,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "40x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.standard__default",
+          "pctAAMasked": 63.24999999999999,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "40x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.standard__default",
+          "pctAAMasked": 59.65909090909091,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "40x20",
+          "realPx": "22x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.dot__default",
+          "pctAAMasked": 55.75,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "40x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.standard__default",
+          "pctAAMasked": 56.625,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "40x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.standard__default",
+          "pctAAMasked": 57.95454545454546,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "40x20",
+          "realPx": "22x22"
+        }
+      ],
+      "rowsElided": 25
+    },
+    {
+      "stem": "breadcrumbs",
+      "cellName": "Breadcrumbs",
+      "cellTokens": [
+        "breadcrumbs"
+      ],
+      "pinned": "__default",
+      "pinnedPct": 14.815718818647792,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "__default",
+        "pctAAMasked": 14.815718818647792,
+        "pass": false
+      },
+      "contractDefaults": [],
+      "defaultsKey": "__default",
+      "defaultsPct": 14.815718818647792,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "__default",
+          "pctAAMasked": 14.815718818647792,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "241x16",
+          "realPx": "241x17"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "__default",
+          "pctAAMasked": 22.166704519645698,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "241x16",
+          "realPx": "259x17"
+        }
+      ],
+      "rowsElided": 1
+    },
+    {
+      "stem": "button",
+      "cellName": "Variant=Contained, Color=Error, Size=Large, State=Default",
+      "cellTokens": [
+        "contained",
+        "error",
+        "large",
+        "default"
+      ],
+      "pinned": "contained.error.large.enabled__default",
+      "pinnedPct": 16.923677532695685,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": true,
+        "how": "figmaStatePreviews"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "contained.error.large.enabled__default",
+        "pctAAMasked": 16.923677532695685,
+        "pass": false
+      },
+      "contractDefaults": [
+        "text",
+        "primary",
+        "medium",
+        "not-disabled",
+        "Button"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "contained.error.large.enabled__default",
+          "pctAAMasked": 16.923677532695685,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "105x37",
+          "realPx": "109x47"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "contained.error.large.enabled__default",
+          "pctAAMasked": 6.361877116594098,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "105x37",
+          "realPx": "106x39"
+        }
+      ],
+      "rowsElided": 251
+    },
+    {
+      "stem": "card",
+      "cellName": "Elevation=0",
+      "cellTokens": [
+        "0"
+      ],
+      "pinned": "0__default",
+      "pinnedPct": 31.475667189952905,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "1__default",
+        "pctAAMasked": 3.7586206896551726,
+        "pass": false
+      },
+      "contractDefaults": [
+        "1",
+        "Card content"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "0__default",
+          "pctAAMasked": 31.475667189952905,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "98x13",
+          "realPx": "83x13"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "1__default",
+          "pctAAMasked": 3.7586206896551726,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "98x13",
+          "realPx": "290x60"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "0__default",
+          "pctAAMasked": 31.475667189952905,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "98x13",
+          "realPx": "83x13"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "1__default",
+          "pctAAMasked": 3.7586206896551726,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "98x13",
+          "realPx": "290x60"
+        }
+      ],
+      "rowsElided": 6
+    },
+    {
+      "stem": "checkbox",
+      "cellName": "Checked=Checked",
+      "cellTokens": [
+        "checked"
+      ],
+      "pinned": "checked.enabled__default",
+      "pinnedPct": 0,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": false,
+        "how": "figma binding BOOLEAN"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "checked.enabled__default",
+        "pctAAMasked": 0,
+        "pass": true
+      },
+      "contractDefaults": [
+        "unchecked",
+        "not-disabled"
+      ],
+      "defaultsKey": "unchecked.enabled__default",
+      "defaultsPct": 81.48148148148148,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "checked.disabled__default",
+          "pctAAMasked": 81.48148148148148,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "checked.enabled__default",
+          "pctAAMasked": 0,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "indeterminate.disabled__default",
+          "pctAAMasked": 87.34567901234568,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "indeterminate.enabled__default",
+          "pctAAMasked": 8.641975308641975,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "unchecked.disabled__default",
+          "pctAAMasked": 81.48148148148148,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "unchecked.enabled__default",
+          "pctAAMasked": 81.48148148148148,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "checked.disabled__default",
+          "pctAAMasked": 0,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "checked.enabled__default",
+          "pctAAMasked": 0,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "indeterminate.disabled__default",
+          "pctAAMasked": 8.641975308641975,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "indeterminate.enabled__default",
+          "pctAAMasked": 8.641975308641975,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "unchecked.disabled__default",
+          "pctAAMasked": 81.48148148148148,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "unchecked.enabled__default",
+          "pctAAMasked": 81.48148148148148,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "18x18",
+          "realPx": "18x18"
+        }
+      ]
+    },
+    {
+      "stem": "chip",
+      "cellName": "Variant=Filled, Color=Default, Size=Medium",
+      "cellTokens": [
+        "filled",
+        "default",
+        "medium"
+      ],
+      "pinned": "filled.default.medium__default",
+      "pinnedPct": 0.7352941176470588,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "filled.default.medium__default",
+        "pctAAMasked": 0.7352941176470588,
+        "pass": false
+      },
+      "contractDefaults": [
+        "filled",
+        "default",
+        "medium",
+        "Chip"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "filled.default.medium__default",
+          "pctAAMasked": 0.7352941176470588,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "51x20",
+          "realPx": "50x32"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "filled.default.medium__default",
+          "pctAAMasked": 1.1764705882352942,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "51x20",
+          "realPx": "50x20"
+        }
+      ],
+      "rowsElided": 55
+    },
+    {
+      "stem": "circular-progress",
+      "cellName": "Variant=Determinate",
+      "cellTokens": [
+        "determinate"
+      ],
+      "pinned": "determinate__default",
+      "pinnedPct": 20.226055919095774,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "indeterminate__default",
+        "pctAAMasked": 18.441403926234383,
+        "pass": false
+      },
+      "contractDefaults": [
+        "indeterminate"
+      ],
+      "defaultsKey": "indeterminate__default",
+      "defaultsPct": 18.441403926234383,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "determinate__default",
+          "pctAAMasked": 20.226055919095774,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "41x41",
+          "realPx": "32x40"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "indeterminate__default",
+          "pctAAMasked": 18.441403926234383,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "41x41",
+          "realPx": "4x1"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "determinate__default",
+          "pctAAMasked": 21.237358715050565,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "41x41",
+          "realPx": "40x32"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "indeterminate__default",
+          "pctAAMasked": 1.784651992861392,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "41x41",
+          "realPx": "40x40"
+        }
+      ],
+      "rowsElided": 2
+    },
+    {
+      "stem": "dialog",
+      "cellName": "Max width=Lg",
+      "cellTokens": [
+        "lg"
+      ],
+      "pinned": "lg__default",
+      "pinnedPct": 94.61344444444444,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "lg__default",
+        "pctAAMasked": 94.61344444444444,
+        "pass": false
+      },
+      "contractDefaults": [
+        "sm",
+        "Dialog body copy for the molecule round."
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "lg__default",
+          "pctAAMasked": 94.61344444444444,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "424x123",
+          "realPx": "900x1000"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "lg__default",
+          "pctAAMasked": 53.788800973828366,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "212x62",
+          "realPx": "212x62"
+        }
+      ],
+      "rowsElided": 9
+    },
+    {
+      "stem": "divider",
+      "cellName": "Variant=FullWidth",
+      "cellTokens": [
+        "fullwidth"
+      ],
+      "pinned": "fullWidth__default",
+      "pinnedPct": 0,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "fullWidth__default",
+        "pctAAMasked": 0,
+        "pass": true
+      },
+      "contractDefaults": [
+        "fullWidth"
+      ],
+      "defaultsKey": "fullWidth__default",
+      "defaultsPct": 0,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "fullWidth__default",
+          "pctAAMasked": 0,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "288x1",
+          "realPx": "288x1"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "fullWidth__default",
+          "pctAAMasked": 0,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "288x1",
+          "realPx": "288x1"
+        }
+      ],
+      "rowsElided": 5
+    },
+    {
+      "stem": "drawer",
+      "cellName": "Variant=Temporary",
+      "cellTokens": [
+        "temporary"
+      ],
+      "pinned": "temporary__default",
+      "pinnedPct": 31.44770464358093,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "temporary__default",
+        "pctAAMasked": 31.44770464358093,
+        "pass": false
+      },
+      "contractDefaults": [
+        "temporary",
+        "Drawer content"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "temporary__default",
+          "pctAAMasked": 31.44770464358093,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "117x97",
+          "realPx": "113x97"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "temporary__default",
+          "pctAAMasked": 55.03154331435606,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "117x97",
+          "realPx": "134x65"
+        }
+      ],
+      "rowsElided": 2
+    },
+    {
+      "stem": "fab",
+      "cellName": "Size=Large, Color=Default",
+      "cellTokens": [
+        "large",
+        "default"
+      ],
+      "pinned": "large.default.enabled__default",
+      "pinnedPct": 39.189189189189186,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": false,
+        "how": "figma binding BOOLEAN"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "small.default.enabled__default",
+        "pctAAMasked": 27.13647959183674,
+        "pass": false
+      },
+      "contractDefaults": [
+        "large",
+        "default",
+        "not-disabled",
+        "+"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "large.default.disabled__default",
+          "pctAAMasked": 55.19770408163265,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "56x56"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "large.default.enabled__default",
+          "pctAAMasked": 39.189189189189186,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "72x74"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "large.primary.disabled__default",
+          "pctAAMasked": 55.19770408163265,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "56x56"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "large.primary.enabled__default",
+          "pctAAMasked": 47.22222222222222,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "72x74"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "large.secondary.disabled__default",
+          "pctAAMasked": 55.19770408163265,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "56x56"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "large.secondary.enabled__default",
+          "pctAAMasked": 47.22222222222222,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "72x74"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.default.disabled__default",
+          "pctAAMasked": 48.39409722222222,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "48x48"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.default.enabled__default",
+          "pctAAMasked": 33.91826923076923,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "64x65"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.primary.disabled__default",
+          "pctAAMasked": 48.39409722222222,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "48x48"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.primary.enabled__default",
+          "pctAAMasked": 44.73557692307693,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "64x65"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.secondary.disabled__default",
+          "pctAAMasked": 48.39409722222222,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "48x48"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.secondary.enabled__default",
+          "pctAAMasked": 44.71153846153847,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "64x65"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.default.disabled__default",
+          "pctAAMasked": 37.68292682926829,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "40x40"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.default.enabled__default",
+          "pctAAMasked": 27.13647959183674,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "56x56"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.primary.disabled__default",
+          "pctAAMasked": 37.68292682926829,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "40x40"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.primary.enabled__default",
+          "pctAAMasked": 40.433673469387756,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "56x56"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.secondary.disabled__default",
+          "pctAAMasked": 37.68292682926829,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "40x40"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.secondary.enabled__default",
+          "pctAAMasked": 40.433673469387756,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "56x56"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.default.disabled__default",
+          "pctAAMasked": 43.05555555555556,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "8x21",
+          "realPx": "8x36"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.default.enabled__default",
+          "pctAAMasked": 1.9639934533551555,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "26x47"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.primary.disabled__default",
+          "pctAAMasked": 43.05555555555556,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "8x21",
+          "realPx": "8x36"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.primary.enabled__default",
+          "pctAAMasked": 18.330605564648117,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "26x47"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.secondary.disabled__default",
+          "pctAAMasked": 43.05555555555556,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "8x21",
+          "realPx": "8x36"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.secondary.enabled__default",
+          "pctAAMasked": 18.330605564648117,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "26x47"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.default.disabled__default",
+          "pctAAMasked": 43.05555555555556,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "8x21",
+          "realPx": "8x36"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.default.enabled__default",
+          "pctAAMasked": 1.9639934533551555,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "26x47"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.primary.disabled__default",
+          "pctAAMasked": 43.05555555555556,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "8x21",
+          "realPx": "8x36"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.primary.enabled__default",
+          "pctAAMasked": 18.330605564648117,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "26x47"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.secondary.disabled__default",
+          "pctAAMasked": 43.05555555555556,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "8x21",
+          "realPx": "8x36"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.secondary.enabled__default",
+          "pctAAMasked": 18.330605564648117,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "26x47"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.default.disabled__default",
+          "pctAAMasked": 43.05555555555556,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "8x21",
+          "realPx": "8x36"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.default.enabled__default",
+          "pctAAMasked": 1.9639934533551555,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "26x47"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.primary.disabled__default",
+          "pctAAMasked": 43.05555555555556,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "8x21",
+          "realPx": "8x36"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.primary.enabled__default",
+          "pctAAMasked": 18.330605564648117,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "26x47"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.secondary.disabled__default",
+          "pctAAMasked": 43.05555555555556,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "8x21",
+          "realPx": "8x36"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.secondary.enabled__default",
+          "pctAAMasked": 18.330605564648117,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x41",
+          "realPx": "26x47"
+        }
+      ]
+    },
+    {
+      "stem": "icon-button",
+      "cellName": "Size=Large, Color=Default",
+      "cellTokens": [
+        "large",
+        "default"
+      ],
+      "pinned": "large.default.enabled__default",
+      "pinnedPct": 24.84472049689441,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": false,
+        "how": "figma binding BOOLEAN"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "small.default.enabled__default",
+        "pctAAMasked": 20.531400966183575,
+        "pass": false
+      },
+      "contractDefaults": [
+        "medium",
+        "default",
+        "not-disabled",
+        "★"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "large.default.disabled__default",
+          "pctAAMasked": 27.018633540372672,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "large.default.enabled__default",
+          "pctAAMasked": 24.84472049689441,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "large.primary.disabled__default",
+          "pctAAMasked": 27.018633540372672,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "large.primary.enabled__default",
+          "pctAAMasked": 27.018633540372672,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "large.secondary.disabled__default",
+          "pctAAMasked": 27.018633540372672,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "large.secondary.enabled__default",
+          "pctAAMasked": 27.018633540372672,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.default.disabled__default",
+          "pctAAMasked": 33.11036789297659,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.default.enabled__default",
+          "pctAAMasked": 32.441471571906355,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.primary.disabled__default",
+          "pctAAMasked": 33.11036789297659,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.primary.enabled__default",
+          "pctAAMasked": 34.448160535117054,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.secondary.disabled__default",
+          "pctAAMasked": 33.11036789297659,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "medium.secondary.enabled__default",
+          "pctAAMasked": 34.448160535117054,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.default.disabled__default",
+          "pctAAMasked": 23.67149758454106,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.default.enabled__default",
+          "pctAAMasked": 20.531400966183575,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.primary.disabled__default",
+          "pctAAMasked": 23.67149758454106,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.primary.enabled__default",
+          "pctAAMasked": 24.396135265700483,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.secondary.disabled__default",
+          "pctAAMasked": 23.67149758454106,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small.secondary.enabled__default",
+          "pctAAMasked": 24.396135265700483,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.default.disabled__default",
+          "pctAAMasked": 27.018633540372672,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.default.enabled__default",
+          "pctAAMasked": 24.84472049689441,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.primary.disabled__default",
+          "pctAAMasked": 27.018633540372672,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.primary.enabled__default",
+          "pctAAMasked": 27.018633540372672,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.secondary.disabled__default",
+          "pctAAMasked": 27.018633540372672,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "large.secondary.enabled__default",
+          "pctAAMasked": 27.018633540372672,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "14x13"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.default.disabled__default",
+          "pctAAMasked": 33.11036789297659,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.default.enabled__default",
+          "pctAAMasked": 32.441471571906355,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.primary.disabled__default",
+          "pctAAMasked": 33.11036789297659,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.primary.enabled__default",
+          "pctAAMasked": 34.448160535117054,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.secondary.disabled__default",
+          "pctAAMasked": 33.11036789297659,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium.secondary.enabled__default",
+          "pctAAMasked": 34.448160535117054,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "12x12"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.default.disabled__default",
+          "pctAAMasked": 23.67149758454106,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.default.enabled__default",
+          "pctAAMasked": 20.531400966183575,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.primary.disabled__default",
+          "pctAAMasked": 23.67149758454106,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.primary.enabled__default",
+          "pctAAMasked": 24.396135265700483,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.secondary.disabled__default",
+          "pctAAMasked": 23.67149758454106,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small.secondary.enabled__default",
+          "pctAAMasked": 24.396135265700483,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "13x23",
+          "realPx": "18x18"
+        }
+      ]
+    },
+    {
+      "stem": "input-adornment",
+      "cellName": "Position=End",
+      "cellTokens": [
+        "end"
+      ],
+      "pinned": "end__default",
+      "pinnedPct": 20.833333333333336,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "end__default",
+        "pctAAMasked": 20.833333333333336,
+        "pass": false
+      },
+      "contractDefaults": [
+        "start",
+        "$"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "end__default",
+          "pctAAMasked": 20.833333333333336,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "8x16",
+          "realPx": "9x16"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "end__default",
+          "pctAAMasked": 20.833333333333336,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "8x16",
+          "realPx": "9x16"
+        }
+      ],
+      "rowsElided": 3
+    },
+    {
+      "stem": "linear-progress",
+      "cellName": "Variant=Determinate",
+      "cellTokens": [
+        "determinate"
+      ],
+      "pinned": "determinate__default",
+      "pinnedPct": 56.182212581344906,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "determinate__default",
+        "pctAAMasked": 56.182212581344906,
+        "pass": false
+      },
+      "contractDefaults": [
+        "indeterminate"
+      ],
+      "defaultsKey": "indeterminate__default",
+      "defaultsPct": 81.34490238611714,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "determinate__default",
+          "pctAAMasked": 56.182212581344906,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "461x4",
+          "realPx": "288x4"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "indeterminate__default",
+          "pctAAMasked": 81.34490238611714,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "461x4",
+          "realPx": "288x4"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "determinate__default",
+          "pctAAMasked": 56.182212581344906,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "461x4",
+          "realPx": "288x4"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "indeterminate__default",
+          "pctAAMasked": 81.34490238611714,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "461x4",
+          "realPx": "288x4"
+        }
+      ],
+      "rowsElided": 2
+    },
+    {
+      "stem": "link",
+      "cellName": "Color=Error, Underline=Always, State=Default",
+      "cellTokens": [
+        "error",
+        "always",
+        "default"
+      ],
+      "pinned": "error.always__default",
+      "pinnedPct": 29.63709677419355,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "error.hover__default",
+        "pctAAMasked": 14.151925078043703,
+        "pass": false
+      },
+      "contractDefaults": [
+        "primary",
+        "hover",
+        "Link"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "error.always__default",
+          "pctAAMasked": 29.63709677419355,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "11x16",
+          "realPx": "31x14"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.hover__default",
+          "pctAAMasked": 14.151925078043703,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "20x31",
+          "realPx": "31x12"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.always__default",
+          "pctAAMasked": 14.151925078043703,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "20x31",
+          "realPx": "31x12"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.hover__default",
+          "pctAAMasked": 14.151925078043703,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "20x31",
+          "realPx": "31x12"
+        }
+      ],
+      "rowsElided": 40
+    },
+    {
+      "stem": "menu",
+      "cellName": "Menu",
+      "cellTokens": [
+        "menu"
+      ],
+      "pinned": "__default",
+      "pinnedPct": 80.57881325081907,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "__default",
+        "pctAAMasked": 80.57881325081907,
+        "pass": false
+      },
+      "contractDefaults": [],
+      "defaultsKey": "__default",
+      "defaultsPct": 80.57881325081907,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "__default",
+          "pctAAMasked": 80.57881325081907,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "123x132",
+          "realPx": "123x134"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "__default",
+          "pctAAMasked": 10.702584637786677,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "123x134",
+          "realPx": "68x43"
+        }
+      ],
+      "rowsElided": 1
+    },
+    {
+      "stem": "paper",
+      "cellName": "Elevation=0, Variant=Elevation",
+      "cellTokens": [
+        "0",
+        "elevation"
+      ],
+      "pinned": "0.elevation__default",
+      "pinnedPct": 25.943396226415093,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "1.elevation__default",
+        "pctAAMasked": 12.586206896551724,
+        "pass": false
+      },
+      "contractDefaults": [
+        "1",
+        "elevation",
+        "Paper content"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "0.elevation__default",
+          "pctAAMasked": 25.943396226415093,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "106x16",
+          "realPx": "88x15"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "1.elevation__default",
+          "pctAAMasked": 12.586206896551724,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "106x16",
+          "realPx": "290x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "0.elevation__default",
+          "pctAAMasked": 25.943396226415093,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "106x16",
+          "realPx": "88x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "1.elevation__default",
+          "pctAAMasked": 12.586206896551724,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "106x16",
+          "realPx": "290x20"
+        }
+      ],
+      "rowsElided": 14
+    },
+    {
+      "stem": "radio",
+      "cellName": "Color=Default, Checked=Checked",
+      "cellTokens": [
+        "default",
+        "checked"
+      ],
+      "pinned": "default.checked.enabled__default",
+      "pinnedPct": 38.5,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": false,
+        "how": "figma binding none"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "default.unchecked.enabled__default",
+        "pctAAMasked": 26.5,
+        "pass": false
+      },
+      "contractDefaults": [
+        "primary",
+        "unchecked"
+      ],
+      "defaultsKey": "primary.unchecked.enabled__default",
+      "defaultsPct": 26.5,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "default.checked.disabled__default",
+          "pctAAMasked": 39.25,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.checked.enabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.unchecked.disabled__default",
+          "pctAAMasked": 27,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.unchecked.enabled__default",
+          "pctAAMasked": 26.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.checked.disabled__default",
+          "pctAAMasked": 39.25,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.checked.enabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.unchecked.disabled__default",
+          "pctAAMasked": 27,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.unchecked.enabled__default",
+          "pctAAMasked": 26.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.checked.disabled__default",
+          "pctAAMasked": 39.25,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.checked.enabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.unchecked.disabled__default",
+          "pctAAMasked": 27,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.unchecked.enabled__default",
+          "pctAAMasked": 26.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.checked.disabled__default",
+          "pctAAMasked": 39.25,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.checked.enabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.unchecked.disabled__default",
+          "pctAAMasked": 27,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.unchecked.enabled__default",
+          "pctAAMasked": 26.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.checked.disabled__default",
+          "pctAAMasked": 39.25,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.checked.enabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.unchecked.disabled__default",
+          "pctAAMasked": 27,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.unchecked.enabled__default",
+          "pctAAMasked": 26.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.checked.disabled__default",
+          "pctAAMasked": 39.25,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.checked.enabled__default",
+          "pctAAMasked": 41.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.unchecked.disabled__default",
+          "pctAAMasked": 27,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.unchecked.enabled__default",
+          "pctAAMasked": 26.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.checked.disabled__default",
+          "pctAAMasked": 39.25,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.checked.enabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.unchecked.disabled__default",
+          "pctAAMasked": 27,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.unchecked.enabled__default",
+          "pctAAMasked": 26.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.checked.disabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.checked.enabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.unchecked.disabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.unchecked.enabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.checked.disabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.checked.enabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.unchecked.disabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.unchecked.enabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.checked.disabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.checked.enabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.unchecked.disabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.unchecked.enabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.checked.disabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.checked.enabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.unchecked.disabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.unchecked.enabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.checked.disabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.checked.enabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.unchecked.disabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.unchecked.enabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.checked.disabled__default",
+          "pctAAMasked": 41.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.checked.enabled__default",
+          "pctAAMasked": 41.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.unchecked.disabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.unchecked.enabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.checked.disabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.checked.enabled__default",
+          "pctAAMasked": 41.75,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.unchecked.disabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.unchecked.enabled__default",
+          "pctAAMasked": 38.5,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "20x20",
+          "realPx": "20x20"
+        }
+      ]
+    },
+    {
+      "stem": "select",
+      "cellName": "Size=Medium",
+      "cellTokens": [
+        "medium"
+      ],
+      "pinned": "medium__default",
+      "pinnedPct": 11.742694226657163,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "small__default",
+        "pctAAMasked": 9.366666666666665,
+        "pass": false
+      },
+      "contractDefaults": [
+        "medium"
+      ],
+      "defaultsKey": "medium__default",
+      "defaultsPct": 11.742694226657163,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "medium__default",
+          "pctAAMasked": 11.742694226657163,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "92x61",
+          "realPx": "75x56"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "small__default",
+          "pctAAMasked": 9.366666666666665,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "75x40",
+          "realPx": "75x40"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium__default",
+          "pctAAMasked": 11.047754811119031,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "92x61",
+          "realPx": "74x56"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "small__default",
+          "pctAAMasked": 8.58108108108108,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "74x40",
+          "realPx": "74x40"
+        }
+      ],
+      "rowsElided": 2
+    },
+    {
+      "stem": "slider",
+      "cellName": "Color=Error, Size=Medium",
+      "cellTokens": [
+        "error",
+        "medium"
+      ],
+      "pinned": "error.medium__default",
+      "pinnedPct": 7.957175925925926,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "error.medium__default",
+        "pctAAMasked": 7.957175925925926,
+        "pass": false
+      },
+      "contractDefaults": [
+        "primary",
+        "medium",
+        "not-disabled"
+      ],
+      "defaultsKey": "primary.medium__default",
+      "defaultsPct": 26.114004629629626,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "error.medium__default",
+          "pctAAMasked": 7.957175925925926,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "288x20",
+          "realPx": "288x24"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.medium__default",
+          "pctAAMasked": 26.114004629629626,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "288x20",
+          "realPx": "288x24"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.medium__default",
+          "pctAAMasked": 48.15972222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "288x20",
+          "realPx": "288x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.medium__default",
+          "pctAAMasked": 50.67708333333333,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "288x20",
+          "realPx": "288x20"
+        }
+      ],
+      "rowsElided": 22
+    },
+    {
+      "stem": "snackbar",
+      "cellName": "Position=BottomLeft",
+      "cellTokens": [
+        "bottomleft"
+      ],
+      "pinned": "__default",
+      "pinnedPct": 17.42777260018639,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "__default",
+        "pctAAMasked": 17.42777260018639,
+        "pass": false
+      },
+      "contractDefaults": [
+        "bottom-left"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "__default",
+          "pctAAMasked": 17.42777260018639,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "148x29",
+          "realPx": "148x29"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "__default",
+          "pctAAMasked": 2.3184518106917036,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "296x58",
+          "realPx": "307x68"
+        }
+      ],
+      "rowsElided": 1
+    },
+    {
+      "stem": "switch",
+      "cellName": "Color=Default, Size=Medium, Checked=Checked",
+      "cellTokens": [
+        "default",
+        "medium",
+        "checked"
+      ],
+      "pinned": "default.medium.checked.enabled__default",
+      "pinnedPct": 10.885167464114833,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": false,
+        "how": "figma binding BOOLEAN"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "default.small.checked.enabled__default",
+        "pctAAMasked": 7.333333333333333,
+        "pass": false
+      },
+      "contractDefaults": [
+        "primary",
+        "medium",
+        "unchecked",
+        "not-disabled"
+      ],
+      "defaultsKey": "primary.medium.unchecked.enabled__default",
+      "defaultsPct": 49.88038277511962,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "default.medium.checked.disabled__default",
+          "pctAAMasked": 23.444976076555022,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.medium.checked.enabled__default",
+          "pctAAMasked": 10.885167464114833,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.medium.unchecked.disabled__default",
+          "pctAAMasked": 51.794258373205736,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.small.checked.disabled__default",
+          "pctAAMasked": 25.429975429975432,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.small.checked.enabled__default",
+          "pctAAMasked": 7.333333333333333,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.small.unchecked.disabled__default",
+          "pctAAMasked": 37.96068796068796,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "default.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.medium.checked.disabled__default",
+          "pctAAMasked": 56.9377990430622,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.medium.checked.enabled__default",
+          "pctAAMasked": 56.698564593301434,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.medium.unchecked.disabled__default",
+          "pctAAMasked": 51.794258373205736,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.small.checked.disabled__default",
+          "pctAAMasked": 46.80589680589681,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.small.checked.enabled__default",
+          "pctAAMasked": 45.08599508599509,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.small.unchecked.disabled__default",
+          "pctAAMasked": 37.96068796068796,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "error.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.medium.checked.disabled__default",
+          "pctAAMasked": 56.9377990430622,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.medium.checked.enabled__default",
+          "pctAAMasked": 56.2200956937799,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.medium.unchecked.disabled__default",
+          "pctAAMasked": 51.794258373205736,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.small.checked.disabled__default",
+          "pctAAMasked": 46.80589680589681,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.small.checked.enabled__default",
+          "pctAAMasked": 44.5945945945946,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.small.unchecked.disabled__default",
+          "pctAAMasked": 37.96068796068796,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.medium.checked.disabled__default",
+          "pctAAMasked": 56.9377990430622,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.medium.checked.enabled__default",
+          "pctAAMasked": 56.2200956937799,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.medium.unchecked.disabled__default",
+          "pctAAMasked": 51.794258373205736,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.small.checked.disabled__default",
+          "pctAAMasked": 46.80589680589681,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.small.checked.enabled__default",
+          "pctAAMasked": 44.5945945945946,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.small.unchecked.disabled__default",
+          "pctAAMasked": 37.96068796068796,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.medium.checked.disabled__default",
+          "pctAAMasked": 56.9377990430622,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.medium.checked.enabled__default",
+          "pctAAMasked": 56.2200956937799,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.medium.unchecked.disabled__default",
+          "pctAAMasked": 51.794258373205736,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.small.checked.disabled__default",
+          "pctAAMasked": 46.80589680589681,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.small.checked.enabled__default",
+          "pctAAMasked": 44.5945945945946,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.small.unchecked.disabled__default",
+          "pctAAMasked": 37.96068796068796,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "secondary.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.medium.checked.disabled__default",
+          "pctAAMasked": 56.9377990430622,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.medium.checked.enabled__default",
+          "pctAAMasked": 56.45933014354066,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.medium.unchecked.disabled__default",
+          "pctAAMasked": 51.794258373205736,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.small.checked.disabled__default",
+          "pctAAMasked": 46.80589680589681,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.small.checked.enabled__default",
+          "pctAAMasked": 44.34889434889435,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.small.unchecked.disabled__default",
+          "pctAAMasked": 37.96068796068796,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "success.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.medium.checked.disabled__default",
+          "pctAAMasked": 56.9377990430622,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.medium.checked.enabled__default",
+          "pctAAMasked": 56.2200956937799,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.medium.unchecked.disabled__default",
+          "pctAAMasked": 51.794258373205736,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.small.checked.disabled__default",
+          "pctAAMasked": 46.80589680589681,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.small.checked.enabled__default",
+          "pctAAMasked": 44.5945945945946,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.small.unchecked.disabled__default",
+          "pctAAMasked": 37.96068796068796,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "warning.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.medium.checked.disabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.medium.checked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.medium.unchecked.disabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.small.checked.disabled__default",
+          "pctAAMasked": 50.888888888888886,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.small.checked.enabled__default",
+          "pctAAMasked": 50.888888888888886,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.small.unchecked.disabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "default.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.medium.checked.disabled__default",
+          "pctAAMasked": 57.17703349282297,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.medium.checked.enabled__default",
+          "pctAAMasked": 57.17703349282297,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.medium.unchecked.disabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.small.checked.disabled__default",
+          "pctAAMasked": 36.85503685503686,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.small.checked.enabled__default",
+          "pctAAMasked": 36.85503685503686,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.small.unchecked.disabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.medium.checked.disabled__default",
+          "pctAAMasked": 56.698564593301434,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.medium.checked.enabled__default",
+          "pctAAMasked": 56.698564593301434,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.medium.unchecked.disabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.small.checked.disabled__default",
+          "pctAAMasked": 36.36363636363637,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.small.checked.enabled__default",
+          "pctAAMasked": 36.36363636363637,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.small.unchecked.disabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.medium.checked.disabled__default",
+          "pctAAMasked": 56.698564593301434,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.medium.checked.enabled__default",
+          "pctAAMasked": 56.698564593301434,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.medium.unchecked.disabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.small.checked.disabled__default",
+          "pctAAMasked": 36.36363636363637,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.small.checked.enabled__default",
+          "pctAAMasked": 36.36363636363637,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.small.unchecked.disabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.medium.checked.disabled__default",
+          "pctAAMasked": 56.57894736842105,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.medium.checked.enabled__default",
+          "pctAAMasked": 56.57894736842105,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.medium.unchecked.disabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.small.checked.disabled__default",
+          "pctAAMasked": 36.36363636363637,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.small.checked.enabled__default",
+          "pctAAMasked": 36.36363636363637,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.small.unchecked.disabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.medium.checked.disabled__default",
+          "pctAAMasked": 56.45933014354066,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.medium.checked.enabled__default",
+          "pctAAMasked": 56.45933014354066,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.medium.unchecked.disabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.small.checked.disabled__default",
+          "pctAAMasked": 36.24078624078624,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.small.checked.enabled__default",
+          "pctAAMasked": 36.24078624078624,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.small.unchecked.disabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "success.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.medium.checked.disabled__default",
+          "pctAAMasked": 56.698564593301434,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.medium.checked.enabled__default",
+          "pctAAMasked": 56.698564593301434,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x22"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.medium.unchecked.disabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.medium.unchecked.enabled__default",
+          "pctAAMasked": 49.88038277511962,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "38x19"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.small.checked.disabled__default",
+          "pctAAMasked": 36.36363636363637,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.small.checked.enabled__default",
+          "pctAAMasked": 36.36363636363637,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "37x22",
+          "realPx": "30x18"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.small.unchecked.disabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "warning.small.unchecked.enabled__default",
+          "pctAAMasked": 50.22222222222222,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "30x12",
+          "realPx": "30x15"
+        }
+      ]
+    },
+    {
+      "stem": "table",
+      "cellName": "Size=Medium",
+      "cellTokens": [
+        "medium"
+      ],
+      "pinned": "medium__default",
+      "pinnedPct": 2.581672203765227,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "medium__default",
+        "pctAAMasked": 2.581672203765227,
+        "pass": true
+      },
+      "contractDefaults": [
+        "medium"
+      ],
+      "defaultsKey": "medium__default",
+      "defaultsPct": 2.581672203765227,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "medium__default",
+          "pctAAMasked": 2.581672203765227,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "344x84",
+          "realPx": "344x84"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "medium__default",
+          "pctAAMasked": 1.9049247606019153,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "344x85",
+          "realPx": "344x85"
+        }
+      ],
+      "rowsElided": 3
+    },
+    {
+      "stem": "table-pagination",
+      "cellName": "TablePagination",
+      "cellTokens": [
+        "tablepagination"
+      ],
+      "pinned": "__default",
+      "pinnedPct": 7.638888888888889,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "__default",
+        "pctAAMasked": 7.638888888888889,
+        "pass": false
+      },
+      "contractDefaults": [],
+      "defaultsKey": "__default",
+      "defaultsPct": 7.638888888888889,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "__default",
+          "pctAAMasked": 7.638888888888889,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "162x8",
+          "realPx": "162x8"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "__default",
+          "pctAAMasked": 18.30985915492958,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "142x8",
+          "realPx": "142x8"
+        }
+      ],
+      "rowsElided": 1
+    },
+    {
+      "stem": "tabs",
+      "cellName": "Text color=Inherit, Indicator color=Primary",
+      "cellTokens": [
+        "inherit",
+        "primary"
+      ],
+      "pinned": "inherit.primary__default",
+      "pinnedPct": 9.991197183098592,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "inherit.primary__default",
+        "pctAAMasked": 9.991197183098592,
+        "pass": false
+      },
+      "contractDefaults": [
+        "primary",
+        "primary"
+      ],
+      "defaultsKey": "inherit.primary__default",
+      "defaultsPct": 9.991197183098592,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "inherit.primary__default",
+          "pctAAMasked": 9.991197183098592,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "142x16",
+          "realPx": "142x16"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "inherit.primary__default",
+          "pctAAMasked": 9.991197183098592,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "142x16",
+          "realPx": "142x16"
+        }
+      ],
+      "rowsElided": 11
+    },
+    {
+      "stem": "text-field",
+      "cellName": "Variant=Outlined, Size=Medium",
+      "cellTokens": [
+        "outlined",
+        "medium"
+      ],
+      "pinned": "__default",
+      "pinnedPct": 7.6143746308663856,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "__default",
+        "pctAAMasked": 7.6143746308663856,
+        "pass": false
+      },
+      "contractDefaults": [
+        "outlined",
+        "medium",
+        "Amount",
+        "Enter a valid amount"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "__default",
+          "pctAAMasked": 7.6143746308663856,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "253x87",
+          "realPx": "251x78"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "__default",
+          "pctAAMasked": 7.291808641133979,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "253x87",
+          "realPx": "253x78"
+        }
+      ],
+      "rowsElided": 1
+    },
+    {
+      "stem": "tooltip",
+      "cellName": "Tooltip",
+      "cellTokens": [
+        "tooltip"
+      ],
+      "pinned": "tooltip",
+      "pinnedPct": 23.466349017272186,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": null,
+      "contractDefaults": [
+        "not-arrow"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [],
+      "rowsElided": 1
+    }
+  ]
+}

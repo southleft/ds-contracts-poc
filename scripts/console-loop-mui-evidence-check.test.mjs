@@ -193,3 +193,105 @@ test("console-loop-mui-evidence-check refuses a mismatched round-trip", () => {
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test("console-loop-mui-evidence-check refuses a CROSS-PLANE reference (state plane the canvas cannot express)", () => {
+  const dir = mkdtempSync(path.join(tmpdir(), "console-loop-mui-ev-"));
+  try {
+    for (const d of [
+      "parity/receipts/console-loop/mui/components",
+      "parity/receipts/console-loop/mui/scores",
+      "scripts",
+      "examples/mui/oracle",
+      "examples/mui/contracts",
+      "extract/computed/configs",
+    ]) {
+      mkdirSync(path.join(dir, d), { recursive: true });
+    }
+    cpSync(CHECK, path.join(dir, "scripts/console-loop-mui-evidence-check.mjs"));
+    cpSync(SCORE_LIB, path.join(dir, "scripts/console-loop-scorecard-lib.mjs"));
+    writeFileSync(
+      path.join(dir, "parity/receipts/console-loop/RATCHET.json"),
+      `${JSON.stringify({ version: 1, floors: { mui: 0 } }, null, 2)}\n`,
+    );
+    cpSync(
+      path.join(ROOT, "examples/mui/oracle/DENOMINATOR-50.json"),
+      path.join(dir, "examples/mui/oracle/DENOMINATOR-50.json"),
+    );
+    // The two inputs the refusal is derived from: the capture config's stateProps
+    // and the contract's own Figma binding for that prop.
+    writeFileSync(
+      path.join(dir, "extract/computed/configs/mui.json"),
+      `${JSON.stringify(
+        {
+          components: [
+            {
+              name: "Checkbox",
+              contract: "examples/mui/contracts-seed/checkbox.contract.json",
+              stateProps: [{ prop: "disabled", state: "disabled" }],
+            },
+          ],
+        },
+        null,
+        2,
+      )}\n`,
+    );
+    writeFileSync(
+      path.join(dir, "examples/mui/contracts/checkbox.contract.json"),
+      `${JSON.stringify(
+        {
+          id: "mui.checkbox",
+          states: ["disabled"],
+          props: [
+            { name: "disabled", type: "boolean", default: false, bindings: { figma: { kind: "BOOLEAN" } } },
+          ],
+        },
+        null,
+        2,
+      )}\n`,
+    );
+    const src = path.join(ROOT, "parity/receipts/console-loop/mui/components/checkbox.json");
+    const receipt = JSON.parse(readFileSync(src, "utf8"));
+    // Honest FAIL-CLOSED receipt — the refusal must fire in this direction too.
+    receipt.visual.ok = false;
+    receipt.visual.matchDeveloped = false;
+    receipt.visual.status = "fail-closed";
+    receipt.visual.defects = ["named defect"];
+    receipt.acceptance.visualMatchDeveloped = false;
+    writeFileSync(
+      path.join(dir, "parity/receipts/console-loop/mui/components/checkbox.json"),
+      `${JSON.stringify(receipt, null, 2)}\n`,
+    );
+    writeFileSync(
+      path.join(dir, "parity/receipts/console-loop/mui/components/checkbox.md"),
+      `# stub\n${receipt.fileKey}\n${receipt.fingerprint.v6}\n`,
+    );
+    writeFileSync(
+      path.join(dir, "parity/receipts/console-loop/mui/scores/checkbox.json"),
+      `${JSON.stringify(
+        {
+          version: 3,
+          status: "fail",
+          passBar: { pctAAMaskedMax: 5, compositionOk: true },
+          metrics: { pctAAMasked: 81.48 },
+          compositionOk: true,
+          reference: "extract/computed/out/mui/checkbox/orig-shots/checked.disabled__default.png",
+        },
+        null,
+        2,
+      )}\n`,
+    );
+    const r = spawnSync(
+      process.execPath,
+      [path.join(dir, "scripts/console-loop-mui-evidence-check.mjs")],
+      {
+        cwd: dir,
+        encoding: "utf8",
+        env: { ...process.env, CONSOLE_LOOP_MUI_REQUIRED: "checkbox" },
+      },
+    );
+    assert.notEqual(r.status, 0);
+    assert.match(`${r.stderr}${r.stdout}`, /CROSS-PLANE REFERENCE/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});

@@ -8,7 +8,7 @@
     "compositionOk": true
   },
   "receipt": "parity/receipts/console-loop/mui/components/accordion.json",
-  "status": "fail",
+  "status": "pass",
   "fileKey": "59mLQlOMiD5w5za6SUcoO5",
   "fileVersion": "2384477865735882405",
   "setNodeId": "21:79",
@@ -17,27 +17,27 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 99.51034482758621,
-    "pctAAUnmasked": 94.63448275862069,
-    "pctAAMasked": 94.63448275862069,
+    "pctExactUnmasked": 7.944827586206897,
+    "pctAAUnmasked": 2.882758620689655,
+    "pctAAMasked": 2.882758620689655,
     "maskCoveragePct": 0,
     "canvasPx": "290x50",
     "realPx": "290x50",
     "inkCanvasPct": 7.813793103448276,
-    "inkRealPct": 99.91724137931034
+    "inkRealPct": 8.158620689655173
   },
-  "reference": "extract/computed/out/mui/accordion/orig-shots/elevation.collapsed.disabled__default.png",
-  "referenceSha256": "da6b54883c63ff6afef3cd9069ed8882fd211063e864bd758424c369509b5e20",
+  "reference": "extract/computed/out/mui/accordion/orig-shots/elevation.collapsed.enabled__default.png",
+  "referenceSha256": "ec0e21e9860d3d01dd3672b1a5a66523cfbd67b447c65dd265b225b50ee54221",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/accordion.png",
   "canvasShotSha256": "d9c1b726aaea7bc0c8023e88fc68fd4a09aba309b0dc1adbabaacdb24545ec14",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/accordion.diff.png",
-  "compositionOk": false,
-  "strictCompositionOk": false,
-  "framingTolerant": false,
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 92.10344827586206,
+  "inkDelta": 0.3448275862068968,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.00, inkDelta=92.1)"
+  "note": "pixel bar met (headless REST render vs code reference)"
 }

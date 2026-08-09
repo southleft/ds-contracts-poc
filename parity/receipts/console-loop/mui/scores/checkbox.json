@@ -1,24 +1,24 @@
 {
   "version": 3,
-  "status": "fail",
-  "matchDeveloped": true,
-  "recommendMatchDeveloped": false,
+  "status": "pass",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 92.5925925925926,
-    "pctAAUnmasked": 81.48148148148148,
-    "pctAAMasked": 81.48148148148148,
+    "pctExactUnmasked": 12.345679012345679,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
     "maskCoveragePct": 0,
     "canvasPx": "18x18",
     "realPx": "18x18",
     "inkCanvasPct": 92.5925925925926,
     "inkRealPct": 92.5925925925926
   },
-  "reference": "extract/computed/out/mui/checkbox/orig-shots/checked.disabled__default.png",
-  "referenceSha256": "00b7790a0ad02b975fb15f9c1aa42753524c18ae7d40266f5850aac40f795e15",
+  "reference": "extract/computed/out/mui/checkbox/orig-shots/checked.enabled__default.png",
+  "referenceSha256": "e2064b98180a8fee8efe3133fae0e9ba9b888ea5e267fdd46564f957a017d3cc",
   "canvasShot": "parity/receipts/console-loop/mui/shots/checkbox-cell.png",
   "canvasShotSha256": "4bd0e181fbab9843d2bffb3f49329af4233cd228d924599b4101784e05b2c6c9",
   "diff": "parity/receipts/console-loop/mui/scores/checkbox.diff.png",
@@ -26,12 +26,12 @@
   "receipt": "parity/receipts/console-loop/mui/components/checkbox.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
   "inkDelta": 0,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=81.48 > 5)",
-  "recordedAt": "2026-08-09T03:33:13.348Z"
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-09T05:45:20.860Z"
 }

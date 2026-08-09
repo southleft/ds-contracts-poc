@@ -56,6 +56,90 @@ const REQUIRED = (
   .map((s) => s.trim())
   .filter(Boolean);
 
+/**
+ * CROSS-PLANE REFERENCE REFUSAL (2026-08-09).
+ *
+ * `extract/computed/configs/mui.json` declares `stateProps` for the components
+ * whose capture matrix sweeps a React prop as a STATE PLANE (MUI: `disabled`).
+ * The capture key spells that plane as the LAST segment of the variant part —
+ * `checked.enabled__default` / `checked.disabled__default` — with `enabled` the
+ * BASE (prop absent) rendering.
+ *
+ * The canvas can only be on the non-base value when the contract binds that
+ * prop as a Figma VARIANT axis, or when `figmaStatePreviews` compiles a `State=`
+ * axis. Bound as a Figma BOOLEAN property — which toggles child visibility and
+ * CANNOT repaint a fill — no cell in the set is ever disabled, so a reference
+ * pinned there is scored against a cell that is a DIFFERENT POINT IN PROP SPACE
+ * and its pctAAMasked measures the missing plane rather than fidelity.
+ *
+ * That is exactly how mui/checkbox read 81.48 (and accordion 94.63, switch
+ * 23.44) on 2026-08-08: `visual-truth-run.mjs`'s `pickGateShot` pins the
+ * alphabetically first `*__default.png`, and "disabled" sorts before "enabled".
+ * The number was not a canvas defect and could not be climbed.
+ *
+ * The gate now REFUSES such a pin rather than reporting its number, in either
+ * direction (a pass-claim and a fail-closed claim are equally void when the pair
+ * is cross-plane). Degrades to a no-op when the config/contracts are absent (the
+ * unit tests run the checker against a synthetic ROOT).
+ */
+const CONFIG = path.join(ROOT, "extract/computed/configs/mui.json");
+const CONTRACTS = path.join(ROOT, "examples/mui/contracts");
+const STEM_ALIAS = { pagination: "table-pagination" };
+/** stem -> { prop, state, canvasExpressible, how } */
+const statePlanes = new Map();
+if (existsSync(CONFIG) && existsSync(CONTRACTS)) {
+  let cfg;
+  try {
+    cfg = JSON.parse(readFileSync(CONFIG, "utf8"));
+  } catch {
+    cfg = null;
+  }
+  for (const c of cfg?.components ?? []) {
+    const sp = (c.stateProps ?? [])[0];
+    if (!sp) continue;
+    const base = path.basename(String(c.contract ?? "")).replace(".contract.json", "");
+    const stem = STEM_ALIAS[base] ?? base;
+    const cPath = path.join(CONTRACTS, `${stem}.contract.json`);
+    if (!existsSync(cPath)) continue;
+    let contract;
+    try {
+      contract = JSON.parse(readFileSync(cPath, "utf8"));
+    } catch {
+      continue;
+    }
+    const prop = (contract.props ?? []).find((p) => p.name === sp.prop);
+    const kind = prop?.bindings?.figma?.kind ?? null;
+    const previews =
+      Boolean(contract.figmaStatePreviews) && (contract.states ?? []).includes(sp.state);
+    statePlanes.set(stem, {
+      prop: sp.prop,
+      state: sp.state,
+      canvasExpressible: kind === "VARIANT" || previews,
+      how: kind === "VARIANT" ? "variant-axis" : previews ? "figmaStatePreviews" : `figma binding ${kind ?? "none"}`,
+    });
+  }
+}
+
+/** @returns {string|null} error text when the scorecard's reference is cross-plane */
+function crossPlaneError(stem, scorecard) {
+  const plane = statePlanes.get(stem);
+  if (!plane || plane.canvasExpressible) return null;
+  const ref = scorecard?.reference;
+  if (typeof ref !== "string" || !ref) return null;
+  const key = path.basename(ref).replace(/\.png$/, "");
+  const variantPart = key.split("__")[0] ?? "";
+  const last = variantPart.split(".").pop() ?? "";
+  if (last.toLowerCase() !== plane.state.toLowerCase()) return null;
+  return (
+    `${stem}: CROSS-PLANE REFERENCE — the scorecard is pinned to "${key}", which names the ` +
+    `\`${plane.state}\` value of the \`${plane.prop}\` state plane, but no cell in this canvas set can be ` +
+    `${plane.state} (${plane.how}). Its pctAAMasked measures the missing plane, not fidelity, in either ` +
+    `direction. Re-pin to the base plane with ` +
+    `\`npx tsx scripts/console-loop-ref-plane-probe.mts --lane mui --repin\` and record the plane as ` +
+    `unmeasured (FC-STATE-PLANE-ABSENT).`
+  );
+}
+
 const errors = [];
 const scoredPass = [];
 const failClosed = [];
@@ -99,6 +183,10 @@ for (const stem of REQUIRED) {
   const claims = visualClaimsPass(receipt);
   const defects = Array.isArray(receipt.visual?.defects) ? receipt.visual.defects : [];
   const sc = readScorecard(SCORES_DIR, stem);
+  if (sc?.data) {
+    const xp = crossPlaneError(stem, sc.data);
+    if (xp) errors.push(xp);
+  }
   if (claims) {
     if (!sc) {
       errors.push(
