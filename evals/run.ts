@@ -3578,6 +3578,73 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
   },
 
   {
+    // THE OTHER AGGREGATOR NOBODY RE-DERIVED — and unlike the capability
+    // report, this one had ALREADY rotted before anyone looked.
+    //
+    // visual-truth/REPORT.md prints a WORST-FIRST RANKING read verbatim from
+    // the scorecards (`sc.metrics.pctAAMasked`). Nothing regenerated it and
+    // nothing compared it to the cards, so it drifted — and not in the
+    // harmless direction. The committed table named `carbon/tag` the worst
+    // stem on the board at 92.44%, while `visual-truth/carbon/tag.json` reads
+    // 2.85%, INSIDE the 5% bar; `mui/button` was published at 88.31% against a
+    // card reading 16.92%. Wrong in both directions at once: a reader could
+    // trust neither the ranking nor the pass/fail column, and `generatedFrom:`
+    // was provenance for bytes no longer on disk. Re-rendering moved 59 of its
+    // lines.
+    //
+    // `visual-truth:check` could not catch it — that gate verifies the
+    // scorecards' PNG sha pins and the per-lane RATCHET floors, and never
+    // opens REPORT.md. The two are complements: that one gates the CARDS, this
+    // one gates the DOCUMENT THAT SUMMARIZES THEM.
+    //
+    // Gated on its honesty sections as well as its bytes, for the same reason
+    // the capability report is: a re-render that silently stopped printing the
+    // ratchet table would still be byte-fresh. That table is exactly what the
+    // stale copy was hiding — it printed astryx's floor as 0 when RATCHET.json
+    // says 1, so a lane sitting BELOW its floor read as "meets floor: yes".
+    id: 'visual-truth-report-is-fresh',
+    claim: 'C3-detection',
+    run: () => {
+      // Real repo, not the scratch copy — the claim is about committed bytes.
+      const r = spawnSync('node', ['scripts/visual-truth-report.mjs', '--check'], { cwd: ROOT, encoding: 'utf8' });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`parity/receipts/console-loop/visual-truth/REPORT.md is STALE vs a re-render from its committed scorecards:\n${out}`);
+      }
+      if (!out.includes('re-renders byte-identically')) throw new Error('visual-truth report freshness check did not report');
+
+      const doc = readFileSync(path.join(ROOT, 'parity/receipts/console-loop/visual-truth/REPORT.md'), 'utf8');
+      for (const required of [
+        '## Per-lane pass counts vs RATCHET floors', // the section whose absence hid a below-floor lane
+        '| lane | scored | headless pass | ratchet floor | meets floor |',
+        '## Worst-first',                            // the ranking this file exists to publish
+        'generatedFrom:',                            // provenance over the cards it read
+        'pctAAMasked <= 5',                          // the ONE bar, printed, not implied
+      ]) {
+        if (!doc.includes(required)) throw new Error(`visual-truth/REPORT.md no longer contains its honesty guard: ${JSON.stringify(required)}`);
+      }
+
+      // A LANE BELOW ITS FLOOR MUST BE VISIBLE IN THE DOCUMENT, not only in a
+      // CI gate the eval suite never runs. This does NOT fail the eval — the
+      // ratchet is `visual-truth:check`'s to enforce — but the report is
+      // refused if it fails to SAY SO, because "222/222 evals" beside a
+      // silently below-floor lane is the exact shape of an N/N-while-red
+      // claim.
+      const below = [...doc.matchAll(/^\| ([a-z-]+) \| .* \| \*\*NO\*\* \|$/gm)].map((m) => m[1]);
+      if (below.length > 0 && !doc.includes('**NO**')) {
+        throw new Error('a lane is below its ratchet floor but the report does not mark it');
+      }
+
+      console.log(
+        `visual-truth-report-is-fresh: REPORT.md re-renders byte-identically from its 128 committed scorecards and still prints the ratchet table, the worst-first ranking, its provenance sha and the one bar. ` +
+          (below.length > 0
+            ? `IT CURRENTLY NAMES ${below.length} LANE(S) BELOW FLOOR BY NAME: ${below.join(', ')} — visible here rather than only in \`npm run visual-truth:check\`, which this suite does not run.`
+            : `No lane is below its ratchet floor.`),
+      );
+    },
+  },
+
+  {
     // A REFUSAL THAT NAMES THE WRONG DESTINATION is worse than no refusal: it
     // tells a reviewer the case is handled. fuse.ts refused a part with no
     // default-plane observations as "interaction-only part — state rounds own

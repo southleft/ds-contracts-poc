@@ -69,6 +69,7 @@
     "visual-truth:run": "tsx scripts/visual-truth-run.mjs",
     "visual-truth:report": "node scripts/visual-truth-report.mjs",
     "visual-truth:check": "node scripts/visual-truth-check.mjs",
+    "visual-truth:report:fresh": "node scripts/visual-truth-report.mjs --check",
     "console-loop:stem-serve": "node scripts/console-loop-stem-serve.mjs",
     "human-gates:inventory": "node scripts/human-gate-inventory-check.mjs",
     "mui:denominator:check": "node scripts/mui-denominator-check.mjs",

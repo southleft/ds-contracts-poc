@@ -162,5 +162,42 @@ if (skips.length > 0) {
 }
 
 const outPath = path.join(VT, "REPORT.md");
-writeFileSync(outPath, `${lines.join("\n")}\n`);
+const rendered = `${lines.join("\n")}\n`;
+
+// `--check` — THE REPORT MUST NOT OUTLIVE ITS OWN NUMBERS.
+//
+// Every figure in REPORT.md is READ from a scorecard: the worst-first table
+// prints `sc.metrics.pctAAMasked` verbatim. Nothing re-derived it, and nothing
+// compared it to the cards, so it silently rotted — and not in the harmless
+// direction. The committed table called `carbon/tag` the worst thing on the
+// board at 92.44%, while `visual-truth/carbon/tag.json` reads 2.85%, which is
+// INSIDE the 5% bar; `mui/button` was published at 88.31% against a card
+// reading 16.92%. Wrong in both directions at once, so a reader could neither
+// trust the ranking nor the pass/fail column, and the `generatedFrom:` sha was
+// provenance for bytes that no longer existed on disk.
+//
+// `visual-truth:check` could not have caught this: it verifies the scorecards'
+// PNG sha pins and the ratchet floor, and never opens REPORT.md. So the check
+// belongs here, in the shape `build-capability-report.mjs --check` already
+// uses — render in memory, byte-compare, refuse by name. An aggregator whose
+// output is a RANKING is exactly the kind that must be gated on its bytes.
+if (process.argv.includes("--check")) {
+  const committed = existsSync(outPath) ? readFileSync(outPath, "utf8") : null;
+  if (committed === null) {
+    console.error(`✖ visual-truth:report --check: ${path.relative(ROOT, outPath)} does not exist — it is a committed artifact; run \`npm run visual-truth:report\``);
+    process.exit(1);
+  }
+  if (committed !== rendered) {
+    console.error(
+      `✖ STALE: ${path.relative(ROOT, outPath)} does not match a re-render from the committed scorecards.\n` +
+        `Every number in it is READ from a scorecard; one of those cards moved (or the report was never re-run).\n` +
+        `Rebuild it and commit:  npm run visual-truth:report`,
+    );
+    process.exit(1);
+  }
+  console.log(`✔ visual-truth:report --check: ${path.relative(ROOT, outPath)} re-renders byte-identically from ${cards.length} committed scorecard(s)`);
+  process.exit(0);
+}
+
+writeFileSync(outPath, rendered);
 console.log(`visual-truth:report → ${path.relative(ROOT, outPath)} (${cards.length} scorecards)`);
