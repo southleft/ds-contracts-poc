@@ -9605,6 +9605,60 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // SCORE MONOTONICITY: the board's own metric PREFERS a wrong-sized canvas.
+    // Measured on the committed altitude icon-close pair — the byte-correct
+    // 18x18 cell scores 19.75 while a 16x16 one (the exact defect an earlier
+    // round fixed) scores 15.12, and NO normalisation branch fires at that
+    // size, so the "pre-comparison resampling" story recorded for this defect
+    // is dead. Not fixed here: repairing the AA point re-scores all 92 cells
+    // and belongs in its own round. Pinned instead, both halves — the numbers,
+    // so a change to the metric cannot drift the evidence away silently, and
+    // the COST, so the moment a pass starts being bought with the defect (a
+    // passing cell smaller than its reference) it fails by name. Today that
+    // cost is zero of 28 passing cells.
+    id: 'console-loop-score-monotonicity',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(
+        TSX,
+        [path.join(ROOT, 'scripts', 'console-loop-score-monotonicity-probe.mts'), '--check'],
+        { cwd: ROOT, encoding: 'utf8' },
+      );
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) throw new Error(`score-monotonicity check failed:\n${out}`);
+      if (!out.includes('the defect is pinned, not fixed'))
+        throw new Error(`the probe stopped naming the defect it pins:\n${out}`);
+      if (!/0 of \d+ passing cell\(s\) is smaller than its reference/.test(out))
+        throw new Error(`the probe stopped reporting the board cost:\n${out}`);
+    },
+  },
+  {
+    // WHITE-TRIM REACH: before scoring, both images are cropped to pixels under
+    // a 250 white threshold, so a component whose design IS a light surface has
+    // that surface classified as page background. The first-party `token`
+    // receipt recorded this for itself — its 11.15 is AA over the four-letter
+    // glyph run because the pill, its border and its radius are all lighter
+    // than the threshold — and it was never asked how far the crop reaches.
+    // Swept: 10 of 184 committed images drop VISIBLY painted pixels, and the
+    // worst are failing cells scored on partial components (mui snackbar keeps
+    // 62% of its frame, mui fab 21%), which makes their failure CAUSES suspect
+    // as well as their numbers. Exactly one PASSING cell drops visible paint
+    // and it is named with its measurement inside the probe.
+    id: 'console-loop-white-trim-reach',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(
+        TSX,
+        [path.join(ROOT, 'scripts', 'console-loop-white-trim-reach-probe.mts'), '--check'],
+        { cwd: ROOT, encoding: 'utf8' },
+      );
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) throw new Error(`white-trim reach check failed:\n${out}`);
+      if (!/\d+ crop\(s\) discard VISIBLE paint/.test(out))
+        throw new Error(`the probe stopped reporting the reach it measures:\n${out}`);
+    },
+  },
+  {
     // CANVAS-DRIFT: no other gate can ask whether a live cell is what its lane's
     // own committed emit script would build TODAY. A cell from an older revision
     // is perfectly self-consistent — right node id, right variant name, shot
