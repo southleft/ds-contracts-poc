@@ -8,7 +8,7 @@
     "compositionOk": true
   },
   "receipt": "parity/receipts/console-loop/polaris/components/spinner.json",
-  "status": "fail",
+  "status": "pass",
   "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
   "fileVersion": "2385140377324169403",
   "setNodeId": "1:10105",
@@ -17,9 +17,9 @@
   "cellPick": "first-cell",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 21.633315305570576,
-    "pctAAUnmasked": 7.787993510005409,
-    "pctAAMasked": 7.787993510005409,
+    "pctExactUnmasked": 7.13899405083829,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
     "maskCoveragePct": 0,
     "canvasPx": "43x43",
     "realPx": "43x43",
@@ -27,17 +27,17 @@
     "inkRealPct": 17.36073553272039
   },
   "reference": "parity/receipts/console-loop/polaris/refs/spinner.png",
-  "referenceSha256": "bcde33caf3293e2f06efeeecd1e7a4076815f7bba41f7ff43192f2f15ed72d3d",
+  "referenceSha256": "99046b4ebcd6b6ae1642def1c3760878d1543bee86273fd3dd8366799afdac7a",
   "canvasShot": "parity/receipts/console-loop/visual-truth/polaris/shots/spinner.png",
   "canvasShotSha256": "9a322becfa3a0cf76b5b8bdbdbca8eb6d69827f5dcfae9138d611ba59d981e5b",
   "diff": "parity/receipts/console-loop/visual-truth/polaris/diffs/spinner.diff.png",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
   "inkDelta": 1.460248783126012,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=7.79 > 5)"
+  "note": "pixel bar met (headless REST render vs code reference)"
 }

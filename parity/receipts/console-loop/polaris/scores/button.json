@@ -8,32 +8,32 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 53.769841269841265,
-    "pctAAUnmasked": 11.607142857142858,
-    "pctAAMasked": 11.607142857142858,
+    "pctExactUnmasked": 34.672619047619044,
+    "pctAAUnmasked": 16.61706349206349,
+    "pctAAMasked": 16.61706349206349,
     "maskCoveragePct": 0,
-    "canvasPx": "63x32",
+    "canvasPx": "63x21",
     "realPx": "63x32",
-    "inkCanvasPct": 97.56944444444444,
-    "inkRealPct": 92.7579365079365
+    "inkCanvasPct": 14.285714285714285,
+    "inkRealPct": 22.023809523809522
   },
   "reference": "parity/receipts/console-loop/polaris/refs/button.png",
-  "referenceSha256": "431c74133e7af7c0680fbffc9fc226aeeac9f8ed745866fed7ad76e41fe582e3",
+  "referenceSha256": "fa9bf32e0f4b7066d2ae57b496268852287aadcacc9b5bd97833b0b73147a768",
   "canvasShot": "parity/receipts/console-loop/polaris/shots/button-cell.png",
-  "canvasShotSha256": "541d7d9b8ca329b7245c80d0e6c09649125e40828f982ed9e693bc3c15893e33",
+  "canvasShotSha256": "87dff9aa42a97fb47b21b165ecdb3be6f3b68b30809a69b98a967a60fc75cded",
   "diff": "parity/receipts/console-loop/polaris/scores/button.diff.png",
   "fc": [
     "FC-ENUM-HOLE"
   ],
   "receipt": "parity/receipts/console-loop/polaris/components/button.json",
-  "compositionOk": true,
-  "strictCompositionOk": true,
+  "compositionOk": false,
+  "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 4.811507936507937,
+  "scaleRatio": 1.5238095238095237,
+  "inkDelta": 7.738095238095237,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=11.61 > 5)",
-  "recordedAt": "2026-08-08T04:31:19.412Z"
+  "note": "composition mismatch (scaleRatio=1.52, inkDelta=7.7) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-09T00:37:41.422Z"
 }

@@ -1,0 +1,329 @@
+{
+  "recordedAt": "2026-08-09T00:37:40.249Z",
+  "results": [
+    {
+      "stem": "avatar",
+      "box": {
+        "w": 28,
+        "h": 28
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 44x44 vs 28x28"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 5.1020408163265305,
+        "note": "28x28"
+      },
+      "legLiveVsFresh": {
+        "pctAA": 8.673469387755102,
+        "pctExact": 26.913265306122447,
+        "note": "28x28"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 5.994897959183674,
+        "note": "28x28"
+      }
+    },
+    {
+      "stem": "badge",
+      "box": {
+        "w": 61,
+        "h": 20
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 77x36 vs 61x20"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 92.8688524590164,
+        "note": "61x20"
+      },
+      "legLiveVsFresh": {
+        "pctAA": 6.065573770491803,
+        "pctExact": 26.885245901639344,
+        "note": "61x20"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 90.24590163934427,
+        "note": "61x20"
+      }
+    },
+    {
+      "stem": "banner",
+      "box": {
+        "w": 319,
+        "h": 88
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 336x107 vs 320x93"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 2.8925619834710745,
+        "note": "319x88"
+      },
+      "legLiveVsFresh": {
+        "pctAA": 8.984041037332574,
+        "pctExact": 17.0846394984326,
+        "note": "319x88"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 0.769489247311828,
+        "note": "320x93"
+      }
+    },
+    {
+      "stem": "button",
+      "box": {
+        "w": 63,
+        "h": 32
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 79x48 vs 63x32"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 3.5714285714285716,
+        "note": "63x32"
+      },
+      "legLiveVsFresh": {
+        "pctAA": 4.910714285714286,
+        "pctExact": 19.246031746031747,
+        "note": "63x32"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 2.7777777777777777,
+        "note": "63x32"
+      }
+    },
+    {
+      "stem": "checkbox",
+      "box": {
+        "w": 160,
+        "h": 28
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 176x44 vs 158x28"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 88.21428571428571,
+        "note": "160x28"
+      },
+      "legLiveVsFresh": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 158x18 vs 157x18"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 88.4493670886076,
+        "note": "158x28"
+      }
+    },
+    {
+      "stem": "progress-bar",
+      "box": {
+        "w": 288,
+        "h": 16
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 304x32 vs 288x16"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 0.2170138888888889,
+        "note": "288x16"
+      },
+      "legLiveVsFresh": {
+        "pctAA": 0.043402777777777776,
+        "pctExact": 0.2170138888888889,
+        "note": "288x16"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 0.3472222222222222,
+        "note": "288x16"
+      }
+    },
+    {
+      "stem": "radio-button",
+      "box": {
+        "w": 166,
+        "h": 28
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 183x44 vs 167x28"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 89.67297762478485,
+        "note": "166x28"
+      },
+      "legLiveVsFresh": {
+        "pctAA": 8.971600688468158,
+        "pctExact": 21.53614457831325,
+        "note": "166x28"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 90.18391787852866,
+        "note": "167x28"
+      }
+    },
+    {
+      "stem": "spinner",
+      "box": {
+        "w": 44,
+        "h": 44
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 60x60 vs 44x48"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 90.08264462809917,
+        "note": "44x44"
+      },
+      "legLiveVsFresh": {
+        "pctAA": 4.855371900826446,
+        "pctExact": 18.233471074380166,
+        "note": "44x44"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 91.2405303030303,
+        "note": "44x48"
+      }
+    },
+    {
+      "stem": "tag",
+      "box": {
+        "w": 72,
+        "h": 20
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 88x36 vs 72x20"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 5.069444444444445,
+        "note": "72x20"
+      },
+      "legLiveVsFresh": {
+        "pctAA": 2.5694444444444446,
+        "pctExact": 23.40277777777778,
+        "note": "72x20"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 5.277777777777778,
+        "note": "72x20"
+      }
+    },
+    {
+      "stem": "text",
+      "box": {
+        "w": 146,
+        "h": 20
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 162x36 vs 144x20"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 89.86301369863014,
+        "note": "146x20"
+      },
+      "legLiveVsFresh": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 144x11 vs 143x11"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 93.125,
+        "note": "144x20"
+      }
+    },
+    {
+      "stem": "text-field",
+      "box": {
+        "w": 211,
+        "h": 60
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 227x76 vs 211x60"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 39.75513428120063,
+        "note": "211x60"
+      },
+      "legLiveVsFresh": {
+        "pctAA": 7.527646129541864,
+        "pctExact": 12.377567140600316,
+        "note": "211x60"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 41.2480252764613,
+        "note": "211x60"
+      }
+    },
+    {
+      "stem": "thumbnail",
+      "box": {
+        "w": 60,
+        "h": 60
+      },
+      "legCommittedShotVsRef": {
+        "pctAA": null,
+        "pctExact": null,
+        "note": "size 76x76 vs 60x60"
+      },
+      "legCommittedVsLive": {
+        "pctAA": 0,
+        "pctExact": 2,
+        "note": "60x60"
+      },
+      "legLiveVsFresh": {
+        "pctAA": 76.58333333333333,
+        "pctExact": 98.27777777777777,
+        "note": "60x60"
+      },
+      "legRefVsFresh": {
+        "pctAA": 0,
+        "pctExact": 1.9166666666666667,
+        "note": "60x60"
+      }
+    }
+  ]
+}

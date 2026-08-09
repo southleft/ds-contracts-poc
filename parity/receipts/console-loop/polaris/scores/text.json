@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/text/gate-shots/headingSm.base.regular__default.png",
   "referenceSha256": "9380ea7fdfa8868b9d27166523790bc4a56b3c79d0572d5b70cbe248695cec4f",
   "canvasShot": "parity/receipts/console-loop/polaris/shots/text-cell.png",
-  "canvasShotSha256": "6a99b575a724df7532bf2682a5712588db9b2a73c5cc274d154b82393eab5f02",
+  "canvasShotSha256": "b10bc85e3f7d038623808d226c44058e071c8c88433b11dfab960f057b632156",
   "diff": "parity/receipts/console-loop/polaris/scores/text.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/polaris/components/text.json",
@@ -33,5 +33,5 @@
   "dprNormalized": true,
   "sizeNormalized": false,
   "note": "pixel bar missed (pctAAMasked=26.07 > 5)",
-  "recordedAt": "2026-08-08T23:36:17.875Z"
+  "recordedAt": "2026-08-09T00:42:29.336Z"
 }

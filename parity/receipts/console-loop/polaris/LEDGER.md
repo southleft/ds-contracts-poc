@@ -33,3 +33,95 @@ true — an honest number for the first time.
 
 Pin: `parity/receipts/console-loop/polaris/framing.json` +
 `scripts/console-loop-capture-framing-check.mjs`.
+
+## 2026-08-08 — Class B round: FIVE of nine "pixel-bar misses" were STALE EVIDENCE
+
+The nine composition-clean misses were re-measured with a triangle probe
+(`scripts/polaris-ref-triangle.mts`) that renders the CURRENT contract's
+emit-html output at scale 1 on the real Inter face and compares it against BOTH
+the committed reference AND the live canvas cell, re-exported from
+`GnQnjSNBXtgtd2Ht0Hs1C8` over the Desktop Bridge. Evidence:
+`refs-fresh/TRIANGLE.json`.
+
+The triangle answers "reader, grammar, emitter or reference?" by construction:
+
+| leg | reading |
+|---|---|
+| live canvas ↔ fresh code render ≈ 0, committed ref ↔ fresh large | the REFERENCE is stale |
+| committed ref ↔ fresh ≈ 0, live ↔ fresh large | the CANVAS is wrong (emitter) |
+| committed shot ↔ live cell large | the SHOT is stale |
+
+Result: **not one of the nine was a canvas defect.**
+
+| stem | before | after | cause |
+|---|---|---|---|
+| progress-bar | 59.77 | **0.17 SCORED PASS** | FC-STALE-REF (the FC-METER fix landed on the canvas; the reference was never re-rendered) |
+| spinner | 7.79 | **0.00 SCORED PASS** | FC-STALE-REF |
+| tag | 9.72 | **1.94 SCORED PASS** | FC-STALE-REF |
+| radio-button | 20.60 | 14.07 | FC-STALE-REF (old ref was 142x18 — it predated the label) + glyph raster |
+| avatar | 14.54 | 8.67 | FC-STALE-REF + glyph raster |
+| checkbox | 18.39 | 15.47 | ref was the 18x18 box-only gate-shot + glyph raster |
+| badge | 15.81 | 12.58 | FC-STALE-SHOT + FC-ENUM-DEFAULT-SPLIT |
+| button | 11.61 | 16.62 | FC-STALE-SHOT + FC-WHITE-ON-WHITE (instrument; 4.91 on the declared cream surface) |
+| banner | 8.96 | 9.50 | unchanged within noise — glyph raster + icon vector |
+
+### The headline: progress-bar, 59.77 → 0.17
+
+The canvas draws a #E3E3E3 track with a #91D0FF indicator 115/288 wide — 40%,
+exactly the contract's `progress` default and exactly what today's emit-html
+writes (`style="width: 40%"`). The committed reference was 99.3% solid #91D0FF:
+a render of an OLDER emit-html in which the indicator spanned the whole track.
+`receipts/pair--medium.highlight__default.png` in the computed output shows the
+same frame from the other side — REAL POLARIS at 40%, CONTRACT RENDER at 100%.
+The 59.77 was the age of a PNG.
+
+### Named causes carried forward (fail-closed, canvas is NOT the defect)
+
+- **FC-BORDER-STYLE-NOT-SYNTHESISED** (text-field, code side). `core/emit-react.ts`
+  synthesises `border-style: solid` only when the SHORTHAND `border-width` sits in
+  `part.tokens`/`part.literals` (lines ~1750 and ~2377). Since `c924c9c2` the
+  TextField backdrop carries its width as per-variant LONGHAND literals
+  (`border-top-width: 1px` … under `.text-field--variant-inherit`) and the base
+  `{p.border-width-0165}` token binding is gone — so no keyword is emitted and CSS
+  paints nothing. The v0.1.0 `gate.html` still carries `border-width` +
+  `border-style: solid`, which is why the gate-shot reference has a border and the
+  current render does not. The canvas is RIGHT (`stroke: p/color-input-border`,
+  strokeSides 1) and so is the library (`border: var(--p-border-width-0165) solid
+  var(--p-color-input-border)`). Reference deliberately LEFT on the gate-shot —
+  re-basing would have installed a knowingly border-less reference and regressed a
+  passing stem 4.11 → 10.62.
+- **FC-ENUM-DEFAULT-SPLIT** (text 26.07, badge). `text` declares FIVE enum props
+  with no `default`; emit-html renders a bare `<p class="text">` at base typography
+  while the canvas cell is `Variant=Heading Sm`. The two emitters disagree about
+  what the default IS, so the default cell can never be a like-for-like pair. Same
+  shape on `badge.tone` (no default; canvas names the cell `Tone=enabled`).
+- **FC-WHITE-ON-WHITE** (button, INSTRUMENT limit — added to `framing.json`
+  `guard.framingCauses`). Polaris Button secondary's root fill IS #ffffff, the
+  review substrate, so the content-box crop finds only the border and the shot box
+  collapses to 63x21 for a 63x32 cell. Both sides on the cream `#F8F4ED`
+  reviewSurface the receipts already declare: **4.91**, under the bar. The lane
+  cannot simply move to cream — the scorer's crop trims WHITE only, so a cream
+  margin reads as ink (measured: progress-bar 0.17 → 58.25 on cream). The fix is to
+  teach the crop the substrate, not to re-shoot the canvas.
+- **FC-REF-BROKEN-ASSET** (thumbnail 76.44, unchanged refusal). Both the gate-shot
+  and the regenerated current render draw the browser's broken-image glyph plus the
+  alt text; the contract slot default has no resolvable source.
+
+### Two instrument findings worth keeping
+
+1. **The framing pin is geometry-only.** `polaris/button` and `polaris/badge` both
+   shipped a canvas shot of a DIFFERENT variant than the pinned cell (a dark
+   Primary-looking button where the live Secondary cell is white; a blue pill where
+   the live cell is neutral). Both passed `console-loop:capture-framing` because the
+   dimensions matched. A content fingerprint, not just a box, would have caught it.
+2. **pixelmatch at threshold 0.1 is blind to a tone swap.** badge's stale blue shot
+   vs the live neutral cell differed on 94.43% of pixels per channel and scored
+   7.13 AA — #F0F0F0 vs #D5EBFF has a YIQ delta of 158 against the 352 cutoff.
+
+### Verification
+
+`console-loop:capture-framing` ✔ (button open, named FC-WHITE-ON-WHITE) ·
+`console-loop:polaris:evidence:check` ✔ 12/12, **4 scored-pass** (was 1) ·
+`visual-truth:run --lib polaris` reproduces the board on the INDEPENDENT headless
+REST instrument (progress-bar 0.04, spinner 0.00, tag 2.50, text-field 4.72 — all
+pass) · `visual-truth:check` ✔ for polaris · `tsc --noEmit` ✔.

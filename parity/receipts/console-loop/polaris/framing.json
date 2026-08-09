@@ -27,9 +27,10 @@
       "FC-REF-CROSS-LIBRARY",
       "FC-FONT-SUBSTRATE",
       "FC-ABS-SIZE",
-      "FC-WIDTH-TOKEN"
+      "FC-WIDTH-TOKEN",
+      "FC-WHITE-ON-WHITE"
     ],
-    "framingCausesNote": "C2 (reference comparability) is waived on a fail-closed receipt by naming ANY of these in visual.defects. A stem already retargeted to a correct like-for-like reference that still sits outside the guard names the real emit defect (FC-ABS-SIZE / FC-WIDTH-TOKEN), not the generic framing code."
+    "framingCausesNote": "C2 (reference comparability) is waived on a fail-closed receipt by naming ANY of these in visual.defects. A stem already retargeted to a correct like-for-like reference that still sits outside the guard names the real emit defect (FC-ABS-SIZE / FC-WIDTH-TOKEN), not the generic framing code. FC-WHITE-ON-WHITE (added 2026-08-08) is an INSTRUMENT limit, not a canvas defect: when a component's root fill IS the review surface (Polaris Button secondary is #ffffff on a white substrate) the content-box crop finds only the border, so the shot's box collapses (button: 63x21 for a 63x32 cell) and scaleRatio/pctAA are computed on a sliver. Measured both-sides-on-cream (#F8F4ED, the reviewSurface the receipts already declare), polaris/button is 4.91 — under the bar. The lane cannot simply move to cream because the scorer's crop trims WHITE only; fixing this means teaching the crop the substrate, not re-shooting the canvas."
   },
   "refAllow": [
     "parity/receipts/console-loop/polaris/refs/",

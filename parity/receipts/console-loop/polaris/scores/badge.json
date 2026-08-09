@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 94.83870967741936,
-    "pctAAUnmasked": 15.806451612903224,
-    "pctAAMasked": 15.806451612903224,
+    "pctExactUnmasked": 33.5483870967742,
+    "pctAAUnmasked": 12.580645161290322,
+    "pctAAMasked": 12.580645161290322,
     "maskCoveragePct": 0,
     "canvasPx": "31x10",
     "realPx": "31x10",
-    "inkCanvasPct": 93.54838709677419,
-    "inkRealPct": 93.54838709677419
+    "inkCanvasPct": 93.2258064516129,
+    "inkRealPct": 95.80645161290322
   },
   "reference": "parity/receipts/console-loop/polaris/refs/badge.png",
-  "referenceSha256": "85cfd6c6ecff71fd83d77893c2170c81e63314d354883c7e1f1339538be0c63b",
+  "referenceSha256": "4c77a2485a5279b0106611318bdb95e8fc436f26730a34693a92c4711dc54425",
   "canvasShot": "parity/receipts/console-loop/polaris/shots/badge-cell.png",
-  "canvasShotSha256": "b6cf173007a666b4c625b73c1d61e2e1765d936b50d814b7c4cc017f0a1fdce2",
+  "canvasShotSha256": "832c9bd66f7a9af1bd04543594e6bc0b0ad5e529d5ad00c4b606180a708e36aa",
   "diff": "parity/receipts/console-loop/polaris/scores/badge.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/polaris/components/badge.json",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 0,
+  "inkDelta": 2.5806451612903203,
   "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=15.81 > 5)",
-  "recordedAt": "2026-08-08T04:31:18.894Z"
+  "note": "pixel bar missed (pctAAMasked=12.58 > 5)",
+  "recordedAt": "2026-08-09T00:37:40.836Z"
 }

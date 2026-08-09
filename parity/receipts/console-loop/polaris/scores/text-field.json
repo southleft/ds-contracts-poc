@@ -1,7 +1,7 @@
 {
   "version": 3,
   "status": "pass",
-  "matchDeveloped": false,
+  "matchDeveloped": true,
   "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/textfield/gate-shots/inherit.medium.off.off.off.enabled__default.png",
   "referenceSha256": "6bdc602198700bb4bbc0cbbf730820932d752e1b87302fea0b260415e34c4221",
   "canvasShot": "parity/receipts/console-loop/polaris/shots/text-field-cell.png",
-  "canvasShotSha256": "5363d0aada97303c129b3f881339876abc502a183201532ba11475b5c7798870",
+  "canvasShotSha256": "547f85a896007a6e34bb927d99336170b4cec5997a9a9713f6f153c3ee5cda55",
   "diff": "parity/receipts/console-loop/polaris/scores/text-field.diff.png",
   "fc": [
     "FC-PLACEHOLDER",
@@ -36,5 +36,5 @@
   "dprNormalized": true,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T23:36:17.595Z"
+  "recordedAt": "2026-08-09T00:42:29.611Z"
 }

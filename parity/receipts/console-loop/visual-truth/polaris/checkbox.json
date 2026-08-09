@@ -17,27 +17,27 @@
   "cellPick": "first-cell",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 30.028129395218002,
-    "pctAAUnmasked": 14.838255977496484,
-    "pctAAMasked": 14.838255977496484,
+    "pctExactUnmasked": 34.49367088607595,
+    "pctAAUnmasked": 15.436005625879043,
+    "pctAAMasked": 15.436005625879043,
     "maskCoveragePct": 0,
     "canvasPx": "158x18",
-    "realPx": "18x18",
+    "realPx": "157x18",
     "inkCanvasPct": 27.180028129395218,
-    "inkRealPct": 2.6722925457102673
+    "inkRealPct": 29.746835443037973
   },
   "reference": "parity/receipts/console-loop/polaris/refs/checkbox.png",
-  "referenceSha256": "59c5f29adf2a8fdbe8e70ce4ebc7dce47ef7efd133febc4e474ba534f9cd9358",
+  "referenceSha256": "c77d0504b4cfb408a2f26a5fd3c1e7c532ae0c968a221f433c5470901dd7224d",
   "canvasShot": "parity/receipts/console-loop/visual-truth/polaris/shots/checkbox.png",
   "canvasShotSha256": "ecc074e887751e4861d8e36be8fc1bec5759aa23b996b96aa86c76c3f2c92d93",
   "diff": "parity/receipts/console-loop/visual-truth/polaris/diffs/checkbox.diff.png",
-  "compositionOk": false,
-  "strictCompositionOk": false,
+  "compositionOk": true,
+  "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 8.777777777777779,
-  "inkDelta": 24.50773558368495,
+  "scaleRatio": 1.0063694267515924,
+  "inkDelta": 2.566807313642755,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=8.78, inkDelta=24.5)"
+  "note": "pixel bar missed (pctAAMasked=15.44 > 5)"
 }

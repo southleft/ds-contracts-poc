@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 35.47819971870605,
-    "pctAAUnmasked": 18.38959212376934,
-    "pctAAMasked": 18.38959212376934,
+    "pctExactUnmasked": 34.49367088607595,
+    "pctAAUnmasked": 15.471167369901547,
+    "pctAAMasked": 15.471167369901547,
     "maskCoveragePct": 0,
     "canvasPx": "158x18",
-    "realPx": "135x18",
+    "realPx": "157x18",
     "inkCanvasPct": 27.180028129395218,
-    "inkRealPct": 19.479606188466946
+    "inkRealPct": 29.746835443037973
   },
-  "reference": "extract/computed/out/checkbox/gate-shots/unchecked.enabled__default.png",
-  "referenceSha256": "ced49ee9e37167603b89ad83619ba4df00c8be7c4cda7dd95d01d8f540779d06",
+  "reference": "parity/receipts/console-loop/polaris/refs/checkbox.png",
+  "referenceSha256": "c77d0504b4cfb408a2f26a5fd3c1e7c532ae0c968a221f433c5470901dd7224d",
   "canvasShot": "parity/receipts/console-loop/polaris/shots/checkbox-cell.png",
-  "canvasShotSha256": "00eeb2a8575a787269952dcbb089a4d6ecf9bea5630f3e84866889d58daa0efd",
+  "canvasShotSha256": "b76460262e73ee515ce77ddc0fc9dbb07b84ea79bda0abcb6c1c0349ba44af84",
   "diff": "parity/receipts/console-loop/polaris/scores/checkbox.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/polaris/components/checkbox.json",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.1703703703703703,
-  "inkDelta": 7.700421940928273,
-  "dprNormalized": true,
+  "scaleRatio": 1.0063694267515924,
+  "inkDelta": 2.566807313642755,
+  "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=18.39 > 5)",
-  "recordedAt": "2026-08-08T23:36:18.210Z"
+  "note": "pixel bar missed (pctAAMasked=15.47 > 5)",
+  "recordedAt": "2026-08-09T00:37:41.695Z"
 }

@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 98.97222222222221,
-    "pctAAUnmasked": 85.72222222222223,
-    "pctAAMasked": 85.72222222222223,
+    "pctExactUnmasked": 99.05555555555556,
+    "pctAAUnmasked": 76.44444444444444,
+    "pctAAMasked": 76.44444444444444,
     "maskCoveragePct": 0,
     "canvasPx": "60x60",
-    "realPx": "56x56",
+    "realPx": "60x57",
     "inkCanvasPct": 98.77777777777777,
-    "inkRealPct": 23.305555555555554
+    "inkRealPct": 32.52777777777778
   },
-  "reference": "extract/computed/out/thumbnail/gate-shots/medium__default.png",
-  "referenceSha256": "e1c01d4b4d4c2c471c36e85d174dc0d22aa94de2634eb77e9d00291516f8912f",
+  "reference": "parity/receipts/console-loop/polaris/refs/thumbnail.png",
+  "referenceSha256": "3abd5b866714ffdfbd157815efa32a7d99b8f3540cb7ecefc97ad60c0b0f0342",
   "canvasShot": "parity/receipts/console-loop/polaris/shots/thumbnail-cell.png",
-  "canvasShotSha256": "5053eb49d5ccc1f11352329c8850226cc98bde3d0492d381b2d20dcf4faec1d7",
+  "canvasShotSha256": "bab65f2956ce79b735b5c1fc54e2f3cd2aa115120788619bf44ad7c0cfa6fbca",
   "diff": "parity/receipts/console-loop/polaris/scores/thumbnail.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/polaris/components/thumbnail.json",
@@ -28,10 +28,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.0714285714285714,
-  "inkDelta": 75.47222222222221,
-  "dprNormalized": true,
+  "scaleRatio": 1.0526315789473684,
+  "inkDelta": 66.25,
+  "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.07, inkDelta=75.5) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T23:36:18.554Z"
+  "note": "composition mismatch (scaleRatio=1.05, inkDelta=66.3) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-09T00:37:43.662Z"
 }
