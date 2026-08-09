@@ -5,9 +5,20 @@
  *   1. a committed sync/ledger.json that fails schema validation or whose
  *      bytes are not the deterministic serialization (hand-edits that
  *      reorder records or keys would make every future diff noise);
- *   2. a seeded record that disagrees with the receipt it cites
+ *   2. ANY record that disagrees with the receipt it cites
  *      (fingerprint/fileKey/nodeId — the receipts under
- *      parity/receipts/console-loop are READ-ONLY evidence here);
+ *      parity/receipts/console-loop are READ-ONLY evidence here).
+ *
+ *      THE PROVENANCE HOLE THIS CLOSES (2026-08-09). This check used to run
+ *      only where `provenance === 'seeded-from-receipts'`. But the repair for
+ *      a stale row is `sync record --from-receipt <receipt>`, and that verb
+ *      re-labels the row `sync-record` — so the one command that fixes a
+ *      disagreement ALSO removes the row from the check that found it. All 128
+ *      committed records cite a receipt, so the laundered row would have kept
+ *      citing evidence nothing compared it against, and the next receipt to
+ *      move would go unnoticed. Measured by doing it: repairing altitude.badge
+ *      dropped it out of the checked set. The citation, not the provenance
+ *      label, is what makes a row checkable;
  *   3. a record whose contractPath no longer exists (a deleted contract must
  *      delete or re-point its ledger record, never rot silently);
  *   4. a drift table over the committed fixture that stops classifying all
@@ -41,19 +52,21 @@ if (serializeLedger(ledger) !== bytes) {
   );
 }
 
-// 2. Seeded records agree with the receipts they cite ------------------------
-let seeded = 0;
+// 2. Every receipt-citing record agrees with the receipt it cites ------------
+let cited = 0;
 for (const r of ledger.records) {
-  if (r.provenance !== 'seeded-from-receipts') continue;
-  seeded++;
-  const cited = r.note?.match(/^receipt (.+)$/)?.[1];
-  if (!cited) {
-    fail(`${recordKey(r)}: seeded-from-receipts but the note cites no receipt path`);
+  const citedPath = r.note?.match(/^receipt (.+)$/)?.[1];
+  if (!citedPath) {
+    // A row that cites nothing is only a failure when its provenance CLAIMS a
+    // receipt; rows recorded from a live write may legitimately carry no note.
+    if (r.provenance === 'seeded-from-receipts')
+      fail(`${recordKey(r)}: seeded-from-receipts but the note cites no receipt path`);
     continue;
   }
-  const receiptPath = path.join(ROOT, cited);
+  cited++;
+  const receiptPath = path.join(ROOT, citedPath);
   if (!existsSync(receiptPath)) {
-    fail(`${recordKey(r)}: cited receipt ${cited} is not on disk`);
+    fail(`${recordKey(r)}: cited receipt ${citedPath} is not on disk`);
     continue;
   }
   const receipt = JSON.parse(readFileSync(receiptPath, 'utf8')) as {
@@ -62,11 +75,11 @@ for (const r of ledger.records) {
     fingerprint?: { v6?: string };
   };
   if (receipt.fingerprint?.v6 !== r.canvasFingerprint)
-    fail(`${recordKey(r)}: canvasFingerprint ${r.canvasFingerprint} ≠ receipt ${cited} v6 ${receipt.fingerprint?.v6}`);
+    fail(`${recordKey(r)}: canvasFingerprint ${r.canvasFingerprint} ≠ receipt ${citedPath} v6 ${receipt.fingerprint?.v6}`);
   if (receipt.fileKey !== r.fileKey)
-    fail(`${recordKey(r)}: fileKey ${r.fileKey} ≠ receipt ${cited} fileKey ${receipt.fileKey}`);
+    fail(`${recordKey(r)}: fileKey ${r.fileKey} ≠ receipt ${citedPath} fileKey ${receipt.fileKey}`);
   if (receipt.generate?.nodeId !== r.setNodeId)
-    fail(`${recordKey(r)}: setNodeId ${r.setNodeId} ≠ receipt ${cited} nodeId ${receipt.generate?.nodeId}`);
+    fail(`${recordKey(r)}: setNodeId ${r.setNodeId} ≠ receipt ${citedPath} nodeId ${receipt.generate?.nodeId}`);
 }
 
 // 3. Contract paths resolve --------------------------------------------------
@@ -118,7 +131,7 @@ if (failures.length > 0) {
   process.exit(1);
 }
 console.log(
-  `sync-ledger-check: ${ledger.records.length} record(s) ok (${seeded} seeded-from-receipts verified against their receipts), ` +
+  `sync-ledger-check: ${ledger.records.length} record(s) ok (${cited} receipt-citing record(s) verified against the receipts they cite), ` +
     'bytes deterministic, contract paths resolve; offline fixture drift table classifies ' +
     'in-sync / code-ahead / canvas-ahead / conflict / untracked exactly.',
 );

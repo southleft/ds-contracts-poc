@@ -10908,8 +10908,26 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       });
       const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
       if ((r.status ?? -1) !== 0) throw new Error(`sync:ledger:check failed:\n${out}`);
-      if (!/\d+ record\(s\) ok/.test(out) || !out.includes('seeded-from-receipts'))
-        throw new Error('sync:ledger:check did not report record/seed verification');
+      if (!/\d+ record\(s\) ok/.test(out))
+        throw new Error('sync:ledger:check did not report record verification');
+      // THE DENOMINATOR, not just the phrase. The gate used to check only rows
+      // labelled `seeded-from-receipts`, and the very command that repairs a
+      // stale row (`sync record --from-receipt`) re-labels it `sync-record` —
+      // so repairing a disagreement silently removed the row from the check
+      // that found it. The gate now keys on the receipt CITATION, and this
+      // asserts the count it verified equals the number of citing rows in the
+      // committed ledger, so a shrinking checked-set is a failure rather than
+      // a smaller green number.
+      const citing = (
+        JSON.parse(readFileSync(path.join(ROOT, 'sync', 'ledger.json'), 'utf8')) as {
+          records: { note?: string }[];
+        }
+      ).records.filter((r) => /^receipt /.test(r.note ?? '')).length;
+      const reported = Number(out.match(/\((\d+) receipt-citing record\(s\) verified/)?.[1] ?? -1);
+      if (reported !== citing)
+        throw new Error(
+          `sync:ledger:check verified ${reported} receipt-citing record(s) but the committed ledger has ${citing} — a checked-set that shrinks is how a laundered row escapes`,
+        );
       if (!out.includes('in-sync / code-ahead / canvas-ahead / conflict / untracked'))
         throw new Error('sync:ledger:check did not report the five-status fixture drift table');
       console.log(

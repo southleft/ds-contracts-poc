@@ -26,12 +26,12 @@
       "contractHash": "sha256:42693246bc95a9fdcb34a06edca990fff6903ace039fdd01ec53788fead20322",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "60:10083",
-      "canvasFingerprint": "v6:3192606537",
+      "canvasFingerprint": "v6:3977245456",
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:43:10.768Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/altitude/components/badge.json"
     },
     {
@@ -40,12 +40,12 @@
       "contractHash": "sha256:c535887b34f3a9b797f35fa7ff7f443c1e6b798732cc4b74e70ecdfd85ea0270",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "60:10151",
-      "canvasFingerprint": "v6:3196882528",
+      "canvasFingerprint": "v6:3313935822",
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:43:11.810Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/altitude/components/button.json"
     },
     {
@@ -54,12 +54,12 @@
       "contractHash": "sha256:d9a844ec9ff819bf7c0a266f06599b16beaf84723c681002ae259aa627c98b6b",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "60:10126",
-      "canvasFingerprint": "v6:2414831033",
+      "canvasFingerprint": "v6:3288704793",
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:43:13.030Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/altitude/components/chip.json"
     },
     {
@@ -68,12 +68,12 @@
       "contractHash": "sha256:f7aa750a69c0eee18cf0dce137bfc9bf9e49a4b0c7f62544e92ead9d361d784c",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "59:9713",
-      "canvasFingerprint": "v6:3296776669",
+      "canvasFingerprint": "v6:1673250268",
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:43:13.347Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/altitude/components/divider.json"
     },
     {
@@ -82,12 +82,12 @@
       "contractHash": "sha256:3055234e8a343491f962d27d4d552724dd3cbe09a790c33081f8fa0424295d2a",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3047",
-      "canvasFingerprint": "v6:3593476120",
+      "canvasFingerprint": "v6:541267266",
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:43:13.859Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/altitude/components/heading.json"
     },
     {
@@ -96,30 +96,26 @@
       "contractHash": "sha256:dfe8c8afc6ff9ade50fb951d2e969af2f10da920c7bd796233332a6f9e93a991",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3071",
-      "canvasFingerprint": "v6:163654327",
+      "canvasFingerprint": "v6:1912940653",
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:43:14.336Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:319884819",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
-      "provenance": "seeded-from-receipts",
+      "observed": null,
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/altitude/components/icon-close.json"
     },
     {
       "contractId": "altitude.link",
       "contractPath": "examples/altitude/contracts/link.contract.json",
-      "contractHash": "sha256:087a8ea0ac60bca207bbe23d2723b6949ac5923a3a20e4ad375bfc175f2c9b93",
+      "contractHash": "sha256:a471ba09b99fc18c48c3bad31a102d53ec53b9c5b16e293a394c7d02c31fabcb",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "60:10102",
-      "canvasFingerprint": "v6:2052539233",
+      "canvasFingerprint": "v6:3448013784",
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:43:14.695Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/altitude/components/link.json"
     },
     {
