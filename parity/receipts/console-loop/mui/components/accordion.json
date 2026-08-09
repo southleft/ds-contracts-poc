@@ -23,7 +23,9 @@
       "Accordion COMPONENT_SET 21:79: 4 variant(s), 3 prop def(s). Structure looks sane; slot placeholders OK."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=6.80% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/accordion.json"
+      "pixel scorecard fail: pctAAMasked=6.80% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/accordion.json",
+      "FC-REF-WRONG-VARIANT (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference is pinned to elevation.collapsed.disabled__default, but the computed-extract harness renders the SAME expanded panel for both values of the collapsed/expanded axis — elevation.collapsed ink is 290x89 and includes the 'Details body copy for the molecule round.' paragraph, elevation.expanded ink is 290x126. The canvas cell is a 290x50 collapsed header. Every accordion gate-shot in extract/computed/out/mui/accordion therefore depicts a body panel the collapsed cell does not have, so no correctly-collapsed MUI accordion reference exists to retarget to; closing this needs the harness to honour the collapsed prop.",
+      "Live cell identity (reference audit 2026-08-08): the canvas cell is 21:39 \"Variant=Elevation, Expanded=Collapsed\", so the pinned elevation.collapsed.* reference names the right variant — the defect is that the HARNESS ignores the Expanded axis, not that the wrong file was pinned. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) — an independent live-canvas fact, not a re-reading of the committed PNG. (The .enabled and .disabled accordion gate-shots are byte-identical, so that token carries no information either.)"
     ],
     "reference": "parity/receipts/console-loop/mui/refs/accordion.png",
     "referenceSource": "extract/computed/out/mui/accordion/gate-shots/elevation.collapsed.disabled__default.png",
@@ -42,8 +44,8 @@
     "mismatches": [],
     "gaps": [],
     "matchedAxes": [
-      "Variant enum \u2192 Elevation/Outlined",
-      "Expanded enum \u2192 Collapsed/Expanded",
+      "Variant enum → Elevation/Outlined",
+      "Expanded enum → Collapsed/Expanded",
       "BOOLEAN Disabled",
       "first-variant fill bound: imported/accordion/root/background-color"
     ],

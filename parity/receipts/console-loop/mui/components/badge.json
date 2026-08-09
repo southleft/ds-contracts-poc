@@ -24,7 +24,8 @@
       "Screenshot reviewed on section/node 84:2377; structure/variants look sane (slot placeholders OK)."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=54.00% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/badge.json"
+      "pixel scorecard fail: pctAAMasked=54.00% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/badge.json",
+      "FC-REF-STALE-COPY (closed by reference audit 2026-08-08): the committed refs/ copy had the same dimensions as the gate-shot its referenceSource names but different bytes — the source had been re-rendered (Roboto cfg.fonts substrate) underneath it, so the scored PNG was not the artifact the provenance line claimed. Copy re-synced from source. The stale copy rendered the avatar initial as a broken 'Λ' glyph; the current source renders 'A'."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/badge.png",
     "referenceSource": "extract/computed/out/mui/badge/gate-shots/default.dot__default.png",
@@ -39,7 +40,7 @@
       ":COMPONENT_SET/Badge|fill|[]",
       ":COMPONENT_SET/Badge|radius|5,5,5,5",
       ":COMPONENT_SET/Badge|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Badge|description|Badge \u00e2\u0080\u0094 generated from contract mui.badge v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Badge|description|Badge â generated from contract mui.badge v0.2.0 â",
       ":COMPONENT_SET/Badge|propdef|Color:VARIANT=Default",
       ":COMPONENT_SET/Badge|propdef|Variant:VARIANT=Standard",
       "/0:COMPONENT/Color=Default, Variant=Standard|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
@@ -64,8 +65,8 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Color enum \u2192 Default/Primary/Secondary/Error/Info/Success/Warning",
-      "Variant enum \u2192 Standard/Dot"
+      "Color enum → Default/Primary/Secondary/Error/Info/Success/Warning",
+      "Variant enum → Standard/Dot"
     ],
     "observed": {
       "type": "COMPONENT_SET",

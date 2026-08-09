@@ -24,7 +24,8 @@
       "Screenshot reviewed on section/node 84:1744; structure/variants look sane (slot placeholders OK)."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=2.13% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/fab.json"
+      "pixel scorecard fail: pctAAMasked=2.13% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/fab.json",
+      "FC-REF-STALE-COPY (closed by reference audit 2026-08-08): the committed refs/ copy had the same dimensions as the gate-shot its referenceSource names but different bytes — the source had been re-rendered (Roboto cfg.fonts substrate) underneath it, so the scored PNG was not the artifact the provenance line claimed. Copy re-synced from source. "
     ],
     "reference": "parity/receipts/console-loop/mui/refs/fab.png",
     "referenceSource": "extract/computed/out/mui/fab/gate-shots/large.default.enabled__default.png",
@@ -39,7 +40,7 @@
       ":COMPONENT_SET/Fab|fill|[]",
       ":COMPONENT_SET/Fab|radius|5,5,5,5",
       ":COMPONENT_SET/Fab|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Fab|description|Fab \u00e2\u0080\u0094 generated from contract mui.fab v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Fab|description|Fab â generated from contract mui.fab v0.2.0 â",
       ":COMPONENT_SET/Fab|propdef|Color:VARIANT=Default",
       ":COMPONENT_SET/Fab|propdef|Disabled#84:39:BOOLEAN=false",
       ":COMPONENT_SET/Fab|propdef|Label#84:49:TEXT=+",
@@ -62,8 +63,8 @@
     "mismatches": [],
     "gaps": [],
     "matchedAxes": [
-      "Size enum \u2192 Large/Small/Medium",
-      "Color enum \u2192 Default/Primary/Secondary",
+      "Size enum → Large/Small/Medium",
+      "Color enum → Default/Primary/Secondary",
       "BOOLEAN Disabled",
       "TEXT Label",
       "first-variant fill bound: imported/fab/root/background-color/default"

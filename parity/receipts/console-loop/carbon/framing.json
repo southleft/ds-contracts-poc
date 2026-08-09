@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "kind": "console-loop-capture-framing-pin",
+  "lane": "carbon",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileName": "DS Contracts Testing",
+  "note": "CAPTURE-FRAMING PIN. cellW/cellH are the LIVE Figma VARIANT-cell dimensions, minted from the Desktop Bridge (figma-console figma_execute, fileKey pinned) — NOT derived from the committed PNGs. scripts/console-loop-capture-framing-check.mjs asserts that every committed canvas shot is that cell plus ONE uniform margin, and that the reference the scorer resolves is comparable, in-library, provenance-resolvable and not flush against its harness stage edge.",
+  "mintedFrom": {
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge)",
+    "mintedAt": "2026-08-08",
+    "method": "COMPONENT_SET children walk; cell dimensions read from node.width/node.height; ambiguous cells disambiguated by the cell's own solid fill against the committed shot's dominant colour (see stems[].cellNote)"
+  },
+  "guard": {
+    "marginMinPx": -1,
+    "marginMaxPx": 17,
+    "marginSkewMaxPx": 2,
+    "scaleRatioMax": 1.35,
+    "aspectRatioMax": 1.35,
+    "dprBand": [
+      1.7,
+      2.4
+    ],
+    "requireResolvableProvenance": true,
+    "stageClipCheck": true,
+    "framingCauses": [
+      "FC-REF-FRAMING",
+      "FC-REF-WHOLE-PAGE",
+      "FC-REF-BROKEN-ASSET",
+      "FC-REF-CROSS-LIBRARY",
+      "FC-REF-WRONG-VARIANT",
+      "FC-REF-STAGE-EDGE",
+      "FC-REF-STALE-COPY",
+      "FC-REF-MISSING-CONTROL",
+      "FC-REF-UNSTYLED-DOM",
+      "FC-REF-UNVERIFIABLE-PROVENANCE",
+      "FC-FONT-SUBSTRATE",
+      "FC-ABS-SIZE",
+      "FC-WIDTH-TOKEN"
+    ],
+    "framingCausesNote": "C2 (reference comparability) is waived on a fail-closed receipt by naming ANY of these in visual.defects. A stem already retargeted to a correct like-for-like reference that still sits outside the guard names the real emit defect (FC-ABS-SIZE / FC-WIDTH-TOKEN), not the generic framing code."
+  },
+  "refAllow": [
+    "parity/receipts/console-loop/carbon/refs/",
+    "extract/computed/out/carbon/",
+    "examples/carbon/"
+  ],
+  "stems": {
+    "accordion": {
+      "setNodeId": "60:10429",
+      "cellNodeId": "60:10365",
+      "cellName": "Align=End, Size=Lg, State=Default",
+      "cellW": 328,
+      "cellH": 98,
+      "cellNote": "Align=End and Align=Start are both 328x98, so C1 cannot discriminate them; this pin records the cell whose variant the receipt's reference names (end.lg)."
+    },
+    "button": {
+      "setNodeId": "1:5528",
+      "cellNodeId": "1:5368",
+      "cellName": "Kind=Primary, Size=Xs, State=Default",
+      "cellW": 79,
+      "cellH": 24
+    },
+    "checkbox": {
+      "setNodeId": "1:5562",
+      "cellNodeId": "1:5547",
+      "cellName": "Checked=Unchecked",
+      "cellW": 136,
+      "cellH": 20,
+      "cellNote": "All three Checked cells are 136x20; the committed shot depicts an empty box, so Unchecked."
+    },
+    "icon-button": {
+      "setNodeId": "1:5645",
+      "cellNodeId": "1:5580",
+      "cellName": "Kind=Primary, Size=Lg",
+      "cellW": 48,
+      "cellH": 48,
+      "cellNote": "Disambiguated by fill: the shot's dominant colour is #0f62fe, the Primary btn fill (Secondary #393939, Tertiary/Ghost #000000)."
+    },
+    "inline-notification": {
+      "setNodeId": "60:10344",
+      "cellNodeId": "60:10198",
+      "cellName": "Kind=Error, Contrast=High",
+      "cellW": 346,
+      "cellH": 48,
+      "cellNote": "All twelve cells are 346x48; this pin records the cell whose variant the receipt's reference names (error.high)."
+    },
+    "modal": {
+      "setNodeId": "1:5911",
+      "cellNodeId": "1:5848",
+      "cellName": "Size=Sm",
+      "cellW": 540,
+      "cellH": 214
+    },
+    "tabs": {
+      "setNodeId": "1:5947",
+      "cellNodeId": "1:5914",
+      "cellName": "State=Default",
+      "cellW": 328,
+      "cellH": 40,
+      "cellNote": "All three State cells are 328x40; recorded as the Default state the receipt's reference names."
+    },
+    "tag": {
+      "setNodeId": "1:6024",
+      "cellNodeId": "1:5974",
+      "cellName": "Type=Blue, Size=Lg",
+      "cellW": 46,
+      "cellH": 32,
+      "cellNote": "Disambiguated by fill: the shot's pill fill is #d0e2ff, the Blue tag background."
+    },
+    "text-input": {
+      "setNodeId": "1:6091",
+      "cellNodeId": "1:6051",
+      "cellName": "Size=Lg, State=Default",
+      "cellW": 288,
+      "cellH": 72
+    },
+    "toggle": {
+      "setNodeId": "1:6126",
+      "cellNodeId": "1:6094",
+      "cellName": "Toggled=Untoggled, State=Default",
+      "cellW": 75,
+      "cellH": 58,
+      "cellNote": "Untoggled cells are 75x58 and Toggled cells 74x58, so the 76x58 committed shot resolves to Untoggled."
+    }
+  }
+}

@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 8.522571819425446,
-    "pctAAUnmasked": 2.359781121751026,
-    "pctAAMasked": 2.359781121751026,
+    "pctExactUnmasked": 8.720930232558139,
+    "pctAAUnmasked": 1.9049247606019153,
+    "pctAAMasked": 1.9049247606019153,
     "maskCoveragePct": 0,
     "canvasPx": "344x85",
     "realPx": "344x85",
     "inkCanvasPct": 42.35978112175103,
-    "inkRealPct": 42.804377564979475
+    "inkRealPct": 43.38577291381669
   },
   "reference": "parity/receipts/console-loop/mui/refs/table.png",
-  "referenceSha256": "c28817c85a7d78c3a0f59bd62d054cfef385227792a3324c52d327f3b23a0f1e",
+  "referenceSha256": "b58de21283747ba8f17654e7fe789fd504fe85ce1da0fbbbffcef3f5c12d25bf",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/table.png",
   "canvasShotSha256": "ec9620ffdd2bffb458f00914ffa2b16930ed85d660c75eca9b290eab621940df",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/table.diff.png",
@@ -36,7 +36,7 @@
   "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 0.4445964432284484,
+  "inkDelta": 1.0259917920656605,
   "dprNormalized": true,
   "sizeNormalized": true,
   "note": "pixel bar met (headless REST render vs code reference)"

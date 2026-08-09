@@ -41,7 +41,9 @@
       "Structure/variants reviewed via inspect (COMPONENT_SET, 8 variants on page Paper)."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=25.94% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/paper.json"
+      "pixel scorecard fail: pctAAMasked=25.94% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/paper.json",
+      "FC-REF-UNSTYLED-DOM (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference renders its body text in the browser DEFAULT SERIF, not the Roboto substrate the lane pinned. The harness sets no document-level font-family, so text that MUI does not wrap in a Typography element (Card/Paper/Dialog content, the Accordion details paragraph) inherits Times while the canvas renders the contract's face. The gate-shot is the current regate (mtime 2026-08-08 09:xx, same batch as the stems whose Roboto re-pin DID take), so this is not a stale copy — the harness genuinely emits serif here. Glyph ink dominates the diff.",
+      "RETRACTED CANDIDATE (reference audit 2026-08-08): retargeting to 1.elevation__default (12.59) is REFUTED — the canvas cell is 83:1617 \"Elevation=0, Variant=Elevation\", so the pinned 0.elevation__default is correct. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) — an independent live-canvas fact, not a re-reading of the committed PNG."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/paper.png",
     "referenceSource": "extract/computed/out/mui/paper/gate-shots/0.elevation__default.png",
@@ -56,7 +58,7 @@
       ":COMPONENT_SET/Paper|fill|[]",
       ":COMPONENT_SET/Paper|radius|5,5,5,5",
       ":COMPONENT_SET/Paper|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Paper|description|Paper \u00e2\u0080\u0094 generated from contract mui.paper v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Paper|description|Paper â generated from contract mui.paper v0.2.0 â",
       ":COMPONENT_SET/Paper|propdef|Content#83:0:TEXT=Paper content",
       ":COMPONENT_SET/Paper|propdef|Elevation:VARIANT=1",
       ":COMPONENT_SET/Paper|propdef|Variant:VARIANT=Elevation",
@@ -79,8 +81,8 @@
     "mismatches": [],
     "gaps": [],
     "matchedAxes": [
-      "Elevation enum \u2192 1/0/3/8",
-      "Variant enum \u2192 Elevation/Outlined",
+      "Elevation enum → 1/0/3/8",
+      "Variant enum → Elevation/Outlined",
       "TEXT Content",
       "first-variant fill bound: imported/paper/root/background-color"
     ],

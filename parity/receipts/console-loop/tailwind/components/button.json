@@ -47,7 +47,7 @@
     "defects": [],
     "reference": "parity/receipts/console-loop/tailwind/refs/button.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "pair--default.md.enabled__default.png#package-left",
+    "referenceSource": "extract/computed/out/tailwind/button/receipts/pair--default.md.enabled__default.png#package-left",
     "scorecard": "parity/receipts/console-loop/tailwind/scores/button.json",
     "matchDevelopedReason": "agent AA=1.94 compositionOk vs package-left (Md Default)",
     "matchedAt": "2026-08-08T03:23:28.851Z",

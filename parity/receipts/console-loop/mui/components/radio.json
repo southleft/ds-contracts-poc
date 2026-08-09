@@ -40,7 +40,8 @@
       "Structure/variants reviewed via inspect (COMPONENT_SET, 14 variants on page Radio)."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=38.50% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/radio.json"
+      "pixel scorecard fail: pctAAMasked=38.50% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/radio.json",
+      "REAL (CANVAS-SIDE), not reference-side (reference audit 2026-08-08): all 28 sibling gate-shots score IDENTICALLY at 38.50 — checked and unchecked, enabled and disabled — so no retarget can move this number and the reference is not the variable. The canvas cell draws an ellipse outline with a detached dot instead of MUI's concentric circles; ink boxes agree exactly (20x20 vs 20x20) and inkRealPct 61.0 vs inkCanvasPct 36.0 is the missing fill."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/radio.png",
     "referenceSource": "extract/computed/out/mui/radio/gate-shots/default.checked.enabled__default.png",
@@ -55,7 +56,7 @@
       ":COMPONENT_SET/Radio|fill|[]",
       ":COMPONENT_SET/Radio|radius|5,5,5,5",
       ":COMPONENT_SET/Radio|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Radio|description|Radio \u00e2\u0080\u0094 generated from contract mui.radio v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Radio|description|Radio â generated from contract mui.radio v0.2.0 â",
       ":COMPONENT_SET/Radio|propdef|Checked:VARIANT=Unchecked",
       ":COMPONENT_SET/Radio|propdef|Color:VARIANT=Primary",
       "/0:COMPONENT/Color=Primary, Checked=Unchecked|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
@@ -80,8 +81,8 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Color enum \u2192 Primary/Secondary/Error/Info/Success/Warning/Default",
-      "Checked enum \u2192 Unchecked/Checked"
+      "Color enum → Primary/Secondary/Error/Info/Success/Warning/Default",
+      "Checked enum → Unchecked/Checked"
     ],
     "observed": {
       "type": "COMPONENT_SET",

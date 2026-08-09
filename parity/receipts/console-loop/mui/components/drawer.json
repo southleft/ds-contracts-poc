@@ -36,11 +36,13 @@
   "visual": {
     "ok": false,
     "notes": [
-      "Structure/variants reviewed via inspect (83:1680, page Drawer); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (83:1680, page Drawer); visual OK — slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page Drawer)."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=55.03% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/drawer.json"
+      "pixel scorecard fail: pctAAMasked=55.03% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/drawer.json",
+      "FC-REF-STAGE-EDGE (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference's ink is flush against the LEFT edge of its 480x320 stage (content box 134x65 at x=0) — the temporary Drawer is position:fixed to the viewport edge, so the harness captures it anchored to the stage rather than framed inside it. The only sibling, permanent__default, is 8.08x off in scale. No stage-inset MUI drawer reference exists.",
+      "FC-REF-FRAMING: consequence of the above — shot ink 117x97 vs reference ink 134x65 (aspectRatio 1.71)."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/drawer.png",
     "referenceSource": "extract/computed/out/mui/drawer/gate-shots/temporary__default.png",
@@ -55,7 +57,7 @@
       ":COMPONENT_SET/Drawer|fill|[]",
       ":COMPONENT_SET/Drawer|radius|5,5,5,5",
       ":COMPONENT_SET/Drawer|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Drawer|description|Drawer \u00e2\u0080\u0094 generated from contract mui.drawer v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Drawer|description|Drawer â generated from contract mui.drawer v0.2.0 â",
       ":COMPONENT_SET/Drawer|propdef|Content#83:13:TEXT=Drawer content",
       ":COMPONENT_SET/Drawer|propdef|Variant:VARIANT=Temporary",
       "/0:COMPONENT/Variant=Temporary|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
@@ -80,7 +82,7 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Variant enum \u2192 Temporary/Permanent",
+      "Variant enum → Temporary/Permanent",
       "TEXT Content"
     ],
     "observed": {

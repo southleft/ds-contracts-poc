@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "kind": "console-loop-capture-framing-pin",
+  "lane": "tailwind",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileName": "DS Contracts Testing",
+  "note": "CAPTURE-FRAMING PIN. cellW/cellH are the LIVE Figma VARIANT-cell dimensions, minted from the Desktop Bridge (figma-console figma_execute, fileKey pinned) — NOT derived from the committed PNGs. scripts/console-loop-capture-framing-check.mjs asserts that every committed canvas shot is that cell plus ONE uniform margin, and that the reference the scorer resolves is comparable, in-library, provenance-resolvable and not flush against its harness stage edge.",
+  "mintedFrom": {
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge)",
+    "mintedAt": "2026-08-08",
+    "method": "COMPONENT_SET children walk; cell dimensions read from node.width/node.height; ambiguous cells disambiguated by the cell's own solid fill against the committed shot's dominant colour (see stems[].cellNote)"
+  },
+  "guard": {
+    "marginMinPx": -1,
+    "marginMaxPx": 17,
+    "marginSkewMaxPx": 2,
+    "scaleRatioMax": 1.35,
+    "aspectRatioMax": 1.35,
+    "dprBand": [
+      1.7,
+      2.4
+    ],
+    "requireResolvableProvenance": true,
+    "stageClipCheck": true,
+    "framingCauses": [
+      "FC-REF-FRAMING",
+      "FC-REF-WHOLE-PAGE",
+      "FC-REF-BROKEN-ASSET",
+      "FC-REF-CROSS-LIBRARY",
+      "FC-REF-WRONG-VARIANT",
+      "FC-REF-STAGE-EDGE",
+      "FC-REF-STALE-COPY",
+      "FC-REF-MISSING-CONTROL",
+      "FC-REF-UNSTYLED-DOM",
+      "FC-REF-UNVERIFIABLE-PROVENANCE",
+      "FC-FONT-SUBSTRATE",
+      "FC-ABS-SIZE",
+      "FC-WIDTH-TOKEN"
+    ],
+    "framingCausesNote": "C2 (reference comparability) is waived on a fail-closed receipt by naming ANY of these in visual.defects. A stem already retargeted to a correct like-for-like reference that still sits outside the guard names the real emit defect (FC-ABS-SIZE / FC-WIDTH-TOKEN), not the generic framing code."
+  },
+  "refAllow": [
+    "parity/receipts/console-loop/tailwind/refs/",
+    "extract/computed/out/tailwind/",
+    "examples/tailwind/"
+  ],
+  "stems": {
+    "alert": {
+      "setNodeId": "1:2098",
+      "cellNodeId": "1:2089",
+      "cellName": "Color=Failure",
+      "cellW": 128,
+      "cellH": 52,
+      "cellNote": "Disambiguated by fill: the shot's dominant colour is #fde8e8, the Failure background."
+    },
+    "badge": {
+      "setNodeId": "1:2149",
+      "cellNodeId": "1:2107",
+      "cellName": "Color=Failure, Size=Sm, State=Default",
+      "cellW": 60,
+      "cellH": 24,
+      "cellNote": "Disambiguated by fill: #fde8e8 background with #9b1c1c label — the Failure badge."
+    },
+    "button": {
+      "setNodeId": "1:2254",
+      "cellNodeId": "1:2164",
+      "cellName": "Color=Default, Size=Md, State=Default",
+      "cellW": 85,
+      "cellH": 40,
+      "cellNote": "Disambiguated by fill: #1a56db, the Default button background."
+    },
+    "card": {
+      "setNodeId": "1:2267",
+      "cellNodeId": "1:2267",
+      "cellName": "Card (flowbite.card)",
+      "cellW": 149,
+      "cellH": 74,
+      "cellNote": "flowbite.card emits a bare COMPONENT, not a COMPONENT_SET, so the set and cell node are the same node."
+    },
+    "toggle-switch": {
+      "setNodeId": "1:2296",
+      "cellNodeId": "1:2272",
+      "cellName": "Sizing=Md, Checked=Unchecked",
+      "cellW": 100,
+      "cellH": 24,
+      "cellNote": "Md cells are 100x24 for both Checked values; the committed shot has the thumb at the left, so Unchecked."
+    }
+  }
+}

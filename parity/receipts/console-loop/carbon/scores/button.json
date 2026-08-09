@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 98.3739837398374,
-    "pctAAUnmasked": 75.40650406504065,
-    "pctAAMasked": 75.40650406504065,
+    "pctExactUnmasked": 47.549019607843135,
+    "pctAAUnmasked": 39.21568627450981,
+    "pctAAMasked": 39.21568627450981,
     "maskCoveragePct": 0,
-    "canvasPx": "39x12",
-    "realPx": "41x12",
-    "inkCanvasPct": 94.51219512195121,
-    "inkRealPct": 54.67479674796748
+    "canvasPx": "79x24",
+    "realPx": "119x24",
+    "inkCanvasPct": 66.03641456582633,
+    "inkRealPct": 96.95378151260505
   },
-  "reference": "extract/computed/out/carbon/button/gate-shots/danger--ghost.2xl.enabled__default.png",
-  "referenceSha256": "8951a4a997d9e85d5a9f233456e8c03d93ae8ce6ddc0c168f014b276ef3f9fb1",
+  "reference": "extract/computed/out/carbon/button/gate-shots/primary.xs.enabled__default.png",
+  "referenceSha256": "9d107db29bc66a80dea46925f48f2741fe3b254c27537a22d206c914adfb2e2e",
   "canvasShot": "parity/receipts/console-loop/carbon/shots/button-cell.png",
   "canvasShotSha256": "86f96668a2c6983283161b861372e05816d6171adae9dce85e779f43867555d9",
   "diff": "parity/receipts/console-loop/carbon/scores/button.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.0512820512820513,
-  "inkDelta": 39.83739837398373,
-  "dprNormalized": true,
+  "scaleRatio": 1.5063291139240507,
+  "inkDelta": 30.917366946778714,
+  "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.05, inkDelta=39.8) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T04:31:16.323Z"
+  "note": "composition mismatch (scaleRatio=1.51, inkDelta=30.9) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-09T00:43:11.608Z"
 }

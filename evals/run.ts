@@ -9506,6 +9506,19 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (!gOut.includes('every committed shot is its 1x VARIANT cell')) {
         throw new Error('capture-framing pin did not report the cell-framing assertion');
       }
+      if (!/\(\d+ cell-pinned, \d+ cell-PENDING with a named reason/.test(gOut)) {
+        throw new Error('capture-framing pin did not report its cell-pinned/cell-PENDING split');
+      }
+      // C4 (stage-clip), C3b (unresolvable provenance) and the cellPending
+      // red halves live in the pin's own node:test file — run it here so a
+      // regression in any of them fails the suite, not just the local script.
+      const ext = spawnSync(process.execPath, ['--test', 'scripts/console-loop-capture-framing-check.test.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      if ((ext.status ?? -1) !== 0) {
+        throw new Error(`capture-framing red-test suite failed:\n${ext.stdout ?? ''}${ext.stderr ?? ''}`);
+      }
       const red = spawnSync(
         process.execPath,
         [

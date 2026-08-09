@@ -17,8 +17,8 @@
     "inkCanvasPct": 19.35096153846154,
     "inkRealPct": 97.23557692307693
   },
-  "reference": "parity/receipts/console-loop/carbon/refs/tag.png",
-  "referenceSha256": "8a841b211d8830f6e584b0ab6d2afcfce43ce109bbc8cf1f9f7a0219af12c3ce",
+  "reference": "extract/computed/out/carbon/tag/gate-shots/blue.lg__default.png",
+  "referenceSha256": "544ae67d313f0bc26b9063897b5a17a341f7b6483060d14851e29746e2b74aed",
   "canvasShot": "parity/receipts/console-loop/carbon/shots/tag-cell.png",
   "canvasShotSha256": "1e36b2676d4ebb53f0b542d725f63f46bbec88f229ee08706569b63319fd54ae",
   "diff": "parity/receipts/console-loop/carbon/scores/tag.diff.png",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "composition mismatch (scaleRatio=4.52, inkDelta=77.9) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T04:31:59.411Z"
+  "recordedAt": "2026-08-09T00:43:12.138Z"
 }

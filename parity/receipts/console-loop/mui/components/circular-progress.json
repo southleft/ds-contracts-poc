@@ -35,11 +35,12 @@
   "visual": {
     "ok": false,
     "notes": [
-      "Structure/variants reviewed via inspect (83:1647, page CircularProgress); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (83:1647, page CircularProgress); visual OK — slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page CircularProgress)."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=21.24% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/circular-progress.json"
+      "pixel scorecard fail: pctAAMasked=21.24% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/circular-progress.json",
+      "RETRACTED CANDIDATE + REAL (CANVAS-SIDE) (reference audit 2026-08-08): an earlier pass of this audit proposed retargeting to indeterminate__default because it scores 1.78 against this shot. That is REFUTED: the canvas cell is 83:1644 \"Variant=Determinate\", so determinate__default IS the correct counterpart and the pinned reference is right. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) — an independent live-canvas fact, not a re-reading of the committed PNG. The real defect is canvas-side: the reference draws the ~250-degree determinate arc, the canvas draws a CLOSED ring — the arc sweep is not emitted. Scoring against indeterminate would have bought a green by pairing a Determinate cell with an Indeterminate render."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/circular-progress.png",
     "referenceSource": "extract/computed/out/mui/circularprogress/gate-shots/determinate__default.png",
@@ -54,7 +55,7 @@
       ":COMPONENT_SET/CircularProgress|fill|[]",
       ":COMPONENT_SET/CircularProgress|radius|5,5,5,5",
       ":COMPONENT_SET/CircularProgress|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/CircularProgress|description|CircularProgress \u00e2\u0080\u0094 generated from contract mui.circular-progress v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/CircularProgress|description|CircularProgress â generated from contract mui.circular-progress v0.2.0 â",
       ":COMPONENT_SET/CircularProgress|propdef|Variant:VARIANT=Indeterminate",
       "/0:COMPONENT/Variant=Indeterminate|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
       "/0:COMPONENT/Variant=Indeterminate|radius|0,0,0,0",
@@ -79,7 +80,7 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Variant enum \u2192 Indeterminate/Determinate"
+      "Variant enum → Indeterminate/Determinate"
     ],
     "observed": {
       "type": "COMPONENT_SET",

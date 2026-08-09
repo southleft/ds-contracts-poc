@@ -21,7 +21,8 @@
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:744).",
       "Table COMPONENT_SET 21:744: 2 variant(s), 1 prop def(s). Structure looks sane; slot placeholders OK.",
-      "2026-08-08 STRICT-LANE CONVERSION: pixel scorecard PASS on both instruments \u2014 lane scorer pctAAMasked=2.08 (scores/table.json, headless REST cell at scale 1 vs committed developed ref mui/refs/table.png) and headless visual-truth card agrees; bar pctAAMasked<=5 AND compositionOk."
+      "2026-08-08 STRICT-LANE CONVERSION: pixel scorecard PASS on both instruments — lane scorer pctAAMasked=2.08 (scores/table.json, headless REST cell at scale 1 vs committed developed ref mui/refs/table.png) and headless visual-truth card agrees; bar pctAAMasked<=5 AND compositionOk.",
+      "FC-REF-STALE-COPY CLOSED ( reference audit 2026-08-08): the committed refs/ copy had the same dimensions as the gate-shot its referenceSource names but different bytes — the source had been re-rendered (Roboto cfg.fonts substrate) underneath it, so the scored PNG was not the artifact the provenance line claimed. Copy re-synced from source. "
     ],
     "defects": [],
     "reference": "parity/receipts/console-loop/mui/refs/table.png",
@@ -43,7 +44,7 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Size enum \u2192 Medium/Small"
+      "Size enum → Medium/Small"
     ],
     "observed": {
       "type": "COMPONENT_SET",

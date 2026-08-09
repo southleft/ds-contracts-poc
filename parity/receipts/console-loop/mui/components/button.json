@@ -23,10 +23,10 @@
       "Button COMPONENT_SET 21:287: 75 variant(s), 6 prop def(s). Structure looks sane; slot placeholders OK."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=88.31% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/button.json"
+      "FC-REF-WRONG-VARIANT (closed by reference audit 2026-08-08): the committed reference was contained.error.large.DISABLED — a greyed control — while the canvas cell is the ENABLED red contained/error/large button. The 88.31% pctAAMasked was measuring enabled-vs-disabled, not this component. Reference retargeted to contained.error.large.enabled__default."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/button.png",
-    "referenceSource": "extract/computed/out/mui/button/gate-shots/contained.error.large.disabled__default.png",
+    "referenceSource": "extract/computed/out/mui/button/gate-shots/contained.error.large.enabled__default.png",
     "canvasShot": "parity/receipts/console-loop/mui/shots/button-cell.png",
     "matchDeveloped": false,
     "status": "fail-closed"
@@ -43,9 +43,9 @@
     "mismatches": [],
     "gaps": [],
     "matchedAxes": [
-      "Variant enum \u2192 Text/Contained/Outlined",
-      "Color enum \u2192 Primary/Secondary/Error/Success/Warning/Info/Inherit",
-      "Size enum \u2192 Medium/Small/Large",
+      "Variant enum → Text/Contained/Outlined",
+      "Color enum → Primary/Secondary/Error/Success/Warning/Info/Inherit",
+      "Size enum → Medium/Small/Large",
       "BOOLEAN Disabled",
       "TEXT Label",
       "first-variant fill bound: imported/button/root/background-color/text/primary"

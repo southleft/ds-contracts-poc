@@ -42,11 +42,12 @@
       "Re-synced n=22 total=129740; amended rebuiltVariants=4. Footer btn-set strip proportions unverified. matchDeveloped left false."
     ],
     "defects": [
-      "Dialog surface/footer button-set strip proportions not verified as match to pair--unset__default — fail closed."
+      "Dialog surface/footer button-set strip proportions not verified as match to pair--unset__default — fail closed.",
+      "FC-REF-UNVERIFIABLE-PROVENANCE (closed by reference audit 2026-08-08): referenceSource was the bare filename \"pair--unset__default.png#package-dialog-bbox\" — no directory, so the provenance gate could not tell which library or which artifact the crop came from and skipped it silently. Now spelled as the full repo path extract/computed/out/carbon/modal/receipts/pair--unset__default.png (a 1232x1026 pair receipt), which C3 can check."
     ],
     "reference": "parity/receipts/console-loop/carbon/refs/modal.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "pair--unset__default.png#package-dialog-bbox",
+    "referenceSource": "extract/computed/out/carbon/modal/receipts/pair--unset__default.png#package-dialog-bbox",
     "scorecard": "parity/receipts/console-loop/carbon/scores/modal.json",
     "status": "fail-closed",
     "revoked": {

@@ -40,19 +40,48 @@
  *      extract/computed/out/banner/ — the POLARIS lane) is scored against the
  *      wrong design system and its number means nothing.
  *
+ *  C3b RESOLVABLE PROVENANCE — opt-in via guard.requireResolvableProvenance.
+ *      C3 can only judge a descriptor that carries a repo path. Four receipts
+ *      in the carbon/tailwind lanes spelled referenceSource as a BARE FILENAME
+ *      ("pair--unset.lg__default.png#package-left-pill"): no directory, so C3
+ *      skipped them silently and a hand crop of an unknown artifact passed the
+ *      provenance gate by being too vague to check. Lanes that opt in require
+ *      every referenceSource to resolve to a repo path.
+ *
+ *  C4  REFERENCE STAGE EDGE — opt-in via guard.stageClipCheck.
+ *      A developed gate-shot renders a component inside a fixed harness stage.
+ *      When the component overflows that stage the render is CUT, and the
+ *      committed reference silently depicts a truncated component (mui/menu
+ *      loses its third item and the bottom of its second; mui/dialog loses its
+ *      body's last line). The signature is an ink box flush against SOME but
+ *      not ALL four PNG edges. Flush against ALL four is a deliberate tight
+ *      crop and is exempt.
+ *
+ * CELL-PENDING LANES
+ * ------------------
+ * cellW/cellH are only trustworthy when minted from the live canvas, so a lane
+ * whose Figma file is not reachable from the Desktop Bridge cannot be C1-pinned
+ * without fabricating the very number C1 exists to check. Such a stem may
+ * declare `"cellPending": { "reason": "..." }` instead of cellW/cellH: C1 is
+ * then NOT asserted, the stem is counted and printed as cell-PENDING (never
+ * silently green), and C2/C3/C3b/C4 — which need no bridge — still run. A
+ * cellPending without a reason is an error: an unpinned capture must say why.
+ *
  * SEVERITY
  * --------
  * C1 is always an error: a capture is either that cell or it is not.
- * C2/C3 are errors when the receipt CLAIMS a visual pass. On an honest
+ * C2/C3/C3b/C4 are errors when the receipt CLAIMS a visual pass. On an honest
  * fail-closed receipt they are errors only if the receipt does not NAME the
  * cause the pin raised in visual.defects — the same "honest fail-closed is
  * legal, but it must be named" grammar the console-loop evidence gates use.
  * Named-open findings are printed, counted, and do not fail CI.
  *
  * Cause codes raised:
- *   FC-CELL-FRAMING          C1 — shot is not the pinned VARIANT cell (never waivable)
- *   FC-REF-FRAMING           C2 — reference is not comparable to the cell
- *   FC-REF-CROSS-LIBRARY     C3 — reference belongs to another lane's library
+ *   FC-CELL-FRAMING              C1  — shot is not the pinned VARIANT cell (never waivable)
+ *   FC-REF-FRAMING               C2  — reference is not comparable to the cell
+ *   FC-REF-CROSS-LIBRARY         C3  — reference belongs to another lane's library
+ *   FC-REF-UNVERIFIABLE-PROVENANCE C3b — referenceSource names no repo path
+ *   FC-REF-STAGE-EDGE            C4  — reference ink is flush to its stage edge (cut or anchored)
  *
  * C2 is waived by naming ANY code from guard.framingCauses in visual.defects,
  * not only the generic FC-REF-FRAMING. A stem whose reference has already been
@@ -97,6 +126,8 @@ if (!lanes.length) {
 const CAUSE_CELL = "FC-CELL-FRAMING";
 const CAUSE_REF_FRAMING = "FC-REF-FRAMING";
 const CAUSE_REF_CROSS = "FC-REF-CROSS-LIBRARY";
+const CAUSE_REF_PROVENANCE = "FC-REF-UNVERIFIABLE-PROVENANCE";
+const CAUSE_REF_STAGE_EDGE = "FC-REF-STAGE-EDGE";
 
 const WHITE_TRIM = 250;
 /** Ink content box — same rule as console-loop-developed-score.mjs. */
@@ -121,11 +152,16 @@ function contentBox(png) {
       }
     }
   }
-  if (maxX < 0) return { width: png.width, height: png.height, blank: true };
-  return { width: maxX - minX + 1, height: maxY - minY + 1, blank: false };
+  if (maxX < 0) {
+    return { width: png.width, height: png.height, blank: true, edges: "" };
+  }
+  // Which stage edges the ink is flush against. ALL FOUR means a deliberate
+  // tight crop; SOME means the render was cut by, or anchored to, its stage.
+  const edges =
+    (minX <= 0 ? "L" : "") + (maxX >= png.width - 1 ? "R" : "") +
+    (minY <= 0 ? "T" : "") + (maxY >= png.height - 1 ? "B" : "");
+  return { width: maxX - minX + 1, height: maxY - minY + 1, blank: false, edges };
 }
-
-const readBox = (p) => contentBox(PNG.sync.read(readFileSync(p)));
 
 /** Mirror of console-loop-developed-score.mjs resolveCanvasShot (lane form). */
 function resolveShot(lane, stem, receipt) {
@@ -171,6 +207,8 @@ const visualClaimsPass = (r) =>
 const errors = [];
 const open = [];
 let checked = 0;
+let cellPinned = 0;
+let cellPending = 0;
 
 for (const lane of lanes) {
   const pinPath = path.join(CL, lane, "framing.json");
@@ -198,6 +236,10 @@ for (const lane of lanes) {
   const aspectMax = g.aspectRatioMax ?? 1.35;
   const [dprLo, dprHi] = g.dprBand ?? [1.7, 2.4];
   const refAllow = Array.isArray(pin.refAllow) ? pin.refAllow : [];
+  // Opt-in per lane so a lane that has not yet been audited this way is not
+  // retroactively reddened by a check its receipts never had a chance to name.
+  const requireResolvableProvenance = g.requireResolvableProvenance === true;
+  const stageClipCheck = g.stageClipCheck === true;
   const framingCauses = Array.isArray(g.framingCauses) && g.framingCauses.length
     ? g.framingCauses
     : [CAUSE_REF_FRAMING];
@@ -265,17 +307,33 @@ for (const lane of lanes) {
     const rel = (p) => path.relative(ROOT, p);
 
     // ---- C1: shot is the pinned VARIANT cell plus ONE uniform margin -------
-    const dW = shotPng.width - s.cellW;
-    const dH = shotPng.height - s.cellH;
-    const skew = Math.abs(dW - dH);
-    const margin = (dW + dH) / 4;
-    if (skew > skewMax || margin < marginMin || margin > marginMax) {
-      raise(
-        CAUSE_CELL,
-        `committed shot ${rel(shotPath)} is ${shotPng.width}x${shotPng.height} but the pinned 1x VARIANT cell ${s.cellNodeId} "${s.cellName}" is ${s.cellW}x${s.cellH} ` +
-          `(deltaW=${dW}, deltaH=${dH}, skew=${skew}px > ${skewMax}, implied margin=${margin.toFixed(1)}px) — the shot is not that cell (whole-set shot / crop / wrong set)`,
+    // A red-test override supplies a deliberately wrong shot; it must be able
+    // to prove C1 still bites, so it overrides cellPending too.
+    if (s.cellPending && !redTest.has(tag)) {
+      if (typeof s.cellPending.reason !== "string" || !s.cellPending.reason.trim()) {
+        errors.push(
+          `${tag}: cellPending without a reason — an unpinned capture must say why the live cell could not be minted`,
+        );
+        continue;
+      }
+      cellPending += 1;
+      open.push(
+        `${tag}: C1 NOT ASSERTED (cell-pending) — ${s.cellPending.reason} [shot ${rel(shotPath)} ${shotPng.width}x${shotPng.height}]`,
       );
-      continue; // a shot that is not the cell makes C2 meaningless
+    } else {
+      const dW = shotPng.width - s.cellW;
+      const dH = shotPng.height - s.cellH;
+      const skew = Math.abs(dW - dH);
+      const margin = (dW + dH) / 4;
+      if (skew > skewMax || margin < marginMin || margin > marginMax) {
+        raise(
+          CAUSE_CELL,
+          `committed shot ${rel(shotPath)} is ${shotPng.width}x${shotPng.height} but the pinned 1x VARIANT cell ${s.cellNodeId} "${s.cellName}" is ${s.cellW}x${s.cellH} ` +
+            `(deltaW=${dW}, deltaH=${dH}, skew=${skew}px > ${skewMax}, implied margin=${margin.toFixed(1)}px) — the shot is not that cell (whole-set shot / crop / wrong set)`,
+        );
+        continue; // a shot that is not the cell makes C2 meaningless
+      }
+      cellPinned += 1;
     }
 
     // ---- C3: reference provenance ----------------------------------------
@@ -295,6 +353,17 @@ for (const lane of lanes) {
       );
     }
 
+    // ---- C3b: the provenance descriptor must be checkable at all ----------
+    if (requireResolvableProvenance) {
+      const descriptor = receipt?.visual?.referenceSource;
+      if (typeof descriptor === "string" && descriptor.trim() && !refSource) {
+        raise(
+          CAUSE_REF_PROVENANCE,
+          `visual.referenceSource "${descriptor}" carries no repo path, so C3 cannot judge which library or artifact it came from — spell it as a full repo path (a bare filename is a provenance claim nothing can verify)`,
+        );
+      }
+    }
+
     // ---- C2: reference comparability --------------------------------------
     if (!refRel) {
       raise(CAUSE_REF_FRAMING, "receipt has no visual.reference — nothing to frame against");
@@ -305,8 +374,19 @@ for (const lane of lanes) {
       raise(CAUSE_REF_FRAMING, `visual.reference "${refRel}" does not exist on disk`);
       continue;
     }
+    const refPng = PNG.sync.read(readFileSync(refPath));
     let a = contentBox(shotPng);
-    let b = readBox(refPath);
+    let b = contentBox(refPng);
+
+    // ---- C4: reference ink flush against its stage edge --------------------
+    if (stageClipCheck && !b.blank && b.edges && b.edges.length < 4) {
+      raise(
+        CAUSE_REF_STAGE_EDGE,
+        `reference "${refRel}" (${refPng.width}x${refPng.height}, content box ${b.width}x${b.height}) has ink flush against stage edge(s) [${b.edges.split("").join(",")}] — ` +
+          "a developed reference is expected to sit INSIDE its harness stage with margin on every side, so this render was either cut by the stage or anchored to it; either way it does not depict the whole component. " +
+          "(Flush on all four edges is a deliberate tight crop and is exempt.)",
+      );
+    }
     // Same DPR normalisation the scorer applies before judging composition.
     const rough = Math.max(a.width / b.width, b.width / a.width, a.height / b.height, b.height / a.height);
     if (rough >= dprLo && rough <= dprHi) {
@@ -337,5 +417,8 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(
-  `✔ console-loop:capture-framing — ${checked} pinned stem(s) across ${lanes.length} lane(s): every committed shot is its 1x VARIANT cell; ${open.length} named-open reference finding(s)`,
+  `✔ console-loop:capture-framing — ${checked} pinned stem(s) across ${lanes.length} lane(s): ` +
+    `every committed shot is its 1x VARIANT cell where one is pinned ` +
+    `(${cellPinned} cell-pinned, ${cellPending} cell-PENDING with a named reason — C1 not asserted there); ` +
+    `${open.length} named-open finding(s)`,
 );

@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 27.701115678214915,
-    "pctAAUnmasked": 17.733411626541397,
-    "pctAAMasked": 17.733411626541397,
+    "pctExactUnmasked": 26.826082588164375,
+    "pctAAUnmasked": 17.612780066311664,
+    "pctAAMasked": 17.612780066311664,
     "maskCoveragePct": 0,
-    "canvasPx": "126x18",
+    "canvasPx": "269x37",
     "realPx": "262x26",
-    "inkCanvasPct": 4.462712859659425,
-    "inkRealPct": 23.223722842043454
+    "inkCanvasPct": 13.553702401286044,
+    "inkRealPct": 15.89470511403597
   },
-  "reference": "parity/receipts/console-loop/carbon/refs/tabs.png",
-  "referenceSha256": "c1a4b2f2cf300fb6c64293fe1e358ed69550a170743a3a68f9dad581b26ad683",
+  "reference": "extract/computed/out/carbon/tabs/gate-shots/__default.png",
+  "referenceSha256": "cd876a044cc87e23badacb441de5a00386aaacf2c5ab6c6f5ba7dd6b66c90bed",
   "canvasShot": "parity/receipts/console-loop/carbon/shots/tabs-cell.png",
   "canvasShotSha256": "f0a06b183992e37736a59384876de4a6c0b3a47adde07a6cf78dab302a2a4d95",
   "diff": "parity/receipts/console-loop/carbon/scores/tabs.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 2.0793650793650795,
-  "inkDelta": 18.761009982384028,
-  "dprNormalized": true,
+  "scaleRatio": 1.4230769230769231,
+  "inkDelta": 2.341002712749926,
+  "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=2.08, inkDelta=18.8) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T04:31:17.616Z"
+  "note": "composition mismatch (scaleRatio=1.42, inkDelta=2.3) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-09T00:47:32.220Z"
 }

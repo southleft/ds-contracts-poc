@@ -23,7 +23,9 @@
       "Card COMPONENT_SET 21:308: 4 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=31.48% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/card.json"
+      "pixel scorecard fail: pctAAMasked=31.48% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/card.json",
+      "FC-REF-UNSTYLED-DOM (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference renders its body text in the browser DEFAULT SERIF, not the Roboto substrate the lane pinned. The harness sets no document-level font-family, so text that MUI does not wrap in a Typography element (Card/Paper/Dialog content, the Accordion details paragraph) inherits Times while the canvas renders the contract's face. The gate-shot is the current regate (mtime 2026-08-08 09:xx, same batch as the stems whose Roboto re-pin DID take), so this is not a stale copy — the harness genuinely emits serif here. Glyph ink dominates the diff.",
+      "RETRACTED CANDIDATE (reference audit 2026-08-08): retargeting to 1__default (3.76) is REFUTED — the canvas cell is 21:299 \"Elevation=0\", so the pinned 0__default is the correct counterpart. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) — an independent live-canvas fact, not a re-reading of the committed PNG. The 3.76 was a scaleRatio-4.62 composition artifact. The residual is the FC-REF-UNSTYLED-DOM serif substrate named above."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/card.png",
     "referenceSource": "extract/computed/out/mui/card/gate-shots/0__default.png",
@@ -42,7 +44,7 @@
     "mismatches": [],
     "gaps": [],
     "matchedAxes": [
-      "Elevation enum \u2192 1/0/3/8",
+      "Elevation enum → 1/0/3/8",
       "TEXT Content",
       "first-variant fill bound: imported/card/root/background-color"
     ],

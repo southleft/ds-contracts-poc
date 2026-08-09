@@ -23,7 +23,8 @@
       "Switch COMPONENT_SET 21:624: 28 variant(s), 5 prop def(s). Structure looks sane; slot placeholders OK."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=49.88% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/switch.json"
+      "pixel scorecard fail: pctAAMasked=49.88% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/switch.json",
+      "RETRACTED CANDIDATE + REAL (CANVAS-SIDE) (reference audit 2026-08-08): retargeting to default.small.unchecked.* (36.24) is REFUTED — the canvas cell is 21:612 \"Color=Default, Size=Medium, Checked=Checked\", which is exactly what the pinned default.medium.checked.* reference depicts. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) — an independent live-canvas fact, not a re-reading of the committed PNG. Note also that the MUI harness emits BYTE-IDENTICAL gate-shots for .enabled and .disabled on switch, accordion and checkbox (verified by sha256), so the disabled/enabled token in the reference filename carries no information here. The 49.88 is track/thumb paint inside a correctly framed 58x38 pair."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/switch.png",
     "referenceSource": "extract/computed/out/mui/switch/gate-shots/default.medium.checked.disabled__default.png",
@@ -44,9 +45,9 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Color enum \u2192 Primary/Secondary/Error/Warning/Info/Success/Default",
-      "Size enum \u2192 Medium/Small",
-      "Checked enum \u2192 Unchecked/Checked",
+      "Color enum → Primary/Secondary/Error/Warning/Info/Success/Default",
+      "Size enum → Medium/Small",
+      "Checked enum → Unchecked/Checked",
       "BOOLEAN Disabled"
     ],
     "observed": {

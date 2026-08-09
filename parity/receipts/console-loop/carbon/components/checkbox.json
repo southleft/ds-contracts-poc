@@ -50,7 +50,9 @@
       "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — skipped unchanged; nodeId=1:5562; matchDeveloped left unset."
     ],
     "defects": [
-      "matchDeveloped remains false — developed-parity not claimed; indeterminate bar glyph confirmed on canvas."
+      "matchDeveloped remains false — developed-parity not claimed; indeterminate bar glyph confirmed on canvas.",
+      "FC-REF-MISSING-CONTROL (named-open by reference audit 2026-08-08, NOT FIXABLE in this lane): the unchecked.* reference contains NO CHECKBOX. Carbon draws the unchecked box entirely with a ::before pseudo-element on a visually-hidden <input>, and the computed-extract harness does not capture it, so the reference's whole ink is the 66x12 label text while the canvas cell is a 97x16 box+label. The checked.* references DO carry a control (a filled square), which is why they score differently — but they are the wrong variant for cell 1:5547 \"Checked=Unchecked\". No unchecked Carbon checkbox reference that depicts the control exists in extract/computed/out/carbon/checkbox; producing one needs pseudo-element capture in the harness, which is outside this lane.",
+      "FC-REF-FRAMING: consequence of the above — shot ink 97x16 vs reference ink 66x12 (scaleRatio 1.47) because the reference is missing the 16px control the canvas draws."
     ],
     "reference": "extract/computed/out/carbon/checkbox/gate-shots/unchecked.enabled__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
@@ -80,7 +82,8 @@
         "matchedAt": "2026-08-08T03:05:52.736Z"
       },
       "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=30.93, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
-    }
+    },
+    "referenceSource": "extract/computed/out/carbon/checkbox/gate-shots/unchecked.enabled__default.png"
   },
   "fingerprint": {
     "v6": "v6:4163950863",

@@ -39,11 +39,12 @@
   "visual": {
     "ok": false,
     "notes": [
-      "Structure/variants reviewed via inspect (84:1832, page Link); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (84:1832, page Link); visual OK — slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 42 variants on page Link)."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=14.15% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/link.json"
+      "pixel scorecard fail: pctAAMasked=14.15% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/link.json",
+      "FC-TEXT-WRAP (named-open by reference audit 2026-08-08, CANVAS-SIDE): the reference is the correct variant (error.always, ink 31x12, 'Link' on one line) but the canvas cell is 31x38 with ink 20x31 — the label wraps to 'Lin' / 'k' because the cell is too narrow for its own text. The 4.00 aspectRatio is that wrap. Retargeting cannot help: all 21 sibling gate-shots score within 0.11 of each other (14.15-14.26)."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/link.png",
     "referenceSource": "extract/computed/out/mui/link/gate-shots/error.always__default.png",
@@ -58,7 +59,7 @@
       ":COMPONENT_SET/Link|fill|[]",
       ":COMPONENT_SET/Link|radius|5,5,5,5",
       ":COMPONENT_SET/Link|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Link|description|Link \u00e2\u0080\u0094 generated from contract mui.link v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Link|description|Link â generated from contract mui.link v0.2.0 â",
       ":COMPONENT_SET/Link|propdef|Color:VARIANT=Primary",
       ":COMPONENT_SET/Link|propdef|Label#84:59:TEXT=Link",
       ":COMPONENT_SET/Link|propdef|State:VARIANT=Default",
@@ -68,8 +69,8 @@
       "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
       "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|sizing|FIXED/HUG AUTO",
       "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|bound:width|imported/link/root/width",
-      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|reaction|ON_HOVER\u2192CHANGE_TO Color=Primary, Underline=Hover, State=Hover",
-      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|reaction|ON_PRESS\u2192CHANGE_TO Color=Primary, Underline=Hover, State=Active",
+      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|reaction|ON_HOVER→CHANGE_TO Color=Primary, Underline=Hover, State=Hover",
+      "/0:COMPONENT/Color=Primary, Underline=Hover, State=Default|reaction|ON_PRESS→CHANGE_TO Color=Primary, Underline=Hover, State=Active",
       "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.09803921729326248,\"g\":0.4627451002597809,\"b\":0.8235294222831726},\"boundVariables\":{\"color\":{\"var\":\"imported/link/root/color/primary\"}}}]",
       "/0/0:TEXT/label|radius|0,0,0,0",
       "/0/0:TEXT/label|sizing|FILL/HUG AUTO",
@@ -83,8 +84,8 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Color enum \u2192 Primary/Secondary/Error/Info/Success/Warning/Inherit",
-      "Underline enum \u2192 Hover/None/Always",
+      "Color enum → Primary/Secondary/Error/Info/Success/Warning/Inherit",
+      "Underline enum → Hover/None/Always",
       "TEXT Label"
     ],
     "observed": {

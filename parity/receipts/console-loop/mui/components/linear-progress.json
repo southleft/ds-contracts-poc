@@ -35,11 +35,12 @@
   "visual": {
     "ok": false,
     "notes": [
-      "Structure/variants reviewed via inspect (83:1655, page LinearProgress); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (83:1655, page LinearProgress); visual OK — slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page LinearProgress)."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=56.18% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/linear-progress.json"
+      "pixel scorecard fail: pctAAMasked=56.18% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/linear-progress.json",
+      "FC-ABS-SIZE (named-open by reference audit 2026-08-08, CANVAS-SIDE): the reference is the correct variant (determinate, ink 288x4) but the canvas cell draws the bar 461px wide (ink 461x4) — a 1.60 scale on the long axis with the hairline height matching exactly. The indeterminate sibling is worse (81.34), so this is not a variant mismatch; it is the canvas baking an absolute track width."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/linear-progress.png",
     "referenceSource": "extract/computed/out/mui/linearprogress/gate-shots/determinate__default.png",
@@ -54,7 +55,7 @@
       ":COMPONENT_SET/LinearProgress|fill|[]",
       ":COMPONENT_SET/LinearProgress|radius|5,5,5,5",
       ":COMPONENT_SET/LinearProgress|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/LinearProgress|description|LinearProgress \u00e2\u0080\u0094 generated from contract mui.linear-progress v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/LinearProgress|description|LinearProgress â generated from contract mui.linear-progress v0.2.0 â",
       ":COMPONENT_SET/LinearProgress|propdef|Variant:VARIANT=Indeterminate",
       "/0:COMPONENT/Variant=Indeterminate|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6549019813537598,\"g\":0.7921568751335144,\"b\":0.929411768913269},\"boundVariables\":{\"color\":{\"var\":\"imported/linear-progress/root/background-color\"}}}]",
       "/0:COMPONENT/Variant=Indeterminate|radius|0,0,0,0",
@@ -77,7 +78,7 @@
     "mismatches": [],
     "gaps": [],
     "matchedAxes": [
-      "Variant enum \u2192 Indeterminate/Determinate",
+      "Variant enum → Indeterminate/Determinate",
       "first-variant fill bound: imported/linear-progress/root/background-color"
     ],
     "observed": {

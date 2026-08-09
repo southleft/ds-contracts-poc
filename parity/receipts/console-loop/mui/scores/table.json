@@ -1,24 +1,24 @@
 {
   "version": 3,
   "status": "pass",
-  "matchDeveloped": false,
+  "matchDeveloped": true,
   "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 6.596068660022149,
-    "pctAAUnmasked": 2.0764119601328903,
-    "pctAAMasked": 2.0764119601328903,
+    "pctExactUnmasked": 6.384966777408637,
+    "pctAAUnmasked": 1.2458471760797343,
+    "pctAAMasked": 1.2458471760797343,
     "maskCoveragePct": 0,
     "canvasPx": "344x84",
     "realPx": "344x84",
     "inkCanvasPct": 42.801771871539316,
-    "inkRealPct": 40.946843853820596
+    "inkRealPct": 41.6389811738649
   },
   "reference": "parity/receipts/console-loop/mui/refs/table.png",
-  "referenceSha256": "c28817c85a7d78c3a0f59bd62d054cfef385227792a3324c52d327f3b23a0f1e",
+  "referenceSha256": "b58de21283747ba8f17654e7fe789fd504fe85ce1da0fbbbffcef3f5c12d25bf",
   "canvasShot": "parity/receipts/console-loop/mui/shots/table-cell.png",
   "canvasShotSha256": "ec9620ffdd2bffb458f00914ffa2b16930ed85d660c75eca9b290eab621940df",
   "diff": "parity/receipts/console-loop/mui/scores/table.diff.png",
@@ -29,9 +29,9 @@
   "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 1.85492801771872,
+  "inkDelta": 1.1627906976744171,
   "dprNormalized": true,
   "sizeNormalized": true,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T08:30:08.334Z"
+  "recordedAt": "2026-08-09T00:42:47.226Z"
 }

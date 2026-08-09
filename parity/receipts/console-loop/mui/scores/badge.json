@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 61.75000000000001,
-    "pctAAUnmasked": 54,
-    "pctAAMasked": 54,
+    "pctExactUnmasked": 61.875,
+    "pctAAUnmasked": 54.75,
+    "pctAAMasked": 54.75,
     "maskCoveragePct": 0,
     "canvasPx": "40x20",
     "realPx": "20x20",
     "inkCanvasPct": 95.75,
-    "inkRealPct": 49.625
+    "inkRealPct": 48.25
   },
   "reference": "parity/receipts/console-loop/mui/refs/badge.png",
-  "referenceSha256": "858992e89922a72b05acde916b39989b570e6d4d2431656f6a163eb94021899c",
+  "referenceSha256": "842326eada9d64d328f84ca718ff1dd3479fd29552e3b21f9cf521f6063a0b1b",
   "canvasShot": "parity/receipts/console-loop/mui/shots/badge-cell.png",
   "canvasShotSha256": "360d4c052cece40cbd3dec66d423aef3d1cc1752b922472b5f02aaebe955b737",
   "diff": "parity/receipts/console-loop/mui/scores/badge.diff.png",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 2,
-  "inkDelta": 46.125,
+  "inkDelta": 47.5,
   "dprNormalized": true,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=2.00, inkDelta=46.1) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T08:30:09.607Z"
+  "note": "composition mismatch (scaleRatio=2.00, inkDelta=47.5) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-09T00:42:46.382Z"
 }

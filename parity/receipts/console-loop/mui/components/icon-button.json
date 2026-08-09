@@ -38,11 +38,12 @@
   "visual": {
     "ok": false,
     "notes": [
-      "Structure/variants reviewed via inspect (83:1708, page IconButton); visual OK \u2014 slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (83:1708, page IconButton); visual OK — slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 9 variants on page IconButton)."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=25.78% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/icon-button.json"
+      "pixel scorecard fail: pctAAMasked=25.78% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/icon-button.json",
+      "FC-GLYPH-MOJIBAKE (named-open by reference audit 2026-08-08, CANVAS-SIDE): the reference is the correct variant and the correct component — large.default.enabled, ink 28x27 depicting a star icon — but the canvas cell renders the literal characters 'a-circumflex' where the star should be, ink 13x23. The icon codepoint was mis-decoded (UTF-8 read as latin-1) on the way to the canvas; the same mojibake appears in this receipt's own fingerprint sampleLines. The 1.70 scaleRatio is that broken glyph, not the framing."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/icon-button.png",
     "referenceSource": "extract/computed/out/mui/iconbutton/gate-shots/large.default.enabled__default.png",
@@ -57,10 +58,10 @@
       ":COMPONENT_SET/IconButton|fill|[]",
       ":COMPONENT_SET/IconButton|radius|5,5,5,5",
       ":COMPONENT_SET/IconButton|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/IconButton|description|IconButton \u00e2\u0080\u0094 generated from contract mui.icon-button v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/IconButton|description|IconButton â generated from contract mui.icon-button v0.2.0 â",
       ":COMPONENT_SET/IconButton|propdef|Color:VARIANT=Default",
       ":COMPONENT_SET/IconButton|propdef|Disabled#83:19:BOOLEAN=false",
-      ":COMPONENT_SET/IconButton|propdef|Icon#83:29:TEXT=\u00e2\u0098\u0085",
+      ":COMPONENT_SET/IconButton|propdef|Icon#83:29:TEXT=â",
       ":COMPONENT_SET/IconButton|propdef|Size:VARIANT=Medium",
       "/0:COMPONENT/Size=Medium, Color=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0,\"g\":0,\"b\":0},\"boundVariables\":{\"color\":{\"var\":\"imported/icon-button/root/background-color\"}}}]",
       "/0:COMPONENT/Size=Medium, Color=Default|radius|20,20,20,20",
@@ -80,8 +81,8 @@
     "mismatches": [],
     "gaps": [],
     "matchedAxes": [
-      "Size enum \u2192 Medium/Small/Large",
-      "Color enum \u2192 Default/Primary/Secondary",
+      "Size enum → Medium/Small/Large",
+      "Color enum → Default/Primary/Secondary",
       "BOOLEAN Disabled",
       "TEXT Icon",
       "first-variant fill bound: imported/icon-button/root/background-color"
@@ -119,7 +120,7 @@
         {
           "name": "Icon#83:29",
           "type": "TEXT",
-          "defaultValue": "\u00e2\u0098\u0085",
+          "defaultValue": "â",
           "variantOptions": null
         },
         {

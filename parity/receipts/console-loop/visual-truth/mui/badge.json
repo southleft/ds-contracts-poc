@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 62,
-    "pctAAUnmasked": 54.625,
-    "pctAAMasked": 54.625,
+    "pctExactUnmasked": 62.375,
+    "pctAAUnmasked": 55.75,
+    "pctAAMasked": 55.75,
     "maskCoveragePct": 0,
     "canvasPx": "40x20",
     "realPx": "20x20",
     "inkCanvasPct": 95.75,
-    "inkRealPct": 50
+    "inkRealPct": 49.375
   },
   "reference": "parity/receipts/console-loop/mui/refs/badge.png",
-  "referenceSha256": "858992e89922a72b05acde916b39989b570e6d4d2431656f6a163eb94021899c",
+  "referenceSha256": "842326eada9d64d328f84ca718ff1dd3479fd29552e3b21f9cf521f6063a0b1b",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/badge.png",
   "canvasShotSha256": "360d4c052cece40cbd3dec66d423aef3d1cc1752b922472b5f02aaebe955b737",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/badge.diff.png",
@@ -36,8 +36,8 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 2,
-  "inkDelta": 45.75,
+  "inkDelta": 46.375,
   "dprNormalized": true,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=2.00, inkDelta=45.8)"
+  "note": "composition mismatch (scaleRatio=2.00, inkDelta=46.4)"
 }

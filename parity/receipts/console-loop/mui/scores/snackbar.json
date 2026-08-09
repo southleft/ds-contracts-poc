@@ -1,24 +1,24 @@
 {
   "version": 3,
   "status": "pass",
-  "matchDeveloped": false,
+  "matchDeveloped": true,
   "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 36.9515232803219,
-    "pctAAUnmasked": 2.0933128951906497,
-    "pctAAMasked": 2.0933128951906497,
+    "pctExactUnmasked": 37.42575205978157,
+    "pctAAUnmasked": 2.3184518106917036,
+    "pctAAMasked": 2.3184518106917036,
     "maskCoveragePct": 0,
     "canvasPx": "296x58",
     "realPx": "307x68",
     "inkCanvasPct": 81.85955163824488,
-    "inkRealPct": 97.98333013987353
+    "inkRealPct": 97.00134125311362
   },
   "reference": "parity/receipts/console-loop/mui/refs/snackbar.png",
-  "referenceSha256": "d770078c49ae07ddd9553aa06866adc147b61d82ba47d5d99f3b398061b9f2d0",
+  "referenceSha256": "d0b09d8ac6786da64ab50223b8427fb3e4d570cbb4952e17671ef036c1cad78a",
   "canvasShot": "parity/receipts/console-loop/mui/shots/snackbar-cell.png",
   "canvasShotSha256": "67293436727f4c5986793411b30b4c369cf45dfaac04bb71f5f0b1b980ed8577",
   "diff": "parity/receipts/console-loop/mui/scores/snackbar.diff.png",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1.1724137931034482,
-  "inkDelta": 16.12377850162865,
+  "inkDelta": 15.141789614868742,
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T08:30:12.605Z"
+  "recordedAt": "2026-08-09T00:42:46.937Z"
 }

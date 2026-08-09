@@ -23,7 +23,9 @@
       "Menu COMPONENT 21:451: 1 variant(s), 0 prop def(s). Structure looks sane; slot placeholders OK."
     ],
     "defects": [
-      "pixel scorecard fail: pctAAMasked=10.46% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/menu.json"
+      "pixel scorecard fail: pctAAMasked=10.46% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/menu.json",
+      "FC-REF-STAGE-EDGE (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference's ink is flush against BOTH the top and bottom edges of its 320x96 stage (content box 135x96 — the full stage height) — the 3-item menu overflowed a 96px stage and the render is cut: 'My account' loses its descender row and 'Log out' is absent entirely. The canvas cell shows all three items at 123x134. mui/menu has exactly ONE gate-shot (__default), and the current on-disk regate is clipped the same way (ink flush [B]), so there is nothing to retarget to.",
+      "FC-REF-FRAMING: consequence of the above — shot ink 123x134 vs reference ink 135x96 (aspectRatio 1.53)."
     ],
     "reference": "parity/receipts/console-loop/mui/refs/menu.png",
     "referenceSource": "extract/computed/out/mui/menu/gate-shots/__default.png",
@@ -41,7 +43,7 @@
   "roundtrip": {
     "mismatches": [],
     "gaps": [
-      "canvas-absent: contract has empty props[] (anatomy/overlay-heavy) \u2014 OK"
+      "canvas-absent: contract has empty props[] (anatomy/overlay-heavy) — OK"
     ],
     "matchedAxes": [
       "first-variant fill bound: imported/menu/root/background-color"
