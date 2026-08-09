@@ -2296,6 +2296,20 @@ function centerSvgGlyphsInHosts(children: NodeSpec[]): void {
         left: (hw - size) / 2,
         top: (hh - size) / 2,
       };
+      // CENTERING SUPERSEDES STRETCHING — and the two must never both be
+      // stamped on one node. Now that the icon early-return carries a boxless
+      // icon part's declared position/insets, a glyph whose contract says
+      // `position:absolute` + inset 0 arrives here ALREADY marked
+      // `insetOverlay` (polaris Checkbox's `icon-6` is exactly that shape).
+      // Left alone it would carry both "stretch to the parent" and "sit at
+      // (hw-size)/2" — a contradiction each reader is free to resolve
+      // differently, which is the class of silent disagreement this engine
+      // exists to refuse. This pass is the MORE SPECIFIC decision: it can see
+      // the host rect and the glyph's intrinsic `iconSize`, so a 14px check
+      // stays 14px centred on its 18px box instead of being stretched to fill
+      // it. Dropping the marks here keeps polaris byte-identical.
+      delete glyph.insetOverlay;
+      delete glyph.insetOffsets;
     }
   }
 }
@@ -3377,6 +3391,39 @@ function partToSpecInner(
       );
     };
     if (!iconPartHasBox()) {
+      // AN ICON PART'S DECLARED POSITION WAS DROPPED IN SILENCE.
+      //
+      // This early return is the whole bug. `partToSpecs` handles `part.icon`
+      // FIRST, and a boxless icon returned here — while the inset-overlay /
+      // absolute lowering lives further down, on the general frame path. So a
+      // contract could declare `position: absolute` plus all four inset
+      // channels on an icon part and the emitter would carry NONE of it, with
+      // nothing refused and nothing logged. The part just flowed as an
+      // ordinary sibling.
+      //
+      // Measured on MUI Radio, which is two real committed SVGs — the
+      // RadioButtonUnchecked donut and the RadioButtonChecked dot, the dot
+      // declaring `position:absolute` + inset 0 so it rides ON the ring. Both
+      // carry `grow`, so with the position dropped they became two in-flow
+      // children of a 24px HORIZONTAL frame and split it 50/50: a squashed
+      // ring with the dot BESIDE it instead of concentric circles. That is
+      // the visible half of a 38.50% AA score whose boxes otherwise agree
+      // exactly (20×20 both) — the reference was already falsified as the
+      // cause (all 28 sibling gate-shots score identically).
+      //
+      // Applied HERE, inside the boxless branch, and not above the
+      // `iconPartHasBox()` test: a box-carrying icon builds a frame that
+      // reaches the general lowering on its own, and applying it in both
+      // places would double it. An icon part declaring no position and no
+      // insets is byte-unchanged, which is every icon part in the corpus bar
+      // four.
+      const io = insetOverlayOffsets(part, subst);
+      if (io) {
+        spec.insetOverlay = true;
+        if (io.top !== 0 || io.right !== 0 || io.bottom !== 0 || io.left !== 0) spec.insetOffsets = io;
+      } else {
+        applyAbsoluteThisCombo(spec, part, subst);
+      }
       applyVisibleWhen(spec, part, contract);
       return spec;
     }

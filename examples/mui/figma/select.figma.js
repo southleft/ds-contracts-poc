@@ -88,7 +88,14 @@ const COMPONENTS = [
               "name": "icon",
               "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
               "svgPaintVar": "imported/select/icon/fill",
-              "iconSize": 24
+              "iconSize": 24,
+              "insetOverlay": true,
+              "insetOffsets": {
+                "top": 16,
+                "right": 7,
+                "bottom": 16,
+                "left": 42.9375
+              }
             },
             {
               "type": "frame",
@@ -246,7 +253,14 @@ const COMPONENTS = [
               "name": "icon",
               "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
               "svgPaintVar": "imported/select/icon/fill",
-              "iconSize": 24
+              "iconSize": 24,
+              "insetOverlay": true,
+              "insetOffsets": {
+                "top": 8,
+                "right": 7,
+                "bottom": 8,
+                "left": 42.9375
+              }
             },
             {
               "type": "frame",

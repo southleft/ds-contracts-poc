@@ -81,7 +81,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/primary/unchecked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -154,7 +154,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/primary/checked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -227,7 +227,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/secondary/unchecked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -300,7 +300,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/secondary/checked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -373,7 +373,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/error/unchecked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -446,7 +446,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/error/checked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -519,7 +519,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/info/unchecked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -592,7 +592,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/info/checked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -665,7 +665,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/success/unchecked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -738,7 +738,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/success/checked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -811,7 +811,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/warning/unchecked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -884,7 +884,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/warning/checked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -957,7 +957,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/default/unchecked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -1030,7 +1030,7 @@ const COMPONENTS = [
                   "svgPaintVar": "imported/radio/icon-2/fill/default/checked",
                   "grow": true,
                   "iconSize": 24,
-                  "fillW": true
+                  "insetOverlay": true
                 }
               ]
             }
@@ -1413,6 +1413,105 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
+// B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
+// lowered out of flow — ABSOLUTE, stretched to the parent, BEHIND the
+// in-flow siblings — matching the declared anatomy and the HTML render.
+function applyInsetOverlay(parent, childNode, childSpec) {
+  if (!childSpec.insetOverlay) return;
+  try {
+    // CSS overflow:visible — unclip parent AND FRAME/COMPONENT ancestors so
+    // overhanging thumbs/rails aren't clipped by a grandparent track
+    // (Astryx Slider semi-circle residual under default clipsContent:true).
+    for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
+      if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+      n.clipsContent = false;
+    }
+    // Round 5f (B5E finding 3): only a childless BACKDROP overlay (an
+    // inset:0 fill layer — TextField's backdrop) lowers BEHIND the in-flow
+    // siblings (index 0). A CONTENT overlay that carries glyphs (the Checkbox
+    // check, the RadioButton dot, a remove button) must stay ON TOP at its
+    // natural post-backdrop index — else the opaque backdrop sibling paints
+    // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
+    // previously hand-corrected on canvas each re-amend).
+    // Absolute-position round: the backdrop shove applies ONLY to true
+    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
+    // at their y positions) keeps its compile-time paint order — the shove
+    // was inverting rail/track stacking.
+    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
+      parent.insertChild(0, childNode);
+    }
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+    // Astryx Slider thumb finding: inset overlays with fixedWidth/fixedHeight
+    // (20×20 disk) must NOT STRETCH into a hug-zero display:contents parent —
+    // that collapsed thumbs into 1px lines / semi-circles. Keep intrinsic size.
+    const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
+    const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+    if (fw != null || fh != null) {
+      childNode.constraints = {
+        horizontal: fw != null ? 'MIN' : 'STRETCH',
+        vertical: fh != null ? 'MIN' : 'STRETCH',
+      };
+      childNode.x = o.left;
+      childNode.y = o.top;
+      childNode.resize(
+        Math.max(1, fw != null ? fw : (parent.width - o.left - o.right)),
+        Math.max(1, fh != null ? fh : (parent.height - o.top - o.bottom)),
+      );
+    } else {
+      childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
+      childNode.x = o.left;
+      childNode.y = o.top;
+      childNode.resize(
+        Math.max(1, parent.width - o.left - o.right),
+        Math.max(1, parent.height - o.top - o.bottom),
+      );
+    }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
+function resizeOutOfFlow(parent, built) {
+  for (const pair of built) {
+    const childSpec = pair[0], childNode = pair[1];
+    try {
+      if (childSpec.insetOverlay) {
+        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+        childNode.x = o.left || 0;
+        childNode.y = o.top || 0;
+        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
+        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+        if (fw != null || fh != null) {
+          childNode.resize(
+            Math.max(1, fw != null ? fw : (parent.width - (o.left || 0) - (o.right || 0))),
+            Math.max(1, fh != null ? fh : (parent.height - (o.top || 0) - (o.bottom || 0))),
+          );
+        } else {
+          childNode.resize(
+            Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
+            Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
+          );
+        }
+      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
+        const a = childSpec.absolute;
+        childNode.resize(
+          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
+          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
+        );
+        if (a.h === 'STRETCH') childNode.x = a.left || 0;
+        if (a.v === 'STRETCH') childNode.y = a.top || 0;
+      }
+    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
+  }
+}
+
+function propagateOverflowVisible(childNode, parent) {
+  if (!childNode || !('clipsContent' in childNode) || childNode.clipsContent !== false) return;
+  for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
+    if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+    n.clipsContent = false;
+  }
+}
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1561,6 +1660,7 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    propagateOverflowVisible(childNode, node);
     built.push([child, childNode]);
     applyOverlay(node, childNode, child);
     if (child.pct != null) {
@@ -1593,7 +1693,9 @@ async function buildNode(spec, registry) {
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
+    applyInsetOverlay(node, childNode, child);
   }
+  resizeOutOfFlow(node, built);
   return node;
 }
 
@@ -1904,6 +2006,7 @@ async function amendSet(set, C) {
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+    propagateOverflowVisible(childNode, comp);
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
@@ -1920,7 +2023,9 @@ async function amendSet(set, C) {
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
+    applyInsetOverlay(comp, childNode, childSpec);
       }
+  resizeOutOfFlow(comp, built);
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -2073,6 +2178,7 @@ async function amendComponent(comp, C) {
   for (const childSpec of v.spec.children || []) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
+    propagateOverflowVisible(childNode, comp);
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
@@ -2089,7 +2195,9 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
+    applyInsetOverlay(comp, childNode, childSpec);
   }
+  resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
