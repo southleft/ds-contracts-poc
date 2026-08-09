@@ -8,9 +8,9 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 15.889423076923077,
-    "pctAAUnmasked": 11.394230769230768,
-    "pctAAMasked": 11.394230769230768,
+    "pctExactUnmasked": 15.528846153846153,
+    "pctAAUnmasked": 11.177884615384617,
+    "pctAAMasked": 11.177884615384617,
     "maskCoveragePct": 0,
     "canvasPx": "160x26",
     "realPx": "160x26",
@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/astryx/textinput/orig-shots/text.md__default.png",
   "referenceSha256": "934ca6f400cc291b4626fbd0a2e1a959695ac73d6c4b82e49753e2be62868aad",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/text-input-cell.png",
-  "canvasShotSha256": "c8735a87bd5eb0e4d8e6e125c98971810885487069043469ab912e170dfc5a79",
+  "canvasShotSha256": "00e21dc43bbf834c1e8ecc8749f8d9149ccedc246298b16b8d71e981efc79134",
   "diff": "parity/receipts/console-loop/astryx/scores/text-input.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/astryx/components/text-input.json",
@@ -32,6 +32,6 @@
   "inkDelta": 0.1923076923076934,
   "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=11.39 > 5)",
-  "recordedAt": "2026-08-09T02:48:40.236Z"
+  "note": "pixel bar missed (pctAAMasked=11.18 > 5)",
+  "recordedAt": "2026-08-09T13:01:59.299Z"
 }

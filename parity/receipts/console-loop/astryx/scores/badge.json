@@ -1,16 +1,16 @@
 {
   "version": 3,
-  "status": "fail",
+  "status": "pass",
   "matchDeveloped": false,
-  "recommendMatchDeveloped": false,
+  "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 92.38095238095238,
-    "pctAAUnmasked": 10.119047619047619,
-    "pctAAMasked": 10.119047619047619,
+    "pctExactUnmasked": 25.476190476190474,
+    "pctAAUnmasked": 4.880952380952381,
+    "pctAAMasked": 4.880952380952381,
     "maskCoveragePct": 0,
     "canvasPx": "42x20",
     "realPx": "41x20",
@@ -20,18 +20,18 @@
   "reference": "extract/computed/out/astryx/badge/orig-shots/blue__default.png",
   "referenceSha256": "a131cbf8310103e3e8e48e997bf82e2a80404a5d792782f93d958ae9d87dbbb6",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/badge-cell.png",
-  "canvasShotSha256": "2c446d200262dc86a921f10dcf0f8668fe4b633614be9b402f23b170028c863c",
+  "canvasShotSha256": "5cbc29414f9e75580b0b81dbd949d51a07fa9aea90b71b5f1716e650549a78c5",
   "diff": "parity/receipts/console-loop/astryx/scores/badge.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/astryx/components/badge.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1.024390243902439,
   "inkDelta": 2.3809523809523654,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=10.12 > 5)",
-  "recordedAt": "2026-08-09T02:48:37.606Z"
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-09T13:01:56.669Z"
 }

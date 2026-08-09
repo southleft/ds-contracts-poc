@@ -9585,15 +9585,28 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if ((green.status ?? -1) !== 0) {
         throw new Error(`capture-framing pin is red with the content checks on:\n${gOut}`);
       }
-      // C5 must be LIVE, not merely enabled. astryx/badge's cell is named
-      // Variant=Blue and the canvas paints it near-white, so the sweep proposes
-      // neutral__default (7.0% vs the pinned 87.0%) and the receipt refuses the
-      // retarget by name. If this line disappears the sweep has gone inert.
-      if (!/astryx\/badge: FC-REF-WRONG-VARIANT[\s\S]*?neutral__default\.png/.test(gOut)) {
-        throw new Error(`C5 no longer fires on astryx/badge — the sweep is enabled but inert:\n${gOut}`);
-      }
-      if (!gOut.includes('[named as FC-REF-SWEEP-DECOY]')) {
-        throw new Error(`the astryx/badge decoy waiver is not read as a named-open finding:\n${gOut}`);
+      // C5 MUST BE LIVE, NOT MERELY ENABLED — and the way this is proved had to
+      // change, because the canary died of being CURED (2026-08-09).
+      //
+      // It used to demand that C5 fire on astryx/badge: that cell is named
+      // Variant=Blue and the canvas painted it near-white, so the sweep proposed
+      // neutral__default and the receipt refused the retarget by name. Then the
+      // theme-neutral re-base and the canvas rebuild made the canvas paint Blue
+      // #c4ddfb — the reference's own colour — badge went 10.12 to 4.88 and
+      // PASSED, and the sweep correctly went quiet. The liveness proof failed
+      // while the thing it guards was working better than ever.
+      //
+      // A liveness proof must not depend on a real defect staying unfixed. The
+      // proof is now the SYNTHETIC red half that already exists and is already
+      // run above (scripts/console-loop-capture-framing-check.test.mjs, "red: C5
+      // refuses a reference pointed at a sibling VARIANT and names the winner",
+      // plus the C6 tone-swap red) — the same move this repo made when the
+      // gate-inventory fixture stopped diverging. What stays asserted HERE is
+      // only what a fixture cannot show: that the sweep is switched on across
+      // real lanes (checked above) and that a lane's own named waiver is still
+      // read as named-open rather than silently swallowed.
+      if (!/\[named as FC-REF-[A-Z-]+\]/.test(gOut)) {
+        throw new Error(`no lane's named reference waiver is being read as a named-open finding:\n${gOut}`);
       }
       // Red halves for C5 (a stem pointed at a sibling variant's render, gate
       // must name the winner) and C6 (a tone swap under an in-band AA) live in
@@ -9684,23 +9697,25 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const EXPECTED: Record<string, { sync: number; drift: string[]; cellPending: number }> = {
         'first-party': { sync: 18, drift: [], cellPending: 36 },
         altitude: { sync: 7, drift: ['avatar'], cellPending: 0 },
-        // ASTRYX 3 → 5 IN-SYNC (2026-08-09, theme-neutral re-base + the
-        // firstFamily keyword fix). Recorded rather than absorbed: two stems
-        // flipped DRIFT → in-sync without anyone touching the canvas, because
-        // the drift was never in the canvas — `progress-bar` and `text-input`
-        // drew Figtree while their own scripts declared `-apple-system`, a
-        // family Figma cannot resolve. Fixing the SCRIPT to say what the cell
-        // already draws closed the gap from the code side. The remaining eight
-        // are the cross-library collection collision, which needs the canvas
-        // rebuilt (#60) — this count is the thing that will move when it is.
-        astryx: {
-          sync: 5,
-          drift: [
-            'button', 'checkbox-input', 'dropdown-menu', 'dropdown-menu-item',
-            'slider', 'switch', 'toast', 'token',
-          ],
-          cellPending: 0,
-        },
+        // ASTRYX 3 → 5 → 12 IN-SYNC (2026-08-09). The 5 came from the
+        // theme-neutral re-base plus the firstFamily keyword fix, closing two
+        // stems from the CODE side: `progress-bar` and `text-input` were
+        // already drawing Figtree while their own scripts declared
+        // `-apple-system`, so the cell was right and the script was wrong.
+        // The 12 came from actually rebuilding the canvas — 11 of 13 cells
+        // amended in place from the committed scripts, which retired the
+        // cross-library collection collision (a node taking one padding from
+        // Carbon and another from Astryx). token and text-input were NOT
+        // rebuilt: both exceed the hard 30-second figma_execute cap, an
+        // EXECUTION-TIME ceiling rather than the transport-size limit that had
+        // been on record. They still read in-sync because their bindings and
+        // fonts already matched; it is their PIXELS that moved, which this
+        // probe does not measure.
+        //
+        // `toast` is the lone remaining drift: one TEXT node draws Inter where
+        // the script declares Figtree — a font the file does not carry for
+        // that style, named on the console rather than substituted silently.
+        astryx: { sync: 12, drift: ['toast'], cellPending: 0 },
         carbon: { sync: 8, drift: ['button', 'checkbox'], cellPending: 0 },
         polaris: { sync: 11, drift: ['badge'], cellPending: 0 },
         tailwind: { sync: 5, drift: [], cellPending: 0 },

@@ -8,9 +8,9 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 99,
-    "pctAAUnmasked": 90.75,
-    "pctAAMasked": 90.75,
+    "pctExactUnmasked": 44.52777777777778,
+    "pctAAUnmasked": 35.80555555555556,
+    "pctAAMasked": 35.80555555555556,
     "maskCoveragePct": 0,
     "canvasPx": "100x36",
     "realPx": "67x36",
@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/astryx/button/orig-shots/primary.lg.no-isDisabled__default.png",
   "referenceSha256": "5a96c727376fc0abdd0af3920ff182dd2a7afe83de331bcb5ad90800cd795b2c",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/button-cell.png",
-  "canvasShotSha256": "c4b30b33b1b2c9775db1f0f422edbf2381dfb29d1fa82fb8e278cb5031c6afee",
+  "canvasShotSha256": "b16e792f3bbeac896ec10853797a66e89165055dadd3f3659c54655a847c99d9",
   "diff": "parity/receipts/console-loop/astryx/scores/button.diff.png",
   "fc": [
     "FC-THEME-ISO"
@@ -35,5 +35,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "composition mismatch (scaleRatio=1.49, inkDelta=32.6) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-09T03:42:30.392Z"
+  "recordedAt": "2026-08-09T13:01:57.215Z"
 }

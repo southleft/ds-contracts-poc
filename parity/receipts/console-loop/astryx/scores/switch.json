@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 41.61985018726592,
-    "pctAAUnmasked": 14.185393258426968,
-    "pctAAMasked": 14.185393258426968,
+    "pctExactUnmasked": 41.899441340782126,
+    "pctAAUnmasked": 14.827746741154563,
+    "pctAAMasked": 14.827746741154563,
     "maskCoveragePct": 0,
-    "canvasPx": "178x24",
+    "canvasPx": "179x24",
     "realPx": "173x24",
-    "inkCanvasPct": 33.684456928838955,
-    "inkRealPct": 31.296816479400746
+    "inkCanvasPct": 33.659217877094974,
+    "inkRealPct": 31.121973929236503
   },
   "reference": "extract/computed/out/astryx/switch/orig-shots/end.no-isDisabled__default.png",
   "referenceSha256": "2d8ef36a3d999b1f5b062115f41fdea720775ee67c4b507e81204d887906d5e6",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/switch-cell.png",
-  "canvasShotSha256": "8aea43abf30325517715221e55a756ac023e44b62ecd154891f913b49738ded2",
+  "canvasShotSha256": "3b2a88485ac38bf6967e28840eb1518cbea647038b0df262acc9d7c92604bf9f",
   "diff": "parity/receipts/console-loop/astryx/scores/switch.diff.png",
   "fc": [
     "FC-MISSING-AXIS",
@@ -31,10 +31,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.0289017341040463,
-  "inkDelta": 2.3876404494382086,
+  "scaleRatio": 1.0346820809248556,
+  "inkDelta": 2.537243947858471,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=14.19 > 5)",
-  "recordedAt": "2026-08-09T03:42:30.385Z"
+  "note": "pixel bar missed (pctAAMasked=14.83 > 5)",
+  "recordedAt": "2026-08-09T13:01:59.029Z"
 }

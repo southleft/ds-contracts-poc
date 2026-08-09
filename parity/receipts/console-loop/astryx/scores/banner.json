@@ -8,9 +8,9 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 99.7314453125,
-    "pctAAUnmasked": 8.603515625,
-    "pctAAMasked": 8.603515625,
+    "pctExactUnmasked": 66.4501953125,
+    "pctAAUnmasked": 58.4130859375,
+    "pctAAMasked": 58.4130859375,
     "maskCoveragePct": 0,
     "canvasPx": "320x64",
     "realPx": "320x64",
@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/astryx/banner/orig-shots/info.card__default.png",
   "referenceSha256": "9b64fd410da678de7ff7abee930875180358c6599eaca7d6c859cbeb26d0dcad",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/banner-cell.png",
-  "canvasShotSha256": "55dea0f9ea4c116f8e0381d258ac8bb303fc4868c33ac0a0e71ca62bc5fe995f",
+  "canvasShotSha256": "5f6692d41ac9413bb47e87d0dc17b821a517b456e733a3030d59bf8220f90e79",
   "diff": "parity/receipts/console-loop/astryx/scores/banner.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/astryx/components/banner.json",
@@ -32,6 +32,6 @@
   "inkDelta": 0.17578125,
   "dprNormalized": false,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=8.60 > 5)",
-  "recordedAt": "2026-08-09T02:48:37.886Z"
+  "note": "pixel bar missed (pctAAMasked=58.41 > 5)",
+  "recordedAt": "2026-08-09T13:01:56.953Z"
 }

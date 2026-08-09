@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 39.86607142857143,
-    "pctAAUnmasked": 24.821428571428573,
-    "pctAAMasked": 24.821428571428573,
+    "pctExactUnmasked": 43.125,
+    "pctAAUnmasked": 34.375,
+    "pctAAMasked": 34.375,
     "maskCoveragePct": 0,
-    "canvasPx": "240x18",
+    "canvasPx": "240x17",
     "realPx": "240x28",
-    "inkCanvasPct": 17.72321428571429,
+    "inkCanvasPct": 17.708333333333336,
     "inkRealPct": 33.839285714285715
   },
   "reference": "extract/computed/out/astryx/progressbar/orig-shots/accent__default.png",
   "referenceSha256": "cb19b269f0a2b42f2d37219d3332142b508e2f3d0fada10bc6f6b647df6759ea",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/progress-bar-cell.png",
-  "canvasShotSha256": "b306b8a2f7e73bab62d6ef9ecda274161417b3c4aa70eda9f3ceeb502b8a58c2",
+  "canvasShotSha256": "3a38ba7c55b2a55cc2d3f584372b7b0d02ca0a5ed637415d9bf56e5ef106efe3",
   "diff": "parity/receipts/console-loop/astryx/scores/progress-bar.diff.png",
   "fc": [
     "FC-WIDTH-TOKEN",
@@ -31,10 +31,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.5555555555555556,
-  "inkDelta": 16.116071428571427,
+  "scaleRatio": 1.6470588235294117,
+  "inkDelta": 16.13095238095238,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.56, inkDelta=16.1) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-09T03:42:30.375Z"
+  "note": "composition mismatch (scaleRatio=1.65, inkDelta=16.1) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-09T13:01:58.496Z"
 }

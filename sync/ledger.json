@@ -129,7 +129,7 @@
       "lastSyncedAt": "2026-08-06T05:44:07.010Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/badge.json"
     },
     {
@@ -143,7 +143,7 @@
       "lastSyncedAt": "2026-08-06T05:44:07.801Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/banner.json"
     },
     {
@@ -157,7 +157,7 @@
       "lastSyncedAt": "2026-08-06T05:44:08.324Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/button.json"
     },
     {
@@ -170,12 +170,8 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:44:13.994Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:2509439330",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
-      "provenance": "seeded-from-receipts",
+      "observed": null,
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/card.json"
     },
     {
@@ -188,12 +184,8 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:44:08.786Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:2910373000",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
-      "provenance": "seeded-from-receipts",
+      "observed": null,
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/checkbox-input.json"
     },
     {
@@ -206,12 +198,8 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:44:09.106Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3617510417",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
-      "provenance": "seeded-from-receipts",
+      "observed": null,
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/dropdown-menu-item.json"
     },
     {
@@ -224,12 +212,8 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:44:14.392Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3472638879",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
-      "provenance": "seeded-from-receipts",
+      "observed": null,
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/dropdown-menu.json"
     },
     {
@@ -243,7 +227,7 @@
       "lastSyncedAt": "2026-08-06T05:44:09.675Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/progress-bar.json"
     },
     {
@@ -257,7 +241,7 @@
       "lastSyncedAt": "2026-08-06T05:44:10.926Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/slider.json"
     },
     {
@@ -271,7 +255,7 @@
       "lastSyncedAt": "2026-08-06T05:44:11.441Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/switch.json"
     },
     {
@@ -285,7 +269,7 @@
       "lastSyncedAt": "2026-08-06T05:44:12.948Z",
       "direction": "code→canvas",
       "observed": null,
-      "provenance": "seeded-from-receipts",
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/text-input.json"
     },
     {
@@ -298,12 +282,8 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:44:13.449Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3360096880",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
-      "provenance": "seeded-from-receipts",
+      "observed": null,
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/toast.json"
     },
     {
@@ -316,12 +296,8 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:44:06.476Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3708527189",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
-      "provenance": "seeded-from-receipts",
+      "observed": null,
+      "provenance": "sync-record",
       "note": "receipt parity/receipts/console-loop/astryx/components/token.json"
     },
     {

@@ -8,30 +8,30 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 96.42857142857143,
-    "pctAAUnmasked": 84.41176470588235,
-    "pctAAMasked": 84.41176470588235,
+    "pctExactUnmasked": 22.854141656662666,
+    "pctAAUnmasked": 12.905162064825932,
+    "pctAAMasked": 12.905162064825932,
     "maskCoveragePct": 0,
-    "canvasPx": "115x80",
+    "canvasPx": "115x56",
     "realPx": "119x48",
-    "inkCanvasPct": 95.44117647058825,
-    "inkRealPct": 9.054621848739496
+    "inkCanvasPct": 13.940576230492196,
+    "inkRealPct": 12.93517406962785
   },
   "reference": "extract/computed/out/astryx/card/orig-shots/default__default.png",
   "referenceSha256": "6e809a52946117f96c8a3a23fd1280667df3f68729a902017f000f218e5469f7",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/card-cell.png",
-  "canvasShotSha256": "12da19bda44edd12db1a8f78a9912d72fe47a97db731961efc48deab08b906d8",
+  "canvasShotSha256": "7924f970206437a98723826480fed817b0ce1d2e5270219eb1539028a7575108",
   "diff": "parity/receipts/console-loop/astryx/scores/card.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/astryx/components/card.json",
-  "compositionOk": false,
-  "strictCompositionOk": false,
+  "compositionOk": true,
+  "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.6666666666666667,
-  "inkDelta": 86.38655462184875,
+  "scaleRatio": 1.1666666666666667,
+  "inkDelta": 1.005402160864346,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.67, inkDelta=86.4) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-09T02:48:38.403Z"
+  "note": "pixel bar missed (pctAAMasked=12.91 > 5)",
+  "recordedAt": "2026-08-09T13:01:57.476Z"
 }

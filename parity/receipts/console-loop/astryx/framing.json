@@ -7,8 +7,9 @@
   "note": "CAPTURE-FRAMING PIN. cellW/cellH are the LIVE Figma VARIANT-cell dimensions, minted from the Desktop Bridge (figma-console figma_execute, fileKey pinned) — NOT derived from the committed PNGs. scripts/console-loop-capture-framing-check.mjs asserts that every committed canvas shot is that cell plus ONE uniform margin, and that the shot's content box is comparable to the reference the scorer resolves. A whole-set shot, a hand crop, or a shot of a different component set fails BY NAME at check time instead of surfacing later as a mystery low score.",
   "mintedFrom": {
     "bridge": "figma-console MCP figma_execute (Desktop Bridge)",
-    "mintedAt": "2026-08-08",
-    "method": "COMPONENT_SET children walk; cell dimensions read from node.width/node.height"
+    "mintedAt": "2026-08-09",
+    "method": "COMPONENT_SET children walk; cell dimensions read from node.width/node.height",
+    "remint": "2026-08-09 RE-MINT after the astryx canvas rebuild + theme-neutral token re-base. Same bridge, same method. Cells that MOVED: card: 114x80 -> 114x56; checkbox-input: 114x28 -> 110x28; dropdown-menu-item: 87x33 -> 84x33; token: 34x16 -> 33x16. token was NOT structurally rebuilt yet its cell narrowed 34->33 — variable-bound padding moved under the re-base, which is why the pin is re-minted for it too."
   },
   "guard": {
     "marginMinPx": -1,
@@ -73,13 +74,13 @@
       "cellNodeId": "1:4021",
       "cellName": "Variant=Default",
       "cellW": 114,
-      "cellH": 80
+      "cellH": 56
     },
     "checkbox-input": {
       "setNodeId": "1:3873",
       "cellNodeId": "1:3867",
       "cellName": "Size=Md",
-      "cellW": 114,
+      "cellW": 110,
       "cellH": 28
     },
     "dropdown-menu": {
@@ -93,7 +94,7 @@
       "setNodeId": "1:3876",
       "cellNodeId": "1:3876",
       "cellName": "DropdownMenuItem (standalone COMPONENT)",
-      "cellW": 87,
+      "cellW": 84,
       "cellH": 33
     },
     "progress-bar": {
@@ -135,7 +136,7 @@
       "setNodeId": "1:3763",
       "cellNodeId": "1:3697",
       "cellName": "Size=Md, Color=Default",
-      "cellW": 34,
+      "cellW": 33,
       "cellH": 16
     }
   },
