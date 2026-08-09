@@ -3,6 +3,13 @@
  * Regenerate with: npm run generate
  */
 
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
 .root {
   display: flex;
   flex-direction: column;
@@ -196,7 +203,7 @@
 }
 
 .Text {
-  font-size: var(--imported-shared-size-12);
+  font-size: var(--imported-text-text-xs-semibold-font-size);
   font-weight: var(--imported-text-text-xs-semibold-font-weight);
   line-height: var(--imported-text-text-xs-semibold-line-height);
 }
@@ -210,7 +217,7 @@
 }
 
 .supportingText {
-  font-size: var(--imported-shared-size-12);
+  font-size: var(--imported-text-text-xs-regular-font-size);
   font-weight: var(--imported-text-text-xs-regular-font-weight);
   line-height: var(--imported-text-text-xs-regular-line-height);
 }

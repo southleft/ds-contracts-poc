@@ -238,9 +238,9 @@ The campaign opened with an audit whose prose calls itself "13 classes"; the doc
 | 9 | `style-channel-dropped` | propose-invert | inversion-side | BLOCKER | **CLOSED** | fixture | `layout-gap-literal` CARRIED/green, `layout-padding-asymmetric-bound` CARRIED/green, `layout-justify-space-between` CARRIED/green, `effect-shadow-single` CARRIED/green, `stroke-uniform-var` CARRIED/green, `text-style-token` CARRIED/green |
 | 10 | `root-sizing-lost` | propose-invert | inversion-side | MAJOR | **CLOSED** | fixture | `layout-root-fixed-bbox` CARRIED/green, `layout-width-bound-root` CARRIED/green, `layout-root-default-elided` CARRIED/green |
 | 11 | `string-boolean-coercion` | mint | inversion-side | MAJOR | **CLOSED** | this kit | 0 of 899 string-literal JSX attributes land on a dependency prop typed `boolean`. |
-| 12 | `ua-default-leakage` | emit-react | emitter-side | MAJOR | **PARTIAL** | this kit | global `box-sizing: border-box` reset in tokens.css: present; 8/32 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files). |
-| 13 | `variant-name-transliteration-api` | mint | inversion-side | MINOR | **OPEN** | this kit | 1 reserved-name collision (SocialIcon.style); 13 props whose enum still spells `'false'` instead of absence/boolean; 3 numeric-valued string enums (ProgressBar.progress, Slider.leftControl, Slider.rightControl). |
-| 14 | `story-space-mismatch` | story-gen | emitter-side | MINOR | **PARTIAL** | this kit | 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 32 emitted components ship stories). |
+| 12 | `ua-default-leakage` | emit-react | emitter-side | MAJOR | **PARTIAL** | this kit | global `box-sizing: border-box` reset in tokens.css: present; 8/30 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files). |
+| 13 | `variant-name-transliteration-api` | mint | inversion-side | MINOR | **OPEN** | this kit | 1 reserved-name collision (SocialIcon.style); 11 props whose enum still spells `'false'` instead of absence/boolean; 3 numeric-valued string enums (ProgressBar.progress, Slider.leftControl, Slider.rightControl). |
+| 14 | `story-space-mismatch` | story-gen | emitter-side | MINOR | **PARTIAL** | this kit | 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 30 emitted components ship stories). |
 | 15 | `ledgered-degradations-visible` | dump | capture-side | MINOR | **NAMED-BY-DESIGN** | fixture | `radius-per-corner` LEDGERED/green, `text-lineheight-percent` LEDGERED/green, `stroke-weights-nonuniform` LEDGERED/green |
 
 Tally: **10** CLOSED · **1** NAMED-BY-DESIGN · **3** PARTIAL · **1** OPEN, of 15 classes.
@@ -258,10 +258,10 @@ Named holes, so that no reader mistakes an absence for a zero.
 ### 5.4 The work order, in the order it pays
 
 1. **The paste door is OPEN** (§3.4) — closed for two rounds, and the two blockers that held it (an empty `base` tokenSet refused outright, and `social-button`'s `{platform}` icon ref read as a literal filename) are both fixed and pinned by `npm run paste:check`, which drives the REAL referee for this kit and for a variable-publishing one. An adopter can now take these 15 contracts through the shipping path unaided. What ranks first NOW is below.
-2. **variant-name-transliteration-api** — OPEN, mint stage (inversion-side). 1 reserved-name collision (SocialIcon.style); 13 props whose enum still spells `'false'` instead of absence/boolean; 3 numeric-valued string enums (ProgressBar.progress, Slider.leftControl, Slider.rightControl).
+2. **variant-name-transliteration-api** — OPEN, mint stage (inversion-side). 1 reserved-name collision (SocialIcon.style); 11 props whose enum still spells `'false'` instead of absence/boolean; 3 numeric-valued string enums (ProgressBar.progress, Slider.leftControl, Slider.rightControl).
 3. **duplicate-parts-from-wrapper-union** — PARTIAL, propose-invert stage (inversion-side). 3 numbered part names whose base name is also a part of the same contract (progress-bar.Progress2, slider.leftControl2, slider.rightControl2); the audited duplicates (ProgressCircle's four label parts, DropdownListItem's Text2/Checkbox×2/circle×2, InputFieldBase's tripled trailing icons) are all absent. The probe cannot prove the residuals are not genuine sibling nodes.
-4. **ua-default-leakage** — PARTIAL, emit-react stage (emitter-side). global `box-sizing: border-box` reset in tokens.css: present; 8/32 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files).
-5. **story-space-mismatch** — PARTIAL, story-gen stage (emitter-side). 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 32 emitted components ship stories).
+4. **ua-default-leakage** — PARTIAL, emit-react stage (emitter-side). global `box-sizing: border-box` reset in tokens.css: present; 8/30 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files).
+5. **story-space-mismatch** — PARTIAL, story-gen stage (emitter-side). 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 30 emitted components ship stories).
 6. **Classify the 0 untagged round-trip facts** (§5.3) — until divergence and loss are classified the way invention already is, no blast-radius number in §4 can claim to be complete.
 
 ---
@@ -285,7 +285,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 #    expect: 537 scored variants, mean 92.7%
 ```
 
-§2 and §3.3 read `extract/figma/conformance/MANIFEST.json` directly (the hand-authored denominator — the engine never defines its own). §3.1 reads `_degradations` from the 15 dumps. §3.2 reads the `description` field of the 30 contracts. §3.6 reads the icon manifest. §4 reads `report.json` and quotes the glossary lines out of `REPORT.md`. §5.2's probes read the 32 emitted component directories plus the contracts.
+§2 and §3.3 read `extract/figma/conformance/MANIFEST.json` directly (the hand-authored denominator — the engine never defines its own). §3.1 reads `_degradations` from the 15 dumps. §3.2 reads the `description` field of the 30 contracts. §3.6 reads the icon manifest. §4 reads `report.json` and quotes the glossary lines out of `REPORT.md`. §5.2's probes read the 30 emitted component directories plus the contracts.
 
 ### Sources this build read
 
@@ -297,7 +297,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | fidelity scores |
 | `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
 | `examples/untitled-ui/storybook/contracts/` | `63f093f001fb` | 129,887 | proposed contracts (30 files) |
-| `examples/untitled-ui/storybook/src/generated/` | `256e2627c802` | 275,910 | emitted components (32 dirs) |
+| `examples/untitled-ui/storybook/src/generated/` | `b8deda055f5c` | 275,098 | emitted components (30 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `8c31938a1627` | 674,804 | emitted global tokens |
 | `extract/figma/conformance/MANIFEST.json` | `71392fbbb21e` | 67,755 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |

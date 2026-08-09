@@ -3,6 +3,13 @@
  * Regenerate with: npm run generate
  */
 
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
 .root {
   display: inline-flex;
   align-items: center;
@@ -365,7 +372,7 @@
   color: var(--imported-slider-progress-left-control-left-number-color);
   font-size: var(--imported-text-text-md-medium-font-size);
   font-weight: var(--imported-text-text-md-medium-font-weight);
-  line-height: var(--imported-shared-size-24);
+  line-height: var(--imported-text-text-md-medium-line-height);
   top: var(--imported-slider-progress-left-control-left-number-top);
   text-align: center;
   position: absolute;
@@ -521,7 +528,7 @@
   color: var(--imported-slider-progress-right-control-right-number-color);
   font-size: var(--imported-text-text-md-medium-font-size);
   font-weight: var(--imported-text-text-md-medium-font-weight);
-  line-height: var(--imported-shared-size-24);
+  line-height: var(--imported-text-text-md-medium-line-height);
   top: var(--imported-slider-progress-right-control-right-number-top);
   position: absolute;
 }

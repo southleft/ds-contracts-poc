@@ -3,6 +3,13 @@
  * Regenerate with: npm run generate
  */
 
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
 .root {
   display: flex;
   flex-direction: column;
@@ -21,7 +28,7 @@
 
 .Label {
   color: var(--imported-input-field-base-input-with-label-label-color);
-  font-size: var(--imported-shared-size-14);
+  font-size: var(--imported-text-text-sm-medium-font-size);
   font-weight: var(--imported-text-text-sm-medium-font-weight);
   line-height: var(--imported-text-text-sm-medium-line-height);
 }
@@ -153,9 +160,9 @@
 
 .Text {
   color: var(--imported-shared-color-737373);
-  font-size: var(--imported-shared-size-16);
-  font-weight: var(--imported-shared-num-400);
-  line-height: var(--imported-shared-size-24);
+  font-size: var(--imported-text-text-md-regular-font-size);
+  font-weight: var(--imported-text-text-md-regular-font-weight);
+  line-height: var(--imported-text-text-md-regular-line-height);
 }
 
 .Dropdown {
@@ -170,9 +177,9 @@
 
 .dropdownText {
   color: var(--imported-input-field-base-input-with-label-input-dropdown-dropdown-text-color);
-  font-size: var(--imported-shared-size-16);
-  font-weight: var(--imported-shared-num-400);
-  line-height: var(--imported-shared-size-24);
+  font-size: var(--imported-text-text-md-regular-font-size);
+  font-weight: var(--imported-text-text-md-regular-font-weight);
+  line-height: var(--imported-text-text-md-regular-line-height);
 }
 
 .chevronDown {
@@ -392,20 +399,20 @@
 
 .leadingText {
   color: var(--imported-shared-color-737373);
-  font-size: var(--imported-shared-size-16);
-  font-weight: var(--imported-shared-num-400);
-  line-height: var(--imported-shared-size-24);
+  font-size: var(--imported-text-text-md-regular-font-size);
+  font-weight: var(--imported-text-text-md-regular-font-weight);
+  line-height: var(--imported-text-text-md-regular-line-height);
 }
 
 .textInputText {
   color: var(--imported-shared-color-737373);
-  font-size: var(--imported-shared-size-16);
-  font-weight: var(--imported-shared-num-400);
-  line-height: var(--imported-shared-size-24);
+  font-size: var(--imported-text-text-md-regular-font-size);
+  font-weight: var(--imported-text-text-md-regular-font-weight);
+  line-height: var(--imported-text-text-md-regular-line-height);
 }
 
 .hintText {
-  font-size: var(--imported-shared-size-14);
-  font-weight: var(--imported-shared-num-400);
+  font-size: var(--imported-text-text-sm-regular-font-size);
+  font-weight: var(--imported-text-text-sm-regular-font-weight);
   line-height: var(--imported-text-text-sm-regular-line-height);
 }
