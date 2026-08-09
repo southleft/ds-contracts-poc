@@ -1,5 +1,5 @@
 {
-  "passed": 220,
+  "passed": 222,
   "total": 222,
   "results": [
     {
@@ -965,8 +965,7 @@
     {
       "id": "child-wider-ratchet-and-script-freshness",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: child-wider ratchet RED:\nlibrary      scripts  overflows  text-caused  margin-box  cause\naltitude           8          0            0           0  \nastryx            13          0           33           0  textCaused(33): the corpus-wide text-wrapping gap (docs/22 §\"Text wrapping is not implemented\") — grew 6→33 at the exact-conversion wave (feat/exact-conversion-wave0): Banner's promoted title/description rows, TextInput's label/helper runs and the source-geometry Slider labels are real hugging text runs the earlier harness-floor geometry hid. The five ProgressBar percent-width overflows the previous baseline named are FIXED — the wave carries the fill as a source-derived literal inside the track — so the non-text class is ZERO.\ncarbon            10          0            8           0  textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them — this row is the exempted class only.\nfluent            11         18           32          43  (no baseline row)\nmui               31          2           56           2  overflows(2): Wave 5 denominator — `label` paints 75px inside a 74px Size=Medium/Small hug cell (Size=Medium + Size=Small). textCaused(56): corpus-wide text-wrapping gap (docs/22) — grew 14→56 at the exact-conversion wave landing, when MUI's scripts were finally re-emitted against the wave engine (they had sat stale; the freshness gate is what caught it): the non-truncating-text HUG rule (Carbon Tabs fix, refined by FC-TEXT-FILL-A"
+      "pass": true
     },
     {
       "id": "css-dom-conformance-frontier",
@@ -996,8 +995,7 @@
     {
       "id": "minted-leaves-bind-to-something",
       "claim": "C2-refusal",
-      "pass": false,
-      "error": "Error: the shipped token sets grew variables nothing binds (task #42):\n  fluent: NO BASELINE ROW — a new library must record one"
+      "pass": true
     },
     {
       "id": "live-figma-evidence-receipt",

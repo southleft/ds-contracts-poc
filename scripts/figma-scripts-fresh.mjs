@@ -41,7 +41,9 @@ const CLI = 'packages/cli/src/cli.ts';
 const LIBRARIES = {
   mui: ['--icons', 'examples/mui/assets/icons', '--tokens', 'examples/mui/tokens/mui.dtcg.json,examples/mui/tokens/mui-minted.dtcg.json'],
   carbon: ['--icons', 'examples/carbon/assets/icons', '--tokens', 'examples/carbon/tokens/carbon.dtcg.json,examples/carbon/tokens/carbon-minted.dtcg.json'],
-  altitude: ['--icons', 'examples/altitude/assets/icons', '--tokens', 'examples/altitude/tokens/altitude.dtcg.json,examples/altitude/tokens/altitude-minted.dtcg.json'],
+  // altitude is NOT here — it is a CUSTOM_REBUILD below. It is the one lane
+  // whose committed scripts are emitted with a preferred variable collection,
+  // which the CLI `figma` verb cannot express. See that row for the full why.
   // Exact-conversion wave: alert grew real icon-asset parts (status glyphs +
   // dismiss, examples/tailwind/assets/icons) — same reason as astryx below.
   tailwind: ['--icons', 'examples/tailwind/assets/icons', '--tokens', 'examples/tailwind/tokens/tailwind.dtcg.json,examples/tailwind/tokens/tailwind-minted.dtcg.json'],
@@ -83,6 +85,36 @@ const CUSTOM_REBUILDS = {
     cmd: ['examples/polaris/generate.ts', '--check'],
     mustInclude: 'byte-stable',
     note: 'via generate.ts --check — all generated surfaces incl. figma/*.figma.js byte-compared',
+  },
+  /** altitude — THE ROW THAT WAS ASKING THE WRONG QUESTION.
+   *
+   *  Until now altitude sat in LIBRARIES and was re-derived with the CLI
+   *  `figma` verb like every other lane. It reported STALE, and the verdict
+   *  was this gate's defect rather than the artifact's: all eight committed
+   *  altitude scripts are emitted by `scripts/reemit-altitude-figma.ts` with
+   *  `variableCollection: 'Altitude'`, and the CLI has no option that can say
+   *  that — `variableCollection` appears nowhere under packages/cli/src, so
+   *  there is no flag to add to the args array. The CLI rebuild therefore
+   *  omitted the `_prefCol` preamble block that all nine altitude artifacts
+   *  carry (grep `_prefCol examples/altitude/figma` → 9 files; every other
+   *  lane → 0) and then called the difference staleness.
+   *
+   *  What makes this worth a comment rather than a one-line move: the obvious
+   *  way to make the row green was to re-emit altitude with the gate's own
+   *  command and commit the result. That would have DELETED the preferred-
+   *  collection resolution from the whole lane — i.e. destroyed FC-THEME-ISO,
+   *  since without `_prefCol` the runtime binds whichever same-named variable
+   *  it meets first across ALL collections in the file, and an altitude paste
+   *  into a file that already holds another library's variables silently
+   *  binds the wrong theme. A gate that is wrong in the direction of "delete
+   *  the thing the artifact exists to carry" is worse than no gate.
+   *
+   *  So the rebuild command is now the one that actually built the artifacts,
+   *  in a `--check` mode that emits in memory and byte-compares. */
+  altitude: {
+    cmd: ['scripts/reemit-altitude-figma.ts', '--check'],
+    mustInclude: 'byte-stable vs a fresh emission',
+    note: 'via reemit-altitude-figma.ts --check — CLI figma verb cannot express the "Altitude" preferred collection',
   },
 };
 
@@ -140,6 +172,14 @@ const figmaDirs = readdirSync(path.join(ROOT, 'examples'), { withFileTypes: true
 for (const lib of figmaDirs) {
   if (CUSTOM_REBUILDS[lib]) {
     const { cmd, mustInclude, note } = CUSTOM_REBUILDS[lib];
+    // The GENESIS check runs for custom-rebuild libraries TOO. It used to sit
+    // only on the CLI path below, so moving altitude up here would have
+    // silently dropped its GENESIS-BATCH.figma.js — the artifact a designer
+    // actually pastes — out of the gate, which is precisely the "excluded from
+    // the set comparison, therefore excluded from freshness" conflation that
+    // checkGenesis was written to end. polaris has neither builder nor
+    // committed batch, so this is a no-op there.
+    genesisRows.push(...checkGenesis(lib, path.join(ROOT, 'examples', lib, 'figma')));
     try {
       const out = execFileSync(TSX, cmd, { cwd: ROOT, encoding: 'utf8', stdio: 'pipe' });
       if (!out.includes(mustInclude)) {

@@ -22,6 +22,11 @@
       "unreferenced": 4
     },
     {
+      "library": "fluent",
+      "leaves": 1664,
+      "unreferenced": 228
+    },
+    {
       "library": "mui",
       "leaves": 1986,
       "unreferenced": 373
