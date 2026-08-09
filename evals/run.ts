@@ -3578,6 +3578,52 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
   },
 
   {
+    // THE SECOND SURFACE NOBODY RE-DERIVED — generated React trees.
+    //
+    // `figma-scripts-fresh` closed this hole for `examples/<lib>/figma/*`. The
+    // same hole was open on `examples/<lib>/storybook/src/generated`, and all
+    // three libraries that commit one had rotted: eventz-vars 17 files,
+    // untitled-ui 30 files plus 2 directories the generator no longer emits,
+    // astryx 24 files plus 3 whole missing components.
+    //
+    // The near-miss is the instructive part. `astryx-dev-journey` DOES run the
+    // generator — twice — and hashes the two outputs against each other. Both
+    // runs are FRESH. It never compares either to the committed tree, so a
+    // deterministic generator and a rotted artifact look identical to it.
+    // "The generator is deterministic" and "the committed bytes are what the
+    // generator produces" are different claims, and only the first was gated.
+    id: 'generated-storybook-trees-are-fresh',
+    claim: 'C3-detection',
+    run: () => {
+      // Real repo, not the scratch copy: `run()`'s cwd is evals/.scratch, which
+      // does not carry examples/*/storybook. Same reason spelled out on
+      // ledger-and-residuals-are-fresh and capability-report-is-fresh above.
+      const r = spawnSync('node', ['scripts/generated-surfaces-fresh.mjs'], { cwd: ROOT, encoding: 'utf8' });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) throw new Error(`a committed storybook/src/generated tree is STALE vs its own generator:\n${out}`);
+
+      // ANTI-ROT. A green exit is not enough — the gate must still be LOOKING.
+      // If a library grows a generated tree with no row, the script reports it
+      // as NOT GATED and fails; this pin catches the inverse rot, where a row
+      // is quietly deleted and the surface stops being counted at all.
+      if (out.includes('NOT GATED')) throw new Error(`generated-surfaces-fresh reported an ungated surface:\n${out}`);
+      for (const required of ['eventz-vars', 'untitled-ui', 'astryx']) {
+        if (!out.includes(required)) throw new Error(`generated-surfaces-fresh no longer reports ${required} — a surface stopped being measured`);
+      }
+      // A NAMED HOLE MUST STAY VISIBLY A HOLE. astryx cannot be rebuilt today
+      // (its storybook token generator never reads the minted DTCG, so a regen
+      // would raise undefined `--imported-*` references from 34 to 312). If it
+      // ever silently reads as "fresh" without that script being fixed, the
+      // hole was closed by forgetting rather than by work.
+      if (!out.includes('NAMED HOLE')) throw new Error('astryx is no longer reported as a named hole — either it was genuinely closed (update this pin) or the hole stopped being printed');
+
+      console.log(
+        `generated-storybook-trees-are-fresh: every committed examples/*/storybook/src/generated tree is byte-identical to a fresh run of its own generator, with STALE / MISSING / ORPHANED reported as three separate classes (an orphan means DELETE, and "differs" would hide that). astryx stays a NAMED HOLE, not a pass — a rebuild today would raise its undefined \`--imported-*\` refs from 34 to 312, because examples/astryx/scripts/build-storybook-tokens.ts never reads astryx-minted.dtcg.json. The gap this closes: astryx-dev-journey already ran the generator twice and hashed the two FRESH outputs against each other, which is byte-stability, not freshness of the committed bytes.`,
+      );
+    },
+  },
+
+  {
     // THE OTHER AGGREGATOR NOBODY RE-DERIVED — and unlike the capability
     // report, this one had ALREADY rotted before anyone looked.
     //

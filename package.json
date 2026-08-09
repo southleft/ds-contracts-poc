@@ -179,6 +179,7 @@
     "conformance:report": "tsx conformance/report.ts",
     "child-wider": "node scripts/child-wider.mjs",
     "figma:fresh": "node scripts/figma-scripts-fresh.mjs",
+    "generated:fresh": "node scripts/generated-surfaces-fresh.mjs",
     "conformance:canvas": "tsx extract/figma/conformance/run.ts",
     "catalog:visual:check": "tsx extract/figma/catalog-visual/run.ts",
     "extract:figma:roundtrip:uui": "tsx extract/figma/roundtrip-uui/run.ts",

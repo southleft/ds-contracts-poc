@@ -1,6 +1,6 @@
 {
-  "passed": 223,
-  "total": 223,
+  "passed": 224,
+  "total": 224,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -624,6 +624,11 @@
     },
     {
       "id": "capability-report-is-fresh",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "generated-storybook-trees-are-fresh",
       "claim": "C3-detection",
       "pass": true
     },
