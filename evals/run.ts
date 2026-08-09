@@ -9541,6 +9541,69 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       );
     },
   },
+  {
+    // CONTENT CHECKS (C5 sweep / C6 tone) — the framing pin's C1-C4 are all
+    // geometry and provenance, so a reference that is correctly sized, correctly
+    // located and correctly sourced can still DEPICT THE WRONG PICTURE and pass.
+    // Measured: mui/button was scored against the DISABLED render of its own
+    // variant (88.31 -> 6.36 on retarget), carbon/button against danger-ghost at
+    // 2xl while the cell is primary at xs, carbon/toggle against the toggled-ON
+    // render, and polaris/badge's stale blue shot read 7.13 pctAAMasked against
+    // a neutral cell while 94.43% of pixels differed per channel — pixelmatch at
+    // threshold 0.1 compares YIQ against a 352 cutoff and #F0F0F0 vs #D5EBFF is
+    // a delta of 158. C5 ranks the shot against every sibling __default gate-shot
+    // on an 8x8x8 colour-histogram total-variation distance and NAMES the winner;
+    // C6 applies the same distance to the pinned pair, inside the band where the
+    // AA number is claiming closeness. Both are opt-in per lane so a neighbour is
+    // never retroactively reddened by a rule it did not adopt.
+    id: 'console-loop-reference-content-checks',
+    claim: 'C3-detection',
+    run: () => {
+      const lanes = ['astryx', 'carbon', 'mui', 'polaris', 'tailwind'];
+      let sweepLanes = 0;
+      let toneLanes = 0;
+      for (const lane of lanes) {
+        const pin = JSON.parse(
+          readFileSync(path.join(ROOT, `parity/receipts/console-loop/${lane}/framing.json`), 'utf8'),
+        );
+        if (pin.guard?.referenceSweepCheck === true) sweepLanes += 1;
+        if (pin.guard?.referenceToneCheck === true) toneLanes += 1;
+      }
+      // 4 sweep lanes (polaris references are emit-html renders with no sibling
+      // gate-shots, so the sweep is inert there and the lane does not claim it);
+      // 5 tone lanes — C6 needs only the pinned pair.
+      if (sweepLanes < 4 || toneLanes < 5) {
+        throw new Error(
+          `content checks are dead code: referenceSweepCheck on ${sweepLanes} lane(s), referenceToneCheck on ${toneLanes}`,
+        );
+      }
+      const green = spawnSync(process.execPath, ['scripts/console-loop-capture-framing-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const gOut = `${green.stdout ?? ''}${green.stderr ?? ''}`;
+      if ((green.status ?? -1) !== 0) {
+        throw new Error(`capture-framing pin is red with the content checks on:\n${gOut}`);
+      }
+      // C5 must be LIVE, not merely enabled. astryx/badge's cell is named
+      // Variant=Blue and the canvas paints it near-white, so the sweep proposes
+      // neutral__default (7.0% vs the pinned 87.0%) and the receipt refuses the
+      // retarget by name. If this line disappears the sweep has gone inert.
+      if (!/astryx\/badge: FC-REF-WRONG-VARIANT[\s\S]*?neutral__default\.png/.test(gOut)) {
+        throw new Error(`C5 no longer fires on astryx/badge — the sweep is enabled but inert:\n${gOut}`);
+      }
+      if (!gOut.includes('[named as FC-REF-SWEEP-DECOY]')) {
+        throw new Error(`the astryx/badge decoy waiver is not read as a named-open finding:\n${gOut}`);
+      }
+      // Red halves for C5 (a stem pointed at a sibling variant's render, gate
+      // must name the winner) and C6 (a tone swap under an in-band AA) live in
+      // the pin's node:test file, which the capture-framing eval already runs.
+      console.log(
+        `console-loop-reference-content-checks: C5 sweep on ${sweepLanes} lane(s), C6 tone on ${toneLanes}; ` +
+          'astryx/badge sweep finding named-open as FC-REF-SWEEP-DECOY, no stem red',
+      );
+    },
+  },
 
   {
     // MUI denominator (31) on MUI Test 1 — same Console MCP loop, foreign corpus.

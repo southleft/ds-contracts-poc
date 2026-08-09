@@ -51,7 +51,8 @@
     ],
     "defects": [
       "Accent/default row uses near-black solid; docs Info status is saturated blue with white text — status mapping incomplete.",
-      "Missing icon treatments present in some docs badge examples; fail closed until status axis maps 1:1 to developed Neutral/Info/Success/Warning/Error row."
+      "Missing icon treatments present in some docs badge examples; fail closed until status axis maps 1:1 to developed Neutral/Info/Success/Warning/Error row.",
+      "FC-REF-SWEEP-DECOY (reference sweep 2026-08-08, RETARGET REFUSED): C5 ranks neutral__default.png at 7.0% colour-histogram distance against the pinned blue__default.png at 87.0% and proposes the retarget. It is REFUSED: the pinned cell 1:3776 is named Variant=Blue, so blue__default.png IS the like-for-like reference and taking the neutral winner would pair a Blue cell with a picture of the Neutral badge. The 87.0pt gap is the CANVAS-side defect already recorded above — the Blue variant paints a near-white pill instead of the saturated blue the developed row renders — so the 11.55 pctAAMasked is measuring a real colour miss, not a reference error."
     ],
     "reference": "parity/receipts/console-loop/astryx/refs/badge.png",
     "reviewSurface": "cream-#F8F4ED-component-set",

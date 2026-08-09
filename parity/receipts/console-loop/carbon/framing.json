@@ -35,9 +35,18 @@
       "FC-REF-UNVERIFIABLE-PROVENANCE",
       "FC-FONT-SUBSTRATE",
       "FC-ABS-SIZE",
-      "FC-WIDTH-TOKEN"
+      "FC-WIDTH-TOKEN",
+      "FC-REF-SWEEP-DECOY",
+      "FC-REF-TONE-SWAP"
     ],
-    "framingCausesNote": "C2 (reference comparability) is waived on a fail-closed receipt by naming ANY of these in visual.defects. A stem already retargeted to a correct like-for-like reference that still sits outside the guard names the real emit defect (FC-ABS-SIZE / FC-WIDTH-TOKEN), not the generic framing code."
+    "framingCausesNote": "C2 (reference comparability) is waived on a fail-closed receipt by naming ANY of these in visual.defects. A stem already retargeted to a correct like-for-like reference that still sits outside the guard names the real emit defect (FC-ABS-SIZE / FC-WIDTH-TOKEN), not the generic framing code.",
+    "referenceSweepCheck": true,
+    "sweepPinnedMinPct": 15,
+    "sweepGapMinPct": 12,
+    "referenceToneCheck": true,
+    "toneTVMaxPct": 25,
+    "toneAAMaxPct": 10,
+    "contentCausesNote": "C5 (referenceSweepCheck) ranks the canvas shot against every sibling __default gate-shot in the directory this stem’s own referenceSource names, using an 8x8x8 colour-histogram total-variation distance; it fires only on a decisive margin (pinned>=sweepPinnedMinPct AND gap>=sweepGapMinPct) and is waived on a fail-closed receipt by FC-REF-WRONG-VARIANT (retarget accepted) or FC-REF-SWEEP-DECOY (retarget examined and refused: the canvas, not the reference, is what is wrong). C6 (referenceToneCheck) applies the same distance to the pinned pair, but only in the band where the AA number is claiming closeness (pass claim, or scorecard pctAAMasked<=toneAAMaxPct) — pixelmatch at threshold 0.1 compares YIQ against a 352 cutoff, so a whole-component tone swap sits under it (measured: #F0F0F0 cell vs #D5EBFF reference, YIQ delta 158, 94.43% of pixels differing per channel, AA 7.13). Thresholds calibrated 2026-08-08 against five measured wrong-reference pairs (tv 20.6-97.3) and every committed pair in-tree (highest non-firing sweep gap 10.1pt; highest in-band tone distance 17.3%)."
   },
   "refAllow": [
     "parity/receipts/console-loop/carbon/refs/",

@@ -29,8 +29,10 @@
  *                drifted is FC-REF-STALE-COPY: the receipt's provenance claim
  *                is false and the number was scored against an artifact no
  *                longer in the tree.
- *   SWEEP        best-scoring sibling gate-shot vs the one currently pinned.
- *                A large gap is FC-REF-WRONG-VARIANT.
+ *   SWEEP        best-scoring sibling gate-shot vs the one currently pinned,
+ *                ranked on the SAME colour-histogram distance (tv) the C5 gate in
+ *                console-loop-capture-framing-check.mjs decides on, with AA printed
+ *                beside it. A large tv gap is FC-REF-WRONG-VARIANT.
  *   GEOMETRY     shot / reference pixel + ink boxes, so a stage-clipped or
  *                hand-cropped reference is visible as a number.
  *
@@ -101,14 +103,46 @@ const downscale2x = (src) => {
 };
 
 /**
+ * COLOUR HISTOGRAM — the signal the C5/C6 GATE ranks on
+ * (scripts/console-loop-capture-framing-check.mjs). Kept byte-identical in
+ * behaviour here so the diagnostic and the gate cannot disagree about which
+ * sibling wins: an audit that ranks by a different number than the gate would
+ * send a human to retarget a stem the gate will not accept.
+ */
+function contentHistogram(png) {
+  const box = contentBox(png);
+  const h = new Float64Array(512);
+  let n = 0;
+  for (let y = 0; y < box.height; y += 1) {
+    for (let x = 0; x < box.width; x += 1) {
+      const i = ((box.y + y) * png.width + (box.x + x)) * 4;
+      const a = png.data[i + 3] / 255;
+      const r = Math.round(png.data[i] * a + 255 * (1 - a));
+      const g = Math.round(png.data[i + 1] * a + 255 * (1 - a));
+      const b = Math.round(png.data[i + 2] * a + 255 * (1 - a));
+      h[((r >> 5) << 6) | ((g >> 5) << 3) | (b >> 5)] += 1;
+      n += 1;
+    }
+  }
+  if (n) for (let i = 0; i < 512; i += 1) h[i] /= n;
+  return h;
+}
+const tvDistancePct = (p, q) => {
+  let s = 0;
+  for (let i = 0; i < 512; i += 1) s += Math.abs(p[i] - q[i]);
+  return (s / 2) * 100;
+};
+
+/**
  * Ranking score. Deliberately SIMPLER than console-loop-developed-score.mjs:
  * DPR normalisation + align + scoreCell, with no size-normalisation rescue.
  * Its job is to order candidates, never to decide a pass — the winner is always
  * re-measured by the real scorer before any receipt changes.
  */
-function rank(canvasPng, refPathAbs) {
+function rank(canvasPng, refPathAbs, canvasHist) {
   let a = canvasPng;
   let b = scorer.readPngBuffer(readFileSync(refPathAbs));
+  const tv = tvDistancePct(canvasHist ?? contentHistogram(canvasPng), contentHistogram(b));
   const rough = Math.max(a.width / b.width, b.width / a.width, a.height / b.height, b.height / a.height);
   if (rough >= 1.7 && rough <= 2.4) {
     if (a.width * a.height > b.width * b.height) a = downscale2x(a);
@@ -124,6 +158,7 @@ function rank(canvasPng, refPathAbs) {
   const aspect = Math.max((aW / aH) / (bW / bH), (bW / bH) / (aW / aH));
   return {
     aa: cell.pctAAMasked,
+    tv,
     scaleRatio,
     aspect,
     inkCanvasPct: cell.inkCanvasPct,
@@ -206,6 +241,7 @@ for (const stem of stems) {
     continue;
   }
   const canvasPng = scorer.readPngBuffer(readFileSync(shotPath));
+  const canvasHist = contentHistogram(canvasPng);
   const sBox = contentBox(canvasPng);
   row.shot = { rel: path.relative(ROOT, shotPath), px: `${canvasPng.width}x${canvasPng.height}`, ink: `${sBox.width}x${sBox.height}` };
 
@@ -214,7 +250,7 @@ for (const stem of stems) {
     const refPng = scorer.readPngBuffer(readFileSync(refAbs));
     const rBox = contentBox(refPng);
     row.reference = { rel: refRel, px: `${refPng.width}x${refPng.height}`, ink: `${rBox.width}x${rBox.height}` };
-    row.current = rank(canvasPng, refAbs);
+    row.current = rank(canvasPng, refAbs, canvasHist);
   } else {
     row.reference = { rel: refRel, missing: true };
   }
@@ -252,12 +288,14 @@ for (const stem of stems) {
     const scored = [];
     for (const f of cands) {
       try {
-        scored.push({ ref: path.join(compDir, "gate-shots", f), ...rank(canvasPng, path.join(shotsDir, f)) });
+        scored.push({ ref: path.join(compDir, "gate-shots", f), ...rank(canvasPng, path.join(shotsDir, f), canvasHist) });
       } catch {
         /* unreadable candidate is not evidence */
       }
     }
-    scored.sort((a, b) => a.aa - b.aa);
+    // Ranked on tv — the SAME key the C5 gate uses — so a retarget this audit
+    // proposes is one the gate will accept. AA is printed beside it, never sorted on.
+    scored.sort((a, b) => a.tv - b.tv);
     row.sweep = { candidates: scored.length, top: scored.slice(0, 4) };
   } else {
     row.sweep = { candidates: 0, note: `no gate-shots dir under ${compDir ?? "extract/computed/out/" + lane}` };
@@ -275,7 +313,7 @@ if (asJson) {
     console.log(`   shot      ${r.shot.px} ink ${r.shot.ink}  ${r.shot.rel}`);
     if (r.reference.missing) console.log(`   reference MISSING ON DISK: ${r.reference.rel}`);
     else console.log(`   reference ${r.reference.px} ink ${r.reference.ink}  ${r.reference.rel}`);
-    if (r.current) console.log(`   current   AA=${fmt(r.current.aa)}%  scale=${fmt(r.current.scaleRatio)} aspect=${fmt(r.current.aspect)} ink ${fmt(r.current.inkCanvasPct)}/${fmt(r.current.inkRealPct)}`);
+    if (r.current) console.log(`   current   tv=${fmt(r.current.tv)}%  AA=${fmt(r.current.aa)}%  scale=${fmt(r.current.scaleRatio)} aspect=${fmt(r.current.aspect)} ink ${fmt(r.current.inkCanvasPct)}/${fmt(r.current.inkRealPct)}`);
     const p = r.provenance;
     console.log(
       `   provenance ${p.kind}${p.kind === "bare" ? ` (BARE FILENAME — unverifiable descriptor "${p.bare}")` : ""}` +
@@ -287,7 +325,7 @@ if (asJson) {
       console.log(`   sweep     ${r.sweep.candidates} sibling __default gate-shot(s); best:`);
       for (const t of r.sweep.top) {
         const isCurrent = r.reference.rel && (t.ref === r.reference.rel || (p.rel && t.ref === p.rel));
-        console.log(`      AA=${String(fmt(t.aa)).padStart(6)}%  scale=${fmt(t.scaleRatio)}  ${t.ref}${isCurrent ? "   <== CURRENTLY PINNED" : ""}`);
+        console.log(`      tv=${String(fmt(t.tv)).padStart(6)}%  AA=${String(fmt(t.aa)).padStart(6)}%  scale=${fmt(t.scaleRatio)}  ${t.ref}${isCurrent ? "   <== CURRENTLY PINNED" : ""}`);
       }
     } else {
       console.log(`   sweep     ${r.sweep.note}`);

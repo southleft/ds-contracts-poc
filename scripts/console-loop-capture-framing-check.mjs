@@ -57,6 +57,48 @@
  *      not ALL four PNG edges. Flush against ALL four is a deliberate tight
  *      crop and is exempt.
  *
+ *  C5  REFERENCE SWEEP — opt-in via guard.referenceSweepCheck.
+ *      C1-C4 are all GEOMETRY and PROVENANCE: they judge where a PNG sits and
+ *      how big it is. None of them can see a reference that is correctly sized,
+ *      correctly located, correctly sourced — and DEPICTS THE WRONG PICTURE.
+ *      Measured cases: mui/button was scored against the DISABLED render of its
+ *      own variant (88.31 -> 6.36 once retargeted to enabled); carbon/button
+ *      against danger-ghost at 2xl while the cell is primary at xs;
+ *      carbon/toggle against the toggled-ON render. All three passed C1-C4.
+ *
+ *      The signal is the CONTENT COLOUR HISTOGRAM (see contentHistogram): an
+ *      8x8x8 RGB histogram of the ink content box, compared as a total-variation
+ *      distance in percent (0 = identical palette mix, 100 = disjoint). It is
+ *      position-, scale- and DPR-independent, which is what makes it usable as
+ *      a RANKING key: the shot is scored against every sibling __default
+ *      gate-shot in the directory the receipt's own referenceSource names, and
+ *      if some sibling is dramatically closer than the pinned one, the pinned
+ *      one is what is wrong and the winner NAMES the retarget.
+ *
+ *      This is a ranking, not a verdict, so it fires only on a decisive margin
+ *      (guard.sweepPinnedMinPct / guard.sweepGapMinPct) and it CAN be fooled:
+ *      when the canvas itself renders the wrong colour, a sibling of the right
+ *      component will win for the wrong reason (astryx/badge's cell IS
+ *      Variant=Blue and its blue__default reference is correct — the canvas
+ *      paints it near-white). That decoy reading is why the waiver accepts
+ *      FC-REF-SWEEP-DECOY as well as FC-REF-WRONG-VARIANT: a receipt that has
+ *      examined the proposed retarget and REFUSED it says so, in the tree,
+ *      instead of the finding being re-derived by hand every round.
+ *
+ *  C6  REFERENCE TONE — opt-in via guard.referenceToneCheck.
+ *      pixelmatch at threshold 0.1 compares a YIQ distance against a cutoff of
+ *      35215*t^2; a whole-component TONE SWAP can sit under it. Measured:
+ *      polaris/badge's stale blue shot against the live neutral cell differed on
+ *      94.43% of pixels per channel and still scored 7.13 pctAAMasked, because
+ *      #F0F0F0 vs #D5EBFF is a YIQ delta of 158 against a 352 cutoff. So the one
+ *      number the board is built on can read "nearly identical" for two pictures
+ *      that share no colour.
+ *      C6 is the second, independent colour metric: the same histogram distance
+ *      as C5, applied directly to the pinned pair, and asserted ONLY in the band
+ *      where the AA number is claiming closeness (receipt claims a pass, or the
+ *      scorecard's pctAAMasked <= guard.toneAAMaxPct). Outside that band the
+ *      stem is already failing loudly and the tone number adds nothing.
+ *
  * CELL-PENDING LANES
  * ------------------
  * cellW/cellH are only trustworthy when minted from the live canvas, so a lane
@@ -82,6 +124,9 @@
  *   FC-REF-CROSS-LIBRARY         C3  — reference belongs to another lane's library
  *   FC-REF-UNVERIFIABLE-PROVENANCE C3b — referenceSource names no repo path
  *   FC-REF-STAGE-EDGE            C4  — reference ink is flush to its stage edge (cut or anchored)
+ *   FC-REF-WRONG-VARIANT         C5  — a sibling gate-shot depicts the cell far better
+ *                                      (waivable also by FC-REF-SWEEP-DECOY — retarget examined and refused)
+ *   FC-REF-TONE-SWAP             C6  — pinned pair share almost no colour while AA claims closeness
  *
  * C2 is waived by naming ANY code from guard.framingCauses in visual.defects,
  * not only the generic FC-REF-FRAMING. A stem whose reference has already been
@@ -90,7 +135,7 @@
  * strictly more honest than restating "framing". C3 requires the exact code —
  * a reference from the wrong design system has no honest alternative reading.
  */
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { PNG } from "pngjs";
@@ -128,6 +173,9 @@ const CAUSE_REF_FRAMING = "FC-REF-FRAMING";
 const CAUSE_REF_CROSS = "FC-REF-CROSS-LIBRARY";
 const CAUSE_REF_PROVENANCE = "FC-REF-UNVERIFIABLE-PROVENANCE";
 const CAUSE_REF_STAGE_EDGE = "FC-REF-STAGE-EDGE";
+const CAUSE_REF_WRONG_VARIANT = "FC-REF-WRONG-VARIANT";
+const CAUSE_REF_SWEEP_DECOY = "FC-REF-SWEEP-DECOY";
+const CAUSE_REF_TONE_SWAP = "FC-REF-TONE-SWAP";
 
 const WHITE_TRIM = 250;
 /** Ink content box — same rule as console-loop-developed-score.mjs. */
@@ -153,14 +201,64 @@ function contentBox(png) {
     }
   }
   if (maxX < 0) {
-    return { width: png.width, height: png.height, blank: true, edges: "" };
+    return { x: 0, y: 0, width: png.width, height: png.height, blank: true, edges: "" };
   }
   // Which stage edges the ink is flush against. ALL FOUR means a deliberate
   // tight crop; SOME means the render was cut by, or anchored to, its stage.
   const edges =
     (minX <= 0 ? "L" : "") + (maxX >= png.width - 1 ? "R" : "") +
     (minY <= 0 ? "T" : "") + (maxY >= png.height - 1 ? "B" : "");
-  return { width: maxX - minX + 1, height: maxY - minY + 1, blank: false, edges };
+  return { x: minX, y: minY, width: maxX - minX + 1, height: maxY - minY + 1, blank: false, edges };
+}
+
+/**
+ * CONTENT COLOUR HISTOGRAM — the C5/C6 signal.
+ *
+ * 8x8x8 RGB histogram over the ink content box, alpha-composited over white and
+ * normalised to a distribution. Deliberately NOT spatial: two renders of the
+ * same component at different DPR, or with a shadow that extends the box by a
+ * few pixels, produce nearly the same histogram, while a variant swap that
+ * repaints the component (enabled->disabled, blue->neutral, ghost->primary)
+ * moves most of the mass to different bins. That is exactly the axis pixelmatch
+ * throws away: it asks "is THIS pixel's YIQ delta over the cutoff", never "do
+ * these two pictures use the same colours at all".
+ *
+ * 32-wide bins are the coarsest quantisation that still separates the measured
+ * tone swap: #F0F0F0 -> (7,7,7) and #D5EBFF -> (6,7,7) land in different bins.
+ */
+function contentHistogram(png, box) {
+  const h = new Float64Array(512);
+  let n = 0;
+  for (let y = 0; y < box.height; y += 1) {
+    for (let x = 0; x < box.width; x += 1) {
+      const i = ((box.y + y) * png.width + (box.x + x)) * 4;
+      const a = png.data[i + 3] / 255;
+      const r = Math.round(png.data[i] * a + 255 * (1 - a));
+      const g = Math.round(png.data[i + 1] * a + 255 * (1 - a));
+      const b = Math.round(png.data[i + 2] * a + 255 * (1 - a));
+      h[((r >> 5) << 6) | ((g >> 5) << 3) | (b >> 5)] += 1;
+      n += 1;
+    }
+  }
+  if (n) for (let i = 0; i < 512; i += 1) h[i] /= n;
+  return h;
+}
+
+/** Total-variation distance between two normalised histograms, in percent. */
+function tvDistancePct(p, q) {
+  let s = 0;
+  for (let i = 0; i < 512; i += 1) s += Math.abs(p[i] - q[i]);
+  return (s / 2) * 100;
+}
+
+/** Histogram of a PNG on disk, memoised — a sweep re-reads the same siblings. */
+const histCache = new Map();
+function histogramOf(absPath) {
+  if (histCache.has(absPath)) return histCache.get(absPath);
+  const png = PNG.sync.read(readFileSync(absPath));
+  const h = contentHistogram(png, contentBox(png));
+  histCache.set(absPath, h);
+  return h;
 }
 
 /** Mirror of console-loop-developed-score.mjs resolveCanvasShot (lane form). */
@@ -240,6 +338,12 @@ for (const lane of lanes) {
   // retroactively reddened by a check its receipts never had a chance to name.
   const requireResolvableProvenance = g.requireResolvableProvenance === true;
   const stageClipCheck = g.stageClipCheck === true;
+  const referenceSweepCheck = g.referenceSweepCheck === true;
+  const sweepPinnedMin = g.sweepPinnedMinPct ?? 15;
+  const sweepGapMin = g.sweepGapMinPct ?? 12;
+  const referenceToneCheck = g.referenceToneCheck === true;
+  const toneTVMax = g.toneTVMaxPct ?? 25;
+  const toneAAMax = g.toneAAMaxPct ?? 10;
   const framingCauses = Array.isArray(g.framingCauses) && g.framingCauses.length
     ? g.framingCauses
     : [CAUSE_REF_FRAMING];
@@ -288,7 +392,15 @@ for (const lane of lanes) {
         errors.push(`${line} (receipt CLAIMS a visual pass)`);
         return;
       }
-      const accepted = cause === CAUSE_REF_FRAMING ? framingCauses : [cause];
+      // C2 is waived by any lane-configured framing cause; C5 additionally by
+      // FC-REF-SWEEP-DECOY, the honest reading when the proposed retarget was
+      // examined and refused. Everything else needs its own exact code.
+      const accepted =
+        cause === CAUSE_REF_FRAMING
+          ? framingCauses
+          : cause === CAUSE_REF_WRONG_VARIANT
+            ? [CAUSE_REF_WRONG_VARIANT, CAUSE_REF_SWEEP_DECOY]
+            : [cause];
       const named = accepted.find((c) => defects.includes(c));
       if (named) open.push(named === cause ? line : `${line} [named as ${named}]`);
       else errors.push(`${line} — and visual.defects names none of: ${accepted.join(", ")}`);
@@ -386,6 +498,73 @@ for (const lane of lanes) {
           "a developed reference is expected to sit INSIDE its harness stage with margin on every side, so this render was either cut by the stage or anchored to it; either way it does not depict the whole component. " +
           "(Flush on all four edges is a deliberate tight crop and is exempt.)",
       );
+    }
+
+    // ---- C5/C6: does the reference DEPICT this cell? ------------------------
+    // Both read the same signal, from the content boxes BEFORE the DPR
+    // rescaling C2 applies below (the histogram is already scale-independent).
+    if (referenceSweepCheck || referenceToneCheck) {
+      const shotHist = contentHistogram(shotPng, a);
+      const pinnedTV = tvDistancePct(shotHist, contentHistogram(refPng, b));
+
+      // C5 — rank the shot against every sibling __default gate-shot in the
+      // directory the receipt's OWN referenceSource names. No referenceSource
+      // resolving into a gate-shots dir means no siblings and no sweep: this
+      // check never guesses where a reference "should" have come from.
+      if (referenceSweepCheck && refSource) {
+        const srcDir = path.dirname(refSource);
+        const siblingsDir = path.join(ROOT, srcDir);
+        if (path.basename(srcDir) === "gate-shots" && existsSync(siblingsDir)) {
+          const siblings = readdirSync(siblingsDir).filter((f) => f.endsWith("__default.png"));
+          if (siblings.length >= 2) {
+            let best = null;
+            for (const f of siblings) {
+              let d;
+              try {
+                d = tvDistancePct(shotHist, histogramOf(path.join(siblingsDir, f)));
+              } catch {
+                continue; // an unreadable candidate is not evidence
+              }
+              if (!best || d < best.d) best = { f, d };
+            }
+            const gap = best ? pinnedTV - best.d : 0;
+            if (best && pinnedTV >= sweepPinnedMin && gap >= sweepGapMin) {
+              raise(
+                CAUSE_REF_WRONG_VARIANT,
+                `pinned reference "${refRel}" (from ${path.basename(refSource)}) is ${pinnedTV.toFixed(1)}% colour-histogram distance from the canvas cell, ` +
+                  `but the sibling "${path.join(srcDir, best.f)}" is only ${best.d.toFixed(1)}% (gap ${gap.toFixed(1)}pt over ${siblings.length} siblings; ` +
+                  `fires at pinned>=${sweepPinnedMin}% and gap>=${sweepGapMin}pt) — either the reference depicts the wrong variant and ${best.f} names the retarget, ` +
+                  "or the CANVAS renders the wrong colour and a sibling wins for the wrong reason; " +
+                  `whichever it is, say so (${CAUSE_REF_WRONG_VARIANT} to retarget, ${CAUSE_REF_SWEEP_DECOY} if the retarget was examined and refused)`,
+              );
+            }
+          }
+        }
+      }
+
+      // C6 — a tone swap that pixelmatch cannot see, asserted only where the AA
+      // number is claiming closeness.
+      if (referenceToneCheck) {
+        let aa = null;
+        const scorePath = path.join(CL, lane, "scores", `${stem}.json`);
+        if (existsSync(scorePath)) {
+          try {
+            aa = JSON.parse(readFileSync(scorePath, "utf8"))?.metrics?.pctAAMasked ?? null;
+          } catch {
+            /* an unreadable scorecard is the evidence gate's business */
+          }
+        }
+        const inBand = claimsPass || (typeof aa === "number" && aa <= toneAAMax);
+        if (inBand && pinnedTV >= toneTVMax) {
+          raise(
+            CAUSE_REF_TONE_SWAP,
+            `shot and reference "${refRel}" share almost no colour — ${pinnedTV.toFixed(1)}% colour-histogram distance (bar ${toneTVMax}%) — ` +
+              `while pctAAMasked ${aa === null ? "is unrecorded and the receipt CLAIMS a pass" : `is ${aa.toFixed(2)} (band <=${toneAAMax})`}, ` +
+              "i.e. the pixel score is reading these two pictures as near-identical. pixelmatch at threshold 0.1 compares a YIQ delta against a 352 cutoff, " +
+              "so a whole-component tone swap (measured: #F0F0F0 cell vs #D5EBFF reference, YIQ delta 158, 94.43% of pixels differing per channel, AA 7.13) sits under the bar",
+          );
+        }
+      }
     }
     // Same DPR normalisation the scorer applies before judging composition.
     const rough = Math.max(a.width / b.width, b.width / a.width, a.height / b.height, b.height / a.height);

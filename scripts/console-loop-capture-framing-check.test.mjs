@@ -89,16 +89,23 @@ const CLIPPED_REF = "parity/receipts/console-loop/mui/refs/menu.png";
 /** A committed shot that is flush to no edge — safe filler for C2/C4. */
 const CLEAN_PNG = "parity/receipts/console-loop/mui/shots/menu-cell.png";
 
-function buildFixture({ stems, guardExtras = {}, receipts }) {
+function buildFixture({ stems, guardExtras = {}, receipts, shots = {}, scores = {} }) {
   rmSync(FIXTURE_DIR, { recursive: true, force: true });
   mkdirSync(path.join(FIXTURE_DIR, "components"), { recursive: true });
   mkdirSync(path.join(FIXTURE_DIR, "shots"), { recursive: true });
+  mkdirSync(path.join(FIXTURE_DIR, "scores"), { recursive: true });
   for (const stem of Object.keys(stems)) {
-    copyFileSync(path.join(ROOT, CLEAN_PNG), path.join(FIXTURE_DIR, "shots", `${stem}-cell.png`));
+    copyFileSync(path.join(ROOT, shots[stem] ?? CLEAN_PNG), path.join(FIXTURE_DIR, "shots", `${stem}-cell.png`));
     writeFileSync(
       path.join(FIXTURE_DIR, "components", `${stem}.json`),
       `${JSON.stringify(receipts[stem], null, 2)}\n`,
     );
+    if (scores[stem] !== undefined) {
+      writeFileSync(
+        path.join(FIXTURE_DIR, "scores", `${stem}.json`),
+        `${JSON.stringify({ metrics: { pctAAMasked: scores[stem] } }, null, 2)}\n`,
+      );
+    }
   }
   writeFileSync(
     path.join(FIXTURE_DIR, "framing.json"),
@@ -114,7 +121,7 @@ function buildFixture({ stems, guardExtras = {}, receipts }) {
           framingCauses: ["FC-REF-FRAMING", "FC-REF-STAGE-EDGE", "FC-REF-UNVERIFIABLE-PROVENANCE"],
           ...guardExtras,
         },
-        refAllow: ["parity/receipts/console-loop/"],
+        refAllow: ["parity/receipts/console-loop/", "extract/computed/out/"],
         stems,
       },
       null,
@@ -228,6 +235,150 @@ test("green: C4 is waived when the receipt NAMES FC-REF-STAGE-EDGE", () => {
       assert.ok(out.includes("open (named)") && out.includes("FC-REF-STAGE-EDGE"), out);
     },
   );
+});
+
+/* ------------------------------------------------------------------------ *
+ * C5 (reference sweep) and C6 (reference tone) — the two content checks.
+ *
+ * Both red halves are the MEASURED cases, replayed out of committed PNGs:
+ *   C5  the carbon Toggle cell pointed at its own toggled-ON sibling render
+ *       (the gate must name the untoggled sibling that wins the sweep);
+ *   C6  the mui Button cell pointed at the DISABLED render of its own variant,
+ *       carrying the real pctAAMasked=6.36 that pair scored — a number under
+ *       2x the bar for two pictures that share almost no colour.
+ * ------------------------------------------------------------------------ */
+const TOGGLE_SHOT = "parity/receipts/console-loop/carbon/shots/toggle-cell.png";
+const TOGGLE_WRONG_REF = "extract/computed/out/carbon/toggle/gate-shots/toggled.enabled__default.png";
+const MUI_BUTTON_SHOT = "parity/receipts/console-loop/mui/shots/button-cell.png";
+const MUI_BUTTON_DISABLED_REF =
+  "extract/computed/out/mui/button/gate-shots/contained.error.large.disabled__default.png";
+
+const sweepSpec = (defects, ok = false) => ({
+  stems: { toggleswap: PENDING },
+  guardExtras: { referenceSweepCheck: true },
+  shots: { toggleswap: TOGGLE_SHOT },
+  receipts: { toggleswap: receipt(TOGGLE_WRONG_REF, TOGGLE_WRONG_REF, defects, ok) },
+});
+
+test("red: C5 refuses a reference pointed at a sibling VARIANT and names the winner", (t) => {
+  if (!existsSync(path.join(ROOT, TOGGLE_WRONG_REF))) {
+    t.skip(`${TOGGLE_WRONG_REF} not committed in this tree`);
+    return;
+  }
+  withFixture(sweepSpec(["FC-REF-FRAMING"]), (r) => {
+    const out = outputOf(r);
+    assert.equal(
+      r.status,
+      1,
+      `pin accepted a reference depicting the TOGGLED render of an untoggled cell:\n${out}`,
+    );
+    assert.ok(out.includes("FC-REF-WRONG-VARIANT"), out);
+    // The whole point of a sweep is that it NAMES the retarget, not just the fault.
+    assert.match(
+      out,
+      /untoggled\.\w[\w.-]*__default\.png/,
+      `C5 refused but did not name the sibling stem that wins the sweep:\n${out}`,
+    );
+    assert.ok(out.includes("colour-histogram distance"), out);
+  });
+});
+
+test("green: C5 is OFF for lanes that have not opted in", (t) => {
+  if (!existsSync(path.join(ROOT, TOGGLE_WRONG_REF))) {
+    t.skip(`${TOGGLE_WRONG_REF} not committed in this tree`);
+    return;
+  }
+  const spec = sweepSpec(["FC-REF-FRAMING"]);
+  spec.guardExtras = {};
+  withFixture(spec, (r) => {
+    const out = outputOf(r);
+    assert.equal(r.status, 0, `C5 fired on a lane that never opted in:\n${out}`);
+    assert.ok(!out.includes("FC-REF-WRONG-VARIANT"), out);
+  });
+});
+
+test("green: C5 is waived when the receipt NAMES the retarget as examined-and-refused", (t) => {
+  if (!existsSync(path.join(ROOT, TOGGLE_WRONG_REF))) {
+    t.skip(`${TOGGLE_WRONG_REF} not committed in this tree`);
+    return;
+  }
+  withFixture(
+    sweepSpec([
+      "FC-REF-SWEEP-DECOY: the sweep winner is a different variant of the same axis; retarget refused",
+      "FC-REF-FRAMING",
+    ]),
+    (r) => {
+      const out = outputOf(r);
+      assert.equal(r.status, 0, `an honestly refused retarget should be open, not red:\n${out}`);
+      assert.ok(out.includes("open (named)") && out.includes("FC-REF-SWEEP-DECOY"), out);
+    },
+  );
+});
+
+test("red: a swept-out reference on a receipt CLAIMING a pass is never waivable", (t) => {
+  if (!existsSync(path.join(ROOT, TOGGLE_WRONG_REF))) {
+    t.skip(`${TOGGLE_WRONG_REF} not committed in this tree`);
+    return;
+  }
+  withFixture(sweepSpec(["FC-REF-WRONG-VARIANT", "FC-REF-FRAMING"], true), (r) => {
+    const out = outputOf(r);
+    assert.equal(r.status, 1, `narration waived a wrong-variant reference under a PASS claim:\n${out}`);
+    assert.ok(out.includes("receipt CLAIMS a visual pass"), out);
+  });
+});
+
+const toneSpec = (defects, aa = 6.36) => ({
+  stems: { toneswap: PENDING },
+  guardExtras: { referenceToneCheck: true },
+  shots: { toneswap: MUI_BUTTON_SHOT },
+  scores: { toneswap: aa },
+  receipts: { toneswap: receipt(MUI_BUTTON_DISABLED_REF, MUI_BUTTON_DISABLED_REF, defects) },
+});
+
+test("red: C6 refuses a tone swap that the AA number reads as near-identical", (t) => {
+  if (!existsSync(path.join(ROOT, MUI_BUTTON_DISABLED_REF))) {
+    t.skip(`${MUI_BUTTON_DISABLED_REF} not committed in this tree`);
+    return;
+  }
+  withFixture(toneSpec(["FC-REF-FRAMING"]), (r) => {
+    const out = outputOf(r);
+    assert.equal(
+      r.status,
+      1,
+      `pin accepted a pair sharing almost no colour while AA=6.36 called them close:\n${out}`,
+    );
+    assert.ok(out.includes("FC-REF-TONE-SWAP"), out);
+    assert.ok(out.includes("share almost no colour"), out);
+    assert.ok(out.includes("6.36"), `C6 refused without printing the AA it is contradicting:\n${out}`);
+  });
+});
+
+test("green: C6 is OFF for lanes that have not opted in", (t) => {
+  if (!existsSync(path.join(ROOT, MUI_BUTTON_DISABLED_REF))) {
+    t.skip(`${MUI_BUTTON_DISABLED_REF} not committed in this tree`);
+    return;
+  }
+  const spec = toneSpec(["FC-REF-FRAMING"]);
+  spec.guardExtras = {};
+  withFixture(spec, (r) => {
+    const out = outputOf(r);
+    assert.equal(r.status, 0, `C6 fired on a lane that never opted in:\n${out}`);
+    assert.ok(!out.includes("FC-REF-TONE-SWAP"), out);
+  });
+});
+
+test("green: C6 stays silent outside the band where AA claims closeness", (t) => {
+  if (!existsSync(path.join(ROOT, MUI_BUTTON_DISABLED_REF))) {
+    t.skip(`${MUI_BUTTON_DISABLED_REF} not committed in this tree`);
+    return;
+  }
+  // Same tone gap, but the stem is already failing loudly at 88.31 — the tone
+  // number adds nothing there and must not add a second red to one defect.
+  withFixture(toneSpec(["FC-REF-FRAMING"], 88.31), (r) => {
+    const out = outputOf(r);
+    assert.equal(r.status, 0, `C6 fired on a stem whose AA is nowhere near the bar:\n${out}`);
+    assert.ok(!out.includes("FC-REF-TONE-SWAP"), out);
+  });
 });
 
 test("red: a stage-clipped reference on a receipt CLAIMING a pass is never waivable", () => {
