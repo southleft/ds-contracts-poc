@@ -132,7 +132,7 @@
               "prop": "status",
               "map": {
                 "info": {
-                  "background-color": "{color-accent-muted}"
+                  "background-color": "{color-background-blue}"
                 },
                 "warning": {
                   "background-color": "{color-warning-muted}"
@@ -176,7 +176,7 @@
                     "equals": "info"
                   },
                   "tokens": {
-                    "color": "{color-accent}"
+                    "color": "{color-text-blue}"
                   }
                 },
                 "iconWarning": {
@@ -189,7 +189,7 @@
                     "equals": "warning"
                   },
                   "tokens": {
-                    "color": "{color-warning}"
+                    "color": "{color-text-yellow}"
                   }
                 },
                 "iconError": {
@@ -202,7 +202,7 @@
                     "equals": "error"
                   },
                   "tokens": {
-                    "color": "{color-error}"
+                    "color": "{color-text-red}"
                   }
                 },
                 "iconSuccess": {
@@ -215,7 +215,7 @@
                     "equals": "success"
                   },
                   "tokens": {
-                    "color": "{color-success}"
+                    "color": "{color-text-green}"
                   }
                 }
               }
@@ -237,7 +237,18 @@
                     "font-size": "{text-label-size}",
                     "font-weight": "{font-weight-semibold}",
                     "line-height": "{text-label-leading}"
-                  }
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "status",
+                      "map": {
+                        "info": { "color": "{color-text-blue}" },
+                        "warning": { "color": "{color-text-yellow}" },
+                        "error": { "color": "{color-text-red}" },
+                        "success": { "color": "{color-text-green}" }
+                      }
+                    }
+                  ]
                 },
                 "description": {
                   "element": "div",
@@ -249,7 +260,18 @@
                     "font-size": "{text-supporting-size}",
                     "font-weight": "{text-supporting-weight}",
                     "line-height": "{text-supporting-leading}"
-                  }
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "status",
+                      "map": {
+                        "info": { "color": "{color-text-blue}" },
+                        "warning": { "color": "{color-text-yellow}" },
+                        "error": { "color": "{color-text-red}" },
+                        "success": { "color": "{color-text-green}" }
+                      }
+                    }
+                  ]
                 }
               }
             }

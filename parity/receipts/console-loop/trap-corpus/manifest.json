@@ -128,6 +128,18 @@
       "reference": "extract/computed/out/astryx/button/orig-shots/primary.lg.no-isDisabled__default.png",
       "pendingRef": false,
       "referenceWas": "parity/receipts/console-loop/trap-corpus/refs/astryx/button/primary.md.no-isDisabled__default.png"
+    },
+    {
+      "lib": "astryx",
+      "stem": "banner",
+      "fc": [
+        "FC-SCOPED-VAR-OVERRIDE"
+      ],
+      "contract": "examples/astryx/contracts/banner.contract.json",
+      "script": "examples/astryx/figma/banner.figma.js",
+      "reference": "extract/computed/out/astryx/banner/orig-shots/info.card__default.png",
+      "pendingRef": false,
+      "_why": "The `info` cell is the diagnostic one for FC-SCOPED-VAR-OVERRIDE, and it traps BOTH halves of the class at once. Before the fix the contract bound the token the BASE rule spells, so this cell painted background `{color-accent-muted}` = #f1f1f1 (a GREY) where @astryxdesign/theme-neutral paints `var(--color-background-blue)` = #c4ddfb, and its title/description/icon all took `{color-text-primary}`/`{color-accent}` — identical ink in all four statuses, because the per-status ink lives ONLY in the scoped redeclaration. The reference is the REAL library render (orig-shots, run.ts --keep-originals), not a contract render, per the _astryxReferenceNote convention below."
     }
   ],
   "_astryxReferenceNote": "2026-08-08 REFERENCE-TRUTH round: the four astryx rows with a computed capture now point at extract/computed/out/astryx/<comp>/orig-shots/ — the REAL @astryxdesign/core render, committed for the first time by `extract/computed/run.ts --keep-originals`. They previously pointed at trap-corpus snapshots cut from gate-shots, i.e. the CONTRACT RENDER (enriched contract -> emit-html), not the library. Both scoring paths (manifest mode and --lib/--stem, which reads receipt.visual.reference) now resolve the same PNG; before this they disagreed, so a bare `npm run console-loop:developed-score` would silently overwrite the lane scorecards with numbers measured against a different picture. astryx/toast keeps its trap snapshot: Toast is composition-tier and has no single-component capture."

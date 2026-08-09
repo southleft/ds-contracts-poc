@@ -51,7 +51,7 @@ const COMPONENTS = [
                 "paddingLeft": "spacing-4",
                 "paddingRight": "spacing-4"
               },
-              "fill": "color-accent-muted",
+              "fill": "color-background-blue",
               "lits": {
                 "radius": 12
               },
@@ -68,8 +68,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconInfo",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#262626\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm0 4a1 1 0 100 2 1 1 0 000-2zm-.75 3.75a.75.75 0 011.5 0v5.5a.75.75 0 01-1.5 0v-5.5z\"/>\n</svg>",
-                      "svgPaintVar": "color-accent",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#00458c\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm0 4a1 1 0 100 2 1 1 0 000-2zm-.75 3.75a.75.75 0 011.5 0v5.5a.75.75 0 01-1.5 0v-5.5z\"/>\n</svg>",
+                      "svgPaintVar": "color-text-blue",
                       "iconSize": 20
                     }
                   ]
@@ -92,7 +92,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
-                      "textFill": "color-text-primary",
+                      "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 142.86,
                         "unit": "PERCENT"
@@ -106,7 +106,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
-                      "textFill": "color-text-secondary",
+                      "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 166.67000000000002,
                         "unit": "PERCENT"
@@ -150,7 +150,7 @@ const COMPONENTS = [
                 "paddingLeft": "spacing-4",
                 "paddingRight": "spacing-4"
               },
-              "fill": "color-accent-muted",
+              "fill": "color-background-blue",
               "lits": {
                 "radius": 0
               },
@@ -167,8 +167,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconInfo",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#262626\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm0 4a1 1 0 100 2 1 1 0 000-2zm-.75 3.75a.75.75 0 011.5 0v5.5a.75.75 0 01-1.5 0v-5.5z\"/>\n</svg>",
-                      "svgPaintVar": "color-accent",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#00458c\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm0 4a1 1 0 100 2 1 1 0 000-2zm-.75 3.75a.75.75 0 011.5 0v5.5a.75.75 0 01-1.5 0v-5.5z\"/>\n</svg>",
+                      "svgPaintVar": "color-text-blue",
                       "iconSize": 20
                     }
                   ]
@@ -191,7 +191,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
-                      "textFill": "color-text-primary",
+                      "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 142.86,
                         "unit": "PERCENT"
@@ -205,7 +205,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
-                      "textFill": "color-text-secondary",
+                      "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 166.67000000000002,
                         "unit": "PERCENT"
@@ -266,8 +266,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconWarning",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#745b00\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.29 3.86L2.07 19.05A2 2 0 003.78 22h16.44a2 2 0 001.71-2.95L13.71 3.86a2 2 0 00-3.42 0zM12 9a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0112 9zm0 9a1 1 0 100-2 1 1 0 000 2z\"/>\n</svg>",
-                      "svgPaintVar": "color-warning",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#584400\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.29 3.86L2.07 19.05A2 2 0 003.78 22h16.44a2 2 0 001.71-2.95L13.71 3.86a2 2 0 00-3.42 0zM12 9a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0112 9zm0 9a1 1 0 100-2 1 1 0 000 2z\"/>\n</svg>",
+                      "svgPaintVar": "color-text-yellow",
                       "iconSize": 20
                     }
                   ]
@@ -290,7 +290,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
-                      "textFill": "color-text-primary",
+                      "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 142.86,
                         "unit": "PERCENT"
@@ -304,7 +304,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
-                      "textFill": "color-text-secondary",
+                      "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 166.67000000000002,
                         "unit": "PERCENT"
@@ -365,8 +365,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconWarning",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#745b00\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.29 3.86L2.07 19.05A2 2 0 003.78 22h16.44a2 2 0 001.71-2.95L13.71 3.86a2 2 0 00-3.42 0zM12 9a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0112 9zm0 9a1 1 0 100-2 1 1 0 000 2z\"/>\n</svg>",
-                      "svgPaintVar": "color-warning",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#584400\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.29 3.86L2.07 19.05A2 2 0 003.78 22h16.44a2 2 0 001.71-2.95L13.71 3.86a2 2 0 00-3.42 0zM12 9a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0112 9zm0 9a1 1 0 100-2 1 1 0 000 2z\"/>\n</svg>",
+                      "svgPaintVar": "color-text-yellow",
                       "iconSize": 20
                     }
                   ]
@@ -389,7 +389,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
-                      "textFill": "color-text-primary",
+                      "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 142.86,
                         "unit": "PERCENT"
@@ -403,7 +403,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
-                      "textFill": "color-text-secondary",
+                      "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 166.67000000000002,
                         "unit": "PERCENT"
@@ -464,8 +464,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconError",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#a50c25\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm-2.47 5.47a.75.75 0 00-1.06 1.06L10.94 12l-2.47 2.47a.75.75 0 101.06 1.06L12 13.06l2.47 2.47a.75.75 0 101.06-1.06L13.06 12l2.47-2.47a.75.75 0 00-1.06-1.06L12 10.94l-2.47-2.47z\"/>\n</svg>",
-                      "svgPaintVar": "color-error",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#89001a\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm-2.47 5.47a.75.75 0 00-1.06 1.06L10.94 12l-2.47 2.47a.75.75 0 101.06 1.06L12 13.06l2.47 2.47a.75.75 0 101.06-1.06L13.06 12l2.47-2.47a.75.75 0 00-1.06-1.06L12 10.94l-2.47-2.47z\"/>\n</svg>",
+                      "svgPaintVar": "color-text-red",
                       "iconSize": 20
                     }
                   ]
@@ -488,7 +488,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
-                      "textFill": "color-text-primary",
+                      "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 142.86,
                         "unit": "PERCENT"
@@ -502,7 +502,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
-                      "textFill": "color-text-secondary",
+                      "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 166.67000000000002,
                         "unit": "PERCENT"
@@ -563,8 +563,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconError",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#a50c25\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm-2.47 5.47a.75.75 0 00-1.06 1.06L10.94 12l-2.47 2.47a.75.75 0 101.06 1.06L12 13.06l2.47 2.47a.75.75 0 101.06-1.06L13.06 12l2.47-2.47a.75.75 0 00-1.06-1.06L12 10.94l-2.47-2.47z\"/>\n</svg>",
-                      "svgPaintVar": "color-error",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#89001a\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm-2.47 5.47a.75.75 0 00-1.06 1.06L10.94 12l-2.47 2.47a.75.75 0 101.06 1.06L12 13.06l2.47 2.47a.75.75 0 101.06-1.06L13.06 12l2.47-2.47a.75.75 0 00-1.06-1.06L12 10.94l-2.47-2.47z\"/>\n</svg>",
+                      "svgPaintVar": "color-text-red",
                       "iconSize": 20
                     }
                   ]
@@ -587,7 +587,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
-                      "textFill": "color-text-primary",
+                      "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 142.86,
                         "unit": "PERCENT"
@@ -601,7 +601,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
-                      "textFill": "color-text-secondary",
+                      "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 166.67000000000002,
                         "unit": "PERCENT"
@@ -662,8 +662,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconSuccess",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#007004\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm4.06 6.56a.75.75 0 00-1.12-1l-3.94 4.4-1.94-1.94a.75.75 0 00-1.06 1.06l2.5 2.5a.75.75 0 001.09-.03l4.47-5z\"/>\n</svg>",
-                      "svgPaintVar": "color-success",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#0c5700\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm4.06 6.56a.75.75 0 00-1.12-1l-3.94 4.4-1.94-1.94a.75.75 0 00-1.06 1.06l2.5 2.5a.75.75 0 001.09-.03l4.47-5z\"/>\n</svg>",
+                      "svgPaintVar": "color-text-green",
                       "iconSize": 20
                     }
                   ]
@@ -686,7 +686,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
-                      "textFill": "color-text-primary",
+                      "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 142.86,
                         "unit": "PERCENT"
@@ -700,7 +700,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
-                      "textFill": "color-text-secondary",
+                      "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 166.67000000000002,
                         "unit": "PERCENT"
@@ -761,8 +761,8 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconSuccess",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#007004\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm4.06 6.56a.75.75 0 00-1.12-1l-3.94 4.4-1.94-1.94a.75.75 0 00-1.06 1.06l2.5 2.5a.75.75 0 001.09-.03l4.47-5z\"/>\n</svg>",
-                      "svgPaintVar": "color-success",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#0c5700\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm4.06 6.56a.75.75 0 00-1.12-1l-3.94 4.4-1.94-1.94a.75.75 0 00-1.06 1.06l2.5 2.5a.75.75 0 001.09-.03l4.47-5z\"/>\n</svg>",
+                      "svgPaintVar": "color-text-green",
                       "iconSize": 20
                     }
                   ]
@@ -785,7 +785,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
-                      "textFill": "color-text-primary",
+                      "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 142.86,
                         "unit": "PERCENT"
@@ -799,7 +799,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
-                      "textFill": "color-text-secondary",
+                      "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 166.67000000000002,
                         "unit": "PERCENT"

@@ -2,7 +2,7 @@
  * Trap corpus structural / compile-marker gate (code→canvas hill-climb).
  *
  * Validates parity/receipts/console-loop/trap-corpus/manifest.json:
- *   - schema (version, kind, 10 stems with lib/stem/fc/contract/script/reference)
+ *   - schema (version, kind, 11 stems with lib/stem/fc/contract/script/reference)
  *   - each stem: contract + figma script exist
  *   - reference PNG exists OR pendingRef: true (warn, not fail)
  *   - committed astryx toast/slider scripts carry Wave A emit markers
@@ -22,7 +22,12 @@ const MANIFEST = path.join(
   "parity/receipts/console-loop/trap-corpus/manifest.json",
 );
 
-const EXPECTED_STEM_COUNT = 10;
+// 10 → 11 (2026-08-09): astryx/banner joins the frozen set as the trap for
+// FC-SCOPED-VAR-OVERRIDE. The count is pinned rather than derived precisely so
+// that GROWING the corpus is a reviewed edit and SHRINKING it cannot happen
+// quietly — so this line moves only alongside a manifest stem, never to make a
+// red gate green.
+const EXPECTED_STEM_COUNT = 11;
 const FC_RE = /^FC-[A-Z0-9-]+$/;
 
 /** @type {{ ok: string[], warn: string[], fail: string[] }} */
