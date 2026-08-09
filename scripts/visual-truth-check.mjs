@@ -55,6 +55,7 @@ for (const lane of [...lanes].sort()) {
   let passed = 0;
   let scored = 0;
   const skipReasons = new Map();
+  const staleRefs = [];
   for (const f of files) {
     const p = path.join(dir, f);
     let sc;
@@ -77,7 +78,59 @@ for (const lane of [...lanes].sort()) {
     for (const err of verifyScorecardPins(ROOT, sc)) {
       errors.push(`${lane}/${f}: ${err}`);
     }
+    // A CARD SCORED AGAINST A SUPERSEDED REFERENCE IS NOT EVIDENCE — for the
+    // floor OR against it.
+    //
+    // The sha pins above prove a card still matches the PNG IT SCORED. They
+    // cannot notice that the lane has since been repointed at a DIFFERENT
+    // picture. The 2026-08-09 reference-truth round moved the lane receipts
+    // from contract renders (emit-html output) to the real library renders
+    // under `extract/computed/out/<lib>/<stem>/orig-shots/`, and the headless
+    // cards were never re-run — so every pin stayed green while the whole
+    // basis of comparison had moved underneath them.
+    //
+    // Measured across the corpus: 66 cards agree with their lane receipt, 11
+    // disagree, and ALL ELEVEN are astryx — every astryx card, none anywhere
+    // else. That is what put the lane below its floor: badge reads 12.62 here
+    // against `console-loop/astryx/refs/badge.png` and 4.88 on the bridge
+    // instrument against `orig-shots/blue__default.png`. Same stem, same bar,
+    // different picture. The floor was then raised 0→1 from the BRIDGE
+    // instrument while this gate enforces it against the HEADLESS count.
+    //
+    // Reported as a distinct error rather than folded into the pass-count, so
+    // the output says "these cards are stale, re-run the lane" instead of
+    // implying a fidelity regression that did not happen.
+    const recPath = path.join(ROOT, "parity/receipts/console-loop", lane, "components", `${f.slice(0, -5)}.json`);
+    if (sc.reference && existsSync(recPath)) {
+      let rec;
+      try {
+        rec = JSON.parse(readFileSync(recPath, "utf8"));
+      } catch {
+        rec = null;
+      }
+      // `"none"` is the receipts' SENTINEL for "this stem records no
+      // reference", not a path — astryx/toast carries it because Toast is
+      // composition-tier with no single-component capture, so it keeps the
+      // trap-corpus snapshot by name (trap-corpus/manifest.json). Treating the
+      // sentinel as a replaced path made this check's first run flag toast as
+      // stale, which is a false positive: nothing replaced anything. A receipt
+      // that records no reference cannot contradict the card.
+      const recRef = rec?.visual?.reference;
+      if (recRef && recRef !== "none" && recRef !== sc.reference) {
+        staleRefs.push(`${f.slice(0, -5)} (scored ${sc.reference}, receipt now says ${recRef})`);
+      }
+    }
     if (scorecardPasses(sc)) passed += 1;
+  }
+
+  // Named BEFORE the floor verdict, because it changes what that verdict
+  // means: a lane whose cards no longer point at the lane's own reference
+  // cannot be said to have regressed OR held.
+  if (staleRefs.length > 0) {
+    errors.push(
+      `${lane}: ${staleRefs.length} of ${scored} scored card(s) were scored against a reference the lane receipt has since REPLACED — ` +
+        `re-run the lane headlessly (\`visual-truth:run --lane ${lane}\`) before reading its pass-count as fidelity:\n      ${staleRefs.join("\n      ")}`,
+    );
   }
 
   const floor = floors[lane];
