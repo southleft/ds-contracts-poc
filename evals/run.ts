@@ -9684,11 +9684,20 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const EXPECTED: Record<string, { sync: number; drift: string[]; cellPending: number }> = {
         'first-party': { sync: 18, drift: [], cellPending: 36 },
         altitude: { sync: 7, drift: ['avatar'], cellPending: 0 },
+        // ASTRYX 3 → 5 IN-SYNC (2026-08-09, theme-neutral re-base + the
+        // firstFamily keyword fix). Recorded rather than absorbed: two stems
+        // flipped DRIFT → in-sync without anyone touching the canvas, because
+        // the drift was never in the canvas — `progress-bar` and `text-input`
+        // drew Figtree while their own scripts declared `-apple-system`, a
+        // family Figma cannot resolve. Fixing the SCRIPT to say what the cell
+        // already draws closed the gap from the code side. The remaining eight
+        // are the cross-library collection collision, which needs the canvas
+        // rebuilt (#60) — this count is the thing that will move when it is.
         astryx: {
-          sync: 3,
+          sync: 5,
           drift: [
             'button', 'checkbox-input', 'dropdown-menu', 'dropdown-menu-item',
-            'progress-bar', 'slider', 'switch', 'text-input', 'toast', 'token',
+            'slider', 'switch', 'toast', 'token',
           ],
           cellPending: 0,
         },
@@ -9779,10 +9788,35 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           `expected exactly mui's 4 passes to be un-probed for drift, got [${unmeasuredPasses.join(', ')}]`,
         );
       }
+      // DERIVED, NOT TYPED. This line used to be a hardcoded string and it went
+      // stale the first time a lane moved: it still read "astryx 3/10" after the
+      // theme re-base made it 5/8, so the gate's own receipt disagreed with the
+      // gate's own assertions. A summary nobody recomputes is the cheapest place
+      // for an instrument to start lying.
+      // A lane is UN-PROBED only when nothing in it was measured. first-party
+      // has 18 measured stems AND 36 unpinned cells; calling it un-probed
+      // (the first cut of this line did) hides eighteen real measurements.
+      const laneSummary = Object.keys(EXPECTED)
+        .map((lane) => {
+          const rows = byLane.get(lane) ?? [];
+          const sync = rows.filter((r: DriftRow) => r.status === 'in-sync').length;
+          const drift = rows.filter((r: DriftRow) => r.status === 'DRIFT').length;
+          const pend = EXPECTED[lane].cellPending;
+          return `${lane} ${sync}/${drift}${pend > 0 ? ` (+${pend} unpinned)` : ''}`;
+        })
+        .join(', ');
+      const unprobed = Object.keys(EXPECTED).filter(
+        (lane) => (byLane.get(lane) ?? []).filter((r: DriftRow) => r.status !== 'CELL-PENDING').length === 0,
+      );
+      const totalPasses = Object.keys(EXPECTED).reduce((n, lane) => n + scoredPasses(lane).length, 0);
       console.log(
-        'console-loop-canvas-drift-probe: 6 lanes probed (first-party 18/0, tailwind 5/0, altitude 7/1, ' +
-          'polaris 11/1, carbon 8/2, astryx 3/10 in-sync/drift); mui UN-PROBED (0 of 31 cells pinned). ' +
-          '24 of 28 scored passes measured, ZERO drifted; the 4 unmeasured are mui and are named, not claimed.',
+        `console-loop-canvas-drift-probe: ${Object.keys(EXPECTED).length} lane(s), in-sync/drift ` +
+          `— ${laneSummary}` +
+          (unprobed.length > 0
+            ? `; ${unprobed.join(', ')} wholly UN-PROBED (${unprobed.map((l) => `${EXPECTED[l].cellPending} cell(s) unpinned`).join(', ')})`
+            : '') +
+          `. ${totalPasses - unmeasuredPasses.length} of ${totalPasses} scored passes measured, ZERO drifted; ` +
+          `the ${unmeasuredPasses.length} unmeasured are named, not claimed: ${unmeasuredPasses.join(', ')}.`,
       );
     },
   },
@@ -11435,6 +11469,183 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       console.log(
         `painted-decoration-survives-control-equality: altitude Link's underline EQUALS the <a> control (\`<a href="#c">\`, :any-link) and was therefore dropped as "the emitted element inherits it for free" — false twice over, because core/emit-html writes the root <a> with no href (library ink 34x16 vs contract render 32x14 at Variant=Lg) and because Figma has no user agent at all. The library authors it outright (\`.al-c-link { text-decoration: var(--al-link-text-decoration, underline) }\`), so the equality was coincidence, not provenance. The door now re-admits a PAINTED decoration and still drops \`none\` (falsified here: forcing the capture to \`none\` carries nothing), font-family joins the round-5c clause that FC-FONT-SUBSTRATE needs, and the fact reaches the committed contract and ${underlines} canvas node(s) — replacing two hand-edits (26f1a279 text-decoration-line, ac5e6181 Plex families) that promote() could not reproduce and the next re-promote would have erased.`,
+      );
+    },
+  },
+  // -------------------------------------------------------------------------
+  // APPENDED 2026-08-09 — FC-TOKEN-PLANE-MISMATCH.
+  //
+  // `examples/astryx/tokens/astryx.dtcg.json` was wrapped from
+  // `@astryxdesign/core`'s defineVars tables — the library's UNTHEMED
+  // defaults — while the capture harness mounts `<Theme theme={neutralTheme}>`
+  // and injects `@astryxdesign/theme-neutral/dist/theme.css`
+  // (extract/computed/configs/astryx.json `mount.imports`). Every committed
+  // reference render under extract/computed/out/astryx/<c>/orig-shots/ is
+  // therefore a THEME-NEUTRAL render scored against a CORE token plane.
+  //
+  // Measured before the fix: 87 of the 177 checkable custom properties
+  // disagreed, and `--font-family-body` began `-apple-system` — a CSS
+  // system-font KEYWORD that the Figma emitter's firstFamily() passes through
+  // as a family name (core/emit-figma-script.ts:2356 denies only the generic
+  // families), putting `fontFamily": "-apple-system"` into 148 declarations
+  // across 10 astryx scripts. Figma resolves that string to nothing, so every
+  // text node fell back silently.
+  //
+  // The instrument is the committed captured truth itself: capture records the
+  // RAW custom-property declarations off the rendered element
+  // (`"--color-background-blue":"light-dark(#c4ddfb, #9eb7ff3D)"`), so the
+  // substrate is in-tree and needs no sandbox, no browser and no network.
+  {
+    id: 'astryx-token-plane-is-the-render-substrate',
+    claim: 'C3-detection',
+    run: () => {
+      const norm = (s: unknown) => String(s).replace(/\s+/g, ' ').trim();
+      const A = (rel: string) => path.join(ROOT, 'examples/astryx', rel);
+      const base = JSON.parse(readFileSync(A('tokens/astryx.dtcg.json'), 'utf8')) as Record<string, { $value: unknown }>;
+      const lightTree = JSON.parse(readFileSync(A('tokens/modes/astryx.light.dtcg.json'), 'utf8')) as Record<string, { $value: unknown }>;
+      const resolve = (n: string, d = 0): string | undefined => {
+        const leaf = lightTree[n] ?? base[n];
+        if (!leaf || d > 8) return undefined;
+        const v = norm(leaf.$value);
+        const m = /^\{([a-z0-9-]+)\}$/i.exec(v);
+        return m ? resolve(m[1], d + 1) : v;
+      };
+      // The light branch of a raw `light-dark(a, b)` declaration.
+      const lightBranch = (v: string): string => {
+        const m = /^light-dark\((.*)\)$/s.exec(norm(v));
+        if (!m) return norm(v);
+        let depth = 0, cur = '';
+        const parts: string[] = [];
+        for (const ch of m[1]) {
+          if (ch === '(') depth++;
+          if (ch === ')') depth--;
+          if (ch === ',' && depth === 0) { parts.push(cur); cur = ''; continue; }
+          cur += ch;
+        }
+        parts.push(cur);
+        return parts[0].trim();
+      };
+
+      // --- the substrate of record: every --name/value pair the committed
+      //     astryx captures carry -----------------------------------------
+      const outRoot = path.join(ROOT, 'extract/computed/out/astryx');
+      const declared = new Map<string, Set<string>>();
+      let capturesRead = 0;
+      for (const c of readdirSync(outRoot).sort()) {
+        const f = path.join(outRoot, c, 'captured-truth.json');
+        if (!existsSync(f)) continue;
+        capturesRead++;
+        const txt = readFileSync(f, 'utf8');
+        for (const m of txt.matchAll(/"--([a-z0-9-]+)":"((?:[^"\\]|\\.)*)"/gi)) {
+          const val = norm(JSON.parse(`"${m[2]}"`));
+          if (!declared.has(m[1])) declared.set(m[1], new Set());
+          declared.get(m[1])!.add(val);
+        }
+      }
+      if (capturesRead < 10) throw new Error(`only ${capturesRead} astryx captured-truth file(s) found — this pin needs the committed capture corpus to have a substrate to compare against`);
+
+      // --- every single-valued property must AGREE with the wrap -----------
+      const mismatches: string[] = [];
+      let checked = 0;
+      for (const name of Object.keys(base)) {
+        const vals = declared.get(name);
+        if (!vals || vals.size !== 1) continue; // absent, or mode/scope-varying across captures
+        const raw = lightBranch([...vals][0]);
+        const asAlias = /^var\(--([a-z0-9-]+)\)$/i.exec(raw);
+        const want = asAlias ? resolve(asAlias[1]) : raw;
+        const got = resolve(name);
+        checked++;
+        if (String(got).toLowerCase() !== String(want).toLowerCase()) {
+          mismatches.push(`--${name}: wrap resolves ${String(got)}, the render substrate declared ${String(want)}`);
+        }
+      }
+      if (checked < 150) throw new Error(`only ${checked} token(s) were comparable against the capture substrate — the pin's denominator collapsed and it is asserting nothing`);
+      if (mismatches.length > 0) {
+        throw new Error(
+          `${mismatches.length} of ${checked} astryx token(s) do NOT carry the value the reference renders were made under — ` +
+            `the DTCG base plane and the capture plane are different themes, so every scored pixel is graded against a palette ` +
+            `nothing rendered:\n  - ${mismatches.slice(0, 12).join('\n  - ')}` +
+            (mismatches.length > 12 ? `\n  … ${mismatches.length - 12} more` : ''),
+        );
+      }
+
+      // --- and no emitted script may name a CSS keyword as a font family ---
+      // A generic/system font keyword is not a family: Figma cannot resolve it
+      // and the runtime falls back silently, which is invisible in every
+      // structural gate. This half is deliberately corpus-wide over astryx's
+      // own scripts, so an upstream stack change re-opens it here first.
+      const KEYWORD = /^(-apple-system|BlinkMacSystemFont|system-ui|ui-sans-serif|ui-serif|ui-monospace|ui-rounded|sans-serif|serif|monospace|cursive|fantasy|math|inherit|initial|unset|revert)$/i;
+      const figmaDir = A('figma');
+      const keywordBy = new Map<string, number>();
+      let declarations = 0;
+      for (const f of readdirSync(figmaDir).sort()) {
+        if (!f.endsWith('.figma.js')) continue;
+        const src = readFileSync(path.join(figmaDir, f), 'utf8');
+        for (const m of src.matchAll(/"fontFamily":\s*"([^"]*)"/g)) {
+          declarations++;
+          if (KEYWORD.test(m[1])) keywordBy.set(f, (keywordBy.get(f) ?? 0) + 1);
+        }
+      }
+      if (declarations === 0) throw new Error('no fontFamily declaration found in any astryx figma script — the second half of this pin has no denominator');
+
+      // THE RESIDUE, NAMED AND FROZEN — not blessed, ratcheted.
+      //
+      // 148 → 28 (this sweep counts GENESIS-BATCH.figma.js, which is the
+      // concatenation of the 13 component scripts, so every residual
+      // declaration is counted twice: 14 unique, 14 duplicated in the batch).
+      // 120 of the 148 died with the re-base: they came from
+      // `{font-family-body}`, which now resolves to the theme's "Figtree, …"
+      // stack instead of core's "-apple-system, …".
+      //
+      // …AND THEN THE REMAINING 28 DIED TOO, by a different door than the one
+      // predicted here. This ratchet was written allowing 28 — 14 unique in
+      // slider/switch plus their copies in the batch — because those come from
+      // LITERAL stacks baked into two committed contracts, spelled
+      // `-apple-system, "system-ui", "Segoe UI", …`, matching NEITHER core NOR
+      // theme-neutral; a fossil of the pre-Theme-mount capture. The predicted
+      // closing condition was a lane re-promote dropping slider's literal.
+      //
+      // That is not what closed it. The real cause was one missing alternation
+      // in `firstFamily` (core/emit-figma-script.ts): its denylist covered the
+      // GENERIC families but not the SYSTEM-FONT keywords, so `-apple-system`
+      // was returned as though it were a typeface no matter where the stack
+      // came from — token plane or literal contract. Widening that denylist
+      // takes the count to ZERO, contract literals included, and moves no
+      // other lane (altitude re-emits byte-identical; it is the only lane
+      // whose stack head was ever a keyword).
+      //
+      // The allowance is therefore tightened from 28 to NOTHING rather than
+      // left with slack a regression could hide in — an improvement recorded,
+      // not silently absorbed. Any keyword in any astryx script now fails.
+      const RESIDUE: Record<string, number> = {};
+      const grew: string[] = [];
+      for (const [f, n] of [...keywordBy].sort()) {
+        const allowed = RESIDUE[f];
+        if (allowed === undefined) grew.push(`${f}: ${n}× — a script with NO named keyword residue now declares one`);
+        else if (n > allowed) grew.push(`${f}: ${n}× (named residue is ${allowed}) — the keyword font grew`);
+      }
+      if (grew.length > 0) {
+        throw new Error(
+          `a CSS system/generic-font KEYWORD is being emitted as a Figma font family — Figma resolves it to nothing and every one of ` +
+            `those text nodes falls back silently:\n  - ${grew.join('\n  - ')}\n` +
+            `  The stack's FIRST entry is what core/emit-figma-script.ts firstFamily() takes. Its denylist covers the generic families ` +
+            `AND (since 2026-08-09) the system-font keywords, and it deliberately does NOT fall through to the next stack entry — ` +
+            `falling through would pick a face the browser never resolves the keyword to, trading a loud refusal for a quiet wrong ` +
+            `font. So a keyword reaching this gate means either a new keyword outside NON_FAMILY_KEYWORDS or a path that bypasses ` +
+            `firstFamily() entirely; find which before widening anything.`,
+        );
+      }
+      const residueNow = [...keywordBy.values()].reduce((a, b) => a + b, 0);
+      const residueNamed = Object.values(RESIDUE).reduce((a, b) => a + b, 0);
+
+      console.log(
+        `astryx-token-plane-is-the-render-substrate: ${checked} of ${Object.keys(base).length} committed astryx tokens are comparable against the ` +
+          `${capturesRead} committed capture(s)' own raw custom-property declarations, and ALL ${checked} agree (87 disagreed before the ` +
+          `theme-neutral re-base — the DTCG was @astryxdesign/core's UNTHEMED defaults while every reference render was made under ` +
+          `@astryxdesign/theme-neutral). CSS-keyword font families across ${declarations} fontFamily declaration(s): ${residueNow} ` +
+          `(allowance ${residueNamed}, was 148) — ZERO remain. The token-plane ones died with the re-base; the 28 that survived it ` +
+          `were contract LITERALS and died to one missing alternation in firstFamily(), whose denylist covered the generic families ` +
+          `but not the system-font keywords. The allowance was tightened 28 -> 0 in the same change, so the gain cannot be given back.`,
       );
     },
   },

@@ -56,7 +56,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -94,7 +94,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-text",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -108,7 +108,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -145,7 +145,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -183,7 +183,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-text",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -197,7 +197,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -234,7 +234,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -272,7 +272,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-text",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -286,7 +286,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -323,7 +323,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -361,7 +361,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-password",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -375,7 +375,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -412,7 +412,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -450,7 +450,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-password",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -464,7 +464,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -501,7 +501,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -539,7 +539,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-password",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -553,7 +553,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -590,7 +590,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -628,7 +628,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-email",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -642,7 +642,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -679,7 +679,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -717,7 +717,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-email",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -731,7 +731,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -768,7 +768,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -806,7 +806,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-email",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -820,7 +820,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],

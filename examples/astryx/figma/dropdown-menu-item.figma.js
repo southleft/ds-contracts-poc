@@ -51,7 +51,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "text-label-size",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]

@@ -53,7 +53,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -92,7 +92,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-red",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -131,7 +131,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-orange",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -170,7 +170,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-yellow",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -209,7 +209,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-green",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -248,7 +248,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-teal",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -287,7 +287,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-cyan",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -326,7 +326,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-blue",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -365,7 +365,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-purple",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -404,7 +404,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-pink",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -443,7 +443,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-gray",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -482,7 +482,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -521,7 +521,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-red",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -560,7 +560,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-orange",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -599,7 +599,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-yellow",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -638,7 +638,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-green",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -677,7 +677,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-teal",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -716,7 +716,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-cyan",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -755,7 +755,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-blue",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -794,7 +794,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-purple",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -833,7 +833,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-pink",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -872,7 +872,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-gray",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -911,7 +911,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -950,7 +950,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-red",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -989,7 +989,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-orange",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -1028,7 +1028,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-yellow",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -1067,7 +1067,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-green",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -1106,7 +1106,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-teal",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -1145,7 +1145,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-cyan",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -1184,7 +1184,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-blue",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -1223,7 +1223,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-purple",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -1262,7 +1262,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-pink",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -1301,7 +1301,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-gray",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]

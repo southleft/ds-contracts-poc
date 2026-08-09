@@ -2352,12 +2352,34 @@ function centerStrokeGlyphsInHosts(children: NodeSpec[]): void {
   }
 }
 
-/** v15: first font-family stack entry, unquoted — the canvas family. */
+/** v15: first font-family stack entry, unquoted — the canvas family.
+ *
+ *  THE KEYWORD HOLE (2026-08-09). The denylist covered the GENERIC families
+ *  but not the SYSTEM-FONT keywords, so a stack opening `-apple-system, …`
+ *  returned `-apple-system` as if it were a typeface. Figma has no such
+ *  family, `loadFontAsync` throws, and the node keeps the runtime's Inter
+ *  fallback. Measured on astryx, the only lane whose stack opens with one:
+ *  148 emitted `fontFamily": "-apple-system"` declarations across 10 scripts
+ *  and zero `Figtree`, while every reference render draws Figtree — a whole
+ *  lane mis-fonted from one missing alternation. (Altitude emits
+ *  "IBM Plex Sans", mui "Roboto", first-party "Inter"; none is affected.)
+ *
+ *  WHY THIS DOES NOT FALL THROUGH TO THE NEXT ENTRY, which was the proposed
+ *  repair and is worse. `-apple-system, BlinkMacSystemFont, "Segoe UI", …`
+ *  falls through to Segoe UI — a font the browser would never pick on the
+ *  platform the reference was captured on, where the keyword resolves to San
+ *  Francisco. Falling through trades a family Figma REFUSES for one it
+ *  accepts and draws wrongly, turning a loud failure into a quiet one. So a
+ *  keyword-only head yields NO family: the runtime keeps its documented
+ *  fallback and, since rt7, says so on the console with a stable code. The
+ *  right long-term answer is a real substitution table mapping each system
+ *  keyword to the face that platform actually resolves it to; that needs the
+ *  capture platform recorded per lane and is not invented here. */
+const NON_FAMILY_KEYWORDS =
+  /^(sans-serif|serif|monospace|cursive|fantasy|math|system-ui|ui-sans-serif|ui-serif|ui-monospace|ui-rounded|-apple-system|BlinkMacSystemFont|inherit|initial|revert|revert-layer|unset)$/i;
 function firstFamily(stack: string): string | undefined {
   const first = splitTopLevel(stack)[0]?.trim().replace(/^["']|["']$/g, '');
-  return first && !/^(sans-serif|serif|monospace|system-ui|ui-sans-serif|ui-serif|ui-monospace)$/.test(first)
-    ? first
-    : undefined;
+  return first && !NON_FAMILY_KEYWORDS.test(first) ? first : undefined;
 }
 
 /** v15 (S4): declared facts with a NATIVE canvas field (the 'draw' verdicts

@@ -79,7 +79,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -136,7 +136,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]

@@ -125,20 +125,20 @@ alias with no evidence behind it is the failure this whole round exists to avoid
 - **`RA-X-gradient`** (`non-scalar-gradient`) — 2 leaf/leaves, 2 ref(s), value `linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))`:
   - EXCLUDED non-scalar-gradient: the value is a linear-gradient() string. The join key is a normalized r,g,b,a tuple, which a gradient has none of.
   - A gradient can only be re-anchored once the base wrap carries gradient tokens. Named, not silently dropped.
-- **`RA-X-unref-0064e0`** (`unreferenced-leaf`) — 1 leaf/leaves, 0 ref(s), value `#0064E0`:
-  - EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
-  - Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
-  - Candidates the value WOULD have matched: color-accent, color-border-blue, color-icon-accent, color-icon-blue, color-text-accent.
 - **`RA-X-unref-0536591a`** (`unreferenced-leaf`) — 1 leaf/leaves, 0 ref(s), value `#0536591a`:
   - EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
   - Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
   - Candidates the value WOULD have matched: (none).
-- **`RA-X-unref-0a1317`** (`unreferenced-leaf`) — 1 leaf/leaves, 0 ref(s), value `#0A1317`:
-  - EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
-  - Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
-  - Candidates the value WOULD have matched: color-background-inverted, color-icon-primary, color-on-warning, color-text-gray, color-text-primary.
 - **`RA-X-unref-0a131733`** (`unreferenced-leaf`) — 2 leaf/leaves, 0 ref(s), value `#0a131733`:
   - EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
   - Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
-  - Candidates the value WOULD have matched: color-background-gray.
+  - Candidates the value WOULD have matched: (none).
+- **`RA-X-unref-171717`** (`unreferenced-leaf`) — 1 leaf/leaves, 0 ref(s), value `#171717`:
+  - EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
+  - Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
+  - Candidates the value WOULD have matched: color-icon-primary, color-on-light, color-on-warning, color-text-primary.
+- **`RA-X-unref-262626`** (`unreferenced-leaf`) — 1 leaf/leaves, 0 ref(s), value `#262626`:
+  - EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
+  - Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
+  - Candidates the value WOULD have matched: color-accent, color-icon-accent, color-text-accent, color-text-gray.
 

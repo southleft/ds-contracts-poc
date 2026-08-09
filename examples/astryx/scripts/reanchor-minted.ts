@@ -23,15 +23,22 @@
  * The join MUST run against the NEUTRAL wrap (`tokens/astryx.dtcg.json`).
  * Joining against the docs plane (`tokens/astryx-docs.dtcg.json`) would
  * value-match the UNCHANGED pass-throughs and, worse, would let the neutral
- * blue `#0064e0` "cleanly" join a docs token whose docs value is `#15110C` —
+ * accent `#262626` "cleanly" join a docs token whose docs value is `#15110C` —
  * preserving theme-neutral forever, a silent no-op dressed as the fix. The
  * anchor is fingerprinted BY VALUE (ANCHOR_PROBES below) and a non-neutral
  * anchor is REFUSED BY NAME.
  *
+ * `tokens/astryx.dtcg.json` became a genuinely theme-neutral plane on
+ * 2026-08-09 (examples/astryx/scripts/build-tokens.ts, theme overlay). Before
+ * that it carried `@astryxdesign/core`'s UNTHEMED defaults while every
+ * committed reference render was made under theme-neutral, and this guard's
+ * own probes asserted the core values — see ANCHOR_PROBES below.
+ *
  * ── TRAP 2 · DARK MODE ──────────────────────────────────────────────────────
  * Re-anchoring is NOT a pixel no-op. A minted literal is MODE-FROZEN (the same
  * hex in Light and Dark); a semantic token VARIES (`{color-accent}` is
- * #0064E0 light / #2694FE dark). So every alias is also a DARK REPAIR — and
+ * #262626 light / #ebebeb dark on the theme-neutral plane). So every alias is
+ * also a DARK REPAIR — and
  * for many value groups the ONLY thing that decides between candidates is
  * which dark behaviour is correct. That is the decision input, so every
  * proposal row carries a per-candidate `darkDelta`, and every applied row's
@@ -207,12 +214,30 @@ const readJson = <T,>(p: string): T => JSON.parse(readFileSync(p, 'utf8')) as T;
 /** The theme-neutral fingerprint. These four names are exactly the ones the
  *  docs theme MOVES (DOCS-THEME.md "the theme delta"), so a docs-plane (or any
  *  re-themed) anchor cannot pass. Value probes, not a filename check: renaming
- *  a file must not be able to smuggle a foreign plane past the gate. */
+ *  a file must not be able to smuggle a foreign plane past the gate.
+ *
+ *  RECALIBRATED 2026-08-09 (FC-TOKEN-PLANE-MISMATCH). These probes previously
+ *  read #0064E0 / #0A1317 / #F1F4F7 / #0064E0 and called them "the theme-
+ *  neutral" values. They are not: they are `@astryxdesign/core`'s UNTHEMED
+ *  defineVars defaults. `@astryxdesign/theme-neutral@0.1.6 dist/theme.css`
+ *  `:scope` declares
+ *      --color-accent:          light-dark(#262626, #ebebeb)
+ *      --color-text-primary:    light-dark(#171717, #fafafa)
+ *      --color-background-body: light-dark(#f1f1f1, #1b1b1b)
+ *      --color-icon-accent:     light-dark(#262626, #ebebeb)
+ *  and the capture harness renders under exactly that stylesheet
+ *  (extract/computed/configs/astryx.json mount.imports). The four light
+ *  branches below are witnessed verbatim in the committed captured truth;
+ *  the four values they replace appear ZERO times in it. The guard that
+ *  exists to refuse a non-theme-neutral anchor was itself calibrated to the
+ *  wrong plane, so it would have REFUSED the genuinely theme-neutral wrap.
+ *  The docs plane still fails all four (#15110C / #15110C / #F8F4ED /
+ *  #15110C), which is the discrimination this guard is for. */
 const ANCHOR_PROBES: Record<string, string> = {
-  'color-accent': '#0064E0',
-  'color-text-primary': '#0A1317',
-  'color-background-body': '#F1F4F7',
-  'color-icon-accent': '#0064E0',
+  'color-accent': '#262626',
+  'color-text-primary': '#171717',
+  'color-background-body': '#f1f1f1',
+  'color-icon-accent': '#262626',
 };
 
 function assertNeutralAnchor(base: DtcgFlat, anchorPath: string): void {

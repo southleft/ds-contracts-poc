@@ -7,7 +7,7 @@ deciding to KEEP a leaf literal means adding a row to that file's `literals` arr
 A row is only RESOLVED when every live leaf it holds is one or the other —
 `ambiguous` and `clean` rows are the ones still waiting on a human.
 
-- **Anchor plane**: `examples/astryx/tokens/astryx.dtcg.json` — THEME-NEUTRAL, value-fingerprinted (color-accent=#0064E0, color-text-primary=#0A1317, color-background-body=#F1F4F7, color-icon-accent=#0064E0). A re-themed anchor is refused by name.
+- **Anchor plane**: `examples/astryx/tokens/astryx.dtcg.json` — THEME-NEUTRAL, value-fingerprinted (color-accent=#262626, color-text-primary=#171717, color-background-body=#f1f1f1, color-icon-accent=#262626). A re-themed anchor is refused by name.
 - **Join**: normalized r,g,b,a tuple equality (`tuple()`/`valueEq()` copied verbatim from `examples/mui/scripts/promote-floor.mjs`), minted color leaf × alias-resolved base color token.
 - **Ranking is presentation.** A row with more than one candidate is NEVER auto-resolved; StyleX compiled the source name away, so no fact decides it.
 - **Every alias is a dark-mode change.** Minted literals are mode-frozen; semantic tokens vary. Each candidate carries its `darkDelta`.
@@ -16,454 +16,488 @@ A row is only RESOLVED when every live leaf it holds is one or the other —
 
 | disposition | rows | leaves | axis-expanded refs |
 |---|---|---|---|
-| applied | 28 | 78 | 78 |
+| applied | 30 | 78 | 78 |
 | decided-literal | 0 | 0 | 0 |
 | clean | 0 | 0 | 0 |
 | ambiguous | 0 | 0 | 0 |
 | no-match | 2 | 3 | 3 |
 | excluded | 6 | 55 | 50 |
 
-## APPLIED — 28 row(s), 78 ref(s)
+## APPLIED — 30 row(s), 78 ref(s)
 
-### `RA-0064e0` — `#0064E0`
-
-- **leaves** (5): `imported.badge.root.background-color.info`, `imported.button.root.background-color.primary`, `imported.button.root.outline-color-state-focus-visible.ghost`, `imported.button.root.outline-color-state-focus-visible.primary`, `imported.button.root.outline-color-state-focus-visible.secondary`
-- **used by** (5 axis-expanded ref(s)): badge, button
-- **channel classes**: `background-color`, `outline-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #0064E0 (0,100,224,1) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-accent` | 3 | +3 channel:background-color→color-background-*/color-accent (2/5 leaf/leaves) | `#0064E0` | `#2694FE` | **dark repair** |
-| 2 | `color-border-blue` | 0 | +0 the row's channel class(es) do not point at this token family | `#0064E0` | `#2694FE` | **dark repair** |
-| 3 | `color-icon-accent` | 0 | +0 the row's channel class(es) do not point at this token family | `#0064E0` | `#2694FE` | **dark repair** |
-| 4 | `color-icon-blue` | 0 | +0 the row's channel class(es) do not point at this token family | `#0064E0` | `#2694FE` | **dark repair** |
-| 5 | `color-text-accent` | 0 | +0 the row's channel class(es) do not point at this token family | `#0064E0` | `#3E9EFB` | **dark repair** |
-
-> APPLIED: all 5 live leaf/leaves in this group already alias {color-accent} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-014975` — `#014975`
-
-- **leaves** (1): `imported.badge.root.color.cyan`
-- **used by** (1 axis-expanded ref(s)): badge
-- **channel classes**: `color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #014975 (1,73,117,1) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-text-cyan` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:cyan→*-cyan | `#014975` | `#A1EEF9` | **dark repair** |
-
-> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-cyan} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-0171e333` — `#0171E333`
-
-- **leaves** (2): `imported.badge.root.background-color.blue`, `imported.card.root.background-color.blue`
-- **used by** (2 axis-expanded ref(s)): badge, card
-- **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #0171E333 (1,113,227,0.2) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-background-blue` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:blue→*-blue | `#0171E333` | `#0171E333` | mode-safe |
-
-> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-blue} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-03a7d733` — `#03A7D733`
-
-- **leaves** (2): `imported.badge.root.background-color.cyan`, `imported.card.root.background-color.cyan`
-- **used by** (2 axis-expanded ref(s)): badge, card
-- **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #03A7D733 (3,167,215,0.2) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-background-cyan` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:cyan→*-cyan | `#03A7D733` | `#03A7D733` | mode-safe |
-
-> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-cyan} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-042f97` — `#042F97`
+### `RA-00458c` — `#00458c`
 
 - **leaves** (1): `imported.badge.root.color.blue`
 - **used by** (1 axis-expanded ref(s)): badge
 - **channel classes**: `color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #042F97 (4,47,151,1) — re-verified at apply time against the then-current DTCG.
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #00458c (0,69,140,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-text-blue` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:blue→*-blue | `#042F97` | `#AFD7FF` | **dark repair** |
+| 1 | `color-text-blue` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:blue→*-blue | `#00458c` | `#c7d3ff` | **dark repair** |
+| 2 | `color-icon-blue` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:blue→*-blue | `#00458c` | `#9eb7ff` | **dark repair** |
 
 > APPLIED: all 1 live leaf/leaves in this group already alias {color-text-blue} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-0536590c` — `#0536590C`
+### `RA-00505f` — `#00505f`
 
-- **leaves** (1): `imported.card.root.background-color.muted`
-- **used by** (1 axis-expanded ref(s)): card
-- **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #0536590C (5,54,89,0.0471) — re-verified at apply time against the then-current DTCG.
+- **leaves** (1): `imported.badge.root.color.cyan`
+- **used by** (1 axis-expanded ref(s)): badge
+- **channel classes**: `color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #00505f (0,80,95,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-background-muted` | 5 | +3 channel:background-color→color-background-*/color-accent (1/1 leaf/leaves)<br>+2 axis:muted→*-muted | `#0536590C` | `#1111127F` | **dark repair** |
-| 2 | `color-overlay-hover` | 0 | +0 the row's channel class(es) do not point at this token family | `#0536590C` | `#FFFFFF0C` | **dark repair** |
+| 1 | `color-text-cyan` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:cyan→*-cyan | `#00505f` | `#9edef0` | **dark repair** |
+| 2 | `color-icon-cyan` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:cyan→*-cyan | `#00505f` | `#83c2d4` | **dark repair** |
 
-> APPLIED: all 1 live leaf/leaves in this group already alias {color-background-muted} — landed from tokens/reanchor-decisions.json.
+> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-cyan} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-083943` — `#083943`
+### `RA-005348` — `#005348`
 
 - **leaves** (1): `imported.badge.root.color.teal`
 - **used by** (1 axis-expanded ref(s)): badge
 - **channel classes**: `color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #083943 (8,57,67,1) — re-verified at apply time against the then-current DTCG.
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #005348 (0,83,72,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-text-teal` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:teal→*-teal | `#083943` | `#40DCCD` | **dark repair** |
+| 1 | `color-text-teal` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:teal→*-teal | `#005348` | `#99e2d3` | **dark repair** |
+| 2 | `color-icon-teal` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:teal→*-teal | `#005348` | `#7ec6b8` | **dark repair** |
 
 > APPLIED: all 1 live leaf/leaves in this group already alias {color-text-teal} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-09441f` — `#09441F`
-
-- **leaves** (1): `imported.badge.root.color.green`
-- **used by** (1 axis-expanded ref(s)): badge
-- **channel classes**: `color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #09441F (9,68,31,1) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-text-green` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:green→*-green | `#09441F` | `#A5F690` | **dark repair** |
-
-> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-green} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-0a1317` — `#0A1317`
-
-- **leaves** (13): `imported.badge.root.color.warning`, `imported.button.label.color.ghost`, `imported.button.label.color.secondary`, `imported.button.part-0.color.ghost`, … (+9 more, see reanchor-proposals.json)
-- **used by** (13 axis-expanded ref(s)): badge, button, slider
-- **channel classes**: `background-color`, `color`, `outline-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #0A1317 (10,19,23,1) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-background-inverted` | 3 | +3 channel:background-color→color-background-*/color-accent (1/13 leaf/leaves) | `#0A1317` | `#FFFFFF` | **dark repair** |
-| 2 | `color-text-gray` | 3 | +3 channel:color→color-text-* (10/13 leaf/leaves) | `#0A1317` | `#E7EAED` | **dark repair** |
-| 3 | `color-text-primary` | 3 | +3 channel:color→color-text-* (10/13 leaf/leaves) | `#0A1317` | `#DFE2E5` | **dark repair** |
-| 4 | `color-on-warning` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:warning→*-warning | `#0A1317` | `#0A1317` | mode-safe |
-| 5 | `color-icon-primary` | 0 | +0 the row's channel class(es) do not point at this token family | `#0A1317` | `#DFE2E5` | **dark repair** |
-
-> APPLIED: all 13 live leaf/leaves in this group already alias {color-background-inverted}, {color-on-warning}, {color-text-primary} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-0a131733` — `#0A131733`
-
-- **leaves** (1): `imported.card.root.background-color.gray`
-- **used by** (1 axis-expanded ref(s)): card
-- **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #0A131733 (10,19,23,0.2) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-background-gray` | 5 | +3 channel:background-color→color-background-*/color-accent (1/1 leaf/leaves)<br>+2 axis:gray→*-gray | `#0A131733` | `#666A724C` | **dark repair** |
-
-> APPLIED: all 1 live leaf/leaves in this group already alias {color-background-gray} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-0d8626` — `#0D8626`
+### `RA-007004` — `#007004`
 
 - **leaves** (1): `imported.badge.root.background-color.success`
 - **used by** (1 axis-expanded ref(s)): badge
 - **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #0D8626 (13,134,38,1) — re-verified at apply time against the then-current DTCG.
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #007004 (0,112,4,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-success` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:success→*-success | `#0D8626` | `#0D8626` | mode-safe |
-| 2 | `color-border-green` | 0 | +0 the row's channel class(es) do not point at this token family | `#0D8626` | `#0B991F` | **dark repair** |
-| 3 | `color-icon-green` | 0 | +0 the row's channel class(es) do not point at this token family | `#0D8626` | `#26A756` | **dark repair** |
+| 1 | `color-success` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:success→*-success | `#007004` | `#9fe59b` | **dark repair** |
 
 > APPLIED: all 1 live leaf/leaves in this group already alias {color-success} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-0db7af33` — `#0DB7AF33`
+### `RA-0a1317` — `#0A1317`
 
-- **leaves** (2): `imported.badge.root.background-color.teal`, `imported.card.root.background-color.teal`
-- **used by** (2 axis-expanded ref(s)): badge, card
+- **leaves** (1): `imported.slider.tooltip.background-color`
+- **used by** (1 axis-expanded ref(s)): slider
 - **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #0DB7AF33 (13,183,175,0.2) — re-verified at apply time against the then-current DTCG.
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #0A1317 (10,19,23,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-background-teal` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:teal→*-teal | `#0DB7AF33` | `#0DB7AF33` | mode-safe |
+| 1 | `color-background-inverted` | 3 | +3 channel:background-color→color-background-*/color-accent (1/1 leaf/leaves) | `#0A1317` | `#FFFFFF` | **dark repair** |
 
-> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-teal} — landed from tokens/reanchor-decisions.json.
+> APPLIED: all 1 live leaf/leaves in this group already alias {color-background-inverted} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-24bb5e33` — `#24BB5E33`
+### `RA-0c5700` — `#0c5700`
 
-- **leaves** (2): `imported.badge.root.background-color.green`, `imported.card.root.background-color.green`
-- **used by** (2 axis-expanded ref(s)): badge, card
-- **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #24BB5E33 (36,187,94,0.2) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-background-green` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:green→*-green | `#24BB5E33` | `#24BB5E33` | mode-safe |
-
-> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-green} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-3e0697` — `#3E0697`
-
-- **leaves** (1): `imported.badge.root.color.purple`
+- **leaves** (1): `imported.badge.root.color.green`
 - **used by** (1 axis-expanded ref(s)): badge
 - **channel classes**: `color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #3E0697 (62,6,151,1) — re-verified at apply time against the then-current DTCG.
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #0c5700 (12,87,0,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-text-purple` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:purple→*-purple | `#3E0697` | `#B3B0FE` | **dark repair** |
+| 1 | `color-text-green` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:green→*-green | `#0c5700` | `#9fe59b` | **dark repair** |
+| 2 | `color-icon-green` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:green→*-green | `#0c5700` | `#84c980` | **dark repair** |
 
-> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-purple} — landed from tokens/reanchor-decisions.json.
+> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-green} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-4e606f` — `#4E606F`
+### `RA-171717` — `#171717`
 
-- **leaves** (3): `imported.slider.label.color`, `imported.switch.label-2.color`, `imported.switch.label.color`
-- **used by** (3 axis-expanded ref(s)): slider, switch
-- **channel classes**: `color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #4E606F (78,96,111,1) — re-verified at apply time against the then-current DTCG.
+- **leaves** (12): `imported.badge.root.color.warning`, `imported.button.label.color.ghost`, `imported.button.label.color.secondary`, `imported.button.part-0.color.ghost`, … (+8 more, see reanchor-proposals.json)
+- **used by** (12 axis-expanded ref(s)): badge, button, slider
+- **channel classes**: `color`, `outline-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #171717 (23,23,23,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-text-secondary` | 3 | +3 channel:color→color-text-* (3/3 leaf/leaves) | `#4E606F` | `#AAAFB5` | **dark repair** |
-| 2 | `color-icon-gray` | 0 | +0 the row's channel class(es) do not point at this token family | `#4E606F` | `#AAAFB5` | **dark repair** |
-| 3 | `color-icon-secondary` | 0 | +0 the row's channel class(es) do not point at this token family | `#4E606F` | `#AAAFB5` | **dark repair** |
+| 1 | `color-text-primary` | 3 | +3 channel:color→color-text-* (10/12 leaf/leaves) | `#171717` | `#fafafa` | **dark repair** |
+| 2 | `color-on-warning` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:warning→*-warning | `#171717` | `#171717` | mode-safe |
+| 3 | `color-icon-primary` | 0 | +0 the row's channel class(es) do not point at this token family | `#171717` | `#fafafa` | **dark repair** |
+| 4 | `color-on-light` | 0 | +0 the row's channel class(es) do not point at this token family | `#171717` | `#171717` | mode-safe |
 
-> APPLIED: all 3 live leaf/leaves in this group already alias {color-text-secondary} — landed from tokens/reanchor-decisions.json.
+> APPLIED: all 12 live leaf/leaves in this group already alias {color-on-warning}, {color-text-primary} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-650053` — `#650053`
+### `RA-262626` — `#262626`
 
-- **leaves** (1): `imported.badge.root.color.pink`
-- **used by** (1 axis-expanded ref(s)): badge
-- **channel classes**: `color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #650053 (101,0,83,1) — re-verified at apply time against the then-current DTCG.
+- **leaves** (5): `imported.badge.root.background-color.info`, `imported.button.root.background-color.primary`, `imported.button.root.outline-color-state-focus-visible.ghost`, `imported.button.root.outline-color-state-focus-visible.primary`, `imported.button.root.outline-color-state-focus-visible.secondary`
+- **used by** (5 axis-expanded ref(s)): badge, button
+- **channel classes**: `background-color`, `outline-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #262626 (38,38,38,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-text-pink` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:pink→*-pink | `#650053` | `#FEADE3` | **dark repair** |
+| 1 | `color-accent` | 3 | +3 channel:background-color→color-background-*/color-accent (2/5 leaf/leaves) | `#262626` | `#ebebeb` | **dark repair** |
+| 2 | `color-icon-accent` | 0 | +0 the row's channel class(es) do not point at this token family | `#262626` | `#ebebeb` | **dark repair** |
+| 3 | `color-text-accent` | 0 | +0 the row's channel class(es) do not point at this token family | `#262626` | `#ebebeb` | **dark repair** |
+| 4 | `color-text-gray` | 0 | +0 the row's channel class(es) do not point at this token family | `#262626` | `#e5e5e5` | **dark repair** |
 
-> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-pink} — landed from tokens/reanchor-decisions.json.
+> APPLIED: all 5 live leaf/leaves in this group already alias {color-accent} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-6b2203` — `#6B2203`
-
-- **leaves** (1): `imported.badge.root.color.orange`
-- **used by** (1 axis-expanded ref(s)): badge
-- **channel classes**: `color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #6B2203 (107,34,3,1) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-text-orange` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:orange→*-orange | `#6B2203` | `#FDB876` | **dark repair** |
-
-> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-orange} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-753f07` — `#753F07`
+### `RA-584400` — `#584400`
 
 - **leaves** (1): `imported.badge.root.color.yellow`
 - **used by** (1 axis-expanded ref(s)): badge
 - **channel classes**: `color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #753F07 (117,63,7,1) — re-verified at apply time against the then-current DTCG.
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #584400 (88,68,0,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-text-yellow` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:yellow→*-yellow | `#753F07` | `#FBCE03` | **dark repair** |
+| 1 | `color-text-yellow` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:yellow→*-yellow | `#584400` | `#fdcf4f` | **dark repair** |
+| 2 | `color-icon-yellow` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:yellow→*-yellow | `#584400` | `#deb433` | **dark repair** |
 
 > APPLIED: all 1 live leaf/leaves in this group already alias {color-text-yellow} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-7952ff33` — `#7952FF33`
+### `RA-6e3500` — `#6e3500`
 
-- **leaves** (2): `imported.badge.root.background-color.purple`, `imported.card.root.background-color.purple`
-- **used by** (2 axis-expanded ref(s)): badge, card
-- **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #7952FF33 (121,82,255,0.2) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-background-purple` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:purple→*-purple | `#7952FF33` | `#7952FF33` | mode-safe |
-
-> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-purple} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-7b0210` — `#7B0210`
-
-- **leaves** (1): `imported.badge.root.color.red`
+- **leaves** (1): `imported.badge.root.color.orange`
 - **used by** (1 axis-expanded ref(s)): badge
 - **channel classes**: `color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #7B0210 (123,2,16,1) — re-verified at apply time against the then-current DTCG.
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #6e3500 (110,53,0,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-text-red` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:red→*-red | `#7B0210` | `#FFB2B8` | **dark repair** |
+| 1 | `color-text-orange` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:orange→*-orange | `#6e3500` | `#ffc9a2` | **dark repair** |
+| 2 | `color-icon-orange` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:orange→*-orange | `#6e3500` | `#ffa258` | **dark repair** |
 
-> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-red} — landed from tokens/reanchor-decisions.json.
+> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-orange} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-ccd3db` — `#CCD3DB`
+### `RA-700084` — `#700084`
 
-- **leaves** (5): `imported.card.root.border-bottom-color.default`, `imported.card.root.border-left-color.default`, `imported.card.root.border-right-color.default`, `imported.card.root.border-top-color.default`, `imported.slider.slider-track.background-color`
-- **used by** (5 axis-expanded ref(s)): card, slider
-- **channel classes**: `background-color`, `border-bottom-color`, `border-left-color`, `border-right-color`, `border-top-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #CCD3DB (204,211,219,1) — re-verified at apply time against the then-current DTCG.
+- **leaves** (1): `imported.badge.root.color.purple`
+- **used by** (1 axis-expanded ref(s)): badge
+- **channel classes**: `color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #700084 (112,0,132,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-border-emphasized` | 3 | +3 channel:border-*-color→color-border-* (4/5 leaf/leaves) | `#CCD3DB` | `#494D53` | **dark repair** |
-| 2 | `color-skeleton` | 0 | +0 the row's channel class(es) do not point at this token family | `#CCD3DB` | `#5A5E66` | **dark repair** |
-| 3 | `color-track` | 0 | +0 the row's channel class(es) do not point at this token family | `#CCD3DB` | `#5A5E66` | **dark repair** |
+| 1 | `color-text-purple` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:purple→*-purple | `#700084` | `#fac1ff` | **dark repair** |
+| 2 | `color-icon-purple` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:purple→*-purple | `#700084` | `#f297ff` | **dark repair** |
 
-> APPLIED: all 5 live leaf/leaves in this group already alias {color-border-emphasized}, {color-track} — landed from tokens/reanchor-decisions.json.
+> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-purple} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-e2a40033` — `#E2A40033`
+### `RA-737373` — `#737373`
 
-- **leaves** (2): `imported.badge.root.background-color.yellow`, `imported.card.root.background-color.yellow`
-- **used by** (2 axis-expanded ref(s)): badge, card
-- **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #E2A40033 (226,164,0,0.2) — re-verified at apply time against the then-current DTCG.
+- **leaves** (3): `imported.slider.label.color`, `imported.switch.label-2.color`, `imported.switch.label.color`
+- **used by** (3 axis-expanded ref(s)): slider, switch
+- **channel classes**: `color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #737373 (115,115,115,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-background-yellow` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:yellow→*-yellow | `#E2A40033` | `#E2A40033` | mode-safe |
-| 2 | `color-warning-muted` | 0 | +0 the row's channel class(es) do not point at this token family | `#E2A40033` | `#E2A4003F` | **dark repair** |
+| 1 | `color-text-secondary` | 3 | +3 channel:color→color-text-* (3/3 leaf/leaves) | `#737373` | `#a3a3a3` | **dark repair** |
+| 2 | `color-icon-secondary` | 0 | +0 the row's channel class(es) do not point at this token family | `#737373` | `#a3a3a3` | **dark repair** |
 
-> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-yellow} — landed from tokens/reanchor-decisions.json.
+> APPLIED: all 3 live leaf/leaves in this group already alias {color-text-secondary} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-e3193b` — `#E3193B`
-
-- **leaves** (3): `imported.badge.root.background-color.error`, `imported.button.root.background-color.destructive`, `imported.button.root.outline-color-state-focus-visible.destructive`
-- **used by** (3 axis-expanded ref(s)): badge, button
-- **channel classes**: `background-color`, `outline-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #E3193B (227,25,59,1) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-error` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:error→*-error | `#E3193B` | `#F5394F` | **dark repair** |
-| 2 | `color-border-red` | 0 | +0 the row's channel class(es) do not point at this token family | `#E3193B` | `#F5394F` | **dark repair** |
-
-> APPLIED: all 3 live leaf/leaves in this group already alias {color-error} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-e3193b33` — `#E3193B33`
-
-- **leaves** (2): `imported.badge.root.background-color.red`, `imported.card.root.background-color.red`
-- **used by** (2 axis-expanded ref(s)): badge, card
-- **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #E3193B33 (227,25,59,0.2) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-background-red` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:red→*-red | `#E3193B33` | `#E3193B33` | mode-safe |
-| 2 | `color-error-muted` | 0 | +0 the row's channel class(es) do not point at this token family | `#E3193B33` | `#F5394F3F` | **dark repair** |
-
-> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-red} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-e638b333` — `#E638B333`
-
-- **leaves** (2): `imported.badge.root.background-color.pink`, `imported.card.root.background-color.pink`
-- **used by** (2 axis-expanded ref(s)): badge, card
-- **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #E638B333 (230,56,179,0.2) — re-verified at apply time against the then-current DTCG.
-
-| rank | candidate | score | affinity rules | light | dark | dark effect |
-|---|---|---|---|---|---|---|
-| 1 | `color-background-pink` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:pink→*-pink | `#E638B333` | `#E638B333` | mode-safe |
-
-> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-pink} — landed from tokens/reanchor-decisions.json.
-> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
-> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
-
-### `RA-e9af08` — `#E9AF08`
+### `RA-745b00` — `#745b00`
 
 - **leaves** (1): `imported.badge.root.background-color.warning`
 - **used by** (1 axis-expanded ref(s)): badge
 - **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #E9AF08 (233,175,8,1) — re-verified at apply time against the then-current DTCG.
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #745b00 (116,91,0,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-warning` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:warning→*-warning | `#E9AF08` | `#F2C00B` | **dark repair** |
+| 1 | `color-warning` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:warning→*-warning | `#745b00` | `#fdcf4f` | **dark repair** |
 
 > APPLIED: all 1 live leaf/leaves in this group already alias {color-warning} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-f2790233` — `#F2790233`
+### `RA-83004b` — `#83004b`
+
+- **leaves** (1): `imported.badge.root.color.pink`
+- **used by** (1 axis-expanded ref(s)): badge
+- **channel classes**: `color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #83004b (131,0,75,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-text-pink` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:pink→*-pink | `#83004b` | `#ffc3da` | **dark repair** |
+| 2 | `color-icon-pink` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:pink→*-pink | `#83004b` | `#ff99c3` | **dark repair** |
+
+> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-pink} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-89001a` — `#89001a`
+
+- **leaves** (1): `imported.badge.root.color.red`
+- **used by** (1 axis-expanded ref(s)): badge
+- **channel classes**: `color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #89001a (137,0,26,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-text-red` | 5 | +3 channel:color→color-text-* (1/1 leaf/leaves)<br>+2 axis:red→*-red | `#89001a` | `#ffc6c1` | **dark repair** |
+| 2 | `color-icon-red` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:red→*-red | `#89001a` | `#ff9e97` | **dark repair** |
+
+> APPLIED: all 1 live leaf/leaves in this group already alias {color-text-red} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-a3e0ef` — `#a3e0ef`
+
+- **leaves** (2): `imported.badge.root.background-color.cyan`, `imported.card.root.background-color.cyan`
+- **used by** (2 axis-expanded ref(s)): badge, card
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #a3e0ef (163,224,239,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-background-cyan` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:cyan→*-cyan | `#a3e0ef` | `#83c2d43D` | **dark repair** |
+
+> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-cyan} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-a50c25` — `#a50c25`
+
+- **leaves** (3): `imported.badge.root.background-color.error`, `imported.button.root.background-color.destructive`, `imported.button.root.outline-color-state-focus-visible.destructive`
+- **used by** (3 axis-expanded ref(s)): badge, button
+- **channel classes**: `background-color`, `outline-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #a50c25 (165,12,37,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-error` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:error→*-error | `#a50c25` | `#ffc6c1` | **dark repair** |
+
+> APPLIED: all 3 live leaf/leaves in this group already alias {color-error} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-a5e3d6` — `#a5e3d6`
+
+- **leaves** (2): `imported.badge.root.background-color.teal`, `imported.card.root.background-color.teal`
+- **used by** (2 axis-expanded ref(s)): badge, card
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #a5e3d6 (165,227,214,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-background-teal` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:teal→*-teal | `#a5e3d6` | `#7ec6b83D` | **dark repair** |
+
+> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-teal} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-c4ddfb` — `#c4ddfb`
+
+- **leaves** (2): `imported.badge.root.background-color.blue`, `imported.card.root.background-color.blue`
+- **used by** (2 axis-expanded ref(s)): badge, card
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #c4ddfb (196,221,251,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-background-blue` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:blue→*-blue | `#c4ddfb` | `#9eb7ff3D` | **dark repair** |
+
+> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-blue} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-c5e5c0` — `#c5e5c0`
+
+- **leaves** (2): `imported.badge.root.background-color.green`, `imported.card.root.background-color.green`
+- **used by** (2 axis-expanded ref(s)): badge, card
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #c5e5c0 (197,229,192,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-background-green` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:green→*-green | `#c5e5c0` | `#84c9803D` | **dark repair** |
+| 2 | `color-success-muted` | 0 | +0 the row's channel class(es) do not point at this token family | `#c5e5c0` | `#84c9803D` | **dark repair** |
+
+> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-green} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-ccd3db` — `#CCD3DB`
+
+- **leaves** (1): `imported.slider.slider-track.background-color`
+- **used by** (1 axis-expanded ref(s)): slider
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #CCD3DB (204,211,219,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-track` | 0 | +0 the row's channel class(es) do not point at this token family | `#CCD3DB` | `#5A5E66` | **dark repair** |
+
+> APPLIED: all 1 live leaf/leaves in this group already alias {color-track} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-d4d4d4` — `#d4d4d4`
+
+- **leaves** (4): `imported.card.root.border-bottom-color.default`, `imported.card.root.border-left-color.default`, `imported.card.root.border-right-color.default`, `imported.card.root.border-top-color.default`
+- **used by** (4 axis-expanded ref(s)): card
+- **channel classes**: `border-bottom-color`, `border-left-color`, `border-right-color`, `border-top-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #d4d4d4 (212,212,212,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-border-emphasized` | 3 | +3 channel:border-*-color→color-border-* (4/4 leaf/leaves) | `#d4d4d4` | `#525252` | **dark repair** |
+| 2 | `color-border-gray` | 3 | +3 channel:border-*-color→color-border-* (4/4 leaf/leaves) | `#d4d4d4` | `#262626` | **dark repair** |
+
+> APPLIED: all 4 live leaf/leaves in this group already alias {color-border-emphasized} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-e5e5e5` — `#e5e5e5`
+
+- **leaves** (1): `imported.card.root.background-color.gray`
+- **used by** (1 axis-expanded ref(s)): card
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #e5e5e5 (229,229,229,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-background-gray` | 5 | +3 channel:background-color→color-background-*/color-accent (1/1 leaf/leaves)<br>+2 axis:gray→*-gray | `#e5e5e5` | `#FFFFFF1A` | **dark repair** |
+
+> APPLIED: all 1 live leaf/leaves in this group already alias {color-background-gray} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-eccef3` — `#eccef3`
+
+- **leaves** (2): `imported.badge.root.background-color.purple`, `imported.card.root.background-color.purple`
+- **used by** (2 axis-expanded ref(s)): badge, card
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #eccef3 (236,206,243,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-background-purple` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:purple→*-purple | `#eccef3` | `#f297ff3D` | **dark repair** |
+
+> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-purple} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-f1f1f1` — `#f1f1f1`
+
+- **leaves** (1): `imported.card.root.background-color.muted`
+- **used by** (1 axis-expanded ref(s)): card
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #f1f1f1 (241,241,241,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-accent-muted` | 5 | +3 channel:background-color→color-background-*/color-accent (1/1 leaf/leaves)<br>+2 axis:muted→*-muted | `#f1f1f1` | `#262626` | **dark repair** |
+| 2 | `color-background-muted` | 5 | +3 channel:background-color→color-background-*/color-accent (1/1 leaf/leaves)<br>+2 axis:muted→*-muted | `#f1f1f1` | `#1b1b1b` | **dark repair** |
+| 3 | `color-background-body` | 3 | +3 channel:background-color→color-background-*/color-accent (1/1 leaf/leaves) | `#f1f1f1` | `#1b1b1b` | **dark repair** |
+
+> APPLIED: all 1 live leaf/leaves in this group already alias {color-background-muted} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-f8da9d` — `#f8da9d`
+
+- **leaves** (2): `imported.badge.root.background-color.yellow`, `imported.card.root.background-color.yellow`
+- **used by** (2 axis-expanded ref(s)): badge, card
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #f8da9d (248,218,157,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-background-yellow` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:yellow→*-yellow | `#f8da9d` | `#deb4333D` | **dark repair** |
+| 2 | `color-warning-muted` | 0 | +0 the row's channel class(es) do not point at this token family | `#f8da9d` | `#deb4333D` | **dark repair** |
+
+> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-yellow} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-facecb` — `#facecb`
+
+- **leaves** (2): `imported.badge.root.background-color.red`, `imported.card.root.background-color.red`
+- **used by** (2 axis-expanded ref(s)): badge, card
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #facecb (250,206,203,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-background-red` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:red→*-red | `#facecb` | `#ff9e973D` | **dark repair** |
+| 2 | `color-error-muted` | 0 | +0 the row's channel class(es) do not point at this token family | `#facecb` | `#ff9e973D` | **dark repair** |
+
+> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-red} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-fad0b5` — `#fad0b5`
 
 - **leaves** (2): `imported.badge.root.background-color.orange`, `imported.card.root.background-color.orange`
 - **used by** (2 axis-expanded ref(s)): badge, card
 - **channel classes**: `background-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #F2790233 (242,121,2,0.2) — re-verified at apply time against the then-current DTCG.
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #fad0b5 (250,208,181,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-background-orange` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:orange→*-orange | `#F2790233` | `#F2790233` | mode-safe |
+| 1 | `color-background-orange` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:orange→*-orange | `#fad0b5` | `#ffa2583D` | **dark repair** |
 
 > APPLIED: all 2 live leaf/leaves in this group already alias {color-background-orange} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
 > TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
 
-### `RA-ffffff` — `#FFFFFF`
+### `RA-fccadc` — `#fccadc`
+
+- **leaves** (2): `imported.badge.root.background-color.pink`, `imported.card.root.background-color.pink`
+- **used by** (2 axis-expanded ref(s)): badge, card
+- **channel classes**: `background-color`
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #fccadc (252,202,220,1) — re-verified at apply time against the then-current DTCG.
+
+| rank | candidate | score | affinity rules | light | dark | dark effect |
+|---|---|---|---|---|---|---|
+| 1 | `color-background-pink` | 5 | +3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)<br>+2 axis:pink→*-pink | `#fccadc` | `#ff99c33D` | **dark repair** |
+
+> APPLIED: all 2 live leaf/leaves in this group already alias {color-background-pink} — landed from tokens/reanchor-decisions.json.
+> The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
+> TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back).
+
+### `RA-ffffff` — `#ffffff`
 
 - **leaves** (18): `imported.badge.root.color.error`, `imported.badge.root.color.info`, `imported.badge.root.color.success`, `imported.button.label.color.destructive`, … (+14 more, see reanchor-proposals.json)
 - **used by** (18 axis-expanded ref(s)): badge, button, card, slider, switch
 - **channel classes**: `background-color`, `color`, `outline-color`
-- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #FFFFFF (255,255,255,1) — re-verified at apply time against the then-current DTCG.
+- **light-plane proof**: every candidate's NEUTRAL light value tuple-equals the leaf literal #ffffff (255,255,255,1) — re-verified at apply time against the then-current DTCG.
 
 | rank | candidate | score | affinity rules | light | dark | dark effect |
 |---|---|---|---|---|---|---|
-| 1 | `color-background-card` | 3 | +3 channel:background-color→color-background-*/color-accent (3/18 leaf/leaves) | `#FFFFFF` | `#1F1F22` | **dark repair** |
-| 2 | `color-background-popover` | 3 | +3 channel:background-color→color-background-*/color-accent (3/18 leaf/leaves) | `#FFFFFF` | `#28292C` | **dark repair** |
-| 3 | `color-background-surface` | 3 | +3 channel:background-color→color-background-*/color-accent (3/18 leaf/leaves) | `#FFFFFF` | `#1F1F22` | **dark repair** |
-| 4 | `color-on-error` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:error→*-error | `#FFFFFF` | `#FFFFFF` | mode-safe |
-| 5 | `color-on-success` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:success→*-success | `#FFFFFF` | `#FFFFFF` | mode-safe |
-| 6 | `color-on-accent` | 0 | +0 the row's channel class(es) do not point at this token family | `#FFFFFF` | `#FFFFFF` | mode-safe |
-| 7 | `color-on-dark` | 0 | +0 the row's channel class(es) do not point at this token family | `#FFFFFF` | `#FFFFFF` | mode-safe |
+| 1 | `color-background-card` | 3 | +3 channel:background-color→color-background-*/color-accent (3/18 leaf/leaves) | `#ffffff` | `#1b1b1b` | **dark repair** |
+| 2 | `color-background-popover` | 3 | +3 channel:background-color→color-background-*/color-accent (3/18 leaf/leaves) | `#ffffff` | `#1b1b1b` | **dark repair** |
+| 3 | `color-background-surface` | 3 | +3 channel:background-color→color-background-*/color-accent (3/18 leaf/leaves) | `#ffffff` | `#262626` | **dark repair** |
+| 4 | `color-on-error` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:error→*-error | `#ffffff` | `#171717` | **dark repair** |
+| 5 | `color-on-success` | 2 | +0 the row's channel class(es) do not point at this token family<br>+2 axis:success→*-success | `#ffffff` | `#171717` | **dark repair** |
+| 6 | `color-on-accent` | 0 | +0 the row's channel class(es) do not point at this token family | `#ffffff` | `#171717` | **dark repair** |
+| 7 | `color-on-dark` | 0 | +0 the row's channel class(es) do not point at this token family | `#ffffff` | `#ffffff` | mode-safe |
 
 > APPLIED: all 18 live leaf/leaves in this group already alias {color-background-card}, {color-background-surface}, {color-on-accent}, {color-on-dark}, {color-on-error}, {color-on-success} — landed from tokens/reanchor-decisions.json.
 > The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.
@@ -498,7 +532,7 @@ A row is only RESOLVED when every live leaf it holds is one or the other —
 - **leaves** (48): `imported.card.root.border-bottom-color.blue`, `imported.card.root.border-bottom-color.cyan`, `imported.card.root.border-bottom-color.gray`, `imported.card.root.border-bottom-color.green`, … (+44 more, see reanchor-proposals.json)
 - **used by** (48 axis-expanded ref(s)): card
 - **channel classes**: `border-bottom-color`, `border-left-color`, `border-right-color`, `border-top-color`
-- **light-plane proof**: would join 1:1 to {color-on-light} — which is exactly why it is refused: a clean-looking join over a defective observation.
+- **light-plane proof**: would join 1:1 to {} — which is exactly why it is refused: a clean-looking join over a defective observation.
 
 > EXCLUDED card-border-degraded-capture (BY NAME, not by score).
 > Evidence 1 — the border is not drawn: each of these 48 leaves has its OWN sibling border-<side>-width at 0px (checked per leaf, not assumed). A color channel on a zero-width border paints nothing. card's `default` variant, whose border IS 1px, is deliberately NOT here — it is #ccd3db and sits in the review queue.
@@ -515,17 +549,6 @@ A row is only RESOLVED when every live leaf it holds is one or the other —
 > EXCLUDED non-scalar-gradient: the value is a linear-gradient() string. The join key is a normalized r,g,b,a tuple, which a gradient has none of.
 > A gradient can only be re-anchored once the base wrap carries gradient tokens. Named, not silently dropped.
 
-### `RA-X-unref-0064e0` — `#0064E0` · EXCLUDED `unreferenced-leaf`
-
-- **leaves** (1): `imported.shared.color-0064e0`
-- **used by** (0 axis-expanded ref(s)): _nothing_
-- **channel classes**: `(none — value-named shared leaf)`
-- **light-plane proof**: n/a — nothing binds these leaves, so no rendered pixel can be proven either way.
-
-> EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
-> Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
-> Candidates the value WOULD have matched: color-accent, color-border-blue, color-icon-accent, color-icon-blue, color-text-accent.
-
 ### `RA-X-unref-0536591a` — `#0536591a` · EXCLUDED `unreferenced-leaf`
 
 - **leaves** (1): `imported.button.root.background-color.secondary`
@@ -537,17 +560,6 @@ A row is only RESOLVED when every live leaf it holds is one or the other —
 > Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
 > Candidates the value WOULD have matched: (none).
 
-### `RA-X-unref-0a1317` — `#0A1317` · EXCLUDED `unreferenced-leaf`
-
-- **leaves** (1): `imported.badge.root.color.neutral`
-- **used by** (0 axis-expanded ref(s)): _nothing_
-- **channel classes**: `color`
-- **light-plane proof**: n/a — nothing binds these leaves, so no rendered pixel can be proven either way.
-
-> EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
-> Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
-> Candidates the value WOULD have matched: color-background-inverted, color-icon-primary, color-on-warning, color-text-gray, color-text-primary.
-
 ### `RA-X-unref-0a131733` — `#0a131733` · EXCLUDED `unreferenced-leaf`
 
 - **leaves** (2): `imported.switch.switch-2.background-color`, `imported.switch.switch.background-color`
@@ -557,5 +569,27 @@ A row is only RESOLVED when every live leaf it holds is one or the other —
 
 > EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
 > Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
-> Candidates the value WOULD have matched: color-background-gray.
+> Candidates the value WOULD have matched: (none).
+
+### `RA-X-unref-171717` — `#171717` · EXCLUDED `unreferenced-leaf`
+
+- **leaves** (1): `imported.badge.root.color.neutral`
+- **used by** (0 axis-expanded ref(s)): _nothing_
+- **channel classes**: `color`
+- **light-plane proof**: n/a — nothing binds these leaves, so no rendered pixel can be proven either way.
+
+> EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
+> Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
+> Candidates the value WOULD have matched: color-icon-primary, color-on-light, color-on-warning, color-text-primary.
+
+### `RA-X-unref-262626` — `#262626` · EXCLUDED `unreferenced-leaf`
+
+- **leaves** (1): `imported.shared.color-0064e0`
+- **used by** (0 axis-expanded ref(s)): _nothing_
+- **channel classes**: `(none — value-named shared leaf)`
+- **light-plane proof**: n/a — nothing binds these leaves, so no rendered pixel can be proven either way.
+
+> EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.
+> Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.
+> Candidates the value WOULD have matched: color-accent, color-icon-accent, color-text-accent, color-text-gray.
 

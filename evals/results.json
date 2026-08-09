@@ -1,6 +1,6 @@
 {
   "passed": 218,
-  "total": 221,
+  "total": 222,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -896,7 +896,8 @@
     {
       "id": "astryx-reanchor-minted",
       "claim": "C1-determinism",
-      "pass": true
+      "pass": false,
+      "error": "Error: an acked id did NOT apply:\nREFUSED: STALE LEDGER — decision RA-042f97 was acked against #042f97, but {color-text-blue} is now #00458c.\n  The DTCG drifted under the ledger. Re-run --propose and re-review; do not re-point a live binding at an unreviewed value.\n"
     },
     {
       "id": "checked-axis-projection",
@@ -1108,6 +1109,11 @@
     {
       "id": "painted-decoration-survives-control-equality",
       "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "astryx-token-plane-is-the-render-substrate",
+      "claim": "C3-detection",
       "pass": true
     }
   ]

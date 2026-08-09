@@ -61,7 +61,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -142,7 +142,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -223,7 +223,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -304,7 +304,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -385,7 +385,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {

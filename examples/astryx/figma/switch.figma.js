@@ -167,7 +167,6 @@ const COMPONENTS = [
                         "value": 20.0004,
                         "unit": "PIXELS"
                       },
-                      "fontFamily": "-apple-system",
                       "contentProp": "Label"
                     }
                   ]
@@ -242,7 +241,6 @@ const COMPONENTS = [
                         "value": 20.0004,
                         "unit": "PIXELS"
                       },
-                      "fontFamily": "-apple-system",
                       "contentProp": "Label"
                     }
                   ]
@@ -472,7 +470,6 @@ const COMPONENTS = [
                         "value": 20.0004,
                         "unit": "PIXELS"
                       },
-                      "fontFamily": "-apple-system",
                       "contentProp": "Label"
                     }
                   ]
@@ -547,7 +544,6 @@ const COMPONENTS = [
                         "value": 20.0004,
                         "unit": "PIXELS"
                       },
-                      "fontFamily": "-apple-system",
                       "contentProp": "Label"
                     }
                   ]
@@ -1177,54 +1173,6 @@ async function buildNode(spec, registry) {
     else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
-    if (spec.fontFamily) {
-      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
-      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
-      // "Extra Light"). Other families spell the same face WITHOUT the space
-      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
-      // load THROWS and the node silently keeps the Inter fallback assigned
-      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
-      // nothing was refused, and the canvas rendered a different typeface at
-      // different advance widths (altitude heading 194px of Inter Semi Bold
-      // where IBM Plex Sans SemiBold is 185px).
-      //
-      // A space-free retry was tried on 2026-08-08 and REVERTED because the
-      // then-pinned references were CONTRACT renders made by a harness that
-      // loaded no @font-face, so the truer canvas font scored WORSE. That
-      // premise is dead: the references are now the real library renders
-      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
-      // run.ts --keep-originals) and the capture harness loads the library's
-      // own faces (cfg.fonts). Truer is now also closer.
-      //
-      // The fallback is kept — a family Figma does not have at all must still
-      // draw something — but it is no longer SILENT: an unresolved style is
-      // named on the console with a stable code.
-      const wantStyle = spec.fontStyle || 'Medium';
-      const styleCandidates = [wantStyle];
-      const tightStyle = wantStyle.split(' ').join('');
-      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
-      let fontResolved = false;
-      for (let i = 0; i < styleCandidates.length; i++) {
-        try {
-          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
-          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
-          fontResolved = true;
-          break;
-        } catch (e) { /* try this family's own spelling of the same face */ }
-      }
-      if (!fontResolved) {
-        console.warn(
-          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
-          ' is not available in this file (tried ' + styleCandidates.join(', ') +
-          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
-        );
-      }
-    }
-    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
-    if (spec.textCase) node.textCase = spec.textCase;
-    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
-    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

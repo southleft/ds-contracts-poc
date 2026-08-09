@@ -9,7 +9,7 @@ await (async () => {
 // from re-anchored minted leaves — they INHERIT the target's Light/Dark values).
 // TWO PASSES: concrete values first, then aliases (targets must exist).
 // Run BEFORE the component scripts.
-const TOKENS = [{"name":"imported/badge/root/background-color/blue","type":"ALIAS","target":"color-background-blue"},{"name":"imported/badge/root/background-color/cyan","type":"ALIAS","target":"color-background-cyan"},{"name":"imported/badge/root/background-color/error","type":"ALIAS","target":"color-error"},{"name":"imported/badge/root/background-color/green","type":"ALIAS","target":"color-background-green"},{"name":"imported/badge/root/background-color/info","type":"ALIAS","target":"color-accent"},{"name":"imported/badge/root/background-color/neutral","type":"COLOR","light":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.10196078431372549},"dark":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.10196078431372549}},{"name":"imported/badge/root/background-color/orange","type":"ALIAS","target":"color-background-orange"},{"name":"imported/badge/root/background-color/pink","type":"ALIAS","target":"color-background-pink"},{"name":"imported/badge/root/background-color/purple","type":"ALIAS","target":"color-background-purple"},{"name":"imported/badge/root/background-color/red","type":"ALIAS","target":"color-background-red"},{"name":"imported/badge/root/background-color/success","type":"ALIAS","target":"color-success"},{"name":"imported/badge/root/background-color/teal","type":"ALIAS","target":"color-background-teal"},{"name":"imported/badge/root/background-color/warning","type":"ALIAS","target":"color-warning"},{"name":"imported/badge/root/background-color/yellow","type":"ALIAS","target":"color-background-yellow"},{"name":"imported/badge/root/color/blue","type":"ALIAS","target":"color-text-blue"},{"name":"imported/badge/root/color/cyan","type":"ALIAS","target":"color-text-cyan"},{"name":"imported/badge/root/color/error","type":"ALIAS","target":"color-on-error"},{"name":"imported/badge/root/color/green","type":"ALIAS","target":"color-text-green"},{"name":"imported/badge/root/color/info","type":"ALIAS","target":"color-on-accent"},{"name":"imported/badge/root/color/neutral","type":"ALIAS","target":"color-text-primary"},{"name":"imported/badge/root/color/orange","type":"ALIAS","target":"color-text-orange"},{"name":"imported/badge/root/color/pink","type":"ALIAS","target":"color-text-pink"},{"name":"imported/badge/root/color/purple","type":"ALIAS","target":"color-text-purple"},{"name":"imported/badge/root/color/red","type":"ALIAS","target":"color-text-red"},{"name":"imported/badge/root/color/success","type":"ALIAS","target":"color-on-success"},{"name":"imported/badge/root/color/teal","type":"ALIAS","target":"color-text-teal"},{"name":"imported/badge/root/color/warning","type":"ALIAS","target":"color-on-warning"},{"name":"imported/badge/root/color/yellow","type":"ALIAS","target":"color-text-yellow"},{"name":"imported/badge/root/column-gap","type":"FLOAT","light":4,"dark":4},{"name":"imported/badge/root/font-size","type":"FLOAT","light":12,"dark":12},{"name":"imported/badge/root/font-weight","type":"FLOAT","light":500,"dark":500},{"name":"imported/badge/root/line-height","type":"FLOAT","light":20.0004,"dark":20.0004},{"name":"imported/badge/root/padding-left","type":"FLOAT","light":8,"dark":8},{"name":"imported/badge/root/padding-right","type":"FLOAT","light":8,"dark":8},{"name":"imported/badge/root/row-gap","type":"FLOAT","light":4,"dark":4},{"name":"imported/button/label/color/destructive","type":"ALIAS","target":"color-on-error"},{"name":"imported/button/label/color/ghost","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/label/color/primary","type":"ALIAS","target":"color-on-accent"},{"name":"imported/button/label/color/secondary","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/part-0/color/destructive","type":"ALIAS","target":"color-on-error"},{"name":"imported/button/part-0/color/ghost","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/part-0/color/primary","type":"ALIAS","target":"color-on-accent"},{"name":"imported/button/part-0/color/secondary","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/part-1/bottom/lg","type":"FLOAT","light":37,"dark":37},{"name":"imported/button/part-1/bottom/md","type":"FLOAT","light":33,"dark":33},{"name":"imported/button/part-1/bottom/sm","type":"FLOAT","light":29,"dark":29},{"name":"imported/button/part-1/color/destructive","type":"ALIAS","target":"color-on-error"},{"name":"imported/button/part-1/color/ghost","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/part-1/color/primary","type":"ALIAS","target":"color-on-accent"},{"name":"imported/button/part-1/color/secondary","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/part-1/height","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/part-1/right","type":"FLOAT","light":100.812,"dark":100.812},{"name":"imported/button/part-1/width","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/background-color/destructive","type":"ALIAS","target":"color-error"},{"name":"imported/button/root/background-color/ghost","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":0},"dark":{"r":0,"g":0,"b":0,"a":0}},{"name":"imported/button/root/background-color/primary","type":"ALIAS","target":"color-accent"},{"name":"imported/button/root/background-color/secondary","type":"COLOR","light":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.10196078431372549},"dark":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.10196078431372549}},{"name":"imported/button/root/background-image-state-active","type":"STRING","light":"linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))","dark":"linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))"},{"name":"imported/button/root/background-image-state-hover","type":"STRING","light":"linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))","dark":"linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))"},{"name":"imported/button/root/color/destructive","type":"ALIAS","target":"color-on-error"},{"name":"imported/button/root/color/ghost","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/root/color/primary","type":"ALIAS","target":"color-on-accent"},{"name":"imported/button/root/color/secondary","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/root/height/lg","type":"FLOAT","light":36,"dark":36},{"name":"imported/button/root/height/md","type":"FLOAT","light":32,"dark":32},{"name":"imported/button/root/height/sm","type":"FLOAT","light":28,"dark":28},{"name":"imported/button/root/opacity-state-disabled","type":"FLOAT","light":0.5,"dark":0.5},{"name":"imported/button/root/outline-color-state-focus-visible/destructive","type":"ALIAS","target":"color-error"},{"name":"imported/button/root/outline-color-state-focus-visible/ghost","type":"ALIAS","target":"color-accent"},{"name":"imported/button/root/outline-color-state-focus-visible/primary","type":"ALIAS","target":"color-accent"},{"name":"imported/button/root/outline-color-state-focus-visible/secondary","type":"ALIAS","target":"color-accent"},{"name":"imported/button/root/outline-color/destructive","type":"ALIAS","target":"color-on-error"},{"name":"imported/button/root/outline-color/ghost","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/root/outline-color/primary","type":"ALIAS","target":"color-on-accent"},{"name":"imported/button/root/outline-color/secondary","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/root/outline-offset-state-focus-visible","type":"FLOAT","light":3,"dark":3},{"name":"imported/button/root/outline-width-state-focus-visible","type":"FLOAT","light":2,"dark":2},{"name":"imported/button/root/padding-left","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/padding-right","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/width","type":"FLOAT","light":99.8125,"dark":99.8125},{"name":"imported/card/root/background-color/blue","type":"ALIAS","target":"color-background-blue"},{"name":"imported/card/root/background-color/cyan","type":"ALIAS","target":"color-background-cyan"},{"name":"imported/card/root/background-color/default","type":"ALIAS","target":"color-background-card"},{"name":"imported/card/root/background-color/gray","type":"ALIAS","target":"color-background-gray"},{"name":"imported/card/root/background-color/green","type":"ALIAS","target":"color-background-green"},{"name":"imported/card/root/background-color/muted","type":"ALIAS","target":"color-background-muted"},{"name":"imported/card/root/background-color/orange","type":"ALIAS","target":"color-background-orange"},{"name":"imported/card/root/background-color/pink","type":"ALIAS","target":"color-background-pink"},{"name":"imported/card/root/background-color/purple","type":"ALIAS","target":"color-background-purple"},{"name":"imported/card/root/background-color/red","type":"ALIAS","target":"color-background-red"},{"name":"imported/card/root/background-color/teal","type":"ALIAS","target":"color-background-teal"},{"name":"imported/card/root/background-color/transparent","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":0},"dark":{"r":0,"g":0,"b":0,"a":0}},{"name":"imported/card/root/background-color/yellow","type":"ALIAS","target":"color-background-yellow"},{"name":"imported/card/root/border-bottom-color/blue","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/cyan","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/default","type":"ALIAS","target":"color-border-emphasized"},{"name":"imported/card/root/border-bottom-color/gray","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/green","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/muted","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/orange","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/pink","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/purple","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/red","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/teal","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/transparent","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/yellow","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-width/blue","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/cyan","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/default","type":"FLOAT","light":1,"dark":1},{"name":"imported/card/root/border-bottom-width/gray","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/muted","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/orange","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/pink","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/purple","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/teal","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/transparent","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/yellow","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-color/blue","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/cyan","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/default","type":"ALIAS","target":"color-border-emphasized"},{"name":"imported/card/root/border-left-color/gray","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/green","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/muted","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/orange","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/pink","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/purple","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/red","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/teal","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/transparent","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/yellow","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-width/blue","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/cyan","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/default","type":"FLOAT","light":1,"dark":1},{"name":"imported/card/root/border-left-width/gray","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/muted","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/orange","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/pink","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/purple","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/teal","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/transparent","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/yellow","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-color/blue","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/cyan","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/default","type":"ALIAS","target":"color-border-emphasized"},{"name":"imported/card/root/border-right-color/gray","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/green","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/muted","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/orange","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/pink","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/purple","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/red","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/teal","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/transparent","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/yellow","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-width/blue","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/cyan","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/default","type":"FLOAT","light":1,"dark":1},{"name":"imported/card/root/border-right-width/gray","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/muted","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/orange","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/pink","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/purple","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/teal","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/transparent","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/yellow","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-color/blue","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/cyan","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/default","type":"ALIAS","target":"color-border-emphasized"},{"name":"imported/card/root/border-top-color/gray","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/green","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/muted","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/orange","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/pink","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/purple","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/red","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/teal","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/transparent","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/yellow","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-width/blue","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/cyan","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/default","type":"FLOAT","light":1,"dark":1},{"name":"imported/card/root/border-top-width/gray","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/muted","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/orange","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/pink","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/purple","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/teal","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/transparent","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/yellow","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/font-size","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/font-weight","type":"FLOAT","light":400,"dark":400},{"name":"imported/card/root/line-height","type":"FLOAT","light":24,"dark":24},{"name":"imported/card/root/padding-bottom/blue","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/cyan","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/default","type":"FLOAT","light":15,"dark":15},{"name":"imported/card/root/padding-bottom/gray","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/green","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/muted","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/orange","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/pink","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/purple","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/red","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/teal","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/transparent","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/yellow","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/blue","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/cyan","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/default","type":"FLOAT","light":15,"dark":15},{"name":"imported/card/root/padding-left/gray","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/green","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/muted","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/orange","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/pink","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/purple","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/red","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/teal","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/transparent","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/yellow","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/blue","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/cyan","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/default","type":"FLOAT","light":15,"dark":15},{"name":"imported/card/root/padding-right/gray","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/green","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/muted","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/orange","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/pink","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/purple","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/red","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/teal","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/transparent","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/yellow","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/blue","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/cyan","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/default","type":"FLOAT","light":15,"dark":15},{"name":"imported/card/root/padding-top/gray","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/green","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/muted","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/orange","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/pink","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/purple","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/red","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/teal","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/transparent","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/yellow","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/width","type":"FLOAT","light":114.203,"dark":114.203},{"name":"imported/shared/color-0064e0","type":"ALIAS","target":"color-accent"},{"name":"imported/shared/num-1","type":"FLOAT","light":1,"dark":1},{"name":"imported/shared/num-500","type":"FLOAT","light":500,"dark":500},{"name":"imported/shared/size-0","type":"FLOAT","light":0,"dark":0},{"name":"imported/shared/size-12","type":"FLOAT","light":12,"dark":12},{"name":"imported/shared/size-14","type":"FLOAT","light":14,"dark":14},{"name":"imported/shared/size-16","type":"FLOAT","light":16,"dark":16},{"name":"imported/shared/size-20-0004","type":"FLOAT","light":20.0004,"dark":20.0004},{"name":"imported/shared/size-4","type":"FLOAT","light":4,"dark":4},{"name":"imported/shared/size-40","type":"FLOAT","light":40,"dark":40},{"name":"imported/shared/size-8","type":"FLOAT","light":8,"dark":8},{"name":"imported/shared/size-9999","type":"FLOAT","light":9999,"dark":9999},{"name":"imported/shared/size-neg-1","type":"FLOAT","light":-1,"dark":-1},{"name":"imported/slider/label-2/color","type":"ALIAS","target":"color-on-dark"},{"name":"imported/slider/label-2/font-weight","type":"FLOAT","light":400,"dark":400},{"name":"imported/slider/label-2/max-width","type":"FLOAT","light":300,"dark":300},{"name":"imported/slider/label-3/color","type":"ALIAS","target":"color-text-primary"},{"name":"imported/slider/label-3/flex-shrink","type":"FLOAT","light":0,"dark":0},{"name":"imported/slider/label-3/font-weight","type":"FLOAT","light":400,"dark":400},{"name":"imported/slider/label-3/line-height","type":"FLOAT","light":21,"dark":21},{"name":"imported/slider/label/color","type":"ALIAS","target":"color-text-secondary"},{"name":"imported/slider/label/font-weight","type":"FLOAT","light":500,"dark":500},{"name":"imported/slider/slider-track/background-color","type":"ALIAS","target":"color-track"},{"name":"imported/slider/slider/height/horizontal/none","type":"FLOAT","light":20,"dark":20},{"name":"imported/slider/slider/height/horizontal/text","type":"FLOAT","light":21,"dark":21},{"name":"imported/slider/slider/height/horizontal/tooltip","type":"FLOAT","light":20,"dark":20},{"name":"imported/slider/slider/height/vertical/none","type":"FLOAT","light":160,"dark":160},{"name":"imported/slider/slider/height/vertical/text","type":"FLOAT","light":160,"dark":160},{"name":"imported/slider/slider/height/vertical/tooltip","type":"FLOAT","light":160,"dark":160},{"name":"imported/slider/tooltip/background-color","type":"ALIAS","target":"color-background-inverted"},{"name":"imported/slider/tooltip/color","type":"ALIAS","target":"color-on-dark"},{"name":"imported/slider/tooltip/margin-bottom/horizontal","type":"FLOAT","light":4,"dark":4},{"name":"imported/slider/tooltip/margin-bottom/vertical","type":"FLOAT","light":0,"dark":0},{"name":"imported/slider/tooltip/margin-left/horizontal","type":"FLOAT","light":0,"dark":0},{"name":"imported/slider/tooltip/margin-left/vertical","type":"FLOAT","light":4,"dark":4},{"name":"imported/slider/tooltip/margin-right/horizontal","type":"FLOAT","light":0,"dark":0},{"name":"imported/slider/tooltip/margin-right/vertical","type":"FLOAT","light":4,"dark":4},{"name":"imported/slider/tooltip/margin-top/horizontal","type":"FLOAT","light":4,"dark":4},{"name":"imported/slider/tooltip/margin-top/vertical","type":"FLOAT","light":0,"dark":0},{"name":"imported/switch/label-2/color","type":"ALIAS","target":"color-text-secondary"},{"name":"imported/switch/label-2/font-size","type":"FLOAT","light":14,"dark":14},{"name":"imported/switch/label-2/font-weight","type":"FLOAT","light":500,"dark":500},{"name":"imported/switch/label-2/line-height","type":"FLOAT","light":20.0004,"dark":20.0004},{"name":"imported/switch/label/color","type":"ALIAS","target":"color-text-secondary"},{"name":"imported/switch/label/font-size","type":"FLOAT","light":14,"dark":14},{"name":"imported/switch/label/font-weight","type":"FLOAT","light":500,"dark":500},{"name":"imported/switch/label/line-height","type":"FLOAT","light":20.0004,"dark":20.0004},{"name":"imported/switch/part-0-0-0/opacity","type":"FLOAT","light":0,"dark":0},{"name":"imported/switch/part-0-0-0/z-index","type":"FLOAT","light":1,"dark":1},{"name":"imported/switch/part-0-0/flex-shrink/end","type":"FLOAT","light":0,"dark":0},{"name":"imported/switch/part-0-0/flex-shrink/start","type":"FLOAT","light":1,"dark":1},{"name":"imported/switch/part-0-0/width/end","type":"FLOAT","light":40,"dark":40},{"name":"imported/switch/part-0-0/width/start","type":"FLOAT","light":130.016,"dark":130.016},{"name":"imported/switch/part-0-1-0/opacity","type":"FLOAT","light":0,"dark":0},{"name":"imported/switch/part-0-1-0/z-index","type":"FLOAT","light":1,"dark":1},{"name":"imported/switch/part-0-1/flex-shrink/end","type":"FLOAT","light":1,"dark":1},{"name":"imported/switch/part-0-1/flex-shrink/start","type":"FLOAT","light":0,"dark":0},{"name":"imported/switch/part-0-1/width/end","type":"FLOAT","light":130.016,"dark":130.016},{"name":"imported/switch/part-0-1/width/start","type":"FLOAT","light":40,"dark":40},{"name":"imported/switch/part-0/column-gap","type":"FLOAT","light":8,"dark":8},{"name":"imported/switch/part-0/row-gap","type":"FLOAT","light":8,"dark":8},{"name":"imported/switch/part-0/width","type":"FLOAT","light":178.016,"dark":178.016},{"name":"imported/switch/root/width","type":"FLOAT","light":178.016,"dark":178.016},{"name":"imported/switch/switch-2/background-color","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":0.2},"dark":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":0.2}},{"name":"imported/switch/switch-thumb-2/background-color","type":"ALIAS","target":"color-background-surface"},{"name":"imported/switch/switch-thumb/background-color","type":"ALIAS","target":"color-background-surface"},{"name":"imported/switch/switch/background-color","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":0.2},"dark":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":0.2}},{"name":"border-width","type":"FLOAT","light":1,"dark":1},{"name":"color-accent","type":"COLOR","light":{"r":0,"g":0.39215686274509803,"b":0.8784313725490196,"a":1},"dark":{"r":0.14901960784313725,"g":0.5803921568627451,"b":0.996078431372549,"a":1}},{"name":"color-accent-muted","type":"COLOR","light":{"r":0,"g":0.5098039215686274,"b":0.984313725490196,"a":0.2},"dark":{"r":0,"g":0.5098039215686274,"b":0.984313725490196,"a":0.24705882352941178}},{"name":"color-background-blue","type":"COLOR","light":{"r":0.00392156862745098,"g":0.44313725490196076,"b":0.8901960784313725,"a":0.2},"dark":{"r":0.00392156862745098,"g":0.44313725490196076,"b":0.8901960784313725,"a":0.2}},{"name":"color-background-body","type":"COLOR","light":{"r":0.9450980392156862,"g":0.9568627450980393,"b":0.9686274509803922,"a":1},"dark":{"r":0.06666666666666667,"g":0.06666666666666667,"b":0.07058823529411765,"a":1}},{"name":"color-background-card","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":0.12156862745098039,"g":0.12156862745098039,"b":0.13333333333333333,"a":1}},{"name":"color-background-cyan","type":"COLOR","light":{"r":0.011764705882352941,"g":0.6549019607843137,"b":0.8431372549019608,"a":0.2},"dark":{"r":0.011764705882352941,"g":0.6549019607843137,"b":0.8431372549019608,"a":0.2}},{"name":"color-background-error-inverted","type":"COLOR","light":{"r":0.6666666666666666,"g":0.027450980392156862,"b":0.11764705882352941,"a":1},"dark":{"r":0.8901960784313725,"g":0.09803921568627451,"b":0.23137254901960785,"a":1}},{"name":"color-background-gray","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":0.2},"dark":{"r":0.4,"g":0.41568627450980394,"b":0.4470588235294118,"a":0.2980392156862745}},{"name":"color-background-green","type":"COLOR","light":{"r":0.1411764705882353,"g":0.7333333333333333,"b":0.3686274509803922,"a":0.2},"dark":{"r":0.1411764705882353,"g":0.7333333333333333,"b":0.3686274509803922,"a":0.2}},{"name":"color-background-inverted","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"color-background-muted","type":"COLOR","light":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.047058823529411764},"dark":{"r":0.06666666666666667,"g":0.06666666666666667,"b":0.07058823529411765,"a":0.4980392156862745}},{"name":"color-background-orange","type":"COLOR","light":{"r":0.9490196078431372,"g":0.4745098039215686,"b":0.00784313725490196,"a":0.2},"dark":{"r":0.9490196078431372,"g":0.4745098039215686,"b":0.00784313725490196,"a":0.2}},{"name":"color-background-pink","type":"COLOR","light":{"r":0.9019607843137255,"g":0.2196078431372549,"b":0.7019607843137254,"a":0.2},"dark":{"r":0.9019607843137255,"g":0.2196078431372549,"b":0.7019607843137254,"a":0.2}},{"name":"color-background-popover","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":0.1568627450980392,"g":0.1607843137254902,"b":0.17254901960784313,"a":1}},{"name":"color-background-purple","type":"COLOR","light":{"r":0.4745098039215686,"g":0.3215686274509804,"b":1,"a":0.2},"dark":{"r":0.4745098039215686,"g":0.3215686274509804,"b":1,"a":0.2}},{"name":"color-background-red","type":"COLOR","light":{"r":0.8901960784313725,"g":0.09803921568627451,"b":0.23137254901960785,"a":0.2},"dark":{"r":0.8901960784313725,"g":0.09803921568627451,"b":0.23137254901960785,"a":0.2}},{"name":"color-background-surface","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":0.12156862745098039,"g":0.12156862745098039,"b":0.13333333333333333,"a":1}},{"name":"color-background-teal","type":"COLOR","light":{"r":0.050980392156862744,"g":0.7176470588235294,"b":0.6862745098039216,"a":0.2},"dark":{"r":0.050980392156862744,"g":0.7176470588235294,"b":0.6862745098039216,"a":0.2}},{"name":"color-background-yellow","type":"COLOR","light":{"r":0.8862745098039215,"g":0.6431372549019608,"b":0,"a":0.2},"dark":{"r":0.8862745098039215,"g":0.6431372549019608,"b":0,"a":0.2}},{"name":"color-border","type":"COLOR","light":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.09803921568627451},"dark":{"r":0.9490196078431372,"g":0.9568627450980393,"b":0.9647058823529412,"a":0.09803921568627451}},{"name":"color-border-blue","type":"COLOR","light":{"r":0,"g":0.39215686274509803,"b":0.8784313725490196,"a":1},"dark":{"r":0.14901960784313725,"g":0.5803921568627451,"b":0.996078431372549,"a":1}},{"name":"color-border-cyan","type":"COLOR","light":{"r":0.03137254901960784,"g":0.615686274509804,"b":0.8156862745098039,"a":1},"dark":{"r":0.00392156862745098,"g":0.44313725490196076,"b":0.6431372549019608,"a":1}},{"name":"color-border-emphasized","type":"COLOR","light":{"r":0.8,"g":0.8274509803921568,"b":0.8588235294117647,"a":1},"dark":{"r":0.28627450980392155,"g":0.30196078431372547,"b":0.3254901960784314,"a":1}},{"name":"color-border-gray","type":"COLOR","light":{"r":0.39215686274509803,"g":0.4627450980392157,"b":0.5215686274509804,"a":1},"dark":{"r":0.4549019607843137,"g":0.5254901960784314,"b":0.5843137254901961,"a":1}},{"name":"color-border-green","type":"COLOR","light":{"r":0.050980392156862744,"g":0.5254901960784314,"b":0.14901960784313725,"a":1},"dark":{"r":0.043137254901960784,"g":0.6,"b":0.12156862745098039,"a":1}},{"name":"color-border-orange","type":"COLOR","light":{"r":0.9215686274509803,"g":0.43137254901960786,"b":0,"a":1},"dark":{"r":0.7019607843137254,"g":0.2901960784313726,"b":0.00392156862745098,"a":1}},{"name":"color-border-pink","type":"COLOR","light":{"r":0.9529411764705882,"g":0.3176470588235294,"b":0.7529411764705882,"a":1},"dark":{"r":0.7529411764705882,"g":0.13333333333333333,"b":0.5803921568627451,"a":1}},{"name":"color-border-purple","type":"COLOR","light":{"r":0.5647058823529412,"g":0.5058823529411764,"b":1,"a":1},"dark":{"r":0.45098039215686275,"g":0.25098039215686274,"b":0.996078431372549,"a":1}},{"name":"color-border-red","type":"COLOR","light":{"r":0.8901960784313725,"g":0.09803921568627451,"b":0.23137254901960785,"a":1},"dark":{"r":0.9607843137254902,"g":0.2235294117647059,"b":0.30980392156862746,"a":1}},{"name":"color-border-teal","type":"COLOR","light":{"r":0.03137254901960784,"g":0.6392156862745098,"b":0.6392156862745098,"a":1},"dark":{"r":0.03137254901960784,"g":0.4627450980392157,"b":0.49019607843137253,"a":1}},{"name":"color-border-yellow","type":"COLOR","light":{"r":0.7725490196078432,"g":0.5254901960784314,"b":0,"a":1},"dark":{"r":0.7058823529411765,"g":0.4666666666666667,"b":0,"a":1}},{"name":"color-error","type":"COLOR","light":{"r":0.8901960784313725,"g":0.09803921568627451,"b":0.23137254901960785,"a":1},"dark":{"r":0.9607843137254902,"g":0.2235294117647059,"b":0.30980392156862746,"a":1}},{"name":"color-error-muted","type":"COLOR","light":{"r":0.8901960784313725,"g":0.09803921568627451,"b":0.23137254901960785,"a":0.2},"dark":{"r":0.9607843137254902,"g":0.2235294117647059,"b":0.30980392156862746,"a":0.24705882352941178}},{"name":"color-icon-accent","type":"COLOR","light":{"r":0,"g":0.39215686274509803,"b":0.8784313725490196,"a":1},"dark":{"r":0.14901960784313725,"g":0.5803921568627451,"b":0.996078431372549,"a":1}},{"name":"color-icon-blue","type":"COLOR","light":{"r":0,"g":0.39215686274509803,"b":0.8784313725490196,"a":1},"dark":{"r":0.14901960784313725,"g":0.5803921568627451,"b":0.996078431372549,"a":1}},{"name":"color-icon-cyan","type":"COLOR","light":{"r":0,"g":0.6745098039215687,"b":0.7568627450980392,"a":1},"dark":{"r":0.14901960784313725,"g":0.7764705882352941,"b":0.8549019607843137,"a":1}},{"name":"color-icon-disabled","type":"COLOR","light":{"r":0.6431372549019608,"g":0.6901960784313725,"b":0.7372549019607844,"a":1},"dark":{"r":0.43529411764705883,"g":0.4549019607843137,"b":0.48627450980392156,"a":1}},{"name":"color-icon-gray","type":"COLOR","light":{"r":0.3058823529411765,"g":0.3764705882352941,"b":0.43529411764705883,"a":1},"dark":{"r":0.6666666666666666,"g":0.6862745098039216,"b":0.7098039215686275,"a":1}},{"name":"color-icon-green","type":"COLOR","light":{"r":0.050980392156862744,"g":0.5254901960784314,"b":0.14901960784313725,"a":1},"dark":{"r":0.14901960784313725,"g":0.6549019607843137,"b":0.33725490196078434,"a":1}},{"name":"color-icon-orange","type":"COLOR","light":{"r":0.9137254901960784,"g":0.4117647058823529,"b":0.043137254901960784,"a":1},"dark":{"r":0.984313725490196,"g":0.5490196078431373,"b":0,"a":1}},{"name":"color-icon-pink","type":"COLOR","light":{"r":0.7607843137254902,"g":0.09411764705882353,"b":0.3568627450980392,"a":1},"dark":{"r":0.9254901960784314,"g":0.25098039215686274,"b":0.47843137254901963,"a":1}},{"name":"color-icon-primary","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":1},"dark":{"r":0.8745098039215686,"g":0.8862745098039215,"b":0.8980392156862745,"a":1}},{"name":"color-icon-purple","type":"COLOR","light":{"r":0.3568627450980392,"g":0.03137254901960784,"b":0.8470588235294118,"a":1},"dark":{"r":0.4745098039215686,"g":0.3215686274509804,"b":1,"a":1}},{"name":"color-icon-red","type":"COLOR","light":{"r":0.8274509803921568,"g":0.06666666666666667,"b":0.18823529411764706,"a":1},"dark":{"r":0.8901960784313725,"g":0.09803921568627451,"b":0.23137254901960785,"a":1}},{"name":"color-icon-secondary","type":"COLOR","light":{"r":0.3058823529411765,"g":0.3764705882352941,"b":0.43529411764705883,"a":1},"dark":{"r":0.6666666666666666,"g":0.6862745098039216,"b":0.7098039215686275,"a":1}},{"name":"color-icon-teal","type":"COLOR","light":{"r":0,"g":0.5882352941176471,"b":0.5333333333333333,"a":1},"dark":{"r":0.14901960784313725,"g":0.6509803921568628,"b":0.6039215686274509,"a":1}},{"name":"color-icon-yellow","type":"COLOR","light":{"r":0.984313725490196,"g":0.7529411764705882,"b":0.17647058823529413,"a":1},"dark":{"r":1,"g":0.9333333333333333,"b":0.34509803921568627,"a":1}},{"name":"color-neutral","type":"COLOR","light":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.1},"dark":{"r":0.8745098039215686,"g":0.8862745098039215,"b":0.8980392156862745,"a":0.2}},{"name":"color-on-accent","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"color-on-dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"color-on-error","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"color-on-light","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"color-on-success","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"color-on-warning","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":1},"dark":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":1}},{"name":"color-overlay","type":"COLOR","light":{"r":0.00392156862745098,"g":0.07058823529411765,"b":0.1568627450980392,"a":0.4},"dark":{"r":0.06666666666666667,"g":0.06666666666666667,"b":0.07058823529411765,"a":0.6}},{"name":"color-overlay-hover","type":"COLOR","light":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.047058823529411764},"dark":{"r":1,"g":1,"b":1,"a":0.047058823529411764}},{"name":"color-overlay-pressed","type":"COLOR","light":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.09803921568627451},"dark":{"r":1,"g":1,"b":1,"a":0.09803921568627451}},{"name":"color-shadow","type":"COLOR","light":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.1},"dark":{"r":0,"g":0,"b":0,"a":0.3}},{"name":"color-skeleton","type":"COLOR","light":{"r":0.8,"g":0.8274509803921568,"b":0.8588235294117647,"a":1},"dark":{"r":0.35294117647058826,"g":0.3686274509803922,"b":0.4,"a":1}},{"name":"color-success","type":"COLOR","light":{"r":0.050980392156862744,"g":0.5254901960784314,"b":0.14901960784313725,"a":1},"dark":{"r":0.050980392156862744,"g":0.5254901960784314,"b":0.14901960784313725,"a":1}},{"name":"color-success-muted","type":"COLOR","light":{"r":0.043137254901960784,"g":0.6,"b":0.12156862745098039,"a":0.2},"dark":{"r":0.043137254901960784,"g":0.6,"b":0.12156862745098039,"a":0.24705882352941178}},{"name":"color-text-accent","type":"COLOR","light":{"r":0,"g":0.39215686274509803,"b":0.8784313725490196,"a":1},"dark":{"r":0.24313725490196078,"g":0.6196078431372549,"b":0.984313725490196,"a":1}},{"name":"color-text-blue","type":"COLOR","light":{"r":0.01568627450980392,"g":0.1843137254901961,"b":0.592156862745098,"a":1},"dark":{"r":0.6862745098039216,"g":0.8431372549019608,"b":1,"a":1}},{"name":"color-text-cyan","type":"COLOR","light":{"r":0.00392156862745098,"g":0.28627450980392155,"b":0.4588235294117647,"a":1},"dark":{"r":0.6313725490196078,"g":0.9333333333333333,"b":0.9764705882352941,"a":1}},{"name":"color-text-disabled","type":"COLOR","light":{"r":0.6431372549019608,"g":0.6901960784313725,"b":0.7372549019607844,"a":1},"dark":{"r":0.43529411764705883,"g":0.4549019607843137,"b":0.48627450980392156,"a":1}},{"name":"color-text-gray","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":1},"dark":{"r":0.9058823529411765,"g":0.9176470588235294,"b":0.9294117647058824,"a":1}},{"name":"color-text-green","type":"COLOR","light":{"r":0.03529411764705882,"g":0.26666666666666666,"b":0.12156862745098039,"a":1},"dark":{"r":0.6470588235294118,"g":0.9647058823529412,"b":0.5647058823529412,"a":1}},{"name":"color-text-orange","type":"COLOR","light":{"r":0.4196078431372549,"g":0.13333333333333333,"b":0.011764705882352941,"a":1},"dark":{"r":0.9921568627450981,"g":0.7215686274509804,"b":0.4627450980392157,"a":1}},{"name":"color-text-pink","type":"COLOR","light":{"r":0.396078431372549,"g":0,"b":0.3254901960784314,"a":1},"dark":{"r":0.996078431372549,"g":0.6784313725490196,"b":0.8901960784313725,"a":1}},{"name":"color-text-primary","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":1},"dark":{"r":0.8745098039215686,"g":0.8862745098039215,"b":0.8980392156862745,"a":1}},{"name":"color-text-purple","type":"COLOR","light":{"r":0.24313725490196078,"g":0.023529411764705882,"b":0.592156862745098,"a":1},"dark":{"r":0.7019607843137254,"g":0.6901960784313725,"b":0.996078431372549,"a":1}},{"name":"color-text-red","type":"COLOR","light":{"r":0.4823529411764706,"g":0.00784313725490196,"b":0.06274509803921569,"a":1},"dark":{"r":1,"g":0.6980392156862745,"b":0.7215686274509804,"a":1}},{"name":"color-text-secondary","type":"COLOR","light":{"r":0.3058823529411765,"g":0.3764705882352941,"b":0.43529411764705883,"a":1},"dark":{"r":0.6666666666666666,"g":0.6862745098039216,"b":0.7098039215686275,"a":1}},{"name":"color-text-teal","type":"COLOR","light":{"r":0.03137254901960784,"g":0.2235294117647059,"b":0.2627450980392157,"a":1},"dark":{"r":0.25098039215686274,"g":0.8627450980392157,"b":0.803921568627451,"a":1}},{"name":"color-text-yellow","type":"COLOR","light":{"r":0.4588235294117647,"g":0.24705882352941178,"b":0.027450980392156862,"a":1},"dark":{"r":0.984313725490196,"g":0.807843137254902,"b":0.011764705882352941,"a":1}},{"name":"color-tint-hover","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"color-track","type":"COLOR","light":{"r":0.8,"g":0.8274509803921568,"b":0.8588235294117647,"a":1},"dark":{"r":0.35294117647058826,"g":0.3686274509803922,"b":0.4,"a":1}},{"name":"color-warning","type":"COLOR","light":{"r":0.9137254901960784,"g":0.6862745098039216,"b":0.03137254901960784,"a":1},"dark":{"r":0.9490196078431372,"g":0.7529411764705882,"b":0.043137254901960784,"a":1}},{"name":"color-warning-muted","type":"COLOR","light":{"r":0.8862745098039215,"g":0.6431372549019608,"b":0,"a":0.2},"dark":{"r":0.8862745098039215,"g":0.6431372549019608,"b":0,"a":0.24705882352941178}},{"name":"duration-fast","type":"FLOAT","light":175,"dark":175},{"name":"duration-fast-max","type":"FLOAT","light":230,"dark":230},{"name":"duration-fast-min","type":"FLOAT","light":130,"dark":130},{"name":"duration-medium","type":"FLOAT","light":410,"dark":410},{"name":"duration-medium-max","type":"FLOAT","light":550,"dark":550},{"name":"duration-medium-min","type":"FLOAT","light":310,"dark":310},{"name":"duration-slow","type":"FLOAT","light":975,"dark":975},{"name":"duration-slow-max","type":"FLOAT","light":1300,"dark":1300},{"name":"duration-slow-min","type":"FLOAT","light":730,"dark":730},{"name":"ease-standard","type":"STRING","light":"cubic-bezier(0.24, 1, 0.4, 1)","dark":"cubic-bezier(0.24, 1, 0.4, 1)"},{"name":"font-family-body","type":"STRING","light":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif","dark":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"},{"name":"font-family-code","type":"STRING","light":"\"SF Mono\", Monaco, Consolas, monospace","dark":"\"SF Mono\", Monaco, Consolas, monospace"},{"name":"font-family-heading","type":"STRING","light":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif","dark":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"},{"name":"font-size-2xl","type":"FLOAT","light":24,"dark":24},{"name":"font-size-2xs","type":"FLOAT","light":8,"dark":8},{"name":"font-size-3xl","type":"FLOAT","light":29,"dark":29},{"name":"font-size-3xs","type":"FLOAT","light":7,"dark":7},{"name":"font-size-4xl","type":"FLOAT","light":35,"dark":35},{"name":"font-size-4xs","type":"FLOAT","light":6,"dark":6},{"name":"font-size-5xl","type":"FLOAT","light":42,"dark":42},{"name":"font-size-base","type":"FLOAT","light":14,"dark":14},{"name":"font-size-lg","type":"FLOAT","light":17,"dark":17},{"name":"font-size-sm","type":"FLOAT","light":12,"dark":12},{"name":"font-size-xl","type":"FLOAT","light":20,"dark":20},{"name":"font-size-xs","type":"FLOAT","light":10,"dark":10},{"name":"font-weight-bold","type":"FLOAT","light":700,"dark":700},{"name":"font-weight-medium","type":"FLOAT","light":500,"dark":500},{"name":"font-weight-normal","type":"FLOAT","light":400,"dark":400},{"name":"font-weight-semibold","type":"FLOAT","light":600,"dark":600},{"name":"radius-chat","type":"FLOAT","light":28,"dark":28},{"name":"radius-container","type":"FLOAT","light":12,"dark":12},{"name":"radius-element","type":"FLOAT","light":8,"dark":8},{"name":"radius-full","type":"FLOAT","light":9999,"dark":9999},{"name":"radius-inner","type":"FLOAT","light":4,"dark":4},{"name":"radius-none","type":"FLOAT","light":0,"dark":0},{"name":"radius-page","type":"FLOAT","light":28,"dark":28},{"name":"shadow-high","type":"STRING","light":"0px 2px 2px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), 0px 8px 24px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3))","dark":"0px 2px 2px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), 0px 8px 24px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3))"},{"name":"shadow-inset-error","type":"STRING","light":"inset 0px 0px 0px 2px rgba(227, 25, 59, 0.3)","dark":"inset 0px 0px 0px 2px rgba(227, 25, 59, 0.3)"},{"name":"shadow-inset-hover","type":"STRING","light":"inset 0px 0px 0px 2px light-dark(rgba(5, 54, 89, 0.15), rgba(223, 226, 229, 0.2))","dark":"inset 0px 0px 0px 2px light-dark(rgba(5, 54, 89, 0.15), rgba(223, 226, 229, 0.2))"},{"name":"shadow-inset-selected","type":"STRING","light":"inset 0px 0px 0px 2px rgba(1, 113, 227, 0.5)","dark":"inset 0px 0px 0px 2px rgba(1, 113, 227, 0.5)"},{"name":"shadow-inset-success","type":"STRING","light":"inset 0px 0px 0px 2px rgba(38, 167, 86, 0.3)","dark":"inset 0px 0px 0px 2px rgba(38, 167, 86, 0.3)"},{"name":"shadow-inset-warning","type":"STRING","light":"inset 0px 0px 0px 2px rgba(226, 164, 0, 0.3)","dark":"inset 0px 0px 0px 2px rgba(226, 164, 0, 0.3)"},{"name":"shadow-low","type":"STRING","light":"0px 1px 1px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), 0px 2px 8px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2))","dark":"0px 1px 1px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), 0px 2px 8px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2))"},{"name":"shadow-med","type":"STRING","light":"0px 1px 2px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), 0px 2px 12px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2))","dark":"0px 1px 2px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), 0px 2px 12px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2))"},{"name":"size-element-lg","type":"FLOAT","light":36,"dark":36},{"name":"size-element-md","type":"FLOAT","light":32,"dark":32},{"name":"size-element-sm","type":"FLOAT","light":28,"dark":28},{"name":"spacing-0","type":"FLOAT","light":0,"dark":0},{"name":"spacing-0-5","type":"FLOAT","light":2,"dark":2},{"name":"spacing-1","type":"FLOAT","light":4,"dark":4},{"name":"spacing-1-5","type":"FLOAT","light":6,"dark":6},{"name":"spacing-10","type":"FLOAT","light":40,"dark":40},{"name":"spacing-11","type":"FLOAT","light":44,"dark":44},{"name":"spacing-12","type":"FLOAT","light":48,"dark":48},{"name":"spacing-2","type":"FLOAT","light":8,"dark":8},{"name":"spacing-3","type":"FLOAT","light":12,"dark":12},{"name":"spacing-4","type":"FLOAT","light":16,"dark":16},{"name":"spacing-5","type":"FLOAT","light":20,"dark":20},{"name":"spacing-6","type":"FLOAT","light":24,"dark":24},{"name":"spacing-7","type":"FLOAT","light":28,"dark":28},{"name":"spacing-8","type":"FLOAT","light":32,"dark":32},{"name":"spacing-9","type":"FLOAT","light":36,"dark":36},{"name":"text-body-leading","type":"FLOAT","light":1.4286,"dark":1.4286},{"name":"text-body-size","type":"FLOAT","light":14,"dark":14},{"name":"text-body-weight","type":"FLOAT","light":400,"dark":400},{"name":"text-code-leading","type":"FLOAT","light":1.4286,"dark":1.4286},{"name":"text-code-size","type":"FLOAT","light":14,"dark":14},{"name":"text-code-weight","type":"FLOAT","light":400,"dark":400},{"name":"text-display-1-leading","type":"FLOAT","light":1.2381,"dark":1.2381},{"name":"text-display-1-size","type":"FLOAT","light":42,"dark":42},{"name":"text-display-1-weight","type":"FLOAT","light":400,"dark":400},{"name":"text-display-2-leading","type":"FLOAT","light":1.2571,"dark":1.2571},{"name":"text-display-2-size","type":"FLOAT","light":35,"dark":35},{"name":"text-display-2-weight","type":"FLOAT","light":400,"dark":400},{"name":"text-display-3-leading","type":"FLOAT","light":1.2414,"dark":1.2414},{"name":"text-display-3-size","type":"FLOAT","light":29,"dark":29},{"name":"text-display-3-weight","type":"FLOAT","light":400,"dark":400},{"name":"text-heading-1-leading","type":"FLOAT","light":1.3333,"dark":1.3333},{"name":"text-heading-1-size","type":"FLOAT","light":24,"dark":24},{"name":"text-heading-1-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-heading-2-leading","type":"FLOAT","light":1.4,"dark":1.4},{"name":"text-heading-2-size","type":"FLOAT","light":20,"dark":20},{"name":"text-heading-2-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-heading-3-leading","type":"FLOAT","light":1.4118,"dark":1.4118},{"name":"text-heading-3-size","type":"FLOAT","light":17,"dark":17},{"name":"text-heading-3-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-heading-4-leading","type":"FLOAT","light":1.4286,"dark":1.4286},{"name":"text-heading-4-size","type":"FLOAT","light":14,"dark":14},{"name":"text-heading-4-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-heading-5-leading","type":"FLOAT","light":1.6667,"dark":1.6667},{"name":"text-heading-5-size","type":"FLOAT","light":12,"dark":12},{"name":"text-heading-5-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-heading-6-leading","type":"FLOAT","light":1.6,"dark":1.6},{"name":"text-heading-6-size","type":"FLOAT","light":10,"dark":10},{"name":"text-heading-6-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-label-leading","type":"FLOAT","light":1.4286,"dark":1.4286},{"name":"text-label-size","type":"FLOAT","light":14,"dark":14},{"name":"text-label-weight","type":"FLOAT","light":500,"dark":500},{"name":"text-large-leading","type":"FLOAT","light":1.4118,"dark":1.4118},{"name":"text-large-size","type":"FLOAT","light":17,"dark":17},{"name":"text-large-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-supporting-leading","type":"FLOAT","light":1.6667,"dark":1.6667},{"name":"text-supporting-size","type":"FLOAT","light":12,"dark":12},{"name":"text-supporting-weight","type":"FLOAT","light":400,"dark":400},{"name":"transition-fast","type":"STRING","light":"0.15s ease","dark":"0.15s ease"},{"name":"transition-normal","type":"STRING","light":"0.2s ease","dark":"0.2s ease"}];
+const TOKENS = [{"name":"imported/badge/root/background-color/blue","type":"ALIAS","target":"color-background-blue"},{"name":"imported/badge/root/background-color/cyan","type":"ALIAS","target":"color-background-cyan"},{"name":"imported/badge/root/background-color/error","type":"ALIAS","target":"color-error"},{"name":"imported/badge/root/background-color/green","type":"ALIAS","target":"color-background-green"},{"name":"imported/badge/root/background-color/info","type":"ALIAS","target":"color-accent"},{"name":"imported/badge/root/background-color/neutral","type":"COLOR","light":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.10196078431372549},"dark":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.10196078431372549}},{"name":"imported/badge/root/background-color/orange","type":"ALIAS","target":"color-background-orange"},{"name":"imported/badge/root/background-color/pink","type":"ALIAS","target":"color-background-pink"},{"name":"imported/badge/root/background-color/purple","type":"ALIAS","target":"color-background-purple"},{"name":"imported/badge/root/background-color/red","type":"ALIAS","target":"color-background-red"},{"name":"imported/badge/root/background-color/success","type":"ALIAS","target":"color-success"},{"name":"imported/badge/root/background-color/teal","type":"ALIAS","target":"color-background-teal"},{"name":"imported/badge/root/background-color/warning","type":"ALIAS","target":"color-warning"},{"name":"imported/badge/root/background-color/yellow","type":"ALIAS","target":"color-background-yellow"},{"name":"imported/badge/root/color/blue","type":"ALIAS","target":"color-text-blue"},{"name":"imported/badge/root/color/cyan","type":"ALIAS","target":"color-text-cyan"},{"name":"imported/badge/root/color/error","type":"ALIAS","target":"color-on-error"},{"name":"imported/badge/root/color/green","type":"ALIAS","target":"color-text-green"},{"name":"imported/badge/root/color/info","type":"ALIAS","target":"color-on-accent"},{"name":"imported/badge/root/color/neutral","type":"ALIAS","target":"color-text-primary"},{"name":"imported/badge/root/color/orange","type":"ALIAS","target":"color-text-orange"},{"name":"imported/badge/root/color/pink","type":"ALIAS","target":"color-text-pink"},{"name":"imported/badge/root/color/purple","type":"ALIAS","target":"color-text-purple"},{"name":"imported/badge/root/color/red","type":"ALIAS","target":"color-text-red"},{"name":"imported/badge/root/color/success","type":"ALIAS","target":"color-on-success"},{"name":"imported/badge/root/color/teal","type":"ALIAS","target":"color-text-teal"},{"name":"imported/badge/root/color/warning","type":"ALIAS","target":"color-on-warning"},{"name":"imported/badge/root/color/yellow","type":"ALIAS","target":"color-text-yellow"},{"name":"imported/badge/root/column-gap","type":"FLOAT","light":4,"dark":4},{"name":"imported/badge/root/font-size","type":"FLOAT","light":12,"dark":12},{"name":"imported/badge/root/font-weight","type":"FLOAT","light":500,"dark":500},{"name":"imported/badge/root/line-height","type":"FLOAT","light":20.0004,"dark":20.0004},{"name":"imported/badge/root/padding-left","type":"FLOAT","light":8,"dark":8},{"name":"imported/badge/root/padding-right","type":"FLOAT","light":8,"dark":8},{"name":"imported/badge/root/row-gap","type":"FLOAT","light":4,"dark":4},{"name":"imported/button/label/color/destructive","type":"ALIAS","target":"color-on-error"},{"name":"imported/button/label/color/ghost","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/label/color/primary","type":"ALIAS","target":"color-on-accent"},{"name":"imported/button/label/color/secondary","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/part-0/color/destructive","type":"ALIAS","target":"color-on-error"},{"name":"imported/button/part-0/color/ghost","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/part-0/color/primary","type":"ALIAS","target":"color-on-accent"},{"name":"imported/button/part-0/color/secondary","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/part-1/bottom/lg","type":"FLOAT","light":37,"dark":37},{"name":"imported/button/part-1/bottom/md","type":"FLOAT","light":33,"dark":33},{"name":"imported/button/part-1/bottom/sm","type":"FLOAT","light":29,"dark":29},{"name":"imported/button/part-1/color/destructive","type":"ALIAS","target":"color-on-error"},{"name":"imported/button/part-1/color/ghost","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/part-1/color/primary","type":"ALIAS","target":"color-on-accent"},{"name":"imported/button/part-1/color/secondary","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/part-1/height","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/part-1/right","type":"FLOAT","light":100.812,"dark":100.812},{"name":"imported/button/part-1/width","type":"FLOAT","light":1,"dark":1},{"name":"imported/button/root/background-color/destructive","type":"ALIAS","target":"color-error"},{"name":"imported/button/root/background-color/ghost","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":0},"dark":{"r":0,"g":0,"b":0,"a":0}},{"name":"imported/button/root/background-color/primary","type":"ALIAS","target":"color-accent"},{"name":"imported/button/root/background-color/secondary","type":"COLOR","light":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.10196078431372549},"dark":{"r":0.0196078431372549,"g":0.21176470588235294,"b":0.34901960784313724,"a":0.10196078431372549}},{"name":"imported/button/root/background-image-state-active","type":"STRING","light":"linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))","dark":"linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))"},{"name":"imported/button/root/background-image-state-hover","type":"STRING","light":"linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))","dark":"linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))"},{"name":"imported/button/root/color/destructive","type":"ALIAS","target":"color-on-error"},{"name":"imported/button/root/color/ghost","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/root/color/primary","type":"ALIAS","target":"color-on-accent"},{"name":"imported/button/root/color/secondary","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/root/height/lg","type":"FLOAT","light":36,"dark":36},{"name":"imported/button/root/height/md","type":"FLOAT","light":32,"dark":32},{"name":"imported/button/root/height/sm","type":"FLOAT","light":28,"dark":28},{"name":"imported/button/root/opacity-state-disabled","type":"FLOAT","light":0.5,"dark":0.5},{"name":"imported/button/root/outline-color-state-focus-visible/destructive","type":"ALIAS","target":"color-error"},{"name":"imported/button/root/outline-color-state-focus-visible/ghost","type":"ALIAS","target":"color-accent"},{"name":"imported/button/root/outline-color-state-focus-visible/primary","type":"ALIAS","target":"color-accent"},{"name":"imported/button/root/outline-color-state-focus-visible/secondary","type":"ALIAS","target":"color-accent"},{"name":"imported/button/root/outline-color/destructive","type":"ALIAS","target":"color-on-error"},{"name":"imported/button/root/outline-color/ghost","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/root/outline-color/primary","type":"ALIAS","target":"color-on-accent"},{"name":"imported/button/root/outline-color/secondary","type":"ALIAS","target":"color-text-primary"},{"name":"imported/button/root/outline-offset-state-focus-visible","type":"FLOAT","light":3,"dark":3},{"name":"imported/button/root/outline-width-state-focus-visible","type":"FLOAT","light":2,"dark":2},{"name":"imported/button/root/padding-left","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/padding-right","type":"FLOAT","light":12,"dark":12},{"name":"imported/button/root/width","type":"FLOAT","light":99.8125,"dark":99.8125},{"name":"imported/card/root/background-color/blue","type":"ALIAS","target":"color-background-blue"},{"name":"imported/card/root/background-color/cyan","type":"ALIAS","target":"color-background-cyan"},{"name":"imported/card/root/background-color/default","type":"ALIAS","target":"color-background-card"},{"name":"imported/card/root/background-color/gray","type":"ALIAS","target":"color-background-gray"},{"name":"imported/card/root/background-color/green","type":"ALIAS","target":"color-background-green"},{"name":"imported/card/root/background-color/muted","type":"ALIAS","target":"color-background-muted"},{"name":"imported/card/root/background-color/orange","type":"ALIAS","target":"color-background-orange"},{"name":"imported/card/root/background-color/pink","type":"ALIAS","target":"color-background-pink"},{"name":"imported/card/root/background-color/purple","type":"ALIAS","target":"color-background-purple"},{"name":"imported/card/root/background-color/red","type":"ALIAS","target":"color-background-red"},{"name":"imported/card/root/background-color/teal","type":"ALIAS","target":"color-background-teal"},{"name":"imported/card/root/background-color/transparent","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":0},"dark":{"r":0,"g":0,"b":0,"a":0}},{"name":"imported/card/root/background-color/yellow","type":"ALIAS","target":"color-background-yellow"},{"name":"imported/card/root/border-bottom-color/blue","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/cyan","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/default","type":"ALIAS","target":"color-border-emphasized"},{"name":"imported/card/root/border-bottom-color/gray","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/green","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/muted","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/orange","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/pink","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/purple","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/red","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/teal","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/transparent","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-color/yellow","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-bottom-width/blue","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/cyan","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/default","type":"FLOAT","light":1,"dark":1},{"name":"imported/card/root/border-bottom-width/gray","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/muted","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/orange","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/pink","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/purple","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/teal","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/transparent","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-bottom-width/yellow","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-color/blue","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/cyan","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/default","type":"ALIAS","target":"color-border-emphasized"},{"name":"imported/card/root/border-left-color/gray","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/green","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/muted","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/orange","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/pink","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/purple","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/red","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/teal","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/transparent","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-color/yellow","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-left-width/blue","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/cyan","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/default","type":"FLOAT","light":1,"dark":1},{"name":"imported/card/root/border-left-width/gray","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/muted","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/orange","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/pink","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/purple","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/teal","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/transparent","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-left-width/yellow","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-color/blue","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/cyan","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/default","type":"ALIAS","target":"color-border-emphasized"},{"name":"imported/card/root/border-right-color/gray","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/green","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/muted","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/orange","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/pink","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/purple","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/red","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/teal","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/transparent","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-color/yellow","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-right-width/blue","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/cyan","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/default","type":"FLOAT","light":1,"dark":1},{"name":"imported/card/root/border-right-width/gray","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/muted","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/orange","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/pink","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/purple","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/teal","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/transparent","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-right-width/yellow","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-color/blue","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/cyan","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/default","type":"ALIAS","target":"color-border-emphasized"},{"name":"imported/card/root/border-top-color/gray","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/green","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/muted","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/orange","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/pink","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/purple","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/red","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/teal","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/transparent","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-color/yellow","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":0,"g":0,"b":0,"a":1}},{"name":"imported/card/root/border-top-width/blue","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/cyan","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/default","type":"FLOAT","light":1,"dark":1},{"name":"imported/card/root/border-top-width/gray","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/green","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/muted","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/orange","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/pink","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/purple","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/red","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/teal","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/transparent","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/border-top-width/yellow","type":"FLOAT","light":0,"dark":0},{"name":"imported/card/root/font-size","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/font-weight","type":"FLOAT","light":400,"dark":400},{"name":"imported/card/root/line-height","type":"FLOAT","light":24,"dark":24},{"name":"imported/card/root/padding-bottom/blue","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/cyan","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/default","type":"FLOAT","light":15,"dark":15},{"name":"imported/card/root/padding-bottom/gray","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/green","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/muted","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/orange","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/pink","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/purple","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/red","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/teal","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/transparent","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-bottom/yellow","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/blue","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/cyan","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/default","type":"FLOAT","light":15,"dark":15},{"name":"imported/card/root/padding-left/gray","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/green","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/muted","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/orange","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/pink","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/purple","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/red","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/teal","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/transparent","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-left/yellow","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/blue","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/cyan","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/default","type":"FLOAT","light":15,"dark":15},{"name":"imported/card/root/padding-right/gray","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/green","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/muted","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/orange","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/pink","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/purple","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/red","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/teal","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/transparent","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-right/yellow","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/blue","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/cyan","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/default","type":"FLOAT","light":15,"dark":15},{"name":"imported/card/root/padding-top/gray","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/green","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/muted","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/orange","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/pink","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/purple","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/red","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/teal","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/transparent","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/padding-top/yellow","type":"FLOAT","light":16,"dark":16},{"name":"imported/card/root/width","type":"FLOAT","light":114.203,"dark":114.203},{"name":"imported/shared/color-0064e0","type":"ALIAS","target":"color-accent"},{"name":"imported/shared/num-1","type":"FLOAT","light":1,"dark":1},{"name":"imported/shared/num-500","type":"FLOAT","light":500,"dark":500},{"name":"imported/shared/size-0","type":"FLOAT","light":0,"dark":0},{"name":"imported/shared/size-12","type":"FLOAT","light":12,"dark":12},{"name":"imported/shared/size-14","type":"FLOAT","light":14,"dark":14},{"name":"imported/shared/size-16","type":"FLOAT","light":16,"dark":16},{"name":"imported/shared/size-20-0004","type":"FLOAT","light":20.0004,"dark":20.0004},{"name":"imported/shared/size-4","type":"FLOAT","light":4,"dark":4},{"name":"imported/shared/size-40","type":"FLOAT","light":40,"dark":40},{"name":"imported/shared/size-8","type":"FLOAT","light":8,"dark":8},{"name":"imported/shared/size-9999","type":"FLOAT","light":9999,"dark":9999},{"name":"imported/shared/size-neg-1","type":"FLOAT","light":-1,"dark":-1},{"name":"imported/slider/label-2/color","type":"ALIAS","target":"color-on-dark"},{"name":"imported/slider/label-2/font-weight","type":"FLOAT","light":400,"dark":400},{"name":"imported/slider/label-2/max-width","type":"FLOAT","light":300,"dark":300},{"name":"imported/slider/label-3/color","type":"ALIAS","target":"color-text-primary"},{"name":"imported/slider/label-3/flex-shrink","type":"FLOAT","light":0,"dark":0},{"name":"imported/slider/label-3/font-weight","type":"FLOAT","light":400,"dark":400},{"name":"imported/slider/label-3/line-height","type":"FLOAT","light":21,"dark":21},{"name":"imported/slider/label/color","type":"ALIAS","target":"color-text-secondary"},{"name":"imported/slider/label/font-weight","type":"FLOAT","light":500,"dark":500},{"name":"imported/slider/slider-track/background-color","type":"ALIAS","target":"color-track"},{"name":"imported/slider/slider/height/horizontal/none","type":"FLOAT","light":20,"dark":20},{"name":"imported/slider/slider/height/horizontal/text","type":"FLOAT","light":21,"dark":21},{"name":"imported/slider/slider/height/horizontal/tooltip","type":"FLOAT","light":20,"dark":20},{"name":"imported/slider/slider/height/vertical/none","type":"FLOAT","light":160,"dark":160},{"name":"imported/slider/slider/height/vertical/text","type":"FLOAT","light":160,"dark":160},{"name":"imported/slider/slider/height/vertical/tooltip","type":"FLOAT","light":160,"dark":160},{"name":"imported/slider/tooltip/background-color","type":"ALIAS","target":"color-background-inverted"},{"name":"imported/slider/tooltip/color","type":"ALIAS","target":"color-on-dark"},{"name":"imported/slider/tooltip/margin-bottom/horizontal","type":"FLOAT","light":4,"dark":4},{"name":"imported/slider/tooltip/margin-bottom/vertical","type":"FLOAT","light":0,"dark":0},{"name":"imported/slider/tooltip/margin-left/horizontal","type":"FLOAT","light":0,"dark":0},{"name":"imported/slider/tooltip/margin-left/vertical","type":"FLOAT","light":4,"dark":4},{"name":"imported/slider/tooltip/margin-right/horizontal","type":"FLOAT","light":0,"dark":0},{"name":"imported/slider/tooltip/margin-right/vertical","type":"FLOAT","light":4,"dark":4},{"name":"imported/slider/tooltip/margin-top/horizontal","type":"FLOAT","light":4,"dark":4},{"name":"imported/slider/tooltip/margin-top/vertical","type":"FLOAT","light":0,"dark":0},{"name":"imported/switch/label-2/color","type":"ALIAS","target":"color-text-secondary"},{"name":"imported/switch/label-2/font-size","type":"FLOAT","light":14,"dark":14},{"name":"imported/switch/label-2/font-weight","type":"FLOAT","light":500,"dark":500},{"name":"imported/switch/label-2/line-height","type":"FLOAT","light":20.0004,"dark":20.0004},{"name":"imported/switch/label/color","type":"ALIAS","target":"color-text-secondary"},{"name":"imported/switch/label/font-size","type":"FLOAT","light":14,"dark":14},{"name":"imported/switch/label/font-weight","type":"FLOAT","light":500,"dark":500},{"name":"imported/switch/label/line-height","type":"FLOAT","light":20.0004,"dark":20.0004},{"name":"imported/switch/part-0-0-0/opacity","type":"FLOAT","light":0,"dark":0},{"name":"imported/switch/part-0-0-0/z-index","type":"FLOAT","light":1,"dark":1},{"name":"imported/switch/part-0-0/flex-shrink/end","type":"FLOAT","light":0,"dark":0},{"name":"imported/switch/part-0-0/flex-shrink/start","type":"FLOAT","light":1,"dark":1},{"name":"imported/switch/part-0-0/width/end","type":"FLOAT","light":40,"dark":40},{"name":"imported/switch/part-0-0/width/start","type":"FLOAT","light":130.016,"dark":130.016},{"name":"imported/switch/part-0-1-0/opacity","type":"FLOAT","light":0,"dark":0},{"name":"imported/switch/part-0-1-0/z-index","type":"FLOAT","light":1,"dark":1},{"name":"imported/switch/part-0-1/flex-shrink/end","type":"FLOAT","light":1,"dark":1},{"name":"imported/switch/part-0-1/flex-shrink/start","type":"FLOAT","light":0,"dark":0},{"name":"imported/switch/part-0-1/width/end","type":"FLOAT","light":130.016,"dark":130.016},{"name":"imported/switch/part-0-1/width/start","type":"FLOAT","light":40,"dark":40},{"name":"imported/switch/part-0/column-gap","type":"FLOAT","light":8,"dark":8},{"name":"imported/switch/part-0/row-gap","type":"FLOAT","light":8,"dark":8},{"name":"imported/switch/part-0/width","type":"FLOAT","light":178.016,"dark":178.016},{"name":"imported/switch/root/width","type":"FLOAT","light":178.016,"dark":178.016},{"name":"imported/switch/switch-2/background-color","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":0.2},"dark":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":0.2}},{"name":"imported/switch/switch-thumb-2/background-color","type":"ALIAS","target":"color-background-surface"},{"name":"imported/switch/switch-thumb/background-color","type":"ALIAS","target":"color-background-surface"},{"name":"imported/switch/switch/background-color","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":0.2},"dark":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":0.2}},{"name":"border-width","type":"FLOAT","light":1,"dark":1},{"name":"color-accent","type":"COLOR","light":{"r":0.14901960784313725,"g":0.14901960784313725,"b":0.14901960784313725,"a":1},"dark":{"r":0.9215686274509803,"g":0.9215686274509803,"b":0.9215686274509803,"a":1}},{"name":"color-accent-muted","type":"COLOR","light":{"r":0.9450980392156862,"g":0.9450980392156862,"b":0.9450980392156862,"a":1},"dark":{"r":0.14901960784313725,"g":0.14901960784313725,"b":0.14901960784313725,"a":1}},{"name":"color-background-blue","type":"COLOR","light":{"r":0.7686274509803922,"g":0.8666666666666667,"b":0.984313725490196,"a":1},"dark":{"r":0.6196078431372549,"g":0.7176470588235294,"b":1,"a":0.23921568627450981}},{"name":"color-background-body","type":"COLOR","light":{"r":0.9450980392156862,"g":0.9450980392156862,"b":0.9450980392156862,"a":1},"dark":{"r":0.10588235294117647,"g":0.10588235294117647,"b":0.10588235294117647,"a":1}},{"name":"color-background-card","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":0.10588235294117647,"g":0.10588235294117647,"b":0.10588235294117647,"a":1}},{"name":"color-background-cyan","type":"COLOR","light":{"r":0.6392156862745098,"g":0.8784313725490196,"b":0.9372549019607843,"a":1},"dark":{"r":0.5137254901960784,"g":0.7607843137254902,"b":0.8313725490196079,"a":0.23921568627450981}},{"name":"color-background-error-inverted","type":"COLOR","light":{"r":0.6666666666666666,"g":0.027450980392156862,"b":0.11764705882352941,"a":1},"dark":{"r":0.8901960784313725,"g":0.09803921568627451,"b":0.23137254901960785,"a":1}},{"name":"color-background-gray","type":"COLOR","light":{"r":0.8980392156862745,"g":0.8980392156862745,"b":0.8980392156862745,"a":1},"dark":{"r":0,"g":0,"b":0,"a":0.058823529411764705}},{"name":"color-background-green","type":"COLOR","light":{"r":0.7725490196078432,"g":0.8980392156862745,"b":0.7529411764705882,"a":1},"dark":{"r":0.5176470588235295,"g":0.788235294117647,"b":0.5019607843137255,"a":0.23921568627450981}},{"name":"color-background-inverted","type":"COLOR","light":{"r":0.0392156862745098,"g":0.07450980392156863,"b":0.09019607843137255,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"color-background-muted","type":"COLOR","light":{"r":0.9450980392156862,"g":0.9450980392156862,"b":0.9450980392156862,"a":1},"dark":{"r":0.10588235294117647,"g":0.10588235294117647,"b":0.10588235294117647,"a":1}},{"name":"color-background-orange","type":"COLOR","light":{"r":0.9803921568627451,"g":0.8156862745098039,"b":0.7098039215686275,"a":1},"dark":{"r":1,"g":0.6352941176470588,"b":0.34509803921568627,"a":0.23921568627450981}},{"name":"color-background-pink","type":"COLOR","light":{"r":0.9882352941176471,"g":0.792156862745098,"b":0.8627450980392157,"a":1},"dark":{"r":1,"g":0.6,"b":0.7647058823529411,"a":0.23921568627450981}},{"name":"color-background-popover","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":0.10588235294117647,"g":0.10588235294117647,"b":0.10588235294117647,"a":1}},{"name":"color-background-purple","type":"COLOR","light":{"r":0.9254901960784314,"g":0.807843137254902,"b":0.9529411764705882,"a":1},"dark":{"r":0.9490196078431372,"g":0.592156862745098,"b":1,"a":0.23921568627450981}},{"name":"color-background-red","type":"COLOR","light":{"r":0.9803921568627451,"g":0.807843137254902,"b":0.796078431372549,"a":1},"dark":{"r":1,"g":0.6196078431372549,"b":0.592156862745098,"a":0.23921568627450981}},{"name":"color-background-surface","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":0.14901960784313725,"g":0.14901960784313725,"b":0.14901960784313725,"a":1}},{"name":"color-background-teal","type":"COLOR","light":{"r":0.6470588235294118,"g":0.8901960784313725,"b":0.8392156862745098,"a":1},"dark":{"r":0.49411764705882355,"g":0.7764705882352941,"b":0.7215686274509804,"a":0.23921568627450981}},{"name":"color-background-yellow","type":"COLOR","light":{"r":0.9725490196078431,"g":0.8549019607843137,"b":0.615686274509804,"a":1},"dark":{"r":0.8705882352941177,"g":0.7058823529411765,"b":0.2,"a":0.23921568627450981}},{"name":"color-border","type":"COLOR","light":{"r":0.9215686274509803,"g":0.9215686274509803,"b":0.9215686274509803,"a":1},"dark":{"r":1,"g":1,"b":1,"a":0.10196078431372549}},{"name":"color-border-blue","type":"COLOR","light":{"r":0.6941176470588235,"g":0.788235294117647,"b":0.9058823529411765,"a":1},"dark":{"r":0.42745098039215684,"g":0.611764705882353,"b":0.996078431372549,"a":1}},{"name":"color-border-cyan","type":"COLOR","light":{"r":0.5686274509803921,"g":0.8274509803921568,"b":0.8901960784313725,"a":1},"dark":{"r":0.403921568627451,"g":0.6549019607843137,"b":0.7215686274509804,"a":1}},{"name":"color-border-emphasized","type":"COLOR","light":{"r":0.8313725490196079,"g":0.8313725490196079,"b":0.8313725490196079,"a":1},"dark":{"r":0.3215686274509804,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"color-border-gray","type":"COLOR","light":{"r":0.8313725490196079,"g":0.8313725490196079,"b":0.8313725490196079,"a":1},"dark":{"r":0.14901960784313725,"g":0.14901960784313725,"b":0.14901960784313725,"a":1}},{"name":"color-border-green","type":"COLOR","light":{"r":0.6980392156862745,"g":0.8196078431372549,"b":0.6745098039215687,"a":1},"dark":{"r":0.4117647058823529,"g":0.6784313725490196,"b":0.403921568627451,"a":1}},{"name":"color-border-orange","type":"COLOR","light":{"r":0.9019607843137255,"g":0.7411764705882353,"b":0.6352941176470588,"a":1},"dark":{"r":0.8862745098039215,"g":0.5333333333333333,"b":0.24313725490196078,"a":1}},{"name":"color-border-pink","type":"COLOR","light":{"r":0.9058823529411765,"g":0.7176470588235294,"b":0.7843137254901961,"a":1},"dark":{"r":0.9490196078431372,"g":0.45098039215686275,"b":0.6666666666666666,"a":1}},{"name":"color-border-purple","type":"COLOR","light":{"r":0.8470588235294118,"g":0.7333333333333333,"b":0.8745098039215686,"a":1},"dark":{"r":0.8666666666666667,"g":0.4549019607843137,"b":0.9411764705882353,"a":1}},{"name":"color-border-red","type":"COLOR","light":{"r":0.9019607843137255,"g":0.7294117647058823,"b":0.7215686274509804,"a":1},"dark":{"r":1,"g":0.43529411764705883,"b":0.4235294117647059,"a":1}},{"name":"color-border-teal","type":"COLOR","light":{"r":0.5803921568627451,"g":0.8392156862745098,"b":0.7843137254901961,"a":1},"dark":{"r":0.38823529411764707,"g":0.6705882352941176,"b":0.615686274509804,"a":1}},{"name":"color-border-yellow","type":"COLOR","light":{"r":0.8941176470588236,"g":0.7607843137254902,"b":0.4745098039215686,"a":1},"dark":{"r":0.7529411764705882,"g":0.6,"b":0.054901960784313725,"a":1}},{"name":"color-error","type":"COLOR","light":{"r":0.6470588235294118,"g":0.047058823529411764,"b":0.1450980392156863,"a":1},"dark":{"r":1,"g":0.7764705882352941,"b":0.7568627450980392,"a":1}},{"name":"color-error-muted","type":"COLOR","light":{"r":0.9803921568627451,"g":0.807843137254902,"b":0.796078431372549,"a":1},"dark":{"r":1,"g":0.6196078431372549,"b":0.592156862745098,"a":0.23921568627450981}},{"name":"color-icon-accent","type":"COLOR","light":{"r":0.14901960784313725,"g":0.14901960784313725,"b":0.14901960784313725,"a":1},"dark":{"r":0.9215686274509803,"g":0.9215686274509803,"b":0.9215686274509803,"a":1}},{"name":"color-icon-blue","type":"COLOR","light":{"r":0,"g":0.27058823529411763,"b":0.5490196078431373,"a":1},"dark":{"r":0.6196078431372549,"g":0.7176470588235294,"b":1,"a":1}},{"name":"color-icon-cyan","type":"COLOR","light":{"r":0,"g":0.3137254901960784,"b":0.37254901960784315,"a":1},"dark":{"r":0.5137254901960784,"g":0.7607843137254902,"b":0.8313725490196079,"a":1}},{"name":"color-icon-disabled","type":"COLOR","light":{"r":0.6392156862745098,"g":0.6392156862745098,"b":0.6392156862745098,"a":1},"dark":{"r":0.3215686274509804,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"color-icon-gray","type":"COLOR","light":{"r":0.3215686274509804,"g":0.3215686274509804,"b":0.3215686274509804,"a":1},"dark":{"r":0.6392156862745098,"g":0.6392156862745098,"b":0.6392156862745098,"a":1}},{"name":"color-icon-green","type":"COLOR","light":{"r":0.047058823529411764,"g":0.3411764705882353,"b":0,"a":1},"dark":{"r":0.5176470588235295,"g":0.788235294117647,"b":0.5019607843137255,"a":1}},{"name":"color-icon-orange","type":"COLOR","light":{"r":0.43137254901960786,"g":0.20784313725490197,"b":0,"a":1},"dark":{"r":1,"g":0.6352941176470588,"b":0.34509803921568627,"a":1}},{"name":"color-icon-pink","type":"COLOR","light":{"r":0.5137254901960784,"g":0,"b":0.29411764705882354,"a":1},"dark":{"r":1,"g":0.6,"b":0.7647058823529411,"a":1}},{"name":"color-icon-primary","type":"COLOR","light":{"r":0.09019607843137255,"g":0.09019607843137255,"b":0.09019607843137255,"a":1},"dark":{"r":0.9803921568627451,"g":0.9803921568627451,"b":0.9803921568627451,"a":1}},{"name":"color-icon-purple","type":"COLOR","light":{"r":0.4392156862745098,"g":0,"b":0.5176470588235295,"a":1},"dark":{"r":0.9490196078431372,"g":0.592156862745098,"b":1,"a":1}},{"name":"color-icon-red","type":"COLOR","light":{"r":0.5372549019607843,"g":0,"b":0.10196078431372549,"a":1},"dark":{"r":1,"g":0.6196078431372549,"b":0.592156862745098,"a":1}},{"name":"color-icon-secondary","type":"COLOR","light":{"r":0.45098039215686275,"g":0.45098039215686275,"b":0.45098039215686275,"a":1},"dark":{"r":0.6392156862745098,"g":0.6392156862745098,"b":0.6392156862745098,"a":1}},{"name":"color-icon-teal","type":"COLOR","light":{"r":0,"g":0.3254901960784314,"b":0.2823529411764706,"a":1},"dark":{"r":0.49411764705882355,"g":0.7764705882352941,"b":0.7215686274509804,"a":1}},{"name":"color-icon-yellow","type":"COLOR","light":{"r":0.34509803921568627,"g":0.26666666666666666,"b":0,"a":1},"dark":{"r":0.8705882352941177,"g":0.7058823529411765,"b":0.2,"a":1}},{"name":"color-neutral","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":0.058823529411764705},"dark":{"r":1,"g":1,"b":1,"a":0.10196078431372549}},{"name":"color-on-accent","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":0.09019607843137255,"g":0.09019607843137255,"b":0.09019607843137255,"a":1}},{"name":"color-on-dark","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"color-on-error","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":0.09019607843137255,"g":0.09019607843137255,"b":0.09019607843137255,"a":1}},{"name":"color-on-light","type":"COLOR","light":{"r":0.09019607843137255,"g":0.09019607843137255,"b":0.09019607843137255,"a":1},"dark":{"r":0.09019607843137255,"g":0.09019607843137255,"b":0.09019607843137255,"a":1}},{"name":"color-on-success","type":"COLOR","light":{"r":1,"g":1,"b":1,"a":1},"dark":{"r":0.09019607843137255,"g":0.09019607843137255,"b":0.09019607843137255,"a":1}},{"name":"color-on-warning","type":"COLOR","light":{"r":0.09019607843137255,"g":0.09019607843137255,"b":0.09019607843137255,"a":1},"dark":{"r":0.09019607843137255,"g":0.09019607843137255,"b":0.09019607843137255,"a":1}},{"name":"color-overlay","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":0.5019607843137255},"dark":{"r":0,"g":0,"b":0,"a":0.8}},{"name":"color-overlay-hover","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":0.050980392156862744},"dark":{"r":1,"g":1,"b":1,"a":0.050980392156862744}},{"name":"color-overlay-pressed","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":0.10196078431372549},"dark":{"r":1,"g":1,"b":1,"a":0.10196078431372549}},{"name":"color-shadow","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":0.10196078431372549},"dark":{"r":0,"g":0,"b":0,"a":0.30196078431372547}},{"name":"color-skeleton","type":"COLOR","light":{"r":0.9215686274509803,"g":0.9215686274509803,"b":0.9215686274509803,"a":1},"dark":{"r":0.3215686274509804,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"color-success","type":"COLOR","light":{"r":0,"g":0.4392156862745098,"b":0.01568627450980392,"a":1},"dark":{"r":0.6235294117647059,"g":0.8980392156862745,"b":0.6078431372549019,"a":1}},{"name":"color-success-muted","type":"COLOR","light":{"r":0.7725490196078432,"g":0.8980392156862745,"b":0.7529411764705882,"a":1},"dark":{"r":0.5176470588235295,"g":0.788235294117647,"b":0.5019607843137255,"a":0.23921568627450981}},{"name":"color-text-accent","type":"COLOR","light":{"r":0.14901960784313725,"g":0.14901960784313725,"b":0.14901960784313725,"a":1},"dark":{"r":0.9215686274509803,"g":0.9215686274509803,"b":0.9215686274509803,"a":1}},{"name":"color-text-blue","type":"COLOR","light":{"r":0,"g":0.27058823529411763,"b":0.5490196078431373,"a":1},"dark":{"r":0.7803921568627451,"g":0.8274509803921568,"b":1,"a":1}},{"name":"color-text-cyan","type":"COLOR","light":{"r":0,"g":0.3137254901960784,"b":0.37254901960784315,"a":1},"dark":{"r":0.6196078431372549,"g":0.8705882352941177,"b":0.9411764705882353,"a":1}},{"name":"color-text-disabled","type":"COLOR","light":{"r":0.6392156862745098,"g":0.6392156862745098,"b":0.6392156862745098,"a":1},"dark":{"r":0.3215686274509804,"g":0.3215686274509804,"b":0.3215686274509804,"a":1}},{"name":"color-text-gray","type":"COLOR","light":{"r":0.14901960784313725,"g":0.14901960784313725,"b":0.14901960784313725,"a":1},"dark":{"r":0.8980392156862745,"g":0.8980392156862745,"b":0.8980392156862745,"a":1}},{"name":"color-text-green","type":"COLOR","light":{"r":0.047058823529411764,"g":0.3411764705882353,"b":0,"a":1},"dark":{"r":0.6235294117647059,"g":0.8980392156862745,"b":0.6078431372549019,"a":1}},{"name":"color-text-orange","type":"COLOR","light":{"r":0.43137254901960786,"g":0.20784313725490197,"b":0,"a":1},"dark":{"r":1,"g":0.788235294117647,"b":0.6352941176470588,"a":1}},{"name":"color-text-pink","type":"COLOR","light":{"r":0.5137254901960784,"g":0,"b":0.29411764705882354,"a":1},"dark":{"r":1,"g":0.7647058823529411,"b":0.8549019607843137,"a":1}},{"name":"color-text-primary","type":"COLOR","light":{"r":0.09019607843137255,"g":0.09019607843137255,"b":0.09019607843137255,"a":1},"dark":{"r":0.9803921568627451,"g":0.9803921568627451,"b":0.9803921568627451,"a":1}},{"name":"color-text-purple","type":"COLOR","light":{"r":0.4392156862745098,"g":0,"b":0.5176470588235295,"a":1},"dark":{"r":0.9803921568627451,"g":0.7568627450980392,"b":1,"a":1}},{"name":"color-text-red","type":"COLOR","light":{"r":0.5372549019607843,"g":0,"b":0.10196078431372549,"a":1},"dark":{"r":1,"g":0.7764705882352941,"b":0.7568627450980392,"a":1}},{"name":"color-text-secondary","type":"COLOR","light":{"r":0.45098039215686275,"g":0.45098039215686275,"b":0.45098039215686275,"a":1},"dark":{"r":0.6392156862745098,"g":0.6392156862745098,"b":0.6392156862745098,"a":1}},{"name":"color-text-teal","type":"COLOR","light":{"r":0,"g":0.3254901960784314,"b":0.2823529411764706,"a":1},"dark":{"r":0.6,"g":0.8862745098039215,"b":0.8274509803921568,"a":1}},{"name":"color-text-yellow","type":"COLOR","light":{"r":0.34509803921568627,"g":0.26666666666666666,"b":0,"a":1},"dark":{"r":0.9921568627450981,"g":0.8117647058823529,"b":0.30980392156862746,"a":1}},{"name":"color-tint-hover","type":"COLOR","light":{"r":0,"g":0,"b":0,"a":1},"dark":{"r":1,"g":1,"b":1,"a":1}},{"name":"color-track","type":"COLOR","light":{"r":0.8,"g":0.8274509803921568,"b":0.8588235294117647,"a":1},"dark":{"r":0.35294117647058826,"g":0.3686274509803922,"b":0.4,"a":1}},{"name":"color-warning","type":"COLOR","light":{"r":0.4549019607843137,"g":0.3568627450980392,"b":0,"a":1},"dark":{"r":0.9921568627450981,"g":0.8117647058823529,"b":0.30980392156862746,"a":1}},{"name":"color-warning-muted","type":"COLOR","light":{"r":0.9725490196078431,"g":0.8549019607843137,"b":0.615686274509804,"a":1},"dark":{"r":0.8705882352941177,"g":0.7058823529411765,"b":0.2,"a":0.23921568627450981}},{"name":"duration-fast","type":"FLOAT","light":125,"dark":125},{"name":"duration-fast-max","type":"FLOAT","light":165,"dark":165},{"name":"duration-fast-min","type":"FLOAT","light":95,"dark":95},{"name":"duration-medium","type":"FLOAT","light":300,"dark":300},{"name":"duration-medium-max","type":"FLOAT","light":400,"dark":400},{"name":"duration-medium-min","type":"FLOAT","light":225,"dark":225},{"name":"duration-slow","type":"FLOAT","light":700,"dark":700},{"name":"duration-slow-max","type":"FLOAT","light":935,"dark":935},{"name":"duration-slow-min","type":"FLOAT","light":525,"dark":525},{"name":"ease-standard","type":"STRING","light":"cubic-bezier(0.24, 1, 0.4, 1)","dark":"cubic-bezier(0.24, 1, 0.4, 1)"},{"name":"font-family-body","type":"STRING","light":"Figtree, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif","dark":"Figtree, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"},{"name":"font-family-code","type":"STRING","light":"ui-monospace, \"SF Mono\", Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace","dark":"ui-monospace, \"SF Mono\", Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"},{"name":"font-family-heading","type":"STRING","light":"Figtree, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif","dark":"Figtree, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"},{"name":"font-size-2xl","type":"FLOAT","light":24,"dark":24},{"name":"font-size-2xs","type":"FLOAT","light":8,"dark":8},{"name":"font-size-3xl","type":"FLOAT","light":29,"dark":29},{"name":"font-size-3xs","type":"FLOAT","light":7,"dark":7},{"name":"font-size-4xl","type":"FLOAT","light":35,"dark":35},{"name":"font-size-4xs","type":"FLOAT","light":6,"dark":6},{"name":"font-size-5xl","type":"FLOAT","light":42,"dark":42},{"name":"font-size-base","type":"FLOAT","light":14,"dark":14},{"name":"font-size-lg","type":"FLOAT","light":17,"dark":17},{"name":"font-size-sm","type":"FLOAT","light":12,"dark":12},{"name":"font-size-xl","type":"FLOAT","light":20,"dark":20},{"name":"font-size-xs","type":"FLOAT","light":10,"dark":10},{"name":"font-weight-bold","type":"FLOAT","light":700,"dark":700},{"name":"font-weight-medium","type":"FLOAT","light":500,"dark":500},{"name":"font-weight-normal","type":"FLOAT","light":400,"dark":400},{"name":"font-weight-semibold","type":"FLOAT","light":600,"dark":600},{"name":"radius-chat","type":"FLOAT","light":28,"dark":28},{"name":"radius-container","type":"FLOAT","light":12,"dark":12},{"name":"radius-element","type":"FLOAT","light":10,"dark":10},{"name":"radius-full","type":"FLOAT","light":9999,"dark":9999},{"name":"radius-inner","type":"FLOAT","light":6,"dark":6},{"name":"radius-none","type":"FLOAT","light":4,"dark":4},{"name":"radius-page","type":"FLOAT","light":28,"dark":28},{"name":"shadow-high","type":"STRING","light":"0 4px 6px light-dark(oklch(0 0 0 / 10%), oklch(0 0 0 / 50%)), 0 12px 24px light-dark(oklch(0 0 0 / 15%), oklch(0 0 0 / 70%)), inset 0 0 0 1px light-dark(transparent, oklch(1 0 0 / 15%))","dark":"0 4px 6px light-dark(oklch(0 0 0 / 10%), oklch(0 0 0 / 50%)), 0 12px 24px light-dark(oklch(0 0 0 / 15%), oklch(0 0 0 / 70%)), inset 0 0 0 1px light-dark(transparent, oklch(1 0 0 / 15%))"},{"name":"shadow-inset-error","type":"STRING","light":"inset 0px 0px 0px 2px #e33f4a4D","dark":"inset 0px 0px 0px 2px #e33f4a4D"},{"name":"shadow-inset-hover","type":"STRING","light":"inset 0px 0px 0px 2px #0074e24D","dark":"inset 0px 0px 0px 2px #0074e24D"},{"name":"shadow-inset-selected","type":"STRING","light":"inset 0px 0px 0px 2px #0074e280","dark":"inset 0px 0px 0px 2px #0074e280"},{"name":"shadow-inset-success","type":"STRING","light":"inset 0px 0px 0px 2px #1981004D","dark":"inset 0px 0px 0px 2px #1981004D"},{"name":"shadow-inset-warning","type":"STRING","light":"inset 0px 0px 0px 2px #ffce2f4D","dark":"inset 0px 0px 0px 2px #ffce2f4D"},{"name":"shadow-low","type":"STRING","light":"0 2px 4px light-dark(oklch(0 0 0 / 5%), oklch(0 0 0 / 25%)), 0 4px 8px light-dark(oklch(0 0 0 / 10%), oklch(0 0 0 / 40%)), inset 0 0 0 1px light-dark(transparent, oklch(1 0 0 / 8%))","dark":"0 2px 4px light-dark(oklch(0 0 0 / 5%), oklch(0 0 0 / 25%)), 0 4px 8px light-dark(oklch(0 0 0 / 10%), oklch(0 0 0 / 40%)), inset 0 0 0 1px light-dark(transparent, oklch(1 0 0 / 8%))"},{"name":"shadow-med","type":"STRING","light":"0 2px 4px light-dark(oklch(0 0 0 / 5%), oklch(0 0 0 / 35%)), 0 4px 12px light-dark(oklch(0 0 0 / 10%), oklch(0 0 0 / 50%)), inset 0 0 0 1px light-dark(transparent, oklch(1 0 0 / 12%))","dark":"0 2px 4px light-dark(oklch(0 0 0 / 5%), oklch(0 0 0 / 35%)), 0 4px 12px light-dark(oklch(0 0 0 / 10%), oklch(0 0 0 / 50%)), inset 0 0 0 1px light-dark(transparent, oklch(1 0 0 / 12%))"},{"name":"size-element-lg","type":"FLOAT","light":36,"dark":36},{"name":"size-element-md","type":"FLOAT","light":32,"dark":32},{"name":"size-element-sm","type":"FLOAT","light":28,"dark":28},{"name":"spacing-0","type":"FLOAT","light":0,"dark":0},{"name":"spacing-0-5","type":"FLOAT","light":2,"dark":2},{"name":"spacing-1","type":"FLOAT","light":4,"dark":4},{"name":"spacing-1-5","type":"FLOAT","light":6,"dark":6},{"name":"spacing-10","type":"FLOAT","light":40,"dark":40},{"name":"spacing-11","type":"FLOAT","light":44,"dark":44},{"name":"spacing-12","type":"FLOAT","light":48,"dark":48},{"name":"spacing-2","type":"FLOAT","light":8,"dark":8},{"name":"spacing-3","type":"FLOAT","light":12,"dark":12},{"name":"spacing-4","type":"FLOAT","light":16,"dark":16},{"name":"spacing-5","type":"FLOAT","light":20,"dark":20},{"name":"spacing-6","type":"FLOAT","light":24,"dark":24},{"name":"spacing-7","type":"FLOAT","light":28,"dark":28},{"name":"spacing-8","type":"FLOAT","light":32,"dark":32},{"name":"spacing-9","type":"FLOAT","light":36,"dark":36},{"name":"text-body-leading","type":"FLOAT","light":1.4286,"dark":1.4286},{"name":"text-body-size","type":"FLOAT","light":14,"dark":14},{"name":"text-body-weight","type":"FLOAT","light":400,"dark":400},{"name":"text-code-leading","type":"FLOAT","light":1.4286,"dark":1.4286},{"name":"text-code-size","type":"FLOAT","light":14,"dark":14},{"name":"text-code-weight","type":"FLOAT","light":400,"dark":400},{"name":"text-display-1-leading","type":"FLOAT","light":1.2381,"dark":1.2381},{"name":"text-display-1-size","type":"FLOAT","light":42,"dark":42},{"name":"text-display-1-weight","type":"FLOAT","light":400,"dark":400},{"name":"text-display-2-leading","type":"FLOAT","light":1.2571,"dark":1.2571},{"name":"text-display-2-size","type":"FLOAT","light":35,"dark":35},{"name":"text-display-2-weight","type":"FLOAT","light":400,"dark":400},{"name":"text-display-3-leading","type":"FLOAT","light":1.3793,"dark":1.3793},{"name":"text-display-3-size","type":"FLOAT","light":29,"dark":29},{"name":"text-display-3-weight","type":"FLOAT","light":400,"dark":400},{"name":"text-heading-1-leading","type":"FLOAT","light":1.3333,"dark":1.3333},{"name":"text-heading-1-size","type":"FLOAT","light":24,"dark":24},{"name":"text-heading-1-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-heading-2-leading","type":"FLOAT","light":1.4,"dark":1.4},{"name":"text-heading-2-size","type":"FLOAT","light":20,"dark":20},{"name":"text-heading-2-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-heading-3-leading","type":"FLOAT","light":1.4118,"dark":1.4118},{"name":"text-heading-3-size","type":"FLOAT","light":17,"dark":17},{"name":"text-heading-3-weight","type":"FLOAT","light":700,"dark":700},{"name":"text-heading-4-leading","type":"FLOAT","light":1.4286,"dark":1.4286},{"name":"text-heading-4-size","type":"FLOAT","light":14,"dark":14},{"name":"text-heading-4-weight","type":"FLOAT","light":700,"dark":700},{"name":"text-heading-5-leading","type":"FLOAT","light":1.6667,"dark":1.6667},{"name":"text-heading-5-size","type":"FLOAT","light":12,"dark":12},{"name":"text-heading-5-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-heading-6-leading","type":"FLOAT","light":1.6,"dark":1.6},{"name":"text-heading-6-size","type":"FLOAT","light":10,"dark":10},{"name":"text-heading-6-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-label-leading","type":"FLOAT","light":1.4286,"dark":1.4286},{"name":"text-label-size","type":"FLOAT","light":14,"dark":14},{"name":"text-label-weight","type":"FLOAT","light":500,"dark":500},{"name":"text-large-leading","type":"FLOAT","light":1.4118,"dark":1.4118},{"name":"text-large-size","type":"FLOAT","light":17,"dark":17},{"name":"text-large-weight","type":"FLOAT","light":600,"dark":600},{"name":"text-supporting-leading","type":"FLOAT","light":1.6667,"dark":1.6667},{"name":"text-supporting-size","type":"FLOAT","light":12,"dark":12},{"name":"text-supporting-weight","type":"FLOAT","light":400,"dark":400},{"name":"transition-fast","type":"STRING","light":"0.15s ease","dark":"0.15s ease"},{"name":"transition-normal","type":"STRING","light":"0.2s ease","dark":"0.2s ease"}];
 const collections = await figma.variables.getLocalVariableCollectionsAsync();
 let col = collections.find((c) => c.name === 'Astryx');
 if (!col) col = figma.variables.createVariableCollection('Astryx');
@@ -1409,7 +1409,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -1979,7 +1979,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconInfo",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#0064E0\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm0 4a1 1 0 100 2 1 1 0 000-2zm-.75 3.75a.75.75 0 011.5 0v5.5a.75.75 0 01-1.5 0v-5.5z\"/>\n</svg>",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#262626\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm0 4a1 1 0 100 2 1 1 0 000-2zm-.75 3.75a.75.75 0 011.5 0v5.5a.75.75 0 01-1.5 0v-5.5z\"/>\n</svg>",
                       "svgPaintVar": "color-accent",
                       "iconSize": 20
                     }
@@ -2078,7 +2078,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconInfo",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#0064E0\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm0 4a1 1 0 100 2 1 1 0 000-2zm-.75 3.75a.75.75 0 011.5 0v5.5a.75.75 0 01-1.5 0v-5.5z\"/>\n</svg>",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#262626\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm0 4a1 1 0 100 2 1 1 0 000-2zm-.75 3.75a.75.75 0 011.5 0v5.5a.75.75 0 01-1.5 0v-5.5z\"/>\n</svg>",
                       "svgPaintVar": "color-accent",
                       "iconSize": 20
                     }
@@ -2177,7 +2177,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconWarning",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#E9AF08\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.29 3.86L2.07 19.05A2 2 0 003.78 22h16.44a2 2 0 001.71-2.95L13.71 3.86a2 2 0 00-3.42 0zM12 9a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0112 9zm0 9a1 1 0 100-2 1 1 0 000 2z\"/>\n</svg>",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#745b00\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.29 3.86L2.07 19.05A2 2 0 003.78 22h16.44a2 2 0 001.71-2.95L13.71 3.86a2 2 0 00-3.42 0zM12 9a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0112 9zm0 9a1 1 0 100-2 1 1 0 000 2z\"/>\n</svg>",
                       "svgPaintVar": "color-warning",
                       "iconSize": 20
                     }
@@ -2276,7 +2276,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconWarning",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#E9AF08\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.29 3.86L2.07 19.05A2 2 0 003.78 22h16.44a2 2 0 001.71-2.95L13.71 3.86a2 2 0 00-3.42 0zM12 9a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0112 9zm0 9a1 1 0 100-2 1 1 0 000 2z\"/>\n</svg>",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#745b00\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10.29 3.86L2.07 19.05A2 2 0 003.78 22h16.44a2 2 0 001.71-2.95L13.71 3.86a2 2 0 00-3.42 0zM12 9a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0112 9zm0 9a1 1 0 100-2 1 1 0 000 2z\"/>\n</svg>",
                       "svgPaintVar": "color-warning",
                       "iconSize": 20
                     }
@@ -2375,7 +2375,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconError",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#E3193B\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm-2.47 5.47a.75.75 0 00-1.06 1.06L10.94 12l-2.47 2.47a.75.75 0 101.06 1.06L12 13.06l2.47 2.47a.75.75 0 101.06-1.06L13.06 12l2.47-2.47a.75.75 0 00-1.06-1.06L12 10.94l-2.47-2.47z\"/>\n</svg>",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#a50c25\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm-2.47 5.47a.75.75 0 00-1.06 1.06L10.94 12l-2.47 2.47a.75.75 0 101.06 1.06L12 13.06l2.47 2.47a.75.75 0 101.06-1.06L13.06 12l2.47-2.47a.75.75 0 00-1.06-1.06L12 10.94l-2.47-2.47z\"/>\n</svg>",
                       "svgPaintVar": "color-error",
                       "iconSize": 20
                     }
@@ -2474,7 +2474,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconError",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#E3193B\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm-2.47 5.47a.75.75 0 00-1.06 1.06L10.94 12l-2.47 2.47a.75.75 0 101.06 1.06L12 13.06l2.47 2.47a.75.75 0 101.06-1.06L13.06 12l2.47-2.47a.75.75 0 00-1.06-1.06L12 10.94l-2.47-2.47z\"/>\n</svg>",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#a50c25\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm-2.47 5.47a.75.75 0 00-1.06 1.06L10.94 12l-2.47 2.47a.75.75 0 101.06 1.06L12 13.06l2.47 2.47a.75.75 0 101.06-1.06L13.06 12l2.47-2.47a.75.75 0 00-1.06-1.06L12 10.94l-2.47-2.47z\"/>\n</svg>",
                       "svgPaintVar": "color-error",
                       "iconSize": 20
                     }
@@ -2573,7 +2573,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconSuccess",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#0D8626\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm4.06 6.56a.75.75 0 00-1.12-1l-3.94 4.4-1.94-1.94a.75.75 0 00-1.06 1.06l2.5 2.5a.75.75 0 001.09-.03l4.47-5z\"/>\n</svg>",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#007004\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm4.06 6.56a.75.75 0 00-1.12-1l-3.94 4.4-1.94-1.94a.75.75 0 00-1.06 1.06l2.5 2.5a.75.75 0 001.09-.03l4.47-5z\"/>\n</svg>",
                       "svgPaintVar": "color-success",
                       "iconSize": 20
                     }
@@ -2672,7 +2672,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "iconSuccess",
-                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#0D8626\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm4.06 6.56a.75.75 0 00-1.12-1l-3.94 4.4-1.94-1.94a.75.75 0 00-1.06 1.06l2.5 2.5a.75.75 0 001.09-.03l4.47-5z\"/>\n</svg>",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#007004\" aria-hidden=\"true\">\n  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 3a9 9 0 100 18 9 9 0 000-18zm4.06 6.56a.75.75 0 00-1.12-1l-3.94 4.4-1.94-1.94a.75.75 0 00-1.06 1.06l2.5 2.5a.75.75 0 001.09-.03l4.47-5z\"/>\n</svg>",
                       "svgPaintVar": "color-success",
                       "iconSize": 20
                     }
@@ -3543,7 +3543,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -5128,18 +5128,47 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -5506,7 +5535,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -7489,7 +7518,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -8070,7 +8099,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -8127,7 +8156,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -8524,18 +8553,47 @@ async function buildNode(spec, registry) {
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -8902,7 +8960,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -9465,7 +9523,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -9546,7 +9604,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -9627,7 +9685,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -9708,7 +9766,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -9789,7 +9847,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -10288,18 +10346,47 @@ async function buildNode(spec, registry) {
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -10666,7 +10753,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -11228,7 +11315,6 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             },
             {
@@ -11395,8 +11481,7 @@ const COMPONENTS = [
                               "lineHeight": {
                                 "value": 20.0004,
                                 "unit": "PIXELS"
-                              },
-                              "fontFamily": "-apple-system"
+                              }
                             }
                           ],
                           "bindings": {
@@ -11454,7 +11539,6 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             },
             {
@@ -11584,8 +11668,7 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 21,
                     "unit": "PIXELS"
-                  },
-                  "fontFamily": "-apple-system"
+                  }
                 }
               ],
               "fillW": true
@@ -11628,7 +11711,6 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             },
             {
@@ -11788,7 +11870,6 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             },
             {
@@ -11956,8 +12037,7 @@ const COMPONENTS = [
                               "lineHeight": {
                                 "value": 20.0004,
                                 "unit": "PIXELS"
-                              },
-                              "fontFamily": "-apple-system"
+                              }
                             }
                           ],
                           "bindings": {
@@ -12015,7 +12095,6 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             },
             {
@@ -12147,7 +12226,6 @@ const COMPONENTS = [
                     "value": 21,
                     "unit": "PIXELS"
                   },
-                  "fontFamily": "-apple-system",
                   "absolute": {
                     "h": "MIN",
                     "v": "MIN",
@@ -12196,7 +12274,6 @@ const COMPONENTS = [
                 "value": 20.0004,
                 "unit": "PIXELS"
               },
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             },
             {
@@ -12902,25 +12979,6 @@ async function buildNode(spec, registry) {
     else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
-    if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
-    }
-    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
-    if (spec.textCase) node.textCase = spec.textCase;
-    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
-    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -13285,7 +13343,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -13961,7 +14019,6 @@ const COMPONENTS = [
                         "value": 20.0004,
                         "unit": "PIXELS"
                       },
-                      "fontFamily": "-apple-system",
                       "contentProp": "Label"
                     }
                   ]
@@ -14036,7 +14093,6 @@ const COMPONENTS = [
                         "value": 20.0004,
                         "unit": "PIXELS"
                       },
-                      "fontFamily": "-apple-system",
                       "contentProp": "Label"
                     }
                   ]
@@ -14266,7 +14322,6 @@ const COMPONENTS = [
                         "value": 20.0004,
                         "unit": "PIXELS"
                       },
-                      "fontFamily": "-apple-system",
                       "contentProp": "Label"
                     }
                   ]
@@ -14341,7 +14396,6 @@ const COMPONENTS = [
                         "value": 20.0004,
                         "unit": "PIXELS"
                       },
-                      "fontFamily": "-apple-system",
                       "contentProp": "Label"
                     }
                   ]
@@ -14971,25 +15025,6 @@ async function buildNode(spec, registry) {
     else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
-    if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
-    }
-    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
-    if (spec.textCase) node.textCase = spec.textCase;
-    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
-    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -15353,7 +15388,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -15917,7 +15952,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -15955,7 +15990,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-text",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -15969,7 +16004,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -16006,7 +16041,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -16044,7 +16079,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-text",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -16058,7 +16093,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -16095,7 +16130,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -16133,7 +16168,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-text",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -16147,7 +16182,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -16184,7 +16219,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -16222,7 +16257,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-password",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -16236,7 +16271,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -16273,7 +16308,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -16311,7 +16346,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-password",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -16325,7 +16360,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -16362,7 +16397,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -16400,7 +16435,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-password",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11M5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11Z\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -16414,7 +16449,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -16451,7 +16486,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -16489,7 +16524,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-email",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -16503,7 +16538,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -16540,7 +16575,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -16578,7 +16613,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-email",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -16592,7 +16627,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -16629,7 +16664,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-secondary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             },
             {
@@ -16667,7 +16702,7 @@ const COMPONENTS = [
                     {
                       "type": "svg",
                       "name": "icon-email",
-                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#4E606F\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
+                      "svg": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6\" stroke=\"#737373\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>",
                       "svgPaintVar": "color-icon-secondary",
                       "iconSize": 16
                     }
@@ -16681,7 +16716,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "font-size-sm",
                   "textFill": "color-text-secondary",
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Placeholder"
                 }
               ],
@@ -17145,18 +17180,47 @@ async function buildNode(spec, registry) {
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -17523,7 +17587,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -18078,7 +18142,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18117,7 +18181,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-red",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18156,7 +18220,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-orange",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18195,7 +18259,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-yellow",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18234,7 +18298,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-green",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18273,7 +18337,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-teal",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18312,7 +18376,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-cyan",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18351,7 +18415,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-blue",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18390,7 +18454,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-purple",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18429,7 +18493,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-pink",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18468,7 +18532,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
               "textFill": "color-text-gray",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18507,7 +18571,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18546,7 +18610,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-red",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18585,7 +18649,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-orange",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18624,7 +18688,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-yellow",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18663,7 +18727,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-green",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18702,7 +18766,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-teal",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18741,7 +18805,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-cyan",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18780,7 +18844,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-blue",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18819,7 +18883,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-purple",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18858,7 +18922,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-pink",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18897,7 +18961,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
               "textFill": "color-text-gray",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18936,7 +19000,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -18975,7 +19039,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-red",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -19014,7 +19078,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-orange",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -19053,7 +19117,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-yellow",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -19092,7 +19156,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-green",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -19131,7 +19195,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-teal",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -19170,7 +19234,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-cyan",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -19209,7 +19273,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-blue",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -19248,7 +19312,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-purple",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -19287,7 +19351,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-pink",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -19326,7 +19390,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "textFill": "color-text-gray",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -19723,18 +19787,47 @@ async function buildNode(spec, registry) {
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -20101,7 +20194,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -20654,7 +20747,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "text-label-size",
               "textFill": "color-text-primary",
-              "fontFamily": "-apple-system",
+              "fontFamily": "Figtree",
               "contentProp": "Label"
             }
           ]
@@ -21051,18 +21144,47 @@ async function buildNode(spec, registry) {
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -21429,7 +21551,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -21996,7 +22118,7 @@ const COMPONENTS = [
                     "value": 142.86,
                     "unit": "PERCENT"
                   },
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Body"
                 }
               ],
@@ -22626,18 +22748,47 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -23010,7 +23161,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -24422,7 +24573,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;

@@ -65,7 +65,7 @@ const COMPONENTS = [
                     "value": 142.86,
                     "unit": "PERCENT"
                   },
-                  "fontFamily": "-apple-system",
+                  "fontFamily": "Figtree",
                   "contentProp": "Body"
                 }
               ],
