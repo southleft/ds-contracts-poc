@@ -37,22 +37,22 @@
     "matchDeveloped": true,
     "reviewedAt": "2026-08-07T17:56:00.340Z",
     "notes": [
-      "Re-synced 2026-08-06 from surgically patched text-field.figma.js via Console MCP (35\u00d78KB clientStorage chunk append). Amended 1:10365; rebuilt 8 variants.",
+      "Re-synced 2026-08-06 from surgically patched text-field.figma.js via Console MCP (35×8KB clientStorage chunk append). Amended 1:10365; rebuilt 8 variants.",
       "Canvas observations (not a visual pass): all 8 roots VERTICAL; placeholder text \"Example\" (prop default Example); label \"Store name\" above field (labelled__labelwrapper first child).",
-      "Developed score pending \u2014 do not treat as visual pass.",
+      "Developed score pending — do not treat as visual pass.",
       "Re-synced via clientStorage chunks (n=21, total=163475); nodeId=1:10365",
       "Re-synced via clientStorage chunks (n=28, total=167262); nodeId=1:10365; connected/textfield width=211px",
       "Re-synced via clientStorage chunks (n=28, total=167262); nodeId=1:10365; connected/textfield width=211px",
-      "FC-REF-FRAMING closed 2026-08-08: reference re-pointed from the emit-html first-item render (69x47 content, Times fallback, shrink-to-fit) to the Polaris computed gate-shot for the SAME variant tokens as the canvas cell 1:10197 (Variant=Inherit, Size=Medium, State=Default). Capture-framing pin: scaleRatio 3.06 -> 1.00, aspectRatio 2.61 -> 1.00. The canvas shot was never wrong \u2014 measured live on the bridge it is exactly the 211x60 VARIANT cell.",
-      "Scored pass 2026-08-08 (FC-REF-FRAMING round): 9.56 comp=false -> 4.11 comp=true. NOTHING about the canvas changed \u2014 the live bridge confirmed the committed shot is exactly VARIANT cell 1:10197 (211x60). Only the reference moved, from a Times-substrate emit-html first-item render (69x47) to the like-for-like 1x gate-shot.",
+      "FC-REF-FRAMING closed 2026-08-08: reference re-pointed from the emit-html first-item render (69x47 content, Times fallback, shrink-to-fit) to the Polaris computed gate-shot for the SAME variant tokens as the canvas cell 1:10197 (Variant=Inherit, Size=Medium, State=Default). Capture-framing pin: scaleRatio 3.06 -> 1.00, aspectRatio 2.61 -> 1.00. The canvas shot was never wrong — measured live on the bridge it is exactly the 211x60 VARIANT cell.",
+      "Scored pass 2026-08-08 (FC-REF-FRAMING round): 9.56 comp=false -> 4.11 comp=true. NOTHING about the canvas changed — the live bridge confirmed the committed shot is exactly VARIANT cell 1:10197 (211x60). Only the reference moved, from a Times-substrate emit-html first-item render (69x47) to the like-for-like 1x gate-shot.",
       "2026-08-08 Class-B round: reference REGENERATED from the current contract (scripts/polaris-ref-triangle.mts) and the canvas cell RE-EXPORTED at scale 1 from the live file GnQnjSNBXtgtd2Ht0Hs1C8. Evidence: parity/receipts/console-loop/polaris/refs-fresh/TRIANGLE.json. scorecard pctAAMasked=4.11 status=pass",
-      "FC-BORDER-STYLE-NOT-SYNTHESISED (code side, not canvas): the backdrop border no longer renders in emit-html. core/emit-react.ts:1750 and :2377 synthesise `border-style: solid` only when the SHORTHAND `border-width` sits in part.tokens/part.literals. Since c924c9c2 the backdrop carries its width as per-variant LONGHAND literals (border-top-width: 1px \u2026 under .text-field--variant-inherit) and the base {p.border-width-0165} token binding is gone, so no keyword is emitted and CSS paints nothing. The canvas is RIGHT (emit-figma-script emits stroke p/color-input-border with strokeSides 1) and the real library is `border: var(--p-border-width-0165) solid var(--p-color-input-border)`.",
-      "Reference kept on its gate-shot (v0.1.0 gate.html still carries border-width + border-style: solid). Re-basing to the current emit-html render would have installed a knowingly border-less reference and regressed this stem 4.11 \u2192 10.62.",
-      "FC-BORDER-STYLE-NOT-SYNTHESISED CLOSED 2026-08-08 (emitter, not canvas). core/emit-react.ts, core/emit-html.ts and core/emit-react-inline.ts now route the keyword through ONE shared rule (borderStyleDecls, packages/schema/src/contract-schema.ts): a per-side LITERAL width earns the per-side keyword, per-enum-value maps reach the rule, and a per-side TOKEN width still earns nothing (the altitude Chip/Button scar, pinned in core/border-style-check.ts \u00a77). The backdrop now emits border-*-style: solid under .text-field--variant-inherit and the border paints. MEASURED BOTH WAYS on the SAME adopted reference: without the fix this adoption scores 10.62 (fail) \u2014 exactly the regression the previous round predicted and refused to install; with the fix it scores 4.77 (pass, compositionOk=true, reliedOnFramingTolerant=false). The reference is therefore no longer a gate-shot stand-in: it is the code-side render of the current contract, which is this lane's own definition of a developed reference.",
+      "FC-BORDER-STYLE-NOT-SYNTHESISED (code side, not canvas): the backdrop border no longer renders in emit-html. core/emit-react.ts:1750 and :2377 synthesise `border-style: solid` only when the SHORTHAND `border-width` sits in part.tokens/part.literals. Since c924c9c2 the backdrop carries its width as per-variant LONGHAND literals (border-top-width: 1px … under .text-field--variant-inherit) and the base {p.border-width-0165} token binding is gone, so no keyword is emitted and CSS paints nothing. The canvas is RIGHT (emit-figma-script emits stroke p/color-input-border with strokeSides 1) and the real library is `border: var(--p-border-width-0165) solid var(--p-color-input-border)`.",
+      "Reference kept on its gate-shot (v0.1.0 gate.html still carries border-width + border-style: solid). Re-basing to the current emit-html render would have installed a knowingly border-less reference and regressed this stem 4.11 → 10.62.",
+      "FC-BORDER-STYLE-NOT-SYNTHESISED CLOSED 2026-08-08 (emitter, not canvas). core/emit-react.ts, core/emit-html.ts and core/emit-react-inline.ts now route the keyword through ONE shared rule (borderStyleDecls, packages/schema/src/contract-schema.ts): a per-side LITERAL width earns the per-side keyword, per-enum-value maps reach the rule, and a per-side TOKEN width still earns nothing (the altitude Chip/Button scar, pinned in core/border-style-check.ts §7). The backdrop now emits border-*-style: solid under .text-field--variant-inherit and the border paints. MEASURED BOTH WAYS on the SAME adopted reference: without the fix this adoption scores 10.62 (fail) — exactly the regression the previous round predicted and refused to install; with the fix it scores 4.77 (pass, compositionOk=true, reliedOnFramingTolerant=false). The reference is therefore no longer a gate-shot stand-in: it is the code-side render of the current contract, which is this lane's own definition of a developed reference.",
       "Score moved 4.11 -> 4.77 and that is a REFERENCE change, not a regression in the canvas or the code. 4.11 was measured against the Polaris computed gate-shot (which renders the string \"Jaded Pixel\"); 4.77 is measured against the regenerated emit-html render of THIS contract (which renders the cell's own \"Example\", and now carries the border). Both clear the one bar (pctAAMasked <= 5)."
     ],
     "defects": [],
-    "reference": "parity/receipts/console-loop/polaris/refs/text-field.png",
+    "reference": "extract/computed/out/textfield/orig-shots/inherit.medium.off.off.off.enabled__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
     "observations": {
       "rootVertical": true,
@@ -62,7 +62,7 @@
     },
     "cellShot": "parity/receipts/console-loop/polaris/shots/text-field-cell.png",
     "scorecard": "parity/receipts/console-loop/polaris/scores/text-field.json",
-    "referenceSource": "examples/polaris/generated/html/text-field.html#first-item \u2014 REGENERATED by scripts/polaris-ref-triangle.mts --adopt (current contract, polaris-tokens.css + polaris-minted-tokens.css, real Inter face, scale 1)",
+    "referenceSource": "extract/computed/out/textfield/orig-shots/inherit.medium.off.off.off.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (emit-html of the current contract, refs/text-field.png)): parity/receipts/console-loop/polaris/refs/text-field.png [declared source: examples/polaris/generated/html/text-field.html#first-item — REGENERATED by scripts/polaris-ref-triangle.mts --adopt (current contract, polaris-tokens.css + polaris-minted-tokens.css, real Inter face, scale 1)].",
     "status": "scored-pass",
     "revoked": {
       "at": "2026-08-08T04:31:03.484Z",
@@ -72,17 +72,19 @@
         "matchDevelopedReason": "agent visual loop score pass",
         "matchedAt": "2026-08-08T03:06:48.091Z"
       },
-      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=9.56, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk \u2014 prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=9.56, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
     },
     "referencePrevious": "parity/receipts/console-loop/polaris/refs/text-field.png",
     "referenceSourcePrevious": "examples/polaris/generated/html/text-field.html#first-item-inline-css",
     "defectsRevoked": {
       "at": "2026-08-08T23:36:59.410Z",
       "were": [
-        "re-synced from patched script; border/radius/padding vs developed receipt not scored \u2014 FAIL closed / matchDeveloped false"
+        "re-synced from patched script; border/radius/padding vs developed receipt not scored — FAIL closed / matchDeveloped false"
       ],
       "reason": "the un-scored condition is now scored: scores/text-field.json status=pass, pctAAMasked=4.11 <= 5, strictCompositionOk=true, reliedOnFramingTolerant=false, against the Polaris computed gate-shot for the same variant tokens as canvas cell 1:10197."
-    }
+    },
+    "matchDevelopedReason": "scorer pctAAMasked=3.97 compositionOk against the REAL LIBRARY RENDER (extract/computed/out/textfield/orig-shots/inherit.medium.off.off.off.enabled__default.png) — 2026-08-08 REFERENCE-TRUTH re-measure",
+    "matchedAt": "2026-08-09T04:23:45.298Z"
   },
   "fingerprint": {
     "v6": "v6:3489765104",
@@ -91,7 +93,7 @@
       ":COMPONENT_SET/TextField (polaris.text-field)|fill|[]",
       ":COMPONENT_SET/TextField (polaris.text-field)|radius|5,5,5,5",
       ":COMPONENT_SET/TextField (polaris.text-field)|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/TextField (polaris.text-field)|description|TextField \u00e2\u0080\u0094 generated from contract polaris.text-field v0.4.0 \u00e2\u0080",
+      ":COMPONENT_SET/TextField (polaris.text-field)|description|TextField â generated from contract polaris.text-field v0.4.0 â",
       ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Align:VARIANT=Left",
       ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Aria Active Descendant#1:2683:TEXT=",
       ":COMPONENT_SET/TextField (polaris.text-field)|propdef|Aria Autocomplete#1:2692:TEXT=",
@@ -113,7 +115,7 @@
   "roundtrip": {
     "mismatches": [],
     "gaps": [
-      "canvas-projection (named curation per examples/polaris/figma/COMPILE-RECEIPT.md): Drawn set is variant\u00d7size (4 cells); type/inputMode/align pinned to representative values \u2014 full cartesian remains on contract/code surfaces.",
+      "canvas-projection (named curation per examples/polaris/figma/COMPILE-RECEIPT.md): Drawn set is variant×size (4 cells); type/inputMode/align pinned to representative values — full cartesian remains on contract/code surfaces.",
       "curated-not-drawn: Type missing option Email",
       "curated-not-drawn: Type missing option Number",
       "curated-not-drawn: Type missing option Integer",
@@ -148,7 +150,7 @@
       "BOOLEAN Read Only",
       "BOOLEAN Auto Focus",
       "BOOLEAN Focused",
-      "Type enum \u2192 Text",
+      "Type enum → Text",
       "TEXT Name",
       "TEXT Role",
       "TEXT Step",
@@ -157,7 +159,7 @@
       "TEXT Max Length",
       "TEXT Min Length",
       "TEXT Pattern",
-      "Input Mode enum \u2192 Text",
+      "Input Mode enum → Text",
       "BOOLEAN Spell Check",
       "TEXT Aria Owns",
       "BOOLEAN Aria Expanded",
@@ -165,11 +167,11 @@
       "TEXT Aria Active Descendant",
       "TEXT Aria Autocomplete",
       "BOOLEAN Show Character Count",
-      "Align enum \u2192 Left",
+      "Align enum → Left",
       "BOOLEAN Required Indicator",
       "BOOLEAN Monospaced",
-      "Variant enum \u2192 Inherit/Borderless",
-      "Size enum \u2192 Medium/Slim",
+      "Variant enum → Inherit/Borderless",
+      "Size enum → Medium/Slim",
       "BOOLEAN Auto Size",
       "BOOLEAN Loading",
       "BOOLEAN Show WithPrefix",

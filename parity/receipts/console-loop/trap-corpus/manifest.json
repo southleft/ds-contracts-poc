@@ -1,7 +1,7 @@
 {
   "version": 1,
   "kind": "code-to-canvas-trap-corpus",
-  "description": "Frozen adversarial stems for code→canvas hill-climb (CODE-TO-CANVAS-HILLCLIMB.md §3.2 / §4 Phase M2). Structural CI only until developed scores land. toast/progress-bar refs (2026-08-08): DEVELOPED references rendered offline from their promoted contracts via the gate's own emit pipeline (emit-html + astryx token stylesheet + shipped minted tree, pinned headless Chromium, stage screenshot) — these stems were never computed-captured, so no gate-shots exist; astryx fonts stay UNCONFIGURED by name (FC-FONT-SUBSTRATE precedent), the refs render the CSS fallback stack.",
+  "description": "Frozen adversarial stems for code→canvas hill-climb (CODE-TO-CANVAS-HILLCLIMB.md §3.2 / §4 Phase M2). Structural CI only until developed scores land. toast/progress-bar refs (2026-08-08): DEVELOPED references rendered offline from their promoted contracts via the gate's own emit pipeline (emit-html + astryx token stylesheet + shipped minted tree, pinned headless Chromium, stage screenshot) — these stems were never computed-captured, so no gate-shots exist; astryx fonts stay UNCONFIGURED by name (FC-FONT-SUBSTRATE precedent), the refs render the CSS fallback stack. 2026-08-08 REFERENCE-TRUTH round: altitude/badge, tailwind/toggle-switch and carbon/checkbox retargeted from trap-corpus contract-render copies to the REAL LIBRARY RENDER under extract/computed/out/<lib>/<comp>/orig-shots/ (run.ts --keep-originals), matching the lane receipts so a --manifest rescore cannot silently restore the contract-render basis. polaris/text-field, polaris/button and astryx/toast keep non-orig-shots references by name — see each lane LEDGER. ALSO 2026-08-08: polaris/text-field and polaris/button manifest references were DIVERGENT from their lane receipts (examples/polaris/receipts/... vs parity/receipts/console-loop/polaris/refs/...), so a --manifest rescore silently rewrote those two scorecards onto a different picture (text-field 4.77 pass -> 4.80 fail, button 16.62 -> 44.37). Aligned to the receipt references; the divergence itself is recorded in the polaris LEDGER as an instrument defect.",
   "stems": [
     {
       "lib": "astryx",
@@ -49,8 +49,9 @@
       ],
       "contract": "examples/polaris/contracts/text-field.contract.json",
       "script": "examples/polaris/figma/text-field.figma.js",
-      "reference": "examples/polaris/receipts/text-field/default.png",
-      "pendingRef": false
+      "reference": "parity/receipts/console-loop/polaris/refs/text-field.png",
+      "pendingRef": false,
+      "referenceWas": "examples/polaris/receipts/text-field/default.png"
     },
     {
       "lib": "altitude",
@@ -60,8 +61,9 @@
       ],
       "contract": "examples/altitude/contracts/badge.contract.json",
       "script": "examples/altitude/figma/badge.figma.js",
-      "reference": "parity/receipts/console-loop/trap-corpus/refs/altitude/badge/info.default__default.png",
-      "pendingRef": false
+      "reference": "extract/computed/out/altitude/badge/orig-shots/info.default__default.png",
+      "pendingRef": false,
+      "referenceWas": "parity/receipts/console-loop/trap-corpus/refs/altitude/badge/info.default__default.png"
     },
     {
       "lib": "tailwind",
@@ -72,8 +74,9 @@
       ],
       "contract": "examples/tailwind/contracts/toggleswitch.contract.json",
       "script": "examples/tailwind/figma/toggle-switch.figma.js",
-      "reference": "parity/receipts/console-loop/trap-corpus/refs/tailwind/toggle-switch/md.unchecked__default.png",
-      "pendingRef": false
+      "reference": "extract/computed/out/tailwind/toggleswitch/orig-shots/md.unchecked__default.png",
+      "pendingRef": false,
+      "referenceWas": "parity/receipts/console-loop/trap-corpus/refs/tailwind/toggle-switch/md.unchecked__default.png"
     },
     {
       "lib": "astryx",
@@ -98,8 +101,9 @@
       ],
       "contract": "examples/carbon/contracts/checkbox.contract.json",
       "script": "examples/carbon/figma/checkbox.figma.js",
-      "reference": "parity/receipts/console-loop/trap-corpus/refs/carbon/checkbox/unchecked.enabled__default.png",
-      "pendingRef": false
+      "reference": "extract/computed/out/carbon/checkbox/orig-shots/unchecked.enabled__default.png",
+      "pendingRef": false,
+      "referenceWas": "parity/receipts/console-loop/trap-corpus/refs/carbon/checkbox/unchecked.enabled__default.png"
     },
     {
       "lib": "polaris",
@@ -109,8 +113,9 @@
       ],
       "contract": "examples/polaris/contracts/button.contract.json",
       "script": "examples/polaris/figma/button.figma.js",
-      "reference": "examples/polaris/receipts/canvas-gate/button--representative.png",
-      "pendingRef": false
+      "reference": "parity/receipts/console-loop/polaris/refs/button.png",
+      "pendingRef": false,
+      "referenceWas": "examples/polaris/receipts/canvas-gate/button--representative.png"
     },
     {
       "lib": "astryx",

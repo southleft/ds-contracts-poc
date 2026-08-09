@@ -17,17 +17,17 @@
   "cellPick": "standalone-node",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 25.793852946170826,
-    "pctAAUnmasked": 7.683817286466294,
-    "pctAAMasked": 7.683817286466294,
+    "pctExactUnmasked": 25.91216216216216,
+    "pctAAUnmasked": 5.641891891891892,
+    "pctAAMasked": 5.641891891891892,
     "maskCoveragePct": 0,
-    "canvasPx": "151x78",
-    "realPx": "146x70",
-    "inkCanvasPct": 14.739344540669045,
-    "inkRealPct": 13.143148242485992
+    "canvasPx": "74x40",
+    "realPx": "74x40",
+    "inkCanvasPct": 13.85135135135135,
+    "inkRealPct": 22.83783783783784
   },
-  "reference": "parity/receipts/console-loop/tailwind/refs/card.png",
-  "referenceSha256": "3f11af975ec5bad9561586a9514e2c17affbfad73b20a61aeaa157ae285d6cf4",
+  "reference": "extract/computed/out/tailwind/card/orig-shots/__default.png",
+  "referenceSha256": "9eef5d72c97a3d7bbc982e4c5e5f5e6c3d4a7135df0718f07b071fe8048180ef",
   "canvasShot": "parity/receipts/console-loop/visual-truth/tailwind/shots/card.png",
   "canvasShotSha256": "4b3e38ff9fa3a299f1dbd8aab88839ded0b1722d540e292748a3b33c2fa68689",
   "diff": "parity/receipts/console-loop/visual-truth/tailwind/diffs/card.diff.png",
@@ -35,9 +35,9 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.1142857142857143,
-  "inkDelta": 1.5961962981830524,
-  "dprNormalized": false,
-  "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=7.68 > 5)"
+  "scaleRatio": 1,
+  "inkDelta": 8.986486486486488,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=5.64 > 5)"
 }

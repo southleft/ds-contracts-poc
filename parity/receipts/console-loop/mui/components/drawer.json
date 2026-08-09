@@ -40,15 +40,17 @@
       "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page Drawer)."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=31.45 (bar 5), compositionOk=true",
       "pixel scorecard fail: pctAAMasked=55.03% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/drawer.json",
       "FC-REF-STAGE-EDGE (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference's ink is flush against the LEFT edge of its 480x320 stage (content box 134x65 at x=0) — the temporary Drawer is position:fixed to the viewport edge, so the harness captures it anchored to the stage rather than framed inside it. The only sibling, permanent__default, is 8.08x off in scale. No stage-inset MUI drawer reference exists.",
       "FC-REF-FRAMING: consequence of the above — shot ink 117x97 vs reference ink 134x65 (aspectRatio 1.71)."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/drawer.png",
-    "referenceSource": "extract/computed/out/mui/drawer/gate-shots/temporary__default.png",
+    "reference": "extract/computed/out/mui/drawer/orig-shots/temporary__default.png",
+    "referenceSource": "extract/computed/out/mui/drawer/orig-shots/temporary__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/drawer.png — a byte-identical copy of mui/drawer/gate-shots/temporary__default.png)): parity/receipts/console-loop/mui/refs/drawer.png [declared source: extract/computed/out/mui/drawer/gate-shots/temporary__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/drawer-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/drawer.json"
   },
   "fingerprint": {
     "v6": "v6:415446264",

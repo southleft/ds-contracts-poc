@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 34.88215488215488,
-    "pctAAUnmasked": 14.074074074074074,
-    "pctAAMasked": 14.074074074074074,
+    "pctExactUnmasked": 36.195286195286194,
+    "pctAAUnmasked": 10.033670033670033,
+    "pctAAMasked": 10.033670033670033,
     "maskCoveragePct": 0,
     "canvasPx": "165x18",
-    "realPx": "164x18",
+    "realPx": "165x18",
     "inkCanvasPct": 28.68686868686869,
-    "inkRealPct": 30.774410774410775
+    "inkRealPct": 22.154882154882156
   },
-  "reference": "parity/receipts/console-loop/polaris/refs/radio-button.png",
-  "referenceSha256": "cbb15bbf012ca9290f24abc6713ba6ce1ef566f1a00a0b8c24f275a9a25cf726",
+  "reference": "extract/computed/out/radiobutton/orig-shots/unchecked.enabled__default.png",
+  "referenceSha256": "c9fe951831d70bba3c19de1cf500977286f8d1a15bd2c17eb2ae751f94dd2336",
   "canvasShot": "parity/receipts/console-loop/polaris/shots/radio-button-cell.png",
   "canvasShotSha256": "15ad8008208f7fddf6f978712129dce873895db199196d061ca9e32bd2e0eb39",
   "diff": "parity/receipts/console-loop/polaris/scores/radio-button.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.0060975609756098,
-  "inkDelta": 2.0875420875420865,
-  "dprNormalized": false,
+  "scaleRatio": 1,
+  "inkDelta": 6.531986531986533,
+  "dprNormalized": true,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=14.07 > 5)",
-  "recordedAt": "2026-08-09T00:37:42.238Z"
+  "note": "pixel bar missed (pctAAMasked=10.03 > 5)",
+  "recordedAt": "2026-08-09T04:18:07.163Z"
 }

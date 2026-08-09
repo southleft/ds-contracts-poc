@@ -17,8 +17,8 @@
     "inkCanvasPct": 97.88235294117648,
     "inkRealPct": 94.61764705882352
   },
-  "reference": "parity/receipts/console-loop/tailwind/refs/button.png",
-  "referenceSha256": "06dbe7621273c2c759271bb5fdb7d20dc04761973d1ca6b2ebb7742823038be1",
+  "reference": "extract/computed/out/tailwind/button/orig-shots/default.md.enabled__default.png",
+  "referenceSha256": "e273db5dc43aba8b9ac8727b0ec45b8e46dd366b29aa2e8fc13dc8736b0cb62e",
   "canvasShot": "parity/receipts/console-loop/tailwind/shots/button-cell.png",
   "canvasShotSha256": "618d8f406786ac65b74fbb55f8fa5dfb213240a8206d32e0c015c6c1a6528cb7",
   "diff": "parity/receipts/console-loop/tailwind/scores/button.diff.png",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T04:31:22.220Z"
+  "recordedAt": "2026-08-09T03:12:37.115Z"
 }

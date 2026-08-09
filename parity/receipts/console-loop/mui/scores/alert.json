@@ -1,24 +1,24 @@
 {
   "version": 3,
-  "status": "pass",
+  "status": "fail",
   "matchDeveloped": false,
-  "recommendMatchDeveloped": true,
+  "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 11.918604651162791,
-    "pctAAUnmasked": 4.715762273901809,
-    "pctAAMasked": 4.715762273901809,
+    "pctExactUnmasked": 13.512731481481483,
+    "pctAAUnmasked": 7.03125,
+    "pctAAMasked": 7.03125,
     "maskCoveragePct": 0,
-    "canvasPx": "129x24",
-    "realPx": "129x24",
-    "inkCanvasPct": 98.25581395348837,
-    "inkRealPct": 95.9625322997416
+    "canvasPx": "144x24",
+    "realPx": "144x24",
+    "inkCanvasPct": 98.09027777777779,
+    "inkRealPct": 96.41203703703704
   },
-  "reference": "parity/receipts/console-loop/mui/refs/alert.png",
-  "referenceSha256": "2ba015f458d9fc8d0cda2142cfcd0a0ea0222a3aabc6fc653de7208ca00e3858",
+  "reference": "extract/computed/out/mui/alert/orig-shots/error.filled__default.png",
+  "referenceSha256": "fe7189e49b669434b8f53ce9476312a90f61b93cc307f6cee714d5321986e60d",
   "canvasShot": "parity/receipts/console-loop/mui/shots/alert-cell.png",
   "canvasShotSha256": "9c2460d22357f6e18925a348221214bbbf77947e2633cfe8412efd1ff852f86f",
   "diff": "parity/receipts/console-loop/mui/scores/alert.diff.png",
@@ -26,12 +26,12 @@
   "receipt": "parity/receipts/console-loop/mui/components/alert.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": true,
+  "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 2.2932816537467744,
+  "inkDelta": 1.6782407407407476,
   "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T14:34:20.380Z"
+  "note": "pixel bar missed (pctAAMasked=7.03 > 5)",
+  "recordedAt": "2026-08-09T03:33:11.338Z"
 }

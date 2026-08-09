@@ -39,14 +39,16 @@
       "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page CircularProgress)."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=20.23 (bar 5), compositionOk=true",
       "pixel scorecard fail: pctAAMasked=21.24% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/circular-progress.json",
       "RETRACTED CANDIDATE + REAL (CANVAS-SIDE) (reference audit 2026-08-08): an earlier pass of this audit proposed retargeting to indeterminate__default because it scores 1.78 against this shot. That is REFUTED: the canvas cell is 83:1644 \"Variant=Determinate\", so determinate__default IS the correct counterpart and the pinned reference is right. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) — an independent live-canvas fact, not a re-reading of the committed PNG. The real defect is canvas-side: the reference draws the ~250-degree determinate arc, the canvas draws a CLOSED ring — the arc sweep is not emitted. Scoring against indeterminate would have bought a green by pairing a Determinate cell with an Indeterminate render."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/circular-progress.png",
-    "referenceSource": "extract/computed/out/mui/circularprogress/gate-shots/determinate__default.png",
+    "reference": "extract/computed/out/mui/circularprogress/orig-shots/determinate__default.png",
+    "referenceSource": "extract/computed/out/mui/circularprogress/orig-shots/determinate__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/circular-progress.png — a byte-identical copy of mui/circularprogress/gate-shots/determinate__default.png)): parity/receipts/console-loop/mui/refs/circular-progress.png [declared source: extract/computed/out/mui/circularprogress/gate-shots/determinate__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/circular-progress-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/circular-progress.json"
   },
   "fingerprint": {
     "v6": "v6:3509931486",

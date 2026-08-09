@@ -42,14 +42,16 @@
       "Structure/variants reviewed via inspect (COMPONENT_SET, 9 variants on page IconButton)."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=25.78 (bar 5), compositionOk=false",
       "pixel scorecard fail: pctAAMasked=25.78% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/icon-button.json",
       "FC-GLYPH-MOJIBAKE (named-open by reference audit 2026-08-08, CANVAS-SIDE): the reference is the correct variant and the correct component — large.default.enabled, ink 28x27 depicting a star icon — but the canvas cell renders the literal characters 'a-circumflex' where the star should be, ink 13x23. The icon codepoint was mis-decoded (UTF-8 read as latin-1) on the way to the canvas; the same mojibake appears in this receipt's own fingerprint sampleLines. The 1.70 scaleRatio is that broken glyph, not the framing."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/icon-button.png",
-    "referenceSource": "extract/computed/out/mui/iconbutton/gate-shots/large.default.enabled__default.png",
+    "reference": "extract/computed/out/mui/iconbutton/orig-shots/large.default.enabled__default.png",
+    "referenceSource": "extract/computed/out/mui/iconbutton/orig-shots/large.default.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/icon-button.png — a byte-identical copy of mui/iconbutton/gate-shots/large.default.enabled__default.png)): parity/receipts/console-loop/mui/refs/icon-button.png [declared source: extract/computed/out/mui/iconbutton/gate-shots/large.default.enabled__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/icon-button-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/icon-button.json"
   },
   "fingerprint": {
     "v6": "v6:1946274529",

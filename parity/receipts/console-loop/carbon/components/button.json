@@ -46,10 +46,11 @@
       "Matches extract/computed Carbon primary aesthetic (compact hug, sharp corners, IBM blue)."
     ],
     "defects": [
+      "FC-ABS-SIZE: against the real @carbon/react Button render pctAAMasked=39.82, compositionOk=false — canvas 79x24 vs library 124x24 (Carbon's xs button is min-width 100%-of-column, the contract hugs).",
       "FC-REF-WRONG-VARIANT (closed by reference audit 2026-08-08): the committed reference was danger--ghost.2xl.enabled — a red GHOST (fill-less) 2xl button whose whole ink is 41x12 — while the canvas cell is the live COMPONENT 1:5368 \"Kind=Primary, Size=Xs, State=Default\", 79x24, fill #0f62fe (dimensions and fill read from the Desktop Bridge, fileKey GnQnjSNBXtgtd2Ht0Hs1C8). The 75.41% was measuring primary-vs-ghost across two size steps. Reference retargeted to primary.xs.enabled__default.",
       "FC-WIDTH-TOKEN residual: every carbon button gate-shot renders at a fixed 119px harness stage width regardless of Size, while the canvas cell hugs at 79px (task #37/D7 hug-ceiling doctrine — the harness stage width is deliberately NOT baked into the contract). The retargeted pair is like-for-like in kind, size-step and state; the residual is that stage width."
     ],
-    "reference": "extract/computed/out/carbon/button/gate-shots/primary.xs.enabled__default.png",
+    "reference": "extract/computed/out/carbon/button/orig-shots/primary.xs.enabled__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
     "status": "fail-closed",
     "scorecard": "parity/receipts/console-loop/carbon/scores/button.json",
@@ -61,7 +62,7 @@
       },
       "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=75.41, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
     },
-    "referenceSource": "extract/computed/out/carbon/button/gate-shots/primary.xs.enabled__default.png"
+    "referenceSource": "extract/computed/out/carbon/button/orig-shots/primary.xs.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (gate-shots)): extract/computed/out/carbon/button/gate-shots/primary.xs.enabled__default.png [declared source: extract/computed/out/carbon/button/gate-shots/primary.xs.enabled__default.png]."
   },
   "fingerprint": {
     "v6": "v6:310064922",

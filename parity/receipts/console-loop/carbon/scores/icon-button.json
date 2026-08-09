@@ -17,8 +17,8 @@
     "inkCanvasPct": 100,
     "inkRealPct": 100
   },
-  "reference": "parity/receipts/console-loop/carbon/refs/icon-button.png",
-  "referenceSha256": "38cca82fdab648263d28b95e984501540d56b34cfeabeac132abde74bb626e19",
+  "reference": "extract/computed/out/carbon/iconbutton/orig-shots/primary.unset.enabled__default.png",
+  "referenceSha256": "bd32f4df17374f7fef11cac8b5fea4008a6708c7a2a6f06a025c2a653c8ea77b",
   "canvasShot": "parity/receipts/console-loop/carbon/shots/icon-button-cell.png",
   "canvasShotSha256": "56832435cfed9e6801537448dca0a420e7b07d94865f6986a5fa7b39c45f74a1",
   "diff": "parity/receipts/console-loop/carbon/scores/icon-button.diff.png",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T04:31:16.826Z"
+  "recordedAt": "2026-08-09T03:25:23.884Z"
 }

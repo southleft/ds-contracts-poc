@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 65.28220594571306,
-    "pctAAUnmasked": 4.722102542007756,
-    "pctAAMasked": 4.722102542007756,
+    "pctExactUnmasked": 66.80741059887978,
+    "pctAAUnmasked": 4.213700990952176,
+    "pctAAMasked": 4.213700990952176,
     "maskCoveragePct": 0,
     "canvasPx": "211x55",
     "realPx": "211x55",
     "inkCanvasPct": 11.900043084877208,
-    "inkRealPct": 13.235674278328307
+    "inkRealPct": 12.623869021973288
   },
-  "reference": "extract/computed/out/textfield/gate-shots/inherit.medium.off.off.off.enabled__default.png",
-  "referenceSha256": "6bdc602198700bb4bbc0cbbf730820932d752e1b87302fea0b260415e34c4221",
+  "reference": "extract/computed/out/textfield/orig-shots/inherit.medium.off.off.off.enabled__default.png",
+  "referenceSha256": "d0879b4f947022f5bc092ac9abd5dc28d29cd770e68e7ab0dcd3b29e804adb1c",
   "canvasShot": "parity/receipts/console-loop/visual-truth/polaris/shots/text-field.png",
   "canvasShotSha256": "d0f77e95d1050f0a09e94d7bbc15371558ba02dcffd6edf86108d0b7b9e86007",
   "diff": "parity/receipts/console-loop/visual-truth/polaris/diffs/text-field.diff.png",
@@ -36,7 +36,7 @@
   "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 1.3356311934510998,
+  "inkDelta": 0.7238259370960805,
   "dprNormalized": true,
   "sizeNormalized": false,
   "note": "pixel bar met (headless REST render vs code reference)"

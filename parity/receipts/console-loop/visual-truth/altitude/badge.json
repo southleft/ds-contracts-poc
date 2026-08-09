@@ -26,8 +26,8 @@
     "inkCanvasPct": 92.88888888888889,
     "inkRealPct": 88
   },
-  "reference": "extract/computed/out/altitude/badge/gate-shots/info.default__default.png",
-  "referenceSha256": "11b047fe79d9e498aa580ef1809d73d954ab8a4997942c863a79eaa8b1d352e4",
+  "reference": "extract/computed/out/altitude/badge/orig-shots/info.default__default.png",
+  "referenceSha256": "50d2a2fdd5742fe2d7062fd1ff5733c30c8dace7c9fccd01af5ca9b79927c900",
   "canvasShot": "parity/receipts/console-loop/visual-truth/altitude/shots/badge.png",
   "canvasShotSha256": "52296753ce1a211dcabd2a76433902630823eedaeb3ab2975b9c54cf64a642e7",
   "diff": "parity/receipts/console-loop/visual-truth/altitude/diffs/badge.diff.png",

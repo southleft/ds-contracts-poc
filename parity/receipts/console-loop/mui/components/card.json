@@ -23,15 +23,17 @@
       "Card COMPONENT_SET 21:308: 4 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=31.48 (bar 5), compositionOk=true",
       "pixel scorecard fail: pctAAMasked=31.48% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/card.json",
       "FC-REF-UNSTYLED-DOM (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference renders its body text in the browser DEFAULT SERIF, not the Roboto substrate the lane pinned. The harness sets no document-level font-family, so text that MUI does not wrap in a Typography element (Card/Paper/Dialog content, the Accordion details paragraph) inherits Times while the canvas renders the contract's face. The gate-shot is the current regate (mtime 2026-08-08 09:xx, same batch as the stems whose Roboto re-pin DID take), so this is not a stale copy — the harness genuinely emits serif here. Glyph ink dominates the diff.",
       "RETRACTED CANDIDATE (reference audit 2026-08-08): retargeting to 1__default (3.76) is REFUTED — the canvas cell is 21:299 \"Elevation=0\", so the pinned 0__default is the correct counterpart. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) — an independent live-canvas fact, not a re-reading of the committed PNG. The 3.76 was a scaleRatio-4.62 composition artifact. The residual is the FC-REF-UNSTYLED-DOM serif substrate named above."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/card.png",
-    "referenceSource": "extract/computed/out/mui/card/gate-shots/0__default.png",
+    "reference": "extract/computed/out/mui/card/orig-shots/0__default.png",
+    "referenceSource": "extract/computed/out/mui/card/orig-shots/0__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/card.png — a byte-identical copy of mui/card/gate-shots/0__default.png)): parity/receipts/console-loop/mui/refs/card.png [declared source: extract/computed/out/mui/card/gate-shots/0__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/card-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/card.json"
   },
   "fingerprint": {
     "v6": "v6:2926211222",

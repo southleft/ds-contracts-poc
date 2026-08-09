@@ -174,3 +174,20 @@ and never a fresh promote.
 `@astryxdesign/theme-neutral` (then `--propose` re-joins and the acked *role*
 choices survive a mechanical re-measure), **or** mount the capture under the core
 default plane and accept losing the base font again. Both are product decisions.
+
+## 2026-08-08 — REFERENCE-TRUTH round (board-wide): astryx re-verified, not re-measured
+
+This lane was already re-pointed at `orig-shots/` by the round recorded above, so
+the board-wide sweep re-verified it rather than re-scoring it. Every number in the
+"Honest before → after" table above reproduces exactly at HEAD: 0 scorecard passes,
+13 fail-closed receipts, floor 0 held on both instruments (bridge lane and headless
+`visual-truth`, which scores 11 of 13 cards and passes none).
+
+**Reference basis: LIBRARY RENDER** for the ten captured stems.
+`dropdown-menu`, `dropdown-menu-item` and `toast` have no computed-capture entry in
+`extract/computed/configs/astryx.json`, so no library render exists for them. `toast`
+now carries a scorecard (6.47, fail) produced by
+`console-loop-developed-score --manifest` against
+`trap-corpus/refs/astryx/toast/default__default.png` — an **emit-html render of the
+promoted contract**, i.e. a CONTRACT RENDER. It is named here so it is a known
+class; the receipt claims nothing and the number has no floor effect.

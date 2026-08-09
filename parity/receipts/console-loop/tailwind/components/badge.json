@@ -43,11 +43,11 @@
     "reviewedAt": "2026-08-06T13:32:20.271Z",
     "notes": [],
     "defects": [],
-    "reference": "extract/computed/out/tailwind/badge/gate-shots/failure.sm__default.png",
+    "reference": "extract/computed/out/tailwind/badge/orig-shots/failure.sm__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
     "scorecard": "parity/receipts/console-loop/tailwind/scores/badge.json",
-    "matchDevelopedReason": "agent AA=2.43 compositionOk (cropped-ref loop)",
-    "matchedAt": "2026-08-08T03:09:53.139Z",
+    "matchDevelopedReason": "scorer pctAAMasked=2.43 compositionOk against the REAL LIBRARY RENDER (extract/computed/out/tailwind/badge/orig-shots/failure.sm__default.png) — 2026-08-08 REFERENCE-TRUTH re-measure",
+    "matchedAt": "2026-08-09T03:15:45.580Z",
     "status": "scored-pass",
     "scoreConfirmed": {
       "at": "2026-08-08T04:31:56.356Z",
@@ -55,7 +55,8 @@
       "compositionOk": true,
       "supersededDefects": [],
       "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
-    }
+    },
+    "referenceSource": "extract/computed/out/tailwind/badge/orig-shots/failure.sm__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (gate-shots) — measured BYTE-IDENTICAL to this library render, so the number is unchanged): extract/computed/out/tailwind/badge/gate-shots/failure.sm__default.png [declared source: (none)]."
   },
   "fingerprint": {
     "v6": "v6:2933199349",

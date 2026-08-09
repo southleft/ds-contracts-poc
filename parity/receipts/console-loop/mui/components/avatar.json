@@ -1,144 +1,146 @@
 {
- "version": 1,
- "kind": "console-loop-mui-component",
- "status": "completed",
- "component": "avatar",
- "contract": "examples/mui/contracts/avatar.contract.json",
- "script": "examples/mui/figma/avatar.figma.js",
- "fileKey": "59mLQlOMiD5w5za6SUcoO5",
- "recordedAt": "2026-08-06T05:00:34.663Z",
- "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
- "generate": {
-  "ok": true,
-  "nodeId": "83:1638",
-  "mode": "generated",
-  "page": "Avatar",
-  "sectionId": "83:1639",
-  "result": {
-   "createdNodeIds": [
-    "83:1638"
-   ],
-   "results": [
-    {
-     "name": "Avatar",
-     "contractId": "mui.avatar",
-     "nodeId": "83:1638",
-     "key": "1b69dcd586117a167af2d24e7de684acb685a51b",
-     "variants": 3,
-     "properties": [
-      "Initials#83:9",
-      "Variant"
-     ]
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "avatar",
+  "contract": "examples/mui/contracts/avatar.contract.json",
+  "script": "examples/mui/figma/avatar.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:00:34.663Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "83:1638",
+    "mode": "generated",
+    "page": "Avatar",
+    "sectionId": "83:1639",
+    "result": {
+      "createdNodeIds": [
+        "83:1638"
+      ],
+      "results": [
+        {
+          "name": "Avatar",
+          "contractId": "mui.avatar",
+          "nodeId": "83:1638",
+          "key": "1b69dcd586117a167af2d24e7de684acb685a51b",
+          "variants": 3,
+          "properties": [
+            "Initials#83:9",
+            "Variant"
+          ]
+        }
+      ]
     }
-   ]
-  }
- },
- "visual": {
-  "ok": false,
-  "notes": [
-   "Structure/variants reviewed via inspect (83:1638, page Avatar); visual OK — slot placeholders acceptable.",
-   "Structure/variants reviewed via inspect (COMPONENT_SET, 3 variants on page Avatar).",
-   "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot."
-  ],
-  "defects": [
-   "pixel scorecard fail: pctAAMasked=5.71% lane / 5.71% headless (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/avatar.json",
-   "residual after FC-FONT-SUBSTRATE closure: reference now renders committed Roboto (was local Roboto-Thin), both instruments agree at 5.71/5.71 (was 12.14) — the remaining diff is not the harness font substrate; per-stem geometry/color/raster causes stay open"
-  ],
-  "reference": "parity/receipts/console-loop/mui/refs/avatar.png",
-  "referenceSource": "extract/computed/out/mui/avatar/gate-shots/circular__default.png",
-  "canvasShot": "parity/receipts/console-loop/mui/shots/avatar-cell.png",
-  "matchDeveloped": false,
-  "status": "fail-closed"
- },
- "fingerprint": {
-  "v6": "v6:2993664762",
-  "lineCount": 42,
-  "sampleLines": [
-   ":COMPONENT_SET/Avatar|fill|[]",
-   ":COMPONENT_SET/Avatar|radius|5,5,5,5",
-   ":COMPONENT_SET/Avatar|sizing|FIXED/FIXED AUTO",
-   ":COMPONENT_SET/Avatar|description|Avatar â generated from contract mui.avatar v0.2.0 â",
-   ":COMPONENT_SET/Avatar|propdef|Initials#83:9:TEXT=A",
-   ":COMPONENT_SET/Avatar|propdef|Variant:VARIANT=Circular",
-   "/0:COMPONENT/Variant=Circular|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.7411764860153198,\"g\":0.7411764860153198,\"b\":0.7411764860153198},\"boundVariables\":{\"color\":{\"var\":\"imported/avatar/root/background-color\"}}}]",
-   "/0:COMPONENT/Variant=Circular|radius|20,20,20,20",
-   "/0:COMPONENT/Variant=Circular|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
-   "/0:COMPONENT/Variant=Circular|sizing|HUG/HUG AUTO",
-   "/0:COMPONENT/Variant=Circular|bound:bottomLeftRadius|imported/avatar/root/border-bottom-left-radius/circular",
-   "/0:COMPONENT/Variant=Circular|bound:bottomRightRadius|imported/avatar/root/border-bottom-right-radius/circular",
-   "/0:COMPONENT/Variant=Circular|bound:topLeftRadius|imported/avatar/root/border-top-left-radius/circular",
-   "/0:COMPONENT/Variant=Circular|bound:topRightRadius|imported/avatar/root/border-top-right-radius/circular",
-   "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/avatar/root/color\"}}}]",
-   "/0/0:TEXT/label|radius|0,0,0,0",
-   "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
-   "/0/0:TEXT/label|text|\"A\" 20px {\"family\":\"Roboto\",\"style\":\"Regular\"}",
-   "/1:COMPONENT/Variant=Rounded|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.7411764860153198,\"g\":0.7411764860153198,\"b\":0.7411764860153198},\"boundVariables\":{\"color\":{\"var\":\"imported/avatar/root/background-color\"}}}]",
-   "/1:COMPONENT/Variant=Rounded|radius|4,4,4,4"
-  ]
- },
- "roundtrip": {
-  "mismatches": [],
-  "gaps": [],
-  "matchedAxes": [
-   "Variant enum → Circular/Rounded/Square",
-   "TEXT Initials",
-   "first-variant fill bound: imported/avatar/root/background-color"
-  ],
-  "observed": {
-   "type": "COMPONENT_SET",
-   "variantNames": [
-    "Variant=Circular",
-    "Variant=Rounded",
-    "Variant=Square"
-   ],
-   "propDefs": [
-    {
-     "name": "Initials#83:9",
-     "type": "TEXT",
-     "defaultValue": "A",
-     "variantOptions": null
-    },
-    {
-     "name": "Variant",
-     "type": "VARIANT",
-     "defaultValue": "Circular",
-     "variantOptions": [
-      "Circular",
-      "Rounded",
-      "Square"
-     ]
-    }
-   ],
-   "firstRoot": {
-    "name": "Variant=Circular",
-    "type": "COMPONENT",
-    "layoutMode": "HORIZONTAL",
-    "padding": {
-     "t": 0,
-     "r": 0,
-     "b": 0,
-     "l": 0
-    },
-    "radius": 20,
-    "fillVarName": "imported/avatar/root/background-color",
-    "padBound": {
-     "topLeftRadius": "imported/avatar/root/border-top-left-radius/circular",
-     "topRightRadius": "imported/avatar/root/border-top-right-radius/circular",
-     "bottomLeftRadius": "imported/avatar/root/border-bottom-left-radius/circular",
-     "bottomRightRadius": "imported/avatar/root/border-bottom-right-radius/circular"
-    },
-    "w": 14,
-    "h": 20,
-    "childTypes": [
-     "TEXT/label"
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Structure/variants reviewed via inspect (83:1638, page Avatar); visual OK — slot placeholders acceptable.",
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 3 variants on page Avatar).",
+      "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot."
+    ],
+    "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=59.13 (bar 5), compositionOk=false",
+      "pixel scorecard fail: pctAAMasked=5.71% lane / 5.71% headless (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/avatar.json",
+      "residual after FC-FONT-SUBSTRATE closure: reference now renders committed Roboto (was local Roboto-Thin), both instruments agree at 5.71/5.71 (was 12.14) — the remaining diff is not the harness font substrate; per-stem geometry/color/raster causes stay open"
+    ],
+    "reference": "extract/computed/out/mui/avatar/orig-shots/circular__default.png",
+    "referenceSource": "extract/computed/out/mui/avatar/orig-shots/circular__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/avatar.png — a byte-identical copy of mui/avatar/gate-shots/circular__default.png)): parity/receipts/console-loop/mui/refs/avatar.png [declared source: extract/computed/out/mui/avatar/gate-shots/circular__default.png].",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/avatar-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/avatar.json"
+  },
+  "fingerprint": {
+    "v6": "v6:2993664762",
+    "lineCount": 42,
+    "sampleLines": [
+      ":COMPONENT_SET/Avatar|fill|[]",
+      ":COMPONENT_SET/Avatar|radius|5,5,5,5",
+      ":COMPONENT_SET/Avatar|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Avatar|description|Avatar â generated from contract mui.avatar v0.2.0 â",
+      ":COMPONENT_SET/Avatar|propdef|Initials#83:9:TEXT=A",
+      ":COMPONENT_SET/Avatar|propdef|Variant:VARIANT=Circular",
+      "/0:COMPONENT/Variant=Circular|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.7411764860153198,\"g\":0.7411764860153198,\"b\":0.7411764860153198},\"boundVariables\":{\"color\":{\"var\":\"imported/avatar/root/background-color\"}}}]",
+      "/0:COMPONENT/Variant=Circular|radius|20,20,20,20",
+      "/0:COMPONENT/Variant=Circular|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Variant=Circular|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Variant=Circular|bound:bottomLeftRadius|imported/avatar/root/border-bottom-left-radius/circular",
+      "/0:COMPONENT/Variant=Circular|bound:bottomRightRadius|imported/avatar/root/border-bottom-right-radius/circular",
+      "/0:COMPONENT/Variant=Circular|bound:topLeftRadius|imported/avatar/root/border-top-left-radius/circular",
+      "/0:COMPONENT/Variant=Circular|bound:topRightRadius|imported/avatar/root/border-top-right-radius/circular",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/avatar/root/color\"}}}]",
+      "/0/0:TEXT/label|radius|0,0,0,0",
+      "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
+      "/0/0:TEXT/label|text|\"A\" 20px {\"family\":\"Roboto\",\"style\":\"Regular\"}",
+      "/1:COMPONENT/Variant=Rounded|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.7411764860153198,\"g\":0.7411764860153198,\"b\":0.7411764860153198},\"boundVariables\":{\"color\":{\"var\":\"imported/avatar/root/background-color\"}}}]",
+      "/1:COMPONENT/Variant=Rounded|radius|4,4,4,4"
     ]
-   }
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant enum → Circular/Rounded/Square",
+      "TEXT Initials",
+      "first-variant fill bound: imported/avatar/root/background-color"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Circular",
+        "Variant=Rounded",
+        "Variant=Square"
+      ],
+      "propDefs": [
+        {
+          "name": "Initials#83:9",
+          "type": "TEXT",
+          "defaultValue": "A",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Circular",
+          "variantOptions": [
+            "Circular",
+            "Rounded",
+            "Square"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Circular",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 20,
+        "fillVarName": "imported/avatar/root/background-color",
+        "padBound": {
+          "topLeftRadius": "imported/avatar/root/border-top-left-radius/circular",
+          "topRightRadius": "imported/avatar/root/border-top-right-radius/circular",
+          "bottomLeftRadius": "imported/avatar/root/border-bottom-left-radius/circular",
+          "bottomRightRadius": "imported/avatar/root/border-bottom-right-radius/circular"
+        },
+        "w": 14,
+        "h": 20,
+        "childTypes": [
+          "TEXT/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
- },
- "acceptance": {
-  "generatedOrFound": true,
-  "screenshotReviewed": true,
-  "zeroMismatch": true,
-  "visualMatchDeveloped": false
- }
 }

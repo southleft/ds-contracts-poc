@@ -1,24 +1,24 @@
 {
   "version": 3,
-  "status": "pass",
+  "status": "fail",
   "matchDeveloped": true,
-  "recommendMatchDeveloped": true,
+  "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 42.1875,
-    "pctAAUnmasked": 4.6875,
-    "pctAAMasked": 4.6875,
+    "pctExactUnmasked": 39.50617283950617,
+    "pctAAUnmasked": 17.28395061728395,
+    "pctAAMasked": 17.28395061728395,
     "maskCoveragePct": 0,
     "canvasPx": "16x16",
-    "realPx": "16x16",
-    "inkCanvasPct": 53.125,
-    "inkRealPct": 32.8125
+    "realPx": "18x18",
+    "inkCanvasPct": 41.9753086419753,
+    "inkRealPct": 48.148148148148145
   },
-  "reference": "parity/receipts/console-loop/altitude/refs/icon-close.png",
-  "referenceSha256": "37e139131495aedaa21dcbf63a131dc855f2ad82f9e82a5a3065b2b26f212c86",
+  "reference": "extract/computed/out/altitude/iconclose/orig-shots/lg__default.png",
+  "referenceSha256": "23e6acd16af27d9e62e90163cd0c35b2f2554646e912ee6bf8c078895d03d0a9",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/icon-close-cell.png",
   "canvasShotSha256": "fcdca2138f774f44e5aabf662fa21a1249f940e43854de16765def12d757d8cf",
   "diff": "parity/receipts/console-loop/altitude/scores/icon-close.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 20.3125,
+  "scaleRatio": 1.125,
+  "inkDelta": 6.172839506172842,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T04:31:11.956Z"
+  "note": "pixel bar missed (pctAAMasked=17.28 > 5)",
+  "recordedAt": "2026-08-09T03:14:02.714Z"
 }

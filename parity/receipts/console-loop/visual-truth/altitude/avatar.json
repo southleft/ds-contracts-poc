@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 1.5755208333333333,
-    "pctAAUnmasked": 0.13346354166666666,
-    "pctAAMasked": 0.13346354166666666,
+    "pctExactUnmasked": 53.90625,
+    "pctAAUnmasked": 5.46875,
+    "pctAAMasked": 5.46875,
     "maskCoveragePct": 0,
     "canvasPx": "24x24",
-    "realPx": "320x96",
-    "inkCanvasPct": 1.5234375,
-    "inkRealPct": 0
+    "realPx": "32x32",
+    "inkCanvasPct": 45.703125,
+    "inkRealPct": 79.296875
   },
-  "reference": "extract/computed/out/altitude/avatar/gate-shots/sm.off__default.png",
-  "referenceSha256": "0d75ad46c04d517630590afcb2cf66ce1aabae5dc9c8b23c6985bfcc18edf300",
+  "reference": "extract/computed/out/altitude/avatar/orig-shots/sm.off__default.png",
+  "referenceSha256": "de9bfc3ea56ec0a7bf25a7fc04b58ea3d03d3ee7488bcd71146646c43196e7c3",
   "canvasShot": "parity/receipts/console-loop/visual-truth/altitude/shots/avatar.png",
   "canvasShotSha256": "2ec70561fcb131100da37ff3eee09d1c380a8e7fdbb30851995c5ae077c06a89",
   "diff": "parity/receipts/console-loop/visual-truth/altitude/diffs/avatar.diff.png",
@@ -35,9 +35,9 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 13.333333333333334,
-  "inkDelta": 1.5234375,
+  "scaleRatio": 1.3333333333333333,
+  "inkDelta": 33.59375,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=13.33, inkDelta=1.5)"
+  "note": "composition mismatch (scaleRatio=1.33, inkDelta=33.6)"
 }

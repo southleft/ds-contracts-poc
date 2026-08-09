@@ -39,14 +39,16 @@
       "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page LinearProgress)."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=56.18 (bar 5), compositionOk=false",
       "pixel scorecard fail: pctAAMasked=56.18% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/linear-progress.json",
       "FC-ABS-SIZE (named-open by reference audit 2026-08-08, CANVAS-SIDE): the reference is the correct variant (determinate, ink 288x4) but the canvas cell draws the bar 461px wide (ink 461x4) — a 1.60 scale on the long axis with the hairline height matching exactly. The indeterminate sibling is worse (81.34), so this is not a variant mismatch; it is the canvas baking an absolute track width."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/linear-progress.png",
-    "referenceSource": "extract/computed/out/mui/linearprogress/gate-shots/determinate__default.png",
+    "reference": "extract/computed/out/mui/linearprogress/orig-shots/determinate__default.png",
+    "referenceSource": "extract/computed/out/mui/linearprogress/orig-shots/determinate__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/linear-progress.png — a byte-identical copy of mui/linearprogress/gate-shots/determinate__default.png)): parity/receipts/console-loop/mui/refs/linear-progress.png [declared source: extract/computed/out/mui/linearprogress/gate-shots/determinate__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/linear-progress-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/linear-progress.json"
   },
   "fingerprint": {
     "v6": "v6:3801840436",

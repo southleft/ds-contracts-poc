@@ -45,12 +45,12 @@
       "Re-synced via clientStorage chunks (n=20, total=152832); amended nodeId=1:2254; rebuiltVariants=45; literals for root height (no imported/button/root/height/* vars). matchDeveloped left false."
     ],
     "defects": [],
-    "reference": "parity/receipts/console-loop/tailwind/refs/button.png",
+    "reference": "extract/computed/out/tailwind/button/orig-shots/default.md.enabled__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "extract/computed/out/tailwind/button/receipts/pair--default.md.enabled__default.png#package-left",
+    "referenceSource": "extract/computed/out/tailwind/button/orig-shots/default.md.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (LIBRARY PIXELS, hand-cropped from the pair-- collage's package-left half): parity/receipts/console-loop/tailwind/refs/button.png [declared source: extract/computed/out/tailwind/button/receipts/pair--default.md.enabled__default.png#package-left].",
     "scorecard": "parity/receipts/console-loop/tailwind/scores/button.json",
-    "matchDevelopedReason": "agent AA=1.94 compositionOk vs package-left (Md Default)",
-    "matchedAt": "2026-08-08T03:23:28.851Z",
+    "matchDevelopedReason": "scorer pctAAMasked=1.94 compositionOk against the REAL LIBRARY RENDER (extract/computed/out/tailwind/button/orig-shots/default.md.enabled__default.png) — 2026-08-08 REFERENCE-TRUTH re-measure",
+    "matchedAt": "2026-08-09T03:15:45.605Z",
     "status": "scored-pass",
     "scoreConfirmed": {
       "at": "2026-08-08T04:31:56.356Z",

@@ -44,12 +44,12 @@
       "Force-rebuilt via clientStorage chunks (n=19, total=111490); amended rebuiltVariants=16 nodeId=1:5645; btn-icon glyph centered in host (16/16). matchDeveloped left false."
     ],
     "defects": [],
-    "reference": "parity/receipts/console-loop/carbon/refs/icon-button.png",
+    "reference": "extract/computed/out/carbon/iconbutton/orig-shots/primary.unset.enabled__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "extract/computed/out/carbon/iconbutton/receipts/pair--primary.unset.enabled__default.png#package-left",
+    "referenceSource": "extract/computed/out/carbon/iconbutton/orig-shots/primary.unset.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (LIBRARY PIXELS, hand-cropped from pair--primary.unset.enabled__default.png#package-left): parity/receipts/console-loop/carbon/refs/icon-button.png [declared source: extract/computed/out/carbon/iconbutton/receipts/pair--primary.unset.enabled__default.png#package-left].",
     "scorecard": "parity/receipts/console-loop/carbon/scores/icon-button.json",
-    "matchDevelopedReason": "agent AA=0.95 compositionOk",
-    "matchedAt": "2026-08-08T03:17:04.209Z",
+    "matchDevelopedReason": "scorer pctAAMasked=0.95 compositionOk against the REAL LIBRARY RENDER (extract/computed/out/carbon/iconbutton/orig-shots/primary.unset.enabled__default.png) — 2026-08-08 REFERENCE-TRUTH re-measure",
+    "matchedAt": "2026-08-09T03:26:44.384Z",
     "status": "scored-pass",
     "scoreConfirmed": {
       "at": "2026-08-08T04:31:56.356Z",

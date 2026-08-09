@@ -14,20 +14,20 @@
   "setNodeId": "1:8216",
   "cellNodeId": "1:8190",
   "cellName": "Tone=enabled, Progress=none",
-  "cellPick": "first-cell",
+  "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 67.74193548387096,
-    "pctAAUnmasked": 38.064516129032256,
-    "pctAAMasked": 38.064516129032256,
+    "pctExactUnmasked": 59.830866807610995,
+    "pctAAUnmasked": 33.192389006342495,
+    "pctAAMasked": 33.192389006342495,
     "maskCoveragePct": 0,
-    "canvasPx": "31x10",
-    "realPx": "31x10",
+    "canvasPx": "43x11",
+    "realPx": "43x11",
     "inkCanvasPct": 100,
-    "inkRealPct": 96.12903225806451
+    "inkRealPct": 95.13742071881607
   },
-  "reference": "parity/receipts/console-loop/polaris/refs/badge.png",
-  "referenceSha256": "4c77a2485a5279b0106611318bdb95e8fc436f26730a34693a92c4711dc54425",
+  "reference": "extract/computed/out/badge/orig-shots/enabled.none__default.png",
+  "referenceSha256": "fd6724798410f257a5baf7fc6ea84748cfd19f2da4b47079178520036c683703",
   "canvasShot": "parity/receipts/console-loop/visual-truth/polaris/shots/badge.png",
   "canvasShotSha256": "ad9efc007bf5966b9a35519ba648d27da0743eadd79c426d6f4c0b1d08d2e278",
   "diff": "parity/receipts/console-loop/visual-truth/polaris/diffs/badge.diff.png",
@@ -36,8 +36,8 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 3.8709677419354875,
-  "dprNormalized": true,
+  "inkDelta": 4.862579281183926,
+  "dprNormalized": false,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=38.06 > 5)"
+  "note": "pixel bar missed (pctAAMasked=33.19 > 5)"
 }

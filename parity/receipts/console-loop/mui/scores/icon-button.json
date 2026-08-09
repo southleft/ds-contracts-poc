@@ -17,7 +17,7 @@
     "inkCanvasPct": 52.17391304347826,
     "inkRealPct": 23.60248447204969
   },
-  "reference": "parity/receipts/console-loop/mui/refs/icon-button.png",
+  "reference": "extract/computed/out/mui/iconbutton/orig-shots/large.default.enabled__default.png",
   "referenceSha256": "c26d63bfb0a32f63166ece4038e666935d2ef166a93db99654312a7ac90150f6",
   "canvasShot": "parity/receipts/console-loop/mui/shots/icon-button-cell.png",
   "canvasShotSha256": "c18fe343a10e057085ea8ae5802f1040be9622d9929f9e59a42084c93dab6e67",
@@ -33,5 +33,5 @@
   "dprNormalized": true,
   "sizeNormalized": false,
   "note": "composition mismatch (scaleRatio=1.77, inkDelta=28.6) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T08:30:11.116Z"
+  "recordedAt": "2026-08-09T03:33:15.537Z"
 }

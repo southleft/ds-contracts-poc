@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 25.921209033791815,
-    "pctAAUnmasked": 8.014943114280863,
-    "pctAAMasked": 8.014943114280863,
+    "pctExactUnmasked": 18.81756756756757,
+    "pctAAUnmasked": 6.047297297297297,
+    "pctAAMasked": 6.047297297297297,
     "maskCoveragePct": 0,
-    "canvasPx": "151x78",
-    "realPx": "146x70",
-    "inkCanvasPct": 14.807267787400239,
-    "inkRealPct": 13.143148242485992
+    "canvasPx": "74x40",
+    "realPx": "74x40",
+    "inkCanvasPct": 13.918918918918918,
+    "inkRealPct": 18.14189189189189
   },
-  "reference": "parity/receipts/console-loop/tailwind/refs/card.png",
-  "referenceSha256": "3f11af975ec5bad9561586a9514e2c17affbfad73b20a61aeaa157ae285d6cf4",
+  "reference": "extract/computed/out/tailwind/card/orig-shots/__default.png",
+  "referenceSha256": "9eef5d72c97a3d7bbc982e4c5e5f5e6c3d4a7135df0718f07b071fe8048180ef",
   "canvasShot": "parity/receipts/console-loop/tailwind/shots/card-cell.png",
   "canvasShotSha256": "2966878bef62b848411f7eb095e101fc180a2c5706690d607af25414ace59ebd",
   "diff": "parity/receipts/console-loop/tailwind/scores/card.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.1142857142857143,
-  "inkDelta": 1.6641195449142465,
-  "dprNormalized": false,
-  "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=8.01 > 5)",
-  "recordedAt": "2026-08-08T04:31:22.477Z"
+  "scaleRatio": 1,
+  "inkDelta": 4.222972972972974,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "near-pass (pctAAMasked=6.05; likely font-AA) — NOT a pass; tighten emit (near-pass flips are dead)",
+  "recordedAt": "2026-08-09T03:12:37.399Z"
 }

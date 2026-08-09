@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 17.543859649122805,
-    "pctAAUnmasked": 6.920077972709551,
-    "pctAAMasked": 6.920077972709551,
+    "pctExactUnmasked": 17.12962962962963,
+    "pctAAUnmasked": 6.38401559454191,
+    "pctAAMasked": 6.38401559454191,
     "maskCoveragePct": 0,
     "canvasPx": "76x53",
-    "realPx": "76x54",
+    "realPx": "75x54",
     "inkCanvasPct": 28.630604288499022,
-    "inkRealPct": 28.386939571150098
+    "inkRealPct": 27.850877192982455
   },
-  "reference": "extract/computed/out/carbon/toggle/gate-shots/untoggled.enabled__default.png",
-  "referenceSha256": "db4c6714d0952e0e4da0fdb7c35718a130ca06c8c30336422f387df6ffe1a242",
+  "reference": "extract/computed/out/carbon/toggle/orig-shots/untoggled.enabled__default.png",
+  "referenceSha256": "e2205ce0f132b47c5fd5bc6c60507f23f5d27845e2fe657525d0708db45ad994",
   "canvasShot": "parity/receipts/console-loop/carbon/shots/toggle-cell.png",
   "canvasShotSha256": "90370093379dc329c524e844fd5d06ca2712a035d68dd1d0d59c9bcf7edfa37e",
   "diff": "parity/receipts/console-loop/carbon/scores/toggle.diff.png",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1.0188679245283019,
-  "inkDelta": 0.24366471734892414,
+  "inkDelta": 0.7797270955165665,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=6.92 > 5)",
-  "recordedAt": "2026-08-09T00:43:11.860Z"
+  "note": "near-pass (pctAAMasked=6.38; likely font-AA) — NOT a pass; tighten emit (near-pass flips are dead)",
+  "recordedAt": "2026-08-09T03:25:25.786Z"
 }

@@ -26,7 +26,7 @@
     "inkCanvasPct": 99.16666666666667,
     "inkRealPct": 97.5
   },
-  "reference": "extract/computed/out/tailwind/badge/gate-shots/failure.sm__default.png",
+  "reference": "extract/computed/out/tailwind/badge/orig-shots/failure.sm__default.png",
   "referenceSha256": "50551989c82a0e5ba2f15a75877b627d4f739da01356ae78c20f8c018c6c0355",
   "canvasShot": "parity/receipts/console-loop/visual-truth/tailwind/shots/badge.png",
   "canvasShotSha256": "8523179935679ab341f712f28e3bc428e4366bac4c6dd686f02774befcf09537",

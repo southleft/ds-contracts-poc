@@ -42,11 +42,12 @@
     "reviewedAt": "2026-08-06T13:32:20.271Z",
     "notes": [],
     "defects": [
+      "FC-ROW-HEIGHT: against the real @carbon/react Accordion render pctAAMasked=11.63 (was 11.63 against the contract render); canvas row 164x34 vs library 164x44.",
       "Missing expanded body panel aesthetic vs Carbon accordion developed pairs.",
       "Regeneration-stable fail 2026-08-08 (pctAAMasked 11.73): developed ref wraps body copy under the content's percent right-padding (not canvas-representable), carries the harness <li> list-marker dot and hairline top/bottom rules the contract does not; FC-FONT-SUBSTRATE residual on IBM Plex fallback glyphs.",
       "FC-REF-STAGE-EDGE (named-open by reference audit 2026-08-08, NOT FIXABLE by regate): the reference's ink starts at x=0 of its 360x220 stage — the harness <li> list marker sits outside the accordion's own box, flush against the stage edge. Verified across the gate-shot family (end.lg, start.lg, end.md all ink@x=0), so there is no correctly-inset accordion reference to retarget to; a fresh regate reproduces the same marker."
     ],
-    "reference": "extract/computed/out/carbon/accordion/gate-shots/end.lg.enabled__default.png",
+    "reference": "extract/computed/out/carbon/accordion/orig-shots/end.lg.enabled__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
     "scorecard": "parity/receipts/console-loop/carbon/scores/accordion.json",
     "status": "fail-closed",
@@ -60,7 +61,7 @@
       },
       "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=8.91, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
     },
-    "referenceSource": "extract/computed/out/carbon/accordion/gate-shots/end.lg.enabled__default.png"
+    "referenceSource": "extract/computed/out/carbon/accordion/orig-shots/end.lg.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (gate-shots)): extract/computed/out/carbon/accordion/gate-shots/end.lg.enabled__default.png [declared source: extract/computed/out/carbon/accordion/gate-shots/end.lg.enabled__default.png]."
   },
   "fingerprint": {
     "v6": "v6:1242425722",

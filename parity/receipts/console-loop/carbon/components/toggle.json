@@ -43,9 +43,10 @@
       "Matches Carbon toggle developed pairs for Off gray / On blue + white thumb."
     ],
     "defects": [
+      "FC-TRACK-GEOMETRY: against the real @carbon/react Toggle render pctAAMasked=6.38 (was 6.92); over the 5 bar.",
       "FC-REF-WRONG-VARIANT (closed by reference audit 2026-08-08): the committed reference was toggled.enabled__default — the ON state, green track with the thumb right — while the canvas cell is the live COMPONENT 1:6094 \"Toggled=Untoggled, State=Default\", 75x58 (the Toggled=Toggled cells are 74x58, so the 76x58 committed shot resolves to Untoggled unambiguously; read from the Desktop Bridge, fileKey GnQnjSNBXtgtd2Ht0Hs1C8). Reference retargeted to untoggled.enabled__default."
     ],
-    "reference": "extract/computed/out/carbon/toggle/gate-shots/untoggled.enabled__default.png",
+    "reference": "extract/computed/out/carbon/toggle/orig-shots/untoggled.enabled__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
     "status": "fail-closed",
     "scorecard": "parity/receipts/console-loop/carbon/scores/toggle.json",
@@ -57,7 +58,7 @@
       },
       "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=28.09, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
     },
-    "referenceSource": "extract/computed/out/carbon/toggle/gate-shots/untoggled.enabled__default.png"
+    "referenceSource": "extract/computed/out/carbon/toggle/orig-shots/untoggled.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (gate-shots)): extract/computed/out/carbon/toggle/gate-shots/untoggled.enabled__default.png [declared source: extract/computed/out/carbon/toggle/gate-shots/untoggled.enabled__default.png]."
   },
   "fingerprint": {
     "v6": "v6:756328093",

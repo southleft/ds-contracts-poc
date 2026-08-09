@@ -23,14 +23,16 @@
       "Slider COMPONENT_SET 21:509: 12 variant(s), 3 prop def(s). Structure looks sane; slot placeholders OK."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=7.96 (bar 5), compositionOk=true",
       "pixel scorecard fail: pctAAMasked=48.16% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/slider.json",
       "REAL (CANVAS-SIDE), not reference-side (reference audit 2026-08-08): the pinned reference error.medium is the correct colour and size step and its ink matches the canvas exactly (288x20 vs 288x20, scaleRatio 1.00, inkDelta <1). The 48.16 is thumb/track placement inside an identically-framed box, not a reference defect. The best sibling (error.small, 34.20) only wins by shrinking the stage."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/slider.png",
-    "referenceSource": "extract/computed/out/mui/slider/gate-shots/error.medium__default.png",
+    "reference": "extract/computed/out/mui/slider/orig-shots/error.medium__default.png",
+    "referenceSource": "extract/computed/out/mui/slider/orig-shots/error.medium__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/slider.png — a byte-identical copy of mui/slider/gate-shots/error.medium__default.png)): parity/receipts/console-loop/mui/refs/slider.png [declared source: extract/computed/out/mui/slider/gate-shots/error.medium__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/slider-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/slider.json"
   },
   "fingerprint": {
     "v6": "v6:1845442048",

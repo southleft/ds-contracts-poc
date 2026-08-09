@@ -33,19 +33,32 @@
     }
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Structure/variants reviewed via inspect (84:2140, page Snackbar); visual OK — slot placeholders acceptable.",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 3 variants on page Snackbar).",
       "2026-08-08 STRICT-LANE CONVERSION: pixel scorecard PASS on both instruments — lane scorer pctAAMasked=2.09 (scores/snackbar.json, headless REST cell at scale 1 vs committed developed ref mui/refs/snackbar.png) and headless visual-truth card agrees; bar pctAAMasked<=5 AND compositionOk.",
       "FC-REF-STALE-COPY CLOSED ( reference audit 2026-08-08): the committed refs/ copy had the same dimensions as the gate-shot its referenceSource names but different bytes — the source had been re-rendered (Roboto cfg.fonts substrate) underneath it, so the scored PNG was not the artifact the provenance line claimed. Copy re-synced from source. "
     ],
-    "defects": [],
-    "reference": "parity/receipts/console-loop/mui/refs/snackbar.png",
-    "referenceSource": "extract/computed/out/mui/snackbar/gate-shots/__default.png",
+    "defects": [
+      "FC-REF-CONTRACT-RENDER: 2.32 against the CONTRACT RENDER, 17.45 against the real MUI Snackbar render. Same 148x29 content box — the residual is the SnackbarContent surface paint, not geometry."
+    ],
+    "reference": "extract/computed/out/mui/snackbar/orig-shots/__default.png",
+    "referenceSource": "extract/computed/out/mui/snackbar/orig-shots/__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (refs/snackbar.png, byte-identical copy of snackbar/gate-shots/__default.png)): parity/receipts/console-loop/mui/refs/snackbar.png [declared source: extract/computed/out/mui/snackbar/gate-shots/__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/snackbar-cell.png",
-    "matchDeveloped": true,
-    "status": "scored-pass"
+    "matchDeveloped": false,
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/snackbar.json",
+    "revokedByReferenceTruth": {
+      "at": "2026-08-09T03:34:06.928Z",
+      "was": {
+        "ok": true,
+        "matchDeveloped": true,
+        "reason": null,
+        "priorReference": "parity/receipts/console-loop/mui/refs/snackbar.png"
+      },
+      "reason": "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=17.45 (bar 5), compositionOk=true"
+    }
   },
   "fingerprint": {
     "v6": "v6:4279840767",
@@ -128,6 +141,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": true
+    "visualMatchDeveloped": false
   }
 }

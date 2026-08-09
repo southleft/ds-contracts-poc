@@ -17,7 +17,7 @@
     "inkCanvasPct": 36,
     "inkRealPct": 61
   },
-  "reference": "parity/receipts/console-loop/mui/refs/radio.png",
+  "reference": "extract/computed/out/mui/radio/orig-shots/default.checked.enabled__default.png",
   "referenceSha256": "3bd96f03ccf997d787e9084546ef760675b2453fc34f971f09a1ff3a4260c5ea",
   "canvasShot": "parity/receipts/console-loop/mui/shots/radio-cell.png",
   "canvasShotSha256": "4458850b2b5c2b4d79bef887877115cc9cd6a05a8230978f4358499d19f07400",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar missed (pctAAMasked=38.50 > 5)",
-  "recordedAt": "2026-08-08T08:30:12.100Z"
+  "recordedAt": "2026-08-09T03:33:17.344Z"
 }

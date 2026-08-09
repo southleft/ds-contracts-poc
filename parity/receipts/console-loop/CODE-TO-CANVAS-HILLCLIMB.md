@@ -321,17 +321,39 @@ This plan is the **agent-doable fidelity spine** that makes those later gates me
 
 ## Session board (auto)
 
-Updated 2026-08-08 (Track-2 hill-climb round 1): **9/48** foreign GENUINE scorecard passes
-(bridge `<lib>/scores/*.json` under the one bar — the previous board's 31/48 counted
-receipt booleans from before the 2026-08-07 evidence redesign and was stale).
+Updated **2026-08-08 (REFERENCE-TRUTH round)**: **15/77** foreign GENUINE scorecard
+passes, and for the first time every one of them is scored against the **real npm
+package** — `extract/computed/out/<lib>/<comp>/orig-shots/<key>.png`, committed by
+`extract/computed/run.ts --keep-originals`.
 
-| Lib | Scorecard passes |
-|---|---|
-| Altitude | 4/8 (button, divider, heading, icon-close) |
-| Astryx | 0/13 |
-| Carbon | 2/10 (icon-button, text-input) |
-| Polaris | 0/12 |
-| Tailwind | 3/5 (alert, badge, button) |
+Every number on this board before today was measured against `gate-shots/`, which is
+the **CONTRACT RENDER** (enriched contract → emit-html), so it measured whether two
+emitters agree and could not fall when the contract was wrong the same way on both
+sides. The re-measure moved 8 passes off the board and put 3 new ones on.
+
+| Lib | Before (contract render) | After (library render) |
+|---|---|---|
+| MUI | 6/31 (alert, checkbox, chip, divider, snackbar, table) | **2/31** (divider, table) |
+| Altitude | 6/8 (button, chip, divider, heading, icon-close, link) | **3/8** (button, chip, divider) |
+| Carbon | 2/10 (icon-button, text-input) | **3/10** (icon-button, tag, text-input) |
+| Polaris | 4/12 (progress-bar, spinner, tag, text-field) | **4/12** (banner, tag¹, text-field, thumbnail) |
+| Tailwind | 3/5 (alert, badge, button) | **3/5** (alert, badge, button) |
+| Astryx | 0/10 | **0/11** (toast gained a scorecard; see its LEDGER) |
+| **Total** | **21/76** | **15/77** |
+
+¹ `polaris/tag` is the one pass on this board that could **not** be verified against a
+library render: `run.ts` quarantines polaris `Tag` (`part "link" carries channel
+"width" as BOTH a token binding and a literal`), so no package screenshot exists. It
+keeps a contract-render basis, named on the receipt. Excluded from the floor
+recommendation. `mui/tooltip` is the other unobtainable stem (double-run determinism
+refusal, MuiPopper transform unstable) — it is fail-closed either way.
+
+`RATCHET.json` floors were all seeded against contract-render references and are now
+unsound: altitude 6 (actual 3) and mui 5 (actual 2) FAIL their lanes and
+`visual-truth:check` on both instruments. The floors were deliberately NOT edited by
+this round. Recommended re-derivation: altitude 6→3, mui 5→2, carbon 2→3 (or hold at
+2 — the instruments disagree on text-input), polaris 0→3, tailwind 3 hold, astryx 0
+hold, first-party 5 hold.
 
 This session: altitude reconverged to its RATCHET floor 4 headlessly and
 `visual-truth:check` joined the fast lane; tailwind alert converted

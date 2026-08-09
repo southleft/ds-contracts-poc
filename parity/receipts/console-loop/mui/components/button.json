@@ -23,13 +23,15 @@
       "Button COMPONENT_SET 21:287: 75 variant(s), 6 prop def(s). Structure looks sane; slot placeholders OK."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=16.92 (bar 5), compositionOk=true",
       "FC-REF-WRONG-VARIANT (closed by reference audit 2026-08-08): the committed reference was contained.error.large.DISABLED — a greyed control — while the canvas cell is the ENABLED red contained/error/large button. The 88.31% pctAAMasked was measuring enabled-vs-disabled, not this component. Reference retargeted to contained.error.large.enabled__default."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/button.png",
-    "referenceSource": "extract/computed/out/mui/button/gate-shots/contained.error.large.enabled__default.png",
+    "reference": "extract/computed/out/mui/button/orig-shots/contained.error.large.enabled__default.png",
+    "referenceSource": "extract/computed/out/mui/button/orig-shots/contained.error.large.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/button.png — a byte-identical copy of mui/button/gate-shots/contained.error.large.enabled__default.png)): parity/receipts/console-loop/mui/refs/button.png [declared source: extract/computed/out/mui/button/gate-shots/contained.error.large.enabled__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/button-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/button.json"
   },
   "fingerprint": {
     "v6": "v6:437388687",

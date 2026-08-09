@@ -42,11 +42,11 @@
       "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — amended rebuiltVariants=8; nodeId=1:6091; matchDeveloped left unset."
     ],
     "defects": [],
-    "reference": "extract/computed/out/carbon/textinput/gate-shots/lg.enabled__default.png",
+    "reference": "extract/computed/out/carbon/textinput/orig-shots/lg.enabled__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
     "scorecard": "parity/receipts/console-loop/carbon/scores/text-input.json",
-    "matchDevelopedReason": "agent score pass AA=1.49% (Size=Lg like-for-like gate-shot)",
-    "matchedAt": "2026-08-08T03:07:42.614Z",
+    "matchDevelopedReason": "scorer pctAAMasked=2.16 compositionOk against the REAL LIBRARY RENDER (extract/computed/out/carbon/textinput/orig-shots/lg.enabled__default.png) — 2026-08-08 REFERENCE-TRUTH re-measure",
+    "matchedAt": "2026-08-09T03:26:44.507Z",
     "status": "scored-pass",
     "scoreConfirmed": {
       "at": "2026-08-08T04:31:56.356Z",
@@ -54,7 +54,8 @@
       "compositionOk": true,
       "supersededDefects": [],
       "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
-    }
+    },
+    "referenceSource": "extract/computed/out/carbon/textinput/orig-shots/lg.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (gate-shots)): extract/computed/out/carbon/textinput/gate-shots/lg.enabled__default.png [declared source: (none)]."
   },
   "fingerprint": {
     "v6": "v6:2635523164",

@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 15.12413793103448,
-    "pctAAUnmasked": 7.344827586206897,
-    "pctAAMasked": 7.344827586206897,
+    "pctExactUnmasked": 99.51034482758621,
+    "pctAAUnmasked": 94.63448275862069,
+    "pctAAMasked": 94.63448275862069,
     "maskCoveragePct": 0,
     "canvasPx": "290x50",
-    "realPx": "146x43",
+    "realPx": "290x50",
     "inkCanvasPct": 7.813793103448276,
-    "inkRealPct": 5.958620689655173
+    "inkRealPct": 99.91724137931034
   },
-  "reference": "parity/receipts/console-loop/mui/refs/accordion.png",
-  "referenceSha256": "e81b66772c838c5b0c0a4951bc4c625929ad373d69cc549451d1ffc033c06f55",
+  "reference": "extract/computed/out/mui/accordion/orig-shots/elevation.collapsed.disabled__default.png",
+  "referenceSha256": "da6b54883c63ff6afef3cd9069ed8882fd211063e864bd758424c369509b5e20",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/accordion.png",
   "canvasShotSha256": "d9c1b726aaea7bc0c8023e88fc68fd4a09aba309b0dc1adbabaacdb24545ec14",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/accordion.diff.png",
@@ -35,9 +35,9 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.9863013698630136,
-  "inkDelta": 1.8551724137931034,
-  "dprNormalized": true,
+  "scaleRatio": 1,
+  "inkDelta": 92.10344827586206,
+  "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.99, inkDelta=1.9)"
+  "note": "composition mismatch (scaleRatio=1.00, inkDelta=92.1)"
 }

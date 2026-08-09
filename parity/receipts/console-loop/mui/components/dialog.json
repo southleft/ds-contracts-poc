@@ -23,15 +23,17 @@
       "Dialog COMPONENT_SET 21:448: 5 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=94.61 (bar 5), compositionOk=false",
       "pixel scorecard fail: pctAAMasked=51.68% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/dialog.json",
       "FC-REF-STAGE-EDGE (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference's ink is flush against the BOTTOM edge of its 320x96 harness stage (content box 294x68 at y=28) — the dialog overflowed the stage and the render is cut; the last line of the body copy is missing. All four size gate-shots (xs/sm/md/lg) score identically at 55.70 pctAAMasked in the reference sweep, i.e. the harness does not vary the stage with the size axis either. No unclipped MUI dialog reference exists in extract/computed/out/mui/dialog.",
       "FC-REF-FRAMING: consequence of the above — shot ink 212x62 (after DPR normalisation) vs reference ink 294x68."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/dialog.png",
-    "referenceSource": "extract/computed/out/mui/dialog/gate-shots/lg__default.png",
+    "reference": "extract/computed/out/mui/dialog/orig-shots/lg__default.png",
+    "referenceSource": "extract/computed/out/mui/dialog/orig-shots/lg__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/dialog.png — a byte-identical copy of mui/dialog/gate-shots/lg__default.png)): parity/receipts/console-loop/mui/refs/dialog.png [declared source: extract/computed/out/mui/dialog/gate-shots/lg__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/dialog-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/dialog.json"
   },
   "fingerprint": {
     "v6": "v6:915053960",

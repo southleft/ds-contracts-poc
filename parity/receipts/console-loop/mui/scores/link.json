@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 33.50676378772112,
-    "pctAAUnmasked": 14.151925078043703,
-    "pctAAMasked": 14.151925078043703,
+    "pctExactUnmasked": 50.752688172043015,
+    "pctAAUnmasked": 29.89247311827957,
+    "pctAAMasked": 29.89247311827957,
     "maskCoveragePct": 0,
-    "canvasPx": "20x31",
-    "realPx": "31x12",
-    "inkCanvasPct": 15.608740894901144,
-    "inkRealPct": 18.210197710718003
+    "canvasPx": "10x15",
+    "realPx": "31x14",
+    "inkCanvasPct": 7.741935483870968,
+    "inkRealPct": 44.3010752688172
   },
-  "reference": "parity/receipts/console-loop/mui/refs/link.png",
-  "referenceSha256": "5a0d559b048550153519c9927cb13e3e71ebc8e4f2e4705d2c97acb19d6529c1",
+  "reference": "extract/computed/out/mui/link/orig-shots/error.always__default.png",
+  "referenceSha256": "9c7c9bc284b4274b682f0c4b01dad1010d3c26afa6c6bdca4f1b2003feadc626",
   "canvasShot": "parity/receipts/console-loop/mui/shots/link-cell.png",
   "canvasShotSha256": "4980d88e10dd5b0c7765af2b99a9a73778f6785a7cf616384e0fb1292240d843",
   "diff": "parity/receipts/console-loop/mui/scores/link.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 2.5833333333333335,
-  "inkDelta": 2.6014568158168583,
-  "dprNormalized": false,
+  "scaleRatio": 3.1,
+  "inkDelta": 36.55913978494623,
+  "dprNormalized": true,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=2.58, inkDelta=2.6) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T08:30:11.608Z"
+  "note": "composition mismatch (scaleRatio=3.10, inkDelta=36.6) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-09T03:33:16.395Z"
 }

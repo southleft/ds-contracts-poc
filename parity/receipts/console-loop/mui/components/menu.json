@@ -23,15 +23,17 @@
       "Menu COMPONENT 21:451: 1 variant(s), 0 prop def(s). Structure looks sane; slot placeholders OK."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=80.58 (bar 5), compositionOk=false",
       "pixel scorecard fail: pctAAMasked=10.46% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/menu.json",
       "FC-REF-STAGE-EDGE (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference's ink is flush against BOTH the top and bottom edges of its 320x96 stage (content box 135x96 — the full stage height) — the 3-item menu overflowed a 96px stage and the render is cut: 'My account' loses its descender row and 'Log out' is absent entirely. The canvas cell shows all three items at 123x134. mui/menu has exactly ONE gate-shot (__default), and the current on-disk regate is clipped the same way (ink flush [B]), so there is nothing to retarget to.",
       "FC-REF-FRAMING: consequence of the above — shot ink 123x134 vs reference ink 135x96 (aspectRatio 1.53)."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/menu.png",
-    "referenceSource": "extract/computed/out/mui/menu/gate-shots/__default.png",
+    "reference": "extract/computed/out/mui/menu/orig-shots/__default.png",
+    "referenceSource": "extract/computed/out/mui/menu/orig-shots/__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/menu.png — a byte-identical copy of mui/menu/gate-shots/__default.png)): parity/receipts/console-loop/mui/refs/menu.png [declared source: extract/computed/out/mui/menu/gate-shots/__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/menu-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/menu.json"
   },
   "fingerprint": {
     "v6": "v6:226276784",

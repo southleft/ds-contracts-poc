@@ -1,24 +1,24 @@
 {
   "version": 3,
-  "status": "pass",
-  "matchDeveloped": false,
-  "recommendMatchDeveloped": true,
+  "status": "fail",
+  "matchDeveloped": true,
+  "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 37.94642857142857,
-    "pctAAUnmasked": 2.0089285714285716,
-    "pctAAMasked": 2.0089285714285716,
+    "pctExactUnmasked": 45.77205882352941,
+    "pctAAUnmasked": 15.625,
+    "pctAAMasked": 15.625,
     "maskCoveragePct": 0,
     "canvasPx": "32x14",
-    "realPx": "32x14",
-    "inkCanvasPct": 42.857142857142854,
-    "inkRealPct": 47.99107142857143
+    "realPx": "34x16",
+    "inkCanvasPct": 35.294117647058826,
+    "inkRealPct": 45.77205882352941
   },
-  "reference": "parity/receipts/console-loop/altitude/refs/link.png",
-  "referenceSha256": "9ab4b242ddcb2a198fd6c22ef305a058107e7780c3ee70f007b8b1976b7a6e90",
+  "reference": "extract/computed/out/altitude/link/orig-shots/lg__default.png",
+  "referenceSha256": "c6b6182b7ce4828f0194c6f76a7bebafef2ae65b196945aa5fde94e432a7b686",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/link-cell.png",
   "canvasShotSha256": "9a29dcdf805628ab62f5a5928b59c776430cfc5c46a373c9413e5ec8c91bad20",
   "diff": "parity/receipts/console-loop/altitude/scores/link.diff.png",
@@ -26,12 +26,12 @@
   "receipt": "parity/receipts/console-loop/altitude/components/link.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": true,
+  "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 5.1339285714285765,
+  "scaleRatio": 1.1428571428571428,
+  "inkDelta": 10.477941176470587,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T08:11:50.720Z"
+  "note": "pixel bar missed (pctAAMasked=15.63 > 5)",
+  "recordedAt": "2026-08-09T03:14:03.944Z"
 }

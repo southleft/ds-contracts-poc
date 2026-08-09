@@ -37,14 +37,17 @@
     "notes": [
       "Screenshot reviewed on section/node 83:1611; structure/variants look sane (slot placeholders OK).",
       "Structure/variants reviewed via inspect (COMPONENT_SET, 3 variants on page Divider).",
-      "2026-08-08 STRICT-LANE CONVERSION: pixel scorecard PASS on both instruments \u2014 lane scorer pctAAMasked=0.00 (scores/divider.json, headless REST cell at scale 1 vs committed developed ref mui/refs/divider.png) and headless visual-truth card agrees; bar pctAAMasked<=5 AND compositionOk."
+      "2026-08-08 STRICT-LANE CONVERSION: pixel scorecard PASS on both instruments — lane scorer pctAAMasked=0.00 (scores/divider.json, headless REST cell at scale 1 vs committed developed ref mui/refs/divider.png) and headless visual-truth card agrees; bar pctAAMasked<=5 AND compositionOk."
     ],
     "defects": [],
-    "reference": "parity/receipts/console-loop/mui/refs/divider.png",
-    "referenceSource": "extract/computed/out/mui/divider/gate-shots/fullWidth__default.png",
+    "reference": "extract/computed/out/mui/divider/orig-shots/fullWidth__default.png",
+    "referenceSource": "extract/computed/out/mui/divider/orig-shots/fullWidth__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/divider.png — a byte-identical copy of mui/divider/gate-shots/fullWidth__default.png)): parity/receipts/console-loop/mui/refs/divider.png [declared source: extract/computed/out/mui/divider/gate-shots/fullWidth__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/divider-cell.png",
     "matchDeveloped": true,
-    "status": "scored-pass"
+    "status": "scored-pass",
+    "scorecard": "parity/receipts/console-loop/mui/scores/divider.json",
+    "matchDevelopedReason": "scorer pctAAMasked=0.00 compositionOk against the REAL LIBRARY RENDER (extract/computed/out/mui/divider/orig-shots/fullWidth__default.png) — 2026-08-08 REFERENCE-TRUTH re-measure",
+    "matchedAt": "2026-08-09T03:34:06.548Z"
   },
   "fingerprint": {
     "v6": "v6:1949352536",
@@ -53,7 +56,7 @@
       ":COMPONENT_SET/Divider|fill|[]",
       ":COMPONENT_SET/Divider|radius|5,5,5,5",
       ":COMPONENT_SET/Divider|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Divider|description|Divider \u00e2\u0080\u0094 generated from contract mui.divider v0.2.0 \u00e2\u0080",
+      ":COMPONENT_SET/Divider|description|Divider â generated from contract mui.divider v0.2.0 â",
       ":COMPONENT_SET/Divider|propdef|Variant:VARIANT=FullWidth",
       "/0:COMPONENT/Variant=FullWidth|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
       "/0:COMPONENT/Variant=FullWidth|radius|0,0,0,0",
@@ -78,7 +81,7 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Variant enum \u2192 FullWidth/Inset/Middle"
+      "Variant enum → FullWidth/Inset/Middle"
     ],
     "observed": {
       "type": "COMPONENT_SET",

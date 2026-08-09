@@ -1,7 +1,7 @@
 {
   "version": 3,
   "status": "pass",
-  "matchDeveloped": false,
+  "matchDeveloped": true,
   "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
@@ -17,7 +17,7 @@
     "inkCanvasPct": 100,
     "inkRealPct": 100
   },
-  "reference": "parity/receipts/console-loop/mui/refs/divider.png",
+  "reference": "extract/computed/out/mui/divider/orig-shots/fullWidth__default.png",
   "referenceSha256": "a4c56f8da34db8827368a95de1723ad4bf039e2f12b5860595f1add4b89d5399",
   "canvasShot": "parity/receipts/console-loop/mui/shots/divider-cell.png",
   "canvasShotSha256": "c579de0a690e8cd9c1dbc63c98f3a93b84a4fb4518e3d59c2afaefadf368a446",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T08:30:10.352Z"
+  "recordedAt": "2026-08-09T03:33:14.608Z"
 }

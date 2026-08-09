@@ -1,160 +1,162 @@
 {
- "version": 1,
- "kind": "console-loop-mui-component",
- "status": "completed",
- "component": "alert",
- "contract": "examples/mui/contracts/alert.contract.json",
- "script": "examples/mui/figma/alert.figma.js",
- "fileKey": "59mLQlOMiD5w5za6SUcoO5",
- "recordedAt": "2026-08-06T05:17:13.440Z",
- "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
- "generate": {
-  "ok": true,
-  "nodeId": "84:2264",
-  "mode": "generated",
-  "page": "Alert",
-  "sectionId": "84:2265",
-  "result": {
-   "note": "script timed out after create; component present on canvas"
-  }
- },
- "visual": {
-  "ok": false,
-  "notes": [
-   "Screenshot reviewed on section/node 84:2265; structure/variants look sane (slot placeholders OK).",
-   "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot."
-  ],
-  "defects": [
-   "INSTRUMENT DISAGREEMENT — with the Roboto substrate the pair moved 4.50/6.49 -> 4.72 (lane, pass) / 7.24 (headless, FAIL); the disagreement did NOT shrink (1.99 -> 2.52), so the font substrate was not its cause. A pass must hold on BOTH instruments; stays fail-closed."
-  ],
-  "reference": "parity/receipts/console-loop/mui/refs/alert.png",
-  "referenceSource": "extract/computed/out/mui/alert/gate-shots/error.filled__default.png",
-  "canvasShot": "parity/receipts/console-loop/mui/shots/alert-cell.png",
-  "matchDeveloped": false,
-  "status": "fail-closed"
- },
- "fingerprint": {
-  "v6": "v6:1383530075",
-  "lineCount": 535,
-  "sampleLines": [
-   ":COMPONENT_SET/Alert|fill|[]",
-   ":COMPONENT_SET/Alert|radius|5,5,5,5",
-   ":COMPONENT_SET/Alert|sizing|FIXED/FIXED AUTO",
-   ":COMPONENT_SET/Alert|description|Alert â generated from contract mui.alert v0.2.0 â",
-   ":COMPONENT_SET/Alert|propdef|Content#84:122:TEXT=This is an alert â check it out!",
-   ":COMPONENT_SET/Alert|propdef|Severity:VARIANT=Info",
-   ":COMPONENT_SET/Alert|propdef|Variant:VARIANT=Standard",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9647058844566345,\"b\":0.9921568632125854},\"boundVariables\":{\"color\":{\"var\":\"imported/alert/root/background-color/info/standard\"}}}]",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.003921568859368563,\"g\":0.26274511218070984,\"b\":0.3803921639919281},\"boundVariables\":{\"color\":{\"var\":\"imported/alert/root/border-top-color/info/standard\"}}}] w0",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|radius|4,4,4,4",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|layout|HORIZONTAL MIN/MIN gap 12 pad 6,16,6,16",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|sizing|HUG/HUG AUTO",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|bound:bottomLeftRadius|imported/shared/size-4",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|bound:bottomRightRadius|imported/shared/size-4",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|bound:itemSpacing|imported/alert/alert-icon/margin-right",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|bound:minHeight|imported/shared/size-0",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|bound:minWidth|imported/shared/size-0",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|bound:paddingBottom|imported/alert/root/padding-bottom",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|bound:paddingLeft|imported/alert/root/padding-left",
-   "/0:COMPONENT/Severity=Info, Variant=Standard|bound:paddingRight|imported/alert/root/padding-right"
-  ]
- },
- "roundtrip": {
-  "mismatches": [],
-  "gaps": [],
-  "matchedAxes": [
-   "Severity enum → Info/Error/Warning/Success",
-   "Variant enum → Standard/Filled/Outlined",
-   "TEXT Content",
-   "first-variant fill bound: imported/alert/root/background-color/info/standard"
-  ],
-  "observed": {
-   "type": "COMPONENT_SET",
-   "variantNames": [
-    "Severity=Info, Variant=Standard",
-    "Severity=Info, Variant=Filled",
-    "Severity=Info, Variant=Outlined",
-    "Severity=Error, Variant=Standard",
-    "Severity=Error, Variant=Filled",
-    "Severity=Error, Variant=Outlined",
-    "Severity=Warning, Variant=Standard",
-    "Severity=Warning, Variant=Filled",
-    "Severity=Warning, Variant=Outlined",
-    "Severity=Success, Variant=Standard",
-    "Severity=Success, Variant=Filled",
-    "Severity=Success, Variant=Outlined"
-   ],
-   "propDefs": [
-    {
-     "name": "Content#84:122",
-     "type": "TEXT",
-     "defaultValue": "This is an alert â check it out!",
-     "variantOptions": null
-    },
-    {
-     "name": "Severity",
-     "type": "VARIANT",
-     "defaultValue": "Info",
-     "variantOptions": [
-      "Info",
-      "Error",
-      "Warning",
-      "Success"
-     ]
-    },
-    {
-     "name": "Variant",
-     "type": "VARIANT",
-     "defaultValue": "Standard",
-     "variantOptions": [
-      "Standard",
-      "Filled",
-      "Outlined"
-     ]
+  "version": 1,
+  "kind": "console-loop-mui-component",
+  "status": "completed",
+  "component": "alert",
+  "contract": "examples/mui/contracts/alert.contract.json",
+  "script": "examples/mui/figma/alert.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-06T05:17:13.440Z",
+  "transport": "figma-console-mcp figma_execute (+ clientStorage chunk upload when generated)",
+  "generate": {
+    "ok": true,
+    "nodeId": "84:2264",
+    "mode": "generated",
+    "page": "Alert",
+    "sectionId": "84:2265",
+    "result": {
+      "note": "script timed out after create; component present on canvas"
     }
-   ],
-   "firstRoot": {
-    "name": "Severity=Info, Variant=Standard",
-    "type": "COMPONENT",
-    "layoutMode": "HORIZONTAL",
-    "padding": {
-     "t": 6,
-     "r": 16,
-     "b": 6,
-     "l": 16
-    },
-    "radius": 4,
-    "fillVarName": "imported/alert/root/background-color/info/standard",
-    "padBound": {
-     "itemSpacing": "imported/alert/alert-icon/margin-right",
-     "paddingLeft": "imported/alert/root/padding-left",
-     "paddingTop": "imported/alert/root/padding-top",
-     "paddingRight": "imported/alert/root/padding-right",
-     "paddingBottom": "imported/alert/root/padding-bottom",
-     "topLeftRadius": "imported/shared/size-4",
-     "topRightRadius": "imported/shared/size-4",
-     "bottomLeftRadius": "imported/shared/size-4",
-     "bottomRightRadius": "imported/shared/size-4",
-     "strokeTopWeight": "imported/alert/root/border-top-width/standard",
-     "strokeBottomWeight": "imported/alert/root/border-bottom-width/standard",
-     "strokeLeftWeight": "imported/alert/root/border-left-width/standard",
-     "strokeRightWeight": "imported/alert/root/border-right-width/standard",
-     "minWidth": "imported/shared/size-0",
-     "minHeight": "imported/shared/size-0"
-    },
-    "w": 253,
-    "h": 49,
-    "childTypes": [
-     "FRAME/alert-icon",
-     "FRAME/label"
+  },
+  "visual": {
+    "ok": false,
+    "notes": [
+      "Screenshot reviewed on section/node 84:2265; structure/variants look sane (slot placeholders OK).",
+      "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot."
+    ],
+    "defects": [
+      "FC-REF-CONTRACT-RENDER: 4.72 against the CONTRACT RENDER, 7.03 against the real @mui/material@9.2.0 Alert render. Same 144x24 content box on both sides — the residual is paint, not geometry. The prior pass measured emitter agreement.",
+      "INSTRUMENT DISAGREEMENT — with the Roboto substrate the pair moved 4.50/6.49 -> 4.72 (lane, pass) / 7.24 (headless, FAIL); the disagreement did NOT shrink (1.99 -> 2.52), so the font substrate was not its cause. A pass must hold on BOTH instruments; stays fail-closed."
+    ],
+    "reference": "extract/computed/out/mui/alert/orig-shots/error.filled__default.png",
+    "referenceSource": "extract/computed/out/mui/alert/orig-shots/error.filled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (refs/alert.png, byte-identical copy of alert/gate-shots/error.filled__default.png)): parity/receipts/console-loop/mui/refs/alert.png [declared source: extract/computed/out/mui/alert/gate-shots/error.filled__default.png].",
+    "canvasShot": "parity/receipts/console-loop/mui/shots/alert-cell.png",
+    "matchDeveloped": false,
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/alert.json"
+  },
+  "fingerprint": {
+    "v6": "v6:1383530075",
+    "lineCount": 535,
+    "sampleLines": [
+      ":COMPONENT_SET/Alert|fill|[]",
+      ":COMPONENT_SET/Alert|radius|5,5,5,5",
+      ":COMPONENT_SET/Alert|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Alert|description|Alert â generated from contract mui.alert v0.2.0 â",
+      ":COMPONENT_SET/Alert|propdef|Content#84:122:TEXT=This is an alert â check it out!",
+      ":COMPONENT_SET/Alert|propdef|Severity:VARIANT=Info",
+      ":COMPONENT_SET/Alert|propdef|Variant:VARIANT=Standard",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9647058844566345,\"b\":0.9921568632125854},\"boundVariables\":{\"color\":{\"var\":\"imported/alert/root/background-color/info/standard\"}}}]",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.003921568859368563,\"g\":0.26274511218070984,\"b\":0.3803921639919281},\"boundVariables\":{\"color\":{\"var\":\"imported/alert/root/border-top-color/info/standard\"}}}] w0",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|radius|4,4,4,4",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|layout|HORIZONTAL MIN/MIN gap 12 pad 6,16,6,16",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|bound:bottomLeftRadius|imported/shared/size-4",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|bound:bottomRightRadius|imported/shared/size-4",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|bound:itemSpacing|imported/alert/alert-icon/margin-right",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|bound:minHeight|imported/shared/size-0",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|bound:minWidth|imported/shared/size-0",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|bound:paddingBottom|imported/alert/root/padding-bottom",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|bound:paddingLeft|imported/alert/root/padding-left",
+      "/0:COMPONENT/Severity=Info, Variant=Standard|bound:paddingRight|imported/alert/root/padding-right"
     ]
-   }
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Severity enum → Info/Error/Warning/Success",
+      "Variant enum → Standard/Filled/Outlined",
+      "TEXT Content",
+      "first-variant fill bound: imported/alert/root/background-color/info/standard"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Severity=Info, Variant=Standard",
+        "Severity=Info, Variant=Filled",
+        "Severity=Info, Variant=Outlined",
+        "Severity=Error, Variant=Standard",
+        "Severity=Error, Variant=Filled",
+        "Severity=Error, Variant=Outlined",
+        "Severity=Warning, Variant=Standard",
+        "Severity=Warning, Variant=Filled",
+        "Severity=Warning, Variant=Outlined",
+        "Severity=Success, Variant=Standard",
+        "Severity=Success, Variant=Filled",
+        "Severity=Success, Variant=Outlined"
+      ],
+      "propDefs": [
+        {
+          "name": "Content#84:122",
+          "type": "TEXT",
+          "defaultValue": "This is an alert â check it out!",
+          "variantOptions": null
+        },
+        {
+          "name": "Severity",
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Info",
+            "Error",
+            "Warning",
+            "Success"
+          ]
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Standard",
+          "variantOptions": [
+            "Standard",
+            "Filled",
+            "Outlined"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Severity=Info, Variant=Standard",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 6,
+          "r": 16,
+          "b": 6,
+          "l": 16
+        },
+        "radius": 4,
+        "fillVarName": "imported/alert/root/background-color/info/standard",
+        "padBound": {
+          "itemSpacing": "imported/alert/alert-icon/margin-right",
+          "paddingLeft": "imported/alert/root/padding-left",
+          "paddingTop": "imported/alert/root/padding-top",
+          "paddingRight": "imported/alert/root/padding-right",
+          "paddingBottom": "imported/alert/root/padding-bottom",
+          "topLeftRadius": "imported/shared/size-4",
+          "topRightRadius": "imported/shared/size-4",
+          "bottomLeftRadius": "imported/shared/size-4",
+          "bottomRightRadius": "imported/shared/size-4",
+          "strokeTopWeight": "imported/alert/root/border-top-width/standard",
+          "strokeBottomWeight": "imported/alert/root/border-bottom-width/standard",
+          "strokeLeftWeight": "imported/alert/root/border-left-width/standard",
+          "strokeRightWeight": "imported/alert/root/border-right-width/standard",
+          "minWidth": "imported/shared/size-0",
+          "minHeight": "imported/shared/size-0"
+        },
+        "w": 253,
+        "h": 49,
+        "childTypes": [
+          "FRAME/alert-icon",
+          "FRAME/label"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
   }
- },
- "acceptance": {
-  "generatedOrFound": true,
-  "screenshotReviewed": true,
-  "zeroMismatch": true,
-  "visualMatchDeveloped": false
- }
 }

@@ -34,24 +34,34 @@
     }
   },
   "visual": {
-    "ok": true,
-    "matchDeveloped": true,
+    "ok": false,
+    "matchDeveloped": false,
     "reviewedAt": "2026-08-06T13:32:20.271Z",
     "notes": [],
-    "defects": [],
-    "reference": "parity/receipts/console-loop/altitude/refs/icon-close.png",
+    "defects": [
+      "FC-REF-CONTRACT-RENDER: 4.69 against the contract render, 17.28 against the real altitude-web-components IconClose render (canvas 16x16 vs library 18x18). The pass measured emitter agreement, not fidelity."
+    ],
+    "reference": "extract/computed/out/altitude/iconclose/orig-shots/lg__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "extract/computed/out/altitude/iconclose/gate-shots/lg__default.png",
+    "referenceSource": "extract/computed/out/altitude/iconclose/orig-shots/lg__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER, hand-cropped from iconclose/gate-shots/lg__default.png): parity/receipts/console-loop/altitude/refs/icon-close.png [declared source: extract/computed/out/altitude/iconclose/gate-shots/lg__default.png].",
     "scorecard": "parity/receipts/console-loop/altitude/scores/icon-close.json",
-    "matchDevelopedReason": "agent AA=4.69 compositionOk (cropped-ref loop)",
-    "matchedAt": "2026-08-08T03:09:53.136Z",
-    "status": "scored-pass",
+    "status": "fail-closed",
     "scoreConfirmed": {
       "at": "2026-08-08T04:31:56.356Z",
       "pctAAMasked": 4.6875,
       "compositionOk": true,
       "supersededDefects": [],
       "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+    },
+    "revokedByReferenceTruth": {
+      "at": "2026-08-09T03:16:00.807Z",
+      "was": {
+        "ok": true,
+        "matchDeveloped": true,
+        "reason": "agent AA=4.69 compositionOk (cropped-ref loop)",
+        "priorReference": "parity/receipts/console-loop/altitude/refs/icon-close.png"
+      },
+      "reason": "FC-REF-CONTRACT-RENDER: 4.69 against the contract render, 17.28 against the real altitude-web-components IconClose render (canvas 16x16 vs library 18x18). The pass measured emitter agreement, not fidelity."
     }
   },
   "fingerprint": {
@@ -144,6 +154,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": true
+    "visualMatchDeveloped": false
   }
 }

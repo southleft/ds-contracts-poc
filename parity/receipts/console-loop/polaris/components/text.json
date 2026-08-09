@@ -51,14 +51,17 @@
       "2026-08-08 Class-B round: reference REGENERATED from the current contract (scripts/polaris-ref-triangle.mts) and the canvas cell RE-EXPORTED at scale 1 from the live file GnQnjSNBXtgtd2Ht0Hs1C8. Evidence: parity/receipts/console-loop/polaris/refs-fresh/TRIANGLE.json. scorecard pctAAMasked=26.07 status=fail"
     ],
     "defects": [
+      "FC-TYPE-METRICS: 26.07 against the CONTRACT RENDER, 25.38 against the real Polaris Text render.",
       "FC-ENUM-DEFAULT-SPLIT: text declares FIVE enum props with no default (alignment, as, tone, fontWeight, variant). emit-html renders a bare <p class=\"text\"> at base typography; the canvas cell 1:10372 is Variant=Heading Sm, Font Weight=Regular. The 26.07 is entirely glyph weight/size — the reference is not the same variant.",
       "Reference left on its gate-shot: the current emit-html render would be a WORSE reference (no variant class at all), so re-basing was refused this round."
     ],
-    "reference": "extract/computed/out/text/gate-shots/headingSm.base.regular__default.png",
+    "reference": "extract/computed/out/text/orig-shots/headingSm.base.regular__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
     "referencePrevious": "parity/receipts/console-loop/polaris/refs/text.png",
     "referenceSourcePrevious": null,
-    "referenceSource": "extract/computed/out/text/gate-shots/headingSm.base.regular__default.png"
+    "referenceSource": "extract/computed/out/text/orig-shots/headingSm.base.regular__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (gate-shots)): extract/computed/out/text/gate-shots/headingSm.base.regular__default.png [declared source: extract/computed/out/text/gate-shots/headingSm.base.regular__default.png].",
+    "scorecard": "parity/receipts/console-loop/polaris/scores/text.json",
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:3918753726",

@@ -26,7 +26,7 @@
     "inkCanvasPct": 52.17391304347826,
     "inkRealPct": 28.26086956521739
   },
-  "reference": "parity/receipts/console-loop/mui/refs/icon-button.png",
+  "reference": "extract/computed/out/mui/iconbutton/orig-shots/large.default.enabled__default.png",
   "referenceSha256": "c26d63bfb0a32f63166ece4038e666935d2ef166a93db99654312a7ac90150f6",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/icon-button.png",
   "canvasShotSha256": "c18fe343a10e057085ea8ae5802f1040be9622d9929f9e59a42084c93dab6e67",

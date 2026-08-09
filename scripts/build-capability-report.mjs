@@ -164,6 +164,10 @@ const LIBRARIES = [
   // examples/shadcn/RECON.md §2.2 (fetched via shadcn CLI 4.16.2, radix-vega).
   { dir: 'shadcn', label: 'shadcn/ui', pkg: '@shadcn-sandbox/ui@0.0.1', contracts: 'examples/shadcn/contracts' },
   { dir: 'tailwind', label: 'Flowbite / Tailwind', pkg: 'flowbite-react@0.12.17', contracts: 'examples/tailwind/contracts' },
+  // Fluent 2 is npm-pinned, but the SUITE package pins its 64 siblings by caret
+  // range, so the real pin is examples/fluent/sandbox.package-lock.json (sha256
+  // in examples/fluent/PROVENANCE.md) — the same reasoning as shadcn's ledger.
+  { dir: 'fluent', label: 'Fluent 2', pkg: '@fluentui/react-components@9.74.5', contracts: 'examples/fluent/contracts' },
 ];
 
 /* ==================================================================== READ */

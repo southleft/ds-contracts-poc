@@ -43,14 +43,16 @@
       "Structure/variants reviewed via inspect (COMPONENT_SET, 42 variants on page Link)."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=29.89 (bar 5), compositionOk=false",
       "pixel scorecard fail: pctAAMasked=14.15% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/link.json",
       "FC-TEXT-WRAP (named-open by reference audit 2026-08-08, CANVAS-SIDE): the reference is the correct variant (error.always, ink 31x12, 'Link' on one line) but the canvas cell is 31x38 with ink 20x31 — the label wraps to 'Lin' / 'k' because the cell is too narrow for its own text. The 4.00 aspectRatio is that wrap. Retargeting cannot help: all 21 sibling gate-shots score within 0.11 of each other (14.15-14.26)."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/link.png",
-    "referenceSource": "extract/computed/out/mui/link/gate-shots/error.always__default.png",
+    "reference": "extract/computed/out/mui/link/orig-shots/error.always__default.png",
+    "referenceSource": "extract/computed/out/mui/link/orig-shots/error.always__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/link.png — a byte-identical copy of mui/link/gate-shots/error.always__default.png)): parity/receipts/console-loop/mui/refs/link.png [declared source: extract/computed/out/mui/link/gate-shots/error.always__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/link-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/link.json"
   },
   "fingerprint": {
     "v6": "v6:3316422374",

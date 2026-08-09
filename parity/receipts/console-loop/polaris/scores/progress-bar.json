@@ -1,24 +1,24 @@
 {
   "version": 3,
-  "status": "pass",
-  "matchDeveloped": false,
-  "recommendMatchDeveloped": true,
+  "status": "fail",
+  "matchDeveloped": true,
+  "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 0.5208333333333333,
-    "pctAAUnmasked": 0.1736111111111111,
-    "pctAAMasked": 0.1736111111111111,
+    "pctExactUnmasked": 15.45138888888889,
+    "pctAAUnmasked": 15.06076388888889,
+    "pctAAMasked": 15.06076388888889,
     "maskCoveragePct": 0,
-    "canvasPx": "144x8",
-    "realPx": "144x8",
-    "inkCanvasPct": 99.91319444444444,
-    "inkRealPct": 99.82638888888889
+    "canvasPx": "288x16",
+    "realPx": "288x16",
+    "inkCanvasPct": 99.86979166666666,
+    "inkRealPct": 99.78298611111111
   },
-  "reference": "parity/receipts/console-loop/polaris/refs/progress-bar.png",
-  "referenceSha256": "b62edc2f8355e7a9ba100dacceea434a533ec3f9b2c94dc2c44051ab89e4fc3b",
+  "reference": "extract/computed/out/progressbar/orig-shots/medium.highlight__default.png",
+  "referenceSha256": "3c945d63699f2790fbb063333200e28a2c85a876cdc0227e85ed5a4009f8edde",
   "canvasShot": "parity/receipts/console-loop/polaris/shots/progress-bar-cell.png",
   "canvasShotSha256": "79899007639df9126e014ea69deb7783eb9d497be8d60f53463430d399b4fe1e",
   "diff": "parity/receipts/console-loop/polaris/scores/progress-bar.diff.png",
@@ -26,12 +26,12 @@
   "receipt": "parity/receipts/console-loop/polaris/components/progress-bar.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": true,
+  "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 0.08680555555555713,
+  "inkDelta": 0.08680555555554292,
   "dprNormalized": true,
-  "sizeNormalized": true,
-  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-09T00:37:41.969Z"
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=15.06 > 5)",
+  "recordedAt": "2026-08-09T04:18:06.867Z"
 }

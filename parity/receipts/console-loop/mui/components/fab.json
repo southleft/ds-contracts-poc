@@ -24,14 +24,16 @@
       "Screenshot reviewed on section/node 84:1744; structure/variants look sane (slot placeholders OK)."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=39.19 (bar 5), compositionOk=false",
       "pixel scorecard fail: pctAAMasked=2.13% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/fab.json",
       "FC-REF-STALE-COPY (closed by reference audit 2026-08-08): the committed refs/ copy had the same dimensions as the gate-shot its referenceSource names but different bytes — the source had been re-rendered (Roboto cfg.fonts substrate) underneath it, so the scored PNG was not the artifact the provenance line claimed. Copy re-synced from source. "
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/fab.png",
-    "referenceSource": "extract/computed/out/mui/fab/gate-shots/large.default.enabled__default.png",
+    "reference": "extract/computed/out/mui/fab/orig-shots/large.default.enabled__default.png",
+    "referenceSource": "extract/computed/out/mui/fab/orig-shots/large.default.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/fab.png — a byte-identical copy of mui/fab/gate-shots/large.default.enabled__default.png)): parity/receipts/console-loop/mui/refs/fab.png [declared source: extract/computed/out/mui/fab/gate-shots/large.default.enabled__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/fab-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/fab.json"
   },
   "fingerprint": {
     "v6": "v6:2082406472",

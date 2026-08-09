@@ -14,20 +14,20 @@
   "setNodeId": "1:5947",
   "cellNodeId": "1:5914",
   "cellName": "State=Default",
-  "cellPick": "variant-token-match",
+  "cellPick": "first-cell",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 26.816035366221243,
-    "pctAAUnmasked": 17.5926856224254,
-    "pctAAMasked": 17.5926856224254,
+    "pctExactUnmasked": 21.177199504337054,
+    "pctAAUnmasked": 11.047087980173483,
+    "pctAAMasked": 11.047087980173483,
     "maskCoveragePct": 0,
     "canvasPx": "269x37",
-    "realPx": "262x26",
-    "inkCanvasPct": 13.553702401286044,
-    "inkRealPct": 15.89470511403597
+    "realPx": "261x60",
+    "inkCanvasPct": 8.358116480793061,
+    "inkRealPct": 12.7819083023544
   },
-  "reference": "parity/receipts/console-loop/carbon/refs/tabs.png",
-  "referenceSha256": "c1a4b2f2cf300fb6c64293fe1e358ed69550a170743a3a68f9dad581b26ad683",
+  "reference": "extract/computed/out/carbon/tabs/orig-shots/__default.png",
+  "referenceSha256": "ed6c1b52bdd996e5c272206ebcc46b3913864f0208329458efc1cf4dfcfe94c3",
   "canvasShot": "parity/receipts/console-loop/visual-truth/carbon/shots/tabs.png",
   "canvasShotSha256": "c26e653e705893f87f080cbfab8ddd429e095b9228b03649cb44c6d11317f021",
   "diff": "parity/receipts/console-loop/visual-truth/carbon/diffs/tabs.diff.png",
@@ -35,9 +35,9 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.4230769230769231,
-  "inkDelta": 2.341002712749926,
+  "scaleRatio": 1.6216216216216217,
+  "inkDelta": 4.423791821561339,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.42, inkDelta=2.3)"
+  "note": "composition mismatch (scaleRatio=1.62, inkDelta=4.4)"
 }

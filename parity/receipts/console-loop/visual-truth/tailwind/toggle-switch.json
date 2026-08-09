@@ -26,8 +26,8 @@
     "inkCanvasPct": 42.491749174917494,
     "inkRealPct": 42.367986798679866
   },
-  "reference": "parity/receipts/console-loop/tailwind/refs/toggle-switch.png",
-  "referenceSha256": "5700671b49c88002d22c9ba0289feaa5260de7415bd66b0cad787645b873a5c0",
+  "reference": "extract/computed/out/tailwind/toggleswitch/orig-shots/md.unchecked__default.png",
+  "referenceSha256": "31247a078016a3160c5eb229a4382eab1757df43dbe515484a589fb18f7ca729",
   "canvasShot": "parity/receipts/console-loop/visual-truth/tailwind/shots/toggle-switch.png",
   "canvasShotSha256": "7a586340d5bc2f180eebb00847d313b39c75f066d3e926c103cc68fb84fde5b5",
   "diff": "parity/receipts/console-loop/visual-truth/tailwind/diffs/toggle-switch.diff.png",

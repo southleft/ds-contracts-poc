@@ -15,10 +15,10 @@
     "canvasPx": "142x15",
     "realPx": "142x15",
     "inkCanvasPct": 17.230046948356808,
-    "inkRealPct": 17.417840375586856
+    "inkRealPct": 17.464788732394364
   },
-  "reference": "parity/receipts/console-loop/mui/refs/tabs.png",
-  "referenceSha256": "c554407ebc0de7fbdf9abf60314c33a1f216b43c0b7b39d513319f73af5e822e",
+  "reference": "extract/computed/out/mui/tabs/orig-shots/inherit.primary__default.png",
+  "referenceSha256": "fbaba92b7aaaed1ec357f5b12a7a2d7d16bc24acb2a88164a4516693ea548e77",
   "canvasShot": "parity/receipts/console-loop/mui/shots/tabs-cell.png",
   "canvasShotSha256": "0bca1e2b0fc4105d33e519418da235376d43f6436d302f5e1b7cc6684f162eb5",
   "diff": "parity/receipts/console-loop/mui/scores/tabs.diff.png",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 0.18779342723004788,
+  "inkDelta": 0.2347417840375563,
   "dprNormalized": true,
   "sizeNormalized": true,
   "note": "pixel bar missed (pctAAMasked=11.74 > 5)",
-  "recordedAt": "2026-08-08T14:34:18.921Z"
+  "recordedAt": "2026-08-09T03:33:19.474Z"
 }

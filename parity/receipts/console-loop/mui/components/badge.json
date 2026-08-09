@@ -24,14 +24,16 @@
       "Screenshot reviewed on section/node 84:2377; structure/variants look sane (slot placeholders OK)."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=64.00 (bar 5), compositionOk=false",
       "pixel scorecard fail: pctAAMasked=54.00% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/badge.json",
       "FC-REF-STALE-COPY (closed by reference audit 2026-08-08): the committed refs/ copy had the same dimensions as the gate-shot its referenceSource names but different bytes — the source had been re-rendered (Roboto cfg.fonts substrate) underneath it, so the scored PNG was not the artifact the provenance line claimed. Copy re-synced from source. The stale copy rendered the avatar initial as a broken 'Λ' glyph; the current source renders 'A'."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/badge.png",
-    "referenceSource": "extract/computed/out/mui/badge/gate-shots/default.dot__default.png",
+    "reference": "extract/computed/out/mui/badge/orig-shots/default.dot__default.png",
+    "referenceSource": "extract/computed/out/mui/badge/orig-shots/default.dot__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/badge.png — a byte-identical copy of mui/badge/gate-shots/default.dot__default.png)): parity/receipts/console-loop/mui/refs/badge.png [declared source: extract/computed/out/mui/badge/gate-shots/default.dot__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/badge-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/badge.json"
   },
   "fingerprint": {
     "v6": "v6:3419500101",

@@ -24,10 +24,10 @@
     "canvasPx": "142x16",
     "realPx": "142x16",
     "inkCanvasPct": 16.41725352112676,
-    "inkRealPct": 21.258802816901408
+    "inkRealPct": 21.30281690140845
   },
-  "reference": "parity/receipts/console-loop/mui/refs/tabs.png",
-  "referenceSha256": "c554407ebc0de7fbdf9abf60314c33a1f216b43c0b7b39d513319f73af5e822e",
+  "reference": "extract/computed/out/mui/tabs/orig-shots/inherit.primary__default.png",
+  "referenceSha256": "fbaba92b7aaaed1ec357f5b12a7a2d7d16bc24acb2a88164a4516693ea548e77",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/tabs.png",
   "canvasShotSha256": "0bca1e2b0fc4105d33e519418da235376d43f6436d302f5e1b7cc6684f162eb5",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/tabs.diff.png",
@@ -36,7 +36,7 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 4.841549295774648,
+  "inkDelta": 4.885563380281688,
   "dprNormalized": true,
   "sizeNormalized": true,
   "note": "pixel bar missed (pctAAMasked=9.99 > 5)"

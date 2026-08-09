@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 1.5755208333333333,
-    "pctAAUnmasked": 0.13346354166666666,
-    "pctAAMasked": 0.13346354166666666,
+    "pctExactUnmasked": 53.90625,
+    "pctAAUnmasked": 5.46875,
+    "pctAAMasked": 5.46875,
     "maskCoveragePct": 0,
     "canvasPx": "24x24",
-    "realPx": "320x96",
-    "inkCanvasPct": 1.5169270833333333,
-    "inkRealPct": 0
+    "realPx": "32x32",
+    "inkCanvasPct": 45.5078125,
+    "inkRealPct": 79.296875
   },
-  "reference": "extract/computed/out/altitude/avatar/gate-shots/sm.off__default.png",
-  "referenceSha256": "0d75ad46c04d517630590afcb2cf66ce1aabae5dc9c8b23c6985bfcc18edf300",
+  "reference": "extract/computed/out/altitude/avatar/orig-shots/sm.off__default.png",
+  "referenceSha256": "de9bfc3ea56ec0a7bf25a7fc04b58ea3d03d3ee7488bcd71146646c43196e7c3",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/avatar-cell.png",
   "canvasShotSha256": "73029af69826bef526a79972b80709a97d515306964c64c265bb444a5a49e000",
   "diff": "parity/receipts/console-loop/altitude/scores/avatar.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 13.333333333333334,
-  "inkDelta": 1.5169270833333333,
+  "scaleRatio": 1.3333333333333333,
+  "inkDelta": 33.7890625,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=13.33, inkDelta=1.5) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T04:31:10.383Z"
+  "note": "composition mismatch (scaleRatio=1.33, inkDelta=33.8) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-09T03:13:20.090Z"
 }

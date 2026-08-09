@@ -8,7 +8,7 @@
     "compositionOk": true
   },
   "receipt": "parity/receipts/console-loop/carbon/components/text-input.json",
-  "status": "pass",
+  "status": "fail",
   "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
   "fileVersion": "2385245229284424737",
   "setNodeId": "1:6091",
@@ -17,27 +17,27 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 6.726190476190476,
-    "pctAAUnmasked": 4.722222222222222,
-    "pctAAMasked": 4.722222222222222,
+    "pctExactUnmasked": 8.154761904761905,
+    "pctAAUnmasked": 5.257936507936508,
+    "pctAAMasked": 5.257936507936508,
     "maskCoveragePct": 0,
     "canvasPx": "144x35",
     "realPx": "144x35",
     "inkCanvasPct": 69.36507936507937,
-    "inkRealPct": 69.72222222222221
+    "inkRealPct": 69.62301587301587
   },
-  "reference": "extract/computed/out/carbon/textinput/gate-shots/lg.enabled__default.png",
-  "referenceSha256": "1ec462acedc55b679ac1ab19fff58d6f06810847dd13a4134d40df7a0405cfb7",
+  "reference": "extract/computed/out/carbon/textinput/orig-shots/lg.enabled__default.png",
+  "referenceSha256": "e704d7e9c13280bbce6d187c38d24c3a61ada8539aa648e84278855c6a693cc8",
   "canvasShot": "parity/receipts/console-loop/visual-truth/carbon/shots/text-input.png",
   "canvasShotSha256": "d688aba34fd934e9b4fb5421caade8c72484032cf52ca04bb30b1a91148d41ad",
   "diff": "parity/receipts/console-loop/visual-truth/carbon/diffs/text-input.diff.png",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": true,
+  "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 0.357142857142847,
+  "inkDelta": 0.25793650793650613,
   "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar met (headless REST render vs code reference)"
+  "note": "pixel bar missed (pctAAMasked=5.26 > 5)"
 }

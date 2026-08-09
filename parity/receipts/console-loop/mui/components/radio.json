@@ -40,14 +40,16 @@
       "Structure/variants reviewed via inspect (COMPONENT_SET, 14 variants on page Radio)."
     ],
     "defects": [
+      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=38.50 (bar 5), compositionOk=true",
       "pixel scorecard fail: pctAAMasked=38.50% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/radio.json",
       "REAL (CANVAS-SIDE), not reference-side (reference audit 2026-08-08): all 28 sibling gate-shots score IDENTICALLY at 38.50 — checked and unchecked, enabled and disabled — so no retarget can move this number and the reference is not the variable. The canvas cell draws an ellipse outline with a detached dot instead of MUI's concentric circles; ink boxes agree exactly (20x20 vs 20x20) and inkRealPct 61.0 vs inkCanvasPct 36.0 is the missing fill."
     ],
-    "reference": "parity/receipts/console-loop/mui/refs/radio.png",
-    "referenceSource": "extract/computed/out/mui/radio/gate-shots/default.checked.enabled__default.png",
+    "reference": "extract/computed/out/mui/radio/orig-shots/default.checked.enabled__default.png",
+    "referenceSource": "extract/computed/out/mui/radio/orig-shots/default.checked.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/radio.png — a byte-identical copy of mui/radio/gate-shots/default.checked.enabled__default.png)): parity/receipts/console-loop/mui/refs/radio.png [declared source: extract/computed/out/mui/radio/gate-shots/default.checked.enabled__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/radio-cell.png",
     "matchDeveloped": false,
-    "status": "fail-closed"
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/radio.json"
   },
   "fingerprint": {
     "v6": "v6:4150206674",

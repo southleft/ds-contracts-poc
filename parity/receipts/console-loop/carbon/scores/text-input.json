@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 3.4722222222222223,
-    "pctAAUnmasked": 1.488095238095238,
-    "pctAAMasked": 1.488095238095238,
+    "pctExactUnmasked": 4.146825396825396,
+    "pctAAUnmasked": 2.1626984126984126,
+    "pctAAMasked": 2.1626984126984126,
     "maskCoveragePct": 0,
     "canvasPx": "144x35",
     "realPx": "144x35",
     "inkCanvasPct": 69.36507936507937,
-    "inkRealPct": 69.4047619047619
+    "inkRealPct": 69.24603174603175
   },
-  "reference": "extract/computed/out/carbon/textinput/gate-shots/lg.enabled__default.png",
-  "referenceSha256": "1ec462acedc55b679ac1ab19fff58d6f06810847dd13a4134d40df7a0405cfb7",
+  "reference": "extract/computed/out/carbon/textinput/orig-shots/lg.enabled__default.png",
+  "referenceSha256": "e704d7e9c13280bbce6d187c38d24c3a61ada8539aa648e84278855c6a693cc8",
   "canvasShot": "parity/receipts/console-loop/carbon/shots/text-input-cell.png",
   "canvasShotSha256": "407085fb9fa84cc912692cfa7822aa6642e295829798dd07e1aad78e3be33e12",
   "diff": "parity/receipts/console-loop/carbon/scores/text-input.diff.png",
@@ -29,9 +29,9 @@
   "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 0.03968253968253066,
+  "inkDelta": 0.1190476190476204,
   "dprNormalized": true,
   "sizeNormalized": true,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T04:31:18.141Z"
+  "recordedAt": "2026-08-09T03:25:25.487Z"
 }

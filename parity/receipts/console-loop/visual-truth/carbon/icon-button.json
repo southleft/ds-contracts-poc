@@ -14,7 +14,7 @@
   "setNodeId": "1:5645",
   "cellNodeId": "1:5565",
   "cellName": "Kind=Primary, Size=Xs",
-  "cellPick": "variant-token-match",
+  "cellPick": "first-cell",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 7.638888888888889,
@@ -26,8 +26,8 @@
     "inkCanvasPct": 100,
     "inkRealPct": 100
   },
-  "reference": "parity/receipts/console-loop/carbon/refs/icon-button.png",
-  "referenceSha256": "38cca82fdab648263d28b95e984501540d56b34cfeabeac132abde74bb626e19",
+  "reference": "extract/computed/out/carbon/iconbutton/orig-shots/primary.unset.enabled__default.png",
+  "referenceSha256": "bd32f4df17374f7fef11cac8b5fea4008a6708c7a2a6f06a025c2a653c8ea77b",
   "canvasShot": "parity/receipts/console-loop/visual-truth/carbon/shots/icon-button.png",
   "canvasShotSha256": "910a688c809b9ff2f5c60598a5373204c7586490e01c0d574f1d28ea7e68d112",
   "diff": "parity/receipts/console-loop/visual-truth/carbon/diffs/icon-button.diff.png",

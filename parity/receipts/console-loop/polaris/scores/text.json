@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 58.333333333333336,
-    "pctAAUnmasked": 26.073232323232325,
-    "pctAAMasked": 26.073232323232325,
+    "pctExactUnmasked": 58.6489898989899,
+    "pctAAUnmasked": 25.37878787878788,
+    "pctAAMasked": 25.37878787878788,
     "maskCoveragePct": 0,
     "canvasPx": "144x11",
     "realPx": "143x11",
     "inkCanvasPct": 52.84090909090909,
-    "inkRealPct": 42.36111111111111
+    "inkRealPct": 39.33080808080808
   },
-  "reference": "extract/computed/out/text/gate-shots/headingSm.base.regular__default.png",
-  "referenceSha256": "9380ea7fdfa8868b9d27166523790bc4a56b3c79d0572d5b70cbe248695cec4f",
+  "reference": "extract/computed/out/text/orig-shots/headingSm.base.regular__default.png",
+  "referenceSha256": "c0dad37aa15e201ed26422fce5abfcdfb092e7992bb80997bd4c527a61fea588",
   "canvasShot": "parity/receipts/console-loop/polaris/shots/text-cell.png",
   "canvasShotSha256": "b10bc85e3f7d038623808d226c44058e071c8c88433b11dfab960f057b632156",
   "diff": "parity/receipts/console-loop/polaris/scores/text.diff.png",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1.006993006993007,
-  "inkDelta": 10.479797979797986,
+  "inkDelta": 13.51010101010101,
   "dprNormalized": true,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=26.07 > 5)",
-  "recordedAt": "2026-08-09T00:42:29.336Z"
+  "note": "pixel bar missed (pctAAMasked=25.38 > 5)",
+  "recordedAt": "2026-08-09T04:18:28.174Z"
 }

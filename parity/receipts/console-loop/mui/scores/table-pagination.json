@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 34.650455927051674,
-    "pctAAUnmasked": 17.831813576494426,
-    "pctAAMasked": 17.831813576494426,
+    "pctExactUnmasked": 27.151730257320317,
+    "pctAAUnmasked": 11.623779946761314,
+    "pctAAMasked": 11.623779946761314,
     "maskCoveragePct": 0,
-    "canvasPx": "141x7",
-    "realPx": "141x7",
-    "inkCanvasPct": 19.148936170212767,
-    "inkRealPct": 23.70820668693009
+    "canvasPx": "161x7",
+    "realPx": "161x7",
+    "inkCanvasPct": 20.319432120674357,
+    "inkRealPct": 21.73913043478261
   },
-  "reference": "parity/receipts/console-loop/mui/refs/table-pagination.png",
-  "referenceSha256": "eeb604a471ad4717070b8c557871c8a589f8e38e1dabbd876f44da961882672c",
+  "reference": "extract/computed/out/mui/pagination/orig-shots/__default.png",
+  "referenceSha256": "d6deac8f001cdc4ea23ac09f3e984899514c4dffe285f45892a6cfcec25f9a20",
   "canvasShot": "parity/receipts/console-loop/mui/shots/table-pagination-cell.png",
   "canvasShotSha256": "f4d8451d9160f247ccc3a18de303ffbbf0de255014ef38743724fa675ad909af",
   "diff": "parity/receipts/console-loop/mui/scores/table-pagination.diff.png",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 4.559270516717323,
+  "inkDelta": 1.4196983141082526,
   "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=17.83 > 5)",
-  "recordedAt": "2026-08-08T14:34:19.533Z"
+  "note": "pixel bar missed (pctAAMasked=11.62 > 5)",
+  "recordedAt": "2026-08-09T03:33:18.837Z"
 }

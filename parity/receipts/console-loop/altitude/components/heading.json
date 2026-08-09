@@ -36,24 +36,34 @@
     }
   },
   "visual": {
-    "ok": true,
-    "matchDeveloped": true,
+    "ok": false,
+    "matchDeveloped": false,
     "reviewedAt": "2026-08-06T13:32:20.271Z",
     "notes": [],
-    "defects": [],
-    "reference": "parity/receipts/console-loop/altitude/refs/heading.png",
+    "defects": [
+      "FC-REF-STALE-COPY: the 3.77 pass was scored against refs/heading.png, a crop whose 94x24 content box does not match the 91x24 box of the gate-shot its own referenceSource names. Against BOTH the current contract render and the real library render (byte-identical to each other here) pctAAMasked=11.40 — the pass never existed."
+    ],
+    "reference": "extract/computed/out/altitude/heading/orig-shots/display-lg.bold__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "extract/computed/out/altitude/heading/gate-shots/display-lg.bold__default.png",
+    "referenceSource": "extract/computed/out/altitude/heading/orig-shots/display-lg.bold__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER, hand-cropped — and the crop DRIFTED (94x24 content box vs 91x24 in the artifact its referenceSource names)): parity/receipts/console-loop/altitude/refs/heading.png [declared source: extract/computed/out/altitude/heading/gate-shots/display-lg.bold__default.png].",
     "scorecard": "parity/receipts/console-loop/altitude/scores/heading.json",
-    "matchDevelopedReason": "agent AA=3.77 compositionOk (cropped-ref loop)",
-    "matchedAt": "2026-08-08T03:09:53.136Z",
-    "status": "scored-pass",
+    "status": "fail-closed",
     "scoreConfirmed": {
       "at": "2026-08-08T04:31:56.356Z",
       "pctAAMasked": 3.7677304964539005,
       "compositionOk": true,
       "supersededDefects": [],
       "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+    },
+    "revokedByReferenceTruth": {
+      "at": "2026-08-09T03:16:00.776Z",
+      "was": {
+        "ok": true,
+        "matchDeveloped": true,
+        "reason": "agent AA=3.77 compositionOk (cropped-ref loop)",
+        "priorReference": "parity/receipts/console-loop/altitude/refs/heading.png"
+      },
+      "reason": "FC-REF-STALE-COPY: the 3.77 pass was scored against refs/heading.png, a crop whose 94x24 content box does not match the 91x24 box of the gate-shot its own referenceSource names. Against BOTH the current contract render and the real library render (byte-identical to each other here) pctAAMasked=11.40 — the pass never existed."
     }
   },
   "fingerprint": {
@@ -167,6 +177,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": true
+    "visualMatchDeveloped": false
   }
 }

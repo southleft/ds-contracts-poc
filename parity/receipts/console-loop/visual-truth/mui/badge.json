@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 62.375,
-    "pctAAUnmasked": 55.75,
-    "pctAAMasked": 55.75,
+    "pctExactUnmasked": 77.875,
+    "pctAAUnmasked": 63.24999999999999,
+    "pctAAMasked": 63.24999999999999,
     "maskCoveragePct": 0,
     "canvasPx": "40x20",
     "realPx": "20x20",
     "inkCanvasPct": 95.75,
-    "inkRealPct": 49.375
+    "inkRealPct": 40.875
   },
-  "reference": "parity/receipts/console-loop/mui/refs/badge.png",
-  "referenceSha256": "842326eada9d64d328f84ca718ff1dd3479fd29552e3b21f9cf521f6063a0b1b",
+  "reference": "extract/computed/out/mui/badge/orig-shots/default.dot__default.png",
+  "referenceSha256": "ed11fe7eaf22b9438f142dc7d7cf1f278df18e7252123220a140a88004745192",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/badge.png",
   "canvasShotSha256": "360d4c052cece40cbd3dec66d423aef3d1cc1752b922472b5f02aaebe955b737",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/badge.diff.png",
@@ -36,8 +36,8 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 2,
-  "inkDelta": 46.375,
+  "inkDelta": 54.875,
   "dprNormalized": true,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=2.00, inkDelta=46.4)"
+  "note": "composition mismatch (scaleRatio=2.00, inkDelta=54.9)"
 }

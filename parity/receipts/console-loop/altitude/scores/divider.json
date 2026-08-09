@@ -17,8 +17,8 @@
     "inkCanvasPct": 100,
     "inkRealPct": 100
   },
-  "reference": "parity/receipts/console-loop/altitude/refs/divider.png",
-  "referenceSha256": "67471ba41775e829e3e2b04077b226df311703e5971554934966a5a3609f85dd",
+  "reference": "extract/computed/out/altitude/divider/orig-shots/unset__default.png",
+  "referenceSha256": "fea9b08be7db18d7ead37f3b4e33390ba7db3eb9b2af7ba7f28fdff381b7e404",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/divider-cell.png",
   "canvasShotSha256": "6cc49496f88fd03a5a601b21ceb29f412620ce6fc8a7b40360ab5c60cf8ca5c8",
   "diff": "parity/receipts/console-loop/altitude/scores/divider.diff.png",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T07:01:45.423Z"
+  "recordedAt": "2026-08-09T03:13:21.205Z"
 }

@@ -507,14 +507,25 @@ for (const lane of lanes) {
       const shotHist = contentHistogram(shotPng, a);
       const pinnedTV = tvDistancePct(shotHist, contentHistogram(refPng, b));
 
-      // C5 — rank the shot against every sibling __default gate-shot in the
+      // C5 — rank the shot against every sibling __default render in the
       // directory the receipt's OWN referenceSource names. No referenceSource
-      // resolving into a gate-shots dir means no siblings and no sweep: this
-      // check never guesses where a reference "should" have come from.
+      // resolving into a per-combo render dir means no siblings and no sweep:
+      // this check never guesses where a reference "should" have come from.
+      //
+      // BOTH `gate-shots/` (the CONTRACT render) and `orig-shots/` (the REAL
+      // LIBRARY render, written by `extract/computed/run.ts --keep-originals`)
+      // are per-combo sibling sets keyed `<combo>__<interaction>.png`, so both
+      // sweep. Accepting only `gate-shots` was a silent kill switch: the moment
+      // a lane was re-pointed at the library render — which is the whole point
+      // of the 2026-08-08 REFERENCE-TRUTH round — C5 went inert for that lane
+      // while still reporting itself as enabled. astryx hit exactly that at
+      // f26c1205 and the `console-loop-reference-content-checks` eval went red
+      // on the committed tree naming it ("the sweep is enabled but inert").
+      const SWEEPABLE_DIRS = new Set(["gate-shots", "orig-shots"]);
       if (referenceSweepCheck && refSource) {
         const srcDir = path.dirname(refSource);
         const siblingsDir = path.join(ROOT, srcDir);
-        if (path.basename(srcDir) === "gate-shots" && existsSync(siblingsDir)) {
+        if (SWEEPABLE_DIRS.has(path.basename(srcDir)) && existsSync(siblingsDir)) {
           const siblings = readdirSync(siblingsDir).filter((f) => f.endsWith("__default.png"));
           if (siblings.length >= 2) {
             let best = null;

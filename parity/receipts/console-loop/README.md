@@ -28,8 +28,13 @@ npm run console-loop:developed-score     # pixel-score a stem vs its developed r
 - **Honest fail-closed is legal.** No pass-claims + non-empty named
   `visual.defects` (`visual.status: "fail-closed"`) is counted and printed,
   not failed — the branch stays green while the visual hill-climb proceeds.
-  Current genuine scorecard passes: tailwind 3/5, altitude 4/8, carbon 2/10,
-  astryx 0/13, polaris 0/12 (9/48 foreign; see `CORPORA.md`).
+  Current genuine scorecard passes, **re-measured 2026-08-08 against the real
+  npm package** (`extract/computed/out/<lib>/<comp>/orig-shots/`, written by
+  `extract/computed/run.ts --keep-originals`): tailwind 3/5, altitude 3/8,
+  carbon 3/10, astryx 0/11, polaris 4/12, mui 2/31 (15/77 foreign; see
+  `CORPORA.md` and each lane's `LEDGER.md`). Everything before that date was
+  scored against the **CONTRACT RENDER** (`gate-shots/` = enriched contract →
+  emit-html) and measured emitter agreement, not fidelity.
 - **Attested-only (first-party remainder).** MUI went strict 2026-08-08;
   the first-party lane BEGAN its strict transition the same day on the blank
   playground file `BMjUA2ue5CaZXU4kufxL0z` — 10 stems carry pixel scorecards

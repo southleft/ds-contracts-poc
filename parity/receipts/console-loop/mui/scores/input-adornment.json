@@ -17,7 +17,7 @@
     "inkCanvasPct": 51.388888888888886,
     "inkRealPct": 54.861111111111114
   },
-  "reference": "parity/receipts/console-loop/mui/refs/input-adornment.png",
+  "reference": "extract/computed/out/mui/inputadornment/orig-shots/end__default.png",
   "referenceSha256": "379b684fabf2e8169a64f70dfe3b90968345434cd907dcf85b08853a8c8b5ec2",
   "canvasShot": "parity/receipts/console-loop/mui/shots/input-adornment-cell.png",
   "canvasShotSha256": "54a2fce95391d856b337c8344ece455c7c860f245770e6392e904869f5a1d2eb",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar missed (pctAAMasked=20.83 > 5)",
-  "recordedAt": "2026-08-08T14:34:20.169Z"
+  "recordedAt": "2026-08-09T03:33:15.820Z"
 }

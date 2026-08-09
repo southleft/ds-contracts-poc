@@ -10,7 +10,7 @@
   "receipt": "parity/receipts/console-loop/altitude/components/chip.json",
   "status": "pass",
   "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
-  "fileVersion": "2385245229284424737",
+  "fileVersion": "2385229420588708070",
   "setNodeId": "60:10126",
   "cellNodeId": "60:10110",
   "cellName": "Variant=Info, Type=Default",
@@ -26,7 +26,7 @@
     "inkCanvasPct": 90.83557951482479,
     "inkRealPct": 88.94878706199461
   },
-  "reference": "parity/receipts/console-loop/altitude/refs/chip.png",
+  "reference": "extract/computed/out/altitude/chip/orig-shots/info.unset__default.png",
   "referenceSha256": "b28902a5f43a39e6ab670f849993d1a92532e1c128ab569ddd8d5be4c2ead8bf",
   "canvasShot": "parity/receipts/console-loop/visual-truth/altitude/shots/chip.png",
   "canvasShotSha256": "21e44b6a9469da8ef2ce9a59d48ba919b2cc533b07e2e7f09492279cd4b28fb9",

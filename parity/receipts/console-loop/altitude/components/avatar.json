@@ -37,13 +37,14 @@
     "reviewedAt": "2026-08-06T13:32:20.271Z",
     "notes": [],
     "defects": [
+      "FC-REF-BLANK + FC-REF-CONTRACT-RENDER: the prior gate-shot reference was 0% ink (blank); against the real altitude-web-components render the canvas cell is 24x24 vs library 32x32, pctAAMasked=5.47, compositionOk=false.",
       "Set collapsed to 24×24 single variant — not match to developed altitude avatar scale — fail closed."
     ],
-    "reference": "extract/computed/out/altitude/avatar/gate-shots/sm.off__default.png",
+    "reference": "extract/computed/out/altitude/avatar/orig-shots/sm.off__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
     "scorecard": "parity/receipts/console-loop/altitude/scores/avatar.json",
-    "matchDevelopedReason": "reverted: gate-shot sm.off__default has 0% ink (blank) — false framing-tolerant pass",
-    "matchedAt": "2026-08-08T03:06:35.561Z"
+    "referenceSource": "extract/computed/out/altitude/avatar/orig-shots/sm.off__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (gate-shots)): extract/computed/out/altitude/avatar/gate-shots/sm.off__default.png [declared source: (none)].",
+    "status": "fail-closed"
   },
   "fingerprint": {
     "v6": "v6:923243794",

@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 61.111111111111114,
-    "pctAAUnmasked": 30.934343434343436,
-    "pctAAMasked": 30.934343434343436,
+    "pctExactUnmasked": 38.853092783505154,
+    "pctAAUnmasked": 19.329896907216497,
+    "pctAAMasked": 19.329896907216497,
     "maskCoveragePct": 0,
-    "canvasPx": "66x12",
-    "realPx": "66x12",
-    "inkCanvasPct": 27.02020202020202,
-    "inkRealPct": 48.484848484848484
+    "canvasPx": "97x16",
+    "realPx": "90x16",
+    "inkCanvasPct": 27.061855670103093,
+    "inkRealPct": 25.902061855670105
   },
-  "reference": "extract/computed/out/carbon/checkbox/gate-shots/unchecked.enabled__default.png",
-  "referenceSha256": "6033b723710f985e74b3dbacf8b75418aa1a3d0fb06f0cc285737daebb9c22bd",
+  "reference": "extract/computed/out/carbon/checkbox/orig-shots/unchecked.enabled__default.png",
+  "referenceSha256": "ada35196e3a1c6a42422eee35f9c010d6e4d7aa00562a11e3bb615d45fa4af34",
   "canvasShot": "parity/receipts/console-loop/carbon/shots/checkbox-cell.png",
   "canvasShotSha256": "008599ac6865d72417d8fab61552e24db6f18fcb47dcd3746c17ab615aca30b9",
   "diff": "parity/receipts/console-loop/carbon/scores/checkbox.diff.png",
@@ -32,10 +32,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 21.464646464646464,
+  "scaleRatio": 1.0777777777777777,
+  "inkDelta": 1.1597938144329873,
   "dprNormalized": false,
-  "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=30.93 > 5)",
-  "recordedAt": "2026-08-08T04:31:16.578Z"
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=19.33 > 5)",
+  "recordedAt": "2026-08-09T03:42:30.387Z"
 }

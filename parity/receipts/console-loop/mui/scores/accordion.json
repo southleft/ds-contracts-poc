@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 13.841379310344829,
-    "pctAAUnmasked": 6.800000000000001,
-    "pctAAMasked": 6.800000000000001,
+    "pctExactUnmasked": 99.51034482758621,
+    "pctAAUnmasked": 94.63448275862069,
+    "pctAAMasked": 94.63448275862069,
     "maskCoveragePct": 0,
     "canvasPx": "290x50",
-    "realPx": "145x45",
+    "realPx": "290x50",
     "inkCanvasPct": 7.813793103448276,
-    "inkRealPct": 4.772413793103449
+    "inkRealPct": 99.91724137931034
   },
-  "reference": "parity/receipts/console-loop/mui/refs/accordion.png",
-  "referenceSha256": "e81b66772c838c5b0c0a4951bc4c625929ad373d69cc549451d1ffc033c06f55",
+  "reference": "extract/computed/out/mui/accordion/orig-shots/elevation.collapsed.disabled__default.png",
+  "referenceSha256": "da6b54883c63ff6afef3cd9069ed8882fd211063e864bd758424c369509b5e20",
   "canvasShot": "parity/receipts/console-loop/mui/shots/accordion-cell.png",
   "canvasShotSha256": "d9c1b726aaea7bc0c8023e88fc68fd4a09aba309b0dc1adbabaacdb24545ec14",
   "diff": "parity/receipts/console-loop/mui/scores/accordion.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 2,
-  "inkDelta": 3.0413793103448272,
-  "dprNormalized": true,
+  "scaleRatio": 1,
+  "inkDelta": 92.10344827586206,
+  "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=2.00, inkDelta=3.0) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T08:30:06.533Z"
+  "note": "composition mismatch (scaleRatio=1.00, inkDelta=92.1) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-09T03:33:11.033Z"
 }

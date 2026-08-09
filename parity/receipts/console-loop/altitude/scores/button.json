@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 12.976190476190478,
-    "pctAAUnmasked": 4.226190476190476,
-    "pctAAMasked": 4.226190476190476,
+    "pctExactUnmasked": 13.750000000000002,
+    "pctAAUnmasked": 4.7023809523809526,
+    "pctAAMasked": 4.7023809523809526,
     "maskCoveragePct": 0,
     "canvasPx": "84x40",
-    "realPx": "84x40",
+    "realPx": "82x40",
     "inkCanvasPct": 99.88095238095238,
-    "inkRealPct": 99.88095238095238
+    "inkRealPct": 97.5
   },
-  "reference": "parity/receipts/console-loop/altitude/refs/button.png",
-  "referenceSha256": "3f844b8b4a2aeae4d46e042487fed545c1fc2c7f2a11d323fd9a5a9e135b3f6c",
+  "reference": "extract/computed/out/altitude/button/orig-shots/secondary__default.png",
+  "referenceSha256": "499a2ca84068fc0031f9d2f33b8822ed9066eaf8cd9d65523092f2eb6b4c9e65",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/button-cell.png",
   "canvasShotSha256": "65e534040ec3939ceb4054be5a7044d71f5ddd3cbeb815ce0c5d39095ac888a8",
   "diff": "parity/receipts/console-loop/altitude/scores/button.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 0,
+  "scaleRatio": 1.024390243902439,
+  "inkDelta": 2.3809523809523796,
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-08T07:19:57.333Z"
+  "recordedAt": "2026-08-09T03:14:05.236Z"
 }

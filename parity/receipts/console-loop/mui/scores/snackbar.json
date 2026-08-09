@@ -1,24 +1,24 @@
 {
   "version": 3,
-  "status": "pass",
+  "status": "fail",
   "matchDeveloped": true,
-  "recommendMatchDeveloped": true,
+  "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 37.42575205978157,
-    "pctAAUnmasked": 2.3184518106917036,
-    "pctAAMasked": 2.3184518106917036,
+    "pctExactUnmasked": 27.236719478098788,
+    "pctAAUnmasked": 17.45107176141659,
+    "pctAAMasked": 17.45107176141659,
     "maskCoveragePct": 0,
-    "canvasPx": "296x58",
-    "realPx": "307x68",
-    "inkCanvasPct": 81.85955163824488,
-    "inkRealPct": 97.00134125311362
+    "canvasPx": "148x29",
+    "realPx": "148x29",
+    "inkCanvasPct": 99.55731593662628,
+    "inkRealPct": 98.50885368126747
   },
-  "reference": "parity/receipts/console-loop/mui/refs/snackbar.png",
-  "referenceSha256": "d0b09d8ac6786da64ab50223b8427fb3e4d570cbb4952e17671ef036c1cad78a",
+  "reference": "extract/computed/out/mui/snackbar/orig-shots/__default.png",
+  "referenceSha256": "c8a7bbfe5b851dfee1526971bd589a3d23f5304e7c7d76b9486f02bb0638d101",
   "canvasShot": "parity/receipts/console-loop/mui/shots/snackbar-cell.png",
   "canvasShotSha256": "67293436727f4c5986793411b30b4c369cf45dfaac04bb71f5f0b1b980ed8577",
   "diff": "parity/receipts/console-loop/mui/scores/snackbar.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.1724137931034482,
-  "inkDelta": 15.141789614868742,
-  "dprNormalized": false,
-  "sizeNormalized": false,
-  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-09T00:42:46.937Z"
+  "scaleRatio": 1,
+  "inkDelta": 1.0484622553588139,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=17.45 > 5)",
+  "recordedAt": "2026-08-09T03:33:18.223Z"
 }

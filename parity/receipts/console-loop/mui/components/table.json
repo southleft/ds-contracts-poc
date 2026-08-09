@@ -25,11 +25,14 @@
       "FC-REF-STALE-COPY CLOSED ( reference audit 2026-08-08): the committed refs/ copy had the same dimensions as the gate-shot its referenceSource names but different bytes — the source had been re-rendered (Roboto cfg.fonts substrate) underneath it, so the scored PNG was not the artifact the provenance line claimed. Copy re-synced from source. "
     ],
     "defects": [],
-    "reference": "parity/receipts/console-loop/mui/refs/table.png",
-    "referenceSource": "extract/computed/out/mui/table/gate-shots/medium__default.png",
+    "reference": "extract/computed/out/mui/table/orig-shots/medium__default.png",
+    "referenceSource": "extract/computed/out/mui/table/orig-shots/medium__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/table.png — a byte-identical copy of mui/table/gate-shots/medium__default.png)): parity/receipts/console-loop/mui/refs/table.png [declared source: extract/computed/out/mui/table/gate-shots/medium__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/table-cell.png",
     "matchDeveloped": true,
-    "status": "scored-pass"
+    "status": "scored-pass",
+    "scorecard": "parity/receipts/console-loop/mui/scores/table.json",
+    "matchDevelopedReason": "scorer pctAAMasked=1.49 compositionOk against the REAL LIBRARY RENDER (extract/computed/out/mui/table/orig-shots/medium__default.png) — 2026-08-08 REFERENCE-TRUTH re-measure",
+    "matchedAt": "2026-08-09T03:34:07.029Z"
   },
   "fingerprint": {
     "v6": "v6:966664822",

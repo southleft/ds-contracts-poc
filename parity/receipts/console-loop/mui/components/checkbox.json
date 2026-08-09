@@ -17,18 +17,31 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:323).",
       "Checkbox COMPONENT_SET 21:323: 3 variant(s), 2 prop def(s). Structure looks sane; slot placeholders OK.",
-      "2026-08-08 STRICT-LANE CONVERSION: pixel scorecard PASS on both instruments \u2014 lane scorer pctAAMasked=0.00 (scores/checkbox.json, headless REST cell at scale 1 vs committed developed ref mui/refs/checkbox.png) and headless visual-truth card agrees; bar pctAAMasked<=5 AND compositionOk."
+      "2026-08-08 STRICT-LANE CONVERSION: pixel scorecard PASS on both instruments — lane scorer pctAAMasked=0.00 (scores/checkbox.json, headless REST cell at scale 1 vs committed developed ref mui/refs/checkbox.png) and headless visual-truth card agrees; bar pctAAMasked<=5 AND compositionOk."
     ],
-    "defects": [],
-    "reference": "parity/receipts/console-loop/mui/refs/checkbox.png",
-    "referenceSource": "extract/computed/out/mui/checkbox/gate-shots/checked.disabled__default.png",
+    "defects": [
+      "FC-DISABLED-NOT-PAINTED (new, and only visible now): the pinned combo is checked.disabled. Canvas and library agree exactly on geometry (18x18 both, inkCanvasPct 92.6 == inkRealPct 92.6) yet pctAAMasked is 81.48 — the canvas paints the ENABLED checked colour where MUI paints the disabled grey. The contract render made the identical mistake, so the old basis scored 0.00: a perfect match between two renders that are both wrong."
+    ],
+    "reference": "extract/computed/out/mui/checkbox/orig-shots/checked.disabled__default.png",
+    "referenceSource": "extract/computed/out/mui/checkbox/orig-shots/checked.disabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (refs/checkbox.png, byte-identical copy of checkbox/gate-shots/checked.disabled__default.png)): parity/receipts/console-loop/mui/refs/checkbox.png [declared source: extract/computed/out/mui/checkbox/gate-shots/checked.disabled__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/checkbox-cell.png",
-    "matchDeveloped": true,
-    "status": "scored-pass"
+    "matchDeveloped": false,
+    "status": "fail-closed",
+    "scorecard": "parity/receipts/console-loop/mui/scores/checkbox.json",
+    "revokedByReferenceTruth": {
+      "at": "2026-08-09T03:34:06.430Z",
+      "was": {
+        "ok": true,
+        "matchDeveloped": true,
+        "reason": null,
+        "priorReference": "parity/receipts/console-loop/mui/refs/checkbox.png"
+      },
+      "reason": "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=81.48 (bar 5), compositionOk=true"
+    }
   },
   "fingerprint": {
     "v6": "v6:820111622",
@@ -43,7 +56,7 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Checked enum \u2192 Unchecked/Checked/Indeterminate",
+      "Checked enum → Unchecked/Checked/Indeterminate",
       "BOOLEAN Disabled"
     ],
     "observed": {
@@ -96,6 +109,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": true
+    "visualMatchDeveloped": false
   }
 }

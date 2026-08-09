@@ -37,20 +37,16 @@
     }
   },
   "visual": {
-    "ok": false,
-    "matchDeveloped": false,
+    "ok": true,
+    "matchDeveloped": true,
     "reviewedAt": "2026-08-06T13:32:20.271Z",
     "notes": [],
-    "defects": [
-      "FC-REF-WRONG-VARIANT + unverifiable provenance (closed by reference audit 2026-08-08): the committed reference was a hand crop of pair--unset.lg__default.png#package-left-pill — a BARE-FILENAME referenceSource that named no directory, so no gate could resolve or verify it — depicting the unset Type. The canvas cell is the live COMPONENT 1:5974 \"Type=Blue, Size=Lg\", 46x32, fill #d0e2ff (Desktop Bridge, fileKey GnQnjSNBXtgtd2Ht0Hs1C8). Reference retargeted to the committed gate-shot blue.lg__default.",
-      "FC-REF-FRAMING residual: the carbon Tag gate-shot renders the pill stretched to the harness stage width (ink ~208x32) while the canvas cell hugs at 46x32, so the pair stays composition-blocked (scaleRatio ~4.5). No hug-width developed Tag render exists in extract/computed/out/carbon/tag.",
-      "REAL residual is the harness stage width, not the variant (reference audit 2026-08-08): after the Type=Blue/Size=Lg retarget every sibling gate-shot still renders the pill stretched to ~208px. Confirmed across the 52-shot sweep — the best sibling (blue.sm) is 48.60 at the same 4.52 scaleRatio."
-    ],
-    "reference": "extract/computed/out/carbon/tag/gate-shots/blue.lg__default.png",
+    "defects": [],
+    "reference": "extract/computed/out/carbon/tag/orig-shots/blue.lg__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "extract/computed/out/carbon/tag/gate-shots/blue.lg__default.png",
+    "referenceSource": "extract/computed/out/carbon/tag/orig-shots/blue.lg__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (gate-shots) — and a BROKEN one: its content box is 208x32 while the library renders 44x32): extract/computed/out/carbon/tag/gate-shots/blue.lg__default.png [declared source: extract/computed/out/carbon/tag/gate-shots/blue.lg__default.png].",
     "scorecard": "parity/receipts/console-loop/carbon/scores/tag.json",
-    "status": "fail-closed",
+    "status": "scored-pass",
     "revoked": {
       "at": "2026-08-08T04:31:56.356Z",
       "was": {
@@ -60,7 +56,9 @@
         "matchedAt": "2026-08-08T03:19:29.221Z"
       },
       "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=76.04, compositionOk=false); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard; NOTE: an earlier scorecard (recorded 2026-08-08T03:19Z) passed at pctAAMasked=4.21 against a 44x32 reference — the reference PNG on disk has since changed (now 208x32), so the pass no longer holds against pinned bytes"
-    }
+    },
+    "matchDevelopedReason": "scorer pctAAMasked=2.85 compositionOk against the REAL LIBRARY RENDER (extract/computed/out/carbon/tag/orig-shots/blue.lg__default.png) — 2026-08-08 REFERENCE-TRUTH re-measure",
+    "matchedAt": "2026-08-09T03:26:44.483Z"
   },
   "fingerprint": {
     "v6": "v6:640356538",
@@ -212,7 +210,7 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": false
+    "visualMatchDeveloped": true
   },
   "reSyncedAt": "2026-08-07T12:10:48.663Z",
   "reSyncNote": "Re-synced via clientStorage chunks (n=15, total=115875); amended, rebuilt 36 variants"
