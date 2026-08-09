@@ -1,6 +1,6 @@
 {
-  "passed": 213,
-  "total": 216,
+  "passed": 214,
+  "total": 217,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -1017,6 +1017,11 @@
     },
     {
       "id": "console-loop-capture-framing-pin",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "console-loop-reference-content-checks",
       "claim": "C3-detection",
       "pass": true
     },
