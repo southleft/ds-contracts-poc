@@ -7,9 +7,9 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 1512,
-    "cellsEqual": 1512,
-    "pctEqual": 100,
-    "rowsFullyEqual": 56,
+    "cellsEqual": 1448,
+    "pctEqual": 95.76719576719577,
+    "rowsFullyEqual": 36,
     "rows": 56
   },
   "pixel": {
@@ -22,9 +22,9 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 1.7738560267857142,
-    "meanAA": 1.1672247023809537,
-    "maxAA": 1.3411458333333333
+    "meanExact": 2.4451264880952395,
+    "meanAA": 1.9714936755952392,
+    "maxAA": 2.1256510416666665
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -41,54 +41,103 @@
   "worstRows": [
     {
       "key": "warning__default",
-      "pctAA": 1.3411458333333333,
-      "pctExact": 1.77734375,
-      "channelsMismatched": 0
+      "pctAA": 2.1256510416666665,
+      "pctExact": 2.4479166666666665,
+      "channelsMismatched": 12
     },
     {
       "key": "warning__hover",
-      "pctAA": 1.3411458333333333,
-      "pctExact": 1.77734375,
-      "channelsMismatched": 0
+      "pctAA": 2.1256510416666665,
+      "pctExact": 2.4479166666666665,
+      "channelsMismatched": 12
     },
     {
       "key": "warning__focus-visible",
-      "pctAA": 1.3411458333333333,
-      "pctExact": 1.77734375,
-      "channelsMismatched": 0
+      "pctAA": 2.1256510416666665,
+      "pctExact": 2.4479166666666665,
+      "channelsMismatched": 12
     },
     {
       "key": "warning__active",
-      "pctAA": 1.3411458333333333,
-      "pctExact": 1.77734375,
-      "channelsMismatched": 0
+      "pctAA": 2.1256510416666665,
+      "pctExact": 2.4479166666666665,
+      "channelsMismatched": 12
     },
     {
       "key": "blue__default",
-      "pctAA": 1.3411458333333333,
-      "pctExact": 1.77734375,
+      "pctAA": 2.1256510416666665,
+      "pctExact": 2.4479166666666665,
       "channelsMismatched": 0
     },
     {
       "key": "blue__hover",
-      "pctAA": 1.3411458333333333,
-      "pctExact": 1.77734375,
+      "pctAA": 2.1256510416666665,
+      "pctExact": 2.4479166666666665,
       "channelsMismatched": 0
     },
     {
       "key": "blue__focus-visible",
-      "pctAA": 1.3411458333333333,
-      "pctExact": 1.77734375,
+      "pctAA": 2.1256510416666665,
+      "pctExact": 2.4479166666666665,
       "channelsMismatched": 0
     },
     {
       "key": "blue__active",
-      "pctAA": 1.3411458333333333,
-      "pctExact": 1.77734375,
+      "pctAA": 2.1256510416666665,
+      "pctExact": 2.4479166666666665,
       "channelsMismatched": 0
     }
   ],
-  "topMismatchedChannels": [],
+  "topMismatchedChannels": [
+    [
+      "root.background-color",
+      20
+    ],
+    [
+      "root.border-bottom-color",
+      4
+    ],
+    [
+      "root.border-left-color",
+      4
+    ],
+    [
+      "root.border-right-color",
+      4
+    ],
+    [
+      "root.border-top-color",
+      4
+    ],
+    [
+      "root.caret-color",
+      4
+    ],
+    [
+      "root.color",
+      4
+    ],
+    [
+      "root.column-rule-color",
+      4
+    ],
+    [
+      "root.outline-color",
+      4
+    ],
+    [
+      "root.row-rule-color",
+      4
+    ],
+    [
+      "root.text-decoration-color",
+      4
+    ],
+    [
+      "root.text-emphasis-color",
+      4
+    ]
+  ],
   "namedLosses": [],
   "unresolvedTokenRefs": {
     "count": 0,
@@ -96,457 +145,1058 @@
   },
   "shippedMinted": {
     "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-    "leavesAdded": 235,
-    "divergent": []
+    "leavesAdded": 284,
+    "divergent": [
+      {
+        "token": "imported.badge.root.background-color.blue",
+        "fresh": "#c4ddfb",
+        "shipped": "{color-background-blue}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.cyan",
+        "fresh": "#a3e0ef",
+        "shipped": "{color-background-cyan}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.error",
+        "fresh": "#e33f4a",
+        "shipped": "{color-error}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.green",
+        "fresh": "#c5e5c0",
+        "shipped": "{color-background-green}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.info",
+        "fresh": "#0074e2",
+        "shipped": "{color-accent}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.neutral",
+        "fresh": "#e5e5e5",
+        "shipped": "#0536591a",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.orange",
+        "fresh": "#fad0b5",
+        "shipped": "{color-background-orange}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.pink",
+        "fresh": "#fccadc",
+        "shipped": "{color-background-pink}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.purple",
+        "fresh": "#eccef3",
+        "shipped": "{color-background-purple}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.red",
+        "fresh": "#facecb",
+        "shipped": "{color-background-red}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.success",
+        "fresh": "#198100",
+        "shipped": "{color-success}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.teal",
+        "fresh": "#a5e3d6",
+        "shipped": "{color-background-teal}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.warning",
+        "fresh": "#ffce2f",
+        "shipped": "{color-warning}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.background-color.yellow",
+        "fresh": "#f8da9d",
+        "shipped": "{color-background-yellow}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.blue",
+        "fresh": "#00458c",
+        "shipped": "{color-text-blue}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.cyan",
+        "fresh": "#00505f",
+        "shipped": "{color-text-cyan}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.error",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-error}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.root.color.green",
+        "fresh": "#0c5700",
+        "shipped": "{color-text-green}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.info",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.root.color.neutral",
+        "fresh": "#262626",
+        "shipped": "{color-text-primary}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.orange",
+        "fresh": "#6e3500",
+        "shipped": "{color-text-orange}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.pink",
+        "fresh": "#83004b",
+        "shipped": "{color-text-pink}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.purple",
+        "fresh": "#700084",
+        "shipped": "{color-text-purple}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.red",
+        "fresh": "#89001a",
+        "shipped": "{color-text-red}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.success",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-success}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.root.color.teal",
+        "fresh": "#005348",
+        "shipped": "{color-text-teal}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.warning",
+        "fresh": "#171717",
+        "shipped": "{color-on-warning}",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.badge.root.color.yellow",
+        "fresh": "#584400",
+        "shipped": "{color-text-yellow}",
+        "resolvedEqual": false
+      }
+    ]
   },
   "rows": [
     {
       "key": "neutral__default",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 0.20182291666666666,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 0.263671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(5, 54, 89, 0.1)",
+          "theirs": "rgba(229, 229, 229, 1)"
+        }
+      ]
     },
     {
       "key": "neutral__hover",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 0.20182291666666666,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 0.263671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(5, 54, 89, 0.1)",
+          "theirs": "rgba(229, 229, 229, 1)"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "neutral__focus-visible",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 0.20182291666666666,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 0.263671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(5, 54, 89, 0.1)",
+          "theirs": "rgba(229, 229, 229, 1)"
+        }
+      ]
     },
     {
       "key": "neutral__active",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 0.20182291666666666,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 0.263671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(5, 54, 89, 0.1)",
+          "theirs": "rgba(229, 229, 229, 1)"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "info__default",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0279947916666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(0, 100, 224, 1)",
+          "theirs": "rgba(0, 116, 226, 1)"
+        }
+      ]
     },
     {
       "key": "info__hover",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0279947916666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(0, 100, 224, 1)",
+          "theirs": "rgba(0, 116, 226, 1)"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "info__focus-visible",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0279947916666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(0, 100, 224, 1)",
+          "theirs": "rgba(0, 116, 226, 1)"
+        }
+      ]
     },
     {
       "key": "info__active",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0279947916666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(0, 100, 224, 1)",
+          "theirs": "rgba(0, 116, 226, 1)"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "success__default",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0279947916666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(13, 134, 38, 1)",
+          "theirs": "rgba(25, 129, 0, 1)"
+        }
+      ]
     },
     {
       "key": "success__hover",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0279947916666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(13, 134, 38, 1)",
+          "theirs": "rgba(25, 129, 0, 1)"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "success__focus-visible",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0279947916666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(13, 134, 38, 1)",
+          "theirs": "rgba(25, 129, 0, 1)"
+        }
+      ]
     },
     {
       "key": "success__active",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0279947916666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(13, 134, 38, 1)",
+          "theirs": "rgba(25, 129, 0, 1)"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "warning__default",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "channelsEqual": 15,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(233, 175, 8, 1)",
+          "theirs": "rgba(255, 206, 47, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-bottom-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "caret-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "column-rule-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "row-rule-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "text-decoration-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        }
+      ]
     },
     {
       "key": "warning__hover",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "channelsEqual": 15,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(233, 175, 8, 1)",
+          "theirs": "rgba(255, 206, 47, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-bottom-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "caret-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "column-rule-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "row-rule-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "text-decoration-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "warning__focus-visible",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "channelsEqual": 15,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(233, 175, 8, 1)",
+          "theirs": "rgba(255, 206, 47, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-bottom-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "caret-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "column-rule-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "row-rule-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "text-decoration-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        }
+      ]
     },
     {
       "key": "warning__active",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "channelsEqual": 15,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(233, 175, 8, 1)",
+          "theirs": "rgba(255, 206, 47, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-bottom-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "caret-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "column-rule-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "row-rule-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "text-decoration-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(23, 23, 23, 1)"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "error__default",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0247395833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 25, 59, 1)",
+          "theirs": "rgba(227, 63, 74, 1)"
+        }
+      ]
     },
     {
       "key": "error__hover",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0247395833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 25, 59, 1)",
+          "theirs": "rgba(227, 63, 74, 1)"
+        }
+      ],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "error__focus-visible",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0247395833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 25, 59, 1)",
+          "theirs": "rgba(227, 63, 74, 1)"
+        }
+      ]
     },
     {
       "key": "error__active",
       "channelsCompared": 27,
-      "channelsEqual": 27,
-      "pctExact": 1.7610677083333333,
-      "pctAA": 1.2890625,
-      "mismatches": []
+      "channelsEqual": 26,
+      "pctExact": 2.4348958333333335,
+      "pctAA": 2.0247395833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "background-color",
+          "ours": "rgba(227, 25, 59, 1)",
+          "theirs": "rgba(227, 63, 74, 1)"
+        }
+      ],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "blue__default",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "blue__hover",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "blue__focus-visible",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "blue__active",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "cyan__default",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "cyan__hover",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "cyan__focus-visible",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "cyan__active",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "green__default",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "green__hover",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "green__focus-visible",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "green__active",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "orange__default",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "orange__hover",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "orange__focus-visible",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "orange__active",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "pink__default",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "pink__hover",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "pink__focus-visible",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "pink__active",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "purple__default",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "purple__hover",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "purple__focus-visible",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "purple__active",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "red__default",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "red__hover",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "red__focus-visible",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "red__active",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "teal__default",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "teal__hover",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "teal__focus-visible",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "teal__active",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 1.3411458333333333,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "yellow__default",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 0.20182291666666666,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "yellow__hover",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 0.20182291666666666,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
     },
     {
       "key": "yellow__focus-visible",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 0.20182291666666666,
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
       "mismatches": []
     },
     {
       "key": "yellow__active",
       "channelsCompared": 27,
       "channelsEqual": 27,
-      "pctExact": 1.77734375,
-      "pctAA": 0.20182291666666666,
-      "mismatches": []
+      "pctExact": 2.4479166666666665,
+      "pctAA": 2.1256510416666665,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
     }
   ]
 }

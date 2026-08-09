@@ -40,18 +40,20 @@
   "visual": {
     "ok": false,
     "matchDeveloped": false,
-    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "reviewedAt": "2026-08-09T02:47:04.523Z",
     "notes": [
-      "2026-08-08: canvas framing verified correct on the live bridge — shot 130x44 is VARIANT cell 1:3867 (Size=Md) 114x28 + 8px margin."
+      "2026-08-08: canvas framing verified correct on the live bridge — shot 130x44 is VARIANT cell 1:3867 (Size=Md) 114x28 + 8px margin.",
+      "2026-08-08 REFERENCE-TRUTH ROUND. The reference is now the REAL @astryxdesign/core@0.1.6 render — extract/computed/out/astryx/<comp>/orig-shots/<combo>__default.png, committed for the first time by `extract/computed/run.ts --keep-originals`. Every previous astryx reference was one of: an emit-html first-item render in the pre-Theme Times substrate, a POLARIS gate-shot, a 1440x2200 documentation screenshot, or a `gate-shots/` file — and `gate-shots/` is the CONTRACT RENDER (enriched contract -> emit-html), the RIGHT half of the pair receipt, NOT the library. Scoring a canvas built from a contract against another emitter’s render of the same contract measures emitter agreement, not fidelity."
     ],
     "defects": [
-      "Only Size axis; missing checked/indeterminate visual states vs typical Astryx checkbox UX.",
-      "No developed site Checkbox receipt — fail closed on matchDeveloped.",
-      "FC-REF-FRAMING: reference is an emit-html first-item render in the Times fallback substrate (91x16 content: a solid black square plus serif \"Accept terms\") against a 57x14 canvas content box. No astryx CheckboxInput exists in extract/computed/configs/astryx.json, so no correctly-themed 1x gate-shot is available to retarget to; scaleRatio 1.61 is a reference artifact and the stem cannot be honestly scored yet."
+      "pixel scorecard fail: pctAAMasked=14.10 (bar 5), compositionOk=true — parity/receipts/console-loop/astryx/scores/checkbox-input.json",
+      "FC-THEME-BASE: the capture mount renders under `<Theme theme={neutralTheme}>` (@astryxdesign/theme-neutral — the library’s documented Quick Start and the only mount where the base font resolves), while examples/astryx/tokens/astryx.dtcg.json is wrapped from @astryxdesign/core/src/theme/tokens.stylex.ts, the CORE DEFAULT palette. Measured: core --color-accent #0064E0 vs theme-neutral #262626; core --color-text-primary #0A1317 vs #171717; core --color-background-blue #0171E333 vs #c4ddfb. The canvas paints the core plane, the library renders the neutral plane, and no re-promote closes it: promoting from the neutral captures strands 30 of the 36 acked re-anchoring rows (65 leaves) with no alias target, dropping the astryx bundle from 54 Figma-native aliases to 13 and failing the plugin-engine-check pin. A HUMAN decision on which plane is astryx’s canonical repo-side theme is required; nothing was force-fitted.",
+      "RESOLVED THIS ROUND — FC-REF-FRAMING: the previous reference was an emit-html first-item render in the Times fallback with no astryx entry in the capture config to retarget to. CheckboxInput is now in extract/computed/configs/astryx.json; the reference is the library’s own Size=Md render (117x22 vs a 113x28 canvas cell, scaleRatio 1.27, compositionOk true)."
     ],
-    "reference": "parity/receipts/console-loop/astryx/refs/checkbox-input.png",
+    "reference": "extract/computed/out/astryx/checkboxinput/orig-shots/md__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "emit-html:examples/astryx/contracts/checkbox-input.contract.json#first-item"
+    "referenceSource": "extract/computed/out/astryx/checkboxinput/orig-shots/md__default.png",
+    "referenceProvenance": "library:@astryxdesign/core@0.1.6 CheckboxInput size=md label=\"Accept terms\" under <Theme theme={neutralTheme}> (extract/computed/run.ts --keep-originals)"
   },
   "fingerprint": {
     "v6": "v6:2853217606",

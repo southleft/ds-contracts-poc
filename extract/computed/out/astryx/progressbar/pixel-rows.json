@@ -1,0 +1,102 @@
+[
+  {
+    "key": "accent__default",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "accent__hover",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "accent__focus-visible",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "accent__active",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "success__default",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "success__hover",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "success__focus-visible",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "success__active",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "warning__default",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "warning__hover",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "warning__focus-visible",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "warning__active",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "neutral__default",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "neutral__hover",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "neutral__focus-visible",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "neutral__active",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "error__default",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "error__hover",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "error__focus-visible",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  },
+  {
+    "key": "error__active",
+    "pctExact": 2.144607843137255,
+    "pctAA": 1.2025122549019607
+  }
+]

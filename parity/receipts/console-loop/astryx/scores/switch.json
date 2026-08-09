@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 42.2752808988764,
-    "pctAAUnmasked": 14.208801498127341,
-    "pctAAMasked": 14.208801498127341,
+    "pctExactUnmasked": 41.61985018726592,
+    "pctAAUnmasked": 14.185393258426968,
+    "pctAAMasked": 14.185393258426968,
     "maskCoveragePct": 0,
     "canvasPx": "178x24",
     "realPx": "173x24",
     "inkCanvasPct": 33.684456928838955,
-    "inkRealPct": 32.30337078651686
+    "inkRealPct": 31.296816479400746
   },
-  "reference": "extract/computed/out/astryx/switch/gate-shots/end.no-isDisabled__default.png",
-  "referenceSha256": "da343f5916eaf94017c48cf89a9ca81e6b52010145cbdcecba8dd455cb1d857d",
+  "reference": "extract/computed/out/astryx/switch/orig-shots/end.no-isDisabled__default.png",
+  "referenceSha256": "2d8ef36a3d999b1f5b062115f41fdea720775ee67c4b507e81204d887906d5e6",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/switch-cell.png",
   "canvasShotSha256": "8aea43abf30325517715221e55a756ac023e44b62ecd154891f913b49738ded2",
   "diff": "parity/receipts/console-loop/astryx/scores/switch.diff.png",
@@ -32,9 +32,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1.0289017341040463,
-  "inkDelta": 1.381086142322097,
+  "inkDelta": 2.3876404494382086,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=14.21 > 5)",
-  "recordedAt": "2026-08-08T14:37:33.179Z"
+  "note": "pixel bar missed (pctAAMasked=14.19 > 5)",
+  "recordedAt": "2026-08-09T02:59:04.741Z"
 }

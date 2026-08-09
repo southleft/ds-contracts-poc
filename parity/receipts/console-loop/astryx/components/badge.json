@@ -44,19 +44,22 @@
   "visual": {
     "ok": false,
     "matchDeveloped": false,
-    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "reviewedAt": "2026-08-09T02:47:04.521Z",
     "notes": [
       "Cream surface + pastel color chips improved contrast vs prior black-canvas review; Neutral light gray OK.",
-      "Re-synced via clientStorage chunks (n=10, total=75937); nodeId=1:3794; rebuilt 14 variants"
+      "Re-synced via clientStorage chunks (n=10, total=75937); nodeId=1:3794; rebuilt 14 variants",
+      "2026-08-08 REFERENCE-TRUTH ROUND. The reference is now the REAL @astryxdesign/core@0.1.6 render — extract/computed/out/astryx/<comp>/orig-shots/<combo>__default.png, committed for the first time by `extract/computed/run.ts --keep-originals`. Every previous astryx reference was one of: an emit-html first-item render in the pre-Theme Times substrate, a POLARIS gate-shot, a 1440x2200 documentation screenshot, or a `gate-shots/` file — and `gate-shots/` is the CONTRACT RENDER (enriched contract -> emit-html), the RIGHT half of the pair receipt, NOT the library. Scoring a canvas built from a contract against another emitter’s render of the same contract measures emitter agreement, not fidelity."
     ],
     "defects": [
-      "Accent/default row uses near-black solid; docs Info status is saturated blue with white text — status mapping incomplete.",
-      "Missing icon treatments present in some docs badge examples; fail closed until status axis maps 1:1 to developed Neutral/Info/Success/Warning/Error row.",
-      "FC-REF-SWEEP-DECOY (reference sweep 2026-08-08, RETARGET REFUSED): C5 ranks neutral__default.png at 7.0% colour-histogram distance against the pinned blue__default.png at 87.0% and proposes the retarget. It is REFUSED: the pinned cell 1:3776 is named Variant=Blue, so blue__default.png IS the like-for-like reference and taking the neutral winner would pair a Blue cell with a picture of the Neutral badge. The 87.0pt gap is the CANVAS-side defect already recorded above — the Blue variant paints a near-white pill instead of the saturated blue the developed row renders — so the 11.55 pctAAMasked is measuring a real colour miss, not a reference error."
+      "pixel scorecard fail: pctAAMasked=10.12 (bar 5), compositionOk=true — parity/receipts/console-loop/astryx/scores/badge.json",
+      "FC-REF-SWEEP-DECOY: C5 ranks the canvas cell 83.8% colour-distant from the library’s own Variant=Blue badge and only 6.9% from its NEUTRAL badge. The RETARGET IS REFUSED: the canvas cell really is named Variant=Blue and the library really does paint Blue as a pale-blue pill (#c4ddfb ground, blue label) — it is the CANVAS that paints Blue as near-white. This waiver was already carried against an emit-html reference; it now stands on the library’s own pixels.",
+      "FC-REF-TONE-SWAP: same pair, same cause — the AA number reads 10.12 because pixelmatch’s YIQ cutoff sits above a whole-component tone swap. Named so the score cannot be mistaken for closeness.",
+      "FC-THEME-BASE: the capture mount renders under `<Theme theme={neutralTheme}>` (@astryxdesign/theme-neutral — the library’s documented Quick Start and the only mount where the base font resolves), while examples/astryx/tokens/astryx.dtcg.json is wrapped from @astryxdesign/core/src/theme/tokens.stylex.ts, the CORE DEFAULT palette. Measured: core --color-accent #0064E0 vs theme-neutral #262626; core --color-text-primary #0A1317 vs #171717; core --color-background-blue #0171E333 vs #c4ddfb. The canvas paints the core plane, the library renders the neutral plane, and no re-promote closes it: promoting from the neutral captures strands 30 of the 36 acked re-anchoring rows (65 leaves) with no alias target, dropping the astryx bundle from 54 Figma-native aliases to 13 and failing the plugin-engine-check pin. A HUMAN decision on which plane is astryx’s canonical repo-side theme is required; nothing was force-fitted.",
+      "MOUNT DEFECT FOUND AND FIXED THIS ROUND: `sampleText` mounts as CHILDREN and astryx Badge takes a REQUIRED `label: ReactNode` prop (dist/Badge/Badge.d.ts:61), so all 56 previously committed Badge captures were of an EMPTY badge — the Variant=Blue library render was a 16x20 label-less pill against a 42x20 canvas cell. With `label` mounted the content boxes are 41x20 vs 42x20 and compositionOk flipped false -> true."
     ],
-    "reference": "parity/receipts/console-loop/astryx/refs/badge.png",
+    "reference": "extract/computed/out/astryx/badge/orig-shots/blue__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "extract/computed/out/astryx/badge/gate-shots/blue__default.png",
+    "referenceSource": "extract/computed/out/astryx/badge/orig-shots/blue__default.png",
     "scorecard": "parity/receipts/console-loop/astryx/scores/badge.json",
     "status": "fail-closed",
     "revoked": {
@@ -68,7 +71,8 @@
         "matchedAt": "2026-08-08T03:17:04.210Z"
       },
       "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=11.55, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
-    }
+    },
+    "referenceProvenance": "library:@astryxdesign/core@0.1.6 Badge variant=blue label=\"New\" under <Theme theme={neutralTheme}> (extract/computed/run.ts --keep-originals)"
   },
   "fingerprint": {
     "v6": "v6:1192491616",

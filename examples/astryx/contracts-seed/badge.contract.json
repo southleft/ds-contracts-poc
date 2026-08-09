@@ -61,7 +61,7 @@
       "name": "children",
       "description": "Badge label (materialized text slot — Astryx types this as a ReactNode child).",
       "type": "text",
-      "default": "Badge",
+      "default": "New",
       "bindings": {
         "figma": {
           "kind": "TEXT",

@@ -1,0 +1,596 @@
+{
+  "component": "CheckboxInput",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 2,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 976,
+    "cellsEqual": 916,
+    "pctEqual": 93.85245901639344,
+    "rowsFullyEqual": 0,
+    "rows": 8
+  },
+  "pixel": {
+    "pairs": 8,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 2.3014322916666665,
+    "meanAA": 0.263671875,
+    "maxAA": 0.5598958333333334
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 50,
+    "mintedLeavesUnfolded": 47,
+    "baseBindings": 66,
+    "stateBindings": 5,
+    "codeOnlyChannels": 13,
+    "overflowBindings": 5,
+    "folds": 46
+  },
+  "worstRows": [
+    {
+      "key": "md__focus-visible",
+      "pctAA": 0.5598958333333334,
+      "pctExact": 2.255859375,
+      "channelsMismatched": 5
+    },
+    {
+      "key": "sm__focus-visible",
+      "pctAA": 0.4557291666666667,
+      "pctExact": 2.1516927083333335,
+      "channelsMismatched": 5
+    },
+    {
+      "key": "md__hover",
+      "pctAA": 0.2604166666666667,
+      "pctExact": 3.0110677083333335,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "md__active",
+      "pctAA": 0.2604166666666667,
+      "pctExact": 3.0110677083333335,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "sm__hover",
+      "pctAA": 0.20833333333333334,
+      "pctExact": 2.490234375,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "sm__active",
+      "pctAA": 0.20833333333333334,
+      "pctExact": 2.490234375,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "sm__default",
+      "pctAA": 0.078125,
+      "pctExact": 1.5006510416666667,
+      "channelsMismatched": 5
+    },
+    {
+      "key": "md__default",
+      "pctAA": 0.078125,
+      "pctExact": 1.5006510416666667,
+      "channelsMismatched": 5
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "part-0-0-0.anchor-name",
+      8
+    ],
+    [
+      "icon.overflow-clip-margin",
+      8
+    ],
+    [
+      "icon.vertical-align",
+      8
+    ],
+    [
+      "label.align-items",
+      8
+    ],
+    [
+      "label.display",
+      8
+    ],
+    [
+      "checkbox.background-color",
+      4
+    ],
+    [
+      "checkbox.border-bottom-color",
+      4
+    ],
+    [
+      "checkbox.border-left-color",
+      4
+    ],
+    [
+      "checkbox.border-right-color",
+      4
+    ],
+    [
+      "checkbox.border-top-color",
+      4
+    ]
+  ],
+  "namedLosses": [
+    "overflow: checkbox.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: part-0-0-0.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: part-0-0-0.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: part-0-0-0.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: part-0-0-0.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: icon.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only[active]: checkbox.background-color — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[active]: checkbox.border-bottom-color — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[active]: checkbox.border-left-color — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[active]: checkbox.border-right-color — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[active]: checkbox.border-top-color — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[hover]: checkbox.background-color — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[hover]: checkbox.border-bottom-color — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[hover]: checkbox.border-left-color — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[hover]: checkbox.border-right-color — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[hover]: checkbox.border-top-color — value shape outside mintable kinds and outside the declared vocabulary"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+    "leavesAdded": 319,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "sm__default",
+      "channelsCompared": 122,
+      "channelsEqual": 117,
+      "pctExact": 1.5006510416666667,
+      "pctAA": 0.078125,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_4_"
+        },
+        {
+          "part": "icon",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        }
+      ]
+    },
+    {
+      "key": "sm__hover",
+      "channelsCompared": 122,
+      "channelsEqual": 112,
+      "pctExact": 2.490234375,
+      "pctAA": 0.20833333333333334,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_4_"
+        },
+        {
+          "part": "checkbox",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "color(srgb 0.95 0.95 0.95)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-bottom-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-left-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-right-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-top-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "icon",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        }
+      ]
+    },
+    {
+      "key": "sm__focus-visible",
+      "channelsCompared": 122,
+      "channelsEqual": 117,
+      "pctExact": 2.1516927083333335,
+      "pctAA": 0.4557291666666667,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_4_"
+        },
+        {
+          "part": "icon",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        }
+      ]
+    },
+    {
+      "key": "sm__active",
+      "channelsCompared": 122,
+      "channelsEqual": 112,
+      "pctExact": 2.490234375,
+      "pctAA": 0.20833333333333334,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_4_"
+        },
+        {
+          "part": "checkbox",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "color(srgb 0.95 0.95 0.95)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-bottom-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-left-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-right-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-top-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "icon",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        }
+      ]
+    },
+    {
+      "key": "md__default",
+      "channelsCompared": 122,
+      "channelsEqual": 117,
+      "pctExact": 1.5006510416666667,
+      "pctAA": 0.078125,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_8_"
+        },
+        {
+          "part": "icon",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        }
+      ]
+    },
+    {
+      "key": "md__hover",
+      "channelsCompared": 122,
+      "channelsEqual": 112,
+      "pctExact": 3.0110677083333335,
+      "pctAA": 0.2604166666666667,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_8_"
+        },
+        {
+          "part": "checkbox",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "color(srgb 0.95 0.95 0.95)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-bottom-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-left-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-right-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-top-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "icon",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        }
+      ]
+    },
+    {
+      "key": "md__focus-visible",
+      "channelsCompared": 122,
+      "channelsEqual": 117,
+      "pctExact": 2.255859375,
+      "pctAA": 0.5598958333333334,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_8_"
+        },
+        {
+          "part": "icon",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        }
+      ]
+    },
+    {
+      "key": "md__active",
+      "channelsCompared": 122,
+      "channelsEqual": 112,
+      "pctExact": 3.0110677083333335,
+      "pctAA": 0.2604166666666667,
+      "mismatches": [
+        {
+          "part": "part-0-0-0",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_8_"
+        },
+        {
+          "part": "checkbox",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "color(srgb 0.95 0.95 0.95)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-bottom-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-left-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-right-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "checkbox",
+          "channel": "border-top-color",
+          "ours": "rgba(212, 212, 212, 1)",
+          "theirs": "color(srgb 0.665098 0.665098 0.665098)"
+        },
+        {
+          "part": "icon",
+          "channel": "overflow-clip-margin",
+          "ours": "0px",
+          "theirs": "content-box"
+        },
+        {
+          "part": "icon",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        }
+      ]
+    }
+  ]
+}

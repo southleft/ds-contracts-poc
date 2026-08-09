@@ -1,0 +1,225 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.progress-bar",
+  "name": "ProgressBar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx ProgressBar — a determinate meter with a label row. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/ProgressBar/ProgressBar.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). value/max/label/variant and the indeterminate/disabled flags are verbatim; isLabelHidden, hasValueLabel and formatValueLabel are dropped. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "value",
+      "description": "Current progress value.",
+      "type": "number",
+      "default": 40,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Value"
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "max",
+      "description": "Maximum progress value.",
+      "type": "number",
+      "default": 100,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Max"
+        },
+        "code": {
+          "prop": "max"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "description": "Accessible label for the progress bar.",
+      "type": "text",
+      "default": "Uploading",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "description": "The fill tone.",
+      "type": {
+        "enum": [
+          "accent",
+          "success",
+          "warning",
+          "neutral",
+          "error"
+        ]
+      },
+      "default": "accent",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "accent": "Accent",
+            "success": "Success",
+            "warning": "Warning",
+            "neutral": "Neutral",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "isIndeterminate",
+      "description": "Whether progress is indeterminate.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Indeterminate"
+        },
+        "code": {
+          "prop": "isIndeterminate"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the progress bar is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "justify": "space-between"
+          },
+          "parts": {
+            "label": {
+              "content": {
+                "prop": "label"
+              },
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              },
+              "tokens": {
+                "font-size": "{imported.progress-bar.label.font-size}",
+                "font-weight": "{imported.progress-bar.label.font-weight}",
+                "line-height": "{imported.progress-bar.label.line-height}"
+              }
+            }
+          }
+        },
+        "progressbar-track": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|progressbar-track — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden"
+          },
+          "parts": {
+            "progressbar-fill": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|progressbar-fill — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "transition-duration": "0.3s",
+                "transition-property": "width",
+                "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+              },
+              "tokens": {
+                "border-bottom-left-radius": "{imported.shared.size-9999}",
+                "border-bottom-right-radius": "{imported.shared.size-9999}",
+                "border-top-left-radius": "{imported.shared.size-9999}",
+                "border-top-right-radius": "{imported.shared.size-9999}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "variant",
+                  "map": {
+                    "accent": {
+                      "background-color": "{imported.progress-bar.progressbar-fill.background-color.accent}"
+                    },
+                    "error": {
+                      "background-color": "{imported.progress-bar.progressbar-fill.background-color.error}"
+                    },
+                    "neutral": {
+                      "background-color": "{imported.progress-bar.progressbar-fill.background-color.neutral}"
+                    },
+                    "success": {
+                      "background-color": "{imported.progress-bar.progressbar-fill.background-color.success}"
+                    },
+                    "warning": {
+                      "background-color": "{imported.progress-bar.progressbar-fill.background-color.warning}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.progress-bar.progressbar-track.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-9999}",
+            "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-top-left-radius": "{imported.shared.size-9999}",
+            "border-top-right-radius": "{imported.shared.size-9999}"
+          }
+        }
+      },
+      "tokens": {
+        "column-gap": "{imported.progress-bar.root.column-gap}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.progress-bar.root.min-width}",
+        "row-gap": "{imported.progress-bar.root.row-gap}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "ProgressBar"
+    }
+  }
+}

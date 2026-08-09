@@ -84,7 +84,7 @@
             "$type": "dimension"
           },
           "width": {
-            "$value": "110.984px",
+            "$value": "67.0781px",
             "$type": "dimension"
           },
           "background-image-state-active": {
@@ -204,7 +204,7 @@
             "$type": "dimension"
           },
           "right": {
-            "$value": "111.984px",
+            "$value": "68.0781px",
             "$type": "dimension"
           },
           "width": {

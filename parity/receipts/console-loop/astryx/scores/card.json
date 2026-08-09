@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 42.423913043478265,
-    "pctAAUnmasked": 33.27173913043479,
-    "pctAAMasked": 33.27173913043479,
+    "pctExactUnmasked": 96.42857142857143,
+    "pctAAUnmasked": 84.41176470588235,
+    "pctAAMasked": 84.41176470588235,
     "maskCoveragePct": 0,
     "canvasPx": "115x80",
-    "realPx": "114x56",
-    "inkCanvasPct": 98.76086956521739,
-    "inkRealPct": 68.3913043478261
+    "realPx": "119x48",
+    "inkCanvasPct": 95.44117647058825,
+    "inkRealPct": 9.054621848739496
   },
-  "reference": "parity/receipts/console-loop/astryx/refs/card.png",
-  "referenceSha256": "72d2d50d9223eff926d251e8856825c9590764cce986baab48e45b960ad73459",
+  "reference": "extract/computed/out/astryx/card/orig-shots/default__default.png",
+  "referenceSha256": "6e809a52946117f96c8a3a23fd1280667df3f68729a902017f000f218e5469f7",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/card-cell.png",
   "canvasShotSha256": "12da19bda44edd12db1a8f78a9912d72fe47a97db731961efc48deab08b906d8",
   "diff": "parity/receipts/console-loop/astryx/scores/card.diff.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.4285714285714286,
-  "inkDelta": 30.369565217391298,
+  "scaleRatio": 1.6666666666666667,
+  "inkDelta": 86.38655462184875,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.43, inkDelta=30.4) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T23:41:32.118Z"
+  "note": "composition mismatch (scaleRatio=1.67, inkDelta=86.4) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-09T02:48:38.403Z"
 }

@@ -37,23 +37,26 @@
   "visual": {
     "ok": false,
     "matchDeveloped": false,
-    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "reviewedAt": "2026-08-09T02:47:04.523Z",
     "notes": [
       "Cream surface improved text contrast.",
       "2026-08-08: reference provenance corrected — visual.referenceSource claimed an emit-html first-item render; the PNG is in fact the astryx computed gate-shot. Re-pointed at the gate-shot directly so the sha pin means something.",
-      "2026-08-08: reference PROVENANCE corrected (was falsely labelled an emit-html first-item render); the PNG is a tight 1x crop of the astryx computed gate-shot. Retargeting the scorer at the padded 320x96 stage was measured and REVERTED - same 114x56 content box, but inkRealPct collapsed 68.4 -> 9.3 and AA 33.27 -> 86.30, which is an artifact of the scorer's ink metric, not a truth about the card."
+      "2026-08-08: reference PROVENANCE corrected (was falsely labelled an emit-html first-item render); the PNG is a tight 1x crop of the astryx computed gate-shot. Retargeting the scorer at the padded 320x96 stage was measured and REVERTED - same 114x56 content box, but inkRealPct collapsed 68.4 -> 9.3 and AA 33.27 -> 86.30, which is an artifact of the scorer's ink metric, not a truth about the card.",
+      "2026-08-08 REFERENCE-TRUTH ROUND. The reference is now the REAL @astryxdesign/core@0.1.6 render — extract/computed/out/astryx/<comp>/orig-shots/<combo>__default.png, committed for the first time by `extract/computed/run.ts --keep-originals`. Every previous astryx reference was one of: an emit-html first-item render in the pre-Theme Times substrate, a POLARIS gate-shot, a 1440x2200 documentation screenshot, or a `gate-shots/` file — and `gate-shots/` is the CONTRACT RENDER (enriched contract -> emit-html), the RIGHT half of the pair receipt, NOT the library. Scoring a canvas built from a contract against another emitter’s render of the same contract measures emitter agreement, not fidelity."
     ],
     "defects": [
-      "Color variants still lack developed title/body hierarchy and elevation/border cues from Card docs.",
-      "Body-only placeholder aesthetic — fail closed.",
-      "FC-REF-FRAMING: canvas cell 1:4021 (Variant=Default) is 114x80 against a 114x56 developed reference — the canvas card wraps \"Card content\" onto two lines. The reference gate-shot still carries the pre-Theme-mount Times substrate (see extract/computed/configs/astryx.json mount note), which fits the string on ONE line, so the height delta is manufactured by the stale reference; re-gate astryx Card under the fixed <Theme> mount before treating 1.43 as a geometry defect."
+      "pixel scorecard fail: pctAAMasked=84.41 (bar 5), compositionOk=FALSE — parity/receipts/console-loop/astryx/scores/card.json",
+      "FC-TEXT-WRAP: shot content box 115x80 vs library 119x48. The canvas cell is narrow enough that \"Card content\" wraps to two lines and the cell grows to 80px tall; the library renders one line at 48px. A width/wrap defect in the emitted set, not a reference-framing artifact — the reference is the library’s own render.",
+      "FC-THEME-BASE: the capture mount renders under `<Theme theme={neutralTheme}>` (@astryxdesign/theme-neutral — the library’s documented Quick Start and the only mount where the base font resolves), while examples/astryx/tokens/astryx.dtcg.json is wrapped from @astryxdesign/core/src/theme/tokens.stylex.ts, the CORE DEFAULT palette. Measured: core --color-accent #0064E0 vs theme-neutral #262626; core --color-text-primary #0A1317 vs #171717; core --color-background-blue #0171E333 vs #c4ddfb. The canvas paints the core plane, the library renders the neutral plane, and no re-promote closes it: promoting from the neutral captures strands 30 of the 36 acked re-anchoring rows (65 leaves) with no alias target, dropping the astryx bundle from 54 Figma-native aliases to 13 and failing the plugin-engine-check pin. A HUMAN decision on which plane is astryx’s canonical repo-side theme is required; nothing was force-fitted. Card Variant=Default: the library paints a WHITE surface with a 1px border; the canvas paints a blue fill.",
+      "SUPERSEDED: the previous receipt named FC-REF-FRAMING against extract/computed/out/astryx/card/gate-shots/default__default.png and blamed a \"stale Times substrate\". That reference was the CONTRACT RENDER, not the library, and the card capture has been re-run under the Theme mount — the residual is the wrap + the palette, both named above."
     ],
-    "reference": "parity/receipts/console-loop/astryx/refs/card.png",
+    "reference": "extract/computed/out/astryx/card/orig-shots/default__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "extract/computed/out/astryx/card/gate-shots/default__default.png",
+    "referenceSource": "extract/computed/out/astryx/card/orig-shots/default__default.png",
     "referencePrevious": "parity/receipts/console-loop/astryx/refs/card.png",
     "referenceSourcePrevious": "emit-html:examples/astryx/contracts/card.contract.json#first-item",
-    "referenceNote": "refs/card.png is a TIGHT 1x crop (118x60) of the astryx computed gate-shot default__default.png (320x96 stage, same 114x56 content box). The crop is kept as the scored reference: pointing the scorer at the padded stage collapsed inkRealPct 68.4 -> 9.3 for an identical content box, i.e. the lane scorer's ink metric is not stage-padding invariant for pale fills. Provenance now names the real source instead of the previously-claimed emit-html first-item render."
+    "referenceNote": "refs/card.png is a TIGHT 1x crop (118x60) of the astryx computed gate-shot default__default.png (320x96 stage, same 114x56 content box). The crop is kept as the scored reference: pointing the scorer at the padded stage collapsed inkRealPct 68.4 -> 9.3 for an identical content box, i.e. the lane scorer's ink metric is not stage-padding invariant for pale fills. Provenance now names the real source instead of the previously-claimed emit-html first-item render.",
+    "referenceProvenance": "library:@astryxdesign/core@0.1.6 Card variant=default under <Theme theme={neutralTheme}> (extract/computed/run.ts --keep-originals)"
   },
   "fingerprint": {
     "v6": "v6:3092228042",

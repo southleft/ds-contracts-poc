@@ -44,20 +44,24 @@
   "visual": {
     "ok": false,
     "matchDeveloped": false,
-    "reviewedAt": "2026-08-06T14:49:52.752Z",
+    "reviewedAt": "2026-08-09T02:47:04.523Z",
     "notes": [
       "Re-synced 2026-08-06 from re-emitted progress-bar.figma.js via Console MCP (ds_loop_script 72214, djb2 verified). Amended 1:3900; track 240px with fill/meter ~96px present.",
       "Developed score pending — do not treat as visual pass.",
       "Re-synced via clientStorage chunks (n=10, total=72679); nodeId=1:3900; unchanged skip",
-      "2026-08-08: canvas framing verified correct on the live bridge — shot 256x36 is VARIANT cell 1:3880 (Variant=Accent) 240x20 + 8px margin."
+      "2026-08-08: canvas framing verified correct on the live bridge — shot 256x36 is VARIANT cell 1:3880 (Variant=Accent) 240x20 + 8px margin.",
+      "2026-08-08 REFERENCE-TRUTH ROUND. The reference is now the REAL @astryxdesign/core@0.1.6 render — extract/computed/out/astryx/<comp>/orig-shots/<combo>__default.png, committed for the first time by `extract/computed/run.ts --keep-originals`. Every previous astryx reference was one of: an emit-html first-item render in the pre-Theme Times substrate, a POLARIS gate-shot, a 1440x2200 documentation screenshot, or a `gate-shots/` file — and `gate-shots/` is the CONTRACT RENDER (enriched contract -> emit-html), the RIGHT half of the pair receipt, NOT the library. Scoring a canvas built from a contract against another emitter’s render of the same contract measures emitter agreement, not fidelity."
     ],
     "defects": [
-      "re-synced from contract; developed score pending",
-      "FC-REF-FRAMING: reference is an emit-html first-item render at shrink-to-fit width (68x16 content) against a 240x18 canvas track. No astryx ProgressBar in extract/computed/configs/astryx.json, so there is no correctly-widthed 1x gate-shot to retarget to; scaleRatio 3.53 measures the reference's mount width, not the emit."
+      "pixel scorecard fail: pctAAMasked=24.82 (bar 5), compositionOk=FALSE — parity/receipts/console-loop/astryx/scores/progress-bar.json",
+      "FC-ABS-SIZE (height): shot content box 240x18 vs library 240x28. WIDTH now agrees exactly — the harness stage inner width is pinned to the 240px the contract’s own anatomy declares, which is what FC-WIDTH-TOKEN was really measuring (a 68px shrink-to-fit in a flex stage was being receipted as a component defect). The residual is the label row: the library reserves 28px for label + track, the emitted set 18px.",
+      "FC-METER stands: value/max are carried as props but do not drive the fill width; the canvas fill is a static token-styled box.",
+      "FC-THEME-BASE: the capture mount renders under `<Theme theme={neutralTheme}>` (@astryxdesign/theme-neutral — the library’s documented Quick Start and the only mount where the base font resolves), while examples/astryx/tokens/astryx.dtcg.json is wrapped from @astryxdesign/core/src/theme/tokens.stylex.ts, the CORE DEFAULT palette. Measured: core --color-accent #0064E0 vs theme-neutral #262626; core --color-text-primary #0A1317 vs #171717; core --color-background-blue #0171E333 vs #c4ddfb. The canvas paints the core plane, the library renders the neutral plane, and no re-promote closes it: promoting from the neutral captures strands 30 of the 36 acked re-anchoring rows (65 leaves) with no alias target, dropping the astryx bundle from 54 Figma-native aliases to 13 and failing the plugin-engine-check pin. A HUMAN decision on which plane is astryx’s canonical repo-side theme is required; nothing was force-fitted."
     ],
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "reference": "parity/receipts/console-loop/astryx/refs/progress-bar.png",
-    "referenceSource": "emit-html:examples/astryx/contracts/progress-bar.contract.json#first-item"
+    "reference": "extract/computed/out/astryx/progressbar/orig-shots/accent__default.png",
+    "referenceSource": "extract/computed/out/astryx/progressbar/orig-shots/accent__default.png",
+    "referenceProvenance": "library:@astryxdesign/core@0.1.6 ProgressBar variant=accent value=40 label=\"Uploading\" under <Theme theme={neutralTheme}> (extract/computed/run.ts --keep-originals)"
   },
   "fingerprint": {
     "v6": "v6:1229328490",

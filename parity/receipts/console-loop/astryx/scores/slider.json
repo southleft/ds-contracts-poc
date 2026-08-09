@@ -8,17 +8,17 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 17.516666666666666,
-    "pctAAUnmasked": 13.808333333333334,
-    "pctAAMasked": 13.808333333333334,
+    "pctExactUnmasked": 10.5,
+    "pctAAUnmasked": 8.166666666666666,
+    "pctAAMasked": 8.166666666666666,
     "maskCoveragePct": 0,
-    "canvasPx": "240x40",
-    "realPx": "49x50",
-    "inkCanvasPct": 12.5,
-    "inkRealPct": 6.45
+    "canvasPx": "120x20",
+    "realPx": "120x20",
+    "inkCanvasPct": 15.666666666666668,
+    "inkRealPct": 14.916666666666668
   },
-  "reference": "extract/computed/out/astryx/slider/gate-shots/horizontal.tooltip__default.png",
-  "referenceSha256": "4c688ab3eb05df2d822072fe220464eddb675f5fb9fc2585d1195786df6fc7fb",
+  "reference": "extract/computed/out/astryx/slider/orig-shots/horizontal.tooltip__default.png",
+  "referenceSha256": "e3a175ef374d89f63e00388e92ef6d0acd1c241fca055f5250587b67cf629cc2",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/slider-cell.png",
   "canvasShotSha256": "bee623ea284ba692898aedc60fc5fa3c8bc02306f905d5c0a0264c4adbff0086",
   "diff": "parity/receipts/console-loop/astryx/scores/slider.diff.png",
@@ -26,14 +26,14 @@
     "FC-ABS-SIZE"
   ],
   "receipt": "parity/receipts/console-loop/astryx/components/slider.json",
-  "compositionOk": false,
-  "strictCompositionOk": false,
+  "compositionOk": true,
+  "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 4.8979591836734695,
-  "inkDelta": 6.05,
-  "dprNormalized": false,
-  "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=4.90, inkDelta=6.0) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-08T23:36:19.158Z"
+  "scaleRatio": 1,
+  "inkDelta": 0.75,
+  "dprNormalized": true,
+  "sizeNormalized": true,
+  "note": "pixel bar missed (pctAAMasked=8.17 > 5)",
+  "recordedAt": "2026-08-09T02:59:04.729Z"
 }

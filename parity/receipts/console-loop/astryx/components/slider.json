@@ -41,7 +41,7 @@
   "visual": {
     "ok": false,
     "matchDeveloped": false,
-    "reviewedAt": "2026-08-07T16:39:00.021Z",
+    "reviewedAt": "2026-08-09T02:47:04.524Z",
     "notes": [
       "display:contents hoist; developed score pending",
       "Re-synced 2026-08-06 from slider.figma.js with emit overflow:visible ancestor propagate (propagateOverflowVisible) — clipsContent=false on slider + part-1-0 FROM SCRIPT, no hand patch.",
@@ -51,13 +51,15 @@
       "Re-synced via console-loop batch 2026-08-07T16:32:16.817Z — amended rebuiltVariants=6; nodeId=9:831; vertical part-1-0 width=20; thumb after fill; matchDeveloped left unset.",
       "Re-synced via clientStorage chunks (n=13, total=100445); amended nodeId=9:831; rebuiltVariants=6; V-Text rootW=56 label-3.x=28; H-Text part-1-0.w=240; thumb after fill (track→part-1-0-1→thumb). matchDeveloped left false.",
       "Re-synced via clientStorage chunks (n=19, total=108776); amended nodeId=9:831; rebuiltVariants=6; tooltips on Tooltip variants; V-Text label-3 top=86; part-1-0 last child thumb. matchDeveloped left false.",
-      "2026-08-08: reference re-pointed from the emit-html first-item render to the astryx computed gate-shot for the same variant tokens as the shot cell 9:779 (Orientation=Horizontal, Value Display=Tooltip). The framing excuse is gone; FC-ABS-SIZE is the honest cause."
+      "2026-08-08: reference re-pointed from the emit-html first-item render to the astryx computed gate-shot for the same variant tokens as the shot cell 9:779 (Orientation=Horizontal, Value Display=Tooltip). The framing excuse is gone; FC-ABS-SIZE is the honest cause.",
+      "2026-08-08 REFERENCE-TRUTH ROUND. The reference is now the REAL @astryxdesign/core@0.1.6 render — extract/computed/out/astryx/<comp>/orig-shots/<combo>__default.png, committed for the first time by `extract/computed/run.ts --keep-originals`. Every previous astryx reference was one of: an emit-html first-item render in the pre-Theme Times substrate, a POLARIS gate-shot, a 1440x2200 documentation screenshot, or a `gate-shots/` file — and `gate-shots/` is the CONTRACT RENDER (enriched contract -> emit-html), the RIGHT half of the pair receipt, NOT the library. Scoring a canvas built from a contract against another emitter’s render of the same contract measures emitter agreement, not fidelity."
     ],
     "defects": [
-      "display:contents hoist; developed score pending",
-      "FC-ABS-SIZE: canvas track is 240px wide; the developed astryx Slider at contract defaults renders ~49px wide (gate-shot content 49x50). scaleRatio 4.90 against the correct same-library, same-variant, Figtree-substrate reference — this is a real width defect in the emitted set, not a framing artifact."
+      "pixel scorecard fail: pctAAMasked=8.17 (bar 5), compositionOk=true — parity/receipts/console-loop/astryx/scores/slider.json",
+      "FC-ABS-SIZE IS WITHDRAWN AS MEASURED. It read \"canvas track is 240px wide; the developed astryx Slider at contract defaults renders ~49px wide, scaleRatio 4.9\". The 49px was the harness: Slider is a fill-width control and the default flex stage shrink-to-fits it. With the stage inner width pinned to the 240px the contract’s own anatomy declares, the content boxes are 120x20 vs 120x20 (scaleRatio 1.00) and compositionOk flipped false -> true. AA fell 15.61 -> 8.17.",
+      "FC-THEME-BASE: the capture mount renders under `<Theme theme={neutralTheme}>` (@astryxdesign/theme-neutral — the library’s documented Quick Start and the only mount where the base font resolves), while examples/astryx/tokens/astryx.dtcg.json is wrapped from @astryxdesign/core/src/theme/tokens.stylex.ts, the CORE DEFAULT palette. Measured: core --color-accent #0064E0 vs theme-neutral #262626; core --color-text-primary #0A1317 vs #171717; core --color-background-blue #0171E333 vs #c4ddfb. The canvas paints the core plane, the library renders the neutral plane, and no re-promote closes it: promoting from the neutral captures strands 30 of the 36 acked re-anchoring rows (65 leaves) with no alias target, dropping the astryx bundle from 54 Figma-native aliases to 13 and failing the plugin-engine-check pin. A HUMAN decision on which plane is astryx’s canonical repo-side theme is required; nothing was force-fitted."
     ],
-    "reference": "extract/computed/out/astryx/slider/gate-shots/horizontal.tooltip__default.png",
+    "reference": "extract/computed/out/astryx/slider/orig-shots/horizontal.tooltip__default.png",
     "reviewSurface": "COMPONENT_SET-9:831",
     "observations": {
       "thumbSize": {
@@ -82,9 +84,10 @@
         "slider-thumb-2"
       ]
     },
-    "referenceSource": "extract/computed/out/astryx/slider/gate-shots/horizontal.tooltip__default.png",
+    "referenceSource": "extract/computed/out/astryx/slider/orig-shots/horizontal.tooltip__default.png",
     "referencePrevious": "parity/receipts/console-loop/astryx/refs/slider.png",
-    "referenceSourcePrevious": "emit-html:examples/astryx/contracts/slider.contract.json#first-item"
+    "referenceSourcePrevious": "emit-html:examples/astryx/contracts/slider.contract.json#first-item",
+    "referenceProvenance": "library:@astryxdesign/core@0.1.6 Slider orientation=horizontal valueDisplay=tooltip value=40 label=\"Volume\" under <Theme theme={neutralTheme}> (extract/computed/run.ts --keep-originals)"
   },
   "fingerprint": {
     "v6": "v6:3600925889",

@@ -5,7 +5,7 @@
   "combos": 14,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 661,
+  "channelsEnumerated": 675,
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
@@ -113,8 +113,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 36904,
-    "cellsMatched": 36904,
+    "cellsCompared": 37688,
+    "cellsMatched": 37688,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -133,61 +133,61 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 56
+      "mean": 0.5362955729166667,
+      "max": 0.5436197916666666,
+      "perfect": 0
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 56
+      "mean": 0.1583426339285714,
+      "max": 0.17252604166666666,
+      "perfect": 0
     },
     "worst": [
       {
         "key": "neutral__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.537109375,
+        "pctAA": 0.17252604166666666
       },
       {
         "key": "neutral__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.537109375,
+        "pctAA": 0.17252604166666666
       },
       {
         "key": "neutral__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.537109375,
+        "pctAA": 0.17252604166666666
       },
       {
         "key": "neutral__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "pctExact": 0.537109375,
+        "pctAA": 0.17252604166666666
       },
       {
-        "key": "info__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "warning__default",
+        "pctExact": 0.537109375,
+        "pctAA": 0.17252604166666666
       },
       {
-        "key": "info__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "warning__hover",
+        "pctExact": 0.537109375,
+        "pctAA": 0.17252604166666666
       },
       {
-        "key": "info__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "warning__focus-visible",
+        "pctExact": 0.537109375,
+        "pctAA": 0.17252604166666666
       },
       {
-        "key": "info__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "warning__active",
+        "pctExact": 0.537109375,
+        "pctAA": 0.17252604166666666
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 100,
-    "rowsFullyEqual": 56,
+    "computedPctEqual": 95.76719576719577,
+    "rowsFullyEqual": 36,
     "rows": 56,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,

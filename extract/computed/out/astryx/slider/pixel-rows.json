@@ -1,122 +1,122 @@
 [
   {
     "key": "horizontal.tooltip__default",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.8990119485294118,
+    "pctAA": 0.26424632352941174
   },
   {
     "key": "horizontal.tooltip__hover",
-    "pctExact": 0,
-    "pctAA": 0
+    "pctExact": 0.8990119485294118,
+    "pctAA": 0.26424632352941174
   },
   {
     "key": "horizontal.tooltip__focus-visible",
-    "pctExact": 2.9036458333333335,
-    "pctAA": 2.1419270833333335
+    "pctExact": 3.400735294117647,
+    "pctAA": 2.3064108455882355
   },
   {
     "key": "horizontal.tooltip__active",
-    "pctExact": 2.75390625,
-    "pctAA": 2.05078125
+    "pctExact": 3.366268382352941,
+    "pctAA": 2.3150275735294117
   },
   {
     "key": "horizontal.text__default",
-    "pctExact": 0.045572916666666664,
-    "pctAA": 0
+    "pctExact": 1.2953814338235294,
+    "pctAA": 0.390625
   },
   {
     "key": "horizontal.text__hover",
-    "pctExact": 0.045572916666666664,
-    "pctAA": 0
+    "pctExact": 1.2953814338235294,
+    "pctAA": 0.390625
   },
   {
     "key": "horizontal.text__focus-visible",
-    "pctExact": 0.12369791666666667,
-    "pctAA": 0
+    "pctExact": 1.318359375,
+    "pctAA": 0.390625
   },
   {
     "key": "horizontal.text__active",
-    "pctExact": 0.045572916666666664,
-    "pctAA": 0
+    "pctExact": 1.2953814338235294,
+    "pctAA": 0.390625
   },
   {
     "key": "horizontal.none__default",
-    "pctExact": 0.052083333333333336,
-    "pctAA": 0
+    "pctExact": 0.927734375,
+    "pctAA": 0.26424632352941174
   },
   {
     "key": "horizontal.none__hover",
-    "pctExact": 0.052083333333333336,
-    "pctAA": 0
+    "pctExact": 0.927734375,
+    "pctAA": 0.26424632352941174
   },
   {
     "key": "horizontal.none__focus-visible",
-    "pctExact": 0.13020833333333334,
-    "pctAA": 0
+    "pctExact": 0.9507123161764706,
+    "pctAA": 0.26424632352941174
   },
   {
     "key": "horizontal.none__active",
-    "pctExact": 0.052083333333333336,
-    "pctAA": 0
+    "pctExact": 0.927734375,
+    "pctAA": 0.26424632352941174
   },
   {
     "key": "vertical.tooltip__default",
-    "pctExact": 0.01953125,
-    "pctAA": 0
+    "pctExact": 0.9162454044117647,
+    "pctAA": 0.26424632352941174
   },
   {
     "key": "vertical.tooltip__hover",
-    "pctExact": 2.0768229166666665,
-    "pctAA": 0.9798177083333334
+    "pctExact": 2.633846507352941,
+    "pctAA": 1.5107996323529411
   },
   {
     "key": "vertical.tooltip__focus-visible",
-    "pctExact": 6.328125,
-    "pctAA": 4.713541666666667
+    "pctExact": 5.394071691176471,
+    "pctAA": 3.5443474264705883
   },
   {
     "key": "vertical.tooltip__active",
-    "pctExact": 6.328125,
-    "pctAA": 4.713541666666667
+    "pctExact": 4.825367647058823,
+    "pctAA": 2.9239430147058822
   },
   {
     "key": "vertical.text__default",
-    "pctExact": 0.01953125,
-    "pctAA": 0
+    "pctExact": 2.877987132352941,
+    "pctAA": 1.7032398897058822
   },
   {
     "key": "vertical.text__hover",
-    "pctExact": 2.0572916666666665,
-    "pctAA": 0.9733072916666666
+    "pctExact": 3.2312729779411766,
+    "pctAA": 1.6888786764705883
   },
   {
     "key": "vertical.text__focus-visible",
-    "pctExact": 3.8704427083333335,
-    "pctAA": 2.5944010416666665
+    "pctExact": 3.805721507352941,
+    "pctAA": 1.904296875
   },
   {
     "key": "vertical.text__active",
-    "pctExact": 3.2063802083333335,
-    "pctAA": 2.3404947916666665
+    "pctExact": 3.805721507352941,
+    "pctAA": 1.904296875
   },
   {
     "key": "vertical.none__default",
-    "pctExact": 0.01953125,
-    "pctAA": 0
+    "pctExact": 0.9162454044117647,
+    "pctAA": 0.26424632352941174
   },
   {
     "key": "vertical.none__hover",
-    "pctExact": 2.0768229166666665,
-    "pctAA": 0.9798177083333334
+    "pctExact": 2.633846507352941,
+    "pctAA": 1.5107996323529411
   },
   {
     "key": "vertical.none__focus-visible",
-    "pctExact": 3.6295572916666665,
-    "pctAA": 2.5162760416666665
+    "pctExact": 3.208295036764706,
+    "pctAA": 1.726217830882353
   },
   {
     "key": "vertical.none__active",
-    "pctExact": 3.6295572916666665,
-    "pctAA": 2.5162760416666665
+    "pctExact": 3.208295036764706,
+    "pctAA": 1.726217830882353
   }
 ]

@@ -9,65 +9,65 @@
         "root": {
           "background-color": {
             "neutral": {
-              "$value": "#0536591a",
+              "$value": "#e5e5e5",
               "$type": "color"
             },
             "info": {
-              "$value": "#0064e0",
+              "$value": "#0074e2",
               "$type": "color"
             },
             "success": {
-              "$value": "#0d8626",
+              "$value": "#198100",
               "$type": "color"
             },
             "warning": {
-              "$value": "#e9af08",
+              "$value": "#ffce2f",
               "$type": "color"
             },
             "error": {
-              "$value": "#e3193b",
+              "$value": "#e33f4a",
               "$type": "color"
             },
             "blue": {
-              "$value": "#0171e333",
+              "$value": "#c4ddfb",
               "$type": "color"
             },
             "cyan": {
-              "$value": "#03a7d733",
+              "$value": "#a3e0ef",
               "$type": "color"
             },
             "green": {
-              "$value": "#24bb5e33",
+              "$value": "#c5e5c0",
               "$type": "color"
             },
             "orange": {
-              "$value": "#f2790233",
+              "$value": "#fad0b5",
               "$type": "color"
             },
             "pink": {
-              "$value": "#e638b333",
+              "$value": "#fccadc",
               "$type": "color"
             },
             "purple": {
-              "$value": "#7952ff33",
+              "$value": "#eccef3",
               "$type": "color"
             },
             "red": {
-              "$value": "#e3193b33",
+              "$value": "#facecb",
               "$type": "color"
             },
             "teal": {
-              "$value": "#0db7af33",
+              "$value": "#a5e3d6",
               "$type": "color"
             },
             "yellow": {
-              "$value": "#e2a40033",
+              "$value": "#f8da9d",
               "$type": "color"
             }
           },
           "color": {
             "neutral": {
-              "$value": "#0a1317",
+              "$value": "#262626",
               "$type": "color"
             },
             "info": {
@@ -79,7 +79,7 @@
               "$type": "color"
             },
             "warning": {
-              "$value": "#0a1317",
+              "$value": "#171717",
               "$type": "color"
             },
             "error": {
@@ -87,39 +87,39 @@
               "$type": "color"
             },
             "blue": {
-              "$value": "#042f97",
+              "$value": "#00458c",
               "$type": "color"
             },
             "cyan": {
-              "$value": "#014975",
+              "$value": "#00505f",
               "$type": "color"
             },
             "green": {
-              "$value": "#09441f",
+              "$value": "#0c5700",
               "$type": "color"
             },
             "orange": {
-              "$value": "#6b2203",
+              "$value": "#6e3500",
               "$type": "color"
             },
             "pink": {
-              "$value": "#650053",
+              "$value": "#83004b",
               "$type": "color"
             },
             "purple": {
-              "$value": "#3e0697",
+              "$value": "#700084",
               "$type": "color"
             },
             "red": {
-              "$value": "#7b0210",
+              "$value": "#89001a",
               "$type": "color"
             },
             "teal": {
-              "$value": "#083943",
+              "$value": "#005348",
               "$type": "color"
             },
             "yellow": {
-              "$value": "#753f07",
+              "$value": "#584400",
               "$type": "color"
             }
           },
@@ -263,6 +263,8 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
@@ -291,7 +293,8 @@
     ],
     "svgAssets": [],
     "receipts": [
-      "root-display-carried: flex"
+      "root-display-carried: flex",
+      "root-literal-text-carried: root direct text \"New\" matches no prop sample — carried verbatim (named)"
     ],
     "refusals": []
   },

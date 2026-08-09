@@ -1,0 +1,150 @@
+{
+  "component": "ProgressBar",
+  "browser": "151.0.7922.34",
+  "captures": 20,
+  "combos": 5,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 675,
+  "elementsPerCapture": 5,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 11,
+    "part-0": 8,
+    "label": 8,
+    "progressbar-track": 12,
+    "progressbar-fill": 15
+  },
+  "folds": {
+    "count": 0,
+    "receipts": [],
+    "mintedLeavesUnfolded": 14,
+    "mintedLeavesFolded": 14
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 14,
+    "baseBindings": 19,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 18,
+      "perAxis": 1,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 5,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 26,
+    "state": 0,
+    "overflowBindings": 0
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 5,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 67300,
+    "cellsMatched": 67260,
+    "pct": 99.9405646359584,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "inline-size",
+        20
+      ],
+      [
+        "width",
+        20
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 20,
+    "measured": 20,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
+    "exact": {
+      "mean": 2.144607843137254,
+      "max": 2.144607843137255,
+      "perfect": 0
+    },
+    "aa": {
+      "mean": 1.202512254901961,
+      "max": 1.2025122549019607,
+      "perfect": 0
+    },
+    "worst": [
+      {
+        "key": "accent__default",
+        "pctExact": 2.144607843137255,
+        "pctAA": 1.2025122549019607
+      },
+      {
+        "key": "accent__hover",
+        "pctExact": 2.144607843137255,
+        "pctAA": 1.2025122549019607
+      },
+      {
+        "key": "accent__focus-visible",
+        "pctExact": 2.144607843137255,
+        "pctAA": 1.2025122549019607
+      },
+      {
+        "key": "accent__active",
+        "pctExact": 2.144607843137255,
+        "pctAA": 1.2025122549019607
+      },
+      {
+        "key": "success__default",
+        "pctExact": 2.144607843137255,
+        "pctAA": 1.2025122549019607
+      },
+      {
+        "key": "success__hover",
+        "pctExact": 2.144607843137255,
+        "pctAA": 1.2025122549019607
+      },
+      {
+        "key": "success__focus-visible",
+        "pctExact": 2.144607843137255,
+        "pctAA": 1.2025122549019607
+      },
+      {
+        "key": "success__active",
+        "pctExact": 2.144607843137255,
+        "pctAA": 1.2025122549019607
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 51.851851851851855,
+    "rowsFullyEqual": 0,
+    "rows": 20,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 20
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 5
+}

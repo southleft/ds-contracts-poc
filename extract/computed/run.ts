@@ -96,6 +96,10 @@ const OUT_ROOT = arg('out') ? path.resolve(arg('out')!) : path.join(HERE, 'out')
 const CONFIG_PATH = path.resolve(arg('config') ?? path.join(HERE, 'configs', 'polaris.json'));
 const HARNESS = arg('harness') ? path.resolve(arg('harness')!) : null;
 const ONLY = arg('component');
+/** `--keep-originals`: also commit the REAL npm-package screenshots (see the
+ *  block that writes `<out>/<comp>/orig-shots/`). Default OFF — no committed
+ *  artifact for any library moves until a round asks for them. */
+const KEEP_ORIGINALS = process.argv.includes('--keep-originals');
 
 /** CONFORMANCE FRONTIER (R3) — a refusal that is SCOPED TO ONE COMPONENT.
  *  Anything else thrown out of a component is an engine fault and still stops
@@ -372,7 +376,7 @@ async function main() {
     // regenerate GENERATED artifacts only — decisions.json / decisions.md /
     // resolved.contract.json are HUMAN-DECISION artifacts (resolve.ts) and
     // survive regeneration.
-    for (const f of ['captured-truth.json', 'enriched.contract.json', 'enriched.extension.json', 'review-queue.json', 'source-bindings.json', 'scorecard.json', 'numbers.json', 'pixel-rows.json', 'LEDGER.md', 'gate.html', 'replay.html', 'receipts', 'gate-shots', '.replay-shots', 'assets']) {
+    for (const f of ['captured-truth.json', 'enriched.contract.json', 'enriched.extension.json', 'review-queue.json', 'source-bindings.json', 'scorecard.json', 'numbers.json', 'pixel-rows.json', 'LEDGER.md', 'gate.html', 'replay.html', 'receipts', 'gate-shots', 'orig-shots', '.replay-shots', 'assets']) {
       rmSync(path.join(outDir, f), { recursive: true, force: true });
     }
     mkdirSync(outDir, { recursive: true });
@@ -1242,6 +1246,39 @@ async function main() {
       writeFileSync(path.join(receiptsDir, `pair--${key}.png`), PNG.sync.write(outPng));
     }
 
+    // ---- `--keep-originals`: commit the REAL LIBRARY render, un-collaged.
+    //
+    // Why this flag exists. `gate-shots/<key>.png` is the CONTRACT RENDER
+    // (enriched contract → emit-html) — the RIGHT half of the pair above. The
+    // real npm-package render lives only in `scratchShots`, which this file
+    // deletes on the way out, so the ONLY library pixels the pipeline has ever
+    // committed are baked into a labeled side-by-side collage at a handful of
+    // keys. Every console-loop lane that scores "canvas vs DEVELOPED" against a
+    // `gate-shots/` file is therefore scoring the canvas against ANOTHER
+    // EMITTER'S RENDER OF THE SAME CONTRACT, not against the library: a real
+    // measurement (two emitters, two renderers), but not the one its name
+    // claims, and one that cannot fall when the contract is wrong in the same
+    // way on both sides. A lane cannot be honest about fidelity to a library
+    // whose pixels it never keeps.
+    //
+    // Default OFF: no committed artifact moves for any library until a round
+    // deliberately asks for the originals.
+    if (KEEP_ORIGINALS) {
+      const origDir = path.join(outDir, 'orig-shots');
+      mkdirSync(origDir, { recursive: true });
+      let kept = 0;
+      for (const combo of space.enumeration.combos) {
+        for (const inter of INTERACTIONS) {
+          const key = `${combo.key}__${inter}`;
+          const from = path.join(scratchShots, `${comp.name}--${key}.png`);
+          if (!existsSync(from)) continue;
+          writeFileSync(path.join(origDir, `${key}.png`), readFileSync(from));
+          kept++;
+        }
+      }
+      console.log(`  --keep-originals: ${kept} REAL-LIBRARY screenshot(s) → ${path.relative(process.cwd(), origDir)} (gate-shots/ is the CONTRACT render, not this)`);
+    }
+
     // ---- artifacts ----
     // NOT MEASURED prints as words, never as a number — a null rendered as
     // "0.000%" in this metric would read as PERFECT (fix 5).
@@ -1465,7 +1502,7 @@ async function main() {
       mkdirSync(outDir, { recursive: true });
       // The contract artifacts of a quarantined component must NOT exist —
       // a stale one from a previous run would read as this run's output.
-      for (const f of ['enriched.contract.json', 'enriched.extension.json', 'resolved.contract.json', 'scorecard.json', 'numbers.json', 'pixel-rows.json', 'gate.html', 'replay.html', 'gate-shots', 'assets']) {
+      for (const f of ['enriched.contract.json', 'enriched.extension.json', 'resolved.contract.json', 'scorecard.json', 'numbers.json', 'pixel-rows.json', 'gate.html', 'replay.html', 'gate-shots', 'orig-shots', 'assets']) {
         rmSync(path.join(outDir, f), { recursive: true, force: true });
       }
       const record = {

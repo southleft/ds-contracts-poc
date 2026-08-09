@@ -125,8 +125,7 @@
             "align": "center"
           },
           "declared": {
-            "cursor": "pointer",
-            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+            "cursor": "pointer"
           },
           "tokens": {
             "color": "{imported.slider.label.color}",
@@ -219,7 +218,7 @@
                     "user-select": "none"
                   },
                   "tokens": {
-                    "background-color": "{imported.shared.color-0064e0}",
+                    "background-color": "{imported.shared.color-262626}",
                     "border-bottom-left-radius": "{imported.shared.size-9999}",
                     "border-bottom-right-radius": "{imported.shared.size-9999}",
                     "border-top-left-radius": "{imported.shared.size-9999}",
@@ -275,7 +274,7 @@
                     "display": "block",
                     "position": "absolute",
                     "cursor": "grab",
-                    "transition-duration": "0.175s",
+                    "transition-duration": "0.125s",
                     "transition-property": "background-color, box-shadow",
                     "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)",
                     "user-select": "none"
@@ -290,7 +289,7 @@
                     }
                   ],
                   "tokens": {
-                    "background-color": "{imported.shared.color-0064e0}",
+                    "background-color": "{imported.shared.color-262626}",
                     "border-bottom-left-radius": "{imported.shared.size-9999}",
                     "border-bottom-right-radius": "{imported.shared.size-9999}",
                     "border-top-left-radius": "{imported.shared.size-9999}",
@@ -350,7 +349,7 @@
                         "display": "block",
                         "position": "absolute",
                         "cursor": "grab",
-                        "transition-duration": "0.175s",
+                        "transition-duration": "0.125s",
                         "transition-property": "background-color, box-shadow",
                         "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)",
                         "user-select": "none"
@@ -372,7 +371,7 @@
                         }
                       ],
                       "tokens": {
-                        "background-color": "{imported.shared.color-0064e0}",
+                        "background-color": "{imported.shared.color-262626}",
                         "border-bottom-left-radius": "{imported.shared.size-9999}",
                         "border-bottom-right-radius": "{imported.shared.size-9999}",
                         "border-top-left-radius": "{imported.shared.size-9999}",
@@ -421,7 +420,6 @@
                     "border-right-style": "none",
                     "border-top-style": "none",
                     "cursor": "pointer",
-                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                     "user-select": "none"
                   },
                   "stylesWhen": [
@@ -447,7 +445,6 @@
                       "declared": {
                         "display": "block",
                         "cursor": "pointer",
-                        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                         "user-select": "none"
                       },
                       "stylesWhen": [
@@ -565,7 +562,6 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
-                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                 "text-wrap-mode": "nowrap"
               },
               "stylesWhen": [
@@ -585,7 +581,6 @@
                 }
               ],
               "tokens": {
-                "color": "{imported.slider.label-3.color}",
                 "flex-shrink": "{imported.slider.label-3.flex-shrink}",
                 "font-size": "{imported.shared.size-14}",
                 "font-weight": "{imported.slider.label-3.font-weight}",
@@ -619,6 +614,8 @@
       "tokens": {
         "column-gap": "{imported.shared.size-4}",
         "height": "{imported.slider.root.height.{orientation}.{valueDisplay}}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
         "row-gap": "{imported.shared.size-4}",
         "width": "{imported.slider.root.width}",
         "color": "{color-on-light}",

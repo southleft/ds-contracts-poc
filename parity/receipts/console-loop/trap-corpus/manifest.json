@@ -1,7 +1,7 @@
 {
   "version": 1,
   "kind": "code-to-canvas-trap-corpus",
-  "description": "Frozen adversarial stems for code\u2192canvas hill-climb (CODE-TO-CANVAS-HILLCLIMB.md \u00a73.2 / \u00a74 Phase M2). Structural CI only until developed scores land. toast/progress-bar refs (2026-08-08): DEVELOPED references rendered offline from their promoted contracts via the gate's own emit pipeline (emit-html + astryx token stylesheet + shipped minted tree, pinned headless Chromium, stage screenshot) \u2014 these stems were never computed-captured, so no gate-shots exist; astryx fonts stay UNCONFIGURED by name (FC-FONT-SUBSTRATE precedent), the refs render the CSS fallback stack.",
+  "description": "Frozen adversarial stems for code→canvas hill-climb (CODE-TO-CANVAS-HILLCLIMB.md §3.2 / §4 Phase M2). Structural CI only until developed scores land. toast/progress-bar refs (2026-08-08): DEVELOPED references rendered offline from their promoted contracts via the gate's own emit pipeline (emit-html + astryx token stylesheet + shipped minted tree, pinned headless Chromium, stage screenshot) — these stems were never computed-captured, so no gate-shots exist; astryx fonts stay UNCONFIGURED by name (FC-FONT-SUBSTRATE precedent), the refs render the CSS fallback stack.",
   "stems": [
     {
       "lib": "astryx",
@@ -11,8 +11,9 @@
       ],
       "contract": "examples/astryx/contracts/slider.contract.json",
       "script": "examples/astryx/figma/slider.figma.js",
-      "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/slider/horizontal.none__default.png",
-      "pendingRef": false
+      "reference": "extract/computed/out/astryx/slider/orig-shots/horizontal.tooltip__default.png",
+      "pendingRef": false,
+      "referenceWas": "parity/receipts/console-loop/trap-corpus/refs/astryx/slider/horizontal.none__default.png"
     },
     {
       "lib": "astryx",
@@ -35,8 +36,9 @@
       ],
       "contract": "examples/astryx/contracts/progress-bar.contract.json",
       "script": "examples/astryx/figma/progress-bar.figma.js",
-      "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/progress-bar/accent.value-40__default.png",
-      "pendingRef": false
+      "reference": "extract/computed/out/astryx/progressbar/orig-shots/accent__default.png",
+      "pendingRef": false,
+      "referenceWas": "parity/receipts/console-loop/trap-corpus/refs/astryx/progress-bar/accent.value-40__default.png"
     },
     {
       "lib": "polaris",
@@ -82,8 +84,9 @@
       ],
       "contract": "examples/astryx/contracts/switch.contract.json",
       "script": "examples/astryx/figma/switch.figma.js",
-      "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/switch/end.no-isDisabled__default.png",
-      "pendingRef": false
+      "reference": "extract/computed/out/astryx/switch/orig-shots/end.no-isDisabled__default.png",
+      "pendingRef": false,
+      "referenceWas": "parity/receipts/console-loop/trap-corpus/refs/astryx/switch/end.no-isDisabled__default.png"
     },
     {
       "lib": "carbon",
@@ -117,8 +120,10 @@
       ],
       "contract": "examples/astryx/contracts/button.contract.json",
       "script": "examples/astryx/figma/button.figma.js",
-      "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/button/primary.md.no-isDisabled__default.png",
-      "pendingRef": false
+      "reference": "extract/computed/out/astryx/button/orig-shots/primary.lg.no-isDisabled__default.png",
+      "pendingRef": false,
+      "referenceWas": "parity/receipts/console-loop/trap-corpus/refs/astryx/button/primary.md.no-isDisabled__default.png"
     }
-  ]
+  ],
+  "_astryxReferenceNote": "2026-08-08 REFERENCE-TRUTH round: the four astryx rows with a computed capture now point at extract/computed/out/astryx/<comp>/orig-shots/ — the REAL @astryxdesign/core render, committed for the first time by `extract/computed/run.ts --keep-originals`. They previously pointed at trap-corpus snapshots cut from gate-shots, i.e. the CONTRACT RENDER (enriched contract -> emit-html), not the library. Both scoring paths (manifest mode and --lib/--stem, which reads receipt.visual.reference) now resolve the same PNG; before this they disagreed, so a bare `npm run console-loop:developed-score` would silently overwrite the lane scorecards with numbers measured against a different picture. astryx/toast keeps its trap snapshot: Toast is composition-tier and has no single-component capture."
 }

@@ -1,0 +1,162 @@
+[
+  {
+    "key": "info.card__default",
+    "pctExact": 5.179816632231405,
+    "pctAA": 2.5939436983471076
+  },
+  {
+    "key": "info.card__hover",
+    "pctExact": 5.179816632231405,
+    "pctAA": 2.5939436983471076
+  },
+  {
+    "key": "info.card__focus-visible",
+    "pctExact": 5.179816632231405,
+    "pctAA": 2.5939436983471076
+  },
+  {
+    "key": "info.card__active",
+    "pctExact": 5.179816632231405,
+    "pctAA": 2.5939436983471076
+  },
+  {
+    "key": "info.section__default",
+    "pctExact": 5.179816632231405,
+    "pctAA": 2.5939436983471076
+  },
+  {
+    "key": "info.section__hover",
+    "pctExact": 5.179816632231405,
+    "pctAA": 2.5939436983471076
+  },
+  {
+    "key": "info.section__focus-visible",
+    "pctExact": 5.179816632231405,
+    "pctAA": 2.5939436983471076
+  },
+  {
+    "key": "info.section__active",
+    "pctExact": 5.179816632231405,
+    "pctAA": 2.5939436983471076
+  },
+  {
+    "key": "warning.card__default",
+    "pctExact": 5.1491477272727275,
+    "pctAA": 2.6052427685950414
+  },
+  {
+    "key": "warning.card__hover",
+    "pctExact": 5.1491477272727275,
+    "pctAA": 2.6052427685950414
+  },
+  {
+    "key": "warning.card__focus-visible",
+    "pctExact": 5.1491477272727275,
+    "pctAA": 2.6052427685950414
+  },
+  {
+    "key": "warning.card__active",
+    "pctExact": 5.1491477272727275,
+    "pctAA": 2.6052427685950414
+  },
+  {
+    "key": "warning.section__default",
+    "pctExact": 5.1491477272727275,
+    "pctAA": 2.6052427685950414
+  },
+  {
+    "key": "warning.section__hover",
+    "pctExact": 5.1491477272727275,
+    "pctAA": 2.6052427685950414
+  },
+  {
+    "key": "warning.section__focus-visible",
+    "pctExact": 5.1491477272727275,
+    "pctAA": 2.6052427685950414
+  },
+  {
+    "key": "warning.section__active",
+    "pctExact": 5.1491477272727275,
+    "pctAA": 2.6052427685950414
+  },
+  {
+    "key": "error.card__default",
+    "pctExact": 5.210485537190083,
+    "pctAA": 2.6520532024793386
+  },
+  {
+    "key": "error.card__hover",
+    "pctExact": 5.210485537190083,
+    "pctAA": 2.6520532024793386
+  },
+  {
+    "key": "error.card__focus-visible",
+    "pctExact": 5.210485537190083,
+    "pctAA": 2.6520532024793386
+  },
+  {
+    "key": "error.card__active",
+    "pctExact": 5.210485537190083,
+    "pctAA": 2.6520532024793386
+  },
+  {
+    "key": "error.section__default",
+    "pctExact": 5.210485537190083,
+    "pctAA": 2.6520532024793386
+  },
+  {
+    "key": "error.section__hover",
+    "pctExact": 5.210485537190083,
+    "pctAA": 2.6520532024793386
+  },
+  {
+    "key": "error.section__focus-visible",
+    "pctExact": 5.210485537190083,
+    "pctAA": 2.6520532024793386
+  },
+  {
+    "key": "error.section__active",
+    "pctExact": 5.210485537190083,
+    "pctAA": 2.6520532024793386
+  },
+  {
+    "key": "success.card__default",
+    "pctExact": 5.168517561983471,
+    "pctAA": 2.6326833677685952
+  },
+  {
+    "key": "success.card__hover",
+    "pctExact": 5.168517561983471,
+    "pctAA": 2.6326833677685952
+  },
+  {
+    "key": "success.card__focus-visible",
+    "pctExact": 5.168517561983471,
+    "pctAA": 2.6326833677685952
+  },
+  {
+    "key": "success.card__active",
+    "pctExact": 5.168517561983471,
+    "pctAA": 2.6326833677685952
+  },
+  {
+    "key": "success.section__default",
+    "pctExact": 5.168517561983471,
+    "pctAA": 2.6326833677685952
+  },
+  {
+    "key": "success.section__hover",
+    "pctExact": 5.168517561983471,
+    "pctAA": 2.6326833677685952
+  },
+  {
+    "key": "success.section__focus-visible",
+    "pctExact": 5.168517561983471,
+    "pctAA": 2.6326833677685952
+  },
+  {
+    "key": "success.section__active",
+    "pctExact": 5.168517561983471,
+    "pctAA": 2.6326833677685952
+  }
+]

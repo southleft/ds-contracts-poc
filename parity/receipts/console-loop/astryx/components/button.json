@@ -1,222 +1,225 @@
 {
- "version": 1,
- "kind": "console-loop-astryx-component",
- "status": "completed",
- "component": "button",
- "contract": "examples/astryx/contracts/button.contract.json",
- "script": "examples/astryx/figma/button.figma.js",
- "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
- "recordedAt": "2026-08-06T05:44:08.324Z",
- "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
- "generate": {
-  "ok": true,
-  "nodeId": "1:3864",
-  "mode": "generated",
-  "page": "Button (astryx.button)",
-  "sectionId": "1:3865",
-  "contractId": "astryx.button",
-  "result": {
-   "createdNodeIds": [
-    "1:3864"
-   ],
-   "results": [
-    {
-     "name": "Button",
-     "contractId": "astryx.button",
-     "nodeId": "1:3864",
-     "key": "1095d9fe756a9f1deb2282b442a05f785deaf9d5",
-     "variants": 12,
-     "properties": [
-      "Is Disabled#1:930",
-      "Is Loading#1:943",
-      "Is Icon Only#1:956",
-      "Label#1:969",
-      "Variant",
-      "Size"
-     ]
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "button",
+  "contract": "examples/astryx/contracts/button.contract.json",
+  "script": "examples/astryx/figma/button.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:08.324Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload (bridge :9228 /run-script)",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:3864",
+    "mode": "generated",
+    "page": "Button (astryx.button)",
+    "sectionId": "1:3865",
+    "contractId": "astryx.button",
+    "result": {
+      "createdNodeIds": [
+        "1:3864"
+      ],
+      "results": [
+        {
+          "name": "Button",
+          "contractId": "astryx.button",
+          "nodeId": "1:3864",
+          "key": "1095d9fe756a9f1deb2282b442a05f785deaf9d5",
+          "variants": 12,
+          "properties": [
+            "Is Disabled#1:930",
+            "Is Loading#1:943",
+            "Is Icon Only#1:956",
+            "Label#1:969",
+            "Variant",
+            "Size"
+          ]
+        }
+      ]
     }
-   ]
-  }
- },
- "visual": {
-  "ok": false,
-  "matchDeveloped": false,
-  "reviewedAt": "2026-08-06T18:32:59.000Z",
-  "notes": [
-   "Re-sync 2026-08-06 via Console MCP: fetch localhost:9230/stem/astryx-button (83264 bytes); specHash 2925444908→345541608; 12 variants rebuilt in place on 1:3864.",
-   "Representative shot: Variant=Primary, Size=Md → parity/receipts/console-loop/astryx/shots/button.png (2× export).",
-   "Trap-corpus stem — matchDeveloped remains false pending automated score.",
-   "FC-FONT-SUBSTRATE update 2026-08-08: the harness now supports per-library @font-face loading (extract/computed cfg.fonts — altitude converted with it). Astryx stays UNCONFIGURED by name: @astryxdesign/theme-neutral dist declares Figtree first, but no Figtree file ships in the sandbox (network fetch forbidden), and the committed captured truth carries font-family 'Times' for Button (the capture-context token did not resolve at capture time) — so the reference substrate is downstream of a capture-context defect plus an unobtainable face, while the canvas renders Inter (Figma fallback). Still fail-closed; conversion needs a recapture with the token context fixed + a committed Figtree face.",
-   "ASTRYX TIMES ROOT CAUSE FOUND + FIXED AT CAUSE 2026-08-08 (font-substrate round): every token in @astryxdesign/theme-neutral/dist/theme.css lives inside '@scope ([data-astryx-theme=\"neutral\"]) to ([data-astryx-theme])' blocks, and the capture mount imported the CSS but wrapped stages in a bare fragment — no element ever carried the attribute, so NO theme token (Figtree included) resolved at capture. Button's <button> has only reset.css 'font-family: inherit', inherited from an unstyled body (the base font is applied by the Theme provider's OWN wrapper div, stylex x9ynric = font-family:var(--font-family-body)), and computed to the browser default: literal 'Times' — 104 nodes in the committed truth. FIX: configs/astryx.json now mounts the library's documented provider (<Theme theme={neutralTheme}>) — the wrapper carries data-astryx-theme='neutral' AND the base font — plus cfg.fonts Figtree 400/500/600/700 (@fontsource/figtree@5.3.0 pinned, faces committed under extract/computed/fonts/figtree/). Button+Switch recaptured: truth now carries 'Figtree, -apple-system, ...' (0 Times nodes) and theme-resolved colors.",
-   "Reference re-pinned from the recaptured gate render (primary.lg.no-isDisabled__default): themed primary is the neutral near-black (#171717-family), label is real Figtree. Scores moved 7.94 -> 89.31 (lane) / 89.29 (headless) — both instruments AGREE the canvas is now the outlier: the on-canvas set was generated from the PRE-THEME contract (core-fallback blue primary, system-stack label). Honest fail-closed; closing requires re-promote of the theme-resolved contract + canvas re-sync (console-loop), which is canvas-side work outside this round."
-  ],
-  "defects": [
-   "pixel scorecard fail: pctAAMasked=89.31% lane / 89.29% headless (bar 5), compositionOk=true — see parity/receipts/console-loop/astryx/scores/button.json",
-   "FC-THEME-ISO (stale-contract canvas): canvas set generated from the pre-theme captured contract (blue primary, system-stack label); the re-pinned reference renders the library's real themed truth (Theme mount + Figtree). Residual is canvas-side: re-promote + console-loop re-sync from the theme-resolved contract."
-  ],
-  "reference": "parity/receipts/console-loop/astryx/refs/button.png",
-  "reviewSurface": "cream-#F8F4ED-component-set",
-  "referenceSource": "extract/computed/out/astryx/button/gate-shots/primary.lg.no-isDisabled__default.png",
-  "scorecard": "parity/receipts/console-loop/astryx/scores/button.json",
-  "status": "fail-closed",
-  "revoked": {
-   "at": "2026-08-08T04:31:03.484Z",
-   "was": {
+  },
+  "visual": {
     "ok": false,
-    "matchDeveloped": true,
-    "matchDevelopedReason": "agent AA=7.94",
-    "matchedAt": "2026-08-08T03:22:40.017Z"
-   },
-   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=7.94, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
-  }
- },
- "fingerprint": {
-  "v6": "v6:1886612596",
-  "lineCount": 370,
-  "sampleLines": [
-   ":COMPONENT_SET/Button (astryx.button)|fill|[]",
-   ":COMPONENT_SET/Button (astryx.button)|radius|5,5,5,5",
-   ":COMPONENT_SET/Button (astryx.button)|sizing|FIXED/FIXED AUTO",
-   ":COMPONENT_SET/Button (astryx.button)|description|Button â generated from contract astryx.button v0.3.0 â",
-   ":COMPONENT_SET/Button (astryx.button)|propdef|Is Disabled#1:930:BOOLEAN=false",
-   ":COMPONENT_SET/Button (astryx.button)|propdef|Is Icon Only#1:956:BOOLEAN=false",
-   ":COMPONENT_SET/Button (astryx.button)|propdef|Is Loading#1:943:BOOLEAN=false",
-   ":COMPONENT_SET/Button (astryx.button)|propdef|Label#1:969:TEXT=Button",
-   ":COMPONENT_SET/Button (astryx.button)|propdef|Size:VARIANT=Md",
-   ":COMPONENT_SET/Button (astryx.button)|propdef|Variant:VARIANT=Secondary",
-   "/0:COMPONENT/Variant=Secondary, Size=Md|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.10000000149011612,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.019607843831181526,\"g\":0.21176470816135406,\"b\":0.3490196168422699},\"boundVariables\":{\"color\":{\"var\":\"color-neutral\"}}}]",
-   "/0:COMPONENT/Variant=Secondary, Size=Md|radius|8,8,8,8",
-   "/0:COMPONENT/Variant=Secondary, Size=Md|layout|HORIZONTAL CENTER/CENTER gap 8 pad 8,12,8,12",
-   "/0:COMPONENT/Variant=Secondary, Size=Md|sizing|FIXED/FIXED AUTO",
-   "/0:COMPONENT/Variant=Secondary, Size=Md|bound:bottomLeftRadius|imported/shared/size-8",
-   "/0:COMPONENT/Variant=Secondary, Size=Md|bound:bottomRightRadius|imported/shared/size-8",
-   "/0:COMPONENT/Variant=Secondary, Size=Md|bound:height|imported/button/root/height/md",
-   "/0:COMPONENT/Variant=Secondary, Size=Md|bound:itemSpacing|spacing-2",
-   "/0:COMPONENT/Variant=Secondary, Size=Md|bound:paddingBottom|imported/shared/size-8",
-   "/0:COMPONENT/Variant=Secondary, Size=Md|bound:paddingLeft|imported/button/root/padding-left"
-  ]
- },
- "roundtrip": {
-  "mismatches": [],
-  "gaps": [],
-  "matchedAxes": [
-   "Variant enum → Secondary/Primary/Ghost/Destructive",
-   "Size enum → Md/Sm/Lg",
-   "BOOLEAN Is Disabled",
-   "BOOLEAN Is Loading",
-   "BOOLEAN Is Icon Only",
-   "TEXT Label",
-   "first-variant fill bound: color-neutral"
-  ],
-  "observed": {
-   "type": "COMPONENT_SET",
-   "variantNames": [
-    "Variant=Secondary, Size=Md",
-    "Variant=Secondary, Size=Sm",
-    "Variant=Secondary, Size=Lg",
-    "Variant=Primary, Size=Md",
-    "Variant=Primary, Size=Sm",
-    "Variant=Primary, Size=Lg",
-    "Variant=Ghost, Size=Md",
-    "Variant=Ghost, Size=Sm",
-    "Variant=Ghost, Size=Lg",
-    "Variant=Destructive, Size=Md",
-    "Variant=Destructive, Size=Sm",
-    "Variant=Destructive, Size=Lg"
-   ],
-   "propDefs": [
-    {
-     "name": "Is Disabled#1:930",
-     "type": "BOOLEAN",
-     "defaultValue": false,
-     "variantOptions": null
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-09T02:47:04.523Z",
+    "notes": [
+      "Re-sync 2026-08-06 via Console MCP: fetch localhost:9230/stem/astryx-button (83264 bytes); specHash 2925444908→345541608; 12 variants rebuilt in place on 1:3864.",
+      "Representative shot: Variant=Primary, Size=Md → parity/receipts/console-loop/astryx/shots/button.png (2× export).",
+      "Trap-corpus stem — matchDeveloped remains false pending automated score.",
+      "FC-FONT-SUBSTRATE update 2026-08-08: the harness now supports per-library @font-face loading (extract/computed cfg.fonts — altitude converted with it). Astryx stays UNCONFIGURED by name: @astryxdesign/theme-neutral dist declares Figtree first, but no Figtree file ships in the sandbox (network fetch forbidden), and the committed captured truth carries font-family 'Times' for Button (the capture-context token did not resolve at capture time) — so the reference substrate is downstream of a capture-context defect plus an unobtainable face, while the canvas renders Inter (Figma fallback). Still fail-closed; conversion needs a recapture with the token context fixed + a committed Figtree face.",
+      "ASTRYX TIMES ROOT CAUSE FOUND + FIXED AT CAUSE 2026-08-08 (font-substrate round): every token in @astryxdesign/theme-neutral/dist/theme.css lives inside '@scope ([data-astryx-theme=\"neutral\"]) to ([data-astryx-theme])' blocks, and the capture mount imported the CSS but wrapped stages in a bare fragment — no element ever carried the attribute, so NO theme token (Figtree included) resolved at capture. Button's <button> has only reset.css 'font-family: inherit', inherited from an unstyled body (the base font is applied by the Theme provider's OWN wrapper div, stylex x9ynric = font-family:var(--font-family-body)), and computed to the browser default: literal 'Times' — 104 nodes in the committed truth. FIX: configs/astryx.json now mounts the library's documented provider (<Theme theme={neutralTheme}>) — the wrapper carries data-astryx-theme='neutral' AND the base font — plus cfg.fonts Figtree 400/500/600/700 (@fontsource/figtree@5.3.0 pinned, faces committed under extract/computed/fonts/figtree/). Button+Switch recaptured: truth now carries 'Figtree, -apple-system, ...' (0 Times nodes) and theme-resolved colors.",
+      "Reference re-pinned from the recaptured gate render (primary.lg.no-isDisabled__default): themed primary is the neutral near-black (#171717-family), label is real Figtree. Scores moved 7.94 -> 89.31 (lane) / 89.29 (headless) — both instruments AGREE the canvas is now the outlier: the on-canvas set was generated from the PRE-THEME contract (core-fallback blue primary, system-stack label). Honest fail-closed; closing requires re-promote of the theme-resolved contract + canvas re-sync (console-loop), which is canvas-side work outside this round.",
+      "2026-08-08 REFERENCE-TRUTH ROUND. The reference is now the REAL @astryxdesign/core@0.1.6 render — extract/computed/out/astryx/<comp>/orig-shots/<combo>__default.png, committed for the first time by `extract/computed/run.ts --keep-originals`. Every previous astryx reference was one of: an emit-html first-item render in the pre-Theme Times substrate, a POLARIS gate-shot, a 1440x2200 documentation screenshot, or a `gate-shots/` file — and `gate-shots/` is the CONTRACT RENDER (enriched contract -> emit-html), the RIGHT half of the pair receipt, NOT the library. Scoring a canvas built from a contract against another emitter’s render of the same contract measures emitter agreement, not fidelity."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=90.75 (bar 5), compositionOk=FALSE — parity/receipts/console-loop/astryx/scores/button.json",
+      "FC-REF-FRAMING is NOT the cause and is not claimed: shot content box 100x36 vs library 67x36 (scaleRatio 1.49) is a REAL WIDTH DEFECT. The committed contract was promoted from a capture mounted with `label: \"Save changes\"`, a string the contract never declares (its own `label` default is \"Button\"), so the canvas carries the min-width of a longer word. The capture now mounts the contract default; the reference reads \"Button\" and is 67px wide. Closing it needs the re-promote that FC-THEME-BASE blocks.",
+      "FC-THEME-BASE: the capture mount renders under `<Theme theme={neutralTheme}>` (@astryxdesign/theme-neutral — the library’s documented Quick Start and the only mount where the base font resolves), while examples/astryx/tokens/astryx.dtcg.json is wrapped from @astryxdesign/core/src/theme/tokens.stylex.ts, the CORE DEFAULT palette. Measured: core --color-accent #0064E0 vs theme-neutral #262626; core --color-text-primary #0A1317 vs #171717; core --color-background-blue #0171E333 vs #c4ddfb. The canvas paints the core plane, the library renders the neutral plane, and no re-promote closes it: promoting from the neutral captures strands 30 of the 36 acked re-anchoring rows (65 leaves) with no alias target, dropping the astryx bundle from 54 Figma-native aliases to 13 and failing the plugin-engine-check pin. A HUMAN decision on which plane is astryx’s canonical repo-side theme is required; nothing was force-fitted. Button is where this is largest: the library paints Variant=Primary #262626 (near-black), the canvas paints {color-accent} = #0064E0 (blue)."
+    ],
+    "reference": "extract/computed/out/astryx/button/orig-shots/primary.lg.no-isDisabled__default.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "referenceSource": "extract/computed/out/astryx/button/orig-shots/primary.lg.no-isDisabled__default.png",
+    "scorecard": "parity/receipts/console-loop/astryx/scores/button.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "agent AA=7.94",
+        "matchedAt": "2026-08-08T03:22:40.017Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=7.94, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
     },
-    {
-     "name": "Is Loading#1:943",
-     "type": "BOOLEAN",
-     "defaultValue": false,
-     "variantOptions": null
-    },
-    {
-     "name": "Is Icon Only#1:956",
-     "type": "BOOLEAN",
-     "defaultValue": false,
-     "variantOptions": null
-    },
-    {
-     "name": "Label#1:969",
-     "type": "TEXT",
-     "defaultValue": "Button",
-     "variantOptions": null
-    },
-    {
-     "name": "Variant",
-     "type": "VARIANT",
-     "defaultValue": "Secondary",
-     "variantOptions": [
-      "Secondary",
-      "Primary",
-      "Ghost",
-      "Destructive"
-     ]
-    },
-    {
-     "name": "Size",
-     "type": "VARIANT",
-     "defaultValue": "Md",
-     "variantOptions": [
-      "Md",
-      "Sm",
-      "Lg"
-     ]
-    }
-   ],
-   "firstRoot": {
-    "name": "Variant=Secondary, Size=Md",
-    "type": "COMPONENT",
-    "layoutMode": "HORIZONTAL",
-    "padding": {
-     "t": 8,
-     "r": 12,
-     "b": 8,
-     "l": 12
-    },
-    "radius": 8,
-    "fillVarName": "color-neutral",
-    "padBound": {
-     "itemSpacing": "spacing-2",
-     "paddingLeft": "imported/button/root/padding-left",
-     "paddingTop": "imported/shared/size-8",
-     "paddingRight": "imported/button/root/padding-right",
-     "paddingBottom": "imported/shared/size-8",
-     "width": "imported/button/root/width",
-     "height": "imported/button/root/height/md",
-     "topLeftRadius": "imported/shared/size-8",
-     "topRightRadius": "imported/shared/size-8",
-     "bottomLeftRadius": "imported/shared/size-8",
-     "bottomRightRadius": "imported/shared/size-8",
-     "fills": "color-neutral"
-    },
-    "w": 99.8125,
-    "h": 32,
-    "childTypes": [
-     "FRAME/part-0"
+    "referenceProvenance": "library:@astryxdesign/core@0.1.6 Button variant=primary size=lg label=\"Button\" under <Theme theme={neutralTheme}> (extract/computed/run.ts --keep-originals)"
+  },
+  "fingerprint": {
+    "v6": "v6:1886612596",
+    "lineCount": 370,
+    "sampleLines": [
+      ":COMPONENT_SET/Button (astryx.button)|fill|[]",
+      ":COMPONENT_SET/Button (astryx.button)|radius|5,5,5,5",
+      ":COMPONENT_SET/Button (astryx.button)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Button (astryx.button)|description|Button â generated from contract astryx.button v0.3.0 â",
+      ":COMPONENT_SET/Button (astryx.button)|propdef|Is Disabled#1:930:BOOLEAN=false",
+      ":COMPONENT_SET/Button (astryx.button)|propdef|Is Icon Only#1:956:BOOLEAN=false",
+      ":COMPONENT_SET/Button (astryx.button)|propdef|Is Loading#1:943:BOOLEAN=false",
+      ":COMPONENT_SET/Button (astryx.button)|propdef|Label#1:969:TEXT=Button",
+      ":COMPONENT_SET/Button (astryx.button)|propdef|Size:VARIANT=Md",
+      ":COMPONENT_SET/Button (astryx.button)|propdef|Variant:VARIANT=Secondary",
+      "/0:COMPONENT/Variant=Secondary, Size=Md|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.10000000149011612,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.019607843831181526,\"g\":0.21176470816135406,\"b\":0.3490196168422699},\"boundVariables\":{\"color\":{\"var\":\"color-neutral\"}}}]",
+      "/0:COMPONENT/Variant=Secondary, Size=Md|radius|8,8,8,8",
+      "/0:COMPONENT/Variant=Secondary, Size=Md|layout|HORIZONTAL CENTER/CENTER gap 8 pad 8,12,8,12",
+      "/0:COMPONENT/Variant=Secondary, Size=Md|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Variant=Secondary, Size=Md|bound:bottomLeftRadius|imported/shared/size-8",
+      "/0:COMPONENT/Variant=Secondary, Size=Md|bound:bottomRightRadius|imported/shared/size-8",
+      "/0:COMPONENT/Variant=Secondary, Size=Md|bound:height|imported/button/root/height/md",
+      "/0:COMPONENT/Variant=Secondary, Size=Md|bound:itemSpacing|spacing-2",
+      "/0:COMPONENT/Variant=Secondary, Size=Md|bound:paddingBottom|imported/shared/size-8",
+      "/0:COMPONENT/Variant=Secondary, Size=Md|bound:paddingLeft|imported/button/root/padding-left"
     ]
-   }
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Variant enum → Secondary/Primary/Ghost/Destructive",
+      "Size enum → Md/Sm/Lg",
+      "BOOLEAN Is Disabled",
+      "BOOLEAN Is Loading",
+      "BOOLEAN Is Icon Only",
+      "TEXT Label",
+      "first-variant fill bound: color-neutral"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Variant=Secondary, Size=Md",
+        "Variant=Secondary, Size=Sm",
+        "Variant=Secondary, Size=Lg",
+        "Variant=Primary, Size=Md",
+        "Variant=Primary, Size=Sm",
+        "Variant=Primary, Size=Lg",
+        "Variant=Ghost, Size=Md",
+        "Variant=Ghost, Size=Sm",
+        "Variant=Ghost, Size=Lg",
+        "Variant=Destructive, Size=Md",
+        "Variant=Destructive, Size=Sm",
+        "Variant=Destructive, Size=Lg"
+      ],
+      "propDefs": [
+        {
+          "name": "Is Disabled#1:930",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Is Loading#1:943",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Is Icon Only#1:956",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:969",
+          "type": "TEXT",
+          "defaultValue": "Button",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Secondary",
+          "variantOptions": [
+            "Secondary",
+            "Primary",
+            "Ghost",
+            "Destructive"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Md",
+          "variantOptions": [
+            "Md",
+            "Sm",
+            "Lg"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Secondary, Size=Md",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 12,
+          "b": 8,
+          "l": 12
+        },
+        "radius": 8,
+        "fillVarName": "color-neutral",
+        "padBound": {
+          "itemSpacing": "spacing-2",
+          "paddingLeft": "imported/button/root/padding-left",
+          "paddingTop": "imported/shared/size-8",
+          "paddingRight": "imported/button/root/padding-right",
+          "paddingBottom": "imported/shared/size-8",
+          "width": "imported/button/root/width",
+          "height": "imported/button/root/height/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "fills": "color-neutral"
+        },
+        "w": 99.8125,
+        "h": 32,
+        "childTypes": [
+          "FRAME/part-0"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-06T18:32:59.000Z",
+  "storedLength": 83264,
+  "screenshot": "parity/receipts/console-loop/astryx/shots/button.png",
+  "screenshotVariant": {
+    "nodeId": "1:3828",
+    "name": "Variant=Primary, Size=Md",
+    "bytes": 1890
   }
- },
- "acceptance": {
-  "generatedOrFound": true,
-  "screenshotReviewed": true,
-  "zeroMismatch": true,
-  "visualMatchDeveloped": false
- },
- "reSyncedAt": "2026-08-06T18:32:59.000Z",
- "storedLength": 83264,
- "screenshot": "parity/receipts/console-loop/astryx/shots/button.png",
- "screenshotVariant": {
-  "nodeId": "1:3828",
-  "name": "Variant=Primary, Size=Md",
-  "bytes": 1890
- }
 }

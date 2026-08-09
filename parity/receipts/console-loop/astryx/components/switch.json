@@ -1,202 +1,206 @@
 {
- "version": 1,
- "kind": "console-loop-astryx-component",
- "status": "completed",
- "component": "switch",
- "contract": "examples/astryx/contracts/switch.contract.json",
- "script": "examples/astryx/figma/switch.figma.js",
- "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
- "recordedAt": "2026-08-06T05:44:11.441Z",
- "transport": "figma-console-mcp clientStorage chunk append (parts :9228 → ds_loop_script) + force amend eval; removed orphan Label-only variants",
- "generate": {
-  "ok": true,
-  "nodeId": "1:3964",
-  "mode": "amended",
-  "page": "Switch (astryx.switch)",
-  "sectionId": "1:3965",
-  "contractId": "astryx.switch",
-  "result": {
-   "createdNodeIds": [
-    "1:3964"
-   ],
-   "results": [
-    {
-     "name": "Switch",
-     "contractId": "astryx.switch",
-     "amended": true,
-     "nodeId": "1:3964",
-     "key": "5db5ac2c03f99eb4dae83203068eba2eec448d6f",
-     "addedVariants": [
-      "Value=Off, Label Position=End",
-      "Value=Off, Label Position=Start",
-      "Value=On, Label Position=End",
-      "Value=On, Label Position=Start"
-     ],
-     "properties": [
-      "Is Disabled",
-      "Is Required",
-      "Label",
-      "Value",
-      "Label Position"
-     ]
+  "version": 1,
+  "kind": "console-loop-astryx-component",
+  "status": "completed",
+  "component": "switch",
+  "contract": "examples/astryx/contracts/switch.contract.json",
+  "script": "examples/astryx/figma/switch.figma.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T05:44:11.441Z",
+  "transport": "figma-console-mcp clientStorage chunk append (parts :9228 → ds_loop_script) + force amend eval; removed orphan Label-only variants",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:3964",
+    "mode": "amended",
+    "page": "Switch (astryx.switch)",
+    "sectionId": "1:3965",
+    "contractId": "astryx.switch",
+    "result": {
+      "createdNodeIds": [
+        "1:3964"
+      ],
+      "results": [
+        {
+          "name": "Switch",
+          "contractId": "astryx.switch",
+          "amended": true,
+          "nodeId": "1:3964",
+          "key": "5db5ac2c03f99eb4dae83203068eba2eec448d6f",
+          "addedVariants": [
+            "Value=Off, Label Position=End",
+            "Value=Off, Label Position=Start",
+            "Value=On, Label Position=End",
+            "Value=On, Label Position=Start"
+          ],
+          "properties": [
+            "Is Disabled",
+            "Is Required",
+            "Label",
+            "Value",
+            "Label Position"
+          ]
+        }
+      ]
     }
-   ]
-  }
- },
- "visual": {
-  "ok": false,
-  "matchDeveloped": false,
-  "reviewedAt": "2026-08-07T04:28:00.000Z",
-  "notes": [
-   "Wave B.3 thumb travel closed from Switch.tsx source constants (THUMB_SIZE_ON=20, THUMB_TRAVEL_ON=14) — Off 16×16@(4,4), On 20×20@(18,2). Engine: literalsByProp now accepts VARIANT-bound boolean axes (true|false).",
-   "Human spot-check PASS 2026-08-07 — Off/On thumb size+travel approved on canvas (cream set). matchDeveloped stays false until like-for-like pixel score recommends.",
-   "Track On accent color still missing from minted tokens (both planes use #0a131733) — separate token gap, not thumb geometry.",
-   "Re-synced via console-loop batch 2026-08-07T12:02:02.103Z — amended Switch set 1:3964 (rebuiltVariants=4); matchDeveloped left unset.",
-   "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — amended rebuiltVariants=4; nodeId=1:3964; matchDeveloped left unset.",
-   "Pixel score 2026-08-08 — Value=Off, Label Position=End cell vs gate-shot: compositionOk=true, pctAAMasked=8.78% (>5% bar). Region breakdown (aligned 178×24): switch+track 0.00%, gap 0.00%, label 11.32%. No emit/contract gap — thumb 16×16@(4,4), track #0a131733, 8px column-gap all match. Residual is FC-FONT-AA (Figma -apple-system/Inter vs Chromium headless stack on \"Enable notifications\").",
-   "FC-FONT-SUBSTRATE update 2026-08-08: the harness now supports per-library @font-face loading (extract/computed cfg.fonts — altitude converted with it). Astryx stays UNCONFIGURED by name: @astryxdesign/theme-neutral dist declares Figtree first, but no Figtree file ships in the sandbox (network fetch forbidden), and the committed captured truth carries font-family 'Times' for Button (the capture-context token did not resolve at capture time) — so the reference substrate is downstream of a capture-context defect plus an unobtainable face, while the canvas renders Inter (Figma fallback). Still fail-closed; conversion needs a recapture with the token context fixed + a committed Figtree face.",
-   "ASTRYX TIMES ROOT CAUSE FOUND + FIXED AT CAUSE 2026-08-08 (font-substrate round): every token in @astryxdesign/theme-neutral/dist/theme.css lives inside '@scope ([data-astryx-theme=\"neutral\"]) to ([data-astryx-theme])' blocks, and the capture mount imported the CSS but wrapped stages in a bare fragment — no element ever carried the attribute, so NO theme token (Figtree included) resolved at capture. Button's <button> has only reset.css 'font-family: inherit', inherited from an unstyled body (the base font is applied by the Theme provider's OWN wrapper div, stylex x9ynric = font-family:var(--font-family-body)), and computed to the browser default: literal 'Times' — 104 nodes in the committed truth. FIX: configs/astryx.json now mounts the library's documented provider (<Theme theme={neutralTheme}>) — the wrapper carries data-astryx-theme='neutral' AND the base font — plus cfg.fonts Figtree 400/500/600/700 (@fontsource/figtree@5.3.0 pinned, faces committed under extract/computed/fonts/figtree/). Button+Switch recaptured: truth now carries 'Figtree, -apple-system, ...' (0 Times nodes) and theme-resolved colors.",
-   "Switch recaptured under the same fixed mount; gate-shot reference (end.no-isDisabled__default) regenerated in place — label now real Figtree, theme-resolved label colors (label-2 #737373 fresh vs shipped {color-text-secondary} divergence named in the scorecard). Scores moved 8.78 -> 14.21 (lane) / 14.12 (headless), instruments agree: the canvas label (generated from the pre-theme contract, -apple-system/Inter raster) is now the outlier. Honest fail-closed; canvas-side re-sync required."
-  ],
-  "defects": [
-   "Track fill does not change Off→On (minted switch.background-color is Off-only).",
-   "Developed pixel score still composition-blocked (set shot vs gate-shot cell).",
-   "pixel scorecard fail: pctAAMasked=14.21% lane / 14.12% headless (bar 5), compositionOk=true — see parity/receipts/console-loop/astryx/scores/switch.json",
-   "FC-THEME-ISO (stale-contract canvas): canvas text/colors predate the theme-resolved recapture (Figtree + neutral tokens); reference is now the library's real themed truth. Residual is canvas-side re-promote + re-sync."
-  ],
-  "humanSpotCheck": {
-   "passed": true,
-   "at": "2026-08-07T11:45:00.000Z",
-   "scope": "thumb size+travel Off/On + labelPosition grid"
   },
-  "reference": "extract/computed/out/astryx/switch/gate-shots/end.no-isDisabled__default.png",
-  "canvasShot": "parity/receipts/console-loop/astryx/shots/switch.png",
-  "reviewSurface": "cream-#F8F4ED-component-set",
-  "scorecard": "parity/receipts/console-loop/astryx/scores/switch.json",
-  "status": "fail-closed",
-  "revoked": {
-   "at": "2026-08-08T04:31:03.484Z",
-   "was": {
+  "visual": {
     "ok": false,
-    "matchDeveloped": true,
-    "matchDevelopedReason": "chrome 0% AA; residual FC-FONT-AA on label",
-    "matchedAt": "2026-08-08T03:01:18.461Z"
-   },
-   "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=8.78, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
-  }
- },
- "fingerprint": {
-  "v6": "v6:204491426",
-  "lineCount": 46,
-  "sampleLines": [
-   ":COMPONENT_SET/Switch (astryx.switch)|fill|[]",
-   ":COMPONENT_SET/Switch (astryx.switch)|radius|5,5,5,5",
-   ":COMPONENT_SET/Switch (astryx.switch)|sizing|FIXED/FIXED AUTO",
-   ":COMPONENT_SET/Switch (astryx.switch)|description|Switch â generated from contract astryx.switch v0.1.0",
-   ":COMPONENT_SET/Switch (astryx.switch)|propdef|Is Disabled#1:1047:BOOLEAN=false",
-   ":COMPONENT_SET/Switch (astryx.switch)|propdef|Is Required#1:1050:BOOLEAN=false",
-   ":COMPONENT_SET/Switch (astryx.switch)|propdef|Label Position:VARIANT=End",
-   ":COMPONENT_SET/Switch (astryx.switch)|propdef|Label#1:1053:TEXT=Enable notifications",
-   "/0:COMPONENT/Label Position=End|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-   "/0:COMPONENT/Label Position=End|radius|0,0,0,0",
-   "/0:COMPONENT/Label Position=End|layout|HORIZONTAL MIN/CENTER gap 8 pad 0,0,0,0",
-   "/0:COMPONENT/Label Position=End|sizing|HUG/HUG AUTO",
-   "/0:COMPONENT/Label Position=End|bound:itemSpacing|spacing-2",
-   "/0/0:FRAME/track|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.0470588244497776,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.019607843831181526,\"g\":0.21176470816135406,\"b\":0.3490196168422699},\"boundVariables\":{\"color\":{\"var\":\"color-background-muted\"}}}]",
-   "/0/0:FRAME/track|radius|9999,9999,9999,9999",
-   "/0/0:FRAME/track|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
-   "/0/0:FRAME/track|sizing|FIXED/FIXED AUTO",
-   "/0/0:FRAME/track|bound:bottomLeftRadius|radius-full",
-   "/0/0:FRAME/track|bound:bottomRightRadius|radius-full",
-   "/0/0:FRAME/track|bound:height|spacing-5"
-  ],
-  "note": "Wave B.3 re-sync; sampleLines stale until re-fingerprint pass"
- },
- "roundtrip": {
-  "mismatches": [],
-  "gaps": [],
-  "matchedAxes": [
-   "TEXT Label",
-   "Label Position enum → End/Start",
-   "Value enum → Off/On",
-   "BOOLEAN Is Disabled",
-   "BOOLEAN Is Required"
-  ],
-  "observed": {
-   "type": "COMPONENT_SET",
-   "variantNames": [
-    "Value=Off, Label Position=End",
-    "Value=Off, Label Position=Start",
-    "Value=On, Label Position=End",
-    "Value=On, Label Position=Start"
-   ],
-   "propDefs": [
-    {
-     "name": "Is Disabled#1:1047",
-     "type": "BOOLEAN",
-     "defaultValue": false,
-     "variantOptions": null
+    "matchDeveloped": false,
+    "reviewedAt": "2026-08-09T02:47:04.524Z",
+    "notes": [
+      "Wave B.3 thumb travel closed from Switch.tsx source constants (THUMB_SIZE_ON=20, THUMB_TRAVEL_ON=14) — Off 16×16@(4,4), On 20×20@(18,2). Engine: literalsByProp now accepts VARIANT-bound boolean axes (true|false).",
+      "Human spot-check PASS 2026-08-07 — Off/On thumb size+travel approved on canvas (cream set). matchDeveloped stays false until like-for-like pixel score recommends.",
+      "Track On accent color still missing from minted tokens (both planes use #0a131733) — separate token gap, not thumb geometry.",
+      "Re-synced via console-loop batch 2026-08-07T12:02:02.103Z — amended Switch set 1:3964 (rebuiltVariants=4); matchDeveloped left unset.",
+      "Re-synced via console-loop batch 2026-08-07T12:02:33.399Z — amended rebuiltVariants=4; nodeId=1:3964; matchDeveloped left unset.",
+      "Pixel score 2026-08-08 — Value=Off, Label Position=End cell vs gate-shot: compositionOk=true, pctAAMasked=8.78% (>5% bar). Region breakdown (aligned 178×24): switch+track 0.00%, gap 0.00%, label 11.32%. No emit/contract gap — thumb 16×16@(4,4), track #0a131733, 8px column-gap all match. Residual is FC-FONT-AA (Figma -apple-system/Inter vs Chromium headless stack on \"Enable notifications\").",
+      "FC-FONT-SUBSTRATE update 2026-08-08: the harness now supports per-library @font-face loading (extract/computed cfg.fonts — altitude converted with it). Astryx stays UNCONFIGURED by name: @astryxdesign/theme-neutral dist declares Figtree first, but no Figtree file ships in the sandbox (network fetch forbidden), and the committed captured truth carries font-family 'Times' for Button (the capture-context token did not resolve at capture time) — so the reference substrate is downstream of a capture-context defect plus an unobtainable face, while the canvas renders Inter (Figma fallback). Still fail-closed; conversion needs a recapture with the token context fixed + a committed Figtree face.",
+      "ASTRYX TIMES ROOT CAUSE FOUND + FIXED AT CAUSE 2026-08-08 (font-substrate round): every token in @astryxdesign/theme-neutral/dist/theme.css lives inside '@scope ([data-astryx-theme=\"neutral\"]) to ([data-astryx-theme])' blocks, and the capture mount imported the CSS but wrapped stages in a bare fragment — no element ever carried the attribute, so NO theme token (Figtree included) resolved at capture. Button's <button> has only reset.css 'font-family: inherit', inherited from an unstyled body (the base font is applied by the Theme provider's OWN wrapper div, stylex x9ynric = font-family:var(--font-family-body)), and computed to the browser default: literal 'Times' — 104 nodes in the committed truth. FIX: configs/astryx.json now mounts the library's documented provider (<Theme theme={neutralTheme}>) — the wrapper carries data-astryx-theme='neutral' AND the base font — plus cfg.fonts Figtree 400/500/600/700 (@fontsource/figtree@5.3.0 pinned, faces committed under extract/computed/fonts/figtree/). Button+Switch recaptured: truth now carries 'Figtree, -apple-system, ...' (0 Times nodes) and theme-resolved colors.",
+      "Switch recaptured under the same fixed mount; gate-shot reference (end.no-isDisabled__default) regenerated in place — label now real Figtree, theme-resolved label colors (label-2 #737373 fresh vs shipped {color-text-secondary} divergence named in the scorecard). Scores moved 8.78 -> 14.21 (lane) / 14.12 (headless), instruments agree: the canvas label (generated from the pre-theme contract, -apple-system/Inter raster) is now the outlier. Honest fail-closed; canvas-side re-sync required.",
+      "2026-08-08 REFERENCE-TRUTH ROUND. The reference is now the REAL @astryxdesign/core@0.1.6 render — extract/computed/out/astryx/<comp>/orig-shots/<combo>__default.png, committed for the first time by `extract/computed/run.ts --keep-originals`. Every previous astryx reference was one of: an emit-html first-item render in the pre-Theme Times substrate, a POLARIS gate-shot, a 1440x2200 documentation screenshot, or a `gate-shots/` file — and `gate-shots/` is the CONTRACT RENDER (enriched contract -> emit-html), the RIGHT half of the pair receipt, NOT the library. Scoring a canvas built from a contract against another emitter’s render of the same contract measures emitter agreement, not fidelity."
+    ],
+    "defects": [
+      "pixel scorecard fail: pctAAMasked=14.19 (bar 5), compositionOk=true — parity/receipts/console-loop/astryx/scores/switch.json",
+      "FC-MISSING-AXIS stands: `value` is a VARIANT axis on the contract side but the capture enumerates enum props only, so the committed captured truth carries no value dimension. Re-admitting it needs a real recapture with the MUI Switch spelling (enum seed axis off/on + axisValueMap).",
+      "Track fill does not change Off->On (minted switch.background-color is Off-only).",
+      "FC-THEME-BASE: the capture mount renders under `<Theme theme={neutralTheme}>` (@astryxdesign/theme-neutral — the library’s documented Quick Start and the only mount where the base font resolves), while examples/astryx/tokens/astryx.dtcg.json is wrapped from @astryxdesign/core/src/theme/tokens.stylex.ts, the CORE DEFAULT palette. Measured: core --color-accent #0064E0 vs theme-neutral #262626; core --color-text-primary #0A1317 vs #171717; core --color-background-blue #0171E333 vs #c4ddfb. The canvas paints the core plane, the library renders the neutral plane, and no re-promote closes it: promoting from the neutral captures strands 30 of the 36 acked re-anchoring rows (65 leaves) with no alias target, dropping the astryx bundle from 54 Figma-native aliases to 13 and failing the plugin-engine-check pin. A HUMAN decision on which plane is astryx’s canonical repo-side theme is required; nothing was force-fitted.",
+      "Switch is the one captured astryx component promote-floor.ts still excludes BY NAME (the anatomy join carried both labelPosition orders as unconditioned sibling branches); its v0.2.0 curated contract ships."
+    ],
+    "humanSpotCheck": {
+      "passed": true,
+      "at": "2026-08-07T11:45:00.000Z",
+      "scope": "thumb size+travel Off/On + labelPosition grid"
     },
-    {
-     "name": "Is Required#1:1050",
-     "type": "BOOLEAN",
-     "defaultValue": false,
-     "variantOptions": null
+    "reference": "extract/computed/out/astryx/switch/orig-shots/end.no-isDisabled__default.png",
+    "canvasShot": "parity/receipts/console-loop/astryx/shots/switch.png",
+    "reviewSurface": "cream-#F8F4ED-component-set",
+    "scorecard": "parity/receipts/console-loop/astryx/scores/switch.json",
+    "status": "fail-closed",
+    "revoked": {
+      "at": "2026-08-08T04:31:03.484Z",
+      "was": {
+        "ok": false,
+        "matchDeveloped": true,
+        "matchDevelopedReason": "chrome 0% AA; residual FC-FONT-AA on label",
+        "matchedAt": "2026-08-08T03:01:18.461Z"
+      },
+      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=8.78, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
     },
-    {
-     "name": "Label#1:1053",
-     "type": "TEXT",
-     "defaultValue": "Enable notifications",
-     "variantOptions": null
-    },
-    {
-     "name": "Value",
-     "type": "VARIANT",
-     "defaultValue": "Off",
-     "variantOptions": [
-      "Off",
-      "On"
-     ]
-    },
-    {
-     "name": "Label Position",
-     "type": "VARIANT",
-     "defaultValue": "End",
-     "variantOptions": [
-      "End",
-      "Start"
-     ]
-    }
-   ]
-  }
- },
- "acceptance": {
-  "generatedOrFound": true,
-  "screenshotReviewed": true,
-  "zeroMismatch": true,
-  "visualMatchDeveloped": false
- },
- "reSyncedAt": "2026-08-07T12:02:33.399Z",
- "screenshot": "parity/receipts/console-loop/astryx/shots/switch.png",
- "screenshotVariant": {
-  "nodeId": "1:3964",
-  "name": "Switch (astryx.switch)",
-  "bytes": 17409
- },
- "wave": "B.3",
- "thumbCheck": {
-  "offEnd": {
-   "w": 16,
-   "h": 16,
-   "x": 4,
-   "y": 4
+    "referenceSource": "extract/computed/out/astryx/switch/orig-shots/end.no-isDisabled__default.png",
+    "referenceProvenance": "library:@astryxdesign/core@0.1.6 Switch labelPosition=end label=\"Enable notifications\" under <Theme theme={neutralTheme}> (extract/computed/run.ts --keep-originals)"
   },
-  "onEnd": {
-   "w": 20,
-   "h": 20,
-   "x": 18,
-   "y": 2
-  }
- },
- "nodeId": "1:3964"
+  "fingerprint": {
+    "v6": "v6:204491426",
+    "lineCount": 46,
+    "sampleLines": [
+      ":COMPONENT_SET/Switch (astryx.switch)|fill|[]",
+      ":COMPONENT_SET/Switch (astryx.switch)|radius|5,5,5,5",
+      ":COMPONENT_SET/Switch (astryx.switch)|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Switch (astryx.switch)|description|Switch â generated from contract astryx.switch v0.1.0",
+      ":COMPONENT_SET/Switch (astryx.switch)|propdef|Is Disabled#1:1047:BOOLEAN=false",
+      ":COMPONENT_SET/Switch (astryx.switch)|propdef|Is Required#1:1050:BOOLEAN=false",
+      ":COMPONENT_SET/Switch (astryx.switch)|propdef|Label Position:VARIANT=End",
+      ":COMPONENT_SET/Switch (astryx.switch)|propdef|Label#1:1053:TEXT=Enable notifications",
+      "/0:COMPONENT/Label Position=End|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Label Position=End|radius|0,0,0,0",
+      "/0:COMPONENT/Label Position=End|layout|HORIZONTAL MIN/CENTER gap 8 pad 0,0,0,0",
+      "/0:COMPONENT/Label Position=End|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Label Position=End|bound:itemSpacing|spacing-2",
+      "/0/0:FRAME/track|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":0.0470588244497776,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.019607843831181526,\"g\":0.21176470816135406,\"b\":0.3490196168422699},\"boundVariables\":{\"color\":{\"var\":\"color-background-muted\"}}}]",
+      "/0/0:FRAME/track|radius|9999,9999,9999,9999",
+      "/0/0:FRAME/track|layout|HORIZONTAL MIN/MIN gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/track|sizing|FIXED/FIXED AUTO",
+      "/0/0:FRAME/track|bound:bottomLeftRadius|radius-full",
+      "/0/0:FRAME/track|bound:bottomRightRadius|radius-full",
+      "/0/0:FRAME/track|bound:height|spacing-5"
+    ],
+    "note": "Wave B.3 re-sync; sampleLines stale until re-fingerprint pass"
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "TEXT Label",
+      "Label Position enum → End/Start",
+      "Value enum → Off/On",
+      "BOOLEAN Is Disabled",
+      "BOOLEAN Is Required"
+    ],
+    "observed": {
+      "type": "COMPONENT_SET",
+      "variantNames": [
+        "Value=Off, Label Position=End",
+        "Value=Off, Label Position=Start",
+        "Value=On, Label Position=End",
+        "Value=On, Label Position=Start"
+      ],
+      "propDefs": [
+        {
+          "name": "Is Disabled#1:1047",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Is Required#1:1050",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:1053",
+          "type": "TEXT",
+          "defaultValue": "Enable notifications",
+          "variantOptions": null
+        },
+        {
+          "name": "Value",
+          "type": "VARIANT",
+          "defaultValue": "Off",
+          "variantOptions": [
+            "Off",
+            "On"
+          ]
+        },
+        {
+          "name": "Label Position",
+          "type": "VARIANT",
+          "defaultValue": "End",
+          "variantOptions": [
+            "End",
+            "Start"
+          ]
+        }
+      ]
+    }
+  },
+  "acceptance": {
+    "generatedOrFound": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true,
+    "visualMatchDeveloped": false
+  },
+  "reSyncedAt": "2026-08-07T12:02:33.399Z",
+  "screenshot": "parity/receipts/console-loop/astryx/shots/switch.png",
+  "screenshotVariant": {
+    "nodeId": "1:3964",
+    "name": "Switch (astryx.switch)",
+    "bytes": 17409
+  },
+  "wave": "B.3",
+  "thumbCheck": {
+    "offEnd": {
+      "w": 16,
+      "h": 16,
+      "x": 4,
+      "y": 4
+    },
+    "onEnd": {
+      "w": 20,
+      "h": 20,
+      "x": 18,
+      "y": 2
+    }
+  },
+  "nodeId": "1:3964"
 }

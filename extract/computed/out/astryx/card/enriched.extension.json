@@ -17,101 +17,101 @@
               "$type": "color"
             },
             "muted": {
-              "$value": "#0536590c",
+              "$value": "#f1f1f1",
               "$type": "color"
             },
             "blue": {
-              "$value": "#0171e333",
+              "$value": "#c4ddfb",
               "$type": "color"
             },
             "cyan": {
-              "$value": "#03a7d733",
+              "$value": "#a3e0ef",
               "$type": "color"
             },
             "gray": {
-              "$value": "#0a131733",
+              "$value": "#e5e5e5",
               "$type": "color"
             },
             "green": {
-              "$value": "#24bb5e33",
+              "$value": "#c5e5c0",
               "$type": "color"
             },
             "orange": {
-              "$value": "#f2790233",
+              "$value": "#fad0b5",
               "$type": "color"
             },
             "pink": {
-              "$value": "#e638b333",
+              "$value": "#fccadc",
               "$type": "color"
             },
             "purple": {
-              "$value": "#7952ff33",
+              "$value": "#eccef3",
               "$type": "color"
             },
             "red": {
-              "$value": "#e3193b33",
+              "$value": "#facecb",
               "$type": "color"
             },
             "teal": {
-              "$value": "#0db7af33",
+              "$value": "#a5e3d6",
               "$type": "color"
             },
             "yellow": {
-              "$value": "#e2a40033",
+              "$value": "#f8da9d",
               "$type": "color"
             }
           },
           "border-bottom-color": {
             "default": {
-              "$value": "#ccd3db",
+              "$value": "#d4d4d4",
               "$type": "color"
             },
             "transparent": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "muted": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "blue": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "cyan": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "gray": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "green": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "orange": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "pink": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "purple": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "red": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "teal": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "yellow": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             }
           },
@@ -171,55 +171,55 @@
           },
           "border-left-color": {
             "default": {
-              "$value": "#ccd3db",
+              "$value": "#d4d4d4",
               "$type": "color"
             },
             "transparent": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "muted": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "blue": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "cyan": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "gray": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "green": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "orange": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "pink": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "purple": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "red": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "teal": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "yellow": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             }
           },
@@ -279,55 +279,55 @@
           },
           "border-right-color": {
             "default": {
-              "$value": "#ccd3db",
+              "$value": "#d4d4d4",
               "$type": "color"
             },
             "transparent": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "muted": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "blue": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "cyan": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "gray": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "green": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "orange": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "pink": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "purple": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "red": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "teal": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "yellow": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             }
           },
@@ -387,55 +387,55 @@
           },
           "border-top-color": {
             "default": {
-              "$value": "#ccd3db",
+              "$value": "#d4d4d4",
               "$type": "color"
             },
             "transparent": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "muted": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "blue": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "cyan": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "gray": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "green": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "orange": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "pink": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "purple": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "red": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "teal": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             },
             "yellow": {
-              "$value": "#000000",
+              "$value": "#171717",
               "$type": "color"
             }
           },
@@ -507,222 +507,222 @@
           },
           "padding-bottom": {
             "default": {
-              "$value": "15px",
+              "$value": "11px",
               "$type": "dimension"
             },
             "transparent": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "muted": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "blue": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "cyan": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "gray": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "green": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "orange": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "pink": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "purple": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "red": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "teal": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "yellow": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             }
           },
           "padding-left": {
             "default": {
-              "$value": "15px",
+              "$value": "11px",
               "$type": "dimension"
             },
             "transparent": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "muted": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "blue": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "cyan": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "gray": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "green": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "orange": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "pink": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "purple": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "red": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "teal": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "yellow": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             }
           },
           "padding-right": {
             "default": {
-              "$value": "15px",
+              "$value": "11px",
               "$type": "dimension"
             },
             "transparent": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "muted": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "blue": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "cyan": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "gray": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "green": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "orange": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "pink": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "purple": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "red": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "teal": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "yellow": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             }
           },
           "padding-top": {
             "default": {
-              "$value": "15px",
+              "$value": "11px",
               "$type": "dimension"
             },
             "transparent": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "muted": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "blue": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "cyan": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "gray": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "green": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "orange": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "pink": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "purple": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "red": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "teal": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             },
             "yellow": {
-              "$value": "16px",
+              "$value": "12px",
               "$type": "dimension"
             }
           },
           "width": {
-            "$value": "114.203px",
+            "$value": "119.016px",
             "$type": "dimension"
           }
         }
@@ -748,6 +748,26 @@
     "base": [
       {
         "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
         "channel": "overflow-x",
         "value": "clip"
       },
@@ -770,9 +790,16 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
     "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "block-root-width-source: root — the admitted width 119.016px is NOT the stage content box (288px) and NOT the viewport (900px); this block root did not fill anything, it took its own intrinsic/shrink-to-fit size (a flex stage makes a block child a flex item). The admission stands — the number is the library's — but the sentence above names a container this measurement did not come from.",
+    "reset-supplied-border-style-admitted: root.border-bottom-style = solid — EQUAL to the <div> control, so the styled-channel door would normally drop it as \"not a fact of this component\". Admitted anyway because this part draws a real border (border-bottom-width = 1px) and the style comes from the library's GLOBAL CSS (Tailwind preflight's `* { border-style: solid }` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.",
+    "reset-supplied-border-style-admitted: root.border-left-style = solid — EQUAL to the <div> control, so the styled-channel door would normally drop it as \"not a fact of this component\". Admitted anyway because this part draws a real border (border-left-width = 1px) and the style comes from the library's GLOBAL CSS (Tailwind preflight's `* { border-style: solid }` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.",
+    "reset-supplied-border-style-admitted: root.border-right-style = solid — EQUAL to the <div> control, so the styled-channel door would normally drop it as \"not a fact of this component\". Admitted anyway because this part draws a real border (border-right-width = 1px) and the style comes from the library's GLOBAL CSS (Tailwind preflight's `* { border-style: solid }` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.",
+    "reset-supplied-border-style-admitted: root.border-top-style = solid — EQUAL to the <div> control, so the styled-channel door would normally drop it as \"not a fact of this component\". Admitted anyway because this part draws a real border (border-top-width = 1px) and the style comes from the library's GLOBAL CSS (Tailwind preflight's `* { border-style: solid }` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.",
     "text-part-typography-carried: root — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
   ],
   "frontierReceipts": [
@@ -803,6 +830,10 @@
     "refusals": []
   },
   "enrichmentNotes": [
+    "declared fact carried: root.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)"
   ]

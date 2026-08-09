@@ -138,5 +138,6 @@
       "cellW": 34,
       "cellH": 16
     }
-  }
+  },
+  "stemsNote": "CELL DIMENSIONS ARE UNCHANGED THIS ROUND and were NOT re-minted: the 2026-08-08 reference-truth round changed only the REFERENCE side (every astryx stem now scores against extract/computed/out/astryx/<comp>/orig-shots/, the real @astryxdesign/core render committed by `extract/computed/run.ts --keep-originals`). No astryx component set on GnQnjSNBXtgtd2Ht0Hs1C8 was regenerated or edited, so no cell geometry moved and re-minting these numbers from the bridge would restate the same values. They are re-minted the moment the FC-THEME-BASE decision unblocks the re-promote and the sets are rebuilt from the re-emitted scripts."
 }

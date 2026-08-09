@@ -49,19 +49,22 @@
   "visual": {
     "ok": false,
     "matchDeveloped": false,
-    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "reviewedAt": "2026-08-09T02:47:04.523Z",
     "notes": [
       "Re-synced via clientStorage chunks (n=12, total=89278); nodeId=1:3813; rebuilt 8 variants; added Title/Description props",
-      "2026-08-08: named by the new capture-framing pin (reference-provenance check). Canvas framing verified correct on the live bridge: shot 347x104 is VARIANT cell 1:3797 (Status=Info, Container=Card) 331x88 + 8px margin."
+      "2026-08-08: named by the new capture-framing pin (reference-provenance check). Canvas framing verified correct on the live bridge: shot 347x104 is VARIANT cell 1:3797 (Status=Info, Container=Card) 331x88 + 8px margin.",
+      "2026-08-08 REFERENCE-TRUTH ROUND. The reference is now the REAL @astryxdesign/core@0.1.6 render — extract/computed/out/astryx/<comp>/orig-shots/<combo>__default.png, committed for the first time by `extract/computed/run.ts --keep-originals`. Every previous astryx reference was one of: an emit-html first-item render in the pre-Theme Times substrate, a POLARIS gate-shot, a 1440x2200 documentation screenshot, or a `gate-shots/` file — and `gate-shots/` is the CONTRACT RENDER (enriched contract -> emit-html), the RIGHT half of the pair receipt, NOT the library. Scoring a canvas built from a contract against another emitter’s render of the same contract measures emitter agreement, not fidelity."
     ],
     "defects": [
-      "Pastel fills improved on cream, but still dense pill chips without status icons / title+body hierarchy of developed Banner docs.",
-      "Not full-width alert banners as in examples/astryx/receipts/site/Banner.png.",
-      "FC-REF-CROSS-LIBRARY: the committed developed reference is a POLARIS Banner — visual.referenceSource is extract/computed/out/banner/gate-shots/info.off.off__default.png, which is the Polaris lane's computed output (extract/computed/configs/polaris.json), not astryx. The astryx cell is scored against another design system, so pctAAMasked=63.31 is meaningless. astryx has no Banner in extract/computed/configs/astryx.json (Button/Badge/Card/Switch/Slider only) — this stem cannot be scored until astryx Banner is added to the computed corpus."
+      "pixel scorecard fail: pctAAMasked=8.60 (bar 5), compositionOk=true — parity/receipts/console-loop/astryx/scores/banner.json",
+      "FC-REF-TONE-SWAP: 96.4% colour-histogram distance between the canvas cell and the library Status=Info banner while the AA number reads 8.60. The canvas paints the pastel core-plane fill; the library paints the neutral-plane header. Named so the AA number is not read as closeness.",
+      "FC-THEME-BASE: the capture mount renders under `<Theme theme={neutralTheme}>` (@astryxdesign/theme-neutral — the library’s documented Quick Start and the only mount where the base font resolves), while examples/astryx/tokens/astryx.dtcg.json is wrapped from @astryxdesign/core/src/theme/tokens.stylex.ts, the CORE DEFAULT palette. Measured: core --color-accent #0064E0 vs theme-neutral #262626; core --color-text-primary #0A1317 vs #171717; core --color-background-blue #0171E333 vs #c4ddfb. The canvas paints the core plane, the library renders the neutral plane, and no re-promote closes it: promoting from the neutral captures strands 30 of the 36 acked re-anchoring rows (65 leaves) with no alias target, dropping the astryx bundle from 54 Figma-native aliases to 13 and failing the plugin-engine-check pin. A HUMAN decision on which plane is astryx’s canonical repo-side theme is required; nothing was force-fitted.",
+      "RESOLVED THIS ROUND — FC-REF-CROSS-LIBRARY: the previous reference was a POLARIS Banner (extract/computed/out/banner/gate-shots/info.off.off__default.png). astryx Banner is now IN extract/computed/configs/astryx.json and captured; the reference is astryx’s own library render. Banner had been excluded at capture for a double-run determinism refusal — that refusal was the collapse/expand toggle, which Banner renders only when it receives `children`; this mount passes none and the double-run self-check is IDENTICAL."
     ],
-    "reference": "parity/receipts/console-loop/astryx/refs/banner.png",
+    "reference": "extract/computed/out/astryx/banner/orig-shots/info.card__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
-    "referenceSource": "extract/computed/out/banner/gate-shots/info.off.off__default.png"
+    "referenceSource": "extract/computed/out/astryx/banner/orig-shots/info.card__default.png",
+    "referenceProvenance": "library:@astryxdesign/core@0.1.6 Banner status=info container=card under <Theme theme={neutralTheme}> (extract/computed/run.ts --keep-originals)"
   },
   "fingerprint": {
     "v6": "v6:3231585800",

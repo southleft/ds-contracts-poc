@@ -76,6 +76,10 @@
     "root": {
       "declared": {
         "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
         "overflow-x": "clip",
         "overflow-y": "clip"
       },

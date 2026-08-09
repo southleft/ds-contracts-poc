@@ -1,0 +1,124 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.banner",
+  "name": "Banner",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx Banner — a status surface with title, description and optional dismiss. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Banner/Banner.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). status/container/isDismissable are verbatim; title and description are materialized text slots (Astryx types both as ReactNode). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "status",
+      "description": "Status type controlling the icon and color scheme.",
+      "type": {
+        "enum": [
+          "info",
+          "warning",
+          "error",
+          "success"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status",
+          "values": {
+            "info": "Info",
+            "warning": "Warning",
+            "error": "Error",
+            "success": "Success"
+          }
+        },
+        "code": {
+          "prop": "status"
+        }
+      }
+    },
+    {
+      "name": "container",
+      "description": "How the banner is contained.",
+      "type": {
+        "enum": [
+          "card",
+          "section"
+        ]
+      },
+      "default": "card",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Container",
+          "values": {
+            "card": "Card",
+            "section": "Section"
+          }
+        },
+        "code": {
+          "prop": "container"
+        }
+      }
+    },
+    {
+      "name": "isDismissable",
+      "description": "Whether the banner can be dismissed.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Dismissable"
+        },
+        "code": {
+          "prop": "isDismissable"
+        }
+      }
+    },
+    {
+      "name": "title",
+      "description": "Title text displayed prominently in the header area.",
+      "type": "text",
+      "default": "A new software update is available.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Optional supporting text below the title in the header area.",
+      "type": "text",
+      "default": "See what changed in this version.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "Banner"
+    }
+  }
+}

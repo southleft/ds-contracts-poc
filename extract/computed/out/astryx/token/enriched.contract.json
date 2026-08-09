@@ -1,0 +1,269 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.token",
+  "name": "Token",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx Token (Tag/Chip) — a compact labelled chip. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Token/Token.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/size/color and isDisabled are verbatim; href link-mode, description and isLabelHidden are dropped. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "Tag label.",
+      "type": "text",
+      "default": "Tag",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "The size of the tag.",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "color",
+      "description": "The tag color.",
+      "type": {
+        "enum": [
+          "default",
+          "red",
+          "orange",
+          "yellow",
+          "green",
+          "teal",
+          "cyan",
+          "blue",
+          "purple",
+          "pink",
+          "gray"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "default": "Default",
+            "red": "Red",
+            "orange": "Orange",
+            "yellow": "Yellow",
+            "green": "Green",
+            "teal": "Teal",
+            "cyan": "Cyan",
+            "blue": "Blue",
+            "purple": "Purple",
+            "pink": "Pink",
+            "gray": "Gray"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the tag is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "label": {
+          "content": {
+            "prop": "label"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-overflow": "ellipsis",
+            "text-wrap-mode": "nowrap"
+          },
+          "layout": {
+            "grow": true
+          },
+          "tokens": {
+            "font-size": "{imported.token.label.font-size}",
+            "font-weight": "{imported.token.label.font-weight}",
+            "line-height": "{imported.token.label.line-height}",
+            "min-width": "{imported.token.label.min-width}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "blue": {
+                  "color": "{imported.token.label.color.blue}"
+                },
+                "cyan": {
+                  "color": "{imported.token.label.color.cyan}"
+                },
+                "default": {
+                  "color": "{imported.token.label.color.default}"
+                },
+                "gray": {
+                  "color": "{imported.token.label.color.gray}"
+                },
+                "green": {
+                  "color": "{imported.token.label.color.green}"
+                },
+                "orange": {
+                  "color": "{imported.token.label.color.orange}"
+                },
+                "pink": {
+                  "color": "{imported.token.label.color.pink}"
+                },
+                "purple": {
+                  "color": "{imported.token.label.color.purple}"
+                },
+                "red": {
+                  "color": "{imported.token.label.color.red}"
+                },
+                "teal": {
+                  "color": "{imported.token.label.color.teal}"
+                },
+                "yellow": {
+                  "color": "{imported.token.label.color.yellow}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "border-bottom-style": "none",
+        "border-left-style": "none",
+        "border-right-style": "none",
+        "border-top-style": "none",
+        "max-width": "100%",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "text-wrap-mode": "nowrap"
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-6}",
+        "border-bottom-right-radius": "{imported.shared.size-6}",
+        "border-top-left-radius": "{imported.shared.size-6}",
+        "border-top-right-radius": "{imported.shared.size-6}",
+        "column-gap": "{imported.token.root.column-gap}",
+        "font-size": "{imported.token.root.font-size}",
+        "font-weight": "{imported.token.root.font-weight}",
+        "line-height": "{imported.token.root.line-height}",
+        "padding-left": "{imported.token.root.padding-left}",
+        "padding-right": "{imported.token.root.padding-right}",
+        "row-gap": "{imported.token.root.row-gap}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "blue": {
+              "background-color": "{imported.token.root.background-color.blue}",
+              "color": "{imported.token.root.color.blue}"
+            },
+            "cyan": {
+              "background-color": "{imported.token.root.background-color.cyan}",
+              "color": "{imported.token.root.color.cyan}"
+            },
+            "default": {
+              "background-color": "{imported.token.root.background-color.default}",
+              "color": "{imported.token.root.color.default}"
+            },
+            "gray": {
+              "background-color": "{imported.token.root.background-color.gray}",
+              "color": "{imported.token.root.color.gray}"
+            },
+            "green": {
+              "background-color": "{imported.token.root.background-color.green}",
+              "color": "{imported.token.root.color.green}"
+            },
+            "orange": {
+              "background-color": "{imported.token.root.background-color.orange}",
+              "color": "{imported.token.root.color.orange}"
+            },
+            "pink": {
+              "background-color": "{imported.token.root.background-color.pink}",
+              "color": "{imported.token.root.color.pink}"
+            },
+            "purple": {
+              "background-color": "{imported.token.root.background-color.purple}",
+              "color": "{imported.token.root.color.purple}"
+            },
+            "red": {
+              "background-color": "{imported.token.root.background-color.red}",
+              "color": "{imported.token.root.color.red}"
+            },
+            "teal": {
+              "background-color": "{imported.token.root.background-color.teal}",
+              "color": "{imported.token.root.color.teal}"
+            },
+            "yellow": {
+              "background-color": "{imported.token.root.background-color.yellow}",
+              "color": "{imported.token.root.color.yellow}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@astryxdesign/core",
+      "export": "Token"
+    }
+  }
+}
