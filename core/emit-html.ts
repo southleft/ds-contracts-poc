@@ -29,6 +29,7 @@
  *   · Boolean-driven parts render per the showcased boolean value.
  */
 import {
+  borderStyleDecls,
   isNativeCheckablePart,
   shapeCssDecls,
   slotsOf,
@@ -252,8 +253,18 @@ function componentCss(contract: Contract): string[] {
   // one the computed gate renders through (scorecard.method: "enriched contract
   // -> core/emit-html"), so the instrument kept scoring a surface the shipped
   // emitter no longer produced. The keyword rides the WIDTH alone, both sides.
-  if ('border-width' in rootTokens) rootDecls.push('border-style: solid');
-  else rootDecls.push('border: 0');
+  //
+  // FC-BORDER-STYLE-NOT-SYNTHESISED (2026-08-08): this ALSO read only
+  // `rootTokens`, so a SHORTHAND width arriving as a LITERAL earned no keyword
+  // here while core/emit-react.ts gave it one — the same one-surface drift the
+  // paragraph above records, one channel over. Both spellings now route through
+  // the single shared rule, `borderStyleDecls`.
+  const rootLiterals = root.literals ?? {};
+  if ('border-width' in rootTokens || 'border-width' in rootLiterals) {
+    rootDecls.push('border-style: solid');
+  } else rootDecls.push('border: 0');
+  // Pushed AFTER the `border: 0` reset above so the reset cannot erase it.
+  rootDecls.push(...borderStyleDecls(rootLiterals, 'literals', root.declared));
   // Live-gauntlet class ⑤ (linked-icon-wrapper-collapses): a SLOT-ONLY root
   // that carries BOTH height and max-width is a drawn FIXED wrapper (CBDS
   // Icon — an INSTANCE_SWAP shell whose bound width the fluid convention
@@ -396,6 +407,14 @@ function componentCss(contract: Contract): string[] {
         if (floorMirror) entry.decls.push(`min-width: ${cssVar(refPath)}`);
         enumRules.set(key, entry);
       }
+      // FC-BORDER-STYLE-NOT-SYNTHESISED — a per-variant SHORTHAND width earns
+      // the keyword in its own rule; the base `.root` rule may carry no width.
+      for (const d of borderStyleDecls(overrides, 'tokens', root.declared)) {
+        const key = `${tbpProp} ${value}`;
+        const entry = enumRules.get(key) ?? { prop: tbpProp, value, decls: [] };
+        entry.decls.push(d);
+        enumRules.set(key, entry);
+      }
     }
   }
   // v14 literals on the root: base decls + per-value enum-modifier rules.
@@ -414,10 +433,16 @@ function componentCss(contract: Contract): string[] {
   }
   for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
     for (const [value, overrides] of Object.entries(map)) {
+      const key = `${lbpProp} ${value}`;
       for (const [cssProp, lit] of Object.entries(overrides)) {
-        const key = `${lbpProp} ${value}`;
         const entry = enumRules.get(key) ?? { prop: lbpProp, value, decls: [] };
         entry.decls.push(`${cssProp}: ${lit}`);
+        enumRules.set(key, entry);
+      }
+      // FC-BORDER-STYLE-NOT-SYNTHESISED — the per-variant literal width case.
+      for (const d of borderStyleDecls(overrides, 'literals', root.declared)) {
+        const entry = enumRules.get(key) ?? { prop: lbpProp, value, decls: [] };
+        entry.decls.push(d);
         enumRules.set(key, entry);
       }
     }
@@ -633,6 +658,10 @@ function componentCss(contract: Contract): string[] {
     ) {
       decls.push('border-style: solid');
     }
+    // FC-BORDER-STYLE-NOT-SYNTHESISED — the per-side LITERAL width on a nested
+    // part. THIS is the emitter the computed gate renders through, so a border
+    // missing here is scored as if it were the product.
+    decls.push(...borderStyleDecls(part.literals, 'literals', part.declared));
     // v14 literals on a nested part: base decls + per-value descendant rules.
     for (const [cssProp, lit] of Object.entries(part.literals ?? {})) {
       decls.push(`${cssProp}: ${lit}`);
@@ -660,7 +689,12 @@ function componentCss(contract: Contract): string[] {
       for (const [value, overrides] of Object.entries(entry.map)) {
         subRules.push([
           `${enumCls(entry.prop, value)} ${partCls(name)}`,
-          Object.entries(overrides).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+          [
+            ...Object.entries(overrides).map(([cssProp, lit]) => `${cssProp}: ${lit}`),
+            // FC-BORDER-STYLE-NOT-SYNTHESISED — polaris TextField's backdrop
+            // carries its whole border as per-variant literals here.
+            ...borderStyleDecls(overrides, 'literals', part.declared),
+          ],
         ]);
       }
     }
@@ -701,6 +735,9 @@ function componentCss(contract: Contract): string[] {
           }
           plain.push(`${cssProp}: ${cssVar(refPath)}`);
         }
+        // FC-BORDER-STYLE-NOT-SYNTHESISED — per-variant SHORTHAND width on a
+        // nested part.
+        plain.push(...borderStyleDecls(overrides, 'tokens', part.declared));
         if (plain.length > 0) rule(`${enumCls(entry.prop, value)} ${partCls(name)}`, plain);
       }
     }

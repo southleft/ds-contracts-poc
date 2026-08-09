@@ -373,6 +373,10 @@
   border-right-color: rgba(138, 138, 138, 1);
   border-bottom-color: rgba(138, 138, 138, 1);
   border-left-color: rgba(138, 138, 138, 1);
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
 }
 
 .text-field--variant-borderless .text-field__backdrop {
@@ -385,6 +389,7 @@
 .text-field--variant-borderless .text-field__backdrop {
   min-height: var(--p-space-800);
   border-width: var(--p-border-width-0);
+  border-style: solid;
 }
 
 .text-field--size-slim .text-field__backdrop {

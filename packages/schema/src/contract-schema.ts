@@ -1391,6 +1391,78 @@ export function arcMaskCss(startRad: number, endRad: number): string | null {
   return `conic-gradient(from ${from}deg, #000 0deg ${sweep}deg, transparent ${sweep}deg 360deg)`;
 }
 
+/** THE BORDER STYLE KEYWORD — synthesised from a width, shared by every CSS
+ *  surface (emit-react generateCss, emit-html, emit-react-inline) so the rule
+ *  cannot fork. `border-style` is not carried by the Figma direction: a Figma
+ *  stroke has no style axis, and CSS paints NOTHING without the keyword.
+ *
+ *  TWO RULES, AND THE LINE BETWEEN THEM IS WHAT THE EMITTER CAN SEE.
+ *
+ *  1. THE SHORTHAND `border-width` EARNS THE SHORTHAND KEYWORD, whatever its
+ *     value. This is gap-closing round 9's rule, unchanged: a border COLOUR
+ *     alone must NOT earn it (the UA completes the pair with `medium` = 3px —
+ *     UUI ButtonGroupBase, 80.15 against a 98.91 ceiling). The keyword rides
+ *     the WIDTH.
+ *
+ *  2. A PER-SIDE LONGHAND WIDTH earns the per-side keyword ONLY WHEN IT IS A
+ *     LITERAL — a value this function can read — AND that value is non-zero,
+ *     AND the part does not already DECLARE a style for that side.
+ *
+ *  Rule 2's three conditions are each a measured scar:
+ *
+ *  · LITERAL ONLY. core/border-style-check.ts recorded the offline regate that
+ *    killed the naive version of this: altitude Chip and altitude Button carry
+ *    all four `border-*-width` as TOKEN refs and are observed at
+ *    `border-*-style: none` — synthesising drew borders neither library has
+ *    (Chip 94.309 → 89.431, Button 81.484 → 78.984). A token width's VALUE is
+ *    invisible here (`tokenInventory` is a Set of PATHS, not values), so the
+ *    emitter cannot tell a drawn 1px from an extractor's inert readout. That
+ *    file's own conclusion names the boundary: do "not … synthesise from a
+ *    width whose value the emitter cannot see". A LITERAL is exactly the width
+ *    whose value it CAN see, so rule 2 stops precisely there. Carrying the
+ *    observed `border-*-style` for the token case stays task #24's job.
+ *
+ *  · NON-ZERO. `border-*-width: 0px` is the extractor's ordinary readout for a
+ *    part that draws no border (carbon Checkbox `checked`, polaris TextField
+ *    `borderless`). Zero width paints nothing either way, so writing the
+ *    keyword there would be pure noise claiming a border exists.
+ *
+ *  · NOT ALREADY DECLARED. A declared `border-*-style` is an OBSERVED fact; a
+ *    synthesised one is a guess. The guess must never be written where the
+ *    fact exists — polaris Checkbox and Radio Button declare all four sides
+ *    `solid` and must keep exactly the bytes they had. (Rule 1 is deliberately
+ *    NOT gated this way: the shorthand keyword and a declared longhand are
+ *    different channels that the cascade resolves, and round 9's pairing of
+ *    `border-style: solid` with a declared `border-style: dashed` is pinned by
+ *    core/border-style-check.ts.)
+ *
+ *  @param map      the channel map carrying the widths — `tokens`, `literals`,
+ *                  or one per-enum-value map of `tokensByProp`/`literalsByProp`.
+ *  @param kind     whether that map's values are literals or token refs.
+ *  @param declared the owning part's `declared` facts, if any.
+ */
+export function borderStyleDecls(
+  map: Record<string, string> | undefined,
+  kind: "literals" | "tokens",
+  declared?: Record<string, string>,
+): string[] {
+  if (!map) return [];
+  // Rule 1 — the shorthand width, at whatever scope it appears.
+  if ("border-width" in map) return ["border-style: solid"];
+  // Rule 2 — per-side, literals only.
+  if (kind !== "literals") return [];
+  const out: string[] = [];
+  for (const side of ["top", "right", "bottom", "left"] as const) {
+    const width = map[`border-${side}-width`];
+    if (width === undefined) continue;
+    const n = Number.parseFloat(width);
+    if (!Number.isFinite(n) || n === 0) continue;
+    if (declared && (`border-${side}-style` in declared || "border-style" in declared)) continue;
+    out.push(`border-${side}-style: solid`);
+  }
+  return out;
+}
+
 /** The shape's CSS declarations — shared by every code-side surface
  *  (emit-react, emit-html, emit-react-inline, the playground canvas
  *  preview) so the projection cannot fork. A polygon with no captured side

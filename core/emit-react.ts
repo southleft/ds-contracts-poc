@@ -23,6 +23,7 @@ import {
   TOKEN_CHANNELS,
   STATE_PREVIEW_PROPERTY,
   STYLES_WHEN_ALLOWED,
+  borderStyleDecls,
   isNativeCheckablePart,
   pascal,
   shapeCssDecls,
@@ -1554,6 +1555,14 @@ function stylesWhenRules(contract: Contract, partName: string, part: Part, isRoo
   return rules;
 }
 
+/** `"border-top-style: solid"` → `["border-top-style", "solid"]`. The enum-class
+ *  rules are keyed prop→value Maps, so `borderStyleDecls`' declaration strings
+ *  are split back apart to land in them. */
+function splitDecl(decl: string): [string, string] {
+  const i = decl.indexOf(': ');
+  return [decl.slice(0, i), decl.slice(i + 2)];
+}
+
 export function generateCss(contract: Contract, tokenInventory: Set<string>, errors: string[]): string {
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
   const lines: string[] = [
@@ -1745,10 +1754,19 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // invent per-side widths". Carrying per-side weights is a CAPTURE change,
   // not an emitter licence; until the dump carries them, withholding is the
   // honest half of the rule and 3.09 points stay named rather than guessed.
+  //
+  // FC-BORDER-STYLE-NOT-SYNTHESISED: the test above reads the SHORTHAND only,
+  // so a part whose width arrives as per-variant LONGHAND literals got no
+  // keyword and CSS painted no border at all. The rule now lives in ONE place
+  // for all three CSS surfaces — `borderStyleDecls` in the schema package,
+  // which also states why a per-side LITERAL earns the keyword and a per-side
+  // TOKEN ref does not.
   const hasBorderWidth =
     'border-width' in rootTokens || 'border-width' in (root.literals ?? {});
   if (hasBorderWidth) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
+  // Pushed AFTER the `border: 0` reset above so the reset cannot erase it.
+  rootDecls.push(...borderStyleDecls(root.literals, 'literals', root.declared));
   // The OTHER stroke vocabulary gets NO such synthesis, and the reason is
   // this round's own lesson pointed at itself. dump v1.11 lowers an
   // OUTSIDE-aligned Figma stroke to `outline-*`, and a CSS outline paints
@@ -2021,6 +2039,14 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         enumRules.get(cls)!.set(cssProp, cssVar(refPath));
         if (floorMirror) enumRules.get(cls)!.set('min-width', cssVar(refPath));
       }
+      // FC-BORDER-STYLE-NOT-SYNTHESISED: a per-variant width needs the keyword
+      // in ITS OWN rule — the base `.root` rule may carry no width at all.
+      for (const decl of borderStyleDecls(overrides, 'tokens', root.declared)) {
+        const [p, v] = splitDecl(decl);
+        const cls = `${tbpProp}-${value}`;
+        if (!enumRules.has(cls)) enumRules.set(cls, new Map());
+        enumRules.get(cls)!.set(p, v);
+      }
     }
   }
 
@@ -2032,10 +2058,16 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   }
   for (const { prop: lbpProp, map } of root.literalsByProp ?? []) {
     for (const [value, overrides] of Object.entries(map)) {
+      const cls = `${lbpProp}-${value}`;
       for (const [cssProp, lit] of Object.entries(overrides)) {
-        const cls = `${lbpProp}-${value}`;
         if (!enumRules.has(cls)) enumRules.set(cls, new Map());
         enumRules.get(cls)!.set(cssProp, lit);
+      }
+      // FC-BORDER-STYLE-NOT-SYNTHESISED — the per-variant literal width case.
+      for (const decl of borderStyleDecls(overrides, 'literals', root.declared)) {
+        const [p, v] = splitDecl(decl);
+        if (!enumRules.has(cls)) enumRules.set(cls, new Map());
+        enumRules.get(cls)!.set(p, v);
       }
     }
   }
@@ -2380,6 +2412,10 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     ) {
       decls.push('border-style: solid');
     }
+    // FC-BORDER-STYLE-NOT-SYNTHESISED — the per-side LITERAL width on a nested
+    // part (carbon Checkbox's ✓ glyph is a 0/0/1px/1px white corner and drew
+    // nothing at all without this).
+    decls.push(...borderStyleDecls(part.literals, 'literals', part.declared));
     // v10 tokensByProp on a nested part: descendant rule under the root's
     // enum class — exactly the nested-token-substitution rule shape.
     // v14: multiple entries emit in order (later entries win per channel).
@@ -2408,6 +2444,12 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
             `\n.${entry.prop}-${value} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`,
           );
         }
+        // FC-BORDER-STYLE-NOT-SYNTHESISED — a per-variant SHORTHAND width earns
+        // the keyword in its own rule (round 9's rule, at a scope it never
+        // reached).
+        for (const d of borderStyleDecls(overrides, 'tokens', part.declared)) {
+          nestedSubRules.push(`\n.${entry.prop}-${value} .${name} {\n  ${d};\n}`);
+        }
       }
     }
     // v14 literals on a nested part: base decls + per-value descendant rules.
@@ -2417,6 +2459,10 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     for (const entry of part.literalsByProp ?? []) {
       for (const [value, overrides] of Object.entries(entry.map)) {
         const lDecls = Object.entries(overrides).map(([cssProp, lit]) => `  ${cssProp}: ${lit};`);
+        // FC-BORDER-STYLE-NOT-SYNTHESISED — polaris TextField's backdrop carries
+        // its whole border as per-variant literals here, so the keyword has to
+        // land in the per-variant rule or the border never paints.
+        for (const d of borderStyleDecls(overrides, 'literals', part.declared)) lDecls.push(`  ${d};`);
         if (lDecls.length === 0) continue;
         nestedSubRules.push(`\n.${entry.prop}-${value} .${name} {\n${lDecls.join('\n')}\n}`);
       }

@@ -26,6 +26,7 @@
  */
 import {
   TOKEN_CHANNELS,
+  borderStyleDecls,
   isNativeCheckablePart,
   pascal,
   resolveLayout,
@@ -89,6 +90,20 @@ const stripBraces = (ref: string) => ref.slice(1, -1);
 const placeholdersIn = (refPath: string): string[] =>
   [...refPath.matchAll(/\{([a-z][\w-]*)\}/g)].map((m) => m[1]);
 const camel = (cssProp: string) => cssProp.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
+/** FC-BORDER-STYLE-NOT-SYNTHESISED — the shared border-style rule, lowered to
+ *  this surface's camelCase StyleRecord. `borderStyleDecls` states the rule
+ *  once (schema package) so the three CSS surfaces cannot fork on it again. */
+const applyBorderStyle = (
+  target: Record<string, unknown>,
+  map: Record<string, string> | undefined,
+  kind: 'literals' | 'tokens',
+  declared?: Record<string, string>,
+) => {
+  for (const decl of borderStyleDecls(map, kind, declared)) {
+    const i = decl.indexOf(': ');
+    target[camel(decl.slice(0, i))] = decl.slice(i + 2);
+  }
+};
 
 const isStructural = (part: Part) =>
   Boolean(part.parts || part.slot || part.layout || part.layoutByProp) &&
@@ -232,8 +247,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       // WIDTH. `outline-style` is deliberately NOT synthesised the same way —
       // see the long note in core/emit-react.ts; it is a DECLARED fact the
       // inversion carries, never one the emitter infers.
-      if ('border-width' in rootTokens) s.borderStyle = 'solid';
-      else s.border = 0;
+      // FC-BORDER-STYLE-NOT-SYNTHESISED: a LITERAL shorthand width earns the
+      // keyword too, and a per-side literal width earns the per-side keyword —
+      // assigned after the `border: 0` reset so the reset cannot erase it.
+      if ('border-width' in rootTokens || 'border-width' in (part.literals ?? {})) {
+        s.borderStyle = 'solid';
+      } else s.border = 0;
+      applyBorderStyle(s, part.literals, 'literals', part.declared);
       // Slot-wrapper floor (live-gauntlet class ⑤): a SLOT-ONLY root with
       // BOTH height and max-width is a drawn FIXED wrapper — an empty slot's
       // fit-content floor is 0, so the drawn box (the max-width value) is
@@ -317,9 +337,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
           : `ds-inline-pulse 1.6s ease-in-out infinite`;
         usedAnimations.add(part.animation);
       }
-      if (part.tokens && 'border-width' in part.tokens) {
+      if (
+        (part.tokens && 'border-width' in part.tokens) ||
+        (part.literals && 'border-width' in part.literals)
+      ) {
         s.borderStyle = 'solid';
       }
+      applyBorderStyle(s, part.literals, 'literals', part.declared);
     }
     for (const [cssProp, ref] of Object.entries(part.tokens ?? {})) {
       const refPath = stripBraces(ref);
@@ -370,6 +394,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
             decls.minWidth = resolveValue(stripBraces(ref));
           }
         }
+        applyBorderStyle(decls, overrides, 'tokens', part.declared);
         addVariant(entry.prop, value, partName, decls);
       }
     }
@@ -384,6 +409,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         for (const [cssProp, lit] of Object.entries(overrides)) {
           decls[camel(cssProp)] = lit;
         }
+        applyBorderStyle(decls, overrides, 'literals', part.declared);
         addVariant(entry.prop, value, partName, decls);
       }
     }

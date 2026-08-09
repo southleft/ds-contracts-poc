@@ -368,6 +368,10 @@
   border-width: var(--p-border-width-0);
 }
 
+.variant-borderless .backdrop {
+  border-style: solid;
+}
+
 .size-slim .backdrop {
   padding-block: var(--p-space-050);
 }
@@ -389,6 +393,10 @@
   border-right-color: rgba(138, 138, 138, 1);
   border-bottom-color: rgba(138, 138, 138, 1);
   border-left-color: rgba(138, 138, 138, 1);
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
 }
 
 .variant-borderless .backdrop {
