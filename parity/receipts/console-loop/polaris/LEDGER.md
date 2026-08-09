@@ -204,3 +204,36 @@ in the same file so the two paths cannot diverge again.
 their committed `gate-shots/` byte-for-byte at HEAD. `avatar` (40/40), `badge`,
 `banner` (64/64), `checkbox` (24/24) and `textfield` (128/256) do not, and `tag`
 cannot be rebuilt at all (quarantined above).
+
+## 2026-08-09 — CANVAS-DRIFT sweep: 11 of 12 in sync, after the instrument's own premise died
+
+Snapshot: `canvas-drift/LIVE-SNAPSHOT.json` (Desktop Bridge, `fileKey` pinned).
+Probe: `npm run console-loop:canvas-drift polaris`.
+
+**THE FIRST RUN SAID 12 OF 12 DRIFTED, AND ALL TWELVE WERE THE INSTRUMENT'S
+FAULT.** `scripts/console-loop-canvas-drift-probe.mjs` carried a hardcoded
+lane → collection map asserting that polaris bindings belong in a collection
+named `Polaris`. **There is no `Polaris` collection on the Testing file and this
+lane's scripts never create one.** Measured from the committed scripts:
+`examples/polaris/figma/00-tokens.figma.js` creates `Primitives` / `Brand` /
+`Semantic`, and each of the twelve per-component scripts creates
+`Imported (provisional)` and mints its degraded-import tokens there. So for
+polaris a binding in `Primitives` or `Imported (provisional)` **is the script's
+own output**.
+
+The probe now derives the owned set from the lane's own committed scripts
+(`createVariableCollection('…')` in `00-tokens` + the stem's own file) instead of
+asserting a name. Carbon is unchanged by the fix (its scripts create exactly
+`Carbon`, so its `Imported (provisional)` findings still stand), which is the
+control that the fix is a premise correction and not a relaxation.
+
+**After the fix: 11 in-sync / 1 DRIFT. No scored-pass is drifted** — `banner`,
+`tag`, `text-field` and `thumbnail` are each what their own script would build.
+
+| stem | verdict | divergence |
+|---|---|---|
+| `badge` (7.21, fail) | **DRIFT** | all four corner radii: the spec binds `p/border-radius-200` (**8**), the live cell binds `p/border-radius-full` (**9999**). Same collection, same node, different token — a pill where the current contract compiles an 8px rounded rect. |
+| avatar, banner, button, checkbox, progress-bar, radio-button, spinner, tag, text, text-field, thumbnail | in-sync | — |
+
+**Floor: polaris holds at 3.** Nothing converted, nothing regressed,
+`RATCHET.json` untouched.

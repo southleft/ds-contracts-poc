@@ -54,3 +54,26 @@ reproduced every committed `gate-shots/` PNG byte-for-byte for alert, badge,
 button and card. `toggleswitch` did **not**: 12 of its 48 gate-shots differ — every
 `*.unchecked__*` key, by ~100–140 pixels of 30 720 (0.3 %). Recorded here rather
 than chased; no committed gate-shot was overwritten by this round.
+
+## 2026-08-09 — CANVAS-DRIFT sweep: 5 of 5 in sync — the cleanest lane on the board
+
+Snapshot: `canvas-drift/LIVE-SNAPSHOT.json` (Desktop Bridge, `fileKey` pinned).
+Probe: `npm run console-loop:canvas-drift tailwind`.
+
+**Every stem is exactly what `examples/tailwind/figma/<stem>.figma.js` would
+build today**, and every binding on every stem resolved in the `Tailwind`
+collection — the only collection this lane's scripts create. No BINDING-DRIFT, no
+COLLECTION-DRIFT, no VALUE-DRIFT anywhere: `alert`, `badge`, `button`, `card`,
+`toggle-switch`.
+
+All three of this lane's scored passes (`alert` 3.83, `badge` 2.43, `button`
+1.94) are therefore measuring a current canvas. Nothing here is a pass earned by
+a build nobody would ship.
+
+The five stems carry the non-drift note `FC-FONT-SUBSTRATE`: their text nodes
+draw Inter because **no tailwind contract carries a font-family channel at all**,
+so the emitter was faithful and the channel never reached the contract. That is
+the same lane-wide term carbon named, with the same owner (`extract/computed/fuse.ts`,
+outside this lane) and the same deliberate non-fix.
+
+**Floor: tailwind holds at 3.** `RATCHET.json` untouched.

@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "kind": "console-loop-canvas-drift-snapshot",
+  "lane": "altitude",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileName": "DS Contracts Testing",
+  "mintedAt": "2026-08-09",
+  "mintedFrom": {
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge), fileKey pinned on every call",
+    "generator": "scripts/console-loop-canvas-drift-capture.mjs altitude — the pins are read from framing.json, never typed by hand",
+    "method": "getNodeByIdAsync on each stem's framing-pinned cellNodeId; every boundVariables entry resolved by VARIABLE ID (getVariableByIdAsync -> getVariableCollectionByIdAsync), so the COLLECTION a binding landed in is a fact and not a name-first-match guess; descendants and TEXT fontName walked to depth 3",
+    "note": "READ-ONLY. The emitted program calls no mutating API."
+  },
+  "why": "The capture-framing pin asserts the committed SHOT is the live CELL. It cannot ask the prior question: is the live CELL the product of this lane's own committed emit script? scripts/console-loop-canvas-drift-probe.mjs reads this snapshot against examples/altitude/figma/<stem>.figma.js and names the drift.",
+  "stems": {
+    "avatar": {
+      "cellNodeId": "1:10494",
+      "name": "Variant=Sm",
+      "type": "COMPONENT",
+      "w": 24, "h": 24, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "width": { "name": "imported/avatar/root/width/sm", "coll": "Imported (provisional)", "val": 24 },
+        "height": { "name": "imported/avatar/root/height/sm", "coll": "Imported (provisional)", "val": 24 },
+        "topLeftRadius": { "name": "imported/avatar/root/border-top-left-radius/sm", "coll": "Altitude", "val": 16 },
+        "topRightRadius": { "name": "imported/avatar/root/border-top-right-radius/sm", "coll": "Altitude", "val": 16 },
+        "bottomLeftRadius": { "name": "imported/avatar/root/border-bottom-left-radius/sm", "coll": "Altitude", "val": 16 },
+        "bottomRightRadius": { "name": "imported/avatar/root/border-bottom-right-radius/sm", "coll": "Altitude", "val": 16 },
+        "fills": { "name": "imported/avatar/root/background-color", "coll": "Altitude", "val": "#f4f3f1" }
+      },
+      "descendantBound": {
+        "avatar__badge.badge.width": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "avatar__badge.badge.height": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "avatar__badge.badge.fills": { "name": "imported/avatar/badge/background-color", "coll": "Altitude", "val": "#f4f3f1" }
+      },
+      "fonts": [{ "node": "AB", "chars": "AB", "family": "Inter", "style": "Semi Bold", "size": 10, "w": 14, "h": 12 }]
+    },
+    "badge": {
+      "cellNodeId": "60:10071",
+      "name": "Variant=Info, Dot=Default",
+      "type": "COMPONENT",
+      "w": 44, "h": 20, "pl": 4, "pr": 4, "pt": 0, "pb": 0, "gap": 4,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "imported/badge/root/column-gap", "coll": "Altitude", "val": 4 },
+        "paddingLeft": { "name": "imported/badge/root/padding-left/default", "coll": "Altitude", "val": 4 },
+        "paddingRight": { "name": "imported/badge/root/padding-right/default", "coll": "Altitude", "val": 4 },
+        "topLeftRadius": { "name": "imported/badge/root/border-top-left-radius/default", "coll": "Altitude", "val": 20 },
+        "topRightRadius": { "name": "imported/badge/root/border-top-right-radius/default", "coll": "Altitude", "val": 20 },
+        "bottomLeftRadius": { "name": "imported/badge/root/border-bottom-left-radius/default", "coll": "Altitude", "val": 20 },
+        "bottomRightRadius": { "name": "imported/badge/root/border-bottom-right-radius/default", "coll": "Altitude", "val": 20 },
+        "minWidth": { "name": "imported/badge/root/min-width/default", "coll": "Altitude", "val": 20 },
+        "minHeight": { "name": "imported/badge/root/min-height/default", "coll": "Altitude", "val": 20 },
+        "fills": { "name": "imported/badge/root/background-color/info", "coll": "Altitude", "val": "ALIAS VariableID:1:2503" }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "imported/badge/root/color/info", "coll": "Altitude", "val": "ALIAS VariableID:1:2530" },
+        "label.fontSize": { "name": "imported/badge/root/font-size", "coll": "Altitude", "val": 12 }
+      },
+      "fonts": [{ "node": "label", "chars": "Badge", "family": "IBM Plex Sans", "style": "SemiBold", "size": 12, "w": 36, "h": 12 }]
+    },
+    "button": {
+      "cellNodeId": "60:10127",
+      "name": "Variant=Secondary, State=Default",
+      "type": "COMPONENT",
+      "w": 83, "h": 40, "pl": 16, "pr": 16, "pt": 8, "pb": 8, "gap": 8,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "imported/shared/size-8", "coll": "Altitude", "val": 8 },
+        "paddingLeft": { "name": "imported/shared/size-16", "coll": "Altitude", "val": 16 },
+        "paddingTop": { "name": "imported/shared/size-8", "coll": "Altitude", "val": 8 },
+        "paddingRight": { "name": "imported/shared/size-16", "coll": "Altitude", "val": 16 },
+        "paddingBottom": { "name": "imported/shared/size-8", "coll": "Altitude", "val": 8 },
+        "topLeftRadius": { "name": "imported/shared/size-4", "coll": "Altitude", "val": 4 },
+        "topRightRadius": { "name": "imported/shared/size-4", "coll": "Altitude", "val": 4 },
+        "bottomLeftRadius": { "name": "imported/shared/size-4", "coll": "Altitude", "val": 4 },
+        "bottomRightRadius": { "name": "imported/shared/size-4", "coll": "Altitude", "val": 4 },
+        "strokeTopWeight": { "name": "imported/button/root/border-top-width/secondary", "coll": "Altitude", "val": 0 },
+        "strokeBottomWeight": { "name": "imported/button/root/border-bottom-width/secondary", "coll": "Altitude", "val": 0 },
+        "strokeLeftWeight": { "name": "imported/button/root/border-left-width/secondary", "coll": "Altitude", "val": 0 },
+        "strokeRightWeight": { "name": "imported/button/root/border-right-width/secondary", "coll": "Altitude", "val": 0 },
+        "minWidth": { "name": "imported/shared/size-0", "coll": "Altitude", "val": 0 },
+        "minHeight": { "name": "imported/shared/size-0", "coll": "Altitude", "val": 0 },
+        "fills": { "name": "imported/button/root/background-color/secondary", "coll": "Altitude", "val": "ALIAS VariableID:1:2508" },
+        "strokes": { "name": "imported/button/root/border-top-color/secondary", "coll": "Altitude", "val": "#191306" }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "imported/button/root/color/secondary", "coll": "Altitude", "val": "ALIAS VariableID:1:2538" },
+        "label.fontSize": { "name": "imported/shared/size-16", "coll": "Altitude", "val": 16 }
+      },
+      "fonts": [{ "node": "label", "chars": "Button", "family": "IBM Plex Sans", "style": "SemiBold", "size": 16, "w": 51, "h": 24 }]
+    },
+    "chip": {
+      "cellNodeId": "60:10110",
+      "name": "Variant=Info, Type=Default",
+      "type": "COMPONENT",
+      "w": 53, "h": 28, "pl": 12, "pr": 12, "pt": 4, "pb": 4, "gap": 8,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "imported/chip/root/column-gap", "coll": "Altitude", "val": 8 },
+        "paddingLeft": { "name": "imported/chip/root/padding-left", "coll": "Altitude", "val": 12 },
+        "paddingTop": { "name": "imported/chip/root/padding-top", "coll": "Altitude", "val": 4 },
+        "paddingRight": { "name": "imported/chip/root/padding-right", "coll": "Altitude", "val": 12 },
+        "paddingBottom": { "name": "imported/chip/root/padding-bottom", "coll": "Altitude", "val": 4 },
+        "topLeftRadius": { "name": "imported/chip/root/border-top-left-radius/unset", "coll": "Altitude", "val": 32 },
+        "topRightRadius": { "name": "imported/chip/root/border-top-right-radius/unset", "coll": "Altitude", "val": 32 },
+        "bottomLeftRadius": { "name": "imported/chip/root/border-bottom-left-radius/unset", "coll": "Altitude", "val": 32 },
+        "bottomRightRadius": { "name": "imported/chip/root/border-bottom-right-radius/unset", "coll": "Altitude", "val": 32 },
+        "strokeTopWeight": { "name": "imported/chip/root/border-top-width/info", "coll": "Altitude", "val": 0 },
+        "strokeBottomWeight": { "name": "imported/chip/root/border-bottom-width/info", "coll": "Altitude", "val": 0 },
+        "strokeLeftWeight": { "name": "imported/chip/root/border-left-width/info", "coll": "Altitude", "val": 0 },
+        "strokeRightWeight": { "name": "imported/chip/root/border-right-width/info", "coll": "Altitude", "val": 0 },
+        "minWidth": { "name": "imported/chip/root/min-width", "coll": "Altitude", "val": 0 },
+        "minHeight": { "name": "imported/chip/root/min-height", "coll": "Altitude", "val": 0 },
+        "fills": { "name": "imported/chip/root/background-color/info", "coll": "Altitude", "val": "ALIAS VariableID:1:2503" },
+        "strokes": { "name": "imported/chip/root/border-top-color/info", "coll": "Altitude", "val": "#000b29" }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "imported/chip/root/color/info", "coll": "Altitude", "val": "ALIAS VariableID:1:2530" },
+        "label.fontSize": { "name": "imported/chip/root/font-size", "coll": "Altitude", "val": 14 }
+      },
+      "fonts": [{ "node": "label", "chars": "Chip", "family": "IBM Plex Sans", "style": "Regular", "size": 14, "w": 29, "h": 20 }]
+    },
+    "divider": {
+      "cellNodeId": "59:9711",
+      "name": "Variant=Default",
+      "type": "COMPONENT",
+      "w": 288, "h": 1, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "width": { "name": "imported/divider/root/width/unset", "coll": "Altitude", "val": 288 },
+        "minWidth": { "name": "imported/divider/root/min-width", "coll": "Altitude", "val": 0 },
+        "minHeight": { "name": "imported/divider/root/min-height", "coll": "Altitude", "val": 0 },
+        "fills": { "name": "imported/divider/root/background-color", "coll": "Altitude", "val": "ALIAS VariableID:1:2517" }
+      },
+      "descendantBound": {},
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk"
+    },
+    "heading": {
+      "cellNodeId": "1:3025",
+      "name": "Variant=Display Lg, Weight=Bold",
+      "type": "COMPONENT",
+      "w": 328, "h": 52, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "width": { "name": "imported/heading/root/width", "coll": "Altitude", "val": 328 },
+        "minWidth": { "name": "imported/heading/root/min-width", "coll": "Altitude", "val": 0 },
+        "minHeight": { "name": "imported/heading/root/min-height", "coll": "Altitude", "val": 0 }
+      },
+      "descendantBound": {
+        "label.fontSize": { "name": "imported/heading/root/font-size/display-lg", "coll": "Altitude", "val": 48 }
+      },
+      "fonts": [{ "node": "label", "chars": "Heading", "family": "IBM Plex Sans", "style": "SemiBold", "size": 48, "w": 185, "h": 52 }]
+    },
+    "icon-close": {
+      "cellNodeId": "1:3059",
+      "name": "Size=Lg",
+      "type": "COMPONENT",
+      "w": 24, "h": 24, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "width": { "name": "imported/icon-close/root/width/lg", "coll": "Altitude", "val": 24 },
+        "minWidth": { "name": "imported/icon-close/root/min-width", "coll": "Altitude", "val": 0 },
+        "minHeight": { "name": "imported/icon-close/root/min-height", "coll": "Altitude", "val": 0 }
+      },
+      "descendantBound": {
+        "root-lg.Vector.fills": { "name": "imported/icon-close/root/color", "coll": "Altitude", "val": "#101010" }
+      },
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk"
+    },
+    "link": {
+      "cellNodeId": "60:10088",
+      "name": "Variant=Lg, State=Default",
+      "type": "COMPONENT",
+      "w": 34, "h": 28, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 8,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "imported/link/root/column-gap", "coll": "Altitude", "val": 8 },
+        "minWidth": { "name": "imported/link/root/min-width", "coll": "Altitude", "val": 0 },
+        "minHeight": { "name": "imported/link/root/min-height", "coll": "Altitude", "val": 0 }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "imported/link/root/color", "coll": "Altitude", "val": "ALIAS VariableID:1:2533" },
+        "label.fontSize": { "name": "imported/link/root/font-size/lg", "coll": "Altitude", "val": 18 }
+      },
+      "fonts": [{ "node": "label", "chars": "Link", "family": "IBM Plex Sans", "style": "Regular", "size": 18, "w": 34, "h": 28 }]
+    }
+  }
+}

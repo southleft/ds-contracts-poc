@@ -1,0 +1,319 @@
+{
+  "version": 1,
+  "kind": "console-loop-canvas-drift-snapshot",
+  "lane": "polaris",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileName": "DS Contracts Testing",
+  "mintedAt": "2026-08-09",
+  "mintedFrom": {
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge), fileKey pinned on every call",
+    "generator": "scripts/console-loop-canvas-drift-capture.mjs polaris — the pins are read from framing.json, never typed by hand",
+    "method": "getNodeByIdAsync on each stem's framing-pinned cellNodeId; every boundVariables entry resolved by VARIABLE ID (getVariableByIdAsync -> getVariableCollectionByIdAsync), so the COLLECTION a binding landed in is a fact and not a name-first-match guess; descendants and TEXT fontName walked to depth 3",
+    "note": "READ-ONLY. The emitted program calls no mutating API."
+  },
+  "why": "The capture-framing pin asserts the committed SHOT is the live CELL. It cannot ask the prior question: is the live CELL the product of this lane's own committed emit script? scripts/console-loop-canvas-drift-probe.mjs reads this snapshot against examples/polaris/figma/<stem>.figma.js and names the drift.",
+  "collectionNote": "THERE IS NO 'Polaris' COLLECTION IN THIS FILE, and the lane's own scripts never create one. examples/polaris/figma/00-tokens.figma.js creates Primitives / Brand / Semantic, and each per-component script creates 'Imported (provisional)' and mints its degraded-import tokens there. So for THIS lane a binding in Primitives or in 'Imported (provisional)' is the script's own output, not drift. The probe's former hardcoded lane->collection map asserted 'Polaris' and would have flagged all 12 stems.",
+  "stems": {
+    "avatar": {
+      "cellNodeId": "1:7824",
+      "name": "Size=Md",
+      "type": "COMPONENT",
+      "w": 28, "h": 28, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "height": { "name": "imported/avatar/root/height/md", "coll": "Imported (provisional)", "val": 28 },
+        "topLeftRadius": { "name": "imported/avatar/root/border-top-left-radius/md", "coll": "Imported (provisional)", "val": 6 },
+        "topRightRadius": { "name": "imported/avatar/root/border-top-right-radius/md", "coll": "Imported (provisional)", "val": 6 },
+        "bottomLeftRadius": { "name": "imported/avatar/root/border-bottom-left-radius/md", "coll": "Imported (provisional)", "val": 6 },
+        "bottomRightRadius": { "name": "imported/avatar/root/border-bottom-right-radius/md", "coll": "Imported (provisional)", "val": 6 },
+        "fills": { "name": "p/color-avatar-one-bg-fill", "coll": "Primitives", "val": "#c530c5" }
+      },
+      "descendantBound": {
+        "initials.width": { "name": "imported/avatar/initials/width/md", "coll": "Imported (provisional)", "val": 28 },
+        "initials.height": { "name": "imported/avatar/initials/height/md", "coll": "Imported (provisional)", "val": 28 },
+        "initials.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "initials.TP.fills": { "name": "p/color-avatar-one-text-on-bg-fill", "coll": "Primitives", "val": "#fdeffd" }
+      },
+      "fonts": [{ "node": "TP", "chars": "TP", "family": "Inter", "style": "Medium", "size": 13, "w": 17, "h": 16 }]
+    },
+    "badge": {
+      "cellNodeId": "1:8190",
+      "name": "Tone=enabled, Progress=none",
+      "type": "COMPONENT",
+      "w": 61, "h": 20, "pl": 8, "pr": 8, "pt": 2, "pb": 2, "gap": 0,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "paddingLeft": { "name": "p/space-200", "coll": "Primitives", "val": 8 },
+        "paddingTop": { "name": "p/space-050", "coll": "Primitives", "val": 2 },
+        "paddingRight": { "name": "p/space-200", "coll": "Primitives", "val": 8 },
+        "paddingBottom": { "name": "p/space-050", "coll": "Primitives", "val": 2 },
+        "topLeftRadius": { "name": "p/border-radius-full", "coll": "Primitives", "val": 9999 },
+        "topRightRadius": { "name": "p/border-radius-full", "coll": "Primitives", "val": 9999 },
+        "bottomLeftRadius": { "name": "p/border-radius-full", "coll": "Primitives", "val": 9999 },
+        "bottomRightRadius": { "name": "p/border-radius-full", "coll": "Primitives", "val": 9999 },
+        "fills": { "name": "imported/badge/root/background-color/enabled", "coll": "Imported (provisional)", "val": "rgba(0,0,0,0.059)" }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "imported/badge/label/color/enabled", "coll": "Imported (provisional)", "val": "#303030" }
+      },
+      "fonts": [{ "node": "label", "chars": "Fulfilled", "family": "Inter", "style": "Medium", "size": 12, "w": 45, "h": 16 }]
+    },
+    "banner": {
+      "cellNodeId": "1:8219",
+      "name": "Tone=Info, State=Default",
+      "type": "COMPONENT",
+      "w": 319.328, "h": 88, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "width": { "name": "imported/shared/size-319-328", "coll": "Imported (provisional)", "val": 319.3280029296875 },
+        "topLeftRadius": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "topRightRadius": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "bottomLeftRadius": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "bottomRightRadius": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "fills": { "name": "p/color-bg-surface", "coll": "Primitives", "val": "#ffffff" }
+      },
+      "descendantBound": {
+        "box.width": { "name": "imported/shared/size-319-328", "coll": "Imported (provisional)", "val": 319.3280029296875 },
+        "box.blockstack.width": { "name": "imported/shared/size-319-328", "coll": "Imported (provisional)", "val": 319.3280029296875 },
+        "box.blockstack.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "box.blockstack.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "box.blockstack.box-2.paddingLeft": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "box.blockstack.box-2.paddingTop": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "box.blockstack.box-2.paddingRight": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "box.blockstack.box-2.paddingBottom": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "box.blockstack.box-2.width": { "name": "imported/shared/size-319-328", "coll": "Imported (provisional)", "val": 319.3280029296875 },
+        "box.blockstack.box-2.topLeftRadius": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "box.blockstack.box-2.topRightRadius": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "box.blockstack.box-2.fills": { "name": "imported/banner/box-2/background-color/info", "coll": "Imported (provisional)", "val": "#91d0ff" },
+        "box.blockstack.box-3.paddingLeft": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "box.blockstack.box-3.paddingTop": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "box.blockstack.box-3.paddingRight": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "box.blockstack.box-3.paddingBottom": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "box.blockstack.box-3.width": { "name": "imported/shared/size-319-328", "coll": "Imported (provisional)", "val": 319.3280029296875 }
+      },
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk"
+    },
+    "button": {
+      "cellNodeId": "14:1396",
+      "name": "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary, State=Default",
+      "type": "COMPONENT",
+      "w": 63, "h": 32, "pl": 12, "pr": 12, "pt": 6, "pb": 6, "gap": 2,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "p/space-050", "coll": "Primitives", "val": 2 },
+        "paddingLeft": { "name": "p/space-300", "coll": "Primitives", "val": 12 },
+        "paddingTop": { "name": "p/space-150", "coll": "Primitives", "val": 6 },
+        "paddingRight": { "name": "p/space-300", "coll": "Primitives", "val": 12 },
+        "paddingBottom": { "name": "p/space-150", "coll": "Primitives", "val": 6 },
+        "topLeftRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "topRightRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "bottomLeftRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "bottomRightRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "strokeTopWeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "strokeBottomWeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "strokeLeftWeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "strokeRightWeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "minWidth": { "name": "p/width-800", "coll": "Primitives", "val": 32 },
+        "minHeight": { "name": "p/height-800", "coll": "Primitives", "val": 32 },
+        "fills": { "name": "imported/button/root/background-color/secondary/none", "coll": "Imported (provisional)", "val": "#ffffff" }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "imported/button/root/color/secondary/none", "coll": "Imported (provisional)", "val": "ALIAS VariableID:1:6318" }
+      },
+      "fonts": [{ "node": "label", "chars": "Button", "family": "Inter", "style": "Medium", "size": 12, "w": 39, "h": 16 }]
+    },
+    "checkbox": {
+      "cellNodeId": "1:10019",
+      "name": "Checked=unchecked",
+      "type": "COMPONENT",
+      "w": 160, "h": 28, "pl": 0, "pr": 0, "pt": 4, "pb": 4, "gap": 8,
+      "sizingH": "HUG", "sizingV": "FIXED",
+      "bound": {
+        "itemSpacing": { "name": "imported/checkbox/choice-control/margin-right", "coll": "Imported (provisional)", "val": 8 },
+        "paddingTop": { "name": "imported/shared/size-4", "coll": "Imported (provisional)", "val": 4 },
+        "paddingBottom": { "name": "imported/shared/size-4", "coll": "Imported (provisional)", "val": 4 },
+        "height": { "name": "imported/checkbox/root/height", "coll": "Imported (provisional)", "val": 28 }
+      },
+      "descendantBound": {
+        "choice__control.width": { "name": "imported/shared/size-20", "coll": "Imported (provisional)", "val": 20 },
+        "choice__control.checkbox (margin box).checkbox.width": { "name": "imported/shared/size-18", "coll": "Imported (provisional)", "val": 18 },
+        "choice__control.checkbox (margin box).checkbox.height": { "name": "imported/shared/size-18", "coll": "Imported (provisional)", "val": 18 },
+        "choice__label.label.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "choice__label.label.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 }
+      },
+      "fonts": [{ "node": "Save this information", "chars": "Save this information", "family": "Inter", "style": "Medium", "size": 13, "w": 132, "h": 20 }]
+    },
+    "progress-bar": {
+      "cellNodeId": "1:10052",
+      "name": "Size=Medium, Tone=Highlight",
+      "type": "COMPONENT",
+      "w": 288, "h": 16, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "width": { "name": "imported/progress-bar/root/width", "coll": "Imported (provisional)", "val": 288 },
+        "topLeftRadius": { "name": "p/border-radius-100", "coll": "Primitives", "val": 4 },
+        "topRightRadius": { "name": "p/border-radius-100", "coll": "Primitives", "val": 4 },
+        "bottomLeftRadius": { "name": "p/border-radius-100", "coll": "Primitives", "val": 4 },
+        "bottomRightRadius": { "name": "p/border-radius-100", "coll": "Primitives", "val": 4 },
+        "fills": { "name": "p/color-bg-fill-tertiary", "coll": "Primitives", "val": "#e3e3e3" }
+      },
+      "descendantBound": {
+        "indicator.height": { "name": "imported/progress-bar/indicator/height/medium", "coll": "Imported (provisional)", "val": 16 },
+        "indicator.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "indicator.fills": { "name": "p/color-bg-fill-info", "coll": "Primitives", "val": "#91d0ff" }
+      },
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk"
+    },
+    "radio-button": {
+      "cellNodeId": "1:10079",
+      "name": "Checked=unchecked",
+      "type": "COMPONENT",
+      "w": 166.328, "h": 28, "pl": 0, "pr": 0, "pt": 4, "pb": 4, "gap": 8,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "itemSpacing": { "name": "imported/radio-button/choice-control/margin-right", "coll": "Imported (provisional)", "val": 8 },
+        "paddingTop": { "name": "imported/radio-button/root/padding-top", "coll": "Imported (provisional)", "val": 4 },
+        "paddingBottom": { "name": "imported/radio-button/root/padding-bottom", "coll": "Imported (provisional)", "val": 4 },
+        "width": { "name": "imported/radio-button/root/width", "coll": "Imported (provisional)", "val": 166.3280029296875 },
+        "height": { "name": "imported/radio-button/root/height", "coll": "Imported (provisional)", "val": 28 }
+      },
+      "descendantBound": {
+        "choice__control.width": { "name": "imported/radio-button/choice-control/width", "coll": "Imported (provisional)", "val": 20 },
+        "choice__control.radiobutton (margin box).radiobutton.width": { "name": "imported/shared/size-18", "coll": "Imported (provisional)", "val": 18 },
+        "choice__control.radiobutton (margin box).radiobutton.height": { "name": "imported/shared/size-18", "coll": "Imported (provisional)", "val": 18 },
+        "choice__label.width": { "name": "imported/radio-button/choice-label/width", "coll": "Imported (provisional)", "val": 138.3280029296875 },
+        "choice__label.label.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "choice__label.label.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 }
+      },
+      "fonts": [{ "node": "Accounts are disabled", "chars": "Accounts are disabled", "family": "Inter", "style": "Medium", "size": 13, "w": 139, "h": 20 }]
+    },
+    "spinner": {
+      "cellNodeId": "1:10099",
+      "name": "Size=Large",
+      "type": "COMPONENT",
+      "w": 44, "h": 44, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "width": { "name": "imported/spinner/root/width/large", "coll": "Imported (provisional)", "val": 44 }
+      },
+      "descendantBound": {
+        "root-large.Vector.fills": { "name": "imported/spinner/root/color", "coll": "Imported (provisional)", "val": "#303030" }
+      },
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk"
+    },
+    "tag": {
+      "cellNodeId": "1:10108",
+      "name": "Size=none, State=Default",
+      "type": "COMPONENT",
+      "w": 71.9219, "h": 20, "pl": 6, "pr": 6, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "height": { "name": "imported/tag/root/height/none", "coll": "Imported (provisional)", "val": 20 },
+        "topLeftRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "topRightRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "bottomLeftRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "bottomRightRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "fills": { "name": "p/color-bg-fill-tertiary", "coll": "Primitives", "val": "#e3e3e3" }
+      },
+      "descendantBound": {
+        "link.width": { "name": "imported/shared/size-59-9219", "coll": "Imported (provisional)", "val": 59.92190170288086 },
+        "link.topLeftRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "link.topRightRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "link.bottomLeftRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "link.bottomRightRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "link.text-2.width": { "name": "imported/shared/size-59-9219", "coll": "Imported (provisional)", "val": 59.92190170288086 },
+        "link.text-2.label-2.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "link.text-2.label-2.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "text.width": { "name": "imported/shared/size-59-9219", "coll": "Imported (provisional)", "val": 59.92190170288086 },
+        "text.label.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "text.label.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "text.label.Wholesale.fills": { "name": "p/color-text", "coll": "Primitives", "val": "#303030" },
+        "button-2 (margin box).button-2.paddingLeft": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "button-2 (margin box).button-2.paddingTop": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "button-2 (margin box).button-2.paddingRight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "button-2 (margin box).button-2.paddingBottom": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "button-2 (margin box).button-2.width": { "name": "imported/shared/size-18", "coll": "Imported (provisional)", "val": 18 },
+        "button-2 (margin box).button-2.height": { "name": "imported/shared/size-18", "coll": "Imported (provisional)", "val": 18 },
+        "button-2 (margin box).button-2.topLeftRadius": { "name": "imported/shared/size-7", "coll": "Imported (provisional)", "val": 7 },
+        "button-2 (margin box).button-2.topRightRadius": { "name": "imported/shared/size-7", "coll": "Imported (provisional)", "val": 7 },
+        "button-2 (margin box).button-2.bottomLeftRadius": { "name": "imported/shared/size-7", "coll": "Imported (provisional)", "val": 7 },
+        "button-2 (margin box).button-2.bottomRightRadius": { "name": "imported/shared/size-7", "coll": "Imported (provisional)", "val": 7 },
+        "button-2 (margin box).button-2.strokeTopWeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "button-2 (margin box).button-2.strokeBottomWeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "button-2 (margin box).button-2.strokeLeftWeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "button-2 (margin box).button-2.strokeRightWeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "button-2 (margin box).button-2.fills": { "name": "imported/tag/button-2/background-color", "coll": "Imported (provisional)", "val": "rgba(0,0,0,0)" }
+      },
+      "fonts": [{ "node": "Wholesale", "chars": "Wholesale", "family": "Inter", "style": "Medium", "size": 12, "w": 60, "h": 20 }]
+    },
+    "text": {
+      "cellNodeId": "1:10372",
+      "name": "Alignment=Start, As=P, Tone=Base, Font Weight=Regular, Variant=Heading Sm",
+      "type": "COMPONENT",
+      "w": 146, "h": 20, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {},
+      "descendantBound": {
+        "label.fills": { "name": "imported/text/root/color/none", "coll": "Imported (provisional)", "val": "ALIAS VariableID:1:6318" }
+      },
+      "fonts": [{ "node": "label", "chars": "Online store dashboard", "family": "Inter", "style": "Medium", "size": 13, "w": 146, "h": 20 }]
+    },
+    "text-field": {
+      "cellNodeId": "1:10197",
+      "name": "Type=Text, Input Mode=Text, Align=Left, Variant=Inherit, Size=Medium, State=Default",
+      "type": "COMPONENT",
+      "w": 211, "h": 60, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 4,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "itemSpacing": { "name": "imported/shared/size-4", "coll": "Imported (provisional)", "val": 4 },
+        "width": { "name": "imported/text-field/connected/width/off/off", "coll": "Imported (provisional)", "val": 211 },
+        "height": { "name": "imported/text-field/root/height/medium", "coll": "Imported (provisional)", "val": 60 }
+      },
+      "descendantBound": {
+        "labelled__labelwrapper.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "labelled__labelwrapper.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "labelled__labelwrapper.label.width": { "name": "imported/text-field/label/width", "coll": "Imported (provisional)", "val": 70.8125 },
+        "labelled__labelwrapper.label.label__text.width": { "name": "imported/text-field/label-text/width", "coll": "Imported (provisional)", "val": 70.8125 },
+        "labelled__labelwrapper.label.label__text.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "labelled__labelwrapper.label.label__text.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "connected.width": { "name": "imported/text-field/connected/width/off/off", "coll": "Imported (provisional)", "val": 211 },
+        "connected.height": { "name": "imported/text-field/connected/height/medium", "coll": "Imported (provisional)", "val": 36 },
+        "connected.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "connected.connected__item.height": { "name": "imported/text-field/connected-item/height/medium", "coll": "Imported (provisional)", "val": 36 },
+        "connected.connected__item.textfield.height": { "name": "imported/text-field/textfield/height/medium", "coll": "Imported (provisional)", "val": 36 },
+        "connected.connected__item.textfield.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 }
+      },
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk"
+    },
+    "thumbnail": {
+      "cellNodeId": "1:10483",
+      "name": "Size=Medium",
+      "type": "COMPONENT",
+      "w": 60, "h": 60, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "height": { "name": "imported/thumbnail/root/height/medium", "coll": "Imported (provisional)", "val": 60 },
+        "topLeftRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "topRightRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "bottomLeftRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "bottomRightRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "fills": { "name": "p/color-bg-surface", "coll": "Primitives", "val": "#ffffff" }
+      },
+      "descendantBound": {
+        "part-0.width": { "name": "imported/thumbnail/part-0/width/medium", "coll": "Imported (provisional)", "val": 60 },
+        "part-0.height": { "name": "imported/thumbnail/part-0/height/medium", "coll": "Imported (provisional)", "val": 60 },
+        "part-0.topLeftRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "part-0.topRightRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "part-0.bottomLeftRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "part-0.bottomRightRadius": { "name": "p/border-radius-200", "coll": "Primitives", "val": 8 },
+        "part-0.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 }
+      },
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk"
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "kind": "console-loop-canvas-drift-snapshot",
+  "lane": "tailwind",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileName": "DS Contracts Testing",
+  "mintedAt": "2026-08-09",
+  "mintedFrom": {
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge), fileKey pinned on every call",
+    "generator": "scripts/console-loop-canvas-drift-capture.mjs tailwind — the pins are read from framing.json, never typed by hand",
+    "method": "getNodeByIdAsync on each stem's framing-pinned cellNodeId; every boundVariables entry resolved by VARIABLE ID (getVariableByIdAsync -> getVariableCollectionByIdAsync), so the COLLECTION a binding landed in is a fact and not a name-first-match guess; descendants and TEXT fontName walked to depth 3",
+    "note": "READ-ONLY. The emitted program calls no mutating API."
+  },
+  "why": "The capture-framing pin asserts the committed SHOT is the live CELL. It cannot ask the prior question: is the live CELL the product of this lane's own committed emit script? scripts/console-loop-canvas-drift-probe.mjs reads this snapshot against examples/tailwind/figma/<stem>.figma.js and names the drift.",
+  "stems": {
+    "alert": {
+      "cellNodeId": "1:2089",
+      "name": "Color=Failure",
+      "type": "COMPONENT",
+      "w": 128, "h": 52, "pl": 16, "pr": 16, "pt": 16, "pb": 16, "gap": 8,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "paddingLeft": { "name": "imported/shared/size-16", "coll": "Tailwind", "val": 16 },
+        "paddingTop": { "name": "imported/shared/size-16", "coll": "Tailwind", "val": 16 },
+        "paddingRight": { "name": "imported/shared/size-16", "coll": "Tailwind", "val": 16 },
+        "paddingBottom": { "name": "imported/shared/size-16", "coll": "Tailwind", "val": 16 },
+        "topLeftRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "topRightRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "bottomLeftRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "bottomRightRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "fills": { "name": "imported/alert/root/background-color/failure", "coll": "Tailwind", "val": "#fde8e8" }
+      },
+      "descendantBound": {
+        "part-0.label.fills": { "name": "imported/alert/label/color/failure", "coll": "Tailwind", "val": "#c81e1e" },
+        "part-0.dismiss.topLeftRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "part-0.dismiss.topRightRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "part-0.dismiss.bottomLeftRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "part-0.dismiss.bottomRightRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "part-0.dismiss.fills": { "name": "imported/alert/root/background-color/failure", "coll": "Tailwind", "val": "#fde8e8" }
+      },
+      "fonts": [{ "node": "label", "chars": "Alert message", "family": "Inter", "style": "Regular", "size": 14, "w": 96, "h": 20 }]
+    },
+    "badge": {
+      "cellNodeId": "1:2107",
+      "name": "Color=Failure, Size=Sm, State=Default",
+      "type": "COMPONENT",
+      "w": 60, "h": 24, "pl": 8, "pr": 8, "pt": 2, "pb": 2, "gap": 4,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "imported/shared/size-4", "coll": "Tailwind", "val": 4 },
+        "paddingLeft": { "name": "imported/badge/root/padding-left", "coll": "Tailwind", "val": 8 },
+        "paddingTop": { "name": "imported/badge/root/padding-top", "coll": "Tailwind", "val": 2 },
+        "paddingRight": { "name": "imported/badge/root/padding-right", "coll": "Tailwind", "val": 8 },
+        "paddingBottom": { "name": "imported/badge/root/padding-bottom", "coll": "Tailwind", "val": 2 },
+        "topLeftRadius": { "name": "imported/shared/size-4", "coll": "Tailwind", "val": 4 },
+        "topRightRadius": { "name": "imported/shared/size-4", "coll": "Tailwind", "val": 4 },
+        "bottomLeftRadius": { "name": "imported/shared/size-4", "coll": "Tailwind", "val": 4 },
+        "bottomRightRadius": { "name": "imported/shared/size-4", "coll": "Tailwind", "val": 4 },
+        "fills": { "name": "imported/badge/root/background-color/failure", "coll": "Tailwind", "val": "#fde8e8" }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "imported/badge/label/color/failure", "coll": "Tailwind", "val": "#9b1c1c" }
+      },
+      "fonts": [{ "node": "label", "chars": "Badge", "family": "Inter", "style": "Semi Bold", "size": 14, "w": 44, "h": 20 }]
+    },
+    "button": {
+      "cellNodeId": "1:2164",
+      "name": "Color=Default, Size=Md, State=Default",
+      "type": "COMPONENT",
+      "w": 85, "h": 40, "pl": 20, "pr": 20, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "HUG", "sizingV": "FIXED",
+      "bound": {
+        "paddingLeft": { "name": "imported/button/root/padding-left/md", "coll": "Tailwind", "val": 20 },
+        "paddingRight": { "name": "imported/button/root/padding-right/md", "coll": "Tailwind", "val": 20 },
+        "topLeftRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "topRightRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "bottomLeftRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "bottomRightRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "strokeTopWeight": { "name": "imported/button/root/border-top-width/default", "coll": "Tailwind", "val": 0 },
+        "strokeBottomWeight": { "name": "imported/button/root/border-bottom-width/default", "coll": "Tailwind", "val": 0 },
+        "strokeLeftWeight": { "name": "imported/button/root/border-left-width/default", "coll": "Tailwind", "val": 0 },
+        "strokeRightWeight": { "name": "imported/button/root/border-right-width/default", "coll": "Tailwind", "val": 0 },
+        "fills": { "name": "imported/button/root/background-color/default", "coll": "Tailwind", "val": "#1a56db" },
+        "strokes": { "name": "imported/button/root/border-top-color/default", "coll": "Tailwind", "val": "#ffffff" }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "imported/button/root/color/default", "coll": "Tailwind", "val": "ALIAS VariableID:1:1804" }
+      },
+      "fonts": [{ "node": "label", "chars": "Button", "family": "Inter", "style": "Medium", "size": 14, "w": 45, "h": 20 }]
+    },
+    "card": {
+      "cellNodeId": "1:2267",
+      "name": "Card (flowbite.card)",
+      "type": "COMPONENT",
+      "w": 149, "h": 74, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "topLeftRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "topRightRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "bottomLeftRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "bottomRightRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "strokeTopWeight": { "name": "imported/shared/size-1", "coll": "Tailwind", "val": 1 },
+        "strokeBottomWeight": { "name": "imported/shared/size-1", "coll": "Tailwind", "val": 1 },
+        "strokeLeftWeight": { "name": "imported/shared/size-1", "coll": "Tailwind", "val": 1 },
+        "strokeRightWeight": { "name": "imported/shared/size-1", "coll": "Tailwind", "val": 1 },
+        "fills": { "name": "imported/card/root/background-color", "coll": "Tailwind", "val": "ALIAS VariableID:1:1804" },
+        "strokes": { "name": "imported/shared/color-e5e7eb", "coll": "Tailwind", "val": "#e5e7eb" }
+      },
+      "descendantBound": {
+        "label.itemSpacing": { "name": "imported/shared/size-16", "coll": "Tailwind", "val": 16 },
+        "label.paddingLeft": { "name": "imported/shared/size-24", "coll": "Tailwind", "val": 24 },
+        "label.paddingTop": { "name": "imported/shared/size-24", "coll": "Tailwind", "val": 24 },
+        "label.paddingRight": { "name": "imported/shared/size-24", "coll": "Tailwind", "val": 24 },
+        "label.paddingBottom": { "name": "imported/shared/size-24", "coll": "Tailwind", "val": 24 }
+      },
+      "fonts": [{ "node": "label-text", "chars": "Card content", "family": "Inter", "style": "Regular", "size": 16, "w": 99, "h": 24 }]
+    },
+    "toggle-switch": {
+      "cellNodeId": "1:2272",
+      "name": "Sizing=Md, Checked=Unchecked",
+      "type": "COMPONENT",
+      "w": 100.438, "h": 24, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 12,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "itemSpacing": { "name": "imported/toggle-switch/label/margin-left", "coll": "Tailwind", "val": 12 },
+        "width": { "name": "imported/toggle-switch/root/width/md", "coll": "Tailwind", "val": 100.43800354003906 },
+        "height": { "name": "imported/toggle-switch/root/height/md", "coll": "Tailwind", "val": 24 },
+        "topLeftRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "topRightRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "bottomLeftRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 },
+        "bottomRightRadius": { "name": "imported/shared/size-8", "coll": "Tailwind", "val": 8 }
+      },
+      "descendantBound": {
+        "part-0.width": { "name": "imported/toggle-switch/part-0/width/md", "coll": "Tailwind", "val": 44 },
+        "part-0.height": { "name": "imported/toggle-switch/part-0/height/md", "coll": "Tailwind", "val": 24 },
+        "part-0.topLeftRadius": { "name": "imported/shared/size-9999", "coll": "Tailwind", "val": 9999 },
+        "part-0.topRightRadius": { "name": "imported/shared/size-9999", "coll": "Tailwind", "val": 9999 },
+        "part-0.bottomLeftRadius": { "name": "imported/shared/size-9999", "coll": "Tailwind", "val": 9999 },
+        "part-0.bottomRightRadius": { "name": "imported/shared/size-9999", "coll": "Tailwind", "val": 9999 },
+        "part-0.minWidth": { "name": "imported/toggle-switch/part-0/min-width/md", "coll": "Tailwind", "val": 44 },
+        "part-0.fills": { "name": "imported/toggle-switch/part-0/background-color/unchecked", "coll": "Tailwind", "val": "#e5e7eb" },
+        "label (margin box).label.fills": { "name": "imported/toggle-switch/label/color", "coll": "Tailwind", "val": "#111827" }
+      },
+      "fonts": [{ "node": "label", "chars": "Toggle", "family": "Inter", "style": "Medium", "size": 14, "w": 46, "h": 20 }]
+    }
+  }
+}

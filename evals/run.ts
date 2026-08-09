@@ -9605,50 +9605,120 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
-    // CANVAS-DRIFT: C1 asks "is the committed shot the live cell?" and the
-    // reference audit asks "is the reference the right picture?". Neither can
-    // ask whether the live cell is what this lane's own committed emit script
-    // would build TODAY. A cell from an older revision is a self-consistent
-    // pair — right node id, right variant name, shot matches exactly — and
-    // every number is then measuring a canvas nobody would ship. Measured:
-    // carbon/button's cell binds NONE of the four paddings its spec binds
-    // (15/63/1.5/2), sitting at an unbound 16/16/2/2, which is the whole of
-    // its 39.82; carbon/checkbox resolved five bindings in "Imported
-    // (provisional)" instead of Carbon. Controls that make it a CANVAS fact
-    // rather than an emitter one: a fresh re-emit at HEAD is byte-identical to
-    // the committed scripts, and a self-cleaning live probe landed all three
-    // bindings on this very file with zero exceptions.
-    // Red half: feed a fixture snapshot in which button DOES carry its four
-    // padding bindings — the probe must then report in-sync, proving it reads
-    // the snapshot rather than hardcoding the lane's answer.
+    // CANVAS-DRIFT: no other gate can ask whether a live cell is what its lane's
+    // own committed emit script would build TODAY. A cell from an older revision
+    // is perfectly self-consistent — right node id, right variant name, shot
+    // matching exactly — and every score against it measures a canvas nobody
+    // would ship. Swept across every lane 2026-08-09; the per-lane counts below
+    // are the measured outcome, so a canvas that silently re-syncs (or a fresh
+    // one that rots) fails BY NAME rather than sliding under one lane's shape.
     id: 'console-loop-canvas-drift-probe',
     claim: 'C3-detection',
     run: () => {
-      const green = spawnSync(
-        process.execPath,
-        ['scripts/console-loop-canvas-drift-probe.mjs', 'carbon', '--json'],
-        { cwd: ROOT, encoding: 'utf8' },
-      );
-      if ((green.status ?? -1) !== 0) {
-        throw new Error(`canvas-drift probe failed:\n${green.stderr ?? ''}`);
+      const CL = path.join(ROOT, 'parity/receipts/console-loop');
+      type DriftRow = { stem: string; status: string; findings?: string[] };
+      const EXPECTED: Record<string, { sync: number; drift: string[]; cellPending: number }> = {
+        'first-party': { sync: 18, drift: [], cellPending: 36 },
+        altitude: { sync: 7, drift: ['avatar'], cellPending: 0 },
+        astryx: {
+          sync: 3,
+          drift: [
+            'button', 'checkbox-input', 'dropdown-menu', 'dropdown-menu-item',
+            'progress-bar', 'slider', 'switch', 'text-input', 'toast', 'token',
+          ],
+          cellPending: 0,
+        },
+        carbon: { sync: 8, drift: ['button', 'checkbox'], cellPending: 0 },
+        polaris: { sync: 11, drift: ['badge'], cellPending: 0 },
+        tailwind: { sync: 5, drift: [], cellPending: 0 },
+        // MUI's file was never reached by the bridge: framing.json records 0 of 31
+        // cellNodeIds. Asserted so the un-probed lane stays VISIBLE rather than
+        // being quietly counted as clean.
+        mui: { sync: 0, drift: [], cellPending: 31 },
+      };
+      const probe = (lane: string): DriftRow[] => {
+        const r = spawnSync(
+          process.execPath,
+          ['scripts/console-loop-canvas-drift-probe.mjs', lane, '--json'],
+          { cwd: ROOT, encoding: 'utf8' },
+        );
+        if ((r.status ?? -1) !== 0) {
+          throw new Error(`canvas-drift probe failed for ${lane}:\n${r.stderr ?? ''}`);
+        }
+        return (JSON.parse(r.stdout ?? '{}').results ?? []) as DriftRow[];
+      };
+      const byLane = new Map<string, DriftRow[]>();
+      for (const lane of Object.keys(EXPECTED)) {
+        const rows = probe(lane);
+        byLane.set(lane, rows);
+        const want = EXPECTED[lane];
+        const sync = rows.filter((r: DriftRow) => r.status === 'in-sync').length;
+        const pending = rows.filter((r: DriftRow) => r.status === 'CELL-PENDING').length;
+        const drift = rows.filter((r: DriftRow) => r.status === 'DRIFT').map((r: DriftRow) => r.stem).sort();
+        if (sync !== want.sync || pending !== want.cellPending) {
+          throw new Error(
+            `${lane}: expected ${want.sync} in-sync / ${want.cellPending} cell-pending, got ${sync} / ${pending}`,
+          );
+        }
+        if (drift.join(',') !== want.drift.join(',')) {
+          throw new Error(`${lane}: expected drift on [${want.drift.join(',')}], got [${drift.join(',')}]`);
+        }
       }
-      const rows = JSON.parse(green.stdout ?? '{}').results ?? [];
-      const drift = rows.filter((r) => r.status === 'DRIFT').map((r) => r.stem).sort();
-      if (drift.join(',') !== 'button,checkbox') {
-        throw new Error(`expected carbon drift on button+checkbox, got ${drift.join(',') || '(none)'}`);
-      }
-      const btn = rows.find((r) => r.stem === 'button');
-      const pads = (btn?.findings ?? []).filter((f) => /^BINDING-DRIFT: spec binds padding/.test(f));
+      const carbon = byLane.get('carbon') ?? [];
+      const btn = carbon.find((r: DriftRow) => r.stem === 'button');
+      const pads = (btn?.findings ?? []).filter((f: string) => /^BINDING-DRIFT: spec binds padding/.test(f));
       if (pads.length !== 4) {
-        throw new Error(`button should name all four unbound paddings, named ${pads.length}`);
+        throw new Error(`carbon/button should name all four unbound paddings, named ${pads.length}`);
       }
-      const cb = rows.find((r) => r.stem === 'checkbox');
-      if (!(cb?.findings ?? []).some((f) => f.startsWith('COLLECTION-DRIFT'))) {
-        throw new Error('checkbox should name its cross-collection bindings');
+      const cb = carbon.find((r: DriftRow) => r.stem === 'checkbox');
+      if (!(cb?.findings ?? []).some((f: string) => f.startsWith('COLLECTION-DRIFT'))) {
+        throw new Error('carbon/checkbox should name its cross-collection bindings');
+      }
+      const avatar = (byLane.get('altitude') ?? []).find((r: DriftRow) => r.stem === 'avatar');
+      const avatarFindings = avatar?.findings ?? [];
+      if (!avatarFindings.some((f: string) => /BINDING-DRIFT: spec binds minWidth/.test(f))) {
+        throw new Error('altitude/avatar should name its unbound minWidth');
+      }
+      // THE BOARD-FACING INVARIANT: no stem counted as a scored pass may be
+      // measuring a canvas its own emit script would not build. A pass earned by
+      // a build nobody would ship is the same class as the nine the reference
+      // restatement retired, so it FAILS here rather than being written up.
+      const scoredPasses = (lane: string): string[] => {
+        const dir = lane === 'first-party' ? path.join(CL, 'scores') : path.join(CL, lane, 'scores');
+        if (!existsSync(dir)) return [];
+        return readdirSync(dir)
+          .filter((f: string) => f.endsWith('.json') && !f.endsWith('.structural.json'))
+          .filter((f: string) => {
+            const s = JSON.parse(readFileSync(path.join(dir, f), 'utf8'));
+            return s.status === 'pass' && (s.metrics?.pctAAMasked ?? 99) <= 5 && s.compositionOk === true;
+          })
+          .map((f: string) => f.replace(/\.json$/, ''));
+      };
+      const driftedPasses: string[] = [];
+      const unmeasuredPasses: string[] = [];
+      for (const lane of Object.keys(EXPECTED)) {
+        const status = new Map((byLane.get(lane) ?? []).map((r: DriftRow) => [r.stem, r.status]));
+        for (const stem of scoredPasses(lane)) {
+          const s = status.get(stem);
+          if (s === 'DRIFT') driftedPasses.push(`${lane}/${stem}`);
+          else if (s !== 'in-sync') unmeasuredPasses.push(`${lane}/${stem}`);
+        }
+      }
+      if (driftedPasses.length > 0) {
+        throw new Error(
+          `SCORED-PASS ON A DRIFTED CANVAS: ${driftedPasses.join(', ')} — the score is measuring a build its own emit script would not produce`,
+        );
+      }
+      const wantUnmeasured = ['mui/accordion', 'mui/checkbox', 'mui/divider', 'mui/table'];
+      if (unmeasuredPasses.sort().join(',') !== wantUnmeasured.join(',')) {
+        throw new Error(
+          `expected exactly mui's 4 passes to be un-probed for drift, got [${unmeasuredPasses.join(', ')}]`,
+        );
       }
       console.log(
-        'console-loop-canvas-drift-probe: carbon 8/10 in sync with their own emit scripts; ' +
-          'button (4 unbound paddings) and checkbox (5 cross-collection bindings) named',
+        'console-loop-canvas-drift-probe: 6 lanes probed (first-party 18/0, tailwind 5/0, altitude 7/1, ' +
+          'polaris 11/1, carbon 8/2, astryx 3/10 in-sync/drift); mui UN-PROBED (0 of 31 cells pinned). ' +
+          '24 of 28 scored passes measured, ZERO drifted; the 4 unmeasured are mui and are named, not claimed.',
       );
     },
   },

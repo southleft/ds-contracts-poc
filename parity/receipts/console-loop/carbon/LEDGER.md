@@ -207,3 +207,42 @@ bridge lane scores 2.16 (pass) and the headless lane 5.26 (fail). Under the
 established both-instruments rule it is not a floor-worthy pass, which is why the
 recommendation above says "2 → 3 **or hold at 2**". Its receipt stays `scored-pass`
 because that is what its lane scorecard says, and the disagreement is recorded here.
+
+## 2026-08-09 — the transport refusal, RE-MEASURED: two of its three named reasons are dead
+
+The 2026-08-09 canvas-drift round above refused regeneration for three named
+transport reasons. The board-wide sweep re-measured all three from the plugin
+context. **The refusal still stands, but two of its legs do not, and the real
+blocker is somewhere else entirely.**
+
+| claim | verdict | evidence |
+|---|---|---|
+| "plugin-context `fetch` to a local server is **blocked**" | **DEAD as stated, HOLDS as refined** | `fetch('http://localhost:9228/')` returns **200**; `fetch('http://127.0.0.1:9228/')` returns `Failed to fetch`. The earlier probe used the numeric literal only. (This lane's own `CODE-TO-CANVAS-HILLCLIMB.md` §105 already recorded "no `127.0.0.1` — plugin resolves `localhost` → IPv6".) The door is real but narrow: a server stood up on `localhost:9377` was `Failed to fetch` from the plugin, so the allowlist admits the **bridge's own origin only**, and that origin is the MCP server, which 404s arbitrary paths. A local script server is still unreachable — for a different reason than was written down. |
+| "a 230KB script is past what the execute path carries" | **DEAD** | `figma_execute` carried **20,000 chars in a single call** (2.5× the chunker's default 8,000), and `clientStorage` accepted a **400,000-char** value in one `setAsync`. 81,000 chars of the altitude Avatar script went up in **5 calls** and verified **djb2 byte-identical** to the file on disk. 230KB is ~12 calls, not "past what the path carries" — and this is the same chunk path that originally built all 49 receipts. |
+| "the export-back path that would re-mint `shots/<stem>-cell.png` at 1× is not reachable from here" | **DEAD** | `node.exportAsync({ format:'PNG', constraint:{ type:'SCALE', value:1 } })` on carbon's live `1:2107` returned a **978-byte** PNG, and `figma.base64Encode` is present (1,304-char base64, header `iVBORw0KGgo…`). The round trip is reachable. |
+| "`ds-contracts figma push` needs a 6-character pairing code a designer types" | **UNCHALLENGED** | not re-probed this round; it remains the reason the CLI door is human-gated. |
+
+**The blocker that actually stops regeneration is none of these, and it was
+found by trying.** Carried end-to-end on altitude's `avatar`, the committed
+script refused itself:
+
+> `skipped: true, reason: "set/standalone shape mismatch (COMPONENT_SET vs isSet=false) — a human retires the old node"`
+
+The live node is a COMPONENT_SET; the script compiles a standalone COMPONENT.
+`resolveComponentIdentity` refuses rather than delete-and-recreate, because that
+would re-mint the node id and key every instance binds to. And the live set's
+stored `ds_contracts/specHash` is the literal `console-loop-manual-rebuild-v1` —
+**that canvas was hand-built, so no script's guards ever ran over it.**
+
+Two operational notes for the next round: `new AsyncFunction(src)` throws
+`TypeError: Not available` inside the plugin realm — the working door is
+`eval('(async function(){' + src + '})()')`, which is what the original loop
+used. And a full eval of a large set can hit the 30s Desktop Bridge cap
+(astryx/slider already recorded that), so big sets need per-variant amends.
+
+**Carbon's own two drifted stems (`button`, `checkbox`) were NOT regenerated**
+and their receipts are unchanged — their scripts are 228KB and 84KB, and the
+board does not move either way since neither is a scored pass. Carbon's drift
+result is unchanged by the probe's two premise fixes this round (8 in sync, 2
+drifted), which is the control that those fixes are corrections and not
+relaxations.

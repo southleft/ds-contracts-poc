@@ -58,7 +58,7 @@
  * exit 0 always, exactly like console-loop-reference-audit.mjs. Only
  * console-loop-developed-score.mjs may move a pass claim.
  */
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -76,7 +76,7 @@ if (!lane) {
 }
 const onlyStems = argv.slice(1);
 
-const laneDir = path.join(CL, lane);
+const laneDir = lane === "first-party" ? CL : path.join(CL, lane);
 /** CONSOLE_LOOP_DRIFT_SNAPSHOT lets a red-half test point the probe at a
  *  fixture snapshot. It exists so the probe can be proven to READ the snapshot
  *  rather than hardcode this lane's answer — never to relax the real check. */
@@ -85,11 +85,69 @@ const snapPath =
   path.join(laneDir, "canvas-drift/LIVE-SNAPSHOT.json");
 const framingPath = path.join(laneDir, "framing.json");
 
-if (!existsSync(framingPath)) {
-  console.error(`✖ ${lane}: no framing.json — nothing pins the cells to compare`);
+/** WHERE THE LIVE CELL IS PINNED.
+ *
+ *  Foreign lanes pin the cell in `<lane>/framing.json` (the C1 pin). The
+ *  FIRST-PARTY lane has no framing.json at all — but it is NOT unpinned: its
+ *  headless cards under `visual-truth/first-party/<stem>.json` record the same
+ *  two facts, `cellNodeId` and `cellName`, alongside the fileKey and
+ *  fileVersion they were read at. Reading them is not inventing a pin; it is
+ *  using the one the lane already keeps. Stems whose card records no cell
+ *  (the five LAYOUT compositions, which have no headless card at all) still
+ *  come through as CELL-PENDING, which is the honest answer for them. */
+function loadPins() {
+  if (existsSync(framingPath)) {
+    return JSON.parse(readFileSync(framingPath, "utf8")).stems ?? {};
+  }
+  const vt = path.join(CL, "visual-truth", lane);
+  if (!existsSync(vt)) return null;
+  const stems = {};
+  for (const f of readdirSync(vt).filter((x) => x.endsWith(".json"))) {
+    const card = JSON.parse(readFileSync(path.join(vt, f), "utf8"));
+    stems[f.replace(/\.json$/, "")] = {
+      cellNodeId: card.cellNodeId ?? null,
+      cellName: card.cellName ?? null,
+      pinnedBy: `visual-truth/${lane}/${f}`,
+      fileKey: card.fileKey ?? null,
+    };
+  }
+  /** The five LAYOUT compositions have no headless card, so no cellNodeId —
+   *  but they are also the one shape where there is nothing to CHOOSE. Their
+   *  receipts record `variants: undefined`, i.e. the script built ONE
+   *  standalone COMPONENT and not a set, and `generate.nodeId` is that single
+   *  node. Verified live: 7:1658 / 7:1639 / 7:1674 / 7:1632 / 7:1625 are all
+   *  type COMPONENT whose children are SLOTs, with no sibling variants. Taking
+   *  the sole generated node is therefore not the forbidden move of inventing
+   *  a cell from a shot — there is exactly one candidate and the lane's own
+   *  receipt names it. A receipt that DOES record a variant count is left
+   *  alone: picking one variant out of a set without a pin is exactly what C1
+   *  exists to forbid. */
+  const comps = path.join(CL, "components");
+  if (existsSync(comps)) {
+    for (const f of readdirSync(comps).filter((x) => x.endsWith(".json"))) {
+      const stem = f.replace(/\.json$/, "");
+      if (stems[stem]?.cellNodeId) continue;
+      const receipt = JSON.parse(readFileSync(path.join(comps, f), "utf8"));
+      const emitted = receipt.generate?.result?.results?.[0];
+      if (!receipt.generate?.nodeId || emitted?.variants !== undefined) continue;
+      stems[stem] = {
+        cellNodeId: receipt.generate.nodeId,
+        cellName: emitted?.name ?? stem,
+        pinnedBy: `components/${f} (sole generated node — the script emits one standalone COMPONENT, not a set)`,
+        fileKey: receipt.fileKey ?? null,
+      };
+    }
+  }
+  return stems;
+}
+const pins = loadPins();
+if (!pins) {
+  console.error(
+    `✖ ${lane}: no framing.json and no visual-truth cards — nothing pins the cells to compare`,
+  );
   process.exit(2);
 }
-const framing = JSON.parse(readFileSync(framingPath, "utf8"));
+const framing = { stems: pins };
 
 /** The emitted script's `const COMPONENTS = [...]` payload is plain JSON. */
 function readComponents(scriptPath) {
@@ -106,9 +164,25 @@ function readComponents(scriptPath) {
   }
 }
 
-/** stem → examples/<lane>/figma/<file>.figma.js (the emitted names are
- *  kebab-case; the contract basenames are not, so try both spellings). */
+/** stem → the lane's committed emit script.
+ *
+ *  Foreign lanes keep one per stem at `examples/<lane>/figma/<file>.figma.js`
+ *  (the emitted names are kebab-case; the contract basenames are not, so try
+ *  both spellings). The FIRST-PARTY lane does not: its scripts are numbered by
+ *  wave under `parity/receipts/console-loop/emitted/NN-<stem>.js` (and
+ *  `figma-sync/NN-<stem>.js` for the compositions), and the numbering is not
+ *  derivable from the stem — so the path is read from the stem's OWN receipt,
+ *  `components/<stem>.json`.script, which is the record of the script that
+ *  actually built the cell. */
 function scriptFor(stem) {
+  if (lane === "first-party") {
+    const receipt = path.join(CL, "components", `${stem}.json`);
+    if (!existsSync(receipt)) return null;
+    const rel = JSON.parse(readFileSync(receipt, "utf8")).script;
+    if (!rel) return null;
+    const p = path.join(ROOT, rel);
+    return existsSync(p) ? p : null;
+  }
   const dir = path.join(ROOT, "examples", lane, "figma");
   for (const cand of [stem, stem.replace(/-/g, "")]) {
     const p = path.join(dir, `${cand}.figma.js`);
@@ -141,14 +215,41 @@ function pickVariant(component, cellName) {
   return null;
 }
 
-const laneCollection = {
-  carbon: "Carbon",
-  altitude: "Altitude",
-  astryx: "Astryx",
-  tailwind: "Tailwind",
-  polaris: "Polaris",
-  mui: "MUI",
-}[lane];
+/** WHICH COLLECTIONS DOES THIS LANE OWN?
+ *
+ *  This used to be a hardcoded lane -> collection-name map, and for one lane the
+ *  map was simply false: there is NO "Polaris" collection on the Testing file
+ *  and the polaris scripts never create one. `examples/polaris/figma/00-tokens.figma.js`
+ *  creates Primitives / Brand / Semantic, and every per-component polaris script
+ *  creates 'Imported (provisional)' and mints its degraded-import tokens there.
+ *  Under the old map all 12 polaris stems reported COLLECTION-DRIFT on every
+ *  binding — a finding produced entirely by the instrument's own premise.
+ *
+ *  So the owned set is now READ FROM THE LANE'S OWN COMMITTED SCRIPTS: a lane
+ *  owns exactly the collections its emit scripts create. Nothing is asserted
+ *  that the scripts do not say. carbon/astryx/altitude/tailwind are unchanged by
+ *  this (each creates one collection, named for the lane), so the carbon round's
+ *  two findings stand byte-for-byte — including checkbox's five bindings in
+ *  'Imported (provisional)', which carbon's scripts never create and which is
+ *  therefore still drift. */
+const tokensScriptCache = new Map();
+function collectionsCreatedBy(file) {
+  if (!file || !existsSync(file)) return [];
+  const src = readFileSync(file, "utf8");
+  return [...src.matchAll(/createVariableCollection\('([^']+)'\)/g)].map((m) => m[1]);
+}
+function ownedCollections(scriptPath) {
+  if (!tokensScriptCache.has(lane)) {
+    const t =
+      lane === "first-party"
+        ? path.join(CL, "emitted", "01-tokens.js")
+        : path.join(ROOT, "examples", lane, "figma", "00-tokens.figma.js");
+    tokensScriptCache.set(lane, collectionsCreatedBy(t));
+  }
+  const owned = new Set(tokensScriptCache.get(lane));
+  for (const c of collectionsCreatedBy(scriptPath)) owned.add(c);
+  return owned;
+}
 
 const snapshot = existsSync(snapPath)
   ? JSON.parse(readFileSync(snapPath, "utf8"))
@@ -198,9 +299,46 @@ for (const stem of stems) {
     continue;
   }
   const spec = variant.spec ?? {};
+  const owned = ownedCollections(scriptPath);
   row.variant = variant.name;
+  row.ownedCollections = [...owned].sort();
+  if (!owned.size) {
+    row.notes.push(
+      `this lane's scripts create no variable collection, so no COLLECTION-DRIFT can be asserted for ${stem}`,
+    );
+  }
+  /** FIGMA LOWERS THE UNIFORM STROKE WEIGHT, so the probe must lower it too.
+   *
+   *  The wave-numbered first-party scripts bind the single `strokeWeight`
+   *  field; the modern emitter binds the four per-side fields. Comparing the
+   *  names literally made `first-party/card` read BINDING-DRIFT on a canvas
+   *  that is in fact exactly what its script builds. MEASURED, not assumed: a
+   *  self-cleaning live probe on BMjUA2ue5CaZXU4kufxL0z
+   *  (createFrame -> setBoundVariable('strokeWeight', border-width/100) ->
+   *  read back -> remove()) returned boundVariables
+   *  ["strokeTopWeight","strokeBottomWeight","strokeLeftWeight","strokeRightWeight"]
+   *  with no exception: Figma never stores `strokeWeight` as a key at all.
+   *  `strokeWeight` is the ONLY such field in any committed spec — a sweep of
+   *  every lane's scripts finds paddings, radii, min/max and the four per-side
+   *  weights spelled out, and nothing else uniform. */
+  const specBindings = { ...(spec.bindings ?? {}) };
+  if (specBindings.strokeWeight) {
+    const w = specBindings.strokeWeight;
+    delete specBindings.strokeWeight;
+    for (const side of [
+      "strokeTopWeight",
+      "strokeBottomWeight",
+      "strokeLeftWeight",
+      "strokeRightWeight",
+    ]) {
+      specBindings[side] ??= w;
+    }
+    row.notes.push(
+      "spec binds the uniform strokeWeight; Figma stores it as the four per-side weights, so it is compared side-by-side",
+    );
+  }
   row.expected = {
-    bindings: Object.keys(spec.bindings ?? {}).sort(),
+    bindings: Object.keys(specBindings).sort(),
     fixedWidth: spec.fixedWidth?.px ?? null,
     fixedHeight: spec.fixedHeight?.px ?? null,
   };
@@ -221,7 +359,7 @@ for (const stem of stems) {
   }
 
   const liveBound = observed.bound ?? {};
-  for (const [field, wantVar] of Object.entries(spec.bindings ?? {})) {
+  for (const [field, wantVar] of Object.entries(specBindings)) {
     const wantName = String(wantVar).replace(/^\//, "");
     const got = liveBound[field];
     if (!got) {
@@ -235,9 +373,9 @@ for (const stem of stems) {
         `BINDING-DRIFT: spec binds ${field} -> ${wantName}; the live cell binds ${field} -> ${got.name}`,
       );
     }
-    if (laneCollection && got.coll && got.coll !== laneCollection) {
+    if (owned.size && got.coll && !owned.has(got.coll)) {
       row.findings.push(
-        `COLLECTION-DRIFT: ${field} -> ${got.name} resolved in collection "${got.coll}", not "${laneCollection}"` +
+        `COLLECTION-DRIFT: ${field} -> ${got.name} resolved in collection "${got.coll}", which this lane's scripts do not create (${[...owned].join(", ")})` +
           (got.carbonValue !== undefined
             ? ` (live ${got.val} vs this lane's ${got.carbonValue})`
             : ""),
@@ -245,9 +383,9 @@ for (const stem of stems) {
     }
   }
   for (const [key, got] of Object.entries(observed.descendantBound ?? {})) {
-    if (laneCollection && got.coll && got.coll !== laneCollection) {
+    if (owned.size && got.coll && !owned.has(got.coll)) {
       row.findings.push(
-        `COLLECTION-DRIFT: ${key} -> ${got.name} resolved in collection "${got.coll}", not "${laneCollection}"`,
+        `COLLECTION-DRIFT: ${key} -> ${got.name} resolved in collection "${got.coll}", which this lane's scripts do not create (${[...owned].join(", ")})`,
       );
     }
   }
@@ -269,12 +407,30 @@ for (const stem of stems) {
    *  as a NOTE so it can never inflate the drift count, and it is separated
    *  from the case where the spec DOES declare a family and the load still
    *  fell back (that one is the emitter's problem, so it is a finding). */
+  /** WHAT COUNTS AS A FALLBACK IS THE FAMILY THE SPEC ASKED FOR, not the
+   *  string "Inter". The old test was `any Inter node && the spec declares a
+   *  family anywhere` — which fired on every first-party stem, whose contracts
+   *  declare fontFamily "Inter" and whose canvas correctly draws Inter. Ten
+   *  false findings on a lane where the emitter did exactly its job. It also
+   *  MISSED the opposite case: a spec declaring one family and the canvas
+   *  drawing some third face that is not Inter. Compare the drawn family to
+   *  the declared set instead — narrower where it was wrong, wider where it
+   *  was blind. */
   const fonts = observed.fonts ?? [];
+  const declaredFamilies = specFontFamilies(spec);
   const inter = fonts.filter((f) => f.family === "Inter");
-  const declares = specDeclaresFontFamily(spec);
-  if (inter.length && declares) {
+  const declares = declaredFamilies.size > 0;
+  const substituted = declares
+    ? fonts.filter((f) => !declaredFamilies.has(String(f.family)))
+    : [];
+  if (substituted.length) {
+    const drawn = [...new Set(substituted.map((f) => f.family))].join(", ");
     row.findings.push(
-      `FC-FONT-STYLE-UNRESOLVED: ${inter.length} text node(s) fell back to Inter although the spec declares fontFamily — the family or its style spelling is unavailable in this file`,
+      `FC-FONT-STYLE-UNRESOLVED: ${substituted.length} text node(s) draw ${drawn} although the spec declares ${[...declaredFamilies].join(", ")} — the family or its style spelling is unavailable in this file`,
+    );
+  } else if (declares) {
+    row.notes.push(
+      `font substrate matches the spec — ${fonts.length} text node(s) draw ${[...declaredFamilies].join(", ")} as declared`,
     );
   } else if (inter.length) {
     row.notes.push(
@@ -296,16 +452,24 @@ function shortField(field) {
   );
 }
 
-function specDeclaresFontFamily(spec) {
-  let found = false;
+/** Every fontFamily the spec declares, anywhere in the tree. A CSS stack is
+ *  split on commas and unquoted, so `"IBM Plex Sans", system-ui` matches a node
+ *  drawing IBM Plex Sans. */
+function specFontFamilies(spec) {
+  const out = new Set();
   const walk = (x) => {
-    if (found || !x || typeof x !== "object") return;
+    if (!x || typeof x !== "object") return;
     if (Array.isArray(x)) return x.forEach(walk);
-    if (x.fontFamily) { found = true; return; }
+    if (x.fontFamily) {
+      for (const part of String(x.fontFamily).split(",")) {
+        const name = part.trim().replace(/^['"]|['"]$/g, "");
+        if (name) out.add(name);
+      }
+    }
     for (const k of Object.keys(x)) walk(x[k]);
   };
   walk(spec);
-  return found;
+  return out;
 }
 
 if (asJson) {

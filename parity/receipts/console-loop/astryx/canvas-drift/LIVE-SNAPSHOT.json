@@ -1,0 +1,438 @@
+{
+  "version": 1,
+  "kind": "console-loop-canvas-drift-snapshot",
+  "lane": "astryx",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileName": "DS Contracts Testing",
+  "mintedAt": "2026-08-09",
+  "mintedFrom": {
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge), fileKey pinned on every call; taken in two batches of 7 and 6 stems to keep the result payload inside the execute path",
+    "generator": "scripts/console-loop-canvas-drift-capture.mjs astryx — the pins are read from framing.json, never typed by hand",
+    "method": "getNodeByIdAsync on each stem's framing-pinned cellNodeId; every boundVariables entry resolved by VARIABLE ID (getVariableByIdAsync -> getVariableCollectionByIdAsync), so the COLLECTION a binding landed in is a fact and not a name-first-match guess; descendants and TEXT fontName walked to depth 3",
+    "note": "READ-ONLY. The emitted program calls no mutating API."
+  },
+  "why": "The capture-framing pin asserts the committed SHOT is the live CELL. It cannot ask the prior question: is the live CELL the product of this lane's own committed emit script? scripts/console-loop-canvas-drift-probe.mjs reads this snapshot against examples/astryx/figma/<stem>.figma.js and names the drift.",
+  "stems": {
+    "badge": {
+      "cellNodeId": "1:3776",
+      "name": "Variant=Blue",
+      "type": "COMPONENT",
+      "w": 42, "h": 20, "pl": 8, "pr": 8, "pt": 0, "pb": 0, "gap": 4,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "imported/badge/root/column-gap", "coll": "Astryx", "val": 4 },
+        "paddingLeft": { "name": "imported/badge/root/padding-left", "coll": "Astryx", "val": 8 },
+        "paddingTop": { "name": "spacing-0", "coll": "Astryx", "val": 0 },
+        "paddingRight": { "name": "imported/badge/root/padding-right", "coll": "Astryx", "val": 8 },
+        "paddingBottom": { "name": "spacing-0", "coll": "Astryx", "val": 0 },
+        "topLeftRadius": { "name": "imported/shared/size-9999", "coll": "Astryx", "val": 9999 },
+        "topRightRadius": { "name": "imported/shared/size-9999", "coll": "Astryx", "val": 9999 },
+        "bottomLeftRadius": { "name": "imported/shared/size-9999", "coll": "Astryx", "val": 9999 },
+        "bottomRightRadius": { "name": "imported/shared/size-9999", "coll": "Astryx", "val": 9999 },
+        "fills": { "name": "imported/badge/root/background-color/blue", "coll": "Astryx", "val": "ALIAS VariableID:1:3445" }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "imported/badge/root/color/blue", "coll": "Astryx", "val": "ALIAS VariableID:1:3505" }
+      },
+      "fonts": [{ "node": "label", "chars": "New", "family": "Inter", "style": "Medium", "size": 12, "w": 26, "h": 20 }]
+    },
+    "banner": {
+      "cellNodeId": "1:3797",
+      "name": "Status=Info, Container=Card",
+      "type": "COMPONENT",
+      "w": 331, "h": 88, "pl": 16, "pr": 16, "pt": 12, "pb": 12, "gap": 8,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "paddingLeft": { "name": "spacing-4", "coll": "Astryx", "val": 16 },
+        "paddingTop": { "name": "spacing-3", "coll": "Astryx", "val": 12 },
+        "paddingRight": { "name": "spacing-4", "coll": "Astryx", "val": 16 },
+        "paddingBottom": { "name": "spacing-3", "coll": "Astryx", "val": 12 },
+        "topLeftRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "topRightRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "bottomLeftRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "bottomRightRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "fills": { "name": "color-background-blue", "coll": "Astryx", "val": "rgba(1,113,227,0.2)" }
+      },
+      "descendantBound": {
+        "header.itemSpacing": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "header.paddingLeft": { "name": "spacing-4", "coll": "Astryx", "val": 16 },
+        "header.paddingTop": { "name": "spacing-3", "coll": "Astryx", "val": 12 },
+        "header.paddingRight": { "name": "spacing-4", "coll": "Astryx", "val": 16 },
+        "header.paddingBottom": { "name": "spacing-3", "coll": "Astryx", "val": 12 },
+        "header.fills": { "name": "color-accent-muted", "coll": "Astryx", "val": "rgba(0,130,251,0.2)" },
+        "header.headerContent.title.fills": { "name": "color-text-primary", "coll": "Astryx", "val": "#0a1317" },
+        "header.headerContent.description.fills": { "name": "color-text-secondary", "coll": "Astryx", "val": "#4e606f" }
+      },
+      "fonts": [
+        { "node": "title", "chars": "A new software update is available.", "family": "Inter", "style": "Semi Bold", "size": 14, "w": 239, "h": 20 },
+        { "node": "description", "chars": "See what changed in this version.", "family": "Inter", "style": "Regular", "size": 12, "w": 239, "h": 20 }
+      ]
+    },
+    "button": {
+      "cellNodeId": "1:3836",
+      "name": "Variant=Primary, Size=Lg",
+      "type": "COMPONENT",
+      "w": 99.8125, "h": 36, "pl": 12, "pr": 12, "pt": 8, "pb": 8, "gap": 8,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "itemSpacing": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "paddingLeft": { "name": "spacing-3", "coll": "Astryx", "val": 12 },
+        "paddingTop": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "paddingRight": { "name": "spacing-3", "coll": "Astryx", "val": 12 },
+        "paddingBottom": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "width": { "name": "imported/button/root/width", "coll": "Astryx", "val": 99.8125 },
+        "height": { "name": "imported/button/root/height/lg", "coll": "Astryx", "val": 36 },
+        "topLeftRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "topRightRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "bottomLeftRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "bottomRightRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "fills": { "name": "imported/button/root/background-color/primary", "coll": "Carbon", "val": "ALIAS VariableID:1:4123" }
+      },
+      "descendantBound": {
+        "part-0.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "part-0.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "part-0.label.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "part-0.label.Button.fills": { "name": "imported/button/label/color/primary", "coll": "Astryx", "val": "ALIAS VariableID:1:3491" }
+      },
+      "fonts": [{ "node": "Button", "chars": "Button", "family": "Inter", "style": "Medium", "size": 14, "w": 45, "h": 20 }]
+    },
+    "card": {
+      "cellNodeId": "1:4021",
+      "name": "Variant=Default",
+      "type": "COMPONENT",
+      "w": 114.203, "h": 80, "pl": 15, "pr": 15, "pt": 15, "pb": 15, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "paddingLeft": { "name": "imported/card/root/padding-left/default", "coll": "Astryx", "val": 15 },
+        "paddingTop": { "name": "imported/card/root/padding-top/default", "coll": "Astryx", "val": 15 },
+        "paddingRight": { "name": "imported/card/root/padding-right/default", "coll": "Astryx", "val": 15 },
+        "paddingBottom": { "name": "imported/card/root/padding-bottom/default", "coll": "Astryx", "val": 15 },
+        "width": { "name": "imported/card/root/width", "coll": "Astryx", "val": 114.2030029296875 },
+        "topLeftRadius": { "name": "imported/shared/size-12", "coll": "Astryx", "val": 12 },
+        "topRightRadius": { "name": "imported/shared/size-12", "coll": "Astryx", "val": 12 },
+        "bottomLeftRadius": { "name": "imported/shared/size-12", "coll": "Astryx", "val": 12 },
+        "bottomRightRadius": { "name": "imported/shared/size-12", "coll": "Astryx", "val": 12 },
+        "strokeTopWeight": { "name": "imported/card/root/border-top-width/default", "coll": "Astryx", "val": 1 },
+        "strokeBottomWeight": { "name": "imported/card/root/border-bottom-width/default", "coll": "Astryx", "val": 1 },
+        "strokeLeftWeight": { "name": "imported/card/root/border-left-width/default", "coll": "Astryx", "val": 1 },
+        "strokeRightWeight": { "name": "imported/card/root/border-right-width/default", "coll": "Astryx", "val": 1 },
+        "fills": { "name": "imported/card/root/background-color/default", "coll": "Astryx", "val": "ALIAS VariableID:1:3447" },
+        "strokes": { "name": "imported/card/root/border-top-color/default", "coll": "Astryx", "val": "ALIAS VariableID:1:3465" }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "color-on-light", "coll": "Astryx", "val": "#000000" }
+      },
+      "fonts": [{ "node": "label", "chars": "Card content", "family": "Inter", "style": "Regular", "size": 16, "w": 82.2, "h": 48 }]
+    },
+    "checkbox-input": {
+      "cellNodeId": "1:3867",
+      "name": "Size=Md",
+      "type": "COMPONENT",
+      "w": 114, "h": 28, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 8,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "spacing-2", "coll": "Astryx", "val": 8 }
+      },
+      "descendantBound": {
+        "control.width": { "name": "size-element-sm", "coll": "Astryx", "val": 28 },
+        "control.height": { "name": "size-element-sm", "coll": "Astryx", "val": 28 },
+        "control.topLeftRadius": { "name": "radius-inner", "coll": "Astryx", "val": 4 },
+        "control.topRightRadius": { "name": "radius-inner", "coll": "Astryx", "val": 4 },
+        "control.bottomLeftRadius": { "name": "radius-inner", "coll": "Astryx", "val": 4 },
+        "control.bottomRightRadius": { "name": "radius-inner", "coll": "Astryx", "val": 4 },
+        "control.strokeTopWeight": { "name": "border-width", "coll": "Astryx", "val": 1 },
+        "control.strokeBottomWeight": { "name": "border-width", "coll": "Astryx", "val": 1 },
+        "control.strokeLeftWeight": { "name": "border-width", "coll": "Astryx", "val": 1 },
+        "control.strokeRightWeight": { "name": "border-width", "coll": "Astryx", "val": 1 },
+        "control.fills": { "name": "color-background-surface", "coll": "Astryx", "val": "#ffffff" },
+        "control.strokes": { "name": "color-border-emphasized", "coll": "Astryx", "val": "#ccd3db" },
+        "label.fills": { "name": "color-text-primary", "coll": "Astryx", "val": "#0a1317" }
+      },
+      "fonts": [{ "node": "label", "chars": "Accept terms", "family": "Inter", "style": "Medium", "size": 12, "w": 78, "h": 15 }]
+    },
+    "dropdown-menu": {
+      "cellNodeId": "1:4050",
+      "name": "DropdownMenu",
+      "type": "COMPONENT",
+      "w": 240, "h": 143, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {},
+      "descendantBound": {
+        "trigger.itemSpacing": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "trigger.paddingLeft": { "name": "imported/button/root/padding-left", "coll": "Carbon", "val": 15 },
+        "trigger.paddingTop": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "trigger.paddingRight": { "name": "imported/button/root/padding-right", "coll": "Astryx", "val": 12 },
+        "trigger.paddingBottom": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "trigger.width": { "name": "imported/button/root/width", "coll": "Astryx", "val": 99.8125 },
+        "trigger.height": { "name": "imported/button/root/height/md", "coll": "Astryx", "val": 32 },
+        "trigger.topLeftRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "trigger.topRightRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "trigger.bottomLeftRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "trigger.bottomRightRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "trigger.fills": { "name": "color-neutral", "coll": "Astryx", "val": "rgba(5,54,89,0.1)" },
+        "trigger.part-0.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "trigger.part-0.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "trigger.part-0.label.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "menu.itemSpacing": { "name": "spacing-0-5", "coll": "Astryx", "val": 2 },
+        "menu.paddingLeft": { "name": "spacing-1", "coll": "Astryx", "val": 4 },
+        "menu.paddingTop": { "name": "spacing-1", "coll": "Astryx", "val": 4 },
+        "menu.paddingRight": { "name": "spacing-1", "coll": "Astryx", "val": 4 },
+        "menu.paddingBottom": { "name": "spacing-1", "coll": "Astryx", "val": 4 },
+        "menu.topLeftRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "menu.topRightRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "menu.bottomLeftRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "menu.bottomRightRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "menu.fills": { "name": "color-background-surface", "coll": "Astryx", "val": "#ffffff" },
+        "menu.item.paddingLeft": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item.paddingTop": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item.paddingRight": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item.paddingBottom": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item.topLeftRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item.topRightRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item.bottomLeftRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item.bottomRightRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item.label.fills": { "name": "color-text-primary", "coll": "Astryx", "val": "#0a1317" },
+        "menu.item 2.paddingLeft": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item 2.paddingTop": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item 2.paddingRight": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item 2.paddingBottom": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item 2.topLeftRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item 2.topRightRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item 2.bottomLeftRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item 2.bottomRightRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item 2.label.fills": { "name": "color-text-primary", "coll": "Astryx", "val": "#0a1317" },
+        "menu.item 3.paddingLeft": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item 3.paddingTop": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item 3.paddingRight": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item 3.paddingBottom": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "menu.item 3.topLeftRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item 3.topRightRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item 3.bottomLeftRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item 3.bottomRightRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "menu.item 3.label.fills": { "name": "color-text-primary", "coll": "Astryx", "val": "#0a1317" }
+      },
+      "fonts": [
+        { "node": "label", "chars": "Edit", "family": "Inter", "style": "Medium", "size": 14, "w": 26, "h": 17 },
+        { "node": "label", "chars": "Duplicate", "family": "Inter", "style": "Medium", "size": 14, "w": 64, "h": 17 },
+        { "node": "label", "chars": "Delete", "family": "Inter", "style": "Medium", "size": 14, "w": 44, "h": 17 }
+      ]
+    },
+    "dropdown-menu-item": {
+      "cellNodeId": "1:3876",
+      "name": "DropdownMenuItem",
+      "type": "COMPONENT",
+      "w": 87, "h": 33, "pl": 8, "pr": 8, "pt": 8, "pb": 8, "gap": 0,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "paddingLeft": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "paddingTop": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "paddingRight": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "paddingBottom": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "topLeftRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "topRightRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "bottomLeftRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "bottomRightRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "color-text-primary", "coll": "Astryx", "val": "#0a1317" }
+      },
+      "fonts": [{ "node": "label", "chars": "Menu item", "family": "Inter", "style": "Medium", "size": 14, "w": 71, "h": 17 }]
+    },
+    "progress-bar": {
+      "cellNodeId": "1:3880",
+      "name": "Variant=Accent",
+      "type": "COMPONENT",
+      "w": 240, "h": 20, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 4,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "spacing-1", "coll": "Astryx", "val": 4 }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "color-text-secondary", "coll": "Astryx", "val": "#4e606f" },
+        "track.height": { "name": "spacing-1", "coll": "Astryx", "val": 4 },
+        "track.topLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "track.topRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "track.bottomLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "track.bottomRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "track.fills": { "name": "color-track", "coll": "Astryx", "val": "#ccd3db" },
+        "track.fill.height": { "name": "spacing-1", "coll": "Astryx", "val": 4 },
+        "track.fill.topLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "track.fill.topRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "track.fill.bottomLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "track.fill.bottomRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "track.fill.fills": { "name": "color-accent", "coll": "Astryx", "val": "#0064e0" }
+      },
+      "fonts": [{ "node": "label", "chars": "Uploading", "family": "Figtree", "style": "Medium", "size": 10, "w": 47, "h": 12 }]
+    },
+    "slider": {
+      "cellNodeId": "9:779",
+      "name": "Orientation=Horizontal, Value Display=Tooltip",
+      "type": "COMPONENT",
+      "w": 240, "h": 44, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 4,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "spacing-1", "coll": "Astryx", "val": 4 }
+      },
+      "descendantBound": {
+        "label.itemSpacing": { "name": "imported/shared/size-4", "coll": "Imported (provisional)", "val": 4 },
+        "label.Volume.fills": { "name": "imported/slider/label/color", "coll": "Astryx", "val": "ALIAS VariableID:1:3515" },
+        "slider.itemSpacing": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "slider.height": { "name": "imported/slider/slider/height/horizontal/tooltip", "coll": "Astryx", "val": 20 },
+        "slider.part-1-0.slider-track.topLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.slider-track.topRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.slider-track.bottomLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.slider-track.bottomRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.slider-track.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "slider.part-1-0.slider-track.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "slider.part-1-0.slider-track.fills": { "name": "imported/slider/slider-track/background-color", "coll": "Astryx", "val": "ALIAS VariableID:1:3519" },
+        "slider.part-1-0.part-1-0-1.topLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.part-1-0-1.topRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.part-1-0-1.bottomLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.part-1-0-1.bottomRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.part-1-0-1.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "slider.part-1-0.part-1-0-1.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "slider.part-1-0.part-1-0-1.fills": { "name": "color-accent", "coll": "Astryx", "val": "#0064e0" },
+        "slider.part-1-0.slider-thumb-2.topLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.slider-thumb-2.topRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.slider-thumb-2.bottomLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.slider-thumb-2.bottomRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "slider.part-1-0.slider-thumb-2.fills": { "name": "color-accent", "coll": "Astryx", "val": "#0064e0" },
+        "slider.part-1-0.tooltip.topLeftRadius": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "slider.part-1-0.tooltip.topRightRadius": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "slider.part-1-0.tooltip.bottomLeftRadius": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "slider.part-1-0.tooltip.bottomRightRadius": { "name": "imported/shared/size-12", "coll": "Imported (provisional)", "val": 12 },
+        "slider.part-1-0.tooltip.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "slider.part-1-0.tooltip.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "slider.part-1-0.tooltip.fills": { "name": "imported/slider/tooltip/background-color", "coll": "Astryx", "val": "ALIAS VariableID:1:3452" }
+      },
+      "fonts": [{ "node": "Volume", "chars": "Volume", "family": "Inter", "style": "Medium", "size": 14, "w": 50, "h": 20 }]
+    },
+    "switch": {
+      "cellNodeId": "13:1322",
+      "name": "Value=Off, Label Position=End",
+      "type": "COMPONENT",
+      "w": 178.016, "h": 24, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "width": { "name": "imported/switch/root/width", "coll": "Astryx", "val": 178.01600646972656 }
+      },
+      "descendantBound": {
+        "part-0.itemSpacing": { "name": "imported/switch/part-0/column-gap", "coll": "Astryx", "val": 8 },
+        "part-0.width": { "name": "imported/switch/part-0/width", "coll": "Astryx", "val": 178.01600646972656 },
+        "part-0.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "part-0.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "part-0.part-0-0.width": { "name": "imported/switch/part-0-0/width/end", "coll": "Astryx", "val": 40 },
+        "part-0.part-0-0.switch.paddingLeft": { "name": "imported/shared/size-4", "coll": "Imported (provisional)", "val": 4 },
+        "part-0.part-0-0.switch.paddingTop": { "name": "imported/shared/size-4", "coll": "Imported (provisional)", "val": 4 },
+        "part-0.part-0-0.switch.paddingRight": { "name": "imported/shared/size-4", "coll": "Imported (provisional)", "val": 4 },
+        "part-0.part-0-0.switch.paddingBottom": { "name": "imported/shared/size-4", "coll": "Imported (provisional)", "val": 4 },
+        "part-0.part-0-0.switch.width": { "name": "imported/shared/size-40", "coll": "Carbon", "val": 40 },
+        "part-0.part-0-0.switch.topLeftRadius": { "name": "imported/shared/size-9999", "coll": "Astryx", "val": 9999 },
+        "part-0.part-0-0.switch.topRightRadius": { "name": "imported/shared/size-9999", "coll": "Astryx", "val": 9999 },
+        "part-0.part-0-0.switch.bottomLeftRadius": { "name": "imported/shared/size-9999", "coll": "Astryx", "val": 9999 },
+        "part-0.part-0-0.switch.bottomRightRadius": { "name": "imported/shared/size-9999", "coll": "Astryx", "val": 9999 },
+        "part-0.part-0-1.width": { "name": "imported/switch/part-0-1/width/end", "coll": "Astryx", "val": 130.01600646972656 },
+        "part-0.part-0-1.label.itemSpacing": { "name": "imported/shared/size-4", "coll": "Imported (provisional)", "val": 4 }
+      },
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk"
+    },
+    "text-input": {
+      "cellNodeId": "1:3967",
+      "name": "Type=Text, Size=Md",
+      "type": "COMPONENT",
+      "w": 320, "h": 50, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 4,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "spacing-1", "coll": "Astryx", "val": 4 }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "color-text-secondary", "coll": "Astryx", "val": "#4e606f" },
+        "field.itemSpacing": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "field.paddingLeft": { "name": "spacing-3", "coll": "Astryx", "val": 12 },
+        "field.paddingTop": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "field.paddingRight": { "name": "spacing-3", "coll": "Astryx", "val": 12 },
+        "field.paddingBottom": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "field.topLeftRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "field.topRightRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "field.bottomLeftRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "field.bottomRightRadius": { "name": "radius-element", "coll": "Astryx", "val": 8 },
+        "field.strokeTopWeight": { "name": "border-width", "coll": "Astryx", "val": 1 },
+        "field.strokeBottomWeight": { "name": "border-width", "coll": "Astryx", "val": 1 },
+        "field.strokeLeftWeight": { "name": "border-width", "coll": "Astryx", "val": 1 },
+        "field.strokeRightWeight": { "name": "border-width", "coll": "Astryx", "val": 1 },
+        "field.fills": { "name": "color-background-surface", "coll": "Astryx", "val": "#ffffff" },
+        "field.strokes": { "name": "color-border-emphasized", "coll": "Astryx", "val": "#ccd3db" },
+        "field.placeholder-text.fills": { "name": "color-text-secondary", "coll": "Astryx", "val": "#4e606f" }
+      },
+      "fonts": [
+        { "node": "label", "chars": "Email", "family": "Figtree", "style": "Medium", "size": 10, "w": 320, "h": 12 },
+        { "node": "placeholder-text", "chars": "you@example.com", "family": "Figtree", "style": "Medium", "size": 12, "w": 104, "h": 14 }
+      ]
+    },
+    "toast": {
+      "cellNodeId": "1:4006",
+      "name": "Toast (astryx.toast)",
+      "type": "COMPONENT",
+      "w": 360, "h": 64, "pl": 16, "pr": 16, "pt": 16, "pb": 16, "gap": 12,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "spacing-3", "coll": "Astryx", "val": 12 },
+        "paddingLeft": { "name": "spacing-4", "coll": "Astryx", "val": 16 },
+        "paddingTop": { "name": "spacing-4", "coll": "Astryx", "val": 16 },
+        "paddingRight": { "name": "spacing-4", "coll": "Astryx", "val": 16 },
+        "paddingBottom": { "name": "spacing-4", "coll": "Astryx", "val": 16 },
+        "topLeftRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "topRightRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "bottomLeftRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "bottomRightRadius": { "name": "radius-container", "coll": "Astryx", "val": 12 },
+        "fills": { "name": "color-background-surface", "coll": "Astryx", "val": "#ffffff" }
+      },
+      "descendantBound": {
+        "dismiss.itemSpacing": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "dismiss.paddingLeft": { "name": "imported/button/root/padding-left", "coll": "Carbon", "val": 15 },
+        "dismiss.paddingTop": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "dismiss.paddingRight": { "name": "imported/button/root/padding-right", "coll": "Astryx", "val": 12 },
+        "dismiss.paddingBottom": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "dismiss.width": { "name": "imported/button/root/width", "coll": "Astryx", "val": 99.8125 },
+        "dismiss.height": { "name": "imported/button/root/height/md", "coll": "Astryx", "val": 32 },
+        "dismiss.topLeftRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "dismiss.topRightRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "dismiss.bottomLeftRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "dismiss.bottomRightRadius": { "name": "imported/shared/size-8", "coll": "Imported (provisional)", "val": 8 },
+        "dismiss.fills": { "name": "imported/button/root/background-color/ghost", "coll": "Carbon", "val": "rgba(0,0,0,0)" },
+        "dismiss.part-0.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "dismiss.part-0.minHeight": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 },
+        "dismiss.part-0.label.minWidth": { "name": "imported/shared/size-0", "coll": "Imported (provisional)", "val": 0 }
+      },
+      "fonts": [
+        { "node": "bodyText", "chars": "Saved successfully", "family": "Figtree", "style": "Medium", "size": 14, "w": 216.19, "h": 20 },
+        { "node": "Slot", "chars": "Slot", "family": "Inter", "style": "Medium", "size": 12, "w": 23, "h": 15 }
+      ]
+    },
+    "token": {
+      "cellNodeId": "1:3697",
+      "name": "Size=Md, Color=Default",
+      "type": "COMPONENT",
+      "w": 34, "h": 16, "pl": 8, "pr": 8, "pt": 2, "pb": 2, "gap": 4,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "spacing-1", "coll": "Astryx", "val": 4 },
+        "paddingLeft": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "paddingTop": { "name": "spacing-0-5", "coll": "Astryx", "val": 2 },
+        "paddingRight": { "name": "spacing-2", "coll": "Astryx", "val": 8 },
+        "paddingBottom": { "name": "spacing-0-5", "coll": "Astryx", "val": 2 },
+        "topLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "topRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "bottomLeftRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "bottomRightRadius": { "name": "radius-full", "coll": "Astryx", "val": 9999 },
+        "fills": { "name": "color-background-muted", "coll": "Astryx", "val": "rgba(5,54,89,0.047)" }
+      },
+      "descendantBound": {
+        "label.fills": { "name": "color-text-primary", "coll": "Astryx", "val": "#0a1317" }
+      },
+      "fonts": [{ "node": "label", "chars": "Tag", "family": "Inter", "style": "Medium", "size": 10, "w": 18, "h": 12 }]
+    }
+  }
+}
