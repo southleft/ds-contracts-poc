@@ -194,7 +194,8 @@
     "closure:check": "tsx extract/figma/channel-closure-check.ts",
     "dagger:census": "tsx extract/figma/dagger-census.ts",
     "seed:gen": "tsx extract/computed/seed-gen.ts",
-    "seed:verify": "tsx extract/computed/seed-gen.ts extract/computed/configs/carbon.json --verify && tsx extract/computed/seed-gen.ts extract/computed/configs/mui.json --verify"
+    "seed:verify": "tsx extract/computed/seed-gen.ts extract/computed/configs/carbon.json --verify && tsx extract/computed/seed-gen.ts extract/computed/configs/mui.json --verify",
+    "eval:registry:check": "node scripts/eval-registry-coverage-check.mjs"
   },
   "engines": {
     "node": ">=20"

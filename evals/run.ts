@@ -11117,6 +11117,19 @@ const ONLY = (() => {
   return i > -1 && process.argv[i + 1] ? process.argv[i + 1].split(',') : null;
 })();
 
+// `--list-ids` prints every REGISTERED case id and exits without running one.
+// It exists so a gate can assert that evals/results.json carries a row per
+// registered case. The runner writes one row per case it runs, so the record
+// can only under-report by being STALE — a case registered after the last full
+// run is simply absent, and docs:check (which gates every "N/N" doc claim
+// against that file) would then be gating a smaller denominator than the suite
+// actually has. That happened: a check was registered, was already red, and was
+// invisible in the record for hours.
+if (process.argv.includes('--list-ids')) {
+  for (const c of cases) console.log(c.id);
+  process.exit(0);
+}
+
 const results: Array<{ id: string; claim: string; pass: boolean; error?: string }> = [];
 for (const c of ONLY ? cases.filter((x) => ONLY.some((o) => x.id.includes(o))) : cases) {
   resetScratch();

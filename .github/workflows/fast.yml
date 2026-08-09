@@ -186,6 +186,24 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:playground
 
+      # Sits immediately before docs:check because docs:check GATES every "N/N
+      # pass" claim in the documentation against evals/results.json — so if that
+      # record is stale relative to the registry, docs:check is validating a
+      # smaller denominator than the suite actually has. That happened for hours
+      # on 2026-08-08 with a case that was registered, red, and unrecorded.
+      # The capture-framing pin's red halves (C1 cell framing, C3b provenance,
+      # C4 stage clip, C5 wrong-variant sweep, C6 tone swap) live in this
+      # node:test file. An eval already spawns it, but nothing in CI NAMED it —
+      # so ci:lanes counted it uncovered, which is the same orphaned-fixture
+      # class this repo keeps finding. Named here so it is covered by intent.
+      - name: test:console-loop-capture-framing (the reference-check red halves)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:console-loop-capture-framing
+
+      - name: eval:registry:check (results.json covers every registered eval)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run eval:registry:check
+
       - name: docs:check (every number and link the docs quote, re-derived)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run docs:check
