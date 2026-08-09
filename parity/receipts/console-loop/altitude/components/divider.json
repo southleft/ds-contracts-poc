@@ -34,8 +34,10 @@
   "visual": {
     "ok": true,
     "matchDeveloped": true,
-    "reviewedAt": "2026-08-06T13:32:20.271Z",
-    "notes": [],
+    "reviewedAt": "2026-08-09T07:30:10.247Z",
+    "notes": [
+      "Unchanged this round. Re-scored after the regeneration at RUNTIME_EMIT_REV rt7-font-style-per-family: pctAAMasked 0.00, unchanged."
+    ],
     "defects": [],
     "reference": "extract/computed/out/altitude/divider/orig-shots/unset__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
@@ -45,26 +47,25 @@
     "matchedAt": "2026-08-09T03:16:00.746Z",
     "status": "scored-pass",
     "scoreConfirmed": {
-      "at": "2026-08-08T04:31:56.356Z",
+      "at": "2026-08-09T07:30:10.247Z",
       "pctAAMasked": 0,
       "compositionOk": true,
-      "supersededDefects": [],
-      "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
+      "canvasPx": "288x1",
+      "realPx": "288x1",
+      "reference": "extract/computed/out/altitude/divider/orig-shots/unset__default.png",
+      "instrument": "console-loop-developed-score (bridge scale-1 cell export)",
+      "corroboratedBy": "scripts/visual-truth-run.mjs --lib altitude (headless Figma REST images API)"
     }
   },
   "fingerprint": {
-    "v6": "v6:3296776669",
-    "lineCount": 8,
+    "v6": "v6:1673250268",
+    "lineCount": 2,
     "sampleLines": [
-      ":COMPONENT/Divider (altitude.divider)|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6901960968971252,\"g\":0.6901960968971252,\"b\":0.6901960968971252},\"boundVariables\":{\"color\":{\"var\":\"imported/divider/root/background-color\"}}}]",
-      ":COMPONENT/Divider (altitude.divider)|radius|0,0,0,0",
-      ":COMPONENT/Divider (altitude.divider)|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
-      ":COMPONENT/Divider (altitude.divider)|sizing|FIXED/HUG AUTO",
-      ":COMPONENT/Divider (altitude.divider)|bound:minHeight|imported/divider/root/min-height",
-      ":COMPONENT/Divider (altitude.divider)|bound:minWidth|imported/divider/root/min-width",
-      ":COMPONENT/Divider (altitude.divider)|bound:width|imported/divider/root/width/vertical",
-      ":COMPONENT/Divider (altitude.divider)|description|Divider â generated from contract altitude.divider v0.2.0 â"
-    ]
+      ":COMPONENT_SET/Divider (altitude.divider)|description|Divider — generated from contract altitude.divider v0.2.0 †",
+      ":COMPONENT_SET/Divider (altitude.divider)|propdef|Variant:VARIANT=Default"
+    ],
+    "priorV6": "v6:3296776669",
+    "note": "Re-read from the live set after the 2026-08-09 regeneration (ds_contracts/canvasFingerprint). lineCount/sampleLines come from the set-level ds_contracts/canvasSetSnapshot the runtime stores, which is the propdef head, not the full dump the prior receipt counted."
   },
   "roundtrip": {
     "mismatches": [],
@@ -110,5 +111,6 @@
     "screenshotReviewed": true,
     "zeroMismatch": true,
     "visualMatchDeveloped": true
-  }
+  },
+  "regeneratedAt": "2026-08-09T07:30:10.247Z"
 }

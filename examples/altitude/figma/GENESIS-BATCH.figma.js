@@ -248,6 +248,15 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -1217,7 +1226,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2080,6 +2089,15 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -2418,18 +2436,47 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -2796,7 +2843,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -4015,6 +4062,15 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -4353,18 +4409,47 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -4731,7 +4816,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -5806,6 +5891,15 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -6144,18 +6238,47 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -6522,7 +6645,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -7147,6 +7270,15 @@ for (const v of allVars) varByName[v.name] = v;
       for (const v of allVars) {
         if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
       }
+    }
+  }
+}
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
     }
   }
 }
@@ -7898,7 +8030,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -8942,6 +9074,15 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -9280,18 +9421,47 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -9658,7 +9828,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -10200,7 +10370,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "root-xs",
-              "svg": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
               "svgPaintVar": "imported/icon-close/root/color",
               "iconSize": 8,
               "fillW": true
@@ -10233,7 +10403,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "root-sm",
-              "svg": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
               "svgPaintVar": "imported/icon-close/root/color",
               "iconSize": 12,
               "fillW": true
@@ -10299,7 +10469,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "root-lg",
-              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
               "svgPaintVar": "imported/icon-close/root/color",
               "iconSize": 24,
               "fillW": true
@@ -10332,7 +10502,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "root-xl",
-              "svg": "<svg viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
               "svgPaintVar": "imported/icon-close/root/color",
               "iconSize": 32,
               "fillW": true
@@ -10365,7 +10535,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "root-xxl",
-              "svg": "<svg viewBox=\"0 0 36 36\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
               "svgPaintVar": "imported/icon-close/root/color",
               "iconSize": 36,
               "fillW": true
@@ -10398,7 +10568,7 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "root-xxxl",
-              "svg": "<svg viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.2 4.1 C 17.6 3.7 17.6 3.1 17.2 2.8 C 16.8 2.4 16.2 2.4 15.9 2.8 L 10 8.7 L 4.1 2.8 C 3.7 2.4 3.1 2.4 2.8 2.8 C 2.4 3.2 2.4 3.8 2.8 4.1 L 8.7 10 L 2.8 15.9 C 2.4 16.3 2.4 16.9 2.8 17.2 C 3.2 17.6 3.8 17.6 4.1 17.2 L 10 11.3 L 15.9 17.2 C 16.3 17.6 16.9 17.6 17.2 17.2 C 17.6 16.8 17.6 16.2 17.2 15.9 L 11.3 10 L 17.2 4.1 Z\" fill=\"#101010\"/></svg>",
               "svgPaintVar": "imported/icon-close/root/color",
               "iconSize": 40,
               "fillW": true
@@ -10460,6 +10630,15 @@ for (const v of allVars) varByName[v.name] = v;
       for (const v of allVars) {
         if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
       }
+    }
+  }
+}
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
     }
   }
 }
@@ -11165,7 +11344,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -11713,6 +11892,7 @@ const COMPONENTS = [
                 "value": 20,
                 "unit": "PIXELS"
               },
+              "textDecoration": "UNDERLINE",
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -11749,6 +11929,7 @@ const COMPONENTS = [
                 "value": 20,
                 "unit": "PIXELS"
               },
+              "textDecoration": "UNDERLINE",
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -11785,6 +11966,7 @@ const COMPONENTS = [
                 "value": 28,
                 "unit": "PIXELS"
               },
+              "textDecoration": "UNDERLINE",
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -11823,6 +12005,7 @@ const COMPONENTS = [
                 "value": 20,
                 "unit": "PIXELS"
               },
+              "textDecoration": "UNDERLINE",
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -11859,6 +12042,7 @@ const COMPONENTS = [
                 "value": 20,
                 "unit": "PIXELS"
               },
+              "textDecoration": "UNDERLINE",
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -11895,6 +12079,7 @@ const COMPONENTS = [
                 "value": 28,
                 "unit": "PIXELS"
               },
+              "textDecoration": "UNDERLINE",
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -11931,6 +12116,7 @@ const COMPONENTS = [
                 "value": 20,
                 "unit": "PIXELS"
               },
+              "textDecoration": "UNDERLINE",
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -11967,6 +12153,7 @@ const COMPONENTS = [
                 "value": 20,
                 "unit": "PIXELS"
               },
+              "textDecoration": "UNDERLINE",
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -12003,6 +12190,7 @@ const COMPONENTS = [
                 "value": 28,
                 "unit": "PIXELS"
               },
+              "textDecoration": "UNDERLINE",
               "fontFamily": "IBM Plex Sans",
               "contentProp": "Content"
             }
@@ -12080,6 +12268,15 @@ for (const v of allVars) varByName[v.name] = v;
       for (const v of allVars) {
         if (v.variableCollectionId === _best && _wanted.has(v.name)) varByName[v.name] = v;
       }
+    }
+  }
+}
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
     }
   }
 }
@@ -12421,18 +12618,47 @@ async function buildNode(spec, registry) {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
     if (spec.fontFamily) {
-      // NOTE (2026-08-08 hill-climb): style names are per-family ("Semi Bold"
-      // is Inter's naming; IBM Plex Sans ships "SemiBold"), so a space-free
-      // retry would load the true family more often. It was tried and
-      // deliberately REVERTED: the developed gate-shot references render the
-      // CSS fallback font (the computed-extract harness carries no
-      // @font-face), so truer canvas fonts scored WORSE against the pinned
-      // refs (altitude button 4.2%→5.5% AA). Revisit only together with a
-      // font-loading harness + reference re-pin.
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* try this family's own spelling of the same face */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+      }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
@@ -12799,7 +13025,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;

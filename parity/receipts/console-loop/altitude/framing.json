@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "kind": "console-loop-capture-framing-pin",
+  "lane": "altitude",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileName": "DS Contracts Testing",
+  "note": "CAPTURE-FRAMING PIN. cellW/cellH are the LIVE Figma VARIANT-cell dimensions, read from the Desktop Bridge (figma-console figma_execute with fileKey GnQnjSNBXtgtd2Ht0Hs1C8 pinned on every call) immediately after the 2026-08-09 regeneration — NOT derived from the committed PNGs. Until this file existed the altitude lane was SKIPPED ENTIRELY by scripts/console-loop-capture-framing-check.mjs (it only walks lanes that have a framing.json), which is the hole the 2026-08-08 REFERENCE-TRUTH round named in LEDGER.md: the three stale/contract-render references it caught by hand are exactly what C3b/C5/C6 exist to catch automatically.",
+  "mintedFrom": {
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge, websocket :9223)",
+    "mintedAt": "2026-08-09",
+    "method": "getNodeByIdAsync on each stem's cellNodeId (taken from parity/receipts/console-loop/visual-truth/altitude/<stem>.json, which resolves the cell by variant-token match); cellW/cellH = node.width/node.height. absoluteRenderBounds was read for every stem in the same call and equals the node box everywhere except heading — see guard.marginSkewNote."
+  },
+  "guard": {
+    "marginMinPx": -1,
+    "marginMaxPx": 17,
+    "marginSkewMaxPx": 3,
+    "marginSkewNote": "3, not the usual 2, for ONE measured reason: exportAsync exports RENDER bounds, not the node box, and altitude/heading is the only stem in this lane where the two differ — a 48px IBM Plex Sans SemiBold line in a 52px line box has absoluteRenderBounds 328x54.18 against a 328x52 box, so its 1x cell export is 328x55 (skew 3). Every other altitude stem's absoluteRenderBounds equals its box exactly (link 34x28, button 83x40, badge 44x20, chip 53x28, divider 288x1, icon-close 24x24, avatar 24x24), so this allowance is consumed by heading alone and nothing else in the lane gets slack from it.",
+    "scaleRatioMax": 1.35,
+    "aspectRatioMax": 1.35,
+    "dprBand": [1.7, 2.4],
+    "requireResolvableProvenance": true,
+    "stageClipCheck": true,
+    "framingCauses": [
+      "FC-REF-FRAMING",
+      "FC-REF-WHOLE-PAGE",
+      "FC-REF-BROKEN-ASSET",
+      "FC-REF-CROSS-LIBRARY",
+      "FC-REF-WRONG-VARIANT",
+      "FC-REF-STAGE-EDGE",
+      "FC-REF-STALE-COPY",
+      "FC-REF-CONTRACT-RENDER",
+      "FC-REF-MISSING-CONTROL",
+      "FC-REF-UNSTYLED-DOM",
+      "FC-REF-UNVERIFIABLE-PROVENANCE",
+      "FC-FONT-SUBSTRATE",
+      "FC-ABS-SIZE",
+      "FC-WIDTH-TOKEN",
+      "FC-REF-SWEEP-DECOY",
+      "FC-REF-TONE-SWAP",
+      "FC-SVG-VIEWBOX-UNIFIED-MAX",
+      "FC-AA-THIN-VECTOR",
+      "FC-CANVAS-TEXT-METRICS",
+      "FC-CANVAS-DECORATION-AUTO",
+      "FC-AVATAR-SIZE"
+    ],
+    "framingCausesNote": "C2 (reference comparability) is waived on a fail-closed receipt by naming ANY of these in visual.defects. FC-REF-CONTRACT-RENDER is on the list because it is the cause the 2026-08-08 REFERENCE-TRUTH round minted for this lane; the four altitude-specific codes at the end are the causes THIS lane's fail-closed receipts actually name.",
+    "referenceSweepCheck": true,
+    "sweepPinnedMinPct": 15,
+    "sweepGapMinPct": 12,
+    "referenceToneCheck": true,
+    "toneTVMaxPct": 25,
+    "toneAAMaxPct": 10
+  },
+  "refAllow": [
+    "parity/receipts/console-loop/altitude/refs/",
+    "extract/computed/out/altitude/",
+    "examples/altitude/"
+  ],
+  "refAllowNote": "refs/ stays allowed because six PNGs still live there, but NO altitude receipt points at them any more: every stem's visual.reference is an extract/computed/out/altitude/<comp>/orig-shots/<key>__default.png, the real altitude-web-components@1.0.2 render committed by extract/computed/run.ts --keep-originals.",
+  "stems": {
+    "avatar": {
+      "setNodeId": "1:10498",
+      "cellNodeId": "1:10494",
+      "cellName": "Variant=Sm",
+      "cellW": 24,
+      "cellH": 24,
+      "cellNote": "The set has exactly one cell. It is the 2026-08-06 HAND-REBUILT node (ds_contracts/specHash \"console-loop-manual-rebuild-v1\", no canvasFingerprint), which the committed script refuses to amend — so unlike every other stem in this lane its box is not something the emitter produced."
+    },
+    "badge": {
+      "setNodeId": "60:10083",
+      "cellNodeId": "60:10071",
+      "cellName": "Variant=Info, Dot=Default",
+      "cellW": 44,
+      "cellH": 20,
+      "cellNote": "Was 45x20 before 2026-08-09; the cell narrowed to 44 when the label stopped falling back to Inter Semi Bold and got IBM Plex Sans SemiBold (advance 37 -> 36)."
+    },
+    "button": {
+      "setNodeId": "60:10151",
+      "cellNodeId": "60:10127",
+      "cellName": "Variant=Secondary, State=Default",
+      "cellW": 83,
+      "cellH": 40,
+      "cellNote": "Was 84x40 before 2026-08-09, same cause as badge (label advance 52 -> 51)."
+    },
+    "chip": {
+      "setNodeId": "60:10126",
+      "cellNodeId": "60:10110",
+      "cellName": "Variant=Info, Type=Default",
+      "cellW": 53,
+      "cellH": 28,
+      "cellNote": "Unchanged by the font round — chip's label is Regular, which resolved correctly under both spellings."
+    },
+    "divider": {
+      "setNodeId": "59:9713",
+      "cellNodeId": "59:9711",
+      "cellName": "Variant=Default",
+      "cellW": 288,
+      "cellH": 1,
+      "cellNote": "A 1px-tall rule; the shot is the cell with zero margin."
+    },
+    "heading": {
+      "setNodeId": "1:3047",
+      "cellNodeId": "1:3025",
+      "cellName": "Variant=Display Lg, Weight=Bold",
+      "cellW": 328,
+      "cellH": 52,
+      "cellNote": "The one stem in this lane whose export is larger than its box: absoluteRenderBounds 328x54.18 vs box 328x52 (48px SemiBold ascender/descender overflowing a 52px line box, clipsContent false), so the committed 1x export is 328x55. See guard.marginSkewNote."
+    },
+    "icon-close": {
+      "setNodeId": "1:3071",
+      "cellNodeId": "1:3059",
+      "cellName": "Size=Lg",
+      "cellW": 24,
+      "cellH": 24,
+      "cellNote": "Box unchanged by the 2026-08-09 viewBox correction — what changed is the Vector inside it, 15.0 -> 18.0, against the library render's 18x18 ink."
+    },
+    "link": {
+      "setNodeId": "60:10102",
+      "cellNodeId": "60:10088",
+      "cellName": "Variant=Lg, State=Default",
+      "cellW": 34,
+      "cellH": 28,
+      "cellNote": "Box unchanged by the 2026-08-09 underline restoration (the decoration draws inside the 28px line box); the shot's INK box moved 32x14 -> 34x18."
+    }
+  }
+}

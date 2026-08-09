@@ -1,0 +1,409 @@
+{
+  "recordedAt": "2026-08-09T06:58:33.188Z",
+  "lane": "altitude",
+  "full": false,
+  "results": [
+    {
+      "stem": "avatar",
+      "cellName": "Variant=Sm",
+      "cellTokens": [
+        "sm"
+      ],
+      "pinned": "sm.off__default",
+      "pinnedPct": 5.46875,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "unset.off__default",
+        "pctAAMasked": 3.298611111111111,
+        "pass": true
+      },
+      "contractDefaults": [
+        "not-hasBadge",
+        "AB"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "sm.off__default",
+          "pctAAMasked": 5.46875,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "24x24",
+          "realPx": "32x32"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "unset.off__default",
+          "pctAAMasked": 3.298611111111111,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "24x24",
+          "realPx": "24x24"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "sm.off__default",
+          "pctAAMasked": 0.13346354166666666,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "24x24",
+          "realPx": "320x96"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "unset.off__default",
+          "pctAAMasked": 5.46875,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "16x16",
+          "realPx": "16x16"
+        }
+      ],
+      "rowsElided": 6
+    },
+    {
+      "stem": "badge",
+      "cellName": "Variant=Info, Dot=Default",
+      "cellTokens": [
+        "info",
+        "default"
+      ],
+      "pinned": "info.default__default",
+      "pinnedPct": 15.444444444444445,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "info.default__default",
+        "pctAAMasked": 15.444444444444445,
+        "pass": false
+      },
+      "contractDefaults": [
+        "default",
+        "Badge"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "info.default__default",
+          "pctAAMasked": 15.444444444444445,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "45x20",
+          "realPx": "43x20"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.default__default",
+          "pctAAMasked": 15.444444444444445,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "45x20",
+          "realPx": "43x20"
+        }
+      ],
+      "rowsElided": 19
+    },
+    {
+      "stem": "button",
+      "cellName": "Variant=Secondary, State=Default",
+      "cellTokens": [
+        "secondary",
+        "default"
+      ],
+      "pinned": "secondary__default",
+      "pinnedPct": 4.7023809523809526,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "secondary__default",
+        "pctAAMasked": 4.7023809523809526,
+        "pass": true
+      },
+      "contractDefaults": [
+        "Button"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "secondary__default",
+          "pctAAMasked": 4.7023809523809526,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "84x40",
+          "realPx": "82x40"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "secondary__default",
+          "pctAAMasked": 4.7023809523809526,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "84x40",
+          "realPx": "82x40"
+        }
+      ],
+      "rowsElided": 9
+    },
+    {
+      "stem": "chip",
+      "cellName": "Variant=Info, Type=Default",
+      "cellTokens": [
+        "info",
+        "default"
+      ],
+      "pinned": "info.unset__default",
+      "pinnedPct": 0.6738544474393532,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "info.unset__default",
+        "pctAAMasked": 0.6738544474393532,
+        "pass": true
+      },
+      "contractDefaults": [
+        "Chip"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "info.unset__default",
+          "pctAAMasked": 0.6738544474393532,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "53x28",
+          "realPx": "52x28"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info.unset__default",
+          "pctAAMasked": 0.6738544474393532,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "53x28",
+          "realPx": "52x28"
+        }
+      ],
+      "rowsElided": 23
+    },
+    {
+      "stem": "divider",
+      "cellName": "Variant=Default",
+      "cellTokens": [
+        "default"
+      ],
+      "pinned": "unset__default",
+      "pinnedPct": 0,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "unset__default",
+        "pctAAMasked": 0,
+        "pass": true
+      },
+      "contractDefaults": [
+        "default"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "unset__default",
+          "pctAAMasked": 0,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "288x1",
+          "realPx": "288x1"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "unset__default",
+          "pctAAMasked": 0.9375,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "288x1",
+          "realPx": "320x96"
+        }
+      ],
+      "rowsElided": 3
+    },
+    {
+      "stem": "heading",
+      "cellName": "Variant=Display Lg, Weight=Bold",
+      "cellTokens": [
+        "displaylg",
+        "bold"
+      ],
+      "pinned": "display-lg.bold__default",
+      "pinnedPct": 7.478260869565218,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "display-lg.bold__default",
+        "pctAAMasked": 7.478260869565218,
+        "pass": false
+      },
+      "contractDefaults": [
+        "regular",
+        "Heading"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "display-lg.bold__default",
+          "pctAAMasked": 7.478260869565218,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "92x25",
+          "realPx": "92x25"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "display-lg.bold__default",
+          "pctAAMasked": 7.478260869565218,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "92x25",
+          "realPx": "92x25"
+        }
+      ],
+      "rowsElided": 27
+    },
+    {
+      "stem": "icon-close",
+      "cellName": "Size=Lg",
+      "cellTokens": [
+        "lg"
+      ],
+      "pinned": "lg__default",
+      "pinnedPct": 16.049382716049383,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "xxxl__default",
+        "pctAAMasked": 1.5625,
+        "pass": true
+      },
+      "contractDefaults": null,
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "lg__default",
+          "pctAAMasked": 16.049382716049383,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "16x16",
+          "realPx": "18x18"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "xxxl__default",
+          "pctAAMasked": 1.5625,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "16x16",
+          "realPx": "16x16"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "lg__default",
+          "pctAAMasked": 4.6875,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "16x16",
+          "realPx": "16x16"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "xxxl__default",
+          "pctAAMasked": 4.6875,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "16x16",
+          "realPx": "16x16"
+        }
+      ],
+      "rowsElided": 14
+    },
+    {
+      "stem": "link",
+      "cellName": "Variant=Lg, State=Default",
+      "cellTokens": [
+        "lg",
+        "default"
+      ],
+      "pinned": "lg__default",
+      "pinnedPct": 15.625,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "lg__default",
+        "pctAAMasked": 15.625,
+        "pass": false
+      },
+      "contractDefaults": [
+        "Link"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "lg__default",
+          "pctAAMasked": 15.625,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "32x14",
+          "realPx": "34x16"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "lg__default",
+          "pctAAMasked": 2.0089285714285716,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "32x14",
+          "realPx": "32x14"
+        }
+      ],
+      "rowsElided": 7
+    }
+  ]
+}

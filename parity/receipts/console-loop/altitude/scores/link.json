@@ -1,26 +1,26 @@
 {
   "version": 3,
   "status": "fail",
-  "matchDeveloped": true,
+  "matchDeveloped": false,
   "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 45.77205882352941,
-    "pctAAUnmasked": 15.625,
-    "pctAAMasked": 15.625,
+    "pctExactUnmasked": 45.26143790849673,
+    "pctAAUnmasked": 16.830065359477125,
+    "pctAAMasked": 16.830065359477125,
     "maskCoveragePct": 0,
-    "canvasPx": "32x14",
+    "canvasPx": "34x18",
     "realPx": "34x16",
-    "inkCanvasPct": 35.294117647058826,
-    "inkRealPct": 45.77205882352941
+    "inkCanvasPct": 42.48366013071895,
+    "inkRealPct": 40.68627450980392
   },
   "reference": "extract/computed/out/altitude/link/orig-shots/lg__default.png",
   "referenceSha256": "c6b6182b7ce4828f0194c6f76a7bebafef2ae65b196945aa5fde94e432a7b686",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/link-cell.png",
-  "canvasShotSha256": "9a29dcdf805628ab62f5a5928b59c776430cfc5c46a373c9413e5ec8c91bad20",
+  "canvasShotSha256": "3362415f15c3c9285f829cae2a874741a96468af6c7ea1fb4d02bb7fa7716ab8",
   "diff": "parity/receipts/console-loop/altitude/scores/link.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/altitude/components/link.json",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.1428571428571428,
-  "inkDelta": 10.477941176470587,
+  "scaleRatio": 1.125,
+  "inkDelta": 1.7973856209150298,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=15.63 > 5)",
-  "recordedAt": "2026-08-09T03:14:03.944Z"
+  "note": "pixel bar missed (pctAAMasked=16.83 > 5)",
+  "recordedAt": "2026-08-09T07:22:18.774Z"
 }

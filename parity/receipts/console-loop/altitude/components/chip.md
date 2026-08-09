@@ -29,8 +29,8 @@ Chip COMPONENT_SET 1:3017: 20 variant(s), 4 prop def(s) on page Chip. Grid shows
 
 ## Fingerprint (v6)
 
-- **hash:** `v6:2414831033`
-- **lineCount:** 248
+- **hash:** `v6:3288704793`
+- **lineCount:** 4
 
 ## Round-trip
 
@@ -46,15 +46,13 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 
 ## Visual match (developed)
 
-- reviewedAt: `2026-08-06T13:32:20.271Z`
-- matchDeveloped: **false**
-- reference: extract/computed/out/altitude/chip/receipts
-- defect: Not verified vs altitude chip computed pairs — fail closed.
+- reviewedAt: `2026-08-09T07:30:10.247Z`
+- status: **scored-pass**
+- matchDeveloped: **true**
+- reference: `extract/computed/out/altitude/chip/orig-shots/info.unset__default.png` (REAL library render — altitude-web-components@1.0.2)
+- scorecard: `parity/receipts/console-loop/altitude/scores/chip.json` — pctAAMasked **0.67**, compositionOk **true**, canvas 53x28 vs library 52x28
+- corroborating instrument: `scripts/visual-truth-run.mjs --lib altitude` (headless Figma REST images API)
 
-## 2026-08-08 — Track-2 hill-climb round 1
+### Notes
 
-- regenerated (nodeId=60:10126). 5.12 AA, colors/sizes exact — FC-FONT-SUBSTRATE residual, fail-closed.
-
-## 2026-08-08 — FC-FONT-SUBSTRATE closure (font-loading harness)
-
-- reference re-pinned: gate render now loads IBM Plex Sans 400/600 (cfg.fonts, committed woff2 as data: URIs — the library's own Google-Fonts declaration, network-free). Offline regate re-rendered gate-shots; SAME canvas cell shot. 5.12 → **0.67 AA, scored-pass** (headless REST instrument agrees: 0.67).
+- Unchanged this round (IBM Plex Sans Regular already resolved). Re-scored after the regeneration at RUNTIME_EMIT_REV rt7-font-style-per-family: pctAAMasked 0.67, unchanged.

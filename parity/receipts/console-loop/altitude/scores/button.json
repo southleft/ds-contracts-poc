@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 13.750000000000002,
-    "pctAAUnmasked": 4.7023809523809526,
-    "pctAAMasked": 4.7023809523809526,
+    "pctExactUnmasked": 12.048192771084338,
+    "pctAAUnmasked": 2.9819277108433737,
+    "pctAAMasked": 2.9819277108433737,
     "maskCoveragePct": 0,
-    "canvasPx": "84x40",
+    "canvasPx": "83x40",
     "realPx": "82x40",
-    "inkCanvasPct": 99.88095238095238,
-    "inkRealPct": 97.5
+    "inkCanvasPct": 99.87951807228916,
+    "inkRealPct": 98.67469879518073
   },
   "reference": "extract/computed/out/altitude/button/orig-shots/secondary__default.png",
   "referenceSha256": "499a2ca84068fc0031f9d2f33b8822ed9066eaf8cd9d65523092f2eb6b4c9e65",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/button-cell.png",
-  "canvasShotSha256": "65e534040ec3939ceb4054be5a7044d71f5ddd3cbeb815ce0c5d39095ac888a8",
+  "canvasShotSha256": "553de42dfd24b2121e5d9f28aba53dc72194ad4355aeec05c55b83e58b7b7246",
   "diff": "parity/receipts/console-loop/altitude/scores/button.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/altitude/components/button.json",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.024390243902439,
-  "inkDelta": 2.3809523809523796,
+  "scaleRatio": 1.0121951219512195,
+  "inkDelta": 1.2048192771084274,
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-09T03:14:05.236Z"
+  "recordedAt": "2026-08-09T07:22:17.616Z"
 }

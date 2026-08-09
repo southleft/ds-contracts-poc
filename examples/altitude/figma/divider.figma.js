@@ -126,6 +126,15 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+{
+  const _cols = await figma.variables.getLocalVariableCollectionsAsync();
+  const _prefCol = _cols.find((c) => c.name === "Altitude");
+  if (_prefCol) {
+    for (const v of allVars) {
+      if (v.variableCollectionId === _prefCol.id) varByName[v.name] = v;
+    }
+  }
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -874,7 +883,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt6-native-slots';
+const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;

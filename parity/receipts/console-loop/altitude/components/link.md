@@ -19,8 +19,8 @@ Link COMPONENT_SET 1:3092: 9 variant(s), 3 prop def(s) on page Link. Screenshot 
 
 ## Fingerprint (v6)
 
-- **hash:** `v6:2052539233`
-- **lineCount:** 109
+- **hash:** `v6:3448013784`
+- **lineCount:** 4
 
 ## Round-trip
 
@@ -36,15 +36,17 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 
 ## Visual match (developed)
 
-- reviewedAt: `2026-08-06T13:32:20.271Z`
+- reviewedAt: `2026-08-09T07:30:10.247Z`
+- status: **fail-closed**
 - matchDeveloped: **false**
-- reference: extract/computed/out/altitude/link/receipts
-- defect: Not verified vs altitude link computed pairs — fail closed.
+- reference: `extract/computed/out/altitude/link/orig-shots/lg__default.png` (REAL library render — altitude-web-components@1.0.2)
+- scorecard: `parity/receipts/console-loop/altitude/scores/link.json` — pctAAMasked **16.83**, compositionOk **true**, canvas 34x18 vs library 34x16
+- corroborating instrument: `scripts/visual-truth-run.mjs --lib altitude` (headless Figma REST images API)
 
-## 2026-08-08 — Track-2 hill-climb round 1
+### Notes
 
-- regenerated (nodeId=60:10102). font-family carried; fill exact #4375FF both sides; 14.96 AA glyph-body — FC-FONT-SUBSTRATE, fail-closed.
+- UNDERLINE RESTORED 2026-08-09. `text-decoration-line: underline` is captured truth on the library root but the enricher dropped it as equal-to-UA-control, and core/emit-html renders the root <a> with no href so it is never :any-link and never gets the UA rule. Carried now as a declared literal in examples/altitude/contracts/link.contract.json; the canvas cell went from NO underline to textDecoration=UNDERLINE and its ink width from 32 to 34, exactly the library's 34.
 
-## 2026-08-08 — FC-FONT-SUBSTRATE closure (font-loading harness)
+### Named defects (fail-closed)
 
-- reference re-pinned (refs/link.png ← gate-shots/lg__default.png rendered with IBM Plex Sans loaded via cfg.fonts). SAME canvas cell shot. 14.96 → **2.01 AA, scored-pass** (headless REST instrument agrees: 2.01).
+- FC-CANVAS-DECORATION-AUTO: the contract carries `text-decoration-thickness: auto` (the library's own computed value) and Figma's textDecorationThickness/Offset are AUTO to match. Chromium resolves auto at 18px IBM Plex Sans to a 1px rule 1px below the glyph box; Figma resolves it to a 2px rule 2px below. Canvas ink 34x18 vs library 34x16 — width now exact, the 2px of height is entirely the decoration metric. pctAAMasked 16.83 (was 15.63 with NO underline at all: the scorer size-normalises 34x18 onto 34x16 and squashes the glyph rows out of registration). Probed on the live canvas: setting textDecorationThickness to 1px did not change the export, so the thickness is not plugin-addressable at this size; the node was restored to AUTO.

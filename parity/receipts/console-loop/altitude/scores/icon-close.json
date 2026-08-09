@@ -1,26 +1,26 @@
 {
   "version": 3,
   "status": "fail",
-  "matchDeveloped": true,
+  "matchDeveloped": false,
   "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 39.50617283950617,
-    "pctAAUnmasked": 17.28395061728395,
-    "pctAAMasked": 17.28395061728395,
+    "pctExactUnmasked": 38.2716049382716,
+    "pctAAUnmasked": 19.753086419753085,
+    "pctAAMasked": 19.753086419753085,
     "maskCoveragePct": 0,
-    "canvasPx": "16x16",
+    "canvasPx": "18x18",
     "realPx": "18x18",
-    "inkCanvasPct": 41.9753086419753,
+    "inkCanvasPct": 48.148148148148145,
     "inkRealPct": 48.148148148148145
   },
   "reference": "extract/computed/out/altitude/iconclose/orig-shots/lg__default.png",
   "referenceSha256": "23e6acd16af27d9e62e90163cd0c35b2f2554646e912ee6bf8c078895d03d0a9",
   "canvasShot": "parity/receipts/console-loop/altitude/shots/icon-close-cell.png",
-  "canvasShotSha256": "fcdca2138f774f44e5aabf662fa21a1249f940e43854de16765def12d757d8cf",
+  "canvasShotSha256": "5f1c2223a152700d35216341a03d1bb8f5c718039b245c016b78807ca5dc9d8b",
   "diff": "parity/receipts/console-loop/altitude/scores/icon-close.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/altitude/components/icon-close.json",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.125,
-  "inkDelta": 6.172839506172842,
+  "scaleRatio": 1,
+  "inkDelta": 0,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=17.28 > 5)",
-  "recordedAt": "2026-08-09T03:14:02.714Z"
+  "note": "pixel bar missed (pctAAMasked=19.75 > 5)",
+  "recordedAt": "2026-08-09T07:24:50.053Z"
 }

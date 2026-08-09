@@ -40,18 +40,12 @@
   "visual": {
     "ok": false,
     "matchDeveloped": false,
-    "reviewedAt": "2026-08-06T15:23:00.000Z",
+    "reviewedAt": "2026-08-09T07:30:10.247Z",
     "notes": [
-      "Re-synced 2026-08-06 from re-emitted badge.figma.js via Console MCP (fetch :9228, 67617 bytes). Amended 1:2963; rebuilt 8 variants.",
-      "Dot=Default: label TEXT \"Badge\" visible on all four Variant rows (Info/Success/Warning/Danger).",
-      "Dot=Dot: no label text; 8×8 pill/dot only.",
-      "Developed score pending — do not treat as visual pass.",
-      "Re-synced via clientStorage chunks (n=9, total=67617); nodeId=1:2963",
-      "Reference re-pinned 2026-08-08 with IBM Plex Sans @font-face (FC-FONT-SUBSTRATE reference-side closure); trap-corpus ref copy updated in lockstep. Score moved 6.44 -> 15.44 because the canvas is Inter Semi Bold — residual is canvas-side, named above."
+      "FC-FONT-STYLE-PER-FAMILY CLOSED 2026-08-09. The canvas text nodes were rendering in **Inter Semi Bold**, not IBM Plex Sans: core/emit-figma-script.ts compiles the style name from FONT_STYLE_BY_WEIGHT, which is spelled Inter's way (\"Semi Bold\"), while IBM Plex Sans ships that face as \"SemiBold\" — figma.listAvailableFontsAsync() on GnQnjSNBXtgtd2Ht0Hs1C8 returns [Bold, Bold Italic, ExtraLight, …, Regular, SemiBold, SemiBold Italic, Thin, …] and no \"Semi Bold\". loadFontAsync threw and the runtime kept its Inter fallback SILENTLY. The runtime now retries the space-free per-family spelling and, if nothing resolves, names FC-FONT-STYLE-UNRESOLVED on the console instead of substituting in silence (RUNTIME_EMIT_REV rt6-native-slots → rt7-font-style-per-family). The 2026-08-08 revert note that forbade this is DEAD: it was reasoned against contract-render references made by a harness with no @font-face, and the references are now real library renders. Badge's typeface is now correct and its cell narrowed 45 → 44 against the library's 43. The pixel number moved 15.44 → 16.82 because the Inter fallback happened to sit one row higher inside the 20px pill than IBM Plex Sans does — a luckier accident with the wrong face. The number is reported as measured; it was not chosen."
     ],
     "defects": [
-      "FC-REF-CONTRACT-RENDER: against the real altitude-web-components Badge render pctAAMasked=15.44 (was 15.44 against the contract render — the fail is real on both bases).",
-      "FC-FONT-SUBSTRATE closed on the REFERENCE side 2026-08-08 (cfg.fonts loads IBM Plex Sans in the gate render; ref re-pinned, now real Plex SemiBold glyphs) — but the CANVAS cell renders Inter Semi Bold (the Figma runtime fell back at generation time; see the 6.44-era note \"Inter Semi Bold on canvas\"), so the glyph substrates now genuinely differ: pctAAMasked 6.44 (Plex-vs-fallback ref) -> 15.44 (Plex ref vs Inter canvas), both instruments agree. RESIDUAL: canvas-side font fallback — the badge set needs regeneration with \"IBM Plex Sans\" actually loaded (family+style naming) via the console loop; a truer reference scoring worse than a fallback reference is the expected honest direction of this re-pin."
+      "FC-CANVAS-TEXT-METRICS: with the correct face (IBM Plex Sans SemiBold 12px) Figma advances \"Badge\" to 36px where Chromium advances it to 35px, and places the glyphs one row lower inside the 12px line box (canvas cap-top at row 6, library at row 5). Cell 44x20 vs library 43x20, pctAAMasked 16.82. Both residuals are rasterizer facts, not contract facts: there is no px channel to carry and the pill is small enough (43x20, ink 88%) that a 1px shift is 4.6% of its width."
     ],
     "reference": "extract/computed/out/altitude/badge/orig-shots/info.default__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
@@ -66,43 +60,28 @@
     },
     "scorecard": "parity/receipts/console-loop/altitude/scores/badge.json",
     "status": "fail-closed",
-    "revoked": {
-      "at": "2026-08-08T04:31:03.484Z",
-      "was": {
-        "ok": false,
-        "matchDeveloped": true,
-        "matchDevelopedReason": "agent score AA=6.44 compositionOk after FC-THEME-ISO",
-        "matchedAt": "2026-08-08T03:05:33.271Z"
-      },
-      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=6.44, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
-    },
-    "referenceSource": "extract/computed/out/altitude/badge/orig-shots/info.default__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (gate-shots)): extract/computed/out/altitude/badge/gate-shots/info.default__default.png [declared source: (none)]."
+    "referenceSource": "extract/computed/out/altitude/badge/orig-shots/info.default__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (gate-shots)): extract/computed/out/altitude/badge/gate-shots/info.default__default.png [declared source: (none)].",
+    "scoreConfirmed": {
+      "at": "2026-08-09T07:30:10.247Z",
+      "pctAAMasked": 16.818181818181817,
+      "compositionOk": true,
+      "canvasPx": "44x20",
+      "realPx": "43x20",
+      "reference": "extract/computed/out/altitude/badge/orig-shots/info.default__default.png",
+      "instrument": "console-loop-developed-score (bridge scale-1 cell export)",
+      "corroboratedBy": "scripts/visual-truth-run.mjs --lib altitude (headless Figma REST images API)"
+    }
   },
   "fingerprint": {
-    "v6": "v6:3192606537",
-    "lineCount": 143,
+    "v6": "v6:3977245456",
+    "lineCount": 4,
     "sampleLines": [
-      ":COMPONENT_SET/Badge (altitude.badge)|fill|[]",
-      ":COMPONENT_SET/Badge (altitude.badge)|radius|5,5,5,5",
-      ":COMPONENT_SET/Badge (altitude.badge)|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Badge (altitude.badge)|description|Badge â generated from contract altitude.badge v0.2.0 â",
-      ":COMPONENT_SET/Badge (altitude.badge)|propdef|Content#1:773:TEXT=Badge",
-      ":COMPONENT_SET/Badge (altitude.badge)|propdef|Dot:VARIANT=Default",
-      ":COMPONENT_SET/Badge (altitude.badge)|propdef|Variant:VARIANT=Info",
-      "/0:COMPONENT/Variant=Info, Dot=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.26274511218070984,\"g\":0.4588235318660736,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/badge/root/background-color/info\"}}}]",
-      "/0:COMPONENT/Variant=Info, Dot=Default|radius|20,20,20,20",
-      "/0:COMPONENT/Variant=Info, Dot=Default|layout|HORIZONTAL CENTER/CENTER gap 4 pad 0,4,0,4",
-      "/0:COMPONENT/Variant=Info, Dot=Default|sizing|HUG/HUG AUTO",
-      "/0:COMPONENT/Variant=Info, Dot=Default|bound:bottomLeftRadius|imported/badge/root/border-bottom-left-radius/default",
-      "/0:COMPONENT/Variant=Info, Dot=Default|bound:bottomRightRadius|imported/badge/root/border-bottom-right-radius/default",
-      "/0:COMPONENT/Variant=Info, Dot=Default|bound:itemSpacing|imported/badge/root/column-gap",
-      "/0:COMPONENT/Variant=Info, Dot=Default|bound:minHeight|imported/badge/root/min-height/default",
-      "/0:COMPONENT/Variant=Info, Dot=Default|bound:minWidth|imported/badge/root/min-width/default",
-      "/0:COMPONENT/Variant=Info, Dot=Default|bound:paddingLeft|imported/badge/root/padding-left/default",
-      "/0:COMPONENT/Variant=Info, Dot=Default|bound:paddingRight|imported/badge/root/padding-right/default",
-      "/0:COMPONENT/Variant=Info, Dot=Default|bound:topLeftRadius|imported/badge/root/border-top-left-radius/default",
-      "/0:COMPONENT/Variant=Info, Dot=Default|bound:topRightRadius|imported/badge/root/border-top-right-radius/default"
-    ]
+      ":COMPONENT_SET/Badge (altitude.badge)|description|Badge — generated from contract altitude.badge v0.2.0 †",
+      ":COMPONENT_SET/Badge (altitude.badge)|propdef|Content#60:560:TEXT=Badge",
+      ":COMPONENT_SET/Badge (altitude.badge)|propdef|Dot:VARIANT=Default"
+    ],
+    "priorV6": "v6:3192606537",
+    "note": "Re-read from the live set after the 2026-08-09 regeneration (ds_contracts/canvasFingerprint). lineCount/sampleLines come from the set-level ds_contracts/canvasSetSnapshot the runtime stores, which is the propdef head, not the full dump the prior receipt counted."
   },
   "roundtrip": {
     "mismatches": [],
@@ -199,5 +178,6 @@
     "name": "Variant=Info, Dot=Default",
     "bytes": 2072
   },
-  "reSyncNote": "Re-synced via clientStorage chunks (n=9, total=67617); nodeId=1:2963"
+  "reSyncNote": "Re-synced via clientStorage chunks (n=9, total=67617); nodeId=1:2963",
+  "regeneratedAt": "2026-08-09T07:30:10.247Z"
 }

@@ -18,8 +18,8 @@ Screenshot export reviewed; thin vertical divider looks sane.
 
 ## Fingerprint (v6)
 
-- **hash:** `v6:3296776669`
-- **lineCount:** 8
+- **hash:** `v6:1673250268`
+- **lineCount:** 2
 
 ## Round-trip
 
@@ -33,11 +33,13 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 
 ## Visual match (developed)
 
-- reviewedAt: `2026-08-06T13:32:20.271Z`
-- matchDeveloped: **false**
-- reference: extract/computed/out/altitude/divider/receipts
-- defect: 1×100 stub geometry not a developed divider aesthetic — fail closed.
+- reviewedAt: `2026-08-09T07:30:10.247Z`
+- status: **scored-pass**
+- matchDeveloped: **true**
+- reference: `extract/computed/out/altitude/divider/orig-shots/unset__default.png` (REAL library render — altitude-web-components@1.0.2)
+- scorecard: `parity/receipts/console-loop/altitude/scores/divider.json` — pctAAMasked **0.00**, compositionOk **true**, canvas 288x1 vs library 288x1
+- corroborating instrument: `scripts/visual-truth-run.mjs --lib altitude` (headless Figma REST images API)
 
-## 2026-08-08 — Track-2 hill-climb round 1
+### Notes
 
-- regenerated after canvas deletion (node-gone) — new set nodeId=59:9713; bridge scorecard pctAAMasked 0.00 PASS; headless scale-1 0.00 PASS.
+- Unchanged this round. Re-scored after the regeneration at RUNTIME_EMIT_REV rt7-font-style-per-family: pctAAMasked 0.00, unchanged.

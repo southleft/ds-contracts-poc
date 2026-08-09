@@ -39,64 +39,39 @@
   "visual": {
     "ok": false,
     "matchDeveloped": false,
-    "reviewedAt": "2026-08-06T13:32:20.271Z",
+    "reviewedAt": "2026-08-09T07:30:10.247Z",
     "notes": [
-      "FC-FONT-SUBSTRATE CLOSED 2026-08-08: reference re-pinned from gate-shots/lg__default.png rendered with IBM Plex Sans loaded (cfg.fonts, committed woff2, data: URI — network-free). pctAAMasked 14.96 -> 2.01 against the SAME canvas cell shot; headless REST instrument agrees (2.01). Prior defect: FC-FONT-SUBSTRATE: developed gate-shot reference renders the CSS fallback font (computed-extract harness loads no @font-face; \"IBM Plex Sans\" stack falls back to Arial/Helvetica), so canvas glyphs cannot converge below the 5% bar — pctAAMasked 14.96 (IBM Plex Sans Regular 18px vs fallback ref; fill exact #4375FF both sides)."
+      "UNDERLINE RESTORED 2026-08-09. `text-decoration-line: underline` is captured truth on the library root but the enricher dropped it as equal-to-UA-control, and core/emit-html renders the root <a> with no href so it is never :any-link and never gets the UA rule. Carried now as a declared literal in examples/altitude/contracts/link.contract.json; the canvas cell went from NO underline to textDecoration=UNDERLINE and its ink width from 32 to 34, exactly the library's 34."
     ],
     "defects": [
-      "FC-REF-CONTRACT-RENDER: 2.01 against the contract render, 15.63 against the real altitude-web-components Link render (canvas 32x14 vs library 34x16). The FC-FONT-SUBSTRATE closure that produced the 2.01 fixed the CONTRACT render's font, not the gap to the library."
+      "FC-CANVAS-DECORATION-AUTO: the contract carries `text-decoration-thickness: auto` (the library's own computed value) and Figma's textDecorationThickness/Offset are AUTO to match. Chromium resolves auto at 18px IBM Plex Sans to a 1px rule 1px below the glyph box; Figma resolves it to a 2px rule 2px below. Canvas ink 34x18 vs library 34x16 — width now exact, the 2px of height is entirely the decoration metric. pctAAMasked 16.83 (was 15.63 with NO underline at all: the scorer size-normalises 34x18 onto 34x16 and squashes the glyph rows out of registration). Probed on the live canvas: setting textDecorationThickness to 1px did not change the export, so the thickness is not plugin-addressable at this size; the node was restored to AUTO."
     ],
     "reference": "extract/computed/out/altitude/link/orig-shots/lg__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
     "referenceSource": "extract/computed/out/altitude/link/orig-shots/lg__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (byte-identical copy of link/gate-shots/lg__default.png)): parity/receipts/console-loop/altitude/refs/link.png [declared source: extract/computed/out/altitude/link/gate-shots/lg__default.png].",
     "scorecard": "parity/receipts/console-loop/altitude/scores/link.json",
     "status": "fail-closed",
-    "revoked": {
-      "at": "2026-08-08T04:31:03.484Z",
-      "was": {
-        "ok": false,
-        "matchDeveloped": true,
-        "matchDevelopedReason": "near-pass AA=15.13 compositionOk (FC-FONT-AA)",
-        "matchedAt": "2026-08-08T03:20:06.682Z"
-      },
-      "reason": "pass-claim revoked by evidence-gate redesign 2026-08-07: scorecard says fail (pctAAMasked=15.13, compositionOk=true); the one bar is pctAAMasked<=5 AND compositionOk — prior flip trusted a self-attested boolean / near-pass relaxation, never the scorecard"
-    },
-    "revokedByReferenceTruth": {
-      "at": "2026-08-09T03:16:00.837Z",
-      "was": {
-        "ok": true,
-        "matchDeveloped": true,
-        "reason": "scorer AA=2.01 compositionOk after FC-FONT-SUBSTRATE closure (cfg.fonts: IBM Plex Sans @font-face in the gate render; reference re-pinned)",
-        "priorReference": "parity/receipts/console-loop/altitude/refs/link.png"
-      },
-      "reason": "FC-REF-CONTRACT-RENDER: 2.01 against the contract render, 15.63 against the real altitude-web-components Link render (canvas 32x14 vs library 34x16). The FC-FONT-SUBSTRATE closure that produced the 2.01 fixed the CONTRACT render's font, not the gap to the library."
+    "scoreConfirmed": {
+      "at": "2026-08-09T07:30:10.247Z",
+      "pctAAMasked": 16.830065359477125,
+      "compositionOk": true,
+      "canvasPx": "34x18",
+      "realPx": "34x16",
+      "reference": "extract/computed/out/altitude/link/orig-shots/lg__default.png",
+      "instrument": "console-loop-developed-score (bridge scale-1 cell export)",
+      "corroboratedBy": "scripts/visual-truth-run.mjs --lib altitude (headless Figma REST images API)"
     }
   },
   "fingerprint": {
-    "v6": "v6:2052539233",
-    "lineCount": 109,
+    "v6": "v6:3448013784",
+    "lineCount": 4,
     "sampleLines": [
-      ":COMPONENT_SET/Link|fill|[]",
-      ":COMPONENT_SET/Link|radius|5,5,5,5",
-      ":COMPONENT_SET/Link|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Link|description|Link â generated from contract altitude.link v0.2.0 â",
-      ":COMPONENT_SET/Link|propdef|Content#1:819:TEXT=Link",
-      ":COMPONENT_SET/Link|propdef|State:VARIANT=Default",
-      ":COMPONENT_SET/Link|propdef|Variant:VARIANT=Xs",
-      "/0:COMPONENT/Variant=Xs, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/0:COMPONENT/Variant=Xs, State=Default|radius|0,0,0,0",
-      "/0:COMPONENT/Variant=Xs, State=Default|layout|HORIZONTAL MIN/CENTER gap 8 pad 0,0,0,0",
-      "/0:COMPONENT/Variant=Xs, State=Default|sizing|HUG/HUG AUTO",
-      "/0:COMPONENT/Variant=Xs, State=Default|bound:itemSpacing|imported/link/root/column-gap",
-      "/0:COMPONENT/Variant=Xs, State=Default|bound:minHeight|imported/link/root/min-height",
-      "/0:COMPONENT/Variant=Xs, State=Default|bound:minWidth|imported/link/root/min-width",
-      "/0:COMPONENT/Variant=Xs, State=Default|reaction|ON_HOVER→CHANGE_TO Variant=Xs, State=Hover",
-      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.26274511218070984,\"g\":0.4588235318660736,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"imported/link/root/color\"}}}]",
-      "/0/0:TEXT/label|radius|0,0,0,0",
-      "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
-      "/0/0:TEXT/label|text|\"Link\" 12px {\"family\":\"Inter\",\"style\":\"Regular\"}",
-      "/1:COMPONENT/Variant=Sm, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]"
-    ]
+      ":COMPONENT_SET/Link|description|Link — generated from contract altitude.link v0.2.0 †",
+      ":COMPONENT_SET/Link|propdef|Content#60:569:TEXT=Link",
+      ":COMPONENT_SET/Link|propdef|State:VARIANT=Default"
+    ],
+    "priorV6": "v6:2052539233",
+    "note": "Re-read from the live set after the 2026-08-09 regeneration (ds_contracts/canvasFingerprint). lineCount/sampleLines come from the set-level ds_contracts/canvasSetSnapshot the runtime stores, which is the propdef head, not the full dump the prior receipt counted."
   },
   "roundtrip": {
     "mismatches": [],
@@ -176,5 +151,6 @@
     "screenshotReviewed": true,
     "zeroMismatch": true,
     "visualMatchDeveloped": false
-  }
+  },
+  "regeneratedAt": "2026-08-09T07:30:10.247Z"
 }

@@ -36,10 +36,13 @@
   "visual": {
     "ok": false,
     "matchDeveloped": false,
-    "reviewedAt": "2026-08-06T13:32:20.271Z",
-    "notes": [],
+    "reviewedAt": "2026-08-09T07:30:10.247Z",
+    "notes": [
+      "AUTHORED-VIEWBOX CORRECTED 2026-08-09. Every icon-close asset carried a per-size viewBox (unset/xs/sm 0 0 40 40; md 20; lg 24; xl 32; xxl 36; xxxl 40) where altitude-web-components' own dist/icons/close.svg is `0 0 20 20` for every size. The glyph path spans 15.2 user units, so the canvas drew 15.2/24 of a 24px box at Size=Lg (16px of ink) where the library draws 15.2/20 (18px), and at `unset` it drew 6px where the library draws 12px. Assets corrected in examples/altitude/assets/icons/ and extract/computed/out/altitude/iconclose/assets/; the canvas Vector is now 18.0x18.0 against the library's 18x18 ink, identical shape and identical ink percentage (48.148148 both). Evidence: scripts/altitude-svg-viewbox-probe.mts."
+    ],
     "defects": [
-      "FC-REF-CONTRACT-RENDER: 4.69 against the contract render, 17.28 against the real altitude-web-components IconClose render (canvas 16x16 vs library 18x18). The pass measured emitter agreement, not fidelity."
+      "FC-SVG-VIEWBOX-UNIFIED-MAX (generator, NOT taken this round): extract/computed/anatomy.ts round-5c unification takes `cand = Math.max(...anchors.map(g => g.r.vb))` and lets only BUMPED members adopt it, while writing a receipt that calls the result \"the package's own viewBox\". For one glyph drawn at many sizes the authored space is the MINIMUM unbumped computed size and every member must adopt it. The probe predicts the library ink exactly at 5/8 sizes from `0 0 20 20` and within 1px at the other 3, against 0/8 from the committed per-size viewBoxes. Landing it means re-running extract/computed for every lane, so it is named and handed over rather than taken: altitude is the only lane emitting svg-viewbox-unified receipts (6, all IconClose).",
+      "FC-AA-THIN-VECTOR: with the geometry now exact the residual is rasterizer coverage. Aligned on their ink boxes the two 18x18 glyphs have the SAME coverage pattern, but Chromium fills the thin diagonal arms fatter than Figma does — total ink mass 111.05 (library) vs 97.49 (canvas), ~12% — so every fringe pixel of a shape that is almost all fringe differs by ~30/765. pctAAMasked 19.75 (was 17.28 only because the 16x16-vs-18x18 mismatch made the scorer resample and smooth). This is a floor for this glyph on this instrument, not a canvas defect."
     ],
     "reference": "extract/computed/out/altitude/iconclose/orig-shots/lg__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",
@@ -47,48 +50,25 @@
     "scorecard": "parity/receipts/console-loop/altitude/scores/icon-close.json",
     "status": "fail-closed",
     "scoreConfirmed": {
-      "at": "2026-08-08T04:31:56.356Z",
-      "pctAAMasked": 4.6875,
+      "at": "2026-08-09T07:30:10.247Z",
+      "pctAAMasked": 19.753086419753085,
       "compositionOk": true,
-      "supersededDefects": [],
-      "note": "pre-score manual-review defects superseded by passing pixel scorecard under the one bar (pctAAMasked<=5 AND compositionOk); evidence-gate redesign 2026-08-07"
-    },
-    "revokedByReferenceTruth": {
-      "at": "2026-08-09T03:16:00.807Z",
-      "was": {
-        "ok": true,
-        "matchDeveloped": true,
-        "reason": "agent AA=4.69 compositionOk (cropped-ref loop)",
-        "priorReference": "parity/receipts/console-loop/altitude/refs/icon-close.png"
-      },
-      "reason": "FC-REF-CONTRACT-RENDER: 4.69 against the contract render, 17.28 against the real altitude-web-components IconClose render (canvas 16x16 vs library 18x18). The pass measured emitter agreement, not fidelity."
+      "canvasPx": "18x18",
+      "realPx": "18x18",
+      "reference": "extract/computed/out/altitude/iconclose/orig-shots/lg__default.png",
+      "instrument": "console-loop-developed-score (bridge scale-1 cell export)",
+      "corroboratedBy": "scripts/visual-truth-run.mjs --lib altitude (headless Figma REST images API)"
     }
   },
   "fingerprint": {
-    "v6": "v6:163654327",
-    "lineCount": 96,
+    "v6": "v6:1912940653",
+    "lineCount": 2,
     "sampleLines": [
-      ":COMPONENT_SET/IconClose|fill|[]",
-      ":COMPONENT_SET/IconClose|radius|5,5,5,5",
-      ":COMPONENT_SET/IconClose|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/IconClose|description|IconClose â generated from contract altitude.iconclose v0.2.0 â",
-      ":COMPONENT_SET/IconClose|propdef|Size:VARIANT=Xs",
-      "/0:COMPONENT/Size=Xs|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/0:COMPONENT/Size=Xs|radius|0,0,0,0",
-      "/0:COMPONENT/Size=Xs|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
-      "/0:COMPONENT/Size=Xs|sizing|FIXED/HUG AUTO",
-      "/0:COMPONENT/Size=Xs|bound:minHeight|imported/icon-close/root/min-height",
-      "/0:COMPONENT/Size=Xs|bound:minWidth|imported/icon-close/root/min-width",
-      "/0:COMPONENT/Size=Xs|bound:width|imported/icon-close/root/width/xs",
-      "/0/0:FRAME/root-xs|fill|[]",
-      "/0/0:FRAME/root-xs|radius|0,0,0,0",
-      "/0/0:FRAME/root-xs|sizing|FILL/FIXED AUTO",
-      "/0/0/0:VECTOR/Vector|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.062745101749897,\"g\":0.062745101749897,\"b\":0.062745101749897},\"boundVariables\":{\"color\":{\"var\":\"imported/icon-close/root/color\"}}}]",
-      "/0/0/0:VECTOR/Vector|radius|0,0,0,0",
-      "/0/0/0:VECTOR/Vector|sizing|FIXED/FIXED AUTO",
-      "/1:COMPONENT/Size=Sm|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
-      "/1:COMPONENT/Size=Sm|radius|0,0,0,0"
-    ]
+      ":COMPONENT_SET/IconClose|description|IconClose — generated from contract altitude.iconclose v0.2.0 †",
+      ":COMPONENT_SET/IconClose|propdef|Size:VARIANT=Xs"
+    ],
+    "priorV6": "v6:163654327",
+    "note": "Re-read from the live set after the 2026-08-09 regeneration (ds_contracts/canvasFingerprint). lineCount/sampleLines come from the set-level ds_contracts/canvasSetSnapshot the runtime stores, which is the propdef head, not the full dump the prior receipt counted."
   },
   "roundtrip": {
     "mismatches": [],
@@ -155,5 +135,6 @@
     "screenshotReviewed": true,
     "zeroMismatch": true,
     "visualMatchDeveloped": false
-  }
+  },
+  "regeneratedAt": "2026-08-09T07:30:10.247Z"
 }

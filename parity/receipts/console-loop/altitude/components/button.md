@@ -19,8 +19,8 @@ Button COMPONENT_SET 1:2990: 12 variant(s), 3 prop def(s) on page Button (altitu
 
 ## Fingerprint (v6)
 
-- **hash:** `v6:3196882528`
-- **lineCount:** 299
+- **hash:** `v6:3313935822`
+- **lineCount:** 4
 
 ## Round-trip
 
@@ -36,11 +36,13 @@ generatedOrFound ✓ · screenshotReviewed ✓ · zeroMismatch ✓
 
 ## Visual match (developed)
 
-- reviewedAt: `2026-08-06T13:32:20.271Z`
-- matchDeveloped: **false**
-- reference: extract/computed/out/altitude/button/receipts
-- defect: Khaki/orange/blue matrix present on cream surface but not claimed match to altitude button computed pairs — fail closed.
+- reviewedAt: `2026-08-09T07:30:10.247Z`
+- status: **scored-pass**
+- matchDeveloped: **true**
+- reference: `extract/computed/out/altitude/button/orig-shots/secondary__default.png` (REAL library render — altitude-web-components@1.0.2)
+- scorecard: `parity/receipts/console-loop/altitude/scores/button.json` — pctAAMasked **2.98**, compositionOk **true**, canvas 83x40 vs library 82x40
+- corroborating instrument: `scripts/visual-truth-run.mjs --lib altitude` (headless Figma REST images API)
 
-## 2026-08-08 — Track-2 hill-climb round 1
+### Notes
 
-- regenerated (nodeId=60:10151); bridge scorecard 4.23 PASS (Inter stands for 'Semi Bold' — IBM Plex 'SemiBold' loads a truer font but scored 5.51 against the fallback-rendered ref and was deliberately not kept).
+- FC-FONT-STYLE-PER-FAMILY CLOSED 2026-08-09. The canvas text nodes were rendering in **Inter Semi Bold**, not IBM Plex Sans: core/emit-figma-script.ts compiles the style name from FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold"), while IBM Plex Sans ships that face as "SemiBold" — figma.listAvailableFontsAsync() on GnQnjSNBXtgtd2Ht0Hs1C8 returns [Bold, Bold Italic, ExtraLight, …, Regular, SemiBold, SemiBold Italic, Thin, …] and no "Semi Bold". loadFontAsync threw and the runtime kept its Inter fallback SILENTLY. The runtime now retries the space-free per-family spelling and, if nothing resolves, names FC-FONT-STYLE-UNRESOLVED on the console instead of substituting in silence (RUNTIME_EMIT_REV rt6-native-slots → rt7-font-style-per-family). The 2026-08-08 revert note that forbade this is DEAD: it was reasoned against contract-render references made by a harness with no @font-face, and the references are now real library renders. Button was already a scored pass; the true face improved it: pctAAMasked 4.70 → 2.98, and the cell width moved 84 → 83 against the library render's 82.
