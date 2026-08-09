@@ -22,84 +22,84 @@ join that RANKS and PRESENTS and never auto-resolves.
 
 | leaf | → token | ledger row |
 |---|---|---|
-| `imported.badge.root.background-color.blue` | `{color-background-blue}` | `RA-0171e333` |
-| `imported.badge.root.background-color.cyan` | `{color-background-cyan}` | `RA-03a7d733` |
-| `imported.badge.root.background-color.error` | `{color-error}` | `RA-e3193b` |
-| `imported.badge.root.background-color.green` | `{color-background-green}` | `RA-24bb5e33` |
-| `imported.badge.root.background-color.info` | `{color-accent}` | `RA-0064e0` |
-| `imported.badge.root.background-color.orange` | `{color-background-orange}` | `RA-f2790233` |
-| `imported.badge.root.background-color.pink` | `{color-background-pink}` | `RA-e638b333` |
-| `imported.badge.root.background-color.purple` | `{color-background-purple}` | `RA-7952ff33` |
-| `imported.badge.root.background-color.red` | `{color-background-red}` | `RA-e3193b33` |
-| `imported.badge.root.background-color.success` | `{color-success}` | `RA-0d8626` |
-| `imported.badge.root.background-color.teal` | `{color-background-teal}` | `RA-0db7af33` |
-| `imported.badge.root.background-color.warning` | `{color-warning}` | `RA-e9af08` |
-| `imported.badge.root.background-color.yellow` | `{color-background-yellow}` | `RA-e2a40033` |
-| `imported.badge.root.color.blue` | `{color-text-blue}` | `RA-042f97` |
-| `imported.badge.root.color.cyan` | `{color-text-cyan}` | `RA-014975` |
+| `imported.badge.root.background-color.blue` | `{color-background-blue}` | `RA-c4ddfb`, `RA-0171e333` |
+| `imported.badge.root.background-color.cyan` | `{color-background-cyan}` | `RA-a3e0ef`, `RA-03a7d733` |
+| `imported.badge.root.background-color.error` | `{color-error}` | `RA-a50c25`, `RA-e3193b` |
+| `imported.badge.root.background-color.green` | `{color-background-green}` | `RA-c5e5c0`, `RA-24bb5e33` |
+| `imported.badge.root.background-color.info` | `{color-accent}` | `RA-262626`, `RA-0064e0` |
+| `imported.badge.root.background-color.orange` | `{color-background-orange}` | `RA-fad0b5`, `RA-f2790233` |
+| `imported.badge.root.background-color.pink` | `{color-background-pink}` | `RA-fccadc`, `RA-e638b333` |
+| `imported.badge.root.background-color.purple` | `{color-background-purple}` | `RA-eccef3`, `RA-7952ff33` |
+| `imported.badge.root.background-color.red` | `{color-background-red}` | `RA-facecb`, `RA-e3193b33` |
+| `imported.badge.root.background-color.success` | `{color-success}` | `RA-007004`, `RA-0d8626` |
+| `imported.badge.root.background-color.teal` | `{color-background-teal}` | `RA-a5e3d6`, `RA-0db7af33` |
+| `imported.badge.root.background-color.warning` | `{color-warning}` | `RA-745b00`, `RA-e9af08` |
+| `imported.badge.root.background-color.yellow` | `{color-background-yellow}` | `RA-f8da9d`, `RA-e2a40033` |
+| `imported.badge.root.color.blue` | `{color-text-blue}` | `RA-00458c`, `RA-042f97` |
+| `imported.badge.root.color.cyan` | `{color-text-cyan}` | `RA-00505f`, `RA-014975` |
 | `imported.badge.root.color.error` | `{color-on-error}` | `RA-ffffff` |
-| `imported.badge.root.color.green` | `{color-text-green}` | `RA-09441f` |
+| `imported.badge.root.color.green` | `{color-text-green}` | `RA-0c5700`, `RA-09441f` |
 | `imported.badge.root.color.info` | `{color-on-accent}` | `RA-ffffff` |
 | `imported.badge.root.color.neutral` | `{color-text-primary}` | **UNLEDGERED — investigate** |
-| `imported.badge.root.color.orange` | `{color-text-orange}` | `RA-6b2203` |
-| `imported.badge.root.color.pink` | `{color-text-pink}` | `RA-650053` |
-| `imported.badge.root.color.purple` | `{color-text-purple}` | `RA-3e0697` |
-| `imported.badge.root.color.red` | `{color-text-red}` | `RA-7b0210` |
+| `imported.badge.root.color.orange` | `{color-text-orange}` | `RA-6e3500`, `RA-6b2203` |
+| `imported.badge.root.color.pink` | `{color-text-pink}` | `RA-83004b`, `RA-650053` |
+| `imported.badge.root.color.purple` | `{color-text-purple}` | `RA-700084`, `RA-3e0697` |
+| `imported.badge.root.color.red` | `{color-text-red}` | `RA-89001a`, `RA-7b0210` |
 | `imported.badge.root.color.success` | `{color-on-success}` | `RA-ffffff` |
-| `imported.badge.root.color.teal` | `{color-text-teal}` | `RA-083943` |
-| `imported.badge.root.color.warning` | `{color-on-warning}` | `RA-0a1317` |
-| `imported.badge.root.color.yellow` | `{color-text-yellow}` | `RA-753f07` |
+| `imported.badge.root.color.teal` | `{color-text-teal}` | `RA-005348`, `RA-083943` |
+| `imported.badge.root.color.warning` | `{color-on-warning}` | `RA-171717`, `RA-0a1317` |
+| `imported.badge.root.color.yellow` | `{color-text-yellow}` | `RA-584400`, `RA-753f07` |
 | `imported.button.label.color.destructive` | `{color-on-error}` | `RA-ffffff` |
-| `imported.button.label.color.ghost` | `{color-text-primary}` | `RA-0a1317` |
+| `imported.button.label.color.ghost` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
 | `imported.button.label.color.primary` | `{color-on-accent}` | `RA-ffffff` |
-| `imported.button.label.color.secondary` | `{color-text-primary}` | `RA-0a1317` |
+| `imported.button.label.color.secondary` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
 | `imported.button.part-0.color.destructive` | `{color-on-error}` | `RA-ffffff` |
-| `imported.button.part-0.color.ghost` | `{color-text-primary}` | `RA-0a1317` |
+| `imported.button.part-0.color.ghost` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
 | `imported.button.part-0.color.primary` | `{color-on-accent}` | `RA-ffffff` |
-| `imported.button.part-0.color.secondary` | `{color-text-primary}` | `RA-0a1317` |
+| `imported.button.part-0.color.secondary` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
 | `imported.button.part-1.color.destructive` | `{color-on-error}` | `RA-ffffff` |
-| `imported.button.part-1.color.ghost` | `{color-text-primary}` | `RA-0a1317` |
+| `imported.button.part-1.color.ghost` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
 | `imported.button.part-1.color.primary` | `{color-on-accent}` | `RA-ffffff` |
-| `imported.button.part-1.color.secondary` | `{color-text-primary}` | `RA-0a1317` |
-| `imported.button.root.background-color.destructive` | `{color-error}` | `RA-e3193b` |
-| `imported.button.root.background-color.primary` | `{color-accent}` | `RA-0064e0` |
+| `imported.button.part-1.color.secondary` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
+| `imported.button.root.background-color.destructive` | `{color-error}` | `RA-a50c25`, `RA-e3193b` |
+| `imported.button.root.background-color.primary` | `{color-accent}` | `RA-262626`, `RA-0064e0` |
 | `imported.button.root.color.destructive` | `{color-on-error}` | `RA-ffffff` |
-| `imported.button.root.color.ghost` | `{color-text-primary}` | `RA-0a1317` |
+| `imported.button.root.color.ghost` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
 | `imported.button.root.color.primary` | `{color-on-accent}` | `RA-ffffff` |
-| `imported.button.root.color.secondary` | `{color-text-primary}` | `RA-0a1317` |
+| `imported.button.root.color.secondary` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
 | `imported.button.root.outline-color.destructive` | `{color-on-error}` | `RA-ffffff` |
-| `imported.button.root.outline-color.ghost` | `{color-text-primary}` | `RA-0a1317` |
+| `imported.button.root.outline-color.ghost` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
 | `imported.button.root.outline-color.primary` | `{color-on-accent}` | `RA-ffffff` |
-| `imported.button.root.outline-color.secondary` | `{color-text-primary}` | `RA-0a1317` |
-| `imported.button.root.outline-color-state-focus-visible.destructive` | `{color-error}` | `RA-e3193b` |
-| `imported.button.root.outline-color-state-focus-visible.ghost` | `{color-accent}` | `RA-0064e0` |
-| `imported.button.root.outline-color-state-focus-visible.primary` | `{color-accent}` | `RA-0064e0` |
-| `imported.button.root.outline-color-state-focus-visible.secondary` | `{color-accent}` | `RA-0064e0` |
-| `imported.card.root.background-color.blue` | `{color-background-blue}` | `RA-0171e333` |
-| `imported.card.root.background-color.cyan` | `{color-background-cyan}` | `RA-03a7d733` |
+| `imported.button.root.outline-color.secondary` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
+| `imported.button.root.outline-color-state-focus-visible.destructive` | `{color-error}` | `RA-a50c25`, `RA-e3193b` |
+| `imported.button.root.outline-color-state-focus-visible.ghost` | `{color-accent}` | `RA-262626`, `RA-0064e0` |
+| `imported.button.root.outline-color-state-focus-visible.primary` | `{color-accent}` | `RA-262626`, `RA-0064e0` |
+| `imported.button.root.outline-color-state-focus-visible.secondary` | `{color-accent}` | `RA-262626`, `RA-0064e0` |
+| `imported.card.root.background-color.blue` | `{color-background-blue}` | `RA-c4ddfb`, `RA-0171e333` |
+| `imported.card.root.background-color.cyan` | `{color-background-cyan}` | `RA-a3e0ef`, `RA-03a7d733` |
 | `imported.card.root.background-color.default` | `{color-background-card}` | `RA-ffffff` |
-| `imported.card.root.background-color.gray` | `{color-background-gray}` | `RA-0a131733` |
-| `imported.card.root.background-color.green` | `{color-background-green}` | `RA-24bb5e33` |
-| `imported.card.root.background-color.muted` | `{color-background-muted}` | `RA-0536590c` |
-| `imported.card.root.background-color.orange` | `{color-background-orange}` | `RA-f2790233` |
-| `imported.card.root.background-color.pink` | `{color-background-pink}` | `RA-e638b333` |
-| `imported.card.root.background-color.purple` | `{color-background-purple}` | `RA-7952ff33` |
-| `imported.card.root.background-color.red` | `{color-background-red}` | `RA-e3193b33` |
-| `imported.card.root.background-color.teal` | `{color-background-teal}` | `RA-0db7af33` |
-| `imported.card.root.background-color.yellow` | `{color-background-yellow}` | `RA-e2a40033` |
-| `imported.card.root.border-bottom-color.default` | `{color-border-emphasized}` | `RA-ccd3db` |
-| `imported.card.root.border-left-color.default` | `{color-border-emphasized}` | `RA-ccd3db` |
-| `imported.card.root.border-right-color.default` | `{color-border-emphasized}` | `RA-ccd3db` |
-| `imported.card.root.border-top-color.default` | `{color-border-emphasized}` | `RA-ccd3db` |
+| `imported.card.root.background-color.gray` | `{color-background-gray}` | `RA-e5e5e5`, `RA-0a131733` |
+| `imported.card.root.background-color.green` | `{color-background-green}` | `RA-c5e5c0`, `RA-24bb5e33` |
+| `imported.card.root.background-color.muted` | `{color-background-muted}` | `RA-f1f1f1`, `RA-0536590c` |
+| `imported.card.root.background-color.orange` | `{color-background-orange}` | `RA-fad0b5`, `RA-f2790233` |
+| `imported.card.root.background-color.pink` | `{color-background-pink}` | `RA-fccadc`, `RA-e638b333` |
+| `imported.card.root.background-color.purple` | `{color-background-purple}` | `RA-eccef3`, `RA-7952ff33` |
+| `imported.card.root.background-color.red` | `{color-background-red}` | `RA-facecb`, `RA-e3193b33` |
+| `imported.card.root.background-color.teal` | `{color-background-teal}` | `RA-a5e3d6`, `RA-0db7af33` |
+| `imported.card.root.background-color.yellow` | `{color-background-yellow}` | `RA-f8da9d`, `RA-e2a40033` |
+| `imported.card.root.border-bottom-color.default` | `{color-border-emphasized}` | `RA-d4d4d4`, `RA-ccd3db` |
+| `imported.card.root.border-left-color.default` | `{color-border-emphasized}` | `RA-d4d4d4`, `RA-ccd3db` |
+| `imported.card.root.border-right-color.default` | `{color-border-emphasized}` | `RA-d4d4d4`, `RA-ccd3db` |
+| `imported.card.root.border-top-color.default` | `{color-border-emphasized}` | `RA-d4d4d4`, `RA-ccd3db` |
 | `imported.shared.color-0064e0` | `{color-accent}` | **UNLEDGERED — investigate** |
-| `imported.slider.label.color` | `{color-text-secondary}` | `RA-4e606f` |
+| `imported.slider.label.color` | `{color-text-secondary}` | `RA-737373`, `RA-4e606f` |
 | `imported.slider.label-2.color` | `{color-on-dark}` | `RA-ffffff` |
-| `imported.slider.label-3.color` | `{color-text-primary}` | `RA-0a1317` |
+| `imported.slider.label-3.color` | `{color-text-primary}` | `RA-171717`, `RA-0a1317` |
 | `imported.slider.slider-track.background-color` | `{color-track}` | `RA-ccd3db` |
 | `imported.slider.tooltip.background-color` | `{color-background-inverted}` | `RA-0a1317` |
 | `imported.slider.tooltip.color` | `{color-on-dark}` | `RA-ffffff` |
-| `imported.switch.label.color` | `{color-text-secondary}` | `RA-4e606f` |
-| `imported.switch.label-2.color` | `{color-text-secondary}` | `RA-4e606f` |
+| `imported.switch.label.color` | `{color-text-secondary}` | `RA-737373`, `RA-4e606f` |
+| `imported.switch.label-2.color` | `{color-text-secondary}` | `RA-737373`, `RA-4e606f` |
 | `imported.switch.switch-thumb.background-color` | `{color-background-surface}` | `RA-ffffff` |
 | `imported.switch.switch-thumb-2.background-color` | `{color-background-surface}` | `RA-ffffff` |
 

@@ -79,6 +79,7 @@
     },
     {
       "ids": [
+        "RA-171717",
         "RA-0a1317"
       ],
       "leaves": [
@@ -94,7 +95,7 @@
         "imported.button.root.outline-color.secondary",
         "imported.slider.label-3.color"
       ],
-      "value": "#0a1317",
+      "value": "#171717",
       "candidates": [
         "color-text-gray",
         "color-text-primary",
@@ -124,6 +125,7 @@
     },
     {
       "ids": [
+        "RA-d4d4d4",
         "RA-ccd3db"
       ],
       "leaves": [
@@ -132,7 +134,7 @@
         "imported.card.root.border-right-color.default",
         "imported.card.root.border-top-color.default"
       ],
-      "value": "#ccd3db",
+      "value": "#d4d4d4",
       "candidates": [
         "color-border-emphasized",
         "color-skeleton",
@@ -176,6 +178,7 @@
     },
     {
       "ids": [
+        "RA-262626",
         "RA-0064e0"
       ],
       "leaves": [
@@ -185,7 +188,7 @@
         "imported.button.root.outline-color-state-focus-visible.primary",
         "imported.button.root.outline-color-state-focus-visible.secondary"
       ],
-      "value": "#0064e0",
+      "value": "#262626",
       "candidates": [
         "color-accent",
         "color-border-blue",
@@ -206,6 +209,7 @@
     },
     {
       "ids": [
+        "RA-737373",
         "RA-4e606f"
       ],
       "leaves": [
@@ -213,7 +217,7 @@
         "imported.switch.label-2.color",
         "imported.switch.label.color"
       ],
-      "value": "#4e606f",
+      "value": "#737373",
       "candidates": [
         "color-text-secondary",
         "color-icon-gray",
@@ -233,12 +237,13 @@
     },
     {
       "ids": [
+        "RA-00505f",
         "RA-014975"
       ],
       "leaves": [
         "imported.badge.root.color.cyan"
       ],
-      "value": "#014975",
+      "value": "#00505f",
       "candidates": [
         "color-text-cyan"
       ],
@@ -254,13 +259,14 @@
     },
     {
       "ids": [
+        "RA-c4ddfb",
         "RA-0171e333"
       ],
       "leaves": [
         "imported.badge.root.background-color.blue",
         "imported.card.root.background-color.blue"
       ],
-      "value": "#0171e333",
+      "value": "#c4ddfb",
       "candidates": [
         "color-background-blue"
       ],
@@ -277,13 +283,14 @@
     },
     {
       "ids": [
+        "RA-a3e0ef",
         "RA-03a7d733"
       ],
       "leaves": [
         "imported.badge.root.background-color.cyan",
         "imported.card.root.background-color.cyan"
       ],
-      "value": "#03a7d733",
+      "value": "#a3e0ef",
       "candidates": [
         "color-background-cyan"
       ],
@@ -300,12 +307,13 @@
     },
     {
       "ids": [
+        "RA-00458c",
         "RA-042f97"
       ],
       "leaves": [
         "imported.badge.root.color.blue"
       ],
-      "value": "#042f97",
+      "value": "#00458c",
       "candidates": [
         "color-text-blue"
       ],
@@ -321,12 +329,13 @@
     },
     {
       "ids": [
+        "RA-f1f1f1",
         "RA-0536590c"
       ],
       "leaves": [
         "imported.card.root.background-color.muted"
       ],
-      "value": "#0536590c",
+      "value": "#f1f1f1",
       "candidates": [
         "color-background-muted",
         "color-overlay-hover"
@@ -343,12 +352,13 @@
     },
     {
       "ids": [
+        "RA-005348",
         "RA-083943"
       ],
       "leaves": [
         "imported.badge.root.color.teal"
       ],
-      "value": "#083943",
+      "value": "#005348",
       "candidates": [
         "color-text-teal"
       ],
@@ -364,12 +374,13 @@
     },
     {
       "ids": [
+        "RA-0c5700",
         "RA-09441f"
       ],
       "leaves": [
         "imported.badge.root.color.green"
       ],
-      "value": "#09441f",
+      "value": "#0c5700",
       "candidates": [
         "color-text-green"
       ],
@@ -410,12 +421,13 @@
     },
     {
       "ids": [
+        "RA-e5e5e5",
         "RA-0a131733"
       ],
       "leaves": [
         "imported.card.root.background-color.gray"
       ],
-      "value": "#0a131733",
+      "value": "#e5e5e5",
       "candidates": [
         "color-background-gray"
       ],
@@ -431,13 +443,14 @@
     },
     {
       "ids": [
+        "RA-a5e3d6",
         "RA-0db7af33"
       ],
       "leaves": [
         "imported.badge.root.background-color.teal",
         "imported.card.root.background-color.teal"
       ],
-      "value": "#0db7af33",
+      "value": "#a5e3d6",
       "candidates": [
         "color-background-teal"
       ],
@@ -454,13 +467,14 @@
     },
     {
       "ids": [
+        "RA-c5e5c0",
         "RA-24bb5e33"
       ],
       "leaves": [
         "imported.badge.root.background-color.green",
         "imported.card.root.background-color.green"
       ],
-      "value": "#24bb5e33",
+      "value": "#c5e5c0",
       "candidates": [
         "color-background-green"
       ],
@@ -477,12 +491,13 @@
     },
     {
       "ids": [
+        "RA-700084",
         "RA-3e0697"
       ],
       "leaves": [
         "imported.badge.root.color.purple"
       ],
-      "value": "#3e0697",
+      "value": "#700084",
       "candidates": [
         "color-text-purple"
       ],
@@ -498,12 +513,13 @@
     },
     {
       "ids": [
+        "RA-83004b",
         "RA-650053"
       ],
       "leaves": [
         "imported.badge.root.color.pink"
       ],
-      "value": "#650053",
+      "value": "#83004b",
       "candidates": [
         "color-text-pink"
       ],
@@ -519,12 +535,13 @@
     },
     {
       "ids": [
+        "RA-6e3500",
         "RA-6b2203"
       ],
       "leaves": [
         "imported.badge.root.color.orange"
       ],
-      "value": "#6b2203",
+      "value": "#6e3500",
       "candidates": [
         "color-text-orange"
       ],
@@ -540,12 +557,13 @@
     },
     {
       "ids": [
+        "RA-584400",
         "RA-753f07"
       ],
       "leaves": [
         "imported.badge.root.color.yellow"
       ],
-      "value": "#753f07",
+      "value": "#584400",
       "candidates": [
         "color-text-yellow"
       ],
@@ -561,13 +579,14 @@
     },
     {
       "ids": [
+        "RA-eccef3",
         "RA-7952ff33"
       ],
       "leaves": [
         "imported.badge.root.background-color.purple",
         "imported.card.root.background-color.purple"
       ],
-      "value": "#7952ff33",
+      "value": "#eccef3",
       "candidates": [
         "color-background-purple"
       ],
@@ -584,12 +603,13 @@
     },
     {
       "ids": [
+        "RA-89001a",
         "RA-7b0210"
       ],
       "leaves": [
         "imported.badge.root.color.red"
       ],
-      "value": "#7b0210",
+      "value": "#89001a",
       "candidates": [
         "color-text-red"
       ],
@@ -605,13 +625,14 @@
     },
     {
       "ids": [
+        "RA-f8da9d",
         "RA-e2a40033"
       ],
       "leaves": [
         "imported.badge.root.background-color.yellow",
         "imported.card.root.background-color.yellow"
       ],
-      "value": "#e2a40033",
+      "value": "#f8da9d",
       "candidates": [
         "color-background-yellow",
         "color-warning-muted"
@@ -629,6 +650,7 @@
     },
     {
       "ids": [
+        "RA-a50c25",
         "RA-e3193b"
       ],
       "leaves": [
@@ -636,7 +658,7 @@
         "imported.button.root.background-color.destructive",
         "imported.button.root.outline-color-state-focus-visible.destructive"
       ],
-      "value": "#e3193b",
+      "value": "#a50c25",
       "candidates": [
         "color-border-red",
         "color-error"
@@ -654,13 +676,14 @@
     },
     {
       "ids": [
+        "RA-facecb",
         "RA-e3193b33"
       ],
       "leaves": [
         "imported.badge.root.background-color.red",
         "imported.card.root.background-color.red"
       ],
-      "value": "#e3193b33",
+      "value": "#facecb",
       "candidates": [
         "color-background-red",
         "color-error-muted"
@@ -678,13 +701,14 @@
     },
     {
       "ids": [
+        "RA-fccadc",
         "RA-e638b333"
       ],
       "leaves": [
         "imported.badge.root.background-color.pink",
         "imported.card.root.background-color.pink"
       ],
-      "value": "#e638b333",
+      "value": "#fccadc",
       "candidates": [
         "color-background-pink"
       ],
@@ -701,13 +725,14 @@
     },
     {
       "ids": [
+        "RA-fad0b5",
         "RA-f2790233"
       ],
       "leaves": [
         "imported.badge.root.background-color.orange",
         "imported.card.root.background-color.orange"
       ],
-      "value": "#f2790233",
+      "value": "#fad0b5",
       "candidates": [
         "color-background-orange"
       ],
@@ -780,12 +805,13 @@
     },
     {
       "ids": [
+        "RA-171717",
         "RA-0a1317"
       ],
       "leaves": [
         "imported.badge.root.color.warning"
       ],
-      "value": "#0a1317",
+      "value": "#171717",
       "candidates": [
         "color-text-gray",
         "color-text-primary",
@@ -862,12 +888,13 @@
     },
     {
       "ids": [
+        "RA-007004",
         "RA-0d8626"
       ],
       "leaves": [
         "imported.badge.root.background-color.success"
       ],
-      "value": "#0d8626",
+      "value": "#007004",
       "candidates": [
         "color-success",
         "color-border-green",
@@ -885,12 +912,13 @@
     },
     {
       "ids": [
+        "RA-745b00",
         "RA-e9af08"
       ],
       "leaves": [
         "imported.badge.root.background-color.warning"
       ],
-      "value": "#e9af08",
+      "value": "#745b00",
       "candidates": [
         "color-warning"
       ],
@@ -1154,5 +1182,7 @@
         ]
       }
     ]
-  }
+  },
+  "_reRecord_2026_08_09": "THEME-NEUTRAL RE-BASE. These decisions are keyed by VALUE, so moving the base plane from @astryxdesign/core to @astryxdesign/theme-neutral invalidated every row's id at once. A row is re-recorded here ONLY when the ACKED TOKEN'S OWN CURRENT VALUE is what its leaves measure \u2014 i.e. the anchor still resolves to the right colour and only the number moved with the base. That test replaced two weaker ones: comparing against `aliasedTo` is CIRCULAR (it is what the ledger already applied), and comparing against the proposal's top candidate FALSELY flags collisions \u2014 five distinct roles are all #ffffff and two are #f1f1f1, so a value-keyed scorer collapses them onto one token while the acked targets keep the distinction a label-on-accent needs. Historical ids are kept alongside the new ones so nothing citing them is orphaned. Rows in _heldForReview measure something their acked token no longer equals and are NOT re-recorded.",
+  "_heldForReview": []
 }

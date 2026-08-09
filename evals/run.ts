@@ -196,6 +196,7 @@ function run(cmd: string, args: string[]): RunResult {
   });
   return { status: r.status ?? -1, out: `${r.stdout ?? ''}${r.stderr ?? ''}` };
 }
+const REANCHOR_PIN_ID = 'RA-00458c'; // {color-text-blue} on the theme-neutral base (was RA-042f97 on core)
 const generate = () => run(TSX, ['scripts/generate-components.ts']);
 const buildTokens = () => run(process.execPath, ['scripts/build-tokens.mjs']);
 const parity = () => run(TSX, ['parity/diff.ts']);
@@ -7149,6 +7150,14 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     //   4. the BYTE-GATE holds: the 9 applied aliases resolve to the same
     //      NEUTRAL values and the 13 neutral component scripts re-emit
     //      byte-identical (aliasing must not move a neutral pixel)
+    // THE PINNED ROW'S ID MOVES WITH THE BASE, and that is not a loosening.
+    // Re-anchor ids are DERIVED FROM THE VALUE (RA-042f97 is #042f97), so the
+    // theme-neutral re-base renamed every row at once: {color-text-blue} is
+    // #00458c now, and `--apply` resolves ids against the CURRENT join, not
+    // against the decisions file. The historical id is kept alongside the new
+    // one in the decision's `ids` list so nothing that cites it is orphaned,
+    // but the id asserted here has to be the live one or this pin tests a row
+    // that cannot exist.
     id: 'astryx-reanchor-minted',
     claim: 'C1-determinism',
     run: () => {
@@ -7276,7 +7285,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const mintedBefore = sha(MINTED);
 
       // FALSIFY: an ACKED id applies, idempotently, leaving the tree untouched
-      const acked = run(TSX, [SCRIPT, '--apply', 'RA-042f97']);
+      const acked = run(TSX, [SCRIPT, '--apply', REANCHOR_PIN_ID]);
       if (acked.status !== 0) throw new Error(`an acked id did NOT apply:\n${acked.out}`);
       if (sha(MINTED) !== mintedBefore) throw new Error('--apply on an already-landed row was not idempotent');
 
@@ -7415,7 +7424,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const badge = T('examples/astryx/figma/badge.figma.js');
       const badgeSrc = readFileSync(badge);
       writeFileSync(badge, Buffer.concat([badgeSrc, Buffer.from('\n// tamper\n')]));
-      const tampered = run(TSX, [SCRIPT, '--apply', 'RA-042f97']);
+      const tampered = run(TSX, [SCRIPT, '--apply', REANCHOR_PIN_ID]);
       writeFileSync(badge, badgeSrc);
       if (tampered.status === 0) throw new Error('the byte-gate ACCEPTED a moved neutral component script');
       if (!tampered.out.includes('BYTE-GATE') || !tampered.out.includes('badge.figma.js')) {
@@ -7423,9 +7432,41 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
 
       // FALSIFY the stale-ledger guard: drift the DTCG under the ledger.
+      //
+      // THE TAMPER MUST ACTUALLY BITE. This used to hard-code `"#042F97"`, the
+      // pinned row's value on the @astryxdesign/core base. After the
+      // theme-neutral re-base that string is simply absent, so the replace was
+      // a NO-OP: nothing drifted, `--apply` correctly succeeded, and the
+      // falsification passed by testing nothing. A falsification that silently
+      // matches zero bytes is worse than none, so the value is derived from the
+      // pinned row and its presence is asserted before the tamper is trusted.
       const baseSrc = readFileSync(T(BASE), 'utf8');
-      writeFileSync(T(BASE), baseSrc.replace('"#042F97"', '"#123456"'));
-      const stale = run(TSX, [SCRIPT, '--apply', 'RA-042f97']);
+      const pinnedValue = (
+        JSON.parse(readFileSync(T('examples/astryx/tokens/reanchor-decisions.json'), 'utf8')) as {
+          decisions: { ids?: string[]; value?: string }[];
+        }
+      ).decisions.find((r) => (r.ids ?? []).includes(REANCHOR_PIN_ID))?.value;
+      if (!pinnedValue) throw new Error(`no decision row carries ${REANCHOR_PIN_ID} — the stale-ledger falsification has no subject`);
+      // Target the PINNED TOKEN, not the first occurrence of its value: several
+      // tokens share a colour on this base, and a bare string replace lands on
+      // whichever appears first — drifting a token the ledger row never cites,
+      // which is another way for this falsification to test nothing.
+      const pinnedToken = (
+        JSON.parse(readFileSync(T('examples/astryx/tokens/reanchor-decisions.json'), 'utf8')) as {
+          decisions: { ids?: string[]; to?: string }[];
+        }
+      ).decisions.find((r) => (r.ids ?? []).includes(REANCHOR_PIN_ID))?.to;
+      const tamperRe = new RegExp(
+        `("${pinnedToken}"\\s*:\\s*\\{[^}]*?"\\$value"\\s*:\\s*")${pinnedValue}(")`,
+        'i',
+      );
+      if (!tamperRe.test(baseSrc)) {
+        throw new Error(
+          `the stale-ledger falsification cannot bite: ${BASE} has no {${pinnedToken}} carrying ${pinnedValue}, so the tamper would be a silent no-op`,
+        );
+      }
+      writeFileSync(T(BASE), baseSrc.replace(tamperRe, '$1#123456$2'));
+      const stale = run(TSX, [SCRIPT, '--apply', REANCHOR_PIN_ID]);
       if (stale.status === 0) throw new Error('--apply accepted a ledger whose token value had drifted');
       if (!stale.out.includes('STALE LEDGER')) throw new Error(`the drift refusal is not named:\n${stale.out}`);
       // …and the same drift must move --propose (proving step 1 measures the

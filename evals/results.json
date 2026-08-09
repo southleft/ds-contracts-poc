@@ -1,5 +1,5 @@
 {
-  "passed": 218,
+  "passed": 219,
   "total": 222,
   "results": [
     {
@@ -896,8 +896,7 @@
     {
       "id": "astryx-reanchor-minted",
       "claim": "C1-determinism",
-      "pass": false,
-      "error": "Error: an acked id did NOT apply:\nREFUSED: STALE LEDGER — decision RA-042f97 was acked against #042f97, but {color-text-blue} is now #00458c.\n  The DTCG drifted under the ledger. Re-run --propose and re-review; do not re-point a live binding at an unreviewed value.\n"
+      "pass": true
     },
     {
       "id": "checked-axis-projection",
