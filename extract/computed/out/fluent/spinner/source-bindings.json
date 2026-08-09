@@ -1,0 +1,5778 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Spinner",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-tiny.primary.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-tiny.primary.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-tiny.primary.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-tiny.primary.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-tiny.inverted.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-tiny.inverted.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-tiny.inverted.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-tiny.inverted.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "tiny.primary.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "tiny.primary.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "tiny.primary.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "tiny.primary.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "tiny.inverted.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "tiny.inverted.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "tiny.inverted.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "tiny.inverted.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-small.primary.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-small.primary.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-small.primary.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-small.primary.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-small.inverted.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-small.inverted.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-small.inverted.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-small.inverted.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "small.primary.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "small.primary.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "small.primary.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "small.primary.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "small.inverted.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "small.inverted.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "small.inverted.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "small.inverted.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "medium.primary.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "medium.primary.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "medium.primary.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "medium.primary.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "medium.inverted.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "medium.inverted.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "medium.inverted.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "medium.inverted.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "large.primary.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "large.primary.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "large.primary.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "large.primary.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "large.inverted.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "large.inverted.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "large.inverted.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "large.inverted.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-large.primary.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-large.primary.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-large.primary.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-large.primary.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-large.inverted.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-large.inverted.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-large.inverted.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "extra-large.inverted.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "huge.primary.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "huge.primary.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "huge.primary.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "huge.primary.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "huge.inverted.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "huge.inverted.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "huge.inverted.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "huge.inverted.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-static-inverted",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "anchor": {
+        "selector": ".fonrgv7"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-tiny.primary.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-tiny.primary.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-tiny.primary.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-tiny.primary.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-tiny.inverted.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-tiny.inverted.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-tiny.inverted.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-tiny.inverted.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "tiny.primary.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "tiny.primary.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "tiny.primary.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "tiny.primary.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "tiny.inverted.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "tiny.inverted.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "tiny.inverted.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "tiny.inverted.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-small.primary.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-small.primary.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-small.primary.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-small.primary.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-small.inverted.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-small.inverted.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-small.inverted.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-small.inverted.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "small.primary.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "small.primary.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "small.primary.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "small.primary.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "small.inverted.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "small.inverted.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "small.inverted.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "small.inverted.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "medium.primary.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "medium.primary.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "medium.primary.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "medium.primary.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "medium.inverted.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "medium.inverted.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "medium.inverted.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "medium.inverted.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "large.primary.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "large.primary.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "large.primary.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "large.primary.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "large.inverted.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "large.inverted.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "large.inverted.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "large.inverted.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-large.primary.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-large.primary.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-large.primary.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-large.primary.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-large.inverted.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-large.inverted.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-large.inverted.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "extra-large.inverted.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "huge.primary.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "huge.primary.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "huge.primary.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "huge.primary.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "huge.inverted.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "huge.inverted.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "huge.inverted.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "huge.inverted.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-tiny.primary.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-tiny.primary.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-tiny.primary.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-tiny.primary.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-tiny.inverted.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-tiny.inverted.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-tiny.inverted.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-tiny.inverted.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "tiny.primary.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "tiny.primary.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "tiny.primary.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "tiny.primary.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "tiny.inverted.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "tiny.inverted.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "tiny.inverted.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "tiny.inverted.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-small.primary.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-small.primary.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-small.primary.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-small.primary.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-small.inverted.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-small.inverted.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-small.inverted.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-small.inverted.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "small.primary.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "small.primary.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "small.primary.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "small.primary.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "small.inverted.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "small.inverted.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "small.inverted.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "small.inverted.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-regular",
+      "varName": "--fontWeightRegular",
+      "anchor": {
+        "selector": ".figsok6"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "medium.primary.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "medium.primary.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "medium.primary.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "medium.primary.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "medium.inverted.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "medium.inverted.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "medium.inverted.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "medium.inverted.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "large.primary.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "large.primary.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "large.primary.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "large.primary.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "large.inverted.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "large.inverted.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "large.inverted.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "large.inverted.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-large.primary.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-large.primary.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-large.primary.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-large.primary.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-large.inverted.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-large.inverted.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-large.inverted.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "extra-large.inverted.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "huge.primary.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "huge.primary.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "huge.primary.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "huge.primary.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "huge.inverted.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "huge.inverted.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "huge.inverted.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "huge.inverted.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".fl43uef"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-tiny.primary.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-tiny.primary.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-tiny.primary.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-tiny.primary.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-tiny.inverted.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-tiny.inverted.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-tiny.inverted.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-tiny.inverted.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "tiny.primary.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "tiny.primary.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "tiny.primary.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "tiny.primary.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "tiny.inverted.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "tiny.inverted.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "tiny.inverted.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "tiny.inverted.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-small.primary.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-small.primary.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-small.primary.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-small.primary.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-small.inverted.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-small.inverted.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-small.inverted.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-small.inverted.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "small.primary.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "small.primary.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "small.primary.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "small.primary.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "small.inverted.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "small.inverted.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "small.inverted.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "small.inverted.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "medium.primary.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "medium.primary.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "medium.primary.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "medium.primary.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "medium.inverted.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "medium.inverted.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "medium.inverted.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "medium.inverted.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.primary.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.primary.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.primary.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.primary.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.inverted.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.inverted.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.inverted.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.inverted.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-large.primary.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-large.primary.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-large.primary.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-large.primary.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-large.inverted.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-large.inverted.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-large.inverted.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "extra-large.inverted.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base400",
+      "varName": "--lineHeightBase400",
+      "anchor": {
+        "selector": ".faaz57k"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "huge.primary.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base500",
+      "varName": "--lineHeightBase500",
+      "anchor": {
+        "selector": ".f106mvju"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "huge.primary.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base500",
+      "varName": "--lineHeightBase500",
+      "anchor": {
+        "selector": ".f106mvju"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "huge.primary.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base500",
+      "varName": "--lineHeightBase500",
+      "anchor": {
+        "selector": ".f106mvju"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "huge.primary.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base500",
+      "varName": "--lineHeightBase500",
+      "anchor": {
+        "selector": ".f106mvju"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "huge.inverted.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base500",
+      "varName": "--lineHeightBase500",
+      "anchor": {
+        "selector": ".f106mvju"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "huge.inverted.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "line-height-base500",
+      "varName": "--lineHeightBase500",
+      "anchor": {
+        "selector": ".f106mvju"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "huge.inverted.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base500",
+      "varName": "--lineHeightBase500",
+      "anchor": {
+        "selector": ".f106mvju"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "huge.inverted.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base500",
+      "varName": "--lineHeightBase500",
+      "anchor": {
+        "selector": ".f106mvju"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-tiny.primary.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-tiny.primary.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-tiny.primary.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-tiny.primary.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-tiny.inverted.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-tiny.inverted.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-tiny.inverted.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-tiny.inverted.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "tiny.primary.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "tiny.primary.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "tiny.primary.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "tiny.primary.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "tiny.inverted.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "tiny.inverted.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "tiny.inverted.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "tiny.inverted.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-small.primary.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-small.primary.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-small.primary.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-small.primary.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-small.inverted.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-small.inverted.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-small.inverted.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-small.inverted.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "small.primary.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "small.primary.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "small.primary.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "small.primary.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "small.inverted.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "small.inverted.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "small.inverted.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "small.inverted.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "medium.primary.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "medium.primary.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "medium.primary.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "medium.primary.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "medium.inverted.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "medium.inverted.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "medium.inverted.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "medium.inverted.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "large.primary.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "large.primary.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "large.primary.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "large.primary.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "large.inverted.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "large.inverted.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "large.inverted.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "large.inverted.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-large.primary.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-large.primary.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-large.primary.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-large.primary.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-large.inverted.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-large.inverted.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-large.inverted.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "extra-large.inverted.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "huge.primary.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "huge.primary.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "huge.primary.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "huge.primary.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke2-contrast",
+      "varName": "--colorBrandStroke2Contrast",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "huge.inverted.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "huge.inverted.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "huge.inverted.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "background-color",
+      "combo": "huge.inverted.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-alpha2",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "anchor": {
+        "selector": ".fr407j0"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-tiny.primary.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-tiny.primary.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-tiny.primary.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-tiny.primary.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-tiny.inverted.above",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-tiny.inverted.below",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-tiny.inverted.before",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-tiny.inverted.after",
+      "axisValues": {
+        "size": "extra-tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "tiny.primary.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "tiny.primary.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "tiny.primary.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "tiny.primary.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "tiny.inverted.above",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "tiny.inverted.below",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "tiny.inverted.before",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "tiny.inverted.after",
+      "axisValues": {
+        "size": "tiny",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-small.primary.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-small.primary.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-small.primary.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-small.primary.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-small.inverted.above",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-small.inverted.below",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-small.inverted.before",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-small.inverted.after",
+      "axisValues": {
+        "size": "extra-small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "small.primary.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "small.primary.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "small.primary.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "small.primary.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "small.inverted.above",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "small.inverted.below",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "small.inverted.before",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "small.inverted.after",
+      "axisValues": {
+        "size": "small",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "medium.primary.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "medium.primary.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "medium.primary.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "medium.primary.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "medium.inverted.above",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "medium.inverted.below",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "medium.inverted.before",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "medium.inverted.after",
+      "axisValues": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "large.primary.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "large.primary.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "large.primary.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "large.primary.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "large.inverted.above",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "large.inverted.below",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "large.inverted.before",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "large.inverted.after",
+      "axisValues": {
+        "size": "large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-large.primary.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-large.primary.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-large.primary.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-large.primary.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-large.inverted.above",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-large.inverted.below",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-large.inverted.before",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "extra-large.inverted.after",
+      "axisValues": {
+        "size": "extra-large",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "huge.primary.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "huge.primary.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "huge.primary.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "huge.primary.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "token": "color-brand-stroke1",
+      "varName": "--colorBrandStroke1",
+      "anchor": {
+        "selector": ".rvgcg50"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "huge.inverted.above",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "huge.inverted.below",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "below"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "huge.inverted.before",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    },
+    {
+      "part": "spinner",
+      "channel": "color",
+      "combo": "huge.inverted.after",
+      "axisValues": {
+        "size": "huge",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-on-brand2",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "anchor": {
+        "selector": ".f1f7voed"
+      }
+    }
+  ],
+  "skips": [
+    "label.font-family: candidate --fontFamilyBase → \"font-family-base\" = 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "spinner.mask-image: source declares `radial-gradient(closest-side, transparent calc(100% - var(--fui-Spinner--strokeWidth) - 1px), white calc(100% - var(--fu` — a calc() over var(--fui-Spinner--strokeWidth). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "spinnertail.animation-timing-function: candidate --curveEasyEase → \"curve-easy-ease\" = cubic-bezier(0.33,0,0.67,1) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 1,
+  "calcCeiling": 1,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

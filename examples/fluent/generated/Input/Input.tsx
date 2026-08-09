@@ -1,0 +1,39 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/input.contract.json (fluent.input v0.2.0)
+ * Regenerate with: npm run generate
+ */
+import { forwardRef } from 'react';
+import type { HTMLAttributes } from 'react';
+import styles from './Input.module.css';
+
+export interface InputProps extends HTMLAttributes<HTMLSpanElement> {
+  appearance?:
+    | 'outline'
+    | 'underline'
+    | 'filled-darker'
+    | 'filled-lighter'
+    | 'filled-darker-shadow'
+    | 'filled-lighter-shadow';
+  size?: 'small' | 'medium' | 'large';
+}
+
+/** SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: appearance=outline, size=medium, type=text. `type` is DEFERRED BY NAME — 12 HTML input types are an attribute pass-through, not a visual axis. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/fluent/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Fluent's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow. */
+export const Input = forwardRef<HTMLSpanElement, InputProps>(function Input(
+  { appearance = 'outline', size = 'medium', className, children, ...rest },
+  ref,
+) {
+  const classes = [
+    styles.root,
+    styles[`appearance-${appearance}`],
+    styles[`size-${size}`],
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+  return (
+    <span ref={ref} className={classes} {...rest}>
+      <input className={styles.input}></input>
+    </span>
+  );
+});

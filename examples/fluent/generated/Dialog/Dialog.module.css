@@ -1,0 +1,465 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/dialog.contract.json (fluent.dialog v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: var(--imported-shared-color-ffffff);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
+}
+
+.modalType-alert {
+  border-bottom-color: var(--imported-dialog-root-border-bottom-color-alert);
+  border-bottom-left-radius: var(--imported-dialog-root-border-bottom-left-radius-alert);
+  border-bottom-right-radius: var(--imported-dialog-root-border-bottom-right-radius-alert);
+  border-bottom-width: var(--imported-dialog-root-border-bottom-width-alert);
+  border-left-color: var(--imported-dialog-root-border-left-color-alert);
+  border-left-width: var(--imported-dialog-root-border-left-width-alert);
+  border-right-color: var(--imported-dialog-root-border-right-color-alert);
+  border-right-width: var(--imported-dialog-root-border-right-width-alert);
+  border-top-color: var(--imported-dialog-root-border-top-color-alert);
+  border-top-left-radius: var(--imported-dialog-root-border-top-left-radius-alert);
+  border-top-right-radius: var(--imported-dialog-root-border-top-right-radius-alert);
+  border-top-width: var(--imported-dialog-root-border-top-width-alert);
+  box-shadow: var(--imported-dialog-root-box-shadow-alert);
+  margin-bottom: var(--imported-dialog-root-margin-bottom-alert);
+  margin-left: var(--imported-dialog-root-margin-left-alert);
+  margin-right: var(--imported-dialog-root-margin-right-alert);
+  margin-top: var(--imported-dialog-root-margin-top-alert);
+  padding-bottom: var(--imported-dialog-root-padding-bottom-alert);
+  padding-left: var(--imported-dialog-root-padding-left-alert);
+  padding-right: var(--imported-dialog-root-padding-right-alert);
+  padding-top: var(--imported-dialog-root-padding-top-alert);
+}
+
+.modalType-modal {
+  border-bottom-color: var(--imported-dialog-root-border-bottom-color-modal);
+  border-bottom-left-radius: var(--imported-dialog-root-border-bottom-left-radius-modal);
+  border-bottom-right-radius: var(--imported-dialog-root-border-bottom-right-radius-modal);
+  border-bottom-width: var(--imported-dialog-root-border-bottom-width-modal);
+  border-left-color: var(--imported-dialog-root-border-left-color-modal);
+  border-left-width: var(--imported-dialog-root-border-left-width-modal);
+  border-right-color: var(--imported-dialog-root-border-right-color-modal);
+  border-right-width: var(--imported-dialog-root-border-right-width-modal);
+  border-top-color: var(--imported-dialog-root-border-top-color-modal);
+  border-top-left-radius: var(--imported-dialog-root-border-top-left-radius-modal);
+  border-top-right-radius: var(--imported-dialog-root-border-top-right-radius-modal);
+  border-top-width: var(--imported-dialog-root-border-top-width-modal);
+  box-shadow: var(--imported-dialog-root-box-shadow-modal);
+  margin-bottom: var(--imported-dialog-root-margin-bottom-modal);
+  margin-left: var(--imported-dialog-root-margin-left-modal);
+  margin-right: var(--imported-dialog-root-margin-right-modal);
+  margin-top: var(--imported-dialog-root-margin-top-modal);
+  padding-bottom: var(--imported-dialog-root-padding-bottom-modal);
+  padding-left: var(--imported-dialog-root-padding-left-modal);
+  padding-right: var(--imported-dialog-root-padding-right-modal);
+  padding-top: var(--imported-dialog-root-padding-top-modal);
+}
+
+.modalType-non-modal {
+  border-bottom-color: var(--imported-dialog-root-border-bottom-color-non-modal);
+  border-bottom-left-radius: var(--imported-dialog-root-border-bottom-left-radius-non-modal);
+  border-bottom-right-radius: var(--imported-dialog-root-border-bottom-right-radius-non-modal);
+  border-bottom-width: var(--imported-dialog-root-border-bottom-width-non-modal);
+  border-left-color: var(--imported-dialog-root-border-left-color-non-modal);
+  border-left-width: var(--imported-dialog-root-border-left-width-non-modal);
+  border-right-color: var(--imported-dialog-root-border-right-color-non-modal);
+  border-right-width: var(--imported-dialog-root-border-right-width-non-modal);
+  border-top-color: var(--imported-dialog-root-border-top-color-non-modal);
+  border-top-left-radius: var(--imported-dialog-root-border-top-left-radius-non-modal);
+  border-top-right-radius: var(--imported-dialog-root-border-top-right-radius-non-modal);
+  border-top-width: var(--imported-dialog-root-border-top-width-non-modal);
+  box-shadow: var(--imported-dialog-root-box-shadow-non-modal);
+  margin-bottom: var(--imported-dialog-root-margin-bottom-non-modal);
+  margin-left: var(--imported-dialog-root-margin-left-non-modal);
+  margin-right: var(--imported-dialog-root-margin-right-non-modal);
+  margin-top: var(--imported-dialog-root-margin-top-non-modal);
+  padding-bottom: var(--imported-dialog-root-padding-bottom-non-modal);
+  padding-left: var(--imported-dialog-root-padding-left-non-modal);
+  padding-right: var(--imported-dialog-root-padding-right-non-modal);
+  padding-top: var(--imported-dialog-root-padding-top-non-modal);
+}
+
+.dialogbody-2 {
+  display: flex;
+  column-gap: var(--imported-shared-size-8);
+  max-height: var(--imported-dialog-dialogbody-2-max-height);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  row-gap: var(--imported-shared-size-8);
+  box-sizing: border-box;
+}
+
+.modalType-modal .dialogbody-2 {
+  display: none;
+}
+
+.modalType-alert .dialogbody-2 {
+  display: none;
+}
+
+.label-4 {
+  margin: 0;
+  font-size: var(--imported-shared-size-20);
+  font-weight: var(--imported-shared-num-600);
+  line-height: var(--imported-dialog-label-4-line-height);
+  display: block;
+}
+
+.modalType-modal .label-4 {
+  display: none;
+}
+
+.modalType-alert .label-4 {
+  display: none;
+}
+
+.dialogtitle__action {
+  display: flex;
+  display: block;
+}
+
+.modalType-modal .dialogtitle__action {
+  display: none;
+}
+
+.modalType-alert .dialogtitle__action {
+  display: none;
+}
+
+.part-0-1-0 svg {
+  width: 20px;
+  height: 20px;
+}
+
+.part-0-1-0 {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  background-color: var(--imported-shared-color-00000000);
+  border-bottom-width: var(--imported-shared-size-0);
+  border-left-width: var(--imported-shared-size-0);
+  border-right-width: var(--imported-shared-size-0);
+  border-top-width: var(--imported-shared-size-0);
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-242424);
+  font-size: var(--imported-shared-size-14);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  padding-bottom: var(--imported-shared-size-0);
+  padding-left: var(--imported-shared-size-0);
+  padding-right: var(--imported-shared-size-0);
+  padding-top: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  display: inline-block;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  box-sizing: content-box;
+  cursor: pointer;
+  font-family:
+    'Segoe UI',
+    'Segoe UI Web (West European)',
+    -apple-system,
+    'system-ui',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
+  position: relative;
+  text-align: left;
+}
+
+.modalType-modal .part-0-1-0 {
+  display: none;
+}
+
+.modalType-alert .part-0-1-0 {
+  display: none;
+}
+
+.part-0-1-0Glyph {
+  display: inline-flex;
+}
+
+.label-5 {
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-dialog-label-5-font-weight);
+  line-height: var(--imported-shared-size-20);
+  margin-bottom: var(--imported-shared-size-neg-2);
+  margin-left: var(--imported-shared-size-neg-2);
+  margin-right: var(--imported-shared-size-neg-2);
+  margin-top: var(--imported-shared-size-neg-2);
+  min-height: var(--imported-dialog-label-5-min-height);
+  padding-bottom: var(--imported-shared-size-2);
+  padding-left: var(--imported-shared-size-2);
+  padding-right: var(--imported-shared-size-2);
+  padding-top: var(--imported-shared-size-2);
+  display: block;
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.modalType-modal .label-5 {
+  display: none;
+}
+
+.modalType-alert .label-5 {
+  display: none;
+}
+
+.dialogactions-2 {
+  display: flex;
+  column-gap: var(--imported-shared-size-8);
+  row-gap: var(--imported-shared-size-8);
+  box-sizing: border-box;
+}
+
+.modalType-modal .dialogactions-2 {
+  display: none;
+}
+
+.modalType-alert .dialogactions-2 {
+  display: none;
+}
+
+.label-6 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  background-color: var(--imported-shared-color-ffffff);
+  border-bottom-color: var(--imported-shared-color-d1d1d1);
+  border-bottom-left-radius: var(--imported-shared-size-4);
+  border-bottom-right-radius: var(--imported-shared-size-4);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-color: var(--imported-shared-color-d1d1d1);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-color: var(--imported-shared-color-d1d1d1);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-color: var(--imported-shared-color-d1d1d1);
+  border-top-left-radius: var(--imported-shared-size-4);
+  border-top-right-radius: var(--imported-shared-size-4);
+  border-top-width: var(--imported-shared-size-1);
+  color: var(--imported-shared-color-242424);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-shared-num-600);
+  line-height: var(--imported-shared-size-20);
+  min-width: var(--imported-dialog-label-6-min-width);
+  padding-bottom: var(--imported-shared-size-5);
+  padding-left: var(--imported-shared-size-12);
+  padding-right: var(--imported-shared-size-12);
+  padding-top: var(--imported-shared-size-5);
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  font-family:
+    'Segoe UI',
+    'Segoe UI Web (West European)',
+    -apple-system,
+    'system-ui',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transition-duration: 0.1s;
+  transition-property: background, border, color;
+  transition-timing-function: cubic-bezier(0.33, 0, 0.67, 1);
+}
+
+.modalType-modal .label-6 {
+  display: none;
+}
+
+.modalType-alert .label-6 {
+  display: none;
+}
+
+.dialogsurface__backdrop {
+  background-color: var(--imported-dialog-dialogsurface-backdrop-background-color);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
+}
+
+.modalType-non-modal .dialogsurface__backdrop {
+  display: none;
+}
+
+.dialogsurface {
+  display: flex;
+  background-color: var(--imported-shared-color-ffffff);
+  border-bottom-color: var(--imported-shared-color-00000000);
+  border-bottom-left-radius: var(--imported-shared-size-8);
+  border-bottom-right-radius: var(--imported-shared-size-8);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-color: var(--imported-shared-color-00000000);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-color: var(--imported-shared-color-00000000);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-color: var(--imported-shared-color-00000000);
+  border-top-left-radius: var(--imported-shared-size-8);
+  border-top-right-radius: var(--imported-shared-size-8);
+  border-top-width: var(--imported-shared-size-1);
+  box-shadow: var(--imported-dialog-dialogsurface-box-shadow);
+  margin-bottom: var(--imported-dialog-dialogsurface-margin-bottom);
+  margin-left: var(--imported-dialog-dialogsurface-margin-left);
+  margin-right: var(--imported-dialog-dialogsurface-margin-right);
+  margin-top: var(--imported-dialog-dialogsurface-margin-top);
+  max-height: var(--imported-dialog-dialogsurface-max-height);
+  max-width: var(--imported-dialog-dialogsurface-max-width);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  padding-bottom: var(--imported-shared-size-24);
+  padding-left: var(--imported-shared-size-24);
+  padding-right: var(--imported-shared-size-24);
+  padding-top: var(--imported-shared-size-24);
+  scale: var(--imported-dialog-dialogsurface-scale);
+  display: block;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  box-sizing: border-box;
+}
+
+.modalType-non-modal .dialogsurface {
+  display: none;
+}
+
+.dialogbody {
+  display: flex;
+  column-gap: var(--imported-shared-size-8);
+  max-height: var(--imported-dialog-dialogbody-max-height);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  row-gap: var(--imported-shared-size-8);
+  box-sizing: border-box;
+}
+
+.modalType-non-modal .dialogbody {
+  display: none;
+}
+
+.label {
+  margin: 0;
+  font-size: var(--imported-shared-size-20);
+  font-weight: var(--imported-shared-num-600);
+  line-height: var(--imported-dialog-label-line-height);
+  display: block;
+}
+
+.modalType-non-modal .label {
+  display: none;
+}
+
+.label-2 {
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-dialog-label-2-font-weight);
+  line-height: var(--imported-shared-size-20);
+  margin-bottom: var(--imported-shared-size-neg-2);
+  margin-left: var(--imported-shared-size-neg-2);
+  margin-right: var(--imported-shared-size-neg-2);
+  margin-top: var(--imported-shared-size-neg-2);
+  min-height: var(--imported-dialog-label-2-min-height);
+  padding-bottom: var(--imported-shared-size-2);
+  padding-left: var(--imported-shared-size-2);
+  padding-right: var(--imported-shared-size-2);
+  padding-top: var(--imported-shared-size-2);
+  display: block;
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.modalType-non-modal .label-2 {
+  display: none;
+}
+
+.dialogactions {
+  display: flex;
+  column-gap: var(--imported-shared-size-8);
+  row-gap: var(--imported-shared-size-8);
+  box-sizing: border-box;
+}
+
+.modalType-non-modal .dialogactions {
+  display: none;
+}
+
+.label-3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  background-color: var(--imported-shared-color-ffffff);
+  border-bottom-color: var(--imported-shared-color-d1d1d1);
+  border-bottom-left-radius: var(--imported-shared-size-4);
+  border-bottom-right-radius: var(--imported-shared-size-4);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-color: var(--imported-shared-color-d1d1d1);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-color: var(--imported-shared-color-d1d1d1);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-color: var(--imported-shared-color-d1d1d1);
+  border-top-left-radius: var(--imported-shared-size-4);
+  border-top-right-radius: var(--imported-shared-size-4);
+  border-top-width: var(--imported-shared-size-1);
+  color: var(--imported-shared-color-242424);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-shared-num-600);
+  line-height: var(--imported-shared-size-20);
+  min-width: var(--imported-dialog-label-3-min-width);
+  padding-bottom: var(--imported-shared-size-5);
+  padding-left: var(--imported-shared-size-12);
+  padding-right: var(--imported-shared-size-12);
+  padding-top: var(--imported-shared-size-5);
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  font-family:
+    'Segoe UI',
+    'Segoe UI Web (West European)',
+    -apple-system,
+    'system-ui',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transition-duration: 0.1s;
+  transition-property: background, border, color;
+  transition-timing-function: cubic-bezier(0.33, 0, 0.67, 1);
+}
+
+.modalType-non-modal .label-3 {
+  display: none;
+}

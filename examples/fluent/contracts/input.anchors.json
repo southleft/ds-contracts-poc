@@ -1,0 +1,126 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "input",
+  "anchors": [
+    {
+      "leaf": "imported.input.input.padding-left.small",
+      "token": "spacing-horizontal-s",
+      "part": "input",
+      "cssProperty": "padding-left",
+      "varName": "--spacingHorizontalS",
+      "selector": ".f1f5gg8d"
+    },
+    {
+      "leaf": "imported.input.input.padding-right.small",
+      "token": "spacing-horizontal-s",
+      "part": "input",
+      "cssProperty": "padding-right",
+      "varName": "--spacingHorizontalS",
+      "selector": ".f1vdfbxk"
+    },
+    {
+      "leaf": "imported.input.root.background-color.filled-darker",
+      "token": "color-neutral-background3",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground3",
+      "selector": ".f16xq7d1"
+    },
+    {
+      "leaf": "imported.input.root.background-color.filled-darker-shadow",
+      "token": "color-neutral-background3",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground3",
+      "selector": ".f16xq7d1"
+    },
+    {
+      "leaf": "imported.input.root.background-color.filled-lighter",
+      "token": "color-neutral-background1",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground1",
+      "selector": ".r1oeeo9n"
+    },
+    {
+      "leaf": "imported.input.root.background-color.filled-lighter-shadow",
+      "token": "color-neutral-background1",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground1",
+      "selector": ".r1oeeo9n"
+    },
+    {
+      "leaf": "imported.input.root.background-color.outline",
+      "token": "color-neutral-background1",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground1",
+      "selector": ".r1oeeo9n"
+    },
+    {
+      "leaf": "imported.input.root.border-bottom-color.outline",
+      "token": "color-neutral-stroke-accessible",
+      "part": "root",
+      "cssProperty": "border-bottom-color",
+      "varName": "--colorNeutralStrokeAccessible",
+      "selector": ".r1oeeo9n"
+    },
+    {
+      "leaf": "imported.input.root.border-bottom-color.underline",
+      "token": "color-neutral-stroke-accessible",
+      "part": "root",
+      "cssProperty": "border-bottom-color",
+      "varName": "--colorNeutralStrokeAccessible",
+      "selector": ".r1oeeo9n"
+    },
+    {
+      "leaf": "imported.input.root.font-size.large",
+      "token": "font-size-base400",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase400",
+      "selector": ".fod5ikn"
+    },
+    {
+      "leaf": "imported.input.root.font-size.medium",
+      "token": "font-size-base300",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".r1oeeo9n"
+    },
+    {
+      "leaf": "imported.input.root.font-size.small",
+      "token": "font-size-base200",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase200",
+      "selector": ".fy9rknc"
+    },
+    {
+      "leaf": "imported.input.root.line-height.large",
+      "token": "line-height-base400",
+      "part": "root",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase400",
+      "selector": ".faaz57k"
+    },
+    {
+      "leaf": "imported.input.root.line-height.medium",
+      "token": "line-height-base300",
+      "part": "root",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".r1oeeo9n"
+    },
+    {
+      "leaf": "imported.input.root.line-height.small",
+      "token": "line-height-base200",
+      "part": "root",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase200",
+      "selector": ".fwrc4pm"
+    }
+  ]
+}

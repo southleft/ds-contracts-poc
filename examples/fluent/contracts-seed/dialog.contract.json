@@ -1,0 +1,52 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.dialog",
+  "name": "Dialog",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: modalType=modal, open=false, inertTrapFocus=false, unmountOnClose=true. Driven open by openDriver {open:true}; portalCapture.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "modalType",
+      "type": {
+        "enum": [
+          "modal",
+          "non-modal",
+          "alert"
+        ]
+      },
+      "default": "modal",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Modal Type",
+          "values": {
+            "modal": "Modal",
+            "non-modal": "Non Modal",
+            "alert": "Alert"
+          }
+        },
+        "code": {
+          "prop": "modalType"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "Dialog"
+    }
+  }
+}

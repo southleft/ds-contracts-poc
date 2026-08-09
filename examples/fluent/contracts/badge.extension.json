@@ -1,0 +1,1256 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@fluentui/react-components@9.74.5",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "badge": {
+        "root": {
+          "background-color": {
+            "filled": {
+              "brand": {
+                "$value": "#0f6cbd",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#d13438",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#242424",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#ebebeb",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#da3b01",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#107c10",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#fde300",
+                "$type": "color"
+              }
+            },
+            "ghost": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "outline": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "tint": {
+              "brand": {
+                "$value": "#ebf3fc",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#fdf6f6",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#f0f0f0",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#fdf6f3",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#f1faf1",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#fffef5",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-color": {
+            "filled": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "ghost": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "outline": {
+              "brand": {
+                "$value": "#0f6cbd",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#d13438",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#da3b01",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#107c10",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#817400",
+                "$type": "color"
+              }
+            },
+            "tint": {
+              "brand": {
+                "$value": "#b4d6fa",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#f1bbbc",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#f4bfab",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#9fd89f",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#fef7b2",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color": {
+            "filled": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "ghost": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "outline": {
+              "brand": {
+                "$value": "#0f6cbd",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#d13438",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#da3b01",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#107c10",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#817400",
+                "$type": "color"
+              }
+            },
+            "tint": {
+              "brand": {
+                "$value": "#b4d6fa",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#f1bbbc",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#f4bfab",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#9fd89f",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#fef7b2",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color": {
+            "filled": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "ghost": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "outline": {
+              "brand": {
+                "$value": "#0f6cbd",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#d13438",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#da3b01",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#107c10",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#817400",
+                "$type": "color"
+              }
+            },
+            "tint": {
+              "brand": {
+                "$value": "#b4d6fa",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#f1bbbc",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#f4bfab",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#9fd89f",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#fef7b2",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color": {
+            "filled": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "ghost": {
+              "brand": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "outline": {
+              "brand": {
+                "$value": "#0f6cbd",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#d13438",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#da3b01",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#107c10",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#817400",
+                "$type": "color"
+              }
+            },
+            "tint": {
+              "brand": {
+                "$value": "#b4d6fa",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#f1bbbc",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#f4bfab",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#e0e0e0",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#9fd89f",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#fef7b2",
+                "$type": "color"
+              }
+            }
+          },
+          "color": {
+            "filled": {
+              "brand": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#242424",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#242424",
+                "$type": "color"
+              }
+            },
+            "ghost": {
+              "brand": {
+                "$value": "#0f6cbd",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#d13438",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#242424",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#da3b01",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#107c10",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#817400",
+                "$type": "color"
+              }
+            },
+            "outline": {
+              "brand": {
+                "$value": "#0f6cbd",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#d13438",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#da3b01",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#107c10",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#817400",
+                "$type": "color"
+              }
+            },
+            "tint": {
+              "brand": {
+                "$value": "#115ea3",
+                "$type": "color"
+              },
+              "danger": {
+                "$value": "#bc2f32",
+                "$type": "color"
+              },
+              "important": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "informative": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "severe": {
+                "$value": "#c43501",
+                "$type": "color"
+              },
+              "subtle": {
+                "$value": "#616161",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#0e700e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#817400",
+                "$type": "color"
+              }
+            }
+          },
+          "font-size": {
+            "tiny": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          },
+          "font-weight": {
+            "$value": "600",
+            "$type": "number"
+          },
+          "height": {
+            "tiny": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "32px",
+              "$type": "dimension"
+            }
+          },
+          "line-height": {
+            "tiny": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "tiny": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "tiny": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "tiny": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "20.0156px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "32px",
+              "$type": "dimension"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-10000": {
+          "$value": "10000px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "min-width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 5
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "filled.brand.tiny",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.brand.extra-small",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.brand.small",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.brand.medium",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.brand.large",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.brand.extra-large",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.danger.tiny",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.danger.extra-small",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.danger.small",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.danger.medium",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.danger.large",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "filled.danger.extra-large",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 192
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "absolute-geometry-admitted: root — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::after (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "root-content-carried: the root holds direct text (\"9\") with no text-holder child part — bound to text prop \"children\" (MUI Card class)"
+    ],
+    "refusals": [
+      "pseudo-decor-paint-multiaxis: root::after drawn paint varies across the enabled combos and does not factor as a function of ONE enum axis ({\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(15, 108, 189, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(209, 52, 56, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(97, 97, 97, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(224, 224, 224, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(218, 59, 1, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(255, 255, 255, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(16, 124, 16, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(129, 116, 0, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(180, 214, 250, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(241, 187, 188, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(244, 191, 171, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(159, 216, 159, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(254, 247, 178, 1)\",\"radius\":10000}); named refusal"
+    ]
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

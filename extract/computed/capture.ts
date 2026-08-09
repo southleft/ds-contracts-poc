@@ -1619,9 +1619,24 @@ export interface SweepResult {
  *
  * Bounded, never infinite: an animation that genuinely never settles exhausts
  * the rounds and sampling proceeds, exactly as before.
+ *
+ * FLUENT 2 ROUND — THE PROBE MUST SAMPLE THE SAME PLANES THE READER RECORDS.
+ * This probe read `getComputedStyle(el)` and nothing else, while both capture
+ * readers record `getComputedStyle(el, '::before'/'::after'/…)` as well. A
+ * component whose motion lives ENTIRELY on a pseudo-element therefore looked
+ * instantly stable and was sampled mid-flight — the element really was not
+ * moving. Measured on Fluent's Input, whose focus underline is an `::after`
+ * that transitions `transform: scaleX(0)` → `scaleX(1)`: the two sweeps
+ * recorded `matrix(0.873374, 0, 0, 1, 0, 0)` and `matrix(0.87383, 0, 0, 1, 0,
+ * 0)` for the same combo and the double-run gate failed with no channel to
+ * name, because the witness loops do not read pseudo planes either. This is
+ * the same class as the shadow-root walk above (a reader gap becoming two
+ * reader gaps): the settle frontier and the READ frontier have to be the same
+ * list, so it is READ_PSEUDOS in both places rather than a second hardcoded
+ * ::before/::after pair.
  */
 export const settleProbeJs = (stageSel: string): string =>
-  `(() => { ${SHADOW_HELPERS_JS} const stageEl = document.querySelector('${stageSel}'); const els = stageEl ? shWalkEls(stageEl, []) : []; const parts = []; for (const el of els) { const cs = getComputedStyle(el); parts.push(cs.backgroundColor, cs.color, cs.boxShadow, cs.transform, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.opacity, cs.outlineColor, cs.fill); } return parts.join('|'); })()`;
+  `(() => { ${SHADOW_HELPERS_JS} const stageEl = document.querySelector('${stageSel}'); const els = stageEl ? shWalkEls(stageEl, []) : []; const parts = []; const rd = (cs) => { parts.push(cs.backgroundColor, cs.color, cs.boxShadow, cs.transform, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.opacity, cs.outlineColor, cs.fill); }; for (const el of els) { rd(getComputedStyle(el)); for (const pe of ${JSON.stringify(READ_PSEUDOS)}) { const pcs = getComputedStyle(el, pe); if (pcs) rd(pcs); } } return parts.join('|'); })()`;
 
 export async function settleStage(page: Page, stageSel: string): Promise<void> {
   const probe = settleProbeJs(stageSel);
@@ -2061,8 +2076,37 @@ function render() {
     ${cfg.mount.wrapperClose}
   );
 }
+// A CRASHED RENDER IS NOT A MEASUREMENT (Fluent round). React reports an
+// uncaught render error through reportError, i.e. the window 'error' event —
+// nothing in this harness listened, so a component whose render THREW looked
+// exactly like a component that rendered and portaled nothing, and the sweep
+// reported "0 portaled + 0 in-stage new roots" as if it were a finding.
+// Measured on Fluent's Tooltip, whose trigger clone throws "A trigger element
+// must be a single element for this component" when handed the ARRAY that
+// childrenSpec always renders. Recording the errors here lets portalSweep
+// refuse BY NAME with the library's own message instead of publishing a zero.
+window.__renderErrors = [];
+window.addEventListener('error', (e) => {
+  const m = (e && e.error && e.error.message) || (e && e.message) || String(e);
+  if (window.__renderErrors.indexOf(m) < 0) window.__renderErrors.push(m);
+});
 window.__setSpec = (v) => { specIdx = (v === false || v === null || v === undefined) ? null : (v === true ? 0 : v); render(); };
-root = createRoot(document.getElementById('root'));
+// TWO CHANNELS, BECAUSE THE CHEAP ONE IS CENSORED. The window 'error' listener
+// above catches the reportError React uses for an uncaught render error, but
+// the harness page is a file:// document loading a separate bundle, so the
+// browser sanitizes the event to the bare string "Script error." — enough to
+// REFUSE, not enough to say why. React's own onUncaughtError hands over the
+// real Error object with the library's message intact ("A trigger element must
+// be a single element for this component."), which is the part a reader needs.
+// Recording only: neither channel changes a rendered pixel, and both committed
+// portal corpora (mui/menu, mui/dialog) were re-run byte-identical with this in
+// place. An older React that ignores the option degrades to the listener.
+root = createRoot(document.getElementById('root'), {
+  onUncaughtError: (error) => {
+    const m = (error && error.message) || String(error);
+    if (window.__renderErrors.indexOf(m) < 0) window.__renderErrors.push(m);
+  },
+});
 window.__setSpec(false);
 `;
   const pageDir = path.join(harness, 'computed-portal-page');
@@ -2325,6 +2369,7 @@ const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
     preBytes: window.__preBytes,
     postBytes: document.body.innerHTML.length,
     currentReader,
+    renderErrors: (window.__renderErrors || []).slice(),
     roots: rootInfo.map((r) => ({
       location: r.location,
       bytes: r.el.outerHTML.length,
@@ -2373,8 +2418,19 @@ export async function capturePortalRoots(
     preBytes: number;
     postBytes: number;
     currentReader: PortalCapture['currentReader'];
+    renderErrors?: string[];
     roots: Array<{ location: 'in-stage' | 'portaled'; bytes: number; node: CapturedNode; unwrapped?: PortalWrapperNote[] }>;
   };
+  // A CRASHED RENDER IS NOT A MEASUREMENT — refuse BY NAME, with the library's
+  // own message, instead of letting the root-count logic publish a zero. See
+  // the window 'error' listener in buildPortalHarnessPage for the argument.
+  if (raw.renderErrors && raw.renderErrors.length > 0) {
+    throw new Error(
+      `RENDER-THREW refusal — the component's render raised ${raw.renderErrors.length} uncaught error(s) in the page, so the DOM this combo produced is not the component's truth and every root count read from it is meaningless: ${raw.renderErrors
+        .map((m) => `"${m}"`)
+        .join(' · ')}`,
+    );
+  }
   const result: PortalCapture = {
     combo: comboKey,
     preBytes: raw.preBytes,

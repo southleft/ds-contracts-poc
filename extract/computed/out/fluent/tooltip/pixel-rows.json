@@ -1,0 +1,30 @@
+[
+  {
+    "key": "normal.off__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "size-mismatch",
+    "note": "size mismatch ours 360x120 vs orig 213x28 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
+  },
+  {
+    "key": "normal.on__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "size-mismatch",
+    "note": "size mismatch ours 360x120 vs orig 213x28 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
+  },
+  {
+    "key": "inverted.off__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "size-mismatch",
+    "note": "size mismatch ours 360x120 vs orig 213x28 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
+  },
+  {
+    "key": "inverted.on__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "size-mismatch",
+    "note": "size mismatch ours 360x120 vs orig 213x28 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
+  }
+]

@@ -1,0 +1,103 @@
+/* code-only facts — REFUSED BY NAME, not silently dropped:
+     translate-y: SYNTHETIC (decomposeTranslate) — folded into absolute y placement on canvas; CSS has no translate-y longhand.
+   CSS has no per-component translate longhand and this contract conditions
+   the components on different axes, so no single `translate:` declaration
+   can carry them. The canvas lowers them to absolute placement. */
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tooltip.contract.json (fluent.tooltip v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  min-width: fit-content;
+  border-bottom-color: var(--imported-shared-color-00000000);
+  border-bottom-left-radius: var(--imported-shared-size-4);
+  border-bottom-right-radius: var(--imported-shared-size-4);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-color: var(--imported-shared-color-00000000);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-color: var(--imported-shared-color-00000000);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-color: var(--imported-shared-color-00000000);
+  border-top-left-radius: var(--imported-shared-size-4);
+  border-top-right-radius: var(--imported-shared-size-4);
+  border-top-width: var(--imported-shared-size-1);
+  bottom: var(--imported-tooltip-root-bottom);
+  font-size: var(--imported-tooltip-root-font-size);
+  font-weight: var(--imported-tooltip-root-font-weight);
+  height: var(--imported-tooltip-root-height);
+  line-height: var(--imported-tooltip-root-line-height);
+  max-width: var(--imported-tooltip-root-max-width);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  padding-bottom: var(--imported-tooltip-root-padding-bottom);
+  padding-left: var(--imported-tooltip-root-padding-left);
+  padding-right: var(--imported-tooltip-root-padding-right);
+  padding-top: var(--imported-shared-size-4);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-tooltip-root-width);
+  display: block;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  box-sizing: border-box;
+  cursor: default;
+  position: absolute;
+}
+
+.appearance-inverted {
+  background-color: var(--imported-tooltip-root-background-color-inverted);
+  color: var(--imported-tooltip-root-color-inverted);
+}
+
+.appearance-normal {
+  background-color: var(--imported-tooltip-root-background-color-normal);
+  color: var(--imported-tooltip-root-color-normal);
+}
+
+.part-0 {
+  border-bottom-left-radius: var(--imported-tooltip-part-0-border-bottom-left-radius);
+  bottom: var(--imported-tooltip-part-0-bottom);
+  font-size: var(--imported-tooltip-part-0-font-size);
+  height: var(--imported-tooltip-part-0-height);
+  left: var(--imported-tooltip-part-0-left);
+  line-height: var(--imported-tooltip-part-0-line-height);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-tooltip-part-0-right);
+  top: var(--imported-tooltip-part-0-top);
+  width: var(--imported-tooltip-part-0-width);
+  display: block;
+  position: absolute;
+  background-clip: content-box;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+.appearance-inverted .part-0 {
+  background-color: var(--imported-tooltip-part-0-background-color-inverted);
+}
+
+.appearance-inverted .part-0 {
+  color: var(--imported-tooltip-part-0-color-inverted);
+}
+
+.appearance-normal .part-0 {
+  background-color: var(--imported-tooltip-part-0-background-color-normal);
+}
+
+.appearance-normal .part-0 {
+  color: var(--imported-tooltip-part-0-color-normal);
+}

@@ -1,0 +1,4133 @@
+{
+  "border-radius-circular": {
+    "$type": "dimension",
+    "$value": "10000px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadiusCircular"
+      }
+    }
+  },
+  "border-radius-large": {
+    "$type": "dimension",
+    "$value": "6px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadiusLarge"
+      }
+    }
+  },
+  "border-radius-medium": {
+    "$type": "dimension",
+    "$value": "4px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadiusMedium"
+      }
+    }
+  },
+  "border-radius-none": {
+    "$type": "dimension",
+    "$value": "0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadiusNone"
+      }
+    }
+  },
+  "border-radius-small": {
+    "$type": "dimension",
+    "$value": "2px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadiusSmall"
+      }
+    }
+  },
+  "border-radius-xlarge": {
+    "$type": "dimension",
+    "$value": "8px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadiusXLarge"
+      }
+    }
+  },
+  "border-radius2-xlarge": {
+    "$type": "dimension",
+    "$value": "12px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadius2XLarge"
+      }
+    }
+  },
+  "border-radius3-xlarge": {
+    "$type": "dimension",
+    "$value": "16px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadius3XLarge"
+      }
+    }
+  },
+  "border-radius4-xlarge": {
+    "$type": "dimension",
+    "$value": "24px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadius4XLarge"
+      }
+    }
+  },
+  "border-radius5-xlarge": {
+    "$type": "dimension",
+    "$value": "32px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadius5XLarge"
+      }
+    }
+  },
+  "border-radius6-xlarge": {
+    "$type": "dimension",
+    "$value": "40px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--borderRadius6XLarge"
+      }
+    }
+  },
+  "color-background-overlay": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.4)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBackgroundOverlay"
+      }
+    }
+  },
+  "color-brand-background": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackground"
+      }
+    }
+  },
+  "color-brand-background-hover": {
+    "$type": "color",
+    "$value": "#115ea3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackgroundHover"
+      }
+    }
+  },
+  "color-brand-background-inverted": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackgroundInverted"
+      }
+    }
+  },
+  "color-brand-background-inverted-hover": {
+    "$type": "color",
+    "$value": "#ebf3fc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackgroundInvertedHover"
+      }
+    }
+  },
+  "color-brand-background-inverted-pressed": {
+    "$type": "color",
+    "$value": "#b4d6fa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackgroundInvertedPressed"
+      }
+    }
+  },
+  "color-brand-background-inverted-selected": {
+    "$type": "color",
+    "$value": "#cfe4fa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackgroundInvertedSelected"
+      }
+    }
+  },
+  "color-brand-background-pressed": {
+    "$type": "color",
+    "$value": "#0c3b5e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackgroundPressed"
+      }
+    }
+  },
+  "color-brand-background-selected": {
+    "$type": "color",
+    "$value": "#0f548c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackgroundSelected"
+      }
+    }
+  },
+  "color-brand-background-static": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackgroundStatic"
+      }
+    }
+  },
+  "color-brand-background2": {
+    "$type": "color",
+    "$value": "#ebf3fc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackground2"
+      }
+    }
+  },
+  "color-brand-background2-hover": {
+    "$type": "color",
+    "$value": "#cfe4fa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackground2Hover"
+      }
+    }
+  },
+  "color-brand-background2-pressed": {
+    "$type": "color",
+    "$value": "#96c6fa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackground2Pressed"
+      }
+    }
+  },
+  "color-brand-background3-static": {
+    "$type": "color",
+    "$value": "#0f548c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackground3Static"
+      }
+    }
+  },
+  "color-brand-background4-static": {
+    "$type": "color",
+    "$value": "#0c3b5e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandBackground4Static"
+      }
+    }
+  },
+  "color-brand-foreground-inverted": {
+    "$type": "color",
+    "$value": "#479ef5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundInverted"
+      }
+    }
+  },
+  "color-brand-foreground-inverted-hover": {
+    "$type": "color",
+    "$value": "#62abf5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundInvertedHover"
+      }
+    }
+  },
+  "color-brand-foreground-inverted-pressed": {
+    "$type": "color",
+    "$value": "#479ef5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundInvertedPressed"
+      }
+    }
+  },
+  "color-brand-foreground-link": {
+    "$type": "color",
+    "$value": "#115ea3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundLink"
+      }
+    }
+  },
+  "color-brand-foreground-link-hover": {
+    "$type": "color",
+    "$value": "#0f548c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundLinkHover"
+      }
+    }
+  },
+  "color-brand-foreground-link-pressed": {
+    "$type": "color",
+    "$value": "#0c3b5e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundLinkPressed"
+      }
+    }
+  },
+  "color-brand-foreground-link-selected": {
+    "$type": "color",
+    "$value": "#115ea3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundLinkSelected"
+      }
+    }
+  },
+  "color-brand-foreground-on-light": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundOnLight"
+      }
+    }
+  },
+  "color-brand-foreground-on-light-hover": {
+    "$type": "color",
+    "$value": "#115ea3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundOnLightHover"
+      }
+    }
+  },
+  "color-brand-foreground-on-light-pressed": {
+    "$type": "color",
+    "$value": "#0e4775",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundOnLightPressed"
+      }
+    }
+  },
+  "color-brand-foreground-on-light-selected": {
+    "$type": "color",
+    "$value": "#0f548c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForegroundOnLightSelected"
+      }
+    }
+  },
+  "color-brand-foreground1": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForeground1"
+      }
+    }
+  },
+  "color-brand-foreground2": {
+    "$type": "color",
+    "$value": "#115ea3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForeground2"
+      }
+    }
+  },
+  "color-brand-foreground2-hover": {
+    "$type": "color",
+    "$value": "#0f548c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForeground2Hover"
+      }
+    }
+  },
+  "color-brand-foreground2-pressed": {
+    "$type": "color",
+    "$value": "#0a2e4a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandForeground2Pressed"
+      }
+    }
+  },
+  "color-brand-shadow-ambient": {
+    "$type": "color",
+    "$value": "rgba(0,0,0,0.30)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandShadowAmbient"
+      }
+    }
+  },
+  "color-brand-shadow-key": {
+    "$type": "color",
+    "$value": "rgba(0,0,0,0.25)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandShadowKey"
+      }
+    }
+  },
+  "color-brand-stroke1": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandStroke1"
+      }
+    }
+  },
+  "color-brand-stroke2": {
+    "$type": "color",
+    "$value": "#b4d6fa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandStroke2"
+      }
+    }
+  },
+  "color-brand-stroke2-contrast": {
+    "$type": "color",
+    "$value": "#b4d6fa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandStroke2Contrast"
+      }
+    }
+  },
+  "color-brand-stroke2-hover": {
+    "$type": "color",
+    "$value": "#77b7f7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandStroke2Hover"
+      }
+    }
+  },
+  "color-brand-stroke2-pressed": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorBrandStroke2Pressed"
+      }
+    }
+  },
+  "color-compound-brand-background": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorCompoundBrandBackground"
+      }
+    }
+  },
+  "color-compound-brand-background-hover": {
+    "$type": "color",
+    "$value": "#115ea3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorCompoundBrandBackgroundHover"
+      }
+    }
+  },
+  "color-compound-brand-background-pressed": {
+    "$type": "color",
+    "$value": "#0f548c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorCompoundBrandBackgroundPressed"
+      }
+    }
+  },
+  "color-compound-brand-foreground1": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorCompoundBrandForeground1"
+      }
+    }
+  },
+  "color-compound-brand-foreground1-hover": {
+    "$type": "color",
+    "$value": "#115ea3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorCompoundBrandForeground1Hover"
+      }
+    }
+  },
+  "color-compound-brand-foreground1-pressed": {
+    "$type": "color",
+    "$value": "#0f548c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorCompoundBrandForeground1Pressed"
+      }
+    }
+  },
+  "color-compound-brand-stroke": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorCompoundBrandStroke"
+      }
+    }
+  },
+  "color-compound-brand-stroke-hover": {
+    "$type": "color",
+    "$value": "#115ea3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorCompoundBrandStrokeHover"
+      }
+    }
+  },
+  "color-compound-brand-stroke-pressed": {
+    "$type": "color",
+    "$value": "#0f548c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorCompoundBrandStrokePressed"
+      }
+    }
+  },
+  "color-neutral-background-alpha": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.5)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackgroundAlpha"
+      }
+    }
+  },
+  "color-neutral-background-alpha2": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.8)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackgroundAlpha2"
+      }
+    }
+  },
+  "color-neutral-background-disabled": {
+    "$type": "color",
+    "$value": "#f0f0f0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackgroundDisabled"
+      }
+    }
+  },
+  "color-neutral-background-disabled2": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackgroundDisabled2"
+      }
+    }
+  },
+  "color-neutral-background-inverted": {
+    "$type": "color",
+    "$value": "#292929",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackgroundInverted"
+      }
+    }
+  },
+  "color-neutral-background-inverted-disabled": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackgroundInvertedDisabled"
+      }
+    }
+  },
+  "color-neutral-background-inverted-hover": {
+    "$type": "color",
+    "$value": "#3d3d3d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackgroundInvertedHover"
+      }
+    }
+  },
+  "color-neutral-background-inverted-pressed": {
+    "$type": "color",
+    "$value": "#1f1f1f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackgroundInvertedPressed"
+      }
+    }
+  },
+  "color-neutral-background-inverted-selected": {
+    "$type": "color",
+    "$value": "#383838",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackgroundInvertedSelected"
+      }
+    }
+  },
+  "color-neutral-background-static": {
+    "$type": "color",
+    "$value": "#333333",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackgroundStatic"
+      }
+    }
+  },
+  "color-neutral-background1": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground1"
+      }
+    }
+  },
+  "color-neutral-background1-hover": {
+    "$type": "color",
+    "$value": "#f5f5f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground1Hover"
+      }
+    }
+  },
+  "color-neutral-background1-pressed": {
+    "$type": "color",
+    "$value": "#e0e0e0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground1Pressed"
+      }
+    }
+  },
+  "color-neutral-background1-selected": {
+    "$type": "color",
+    "$value": "#ebebeb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground1Selected"
+      }
+    }
+  },
+  "color-neutral-background2": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground2"
+      }
+    }
+  },
+  "color-neutral-background2-hover": {
+    "$type": "color",
+    "$value": "#f0f0f0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground2Hover"
+      }
+    }
+  },
+  "color-neutral-background2-pressed": {
+    "$type": "color",
+    "$value": "#dbdbdb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground2Pressed"
+      }
+    }
+  },
+  "color-neutral-background2-selected": {
+    "$type": "color",
+    "$value": "#e6e6e6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground2Selected"
+      }
+    }
+  },
+  "color-neutral-background3": {
+    "$type": "color",
+    "$value": "#f5f5f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground3"
+      }
+    }
+  },
+  "color-neutral-background3-hover": {
+    "$type": "color",
+    "$value": "#ebebeb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground3Hover"
+      }
+    }
+  },
+  "color-neutral-background3-pressed": {
+    "$type": "color",
+    "$value": "#d6d6d6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground3Pressed"
+      }
+    }
+  },
+  "color-neutral-background3-selected": {
+    "$type": "color",
+    "$value": "#e0e0e0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground3Selected"
+      }
+    }
+  },
+  "color-neutral-background4": {
+    "$type": "color",
+    "$value": "#f0f0f0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground4"
+      }
+    }
+  },
+  "color-neutral-background4-hover": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground4Hover"
+      }
+    }
+  },
+  "color-neutral-background4-pressed": {
+    "$type": "color",
+    "$value": "#f5f5f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground4Pressed"
+      }
+    }
+  },
+  "color-neutral-background4-selected": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground4Selected"
+      }
+    }
+  },
+  "color-neutral-background5": {
+    "$type": "color",
+    "$value": "#ebebeb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground5"
+      }
+    }
+  },
+  "color-neutral-background5-hover": {
+    "$type": "color",
+    "$value": "#f5f5f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground5Hover"
+      }
+    }
+  },
+  "color-neutral-background5-pressed": {
+    "$type": "color",
+    "$value": "#f0f0f0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground5Pressed"
+      }
+    }
+  },
+  "color-neutral-background5-selected": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground5Selected"
+      }
+    }
+  },
+  "color-neutral-background6": {
+    "$type": "color",
+    "$value": "#e6e6e6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground6"
+      }
+    }
+  },
+  "color-neutral-background7": {
+    "$type": "color",
+    "$value": "#00000000",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground7"
+      }
+    }
+  },
+  "color-neutral-background7-hover": {
+    "$type": "color",
+    "$value": "#ebebeb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground7Hover"
+      }
+    }
+  },
+  "color-neutral-background7-pressed": {
+    "$type": "color",
+    "$value": "#d6d6d6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground7Pressed"
+      }
+    }
+  },
+  "color-neutral-background7-selected": {
+    "$type": "color",
+    "$value": "#00000000",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground7Selected"
+      }
+    }
+  },
+  "color-neutral-background8": {
+    "$type": "color",
+    "$value": "#fcfcfc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralBackground8"
+      }
+    }
+  },
+  "color-neutral-card-background": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralCardBackground"
+      }
+    }
+  },
+  "color-neutral-card-background-disabled": {
+    "$type": "color",
+    "$value": "#f0f0f0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralCardBackgroundDisabled"
+      }
+    }
+  },
+  "color-neutral-card-background-hover": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralCardBackgroundHover"
+      }
+    }
+  },
+  "color-neutral-card-background-pressed": {
+    "$type": "color",
+    "$value": "#f5f5f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralCardBackgroundPressed"
+      }
+    }
+  },
+  "color-neutral-card-background-selected": {
+    "$type": "color",
+    "$value": "#ebebeb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralCardBackgroundSelected"
+      }
+    }
+  },
+  "color-neutral-foreground-disabled": {
+    "$type": "color",
+    "$value": "#bdbdbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundDisabled"
+      }
+    }
+  },
+  "color-neutral-foreground-inverted": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundInverted"
+      }
+    }
+  },
+  "color-neutral-foreground-inverted-disabled": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.4)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundInvertedDisabled"
+      }
+    }
+  },
+  "color-neutral-foreground-inverted-hover": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundInvertedHover"
+      }
+    }
+  },
+  "color-neutral-foreground-inverted-link": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundInvertedLink"
+      }
+    }
+  },
+  "color-neutral-foreground-inverted-link-hover": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundInvertedLinkHover"
+      }
+    }
+  },
+  "color-neutral-foreground-inverted-link-pressed": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundInvertedLinkPressed"
+      }
+    }
+  },
+  "color-neutral-foreground-inverted-link-selected": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundInvertedLinkSelected"
+      }
+    }
+  },
+  "color-neutral-foreground-inverted-pressed": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundInvertedPressed"
+      }
+    }
+  },
+  "color-neutral-foreground-inverted-selected": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundInvertedSelected"
+      }
+    }
+  },
+  "color-neutral-foreground-inverted2": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundInverted2"
+      }
+    }
+  },
+  "color-neutral-foreground-on-brand": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundOnBrand"
+      }
+    }
+  },
+  "color-neutral-foreground-static-inverted": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForegroundStaticInverted"
+      }
+    }
+  },
+  "color-neutral-foreground1": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground1"
+      }
+    }
+  },
+  "color-neutral-foreground1-hover": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground1Hover"
+      }
+    }
+  },
+  "color-neutral-foreground1-pressed": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground1Pressed"
+      }
+    }
+  },
+  "color-neutral-foreground1-selected": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground1Selected"
+      }
+    }
+  },
+  "color-neutral-foreground1-static": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground1Static"
+      }
+    }
+  },
+  "color-neutral-foreground2": {
+    "$type": "color",
+    "$value": "#424242",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2"
+      }
+    }
+  },
+  "color-neutral-foreground2-brand-hover": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2BrandHover"
+      }
+    }
+  },
+  "color-neutral-foreground2-brand-pressed": {
+    "$type": "color",
+    "$value": "#115ea3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2BrandPressed"
+      }
+    }
+  },
+  "color-neutral-foreground2-brand-selected": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2BrandSelected"
+      }
+    }
+  },
+  "color-neutral-foreground2-hover": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2Hover"
+      }
+    }
+  },
+  "color-neutral-foreground2-link": {
+    "$type": "color",
+    "$value": "#424242",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2Link"
+      }
+    }
+  },
+  "color-neutral-foreground2-link-hover": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2LinkHover"
+      }
+    }
+  },
+  "color-neutral-foreground2-link-pressed": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2LinkPressed"
+      }
+    }
+  },
+  "color-neutral-foreground2-link-selected": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2LinkSelected"
+      }
+    }
+  },
+  "color-neutral-foreground2-pressed": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2Pressed"
+      }
+    }
+  },
+  "color-neutral-foreground2-selected": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground2Selected"
+      }
+    }
+  },
+  "color-neutral-foreground3": {
+    "$type": "color",
+    "$value": "#616161",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground3"
+      }
+    }
+  },
+  "color-neutral-foreground3-brand-hover": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground3BrandHover"
+      }
+    }
+  },
+  "color-neutral-foreground3-brand-pressed": {
+    "$type": "color",
+    "$value": "#115ea3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground3BrandPressed"
+      }
+    }
+  },
+  "color-neutral-foreground3-brand-selected": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground3BrandSelected"
+      }
+    }
+  },
+  "color-neutral-foreground3-hover": {
+    "$type": "color",
+    "$value": "#424242",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground3Hover"
+      }
+    }
+  },
+  "color-neutral-foreground3-pressed": {
+    "$type": "color",
+    "$value": "#424242",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground3Pressed"
+      }
+    }
+  },
+  "color-neutral-foreground3-selected": {
+    "$type": "color",
+    "$value": "#424242",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground3Selected"
+      }
+    }
+  },
+  "color-neutral-foreground4": {
+    "$type": "color",
+    "$value": "#707070",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground4"
+      }
+    }
+  },
+  "color-neutral-foreground5": {
+    "$type": "color",
+    "$value": "#616161",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground5"
+      }
+    }
+  },
+  "color-neutral-foreground5-hover": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground5Hover"
+      }
+    }
+  },
+  "color-neutral-foreground5-pressed": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground5Pressed"
+      }
+    }
+  },
+  "color-neutral-foreground5-selected": {
+    "$type": "color",
+    "$value": "#242424",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralForeground5Selected"
+      }
+    }
+  },
+  "color-neutral-shadow-ambient": {
+    "$type": "color",
+    "$value": "rgba(0,0,0,0.12)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralShadowAmbient"
+      }
+    }
+  },
+  "color-neutral-shadow-ambient-darker": {
+    "$type": "color",
+    "$value": "rgba(0,0,0,0.20)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralShadowAmbientDarker"
+      }
+    }
+  },
+  "color-neutral-shadow-ambient-lighter": {
+    "$type": "color",
+    "$value": "rgba(0,0,0,0.06)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralShadowAmbientLighter"
+      }
+    }
+  },
+  "color-neutral-shadow-key": {
+    "$type": "color",
+    "$value": "rgba(0,0,0,0.14)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralShadowKey"
+      }
+    }
+  },
+  "color-neutral-shadow-key-darker": {
+    "$type": "color",
+    "$value": "rgba(0,0,0,0.24)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralShadowKeyDarker"
+      }
+    }
+  },
+  "color-neutral-shadow-key-lighter": {
+    "$type": "color",
+    "$value": "rgba(0,0,0,0.07)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralShadowKeyLighter"
+      }
+    }
+  },
+  "color-neutral-stencil1": {
+    "$type": "color",
+    "$value": "#e6e6e6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStencil1"
+      }
+    }
+  },
+  "color-neutral-stencil1-alpha": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStencil1Alpha"
+      }
+    }
+  },
+  "color-neutral-stencil2": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStencil2"
+      }
+    }
+  },
+  "color-neutral-stencil2-alpha": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.05)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStencil2Alpha"
+      }
+    }
+  },
+  "color-neutral-stroke-accessible": {
+    "$type": "color",
+    "$value": "#616161",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeAccessible"
+      }
+    }
+  },
+  "color-neutral-stroke-accessible-hover": {
+    "$type": "color",
+    "$value": "#575757",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeAccessibleHover"
+      }
+    }
+  },
+  "color-neutral-stroke-accessible-pressed": {
+    "$type": "color",
+    "$value": "#4d4d4d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeAccessiblePressed"
+      }
+    }
+  },
+  "color-neutral-stroke-accessible-selected": {
+    "$type": "color",
+    "$value": "#0f6cbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeAccessibleSelected"
+      }
+    }
+  },
+  "color-neutral-stroke-alpha": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.05)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeAlpha"
+      }
+    }
+  },
+  "color-neutral-stroke-alpha2": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.2)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeAlpha2"
+      }
+    }
+  },
+  "color-neutral-stroke-disabled": {
+    "$type": "color",
+    "$value": "#e0e0e0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeDisabled"
+      }
+    }
+  },
+  "color-neutral-stroke-disabled2": {
+    "$type": "color",
+    "$value": "#ebebeb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeDisabled2"
+      }
+    }
+  },
+  "color-neutral-stroke-inverted-disabled": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.4)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeInvertedDisabled"
+      }
+    }
+  },
+  "color-neutral-stroke-on-brand": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeOnBrand"
+      }
+    }
+  },
+  "color-neutral-stroke-on-brand2": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeOnBrand2"
+      }
+    }
+  },
+  "color-neutral-stroke-on-brand2-hover": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeOnBrand2Hover"
+      }
+    }
+  },
+  "color-neutral-stroke-on-brand2-pressed": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeOnBrand2Pressed"
+      }
+    }
+  },
+  "color-neutral-stroke-on-brand2-selected": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeOnBrand2Selected"
+      }
+    }
+  },
+  "color-neutral-stroke-subtle": {
+    "$type": "color",
+    "$value": "#e0e0e0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStrokeSubtle"
+      }
+    }
+  },
+  "color-neutral-stroke1": {
+    "$type": "color",
+    "$value": "#d1d1d1",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStroke1"
+      }
+    }
+  },
+  "color-neutral-stroke1-hover": {
+    "$type": "color",
+    "$value": "#c7c7c7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStroke1Hover"
+      }
+    }
+  },
+  "color-neutral-stroke1-pressed": {
+    "$type": "color",
+    "$value": "#b3b3b3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStroke1Pressed"
+      }
+    }
+  },
+  "color-neutral-stroke1-selected": {
+    "$type": "color",
+    "$value": "#bdbdbd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStroke1Selected"
+      }
+    }
+  },
+  "color-neutral-stroke2": {
+    "$type": "color",
+    "$value": "#e0e0e0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStroke2"
+      }
+    }
+  },
+  "color-neutral-stroke3": {
+    "$type": "color",
+    "$value": "#f0f0f0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStroke3"
+      }
+    }
+  },
+  "color-neutral-stroke4": {
+    "$type": "color",
+    "$value": "#ebebeb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStroke4"
+      }
+    }
+  },
+  "color-neutral-stroke4-hover": {
+    "$type": "color",
+    "$value": "#e0e0e0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStroke4Hover"
+      }
+    }
+  },
+  "color-neutral-stroke4-pressed": {
+    "$type": "color",
+    "$value": "#d6d6d6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStroke4Pressed"
+      }
+    }
+  },
+  "color-neutral-stroke4-selected": {
+    "$type": "color",
+    "$value": "#ebebeb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorNeutralStroke4Selected"
+      }
+    }
+  },
+  "color-palette-anchor-background2": {
+    "$type": "color",
+    "$value": "#bcc3c7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteAnchorBackground2"
+      }
+    }
+  },
+  "color-palette-anchor-border-active": {
+    "$type": "color",
+    "$value": "#394146",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteAnchorBorderActive"
+      }
+    }
+  },
+  "color-palette-anchor-foreground2": {
+    "$type": "color",
+    "$value": "#202427",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteAnchorForeground2"
+      }
+    }
+  },
+  "color-palette-beige-background2": {
+    "$type": "color",
+    "$value": "#d7d4d4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBeigeBackground2"
+      }
+    }
+  },
+  "color-palette-beige-border-active": {
+    "$type": "color",
+    "$value": "#7a7574",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBeigeBorderActive"
+      }
+    }
+  },
+  "color-palette-beige-foreground2": {
+    "$type": "color",
+    "$value": "#444241",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBeigeForeground2"
+      }
+    }
+  },
+  "color-palette-berry-background1": {
+    "$type": "color",
+    "$value": "#fdf5fc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBerryBackground1"
+      }
+    }
+  },
+  "color-palette-berry-background2": {
+    "$type": "color",
+    "$value": "#edbbe7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBerryBackground2"
+      }
+    }
+  },
+  "color-palette-berry-background3": {
+    "$type": "color",
+    "$value": "#c239b3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBerryBackground3"
+      }
+    }
+  },
+  "color-palette-berry-border-active": {
+    "$type": "color",
+    "$value": "#c239b3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBerryBorderActive"
+      }
+    }
+  },
+  "color-palette-berry-border1": {
+    "$type": "color",
+    "$value": "#edbbe7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBerryBorder1"
+      }
+    }
+  },
+  "color-palette-berry-border2": {
+    "$type": "color",
+    "$value": "#c239b3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBerryBorder2"
+      }
+    }
+  },
+  "color-palette-berry-foreground1": {
+    "$type": "color",
+    "$value": "#af33a1",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBerryForeground1"
+      }
+    }
+  },
+  "color-palette-berry-foreground2": {
+    "$type": "color",
+    "$value": "#6d2064",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBerryForeground2"
+      }
+    }
+  },
+  "color-palette-berry-foreground3": {
+    "$type": "color",
+    "$value": "#c239b3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBerryForeground3"
+      }
+    }
+  },
+  "color-palette-blue-background2": {
+    "$type": "color",
+    "$value": "#a9d3f2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBlueBackground2"
+      }
+    }
+  },
+  "color-palette-blue-border-active": {
+    "$type": "color",
+    "$value": "#0078d4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBlueBorderActive"
+      }
+    }
+  },
+  "color-palette-blue-foreground2": {
+    "$type": "color",
+    "$value": "#004377",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBlueForeground2"
+      }
+    }
+  },
+  "color-palette-brass-background2": {
+    "$type": "color",
+    "$value": "#e0cea2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBrassBackground2"
+      }
+    }
+  },
+  "color-palette-brass-border-active": {
+    "$type": "color",
+    "$value": "#986f0b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBrassBorderActive"
+      }
+    }
+  },
+  "color-palette-brass-foreground2": {
+    "$type": "color",
+    "$value": "#553e06",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBrassForeground2"
+      }
+    }
+  },
+  "color-palette-brown-background2": {
+    "$type": "color",
+    "$value": "#ddc3b0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBrownBackground2"
+      }
+    }
+  },
+  "color-palette-brown-border-active": {
+    "$type": "color",
+    "$value": "#8e562e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBrownBorderActive"
+      }
+    }
+  },
+  "color-palette-brown-foreground2": {
+    "$type": "color",
+    "$value": "#50301a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteBrownForeground2"
+      }
+    }
+  },
+  "color-palette-cornflower-background2": {
+    "$type": "color",
+    "$value": "#c8d1fa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteCornflowerBackground2"
+      }
+    }
+  },
+  "color-palette-cornflower-border-active": {
+    "$type": "color",
+    "$value": "#4f6bed",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteCornflowerBorderActive"
+      }
+    }
+  },
+  "color-palette-cornflower-foreground2": {
+    "$type": "color",
+    "$value": "#2c3c85",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteCornflowerForeground2"
+      }
+    }
+  },
+  "color-palette-cranberry-background2": {
+    "$type": "color",
+    "$value": "#eeacb2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteCranberryBackground2"
+      }
+    }
+  },
+  "color-palette-cranberry-border-active": {
+    "$type": "color",
+    "$value": "#c50f1f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteCranberryBorderActive"
+      }
+    }
+  },
+  "color-palette-cranberry-foreground2": {
+    "$type": "color",
+    "$value": "#6e0811",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteCranberryForeground2"
+      }
+    }
+  },
+  "color-palette-dark-green-background2": {
+    "$type": "color",
+    "$value": "#9ad29a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkGreenBackground2"
+      }
+    }
+  },
+  "color-palette-dark-green-border-active": {
+    "$type": "color",
+    "$value": "#0b6a0b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkGreenBorderActive"
+      }
+    }
+  },
+  "color-palette-dark-green-foreground2": {
+    "$type": "color",
+    "$value": "#063b06",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkGreenForeground2"
+      }
+    }
+  },
+  "color-palette-dark-orange-background1": {
+    "$type": "color",
+    "$value": "#fdf6f3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkOrangeBackground1"
+      }
+    }
+  },
+  "color-palette-dark-orange-background2": {
+    "$type": "color",
+    "$value": "#f4bfab",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkOrangeBackground2"
+      }
+    }
+  },
+  "color-palette-dark-orange-background3": {
+    "$type": "color",
+    "$value": "#da3b01",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkOrangeBackground3"
+      }
+    }
+  },
+  "color-palette-dark-orange-border-active": {
+    "$type": "color",
+    "$value": "#da3b01",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkOrangeBorderActive"
+      }
+    }
+  },
+  "color-palette-dark-orange-border1": {
+    "$type": "color",
+    "$value": "#f4bfab",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkOrangeBorder1"
+      }
+    }
+  },
+  "color-palette-dark-orange-border2": {
+    "$type": "color",
+    "$value": "#da3b01",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkOrangeBorder2"
+      }
+    }
+  },
+  "color-palette-dark-orange-foreground1": {
+    "$type": "color",
+    "$value": "#c43501",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkOrangeForeground1"
+      }
+    }
+  },
+  "color-palette-dark-orange-foreground2": {
+    "$type": "color",
+    "$value": "#7a2101",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkOrangeForeground2"
+      }
+    }
+  },
+  "color-palette-dark-orange-foreground3": {
+    "$type": "color",
+    "$value": "#da3b01",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkOrangeForeground3"
+      }
+    }
+  },
+  "color-palette-dark-red-background2": {
+    "$type": "color",
+    "$value": "#d69ca5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkRedBackground2"
+      }
+    }
+  },
+  "color-palette-dark-red-border-active": {
+    "$type": "color",
+    "$value": "#750b1c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkRedBorderActive"
+      }
+    }
+  },
+  "color-palette-dark-red-foreground2": {
+    "$type": "color",
+    "$value": "#420610",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteDarkRedForeground2"
+      }
+    }
+  },
+  "color-palette-forest-background2": {
+    "$type": "color",
+    "$value": "#bdd99b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteForestBackground2"
+      }
+    }
+  },
+  "color-palette-forest-border-active": {
+    "$type": "color",
+    "$value": "#498205",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteForestBorderActive"
+      }
+    }
+  },
+  "color-palette-forest-foreground2": {
+    "$type": "color",
+    "$value": "#294903",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteForestForeground2"
+      }
+    }
+  },
+  "color-palette-gold-background2": {
+    "$type": "color",
+    "$value": "#ecdfa5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGoldBackground2"
+      }
+    }
+  },
+  "color-palette-gold-border-active": {
+    "$type": "color",
+    "$value": "#c19c00",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGoldBorderActive"
+      }
+    }
+  },
+  "color-palette-gold-foreground2": {
+    "$type": "color",
+    "$value": "#6c5700",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGoldForeground2"
+      }
+    }
+  },
+  "color-palette-grape-background2": {
+    "$type": "color",
+    "$value": "#d9a7e0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGrapeBackground2"
+      }
+    }
+  },
+  "color-palette-grape-border-active": {
+    "$type": "color",
+    "$value": "#881798",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGrapeBorderActive"
+      }
+    }
+  },
+  "color-palette-grape-foreground2": {
+    "$type": "color",
+    "$value": "#4c0d55",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGrapeForeground2"
+      }
+    }
+  },
+  "color-palette-green-background1": {
+    "$type": "color",
+    "$value": "#f1faf1",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGreenBackground1"
+      }
+    }
+  },
+  "color-palette-green-background2": {
+    "$type": "color",
+    "$value": "#9fd89f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGreenBackground2"
+      }
+    }
+  },
+  "color-palette-green-background3": {
+    "$type": "color",
+    "$value": "#107c10",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGreenBackground3"
+      }
+    }
+  },
+  "color-palette-green-border-active": {
+    "$type": "color",
+    "$value": "#107c10",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGreenBorderActive"
+      }
+    }
+  },
+  "color-palette-green-border1": {
+    "$type": "color",
+    "$value": "#9fd89f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGreenBorder1"
+      }
+    }
+  },
+  "color-palette-green-border2": {
+    "$type": "color",
+    "$value": "#107c10",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGreenBorder2"
+      }
+    }
+  },
+  "color-palette-green-foreground-inverted": {
+    "$type": "color",
+    "$value": "#359b35",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGreenForegroundInverted"
+      }
+    }
+  },
+  "color-palette-green-foreground1": {
+    "$type": "color",
+    "$value": "#0e700e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGreenForeground1"
+      }
+    }
+  },
+  "color-palette-green-foreground2": {
+    "$type": "color",
+    "$value": "#094509",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGreenForeground2"
+      }
+    }
+  },
+  "color-palette-green-foreground3": {
+    "$type": "color",
+    "$value": "#107c10",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteGreenForeground3"
+      }
+    }
+  },
+  "color-palette-lavender-background2": {
+    "$type": "color",
+    "$value": "#d2ccf8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLavenderBackground2"
+      }
+    }
+  },
+  "color-palette-lavender-border-active": {
+    "$type": "color",
+    "$value": "#7160e8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLavenderBorderActive"
+      }
+    }
+  },
+  "color-palette-lavender-foreground2": {
+    "$type": "color",
+    "$value": "#3f3682",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLavenderForeground2"
+      }
+    }
+  },
+  "color-palette-light-green-background1": {
+    "$type": "color",
+    "$value": "#f2fbf2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightGreenBackground1"
+      }
+    }
+  },
+  "color-palette-light-green-background2": {
+    "$type": "color",
+    "$value": "#a7e3a5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightGreenBackground2"
+      }
+    }
+  },
+  "color-palette-light-green-background3": {
+    "$type": "color",
+    "$value": "#13a10e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightGreenBackground3"
+      }
+    }
+  },
+  "color-palette-light-green-border-active": {
+    "$type": "color",
+    "$value": "#13a10e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightGreenBorderActive"
+      }
+    }
+  },
+  "color-palette-light-green-border1": {
+    "$type": "color",
+    "$value": "#a7e3a5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightGreenBorder1"
+      }
+    }
+  },
+  "color-palette-light-green-border2": {
+    "$type": "color",
+    "$value": "#13a10e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightGreenBorder2"
+      }
+    }
+  },
+  "color-palette-light-green-foreground1": {
+    "$type": "color",
+    "$value": "#11910d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightGreenForeground1"
+      }
+    }
+  },
+  "color-palette-light-green-foreground2": {
+    "$type": "color",
+    "$value": "#0b5a08",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightGreenForeground2"
+      }
+    }
+  },
+  "color-palette-light-green-foreground3": {
+    "$type": "color",
+    "$value": "#13a10e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightGreenForeground3"
+      }
+    }
+  },
+  "color-palette-light-teal-background2": {
+    "$type": "color",
+    "$value": "#a6e9ed",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightTealBackground2"
+      }
+    }
+  },
+  "color-palette-light-teal-border-active": {
+    "$type": "color",
+    "$value": "#00b7c3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightTealBorderActive"
+      }
+    }
+  },
+  "color-palette-light-teal-foreground2": {
+    "$type": "color",
+    "$value": "#00666d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLightTealForeground2"
+      }
+    }
+  },
+  "color-palette-lilac-background2": {
+    "$type": "color",
+    "$value": "#e6bfed",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLilacBackground2"
+      }
+    }
+  },
+  "color-palette-lilac-border-active": {
+    "$type": "color",
+    "$value": "#b146c2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLilacBorderActive"
+      }
+    }
+  },
+  "color-palette-lilac-foreground2": {
+    "$type": "color",
+    "$value": "#63276d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteLilacForeground2"
+      }
+    }
+  },
+  "color-palette-magenta-background2": {
+    "$type": "color",
+    "$value": "#eca5d1",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMagentaBackground2"
+      }
+    }
+  },
+  "color-palette-magenta-border-active": {
+    "$type": "color",
+    "$value": "#bf0077",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMagentaBorderActive"
+      }
+    }
+  },
+  "color-palette-magenta-foreground2": {
+    "$type": "color",
+    "$value": "#6b0043",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMagentaForeground2"
+      }
+    }
+  },
+  "color-palette-marigold-background1": {
+    "$type": "color",
+    "$value": "#fefbf4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMarigoldBackground1"
+      }
+    }
+  },
+  "color-palette-marigold-background2": {
+    "$type": "color",
+    "$value": "#f9e2ae",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMarigoldBackground2"
+      }
+    }
+  },
+  "color-palette-marigold-background3": {
+    "$type": "color",
+    "$value": "#eaa300",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMarigoldBackground3"
+      }
+    }
+  },
+  "color-palette-marigold-border-active": {
+    "$type": "color",
+    "$value": "#eaa300",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMarigoldBorderActive"
+      }
+    }
+  },
+  "color-palette-marigold-border1": {
+    "$type": "color",
+    "$value": "#f9e2ae",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMarigoldBorder1"
+      }
+    }
+  },
+  "color-palette-marigold-border2": {
+    "$type": "color",
+    "$value": "#eaa300",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMarigoldBorder2"
+      }
+    }
+  },
+  "color-palette-marigold-foreground1": {
+    "$type": "color",
+    "$value": "#d39300",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMarigoldForeground1"
+      }
+    }
+  },
+  "color-palette-marigold-foreground2": {
+    "$type": "color",
+    "$value": "#835b00",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMarigoldForeground2"
+      }
+    }
+  },
+  "color-palette-marigold-foreground3": {
+    "$type": "color",
+    "$value": "#eaa300",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMarigoldForeground3"
+      }
+    }
+  },
+  "color-palette-mink-background2": {
+    "$type": "color",
+    "$value": "#cecccb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMinkBackground2"
+      }
+    }
+  },
+  "color-palette-mink-border-active": {
+    "$type": "color",
+    "$value": "#5d5a58",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMinkBorderActive"
+      }
+    }
+  },
+  "color-palette-mink-foreground2": {
+    "$type": "color",
+    "$value": "#343231",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteMinkForeground2"
+      }
+    }
+  },
+  "color-palette-navy-background2": {
+    "$type": "color",
+    "$value": "#a3b2e8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteNavyBackground2"
+      }
+    }
+  },
+  "color-palette-navy-border-active": {
+    "$type": "color",
+    "$value": "#0027b4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteNavyBorderActive"
+      }
+    }
+  },
+  "color-palette-navy-foreground2": {
+    "$type": "color",
+    "$value": "#001665",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteNavyForeground2"
+      }
+    }
+  },
+  "color-palette-peach-background2": {
+    "$type": "color",
+    "$value": "#ffddb3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePeachBackground2"
+      }
+    }
+  },
+  "color-palette-peach-border-active": {
+    "$type": "color",
+    "$value": "#ff8c00",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePeachBorderActive"
+      }
+    }
+  },
+  "color-palette-peach-foreground2": {
+    "$type": "color",
+    "$value": "#8f4e00",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePeachForeground2"
+      }
+    }
+  },
+  "color-palette-pink-background2": {
+    "$type": "color",
+    "$value": "#f7c0e3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePinkBackground2"
+      }
+    }
+  },
+  "color-palette-pink-border-active": {
+    "$type": "color",
+    "$value": "#e43ba6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePinkBorderActive"
+      }
+    }
+  },
+  "color-palette-pink-foreground2": {
+    "$type": "color",
+    "$value": "#80215d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePinkForeground2"
+      }
+    }
+  },
+  "color-palette-platinum-background2": {
+    "$type": "color",
+    "$value": "#cdd6d8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePlatinumBackground2"
+      }
+    }
+  },
+  "color-palette-platinum-border-active": {
+    "$type": "color",
+    "$value": "#69797e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePlatinumBorderActive"
+      }
+    }
+  },
+  "color-palette-platinum-foreground2": {
+    "$type": "color",
+    "$value": "#3b4447",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePlatinumForeground2"
+      }
+    }
+  },
+  "color-palette-plum-background2": {
+    "$type": "color",
+    "$value": "#d696c0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePlumBackground2"
+      }
+    }
+  },
+  "color-palette-plum-border-active": {
+    "$type": "color",
+    "$value": "#77004d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePlumBorderActive"
+      }
+    }
+  },
+  "color-palette-plum-foreground2": {
+    "$type": "color",
+    "$value": "#43002b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePlumForeground2"
+      }
+    }
+  },
+  "color-palette-pumpkin-background2": {
+    "$type": "color",
+    "$value": "#efc4ad",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePumpkinBackground2"
+      }
+    }
+  },
+  "color-palette-pumpkin-border-active": {
+    "$type": "color",
+    "$value": "#ca5010",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePumpkinBorderActive"
+      }
+    }
+  },
+  "color-palette-pumpkin-foreground2": {
+    "$type": "color",
+    "$value": "#712d09",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePumpkinForeground2"
+      }
+    }
+  },
+  "color-palette-purple-background2": {
+    "$type": "color",
+    "$value": "#c6b1de",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePurpleBackground2"
+      }
+    }
+  },
+  "color-palette-purple-border-active": {
+    "$type": "color",
+    "$value": "#5c2e91",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePurpleBorderActive"
+      }
+    }
+  },
+  "color-palette-purple-foreground2": {
+    "$type": "color",
+    "$value": "#341a51",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPalettePurpleForeground2"
+      }
+    }
+  },
+  "color-palette-red-background1": {
+    "$type": "color",
+    "$value": "#fdf6f6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRedBackground1"
+      }
+    }
+  },
+  "color-palette-red-background2": {
+    "$type": "color",
+    "$value": "#f1bbbc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRedBackground2"
+      }
+    }
+  },
+  "color-palette-red-background3": {
+    "$type": "color",
+    "$value": "#d13438",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRedBackground3"
+      }
+    }
+  },
+  "color-palette-red-border-active": {
+    "$type": "color",
+    "$value": "#d13438",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRedBorderActive"
+      }
+    }
+  },
+  "color-palette-red-border1": {
+    "$type": "color",
+    "$value": "#f1bbbc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRedBorder1"
+      }
+    }
+  },
+  "color-palette-red-border2": {
+    "$type": "color",
+    "$value": "#d13438",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRedBorder2"
+      }
+    }
+  },
+  "color-palette-red-foreground-inverted": {
+    "$type": "color",
+    "$value": "#dc5e62",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRedForegroundInverted"
+      }
+    }
+  },
+  "color-palette-red-foreground1": {
+    "$type": "color",
+    "$value": "#bc2f32",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRedForeground1"
+      }
+    }
+  },
+  "color-palette-red-foreground2": {
+    "$type": "color",
+    "$value": "#751d1f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRedForeground2"
+      }
+    }
+  },
+  "color-palette-red-foreground3": {
+    "$type": "color",
+    "$value": "#d13438",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRedForeground3"
+      }
+    }
+  },
+  "color-palette-royal-blue-background2": {
+    "$type": "color",
+    "$value": "#9abfdc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRoyalBlueBackground2"
+      }
+    }
+  },
+  "color-palette-royal-blue-border-active": {
+    "$type": "color",
+    "$value": "#004e8c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRoyalBlueBorderActive"
+      }
+    }
+  },
+  "color-palette-royal-blue-foreground2": {
+    "$type": "color",
+    "$value": "#002c4e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteRoyalBlueForeground2"
+      }
+    }
+  },
+  "color-palette-seafoam-background2": {
+    "$type": "color",
+    "$value": "#a8f0cd",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteSeafoamBackground2"
+      }
+    }
+  },
+  "color-palette-seafoam-border-active": {
+    "$type": "color",
+    "$value": "#00cc6a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteSeafoamBorderActive"
+      }
+    }
+  },
+  "color-palette-seafoam-foreground2": {
+    "$type": "color",
+    "$value": "#00723b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteSeafoamForeground2"
+      }
+    }
+  },
+  "color-palette-steel-background2": {
+    "$type": "color",
+    "$value": "#94c8d4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteSteelBackground2"
+      }
+    }
+  },
+  "color-palette-steel-border-active": {
+    "$type": "color",
+    "$value": "#005b70",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteSteelBorderActive"
+      }
+    }
+  },
+  "color-palette-steel-foreground2": {
+    "$type": "color",
+    "$value": "#00333f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteSteelForeground2"
+      }
+    }
+  },
+  "color-palette-teal-background2": {
+    "$type": "color",
+    "$value": "#9bd9db",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteTealBackground2"
+      }
+    }
+  },
+  "color-palette-teal-border-active": {
+    "$type": "color",
+    "$value": "#038387",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteTealBorderActive"
+      }
+    }
+  },
+  "color-palette-teal-foreground2": {
+    "$type": "color",
+    "$value": "#02494c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteTealForeground2"
+      }
+    }
+  },
+  "color-palette-yellow-background1": {
+    "$type": "color",
+    "$value": "#fffef5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteYellowBackground1"
+      }
+    }
+  },
+  "color-palette-yellow-background2": {
+    "$type": "color",
+    "$value": "#fef7b2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteYellowBackground2"
+      }
+    }
+  },
+  "color-palette-yellow-background3": {
+    "$type": "color",
+    "$value": "#fde300",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteYellowBackground3"
+      }
+    }
+  },
+  "color-palette-yellow-border-active": {
+    "$type": "color",
+    "$value": "#fde300",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteYellowBorderActive"
+      }
+    }
+  },
+  "color-palette-yellow-border1": {
+    "$type": "color",
+    "$value": "#fef7b2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteYellowBorder1"
+      }
+    }
+  },
+  "color-palette-yellow-border2": {
+    "$type": "color",
+    "$value": "#fde300",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteYellowBorder2"
+      }
+    }
+  },
+  "color-palette-yellow-foreground-inverted": {
+    "$type": "color",
+    "$value": "#fef7b2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteYellowForegroundInverted"
+      }
+    }
+  },
+  "color-palette-yellow-foreground1": {
+    "$type": "color",
+    "$value": "#817400",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteYellowForeground1"
+      }
+    }
+  },
+  "color-palette-yellow-foreground2": {
+    "$type": "color",
+    "$value": "#817400",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteYellowForeground2"
+      }
+    }
+  },
+  "color-palette-yellow-foreground3": {
+    "$type": "color",
+    "$value": "#fde300",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorPaletteYellowForeground3"
+      }
+    }
+  },
+  "color-scrollbar-overlay": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.5)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorScrollbarOverlay"
+      }
+    }
+  },
+  "color-status-danger-background1": {
+    "$type": "color",
+    "$value": "#fdf3f4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerBackground1"
+      }
+    }
+  },
+  "color-status-danger-background2": {
+    "$type": "color",
+    "$value": "#eeacb2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerBackground2"
+      }
+    }
+  },
+  "color-status-danger-background3": {
+    "$type": "color",
+    "$value": "#c50f1f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerBackground3"
+      }
+    }
+  },
+  "color-status-danger-background3-hover": {
+    "$type": "color",
+    "$value": "#b10e1c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerBackground3Hover"
+      }
+    }
+  },
+  "color-status-danger-background3-pressed": {
+    "$type": "color",
+    "$value": "#960b18",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerBackground3Pressed"
+      }
+    }
+  },
+  "color-status-danger-border-active": {
+    "$type": "color",
+    "$value": "#c50f1f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerBorderActive"
+      }
+    }
+  },
+  "color-status-danger-border1": {
+    "$type": "color",
+    "$value": "#eeacb2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerBorder1"
+      }
+    }
+  },
+  "color-status-danger-border2": {
+    "$type": "color",
+    "$value": "#c50f1f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerBorder2"
+      }
+    }
+  },
+  "color-status-danger-foreground-inverted": {
+    "$type": "color",
+    "$value": "#dc626d",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerForegroundInverted"
+      }
+    }
+  },
+  "color-status-danger-foreground1": {
+    "$type": "color",
+    "$value": "#b10e1c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerForeground1"
+      }
+    }
+  },
+  "color-status-danger-foreground2": {
+    "$type": "color",
+    "$value": "#6e0811",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerForeground2"
+      }
+    }
+  },
+  "color-status-danger-foreground3": {
+    "$type": "color",
+    "$value": "#c50f1f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusDangerForeground3"
+      }
+    }
+  },
+  "color-status-success-background1": {
+    "$type": "color",
+    "$value": "#f1faf1",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusSuccessBackground1"
+      }
+    }
+  },
+  "color-status-success-background2": {
+    "$type": "color",
+    "$value": "#9fd89f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusSuccessBackground2"
+      }
+    }
+  },
+  "color-status-success-background3": {
+    "$type": "color",
+    "$value": "#107c10",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusSuccessBackground3"
+      }
+    }
+  },
+  "color-status-success-border-active": {
+    "$type": "color",
+    "$value": "#107c10",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusSuccessBorderActive"
+      }
+    }
+  },
+  "color-status-success-border1": {
+    "$type": "color",
+    "$value": "#9fd89f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusSuccessBorder1"
+      }
+    }
+  },
+  "color-status-success-border2": {
+    "$type": "color",
+    "$value": "#107c10",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusSuccessBorder2"
+      }
+    }
+  },
+  "color-status-success-foreground-inverted": {
+    "$type": "color",
+    "$value": "#54b054",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusSuccessForegroundInverted"
+      }
+    }
+  },
+  "color-status-success-foreground1": {
+    "$type": "color",
+    "$value": "#0e700e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusSuccessForeground1"
+      }
+    }
+  },
+  "color-status-success-foreground2": {
+    "$type": "color",
+    "$value": "#094509",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusSuccessForeground2"
+      }
+    }
+  },
+  "color-status-success-foreground3": {
+    "$type": "color",
+    "$value": "#107c10",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusSuccessForeground3"
+      }
+    }
+  },
+  "color-status-warning-background1": {
+    "$type": "color",
+    "$value": "#fff9f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusWarningBackground1"
+      }
+    }
+  },
+  "color-status-warning-background2": {
+    "$type": "color",
+    "$value": "#fdcfb4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusWarningBackground2"
+      }
+    }
+  },
+  "color-status-warning-background3": {
+    "$type": "color",
+    "$value": "#f7630c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusWarningBackground3"
+      }
+    }
+  },
+  "color-status-warning-border-active": {
+    "$type": "color",
+    "$value": "#f7630c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusWarningBorderActive"
+      }
+    }
+  },
+  "color-status-warning-border1": {
+    "$type": "color",
+    "$value": "#fdcfb4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusWarningBorder1"
+      }
+    }
+  },
+  "color-status-warning-border2": {
+    "$type": "color",
+    "$value": "#bc4b09",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusWarningBorder2"
+      }
+    }
+  },
+  "color-status-warning-foreground-inverted": {
+    "$type": "color",
+    "$value": "#faa06b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusWarningForegroundInverted"
+      }
+    }
+  },
+  "color-status-warning-foreground1": {
+    "$type": "color",
+    "$value": "#bc4b09",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusWarningForeground1"
+      }
+    }
+  },
+  "color-status-warning-foreground2": {
+    "$type": "color",
+    "$value": "#8a3707",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusWarningForeground2"
+      }
+    }
+  },
+  "color-status-warning-foreground3": {
+    "$type": "color",
+    "$value": "#bc4b09",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStatusWarningForeground3"
+      }
+    }
+  },
+  "color-stroke-focus1": {
+    "$type": "color",
+    "$value": "#ffffff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStrokeFocus1"
+      }
+    }
+  },
+  "color-stroke-focus2": {
+    "$type": "color",
+    "$value": "#000000",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorStrokeFocus2"
+      }
+    }
+  },
+  "color-subtle-background": {
+    "$type": "color",
+    "$value": "transparent",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackground"
+      }
+    }
+  },
+  "color-subtle-background-hover": {
+    "$type": "color",
+    "$value": "#f5f5f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackgroundHover"
+      }
+    }
+  },
+  "color-subtle-background-inverted": {
+    "$type": "color",
+    "$value": "transparent",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackgroundInverted"
+      }
+    }
+  },
+  "color-subtle-background-inverted-hover": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackgroundInvertedHover"
+      }
+    }
+  },
+  "color-subtle-background-inverted-pressed": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.3)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackgroundInvertedPressed"
+      }
+    }
+  },
+  "color-subtle-background-inverted-selected": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.2)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackgroundInvertedSelected"
+      }
+    }
+  },
+  "color-subtle-background-light-alpha-hover": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.7)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackgroundLightAlphaHover"
+      }
+    }
+  },
+  "color-subtle-background-light-alpha-pressed": {
+    "$type": "color",
+    "$value": "rgba(255, 255, 255, 0.5)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackgroundLightAlphaPressed"
+      }
+    }
+  },
+  "color-subtle-background-light-alpha-selected": {
+    "$type": "color",
+    "$value": "transparent",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackgroundLightAlphaSelected"
+      }
+    }
+  },
+  "color-subtle-background-pressed": {
+    "$type": "color",
+    "$value": "#e0e0e0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackgroundPressed"
+      }
+    }
+  },
+  "color-subtle-background-selected": {
+    "$type": "color",
+    "$value": "#ebebeb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorSubtleBackgroundSelected"
+      }
+    }
+  },
+  "color-transparent-background": {
+    "$type": "color",
+    "$value": "transparent",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorTransparentBackground"
+      }
+    }
+  },
+  "color-transparent-background-hover": {
+    "$type": "color",
+    "$value": "transparent",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorTransparentBackgroundHover"
+      }
+    }
+  },
+  "color-transparent-background-pressed": {
+    "$type": "color",
+    "$value": "transparent",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorTransparentBackgroundPressed"
+      }
+    }
+  },
+  "color-transparent-background-selected": {
+    "$type": "color",
+    "$value": "transparent",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorTransparentBackgroundSelected"
+      }
+    }
+  },
+  "color-transparent-stroke": {
+    "$type": "color",
+    "$value": "transparent",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorTransparentStroke"
+      }
+    }
+  },
+  "color-transparent-stroke-disabled": {
+    "$type": "color",
+    "$value": "transparent",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorTransparentStrokeDisabled"
+      }
+    }
+  },
+  "color-transparent-stroke-interactive": {
+    "$type": "color",
+    "$value": "transparent",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--colorTransparentStrokeInteractive"
+      }
+    }
+  },
+  "curve-accelerate-max": {
+    "$type": "cubicBezier",
+    "$value": "cubic-bezier(0.9,0.1,1,0.2)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--curveAccelerateMax"
+      }
+    }
+  },
+  "curve-accelerate-mid": {
+    "$type": "cubicBezier",
+    "$value": "cubic-bezier(1,0,1,1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--curveAccelerateMid"
+      }
+    }
+  },
+  "curve-accelerate-min": {
+    "$type": "cubicBezier",
+    "$value": "cubic-bezier(0.8,0,0.78,1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--curveAccelerateMin"
+      }
+    }
+  },
+  "curve-decelerate-max": {
+    "$type": "cubicBezier",
+    "$value": "cubic-bezier(0.1,0.9,0.2,1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--curveDecelerateMax"
+      }
+    }
+  },
+  "curve-decelerate-mid": {
+    "$type": "cubicBezier",
+    "$value": "cubic-bezier(0,0,0,1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--curveDecelerateMid"
+      }
+    }
+  },
+  "curve-decelerate-min": {
+    "$type": "cubicBezier",
+    "$value": "cubic-bezier(0.33,0,0.1,1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--curveDecelerateMin"
+      }
+    }
+  },
+  "curve-easy-ease": {
+    "$type": "cubicBezier",
+    "$value": "cubic-bezier(0.33,0,0.67,1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--curveEasyEase"
+      }
+    }
+  },
+  "curve-easy-ease-max": {
+    "$type": "cubicBezier",
+    "$value": "cubic-bezier(0.8,0,0.2,1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--curveEasyEaseMax"
+      }
+    }
+  },
+  "curve-linear": {
+    "$type": "cubicBezier",
+    "$value": "cubic-bezier(0,0,1,1)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--curveLinear"
+      }
+    }
+  },
+  "duration-fast": {
+    "$type": "duration",
+    "$value": "150ms",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--durationFast"
+      }
+    }
+  },
+  "duration-faster": {
+    "$type": "duration",
+    "$value": "100ms",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--durationFaster"
+      }
+    }
+  },
+  "duration-gentle": {
+    "$type": "duration",
+    "$value": "250ms",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--durationGentle"
+      }
+    }
+  },
+  "duration-normal": {
+    "$type": "duration",
+    "$value": "200ms",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--durationNormal"
+      }
+    }
+  },
+  "duration-slow": {
+    "$type": "duration",
+    "$value": "300ms",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--durationSlow"
+      }
+    }
+  },
+  "duration-slower": {
+    "$type": "duration",
+    "$value": "400ms",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--durationSlower"
+      }
+    }
+  },
+  "duration-ultra-fast": {
+    "$type": "duration",
+    "$value": "50ms",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--durationUltraFast"
+      }
+    }
+  },
+  "duration-ultra-slow": {
+    "$type": "duration",
+    "$value": "500ms",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--durationUltraSlow"
+      }
+    }
+  },
+  "font-family-base": {
+    "$type": "fontFamily",
+    "$value": "'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontFamilyBase"
+      }
+    }
+  },
+  "font-family-monospace": {
+    "$type": "fontFamily",
+    "$value": "Consolas, 'Courier New', Courier, monospace",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontFamilyMonospace"
+      }
+    }
+  },
+  "font-family-numeric": {
+    "$type": "fontFamily",
+    "$value": "Bahnschrift, 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontFamilyNumeric"
+      }
+    }
+  },
+  "font-size-base100": {
+    "$type": "dimension",
+    "$value": "10px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontSizeBase100"
+      }
+    }
+  },
+  "font-size-base200": {
+    "$type": "dimension",
+    "$value": "12px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontSizeBase200"
+      }
+    }
+  },
+  "font-size-base300": {
+    "$type": "dimension",
+    "$value": "14px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontSizeBase300"
+      }
+    }
+  },
+  "font-size-base400": {
+    "$type": "dimension",
+    "$value": "16px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontSizeBase400"
+      }
+    }
+  },
+  "font-size-base500": {
+    "$type": "dimension",
+    "$value": "20px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontSizeBase500"
+      }
+    }
+  },
+  "font-size-base600": {
+    "$type": "dimension",
+    "$value": "24px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontSizeBase600"
+      }
+    }
+  },
+  "font-size-hero1000": {
+    "$type": "dimension",
+    "$value": "68px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontSizeHero1000"
+      }
+    }
+  },
+  "font-size-hero700": {
+    "$type": "dimension",
+    "$value": "28px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontSizeHero700"
+      }
+    }
+  },
+  "font-size-hero800": {
+    "$type": "dimension",
+    "$value": "32px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontSizeHero800"
+      }
+    }
+  },
+  "font-size-hero900": {
+    "$type": "dimension",
+    "$value": "40px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontSizeHero900"
+      }
+    }
+  },
+  "font-weight-bold": {
+    "$type": "number",
+    "$value": "700",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontWeightBold"
+      }
+    }
+  },
+  "font-weight-medium": {
+    "$type": "number",
+    "$value": "500",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontWeightMedium"
+      }
+    }
+  },
+  "font-weight-regular": {
+    "$type": "number",
+    "$value": "400",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontWeightRegular"
+      }
+    }
+  },
+  "font-weight-semibold": {
+    "$type": "number",
+    "$value": "600",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--fontWeightSemibold"
+      }
+    }
+  },
+  "line-height-base100": {
+    "$type": "dimension",
+    "$value": "14px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--lineHeightBase100"
+      }
+    }
+  },
+  "line-height-base200": {
+    "$type": "dimension",
+    "$value": "16px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--lineHeightBase200"
+      }
+    }
+  },
+  "line-height-base300": {
+    "$type": "dimension",
+    "$value": "20px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--lineHeightBase300"
+      }
+    }
+  },
+  "line-height-base400": {
+    "$type": "dimension",
+    "$value": "22px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--lineHeightBase400"
+      }
+    }
+  },
+  "line-height-base500": {
+    "$type": "dimension",
+    "$value": "28px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--lineHeightBase500"
+      }
+    }
+  },
+  "line-height-base600": {
+    "$type": "dimension",
+    "$value": "32px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--lineHeightBase600"
+      }
+    }
+  },
+  "line-height-hero1000": {
+    "$type": "dimension",
+    "$value": "92px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--lineHeightHero1000"
+      }
+    }
+  },
+  "line-height-hero700": {
+    "$type": "dimension",
+    "$value": "36px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--lineHeightHero700"
+      }
+    }
+  },
+  "line-height-hero800": {
+    "$type": "dimension",
+    "$value": "40px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--lineHeightHero800"
+      }
+    }
+  },
+  "line-height-hero900": {
+    "$type": "dimension",
+    "$value": "52px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--lineHeightHero900"
+      }
+    }
+  },
+  "shadow16": {
+    "$type": "shadow",
+    "$value": "0 0 2px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.14)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow16"
+      }
+    }
+  },
+  "shadow16-brand": {
+    "$type": "shadow",
+    "$value": "0 0 2px rgba(0,0,0,0.30), 0 8px 16px rgba(0,0,0,0.25)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow16Brand"
+      }
+    }
+  },
+  "shadow2": {
+    "$type": "shadow",
+    "$value": "0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow2"
+      }
+    }
+  },
+  "shadow2-brand": {
+    "$type": "shadow",
+    "$value": "0 0 2px rgba(0,0,0,0.30), 0 1px 2px rgba(0,0,0,0.25)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow2Brand"
+      }
+    }
+  },
+  "shadow28": {
+    "$type": "shadow",
+    "$value": "0 0 8px rgba(0,0,0,0.12), 0 14px 28px rgba(0,0,0,0.14)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow28"
+      }
+    }
+  },
+  "shadow28-brand": {
+    "$type": "shadow",
+    "$value": "0 0 8px rgba(0,0,0,0.30), 0 14px 28px rgba(0,0,0,0.25)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow28Brand"
+      }
+    }
+  },
+  "shadow4": {
+    "$type": "shadow",
+    "$value": "0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.14)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow4"
+      }
+    }
+  },
+  "shadow4-brand": {
+    "$type": "shadow",
+    "$value": "0 0 2px rgba(0,0,0,0.30), 0 2px 4px rgba(0,0,0,0.25)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow4Brand"
+      }
+    }
+  },
+  "shadow64": {
+    "$type": "shadow",
+    "$value": "0 0 8px rgba(0,0,0,0.12), 0 32px 64px rgba(0,0,0,0.14)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow64"
+      }
+    }
+  },
+  "shadow64-brand": {
+    "$type": "shadow",
+    "$value": "0 0 8px rgba(0,0,0,0.30), 0 32px 64px rgba(0,0,0,0.25)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow64Brand"
+      }
+    }
+  },
+  "shadow8": {
+    "$type": "shadow",
+    "$value": "0 0 2px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.14)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow8"
+      }
+    }
+  },
+  "shadow8-brand": {
+    "$type": "shadow",
+    "$value": "0 0 2px rgba(0,0,0,0.30), 0 4px 8px rgba(0,0,0,0.25)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--shadow8Brand"
+      }
+    }
+  },
+  "spacing-horizontal-l": {
+    "$type": "dimension",
+    "$value": "16px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalL"
+      }
+    }
+  },
+  "spacing-horizontal-m": {
+    "$type": "dimension",
+    "$value": "12px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalM"
+      }
+    }
+  },
+  "spacing-horizontal-mnudge": {
+    "$type": "dimension",
+    "$value": "10px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalMNudge"
+      }
+    }
+  },
+  "spacing-horizontal-none": {
+    "$type": "dimension",
+    "$value": "0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalNone"
+      }
+    }
+  },
+  "spacing-horizontal-s": {
+    "$type": "dimension",
+    "$value": "8px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalS"
+      }
+    }
+  },
+  "spacing-horizontal-snudge": {
+    "$type": "dimension",
+    "$value": "6px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalSNudge"
+      }
+    }
+  },
+  "spacing-horizontal-xl": {
+    "$type": "dimension",
+    "$value": "20px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalXL"
+      }
+    }
+  },
+  "spacing-horizontal-xs": {
+    "$type": "dimension",
+    "$value": "4px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalXS"
+      }
+    }
+  },
+  "spacing-horizontal-xxl": {
+    "$type": "dimension",
+    "$value": "24px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalXXL"
+      }
+    }
+  },
+  "spacing-horizontal-xxs": {
+    "$type": "dimension",
+    "$value": "2px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalXXS"
+      }
+    }
+  },
+  "spacing-horizontal-xxxl": {
+    "$type": "dimension",
+    "$value": "32px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingHorizontalXXXL"
+      }
+    }
+  },
+  "spacing-vertical-l": {
+    "$type": "dimension",
+    "$value": "16px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalL"
+      }
+    }
+  },
+  "spacing-vertical-m": {
+    "$type": "dimension",
+    "$value": "12px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalM"
+      }
+    }
+  },
+  "spacing-vertical-mnudge": {
+    "$type": "dimension",
+    "$value": "10px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalMNudge"
+      }
+    }
+  },
+  "spacing-vertical-none": {
+    "$type": "dimension",
+    "$value": "0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalNone"
+      }
+    }
+  },
+  "spacing-vertical-s": {
+    "$type": "dimension",
+    "$value": "8px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalS"
+      }
+    }
+  },
+  "spacing-vertical-snudge": {
+    "$type": "dimension",
+    "$value": "6px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalSNudge"
+      }
+    }
+  },
+  "spacing-vertical-xl": {
+    "$type": "dimension",
+    "$value": "20px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalXL"
+      }
+    }
+  },
+  "spacing-vertical-xs": {
+    "$type": "dimension",
+    "$value": "4px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalXS"
+      }
+    }
+  },
+  "spacing-vertical-xxl": {
+    "$type": "dimension",
+    "$value": "24px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalXXL"
+      }
+    }
+  },
+  "spacing-vertical-xxs": {
+    "$type": "dimension",
+    "$value": "2px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalXXS"
+      }
+    }
+  },
+  "spacing-vertical-xxxl": {
+    "$type": "dimension",
+    "$value": "32px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--spacingVerticalXXXL"
+      }
+    }
+  },
+  "stroke-width-thick": {
+    "$type": "dimension",
+    "$value": "2px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--strokeWidthThick"
+      }
+    }
+  },
+  "stroke-width-thicker": {
+    "$type": "dimension",
+    "$value": "3px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--strokeWidthThicker"
+      }
+    }
+  },
+  "stroke-width-thickest": {
+    "$type": "dimension",
+    "$value": "4px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--strokeWidthThickest"
+      }
+    }
+  },
+  "stroke-width-thin": {
+    "$type": "dimension",
+    "$value": "1px",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "var": "--strokeWidthThin"
+      }
+    }
+  }
+}

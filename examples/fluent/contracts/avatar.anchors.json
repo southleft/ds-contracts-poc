@@ -1,0 +1,62 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "avatar",
+  "anchors": [
+    {
+      "leaf": "imported.avatar.label.background-color",
+      "token": "color-neutral-background6",
+      "part": "label",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground6",
+      "selector": ".f18f03hv"
+    },
+    {
+      "leaf": "imported.avatar.label.color",
+      "token": "color-neutral-foreground3",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground3",
+      "selector": ".f11d4kpn"
+    },
+    {
+      "leaf": "imported.avatar.root.font-size.24",
+      "token": "font-size-base100",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase100",
+      "selector": ".f13mqy1h"
+    },
+    {
+      "leaf": "imported.avatar.root.font-size.48",
+      "token": "font-size-base400",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase400",
+      "selector": ".fod5ikn"
+    },
+    {
+      "leaf": "imported.avatar.root.font-size.96",
+      "token": "font-size-base500",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase500",
+      "selector": ".f1pp30po"
+    },
+    {
+      "leaf": "imported.avatar.root.font-size.unset",
+      "token": "font-size-base300",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".r81b29z"
+    },
+    {
+      "leaf": "imported.avatar.root.font-weight",
+      "token": "font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightSemibold",
+      "selector": ".r81b29z"
+    }
+  ]
+}

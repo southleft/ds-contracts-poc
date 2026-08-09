@@ -1,0 +1,328 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/switch.contract.json (fluent.switch v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  align-items: flex-start;
+  border: 0;
+  bottom: var(--imported-shared-size-0);
+  left: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.labelPosition-above {
+  height: var(--imported-switch-root-height-above);
+  width: var(--imported-switch-root-width-above);
+}
+
+.labelPosition-after {
+  height: var(--imported-switch-root-height-after);
+  width: var(--imported-switch-root-width-after);
+}
+
+.labelPosition-before {
+  height: var(--imported-switch-root-height-before);
+  width: var(--imported-switch-root-width-before);
+}
+
+.root:focus-visible {
+  border-bottom-color: var(--imported-shared-color-00000000);
+}
+
+.root:focus-visible {
+  border-left-color: var(--imported-shared-color-00000000);
+}
+
+.root:focus-visible {
+  border-right-color: var(--imported-shared-color-00000000);
+}
+
+.root:focus-visible {
+  border-top-color: var(--imported-shared-color-00000000);
+}
+
+.input {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-switch-input-color);
+  font-size: var(--imported-switch-input-font-size);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  opacity: var(--imported-switch-input-opacity);
+  outline-color: var(--imported-switch-input-outline-color);
+  display: none;
+  appearance: auto;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: Arial;
+  position: absolute;
+  text-align: start;
+}
+
+.labelPosition-above .input {
+  height: var(--imported-switch-input-height-above);
+}
+
+.labelPosition-above .input {
+  left: var(--imported-switch-input-left-above);
+}
+
+.labelPosition-above .input {
+  right: var(--imported-switch-input-right-above);
+}
+
+.labelPosition-above .input {
+  top: var(--imported-switch-input-top-above);
+}
+
+.labelPosition-above .input {
+  width: var(--imported-switch-input-width-above);
+}
+
+.labelPosition-after .input {
+  height: var(--imported-switch-input-height-after);
+}
+
+.labelPosition-after .input {
+  left: var(--imported-switch-input-left-after);
+}
+
+.labelPosition-after .input {
+  right: var(--imported-switch-input-right-after);
+}
+
+.labelPosition-after .input {
+  top: var(--imported-switch-input-top-after);
+}
+
+.labelPosition-after .input {
+  width: var(--imported-switch-input-width-after);
+}
+
+.labelPosition-before .input {
+  height: var(--imported-switch-input-height-before);
+}
+
+.labelPosition-before .input {
+  left: var(--imported-switch-input-left-before);
+}
+
+.labelPosition-before .input {
+  right: var(--imported-switch-input-right-before);
+}
+
+.labelPosition-before .input {
+  top: var(--imported-switch-input-top-before);
+}
+
+.labelPosition-before .input {
+  width: var(--imported-switch-input-width-before);
+}
+
+.root:disabled .input {
+  cursor: default;
+}
+
+.root:focus-visible .input {
+  outline-style: auto;
+}
+
+.root:disabled .input {
+  color: var(--imported-switch-input-color-state-disabled);
+}
+
+.indicator svg {
+  width: 18px;
+  height: 18px;
+}
+
+.indicator {
+  display: inline-flex;
+  flex-shrink: 0;
+  border-bottom-left-radius: var(--imported-shared-size-10000);
+  border-bottom-right-radius: var(--imported-shared-size-10000);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-left-radius: var(--imported-shared-size-10000);
+  border-top-right-radius: var(--imported-shared-size-10000);
+  border-top-width: var(--imported-shared-size-1);
+  flex-shrink: var(--imported-switch-indicator-flex-shrink);
+  font-size: var(--imported-switch-indicator-font-size);
+  line-height: var(--imported-shared-size-0);
+  margin-bottom: var(--imported-shared-size-8);
+  margin-left: var(--imported-shared-size-8);
+  margin-right: var(--imported-shared-size-8);
+  width: var(--imported-switch-indicator-width);
+  display: block;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  box-sizing: border-box;
+  pointer-events: none;
+  transition-duration: 0.2s;
+  transition-property: background, border, color;
+  transition-timing-function: cubic-bezier(0.33, 0, 0.67, 1);
+}
+
+.checked-checked .indicator {
+  background-color: var(--imported-switch-indicator-background-color-checked);
+}
+
+.checked-checked .indicator {
+  border-bottom-color: var(--imported-switch-indicator-border-bottom-color-checked);
+}
+
+.checked-checked .indicator {
+  border-left-color: var(--imported-switch-indicator-border-left-color-checked);
+}
+
+.checked-checked .indicator {
+  border-right-color: var(--imported-switch-indicator-border-right-color-checked);
+}
+
+.checked-checked .indicator {
+  border-top-color: var(--imported-switch-indicator-border-top-color-checked);
+}
+
+.checked-checked .indicator {
+  color: var(--imported-switch-indicator-color-checked);
+}
+
+.checked-checked .indicator {
+  fill: var(--imported-switch-indicator-fill-checked);
+}
+
+.checked-unchecked .indicator {
+  background-color: var(--imported-switch-indicator-background-color-unchecked);
+}
+
+.checked-unchecked .indicator {
+  border-bottom-color: var(--imported-switch-indicator-border-bottom-color-unchecked);
+}
+
+.checked-unchecked .indicator {
+  border-left-color: var(--imported-switch-indicator-border-left-color-unchecked);
+}
+
+.checked-unchecked .indicator {
+  border-right-color: var(--imported-switch-indicator-border-right-color-unchecked);
+}
+
+.checked-unchecked .indicator {
+  border-top-color: var(--imported-switch-indicator-border-top-color-unchecked);
+}
+
+.checked-unchecked .indicator {
+  color: var(--imported-switch-indicator-color-unchecked);
+}
+
+.checked-unchecked .indicator {
+  fill: var(--imported-switch-indicator-fill-unchecked);
+}
+
+.labelPosition-above .indicator {
+  margin-top: var(--imported-switch-indicator-margin-top-above);
+}
+
+.labelPosition-after .indicator {
+  margin-top: var(--imported-switch-indicator-margin-top-after);
+}
+
+.labelPosition-before .indicator {
+  margin-top: var(--imported-switch-indicator-margin-top-before);
+}
+
+.root:disabled .indicator {
+  color: var(--imported-shared-color-bdbdbd);
+}
+
+.label {
+  font-size: var(--imported-switch-label-font-size);
+  font-weight: var(--imported-switch-label-font-weight);
+  line-height: var(--imported-switch-label-line-height);
+  display: block;
+  cursor: pointer;
+}
+
+.labelPosition-above .label {
+  padding-bottom: var(--imported-switch-label-padding-bottom-above);
+}
+
+.labelPosition-above .label {
+  padding-left: var(--imported-switch-label-padding-left-above);
+}
+
+.labelPosition-above .label {
+  padding-right: var(--imported-switch-label-padding-right-above);
+}
+
+.labelPosition-above .label {
+  padding-top: var(--imported-switch-label-padding-top-above);
+}
+
+.labelPosition-after .label {
+  padding-bottom: var(--imported-switch-label-padding-bottom-after);
+}
+
+.labelPosition-after .label {
+  padding-left: var(--imported-switch-label-padding-left-after);
+}
+
+.labelPosition-after .label {
+  padding-right: var(--imported-switch-label-padding-right-after);
+}
+
+.labelPosition-after .label {
+  padding-top: var(--imported-switch-label-padding-top-after);
+}
+
+.labelPosition-before .label {
+  padding-bottom: var(--imported-switch-label-padding-bottom-before);
+}
+
+.labelPosition-before .label {
+  padding-left: var(--imported-switch-label-padding-left-before);
+}
+
+.labelPosition-before .label {
+  padding-right: var(--imported-switch-label-padding-right-before);
+}
+
+.labelPosition-before .label {
+  padding-top: var(--imported-switch-label-padding-top-before);
+}
+
+.root:disabled .label {
+  cursor: default;
+}
+
+.root:disabled .label {
+  color: var(--imported-shared-color-bdbdbd);
+}

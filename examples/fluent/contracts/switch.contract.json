@@ -1,0 +1,315 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.switch",
+  "name": "Switch",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: checked=false, labelPosition=after. The thumb is a REAL DOM child (fui-Switch__indicator ⊃ fui-Icon) — no ::after trickery, no translate channel. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/fluent/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Fluent's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "labelPosition",
+      "type": {
+        "enum": [
+          "above",
+          "after",
+          "before"
+        ]
+      },
+      "default": "after",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Label Position",
+          "values": {
+            "above": "Above",
+            "after": "After",
+            "before": "Before"
+          }
+        },
+        "code": {
+          "prop": "labelPosition"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "start"
+      },
+      "parts": {
+        "input": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input|Switch__input|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "auto",
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "font-family": "Arial",
+            "position": "absolute",
+            "text-align": "start"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            },
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.switch.input.color}",
+            "font-size": "{imported.switch.input.font-size}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "opacity": "{imported.switch.input.opacity}",
+            "outline-color": "{imported.switch.input.outline-color}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.switch.input.color-state-disabled}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "labelPosition",
+              "map": {
+                "above": {
+                  "height": "{imported.switch.input.height.above}",
+                  "left": "{imported.switch.input.left.above}",
+                  "right": "{imported.switch.input.right.above}",
+                  "top": "{imported.switch.input.top.above}",
+                  "width": "{imported.switch.input.width.above}"
+                },
+                "after": {
+                  "height": "{imported.switch.input.height.after}",
+                  "left": "{imported.switch.input.left.after}",
+                  "right": "{imported.switch.input.right.after}",
+                  "top": "{imported.switch.input.top.after}",
+                  "width": "{imported.switch.input.width.after}"
+                },
+                "before": {
+                  "height": "{imported.switch.input.height.before}",
+                  "left": "{imported.switch.input.left.before}",
+                  "right": "{imported.switch.input.right.before}",
+                  "top": "{imported.switch.input.top.before}",
+                  "width": "{imported.switch.input.width.before}"
+                }
+              }
+            }
+          ]
+        },
+        "indicator": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Switch__indicator — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "pointer-events": "none",
+            "transition-duration": "0.2s",
+            "transition-property": "background, border, color",
+            "transition-timing-function": "cubic-bezier(0.33, 0, 0.67, 1)"
+          },
+          "icon": {
+            "asset": "switch-indicator",
+            "size": 18
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-10000}",
+            "border-bottom-right-radius": "{imported.shared.size-10000}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-left-radius": "{imported.shared.size-10000}",
+            "border-top-right-radius": "{imported.shared.size-10000}",
+            "border-top-width": "{imported.shared.size-1}",
+            "flex-shrink": "{imported.switch.indicator.flex-shrink}",
+            "font-size": "{imported.switch.indicator.font-size}",
+            "line-height": "{imported.shared.size-0}",
+            "margin-bottom": "{imported.shared.size-8}",
+            "margin-left": "{imported.shared.size-8}",
+            "margin-right": "{imported.shared.size-8}",
+            "width": "{imported.switch.indicator.width}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-bdbdbd}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "background-color": "{imported.switch.indicator.background-color.checked}",
+                  "border-bottom-color": "{imported.switch.indicator.border-bottom-color.checked}",
+                  "border-left-color": "{imported.switch.indicator.border-left-color.checked}",
+                  "border-right-color": "{imported.switch.indicator.border-right-color.checked}",
+                  "border-top-color": "{imported.switch.indicator.border-top-color.checked}",
+                  "color": "{imported.switch.indicator.color.checked}",
+                  "fill": "{imported.switch.indicator.fill.checked}"
+                },
+                "unchecked": {
+                  "background-color": "{imported.switch.indicator.background-color.unchecked}",
+                  "border-bottom-color": "{imported.switch.indicator.border-bottom-color.unchecked}",
+                  "border-left-color": "{imported.switch.indicator.border-left-color.unchecked}",
+                  "border-right-color": "{imported.switch.indicator.border-right-color.unchecked}",
+                  "border-top-color": "{imported.switch.indicator.border-top-color.unchecked}",
+                  "color": "{imported.switch.indicator.color.unchecked}",
+                  "fill": "{imported.switch.indicator.fill.unchecked}"
+                }
+              }
+            },
+            {
+              "prop": "labelPosition",
+              "map": {
+                "above": {
+                  "margin-top": "{imported.switch.indicator.margin-top.above}"
+                },
+                "after": {
+                  "margin-top": "{imported.switch.indicator.margin-top.after}"
+                },
+                "before": {
+                  "margin-top": "{imported.switch.indicator.margin-top.before}"
+                }
+              }
+            }
+          ]
+        },
+        "label": {
+          "element": "label",
+          "text": "Switch",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|Label.Switch__label — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "pointer"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            }
+          },
+          "tokens": {
+            "font-size": "{imported.switch.label.font-size}",
+            "font-weight": "{imported.switch.label.font-weight}",
+            "line-height": "{imported.switch.label.line-height}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-bdbdbd}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "labelPosition",
+              "map": {
+                "above": {
+                  "padding-bottom": "{imported.switch.label.padding-bottom.above}",
+                  "padding-left": "{imported.switch.label.padding-left.above}",
+                  "padding-right": "{imported.switch.label.padding-right.above}",
+                  "padding-top": "{imported.switch.label.padding-top.above}"
+                },
+                "after": {
+                  "padding-bottom": "{imported.switch.label.padding-bottom.after}",
+                  "padding-left": "{imported.switch.label.padding-left.after}",
+                  "padding-right": "{imported.switch.label.padding-right.after}",
+                  "padding-top": "{imported.switch.label.padding-top.after}"
+                },
+                "before": {
+                  "padding-bottom": "{imported.switch.label.padding-bottom.before}",
+                  "padding-left": "{imported.switch.label.padding-left.before}",
+                  "padding-right": "{imported.switch.label.padding-right.before}",
+                  "padding-top": "{imported.switch.label.padding-top.before}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "position": "relative"
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "states": {
+        "focus-visible": {
+          "border-bottom-color": "{imported.shared.color-00000000}",
+          "border-left-color": "{imported.shared.color-00000000}",
+          "border-right-color": "{imported.shared.color-00000000}",
+          "border-top-color": "{imported.shared.color-00000000}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "labelPosition",
+          "map": {
+            "above": {
+              "height": "{imported.switch.root.height.above}",
+              "width": "{imported.switch.root.width.above}"
+            },
+            "after": {
+              "height": "{imported.switch.root.height.after}",
+              "width": "{imported.switch.root.width.after}"
+            },
+            "before": {
+              "height": "{imported.switch.root.height.before}",
+              "width": "{imported.switch.root.width.before}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "Switch"
+    }
+  },
+  "figmaStatePreviews": true
+}

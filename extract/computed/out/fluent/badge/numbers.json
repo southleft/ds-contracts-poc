@@ -1,0 +1,183 @@
+{
+  "component": "Badge",
+  "browser": "151.0.7922.34",
+  "captures": 768,
+  "combos": 192,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 475,
+  "elementsPerCapture": 1,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 33
+  },
+  "folds": {
+    "count": 6,
+    "receipts": [
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 423,
+    "mintedLeavesFolded": 231
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 231,
+    "baseBindings": 21,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 9,
+      "perAxis": 6,
+      "perPair": 6,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 2,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 1,
+    "state": 0,
+    "overflowBindings": 0
+  },
+  "pseudoElementFindings": 192,
+  "anatomyPromotion": {
+    "partsCarried": 1,
+    "svgAssets": 0,
+    "refusals": 1
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 363264,
+    "cellsMatched": 363008,
+    "pct": 99.92952783650458,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "inline-size",
+        128
+      ],
+      [
+        "width",
+        128
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 768,
+    "measured": 768,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
+    "exact": {
+      "mean": 0.005018446180555556,
+      "max": 0.06944444444444445,
+      "perfect": 641
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 768
+    },
+    "worst": [
+      {
+        "key": "outline.danger.extra-large__default",
+        "pctExact": 0.06944444444444445,
+        "pctAA": 0
+      },
+      {
+        "key": "outline.danger.extra-large__hover",
+        "pctExact": 0.06944444444444445,
+        "pctAA": 0
+      },
+      {
+        "key": "outline.danger.extra-large__focus-visible",
+        "pctExact": 0.06944444444444445,
+        "pctAA": 0
+      },
+      {
+        "key": "outline.danger.extra-large__active",
+        "pctExact": 0.06944444444444445,
+        "pctAA": 0
+      },
+      {
+        "key": "outline.severe.extra-large__default",
+        "pctExact": 0.06018518518518518,
+        "pctAA": 0
+      },
+      {
+        "key": "outline.severe.extra-large__hover",
+        "pctExact": 0.06018518518518518,
+        "pctAA": 0
+      },
+      {
+        "key": "outline.severe.extra-large__focus-visible",
+        "pctExact": 0.06018518518518518,
+        "pctAA": 0
+      },
+      {
+        "key": "outline.severe.extra-large__active",
+        "pctExact": 0.06018518518518518,
+        "pctAA": 0
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 97.84946236559139,
+    "rowsFullyEqual": 256,
+    "rows": 768,
+    "pixelPerfectExact": 332,
+    "pixelPerfectAA": 480,
+    "pairs": 768
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 192
+}

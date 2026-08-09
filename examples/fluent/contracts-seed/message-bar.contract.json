@@ -1,0 +1,77 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.message-bar",
+  "name": "MessageBar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: intent=info, shape=rounded. `politeness` carries NO @default tag in the rollup (Fluent derives it from intent at runtime); it is pinned to \"polite\" — an aria-live attribute with no visual channel, so the pin cannot move a pixel.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "intent",
+      "type": {
+        "enum": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Intent",
+          "values": {
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "intent"
+        }
+      }
+    },
+    {
+      "name": "shape",
+      "type": {
+        "enum": [
+          "square",
+          "rounded"
+        ]
+      },
+      "default": "rounded",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape",
+          "values": {
+            "square": "Square",
+            "rounded": "Rounded"
+          }
+        },
+        "code": {
+          "prop": "shape"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "MessageBar"
+    }
+  }
+}

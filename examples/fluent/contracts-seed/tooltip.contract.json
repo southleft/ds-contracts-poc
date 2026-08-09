@@ -1,0 +1,50 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.tooltip",
+  "name": "Tooltip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: appearance=normal, withArrow=false, visible=false, positioning=above. `relationship` is a REQUIRED prop (no default) pinned to \"label\"; `positioning` pinned to \"after\". `withArrow` rides the PRESENCE grammar (MUI Tooltip's exact precedent) — it is structure-creating, so the arrow subtree promotes as a visibleWhen-gated part.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "appearance",
+      "type": {
+        "enum": [
+          "normal",
+          "inverted"
+        ]
+      },
+      "default": "normal",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Appearance",
+          "values": {
+            "normal": "Normal",
+            "inverted": "Inverted"
+          }
+        },
+        "code": {
+          "prop": "appearance"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "Tooltip"
+    }
+  }
+}

@@ -1,0 +1,1497 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@fluentui/react-components@9.74.5",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "color-ffffff": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-20": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "num-600": {
+          "$value": "600",
+          "$type": "number"
+        },
+        "color-00000000": {
+          "$value": "#00000000",
+          "$type": "color"
+        },
+        "color-242424": {
+          "$value": "#242424",
+          "$type": "color"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-neg-2": {
+          "$value": "-2px",
+          "$type": "dimension"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "color-d1d1d1": {
+          "$value": "#d1d1d1",
+          "$type": "color"
+        },
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "size-5": {
+          "$value": "5px",
+          "$type": "dimension"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "size-24": {
+          "$value": "24px",
+          "$type": "dimension"
+        }
+      },
+      "dialog": {
+        "root": {
+          "border-bottom-color": {
+            "modal": {
+              "$value": "#242424",
+              "$type": "color"
+            },
+            "non-modal": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "alert": {
+              "$value": "#242424",
+              "$type": "color"
+            }
+          },
+          "border-bottom-left-radius": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-width": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-left-color": {
+            "modal": {
+              "$value": "#242424",
+              "$type": "color"
+            },
+            "non-modal": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "alert": {
+              "$value": "#242424",
+              "$type": "color"
+            }
+          },
+          "border-left-width": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-right-color": {
+            "modal": {
+              "$value": "#242424",
+              "$type": "color"
+            },
+            "non-modal": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "alert": {
+              "$value": "#242424",
+              "$type": "color"
+            }
+          },
+          "border-right-width": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-color": {
+            "modal": {
+              "$value": "#242424",
+              "$type": "color"
+            },
+            "non-modal": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "alert": {
+              "$value": "#242424",
+              "$type": "color"
+            }
+          },
+          "border-top-left-radius": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-width": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "box-shadow": {
+            "modal": {
+              "$value": "none",
+              "$type": "shadow"
+            },
+            "non-modal": {
+              "$value": "rgba(0, 0, 0, 0.12) 0px 0px 8px 0px, rgba(0, 0, 0, 0.14) 0px 32px 64px 0px",
+              "$type": "shadow"
+            },
+            "alert": {
+              "$value": "none",
+              "$type": "shadow"
+            }
+          },
+          "margin-bottom": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "623px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "margin-left": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "250px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "250px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "margin-top": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "623px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "modal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "non-modal": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "alert": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "dialogbody-2": {
+          "max-height": {
+            "$value": "1352px",
+            "$type": "dimension"
+          }
+        },
+        "label-4": {
+          "line-height": {
+            "$value": "28px",
+            "$type": "dimension"
+          }
+        },
+        "label-5": {
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "min-height": {
+            "$value": "32px",
+            "$type": "dimension"
+          }
+        },
+        "label-6": {
+          "min-width": {
+            "$value": "96px",
+            "$type": "dimension"
+          }
+        },
+        "dialogsurface-backdrop": {
+          "background-color": {
+            "$value": "#00000066",
+            "$type": "color"
+          }
+        },
+        "dialogsurface": {
+          "box-shadow": {
+            "$value": "rgba(0, 0, 0, 0.12) 0px 0px 8px 0px, rgba(0, 0, 0, 0.14) 0px 32px 64px 0px",
+            "$type": "shadow"
+          },
+          "margin-bottom": {
+            "$value": "623px",
+            "$type": "dimension"
+          },
+          "margin-left": {
+            "$value": "250px",
+            "$type": "dimension"
+          },
+          "margin-right": {
+            "$value": "250px",
+            "$type": "dimension"
+          },
+          "margin-top": {
+            "$value": "623px",
+            "$type": "dimension"
+          },
+          "max-height": {
+            "$value": "1400px",
+            "$type": "dimension"
+          },
+          "max-width": {
+            "$value": "600px",
+            "$type": "dimension"
+          },
+          "scale": {
+            "$value": "1",
+            "$type": "number"
+          }
+        },
+        "dialogbody": {
+          "max-height": {
+            "$value": "1352px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "line-height": {
+            "$value": "28px",
+            "$type": "dimension"
+          }
+        },
+        "label-2": {
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "min-height": {
+            "$value": "32px",
+            "$type": "dimension"
+          }
+        },
+        "label-3": {
+          "min-width": {
+            "$value": "96px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "part-0-1-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-1-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-6",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "label-6",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label-6",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "label-3",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label-3",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "dialogbody-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "box-sizing",
+        "value": "content-box"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "label-5",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-5",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "label-5",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "dialogactions-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label-6",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-6",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-6",
+        "channel": "transition-duration",
+        "value": "0.1s"
+      },
+      {
+        "part": "label-6",
+        "channel": "transition-property",
+        "value": "background, border, color"
+      },
+      {
+        "part": "label-6",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "dialogbody",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "dialogactions",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label-3",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-3",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-3",
+        "channel": "transition-duration",
+        "value": "0.1s"
+      },
+      {
+        "part": "label-3",
+        "channel": "transition-property",
+        "value": "background, border, color"
+      },
+      {
+        "part": "label-3",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "border-bottom-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "border-left-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "border-right-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "border-top-style",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "box-sizing",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "content-box",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "max-height",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "max-width",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "position",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "absolute",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "scale",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "z-index",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "dialogbody-2",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "grid",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogbody-2",
+      "channel": "grid-template-columns",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "257px 257px 20px",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogbody-2",
+      "channel": "grid-template-rows",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "28px 28px 32px",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "grid-column-end",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "3",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "grid-column-start",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "grid-row-end",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "grid-row-start",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-4",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogtitle__action",
+      "channel": "align-self",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "start",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogtitle__action",
+      "channel": "grid-column-start",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "3",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogtitle__action",
+      "channel": "grid-row-end",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "1",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogtitle__action",
+      "channel": "grid-row-start",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "1",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogtitle__action",
+      "channel": "justify-self",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "end",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0-1-0",
+      "channel": "appearance",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "button",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "grid-column-end",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "4",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "grid-column-start",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "grid-row-end",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "2",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-5",
+      "channel": "grid-row-start",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "2",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogactions-2",
+      "channel": "grid-column-end",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "4",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogactions-2",
+      "channel": "grid-column-start",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "2",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogactions-2",
+      "channel": "grid-row-end",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "3",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogactions-2",
+      "channel": "grid-row-start",
+      "reason": "grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "3",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogactions-2",
+      "channel": "justify-self",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "end",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-6",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogsurface__backdrop",
+      "channel": "position",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "fixed",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogsurface",
+      "channel": "position",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "fixed",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogbody",
+      "channel": "display",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "grid",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogbody",
+      "channel": "grid-template-columns",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "267px 267px 0px",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogbody",
+      "channel": "grid-template-rows",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "28px 28px 32px",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "grid-column-end",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "4",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "grid-column-start",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "grid-row-end",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "grid-row-start",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "grid-column-end",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "4",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "grid-column-start",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "1",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "grid-row-end",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "2",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "grid-row-start",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "2",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogactions",
+      "channel": "grid-column-end",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "4",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogactions",
+      "channel": "grid-column-start",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "2",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogactions",
+      "channel": "grid-row-end",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "3",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogactions",
+      "channel": "grid-row-start",
+      "reason": "grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "sample": "3",
+      "distinctValues": 1
+    },
+    {
+      "part": "dialogactions",
+      "channel": "justify-self",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "end",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [
+    "root-signature-varies: non-modal__default: div| → div|DialogSurface (element-varies receipt; root always aligns)",
+    "union-part-added: non-modal__default @0 (div|DialogBody)",
+    "union-part-added: non-modal__default @0.0 (h2|DialogTitle)",
+    "union-part-added: non-modal__default @0.1 (div|DialogTitle__action)",
+    "union-part-added: non-modal__default @0.1.0 (button|)",
+    "union-part-added: non-modal__default @0.1.0.0 (svg|Icon)",
+    "union-part-added: non-modal__default @0.1.0.0.0 (path|)",
+    "union-part-added: non-modal__default @0.2 (div|DialogContent)",
+    "union-part-added: non-modal__default @0.3 (div|DialogActions)",
+    "union-part-added: non-modal__default @0.3.0 (button|Button)",
+    "signature-drift: non-modal__default root: div| → div|DialogSurface",
+    "part-missing: non-modal__default dialogsurface__backdrop",
+    "part-missing: non-modal__default dialogsurface",
+    "part-missing: non-modal__default part-1-0",
+    "part-missing: non-modal__default dialogbody",
+    "part-missing: non-modal__default label",
+    "part-missing: non-modal__default label-2",
+    "part-missing: non-modal__default dialogactions",
+    "part-missing: non-modal__default label-3",
+    "part-missing: non-modal__default part-1-2",
+    "portal-inert-roots-dropped: modal — 3 new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: <i> portaled, <span> in-stage, <i> portaled",
+    "portal-inert-children-dropped: modal — 1 direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy",
+    "portal-autofocus-neutralized: modal — focus was on \"button|fui-Button.r1f29ykk\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
+    "portal-inert-roots-dropped: non-modal — 3 new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: <i> portaled, <span> in-stage, <i> portaled",
+    "portal-wrapper-unwrapped: non-modal — 1 pass-through portal WRAPPER element(s) between document.body and the overlay were unwrapped BEFORE the single-root policy ran; the captured root is the wrapper's one element child (div|fui-DialogSurface). Decided by MEASUREMENT, never by attribute name: <div [class dir data-portal-node]> position:absolute; display:block; 1100×0; 2 element child (1 inert focus-manager sentinel(s) excluded from the one-child test); draws no box",
+    "portal-autofocus-neutralized: non-modal — focus was on \"button|r2avt6e\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane",
+    "portal-inert-roots-dropped: alert — 3 new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: <i> portaled, <span> in-stage, <i> portaled",
+    "portal-inert-children-dropped: alert — 1 direct child element(s) of the captured root draw no box, carry no library class and contain nothing (focus-trap sentinels); they lowered to full-bleed invisible frames over the component and are not anatomy",
+    "portal-autofocus-neutralized: alert — focus was on \"button|fui-Button.r1f29ykk\" when the overlay settled (the library autofocuses on open); blurred BEFORE sampling so the default-interaction plane is not silently a :focus-visible plane"
+  ],
+  "styledChannelReceipts": [
+    "viewport-derived-geometry-refused: root (position:absolute) — bottom, left, right, top, width NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 0px + box 1100px + right 0px = 1100px = browser.viewport.width (1100px); top 0px + box 0px + bottom 1400px = 1400px = browser.viewport.height (1400px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
+    "viewport-derived-geometry-refused: dialogsurface__backdrop (position:fixed) — bottom, height, left, right, top, width NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 0px + box 1100px + right 0px = 1100px = browser.viewport.width (1100px); top 0px + box 1400px + bottom 0px = 1400px = browser.viewport.height (1400px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
+    "viewport-derived-geometry-refused: dialogsurface (position:fixed) — bottom, left, right, top NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 0px + box 600px + right 0px = 1100px = browser.viewport.width (1100px); top 0px + box 154px + bottom 0px = 1400px = browser.viewport.height (1400px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
+    "block-root-width-refused: root — display:block root, width 1100px = browser.viewport.width (1100px), NOT the stage content box (stage 600px − 2×16px = 568px). The root is position:absolute pinned to the initial containing block, so the window STRETCHED it; it is not \"filling its container\" in any sense the library chose. A width that is a function of the capture window is a fact about the harness, not about the library: it is REFUSED here rather than minted with a warning, because the emitters read the token and not the receipt — a 900px token draws a 900px frame on canvas whatever the receipt says. The component's own drawn box is a DIFFERENT element (the dialog paper); choosing it is capture's root decision (demoteFullBleedScrim), not fusion's to fabricate.",
+    "control-fallback: no control for <h2> — span control used (part label-4)",
+    "control-fallback: no control for <svg> — span control used (part icon)",
+    "control-fallback: no control for <path> — span control used (part part-0-1-0-0-0)",
+    "text-part-typography-carried: label-5 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <i> — span control used (part part-1-0)",
+    "control-fallback: no control for <h2> — span control used (part label)",
+    "text-part-typography-carried: label-2 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "control-fallback: no control for <i> — span control used (part part-1-2)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (label-3, label-6, part-0-1-0); -webkit-text-stroke-color (label-3, label-6, part-0-1-0)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "orphan-mint-refused: part-1-0 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 11 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
+    "orphan-mint-refused: part-1-2 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 11 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
+    "inheritance-check-rejected: label-2.font-size — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.line-height — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.caret-color — values track ancestor \"dialogactions\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.color — values track ancestor \"dialogactions\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-size — values track ancestor \"dialogactions\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"dialogactions\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.line-height — values track ancestor \"dialogactions\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.font-size — values track ancestor \"dialogbody-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.font-weight — values track ancestor \"dialogbody-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.line-height — values track ancestor \"dialogbody-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.font-size — values track ancestor \"dialogbody-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.font-weight — values track ancestor \"dialogbody-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.line-height — values track ancestor \"dialogbody-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.caret-color — values track ancestor \"dialogactions-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.color — values track ancestor \"dialogactions-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.font-size — values track ancestor \"dialogactions-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.font-weight — values track ancestor \"dialogactions-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.line-height — values track ancestor \"dialogactions-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"dialogbody\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-1-0.caret-color — values track ancestor \"dialogtitle__action\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-1-0.color — values track ancestor \"dialogtitle__action\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-1-0.font-size — values track ancestor \"dialogtitle__action\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-1-0.line-height — values track ancestor \"dialogtitle__action\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+  ],
+  "frontierReceipts": [
+    "read-boundary-not-read-on-portal-path: Dialog sweeps through capturePortalRoots (two-phase baseline diff), which normalizes each root inside its own reader and never runs readBoundaryReceipts — so the text-fill fold and the closed-shadow-root signature are NOT MEASURED for this component. Zero lines above means UNREAD, not \"none found\"; a named residual of the molecule round, surfaced by the scope-independence fix (before it, this component displayed its SIBLINGS' folds and looked read).",
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "dialogbody-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-4",
+        "join": "computed-only"
+      },
+      {
+        "part": "dialogtitle__action",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-1-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-5",
+        "join": "computed-only"
+      },
+      {
+        "part": "dialogactions-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-6",
+        "join": "computed-only"
+      },
+      {
+        "part": "dialogsurface__backdrop",
+        "join": "computed-only"
+      },
+      {
+        "part": "dialogsurface",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "dialogbody",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "dialogactions",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-2",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "dialogbody-2",
+      "label-4",
+      "dialogtitle__action",
+      "part-0-1-0",
+      "label-5",
+      "dialogactions-2",
+      "label-6",
+      "dialogsurface__backdrop",
+      "dialogsurface",
+      "dialogbody",
+      "label",
+      "label-2",
+      "dialogactions",
+      "label-3"
+    ],
+    "svgAssets": [
+      "dialog-part-0-1-0"
+    ],
+    "receipts": [
+      "svg-viewbox-reconstructed: Dialog.part-0-1-0@non-modal — 0 0 20 20 from computed size 20×20 (path extent 16.1; viewBox is not a computed style — named reconstruction)",
+      "presence-carried: dialogbody-2 (1/3 combos) →  hidden-when modalType=modal, modalType=alert",
+      "literal-text-carried: label-4 = \"Dialog title\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-4 (1/3 combos) →  hidden-when modalType=modal, modalType=alert",
+      "presence-carried: dialogtitle__action (1/3 combos) →  hidden-when modalType=modal, modalType=alert",
+      "presence-carried: part-0-1-0 (1/3 combos) →  hidden-when modalType=modal, modalType=alert",
+      "literal-text-carried: label-5 = \"Dialog content copy for the Fluent round\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-5 (1/3 combos) →  hidden-when modalType=modal, modalType=alert",
+      "presence-carried: dialogactions-2 (1/3 combos) →  hidden-when modalType=modal, modalType=alert",
+      "literal-text-carried: label-6 = \"Close\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: label-6 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "presence-carried: label-6 (1/3 combos) →  hidden-when modalType=modal, modalType=alert",
+      "grid-promotion-fallback: dialogbody-2 — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; the flex-era lowering decides (named)",
+      "presence-carried: dialogsurface__backdrop (2/3 combos) →  hidden-when modalType=non-modal",
+      "presence-carried: dialogsurface (2/3 combos) →  hidden-when modalType=non-modal",
+      "presence-carried: dialogbody (2/3 combos) →  hidden-when modalType=non-modal",
+      "literal-text-carried: label = \"Dialog title\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label (2/3 combos) →  hidden-when modalType=non-modal",
+      "literal-text-carried: label-2 = \"Dialog content copy for the Fluent round\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-2 (2/3 combos) →  hidden-when modalType=non-modal",
+      "presence-carried: dialogactions (2/3 combos) →  hidden-when modalType=non-modal",
+      "literal-text-carried: label-3 = \"Close\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: label-3 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "presence-carried: label-3 (2/3 combos) →  hidden-when modalType=non-modal",
+      "grid-promotion-fallback: dialogbody — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; the flex-era lowering decides (named)"
+    ],
+    "refusals": [
+      "grid-two-dimensional: grid resolves 3 columns × 3 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (part dialogbody-2)",
+      "non-painting-part: part-1-0 <i> renders NO INK in any combo it appears in (content-visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
+      "grid-two-dimensional: grid resolves 3 columns × 3 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (part dialogbody)",
+      "non-painting-part: part-1-2 <i> renders NO INK in any combo it appears in (content-visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)"
+    ]
+  },
+  "enrichmentNotes": [
+    "layout enriched: label-6.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-6.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-3.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-3.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: dialogbody-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-1-0.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.box-sizing = content-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.text-align = left (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-5.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-5.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-5.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: dialogactions-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-6.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-6.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.transition-duration = 0.1s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.transition-property = background, border, color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-6.transition-timing-function = cubic-bezier(0.33, 0, 0.67, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: dialogsurface.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: dialogsurface.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: dialogsurface.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: dialogsurface.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: dialogsurface.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: dialogbody.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: dialogactions.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.transition-duration = 0.1s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.transition-property = background, border, color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.transition-timing-function = cubic-bezier(0.33, 0, 0.67, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "sizing evidence measured, NOT carried: dialogsurface sits AT its max-width in every combo — the value may be a genuine design width, so the fixed-width lowering stands."
+  ]
+}

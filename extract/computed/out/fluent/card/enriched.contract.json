@@ -1,0 +1,456 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.card",
+  "name": "Card",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: appearance=filled, size=medium, orientation=vertical, focusMode=off (pinned), selected=false (pinned). CardHeader/CardPreview have no readable props (RECON §3b — the slot API), so they are COMPOSITION, not components. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "appearance",
+      "type": {
+        "enum": [
+          "filled",
+          "filled-alternative",
+          "outline",
+          "subtle"
+        ]
+      },
+      "default": "filled",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Appearance",
+          "values": {
+            "filled": "Filled",
+            "filled-alternative": "Filled Alternative",
+            "outline": "Outline",
+            "subtle": "Subtle"
+          }
+        },
+        "code": {
+          "prop": "appearance"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "orientation",
+      "type": {
+        "enum": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "default": "vertical",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Orientation",
+          "values": {
+            "horizontal": "Horizontal",
+            "vertical": "Vertical"
+          }
+        },
+        "code": {
+          "prop": "orientation"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "checkbox": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input|Card__checkbox|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "auto",
+            "box-sizing": "border-box",
+            "cursor": "default",
+            "font-family": "Arial",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "absolute",
+            "text-align": "start",
+            "text-wrap-mode": "nowrap"
+          },
+          "declaredStates": {
+            "disabled": {
+              "user-select": "none"
+            },
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "color": "{imported.card.checkbox.color}",
+            "font-size": "{imported.card.checkbox.font-size}",
+            "height": "{imported.card.checkbox.height}",
+            "margin-bottom": "{imported.shared.size-3}",
+            "margin-left": "{imported.card.checkbox.margin-left}",
+            "margin-right": "{imported.shared.size-3}",
+            "margin-top": "{imported.shared.size-3}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "outline-color": "{imported.card.checkbox.outline-color}",
+            "width": "{imported.card.checkbox.width}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.card.checkbox.color-state-disabled}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "orientation",
+              "map": {
+                "horizontal": {
+                  "bottom": "{imported.card.checkbox.bottom.{size}.horizontal}",
+                  "top": "{imported.card.checkbox.top.{size}.horizontal}"
+                },
+                "vertical": {
+                  "bottom": "{imported.card.checkbox.bottom.{size}.vertical}",
+                  "top": "{imported.card.checkbox.top.{size}.vertical}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "left": "{imported.card.checkbox.left.large}",
+                  "right": "{imported.card.checkbox.right.large}"
+                },
+                "medium": {
+                  "left": "{imported.card.checkbox.left.medium}",
+                  "right": "{imported.card.checkbox.right.medium}"
+                },
+                "small": {
+                  "left": "{imported.card.checkbox.left.small}",
+                  "right": "{imported.card.checkbox.right.small}"
+                }
+              }
+            }
+          ]
+        },
+        "label": {
+          "text": "Preview",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|CardPreview — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "pointer",
+            "position": "relative"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed",
+              "user-select": "none"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "font-size": "{imported.shared.size-14}",
+            "font-weight": "{imported.shared.num-400}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-20}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-bdbdbd}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "orientation",
+              "map": {
+                "horizontal": {
+                  "margin-bottom": "{imported.card.label.margin-bottom.{size}.horizontal}",
+                  "margin-right": "{imported.card.label.margin-right.{size}.horizontal}"
+                },
+                "vertical": {
+                  "margin-bottom": "{imported.card.label.margin-bottom.{size}.vertical}",
+                  "margin-right": "{imported.card.label.margin-right.{size}.vertical}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "margin-left": "{imported.card.label.margin-left.large}",
+                  "margin-top": "{imported.card.label.margin-top.large}"
+                },
+                "medium": {
+                  "margin-left": "{imported.card.label.margin-left.medium}",
+                  "margin-top": "{imported.card.label.margin-top.medium}"
+                },
+                "small": {
+                  "margin-left": "{imported.card.label.margin-left.small}",
+                  "margin-top": "{imported.card.label.margin-top.small}"
+                }
+              }
+            }
+          ]
+        },
+        "cardheader": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|CardHeader — this element exists in the real component's DOM; the static layer had no part for it.",
+          "parts": {
+            "label-2": {
+              "text": "Card header",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|CardHeader__header — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "declared": {
+                "cursor": "pointer"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed",
+                  "user-select": "none"
+                }
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-400}",
+                "line-height": "{imported.shared.size-20}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-bdbdbd}"
+                }
+              }
+            },
+            "label-3": {
+              "text": "Card description",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|CardHeader__description — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "declared": {
+                "cursor": "pointer"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed",
+                  "user-select": "none"
+                }
+              },
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.shared.num-400}",
+                "line-height": "{imported.shared.size-20}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-bdbdbd}"
+                }
+              }
+            }
+          },
+          "declared": {
+            "cursor": "pointer"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed",
+              "user-select": "none"
+            }
+          },
+          "tokens": {
+            "flex-shrink": "{imported.card.cardheader.flex-shrink}",
+            "height": "{imported.card.cardheader.height}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-bdbdbd}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "orientation",
+              "map": {
+                "horizontal": {
+                  "flex-grow": "{imported.card.cardheader.flex-grow.horizontal}",
+                  "width": "{imported.card.cardheader.width.{size}.horizontal}"
+                },
+                "vertical": {
+                  "flex-grow": "{imported.card.cardheader.flex-grow.vertical}",
+                  "width": "{imported.card.cardheader.width.{size}.vertical}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "cursor": "pointer",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "position": "relative"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed",
+          "user-select": "none"
+        }
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "height": "{imported.card.root.height.{size}.{orientation}}",
+        "left": "{imported.shared.size-0}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.card.root.width}"
+      },
+      "states": {
+        "active": {
+          "background-color": "{imported.card.root.background-color-state-active.{appearance}}",
+          "box-shadow": "{imported.card.root.box-shadow-state-active.{appearance}}"
+        },
+        "disabled": {
+          "background-color": "{imported.card.root.background-color-state-disabled.{appearance}}",
+          "border-bottom-color": "{imported.shared.color-e0e0e0}",
+          "border-left-color": "{imported.shared.color-e0e0e0}",
+          "border-right-color": "{imported.shared.color-e0e0e0}",
+          "border-top-color": "{imported.shared.color-e0e0e0}",
+          "box-shadow": "{imported.card.root.box-shadow-state-disabled.{appearance}}",
+          "caret-color": "{imported.shared.color-bdbdbd}",
+          "color": "{imported.shared.color-bdbdbd}",
+          "column-rule-color": "{imported.shared.color-bdbdbd}",
+          "outline-color": "{imported.shared.color-bdbdbd}",
+          "row-rule-color": "{imported.shared.color-bdbdbd}",
+          "text-decoration-color": "{imported.shared.color-bdbdbd}",
+          "text-emphasis-color": "{imported.shared.color-bdbdbd}"
+        },
+        "focus-visible": {
+          "border-bottom-color": "{imported.shared.color-00000000}",
+          "border-left-color": "{imported.shared.color-00000000}",
+          "border-right-color": "{imported.shared.color-00000000}",
+          "border-top-color": "{imported.shared.color-00000000}"
+        },
+        "hover": {
+          "background-color": "{imported.card.root.background-color-state-hover.{appearance}}",
+          "box-shadow": "{imported.card.root.box-shadow-state-hover.{appearance}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "appearance",
+          "map": {
+            "filled": {
+              "background-color": "{imported.card.root.background-color.filled}",
+              "box-shadow": "{imported.card.root.box-shadow.filled}"
+            },
+            "filled-alternative": {
+              "background-color": "{imported.card.root.background-color.filled-alternative}",
+              "box-shadow": "{imported.card.root.box-shadow.filled-alternative}"
+            },
+            "outline": {
+              "background-color": "{imported.card.root.background-color.outline}",
+              "box-shadow": "{imported.card.root.box-shadow.outline}"
+            },
+            "subtle": {
+              "background-color": "{imported.card.root.background-color.subtle}",
+              "box-shadow": "{imported.card.root.box-shadow.subtle}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "border-bottom-left-radius": "{imported.card.root.border-bottom-left-radius.large}",
+              "border-bottom-right-radius": "{imported.card.root.border-bottom-right-radius.large}",
+              "border-top-left-radius": "{imported.card.root.border-top-left-radius.large}",
+              "border-top-right-radius": "{imported.card.root.border-top-right-radius.large}",
+              "column-gap": "{imported.card.root.column-gap.large}",
+              "padding-bottom": "{imported.card.root.padding-bottom.large}",
+              "padding-left": "{imported.card.root.padding-left.large}",
+              "padding-right": "{imported.card.root.padding-right.large}",
+              "padding-top": "{imported.card.root.padding-top.large}",
+              "row-gap": "{imported.card.root.row-gap.large}"
+            },
+            "medium": {
+              "border-bottom-left-radius": "{imported.card.root.border-bottom-left-radius.medium}",
+              "border-bottom-right-radius": "{imported.card.root.border-bottom-right-radius.medium}",
+              "border-top-left-radius": "{imported.card.root.border-top-left-radius.medium}",
+              "border-top-right-radius": "{imported.card.root.border-top-right-radius.medium}",
+              "column-gap": "{imported.card.root.column-gap.medium}",
+              "padding-bottom": "{imported.card.root.padding-bottom.medium}",
+              "padding-left": "{imported.card.root.padding-left.medium}",
+              "padding-right": "{imported.card.root.padding-right.medium}",
+              "padding-top": "{imported.card.root.padding-top.medium}",
+              "row-gap": "{imported.card.root.row-gap.medium}"
+            },
+            "small": {
+              "border-bottom-left-radius": "{imported.card.root.border-bottom-left-radius.small}",
+              "border-bottom-right-radius": "{imported.card.root.border-bottom-right-radius.small}",
+              "border-top-left-radius": "{imported.card.root.border-top-left-radius.small}",
+              "border-top-right-radius": "{imported.card.root.border-top-right-radius.small}",
+              "column-gap": "{imported.card.root.column-gap.small}",
+              "padding-bottom": "{imported.card.root.padding-bottom.small}",
+              "padding-left": "{imported.card.root.padding-left.small}",
+              "padding-right": "{imported.card.root.padding-right.small}",
+              "padding-top": "{imported.card.root.padding-top.small}",
+              "row-gap": "{imported.card.root.row-gap.small}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "Card"
+    }
+  }
+}

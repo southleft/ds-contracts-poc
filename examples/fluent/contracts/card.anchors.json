@@ -1,0 +1,54 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "card",
+  "anchors": [
+    {
+      "leaf": "imported.card.root.background-color-state-disabled.filled",
+      "token": "color-neutral-background-disabled",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "selector": ".f1bg9a2p"
+    },
+    {
+      "leaf": "imported.card.root.background-color-state-disabled.filled-alternative",
+      "token": "color-neutral-background-disabled",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "selector": ".f1bg9a2p"
+    },
+    {
+      "leaf": "imported.card.root.background-color-state-disabled.subtle",
+      "token": "color-neutral-background-disabled",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "selector": ".f1bg9a2p"
+    },
+    {
+      "leaf": "imported.card.root.background-color-state-hover.filled-alternative",
+      "token": "color-neutral-background-disabled",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "selector": ".f1bg9a2p"
+    },
+    {
+      "leaf": "imported.card.root.background-color.filled",
+      "token": "color-neutral-background1",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground1",
+      "selector": ".fxugw4r"
+    },
+    {
+      "leaf": "imported.card.root.background-color.filled-alternative",
+      "token": "color-neutral-background2",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground2",
+      "selector": ".f1dmdbja"
+    }
+  ]
+}

@@ -1,0 +1,492 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.tab-list",
+  "name": "TabList",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: appearance=transparent, size=medium, vertical=false, reserveSelectedTabSpace=true (pinned), selectTabOnFocus=false (pinned). Controlled selectedValue=\"tab-1\" + onTabSelect stub — the Carbon TabList double-run lesson, and Fluent's selectTabOnFocus makes it mandatory. Tab's own axes ride the child-axis limitation (docs/21 §7.3) — pinned, deferred by name. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "appearance",
+      "type": {
+        "enum": [
+          "transparent",
+          "subtle",
+          "subtle-circular",
+          "filled-circular"
+        ]
+      },
+      "default": "transparent",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Appearance",
+          "values": {
+            "transparent": "Transparent",
+            "subtle": "Subtle",
+            "subtle-circular": "Subtle Circular",
+            "filled-circular": "Filled Circular"
+          }
+        },
+        "code": {
+          "prop": "appearance"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "orientation",
+      "description": "Fluent's library prop is `vertical: boolean` (@default false). propSpaceFor refuses a BOOLEAN axis by name (\"booleans ride stateProps\"), and the presence-prop spelling would push every per-plane token binding into overflow by rule (\"presence-prop-driven styling — boolean tokensByProp has no spelling\"). Spelled as a 2-value enum axis mapped through axisValueMap to {vertical:false} / {vertical:true}: the library prop mounted is unchanged, the token names survive, and the canvas gets an Orientation variant property.",
+      "type": {
+        "enum": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "default": "horizontal",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Orientation",
+          "values": {
+            "horizontal": "Horizontal",
+            "vertical": "Vertical"
+          }
+        },
+        "code": {
+          "prop": "orientation"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "stretch"
+      },
+      "parts": {
+        "tab": {
+          "element": "button",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button|Tab — this element exists in the real component's DOM; the static layer had no part for it.",
+          "parts": {
+            "label": {
+              "text": "Overview",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Tab__content — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "text-align": "center"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "font-weight": "{imported.tab-list.label.font-weight}",
+                "padding-left": "{imported.shared.size-2}",
+                "padding-right": "{imported.shared.size-2}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.tab-list.label.color-state-disabled}"
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "appearance",
+                  "map": {
+                    "filled-circular": {
+                      "color": "{imported.tab-list.label.color.filled-circular}"
+                    },
+                    "subtle": {
+                      "color": "{imported.tab-list.label.color.subtle}"
+                    },
+                    "subtle-circular": {
+                      "color": "{imported.tab-list.label.color.subtle-circular}"
+                    },
+                    "transparent": {
+                      "color": "{imported.tab-list.label.color.transparent}"
+                    }
+                  }
+                },
+                {
+                  "prop": "size",
+                  "map": {
+                    "large": {
+                      "font-size": "{imported.tab-list.label.font-size.large}",
+                      "line-height": "{imported.tab-list.label.line-height.large}"
+                    },
+                    "medium": {
+                      "font-size": "{imported.tab-list.label.font-size.medium}",
+                      "line-height": "{imported.tab-list.label.line-height.medium}"
+                    },
+                    "small": {
+                      "font-size": "{imported.tab-list.label.font-size.small}",
+                      "line-height": "{imported.tab-list.label.line-height.small}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "cursor": "pointer",
+            "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
+            "position": "relative"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed",
+              "overflow-x": "hidden",
+              "overflow-y": "hidden"
+            },
+            "focus-visible": {
+              "outline-style": "solid"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "flex-shrink": "{imported.shared.num-0}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.tab-list.tab.line-height}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          },
+          "literals": {
+            "padding-bottom": "12px",
+            "padding-top": "12px"
+          },
+          "tokensByProp": [
+            {
+              "prop": "appearance",
+              "map": {
+                "filled-circular": {
+                  "background-color": "{imported.tab-list.tab.background-color.filled-circular}",
+                  "border-bottom-color": "{imported.tab-list.tab.border-bottom-color.filled-circular}",
+                  "border-bottom-left-radius": "{imported.tab-list.tab.border-bottom-left-radius.filled-circular}",
+                  "border-bottom-right-radius": "{imported.tab-list.tab.border-bottom-right-radius.filled-circular}",
+                  "border-bottom-width": "{imported.tab-list.tab.border-bottom-width.filled-circular}",
+                  "border-left-color": "{imported.tab-list.tab.border-left-color.filled-circular}",
+                  "border-left-width": "{imported.tab-list.tab.border-left-width.filled-circular}",
+                  "border-right-color": "{imported.tab-list.tab.border-right-color.filled-circular}",
+                  "border-right-width": "{imported.tab-list.tab.border-right-width.filled-circular}",
+                  "border-top-color": "{imported.tab-list.tab.border-top-color.filled-circular}",
+                  "border-top-left-radius": "{imported.tab-list.tab.border-top-left-radius.filled-circular}",
+                  "border-top-right-radius": "{imported.tab-list.tab.border-top-right-radius.filled-circular}",
+                  "border-top-width": "{imported.tab-list.tab.border-top-width.filled-circular}",
+                  "color": "{imported.tab-list.tab.color.filled-circular}",
+                  "outline-color": "{imported.tab-list.tab.outline-color.filled-circular}"
+                },
+                "subtle": {
+                  "background-color": "{imported.tab-list.tab.background-color.subtle}",
+                  "border-bottom-color": "{imported.tab-list.tab.border-bottom-color.subtle}",
+                  "border-bottom-left-radius": "{imported.tab-list.tab.border-bottom-left-radius.subtle}",
+                  "border-bottom-right-radius": "{imported.tab-list.tab.border-bottom-right-radius.subtle}",
+                  "border-bottom-width": "{imported.tab-list.tab.border-bottom-width.subtle}",
+                  "border-left-color": "{imported.tab-list.tab.border-left-color.subtle}",
+                  "border-left-width": "{imported.tab-list.tab.border-left-width.subtle}",
+                  "border-right-color": "{imported.tab-list.tab.border-right-color.subtle}",
+                  "border-right-width": "{imported.tab-list.tab.border-right-width.subtle}",
+                  "border-top-color": "{imported.tab-list.tab.border-top-color.subtle}",
+                  "border-top-left-radius": "{imported.tab-list.tab.border-top-left-radius.subtle}",
+                  "border-top-right-radius": "{imported.tab-list.tab.border-top-right-radius.subtle}",
+                  "border-top-width": "{imported.tab-list.tab.border-top-width.subtle}",
+                  "color": "{imported.tab-list.tab.color.subtle}",
+                  "outline-color": "{imported.tab-list.tab.outline-color.subtle}"
+                },
+                "subtle-circular": {
+                  "background-color": "{imported.tab-list.tab.background-color.subtle-circular}",
+                  "border-bottom-color": "{imported.tab-list.tab.border-bottom-color.subtle-circular}",
+                  "border-bottom-left-radius": "{imported.tab-list.tab.border-bottom-left-radius.subtle-circular}",
+                  "border-bottom-right-radius": "{imported.tab-list.tab.border-bottom-right-radius.subtle-circular}",
+                  "border-bottom-width": "{imported.tab-list.tab.border-bottom-width.subtle-circular}",
+                  "border-left-color": "{imported.tab-list.tab.border-left-color.subtle-circular}",
+                  "border-left-width": "{imported.tab-list.tab.border-left-width.subtle-circular}",
+                  "border-right-color": "{imported.tab-list.tab.border-right-color.subtle-circular}",
+                  "border-right-width": "{imported.tab-list.tab.border-right-width.subtle-circular}",
+                  "border-top-color": "{imported.tab-list.tab.border-top-color.subtle-circular}",
+                  "border-top-left-radius": "{imported.tab-list.tab.border-top-left-radius.subtle-circular}",
+                  "border-top-right-radius": "{imported.tab-list.tab.border-top-right-radius.subtle-circular}",
+                  "border-top-width": "{imported.tab-list.tab.border-top-width.subtle-circular}",
+                  "color": "{imported.tab-list.tab.color.subtle-circular}",
+                  "outline-color": "{imported.tab-list.tab.outline-color.subtle-circular}"
+                },
+                "transparent": {
+                  "background-color": "{imported.tab-list.tab.background-color.transparent}",
+                  "border-bottom-color": "{imported.tab-list.tab.border-bottom-color.transparent}",
+                  "border-bottom-left-radius": "{imported.tab-list.tab.border-bottom-left-radius.transparent}",
+                  "border-bottom-right-radius": "{imported.tab-list.tab.border-bottom-right-radius.transparent}",
+                  "border-bottom-width": "{imported.tab-list.tab.border-bottom-width.transparent}",
+                  "border-left-color": "{imported.tab-list.tab.border-left-color.transparent}",
+                  "border-left-width": "{imported.tab-list.tab.border-left-width.transparent}",
+                  "border-right-color": "{imported.tab-list.tab.border-right-color.transparent}",
+                  "border-right-width": "{imported.tab-list.tab.border-right-width.transparent}",
+                  "border-top-color": "{imported.tab-list.tab.border-top-color.transparent}",
+                  "border-top-left-radius": "{imported.tab-list.tab.border-top-left-radius.transparent}",
+                  "border-top-right-radius": "{imported.tab-list.tab.border-top-right-radius.transparent}",
+                  "border-top-width": "{imported.tab-list.tab.border-top-width.transparent}",
+                  "color": "{imported.tab-list.tab.color.transparent}",
+                  "outline-color": "{imported.tab-list.tab.outline-color.transparent}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "column-gap": "{imported.tab-list.tab.column-gap.large}",
+                  "grid-template-columns": "{imported.tab-list.tab.grid-template-columns.large}",
+                  "grid-template-rows": "{imported.tab-list.tab.grid-template-rows.large}",
+                  "padding-left": "{imported.tab-list.tab.padding-left.large}",
+                  "padding-right": "{imported.tab-list.tab.padding-right.large}"
+                },
+                "medium": {
+                  "column-gap": "{imported.tab-list.tab.column-gap.medium}",
+                  "grid-template-columns": "{imported.tab-list.tab.grid-template-columns.medium}",
+                  "grid-template-rows": "{imported.tab-list.tab.grid-template-rows.medium}",
+                  "padding-left": "{imported.tab-list.tab.padding-left.medium}",
+                  "padding-right": "{imported.tab-list.tab.padding-right.medium}"
+                },
+                "small": {
+                  "column-gap": "{imported.tab-list.tab.column-gap.small}",
+                  "grid-template-columns": "{imported.tab-list.tab.grid-template-columns.small}",
+                  "grid-template-rows": "{imported.tab-list.tab.grid-template-rows.small}",
+                  "padding-left": "{imported.tab-list.tab.padding-left.small}",
+                  "padding-right": "{imported.tab-list.tab.padding-right.small}"
+                }
+              }
+            }
+          ]
+        },
+        "tab-2": {
+          "element": "button",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button|Tab — this element exists in the real component's DOM; the static layer had no part for it.",
+          "parts": {
+            "label-2": {
+              "text": "Activity",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Tab__content — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "pointer",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "text-align": "center"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "color": "{imported.tab-list.label-2.color}",
+                "font-weight": "{imported.tab-list.label-2.font-weight}",
+                "padding-left": "{imported.shared.size-2}",
+                "padding-right": "{imported.shared.size-2}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.tab-list.label-2.color-state-disabled}"
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "large": {
+                      "font-size": "{imported.tab-list.label-2.font-size.large}",
+                      "line-height": "{imported.tab-list.label-2.line-height.large}"
+                    },
+                    "medium": {
+                      "font-size": "{imported.tab-list.label-2.font-size.medium}",
+                      "line-height": "{imported.tab-list.label-2.line-height.medium}"
+                    },
+                    "small": {
+                      "font-size": "{imported.tab-list.label-2.font-size.small}",
+                      "line-height": "{imported.tab-list.label-2.line-height.small}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "cursor": "pointer",
+            "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "relative"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "flex-shrink": "{imported.shared.num-0}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.tab-list.tab-2.line-height}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          },
+          "literals": {
+            "padding-bottom": "12px",
+            "padding-top": "12px"
+          },
+          "tokensByProp": [
+            {
+              "prop": "appearance",
+              "map": {
+                "filled-circular": {
+                  "background-color": "{imported.tab-list.tab-2.background-color.filled-circular}",
+                  "border-bottom-color": "{imported.tab-list.tab-2.border-bottom-color.filled-circular}",
+                  "border-bottom-left-radius": "{imported.tab-list.tab-2.border-bottom-left-radius.filled-circular}",
+                  "border-bottom-right-radius": "{imported.tab-list.tab-2.border-bottom-right-radius.filled-circular}",
+                  "border-bottom-width": "{imported.tab-list.tab-2.border-bottom-width.filled-circular}",
+                  "border-left-color": "{imported.tab-list.tab-2.border-left-color.filled-circular}",
+                  "border-left-width": "{imported.tab-list.tab-2.border-left-width.filled-circular}",
+                  "border-right-color": "{imported.tab-list.tab-2.border-right-color.filled-circular}",
+                  "border-right-width": "{imported.tab-list.tab-2.border-right-width.filled-circular}",
+                  "border-top-color": "{imported.tab-list.tab-2.border-top-color.filled-circular}",
+                  "border-top-left-radius": "{imported.tab-list.tab-2.border-top-left-radius.filled-circular}",
+                  "border-top-right-radius": "{imported.tab-list.tab-2.border-top-right-radius.filled-circular}",
+                  "border-top-width": "{imported.tab-list.tab-2.border-top-width.filled-circular}",
+                  "color": "{imported.tab-list.tab-2.color.filled-circular}"
+                },
+                "subtle": {
+                  "background-color": "{imported.tab-list.tab-2.background-color.subtle}",
+                  "border-bottom-color": "{imported.tab-list.tab-2.border-bottom-color.subtle}",
+                  "border-bottom-left-radius": "{imported.tab-list.tab-2.border-bottom-left-radius.subtle}",
+                  "border-bottom-right-radius": "{imported.tab-list.tab-2.border-bottom-right-radius.subtle}",
+                  "border-bottom-width": "{imported.tab-list.tab-2.border-bottom-width.subtle}",
+                  "border-left-color": "{imported.tab-list.tab-2.border-left-color.subtle}",
+                  "border-left-width": "{imported.tab-list.tab-2.border-left-width.subtle}",
+                  "border-right-color": "{imported.tab-list.tab-2.border-right-color.subtle}",
+                  "border-right-width": "{imported.tab-list.tab-2.border-right-width.subtle}",
+                  "border-top-color": "{imported.tab-list.tab-2.border-top-color.subtle}",
+                  "border-top-left-radius": "{imported.tab-list.tab-2.border-top-left-radius.subtle}",
+                  "border-top-right-radius": "{imported.tab-list.tab-2.border-top-right-radius.subtle}",
+                  "border-top-width": "{imported.tab-list.tab-2.border-top-width.subtle}",
+                  "color": "{imported.tab-list.tab-2.color.subtle}"
+                },
+                "subtle-circular": {
+                  "background-color": "{imported.tab-list.tab-2.background-color.subtle-circular}",
+                  "border-bottom-color": "{imported.tab-list.tab-2.border-bottom-color.subtle-circular}",
+                  "border-bottom-left-radius": "{imported.tab-list.tab-2.border-bottom-left-radius.subtle-circular}",
+                  "border-bottom-right-radius": "{imported.tab-list.tab-2.border-bottom-right-radius.subtle-circular}",
+                  "border-bottom-width": "{imported.tab-list.tab-2.border-bottom-width.subtle-circular}",
+                  "border-left-color": "{imported.tab-list.tab-2.border-left-color.subtle-circular}",
+                  "border-left-width": "{imported.tab-list.tab-2.border-left-width.subtle-circular}",
+                  "border-right-color": "{imported.tab-list.tab-2.border-right-color.subtle-circular}",
+                  "border-right-width": "{imported.tab-list.tab-2.border-right-width.subtle-circular}",
+                  "border-top-color": "{imported.tab-list.tab-2.border-top-color.subtle-circular}",
+                  "border-top-left-radius": "{imported.tab-list.tab-2.border-top-left-radius.subtle-circular}",
+                  "border-top-right-radius": "{imported.tab-list.tab-2.border-top-right-radius.subtle-circular}",
+                  "border-top-width": "{imported.tab-list.tab-2.border-top-width.subtle-circular}",
+                  "color": "{imported.tab-list.tab-2.color.subtle-circular}"
+                },
+                "transparent": {
+                  "background-color": "{imported.tab-list.tab-2.background-color.transparent}",
+                  "border-bottom-color": "{imported.tab-list.tab-2.border-bottom-color.transparent}",
+                  "border-bottom-left-radius": "{imported.tab-list.tab-2.border-bottom-left-radius.transparent}",
+                  "border-bottom-right-radius": "{imported.tab-list.tab-2.border-bottom-right-radius.transparent}",
+                  "border-bottom-width": "{imported.tab-list.tab-2.border-bottom-width.transparent}",
+                  "border-left-color": "{imported.tab-list.tab-2.border-left-color.transparent}",
+                  "border-left-width": "{imported.tab-list.tab-2.border-left-width.transparent}",
+                  "border-right-color": "{imported.tab-list.tab-2.border-right-color.transparent}",
+                  "border-right-width": "{imported.tab-list.tab-2.border-right-width.transparent}",
+                  "border-top-color": "{imported.tab-list.tab-2.border-top-color.transparent}",
+                  "border-top-left-radius": "{imported.tab-list.tab-2.border-top-left-radius.transparent}",
+                  "border-top-right-radius": "{imported.tab-list.tab-2.border-top-right-radius.transparent}",
+                  "border-top-width": "{imported.tab-list.tab-2.border-top-width.transparent}",
+                  "color": "{imported.tab-list.tab-2.color.transparent}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "column-gap": "{imported.tab-list.tab-2.column-gap.large}",
+                  "grid-template-columns": "{imported.tab-list.tab-2.grid-template-columns.large}",
+                  "grid-template-rows": "{imported.tab-list.tab-2.grid-template-rows.large}",
+                  "padding-left": "{imported.tab-list.tab-2.padding-left.large}",
+                  "padding-right": "{imported.tab-list.tab-2.padding-right.large}"
+                },
+                "medium": {
+                  "column-gap": "{imported.tab-list.tab-2.column-gap.medium}",
+                  "grid-template-columns": "{imported.tab-list.tab-2.grid-template-columns.medium}",
+                  "grid-template-rows": "{imported.tab-list.tab-2.grid-template-rows.medium}",
+                  "padding-left": "{imported.tab-list.tab-2.padding-left.medium}",
+                  "padding-right": "{imported.tab-list.tab-2.padding-right.medium}"
+                },
+                "small": {
+                  "column-gap": "{imported.tab-list.tab-2.column-gap.small}",
+                  "grid-template-columns": "{imported.tab-list.tab-2.grid-template-columns.small}",
+                  "grid-template-rows": "{imported.tab-list.tab-2.grid-template-rows.small}",
+                  "padding-left": "{imported.tab-list.tab-2.padding-left.small}",
+                  "padding-right": "{imported.tab-list.tab-2.padding-right.small}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "position": "relative"
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "flex-shrink": "{imported.shared.num-0}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "TabList"
+    }
+  }
+}

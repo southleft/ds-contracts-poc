@@ -1,0 +1,431 @@
+{
+  "__provenance": "Capture config resolved from examples/fluent/out/capture-config.draft.json per examples/fluent/RECON.md §4 — reviewed and approved by coordinating session under owner delegation, 2026-08-08. All 45 \"__review:*\" markers answered and deleted; \"__unreviewed-draft\" deleted; the drafter's 23 components trimmed to the 12 of RECON §7's honest slice. THREE SPELLINGS were forced by engine rules the review could not have known about, each recorded on the component it affects and in PROVENANCE.md — none of them changes a library value that gets mounted: (1) Avatar `active`'s third value is literally the string \"unset\", which collides with enumeration.unsetLabel by an explicit named refusal in propSpaceFor — spelled \"none\" in the contract and mapped back through axisValueMap; (2) TabList `vertical` is a BOOLEAN and propSpaceFor refuses boolean axes by name (\"booleans ride stateProps\"), while the presence-prop spelling would push every per-plane binding into overflow by rule — spelled as a 2-value `orientation` enum mapped to {vertical:false|true}; (3) Avatar `size` is left DEFAULTLESS so the approved 3-of-13 subset {24,48,96} stays exactly as approved while the base combo still mounts the prop ABSENT and therefore renders Fluent's real documented default (32), which is not a member of that subset.",
+  "library": {
+    "__note": "Fluent 2 is the corpus's first CSS-in-JS ATOMIC library (Griffel) — and the first where atomic styling and NAMED PART IDENTITY coexist. classAllow is CARBON'S answer, not Tailwind's: RECON §2.2 measured 366 distinct classes on the probe page, 44 stable `fui-*` BEM slot classes cleanly separated from 322 Griffel hashes (no hash matches ^fui-; hashes are f…/r…/___… with no hyphens), and the fui-* classes are COMBO-INVARIANT (Button appearance=primary size=medium carries 52 classes, appearance=subtle size=small carries 38; the only non-atomic member of the 16-class intersection is `fui-Button` plus its makeResetStyles class). The negative lookahead drops fui-FluentProvider and fui-FluentProvider_r_0_: the provider is never component anatomy, and `_r_0_` is a React useId counter — stable within a page (double-run probe: two full loads, byte-identical 366/366 class sets) but an implementation counter has no business in a part signature. varPrefix \"--\": Fluent's custom properties carry NO vendor prefix (RECON §2.4), so \"--\" is the tailwind/shadcn spelling; tokenGroup absent because the reader's var→leaf transform never emits a \".\", so the DTCG tree is FLAT (459 leaves at top level, zero collisions measured across all 459).",
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "framework": "react",
+    "classPrefix": "fui-",
+    "classAllow": "^fui-(?!FluentProvider)",
+    "varPrefix": "--"
+  },
+  "mount": {
+    "__note": "THE WHOLE ROUND IS IN THIS WRAPPER. FluentProvider declares all 459 theme custom properties on a WRAPPER DIV, not on :root — RECON §2.3's probe measured `getComputedStyle(document.documentElement)['--colorNeutralForeground1']` = '' (empty string) and the same on document.body, resolving to #242424 only on the `.fui-FluentProvider` div and on the `.fui-Button` inside it. Without the provider the page still RENDERS (Griffel's rules apply) and every var() silently falls back to the browser's initial values — the Carbon trap and the astryx @scope trap in one. The harness wraps the whole STAGE LIST (capture.ts:841, wrapperOpen sits outside SPECS.map), so one provider covers every combo, custom properties inherit, each stage's firstElementChild is still the component, and the value path never assumes :root (capture.ts:1238 reads getComputedStyle on the captured element). NO STYLESHEET IMPORT — Griffel ships no stylesheet at all and injects every rule at runtime; this is the first library in the corpus with an empty CSS story and an empty mount.imports beyond the provider.",
+    "imports": [
+      "import { FluentProvider, webLightTheme } from '@fluentui/react-components';"
+    ],
+    "wrapperOpen": "<FluentProvider theme={webLightTheme}>",
+    "wrapperClose": "</FluentProvider>"
+  },
+  "tokens": {
+    "__note": "Built by examples/fluent/scripts/build-tokens.mjs from @fluentui/tokens@1.0.0-alpha.23's webLightTheme, whose keys ARE the CSS custom-property names verbatim. The wrap re-asserts and refuses on drift: 459 light keys, 459 dark keys, identical key SET, 315 differing values, 455 string + 4 number values (fontWeight* = 400/500/600/700 — the wrap must not assume strings), 0 leaf collisions. Capture stays single-mode light; the two mode files ride the bundle.",
+    "dtcg": [
+      "examples/fluent/tokens/fluent.dtcg.json"
+    ],
+    "css": "examples/fluent/tokens/fluent.vars.css",
+    "minted": "examples/fluent/tokens/fluent-minted.dtcg.json",
+    "__note:mintedBootstrap": "BOOTSTRAP FLAG REMOVED same-round (task #28 ordering guard): the first capture pass ran with a zero-leaf stub + mintedBootstrap:true (receipted 'measured without a shipped minted tree'); promote-floor then filled the tree (288 source-aliased + 1321 literal leaves) and the capture was RE-RUN against the shipped tree — the committed scorecards are the re-measured ones. Leaving the flag set once the tree has leaves is refused by name."
+  },
+  "icons": "examples/fluent/assets/icons",
+  "__note:fonts": "DELIBERATELY UNCONFIGURED — an unobtainable substrate, recorded rather than substituted. Fluent's font stack is `'Segoe UI', 'Segoe UI Web (West European)', -apple-system, …` and the library ships ZERO @font-face rules (measured: 0 across all 19 injected style elements — Griffel emits none and nothing else does either). Segoe UI is a Windows system font; it is not on npm and cannot be inlined as a data: URI. This is NOT Carbon's situation (Carbon's faces exist on npm and simply were not configured) — Fluent's faces do not exist to configure. Substituting a metric-compatible lookalike would re-pin every pixel reference to a face the library never names, so no `fonts` block is declared: text metrics are the harness's fallback metrics and pixel-AA reads low BY CONSTRUCTION. Read the computed-equality floor, not the pixel number.",
+  "browser": {
+    "viewport": {
+      "width": 1100,
+      "height": 1400
+    },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": {
+    "width": 360,
+    "height": 120,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "unset"
+  },
+  "components": [
+    {
+      "__note": "45 combos × the disabled plane. `disabled` is a GENUINE state plane here and it works: Fluent styles :disabled / [aria-disabled=\"true\"] (75 attribute selectors, 239 pseudo-class selectors in the census). focus-visible also works, and that was not obvious — Fluent's ring is driven by TABSTER, which sets a `data-fui-focus-visible` ATTRIBUTE (45 rules key on it) rather than relying on the pseudo-class (34 rules do use :focus-visible). The capture drives focus-visible with a real sentinel-plus-Tab keypress (capture.ts:1721), which is exactly the keyboard modality tabster listens for; RECON §4.2 measured that after one Tab the button is document.activeElement, matches(':focus-visible') is true AND data-fui-focus-visible is present. A CDP-forced pseudo-state would have captured NOTHING. iconPosition pinned `before`; the `icon` SLOT is deferred by name (a slot, not a prop — RECON §3c).",
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/fluent/contracts-seed/button.contract.json",
+      "sampleText": "Button",
+      "axes": [
+        "appearance",
+        "size",
+        "shape"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "iconPosition": "before"
+      }
+    },
+    {
+      "__note": "192 combos. The full cartesian over all five enum props is 1,152 — over the 512 limit — so `shape` and `iconPosition` are PINNED rather than taking the pairwise certificate: an exact 192-cell grid beats a certified sample. iconPosition is moot with no icon mounted. Single element plus an ::after ring.",
+      "name": "Badge",
+      "importName": "Badge",
+      "contract": "examples/fluent/contracts-seed/badge.contract.json",
+      "sampleText": "9",
+      "axes": [
+        "appearance",
+        "color",
+        "size"
+      ],
+      "fixedProps": {
+        "shape": "circular",
+        "iconPosition": "before"
+      }
+    },
+    {
+      "__note": "TWO SPELLINGS, both forced by named engine rules, neither changing a mounted library value. (1) `active`: Fluent's third value is the STRING \"unset\" and propSpaceFor throws `axis \"active\" already has a value \"unset\" — pick a different enumeration.unsetLabel` when the enum carries the unset label. The approved unsetLabel stays \"unset\"; the contract spells the value \"none\" and axisValueMap maps it back to the library's \"unset\". (2) `size` is a 14-member NUMERIC union the extractor cannot carry; RECON §4.2 approves the named 3-of-13 subset {24,48,96}. Fluent's documented default is 32, which is NOT in the subset, so the seed leaves `size` DEFAULTLESS: the engine prepends its `unset` pseudo-plane, which mounts the prop ABSENT — the base combo therefore renders the library's REAL default (32) while the named subset stays exactly as approved. 2 × 3 × 4 = 24 combos. `image` slot refused BY NAME (needs a remote src in a network-free harness); initials are deterministic from name.",
+      "name": "Avatar",
+      "importName": "Avatar",
+      "contract": "examples/fluent/contracts-seed/avatar.contract.json",
+      "sampleText": "",
+      "axes": [
+        "shape",
+        "active",
+        "size"
+      ],
+      "axisValueMap": {
+        "active": {
+          "none": "unset"
+        },
+        "size": {
+          "24": 24,
+          "48": 48,
+          "96": 96
+        }
+      },
+      "fixedProps": {
+        "name": "Fluent Two",
+        "activeAppearance": "ring"
+      }
+    },
+    {
+      "__note": "24 combos × the disabled plane. blockStage: Card is display:block and would shrink-to-fit inside the default flex stage (the MUI Card lesson). CardHeader/CardPreview have NO readable props (RECON §3b — every one of the 23 static skips is the slot API), so they are COMPOSITION here, not components; CardHeader's `header`/`description` are SLOTS taking string shorthand. focusMode pinned `off`, selected pinned false.",
+      "name": "Card",
+      "importName": "Card",
+      "contract": "examples/fluent/contracts-seed/card.contract.json",
+      "sampleText": "",
+      "axes": [
+        "appearance",
+        "size",
+        "orientation"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "focusMode": "off",
+        "selected": false
+      },
+      "blockStage": true,
+      "stage": {
+        "width": 460,
+        "height": 160,
+        "padding": 16
+      },
+      "childrenSpec": [
+        {
+          "importName": "CardPreview",
+          "text": "Preview"
+        },
+        {
+          "importName": "CardHeader",
+          "props": {
+            "header": "Card header",
+            "description": "Card description"
+          }
+        }
+      ]
+    },
+    {
+      "__note": "TRI-STATE ON ONE AXIS (the MUI/Carbon discipline): Fluent accepts checked=\"mixed\" directly, so the axisValueMap is plain values — no $props expansion. One axis is not cosmetic: the svg-content promotion carries per-value glyph assets only when the markup is a function of exactly ONE axis. 12 combos × the disabled plane. RECON H3 IN FULL FORCE HERE: every indicator colour is routed through a component-local custom property (`border-color: var(--fui-Checkbox__indicator--borderColor)`), and with varPrefix \"--\" the reader's one-hop `defs` branch is unreachable — predict correct pixels and ZERO colour NAMES on this component. labelPosition pinned `after` (its documented default).",
+      "name": "Checkbox",
+      "importName": "Checkbox",
+      "contract": "examples/fluent/contracts-seed/checkbox.contract.json",
+      "sampleText": "",
+      "axes": [
+        "checked",
+        "size",
+        "shape"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true,
+          "mixed": "mixed"
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "id": "fluent-checkbox",
+        "label": "Checkbox",
+        "labelPosition": "after"
+      },
+      "callbackProps": [
+        "onChange"
+      ]
+    },
+    {
+      "__note": "6 combos × the disabled plane. The thumb is a REAL DOM child (fui-Switch__indicator ⊃ fui-Icon) — no ::after decor and no translate trickery observed, so this is the clean case the flowbite and shadcn Switch rounds did not get.",
+      "name": "Switch",
+      "importName": "Switch",
+      "contract": "examples/fluent/contracts-seed/switch.contract.json",
+      "sampleText": "",
+      "axes": [
+        "checked",
+        "labelPosition"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "id": "fluent-switch",
+        "label": "Switch"
+      },
+      "callbackProps": [
+        "onChange"
+      ]
+    },
+    {
+      "__note": "18 combos × the disabled plane — predicted the round's best computed floor (single element plus an ::after focus underline; the shadcn Input precedent is 93.1%). `type` pinned \"text\" and DEFERRED BY NAME: 12 HTML input types are an attribute pass-through, not a visual axis. defaultValue pinned '' so no typed state survives into the second sweep.",
+      "name": "Input",
+      "importName": "Input",
+      "contract": "examples/fluent/contracts-seed/input.contract.json",
+      "sampleText": "",
+      "axes": [
+        "appearance",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": ""
+      }
+    },
+    {
+      "__note": "24 combos × the disabled plane, all on TabList. NAMED SPELLING: Fluent's prop is `vertical: boolean`, but propSpaceFor refuses a boolean axis BY NAME (\"booleans ride stateProps; text/number never enumerate\") and the presence-prop alternative would push every per-plane token binding into overflow by rule (\"presence-prop-driven styling — boolean tokensByProp has no spelling\"). Spelled as a 2-value `orientation` enum mapped through axisValueMap to {vertical:false} / {vertical:true}: the mounted library prop is unchanged, the token names survive, and the canvas gets an Orientation variant property. CONTROLLED selectedValue + onTabSelect stub — the Carbon TabList double-run lesson, and Fluent's selectTabOnFocus makes it mandatory (the focus-visible driver's Tab keypress would otherwise move the selection into the next sweep). Tab's own axes ride the child-axis limitation (docs/21 §7.3) — pinned, deferred by name. RECON H7 predicts one named residue here: `fui-Tab__content--reserved-space` contains `--` after the prefix strip, so stems() drops it as a BEM modifier when it is actually a distinct SLOT.",
+      "name": "TabList",
+      "importName": "TabList",
+      "contract": "examples/fluent/contracts-seed/tab-list.contract.json",
+      "sampleText": "",
+      "axes": [
+        "appearance",
+        "size",
+        "orientation"
+      ],
+      "axisValueMap": {
+        "orientation": {
+          "horizontal": {
+            "$props": {
+              "vertical": false
+            }
+          },
+          "vertical": {
+            "$props": {
+              "vertical": true
+            }
+          }
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "selectedValue": "tab-1",
+        "reserveSelectedTabSpace": true,
+        "selectTabOnFocus": false
+      },
+      "callbackProps": [
+        "onTabSelect"
+      ],
+      "stage": {
+        "width": 360,
+        "height": 60,
+        "padding": 16
+      },
+      "childrenSpec": [
+        {
+          "importName": "Tab",
+          "props": {
+            "value": "tab-1"
+          },
+          "text": "Overview"
+        },
+        {
+          "importName": "Tab",
+          "props": {
+            "value": "tab-2"
+          },
+          "text": "Activity"
+        }
+      ]
+    },
+    {
+      "__note": "PORTAL. openDriver {visible:true} drives the bubble open; `relationship` is a REQUIRED prop with no default, pinned \"label\"; `positioning` pinned \"after\" (its documented default is \"above\" — pinned rather than defaulted so the bubble lands beside the trigger inside the stage). `withArrow` rides the PRESENCE grammar — MUI Tooltip's exact precedent (configs/mui.json `arrow`) — because it is structure-creating: the arrow subtree promotes as a visibleWhen-gated part. Degraded by design: no state planes, and ZERO source-token facts (portalSweep takes no varPrefix — the standing corpus-wide degradation of docs/22 §8.1, especially annoying here because Fluent RE-DECLARES the whole theme on the portal node). RECON H2 predicts the captured root is the 900×0 provider wrapper. THE TRIGGER RIDES childWrap, NOT childrenSpec, AND THAT IS NOT COSMETIC (witnessed run 1, 2026-08-08): Fluent's trigger components clone their child through `cloneTriggerTree` (@fluentui/react-utilities), which throws `A trigger element must be a single element for this component` when `React.isValidElement(child)` is false — and `renderKidList` always returns an ARRAY, so even a one-entry childrenSpec fails the test. The throw happened inside render, React unmounted the tree, and the capture reported `0 portaled + 0 in-stage new roots`. childWrap renders `<Button>{sampleText}</Button>` — one valid element — which is exactly what a Fluent trigger requires. Dialog is NOT affected: useDialog reads its children through React.Children.toArray, where a one-entry array is legal.",
+      "name": "Tooltip",
+      "importName": "Tooltip",
+      "contract": "examples/fluent/contracts-seed/tooltip.contract.json",
+      "sampleText": "Hover",
+      "axes": [
+        "appearance"
+      ],
+      "presenceProps": [
+        {
+          "prop": "withArrow",
+          "libraryProp": "withArrow",
+          "value": true
+        }
+      ],
+      "portalCapture": true,
+      "openDriver": {
+        "visible": true
+      },
+      "fixedProps": {
+        "relationship": "label",
+        "positioning": "after",
+        "content": "Tooltip copy for the Fluent round."
+      },
+      "childWrap": {
+        "importName": "Button"
+      }
+    },
+    {
+      "__note": "PORTAL. RECON H1 PREDICTED A HARD REFUSAL HERE AND IT WAS WITNESSED EXACTLY (run 1, 2026-08-08: `3 portaled + 1 in-stage new roots`), THEN CLOSED BY ENGINE CHANGE E1: tabster appends TWO body-level focus sentinels (<i tabindex role=\"none\" data-tabster-dummy aria-hidden=\"true\">, 1×1, position:fixed, transparent, no classes, no children) alongside the portal node, so the new-root count is 3 and single-root fusion refuses by name. Fluent's own overlay structure is strictly BETTER than Radix's — backdrop and surface nest INSIDE one portal node rather than sitting as flat body siblings — so the refusal is entirely the focus manager's plumbing. A SECOND, UNPREDICTED COST followed and is now also closed: with E1 in place Dialog captured cleanly and then failed generator validation by name — `part \"dialogsurface\" tokens sets \"scale\" which is not a token channel`. Fluent's DialogSurface settles its open animation at an explicit `scale: 1` (the CSS initial is `none`, so the fusion is right to read `1` as a styled fact), and `scale` — the third CSS Transforms Level 2 independent-transform longhand, alongside `translate` and `rotate`, both of which the repo already handled — had no TOKEN_CHANNELS entry at all. Registered as ANNOTATE (a Figma node's size IS its box; a scale factor cannot be lowered without silently rewriting that box), so the value is carried and named by channelMiss rather than quarantining the component.",
+      "name": "Dialog",
+      "importName": "Dialog",
+      "contract": "examples/fluent/contracts-seed/dialog.contract.json",
+      "sampleText": "",
+      "axes": [
+        "modalType"
+      ],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true
+      },
+      "stage": {
+        "width": 600,
+        "height": 300,
+        "padding": 16
+      },
+      "childrenSpec": [
+        {
+          "importName": "DialogSurface",
+          "children": [
+            {
+              "importName": "DialogBody",
+              "children": [
+                {
+                  "importName": "DialogTitle",
+                  "text": "Dialog title"
+                },
+                {
+                  "importName": "DialogContent",
+                  "text": "Dialog content copy for the Fluent round."
+                },
+                {
+                  "importName": "DialogActions",
+                  "children": [
+                    {
+                      "importName": "Button",
+                      "text": "Close"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__note": "64 combos. RECON H8 — AT RISK ON DETERMINISM, and this one is measured, not guessed: fui-Spinner__spinner runs `animation: rb7n1on 1.5s INFINITE` and two reads 300 ms apart returned matrix(-0.00100531, -0.999999, …) then matrix(0.951766, -0.306825, …). The sweep polls to two consecutive stable samples 60 ms apart (up to 1.5 s); a perpetual rotation never stabilises. Expect a settle timeout or a double-run byte-identity failure naming a transform channel — the gate that exists to catch exactly this. delay pinned 0 so the spinner is present at mount.",
+      "name": "Spinner",
+      "importName": "Spinner",
+      "contract": "examples/fluent/contracts-seed/spinner.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size",
+        "appearance",
+        "labelPosition"
+      ],
+      "fixedProps": {
+        "label": "Loading",
+        "delay": 0
+      }
+    }
+  ],
+  "__stopped-components": [
+    {
+      "__note": "8 combos. blockStage. NAMED SPELLING of RECON §4.2's \"MessageBarBody ⊃ MessageBarTitle + text\": a childrenSpec node must carry an importName (a node is a text LEAF or a composition — bare text siblings have no spelling in the grammar), so the body copy rides Fluent's own `Text` component rather than a raw text node. Both children are real Fluent exports; the rendering is the composition every Fluent MessageBar example ships. An icon per intent (4 glyphs, single-axis → the svg-content promotion carries them). `politeness` pinned \"polite\" — it carries no @default tag in the rollup (Fluent derives it from intent) and it is an aria-live attribute with no visual channel, so the pin cannot move a pixel.",
+      "name": "MessageBar",
+      "importName": "MessageBar",
+      "contract": "examples/fluent/contracts-seed/message-bar.contract.json",
+      "sampleText": "",
+      "axes": [
+        "intent",
+        "shape"
+      ],
+      "fixedProps": {
+        "politeness": "polite"
+      },
+      "blockStage": true,
+      "stage": {
+        "width": 560,
+        "height": 56,
+        "padding": 16
+      },
+      "childrenSpec": [
+        {
+          "importName": "MessageBarBody",
+          "children": [
+            {
+              "importName": "MessageBarTitle",
+              "text": "Message title"
+            },
+            {
+              "importName": "Text",
+              "text": "Message body copy for the Fluent round."
+            }
+          ]
+        }
+      ],
+      "__stopped": "STOPPED AT EMIT, 2026-08-08 — the contract is GOOD and the capture is green (8/8 combos, 97.015% computed equality, the round's second-best floor, byte-identical double run). What cannot be built is the CANVAS SCRIPT, and the cause is not in Fluent: MessageBar is the corpus's FIRST grid-rooted component (no other emitted script in all of examples/**/figma carries the grid placement sequencer at all, 116 checked), so that code path — which landed the same day in e16b6f6c — had never run on real output. Measured failure: `Cannot set grid child position: Can't place child at this position because it is occupied by another node`, and after a candidate fix, `grid-placement-cycle-no-spare: the declared 1x4 grid has no free cell to break a placement cycle through`. DIAGNOSIS, recorded so the next session starts where this one stopped: Fluent's MessageBar root is display:grid with four named areas (icon 0,0 · body 0,1 · secondaryActions 0,2 · actions 0,3); the emitted spec lists its children in exactly that order, so auto-flow already matches every target and ZERO moves should be needed. The sequencer nevertheless perceives a permutation cycle. A contributing defect was identified and is real: wrapInMarginBox inserts a wrapper frame into the parent and re-parents the built node into it, so for a part carrying a CSS margin (MessageBar's icon) the actual grid child is the WRAPPER while `built` still holds the inner node — both the occupancy read and the setGridChildPosition write then target a node the grid does not own. A fix resolving the grid child by ancestry was written and MOVED the failure from a hard canvas refusal to the named cycle refusal, but did not make the script build, so it was REVERTED rather than shipped unexercised: core/emit-figma-script.ts is byte-identical to e16b6f6c. Re-enabling this component needs no config change — only the grid placement path fixed by its owner."
+    }
+  ]
+}

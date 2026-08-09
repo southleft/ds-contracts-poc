@@ -1,0 +1,1262 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@fluentui/react-components@9.74.5",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "spinner": {
+        "root": {
+          "column-gap": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "height": {
+            "extra-tiny": {
+              "above": {
+                "$value": "44px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "44px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "20px",
+                "$type": "dimension"
+              }
+            },
+            "tiny": {
+              "above": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "20px",
+                "$type": "dimension"
+              }
+            },
+            "extra-small": {
+              "above": {
+                "$value": "52px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "52px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "24px",
+                "$type": "dimension"
+              }
+            },
+            "small": {
+              "above": {
+                "$value": "56px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "56px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "28px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "28px",
+                "$type": "dimension"
+              }
+            },
+            "medium": {
+              "above": {
+                "$value": "62px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "62px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "32px",
+                "$type": "dimension"
+              }
+            },
+            "large": {
+              "above": {
+                "$value": "66px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "66px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "36px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "36px",
+                "$type": "dimension"
+              }
+            },
+            "extra-large": {
+              "above": {
+                "$value": "70px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "70px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "40px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "40px",
+                "$type": "dimension"
+              }
+            },
+            "huge": {
+              "above": {
+                "$value": "80px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "80px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "44px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "44px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "row-gap": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "width": {
+            "extra-tiny": {
+              "above": {
+                "$value": "51.3125px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "51.3125px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "75.3125px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "75.3125px",
+                "$type": "dimension"
+              }
+            },
+            "tiny": {
+              "above": {
+                "$value": "51.3125px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "51.3125px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "79.3125px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "79.3125px",
+                "$type": "dimension"
+              }
+            },
+            "extra-small": {
+              "above": {
+                "$value": "51.3125px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "51.3125px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "83.3125px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "83.3125px",
+                "$type": "dimension"
+              }
+            },
+            "small": {
+              "above": {
+                "$value": "51.3125px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "51.3125px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "87.3125px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "87.3125px",
+                "$type": "dimension"
+              }
+            },
+            "medium": {
+              "above": {
+                "$value": "60.3438px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "60.3438px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "100.344px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "100.344px",
+                "$type": "dimension"
+              }
+            },
+            "large": {
+              "above": {
+                "$value": "60.3438px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "60.3438px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "104.344px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "104.344px",
+                "$type": "dimension"
+              }
+            },
+            "extra-large": {
+              "above": {
+                "$value": "60.3438px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "60.3438px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "108.344px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "108.344px",
+                "$type": "dimension"
+              }
+            },
+            "huge": {
+              "above": {
+                "$value": "73.3906px",
+                "$type": "dimension"
+              },
+              "below": {
+                "$value": "73.3906px",
+                "$type": "dimension"
+              },
+              "before": {
+                "$value": "125.391px",
+                "$type": "dimension"
+              },
+              "after": {
+                "$value": "125.391px",
+                "$type": "dimension"
+              }
+            }
+          }
+        },
+        "spinner": {
+          "background-color": {
+            "primary": {
+              "$value": "#b4d6fa",
+              "$type": "color"
+            },
+            "inverted": {
+              "$value": "#ffffff33",
+              "$type": "color"
+            }
+          },
+          "color": {
+            "primary": {
+              "$value": "#0f6cbd",
+              "$type": "color"
+            },
+            "inverted": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "height": {
+            "extra-tiny": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "tiny": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "huge": {
+              "$value": "44px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "extra-tiny": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "tiny": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "huge": {
+              "$value": "44px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "spinnertail": {
+          "color": {
+            "primary": {
+              "$value": "#0f6cbd",
+              "$type": "color"
+            },
+            "inverted": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "height": {
+            "extra-tiny": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "tiny": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "huge": {
+              "$value": "44px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "extra-tiny": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "tiny": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "28px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "huge": {
+              "$value": "44px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label": {
+          "color": {
+            "primary": {
+              "$value": "#242424",
+              "$type": "color"
+            },
+            "inverted": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "extra-tiny": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "tiny": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "huge": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "font-weight": {
+            "extra-tiny": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "tiny": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "extra-small": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "small": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "medium": {
+              "$value": "600",
+              "$type": "number"
+            },
+            "large": {
+              "$value": "600",
+              "$type": "number"
+            },
+            "extra-large": {
+              "$value": "600",
+              "$type": "number"
+            },
+            "huge": {
+              "$value": "600",
+              "$type": "number"
+            }
+          },
+          "line-height": {
+            "extra-tiny": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "tiny": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "extra-small": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "small": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "22px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "22px",
+              "$type": "dimension"
+            },
+            "extra-large": {
+              "$value": "22px",
+              "$type": "dimension"
+            },
+            "huge": {
+              "$value": "28px",
+              "$type": "dimension"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "spinner",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinner",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinner",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinner",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinner",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinner",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinner",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinner",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinner",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinner",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinnertail",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinnertail",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinnertail",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinnertail",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinnertail",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinnertail",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinnertail",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinnertail",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinnertail",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "spinnertail",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [
+      "layout-not-uniform: root.flex-direction varies across combos — stays code-only"
+    ],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "spinner",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "spinner",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "default"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "flex-direction",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "column",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "min-width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "min-content",
+      "distinctValues": 1
+    },
+    {
+      "part": "spinner",
+      "channel": "animation-duration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "1.5s",
+      "distinctValues": 1
+    },
+    {
+      "part": "spinner",
+      "channel": "animation-iteration-count",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "infinite",
+      "distinctValues": 1
+    },
+    {
+      "part": "spinner",
+      "channel": "animation-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "rb7n1on",
+      "distinctValues": 1
+    },
+    {
+      "part": "spinner",
+      "channel": "animation-timing-function",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "linear",
+      "distinctValues": 1
+    },
+    {
+      "part": "spinner",
+      "channel": "mask-image",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "radial-gradient(closest-side, rgba(0, 0, 0, 0) calc(100% - 3px), rgba(255, 255, 255, 1) calc(100% - 2px), rgba(255, 255, 255, 1) calc(100% - 1px), rgba(0, 0, 0, 0) 100%)",
+      "distinctValues": 3
+    },
+    {
+      "part": "spinnertail",
+      "channel": "animation-duration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "1.5s",
+      "distinctValues": 1
+    },
+    {
+      "part": "spinnertail",
+      "channel": "animation-iteration-count",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "infinite",
+      "distinctValues": 1
+    },
+    {
+      "part": "spinnertail",
+      "channel": "animation-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "r15mim6k",
+      "distinctValues": 1
+    },
+    {
+      "part": "spinnertail",
+      "channel": "animation-timing-function",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "cubic-bezier(0.33, 0, 0.67, 1)",
+      "distinctValues": 1
+    },
+    {
+      "part": "spinnertail",
+      "channel": "mask-image",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "conic-gradient(rgba(0, 0, 0, 0) 105deg, rgba(255, 255, 255, 1) 105deg)",
+      "distinctValues": 1
+    },
+    {
+      "part": "spinnertail",
+      "channel": "transform",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "matrix(-0.707107, -0.707107, 0.707107, -0.707107, 0, 0)",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "extra-tiny.primary.above",
+        "interaction": "default",
+        "part": "label",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.primary.above",
+        "interaction": "default",
+        "part": "label",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.primary.below",
+        "interaction": "default",
+        "part": "spinnertail",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.primary.below",
+        "interaction": "default",
+        "part": "spinnertail",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.primary.before",
+        "interaction": "default",
+        "part": "label",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.primary.before",
+        "interaction": "default",
+        "part": "label",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.primary.after",
+        "interaction": "default",
+        "part": "spinnertail",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.primary.after",
+        "interaction": "default",
+        "part": "spinnertail",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.inverted.above",
+        "interaction": "default",
+        "part": "label",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.inverted.above",
+        "interaction": "default",
+        "part": "label",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.inverted.below",
+        "interaction": "default",
+        "part": "spinnertail",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "extra-tiny.inverted.below",
+        "interaction": "default",
+        "part": "spinnertail",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 128
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [
+    "union-order-drift: extra-tiny.primary.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.primary.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.primary.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.primary.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.primary.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.primary.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.primary.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.primary.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.inverted.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.inverted.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.inverted.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.inverted.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.inverted.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.inverted.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.inverted.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-tiny.inverted.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.primary.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.primary.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.primary.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.primary.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.primary.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.primary.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.primary.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.primary.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.inverted.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.inverted.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.inverted.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.inverted.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.inverted.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.inverted.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.inverted.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: tiny.inverted.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.primary.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.primary.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.primary.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.primary.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.primary.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.primary.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.primary.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.primary.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.inverted.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.inverted.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.inverted.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.inverted.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.inverted.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.inverted.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.inverted.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-small.inverted.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.primary.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.primary.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.primary.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.primary.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.primary.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.primary.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.primary.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.primary.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.inverted.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.inverted.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.inverted.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.inverted.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.inverted.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.inverted.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.inverted.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: small.inverted.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.primary.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.primary.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.primary.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.primary.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.primary.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.primary.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.primary.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.primary.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.inverted.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.inverted.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.inverted.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.inverted.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.inverted.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.inverted.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.inverted.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: medium.inverted.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.primary.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.primary.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.primary.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.primary.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.primary.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.primary.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.primary.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.primary.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.inverted.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.inverted.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.inverted.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.inverted.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.inverted.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.inverted.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.inverted.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: large.inverted.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.primary.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.primary.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.primary.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.primary.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.primary.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.primary.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.primary.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.primary.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.inverted.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.inverted.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.inverted.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.inverted.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.inverted.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.inverted.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.inverted.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: extra-large.inverted.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.primary.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.primary.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.primary.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.primary.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.primary.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.primary.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.primary.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.primary.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.inverted.above__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.inverted.above__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.inverted.above__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.inverted.above__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.inverted.before__default @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.inverted.before__hover @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.inverted.before__focus-visible @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)",
+    "union-order-drift: huge.inverted.before__active @1 (span|Spinner__spinner) matched behind the cursor — document order varies across captures (named)"
+  ],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: spinner — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: spinnertail — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "translate-door-refused: spinnertail — non-translate transform (matrix(-0.707107, -0.707107, 0.707107, -0.707107, 0, 0)); the synthetic translate-x/y channels are NOT admitted for this part (the bounded grammar carries identity-translate transforms and the independent translate longhand, one spelling at a time) — named refusal, pseudo-decor v2 round",
+    "control-fallback: no control for <label> — span control used (part label)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (label, spinner, spinnertail); -webkit-text-stroke-color (label, spinner, spinnertail)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: spinner.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: spinner.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: spinner.line-height equals ancestor \"root\" on all 256 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: spinnertail.caret-color equals ancestor \"spinner\" on all 256 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: spinnertail.color equals ancestor \"spinner\" on all 256 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: spinnertail.line-height equals ancestor \"spinner\" on all 256 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::after (1 part(s)), ::before (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "spinner",
+        "join": "computed-only"
+      },
+      {
+        "part": "spinnertail",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "spinner",
+      "spinnertail",
+      "label"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "aspect-carried: spinner computed width == height in every enabled combo (16/20/24/28/32/36/40/44px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "aspect-carried: spinnertail computed width == height in every enabled combo (16/20/24/28/32/36/40/44px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "literal-text-carried: label = \"Loading\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": [
+      "pseudo-decor-outside-grammar: spinnertail::before is painted by a mechanism the grammar cannot read (background-image: conic-gradient(rgba(255, 255, 255, 1) 135deg, rgba(0, 0, 0, 0) 135deg)) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
+      "pseudo-decor-outside-grammar: spinnertail::after is painted by a mechanism the grammar cannot read (background-image: conic-gradient(rgba(255, 255, 255, 1) 135deg, rgba(0, 0, 0, 0) 135deg)) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted"
+    ]
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: spinner.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: spinner.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

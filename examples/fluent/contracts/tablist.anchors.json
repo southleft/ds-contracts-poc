@@ -1,0 +1,398 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "tablist",
+  "anchors": [
+    {
+      "leaf": "imported.tab-list.label-2.color",
+      "token": "color-neutral-foreground2",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground2",
+      "selector": ".fpkze5g .fui-Tab__content"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.color-state-active.subtle.horizontal",
+      "token": "color-neutral-foreground2",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground2",
+      "selector": ".fpkze5g .fui-Tab__content"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.color-state-active.transparent.horizontal",
+      "token": "color-neutral-foreground2",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground2",
+      "selector": ".fpkze5g .fui-Tab__content"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.color-state-disabled",
+      "token": "color-neutral-foreground-disabled",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundDisabled",
+      "selector": ".fao1bnu .fui-Tab__content"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.color-state-hover.subtle.horizontal",
+      "token": "color-neutral-foreground2",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground2",
+      "selector": ".fpkze5g .fui-Tab__content"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.color-state-hover.transparent.horizontal",
+      "token": "color-neutral-foreground2",
+      "part": "label-2",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground2",
+      "selector": ".fpkze5g .fui-Tab__content"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.font-size.large",
+      "token": "font-size-base400",
+      "part": "label-2",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase400",
+      "selector": ".fod5ikn"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.font-size.medium",
+      "token": "font-size-base300",
+      "part": "label-2",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".fkhj508"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.font-size.small",
+      "token": "font-size-base300",
+      "part": "label-2",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".fkhj508"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.font-weight",
+      "token": "font-weight-regular",
+      "part": "label-2",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightRegular",
+      "selector": ".figsok6"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.line-height.large",
+      "token": "line-height-base400",
+      "part": "label-2",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase400",
+      "selector": ".faaz57k"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.line-height.medium",
+      "token": "line-height-base300",
+      "part": "label-2",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    },
+    {
+      "leaf": "imported.tab-list.label-2.line-height.small",
+      "token": "line-height-base300",
+      "part": "label-2",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    },
+    {
+      "leaf": "imported.tab-list.label.color-state-disabled",
+      "token": "color-neutral-foreground-disabled",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundDisabled",
+      "selector": ".fao1bnu .fui-Tab__content"
+    },
+    {
+      "leaf": "imported.tab-list.label.color.subtle",
+      "token": "color-neutral-foreground1",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground1",
+      "selector": ".ffplhdr .fui-Tab__content"
+    },
+    {
+      "leaf": "imported.tab-list.label.color.transparent",
+      "token": "color-neutral-foreground1",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground1",
+      "selector": ".ffplhdr .fui-Tab__content"
+    },
+    {
+      "leaf": "imported.tab-list.label.font-size.large",
+      "token": "font-size-base400",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase400",
+      "selector": ".fod5ikn"
+    },
+    {
+      "leaf": "imported.tab-list.label.font-size.medium",
+      "token": "font-size-base300",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".fkhj508"
+    },
+    {
+      "leaf": "imported.tab-list.label.font-size.small",
+      "token": "font-size-base300",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".fkhj508"
+    },
+    {
+      "leaf": "imported.tab-list.label.font-weight",
+      "token": "font-weight-semibold",
+      "part": "label",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightSemibold",
+      "selector": ".fl43uef"
+    },
+    {
+      "leaf": "imported.tab-list.label.line-height.large",
+      "token": "line-height-base400",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase400",
+      "selector": ".faaz57k"
+    },
+    {
+      "leaf": "imported.tab-list.label.line-height.medium",
+      "token": "line-height-base300",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    },
+    {
+      "leaf": "imported.tab-list.label.line-height.small",
+      "token": "line-height-base300",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.background-color-state-active.filled-circular.horizontal",
+      "token": "color-neutral-background3",
+      "part": "tab-2",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground3",
+      "selector": ".f16xq7d1"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.background-color-state-active.filled-circular.vertical",
+      "token": "color-neutral-background3",
+      "part": "tab-2",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground3",
+      "selector": ".f16xq7d1"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.background-color-state-disabled.filled-circular",
+      "token": "color-neutral-background-disabled",
+      "part": "tab-2",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "selector": ".f1bg9a2p"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.background-color-state-hover.filled-circular.horizontal",
+      "token": "color-neutral-background3",
+      "part": "tab-2",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground3",
+      "selector": ".f16xq7d1"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.background-color-state-hover.filled-circular.vertical",
+      "token": "color-neutral-background3",
+      "part": "tab-2",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground3",
+      "selector": ".f16xq7d1"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.background-color.filled-circular",
+      "token": "color-neutral-background3",
+      "part": "tab-2",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground3",
+      "selector": ".f16xq7d1"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.color-state-disabled.filled-circular",
+      "token": "color-neutral-foreground-disabled",
+      "part": "tab-2",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundDisabled",
+      "selector": ".f1s2aq7o"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.color-state-disabled.subtle-circular",
+      "token": "color-neutral-foreground-disabled",
+      "part": "tab-2",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundDisabled",
+      "selector": ".f1s2aq7o"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.color.filled-circular",
+      "token": "color-neutral-foreground2",
+      "part": "tab-2",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground2",
+      "selector": ".fkfq4zb"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.color.subtle-circular",
+      "token": "color-neutral-foreground2",
+      "part": "tab-2",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground2",
+      "selector": ".fkfq4zb"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.column-gap.large",
+      "token": "spacing-horizontal-snudge",
+      "part": "tab-2",
+      "cssProperty": "column-gap",
+      "varName": "--spacingHorizontalSNudge",
+      "selector": ".f1rjii52"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.column-gap.medium",
+      "token": "spacing-horizontal-snudge",
+      "part": "tab-2",
+      "cssProperty": "column-gap",
+      "varName": "--spacingHorizontalSNudge",
+      "selector": ".f1rjii52"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.column-gap.small",
+      "token": "spacing-horizontal-xxs",
+      "part": "tab-2",
+      "cssProperty": "column-gap",
+      "varName": "--spacingHorizontalXXS",
+      "selector": ".f14mj54c"
+    },
+    {
+      "leaf": "imported.tab-list.tab-2.line-height",
+      "token": "line-height-base300",
+      "part": "tab-2",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    },
+    {
+      "leaf": "imported.tab-list.tab.background-color-state-disabled.filled-circular",
+      "token": "color-neutral-background-disabled",
+      "part": "tab",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "selector": ".f1bg9a2p"
+    },
+    {
+      "leaf": "imported.tab-list.tab.background-color-state-disabled.subtle-circular",
+      "token": "color-neutral-background-disabled",
+      "part": "tab",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "selector": ".f1bg9a2p"
+    },
+    {
+      "leaf": "imported.tab-list.tab.background-color.filled-circular",
+      "token": "color-brand-background",
+      "part": "tab",
+      "cssProperty": "background-color",
+      "varName": "--colorBrandBackground",
+      "selector": ".ffp7eso"
+    },
+    {
+      "leaf": "imported.tab-list.tab.background-color.subtle-circular",
+      "token": "color-brand-background2",
+      "part": "tab",
+      "cssProperty": "background-color",
+      "varName": "--colorBrandBackground2",
+      "selector": ".f16xkysk"
+    },
+    {
+      "leaf": "imported.tab-list.tab.color-state-disabled.filled-circular",
+      "token": "color-neutral-foreground-disabled",
+      "part": "tab",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundDisabled",
+      "selector": ".f1s2aq7o"
+    },
+    {
+      "leaf": "imported.tab-list.tab.color-state-disabled.subtle-circular",
+      "token": "color-neutral-foreground-disabled",
+      "part": "tab",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundDisabled",
+      "selector": ".f1s2aq7o"
+    },
+    {
+      "leaf": "imported.tab-list.tab.color.filled-circular",
+      "token": "color-neutral-foreground-on-brand",
+      "part": "tab",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundOnBrand",
+      "selector": ".f1phragk"
+    },
+    {
+      "leaf": "imported.tab-list.tab.color.subtle-circular",
+      "token": "color-brand-foreground2",
+      "part": "tab",
+      "cssProperty": "color",
+      "varName": "--colorBrandForeground2",
+      "selector": ".faj9fo0"
+    },
+    {
+      "leaf": "imported.tab-list.tab.column-gap.large",
+      "token": "spacing-horizontal-snudge",
+      "part": "tab",
+      "cssProperty": "column-gap",
+      "varName": "--spacingHorizontalSNudge",
+      "selector": ".f1rjii52"
+    },
+    {
+      "leaf": "imported.tab-list.tab.column-gap.medium",
+      "token": "spacing-horizontal-snudge",
+      "part": "tab",
+      "cssProperty": "column-gap",
+      "varName": "--spacingHorizontalSNudge",
+      "selector": ".f1rjii52"
+    },
+    {
+      "leaf": "imported.tab-list.tab.column-gap.small",
+      "token": "spacing-horizontal-xxs",
+      "part": "tab",
+      "cssProperty": "column-gap",
+      "varName": "--spacingHorizontalXXS",
+      "selector": ".f14mj54c"
+    },
+    {
+      "leaf": "imported.tab-list.tab.line-height",
+      "token": "line-height-base300",
+      "part": "tab",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    }
+  ]
+}

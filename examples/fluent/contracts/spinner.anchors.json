@@ -1,0 +1,246 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "spinner",
+  "anchors": [
+    {
+      "leaf": "imported.spinner.label.color.inverted",
+      "token": "color-neutral-foreground-static-inverted",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundStaticInverted",
+      "selector": ".fonrgv7"
+    },
+    {
+      "leaf": "imported.spinner.label.color.primary",
+      "token": "color-neutral-foreground1",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground1",
+      "selector": ".f19n0e5"
+    },
+    {
+      "leaf": "imported.spinner.label.font-size.extra-large",
+      "token": "font-size-base400",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase400",
+      "selector": ".fod5ikn"
+    },
+    {
+      "leaf": "imported.spinner.label.font-size.extra-small",
+      "token": "font-size-base300",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".fkhj508"
+    },
+    {
+      "leaf": "imported.spinner.label.font-size.extra-tiny",
+      "token": "font-size-base300",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".fkhj508"
+    },
+    {
+      "leaf": "imported.spinner.label.font-size.huge",
+      "token": "font-size-base500",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase500",
+      "selector": ".f1pp30po"
+    },
+    {
+      "leaf": "imported.spinner.label.font-size.large",
+      "token": "font-size-base400",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase400",
+      "selector": ".fod5ikn"
+    },
+    {
+      "leaf": "imported.spinner.label.font-size.medium",
+      "token": "font-size-base400",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase400",
+      "selector": ".fod5ikn"
+    },
+    {
+      "leaf": "imported.spinner.label.font-size.small",
+      "token": "font-size-base300",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".fkhj508"
+    },
+    {
+      "leaf": "imported.spinner.label.font-size.tiny",
+      "token": "font-size-base300",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".fkhj508"
+    },
+    {
+      "leaf": "imported.spinner.label.font-weight.extra-large",
+      "token": "font-weight-semibold",
+      "part": "label",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightSemibold",
+      "selector": ".fl43uef"
+    },
+    {
+      "leaf": "imported.spinner.label.font-weight.extra-small",
+      "token": "font-weight-regular",
+      "part": "label",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightRegular",
+      "selector": ".figsok6"
+    },
+    {
+      "leaf": "imported.spinner.label.font-weight.extra-tiny",
+      "token": "font-weight-regular",
+      "part": "label",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightRegular",
+      "selector": ".figsok6"
+    },
+    {
+      "leaf": "imported.spinner.label.font-weight.huge",
+      "token": "font-weight-semibold",
+      "part": "label",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightSemibold",
+      "selector": ".fl43uef"
+    },
+    {
+      "leaf": "imported.spinner.label.font-weight.large",
+      "token": "font-weight-semibold",
+      "part": "label",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightSemibold",
+      "selector": ".fl43uef"
+    },
+    {
+      "leaf": "imported.spinner.label.font-weight.medium",
+      "token": "font-weight-semibold",
+      "part": "label",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightSemibold",
+      "selector": ".fl43uef"
+    },
+    {
+      "leaf": "imported.spinner.label.font-weight.small",
+      "token": "font-weight-regular",
+      "part": "label",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightRegular",
+      "selector": ".figsok6"
+    },
+    {
+      "leaf": "imported.spinner.label.font-weight.tiny",
+      "token": "font-weight-regular",
+      "part": "label",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightRegular",
+      "selector": ".figsok6"
+    },
+    {
+      "leaf": "imported.spinner.label.line-height.extra-large",
+      "token": "line-height-base400",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase400",
+      "selector": ".faaz57k"
+    },
+    {
+      "leaf": "imported.spinner.label.line-height.extra-small",
+      "token": "line-height-base300",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    },
+    {
+      "leaf": "imported.spinner.label.line-height.extra-tiny",
+      "token": "line-height-base300",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    },
+    {
+      "leaf": "imported.spinner.label.line-height.huge",
+      "token": "line-height-base500",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase500",
+      "selector": ".f106mvju"
+    },
+    {
+      "leaf": "imported.spinner.label.line-height.large",
+      "token": "line-height-base400",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase400",
+      "selector": ".faaz57k"
+    },
+    {
+      "leaf": "imported.spinner.label.line-height.medium",
+      "token": "line-height-base400",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase400",
+      "selector": ".faaz57k"
+    },
+    {
+      "leaf": "imported.spinner.label.line-height.small",
+      "token": "line-height-base300",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    },
+    {
+      "leaf": "imported.spinner.label.line-height.tiny",
+      "token": "line-height-base300",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    },
+    {
+      "leaf": "imported.spinner.spinner.background-color.inverted",
+      "token": "color-neutral-stroke-alpha2",
+      "part": "spinner",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralStrokeAlpha2",
+      "selector": ".fr407j0"
+    },
+    {
+      "leaf": "imported.spinner.spinner.background-color.primary",
+      "token": "color-brand-stroke2-contrast",
+      "part": "spinner",
+      "cssProperty": "background-color",
+      "varName": "--colorBrandStroke2Contrast",
+      "selector": ".rvgcg50"
+    },
+    {
+      "leaf": "imported.spinner.spinner.color.inverted",
+      "token": "color-neutral-stroke-on-brand2",
+      "part": "spinner",
+      "cssProperty": "color",
+      "varName": "--colorNeutralStrokeOnBrand2",
+      "selector": ".f1f7voed"
+    },
+    {
+      "leaf": "imported.spinner.spinner.color.primary",
+      "token": "color-brand-stroke1",
+      "part": "spinner",
+      "cssProperty": "color",
+      "varName": "--colorBrandStroke1",
+      "selector": ".rvgcg50"
+    }
+  ]
+}

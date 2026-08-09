@@ -1,0 +1,493 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.checkbox",
+  "name": "Checkbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: checked=false, size=medium, shape=square, labelPosition=after (pinned). TRI-STATE ON ONE AXIS (the MUI/Carbon discipline): Fluent accepts checked=\"mixed\" directly, so the axisValueMap is unchecked→false, checked→true, mixed→\"mixed\". One axis is not cosmetic — the svg-content promotion carries per-value glyph assets only when the markup is a function of exactly ONE axis. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "mixed"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "mixed": "Mixed"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "shape",
+      "type": {
+        "enum": [
+          "square",
+          "circular"
+        ]
+      },
+      "default": "square",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape",
+          "values": {
+            "square": "Square",
+            "circular": "Circular"
+          }
+        },
+        "code": {
+          "prop": "shape"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "input": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input|Checkbox__input|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "auto",
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "font-family": "Arial",
+            "position": "absolute",
+            "text-align": "start"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            },
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.checkbox.input.color}",
+            "font-size": "{imported.checkbox.input.font-size}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "opacity": "{imported.checkbox.input.opacity}",
+            "outline-color": "{imported.checkbox.input.outline-color}",
+            "right": "{imported.checkbox.input.right}",
+            "top": "{imported.shared.size-0}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.checkbox.input.color-state-disabled}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "height": "{imported.checkbox.input.height.large}",
+                  "width": "{imported.checkbox.input.width.large}"
+                },
+                "medium": {
+                  "height": "{imported.checkbox.input.height.medium}",
+                  "width": "{imported.checkbox.input.width.medium}"
+                }
+              }
+            }
+          ]
+        },
+        "indicator": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Checkbox__indicator — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "declared": {
+            "aspect-ratio": "1 / 1",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "pointer-events": "none"
+          },
+          "parts": {
+            "icon": {
+              "element": "svg",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy svg|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "aspect-ratio": "1 / 1",
+                "cursor": "pointer",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "pointer-events": "none"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "checked",
+                  "equals": "unchecked",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "parts": {
+                "part-1-0-0": {
+                  "element": "path",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "inline",
+                    "cursor": "pointer",
+                    "pointer-events": "none"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "checked",
+                      "equals": "unchecked",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "tokens": {
+                    "line-height": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "large": {
+                          "font-size": "{imported.checkbox.part-1-0-0.font-size.large}"
+                        },
+                        "medium": {
+                          "font-size": "{imported.checkbox.part-1-0-0.font-size.medium}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "line-height": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "large": {
+                      "font-size": "{imported.checkbox.icon.font-size.large}"
+                    },
+                    "medium": {
+                      "font-size": "{imported.checkbox.icon.font-size.medium}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            }
+          },
+          "tokens": {
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-width": "{imported.shared.size-1}",
+            "flex-shrink": "{imported.checkbox.indicator.flex-shrink}",
+            "margin-bottom": "{imported.shared.size-8}",
+            "margin-left": "{imported.shared.size-8}",
+            "margin-right": "{imported.shared.size-8}",
+            "margin-top": "{imported.shared.size-8}"
+          },
+          "states": {
+            "disabled": {
+              "background-color": "{imported.shared.color-00000000}",
+              "color": "{imported.shared.color-bdbdbd}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "background-color": "{imported.checkbox.indicator.background-color.checked}",
+                  "border-bottom-color": "{imported.checkbox.indicator.border-bottom-color.checked}",
+                  "border-left-color": "{imported.checkbox.indicator.border-left-color.checked}",
+                  "border-right-color": "{imported.checkbox.indicator.border-right-color.checked}",
+                  "border-top-color": "{imported.checkbox.indicator.border-top-color.checked}",
+                  "color": "{imported.checkbox.indicator.color.checked}",
+                  "fill": "{imported.checkbox.indicator.fill.checked}"
+                },
+                "mixed": {
+                  "background-color": "{imported.checkbox.indicator.background-color.mixed}",
+                  "border-bottom-color": "{imported.checkbox.indicator.border-bottom-color.mixed}",
+                  "border-left-color": "{imported.checkbox.indicator.border-left-color.mixed}",
+                  "border-right-color": "{imported.checkbox.indicator.border-right-color.mixed}",
+                  "border-top-color": "{imported.checkbox.indicator.border-top-color.mixed}",
+                  "color": "{imported.checkbox.indicator.color.mixed}",
+                  "fill": "{imported.checkbox.indicator.fill.mixed}"
+                },
+                "unchecked": {
+                  "background-color": "{imported.checkbox.indicator.background-color.unchecked}",
+                  "border-bottom-color": "{imported.checkbox.indicator.border-bottom-color.unchecked}",
+                  "border-left-color": "{imported.checkbox.indicator.border-left-color.unchecked}",
+                  "border-right-color": "{imported.checkbox.indicator.border-right-color.unchecked}",
+                  "border-top-color": "{imported.checkbox.indicator.border-top-color.unchecked}",
+                  "color": "{imported.checkbox.indicator.color.unchecked}",
+                  "fill": "{imported.checkbox.indicator.fill.unchecked}"
+                }
+              }
+            },
+            {
+              "prop": "shape",
+              "map": {
+                "circular": {
+                  "border-bottom-left-radius": "{imported.checkbox.indicator.border-bottom-left-radius.circular}",
+                  "border-bottom-right-radius": "{imported.checkbox.indicator.border-bottom-right-radius.circular}",
+                  "border-top-left-radius": "{imported.checkbox.indicator.border-top-left-radius.circular}",
+                  "border-top-right-radius": "{imported.checkbox.indicator.border-top-right-radius.circular}"
+                },
+                "square": {
+                  "border-bottom-left-radius": "{imported.checkbox.indicator.border-bottom-left-radius.square}",
+                  "border-bottom-right-radius": "{imported.checkbox.indicator.border-bottom-right-radius.square}",
+                  "border-top-left-radius": "{imported.checkbox.indicator.border-top-left-radius.square}",
+                  "border-top-right-radius": "{imported.checkbox.indicator.border-top-right-radius.square}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "font-size": "{imported.checkbox.indicator.font-size.large}",
+                  "height": "{imported.checkbox.indicator.height.large}",
+                  "width": "{imported.checkbox.indicator.width.large}"
+                },
+                "medium": {
+                  "font-size": "{imported.checkbox.indicator.font-size.medium}",
+                  "height": "{imported.checkbox.indicator.height.medium}",
+                  "width": "{imported.checkbox.indicator.width.medium}"
+                }
+              }
+            }
+          ]
+        },
+        "label": {
+          "element": "label",
+          "text": "Checkbox",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|Checkbox__label.Label — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "pointer"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            }
+          },
+          "tokens": {
+            "font-size": "{imported.checkbox.label.font-size}",
+            "font-weight": "{imported.checkbox.label.font-weight}",
+            "line-height": "{imported.checkbox.label.line-height}",
+            "padding-bottom": "{imported.shared.size-8}",
+            "padding-left": "{imported.checkbox.label.padding-left}",
+            "padding-right": "{imported.shared.size-8}",
+            "padding-top": "{imported.shared.size-8}"
+          },
+          "states": {
+            "active": {
+              "color": "{imported.shared.color-242424}"
+            },
+            "disabled": {
+              "color": "{imported.shared.color-bdbdbd}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "color": "{imported.checkbox.label.color.checked}"
+                },
+                "mixed": {
+                  "color": "{imported.checkbox.label.color.mixed}"
+                },
+                "unchecked": {
+                  "color": "{imported.checkbox.label.color.unchecked}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "margin-bottom": "{imported.checkbox.label.margin-bottom.large}",
+                  "margin-top": "{imported.checkbox.label.margin-top.large}"
+                },
+                "medium": {
+                  "margin-bottom": "{imported.checkbox.label.margin-bottom.medium}",
+                  "margin-top": "{imported.checkbox.label.margin-top.medium}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "cursor": "pointer",
+        "max-width": "fit-content",
+        "position": "relative"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "default"
+        }
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "states": {
+        "active": {
+          "border-bottom-color": "{imported.shared.color-242424}",
+          "border-left-color": "{imported.shared.color-242424}",
+          "border-right-color": "{imported.shared.color-242424}",
+          "border-top-color": "{imported.shared.color-242424}",
+          "color": "{imported.shared.color-242424}"
+        },
+        "disabled": {
+          "border-bottom-color": "{imported.shared.color-bdbdbd}",
+          "border-left-color": "{imported.shared.color-bdbdbd}",
+          "border-right-color": "{imported.shared.color-bdbdbd}",
+          "border-top-color": "{imported.shared.color-bdbdbd}",
+          "color": "{imported.shared.color-bdbdbd}"
+        },
+        "focus-visible": {
+          "border-bottom-color": "{imported.shared.color-00000000}",
+          "border-left-color": "{imported.shared.color-00000000}",
+          "border-right-color": "{imported.shared.color-00000000}",
+          "border-top-color": "{imported.shared.color-00000000}"
+        },
+        "hover": {
+          "border-bottom-color": "{imported.checkbox.root.border-bottom-color-state-hover.{checked}}",
+          "border-left-color": "{imported.checkbox.root.border-left-color-state-hover.{checked}}",
+          "border-right-color": "{imported.checkbox.root.border-right-color-state-hover.{checked}}",
+          "border-top-color": "{imported.checkbox.root.border-top-color-state-hover.{checked}}",
+          "color": "{imported.checkbox.root.color-state-hover.{checked}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "checked",
+          "map": {
+            "checked": {
+              "border-bottom-color": "{imported.checkbox.root.border-bottom-color.checked}",
+              "border-left-color": "{imported.checkbox.root.border-left-color.checked}",
+              "border-right-color": "{imported.checkbox.root.border-right-color.checked}",
+              "border-top-color": "{imported.checkbox.root.border-top-color.checked}",
+              "color": "{imported.checkbox.root.color.checked}"
+            },
+            "mixed": {
+              "border-bottom-color": "{imported.checkbox.root.border-bottom-color.mixed}",
+              "border-left-color": "{imported.checkbox.root.border-left-color.mixed}",
+              "border-right-color": "{imported.checkbox.root.border-right-color.mixed}",
+              "border-top-color": "{imported.checkbox.root.border-top-color.mixed}",
+              "color": "{imported.checkbox.root.color.mixed}"
+            },
+            "unchecked": {
+              "border-bottom-color": "{imported.checkbox.root.border-bottom-color.unchecked}",
+              "border-left-color": "{imported.checkbox.root.border-left-color.unchecked}",
+              "border-right-color": "{imported.checkbox.root.border-right-color.unchecked}",
+              "border-top-color": "{imported.checkbox.root.border-top-color.unchecked}",
+              "color": "{imported.checkbox.root.color.unchecked}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "height": "{imported.checkbox.root.height.large}",
+              "width": "{imported.checkbox.root.width.large}"
+            },
+            "medium": {
+              "height": "{imported.checkbox.root.height.medium}",
+              "width": "{imported.checkbox.root.width.medium}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "Checkbox"
+    }
+  }
+}

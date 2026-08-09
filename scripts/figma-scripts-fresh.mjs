@@ -53,6 +53,16 @@ const LIBRARIES = {
   // lucide glyph assets (examples/shadcn/assets/icons), so the emit command
   // needs --icons — same reason as tailwind/astryx above.
   shadcn: ['--icons', 'examples/shadcn/assets/icons', '--tokens', 'examples/shadcn/tokens/shadcn.dtcg.json,examples/shadcn/tokens/shadcn-minted.dtcg.json'],
+  // FLUENT round (library #10): MessageBar's four intent glyphs, the Switch
+  // indicator and the Dialog close button promote as real assets
+  // (examples/fluent/assets/icons), so the emit command needs --icons — same
+  // reason as tailwind/astryx/shadcn above. NOTE the freshness comparison
+  // covers all TWELVE emitted scripts including message-bar.figma.js: it is
+  // CANVAS-STOPPED for the genesis batch and the compile receipt (it cannot
+  // BUILD — grid-placement-cycle-no-spare), but it is still EMITTED and still
+  // committed, so it must still be held still. A stopped script that nobody
+  // re-derives is exactly the ungated surface this gate exists to refuse.
+  fluent: ['--icons', 'examples/fluent/assets/icons', '--tokens', 'examples/fluent/tokens/fluent.dtcg.json,examples/fluent/tokens/fluent-minted.dtcg.json'],
 };
 
 /** Libraries whose scripts are rebuilt by a DIFFERENT recorded command than

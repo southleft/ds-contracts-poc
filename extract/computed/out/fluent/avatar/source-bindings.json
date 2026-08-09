@@ -1,0 +1,1462 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Avatar",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.active.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "unset"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.active.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "24"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.active.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "48"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.active.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "96"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.inactive.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "unset"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.inactive.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "24"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.inactive.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "48"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.inactive.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "96"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.none.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "unset"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.none.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "24"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.none.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "48"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "circular.none.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "96"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.active.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "unset"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.active.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "24"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.active.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "48"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.active.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "96"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.inactive.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "unset"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.inactive.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "24"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.inactive.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "48"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.inactive.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "96"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.none.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "unset"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.none.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "24"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.none.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "48"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "background-color",
+      "combo": "square.none.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "96"
+      },
+      "token": "color-neutral-background6",
+      "varName": "--colorNeutralBackground6",
+      "anchor": {
+        "selector": ".f18f03hv"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.active.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "unset"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.active.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "24"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.active.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "48"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.active.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "96"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.inactive.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "unset"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.inactive.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "24"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.inactive.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "48"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.inactive.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "96"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.none.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "unset"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.none.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "24"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.none.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "48"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "circular.none.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "96"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.active.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "unset"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.active.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "24"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.active.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "48"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.active.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "96"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.inactive.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "unset"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.inactive.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "24"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.inactive.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "48"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.inactive.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "96"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.none.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "unset"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.none.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "24"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.none.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "48"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "square.none.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "96"
+      },
+      "token": "color-neutral-foreground3",
+      "varName": "--colorNeutralForeground3",
+      "anchor": {
+        "selector": ".f11d4kpn"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.active.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "unset"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.active.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "24"
+      },
+      "token": "font-size-base100",
+      "varName": "--fontSizeBase100",
+      "anchor": {
+        "selector": ".f13mqy1h"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.active.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "48"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.active.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "96"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.inactive.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "unset"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.inactive.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "24"
+      },
+      "token": "font-size-base100",
+      "varName": "--fontSizeBase100",
+      "anchor": {
+        "selector": ".f13mqy1h"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.inactive.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "48"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.inactive.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "96"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.none.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "unset"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.none.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "24"
+      },
+      "token": "font-size-base100",
+      "varName": "--fontSizeBase100",
+      "anchor": {
+        "selector": ".f13mqy1h"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.none.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "48"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "circular.none.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "96"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.active.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "unset"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.active.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "24"
+      },
+      "token": "font-size-base100",
+      "varName": "--fontSizeBase100",
+      "anchor": {
+        "selector": ".f13mqy1h"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.active.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "48"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.active.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "96"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.inactive.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "unset"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.inactive.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "24"
+      },
+      "token": "font-size-base100",
+      "varName": "--fontSizeBase100",
+      "anchor": {
+        "selector": ".f13mqy1h"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.inactive.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "48"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.inactive.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "96"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.none.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "unset"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.none.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "24"
+      },
+      "token": "font-size-base100",
+      "varName": "--fontSizeBase100",
+      "anchor": {
+        "selector": ".f13mqy1h"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.none.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "48"
+      },
+      "token": "font-size-base400",
+      "varName": "--fontSizeBase400",
+      "anchor": {
+        "selector": ".fod5ikn"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "square.none.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "96"
+      },
+      "token": "font-size-base500",
+      "varName": "--fontSizeBase500",
+      "anchor": {
+        "selector": ".f1pp30po"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.active.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "unset"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.active.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "24"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.active.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "48"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.active.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "active",
+        "size": "96"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.inactive.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "unset"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.inactive.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "24"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.inactive.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "48"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.inactive.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "96"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.none.unset",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "unset"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.none.24",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "24"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.none.48",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "48"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "circular.none.96",
+      "axisValues": {
+        "shape": "circular",
+        "active": "none",
+        "size": "96"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.active.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "unset"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.active.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "24"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.active.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "48"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.active.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "active",
+        "size": "96"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.inactive.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "unset"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.inactive.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "24"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.inactive.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "48"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.inactive.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "inactive",
+        "size": "96"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.none.unset",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "unset"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.none.24",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "24"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.none.48",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "48"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "square.none.96",
+      "axisValues": {
+        "shape": "square",
+        "active": "none",
+        "size": "96"
+      },
+      "token": "font-weight-semibold",
+      "varName": "--fontWeightSemibold",
+      "anchor": {
+        "selector": ".r81b29z"
+      }
+    }
+  ],
+  "skips": [
+    "root.font-family: candidate --fontFamilyBase → \"font-family-base\" = 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.transition-duration: candidates --durationFaster → \"duration-faster\" = 100ms; --durationUltraSlow → \"duration-ultra-slow\" = 500ms name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.transition-timing-function: candidates --curveDecelerateMin → \"curve-decelerate-min\" = cubic-bezier(0.33,0,0.1,1); --curveEasyEaseMax → \"curve-easy-ease-max\" = cubic-bezier(0.8,0,0.2,1); --curveLinear → \"curve-linear\" = cubic-bezier(0,0,1,1) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 3,
+  "shorthandSkips": [
+    "root.border-radius: SHORTHAND carrying var(--borderRadiusMedium) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-radius: SHORTHAND carrying var(--borderRadiusSmall) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-radius: SHORTHAND carrying var(--borderRadiusXLarge) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

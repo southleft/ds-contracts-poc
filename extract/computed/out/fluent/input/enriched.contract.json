@@ -1,0 +1,338 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.input",
+  "name": "Input",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: appearance=outline, size=medium, type=text. `type` is DEFERRED BY NAME — 12 HTML input types are an attribute pass-through, not a visual axis. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "appearance",
+      "type": {
+        "enum": [
+          "outline",
+          "underline",
+          "filled-darker",
+          "filled-lighter",
+          "filled-darker-shadow",
+          "filled-lighter-shadow"
+        ]
+      },
+      "default": "outline",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Appearance",
+          "values": {
+            "outline": "Outline",
+            "underline": "Underline",
+            "filled-darker": "Filled Darker",
+            "filled-lighter": "Filled Lighter",
+            "filled-darker-shadow": "Filled Darker Shadow",
+            "filled-lighter-shadow": "Filled Lighter Shadow"
+          }
+        },
+        "code": {
+          "prop": "appearance"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [
+    "active",
+    "disabled",
+    "focus-visible",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "input": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input|Input__input — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "appearance": "auto",
+            "box-sizing": "border-box",
+            "cursor": "text",
+            "overflow-x": "clip",
+            "overflow-y": "clip",
+            "text-align": "start"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-767676}",
+            "border-left-color": "{imported.shared.color-767676}",
+            "border-right-color": "{imported.shared.color-767676}",
+            "border-top-color": "{imported.shared.color-767676}",
+            "flex-grow": "{imported.input.input.flex-grow}",
+            "min-width": "{imported.shared.size-0}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-bdbdbd}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "font-size": "{imported.input.input.font-size.large}",
+                  "height": "{imported.input.input.height.{appearance}.large}",
+                  "line-height": "{imported.input.input.line-height.large}",
+                  "padding-left": "{imported.input.input.padding-left.large}",
+                  "padding-right": "{imported.input.input.padding-right.large}",
+                  "width": "{imported.input.input.width.large}"
+                },
+                "medium": {
+                  "font-size": "{imported.input.input.font-size.medium}",
+                  "height": "{imported.input.input.height.{appearance}.medium}",
+                  "line-height": "{imported.input.input.line-height.medium}",
+                  "padding-left": "{imported.input.input.padding-left.medium}",
+                  "padding-right": "{imported.input.input.padding-right.medium}",
+                  "width": "{imported.input.input.width.medium}"
+                },
+                "small": {
+                  "font-size": "{imported.input.input.font-size.small}",
+                  "height": "{imported.input.input.height.{appearance}.small}",
+                  "line-height": "{imported.input.input.line-height.small}",
+                  "padding-left": "{imported.input.input.padding-left.small}",
+                  "padding-right": "{imported.input.input.padding-right.small}",
+                  "width": "{imported.input.input.width.small}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "box-sizing": "border-box",
+        "position": "relative"
+      },
+      "declaredStates": {
+        "active": {
+          "outline-style": "solid"
+        },
+        "disabled": {
+          "cursor": "not-allowed"
+        },
+        "focus-visible": {
+          "outline-style": "solid"
+        }
+      },
+      "tokens": {
+        "border-bottom-width": "{imported.input.root.border-bottom-width}",
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.input.root.width.{appearance}.{size}}"
+      },
+      "states": {
+        "active": {
+          "border-bottom-color": "{imported.input.root.border-bottom-color-state-active.{appearance}}",
+          "border-left-color": "{imported.input.root.border-left-color-state-active.{appearance}}",
+          "border-right-color": "{imported.input.root.border-right-color-state-active.{appearance}}",
+          "border-top-color": "{imported.input.root.border-top-color-state-active.{appearance}}",
+          "outline-color": "{imported.shared.color-00000000}",
+          "outline-width": "{imported.input.root.outline-width-state-active}"
+        },
+        "disabled": {
+          "background-color": "{imported.shared.color-00000000}",
+          "border-bottom-color": "{imported.shared.color-e0e0e0}",
+          "border-left-color": "{imported.shared.color-e0e0e0}",
+          "border-right-color": "{imported.shared.color-e0e0e0}",
+          "border-top-color": "{imported.shared.color-e0e0e0}"
+        },
+        "focus-visible": {
+          "border-bottom-color": "{imported.input.root.border-bottom-color-state-focus-visible.{appearance}}",
+          "border-left-color": "{imported.input.root.border-left-color-state-focus-visible.{appearance}}",
+          "border-right-color": "{imported.input.root.border-right-color-state-focus-visible.{appearance}}",
+          "border-top-color": "{imported.input.root.border-top-color-state-focus-visible.{appearance}}",
+          "outline-color": "{imported.shared.color-00000000}",
+          "outline-width": "{imported.input.root.outline-width-state-focus-visible}"
+        },
+        "hover": {
+          "border-bottom-color": "{imported.input.root.border-bottom-color-state-hover.{appearance}}",
+          "border-left-color": "{imported.input.root.border-left-color-state-hover.{appearance}}",
+          "border-right-color": "{imported.input.root.border-right-color-state-hover.{appearance}}",
+          "border-top-color": "{imported.input.root.border-top-color-state-hover.{appearance}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "appearance",
+          "map": {
+            "filled-darker": {
+              "background-color": "{imported.input.root.background-color.filled-darker}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.filled-darker}",
+              "border-bottom-left-radius": "{imported.input.root.border-bottom-left-radius.filled-darker}",
+              "border-bottom-right-radius": "{imported.input.root.border-bottom-right-radius.filled-darker}",
+              "border-left-color": "{imported.input.root.border-left-color.filled-darker}",
+              "border-left-width": "{imported.input.root.border-left-width.filled-darker}",
+              "border-right-color": "{imported.input.root.border-right-color.filled-darker}",
+              "border-right-width": "{imported.input.root.border-right-width.filled-darker}",
+              "border-top-color": "{imported.input.root.border-top-color.filled-darker}",
+              "border-top-left-radius": "{imported.input.root.border-top-left-radius.filled-darker}",
+              "border-top-right-radius": "{imported.input.root.border-top-right-radius.filled-darker}",
+              "border-top-width": "{imported.input.root.border-top-width.filled-darker}",
+              "box-shadow": "{imported.input.root.box-shadow.filled-darker}"
+            },
+            "filled-darker-shadow": {
+              "background-color": "{imported.input.root.background-color.filled-darker-shadow}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.filled-darker-shadow}",
+              "border-bottom-left-radius": "{imported.input.root.border-bottom-left-radius.filled-darker-shadow}",
+              "border-bottom-right-radius": "{imported.input.root.border-bottom-right-radius.filled-darker-shadow}",
+              "border-left-color": "{imported.input.root.border-left-color.filled-darker-shadow}",
+              "border-left-width": "{imported.input.root.border-left-width.filled-darker-shadow}",
+              "border-right-color": "{imported.input.root.border-right-color.filled-darker-shadow}",
+              "border-right-width": "{imported.input.root.border-right-width.filled-darker-shadow}",
+              "border-top-color": "{imported.input.root.border-top-color.filled-darker-shadow}",
+              "border-top-left-radius": "{imported.input.root.border-top-left-radius.filled-darker-shadow}",
+              "border-top-right-radius": "{imported.input.root.border-top-right-radius.filled-darker-shadow}",
+              "border-top-width": "{imported.input.root.border-top-width.filled-darker-shadow}",
+              "box-shadow": "{imported.input.root.box-shadow.filled-darker-shadow}"
+            },
+            "filled-lighter": {
+              "background-color": "{imported.input.root.background-color.filled-lighter}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.filled-lighter}",
+              "border-bottom-left-radius": "{imported.input.root.border-bottom-left-radius.filled-lighter}",
+              "border-bottom-right-radius": "{imported.input.root.border-bottom-right-radius.filled-lighter}",
+              "border-left-color": "{imported.input.root.border-left-color.filled-lighter}",
+              "border-left-width": "{imported.input.root.border-left-width.filled-lighter}",
+              "border-right-color": "{imported.input.root.border-right-color.filled-lighter}",
+              "border-right-width": "{imported.input.root.border-right-width.filled-lighter}",
+              "border-top-color": "{imported.input.root.border-top-color.filled-lighter}",
+              "border-top-left-radius": "{imported.input.root.border-top-left-radius.filled-lighter}",
+              "border-top-right-radius": "{imported.input.root.border-top-right-radius.filled-lighter}",
+              "border-top-width": "{imported.input.root.border-top-width.filled-lighter}",
+              "box-shadow": "{imported.input.root.box-shadow.filled-lighter}"
+            },
+            "filled-lighter-shadow": {
+              "background-color": "{imported.input.root.background-color.filled-lighter-shadow}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.filled-lighter-shadow}",
+              "border-bottom-left-radius": "{imported.input.root.border-bottom-left-radius.filled-lighter-shadow}",
+              "border-bottom-right-radius": "{imported.input.root.border-bottom-right-radius.filled-lighter-shadow}",
+              "border-left-color": "{imported.input.root.border-left-color.filled-lighter-shadow}",
+              "border-left-width": "{imported.input.root.border-left-width.filled-lighter-shadow}",
+              "border-right-color": "{imported.input.root.border-right-color.filled-lighter-shadow}",
+              "border-right-width": "{imported.input.root.border-right-width.filled-lighter-shadow}",
+              "border-top-color": "{imported.input.root.border-top-color.filled-lighter-shadow}",
+              "border-top-left-radius": "{imported.input.root.border-top-left-radius.filled-lighter-shadow}",
+              "border-top-right-radius": "{imported.input.root.border-top-right-radius.filled-lighter-shadow}",
+              "border-top-width": "{imported.input.root.border-top-width.filled-lighter-shadow}",
+              "box-shadow": "{imported.input.root.box-shadow.filled-lighter-shadow}"
+            },
+            "outline": {
+              "background-color": "{imported.input.root.background-color.outline}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.outline}",
+              "border-bottom-left-radius": "{imported.input.root.border-bottom-left-radius.outline}",
+              "border-bottom-right-radius": "{imported.input.root.border-bottom-right-radius.outline}",
+              "border-left-color": "{imported.input.root.border-left-color.outline}",
+              "border-left-width": "{imported.input.root.border-left-width.outline}",
+              "border-right-color": "{imported.input.root.border-right-color.outline}",
+              "border-right-width": "{imported.input.root.border-right-width.outline}",
+              "border-top-color": "{imported.input.root.border-top-color.outline}",
+              "border-top-left-radius": "{imported.input.root.border-top-left-radius.outline}",
+              "border-top-right-radius": "{imported.input.root.border-top-right-radius.outline}",
+              "border-top-width": "{imported.input.root.border-top-width.outline}",
+              "box-shadow": "{imported.input.root.box-shadow.outline}"
+            },
+            "underline": {
+              "background-color": "{imported.input.root.background-color.underline}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.underline}",
+              "border-bottom-left-radius": "{imported.input.root.border-bottom-left-radius.underline}",
+              "border-bottom-right-radius": "{imported.input.root.border-bottom-right-radius.underline}",
+              "border-left-color": "{imported.input.root.border-left-color.underline}",
+              "border-left-width": "{imported.input.root.border-left-width.underline}",
+              "border-right-color": "{imported.input.root.border-right-color.underline}",
+              "border-right-width": "{imported.input.root.border-right-width.underline}",
+              "border-top-color": "{imported.input.root.border-top-color.underline}",
+              "border-top-left-radius": "{imported.input.root.border-top-left-radius.underline}",
+              "border-top-right-radius": "{imported.input.root.border-top-right-radius.underline}",
+              "border-top-width": "{imported.input.root.border-top-width.underline}",
+              "box-shadow": "{imported.input.root.box-shadow.underline}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "column-gap": "{imported.input.root.column-gap.large}",
+              "font-size": "{imported.input.root.font-size.large}",
+              "height": "{imported.input.root.height.large}",
+              "line-height": "{imported.input.root.line-height.large}",
+              "min-height": "{imported.input.root.min-height.large}",
+              "row-gap": "{imported.input.root.row-gap.large}"
+            },
+            "medium": {
+              "column-gap": "{imported.input.root.column-gap.medium}",
+              "font-size": "{imported.input.root.font-size.medium}",
+              "height": "{imported.input.root.height.medium}",
+              "line-height": "{imported.input.root.line-height.medium}",
+              "min-height": "{imported.input.root.min-height.medium}",
+              "row-gap": "{imported.input.root.row-gap.medium}"
+            },
+            "small": {
+              "column-gap": "{imported.input.root.column-gap.small}",
+              "font-size": "{imported.input.root.font-size.small}",
+              "height": "{imported.input.root.height.small}",
+              "line-height": "{imported.input.root.line-height.small}",
+              "min-height": "{imported.input.root.min-height.small}",
+              "row-gap": "{imported.input.root.row-gap.small}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "Input"
+    }
+  }
+}

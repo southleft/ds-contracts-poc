@@ -1,0 +1,226 @@
+{
+  "component": "Card",
+  "browser": "151.0.7922.34",
+  "captures": 192,
+  "combos": 48,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 475,
+  "elementsPerCapture": 6,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 28,
+    "checkbox": 36,
+    "label": 13,
+    "cardheader": 10,
+    "label-2": 7,
+    "label-3": 7
+  },
+  "folds": {
+    "count": 9,
+    "receipts": [
+      {
+        "part": "checkbox",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "checkbox",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "checkbox",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "checkbox",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "checkbox",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "checkbox",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "checkbox",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "checkbox",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "checkbox",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 130,
+    "mintedLeavesFolded": 134
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 134,
+    "baseBindings": 56,
+    "stateBindings": 70,
+    "byShape": {
+      "uniform": 97,
+      "perAxis": 23,
+      "perPair": 6,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 19,
+    "state": 12
+  },
+  "codeOnly": {
+    "base": 14,
+    "state": 0,
+    "overflowBindings": 44
+  },
+  "pseudoElementFindings": 108,
+  "anatomyPromotion": {
+    "partsCarried": 6,
+    "svgAssets": 0,
+    "refusals": 3
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 544896,
+    "cellsMatched": 543648,
+    "pct": 99.77096546863989,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "overflow-block",
+        192
+      ],
+      [
+        "overflow-inline",
+        192
+      ],
+      [
+        "overflow-x",
+        192
+      ],
+      [
+        "overflow-y",
+        192
+      ],
+      [
+        "inline-size",
+        192
+      ],
+      [
+        "width",
+        192
+      ],
+      [
+        "grid-template-columns",
+        96
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 192,
+    "measured": 192,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
+    "exact": {
+      "mean": 0.00022644927536231887,
+      "max": 0.008152173913043478,
+      "perfect": 186
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 192
+    },
+    "worst": [
+      {
+        "key": "subtle.large.vertical.disabled__default",
+        "pctExact": 0.008152173913043478,
+        "pctAA": 0
+      },
+      {
+        "key": "subtle.large.vertical.disabled__hover",
+        "pctExact": 0.008152173913043478,
+        "pctAA": 0
+      },
+      {
+        "key": "subtle.large.vertical.disabled__focus-visible",
+        "pctExact": 0.008152173913043478,
+        "pctAA": 0
+      },
+      {
+        "key": "subtle.large.vertical.disabled__active",
+        "pctExact": 0.008152173913043478,
+        "pctAA": 0
+      },
+      {
+        "key": "filled-alternative.medium.horizontal.enabled__focus-visible",
+        "pctExact": 0.005434782608695652,
+        "pctAA": 0
+      },
+      {
+        "key": "filled-alternative.medium.vertical.enabled__focus-visible",
+        "pctExact": 0.005434782608695652,
+        "pctAA": 0
+      },
+      {
+        "key": "filled.small.horizontal.enabled__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "filled.small.horizontal.enabled__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 74.83552631578948,
+    "rowsFullyEqual": 0,
+    "rows": 192,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 192
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 48
+}

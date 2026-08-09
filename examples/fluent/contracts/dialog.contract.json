@@ -1,0 +1,643 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.dialog",
+  "name": "Dialog",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: modalType=modal, open=false, inertTrapFocus=false, unmountOnClose=true. Driven open by openDriver {open:true}; portalCapture. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/fluent/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Fluent's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "modalType",
+      "type": {
+        "enum": [
+          "modal",
+          "non-modal",
+          "alert"
+        ]
+      },
+      "default": "modal",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Modal Type",
+          "values": {
+            "modal": "Modal",
+            "non-modal": "Non Modal",
+            "alert": "Alert"
+          }
+        },
+        "code": {
+          "prop": "modalType"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block"
+      },
+      "parts": {
+        "dialogbody-2": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogBody — this element exists in the real component's DOM; the static layer had no part for it.",
+          "stylesWhen": [
+            {
+              "prop": "modalType",
+              "equals": "modal",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "modalType",
+              "equals": "alert",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "parts": {
+            "label-4": {
+              "element": "h2",
+              "text": "Dialog title",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy h2|DialogTitle — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "modalType",
+                  "equals": "modal",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "modalType",
+                  "equals": "alert",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "tokens": {
+                "font-size": "{imported.shared.size-20}",
+                "font-weight": "{imported.shared.num-600}",
+                "line-height": "{imported.dialog.label-4.line-height}"
+              }
+            },
+            "dialogtitle__action": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogTitle__action — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "modalType",
+                  "equals": "modal",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "modalType",
+                  "equals": "alert",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "parts": {
+                "part-0-1-0": {
+                  "element": "button",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "inline-block",
+                    "border-bottom-style": "none",
+                    "border-left-style": "none",
+                    "border-right-style": "none",
+                    "border-top-style": "none",
+                    "box-sizing": "content-box",
+                    "cursor": "pointer",
+                    "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
+                    "position": "relative",
+                    "text-align": "left"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "modalType",
+                      "equals": "modal",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "modalType",
+                      "equals": "alert",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "icon": {
+                    "asset": "dialog-part-0-1-0",
+                    "size": 20
+                  },
+                  "tokens": {
+                    "background-color": "{imported.shared.color-00000000}",
+                    "border-bottom-width": "{imported.shared.size-0}",
+                    "border-left-width": "{imported.shared.size-0}",
+                    "border-right-width": "{imported.shared.size-0}",
+                    "border-top-width": "{imported.shared.size-0}",
+                    "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-242424}",
+                    "font-size": "{imported.shared.size-14}",
+                    "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "padding-bottom": "{imported.shared.size-0}",
+                    "padding-left": "{imported.shared.size-0}",
+                    "padding-right": "{imported.shared.size-0}",
+                    "padding-top": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}"
+                  }
+                }
+              }
+            },
+            "label-5": {
+              "text": "Dialog content copy for the Fluent round.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogContent — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "overflow-x": "auto",
+                "overflow-y": "auto"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "modalType",
+                  "equals": "modal",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "modalType",
+                  "equals": "alert",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "tokens": {
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.dialog.label-5.font-weight}",
+                "line-height": "{imported.shared.size-20}",
+                "margin-bottom": "{imported.shared.size-neg-2}",
+                "margin-left": "{imported.shared.size-neg-2}",
+                "margin-right": "{imported.shared.size-neg-2}",
+                "margin-top": "{imported.shared.size-neg-2}",
+                "min-height": "{imported.dialog.label-5.min-height}",
+                "padding-bottom": "{imported.shared.size-2}",
+                "padding-left": "{imported.shared.size-2}",
+                "padding-right": "{imported.shared.size-2}",
+                "padding-top": "{imported.shared.size-2}"
+              }
+            },
+            "dialogactions-2": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogActions — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "modalType",
+                  "equals": "modal",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "modalType",
+                  "equals": "alert",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "parts": {
+                "label-6": {
+                  "element": "button",
+                  "text": "Close",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|Button — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "grow": true,
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "modalType",
+                      "equals": "modal",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "modalType",
+                      "equals": "alert",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "transition-duration": "0.1s",
+                    "transition-property": "background, border, color",
+                    "transition-timing-function": "cubic-bezier(0.33, 0, 0.67, 1)"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.shared.color-ffffff}",
+                    "border-bottom-color": "{imported.shared.color-d1d1d1}",
+                    "border-bottom-left-radius": "{imported.shared.size-4}",
+                    "border-bottom-right-radius": "{imported.shared.size-4}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "border-left-color": "{imported.shared.color-d1d1d1}",
+                    "border-left-width": "{imported.shared.size-1}",
+                    "border-right-color": "{imported.shared.color-d1d1d1}",
+                    "border-right-width": "{imported.shared.size-1}",
+                    "border-top-color": "{imported.shared.color-d1d1d1}",
+                    "border-top-left-radius": "{imported.shared.size-4}",
+                    "border-top-right-radius": "{imported.shared.size-4}",
+                    "border-top-width": "{imported.shared.size-1}",
+                    "color": "{imported.shared.color-242424}",
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.shared.num-600}",
+                    "line-height": "{imported.shared.size-20}",
+                    "min-width": "{imported.dialog.label-6.min-width}",
+                    "padding-bottom": "{imported.shared.size-5}",
+                    "padding-left": "{imported.shared.size-12}",
+                    "padding-right": "{imported.shared.size-12}",
+                    "padding-top": "{imported.shared.size-5}"
+                  }
+                }
+              },
+              "declared": {
+                "box-sizing": "border-box"
+              },
+              "tokens": {
+                "column-gap": "{imported.shared.size-8}",
+                "row-gap": "{imported.shared.size-8}"
+              }
+            }
+          },
+          "declared": {
+            "box-sizing": "border-box"
+          },
+          "tokens": {
+            "column-gap": "{imported.shared.size-8}",
+            "max-height": "{imported.dialog.dialogbody-2.max-height}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "row-gap": "{imported.shared.size-8}"
+          }
+        },
+        "dialogsurface__backdrop": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogSurface__backdrop — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block"
+          },
+          "stylesWhen": [
+            {
+              "prop": "modalType",
+              "equals": "non-modal",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "tokens": {
+            "background-color": "{imported.dialog.dialogsurface-backdrop.background-color}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        },
+        "dialogsurface": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogSurface — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box"
+          },
+          "stylesWhen": [
+            {
+              "prop": "modalType",
+              "equals": "non-modal",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "parts": {
+            "dialogbody": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogBody — this element exists in the real component's DOM; the static layer had no part for it.",
+              "stylesWhen": [
+                {
+                  "prop": "modalType",
+                  "equals": "non-modal",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "parts": {
+                "label": {
+                  "element": "h2",
+                  "text": "Dialog title",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy h2|DialogTitle — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "modalType",
+                      "equals": "non-modal",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "tokens": {
+                    "font-size": "{imported.shared.size-20}",
+                    "font-weight": "{imported.shared.num-600}",
+                    "line-height": "{imported.dialog.label.line-height}"
+                  }
+                },
+                "label-2": {
+                  "text": "Dialog content copy for the Fluent round.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogContent — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "box-sizing": "border-box",
+                    "overflow-x": "auto",
+                    "overflow-y": "auto"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "modalType",
+                      "equals": "non-modal",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "tokens": {
+                    "font-size": "{imported.shared.size-14}",
+                    "font-weight": "{imported.dialog.label-2.font-weight}",
+                    "line-height": "{imported.shared.size-20}",
+                    "margin-bottom": "{imported.shared.size-neg-2}",
+                    "margin-left": "{imported.shared.size-neg-2}",
+                    "margin-right": "{imported.shared.size-neg-2}",
+                    "margin-top": "{imported.shared.size-neg-2}",
+                    "min-height": "{imported.dialog.label-2.min-height}",
+                    "padding-bottom": "{imported.shared.size-2}",
+                    "padding-left": "{imported.shared.size-2}",
+                    "padding-right": "{imported.shared.size-2}",
+                    "padding-top": "{imported.shared.size-2}"
+                  }
+                },
+                "dialogactions": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogActions — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "modalType",
+                      "equals": "non-modal",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "parts": {
+                    "label-3": {
+                      "element": "button",
+                      "text": "Close",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|Button — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "flex",
+                        "grow": true,
+                        "align": "center",
+                        "justify": "center"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "modalType",
+                          "equals": "non-modal",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "declared": {
+                        "border-bottom-style": "solid",
+                        "border-left-style": "solid",
+                        "border-right-style": "solid",
+                        "border-top-style": "solid",
+                        "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
+                        "overflow-x": "hidden",
+                        "overflow-y": "hidden",
+                        "transition-duration": "0.1s",
+                        "transition-property": "background, border, color",
+                        "transition-timing-function": "cubic-bezier(0.33, 0, 0.67, 1)"
+                      },
+                      "tokens": {
+                        "background-color": "{imported.shared.color-ffffff}",
+                        "border-bottom-color": "{imported.shared.color-d1d1d1}",
+                        "border-bottom-left-radius": "{imported.shared.size-4}",
+                        "border-bottom-right-radius": "{imported.shared.size-4}",
+                        "border-bottom-width": "{imported.shared.size-1}",
+                        "border-left-color": "{imported.shared.color-d1d1d1}",
+                        "border-left-width": "{imported.shared.size-1}",
+                        "border-right-color": "{imported.shared.color-d1d1d1}",
+                        "border-right-width": "{imported.shared.size-1}",
+                        "border-top-color": "{imported.shared.color-d1d1d1}",
+                        "border-top-left-radius": "{imported.shared.size-4}",
+                        "border-top-right-radius": "{imported.shared.size-4}",
+                        "border-top-width": "{imported.shared.size-1}",
+                        "color": "{imported.shared.color-242424}",
+                        "font-size": "{imported.shared.size-14}",
+                        "font-weight": "{imported.shared.num-600}",
+                        "line-height": "{imported.shared.size-20}",
+                        "min-width": "{imported.dialog.label-3.min-width}",
+                        "padding-bottom": "{imported.shared.size-5}",
+                        "padding-left": "{imported.shared.size-12}",
+                        "padding-right": "{imported.shared.size-12}",
+                        "padding-top": "{imported.shared.size-5}"
+                      }
+                    }
+                  },
+                  "declared": {
+                    "box-sizing": "border-box"
+                  },
+                  "tokens": {
+                    "column-gap": "{imported.shared.size-8}",
+                    "row-gap": "{imported.shared.size-8}"
+                  }
+                }
+              },
+              "declared": {
+                "box-sizing": "border-box"
+              },
+              "tokens": {
+                "column-gap": "{imported.shared.size-8}",
+                "max-height": "{imported.dialog.dialogbody.max-height}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "row-gap": "{imported.shared.size-8}"
+              }
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.shared.color-ffffff}",
+            "border-bottom-color": "{imported.shared.color-00000000}",
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-00000000}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-00000000}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-00000000}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "border-top-width": "{imported.shared.size-1}",
+            "box-shadow": "{imported.dialog.dialogsurface.box-shadow}",
+            "margin-bottom": "{imported.dialog.dialogsurface.margin-bottom}",
+            "margin-left": "{imported.dialog.dialogsurface.margin-left}",
+            "margin-right": "{imported.dialog.dialogsurface.margin-right}",
+            "margin-top": "{imported.dialog.dialogsurface.margin-top}",
+            "max-height": "{imported.dialog.dialogsurface.max-height}",
+            "max-width": "{imported.dialog.dialogsurface.max-width}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-bottom": "{imported.shared.size-24}",
+            "padding-left": "{imported.shared.size-24}",
+            "padding-right": "{imported.shared.size-24}",
+            "padding-top": "{imported.shared.size-24}",
+            "scale": "{imported.dialog.dialogsurface.scale}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.shared.color-ffffff}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "modalType",
+          "map": {
+            "alert": {
+              "border-bottom-color": "{imported.dialog.root.border-bottom-color.alert}",
+              "border-bottom-left-radius": "{imported.dialog.root.border-bottom-left-radius.alert}",
+              "border-bottom-right-radius": "{imported.dialog.root.border-bottom-right-radius.alert}",
+              "border-bottom-width": "{imported.dialog.root.border-bottom-width.alert}",
+              "border-left-color": "{imported.dialog.root.border-left-color.alert}",
+              "border-left-width": "{imported.dialog.root.border-left-width.alert}",
+              "border-right-color": "{imported.dialog.root.border-right-color.alert}",
+              "border-right-width": "{imported.dialog.root.border-right-width.alert}",
+              "border-top-color": "{imported.dialog.root.border-top-color.alert}",
+              "border-top-left-radius": "{imported.dialog.root.border-top-left-radius.alert}",
+              "border-top-right-radius": "{imported.dialog.root.border-top-right-radius.alert}",
+              "border-top-width": "{imported.dialog.root.border-top-width.alert}",
+              "box-shadow": "{imported.dialog.root.box-shadow.alert}",
+              "margin-bottom": "{imported.dialog.root.margin-bottom.alert}",
+              "margin-left": "{imported.dialog.root.margin-left.alert}",
+              "margin-right": "{imported.dialog.root.margin-right.alert}",
+              "margin-top": "{imported.dialog.root.margin-top.alert}",
+              "padding-bottom": "{imported.dialog.root.padding-bottom.alert}",
+              "padding-left": "{imported.dialog.root.padding-left.alert}",
+              "padding-right": "{imported.dialog.root.padding-right.alert}",
+              "padding-top": "{imported.dialog.root.padding-top.alert}"
+            },
+            "modal": {
+              "border-bottom-color": "{imported.dialog.root.border-bottom-color.modal}",
+              "border-bottom-left-radius": "{imported.dialog.root.border-bottom-left-radius.modal}",
+              "border-bottom-right-radius": "{imported.dialog.root.border-bottom-right-radius.modal}",
+              "border-bottom-width": "{imported.dialog.root.border-bottom-width.modal}",
+              "border-left-color": "{imported.dialog.root.border-left-color.modal}",
+              "border-left-width": "{imported.dialog.root.border-left-width.modal}",
+              "border-right-color": "{imported.dialog.root.border-right-color.modal}",
+              "border-right-width": "{imported.dialog.root.border-right-width.modal}",
+              "border-top-color": "{imported.dialog.root.border-top-color.modal}",
+              "border-top-left-radius": "{imported.dialog.root.border-top-left-radius.modal}",
+              "border-top-right-radius": "{imported.dialog.root.border-top-right-radius.modal}",
+              "border-top-width": "{imported.dialog.root.border-top-width.modal}",
+              "box-shadow": "{imported.dialog.root.box-shadow.modal}",
+              "margin-bottom": "{imported.dialog.root.margin-bottom.modal}",
+              "margin-left": "{imported.dialog.root.margin-left.modal}",
+              "margin-right": "{imported.dialog.root.margin-right.modal}",
+              "margin-top": "{imported.dialog.root.margin-top.modal}",
+              "padding-bottom": "{imported.dialog.root.padding-bottom.modal}",
+              "padding-left": "{imported.dialog.root.padding-left.modal}",
+              "padding-right": "{imported.dialog.root.padding-right.modal}",
+              "padding-top": "{imported.dialog.root.padding-top.modal}"
+            },
+            "non-modal": {
+              "border-bottom-color": "{imported.dialog.root.border-bottom-color.non-modal}",
+              "border-bottom-left-radius": "{imported.dialog.root.border-bottom-left-radius.non-modal}",
+              "border-bottom-right-radius": "{imported.dialog.root.border-bottom-right-radius.non-modal}",
+              "border-bottom-width": "{imported.dialog.root.border-bottom-width.non-modal}",
+              "border-left-color": "{imported.dialog.root.border-left-color.non-modal}",
+              "border-left-width": "{imported.dialog.root.border-left-width.non-modal}",
+              "border-right-color": "{imported.dialog.root.border-right-color.non-modal}",
+              "border-right-width": "{imported.dialog.root.border-right-width.non-modal}",
+              "border-top-color": "{imported.dialog.root.border-top-color.non-modal}",
+              "border-top-left-radius": "{imported.dialog.root.border-top-left-radius.non-modal}",
+              "border-top-right-radius": "{imported.dialog.root.border-top-right-radius.non-modal}",
+              "border-top-width": "{imported.dialog.root.border-top-width.non-modal}",
+              "box-shadow": "{imported.dialog.root.box-shadow.non-modal}",
+              "margin-bottom": "{imported.dialog.root.margin-bottom.non-modal}",
+              "margin-left": "{imported.dialog.root.margin-left.non-modal}",
+              "margin-right": "{imported.dialog.root.margin-right.non-modal}",
+              "margin-top": "{imported.dialog.root.margin-top.non-modal}",
+              "padding-bottom": "{imported.dialog.root.padding-bottom.non-modal}",
+              "padding-left": "{imported.dialog.root.padding-left.non-modal}",
+              "padding-right": "{imported.dialog.root.padding-right.non-modal}",
+              "padding-top": "{imported.dialog.root.padding-top.non-modal}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "Dialog"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "key": "modal__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "non-modal__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  },
+  {
+    "key": "alert__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  }
+]

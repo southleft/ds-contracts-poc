@@ -1,0 +1,1008 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Switch",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "indicator",
+      "channel": "background-color",
+      "combo": "checked.above.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "color-compound-brand-background",
+      "varName": "--colorCompoundBrandBackground",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:checked:not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "background-color",
+      "combo": "checked.above.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-background-disabled",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled:checked ~ .fui-Switch__indicator, .r12ojtgy[aria-disabled=\"true\"]:checked ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "background-color",
+      "combo": "checked.after.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "color-compound-brand-background",
+      "varName": "--colorCompoundBrandBackground",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:checked:not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "background-color",
+      "combo": "checked.after.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-background-disabled",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled:checked ~ .fui-Switch__indicator, .r12ojtgy[aria-disabled=\"true\"]:checked ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "background-color",
+      "combo": "checked.before.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "color-compound-brand-background",
+      "varName": "--colorCompoundBrandBackground",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:checked:not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "background-color",
+      "combo": "checked.before.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-background-disabled",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled:checked ~ .fui-Switch__indicator, .r12ojtgy[aria-disabled=\"true\"]:checked ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "unchecked.above.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-stroke-accessible",
+      "varName": "--colorNeutralStrokeAccessible",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:not(:checked):not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "unchecked.above.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__indicator, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "unchecked.after.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-stroke-accessible",
+      "varName": "--colorNeutralStrokeAccessible",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:not(:checked):not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "unchecked.after.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__indicator, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "unchecked.before.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-stroke-accessible",
+      "varName": "--colorNeutralStrokeAccessible",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:not(:checked):not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "unchecked.before.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__indicator, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "checked.above.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-inverted",
+      "varName": "--colorNeutralForegroundInverted",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:checked:not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "checked.above.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__indicator, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "checked.after.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-inverted",
+      "varName": "--colorNeutralForegroundInverted",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:checked:not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "checked.after.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__indicator, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "checked.before.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-inverted",
+      "varName": "--colorNeutralForegroundInverted",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:checked:not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "indicator",
+      "channel": "color",
+      "combo": "checked.before.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__indicator, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__indicator"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "unchecked.above.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:not(:checked):not([aria-disabled=\"true\"]) ~ .fui-Switch__label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "unchecked.above.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__label, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "unchecked.after.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:not(:checked):not([aria-disabled=\"true\"]) ~ .fui-Switch__label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "unchecked.after.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__label, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "unchecked.before.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".r12ojtgy:enabled:not(:checked):not([aria-disabled=\"true\"]) ~ .fui-Switch__label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "unchecked.before.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__label, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "checked.above.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "checked.above.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__label, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "checked.after.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "checked.after.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__label, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "checked.before.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground1",
+      "varName": "--colorNeutralForeground1",
+      "anchor": {
+        "selector": ".f19n0e5"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "checked.before.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "color-neutral-foreground-disabled",
+      "varName": "--colorNeutralForegroundDisabled",
+      "anchor": {
+        "selector": ".r12ojtgy:disabled ~ .fui-Switch__label, .r12ojtgy[aria-disabled=\"true\"] ~ .fui-Switch__label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "unchecked.above.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "unchecked.above.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "unchecked.after.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "unchecked.after.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "unchecked.before.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "unchecked.before.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "checked.above.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "checked.above.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "checked.after.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "checked.after.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "checked.before.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "checked.before.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "font-size-base300",
+      "varName": "--fontSizeBase300",
+      "anchor": {
+        "selector": ".fkhj508"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "unchecked.above.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "unchecked.above.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "unchecked.after.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "unchecked.after.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "unchecked.before.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "unchecked.before.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "checked.above.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "checked.above.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "checked.after.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "checked.after.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "checked.before.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "checked.before.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "line-height-base300",
+      "varName": "--lineHeightBase300",
+      "anchor": {
+        "selector": ".f1i3iumi"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-bottom",
+      "combo": "unchecked.above.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "spacing-vertical-xs",
+      "varName": "--spacingVerticalXS",
+      "anchor": {
+        "selector": ".f14wxoun"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-bottom",
+      "combo": "unchecked.above.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "spacing-vertical-xs",
+      "varName": "--spacingVerticalXS",
+      "anchor": {
+        "selector": ".f14wxoun"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-bottom",
+      "combo": "checked.above.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "spacing-vertical-xs",
+      "varName": "--spacingVerticalXS",
+      "anchor": {
+        "selector": ".f14wxoun"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-bottom",
+      "combo": "checked.above.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "spacing-vertical-xs",
+      "varName": "--spacingVerticalXS",
+      "anchor": {
+        "selector": ".f14wxoun"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-left",
+      "combo": "unchecked.after.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "token": "spacing-horizontal-xs",
+      "varName": "--spacingHorizontalXS",
+      "anchor": {
+        "selector": ".fruq291"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-left",
+      "combo": "unchecked.after.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "token": "spacing-horizontal-xs",
+      "varName": "--spacingHorizontalXS",
+      "anchor": {
+        "selector": ".fruq291"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-left",
+      "combo": "checked.after.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "spacing-horizontal-xs",
+      "varName": "--spacingHorizontalXS",
+      "anchor": {
+        "selector": ".fruq291"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-left",
+      "combo": "checked.after.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "token": "spacing-horizontal-xs",
+      "varName": "--spacingHorizontalXS",
+      "anchor": {
+        "selector": ".fruq291"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-right",
+      "combo": "unchecked.before.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "token": "spacing-horizontal-xs",
+      "varName": "--spacingHorizontalXS",
+      "anchor": {
+        "selector": ".f7x41pl"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-right",
+      "combo": "unchecked.before.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "token": "spacing-horizontal-xs",
+      "varName": "--spacingHorizontalXS",
+      "anchor": {
+        "selector": ".f7x41pl"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-right",
+      "combo": "checked.before.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "spacing-horizontal-xs",
+      "varName": "--spacingHorizontalXS",
+      "anchor": {
+        "selector": ".f7x41pl"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-right",
+      "combo": "checked.before.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "before"
+      },
+      "token": "spacing-horizontal-xs",
+      "varName": "--spacingHorizontalXS",
+      "anchor": {
+        "selector": ".f7x41pl"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-top",
+      "combo": "unchecked.above.enabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "spacing-vertical-xs",
+      "varName": "--spacingVerticalXS",
+      "anchor": {
+        "selector": ".f1ywm7hm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-top",
+      "combo": "unchecked.above.disabled",
+      "axisValues": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "token": "spacing-vertical-xs",
+      "varName": "--spacingVerticalXS",
+      "anchor": {
+        "selector": ".f1ywm7hm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-top",
+      "combo": "checked.above.enabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "spacing-vertical-xs",
+      "varName": "--spacingVerticalXS",
+      "anchor": {
+        "selector": ".f1ywm7hm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-top",
+      "combo": "checked.above.disabled",
+      "axisValues": {
+        "checked": "checked",
+        "labelPosition": "above"
+      },
+      "token": "spacing-vertical-xs",
+      "varName": "--spacingVerticalXS",
+      "anchor": {
+        "selector": ".f1ywm7hm"
+      }
+    }
+  ],
+  "skips": [
+    "icon.transition-duration: candidate --durationNormal → \"duration-normal\" = 200ms names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "icon.transition-timing-function: candidate --curveEasyEase → \"curve-easy-ease\" = cubic-bezier(0.33,0,0.67,1) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "indicator.transition-duration: candidate --durationNormal → \"duration-normal\" = 200ms names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "indicator.transition-timing-function: candidate --curveEasyEase → \"curve-easy-ease\" = cubic-bezier(0.33,0,0.67,1) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "input.height: source declares `calc(20px + var(--spacingVerticalS))` — a calc() over var(--spacingVerticalS). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "input.width: source declares `calc(40px + 2 * var(--spacingHorizontalS))` — a calc() over var(--spacingHorizontalS). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "label.font-family: candidate --fontFamilyBase → \"font-family-base\" = 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.margin-bottom: source declares `calc((20px - var(--lineHeightBase300)) / 2)` — a calc() over var(--lineHeightBase300). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "label.margin-top: source declares `calc((20px - var(--lineHeightBase300)) / 2)` — a calc() over var(--lineHeightBase300). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 3,
+  "shorthandSkips": [
+    "indicator.border-color: SHORTHAND carrying var(--colorNeutralStrokeDisabled) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "indicator.border-radius: SHORTHAND carrying var(--borderRadiusCircular) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "label.padding: SHORTHAND carrying var(--spacingHorizontalS, --spacingVerticalS) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 4,
+  "calcCeiling": 4,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

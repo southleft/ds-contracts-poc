@@ -1180,6 +1180,31 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
   "z-index": annotated(
     "paint order on canvas is CHILD ORDER — a z-index a part carries independently of its DOM order has no field.",
   ),
+  // FLUENT 2 ROUND — the third INDEPENDENT TRANSFORM longhand (CSS Transforms
+  // Level 2: `translate`, `rotate`, `scale`). The repo already knew two of
+  // them: `translate` folds into absolute placement through the synthetic
+  // translate-x/translate-y channels above, and `rotate` rides the `transform`
+  // grammar's rotate(<n>deg) branch for icon orientation. `scale` had no entry
+  // at all, so a library that sets it quarantined the whole component.
+  //
+  // Fluent's DialogSurface settles its open animation at an explicit
+  // `scale: 1`. That is a REAL declaration, not a reader artifact — the CSS
+  // initial for `scale` is `none`, so the fusion is right to read `1` as a
+  // styled fact rather than an unset default, and right to refuse to guess
+  // what a canvas should do with it.
+  //
+  // ANNOTATE, not draw, and the distinction is the point: a Figma node's size
+  // IS its box. There is no field that renders a node at a visual size other
+  // than its own, so a scale factor cannot be lowered without silently
+  // rewriting the box it applies to — which would make the canvas disagree
+  // with the contract about how big the component is. Registered so the value
+  // is CARRIED and NAMED by channelMiss (declared-not-drawn) instead of
+  // quarantining the component or being dropped. `scale: 1` is the identity,
+  // so nothing is lost on canvas today; a library that ships a non-identity
+  // scale gets a named miss rather than a wrong box.
+  scale: annotated(
+    "Figma has no scale transform — a node's size IS its box, so a scale factor cannot be lowered without silently rewriting the box; the third independent-transform longhand alongside translate (folded to absolute placement) and rotate (carried by the transform grammar).",
+  ),
   "row-rule-color": annotated(
     "a Chromium GAP-DECORATION longhand (CSS gap decorations) that the computed sweep enumerates for every element — nobody authored it, and neither surface paints it. Registered so it is CARRIED and NAMED rather than silently believed.",
   ),

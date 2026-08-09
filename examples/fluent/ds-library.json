@@ -1,0 +1,49 @@
+{
+  "__note": "LIBRARY MANIFEST — the per-library half of the whole code→canvas pipeline (docs/21). `ds-contracts promote --config <this>` runs the promote stage; `ds-contracts onboard --adopt examples/fluent` runs capture → promote → emit → bundle → publish from it. packages/cli/src/promote.ts is the shared engine-free pipeline; nothing here is library-specific code. Fluent 2 is NPM-PINNED SOURCE, not shadcn's copy-in vendoring: the harness examples/fluent/.fluent-sandbox mounts @fluentui/react-components@9.74.5 (with @fluentui/react-icons@2.0.335 on React 19.2.4) and the pin is that sandbox's package.json plus examples/fluent/sandbox.package-lock.json. Griffel is CSS-in-JS and ships NO stylesheet — every rule is injected at runtime, and all 459 theme custom properties are declared on the FluentProvider WRAPPER DIV rather than on :root (RECON §2.3), which is why the capture config carries a mount wrapper instead of a stylesheet import.",
+  "library": "fluent",
+  "exampleDir": "examples/fluent",
+  "captureOut": "extract/computed/out/fluent",
+  "dtcg": "examples/fluent/tokens/fluent.dtcg.json",
+  "mintedOut": "examples/fluent/tokens/fluent-minted.dtcg.json",
+  "mintedDoc": "examples/fluent/tokens/MINTED.md",
+  "__note:components": "FLUENT 2 round 1 — ELEVEN of the twelve components of RECON §7's honest slice ship. MESSAGEBAR IS STOPPED AT EMIT: its capture and contract are green (97.015% computed equality, the round's second-best floor) but its CANVAS SCRIPT cannot build — MessageBar is the corpus's first grid-rooted component and the grid placement sequencer refuses with grid-placement-cycle-no-spare. Full diagnosis in extract/computed/configs/fluent.json __stopped-components and examples/fluent/PROVENANCE.md. RECON H1's predicted Dialog MULTI-ROOT-CAPTURE refusal was witnessed exactly (3 portaled + 1 in-stage) and IS closed, by engine change E1 plus registering `scale` in TOKEN_CHANNELS. Capture dirs are extract/computed/out/fluent/<config component name lowercased, no separator inserted>.",
+  "components": [
+    "avatar",
+    "badge",
+    "button",
+    "card",
+    "checkbox",
+    "dialog",
+    "input",
+    "spinner",
+    "switch",
+    "tablist",
+    "tooltip"
+  ],
+  "__note:contractStem": "Two of the twelve capture out-dir names lose a word boundary that the seed filenames keep — the config names MessageBar and TabList, so the dirs are `messagebar`/`tablist` while examples/fluent/contracts-seed holds message-bar.contract.json / tab-list.contract.json. contractStem maps out-dir name → contract filename stem (promote.ts:533, used at :668 and :777/:781), which is exactly what examples/mui (circularprogress → circular-progress, …) and examples/polaris (radiobutton → radio-button, …) use it for. shadcn's map is empty only because none of its out-dir names are multi-word.",
+  "contractStem": {
+    "messagebar": "message-bar",
+    "tablist": "tab-list"
+  },
+  "contractVersion": "0.2.0",
+  "promoterPath": "examples/fluent/scripts/promote-floor.mjs",
+  "possessive": "Fluent's",
+  "mintedDocTitle": "Fluent 2 minted tokens",
+  "capture": {
+    "config": "extract/computed/configs/fluent.json",
+    "harness": "examples/fluent/.fluent-sandbox"
+  },
+  "seeds": "examples/fluent/contracts-seed",
+  "emit": {
+    "out": "examples/fluent/figma",
+    "icons": "examples/fluent/assets/icons"
+  },
+  "bundle": {
+    "out": "examples/fluent/figma/fluent.bundle.json",
+    "name": "Fluent",
+    "modes": [
+      "examples/fluent/tokens/modes/fluent.light.dtcg.json",
+      "examples/fluent/tokens/modes/fluent.dark.dtcg.json"
+    ]
+  }
+}

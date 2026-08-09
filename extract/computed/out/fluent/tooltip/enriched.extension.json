@@ -1,0 +1,487 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@fluentui/react-components@9.74.5",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "tooltip": {
+        "root": {
+          "background-color": {
+            "normal": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "inverted": {
+              "$value": "#333333",
+              "$type": "color"
+            }
+          },
+          "bottom": {
+            "$value": "-28px",
+            "$type": "dimension"
+          },
+          "color": {
+            "normal": {
+              "$value": "#242424",
+              "$type": "color"
+            },
+            "inverted": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "height": {
+            "$value": "28px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "max-width": {
+            "$value": "240px",
+            "$type": "dimension"
+          },
+          "padding-bottom": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "11px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "11px",
+            "$type": "dimension"
+          },
+          "translate-x": {
+            "off": {
+              "$value": "116px",
+              "$type": "dimension"
+            },
+            "on": {
+              "$value": "122px",
+              "$type": "dimension"
+            }
+          },
+          "translate-y": {
+            "$value": "18px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "212.141px",
+            "$type": "dimension"
+          }
+        },
+        "part-0": {
+          "background-color": {
+            "normal": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "inverted": {
+              "$value": "#333333",
+              "$type": "color"
+            }
+          },
+          "border-bottom-left-radius": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "bottom": {
+            "$value": "8.76562px",
+            "$type": "dimension"
+          },
+          "color": {
+            "normal": {
+              "$value": "#242424",
+              "$type": "color"
+            },
+            "inverted": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "height": {
+            "$value": "8.46875px",
+            "$type": "dimension"
+          },
+          "left": {
+            "$value": "-4.242px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "205.906px",
+            "$type": "dimension"
+          },
+          "top": {
+            "$value": "8.76562px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "8.46875px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "color-00000000": {
+          "$value": "#00000000",
+          "$type": "color"
+        },
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "part-0",
+        "channel": "background-clip",
+        "value": "content-box"
+      },
+      {
+        "part": "part-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-0",
+        "channel": "cursor",
+        "value": "default"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "filter",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "drop-shadow(rgba(0, 0, 0, 0.12) 0px 0px 2px) drop-shadow(rgba(0, 0, 0, 0.14) 0px 4px 8px)",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "transform",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "matrix(1, 0, 0, 1, 116, 18)",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "transform",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "z-index",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "-1",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "root",
+      "channel": "translate-x",
+      "ref": "{imported.tooltip.root.translate-x.{withArrow}}",
+      "refusal": "presence-prop-driven styling (withArrow) — boolean tokensByProp has no spelling (round 4 residue)"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "normal.on",
+        "interaction": "default",
+        "part": "part-0",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "inverted.on",
+        "interaction": "default",
+        "part": "part-0",
+        "pseudo": "::before",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 2
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [
+    "union-part-added: normal.on__default @0 (div|)",
+    "portal-inert-roots-dropped: normal.off — 1 new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: <span> in-stage",
+    "portal-anchor-receipt: normal.off — 1 in-stage root(s) (the mount's anchor child) NOT carried; the portaled overlay is the captured root",
+    "portal-wrapper-unwrapped: normal.off — 1 pass-through portal WRAPPER element(s) between document.body and the overlay were unwrapped BEFORE the single-root policy ran; the captured root is the wrapper's one element child (div|fui-Tooltip__content). Decided by MEASUREMENT, never by attribute name: <div [class dir data-portal-node]> position:absolute; display:block; 1100×0; 2 element child (1 inert focus-manager sentinel(s) excluded from the one-child test); draws no box",
+    "portal-inert-roots-dropped: normal.on — 1 new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: <span> in-stage",
+    "portal-anchor-receipt: normal.on — 1 in-stage root(s) (the mount's anchor child) NOT carried; the portaled overlay is the captured root",
+    "portal-wrapper-unwrapped: normal.on — 1 pass-through portal WRAPPER element(s) between document.body and the overlay were unwrapped BEFORE the single-root policy ran; the captured root is the wrapper's one element child (div|fui-Tooltip__content). Decided by MEASUREMENT, never by attribute name: <div [class dir data-portal-node]> position:absolute; display:block; 1100×0; 2 element child (1 inert focus-manager sentinel(s) excluded from the one-child test); draws no box",
+    "portal-inert-roots-dropped: inverted.off — 1 new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: <span> in-stage",
+    "portal-anchor-receipt: inverted.off — 1 in-stage root(s) (the mount's anchor child) NOT carried; the portaled overlay is the captured root",
+    "portal-wrapper-unwrapped: inverted.off — 1 pass-through portal WRAPPER element(s) between document.body and the overlay were unwrapped BEFORE the single-root policy ran; the captured root is the wrapper's one element child (div|fui-Tooltip__content). Decided by MEASUREMENT, never by attribute name: <div [class dir data-portal-node]> position:absolute; display:block; 1100×0; 2 element child (1 inert focus-manager sentinel(s) excluded from the one-child test); draws no box",
+    "portal-inert-roots-dropped: inverted.on — 1 new document-level root(s) draw no box, carry no library class and contain nothing (focus-manager sentinels appended to the document rather than to the portal node); dropped BEFORE the single-root policy, which would otherwise have refused MULTI-ROOT-CAPTURE over DOM that paints no ink: <span> in-stage",
+    "portal-anchor-receipt: inverted.on — 1 in-stage root(s) (the mount's anchor child) NOT carried; the portaled overlay is the captured root",
+    "portal-wrapper-unwrapped: inverted.on — 1 pass-through portal WRAPPER element(s) between document.body and the overlay were unwrapped BEFORE the single-root policy ran; the captured root is the wrapper's one element child (div|fui-Tooltip__content). Decided by MEASUREMENT, never by attribute name: <div [class dir data-portal-node]> position:absolute; display:block; 1100×0; 2 element child (1 inert focus-manager sentinel(s) excluded from the one-child test); draws no box"
+  ],
+  "styledChannelReceipts": [
+    "viewport-derived-geometry-refused: root (position:absolute) — left, right NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 0px + box 212.141px + right 887.859px = 1100px = browser.viewport.width (1100px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
+    "viewport-anchored-translate-carried: root — translate-x/116px translate-y/18px is a POSITIONING offset written by the library's own positioner (floating-ui/popper) against where the anchor happened to sit in the capture stage. It is harness-coupled by the same argument as the refused insets, but no arithmetic in one capture proves it, so it is CARRIED and named here rather than refused on a hunch.",
+    "absolute-geometry-admitted: root — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion) — EXCEPT left, right, which this part's box took from the capture WINDOW (see viewport-derived-geometry-refused: root)",
+    "absolute-geometry-admitted: part-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "translate-door-generalized: root — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "text-part-typography-carried: root — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "translate-door-refused: part-0 — non-translate transform (matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)); the synthetic translate-x/y channels are NOT admitted for this part (the bounded grammar carries identity-translate transforms and the independent translate longhand, one spelling at a time) — named refusal, pseudo-decor v2 round",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (part-0, root); -webkit-text-stroke-color (part-0, root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-only: part-0.caret-color equals ancestor \"root\" on all 2 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.color equals ancestor \"root\" on all 2 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.font-size equals ancestor \"root\" on all 2 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-0.line-height equals ancestor \"root\" on all 2 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "read-boundary-not-read-on-portal-path: Tooltip sweeps through capturePortalRoots (two-phase baseline diff), which normalizes each root inside its own reader and never runs readBoundaryReceipts — so the text-fill fold and the closed-shadow-root signature are NOT MEASURED for this component. Zero lines above means UNREAD, not \"none found\"; a named residual of the molecule round, surfaced by the scope-independence fix (before it, this component displayed its SIBLINGS' folds and looked read).",
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::before (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "presence-prop-added: withArrow (boolean, default false; library prop withArrow)",
+      "presence-carried: part-0 (2/4 combos) → visibleWhen withArrow",
+      "root-literal-text-carried: root direct text \"Tooltip copy for the Fluent ro\" matches no prop sample — carried verbatim (named)"
+    ],
+    "refusals": [
+      "pseudo-decor-outside-grammar: part-0::before paints at position:static (8.46875x8.46875, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas"
+    ]
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.background-clip = content-box (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "sizing evidence carried: root.hugsBelowMaxWidth = true (MEASURED — the used width stayed strictly below the max-width cap in every enumerated combo, so the max-width is a CEILING the box hugs beneath, not a design width)"
+  ]
+}

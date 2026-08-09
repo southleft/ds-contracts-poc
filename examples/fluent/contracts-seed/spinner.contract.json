@@ -1,0 +1,112 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.spinner",
+  "name": "Spinner",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: size=medium, appearance=primary, labelPosition=after, delay=0 (pinned). RECON H8: fui-Spinner__spinner runs `animation: rb7n1on 1.5s infinite` and its transform was MEASURED moving between two reads 300ms apart — the steady-state probe can never settle it.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "extra-tiny",
+          "tiny",
+          "extra-small",
+          "small",
+          "medium",
+          "large",
+          "extra-large",
+          "huge"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "extra-tiny": "Extra Tiny",
+            "tiny": "Tiny",
+            "extra-small": "Extra Small",
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large",
+            "extra-large": "Extra Large",
+            "huge": "Huge"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "appearance",
+      "type": {
+        "enum": [
+          "primary",
+          "inverted"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Appearance",
+          "values": {
+            "primary": "Primary",
+            "inverted": "Inverted"
+          }
+        },
+        "code": {
+          "prop": "appearance"
+        }
+      }
+    },
+    {
+      "name": "labelPosition",
+      "type": {
+        "enum": [
+          "above",
+          "below",
+          "before",
+          "after"
+        ]
+      },
+      "default": "after",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Label Position",
+          "values": {
+            "above": "Above",
+            "below": "Below",
+            "before": "Before",
+            "after": "After"
+          }
+        },
+        "code": {
+          "prop": "labelPosition"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "Spinner"
+    }
+  }
+}

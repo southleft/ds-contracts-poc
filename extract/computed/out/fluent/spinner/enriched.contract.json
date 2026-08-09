@@ -1,0 +1,338 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.spinner",
+  "name": "Spinner",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: size=medium, appearance=primary, labelPosition=after, delay=0 (pinned). RECON H8: fui-Spinner__spinner runs `animation: rb7n1on 1.5s infinite` and its transform was MEASURED moving between two reads 300ms apart — the steady-state probe can never settle it. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "extra-tiny",
+          "tiny",
+          "extra-small",
+          "small",
+          "medium",
+          "large",
+          "extra-large",
+          "huge"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "extra-tiny": "Extra Tiny",
+            "tiny": "Tiny",
+            "extra-small": "Extra Small",
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large",
+            "extra-large": "Extra Large",
+            "huge": "Huge"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "appearance",
+      "type": {
+        "enum": [
+          "primary",
+          "inverted"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Appearance",
+          "values": {
+            "primary": "Primary",
+            "inverted": "Inverted"
+          }
+        },
+        "code": {
+          "prop": "appearance"
+        }
+      }
+    },
+    {
+      "name": "labelPosition",
+      "type": {
+        "enum": [
+          "above",
+          "below",
+          "before",
+          "after"
+        ]
+      },
+      "default": "after",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Label Position",
+          "values": {
+            "above": "Above",
+            "below": "Below",
+            "before": "Before",
+            "after": "After"
+          }
+        },
+        "code": {
+          "prop": "labelPosition"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "spinner": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Spinner__spinner — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "aspect-ratio": "1 / 1",
+            "position": "relative",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          },
+          "parts": {
+            "spinnertail": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|Spinner__spinnerTail — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute",
+                "aspect-ratio": "1 / 1"
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "left": "{imported.shared.size-0}",
+                "line-height": "{imported.shared.size-0}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "appearance",
+                  "map": {
+                    "inverted": {
+                      "color": "{imported.spinner.spinnertail.color.inverted}"
+                    },
+                    "primary": {
+                      "color": "{imported.spinner.spinnertail.color.primary}"
+                    }
+                  }
+                },
+                {
+                  "prop": "size",
+                  "map": {
+                    "extra-large": {
+                      "height": "{imported.spinner.spinnertail.height.extra-large}",
+                      "width": "{imported.spinner.spinnertail.width.extra-large}"
+                    },
+                    "extra-small": {
+                      "height": "{imported.spinner.spinnertail.height.extra-small}",
+                      "width": "{imported.spinner.spinnertail.width.extra-small}"
+                    },
+                    "extra-tiny": {
+                      "height": "{imported.spinner.spinnertail.height.extra-tiny}",
+                      "width": "{imported.spinner.spinnertail.width.extra-tiny}"
+                    },
+                    "huge": {
+                      "height": "{imported.spinner.spinnertail.height.huge}",
+                      "width": "{imported.spinner.spinnertail.width.huge}"
+                    },
+                    "large": {
+                      "height": "{imported.spinner.spinnertail.height.large}",
+                      "width": "{imported.spinner.spinnertail.width.large}"
+                    },
+                    "medium": {
+                      "height": "{imported.spinner.spinnertail.height.medium}",
+                      "width": "{imported.spinner.spinnertail.width.medium}"
+                    },
+                    "small": {
+                      "height": "{imported.spinner.spinnertail.height.small}",
+                      "width": "{imported.spinner.spinnertail.width.small}"
+                    },
+                    "tiny": {
+                      "height": "{imported.spinner.spinnertail.height.tiny}",
+                      "width": "{imported.spinner.spinnertail.width.tiny}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "flex-shrink": "{imported.spinner.spinner.flex-shrink}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "appearance",
+              "map": {
+                "inverted": {
+                  "background-color": "{imported.spinner.spinner.background-color.inverted}",
+                  "color": "{imported.spinner.spinner.color.inverted}"
+                },
+                "primary": {
+                  "background-color": "{imported.spinner.spinner.background-color.primary}",
+                  "color": "{imported.spinner.spinner.color.primary}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "extra-large": {
+                  "height": "{imported.spinner.spinner.height.extra-large}",
+                  "width": "{imported.spinner.spinner.width.extra-large}"
+                },
+                "extra-small": {
+                  "height": "{imported.spinner.spinner.height.extra-small}",
+                  "width": "{imported.spinner.spinner.width.extra-small}"
+                },
+                "extra-tiny": {
+                  "height": "{imported.spinner.spinner.height.extra-tiny}",
+                  "width": "{imported.spinner.spinner.width.extra-tiny}"
+                },
+                "huge": {
+                  "height": "{imported.spinner.spinner.height.huge}",
+                  "width": "{imported.spinner.spinner.width.huge}"
+                },
+                "large": {
+                  "height": "{imported.spinner.spinner.height.large}",
+                  "width": "{imported.spinner.spinner.width.large}"
+                },
+                "medium": {
+                  "height": "{imported.spinner.spinner.height.medium}",
+                  "width": "{imported.spinner.spinner.width.medium}"
+                },
+                "small": {
+                  "height": "{imported.spinner.spinner.height.small}",
+                  "width": "{imported.spinner.spinner.width.small}"
+                },
+                "tiny": {
+                  "height": "{imported.spinner.spinner.height.tiny}",
+                  "width": "{imported.spinner.spinner.width.tiny}"
+                }
+              }
+            }
+          ]
+        },
+        "label": {
+          "element": "label",
+          "text": "Loading",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|Label.Spinner__label — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "default"
+          },
+          "tokensByProp": [
+            {
+              "prop": "appearance",
+              "map": {
+                "inverted": {
+                  "color": "{imported.spinner.label.color.inverted}"
+                },
+                "primary": {
+                  "color": "{imported.spinner.label.color.primary}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "extra-large": {
+                  "font-size": "{imported.spinner.label.font-size.extra-large}",
+                  "font-weight": "{imported.spinner.label.font-weight.extra-large}",
+                  "line-height": "{imported.spinner.label.line-height.extra-large}"
+                },
+                "extra-small": {
+                  "font-size": "{imported.spinner.label.font-size.extra-small}",
+                  "font-weight": "{imported.spinner.label.font-weight.extra-small}",
+                  "line-height": "{imported.spinner.label.line-height.extra-small}"
+                },
+                "extra-tiny": {
+                  "font-size": "{imported.spinner.label.font-size.extra-tiny}",
+                  "font-weight": "{imported.spinner.label.font-weight.extra-tiny}",
+                  "line-height": "{imported.spinner.label.line-height.extra-tiny}"
+                },
+                "huge": {
+                  "font-size": "{imported.spinner.label.font-size.huge}",
+                  "font-weight": "{imported.spinner.label.font-weight.huge}",
+                  "line-height": "{imported.spinner.label.line-height.huge}"
+                },
+                "large": {
+                  "font-size": "{imported.spinner.label.font-size.large}",
+                  "font-weight": "{imported.spinner.label.font-weight.large}",
+                  "line-height": "{imported.spinner.label.line-height.large}"
+                },
+                "medium": {
+                  "font-size": "{imported.spinner.label.font-size.medium}",
+                  "font-weight": "{imported.spinner.label.font-weight.medium}",
+                  "line-height": "{imported.spinner.label.line-height.medium}"
+                },
+                "small": {
+                  "font-size": "{imported.spinner.label.font-size.small}",
+                  "font-weight": "{imported.spinner.label.font-weight.small}",
+                  "line-height": "{imported.spinner.label.line-height.small}"
+                },
+                "tiny": {
+                  "font-size": "{imported.spinner.label.font-size.tiny}",
+                  "font-weight": "{imported.spinner.label.font-weight.tiny}",
+                  "line-height": "{imported.spinner.label.line-height.tiny}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "overflow-x": "hidden",
+        "overflow-y": "hidden"
+      },
+      "tokens": {
+        "column-gap": "{imported.spinner.root.column-gap}",
+        "height": "{imported.spinner.root.height.{size}.{labelPosition}}",
+        "line-height": "{imported.shared.size-0}",
+        "row-gap": "{imported.spinner.root.row-gap}",
+        "width": "{imported.spinner.root.width.{size}.{labelPosition}}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "Spinner"
+    }
+  }
+}

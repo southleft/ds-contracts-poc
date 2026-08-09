@@ -1,0 +1,722 @@
+[
+  {
+    "key": "outline.small.enabled__default",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "outline.small.enabled__hover",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "outline.small.enabled__focus-visible",
+    "pctExact": 0.44907407407407407,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "outline.small.enabled__active",
+    "pctExact": 0.44907407407407407,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "outline.small.disabled__default",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "outline.small.disabled__hover",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "outline.small.disabled__focus-visible",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "outline.small.disabled__active",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "outline.medium.enabled__default",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "outline.medium.enabled__hover",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "outline.medium.enabled__focus-visible",
+    "pctExact": 0.5185185185185185,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "outline.medium.enabled__active",
+    "pctExact": 0.5185185185185185,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "outline.medium.disabled__default",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "outline.medium.disabled__hover",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "outline.medium.disabled__focus-visible",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "outline.medium.disabled__active",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "outline.large.enabled__default",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "outline.large.enabled__hover",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "outline.large.enabled__focus-visible",
+    "pctExact": 0.6875,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "outline.large.enabled__active",
+    "pctExact": 0.6875,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "outline.large.disabled__default",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "outline.large.disabled__hover",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "outline.large.disabled__focus-visible",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "outline.large.disabled__active",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "underline.small.enabled__default",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "underline.small.enabled__hover",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "underline.small.enabled__focus-visible",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "underline.small.enabled__active",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "underline.small.disabled__default",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "underline.small.disabled__hover",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "underline.small.disabled__focus-visible",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "underline.small.disabled__active",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "underline.medium.enabled__default",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "underline.medium.enabled__hover",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "underline.medium.enabled__focus-visible",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "underline.medium.enabled__active",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "underline.medium.disabled__default",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "underline.medium.disabled__hover",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "underline.medium.disabled__focus-visible",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "underline.medium.disabled__active",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "underline.large.enabled__default",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "underline.large.enabled__hover",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "underline.large.enabled__focus-visible",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "underline.large.enabled__active",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "underline.large.disabled__default",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "underline.large.disabled__hover",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "underline.large.disabled__focus-visible",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "underline.large.disabled__active",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-darker.small.enabled__default",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-darker.small.enabled__hover",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-darker.small.enabled__focus-visible",
+    "pctExact": 0.4537037037037037,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-darker.small.enabled__active",
+    "pctExact": 0.4537037037037037,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-darker.small.disabled__default",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-darker.small.disabled__hover",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-darker.small.disabled__focus-visible",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-darker.small.disabled__active",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-darker.medium.enabled__default",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-darker.medium.enabled__hover",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-darker.medium.enabled__focus-visible",
+    "pctExact": 0.5231481481481481,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-darker.medium.enabled__active",
+    "pctExact": 0.5231481481481481,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-darker.medium.disabled__default",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-darker.medium.disabled__hover",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-darker.medium.disabled__focus-visible",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-darker.medium.disabled__active",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-darker.large.enabled__default",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-darker.large.enabled__hover",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-darker.large.enabled__focus-visible",
+    "pctExact": 0.6921296296296297,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-darker.large.enabled__active",
+    "pctExact": 0.6921296296296297,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-darker.large.disabled__default",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-darker.large.disabled__hover",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-darker.large.disabled__focus-visible",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-darker.large.disabled__active",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-lighter.small.enabled__default",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-lighter.small.enabled__hover",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-lighter.small.enabled__focus-visible",
+    "pctExact": 0.4444444444444444,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-lighter.small.enabled__active",
+    "pctExact": 0.4537037037037037,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-lighter.small.disabled__default",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-lighter.small.disabled__hover",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-lighter.small.disabled__focus-visible",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-lighter.small.disabled__active",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-lighter.medium.enabled__default",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-lighter.medium.enabled__hover",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-lighter.medium.enabled__focus-visible",
+    "pctExact": 0.5138888888888888,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-lighter.medium.enabled__active",
+    "pctExact": 0.5231481481481481,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-lighter.medium.disabled__default",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-lighter.medium.disabled__hover",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-lighter.medium.disabled__focus-visible",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-lighter.medium.disabled__active",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-lighter.large.enabled__default",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-lighter.large.enabled__hover",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-lighter.large.enabled__focus-visible",
+    "pctExact": 0.6828703703703703,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-lighter.large.enabled__active",
+    "pctExact": 0.6921296296296297,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-lighter.large.disabled__default",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-lighter.large.disabled__hover",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-lighter.large.disabled__focus-visible",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-lighter.large.disabled__active",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-darker-shadow.small.enabled__default",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-darker-shadow.small.enabled__hover",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-darker-shadow.small.enabled__focus-visible",
+    "pctExact": 0.4398148148148148,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-darker-shadow.small.enabled__active",
+    "pctExact": 0.4398148148148148,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-darker-shadow.small.disabled__default",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-darker-shadow.small.disabled__hover",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-darker-shadow.small.disabled__focus-visible",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-darker-shadow.small.disabled__active",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-darker-shadow.medium.enabled__default",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-darker-shadow.medium.enabled__hover",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-darker-shadow.medium.enabled__focus-visible",
+    "pctExact": 0.5092592592592593,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-darker-shadow.medium.enabled__active",
+    "pctExact": 0.5092592592592593,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-darker-shadow.medium.disabled__default",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-darker-shadow.medium.disabled__hover",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-darker-shadow.medium.disabled__focus-visible",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-darker-shadow.medium.disabled__active",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-darker-shadow.large.enabled__default",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-darker-shadow.large.enabled__hover",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-darker-shadow.large.enabled__focus-visible",
+    "pctExact": 0.6782407407407407,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-darker-shadow.large.enabled__active",
+    "pctExact": 0.6782407407407407,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-darker-shadow.large.disabled__default",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-darker-shadow.large.disabled__hover",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-darker-shadow.large.disabled__focus-visible",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-darker-shadow.large.disabled__active",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-lighter-shadow.small.enabled__default",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-lighter-shadow.small.enabled__hover",
+    "pctExact": 0.4305555555555556,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-lighter-shadow.small.enabled__focus-visible",
+    "pctExact": 0.44907407407407407,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-lighter-shadow.small.enabled__active",
+    "pctExact": 0.44907407407407407,
+    "pctAA": 0.17592592592592593
+  },
+  {
+    "key": "filled-lighter-shadow.small.disabled__default",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-lighter-shadow.small.disabled__hover",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-lighter-shadow.small.disabled__focus-visible",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-lighter-shadow.small.disabled__active",
+    "pctExact": 0.42592592592592593,
+    "pctAA": 0.1550925925925926
+  },
+  {
+    "key": "filled-lighter-shadow.medium.enabled__default",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-lighter-shadow.medium.enabled__hover",
+    "pctExact": 0.5,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-lighter-shadow.medium.enabled__focus-visible",
+    "pctExact": 0.5185185185185185,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-lighter-shadow.medium.enabled__active",
+    "pctExact": 0.5185185185185185,
+    "pctAA": 0.25925925925925924
+  },
+  {
+    "key": "filled-lighter-shadow.medium.disabled__default",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-lighter-shadow.medium.disabled__hover",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-lighter-shadow.medium.disabled__focus-visible",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-lighter-shadow.medium.disabled__active",
+    "pctExact": 0.4976851851851852,
+    "pctAA": 0.2337962962962963
+  },
+  {
+    "key": "filled-lighter-shadow.large.enabled__default",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-lighter-shadow.large.enabled__hover",
+    "pctExact": 0.6689814814814815,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-lighter-shadow.large.enabled__focus-visible",
+    "pctExact": 0.6875,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-lighter-shadow.large.enabled__active",
+    "pctExact": 0.6875,
+    "pctAA": 0.29398148148148145
+  },
+  {
+    "key": "filled-lighter-shadow.large.disabled__default",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-lighter-shadow.large.disabled__hover",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-lighter-shadow.large.disabled__focus-visible",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  },
+  {
+    "key": "filled-lighter-shadow.large.disabled__active",
+    "pctExact": 0.6666666666666666,
+    "pctAA": 0.2800925925925926
+  }
+]

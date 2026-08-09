@@ -1,0 +1,102 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "switch",
+  "anchors": [
+    {
+      "leaf": "imported.switch.indicator.background-color-state-disabled.checked",
+      "token": "color-neutral-background-disabled",
+      "part": "indicator",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "selector": ".r12ojtgy:disabled:checked ~ .fui-Switch__indicator, .r12ojtgy[aria-disabled=\"true\"]:checked ~ .fui-Switch__indicator"
+    },
+    {
+      "leaf": "imported.switch.indicator.background-color.checked",
+      "token": "color-compound-brand-background",
+      "part": "indicator",
+      "cssProperty": "background-color",
+      "varName": "--colorCompoundBrandBackground",
+      "selector": ".r12ojtgy:enabled:checked:not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+    },
+    {
+      "leaf": "imported.switch.indicator.color-state-active.checked",
+      "token": "color-neutral-foreground-inverted",
+      "part": "indicator",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundInverted",
+      "selector": ".r12ojtgy:enabled:checked:not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+    },
+    {
+      "leaf": "imported.switch.indicator.color-state-hover.checked",
+      "token": "color-neutral-foreground-inverted",
+      "part": "indicator",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundInverted",
+      "selector": ".r12ojtgy:enabled:checked:not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+    },
+    {
+      "leaf": "imported.switch.indicator.color.checked",
+      "token": "color-neutral-foreground-inverted",
+      "part": "indicator",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundInverted",
+      "selector": ".r12ojtgy:enabled:checked:not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+    },
+    {
+      "leaf": "imported.switch.indicator.color.unchecked",
+      "token": "color-neutral-stroke-accessible",
+      "part": "indicator",
+      "cssProperty": "color",
+      "varName": "--colorNeutralStrokeAccessible",
+      "selector": ".r12ojtgy:enabled:not(:checked):not([aria-disabled=\"true\"]) ~ .fui-Switch__indicator"
+    },
+    {
+      "leaf": "imported.switch.label.font-size",
+      "token": "font-size-base300",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".fkhj508"
+    },
+    {
+      "leaf": "imported.switch.label.line-height",
+      "token": "line-height-base300",
+      "part": "label",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".f1i3iumi"
+    },
+    {
+      "leaf": "imported.switch.label.padding-bottom.above",
+      "token": "spacing-vertical-xs",
+      "part": "label",
+      "cssProperty": "padding-bottom",
+      "varName": "--spacingVerticalXS",
+      "selector": ".f14wxoun"
+    },
+    {
+      "leaf": "imported.switch.label.padding-left.after",
+      "token": "spacing-horizontal-xs",
+      "part": "label",
+      "cssProperty": "padding-left",
+      "varName": "--spacingHorizontalXS",
+      "selector": ".fruq291"
+    },
+    {
+      "leaf": "imported.switch.label.padding-right.before",
+      "token": "spacing-horizontal-xs",
+      "part": "label",
+      "cssProperty": "padding-right",
+      "varName": "--spacingHorizontalXS",
+      "selector": ".f7x41pl"
+    },
+    {
+      "leaf": "imported.switch.label.padding-top.above",
+      "token": "spacing-vertical-xs",
+      "part": "label",
+      "cssProperty": "padding-top",
+      "varName": "--spacingVerticalXS",
+      "selector": ".f1ywm7hm"
+    }
+  ]
+}

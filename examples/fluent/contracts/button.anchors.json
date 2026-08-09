@@ -1,0 +1,270 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "button",
+  "anchors": [
+    {
+      "leaf": "imported.button.root.background-color-state-disabled.primary",
+      "token": "color-neutral-background-disabled",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "selector": ".f1bg9a2p"
+    },
+    {
+      "leaf": "imported.button.root.background-color-state-disabled.secondary",
+      "token": "color-neutral-background-disabled",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackgroundDisabled",
+      "selector": ".f1bg9a2p"
+    },
+    {
+      "leaf": "imported.button.root.background-color.primary",
+      "token": "color-brand-background",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorBrandBackground",
+      "selector": ".ffp7eso"
+    },
+    {
+      "leaf": "imported.button.root.background-color.secondary",
+      "token": "color-neutral-background1",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--colorNeutralBackground1",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.border-bottom-color-state-disabled.outline",
+      "token": "color-neutral-stroke-disabled",
+      "part": "root",
+      "cssProperty": "border-bottom-color",
+      "varName": "--colorNeutralStrokeDisabled",
+      "selector": ".f4ikngz"
+    },
+    {
+      "leaf": "imported.button.root.border-bottom-color-state-disabled.secondary",
+      "token": "color-neutral-stroke-disabled",
+      "part": "root",
+      "cssProperty": "border-bottom-color",
+      "varName": "--colorNeutralStrokeDisabled",
+      "selector": ".f4ikngz"
+    },
+    {
+      "leaf": "imported.button.root.border-left-color-state-disabled.outline",
+      "token": "color-neutral-stroke-disabled",
+      "part": "root",
+      "cssProperty": "border-left-color",
+      "varName": "--colorNeutralStrokeDisabled",
+      "selector": ".fy0fskl"
+    },
+    {
+      "leaf": "imported.button.root.border-left-color-state-disabled.secondary",
+      "token": "color-neutral-stroke-disabled",
+      "part": "root",
+      "cssProperty": "border-left-color",
+      "varName": "--colorNeutralStrokeDisabled",
+      "selector": ".fy0fskl"
+    },
+    {
+      "leaf": "imported.button.root.border-right-color-state-disabled.outline",
+      "token": "color-neutral-stroke-disabled",
+      "part": "root",
+      "cssProperty": "border-right-color",
+      "varName": "--colorNeutralStrokeDisabled",
+      "selector": ".f15xbau"
+    },
+    {
+      "leaf": "imported.button.root.border-right-color-state-disabled.secondary",
+      "token": "color-neutral-stroke-disabled",
+      "part": "root",
+      "cssProperty": "border-right-color",
+      "varName": "--colorNeutralStrokeDisabled",
+      "selector": ".f15xbau"
+    },
+    {
+      "leaf": "imported.button.root.border-top-color-state-disabled.outline",
+      "token": "color-neutral-stroke-disabled",
+      "part": "root",
+      "cssProperty": "border-top-color",
+      "varName": "--colorNeutralStrokeDisabled",
+      "selector": ".f1jj8ep1"
+    },
+    {
+      "leaf": "imported.button.root.border-top-color-state-disabled.secondary",
+      "token": "color-neutral-stroke-disabled",
+      "part": "root",
+      "cssProperty": "border-top-color",
+      "varName": "--colorNeutralStrokeDisabled",
+      "selector": ".f1jj8ep1"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.outline",
+      "token": "color-neutral-foreground1",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground1",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.primary",
+      "token": "color-neutral-foreground-on-brand",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundOnBrand",
+      "selector": ".f1phragk"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.secondary",
+      "token": "color-neutral-foreground1",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground1",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.color-state-disabled",
+      "token": "color-neutral-foreground-disabled",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundDisabled",
+      "selector": ".f1s2aq7o"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.outline",
+      "token": "color-neutral-foreground1",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground1",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.primary",
+      "token": "color-neutral-foreground-on-brand",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundOnBrand",
+      "selector": ".f1phragk"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.secondary",
+      "token": "color-neutral-foreground1",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground1",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.color.outline",
+      "token": "color-neutral-foreground1",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground1",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.color.primary",
+      "token": "color-neutral-foreground-on-brand",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForegroundOnBrand",
+      "selector": ".f1phragk"
+    },
+    {
+      "leaf": "imported.button.root.color.secondary",
+      "token": "color-neutral-foreground1",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground1",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.color.subtle",
+      "token": "color-neutral-foreground2",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground2",
+      "selector": ".fkfq4zb"
+    },
+    {
+      "leaf": "imported.button.root.color.transparent",
+      "token": "color-neutral-foreground2",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--colorNeutralForeground2",
+      "selector": ".fkfq4zb"
+    },
+    {
+      "leaf": "imported.button.root.font-size.large",
+      "token": "font-size-base400",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase400",
+      "selector": ".fod5ikn"
+    },
+    {
+      "leaf": "imported.button.root.font-size.medium",
+      "token": "font-size-base300",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase300",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.font-size.small",
+      "token": "font-size-base200",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--fontSizeBase200",
+      "selector": ".fy9rknc"
+    },
+    {
+      "leaf": "imported.button.root.font-weight.large",
+      "token": "font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightSemibold",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.font-weight.medium",
+      "token": "font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightSemibold",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.font-weight.small",
+      "token": "font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--fontWeightRegular",
+      "selector": ".figsok6"
+    },
+    {
+      "leaf": "imported.button.root.line-height.large",
+      "token": "line-height-base400",
+      "part": "root",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase400",
+      "selector": ".faaz57k"
+    },
+    {
+      "leaf": "imported.button.root.line-height.medium",
+      "token": "line-height-base300",
+      "part": "root",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase300",
+      "selector": ".r1f29ykk"
+    },
+    {
+      "leaf": "imported.button.root.line-height.small",
+      "token": "line-height-base200",
+      "part": "root",
+      "cssProperty": "line-height",
+      "varName": "--lineHeightBase200",
+      "selector": ".fwrc4pm"
+    }
+  ]
+}

@@ -269,6 +269,39 @@ async function main() {
         }
       }
     }
+    // THE CATCH-ALL, and the reason it exists. The two loops above read
+    // `node.style` and the tree shape — they do NOT read `node.pseudo` (the
+    // ::before/::after planes) and they do not read `controls` at all, yet
+    // BOTH are inside `canon()`. So a run could differ in a field no witness
+    // inspects and report `(structural)` with an empty witness list twice in
+    // a row, which is what the Fluent round measured. Rather than chase the
+    // field list — which is how this gap was introduced — locate the
+    // difference from the SAME serialization the comparison itself uses:
+    // whatever `canon` can see, this can name. A refusal that cannot point at
+    // its own cause is not a refusal, it is a shrug.
+    if (witnesses.length === 0) {
+      const idx = (() => {
+        for (let i = 0; i < Math.min(run1.captures.length, run2.captures.length); i++) {
+          if (JSON.stringify(run1.captures[i]) !== JSON.stringify(run2.captures[i])) return i;
+        }
+        return -1;
+      })();
+      if (idx >= 0) {
+        const s1 = JSON.stringify(run1.captures[idx]);
+        const s2 = JSON.stringify(run2.captures[idx]);
+        let k = 0;
+        while (k < s1.length && k < s2.length && s1[k] === s2[k]) k++;
+        unstable.add('(serialized-capture)');
+        witnesses.push(
+          `${run1.captures[idx].combo}__${run1.captures[idx].interaction}: capture #${idx} serializes differently in a field no field-level witness reads (pseudo-element planes and controls are both inside canon()). First divergence at char ${k}: …${s1.slice(Math.max(0, k - 120), k + 120)}… VS …${s2.slice(Math.max(0, k - 120), k + 120)}…`,
+        );
+      } else if (JSON.stringify(run1.controls) !== JSON.stringify(run2.controls)) {
+        unstable.add('(controls)');
+        witnesses.push(
+          `CONTROLS: every capture is byte-identical; the divergence is in the sweep's CONTROL probes — sweep 1 ${JSON.stringify(run1.controls)} vs sweep 2 ${JSON.stringify(run2.controls)}`,
+        );
+      }
+    }
     determinismDetail = `UNSTABLE channels across double-run: ${[...unstable].sort().join(', ') || '(structural)'}${witnesses.length ? ` — witnesses: ${witnesses.join(' | ')}` : ''}`;
     console.log(`  ✖ ${determinismDetail}`);
     throw new Error(`determinism self-check FAILED — ${determinismDetail}`);

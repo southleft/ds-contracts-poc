@@ -1,0 +1,213 @@
+{
+  "library": "fluent",
+  "rows": [
+    {
+      "name": "avatar",
+      "measured": true,
+      "floorPct": 92.38505747126437,
+      "cellsCompared": 5568,
+      "cellsEqual": 5144,
+      "combos": 24,
+      "pixelPerfect": "32/96",
+      "sourceFacts": 96,
+      "namedRefusals": 5,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 5,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "badge",
+      "measured": true,
+      "floorPct": 97.84946236559139,
+      "cellsCompared": 23808,
+      "cellsEqual": 23296,
+      "combos": 192,
+      "pixelPerfect": "480/768",
+      "sourceFacts": 1000,
+      "namedRefusals": 1,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 1,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "button",
+      "measured": true,
+      "floorPct": 96.28306878306879,
+      "cellsCompared": 15120,
+      "cellsEqual": 14558,
+      "combos": 90,
+      "pixelPerfect": "341/360",
+      "sourceFacts": 468,
+      "namedRefusals": 1,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 1,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "card",
+      "measured": true,
+      "floorPct": 74.83552631578948,
+      "cellsCompared": 18240,
+      "cellsEqual": 13650,
+      "combos": 48,
+      "pixelPerfect": "0/192",
+      "sourceFacts": 174,
+      "namedRefusals": 14,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 14,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "checkbox",
+      "measured": true,
+      "floorPct": 67.19527363184079,
+      "cellsCompared": 12864,
+      "cellsEqual": 8644,
+      "combos": 24,
+      "pixelPerfect": "8/96",
+      "sourceFacts": 96,
+      "namedRefusals": 22,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 8,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 14,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "dialog",
+      "measured": true,
+      "floorPct": 82.3529411764706,
+      "cellsCompared": 442,
+      "cellsEqual": 364,
+      "combos": 3,
+      "pixelPerfect": "0/0",
+      "sourceFacts": 0,
+      "namedRefusals": 54,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 54,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "input",
+      "measured": true,
+      "floorPct": 75.25510204081633,
+      "cellsCompared": 7056,
+      "cellsEqual": 5310,
+      "combos": 36,
+      "pixelPerfect": "0/144",
+      "sourceFacts": 261,
+      "namedRefusals": 5,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 5,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "spinner",
+      "measured": true,
+      "floorPct": 83.33333333333333,
+      "cellsCompared": 19200,
+      "cellsEqual": 16000,
+      "combos": 64,
+      "pixelPerfect": "128/256",
+      "sourceFacts": 384,
+      "namedRefusals": 13,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 13,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "switch",
+      "measured": true,
+      "floorPct": 81.4922480620155,
+      "cellsCompared": 2064,
+      "cellsEqual": 1682,
+      "combos": 12,
+      "pixelPerfect": "0/48",
+      "sourceFacts": 70,
+      "namedRefusals": 2,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 2,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "tablist",
+      "measured": true,
+      "floorPct": 64.97844827586206,
+      "cellsCompared": 27840,
+      "cellsEqual": 18090,
+      "combos": 48,
+      "pixelPerfect": "0/192",
+      "sourceFacts": 756,
+      "namedRefusals": 23,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 23,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "tooltip",
+      "measured": true,
+      "floorPct": 91.96428571428571,
+      "cellsCompared": 224,
+      "cellsEqual": 206,
+      "combos": 4,
+      "pixelPerfect": "0/4",
+      "sourceFacts": 0,
+      "namedRefusals": 6,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 6,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    }
+  ],
+  "unmeasured": [],
+  "quarantined": [],
+  "totals": {
+    "measured": 11,
+    "weightedFloorPct": 80.75755516288342,
+    "cellsCompared": 132426,
+    "namedRefusals": 146,
+    "openQueue": 0,
+    "quarantined": 0
+  }
+}

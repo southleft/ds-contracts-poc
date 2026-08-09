@@ -1,0 +1,407 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/badge.contract.json (fluent.badge v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-bottom-left-radius: var(--imported-shared-size-10000);
+  border-bottom-right-radius: var(--imported-shared-size-10000);
+  border-top-left-radius: var(--imported-shared-size-10000);
+  border-top-right-radius: var(--imported-shared-size-10000);
+  bottom: var(--imported-shared-size-0);
+  font-weight: var(--imported-badge-root-font-weight);
+  left: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.appearance-filled {
+}
+
+.color-brand {
+}
+
+.appearance-filled.color-brand {
+  background-color: var(--imported-badge-root-background-color-filled-brand);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-filled-brand);
+  border-left-color: var(--imported-badge-root-border-left-color-filled-brand);
+  border-right-color: var(--imported-badge-root-border-right-color-filled-brand);
+  border-top-color: var(--imported-badge-root-border-top-color-filled-brand);
+  color: var(--imported-badge-root-color-filled-brand);
+}
+
+.color-danger {
+}
+
+.appearance-filled.color-danger {
+  background-color: var(--imported-badge-root-background-color-filled-danger);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-filled-danger);
+  border-left-color: var(--imported-badge-root-border-left-color-filled-danger);
+  border-right-color: var(--imported-badge-root-border-right-color-filled-danger);
+  border-top-color: var(--imported-badge-root-border-top-color-filled-danger);
+  color: var(--imported-badge-root-color-filled-danger);
+}
+
+.color-important {
+}
+
+.appearance-filled.color-important {
+  background-color: var(--imported-badge-root-background-color-filled-important);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-filled-important);
+  border-left-color: var(--imported-badge-root-border-left-color-filled-important);
+  border-right-color: var(--imported-badge-root-border-right-color-filled-important);
+  border-top-color: var(--imported-badge-root-border-top-color-filled-important);
+  color: var(--imported-badge-root-color-filled-important);
+}
+
+.color-informative {
+}
+
+.appearance-filled.color-informative {
+  background-color: var(--imported-badge-root-background-color-filled-informative);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-filled-informative);
+  border-left-color: var(--imported-badge-root-border-left-color-filled-informative);
+  border-right-color: var(--imported-badge-root-border-right-color-filled-informative);
+  border-top-color: var(--imported-badge-root-border-top-color-filled-informative);
+  color: var(--imported-badge-root-color-filled-informative);
+}
+
+.color-severe {
+}
+
+.appearance-filled.color-severe {
+  background-color: var(--imported-badge-root-background-color-filled-severe);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-filled-severe);
+  border-left-color: var(--imported-badge-root-border-left-color-filled-severe);
+  border-right-color: var(--imported-badge-root-border-right-color-filled-severe);
+  border-top-color: var(--imported-badge-root-border-top-color-filled-severe);
+  color: var(--imported-badge-root-color-filled-severe);
+}
+
+.color-subtle {
+}
+
+.appearance-filled.color-subtle {
+  background-color: var(--imported-badge-root-background-color-filled-subtle);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-filled-subtle);
+  border-left-color: var(--imported-badge-root-border-left-color-filled-subtle);
+  border-right-color: var(--imported-badge-root-border-right-color-filled-subtle);
+  border-top-color: var(--imported-badge-root-border-top-color-filled-subtle);
+  color: var(--imported-badge-root-color-filled-subtle);
+}
+
+.color-success {
+}
+
+.appearance-filled.color-success {
+  background-color: var(--imported-badge-root-background-color-filled-success);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-filled-success);
+  border-left-color: var(--imported-badge-root-border-left-color-filled-success);
+  border-right-color: var(--imported-badge-root-border-right-color-filled-success);
+  border-top-color: var(--imported-badge-root-border-top-color-filled-success);
+  color: var(--imported-badge-root-color-filled-success);
+}
+
+.color-warning {
+}
+
+.appearance-filled.color-warning {
+  background-color: var(--imported-badge-root-background-color-filled-warning);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-filled-warning);
+  border-left-color: var(--imported-badge-root-border-left-color-filled-warning);
+  border-right-color: var(--imported-badge-root-border-right-color-filled-warning);
+  border-top-color: var(--imported-badge-root-border-top-color-filled-warning);
+  color: var(--imported-badge-root-color-filled-warning);
+}
+
+.appearance-ghost {
+}
+
+.appearance-ghost.color-brand {
+  background-color: var(--imported-badge-root-background-color-ghost-brand);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-ghost-brand);
+  border-left-color: var(--imported-badge-root-border-left-color-ghost-brand);
+  border-right-color: var(--imported-badge-root-border-right-color-ghost-brand);
+  border-top-color: var(--imported-badge-root-border-top-color-ghost-brand);
+  color: var(--imported-badge-root-color-ghost-brand);
+}
+
+.appearance-ghost.color-danger {
+  background-color: var(--imported-badge-root-background-color-ghost-danger);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-ghost-danger);
+  border-left-color: var(--imported-badge-root-border-left-color-ghost-danger);
+  border-right-color: var(--imported-badge-root-border-right-color-ghost-danger);
+  border-top-color: var(--imported-badge-root-border-top-color-ghost-danger);
+  color: var(--imported-badge-root-color-ghost-danger);
+}
+
+.appearance-ghost.color-important {
+  background-color: var(--imported-badge-root-background-color-ghost-important);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-ghost-important);
+  border-left-color: var(--imported-badge-root-border-left-color-ghost-important);
+  border-right-color: var(--imported-badge-root-border-right-color-ghost-important);
+  border-top-color: var(--imported-badge-root-border-top-color-ghost-important);
+  color: var(--imported-badge-root-color-ghost-important);
+}
+
+.appearance-ghost.color-informative {
+  background-color: var(--imported-badge-root-background-color-ghost-informative);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-ghost-informative);
+  border-left-color: var(--imported-badge-root-border-left-color-ghost-informative);
+  border-right-color: var(--imported-badge-root-border-right-color-ghost-informative);
+  border-top-color: var(--imported-badge-root-border-top-color-ghost-informative);
+  color: var(--imported-badge-root-color-ghost-informative);
+}
+
+.appearance-ghost.color-severe {
+  background-color: var(--imported-badge-root-background-color-ghost-severe);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-ghost-severe);
+  border-left-color: var(--imported-badge-root-border-left-color-ghost-severe);
+  border-right-color: var(--imported-badge-root-border-right-color-ghost-severe);
+  border-top-color: var(--imported-badge-root-border-top-color-ghost-severe);
+  color: var(--imported-badge-root-color-ghost-severe);
+}
+
+.appearance-ghost.color-subtle {
+  background-color: var(--imported-badge-root-background-color-ghost-subtle);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-ghost-subtle);
+  border-left-color: var(--imported-badge-root-border-left-color-ghost-subtle);
+  border-right-color: var(--imported-badge-root-border-right-color-ghost-subtle);
+  border-top-color: var(--imported-badge-root-border-top-color-ghost-subtle);
+  color: var(--imported-badge-root-color-ghost-subtle);
+}
+
+.appearance-ghost.color-success {
+  background-color: var(--imported-badge-root-background-color-ghost-success);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-ghost-success);
+  border-left-color: var(--imported-badge-root-border-left-color-ghost-success);
+  border-right-color: var(--imported-badge-root-border-right-color-ghost-success);
+  border-top-color: var(--imported-badge-root-border-top-color-ghost-success);
+  color: var(--imported-badge-root-color-ghost-success);
+}
+
+.appearance-ghost.color-warning {
+  background-color: var(--imported-badge-root-background-color-ghost-warning);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-ghost-warning);
+  border-left-color: var(--imported-badge-root-border-left-color-ghost-warning);
+  border-right-color: var(--imported-badge-root-border-right-color-ghost-warning);
+  border-top-color: var(--imported-badge-root-border-top-color-ghost-warning);
+  color: var(--imported-badge-root-color-ghost-warning);
+}
+
+.appearance-outline {
+}
+
+.appearance-outline.color-brand {
+  background-color: var(--imported-badge-root-background-color-outline-brand);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-outline-brand);
+  border-left-color: var(--imported-badge-root-border-left-color-outline-brand);
+  border-right-color: var(--imported-badge-root-border-right-color-outline-brand);
+  border-top-color: var(--imported-badge-root-border-top-color-outline-brand);
+  color: var(--imported-badge-root-color-outline-brand);
+}
+
+.appearance-outline.color-danger {
+  background-color: var(--imported-badge-root-background-color-outline-danger);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-outline-danger);
+  border-left-color: var(--imported-badge-root-border-left-color-outline-danger);
+  border-right-color: var(--imported-badge-root-border-right-color-outline-danger);
+  border-top-color: var(--imported-badge-root-border-top-color-outline-danger);
+  color: var(--imported-badge-root-color-outline-danger);
+}
+
+.appearance-outline.color-important {
+  background-color: var(--imported-badge-root-background-color-outline-important);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-outline-important);
+  border-left-color: var(--imported-badge-root-border-left-color-outline-important);
+  border-right-color: var(--imported-badge-root-border-right-color-outline-important);
+  border-top-color: var(--imported-badge-root-border-top-color-outline-important);
+  color: var(--imported-badge-root-color-outline-important);
+}
+
+.appearance-outline.color-informative {
+  background-color: var(--imported-badge-root-background-color-outline-informative);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-outline-informative);
+  border-left-color: var(--imported-badge-root-border-left-color-outline-informative);
+  border-right-color: var(--imported-badge-root-border-right-color-outline-informative);
+  border-top-color: var(--imported-badge-root-border-top-color-outline-informative);
+  color: var(--imported-badge-root-color-outline-informative);
+}
+
+.appearance-outline.color-severe {
+  background-color: var(--imported-badge-root-background-color-outline-severe);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-outline-severe);
+  border-left-color: var(--imported-badge-root-border-left-color-outline-severe);
+  border-right-color: var(--imported-badge-root-border-right-color-outline-severe);
+  border-top-color: var(--imported-badge-root-border-top-color-outline-severe);
+  color: var(--imported-badge-root-color-outline-severe);
+}
+
+.appearance-outline.color-subtle {
+  background-color: var(--imported-badge-root-background-color-outline-subtle);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-outline-subtle);
+  border-left-color: var(--imported-badge-root-border-left-color-outline-subtle);
+  border-right-color: var(--imported-badge-root-border-right-color-outline-subtle);
+  border-top-color: var(--imported-badge-root-border-top-color-outline-subtle);
+  color: var(--imported-badge-root-color-outline-subtle);
+}
+
+.appearance-outline.color-success {
+  background-color: var(--imported-badge-root-background-color-outline-success);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-outline-success);
+  border-left-color: var(--imported-badge-root-border-left-color-outline-success);
+  border-right-color: var(--imported-badge-root-border-right-color-outline-success);
+  border-top-color: var(--imported-badge-root-border-top-color-outline-success);
+  color: var(--imported-badge-root-color-outline-success);
+}
+
+.appearance-outline.color-warning {
+  background-color: var(--imported-badge-root-background-color-outline-warning);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-outline-warning);
+  border-left-color: var(--imported-badge-root-border-left-color-outline-warning);
+  border-right-color: var(--imported-badge-root-border-right-color-outline-warning);
+  border-top-color: var(--imported-badge-root-border-top-color-outline-warning);
+  color: var(--imported-badge-root-color-outline-warning);
+}
+
+.appearance-tint {
+}
+
+.appearance-tint.color-brand {
+  background-color: var(--imported-badge-root-background-color-tint-brand);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-tint-brand);
+  border-left-color: var(--imported-badge-root-border-left-color-tint-brand);
+  border-right-color: var(--imported-badge-root-border-right-color-tint-brand);
+  border-top-color: var(--imported-badge-root-border-top-color-tint-brand);
+  color: var(--imported-badge-root-color-tint-brand);
+}
+
+.appearance-tint.color-danger {
+  background-color: var(--imported-badge-root-background-color-tint-danger);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-tint-danger);
+  border-left-color: var(--imported-badge-root-border-left-color-tint-danger);
+  border-right-color: var(--imported-badge-root-border-right-color-tint-danger);
+  border-top-color: var(--imported-badge-root-border-top-color-tint-danger);
+  color: var(--imported-badge-root-color-tint-danger);
+}
+
+.appearance-tint.color-important {
+  background-color: var(--imported-badge-root-background-color-tint-important);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-tint-important);
+  border-left-color: var(--imported-badge-root-border-left-color-tint-important);
+  border-right-color: var(--imported-badge-root-border-right-color-tint-important);
+  border-top-color: var(--imported-badge-root-border-top-color-tint-important);
+  color: var(--imported-badge-root-color-tint-important);
+}
+
+.appearance-tint.color-informative {
+  background-color: var(--imported-badge-root-background-color-tint-informative);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-tint-informative);
+  border-left-color: var(--imported-badge-root-border-left-color-tint-informative);
+  border-right-color: var(--imported-badge-root-border-right-color-tint-informative);
+  border-top-color: var(--imported-badge-root-border-top-color-tint-informative);
+  color: var(--imported-badge-root-color-tint-informative);
+}
+
+.appearance-tint.color-severe {
+  background-color: var(--imported-badge-root-background-color-tint-severe);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-tint-severe);
+  border-left-color: var(--imported-badge-root-border-left-color-tint-severe);
+  border-right-color: var(--imported-badge-root-border-right-color-tint-severe);
+  border-top-color: var(--imported-badge-root-border-top-color-tint-severe);
+  color: var(--imported-badge-root-color-tint-severe);
+}
+
+.appearance-tint.color-subtle {
+  background-color: var(--imported-badge-root-background-color-tint-subtle);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-tint-subtle);
+  border-left-color: var(--imported-badge-root-border-left-color-tint-subtle);
+  border-right-color: var(--imported-badge-root-border-right-color-tint-subtle);
+  border-top-color: var(--imported-badge-root-border-top-color-tint-subtle);
+  color: var(--imported-badge-root-color-tint-subtle);
+}
+
+.appearance-tint.color-success {
+  background-color: var(--imported-badge-root-background-color-tint-success);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-tint-success);
+  border-left-color: var(--imported-badge-root-border-left-color-tint-success);
+  border-right-color: var(--imported-badge-root-border-right-color-tint-success);
+  border-top-color: var(--imported-badge-root-border-top-color-tint-success);
+  color: var(--imported-badge-root-color-tint-success);
+}
+
+.appearance-tint.color-warning {
+  background-color: var(--imported-badge-root-background-color-tint-warning);
+  border-bottom-color: var(--imported-badge-root-border-bottom-color-tint-warning);
+  border-left-color: var(--imported-badge-root-border-left-color-tint-warning);
+  border-right-color: var(--imported-badge-root-border-right-color-tint-warning);
+  border-top-color: var(--imported-badge-root-border-top-color-tint-warning);
+  color: var(--imported-badge-root-color-tint-warning);
+}
+
+.size-extra-large {
+  font-size: var(--imported-badge-root-font-size-extra-large);
+  height: var(--imported-badge-root-height-extra-large);
+  line-height: var(--imported-badge-root-line-height-extra-large);
+  padding-left: var(--imported-badge-root-padding-left-extra-large);
+  padding-right: var(--imported-badge-root-padding-right-extra-large);
+  width: var(--imported-badge-root-width-extra-large);
+}
+
+.size-extra-small {
+  font-size: var(--imported-badge-root-font-size-extra-small);
+  height: var(--imported-badge-root-height-extra-small);
+  line-height: var(--imported-badge-root-line-height-extra-small);
+  padding-left: var(--imported-badge-root-padding-left-extra-small);
+  padding-right: var(--imported-badge-root-padding-right-extra-small);
+  width: var(--imported-badge-root-width-extra-small);
+}
+
+.size-large {
+  font-size: var(--imported-badge-root-font-size-large);
+  height: var(--imported-badge-root-height-large);
+  line-height: var(--imported-badge-root-line-height-large);
+  padding-left: var(--imported-badge-root-padding-left-large);
+  padding-right: var(--imported-badge-root-padding-right-large);
+  width: var(--imported-badge-root-width-large);
+}
+
+.size-medium {
+  font-size: var(--imported-badge-root-font-size-medium);
+  height: var(--imported-badge-root-height-medium);
+  line-height: var(--imported-badge-root-line-height-medium);
+  padding-left: var(--imported-badge-root-padding-left-medium);
+  padding-right: var(--imported-badge-root-padding-right-medium);
+  width: var(--imported-badge-root-width-medium);
+}
+
+.size-small {
+  font-size: var(--imported-badge-root-font-size-small);
+  height: var(--imported-badge-root-height-small);
+  line-height: var(--imported-badge-root-line-height-small);
+  padding-left: var(--imported-badge-root-padding-left-small);
+  padding-right: var(--imported-badge-root-padding-right-small);
+  width: var(--imported-badge-root-width-small);
+}
+
+.size-tiny {
+  font-size: var(--imported-badge-root-font-size-tiny);
+  height: var(--imported-badge-root-height-tiny);
+  line-height: var(--imported-badge-root-line-height-tiny);
+  padding-left: var(--imported-badge-root-padding-left-tiny);
+  padding-right: var(--imported-badge-root-padding-right-tiny);
+  width: var(--imported-badge-root-width-tiny);
+}

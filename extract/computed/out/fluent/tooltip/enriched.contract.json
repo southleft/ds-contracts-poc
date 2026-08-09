@@ -1,0 +1,165 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "fluent.tooltip",
+  "name": "Tooltip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the FLUENT 2 round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @fluentui/react-components@9.74.5 (Griffel CSS-in-JS; 65-package family pinned by the committed lockfile sha256 c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536 — examples/fluent/RECON.md §1). EVERY enum default below is HAND-TRANSCRIBED from the package rollup's own @default/@defaultvalue JSDoc tag: the react-tsx extractor keeps the description prose but emits no `default` field (RECON §3a), so left to the drafter two of twelve components would have captured their whole grid around a base combo the library never renders. @default tags: appearance=normal, withArrow=false, visible=false, positioning=above. `relationship` is a REQUIRED prop (no default) pinned to \"label\"; `positioning` pinned to \"after\". `withArrow` rides the PRESENCE grammar (MUI Tooltip's exact precedent) — it is structure-creating, so the arrow subtree promotes as a visibleWhen-gated part. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @fluentui/react-components@9.74.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "appearance",
+      "type": {
+        "enum": [
+          "normal",
+          "inverted"
+        ]
+      },
+      "default": "normal",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Appearance",
+          "values": {
+            "normal": "Normal",
+            "inverted": "Inverted"
+          }
+        },
+        "code": {
+          "prop": "appearance"
+        }
+      }
+    },
+    {
+      "name": "withArrow",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `withArrow` (true); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show WithArrow"
+        },
+        "code": {
+          "prop": "withArrow"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "cursor": "default",
+        "position": "absolute"
+      },
+      "parts": {
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "background-clip": "content-box",
+            "box-sizing": "border-box",
+            "cursor": "default"
+          },
+          "visibleWhen": {
+            "prop": "withArrow"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.tooltip.part-0.border-bottom-left-radius}",
+            "bottom": "{imported.tooltip.part-0.bottom}",
+            "font-size": "{imported.tooltip.part-0.font-size}",
+            "height": "{imported.tooltip.part-0.height}",
+            "left": "{imported.tooltip.part-0.left}",
+            "line-height": "{imported.tooltip.part-0.line-height}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.tooltip.part-0.right}",
+            "top": "{imported.tooltip.part-0.top}",
+            "width": "{imported.tooltip.part-0.width}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "appearance",
+              "map": {
+                "inverted": {
+                  "background-color": "{imported.tooltip.part-0.background-color.inverted}",
+                  "color": "{imported.tooltip.part-0.color.inverted}"
+                },
+                "normal": {
+                  "background-color": "{imported.tooltip.part-0.background-color.normal}",
+                  "color": "{imported.tooltip.part-0.color.normal}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "text": "Tooltip copy for the Fluent round.",
+      "tokens": {
+        "border-bottom-color": "{imported.shared.color-00000000}",
+        "border-bottom-left-radius": "{imported.shared.size-4}",
+        "border-bottom-right-radius": "{imported.shared.size-4}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-00000000}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-00000000}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-00000000}",
+        "border-top-left-radius": "{imported.shared.size-4}",
+        "border-top-right-radius": "{imported.shared.size-4}",
+        "border-top-width": "{imported.shared.size-1}",
+        "bottom": "{imported.tooltip.root.bottom}",
+        "font-size": "{imported.tooltip.root.font-size}",
+        "font-weight": "{imported.tooltip.root.font-weight}",
+        "height": "{imported.tooltip.root.height}",
+        "line-height": "{imported.tooltip.root.line-height}",
+        "max-width": "{imported.tooltip.root.max-width}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.tooltip.root.padding-bottom}",
+        "padding-left": "{imported.tooltip.root.padding-left}",
+        "padding-right": "{imported.tooltip.root.padding-right}",
+        "padding-top": "{imported.shared.size-4}",
+        "top": "{imported.shared.size-0}",
+        "translate-y": "{imported.tooltip.root.translate-y}",
+        "width": "{imported.tooltip.root.width}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "appearance",
+          "map": {
+            "inverted": {
+              "background-color": "{imported.tooltip.root.background-color.inverted}",
+              "color": "{imported.tooltip.root.color.inverted}"
+            },
+            "normal": {
+              "background-color": "{imported.tooltip.root.background-color.normal}",
+              "color": "{imported.tooltip.root.color.normal}"
+            }
+          }
+        }
+      ],
+      "hugsBelowMaxWidth": true
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@fluentui/react-components",
+      "export": "Tooltip"
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "component": "Input",
+  "browser": "151.0.7922.34",
+  "captures": 144,
+  "combos": 36,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 475,
+  "elementsPerCapture": 2,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 34,
+    "input": 19
+  },
+  "folds": {
+    "count": 0,
+    "receipts": [],
+    "mintedLeavesUnfolded": 231,
+    "mintedLeavesFolded": 233
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 233,
+    "baseBindings": 37,
+    "stateBindings": 36,
+    "byShape": {
+      "uniform": 35,
+      "perAxis": 36,
+      "perPair": 2,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 9,
+    "state": 4
+  },
+  "codeOnly": {
+    "base": 5,
+    "state": 0,
+    "overflowBindings": 14
+  },
+  "pseudoElementFindings": 54,
+  "anatomyPromotion": {
+    "partsCarried": 2,
+    "svgAssets": 0,
+    "refusals": 1
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 136224,
+    "cellsMatched": 136224,
+    "pct": 100,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": []
+  },
+  "pixel": {
+    "pairs": 144,
+    "measured": 144,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
+    "exact": {
+      "mean": 0.5353009259259258,
+      "max": 0.6921296296296297,
+      "perfect": 0
+    },
+    "aa": {
+      "mean": 0.23302469135802484,
+      "max": 0.29398148148148145,
+      "perfect": 0
+    },
+    "worst": [
+      {
+        "key": "filled-darker.large.enabled__focus-visible",
+        "pctExact": 0.6921296296296297,
+        "pctAA": 0.29398148148148145
+      },
+      {
+        "key": "filled-darker.large.enabled__active",
+        "pctExact": 0.6921296296296297,
+        "pctAA": 0.29398148148148145
+      },
+      {
+        "key": "filled-lighter.large.enabled__active",
+        "pctExact": 0.6921296296296297,
+        "pctAA": 0.29398148148148145
+      },
+      {
+        "key": "outline.large.enabled__focus-visible",
+        "pctExact": 0.6875,
+        "pctAA": 0.29398148148148145
+      },
+      {
+        "key": "outline.large.enabled__active",
+        "pctExact": 0.6875,
+        "pctAA": 0.29398148148148145
+      },
+      {
+        "key": "filled-lighter-shadow.large.enabled__focus-visible",
+        "pctExact": 0.6875,
+        "pctAA": 0.29398148148148145
+      },
+      {
+        "key": "filled-lighter-shadow.large.enabled__active",
+        "pctExact": 0.6875,
+        "pctAA": 0.29398148148148145
+      },
+      {
+        "key": "filled-lighter.large.enabled__focus-visible",
+        "pctExact": 0.6828703703703703,
+        "pctAA": 0.29398148148148145
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 75.25510204081633,
+    "rowsFullyEqual": 0,
+    "rows": 144,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 144
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 36
+}
