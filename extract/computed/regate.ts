@@ -270,11 +270,40 @@ async function main() {
     // from committed truth. Same bytes pathway as run.ts (2-space JSON +
     // trailing newline) — guarded by the replay-sufficiency assertion above.
     if (WRITE_ENRICHED) {
+      /** ALTITUDE LINK ROUND — THE RE-FUSE USED TO DELETE THE FRONTIER
+       *  RECEIPTS, WHILE CLAIMING IT HAD NOT.
+       *
+       *  `frontierReceipts` (closed-shadow-root suspects, which pseudo-
+       *  elements were read, which were refused by name) are CAPTURE-time
+       *  measurements: they come from the live page, not from the truth file,
+       *  so an offline re-fuse cannot recompute them. The block simply left
+       *  the key out — and the `generatedBy` string above it asserted "portal
+       *  receipts … are absent here; EVERY OTHER receipt is recomputed from
+       *  the same truth", which was false. Five committed receipts vanished
+       *  from altitude Link's extension (and from the promoted
+       *  examples/altitude/contracts/link.extension.json downstream) on the
+       *  first re-fuse, with the artifact still asserting completeness — the
+       *  exact silent-loss shape this pipeline gates everywhere else.
+       *
+       *  They are now CARRIED FORWARD from the committed extension beside the
+       *  truth being replayed (the capture that produced them is the capture
+       *  being re-fused), and their provenance is stated. With no committed
+       *  extension there is nothing to carry and the absence is NAMED. */
+      const priorExtPath = path.join(outDir, 'enriched.extension.json');
+      const prior = existsSync(priorExtPath)
+        ? (JSON.parse(readFileSync(priorExtPath, 'utf8')) as Record<string, unknown>)
+        : null;
+      const carriedFrontier = Array.isArray(prior?.frontierReceipts) ? (prior!.frontierReceipts as unknown[]) : null;
       const extension: Record<string, unknown> = {
         _marker: 'NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).',
-        generatedBy: 'extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Difference vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; every other receipt is recomputed from the same truth.',
+        generatedBy: `extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (${carriedFrontier ? `${carriedFrontier.length} receipt(s)` : 'none present — no prior extension beside this truth'}); every other receipt is recomputed from the same truth.`,
         library: `${cfg.library.package}@${cfg.library.version}`,
-        browser: sweep.browserVersion,
+        // The capture browser, spelled exactly as run.ts spells it — this
+        // field documents the browser that CAPTURED the truth, which an
+        // offline re-fuse does not change. (It used to be written raw here,
+        // so a re-fused component's `browser` silently disagreed with every
+        // sibling captured in the same session.)
+        browser: bareBrowser,
         mintedTokens: mergedTree,
         folds,
         foldedStateSkips: prep.foldedStateSkips,
@@ -310,6 +339,7 @@ async function main() {
       interactionOnlyPlaneDropCount: prep.planeAbsentDrops.length,
         structureReceipts: [...new Set(aligned.structureReceipts)],
         styledChannelReceipts: styledReceipts,
+        ...(carriedFrontier ? { frontierReceipts: carriedFrontier } : {}),
         anatomyJoin: { computed: aligned.anatomyJoin, staticOnly: aligned.staticOnlyParts },
         anatomyPromotion: {
           _note: 'Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.',

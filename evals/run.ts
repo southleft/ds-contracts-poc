@@ -9639,11 +9639,21 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // receipt recorded this for itself — its 11.15 is AA over the four-letter
     // glyph run because the pill, its border and its radius are all lighter
     // than the threshold — and it was never asked how far the crop reaches.
-    // Swept: 10 of 184 committed images drop VISIBLY painted pixels, and the
-    // worst are failing cells scored on partial components (mui snackbar keeps
-    // 62% of its frame, mui fab 21%), which makes their failure CAUSES suspect
-    // as well as their numbers. Exactly one PASSING cell drops visible paint
-    // and it is named with its measurement inside the probe.
+    // Swept: 10 of 184 committed images drop VISIBLY painted pixels. Exactly
+    // one PASSING cell does, and it is named with its measurement inside the
+    // probe.
+    //
+    // WHAT THIS SWEEP DOES *NOT* SHOW, corrected after checking rather than
+    // asserting: a low kept-frame percentage is NOT evidence that a cell was
+    // scored on a partial component. The two worst (mui snackbar at 62% kept,
+    // mui fab at 21%) were read that way first and both readings died — the
+    // snackbar's content boxes AGREE exactly at 148x29, with its residual
+    // already localised to surface paint rather than geometry, and the fab's
+    // 16x41-against-72x74 is FC-GEOMETRY-EXCLUDED, a deliberate refusal shared
+    // with chip/avatar/icon-button where the contract gives the root no box so
+    // the canvas hugs. In both the discarded region is stage padding around a
+    // box that is either agreeing or independently explained. The kept
+    // percentage measures the crop, not the component.
     id: 'console-loop-white-trim-reach',
     claim: 'C3-detection',
     run: () => {
@@ -11289,6 +11299,142 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       console.log(
         'local-var-hop-recovers-token-name: with `varPrefix: "--"` the reader\'s one-hop `defs` branch was dead code — every custom property starts with a bare `--`, so a channel reading a component-local variable (`border-color: var(--fui-Checkbox__indicator--borderColor)`) offered only that variable, which names no DTCG leaf, and the theme token behind it was never a candidate. Measured on Fluent: 31 rules across 11 local variables, including ALL of Checkbox\'s indicator colours on all four interaction planes — a silent NAME loss with the pixels still right. A second half the recon did not name: the var-ident regex omitted `_`, so the name truncated at `--fui-Checkbox` and the hop key never matched, which also broke the branch for ORDINARY prefixes (the control fails pre-fix too). Hop targets are now offered as ADDITIONAL candidates flagged `1` and sorted after every direct candidate, so a recovered name can only fill a channel that bound nothing — it can never demote a semantic alias to the primitive behind it. Committed captures carry no 4th element and normalize byte-identically.',
+      );
+    },
+  },
+
+  {
+    // CONTROL-EQUALITY IS A DOM-INHERITANCE ARGUMENT (altitude Link round).
+    //
+    // The styled-channel door drops a channel that EQUALS the bare control for
+    // the part's tag, on the argument that the emitted element inherits the
+    // value for free. Two premises are needed for that to be safe, and a
+    // PAINTED text decoration breaks both:
+    //
+    //  (1) the emitted DOM must reproduce the control's CONDITION. The <a>
+    //      control is `<a href="#c">SAMPLE</a>` (capture.ts CONTROL_TAGS), so
+    //      it is `:any-link` and carries the UA underline; core/emit-html
+    //      writes the root as `<a class="link">` with NO href, so the UA rule
+    //      never applies. Measured on the canvas lane at Variant=Lg: library
+    //      ink 34x16 vs contract render 32x14.
+    //  (2) the target must BE a DOM. Figma has no user agent at all — a
+    //      channel the contract does not record is a channel the canvas
+    //      cannot draw, and `text-decoration-line` is a DECLARED_CHANNELS
+    //      'draw' verdict (textDecoration = UNDERLINE).
+    //
+    // And the equality was not even UA provenance: altitude's own shadow
+    // stylesheet AUTHORS `.al-c-link { text-decoration: var(
+    // --al-link-text-decoration, underline) }`, whose fallback happens to
+    // equal the UA default. The door read a library declaration as a browser
+    // freebie. The repair was previously a HAND-EDIT of the committed
+    // contract (26f1a279), which promote() could not reproduce and the next
+    // re-promote would have erased silently — that is what this pins against.
+    //
+    // Replays the COMMITTED capture through the real fusion path (no Chromium,
+    // no harness) and asserts all four directions, so it cannot pass by
+    // accident:
+    //   a) the PRE-FIX condition still holds in the data (root == control),
+    //      so the ordinary door really would drop it;
+    //   b) the door carries it anyway, with the receipt naming why;
+    //   c) the asymmetry is load-bearing — the same part with `none` (the
+    //      draws-nothing value) is still dropped, so no library mints a
+    //      `text-decoration-line: none` it never authored;
+    //   d) the fact survives all the way to the committed contract AND the
+    //      committed Figma script, so a re-promote cannot silently drop it.
+    id: 'painted-decoration-survives-control-equality',
+    claim: 'C2-refusal',
+    run: () => {
+      const cfg = loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs/altitude.json'));
+      const comp = cfg.components.find((c) => c.name === 'Link')!;
+      const outDir = path.join(ROOT, 'extract/computed/out/altitude/link');
+      const truth = JSON.parse(readFileSync(path.join(outDir, 'captured-truth.json'), 'utf8'));
+      const space = propSpaceFor(ROOT, cfg, comp);
+
+      const fuseOnce = (mutate?: (t: Record<string, never>) => void) => {
+        const t = JSON.parse(JSON.stringify(truth));
+        mutate?.(t);
+        const captures = fuseReconstruct(t).map((c) => ({ ...c, combo: `${comp.name}:${c.combo}` }));
+        const aligned = fuseAlignSweep(
+          { captures, controls: t.controls, allProps: t._provenance.channels, browserVersion: 'committed', fontChecks: {}, pinnedAnimations: [] } as never,
+          comp, space, cfg.library.classPrefix,
+        );
+        const promotion = depthPromoteAnatomy(space, comp, aligned.union, depthKebab(space.contract.name));
+        const svgConsumed = new Set([...promotion.consumed].map((i) => aligned.partNames[i]));
+        const controlStyles = Object.fromEntries(
+          Object.entries(t.controls as Record<string, { style: Record<string, string> }>).map(([tag, n]) => [tag, n.style]),
+        );
+        const receipts: string[] = [];
+        const styled = fuseStyledChannels(aligned, space, controlStyles, t._provenance.channels, receipts, {
+          viewport: cfg.browser.viewport, stage: stageFor(cfg, comp), portaled: comp.portalCapture === true,
+        });
+        const folds = fuseDetectFolds(aligned, styled);
+        const layout = fuseEnrichLayout(aligned, space, styled, promotion.contract);
+        const prep = fusePrepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumed);
+        return { prep, receipts, aligned };
+      };
+
+      // (a) THE PRE-FIX CONDITION, read straight out of the committed capture:
+      //     the subject's decoration is EQUAL to the <a> control's, which is
+      //     exactly what made the ordinary door drop it. If a recapture ever
+      //     breaks this equality the pin is no longer testing the defect.
+      const rootTD = truth.base.root.style['text-decoration-line'];
+      const ctrlTD = truth.controls.a?.style?.['text-decoration-line'];
+      if (rootTD !== 'underline') throw new Error(`altitude Link root text-decoration-line is ${String(rootTD)}, not underline — the captured truth this pin is about is gone`);
+      if (rootTD !== ctrlTD) throw new Error(`the <a> control no longer carries ${String(rootTD)} (control = ${String(ctrlTD)}) — the control-equality collision this pin exists for cannot occur, so the pin is asserting nothing`);
+
+      // (b) …and the door carries it anyway, with the reason named.
+      const carried = fuseOnce();
+      const decl = carried.prep.declared.find((d) => d.part === 'root' && d.channel === 'text-decoration-line');
+      if (!decl || decl.value !== 'underline') {
+        throw new Error(`root.text-decoration-line was NOT carried as a declared fact (got: ${JSON.stringify(decl ?? null)}) — the control-equality door dropped a decoration the canvas cannot draw without it`);
+      }
+      if (!carried.receipts.some((r) => r.startsWith('painted-text-decoration-carried: root.text-decoration-line'))) {
+        throw new Error('the channel is carried but the door named no reason — an unexplained re-admission is how the next reader learns the wrong rule');
+      }
+      // The FOURTH typography channel rides the same round-5c clause; it was
+      // itself a hand-edit (ac5e6181, "altitude's Plex families") until the
+      // clause was completed, and FC-FONT-SUBSTRATE is what it buys.
+      if (!carried.prep.declared.some((d) => d.part === 'root' && d.channel === 'font-family')) {
+        throw new Error('root.font-family was NOT carried — the canvas would draw altitude Link in its own default face (FC-FONT-SUBSTRATE), and the committed contract would need the hand-edit back');
+      }
+
+      // (c) THE ASYMMETRY IS LOAD-BEARING. `none` paints nothing on any
+      //     target, so it must still be dropped — otherwise this widening
+      //     mints a `text-decoration-line: none` into every text part in the
+      //     corpus that never authored one (measured: with `none` admitted,
+      //     that is every text-bearing part in all seven libraries).
+      //     BOTH sides move: leaving the control at `underline` would make
+      //     `none` DIFFER from it, and the ORDINARY door would admit it — a
+      //     mutation that tests nothing about this clause.
+      const noneRun = fuseOnce((t) => {
+        const walk = (n: Record<string, never>): void => {
+          const st = (n as unknown as { style?: Record<string, string> }).style;
+          if (st && st['text-decoration-line'] !== undefined) st['text-decoration-line'] = 'none';
+          for (const k of ((n as unknown as { nodes?: Array<{ t: string; el?: Record<string, never> }> }).nodes ?? [])) if (k.t === 'el' && k.el) walk(k.el);
+        };
+        walk((t as unknown as { base: { root: Record<string, never> } }).base.root);
+        for (const ctl of Object.values((t as unknown as { controls: Record<string, { style: Record<string, string> }> }).controls)) {
+          if (ctl.style['text-decoration-line'] !== undefined) ctl.style['text-decoration-line'] = 'none';
+        }
+      });
+      if (noneRun.prep.declared.some((d) => d.channel === 'text-decoration-line')) {
+        throw new Error('a `none` decoration equal to the control was CARRIED — the door is a blanket, not the measured value asymmetry, and every text part in the corpus would mint a decoration it never authored');
+      }
+
+      // (d) …and it survives the whole chain into the committed artifacts, so
+      //     the next `promote` cannot quietly drop it the way the hand-edit
+      //     was going to be dropped.
+      const shipped = JSON.parse(readFileSync(path.join(ROOT, 'examples/altitude/contracts/link.contract.json'), 'utf8')) as { anatomy: { root: { declared?: Record<string, string> } } };
+      if (shipped.anatomy.root.declared?.['text-decoration-line'] !== 'underline') {
+        throw new Error('examples/altitude/contracts/link.contract.json no longer declares text-decoration-line — the promoted contract lost the fact between fusion and ship');
+      }
+      const script = readFileSync(path.join(ROOT, 'examples/altitude/figma/link.figma.js'), 'utf8');
+      const underlines = (script.match(/"textDecoration": "UNDERLINE"/g) ?? []).length;
+      if (underlines === 0) {
+        throw new Error('examples/altitude/figma/link.figma.js draws NO underline — DECLARED_CHANNELS gives text-decoration-line the canvas verdict "draw", so a contract that declares it must reach the canvas as textDecoration = UNDERLINE');
+      }
+      console.log(
+        `painted-decoration-survives-control-equality: altitude Link's underline EQUALS the <a> control (\`<a href="#c">\`, :any-link) and was therefore dropped as "the emitted element inherits it for free" — false twice over, because core/emit-html writes the root <a> with no href (library ink 34x16 vs contract render 32x14 at Variant=Lg) and because Figma has no user agent at all. The library authors it outright (\`.al-c-link { text-decoration: var(--al-link-text-decoration, underline) }\`), so the equality was coincidence, not provenance. The door now re-admits a PAINTED decoration and still drops \`none\` (falsified here: forcing the capture to \`none\` carries nothing), font-family joins the round-5c clause that FC-FONT-SUBSTRATE needs, and the fact reaches the committed contract and ${underlines} canvas node(s) — replacing two hand-edits (26f1a279 text-decoration-line, ac5e6181 Plex families) that promote() could not reproduce and the next re-promote would have erased.`,
       );
     },
   },

@@ -1,6 +1,6 @@
 {
-  "passed": 214,
-  "total": 217,
+  "passed": 218,
+  "total": 221,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -1026,6 +1026,21 @@
       "pass": true
     },
     {
+      "id": "console-loop-score-monotonicity",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "console-loop-white-trim-reach",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "console-loop-canvas-drift-probe",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
       "id": "console-loop-mui-evidence-receipt",
       "claim": "C3-detection",
       "pass": true
@@ -1087,6 +1102,11 @@
     },
     {
       "id": "local-var-hop-recovers-token-name",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "painted-decoration-survives-control-equality",
       "claim": "C2-refusal",
       "pass": true
     }

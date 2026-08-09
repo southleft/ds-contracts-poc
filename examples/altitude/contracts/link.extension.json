@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "altitude-web-components@1.0.2",
   "browser": "149.0.7827.55",
   "mintedTokens": {
@@ -184,6 +184,16 @@
       },
       {
         "part": "root",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-line",
+        "value": "underline"
+      },
+      {
+        "part": "root",
         "channel": "transition-delay",
         "value": "0s, 0s"
       },
@@ -231,9 +241,12 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
-    "text-part-typography-carried: root — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: root — font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "painted-text-decoration-carried: root.text-decoration-line = underline — carried even though EQUAL to the <a> control. Control-equality is a DOM-INHERITANCE argument (\"the emitted element gets this for free\") and it cannot justify dropping a decoration that must be PAINTED: the <a> control is rendered `<a href=\"#c\">` (`:any-link`, so it carries the UA underline) while core/emit-html writes the root `<a>` with NO href, and the Figma canvas has no user agent at all. Equality with the control is therefore not evidence of UA provenance — the founding case (altitude Link) is a LIBRARY declaration, `.al-c-link { text-decoration: var(--al-link-text-decoration, underline) }`, whose fallback merely coincides with the UA default. `none` is still dropped by value: nothing paints a decoration by default, so the draws-nothing value costs nothing on any target.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."
   ],
@@ -269,6 +282,8 @@
     "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.justify = start (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = \"IBM Plex Sans\", sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.text-decoration-line = underline (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.transition-duration = 0.2s, 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.transition-property = color, background-color (v15 declared vocabulary — declared-not-drawn on canvas)",

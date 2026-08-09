@@ -812,11 +812,87 @@ export function styledChannels(
     const srOnly = (a.baseFlat[pi].node.style['clip-path'] ?? '').startsWith('inset(50%');
     if (hasText && !srOnly) {
       const added: string[] = [];
+      // ALTITUDE LINK ROUND — `font-family` JOINS THE ROUND-5c TRIO.
+      //
+      // Round 5c carried the three BOX-DRIVING typography channels and left
+      // the FOURTH — the one FC-FONT-SUBSTRATE is entirely about — behind.
+      // The argument is identical and stronger: a library that ships a global
+      // `body`/`:root` family (altitude's main.css, and its equivalent in
+      // every other subject) styles the CONTROL too, so control-equality
+      // reports "free" for a family the generated surfaces never inherit —
+      // emit-html/emit-react ship component CSS only, and the canvas draws
+      // its own default face.
+      //
+      // EVIDENCE THAT THIS IS THE ALREADY-AGREED ANSWER, not a new opinion:
+      // commit ac5e6181 ("the hill-climb hand-edited committed contracts …
+      // altitude's Plex families") put `font-family` into altitude's
+      // enriched contracts BY HAND, for exactly the parts this clause
+      // reaches. MEASURED: the 5 altitude parts whose family equals the
+      // control are the 5 altitude enriched contracts that carry a
+      // hand-added `font-family` (badge, button, chip, heading, link) — so
+      // this door REPRODUCES the hand-edit instead of leaving it to be
+      // silently erased by the next re-fuse.
+      // (the round-5c trio stays UNGUARDED — adding an `admit()` test to it
+      // would silently drop a channel the viewport-geometry door refused,
+      // which is a different change than this one and was not measured.)
       for (const ch of ['font-size', 'line-height', 'font-weight']) {
         if (!set.has(ch)) { set.add(ch); added.push(ch); }
       }
+      if (!set.has('font-family')) { set.add('font-family'); added.push('font-family'); }
       if (added.length > 0) {
-        receipts.push(`text-part-typography-carried: ${a.partNames[pi]} — ${added.join('/')} carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)`);
+        receipts.push(`text-part-typography-carried: ${a.partNames[pi]} — ${added.join('/')} carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)`);
+      }
+    }
+    // ALTITUDE LINK ROUND — A PAINTED TEXT DECORATION IS NEVER "FREE".
+    //
+    // The control-equality door drops a channel on the argument that the
+    // EMITTED element inherits the value for nothing. That argument needs
+    // two premises, and a painted `text-decoration-line` breaks both:
+    //
+    //  (1) the emitted DOM must reproduce the control's CONDITION. The <a>
+    //      control is rendered `<a href="#c">SAMPLE</a>` (capture.ts,
+    //      CONTROL_TAGS), so it matches `:any-link` and carries the UA's
+    //      underline. core/emit-html writes the root as `<a class="link">`
+    //      with NO href — not `:any-link`, UA rule never applies. MEASURED
+    //      on altitude Link at Variant=Lg: library ink 34x16, contract
+    //      render 32x14.
+    //  (2) the target must BE a DOM. Figma has no user agent: a channel the
+    //      contract does not record is a channel the canvas cannot draw.
+    //      `text-decoration-line` is a DECLARED_CHANNELS 'draw' verdict
+    //      (textDecoration = UNDERLINE), i.e. the canvas CAN draw it — but
+    //      only if the contract carries it.
+    //
+    // And the coincidence is not even UA provenance: altitude's own shadow
+    // stylesheet AUTHORS the value —
+    //   .al-c-link { text-decoration: var(--al-link-text-decoration, underline) }
+    // (altitude-web-components@1.0.2 dist/components/link/link.js). The
+    // fallback happens to equal the UA default, so control-equality read a
+    // LIBRARY-AUTHORED declaration as a browser freebie: a false negative,
+    // not a UA fact.
+    //
+    // The door is deliberately ASYMMETRIC on value, not on tag: `none` equal
+    // to the control is genuinely nothing to draw (no target paints a
+    // decoration by default), so dropping it still loses nothing and no
+    // `text-decoration-line: none` is minted anywhere. Only a value that
+    // PAINTS A MARK is re-admitted. MEASURED across every committed capture
+    // in extract/computed/out (all seven libraries): exactly ONE part in the
+    // whole corpus has a non-`none` text-decoration-line — altitude Link's
+    // root — so this widens the door by one fact and mints nothing else.
+    //
+    // SCOPED TO `text-decoration-line` ALONE, by measurement: the sibling
+    // longhands need no special case, because every control (span/div/
+    // button/a) computes the INITIAL `solid`/`auto` — a library that authors
+    // a non-default decoration style or thickness already DIFFERS from the
+    // control and walks through the ordinary door. Only `-line` collides,
+    // and only against the `<a>` control.
+    {
+      const ch = 'text-decoration-line';
+      const v = a.baseFlat[pi].node.style[ch];
+      if (!set.has(ch) && admit(ch) && v !== undefined && v !== '' && v !== 'none') {
+        set.add(ch);
+        receipts.push(
+          `painted-text-decoration-carried: ${a.partNames[pi]}.${ch} = ${v} — carried even though EQUAL to the <${tag}> control. Control-equality is a DOM-INHERITANCE argument ("the emitted element gets this for free") and it cannot justify dropping a decoration that must be PAINTED: the <a> control is rendered \`<a href="#c">\` (\`:any-link\`, so it carries the UA underline) while core/emit-html writes the root \`<a>\` with NO href, and the Figma canvas has no user agent at all. Equality with the control is therefore not evidence of UA provenance — the founding case (altitude Link) is a LIBRARY declaration, \`.al-c-link { text-decoration: var(--al-link-text-decoration, underline) }\`, whose fallback merely coincides with the UA default. \`none\` is still dropped by value: nothing paints a decoration by default, so the draws-nothing value costs nothing on any target.`,
+        );
       }
     }
     out.set(a.partNames[pi], set);
