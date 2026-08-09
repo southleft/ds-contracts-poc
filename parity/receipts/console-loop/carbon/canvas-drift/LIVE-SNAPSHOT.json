@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "kind": "console-loop-canvas-drift-snapshot",
+  "lane": "carbon",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "fileName": "DS Contracts Testing",
+  "mintedAt": "2026-08-09",
+  "mintedFrom": {
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge), fileKey pinned on every call",
+    "method": "getNodeByIdAsync on each stem's framing-pinned cellNodeId; boundVariables resolved through getLocalVariablesAsync + getLocalVariableCollectionsAsync so every binding carries the COLLECTION it landed in; TEXT descendants walked to depth 3 for fontName",
+    "note": "READ-ONLY. One self-cleaning probe frame ('__probe_delete_me') was created and removed inside the same figma_execute call to establish that setBoundVariable on paddingLeft/paddingRight lands on this file; nothing else was written."
+  },
+  "why": "The capture-framing pin (framing.json) asserts the committed SHOT is the live CELL. It cannot ask the prior question: is the live CELL the product of this lane's own committed emit script? For carbon it is not, on two stems. scripts/console-loop-canvas-drift-probe.mjs reads this snapshot against examples/carbon/figma/<stem>.figma.js and names the drift.",
+  "stems": {
+    "accordion": {
+      "cellNodeId": "60:10365",
+      "name": "Align=End, Size=Lg, State=Default",
+      "w": 328, "h": 98, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "HUG",
+      "bound": {
+        "width": { "name": "imported/accordion/root/width", "coll": "Carbon", "val": 328 },
+        "minWidth": { "name": "imported/shared/size-0", "coll": "Carbon", "val": 0 },
+        "minHeight": { "name": "imported/shared/size-0", "coll": "Carbon", "val": 0 }
+      },
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk (accordion label frames nest deeper)"
+    },
+    "button": {
+      "cellNodeId": "1:5368",
+      "name": "Kind=Primary, Size=Xs, State=Default",
+      "w": 79, "h": 24, "pl": 16, "pr": 16, "pt": 2, "pb": 2, "gap": 0,
+      "sizingH": "HUG", "sizingV": "FIXED",
+      "bound": {
+        "strokeTopWeight": { "name": "imported/button/root/border-top-width/primary", "coll": "Carbon", "val": 1 },
+        "strokeBottomWeight": { "name": "imported/button/root/border-bottom-width/primary", "coll": "Carbon", "val": 1 },
+        "strokeLeftWeight": { "name": "imported/button/root/border-left-width/primary", "coll": "Carbon", "val": 1 },
+        "strokeRightWeight": { "name": "imported/button/root/border-right-width/primary", "coll": "Carbon", "val": 1 },
+        "maxWidth": { "name": "imported/button/root/max-width", "coll": "Carbon", "val": 320 },
+        "minHeight": { "name": "imported/button/root/min-height/xs", "coll": "Carbon", "val": 24 },
+        "fills": { "name": "imported/button/root/background-color/primary", "coll": "Carbon", "val": "ALIAS VariableID:1:4123" },
+        "strokes": { "name": "imported/button/root/border-top-color/primary", "coll": "Carbon", "val": "rgba(0,0,0,0)" }
+      },
+      "fonts": [{ "node": "label", "chars": "Button", "family": "Inter", "style": "Regular", "size": 14, "w": 45, "h": 18 }]
+    },
+    "checkbox": {
+      "cellNodeId": "1:5547",
+      "name": "Checked=Unchecked",
+      "w": 136.359, "h": 20, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "width": { "name": "imported/checkbox/root/width", "coll": "Imported (provisional)", "val": 136.35899353027344, "ambiguous": true, "carbonValue": 288 },
+        "height": { "name": "imported/shared/size-20", "coll": "Imported (provisional)", "val": 20, "ambiguous": true, "carbonValue": 20 }
+      },
+      "descendantBound": {
+        "checkbox-label.paddingLeft": { "name": "imported/shared/size-20", "coll": "Imported (provisional)", "val": 20, "ambiguous": true },
+        "checkbox-label.paddingTop": { "name": "imported/shared/size-1", "coll": "Imported (provisional)", "val": 1, "ambiguous": true },
+        "checkbox-label.width": { "name": "imported/checkbox/checkbox-label/width", "coll": "Carbon", "val": 92.9218978881836 },
+        "checkbox-label.height": { "name": "imported/shared/size-20", "coll": "Imported (provisional)", "val": 20, "ambiguous": true },
+        "label.paddingLeft": { "name": "imported/checkbox/label/padding-left", "coll": "Carbon", "val": 10 }
+      },
+      "fonts": [{ "node": "label-text", "chars": "Checkbox", "family": "Inter", "style": "Regular", "size": 14, "w": 68, "h": 18 }]
+    },
+    "icon-button": {
+      "cellNodeId": "1:5580",
+      "name": "Kind=Primary, Size=Lg",
+      "w": 48, "h": 48, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "width": { "name": "imported/icon-button/root/width/lg", "coll": "Carbon", "val": 48 },
+        "height": { "name": "imported/icon-button/root/height/lg", "coll": "Carbon", "val": 48 }
+      },
+      "fonts": []
+    },
+    "inline-notification": {
+      "cellNodeId": "60:10198",
+      "name": "Kind=Error, Contrast=High",
+      "w": 346, "h": 48, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 13,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "itemSpacing": { "name": "imported/inline-notification/inline-notification-details/margin-right", "coll": "Carbon", "val": 13 },
+        "strokeTopWeight": { "name": "imported/inline-notification/root/border-top-width/high", "coll": "Carbon", "val": 0 },
+        "strokeBottomWeight": { "name": "imported/inline-notification/root/border-bottom-width/high", "coll": "Carbon", "val": 0 },
+        "strokeLeftWeight": { "name": "imported/inline-notification/root/border-left-width", "coll": "Carbon", "val": 3 },
+        "strokeRightWeight": { "name": "imported/inline-notification/root/border-right-width/high", "coll": "Carbon", "val": 0 },
+        "minWidth": { "name": "imported/inline-notification/root/min-width", "coll": "Carbon", "val": 288 },
+        "maxWidth": { "name": "imported/inline-notification/root/max-width", "coll": "Carbon", "val": 608 },
+        "minHeight": { "name": "imported/shared/size-48", "coll": "Carbon", "val": 48 },
+        "fills": { "name": "imported/inline-notification/root/background-color/error/high", "coll": "Carbon", "val": "#393939" }
+      },
+      "fonts": [
+        { "node": "label", "chars": "Notification title", "family": "Inter", "style": "Semi Bold", "size": 14, "w": 112, "h": 18 },
+        { "node": "label-2", "chars": "Notification subtitle", "family": "Inter", "style": "Regular", "size": 14, "w": 133, "h": 18 }
+      ]
+    },
+    "modal": {
+      "cellNodeId": "1:5848",
+      "name": "Size=Sm",
+      "w": 540, "h": 213.969, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "minWidth": { "name": "imported/shared/size-0", "coll": "Carbon", "val": 0 },
+        "fills": { "name": "imported/modal/root/background-color", "coll": "Carbon", "val": "rgba(0,0,0,0.6)" }
+      },
+      "fonts": [{ "node": "label-5-text", "chars": "Modal body copy for the Carbon round.", "family": "Inter", "style": "Regular", "size": 14, "w": 267, "h": 20 }]
+    },
+    "tabs": {
+      "cellNodeId": "1:5914",
+      "name": "State=Default",
+      "w": 328, "h": 40, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "width": { "name": "imported/tabs/root/width", "coll": "Carbon", "val": 328 },
+        "height": { "name": "imported/shared/size-40", "coll": "Carbon", "val": 40 },
+        "minWidth": { "name": "imported/shared/size-0", "coll": "Carbon", "val": 0 }
+      },
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk (tab labels nest under tabs__nav-item-label-wrapper)"
+    },
+    "tag": {
+      "cellNodeId": "1:5974",
+      "name": "Type=Blue, Size=Lg",
+      "w": 46, "h": 32, "pl": 12, "pr": 12, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "HUG", "sizingV": "HUG",
+      "bound": {
+        "paddingLeft": { "name": "imported/tag/root/padding-left/lg", "coll": "Carbon", "val": 12 },
+        "paddingRight": { "name": "imported/tag/root/padding-right/lg", "coll": "Carbon", "val": 12 },
+        "topLeftRadius": { "name": "imported/shared/size-16", "coll": "Carbon", "val": 16 },
+        "topRightRadius": { "name": "imported/shared/size-16", "coll": "Carbon", "val": 16 },
+        "bottomLeftRadius": { "name": "imported/shared/size-16", "coll": "Carbon", "val": 16 },
+        "bottomRightRadius": { "name": "imported/shared/size-16", "coll": "Carbon", "val": 16 },
+        "minWidth": { "name": "imported/tag/root/min-width", "coll": "Carbon", "val": 32 },
+        "maxWidth": { "name": "imported/tag/root/max-width", "coll": "Carbon", "val": 208 },
+        "minHeight": { "name": "imported/tag/root/min-height/lg", "coll": "Carbon", "val": 32 },
+        "fills": { "name": "imported/tag/root/background-color/blue", "coll": "Carbon", "val": "ALIAS VariableID:1:4358" }
+      },
+      "fonts": [{ "node": "label", "chars": "Tag", "family": "Inter", "style": "Regular", "size": 12, "w": 22, "h": 16 }]
+    },
+    "text-input": {
+      "cellNodeId": "1:6051",
+      "name": "Size=Lg, State=Default",
+      "w": 288, "h": 72, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "width": { "name": "imported/shared/size-288", "coll": "Carbon", "val": 288 },
+        "height": { "name": "imported/text-input/root/height/lg", "coll": "Carbon", "val": 72 },
+        "minWidth": { "name": "imported/shared/size-0", "coll": "Carbon", "val": 0 }
+      },
+      "fonts": [{ "node": "label", "chars": "Label", "family": "Inter", "style": "Regular", "size": 12, "w": 33, "h": 16 }]
+    },
+    "toggle": {
+      "cellNodeId": "1:6094",
+      "name": "Toggled=Untoggled, State=Default",
+      "w": 75.4688, "h": 57.9844, "pl": 0, "pr": 0, "pt": 0, "pb": 0, "gap": 0,
+      "sizingH": "FIXED", "sizingV": "FIXED",
+      "bound": {
+        "width": { "name": "imported/toggle/root/width/untoggled", "coll": "Carbon", "val": 75.46880340576172 },
+        "height": { "name": "imported/toggle/root/height", "coll": "Carbon", "val": 57.98440170288086 }
+      },
+      "fonts": [
+        { "node": "Toggle", "chars": "Toggle", "family": "Inter", "style": "Regular", "size": 12, "w": 40, "h": 16 },
+        { "node": "label-2", "chars": "Off", "family": "Inter", "style": "Regular", "size": 14, "w": 22, "h": 20 }
+      ]
+    }
+  },
+  "collisionProbe": {
+    "question": "does setBoundVariable land on padding fields in THIS file, or is the missing button padding a runtime refusal?",
+    "method": "self-cleaning frame: createFrame -> layoutMode HORIZONTAL -> setBoundVariable('paddingLeft'|'paddingRight'|'maxWidth') -> read back -> remove()",
+    "result": "ALL THREE LANDED (boundVariables = [paddingLeft, paddingRight, maxWidth]); zero exceptions. The missing button padding bindings are therefore NOT a runtime refusal — the live node was never produced by the committed spec.",
+    "sideFinding": "imported/button/root/padding-left exists in TWO collections — Astryx (12) and Carbon (15) — and imported/checkbox/root/width in Carbon (288) and 'Imported (provisional)' (136.359). The naive first-match resolution the probe used picked Astryx. The emitted runtime already guards this (FC-THEME-ISO: prefer the single collection covering the most of THIS script's referenced names), which is why the guard's absence is visible on the canvas as history, not as a live emitter bug."
+  }
+}

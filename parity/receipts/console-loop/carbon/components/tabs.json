@@ -49,7 +49,8 @@
       "FC-TAB-BAR-HEIGHT: against the real @carbon/react Tabs render pctAAMasked=11.07 (was 17.61), compositionOk=false — canvas 269x37 vs library 261x60.",
       "Label truncation and missing Carbon selected underline/bar treatment vs computed tabs pairs.",
       "Reference retargeted by reference audit 2026-08-08 from a hand crop (carbon/refs/tabs.png, 266x30) to the committed gate-shot it was cut from. The crop and the gate-shot have the SAME 262x26 ink, so the number does not move — what changes is that the reference is now a reproducible committed artifact instead of a hand-made one.",
-      "FC-REF-FRAMING: shot ink 269x37 vs reference ink 262x26 (aspectRatio 1.39). The extra 11px of canvas ink is the selected-tab underline bar the canvas draws below the tab row and the reference does not — i.e. the residual is the emit/underline gap named above, not the framing."
+      "FC-REF-FRAMING: shot ink 269x37 vs reference ink 262x26 (aspectRatio 1.39). The extra 11px of canvas ink is the selected-tab underline bar the canvas draws below the tab row and the reference does not — i.e. the residual is the emit/underline gap named above, not the framing.",
+      "FONT SUBSTRATE NOT ASSERTED on this stem: the live snapshot walks three levels and the tab labels nest under tabs__nav-item-label-wrapper, so no fontName was read. The lane-wide fact still holds (0 of 10 carbon contracts carry a font-family channel), but this stem carries no measurement of its own and none is claimed."
     ],
     "reference": "extract/computed/out/carbon/tabs/orig-shots/__default.png",
     "reviewSurface": "cream-#F8F4ED-component-set",

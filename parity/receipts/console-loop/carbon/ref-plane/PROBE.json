@@ -1,0 +1,658 @@
+{
+  "recordedAt": "2026-08-09T07:44:21.654Z",
+  "lane": "carbon",
+  "full": false,
+  "results": [
+    {
+      "stem": "accordion",
+      "cellName": "Align=End, Size=Lg, State=Default",
+      "cellTokens": [
+        "end",
+        "lg",
+        "default"
+      ],
+      "pinned": "end.lg.enabled__default",
+      "pinnedPct": 9.231921266581086,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": true,
+        "how": "figmaStatePreviews"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "end.sm.disabled__default",
+        "pctAAMasked": 4.408287705326033,
+        "pass": false
+      },
+      "contractDefaults": [
+        "end"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "end.lg.enabled__default",
+          "pctAAMasked": 9.231921266581086,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "164x44",
+          "realPx": "164x57"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "end.sm.disabled__default",
+          "pctAAMasked": 4.408287705326033,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "328x98",
+          "realPx": "164x17"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "end.lg.enabled__default",
+          "pctAAMasked": 8.935128518971847,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "172x44",
+          "realPx": "172x57"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "end.sm.disabled__default",
+          "pctAAMasked": 10.085429520645468,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "172x38",
+          "realPx": "172x49"
+        }
+      ],
+      "rowsElided": 30
+    },
+    {
+      "stem": "button",
+      "cellName": "Kind=Primary, Size=Xs, State=Default",
+      "cellTokens": [
+        "primary",
+        "xs",
+        "default"
+      ],
+      "pinned": "primary.xs.enabled__default",
+      "pinnedPct": 39.38172043010753,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": true,
+        "how": "figmaStatePreviews"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "primary.md.enabled__default",
+        "pctAAMasked": 5.959915611814346,
+        "pass": false
+      },
+      "contractDefaults": [
+        "primary",
+        "Button"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "primary.md.enabled__default",
+          "pctAAMasked": 5.959915611814346,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "79x24",
+          "realPx": "79x24"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.xs.enabled__default",
+          "pctAAMasked": 39.38172043010753,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "79x24",
+          "realPx": "124x24"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.md.enabled__default",
+          "pctAAMasked": 6.5400843881856545,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "79x24",
+          "realPx": "79x24"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.xs.enabled__default",
+          "pctAAMasked": 38.760504201680675,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "79x24",
+          "realPx": "119x24"
+        }
+      ],
+      "rowsElided": 222
+    },
+    {
+      "stem": "checkbox",
+      "cellName": "Checked=Unchecked",
+      "cellTokens": [
+        "unchecked"
+      ],
+      "pinned": "unchecked.enabled__default",
+      "pinnedPct": 19.6520618556701,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": false,
+        "how": "figma binding none"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "unchecked.enabled__default",
+        "pctAAMasked": 19.6520618556701,
+        "pass": false
+      },
+      "contractDefaults": [
+        "unchecked"
+      ],
+      "defaultsKey": "unchecked.enabled__default",
+      "defaultsPct": 19.6520618556701,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "checked.disabled__default",
+          "pctAAMasked": 30.283505154639172,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "97x16",
+          "realPx": "90x16"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "checked.enabled__default",
+          "pctAAMasked": 28.93041237113402,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "97x16",
+          "realPx": "90x16"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "indeterminate.disabled__default",
+          "pctAAMasked": 30.992268041237114,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "97x16",
+          "realPx": "90x16"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "indeterminate.enabled__default",
+          "pctAAMasked": 29.25257731958763,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "97x16",
+          "realPx": "90x16"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "unchecked.disabled__default",
+          "pctAAMasked": 20.618556701030926,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "97x16",
+          "realPx": "90x16"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "unchecked.enabled__default",
+          "pctAAMasked": 19.6520618556701,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "97x16",
+          "realPx": "90x16"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "checked.disabled__default",
+          "pctAAMasked": 23.38917525773196,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "97x16",
+          "realPx": "96x16"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "checked.enabled__default",
+          "pctAAMasked": 23.38917525773196,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "97x16",
+          "realPx": "96x16"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "indeterminate.disabled__default",
+          "pctAAMasked": 23.38917525773196,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "97x16",
+          "realPx": "96x16"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "indeterminate.enabled__default",
+          "pctAAMasked": 23.38917525773196,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "97x16",
+          "realPx": "96x16"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "unchecked.disabled__default",
+          "pctAAMasked": 31.439393939393938,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "66x12",
+          "realPx": "66x12"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "unchecked.enabled__default",
+          "pctAAMasked": 31.439393939393938,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "66x12",
+          "realPx": "66x12"
+        }
+      ]
+    },
+    {
+      "stem": "icon-button",
+      "cellName": "Kind=Primary, Size=Xs",
+      "cellTokens": [
+        "primary",
+        "xs"
+      ],
+      "pinned": "primary.unset.enabled__default",
+      "pinnedPct": 2.083333333333333,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "primary.xs.enabled__default",
+        "pctAAMasked": 1.7361111111111112,
+        "pass": true
+      },
+      "contractDefaults": null,
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "primary.unset.enabled__default",
+          "pctAAMasked": 2.083333333333333,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "24x24",
+          "realPx": "24x24"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "primary.xs.enabled__default",
+          "pctAAMasked": 1.7361111111111112,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "24x24",
+          "realPx": "24x24"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.unset.enabled__default",
+          "pctAAMasked": 15.776909722222221,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "24x24",
+          "realPx": "96x48"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "primary.xs.enabled__default",
+          "pctAAMasked": 20.86226851851852,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "24x24",
+          "realPx": "72x48"
+        }
+      ],
+      "rowsElided": 78
+    },
+    {
+      "stem": "inline-notification",
+      "cellName": "Kind=Error, Contrast=High",
+      "cellTokens": [
+        "error",
+        "high"
+      ],
+      "pinned": "error.high__default",
+      "pinnedPct": 25.09735202492212,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "info-square.high__default",
+        "pctAAMasked": 25.004867601246104,
+        "pass": false
+      },
+      "contractDefaults": null,
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "error.high__default",
+          "pctAAMasked": 25.09735202492212,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "346x48",
+          "realPx": "428x48"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "info-square.high__default",
+          "pctAAMasked": 25.004867601246104,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "346x48",
+          "realPx": "428x48"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "error.high__default",
+          "pctAAMasked": 25.31152647975078,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "346x48",
+          "realPx": "428x48"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "info-square.high__default",
+          "pctAAMasked": 25.233644859813083,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "346x48",
+          "realPx": "428x48"
+        }
+      ],
+      "rowsElided": 22
+    },
+    {
+      "stem": "modal",
+      "cellName": "Size=Xs",
+      "cellTokens": [
+        "xs"
+      ],
+      "pinned": "modal",
+      "pinnedPct": 14.631549453628468,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "lg__default",
+        "pctAAMasked": 82.88866666666667,
+        "pass": false
+      },
+      "contractDefaults": [
+        "Modal body copy for the Carbon round."
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "lg__default",
+          "pctAAMasked": 82.88866666666667,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "432x215",
+          "realPx": "900x1000"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "lg__default",
+          "pctAAMasked": 22.84722222222222,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "216x108",
+          "realPx": "320x80"
+        }
+      ],
+      "rowsElided": 8
+    },
+    {
+      "stem": "tabs",
+      "cellName": "State=Default",
+      "cellTokens": [
+        "default"
+      ],
+      "pinned": "__default",
+      "pinnedPct": 11.047087980173483,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "__default",
+        "pctAAMasked": 11.047087980173483,
+        "pass": false
+      },
+      "contractDefaults": [],
+      "defaultsKey": "__default",
+      "defaultsPct": 11.047087980173483,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "__default",
+          "pctAAMasked": 11.047087980173483,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "269x37",
+          "realPx": "261x60"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "__default",
+          "pctAAMasked": 17.5926856224254,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "269x37",
+          "realPx": "262x26"
+        }
+      ],
+      "rowsElided": 1
+    },
+    {
+      "stem": "tag",
+      "cellName": "Type=Blue, Size=Lg",
+      "cellTokens": [
+        "blue",
+        "lg"
+      ],
+      "pinned": "blue.lg__default",
+      "pinnedPct": 2.8532608695652173,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "blue.lg__default",
+        "pctAAMasked": 2.8532608695652173,
+        "pass": true
+      },
+      "contractDefaults": [
+        "Tag"
+      ],
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "blue.lg__default",
+          "pctAAMasked": 2.8532608695652173,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "46x32",
+          "realPx": "44x32"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "blue.lg__default",
+          "pctAAMasked": 76.03665865384616,
+          "compositionOk": false,
+          "pass": false,
+          "canvasPx": "46x32",
+          "realPx": "208x32"
+        }
+      ],
+      "rowsElided": 103
+    },
+    {
+      "stem": "text-input",
+      "cellName": "Size=Lg, State=Default",
+      "cellTokens": [
+        "lg",
+        "default"
+      ],
+      "pinned": "lg.enabled__default",
+      "pinnedPct": 5.257936507936508,
+      "statePlane": null,
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "lg.disabled__default",
+        "pctAAMasked": 2.123015873015873,
+        "pass": true
+      },
+      "contractDefaults": null,
+      "defaultsKey": null,
+      "defaultsPct": null,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "lg.disabled__default",
+          "pctAAMasked": 2.123015873015873,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "144x35",
+          "realPx": "144x35"
+        },
+        {
+          "kind": "orig-shots",
+          "key": "lg.enabled__default",
+          "pctAAMasked": 5.257936507936508,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "144x35",
+          "realPx": "144x35"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "lg.disabled__default",
+          "pctAAMasked": 4.722222222222222,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "144x35",
+          "realPx": "144x35"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "lg.enabled__default",
+          "pctAAMasked": 4.722222222222222,
+          "compositionOk": true,
+          "pass": true,
+          "canvasPx": "144x35",
+          "realPx": "144x35"
+        }
+      ],
+      "rowsElided": 18
+    },
+    {
+      "stem": "toggle",
+      "cellName": "Toggled=Untoggled, State=Default",
+      "cellTokens": [
+        "untoggled",
+        "default"
+      ],
+      "pinned": "untoggled.enabled__default",
+      "pinnedPct": 6.505847953216374,
+      "statePlane": {
+        "prop": "disabled",
+        "state": "disabled",
+        "canvasExpressible": true,
+        "how": "figmaStatePreviews"
+      },
+      "crossPlane": false,
+      "repinKey": null,
+      "repinPct": null,
+      "crossPlaneTokens": [],
+      "bestOrig": {
+        "key": "untoggled.enabled__default",
+        "pctAAMasked": 6.505847953216374,
+        "pass": false
+      },
+      "contractDefaults": [
+        "untoggled"
+      ],
+      "defaultsKey": "untoggled.enabled__default",
+      "defaultsPct": 6.505847953216374,
+      "rows": [
+        {
+          "kind": "orig-shots",
+          "key": "untoggled.enabled__default",
+          "pctAAMasked": 6.505847953216374,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "76x53",
+          "realPx": "75x54"
+        },
+        {
+          "kind": "gate-shots",
+          "key": "untoggled.enabled__default",
+          "pctAAMasked": 6.798245614035088,
+          "compositionOk": true,
+          "pass": false,
+          "canvasPx": "76x53",
+          "realPx": "76x54"
+        }
+      ],
+      "rowsElided": 7
+    }
+  ]
+}

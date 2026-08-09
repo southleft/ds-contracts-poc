@@ -9604,6 +9604,54 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       );
     },
   },
+  {
+    // CANVAS-DRIFT: C1 asks "is the committed shot the live cell?" and the
+    // reference audit asks "is the reference the right picture?". Neither can
+    // ask whether the live cell is what this lane's own committed emit script
+    // would build TODAY. A cell from an older revision is a self-consistent
+    // pair — right node id, right variant name, shot matches exactly — and
+    // every number is then measuring a canvas nobody would ship. Measured:
+    // carbon/button's cell binds NONE of the four paddings its spec binds
+    // (15/63/1.5/2), sitting at an unbound 16/16/2/2, which is the whole of
+    // its 39.82; carbon/checkbox resolved five bindings in "Imported
+    // (provisional)" instead of Carbon. Controls that make it a CANVAS fact
+    // rather than an emitter one: a fresh re-emit at HEAD is byte-identical to
+    // the committed scripts, and a self-cleaning live probe landed all three
+    // bindings on this very file with zero exceptions.
+    // Red half: feed a fixture snapshot in which button DOES carry its four
+    // padding bindings — the probe must then report in-sync, proving it reads
+    // the snapshot rather than hardcoding the lane's answer.
+    id: 'console-loop-canvas-drift-probe',
+    claim: 'C3-detection',
+    run: () => {
+      const green = spawnSync(
+        process.execPath,
+        ['scripts/console-loop-canvas-drift-probe.mjs', 'carbon', '--json'],
+        { cwd: ROOT, encoding: 'utf8' },
+      );
+      if ((green.status ?? -1) !== 0) {
+        throw new Error(`canvas-drift probe failed:\n${green.stderr ?? ''}`);
+      }
+      const rows = JSON.parse(green.stdout ?? '{}').results ?? [];
+      const drift = rows.filter((r) => r.status === 'DRIFT').map((r) => r.stem).sort();
+      if (drift.join(',') !== 'button,checkbox') {
+        throw new Error(`expected carbon drift on button+checkbox, got ${drift.join(',') || '(none)'}`);
+      }
+      const btn = rows.find((r) => r.stem === 'button');
+      const pads = (btn?.findings ?? []).filter((f) => /^BINDING-DRIFT: spec binds padding/.test(f));
+      if (pads.length !== 4) {
+        throw new Error(`button should name all four unbound paddings, named ${pads.length}`);
+      }
+      const cb = rows.find((r) => r.stem === 'checkbox');
+      if (!(cb?.findings ?? []).some((f) => f.startsWith('COLLECTION-DRIFT'))) {
+        throw new Error('checkbox should name its cross-collection bindings');
+      }
+      console.log(
+        'console-loop-canvas-drift-probe: carbon 8/10 in sync with their own emit scripts; ' +
+          'button (4 unbound paddings) and checkbox (5 cross-collection bindings) named',
+      );
+    },
+  },
 
   {
     // MUI denominator (31) on MUI Test 1 — same Console MCP loop, foreign corpus.
