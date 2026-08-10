@@ -109,6 +109,22 @@ the rt10/rt11 re-emissions (59 figma-sync files).
      NOTE altitude/heading and altitude/link are already on the caveated-pass
      list below — a silent height loss is a candidate explanation for both, so
      fix this before re-examining them.
+     **HYPOTHESIS FOR THE FIX, NOT YET VERIFIED — instrument fuse before
+     trusting it.** There are two doors and width appears to fall between them.
+     fuse.ts:2390 (`b.ref === null`, UNCORRELATED) carries a BASE-PLANE LITERAL
+     for exactly `BASE_FALLBACK_CHANNELS ∩ LITERAL_CHANNELS` — which width and
+     height are in — but it is guarded on
+     `baseOcc = obs.occurrences.find(o => o.variant === space.baseComboKey)`
+     being defined. If the observation stream is built from DELTAS, the base
+     combo contributes no occurrence and `baseOcc` is undefined, so that door
+     never opens. Meanwhile the CORRELATED door sees only {small:40, medium:48}
+     — large is missing for the same delta reason — so a 3-value size axis
+     looks partial and is refused. Result: neither door, and no receipt.
+     Border-radius reaching tokensByProp with all three values (incl. the
+     base-equal large=28) is the counter-example that should tell you which
+     door actually works and why. CONFIRM BY INSTRUMENTING, not by reading —
+     this exact style of reasoning-from-the-comment is what produced a wrong
+     conflict measurement earlier this session.
    - **select / table-pagination DO declare overflow** and the clip landed on
      inner parts, not the cell ROOT, so render is unchanged. Find why the root
      part does not carry it.
