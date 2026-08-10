@@ -271,8 +271,27 @@ probe+pin. Where each residual stands as of this handoff:
      NOTE altitude/heading and altitude/link are already on the caveated-pass
      list below — a silent height loss is a candidate explanation for both, so
      fix this before re-examining them.
-     **CAUSE FOUND. IT IS ONE FACT: `width` AND `height` ARE NOT IN
-     `TOKEN_CHANNELS`.** Checked the registry directly
+     **RETRACTED — THAT "CAUSE" WAS A BAD TEST, NOT A FINDING. width AND
+     height ARE IN TOKEN_CHANNELS.** The registry writes them as BARE
+     IDENTIFIERS under a `// -- box --` heading:
+         width: drawn("a fixed width.")
+         height: drawn("a fixed height.")
+         "min-width": drawn("minWidth.")
+     My membership test searched for the QUOTED key `"width"` and reported
+     absent. The quoted neighbours ("min-width", the radii) matched, which made
+     the false negative look like a clean signal. Read the block, do not probe
+     it with a string match.
+     SO THE MINT *CAN* CARRY width/height, AND THE CAUSE IS STILL OPEN. What is
+     still true and still measured: replay delivers 56x56 / 40x40 / 48x48 to the
+     fuse mint loop, border-radius carries per-size from the same part on the
+     same axis, and width/height reach neither contract nor ledger. The control
+     stands; only my explanation of it was wrong.
+     NEXT: instrument the mint for fab root width vs border-radius side by side
+     and find where they diverge. That means an actual log line inside fuse, not
+     another registry inspection.
+
+     **SUPERSEDED (kept as the record of a dead hypothesis) — width/height and
+     TOKEN_CHANNELS:** Checked the registry directly
      (packages/schema/src/contract-schema.ts):
          "width"       absent        "border-radius"           PRESENT
          "height"      absent        "border-top-left-radius"  PRESENT
