@@ -122,7 +122,19 @@ the rt10/rt11 re-emissions (59 figma-sync files).
      looks partial and is refused. Result: neither door, and no receipt.
      Border-radius reaching tokensByProp with all three values (incl. the
      base-equal large=28) is the counter-example that should tell you which
-     door actually works and why. CONFIRM BY INSTRUMENTING, not by reading —
+     door actually works and why.
+     **THE LOSS IS INSIDE FUSE — promote/curation is ELIMINATED.** Checked
+     fuse's own output: `extract/computed/out/mui/fab/enriched.contract.json`
+     already mentions width and height ZERO times (min-height once), root
+     `literals` is null, and its size map holds only the four radii. So the
+     fact never leaves fuse; nothing downstream dropped it. Search fuse only.
+     One more lead worth checking first: fuse.ts:1784 turns an absent value in
+     ANY combo into `unk` ("unmintable"), which would explain a channel that is
+     observed on two of three sizes vanishing wholesale — but fab's
+     `codeOnlyChannels` has only 2 entries and width/height are not among them,
+     so if that IS the path, the codeOnly receipt is ALSO not being written,
+     which is a second defect on top of the first.
+     CONFIRM BY INSTRUMENTING, not by reading —
      this exact style of reasoning-from-the-comment is what produced a wrong
      conflict measurement earlier this session.
    - **select / table-pagination DO declare overflow** and the clip landed on
