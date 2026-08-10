@@ -8,7 +8,7 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 73,
+    "pctExactUnmasked": 73.0625,
     "pctAAUnmasked": 59.12500000000001,
     "pctAAMasked": 59.12500000000001,
     "maskCoveragePct": 0,
@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/mui/avatar/orig-shots/circular__default.png",
   "referenceSha256": "ed11fe7eaf22b9438f142dc7d7cf1f278df18e7252123220a140a88004745192",
   "canvasShot": "parity/receipts/console-loop/mui/shots/avatar-cell.png",
-  "canvasShotSha256": "d46061c9313b2a80410e9da0a969bb31358de289045a02e3a3142e6bb9c2ac26",
+  "canvasShotSha256": "297f81f9f09c6d410228856f94b8590d0b4fc61185eb24f828fc1640b5f4c89f",
   "diff": "parity/receipts/console-loop/mui/scores/avatar.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/avatar.json",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "composition mismatch (scaleRatio=2.86, inkDelta=64.7) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-09T03:33:11.935Z"
+  "recordedAt": "2026-08-10T18:45:02.499Z"
 }

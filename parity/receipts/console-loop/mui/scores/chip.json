@@ -1,7 +1,7 @@
 {
   "version": 3,
   "status": "fail",
-  "matchDeveloped": true,
+  "matchDeveloped": false,
   "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
@@ -9,18 +9,18 @@
   },
   "metrics": {
     "pctExactUnmasked": 42.52450980392157,
-    "pctAAUnmasked": 0.7352941176470588,
-    "pctAAMasked": 0.7352941176470588,
+    "pctAAUnmasked": 0.6127450980392157,
+    "pctAAMasked": 0.6127450980392157,
     "maskCoveragePct": 0,
     "canvasPx": "51x20",
     "realPx": "50x32",
-    "inkCanvasPct": 58.27205882352941,
+    "inkCanvasPct": 58.333333333333336,
     "inkRealPct": 85.5392156862745
   },
   "reference": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png",
   "referenceSha256": "0f99801e0fb9adaa76a4c0926c85d4e0340e6aaa39004672733e25e40942567c",
   "canvasShot": "parity/receipts/console-loop/mui/shots/chip-cell.png",
-  "canvasShotSha256": "f0a1305e19b212531d53dc0131d16dbea0181482ed85271dc552df98e17879be",
+  "canvasShotSha256": "2db08817ac7353800ebed90d154f83198f657308e221dcca58773a7a9e1438d8",
   "diff": "parity/receipts/console-loop/mui/scores/chip.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/chip.json",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1.6,
-  "inkDelta": 27.26715686274509,
+  "inkDelta": 27.205882352941167,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.60, inkDelta=27.3) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-09T03:33:13.633Z"
+  "note": "composition mismatch (scaleRatio=1.60, inkDelta=27.2) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-10T18:45:02.200Z"
 }

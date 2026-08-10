@@ -153,7 +153,13 @@
       "cellName": "Max width=Lg",
       "setNodeId": "21:448",
       "cellW": 424,
-      "cellH": 123
+      "cellH": 123,
+      "cellOverhang": {
+        "fc": "FC-EFFECT-BLEED",
+        "renderW": 468,
+        "renderH": 169,
+        "why": "measured on the live cell: the descendant `dialog-paper` carries THREE DROP_SHADOWs (radius 15 / 38 / 46) \u2014 MUI Dialog's elevation-24 \u2014 which expand the export from the 424x123 layout box to 468x169. Same class as mui/snackbar. Conceals nothing: this stem's scorecard FAILS at 94.61 and its receipt is fail-closed with named defects, so the overhang entry is not standing in for an unmeasured defect \u2014 it only stops C1 calling an honest render-box capture a wrong-cell shot."
+      }
     },
     "divider": {
       "cellNodeId": "83:1607",
