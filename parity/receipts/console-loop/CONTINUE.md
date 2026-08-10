@@ -1,10 +1,23 @@
 # CONTINUE — freeze-board fidelity, feat/beta-rounds
 
-BOARD: foreign 18/77 (alt 4/8, astryx 1/11, carbon 3/10, mui 4/31, polaris 4/12,
-tailwind 3/5). first-party 11/54. Unlike the 18 this session opened with, every
-one is now backed by an emitter-built node and a CURRENT capture — the fake
-divider pass and the stale-shot table pass are both gone, and divider +
-linear-progress replaced them honestly.
+BOARD — RE-DERIVED FROM THE ARTIFACTS, AND "18/77" WAS NEITHER OF THE TWO REAL
+NUMBERS. It was inherited, I repeated it, and counting the files says:
+
+  SCORECARD passes (scores/<stem>.json status=pass):   19/77
+    alt 4/8  astryx 1/11  carbon 3/10  mui 4/31  polaris 4/12  tailwind 3/5
+  CLAIMED passes (components/<stem>.json visual.ok):   17/77
+    alt 4    astryx 0     carbon 3     mui 3     polaris 4     tailwind 3
+
+The per-lane figures the old header listed sum to 19, while its headline said
+18 — the arithmetic never matched its own row. The 2-stem gap between the two
+columns is REAL and is the honest state, not an error: mui/checkbox and
+astryx's one scorecard-pass have PASSING scorecards whose receipts still stand
+fail-closed. A scorecard is permission to claim a pass; it is not the claim.
+Quote which number you mean. first-party 11/54 (unre-derived this session).
+
+Every one of the 19 is now backed by an emitter-built node and a CURRENT
+capture — the fake divider pass and the stale-shot table pass are both gone,
+and divider + linear-progress replaced them honestly.
 
 HEAD: d4dbc91b. RUNTIME_EMIT_REV rt12-birthbox-declared-layout-only.
 Gates: plugin-engine-check GREEN, figma-scripts-fresh 8/8, 7/7 genesis batches
