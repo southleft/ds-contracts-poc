@@ -1,5 +1,44 @@
 # CONTINUE — freeze-board fidelity, feat/beta-rounds
 
+## BLOCKED ON ONE MEASURED FUSE DECISION — NEEDS A HUMAN FORK
+
+Claimed passes moved 17 -> 19 this wave (mui 3 -> 5: checkbox re-earned,
+autocomplete 8.93 -> 3.87), both by rebuild-then-pin, both flipped on a
+scorecard. That lever is now EXHAUSTED for mui: six more stems rebuilt, zero
+flipped, and the reason is measured rather than assumed (see below).
+
+**THE FORK.** Further foreign-board movement runs into ONE decision, already
+localised, at `extract/computed/fuse.ts:555-565`. It excludes geometry channels
+(width/height/insets) from fusion as environment-dependent, admitting them only
+for absolute-cluster parts, table cells and the block-root/overlay doors. It is
+a DELIBERATE refusal, named FC-GEOMETRY-EXCLUDED on 2026-08-09 in
+`mui/components/fab.json`, and the census is 15 findings across 10 stems in 6
+libraries (BASE-EQUAL-GEOMETRY-SWEEP.json — name now retired to
+FC-GEOMETRY-EXCLUDED per instruction).
+
+  Option A — RELAX the exclusion so roots carry their captured box.
+    Unblocks chip (0.61 pctAA, failing ONLY on compositionOk 51x20 vs 50x32),
+    fab, avatar, icon-button and the wider 15.
+    HAZARD, and it is why this is a human call: relaxing this exclusion is the
+    change that previously minted the capture WINDOW as tokens in four of six
+    libraries. It must be done with `viewportDerivedRefusals` held, in its own
+    round, with a full suite.
+  Option B — KEEP the exclusion and make it LOUD. It is currently silent for 14
+    of the 15 (only fab's receipt names it). Emitting a codeOnly/ledger entry
+    per drop closes the honesty gap, changes NO geometry, and is safe.
+    It will NOT move the board.
+
+A raises claimed passes and risks a known regression class; B moves nothing and
+is safe. That trade is not mine to pick.
+
+**ALSO BLOCKING, and not an emitter defect:** mui/alert, mui/badge and
+mui/text-field CANNOT BE REBUILT on MUI Test 1 — each refuses by name with
+"duplicate ds_contracts/contractId on N component targets — refusing ambiguous
+identity". Canvas hygiene: de-duplicate those component targets in the file and
+three more stems become measurable.
+
+
+
 BOARD — RE-DERIVED FROM THE ARTIFACTS, AND "18/77" WAS NEITHER OF THE TWO REAL
 NUMBERS. It was inherited, I repeated it, and counting the files says:
 
