@@ -9887,7 +9887,16 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         // the Desktop Bridge before the capture, so in-sync is by construction, not
         // luck. The remaining 30 stay pending until each is rebuilt the same way —
         // pinning an unrebuilt cell could surface real drift, which throws.
-        mui: { sync: 1, drift: [], cellPending: 30 },
+        //
+        // 2026-08-10: cellPending 30 -> 0. The bridge DID reach fileKey
+        // 59mLQlOMiD5w5za6SUcoO5 this session, so all 31 cells are pinned live in
+        // framing.json and capture-framing C1 is asserted on every one of them.
+        // The 30 did not become clean — they moved from CELL-pending (nothing
+        // pinned the cell at all) to SNAPSHOT-pending (the cell is pinned; no
+        // LIVE-SNAPSHOT entry exists yet), which this record does not count and
+        // the probe prints. Leaving the old 30 here would have asserted a
+        // blindness that is over.
+        mui: { sync: 1, drift: [], cellPending: 0 },
       };
       const probe = (lane: string): DriftRow[] => {
         const r = spawnSync(

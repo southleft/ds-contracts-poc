@@ -9,10 +9,27 @@ linear-progress replaced them honestly.
 HEAD: 3c745d20. RUNTIME_EMIT_REV rt11-overflow-clip-drawn.
 Gates: plugin-engine-check GREEN, figma-scripts-fresh 8/8, 7/7 genesis batches
 mock-proven, console-loop-mui-evidence-check GREEN (31/31, ratchet 4).
-console-loop-capture-framing-check EXITS NON-ZERO — 6 named C1 violations, see
-below. A FULL `npx tsx evals/run.ts` was still RUNNING at handoff and its result
-is UNVERIFIED — run it first. `npm run golden:update` was already applied for
-the rt10/rt11 re-emissions (59 figma-sync files).
+FULL SUITE: 218/224 measured this session. `npm run golden:update` and
+`npm run capability:report` already applied.
+
+THE 6 SUITE FAILURES, triaged — MOST ARE NOT FROM THIS SESSION:
+- `mui-figma-genesis` (switch-track expected 34x14, found 1x1) — **PRE-EXISTING.
+  Proven**: stashed everything, checked out db4c90ae's (this session's OWN start
+  commit) mock + switch.figma.js, and the pin fails there identically. The old
+  CONTINUE named only capture-framing as red; that was incomplete.
+- `child-wider-ratchet-and-script-freshness` — pre-existing (astryx textCaused
+  33, the corpus-wide text-wrapping gap, docs/22).
+- `console-loop-capture-framing-pin` + `console-loop-reference-content-checks` —
+  pre-existing astryx FC-REF-FRAMING, PLUS the 6 new mui C1 violations below.
+  C1 is never waivable; these must be fixed, not narrated.
+- `capability-report-is-fresh` — was mine (I edited the capability matrix);
+  FIXED by `npm run capability:report`.
+- `console-loop-canvas-drift-probe` — was mine; FIXED. It asserted "mui: 30
+  cell-pending", which encoded the blindness C1 just ended. The 30 did not
+  become clean, they moved to SNAPSHOT-pending (cell pinned, no LIVE-SNAPSHOT
+  entry). Expectation re-derived to 0 with that written down.
+A `npx tsx evals/run.ts` was RUNNING at handoff to confirm the last two fixes —
+its result is UNVERIFIED, run it first.
 
 ## CLOSED THIS SESSION
 
