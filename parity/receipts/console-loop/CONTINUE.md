@@ -192,8 +192,12 @@ RUN THE FULL SUITE FIRST and confirm 220/224.
      keys are line-height and min-height. width/height appear in no ledger, no
      codeOnly, no receipt. Must end CARRIED or LEDGERED — silent is the one
      outcome that is not allowed.
-     **THE SWEEP IS DONE AND FAB IS NOT ALONE: 15 silent geometry losses across
-     10 stems in 6 libraries.** `node scripts/base-equal-geometry-sweep.mjs`
+     **FC-BASE-EQUAL-GEOMETRY-DROPPED — 15 silent geometry losses across
+     10 stems in 6 libraries; fab is the exemplar, not the exception.**
+     PROBE: `node scripts/base-equal-geometry-sweep.mjs`. PIN: the committed
+     receipt BASE-EQUAL-GEOMETRY-SWEEP.json carries, per finding, the observed
+     per-axis values and the base value they were measured against, plus the
+     locus (INSIDE fuse) and the stated caveat. `node scripts/base-equal-geometry-sweep.mjs`
      (receipt committed at BASE-EQUAL-GEOMETRY-SWEEP.json). It reports a
      geometry channel that is observed on SOME axis values, absent on at least
      one other, and present in NEITHER the contract NOR the extension ledger:

@@ -1,7 +1,14 @@
 {
+ "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
+ "what": "A geometry channel OBSERVED on some axis values, ABSENT on at least one other (typically the value that equals BASE, which therefore contributes no delta), and present in NEITHER the shipped contract NOR the extension ledger. Captured, carried nowhere, named nowhere.",
+ "probe": "node scripts/base-equal-geometry-sweep.mjs",
+ "pin": "Each finding carries the observed per-axis values and the base value it was measured against. The exemplar is mui/fab: captured-truth /base/root/style = 56x56, deltas small 40x40 / medium 48x48, large ABSENT because large IS the base; the contract carries no width and no height, and fab.extension.json codeOnlyChannels holds only transition-behavior and vertical-align.",
+ "locus": "INSIDE fuse — extract/computed/out/<lib>/<stem>/enriched.contract.json (fuse OWN output) already lacks the channel, so promote/curation is eliminated.",
+ "caveat": "missingOn often includes the `unset` axis value, which equals base by construction, so a subset may be genuinely uniform channels that deserve a ledger line rather than a per-axis map. What is NOT in question is that none of these is carried OR named today.",
  "count": 15,
  "findings": [
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "altitude",
    "stem": "button",
    "channel": "width",
@@ -10,6 +17,7 @@
    "base": "83.5312px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "altitude",
    "stem": "button",
    "channel": "height",
@@ -18,6 +26,7 @@
    "base": "40px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "altitude",
    "stem": "chip",
    "channel": "width",
@@ -26,6 +35,7 @@
    "base": "52.7969px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "altitude",
    "stem": "chip",
    "channel": "height",
@@ -34,6 +44,7 @@
    "base": "28px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "altitude",
    "stem": "heading",
    "channel": "height",
@@ -42,6 +53,7 @@
    "base": "28px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "altitude",
    "stem": "iconclose",
    "channel": "height",
@@ -50,6 +62,7 @@
    "base": "16px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "altitude",
    "stem": "link",
    "channel": "width",
@@ -58,6 +71,7 @@
    "base": "29.3594px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "altitude",
    "stem": "link",
    "channel": "height",
@@ -66,6 +80,7 @@
    "base": "24px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "astryx",
    "stem": "token",
    "channel": "height",
@@ -74,6 +89,7 @@
    "base": "24px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "carbon",
    "stem": "button",
    "channel": "width",
@@ -82,6 +98,7 @@
    "base": "123.5px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "fluent",
    "stem": "dialog",
    "channel": "width",
@@ -90,6 +107,7 @@
    "base": "1100px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "fluent",
    "stem": "dialog",
    "channel": "height",
@@ -98,6 +116,7 @@
    "base": "0px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "mui",
    "stem": "fab",
    "channel": "width",
@@ -106,6 +125,7 @@
    "base": "56px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "mui",
    "stem": "fab",
    "channel": "height",
@@ -114,6 +134,7 @@
    "base": "56px"
   },
   {
+   "fc": "FC-BASE-EQUAL-GEOMETRY-DROPPED",
    "lib": "shadcn",
    "stem": "card",
    "channel": "height",

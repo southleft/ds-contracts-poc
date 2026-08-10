@@ -53,6 +53,7 @@ for (const lib of readdirSync(OUT).filter((d) => !d.startsWith('.'))) {
       const inLedger = extTxt.includes(`"${g}"`);
       if (inContract || inLedger) continue; // carried or named — fine
       findings.push({
+        fc: 'FC-BASE-EQUAL-GEOMETRY-DROPPED',
         lib, stem, channel: g,
         observedOn: seen.map((a) => `${a}=${byAxis[a][g]}`).join(' '),
         missingOn: missing.join(','),
@@ -62,4 +63,21 @@ for (const lib of readdirSync(OUT).filter((d) => !d.startsWith('.'))) {
   }
 }
 findings.sort((a, b) => (a.lib + a.stem).localeCompare(b.lib + b.stem));
-console.log(JSON.stringify({ count: findings.length, findings }, null, 1));
+console.log(JSON.stringify({
+  fc: 'FC-BASE-EQUAL-GEOMETRY-DROPPED',
+  what: 'A geometry channel OBSERVED on some axis values, ABSENT on at least one other '
+      + '(typically the value that equals BASE, which therefore contributes no delta), and present in '
+      + 'NEITHER the shipped contract NOR the extension ledger. Captured, carried nowhere, named nowhere.',
+  probe: 'node scripts/base-equal-geometry-sweep.mjs',
+  pin: 'Each finding carries the observed per-axis values and the base value it was measured against. '
+     + 'The exemplar is mui/fab: captured-truth /base/root/style = 56x56, deltas small 40x40 / medium 48x48, '
+     + 'large ABSENT because large IS the base; the contract carries no width and no height, and '
+     + 'fab.extension.json codeOnlyChannels holds only transition-behavior and vertical-align.',
+  locus: 'INSIDE fuse — extract/computed/out/<lib>/<stem>/enriched.contract.json (fuse OWN output) already '
+       + 'lacks the channel, so promote/curation is eliminated.',
+  caveat: 'missingOn often includes the `unset` axis value, which equals base by construction, so a subset '
+        + 'may be genuinely uniform channels that deserve a ledger line rather than a per-axis map. What is '
+        + 'NOT in question is that none of these is carried OR named today.',
+  count: findings.length,
+  findings,
+}, null, 1));
