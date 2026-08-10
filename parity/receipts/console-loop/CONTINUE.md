@@ -271,6 +271,30 @@ probe+pin. Where each residual stands as of this handoff:
      NOTE altitude/heading and altitude/link are already on the caveated-pass
      list below — a silent height loss is a candidate explanation for both, so
      fix this before re-examining them.
+     **STOP — THE BASE-EQUAL-DELTA THEORY IS PROBABLY WRONG. READ THIS FIRST.**
+     `extract/computed/replay.ts:148` starts each combo from
+     `structuredClone(truth.base.root)` and then applies that combo's deltas on
+     top (`:156`, `node.style[k] = v`). So a channel ABSENT from a delta
+     RETAINS THE BASE VALUE — it is not undefined. For MUI Fab that means
+     `el.node.style.width` is "56px" on the large combos, and the channel is
+     fully observed as small 40 / medium 48 / large 56.
+     If that is right (INSTRUMENT IT — one log line in the fuse mint loop for
+     the fab root across the three sizes), then:
+       · the value-level fallback I wrote could never have helped, which is
+         exactly what was observed — it changed nothing;
+       · the drop happens DOWNSTREAM, at the MINT/CARRY decision, not at
+         observation. Something declines width/height for this part while
+         accepting border-radius on the identical axis;
+       · `scripts/base-equal-geometry-sweep.mjs` detects a real SYMPTOM (15
+         channels carried nowhere and named nowhere — that part is verified
+         from the shipped artifacts) but its stated CAUSE ("absent because it
+         equals base") is a hypothesis that this reading contradicts. Keep the
+         findings, distrust the explanation, and re-derive the cause at the
+         mint.
+     Three hypotheses about this bug have already died on measurement (value
+     door, element level, and now most likely base-equal itself). Do not write
+     another line of fix before the log line above prints.
+
      **SECOND ATTEMPT — THE PRECEDENCE OBSTACLE IS SOLVED, AND THE REAL GATE
      IS ONE LINE EARLIER THAN I THOUGHT.** Two findings, both reverted only
      because the third step is unfinished, not because they are wrong:
