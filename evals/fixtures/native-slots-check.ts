@@ -434,4 +434,51 @@ console.log('\n5. READBACK — the real dump reads it, propose inverts it');
   ok(`propose inverts it back to a slot part with accepts ${JSON.stringify(proposedSlot.slot.accepts)} (acceptsMode "${proposedSlot.slot.acceptsMode}")`);
 }
 
-console.log('\n✔ native-slots ok: native SLOT emission, ONE unified set-level property, amend survival (red-tested), migration reported by name, every API refusal named, and the slot reads back.');
+console.log("\n7. FC-SLOT-BIRTH-BOX — an empty slot measures its content, not createSlot's 100×100");
+{
+  // Measured live 2026-08-10 (DS Contracts Testing, Card 1:459 / Body 67:10995):
+  // after the emitter set layoutMode + AUTO sizing, the slot REPORTED
+  // layoutSizingVertical 'HUG' with zero children and 8+8 padding and still
+  // measured 100 tall. The card shipped 320×142 against a 320×58 reference.
+  // Re-asserting HUG is a no-op; only a FIXED resize round-trip re-measures.
+  const mock = await freshFile(host());
+  for (const variant of theSet(mock).children) {
+    const slotNode = (variant.children ?? []).find((c: any) => c.type === 'SLOT');
+    if (!slotNode) fail(`variant ${variant.name} carries no SLOT node to measure`);
+    for (const [axis, size, mode] of [
+      ['height', slotNode.height, slotNode.layoutSizingVertical],
+      ['width', slotNode.width, slotNode.layoutSizingHorizontal],
+    ] as Array<[string, number, string]>) {
+      if (mode === 'HUG' && size === 100) {
+        fail(
+          `variant ${variant.name}: the slot reports ${axis} HUG and still measures 100 — ` +
+            "createSlot's BIRTH BOX outlived the sizing writes (FC-SLOT-BIRTH-BOX). " +
+            'The emitter must force the FIXED resize round-trip (remeasureSlotBox).',
+        );
+      }
+    }
+  }
+  ok('an empty native slot hugs to its own content on both axes — no 100×100 birth box survives');
+
+  // RED TEST — without the round-trip the birth box MUST survive. If this
+  // still hugs, the mock is kinder than Figma and the pin above proves nothing
+  // (which is exactly how the 320×142 card passed headlessly for two days).
+  const stripped = emit(host()).replace(
+    /if \(spec\.type === 'slot'\) remeasureSlotBox\(node, spec\.slotProperty\);/g,
+    '',
+  );
+  if (stripped === emit(host())) fail('the red test could not strip remeasureSlotBox — the pin below is vacuous');
+  const red = createFigmaMock();
+  await runIn(red, emit(leaf()));
+  await runIn(red, stripped);
+  const redSlot = (theSet(red).children[0].children ?? []).find((c: any) => c.type === 'SLOT');
+  if (!redSlot || redSlot.height !== 100) {
+    fail(
+      `RED TEST DID NOT GO RED: with remeasureSlotBox stripped the slot measured ${redSlot?.height} — ` +
+        'the mock is not modeling createSlot\'s 100×100 birth box, so §7 above is an alibi',
+    );
+  }
+  ok(`red test: stripping remeasureSlotBox leaves the slot at ${redSlot.width}×${redSlot.height} — the trap is real and the pin bites`);
+}
+
+console.log('\n✔ native-slots ok: native SLOT emission, ONE unified set-level property, amend survival (red-tested), migration reported by name, every API refusal named, the slot reads back, and an empty slot hugs (FC-SLOT-BIRTH-BOX, red-tested).');

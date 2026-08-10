@@ -17,18 +17,20 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:79).",
       "Accordion COMPONENT_SET 21:79: 4 variant(s), 3 prop def(s). Structure looks sane; slot placeholders OK.",
-      "2026-08-09 CROSS-PLANE ROUND — SCORED PASS on BOTH instruments against the REAL LIBRARY render: lane scorer pctAAMasked=2.88 (scores/accordion.json) and headless REST visual-truth card 2.88 (parity/receipts/console-loop/visual-truth/mui/accordion.json, cell 21:39 \"Variant=Elevation, Expanded=Collapsed\", fileVersion 2384477865735882405), 290x50 vs 290x50. Bar: pctAAMasked<=5 AND compositionOk."
+      "2026-08-09 CROSS-PLANE ROUND \u2014 SCORED PASS on BOTH instruments against the REAL LIBRARY render: lane scorer pctAAMasked=2.88 (scores/accordion.json) and headless REST visual-truth card 2.88 (parity/receipts/console-loop/visual-truth/mui/accordion.json, cell 21:39 \"Variant=Elevation, Expanded=Collapsed\", fileVersion 2384477865735882405), 290x50 vs 290x50. Bar: pctAAMasked<=5 AND compositionOk."
     ],
-    "defects": [],
+    "defects": [
+      "2026-08-10 REBUILD-THEN-PIN ROUND \u2014 THIS PASS WAS FALSE AND IS NOW WITHDRAWN. The stem was rebuilt from its OWN committed emit script (examples/mui/figma/accordion.figma.js, byte-identical to HEAD \u2014 figma:fresh 8/8) over the Desktop Bridge, re-shot at scale 1 and rescored against the SAME committed orig-shot. The number moved from a scorecard pass to 13.79 (compositionOk true, canvas 145x24 vs real 145x25). Because the script did not change, the only reading is that the previously committed canvas shot was NOT the product of a completed run of this script \u2014 exactly the class mui/LEDGER.md:124 refused to claim clean when it recorded that mui's four passes were UNMEASURED for canvas drift because framing.json pinned 0 of 31 cellNodeIds. The pass is withdrawn rather than the measurement discarded."
+    ],
     "reference": "extract/computed/out/mui/accordion/orig-shots/elevation.collapsed.enabled__default.png",
-    "referenceSource": "extract/computed/out/mui/accordion/orig-shots/elevation.collapsed.enabled__default.png — REAL LIBRARY RENDER, BASE STATE PLANE. Re-pinned by scripts/console-loop-ref-plane-probe.mts --repin: the prior pin (extract/computed/out/mui/accordion/orig-shots/elevation.collapsed.disabled__default.png) named the `disabled` value of the `disabled` state plane, which this canvas set cannot express (figma binding BOOLEAN) — no cell anywhere in the set is disabled, so the scorer's chosen cell \"Variant=Elevation, Expanded=Collapsed\" and that reference named different points in prop space. The `disabled` plane is now UNMEASURED and named as such (FC-STATE-PLANE-ABSENT).",
+    "referenceSource": "extract/computed/out/mui/accordion/orig-shots/elevation.collapsed.enabled__default.png \u2014 REAL LIBRARY RENDER, BASE STATE PLANE. Re-pinned by scripts/console-loop-ref-plane-probe.mts --repin: the prior pin (extract/computed/out/mui/accordion/orig-shots/elevation.collapsed.disabled__default.png) named the `disabled` value of the `disabled` state plane, which this canvas set cannot express (figma binding BOOLEAN) \u2014 no cell anywhere in the set is disabled, so the scorer's chosen cell \"Variant=Elevation, Expanded=Collapsed\" and that reference named different points in prop space. The `disabled` plane is now UNMEASURED and named as such (FC-STATE-PLANE-ABSENT).",
     "canvasShot": "parity/receipts/console-loop/mui/shots/accordion-cell.png",
-    "matchDeveloped": true,
-    "status": "scored-pass",
+    "matchDeveloped": false,
+    "status": "fail-closed",
     "scorecard": "parity/receipts/console-loop/mui/scores/accordion.json",
     "crossPlaneRepin": {
       "at": "2026-08-09T05:45:17.156Z",
@@ -44,17 +46,17 @@
       "rule": "reference must lie in the intersection of the canvas set's expressible prop space and the capture matrix"
     },
     "unmeasured": [
-      "UNMEASURED BY NAME — FC-STATE-PLANE-ABSENT (disabled): this scored pass covers the BASE state plane only. The capture matrix sweeps `disabled` as a state plane (extract/computed/configs/mui.json stateProps), but the contract binds `disabled` as a Figma BOOLEAN property and sets no figmaStatePreviews, so NO cell anywhere in the emitted set is disabled and there is nothing to score the library's disabled render against. PROBE EVIDENCE: (1) the emitted set's variant list carries no Disabled value (roundtrip.observed.propDefs shows Disabled as a BOOLEAN component property, and Figma BOOLEAN properties toggle child visibility — they cannot repaint a fill); (2) extract/computed/out/mui/accordion/gate-shots/*.enabled__default.png and *.disabled__default.png are BYTE-IDENTICAL by sha256 while the library's orig-shots pair DIFFERS — the contract render does not paint the plane either; (3) core/emit-html.ts lowers states.disabled to the `:disabled` pseudo-class (`.checkbox:disabled { color: var(--imported-shared-color-00000042) }` in gate.html) which can never match the emitted root, and extract/computed/gate.ts:367 admits this by stamping data-gate-disabled-unsupported when the root has no `disabled` IDL attribute. Closing it needs a canvas write (a State= axis) on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge this round."
+      "UNMEASURED BY NAME \u2014 FC-STATE-PLANE-ABSENT (disabled): this scored pass covers the BASE state plane only. The capture matrix sweeps `disabled` as a state plane (extract/computed/configs/mui.json stateProps), but the contract binds `disabled` as a Figma BOOLEAN property and sets no figmaStatePreviews, so NO cell anywhere in the emitted set is disabled and there is nothing to score the library's disabled render against. PROBE EVIDENCE: (1) the emitted set's variant list carries no Disabled value (roundtrip.observed.propDefs shows Disabled as a BOOLEAN component property, and Figma BOOLEAN properties toggle child visibility \u2014 they cannot repaint a fill); (2) extract/computed/out/mui/accordion/gate-shots/*.enabled__default.png and *.disabled__default.png are BYTE-IDENTICAL by sha256 while the library's orig-shots pair DIFFERS \u2014 the contract render does not paint the plane either; (3) core/emit-html.ts lowers states.disabled to the `:disabled` pseudo-class (`.checkbox:disabled { color: var(--imported-shared-color-00000042) }` in gate.html) which can never match the emitted root, and extract/computed/gate.ts:367 admits this by stamping data-gate-disabled-unsupported when the root has no `disabled` IDL attribute. Closing it needs a canvas write (a State= axis) on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge this round."
     ],
     "retiredDefects": {
       "at": "2026-08-09T05:50:16.653Z",
       "by": "scripts/console-loop-ref-plane-probe.mts --repin + re-score (lane scorer + headless REST)",
-      "reason": "Every defect below was a consequence of a CROSS-PLANE reference pin, not of the canvas. The pinned reference named the `disabled` value of a state plane no cell in this set can be, so the scorer's chosen cell (\"Variant=Elevation, Expanded=Collapsed\") and the reference named different points in prop space. Re-pinned to the base plane (elevation.collapsed.enabled__default) the same canvas cell scores 2.88 against the real @mui/material@9.2.0 render. The disabled plane itself is not excused — it is carried forward in visual.unmeasured.",
+      "reason": "Every defect below was a consequence of a CROSS-PLANE reference pin, not of the canvas. The pinned reference named the `disabled` value of a state plane no cell in this set can be, so the scorer's chosen cell (\"Variant=Elevation, Expanded=Collapsed\") and the reference named different points in prop space. Re-pinned to the base plane (elevation.collapsed.enabled__default) the same canvas cell scores 2.88 against the real @mui/material@9.2.0 render. The disabled plane itself is not excused \u2014 it is carried forward in visual.unmeasured.",
       "was": [
         "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=94.63 (bar 5), compositionOk=false",
-        "pixel scorecard fail: pctAAMasked=6.80% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/accordion.json",
-        "FC-REF-WRONG-VARIANT (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference is pinned to elevation.collapsed.disabled__default, but the computed-extract harness renders the SAME expanded panel for both values of the collapsed/expanded axis — elevation.collapsed ink is 290x89 and includes the 'Details body copy for the molecule round.' paragraph, elevation.expanded ink is 290x126. The canvas cell is a 290x50 collapsed header. Every accordion gate-shot in extract/computed/out/mui/accordion therefore depicts a body panel the collapsed cell does not have, so no correctly-collapsed MUI accordion reference exists to retarget to; closing this needs the harness to honour the collapsed prop.",
-        "Live cell identity (reference audit 2026-08-08): the canvas cell is 21:39 \"Variant=Elevation, Expanded=Collapsed\", so the pinned elevation.collapsed.* reference names the right variant — the defect is that the HARNESS ignores the Expanded axis, not that the wrong file was pinned. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) — an independent live-canvas fact, not a re-reading of the committed PNG. (The .enabled and .disabled accordion gate-shots are byte-identical, so that token carries no information either.)"
+        "pixel scorecard fail: pctAAMasked=6.80% (bar 5), compositionOk=false \u2014 see parity/receipts/console-loop/mui/scores/accordion.json",
+        "FC-REF-WRONG-VARIANT (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference is pinned to elevation.collapsed.disabled__default, but the computed-extract harness renders the SAME expanded panel for both values of the collapsed/expanded axis \u2014 elevation.collapsed ink is 290x89 and includes the 'Details body copy for the molecule round.' paragraph, elevation.expanded ink is 290x126. The canvas cell is a 290x50 collapsed header. Every accordion gate-shot in extract/computed/out/mui/accordion therefore depicts a body panel the collapsed cell does not have, so no correctly-collapsed MUI accordion reference exists to retarget to; closing this needs the harness to honour the collapsed prop.",
+        "Live cell identity (reference audit 2026-08-08): the canvas cell is 21:39 \"Variant=Elevation, Expanded=Collapsed\", so the pinned elevation.collapsed.* reference names the right variant \u2014 the defect is that the HARNESS ignores the Expanded axis, not that the wrong file was pinned. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) \u2014 an independent live-canvas fact, not a re-reading of the committed PNG. (The .enabled and .disabled accordion gate-shots are byte-identical, so that token carries no information either.)"
       ]
     }
   },
@@ -69,8 +71,8 @@
     "mismatches": [],
     "gaps": [],
     "matchedAxes": [
-      "Variant enum → Elevation/Outlined",
-      "Expanded enum → Collapsed/Expanded",
+      "Variant enum \u2192 Elevation/Outlined",
+      "Expanded enum \u2192 Collapsed/Expanded",
       "BOOLEAN Disabled",
       "first-variant fill bound: imported/accordion/root/background-color"
     ],
@@ -130,6 +132,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": true
+    "visualMatchDeveloped": false
   }
 }

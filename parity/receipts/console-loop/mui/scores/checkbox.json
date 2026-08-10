@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/mui/checkbox/orig-shots/checked.enabled__default.png",
   "referenceSha256": "e2064b98180a8fee8efe3133fae0e9ba9b888ea5e267fdd46564f957a017d3cc",
   "canvasShot": "parity/receipts/console-loop/mui/shots/checkbox-cell.png",
-  "canvasShotSha256": "4bd0e181fbab9843d2bffb3f49329af4233cd228d924599b4101784e05b2c6c9",
+  "canvasShotSha256": "e04bd0dc9d5606b26a1ec3c747f3bdf50c00b564ea9ac3ce0382a244e4d60da0",
   "diff": "parity/receipts/console-loop/mui/scores/checkbox.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/checkbox.json",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-09T05:45:20.860Z"
+  "recordedAt": "2026-08-10T12:56:50.219Z"
 }

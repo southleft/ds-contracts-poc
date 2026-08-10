@@ -1,7 +1,7 @@
 {
   "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
   "fileUrl": "https://www.figma.com/design/GnQnjSNBXtgtd2Ht0Hs1C8/DS-Contracts-Testing",
-  "emittedAt": "2026-08-10T05:35:32.115Z",
+  "emittedAt": "2026-08-10T12:50:11.837Z",
   "scripts": [
     {
       "name": "01-tokens.js",
@@ -9,199 +9,199 @@
     },
     {
       "name": "02-accordionitem.js",
-      "bytes": 76665
+      "bytes": 78807
     },
     {
       "name": "03-avatar.js",
-      "bytes": 65739
+      "bytes": 65732
     },
     {
       "name": "04-avatargroup.js",
-      "bytes": 73640
+      "bytes": 75782
     },
     {
       "name": "05-badge.js",
-      "bytes": 69269
+      "bytes": 69262
     },
     {
       "name": "06-button.js",
-      "bytes": 108654
+      "bytes": 108647
     },
     {
       "name": "07-banner.js",
-      "bytes": 108206
+      "bytes": 110348
     },
     {
       "name": "08-blockquote.js",
-      "bytes": 69493
+      "bytes": 71635
     },
     {
       "name": "09-breadcrumbitem.js",
-      "bytes": 65313
+      "bytes": 65306
     },
     {
       "name": "10-breadcrumbs.js",
-      "bytes": 70014
+      "bytes": 72156
     },
     {
       "name": "11-card.js",
-      "bytes": 74816
+      "bytes": 76958
     },
     {
       "name": "12-chatmessagemetadata.js",
-      "bytes": 80102
+      "bytes": 82244
     },
     {
       "name": "13-chatmessage.js",
-      "bytes": 82269
+      "bytes": 84411
     },
     {
       "name": "14-chatsystemmessage.js",
-      "bytes": 74484
+      "bytes": 76626
     },
     {
       "name": "15-checkbox.js",
-      "bytes": 82109
+      "bytes": 82102
     },
     {
       "name": "16-citation.js",
-      "bytes": 65782
+      "bytes": 65775
     },
     {
       "name": "17-code.js",
-      "bytes": 61669
+      "bytes": 61662
     },
     {
       "name": "18-divider.js",
-      "bytes": 61722
+      "bytes": 61715
     },
     {
       "name": "19-emptystate.js",
-      "bytes": 73560
+      "bytes": 75702
     },
     {
       "name": "20-field.js",
-      "bytes": 74282
+      "bytes": 76424
     },
     {
       "name": "21-heading.js",
-      "bytes": 76628
+      "bytes": 76621
     },
     {
       "name": "22-iconbutton.js",
-      "bytes": 82499
+      "bytes": 84641
     },
     {
       "name": "23-kbd.js",
-      "bytes": 61738
+      "bytes": 61731
     },
     {
       "name": "24-listitem.js",
-      "bytes": 73738
+      "bytes": 75880
     },
     {
       "name": "25-list.js",
-      "bytes": 76117
+      "bytes": 78259
     },
     {
       "name": "26-metadatalistitem.js",
-      "bytes": 72524
+      "bytes": 74666
     },
     {
       "name": "27-metadatalist.js",
-      "bytes": 73461
+      "bytes": 75603
     },
     {
       "name": "28-pagination.js",
-      "bytes": 77161
+      "bytes": 77154
     },
     {
       "name": "29-progressbar.js",
-      "bytes": 71283
+      "bytes": 71276
     },
     {
       "name": "30-section.js",
-      "bytes": 71107
+      "bytes": 73249
     },
     {
       "name": "31-sidenavitem.js",
-      "bytes": 75618
+      "bytes": 77760
     },
     {
       "name": "32-skeleton.js",
-      "bytes": 64011
+      "bytes": 64004
     },
     {
       "name": "33-slider.js",
-      "bytes": 67526
+      "bytes": 67519
     },
     {
       "name": "34-spinner.js",
-      "bytes": 61795
+      "bytes": 61788
     },
     {
       "name": "35-statusdot.js",
-      "bytes": 64476
+      "bytes": 64469
     },
     {
       "name": "36-switch.js",
-      "bytes": 71625
+      "bytes": 71618
     },
     {
       "name": "37-tab.js",
-      "bytes": 75481
+      "bytes": 77623
     },
     {
       "name": "38-tablist.js",
-      "bytes": 69985
+      "bytes": 72127
     },
     {
       "name": "39-tablecell.js",
-      "bytes": 65425
+      "bytes": 65418
     },
     {
       "name": "40-tableheadercell.js",
-      "bytes": 65514
+      "bytes": 65507
     },
     {
       "name": "41-tablerow.js",
-      "bytes": 71840
+      "bytes": 73982
     },
     {
       "name": "42-table.js",
-      "bytes": 75083
+      "bytes": 77225
     },
     {
       "name": "43-textarea.js",
-      "bytes": 75467
+      "bytes": 75460
     },
     {
       "name": "44-textfield.js",
-      "bytes": 75591
+      "bytes": 75584
     },
     {
       "name": "45-toast.js",
-      "bytes": 71790
+      "bytes": 73932
     },
     {
       "name": "46-token.js",
-      "bytes": 143432
+      "bytes": 145574
     },
     {
       "name": "47-toolbar.js",
-      "bytes": 75461
+      "bytes": 77603
     },
     {
       "name": "48-topnavitem.js",
-      "bytes": 74112
+      "bytes": 76254
     },
     {
       "name": "49-topnav.js",
-      "bytes": 70578
+      "bytes": 72720
     },
     {
       "name": "50-typeaheaditem.js",
-      "bytes": 73512
+      "bytes": 75654
     }
   ],
   "skipped": [

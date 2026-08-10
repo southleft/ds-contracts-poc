@@ -188,6 +188,20 @@ export function createFigmaMock() {
         // createFrame starts with — an emitter that forgets to clear it ships
         // a white box where the contract asked for nothing).
         this.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
+        // FC-SLOT-BIRTH-BOX (measured live 2026-08-10, DS Contracts Testing
+        // Card 1:459 / Body 67:10995): that 100×100 BIRTH BOX OUTLIVES the
+        // sizing writes that should dissolve it. After the emitter set
+        // layoutMode VERTICAL + primaryAxisSizingMode AUTO, the node reported
+        // layoutSizingVertical === 'HUG' with ZERO children and 8+8 padding —
+        // and still measured 100 tall, where hug is 16. Re-asserting HUG is a
+        // no-op (Figma already believes it hugs); ONLY a FIXED resize
+        // round-trip forces the relayout a childless slot never gets.
+        // This mock computed hug honestly and so scored the card PERFECT
+        // headlessly while the canvas shipped a 320×142 card against a 320×58
+        // reference. A mock that is kinder than Figma is an alibi, not a test.
+        this._birthBox = { w: true, h: true };
+        this._w = 100;
+        this._h = 100;
       }
     }
 
@@ -344,6 +358,11 @@ export function createFigmaMock() {
       this._w = w;
       this._h = h;
       this._resized = true;
+      // FC-SLOT-BIRTH-BOX: the resize IS the relayout trigger. Measured live:
+      // a Body slot pinned FIXED and resized to height 1 came back 16 — the
+      // padding-only hug — not 1, so Figma re-measures on resize and the stale
+      // birth box is gone for good from that point on.
+      if (this._birthBox) this._birthBox = { w: false, h: false };
     }
 
     resizeWithoutConstraints(w, h) {
@@ -747,6 +766,9 @@ export function createFigmaMock() {
     }
 
     get width() {
+      // FC-SLOT-BIRTH-BOX: while the birth box stands, the slot measures 100
+      // no matter what its sizing modes claim. See the SLOT constructor.
+      if (this._birthBox?.w) return this._w;
       // REAL-FIGMA CONTRACT (round 6, live Dialog finding): an ABSOLUTELY
       // POSITIONED child is OUT of the auto-layout flow — FILL sizing does
       // not apply to it (Figma converts the sizing back to FIXED the moment
@@ -779,6 +801,8 @@ export function createFigmaMock() {
     }
 
     get height() {
+      // FC-SLOT-BIRTH-BOX: see the width getter and the SLOT constructor.
+      if (this._birthBox?.h) return this._h;
       // See the width getter: ABSOLUTE children never FILL (round 6).
       if (
         this.layoutSizingVertical === 'FILL' &&

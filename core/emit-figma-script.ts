@@ -533,7 +533,7 @@ export interface FigmaScriptCtx extends FigmaEngineInput {
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
+export const RUNTIME_EMIT_REV = 'rt8-slot-birth-box';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
@@ -4889,6 +4889,44 @@ const wrapRuntime = (has: boolean, columnWrap: boolean): string =>
 const slotRuntime = (has: boolean): string =>
   has
     ? `
+// FC-SLOT-BIRTH-BOX — \`createSlot()\` mints a 100x100 node (probe 2b), and that
+// birth box SURVIVES every sizing write that should have dissolved it. Measured
+// live 2026-08-10 on DS Contracts Testing (Card 1:459, Body slot 67:10995):
+// after applyFrameSpec the node reports \`layoutSizingVertical === 'HUG'\`,
+// \`primaryAxisSizingMode === 'AUTO'\`, ZERO children and 8+8 padding — and
+// measures 100 tall. It should measure 16. Re-asserting HUG is a NO-OP because
+// Figma already believes it is hugging; only a FIXED resize round-trip forces
+// the relayout a childless slot never gets. The card was 320x142 against a
+// 320x58 reference; one round-trip took it to 320x58 exactly.
+//
+// This is the same class as the GP14 pair already recorded in RATCHET.json
+// (Figma freezing the stale box while REPORTING hug) and the sibling of the
+// \`#60 fix 4\` FILL repair applied to empty createFrame geometry — a slot
+// cannot take that repair, because an empty slot must hug, not fill.
+//
+// Runs AFTER children are appended so \`defaultContent\` is measured, never the
+// empty box. A refusal, not a swallow: an axis that will not round-trip is
+// reported by name rather than left silently holding 100px.
+function remeasureSlotBox(node, label) {
+  for (const axis of ['Vertical', 'Horizontal']) {
+    const prop = 'layoutSizing' + axis;
+    let mode;
+    try { mode = node[prop]; } catch (e) { continue; }
+    if (mode !== 'HUG') continue;
+    try {
+      node[prop] = 'FIXED';
+      node.resize(axis === 'Horizontal' ? 1 : node.width, axis === 'Vertical' ? 1 : node.height);
+      node[prop] = 'HUG';
+    } catch (e) {
+      throw new Error(
+        'Slot "' + label + '": ' + axis.toLowerCase() + ' axis reports HUG but kept ' +
+        'createSlot\\'s 100px birth box, and the FIXED round-trip that normally forces ' +
+        'the re-measure was refused (' + e.message + ') — FC-SLOT-BIRTH-BOX',
+      );
+    }
+  }
+}
+
 // The SLOT property id a slot node is bound to (the \`slotContentId\` key of
 // componentPropertyReferences — a native reference kind, not \`mainComponent\`).
 function slotKeyOf(slotNode) {
@@ -6241,7 +6279,10 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
-  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}
+  }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${hasSlot ? `
+  // FC-SLOT-BIRTH-BOX: dissolve createSlot's 100x100 birth box now that every
+  // child (including slotDefault) is in place. See remeasureSlotBox.
+  if (spec.type === 'slot') remeasureSlotBox(node, spec.slotProperty);` : ''}
   return node;
 }
 
