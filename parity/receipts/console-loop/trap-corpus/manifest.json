@@ -1,7 +1,7 @@
 {
   "version": 1,
   "kind": "code-to-canvas-trap-corpus",
-  "description": "Frozen adversarial stems for code→canvas hill-climb (CODE-TO-CANVAS-HILLCLIMB.md §3.2 / §4 Phase M2). Structural CI only until developed scores land. toast/progress-bar refs (2026-08-08): DEVELOPED references rendered offline from their promoted contracts via the gate's own emit pipeline (emit-html + astryx token stylesheet + shipped minted tree, pinned headless Chromium, stage screenshot) — these stems were never computed-captured, so no gate-shots exist; astryx fonts stay UNCONFIGURED by name (FC-FONT-SUBSTRATE precedent), the refs render the CSS fallback stack. 2026-08-08 REFERENCE-TRUTH round: altitude/badge, tailwind/toggle-switch and carbon/checkbox retargeted from trap-corpus contract-render copies to the REAL LIBRARY RENDER under extract/computed/out/<lib>/<comp>/orig-shots/ (run.ts --keep-originals), matching the lane receipts so a --manifest rescore cannot silently restore the contract-render basis. polaris/text-field, polaris/button and astryx/toast keep non-orig-shots references by name — see each lane LEDGER. ALSO 2026-08-08: polaris/text-field and polaris/button manifest references were DIVERGENT from their lane receipts (examples/polaris/receipts/... vs parity/receipts/console-loop/polaris/refs/...), so a --manifest rescore silently rewrote those two scorecards onto a different picture (text-field 4.77 pass -> 4.80 fail, button 16.62 -> 44.37). Aligned to the receipt references; the divergence itself is recorded in the polaris LEDGER as an instrument defect.",
+  "description": "Frozen adversarial stems for code\u2192canvas hill-climb (CODE-TO-CANVAS-HILLCLIMB.md \u00a73.2 / \u00a74 Phase M2). Structural CI only until developed scores land. toast/progress-bar refs (2026-08-08): DEVELOPED references rendered offline from their promoted contracts via the gate's own emit pipeline (emit-html + astryx token stylesheet + shipped minted tree, pinned headless Chromium, stage screenshot) \u2014 these stems were never computed-captured, so no gate-shots exist; astryx fonts stay UNCONFIGURED by name (FC-FONT-SUBSTRATE precedent), the refs render the CSS fallback stack. 2026-08-08 REFERENCE-TRUTH round: altitude/badge, tailwind/toggle-switch and carbon/checkbox retargeted from trap-corpus contract-render copies to the REAL LIBRARY RENDER under extract/computed/out/<lib>/<comp>/orig-shots/ (run.ts --keep-originals), matching the lane receipts so a --manifest rescore cannot silently restore the contract-render basis. polaris/text-field, polaris/button and astryx/toast keep non-orig-shots references by name \u2014 see each lane LEDGER. ALSO 2026-08-08: polaris/text-field and polaris/button manifest references were DIVERGENT from their lane receipts (examples/polaris/receipts/... vs parity/receipts/console-loop/polaris/refs/...), so a --manifest rescore silently rewrote those two scorecards onto a different picture (text-field 4.77 pass -> 4.80 fail, button 16.62 -> 44.37). Aligned to the receipt references; the divergence itself is recorded in the polaris LEDGER as an instrument defect.",
   "stems": [
     {
       "lib": "astryx",
@@ -49,9 +49,10 @@
       ],
       "contract": "examples/polaris/contracts/text-field.contract.json",
       "script": "examples/polaris/figma/text-field.figma.js",
-      "reference": "parity/receipts/console-loop/polaris/refs/text-field.png",
+      "reference": "extract/computed/out/textfield/orig-shots/inherit.medium.off.off.off.enabled__default.png",
       "pendingRef": false,
-      "referenceWas": "examples/polaris/receipts/text-field/default.png"
+      "referenceWas": "parity/receipts/console-loop/polaris/refs/text-field.png",
+      "_why": "ALIGNED 2026-08-10, same defect and same round as the polaris/button row above. This manifest's own description already CLAIMS both polaris rows were 'aligned to the receipt references' on 2026-08-08 \u2014 neither actually was. Both still pointed at emit-html CONTRACT RENDERS under parity/receipts/console-loop/polaris/refs/ while their receipts and scorecards had moved to the real @shopify/polaris renders under orig-shots/. A `--manifest` rescore would have rewritten both scorecards onto a different picture \u2014 the exact accident the description recounts (text-field 4.77 pass -> 4.80 fail). A claim of alignment is not alignment; these were checked stem-by-stem against every receipt this time."
     },
     {
       "lib": "altitude",
@@ -113,9 +114,10 @@
       ],
       "contract": "examples/polaris/contracts/button.contract.json",
       "script": "examples/polaris/figma/button.figma.js",
-      "reference": "parity/receipts/console-loop/polaris/refs/button.png",
+      "reference": "extract/computed/out/button/orig-shots/secondary.none.medium.off.enabled__default.png",
       "pendingRef": false,
-      "referenceWas": "examples/polaris/receipts/canvas-gate/button--representative.png"
+      "referenceWas": "parity/receipts/console-loop/polaris/refs/button.png",
+      "_why": "ALIGNED 2026-08-10 to the reference the receipt and scorecard actually use. This row still pointed at parity/receipts/console-loop/polaris/refs/button.png \u2014 the emit-html CONTRACT RENDER \u2014 while polaris/components/button.json and polaris/scores/button.json both moved to the real @shopify/polaris render under orig-shots/ in the 2026-08-08 reference-truth round (polaris/LEDGER.md:160, 16.62 -> 19.58). A `--manifest` rescore would therefore have silently rewritten the committed scorecard onto a DIFFERENT picture. That is not hypothetical: this manifest's own description records the same accident happening to polaris/text-field and polaris/button once already (\"button 16.62 -> 44.37\"). Both scoring paths now resolve the same PNG."
     },
     {
       "lib": "astryx",
@@ -139,8 +141,8 @@
       "script": "examples/astryx/figma/banner.figma.js",
       "reference": "extract/computed/out/astryx/banner/orig-shots/info.card__default.png",
       "pendingRef": false,
-      "_why": "The `info` cell is the diagnostic one for FC-SCOPED-VAR-OVERRIDE, and it traps BOTH halves of the class at once. Before the fix the contract bound the token the BASE rule spells, so this cell painted background `{color-accent-muted}` = #f1f1f1 (a GREY) where @astryxdesign/theme-neutral paints `var(--color-background-blue)` = #c4ddfb, and its title/description/icon all took `{color-text-primary}`/`{color-accent}` — identical ink in all four statuses, because the per-status ink lives ONLY in the scoped redeclaration. The reference is the REAL library render (orig-shots, run.ts --keep-originals), not a contract render, per the _astryxReferenceNote convention below."
+      "_why": "The `info` cell is the diagnostic one for FC-SCOPED-VAR-OVERRIDE, and it traps BOTH halves of the class at once. Before the fix the contract bound the token the BASE rule spells, so this cell painted background `{color-accent-muted}` = #f1f1f1 (a GREY) where @astryxdesign/theme-neutral paints `var(--color-background-blue)` = #c4ddfb, and its title/description/icon all took `{color-text-primary}`/`{color-accent}` \u2014 identical ink in all four statuses, because the per-status ink lives ONLY in the scoped redeclaration. The reference is the REAL library render (orig-shots, run.ts --keep-originals), not a contract render, per the _astryxReferenceNote convention below."
     }
   ],
-  "_astryxReferenceNote": "2026-08-08 REFERENCE-TRUTH round: the four astryx rows with a computed capture now point at extract/computed/out/astryx/<comp>/orig-shots/ — the REAL @astryxdesign/core render, committed for the first time by `extract/computed/run.ts --keep-originals`. They previously pointed at trap-corpus snapshots cut from gate-shots, i.e. the CONTRACT RENDER (enriched contract -> emit-html), not the library. Both scoring paths (manifest mode and --lib/--stem, which reads receipt.visual.reference) now resolve the same PNG; before this they disagreed, so a bare `npm run console-loop:developed-score` would silently overwrite the lane scorecards with numbers measured against a different picture. astryx/toast keeps its trap snapshot: Toast is composition-tier and has no single-component capture."
+  "_astryxReferenceNote": "2026-08-08 REFERENCE-TRUTH round: the four astryx rows with a computed capture now point at extract/computed/out/astryx/<comp>/orig-shots/ \u2014 the REAL @astryxdesign/core render, committed for the first time by `extract/computed/run.ts --keep-originals`. They previously pointed at trap-corpus snapshots cut from gate-shots, i.e. the CONTRACT RENDER (enriched contract -> emit-html), not the library. Both scoring paths (manifest mode and --lib/--stem, which reads receipt.visual.reference) now resolve the same PNG; before this they disagreed, so a bare `npm run console-loop:developed-score` would silently overwrite the lane scorecards with numbers measured against a different picture. astryx/toast keeps its trap snapshot: Toast is composition-tier and has no single-component capture."
 }
