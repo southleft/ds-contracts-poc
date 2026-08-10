@@ -271,7 +271,32 @@ probe+pin. Where each residual stands as of this handoff:
      NOTE altitude/heading and altitude/link are already on the caveated-pass
      list below — a silent height loss is a candidate explanation for both, so
      fix this before re-examining them.
-     **STOP — THE BASE-EQUAL-DELTA THEORY IS DEAD. CONFIRMED BY REPLAY, NOT
+     **CAUSE FOUND. IT IS ONE FACT: `width` AND `height` ARE NOT IN
+     `TOKEN_CHANNELS`.** Checked the registry directly
+     (packages/schema/src/contract-schema.ts):
+         "width"       absent        "border-radius"           PRESENT
+         "height"      absent        "border-top-left-radius"  PRESENT
+         "min-width"   PRESENT       "min-height"              PRESENT
+     That is EXACTLY the contract fab ships: min-height and the four radii
+     carried per size, width and height carried nowhere. The capture never lost
+     them (replay proves 56/40/48 reach the mint loop); the mint simply has no
+     channel to put them in, so they cannot become tokens or a tokensByProp
+     map. border-radius was the perfect control because it IS in the set.
+     THE 15 FINDINGS ARE ONE DESIGN DECISION, NOT A BUG PER STEM. Before
+     "fixing" it, answer the question the registry is implicitly asserting:
+     is a raw `width`/`height` deliberately excluded because canvas geometry is
+     meant to derive from layout + min/max constraints rather than be pinned?
+     If YES, the defect is that the exclusion is SILENT — it must produce a
+     codeOnly/ledger entry naming the drop, which today it does not, and that
+     alone would close FC-BASE-EQUAL-GEOMETRY-DROPPED honestly.
+     If NO, adding width/height to TOKEN_CHANNELS is the fix — and then the
+     PRECEDENCE POST-PASS recorded below is required, because that is exactly
+     what starts producing binding+literal collisions (polaris.tag "link").
+     Check git history / docs for why they were excluded before changing it.
+     DO NOT read the dead hypotheses below as guidance — they are kept only as
+     a record of what measurement killed.
+
+     **SUPERSEDED — THE BASE-EQUAL-DELTA THEORY IS DEAD. CONFIRMED BY REPLAY, NOT
      INFERRED.** Ran `reconstructCaptures()` over fab's captured-truth and
      printed the RESOLVED root style. It carries all three sizes:
          56px x 56px  |  40px x 40px  |  48px x 48px
