@@ -38,16 +38,18 @@
     "ok": false,
     "notes": [
       "Screenshot reviewed on section/node 83:1630; structure/variants look sane (slot placeholders OK).",
-      "Structure/variants reviewed via inspect (COMPONENT_SET, 8 variants on page Paper)."
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 8 variants on page Paper).",
+      "2026-08-09 canvas resync (afd1a2f6): the cell was REBUILT from its own emit script over the Desktop Bridge and rescored against the correct elevation-0 shot. It did not move (card 31.48->31.87, paper 25.94->25.94), which rules out canvas staleness as a cause. An earlier attempt of mine scored the Elevation=1 cell and produced a bogus ~10-point 'improvement' with compositionOk FALSE at scaleRatio 2.5/3.3 \u2014 a broken pair measures nothing; those numbers are void. The real fix is lane-wide and HARNESS-side (give the capture page a document font-family, or mint font-family as a token in fuse \u2014 it appears in neither contract nor either enriched sidecar), which would move Dialog and Accordion in the same round."
     ],
     "defects": [
       "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=25.94 (bar 5), compositionOk=true",
-      "pixel scorecard fail: pctAAMasked=25.94% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/paper.json",
-      "FC-REF-UNSTYLED-DOM (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference renders its body text in the browser DEFAULT SERIF, not the Roboto substrate the lane pinned. The harness sets no document-level font-family, so text that MUI does not wrap in a Typography element (Card/Paper/Dialog content, the Accordion details paragraph) inherits Times while the canvas renders the contract's face. The gate-shot is the current regate (mtime 2026-08-08 09:xx, same batch as the stems whose Roboto re-pin DID take), so this is not a stale copy — the harness genuinely emits serif here. Glyph ink dominates the diff.",
-      "RETRACTED CANDIDATE (reference audit 2026-08-08): retargeting to 1.elevation__default (12.59) is REFUTED — the canvas cell is 83:1617 \"Elevation=0, Variant=Elevation\", so the pinned 0.elevation__default is correct. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) — an independent live-canvas fact, not a re-reading of the committed PNG."
+      "pixel scorecard fail: pctAAMasked=25.94% (bar 5), compositionOk=true \u2014 see parity/receipts/console-loop/mui/scores/paper.json",
+      "FC-REF-UNSTYLED-DOM (named-open by reference audit 2026-08-08, NOT FIXABLE by retarget): the reference renders its body text in the browser DEFAULT SERIF, not the Roboto substrate the lane pinned. The harness sets no document-level font-family, so text that MUI does not wrap in a Typography element (Card/Paper/Dialog content, the Accordion details paragraph) inherits Times while the canvas renders the contract's face. The gate-shot is the current regate (mtime 2026-08-08 09:xx, same batch as the stems whose Roboto re-pin DID take), so this is not a stale copy \u2014 the harness genuinely emits serif here. Glyph ink dominates the diff.",
+      "RETRACTED CANDIDATE (reference audit 2026-08-08): retargeting to 1.elevation__default (12.59) is REFUTED \u2014 the canvas cell is 83:1617 \"Elevation=0, Variant=Elevation\", so the pinned 0.elevation__default is correct. Live cell identity read from the Figma REST lane (parity/receipts/console-loop/visual-truth/mui/<stem>.json carries cellNodeId + cellName resolved against fileVersion 2384477865735882405) \u2014 an independent live-canvas fact, not a re-reading of the committed PNG.",
+      "FC-REF-DEGENERATE-CROP (registered in CODE-TO-CANVAS-HILLCLIMB.md \u00a73.1, 2026-08-09): same class as card, same cause. Elevation=0 Variant=Elevation Paper is an invisible 288x19 white box; the reference trims to the glyphs of \"Paper content\". Canvas Inter Regular 16 at 107px advance vs reference Times at 88px = 1.216 ~ the reported scaleRatio 1.205; inkDelta 3.77. NOT FIXABLE COMPONENT-SIDE."
     ],
     "reference": "extract/computed/out/mui/paper/orig-shots/0.elevation__default.png",
-    "referenceSource": "extract/computed/out/mui/paper/orig-shots/0.elevation__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/paper.png — a byte-identical copy of mui/paper/gate-shots/0.elevation__default.png)): parity/receipts/console-loop/mui/refs/paper.png [declared source: extract/computed/out/mui/paper/gate-shots/0.elevation__default.png].",
+    "referenceSource": "extract/computed/out/mui/paper/orig-shots/0.elevation__default.png \u2014 REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/paper.png \u2014 a byte-identical copy of mui/paper/gate-shots/0.elevation__default.png)): parity/receipts/console-loop/mui/refs/paper.png [declared source: extract/computed/out/mui/paper/gate-shots/0.elevation__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/paper-cell.png",
     "matchDeveloped": false,
     "status": "fail-closed",
@@ -60,7 +62,7 @@
       ":COMPONENT_SET/Paper|fill|[]",
       ":COMPONENT_SET/Paper|radius|5,5,5,5",
       ":COMPONENT_SET/Paper|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Paper|description|Paper â generated from contract mui.paper v0.2.0 â",
+      ":COMPONENT_SET/Paper|description|Paper \u00e2\u0080\u0094 generated from contract mui.paper v0.2.0 \u00e2\u0080",
       ":COMPONENT_SET/Paper|propdef|Content#83:0:TEXT=Paper content",
       ":COMPONENT_SET/Paper|propdef|Elevation:VARIANT=1",
       ":COMPONENT_SET/Paper|propdef|Variant:VARIANT=Elevation",
@@ -83,8 +85,8 @@
     "mismatches": [],
     "gaps": [],
     "matchedAxes": [
-      "Elevation enum → 1/0/3/8",
-      "Variant enum → Elevation/Outlined",
+      "Elevation enum \u2192 1/0/3/8",
+      "Variant enum \u2192 Elevation/Outlined",
       "TEXT Content",
       "first-variant fill bound: imported/paper/root/background-color"
     ],
