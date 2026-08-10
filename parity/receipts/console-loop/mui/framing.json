@@ -50,7 +50,7 @@
     "toneTVMaxPct": 25,
     "toneAAMaxPct": 10,
     "contentCausesNote": "C5 (referenceSweepCheck) ranks the canvas shot against every sibling __default gate-shot in the directory this stem\u2019s own referenceSource names, using an 8x8x8 colour-histogram total-variation distance; it fires only on a decisive margin (pinned>=sweepPinnedMinPct AND gap>=sweepGapMinPct) and is waived on a fail-closed receipt by FC-REF-WRONG-VARIANT (retarget accepted) or FC-REF-SWEEP-DECOY (retarget examined and refused: the canvas, not the reference, is what is wrong). C6 (referenceToneCheck) applies the same distance to the pinned pair, but only in the band where the AA number is claiming closeness (pass claim, or scorecard pctAAMasked<=toneAAMaxPct) \u2014 pixelmatch at threshold 0.1 compares YIQ against a 352 cutoff, so a whole-component tone swap sits under it (measured: #F0F0F0 cell vs #D5EBFF reference, YIQ delta 158, 94.43% of pixels differing per channel, AA 7.13). Thresholds calibrated 2026-08-08 against five measured wrong-reference pairs (tv 20.6-97.3) and every committed pair in-tree (highest non-firing sweep gap 10.1pt; highest in-band tone distance 17.3%).",
-    "cellOverhangNote": "C1 accepts a NAMED overhang only when the committed shot equals the stem's independently-measured absoluteRenderBounds AND the entry carries an FC-* code and a reason. It cannot launder a wrong-cell or whole-set shot \u2014 those match neither the layout box plus a uniform margin nor the render box. mui/fab is deliberately NOT given one: its 8x36 box for a Size=Large FAB is a genuine silent geometry loss (FC-BASE-EQUAL-GEOMETRY-DROPPED), so it must stay a hard C1 violation."
+    "cellOverhangNote": "C1 accepts a NAMED overhang only when the committed shot equals the stem's independently-measured absoluteRenderBounds AND the entry carries an FC-* code and a reason. It cannot launder a wrong-cell or whole-set shot \u2014 those match neither the layout box plus a uniform margin nor the render box. mui/fab DOES carry one, under FC-GEOMETRY-EXCLUDED. Its 8x36 layout box is a real geometry loss, but it is a DELIBERATE, ALREADY-NAMED refusal (fuse.ts:555-565) that is independently carried by a FAILING scorecard (39.19, compositionOk false) and a fail-closed receipt \u2014 so naming it here hides nothing, and C1's own question (is this shot that cell) is honestly answered yes."
   },
   "refAllow": [
     "parity/receipts/console-loop/mui/refs/",
@@ -169,7 +169,13 @@
       "setNodeId": "84:1743",
       "cellW": 8,
       "cellH": 36,
-      "cellNote": "Layout box 8x36, RENDER bounds 44x72 \u2014 an export of this cell is 44x72, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
+      "cellNote": "Layout box 8x36, RENDER bounds 44x72 \u2014 an export of this cell is 44x72, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds).",
+      "cellOverhang": {
+        "fc": "FC-GEOMETRY-EXCLUDED",
+        "renderW": 44,
+        "renderH": 72,
+        "why": "the shot IS this cell \u2014 it is the cell's RENDER box. The LAYOUT box is 8x36 because the canvas root HUGS: extract/computed/fuse.ts:555-565 excludes geometry channels (width/height/insets) from fusion as environment-dependent, admitting them only for absolute-cluster parts, table cells and the block-root/overlay doors, and this root is none of those. A DELIBERATE refusal, not a leak \u2014 relaxing it is what previously minted the capture WINDOW as tokens in four of six libraries, so it belongs to its own round with viewportDerivedRefusals held. The geometry defect is NOT hidden by this entry: fab's scorecard FAILS (pctAAMasked 39.19, compositionOk false, canvas 16x41 vs library 72x74) and its receipt is fail-closed naming FC-GEOMETRY-EXCLUDED with the same probe. C1's own question \u2014 is this shot that cell \u2014 is answered yes."
+      }
     },
     "icon-button": {
       "cellNodeId": "83:1702",

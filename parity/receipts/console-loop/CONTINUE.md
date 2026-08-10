@@ -279,7 +279,32 @@ probe+pin. Where each residual stands as of this handoff:
      NOTE altitude/heading and altitude/link are already on the caveated-pass
      list below — a silent height loss is a candidate explanation for both, so
      fix this before re-examining them.
-     **RETRACTED — THAT "CAUSE" WAS A BAD TEST, NOT A FINDING. width AND
+     **THE WHOLE INVESTIGATION WAS A REDISCOVERY. IT WAS LOCALISED ON
+     2026-08-09 AND THE ANSWER WAS IN fab's OWN RECEIPT ALL ALONG.**
+     `parity/receipts/console-loop/mui/components/fab.json` carries:
+       "LOCALISED 2026-08-09 — FC-GEOMETRY-EXCLUDED (shared cause with
+        mui/chip, mui/fab, mui/avatar, mui/icon-button; capture/promote side,
+        and a DELIBERATE refusal rather than a leak) ... fuse.ts:555-565
+        excludes geometry channels (width/height/insets) from fusion as
+        environment-dependent, admitting them only for absolute-cluster parts,
+        table cells and the block-root/overlay doors; this root is none of
+        those. THE FIX IS NOT A PER-STEM PATCH — relaxing the geometry
+        exclusion is the change that previously minted the capture WINDOW as
+        tokens in four of six libraries."
+     So: the cause is fuse.ts:555-565, it is DELIBERATE, and the fix is a
+     dedicated round with viewportDerivedRefusals held — not a mint diff, not
+     TOKEN_CHANNELS, not base-equality.
+     MY "NOTHING NAMED THE LOSS" WAS FALSE. I checked the extension sidecar and
+     the lane LEDGER.md and concluded silence; the naming was in the COMPONENT
+     RECEIPT, which I did not read until the end. Check receipts before
+     declaring a loss unreceipted.
+     WHAT SURVIVES AND IS STILL NEW: the sweep extends the known class from 4
+     mui stems to 15 findings across 10 stems in 6 libraries
+     (BASE-EQUAL-GEOMETRY-SWEEP.json). Treat FC-BASE-EQUAL-GEOMETRY-DROPPED as
+     an ALIAS of FC-GEOMETRY-EXCLUDED — same cause, wider census — and prefer
+     the older name.
+
+     **SUPERSEDED — that "cause" was a bad test, not a finding. width AND
      height ARE IN TOKEN_CHANNELS.** The registry writes them as BARE
      IDENTIFIERS under a `// -- box --` heading:
          width: drawn("a fixed width.")
