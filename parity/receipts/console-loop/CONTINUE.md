@@ -32,9 +32,26 @@ THE 6 SUITE FAILURES, triaged — MOST ARE NOT FROM THIS SESSION:
   `npm run golden:update` (run it after ANY re-emission).
 EXPECTED STEADY STATE: 4 failures, all pre-existing and named
 (mui-figma-genesis, child-wider-ratchet, capture-framing-pin,
-reference-content-checks). A `npx tsx evals/run.ts` was RUNNING at handoff to
-confirm that — its result is UNVERIFIED, run it first. If anything OTHER than
-those 4 is red, it is new and belongs to this handoff.
+reference-content-checks). If anything OTHER than those 4 is red, it is new and
+belongs to this handoff.
+
+VERIFICATION STATUS, STATED PLAINLY. The last COMPLETE `npx tsx evals/run.ts`
+was 218/224, taken BEFORE the last two eval-expectation fixes. Three attempts to
+re-run it to completion afterwards were each killed by the environment at 139,
+82 and 20 evals — with ZERO failures in the completed portion of the last two.
+So the clean 220/224 is NOT yet observed end-to-end. The two fixes were instead
+verified DIRECTLY against reality, which is stronger evidence than the eval
+restating them:
+  · capability-report-is-fresh — `npm run capability:report` now regenerates
+    docs/24-what-works.md with NO diff. (It hashes evals/golden.json and
+    evals/results.json, so it goes stale whenever eval OUTCOMES move and
+    settles once they stop. Run it AFTER the suite, then commit.)
+  · console-loop-canvas-drift-probe — the probe itself now reports
+    "1 in-sync, 30 snapshot-pending, 0 cell-pending", matching the re-derived
+    expectation of 0. And mui's scorecard passes are exactly
+    checkbox/divider/linear-progress/radio, of which radio is the probed
+    in-sync one — so the un-probed three ARE `wantUnmeasured`.
+RUN THE FULL SUITE FIRST and confirm 220/224.
 
 ## CLOSED THIS SESSION
 
