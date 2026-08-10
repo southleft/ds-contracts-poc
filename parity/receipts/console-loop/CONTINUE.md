@@ -112,6 +112,33 @@ RUN THE FULL SUITE FIRST and confirm 220/224.
   the overline carve-out that was hardcoded at the consumer.
   native-slots-check §9 red-tests it.
 
+## RESIDUAL STATUS vs THE FREEZE-BOARD BAR
+
+The bar is: foreign board green, OR every residual is a named FC-* refusal with
+probe+pin. Where each residual stands as of this handoff:
+
+  NAMED with probe+pin (done, see details below):
+   · the 6 capture-framing C1 violations — each carries an FC code, a probe
+     (what was read on the live canvas) and a pin (both boxes). FIVE of the six
+     are C1's OWN semantics, not canvas defects.
+   · FC-BASE-EQUAL-GEOMETRY-DROPPED — 15 findings, probe is
+     `node scripts/base-equal-geometry-sweep.mjs`, pin is the committed
+     BASE-EQUAL-GEOMETRY-SWEEP.json.
+   · the 4 pre-existing suite failures — named above, one PROVEN pre-existing
+     by checking out this session's own start commit.
+
+  NOT YET NAMED — the honest gap, and the first thing to do after the suite:
+   · C1 has no VOCABULARY for a named overhang, so those five sit in the gate
+     as hard violations even though they are now diagnosed. The fix is a
+     per-stem `cellOverhang: {fc, renderW, renderH, why}` in framing.json that
+     C1 accepts ONLY when the shot equals that independently-measured render
+     box, keeping the never-waivable bite for wrong-cell/whole-set shots
+     (which match neither the box+margin nor the named render box).
+     DO NOT instead force clipsContent onto roots the contract never clipped —
+     that makes the canvas lie to satisfy a gate.
+   · mui/fab's silent geometry loss is DIAGNOSED but neither carried nor
+     ledgered, so it is not yet a named refusal either.
+
 ## NEXT 3 STEPS
 
 1. **Verify the full suite** (`npx tsx evals/run.ts`) — see VERIFICATION STATUS
