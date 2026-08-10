@@ -33,15 +33,16 @@ examples/mui/tokens/mui.dtcg.json,examples/mui/tokens/mui-minted.dtcg.json`.
 | select.figma.js | mui.select | size(2) | 2 | tokens 2136 (134 aliased) · 1 set(s) built |
 | slider.figma.js | mui.slider | color(6)×size(2) | 12 | tokens 2136 (134 aliased) · 1 set(s) built |
 | snackbar.figma.js | mui.snackbar | position(3) | 3 | tokens 2136 (134 aliased) · 1 set(s) built |
-| switch.figma.js | mui.switch | color(7)×size(2)×checked(2) | 28 | tokens 2136 (134 aliased) · 1 set(s) built |
 | table-pagination.figma.js | mui.table-pagination | standalone | 1 | tokens 2136 (134 aliased) · 0 set(s) built |
 | table.figma.js | mui.table | size(2) | 2 | tokens 2136 (134 aliased) · 1 set(s) built |
 | tabs.figma.js | mui.tabs | textColor(3)×indicatorColor(2) | 6 | tokens 2136 (134 aliased) · 1 set(s) built |
 | text-field.figma.js | mui.text-field | variant(3)×size(2) | 6 | tokens 2136 (134 aliased) · 2 set(s) built |
 | tooltip.figma.js | mui.tooltip | standalone | 1 | tokens 2136 (134 aliased) · 0 set(s) built |
 
-**31 scripts · 273 variants total.** Each script ran to completion
+**31 scripts · 245 variants total.** Each script ran to completion
 against the mocked Figma (00-tokens.figma.js first — 2136 variables
 including the Figma-native ALIAS pass for source-aliased minted leaves).
 
-**0 failures.**
+## FAILURES (1)
+
+- switch.figma.js: headless execute FAILED — switch-track(medium) pin: expected 34x14, found 1x1

@@ -203,7 +203,16 @@ export function createFigmaMock() {
         this._w = 100;
         this._h = 100;
       }
-      if (type === 'FRAME' || type === 'COMPONENT') {
+      // COMPONENT only, NOT plain FRAME — and the difference is measured, not
+      // assumed. The live evidence is a childless COMPONENT (MUI Divider
+      // 83:1610, 288x100 where the library is 288x1) and a childless SLOT.
+      // Asserting it for FRAME as well was an inference, and the canvas
+      // refutes it: MUI Switch's childless FRAME children measure
+      // switch-track 34x14 and switch-thumb 20x20 live (read from 21:612,
+      // both FIXED), not 100x100. Modeling FRAME made the mock harsher than
+      // Figma, which drove the track to 1x1 through the very re-measure this
+      // work added and broke the mui compile receipt's 34x14 pin.
+      if (type === 'COMPONENT') {
         // THE BIRTH BOX WAS NEVER A SLOT FACT. Measured live 2026-08-10 on MUI
         // Divider (set 83:1610) — a plain COMPONENT with zero children, zero
         // padding, layoutSizingVertical 'HUG': it measured 288×100 where the

@@ -1450,7 +1450,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -3625,7 +3625,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -5670,7 +5670,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -7707,7 +7707,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -9012,12 +9012,21 @@ async function buildNode(spec, registry) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
@@ -9224,7 +9233,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -9353,12 +9362,21 @@ async function amendSet(set, C) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
@@ -9536,12 +9554,21 @@ async function amendComponent(comp, C) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
@@ -10908,12 +10935,21 @@ async function buildNode(spec, registry) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
@@ -11120,7 +11156,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -11249,12 +11285,21 @@ async function amendSet(set, C) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
@@ -11432,12 +11477,21 @@ async function amendComponent(comp, C) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
@@ -13606,12 +13660,21 @@ async function buildNode(spec, registry) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
@@ -13818,7 +13881,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -13951,12 +14014,21 @@ async function amendSet(set, C) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
@@ -14137,12 +14209,21 @@ async function amendComponent(comp, C) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
@@ -15759,12 +15840,21 @@ async function buildNode(spec, registry) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
@@ -15971,7 +16061,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -16103,12 +16193,21 @@ async function amendSet(set, C) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
@@ -16289,12 +16388,21 @@ async function amendComponent(comp, C) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
@@ -18239,7 +18347,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -20887,7 +20995,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -22285,7 +22393,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -23758,12 +23866,21 @@ async function buildNode(spec, registry) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
@@ -23970,7 +24087,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -24100,12 +24217,21 @@ async function amendSet(set, C) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
@@ -24284,12 +24410,21 @@ async function amendComponent(comp, C) {
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // `children` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
     remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
@@ -25451,7 +25586,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;

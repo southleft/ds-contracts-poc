@@ -594,12 +594,21 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
   // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // \`children\` IS the container test, and it has to be explicit: a TEXT node
+  // A DECLARED layout is required, and that is not the timidity it looks like.
+  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
+  // root was a latent hole. It was speculation — the divider roots this fix
+  // exists for all declare layout — and the canvas refuted it: MUI Switch's
+  // switch-track is a childless FRAME with no declared layout that measures
+  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
+  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
+  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
+  // node whose sizing this repair understands.
+  //
+  // \`children\` IS the container test, and it stays explicit: a TEXT node
   // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all, so relaxing the layout guard above
-  // reached every leaf and threw on the first MUI text node. Only FRAME /
-  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
-  if ((${specExpr}.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
+  // birth box; a text or vector leaf measures itself.
+  if (${specExpr}.layout && ${specExpr}.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in ${nodeExpr} && ${nodeExpr}.children &&
       (${specExpr}.type === 'slot' || ${nodeExpr}.children.length === 0)) {
     remeasureBirthBox(${nodeExpr}, ${specExpr}.type === 'slot' ? ${specExpr}.slotProperty : ${specExpr}.name);
@@ -614,7 +623,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
+export const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
