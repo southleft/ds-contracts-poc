@@ -1343,6 +1343,11 @@ function svgStrokeAttrs(
   /** Path draw-on animation (pathLength-relative) drops dashes; progress
    *  rings bake absolute px dasharray/offset so determinate arcs survive. */
   dashMode: 'drop-pathlength' | 'bake-absolute',
+  /** The shape's own captured centre, passed only by the `circle` caller. The
+   *  dash-fold below rotates about it, so the rotation origin is an OBSERVED
+   *  coordinate rather than an assumed viewBox midpoint. Absent for `path`,
+   *  where the fold does not apply. */
+  center?: { cx: number; cy: number },
 ): string {
   const strokeRaw = el.style['stroke'];
   const stroke = strokeRaw && inheritedColor && strokeRaw === inheritedColor ? 'currentColor' : strokeRaw;
@@ -1384,11 +1389,45 @@ function svgStrokeAttrs(
     const dashNum = /^(-?\d+(?:\.\d+)?)px$/.exec(dash.trim());
     const offNum = /^(-?\d+(?:\.\d+)?)px$/.exec((dashOffset ?? '0px').trim());
     if (dashNum) {
-      strokeAttrs.push(` stroke-dasharray="${dashNum[1]}"`);
-      if (offNum) strokeAttrs.push(` stroke-dashoffset="${offNum[1]}"`);
-      receipts.push(
-        `svg-circle-dash-baked: ${label} — stroke-dasharray ${dash} / stroke-dashoffset ${dashOffset || '0px'} carried as absolute user units (progress-ring idiom; not pathLength-relative)`,
-      );
+      // FIGMA'S SVG IMPORTER HONOURS `stroke-dasharray` AND SILENTLY IGNORES
+      // `stroke-dashoffset`. Baking the pair faithfully therefore produced a
+      // canvas ring that was WRONG in the one way the attribute pair exists to
+      // express: MUI's determinate CircularProgress carries dasharray 126.92
+      // (the full circumference) with dashoffset 50.768, i.e. draw 60% of the
+      // ring. With the offset dropped on import, a single-value dasharray equal
+      // to the circumference draws the ENTIRE circle — so the determinate cell
+      // rendered identical to the indeterminate one. Its own receipt recorded
+      // the tell without naming the cause: scoring the INDETERMINATE shot
+      // against the determinate reference gave 1.78, which is only possible if
+      // the two variants are pixel-identical on canvas.
+      //
+      // A two-value dasharray says the same thing in a form the importer keeps:
+      // `visible gap` — draw (dasharray − dashoffset), then skip the rest. Both
+      // numbers are the OBSERVED ones; nothing is invented, and the arithmetic
+      // is exact (126.92 − 50.768 = 76.152, and 76.152/126.92 = 0.6 exactly).
+      //
+      // The PHASE is carried the same way. Dropping the offset also drops where
+      // the arc STARTS, and MUI rotates the element −90° so the ring opens at
+      // 12 o'clock — observed on the root as `transform: matrix(0,-1,1,0,0,0)`,
+      // a fact fusion refuses as a declared channel because it VARIES across
+      // combos (the indeterminate variant animates it). The channel cannot
+      // carry it; this per-variant ASSET can, so the rotation is baked onto the
+      // circle about its own captured centre rather than left to chance.
+      const visible = offNum ? Number(dashNum[1]) - Number(offNum[1]) : null;
+      if (center && visible !== null && visible > 0 && visible < Number(dashNum[1])) {
+        const gap = Number(dashNum[1]) - visible;
+        strokeAttrs.push(` stroke-dasharray="${visible} ${gap}"`);
+        strokeAttrs.push(` transform="rotate(-90 ${center.cx} ${center.cy})"`);
+        receipts.push(
+          `svg-circle-dash-folded: ${label} — stroke-dasharray ${dash} / stroke-dashoffset ${dashOffset} folded to a two-value dasharray "${visible} ${gap}" (visible ${((visible / Number(dashNum[1])) * 100).toFixed(1)}% of the circumference) and a rotate(-90) about the captured centre, BECAUSE Figma's SVG importer honours dasharray and ignores dashoffset — carrying the pair verbatim drew the full ring and made the determinate variant identical to the indeterminate one`,
+        );
+      } else {
+        strokeAttrs.push(` stroke-dasharray="${dashNum[1]}"`);
+        if (offNum) strokeAttrs.push(` stroke-dashoffset="${offNum[1]}"`);
+        receipts.push(
+          `svg-circle-dash-baked: ${label} — stroke-dasharray ${dash} / stroke-dashoffset ${dashOffset || '0px'} carried as absolute user units (progress-ring idiom; not pathLength-relative)`,
+        );
+      }
     } else {
       receipts.push(
         `svg-circle-dash-unreadable: ${label} — stroke-dasharray ${dash} not px; dashes dropped`,
@@ -1549,7 +1588,7 @@ export function reconstructSvg(
         const fillRaw = el.style['fill'] ?? '';
         const fill = fillRaw === 'none' ? 'none' : resolveFill(fillRaw);
         const opacity = el.style['opacity'];
-        const strokeAttrs = svgStrokeAttrs(el, inheritedColor, receipts, label, 'bake-absolute');
+        const strokeAttrs = svgStrokeAttrs(el, inheritedColor, receipts, label, 'bake-absolute', { cx, cy });
         paths.push(
           `<circle cx="${cx}" cy="${cy}" r="${r}"` +
             (fill ? ` fill="${fill}"` : '') +
