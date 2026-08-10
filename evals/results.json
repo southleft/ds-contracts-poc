@@ -255,7 +255,8 @@
     {
       "id": "golden-generated-output",
       "claim": "C1-determinism",
-      "pass": true
+      "pass": false,
+      "error": "Error: Generated output diverges from golden manifest (59 file[s]): figma-sync/02-accordionitem.js, figma-sync/03-avatar.js, figma-sync/04-avatargroup.js, figma-sync/05-badge.js, figma-sync/06-button.js — if intentional, npm run golden:update in a reviewed change"
     },
     {
       "id": "naxis-full-cartesian-product",
@@ -625,8 +626,7 @@
     {
       "id": "capability-report-is-fresh",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: docs/24-what-works.md is STALE vs a rebuild from its committed sources:\nSTALE: docs/24-what-works.md does not match a rebuild from its committed sources.\nEvery number in it is READ from an artifact; one of those artifacts moved.\nRebuild it and commit:  npm run capability:report\n"
+      "pass": true
     },
     {
       "id": "generated-storybook-trees-are-fresh",
@@ -1051,7 +1051,7 @@
       "id": "console-loop-canvas-drift-probe",
       "claim": "C3-detection",
       "pass": false,
-      "error": "Error: mui: expected 1 in-sync / 30 cell-pending, got 1 / 0"
+      "error": "Error: expected exactly mui's 4 passes to be un-probed for drift, got [mui/checkbox, mui/divider, mui/linear-progress]"
     },
     {
       "id": "console-loop-mui-evidence-receipt",

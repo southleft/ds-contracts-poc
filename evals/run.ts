@@ -9985,10 +9985,27 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // bookkeeping: nobody rebuilt those canvases, so a pin could surface real
       // DRIFT — which throws unconditionally above. That is a
       // rebuild-then-pin round, one stem at a time.
-      const wantUnmeasured = ['mui/accordion', 'mui/checkbox', 'mui/divider', 'mui/table'];
+      // 2026-08-10, and it SHRANK again — 4 -> 3, the only direction allowed.
+      // Two members left for opposite reasons and the difference matters:
+      //   · mui/table is gone because IT IS NO LONGER A PASS. capture-framing
+      //     C1, asserted on this lane for the first time, showed the committed
+      //     shot (688x188) was not the live cell (688x447.8). Re-shot and
+      //     rescored, it FAILS (1.57, compositionOk false) — the old pass was
+      //     measuring a stale capture, which hid a row height 2.55x the
+      //     library's. Withdrawn, not probed.
+      //   · mui/accordion is gone because it was never a scorecard pass in the
+      //     first place; it drops out with the pass set re-derived.
+      // mui/linear-progress JOINED the pass set (56.18 -> 0.00) when
+      // FC-OVERFLOW-CLIP-LOST landed, and it is un-probed for the same reason
+      // the others are.
+      // The three that remain are still cell-pinned-but-unrebuilt, and pinning
+      // them is NOT bookkeeping: nobody rebuilt those canvases, so a probe
+      // could surface real DRIFT — which throws unconditionally above. That is
+      // a rebuild-then-pin round, one stem at a time.
+      const wantUnmeasured = ['mui/checkbox', 'mui/divider', 'mui/linear-progress'];
       if (unmeasuredPasses.sort().join(',') !== wantUnmeasured.join(',')) {
         throw new Error(
-          `expected exactly mui's 4 passes to be un-probed for drift, got [${unmeasuredPasses.join(', ')}]`,
+          `expected exactly mui's ${wantUnmeasured.length} un-probed passes [${wantUnmeasured.join(', ')}], got [${unmeasuredPasses.join(', ')}]`,
         );
       }
       // DERIVED, NOT TYPED. This line used to be a hardcoded string and it went
