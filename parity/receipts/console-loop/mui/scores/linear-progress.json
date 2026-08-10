@@ -8,30 +8,30 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 56.399132321041215,
-    "pctAAUnmasked": 56.182212581344906,
-    "pctAAMasked": 56.182212581344906,
+    "pctExactUnmasked": 18.597560975609756,
+    "pctAAUnmasked": 17.98780487804878,
+    "pctAAMasked": 17.98780487804878,
     "maskCoveragePct": 0,
-    "canvasPx": "461x4",
+    "canvasPx": "328x4",
     "realPx": "288x4",
     "inkCanvasPct": 100,
-    "inkRealPct": 62.47288503253796
+    "inkRealPct": 87.8048780487805
   },
   "reference": "extract/computed/out/mui/linearprogress/orig-shots/determinate__default.png",
   "referenceSha256": "505a15de567dbb526e5431732550386172c25a0ec254bd76c76ab380492ca3d1",
   "canvasShot": "parity/receipts/console-loop/mui/shots/linear-progress-cell.png",
-  "canvasShotSha256": "1d16cf85a1013716e03a844a483f2c79dc514adad6e8fd227c5c27bfe6be6544",
+  "canvasShotSha256": "27908a3597db77bda9c416854f063d277bf829fac6ba5ec3a8b02c229710f4a7",
   "diff": "parity/receipts/console-loop/mui/scores/linear-progress.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/linear-progress.json",
-  "compositionOk": false,
-  "strictCompositionOk": false,
+  "compositionOk": true,
+  "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.6006944444444444,
-  "inkDelta": 37.52711496746204,
+  "scaleRatio": 1.1388888888888888,
+  "inkDelta": 12.195121951219505,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.60, inkDelta=37.5) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-09T03:33:16.106Z"
+  "note": "pixel bar missed (pctAAMasked=17.99 > 5)",
+  "recordedAt": "2026-08-10T13:44:40.684Z"
 }

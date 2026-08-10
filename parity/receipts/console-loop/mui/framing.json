@@ -4,11 +4,12 @@
   "lane": "mui",
   "fileKey": "59mLQlOMiD5w5za6SUcoO5",
   "fileName": "MUI (console-loop)",
-  "note": "CAPTURE-FRAMING PIN. cellW/cellH are the LIVE Figma VARIANT-cell dimensions, minted from the Desktop Bridge (figma-console figma_execute, fileKey pinned) \u2014 NOT derived from the committed PNGs. scripts/console-loop-capture-framing-check.mjs asserts that every committed canvas shot is that cell plus ONE uniform margin, and that the reference the scorer resolves is comparable, in-library, provenance-resolvable and not flush against its harness stage edge. THIS LANE IS CELL-PENDING: see stems[].cellPending.reason \u2014 the reference half (C2/C3/C3b/C4) is fully checked, the canvas half (C1) is not.",
+  "note": "CAPTURE-FRAMING PIN. cellW/cellH are the LIVE Figma VARIANT-cell dimensions, minted from the Desktop Bridge (figma-console figma_execute, fileKey pinned) — NOT derived from the committed PNGs. scripts/console-loop-capture-framing-check.mjs asserts that every committed canvas shot is that cell plus ONE uniform margin, and that the reference the scorer resolves is comparable, in-library, provenance-resolvable and not flush against its harness stage edge. THIS LANE IS CELL-PENDING: see stems[].cellPending.reason — the reference half (C2/C3/C3b/C4) is fully checked, the canvas half (C1) is not.",
   "mintedFrom": {
-    "bridge": "NOT MINTED \u2014 Desktop Bridge could not reach fileKey 59mLQlOMiD5w5za6SUcoO5 on 2026-08-08",
-    "mintedAt": null,
-    "method": "n/a \u2014 every stem is cellPending"
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge, websocket :9223)",
+    "mintedAt": "2026-08-10",
+    "method": "getNodeByIdAsync on each stem's cellNodeId (taken from parity/receipts/console-loop/visual-truth/mui/<stem>.json); cellW/cellH = node.width/node.height — the CELL BOX, the same method every other lane's mint used. fileKey 59mLQlOMiD5w5za6SUcoO5 (\"MUI Test 1\") was connected to the Desktop Bridge this session, which is the condition the 2026-08-08 cellPending reason named as its unblock.",
+    "boxNotRenderBounds": "The 2026-08-08 cellPending reason left one question open: whether the five stems whose cached box disagreed with the committed shot were genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds. MEASURED THIS SESSION, and it is the latter for the disagreement and the former for the pin: exportAsync at scale 1 returned EXACTLY absoluteRenderBounds for all five (fab 44x72, linear-progress 328x4, select 75x61, snackbar 324x85, text-field 253x93), so a shot is always the RENDER box while cellW/cellH is the LAYOUT box. C1 is pinned to the LAYOUT box deliberately: pinning render bounds would make C1 compare the export to itself, and it is exactly the box-vs-ink gap that let MUI Divider ship a 288x100 transparent birth box behind a 288x1 strip of ink and score a PASSING 0.00. Where the two diverge the stem carries a cellNote with both numbers."
   },
   "guard": {
     "marginMinPx": -1,
@@ -48,7 +49,7 @@
     "referenceToneCheck": true,
     "toneTVMaxPct": 25,
     "toneAAMaxPct": 10,
-    "contentCausesNote": "C5 (referenceSweepCheck) ranks the canvas shot against every sibling __default gate-shot in the directory this stem\u2019s own referenceSource names, using an 8x8x8 colour-histogram total-variation distance; it fires only on a decisive margin (pinned>=sweepPinnedMinPct AND gap>=sweepGapMinPct) and is waived on a fail-closed receipt by FC-REF-WRONG-VARIANT (retarget accepted) or FC-REF-SWEEP-DECOY (retarget examined and refused: the canvas, not the reference, is what is wrong). C6 (referenceToneCheck) applies the same distance to the pinned pair, but only in the band where the AA number is claiming closeness (pass claim, or scorecard pctAAMasked<=toneAAMaxPct) \u2014 pixelmatch at threshold 0.1 compares YIQ against a 352 cutoff, so a whole-component tone swap sits under it (measured: #F0F0F0 cell vs #D5EBFF reference, YIQ delta 158, 94.43% of pixels differing per channel, AA 7.13). Thresholds calibrated 2026-08-08 against five measured wrong-reference pairs (tv 20.6-97.3) and every committed pair in-tree (highest non-firing sweep gap 10.1pt; highest in-band tone distance 17.3%)."
+    "contentCausesNote": "C5 (referenceSweepCheck) ranks the canvas shot against every sibling __default gate-shot in the directory this stem’s own referenceSource names, using an 8x8x8 colour-histogram total-variation distance; it fires only on a decisive margin (pinned>=sweepPinnedMinPct AND gap>=sweepGapMinPct) and is waived on a fail-closed receipt by FC-REF-WRONG-VARIANT (retarget accepted) or FC-REF-SWEEP-DECOY (retarget examined and refused: the canvas, not the reference, is what is wrong). C6 (referenceToneCheck) applies the same distance to the pinned pair, but only in the band where the AA number is claiming closeness (pass claim, or scorecard pctAAMasked<=toneAAMaxPct) — pixelmatch at threshold 0.1 compares YIQ against a 352 cutoff, so a whole-component tone swap sits under it (measured: #F0F0F0 cell vs #D5EBFF reference, YIQ delta 158, 94.43% of pixels differing per channel, AA 7.13). Thresholds calibrated 2026-08-08 against five measured wrong-reference pairs (tv 20.6-97.3) and every committed pair in-tree (highest non-firing sweep gap 10.1pt; highest in-band tone distance 17.3%)."
   },
   "refAllow": [
     "parity/receipts/console-loop/mui/refs/",
@@ -57,109 +58,154 @@
   ],
   "stems": {
     "accordion": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:39",
+      "cellName": "Variant=Elevation, Expanded=Collapsed",
+      "setNodeId": "21:79",
+      "cellW": 288,
+      "cellH": 48,
+      "cellNote": "Layout box 288x48, RENDER bounds 354x114 — an export of this cell is 354x114, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "alert": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "84:2009",
+      "cellName": "Severity=Error, Variant=Filled",
+      "setNodeId": "84:2264",
+      "cellW": 255,
+      "cellH": 49
     },
     "autocomplete": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:82",
+      "cellName": "Size=Medium",
+      "setNodeId": "21:134",
+      "cellW": 288,
+      "cellH": 56
     },
     "avatar": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "83:1632",
+      "cellName": "Variant=Circular",
+      "setNodeId": "83:1638",
+      "cellW": 14,
+      "cellH": 20
     },
     "badge": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "84:1941",
+      "cellName": "Color=Default, Variant=Dot",
+      "setNodeId": "84:2376",
+      "cellW": 40,
+      "cellH": 40
     },
     "breadcrumbs": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "83:1658",
+      "cellName": "Breadcrumbs",
+      "cellW": 288,
+      "cellH": 24
     },
     "button": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:195",
+      "cellName": "Variant=Contained, Color=Error, Size=Large, State=Default",
+      "setNodeId": "21:287",
+      "cellW": 103,
+      "cellH": 34,
+      "cellNote": "Layout box 103x34, RENDER bounds 113x44 — an export of this cell is 113x44, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "card": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:299",
+      "cellName": "Elevation=0",
+      "setNodeId": "21:308",
+      "cellW": 288,
+      "cellH": 59
     },
     "checkbox": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:315",
+      "cellName": "Checked=Checked",
+      "setNodeId": "21:323",
+      "cellW": 42,
+      "cellH": 42
     },
     "chip": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:326",
+      "cellName": "Variant=Filled, Color=Default, Size=Medium",
+      "setNodeId": "21:410",
+      "cellW": 51,
+      "cellH": 20
     },
     "circular-progress": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "83:1644",
+      "cellName": "Variant=Determinate",
+      "setNodeId": "83:1647",
+      "cellW": 40,
+      "cellH": 40
     },
     "dialog": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:434",
+      "cellName": "Max width=Lg",
+      "setNodeId": "21:448",
+      "cellW": 424,
+      "cellH": 123
     },
     "divider": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "83:1607",
+      "cellName": "Variant=FullWidth",
+      "setNodeId": "83:1610",
+      "cellW": 288,
+      "cellH": 1
     },
     "drawer": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "83:1673",
+      "cellName": "Variant=Temporary",
+      "setNodeId": "83:1680",
+      "cellW": 117,
+      "cellH": 100
     },
     "fab": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "83:1711",
+      "cellName": "Size=Large, Color=Default",
+      "setNodeId": "84:1743",
+      "cellW": 8,
+      "cellH": 36,
+      "cellNote": "Layout box 8x36, RENDER bounds 44x72 — an export of this cell is 44x72, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "icon-button": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "83:1702",
+      "cellName": "Size=Large, Color=Default",
+      "setNodeId": "83:1708",
+      "cellW": 96,
+      "cellH": 58
     },
     "input-adornment": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "83:1685",
+      "cellName": "Position=End",
+      "setNodeId": "83:1687",
+      "cellW": 9,
+      "cellH": 24
     },
     "linear-progress": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "83:1653",
+      "cellName": "Variant=Determinate",
+      "setNodeId": "83:1655",
+      "cellW": 288,
+      "cellH": 4,
+      "cellNote": "Layout box 288x4, RENDER bounds 328x4 — an export of this cell is 328x4, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "link": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "84:1764",
+      "cellName": "Color=Error, Underline=Always, State=Default",
+      "setNodeId": "84:1832",
+      "cellW": 30.22,
+      "cellH": 38
     },
     "menu": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:451",
+      "cellName": "Menu",
+      "cellW": 114.77,
+      "cellH": 124,
+      "cellNote": "Layout box 114.77x124, RENDER bounds 146.77x156 — an export of this cell is 146.77x156, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "paper": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "83:1617",
+      "cellName": "Elevation=0, Variant=Elevation",
+      "setNodeId": "83:1629",
+      "cellW": 288,
+      "cellH": 19
     },
     "radio": {
       "setNodeId": "84:1933",
@@ -167,52 +213,72 @@
       "cellName": "Color=Default, Checked=Checked",
       "cellW": 42,
       "cellH": 42,
-      "pinnedNote": "PINNED 2026-08-09, the first mui cell ever pinned. The cellPending reason every other stem still carries \u2014 \"MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge\" \u2014 is no longer true. This cell is in-sync BY CONSTRUCTION: radio.figma.js was fetched over the bridge and evalled into this file minutes before these numbers were read, so the canvas IS what the emit script builds. cellW/cellH come from the live canvas via getNodeByIdAsync, never back-derived from the committed PNG. The other 30 stems stay pending on purpose: pinning a cell nobody rebuilt could reveal real DRIFT, and a drifted scored pass throws unconditionally \u2014 that is a rebuild-then-pin round, not a bookkeeping edit."
+      "pinnedNote": "PINNED 2026-08-09, the first mui cell ever pinned. The cellPending reason every other stem still carries — \"MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge\" — is no longer true. This cell is in-sync BY CONSTRUCTION: radio.figma.js was fetched over the bridge and evalled into this file minutes before these numbers were read, so the canvas IS what the emit script builds. cellW/cellH come from the live canvas via getNodeByIdAsync, never back-derived from the committed PNG. The other 30 stems stay pending on purpose: pinning a cell nobody rebuilt could reveal real DRIFT, and a drifted scored pass throws unconditionally — that is a rebuild-then-pin round, not a bookkeeping edit."
     },
     "select": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "84:2107",
+      "cellName": "Size=Medium",
+      "setNodeId": "84:2125",
+      "cellW": 73.94,
+      "cellH": 56,
+      "cellNote": "Layout box 73.94x56, RENDER bounds 75x61 — an export of this cell is 75x61, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "slider": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:477",
+      "cellName": "Color=Error, Size=Medium",
+      "setNodeId": "21:509",
+      "cellW": 288,
+      "cellH": 30
     },
     "snackbar": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "84:2128",
+      "cellName": "Position=BottomLeft",
+      "setNodeId": "84:2140",
+      "cellW": 288,
+      "cellH": 49,
+      "cellNote": "Layout box 288x49, RENDER bounds 324x85 — an export of this cell is 324x85, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "switch": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:612",
+      "cellName": "Color=Default, Size=Medium, Checked=Checked",
+      "setNodeId": "21:624",
+      "cellW": 58,
+      "cellH": 38
     },
     "table-pagination": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:627",
+      "cellName": "TablePagination",
+      "cellW": 428,
+      "cellH": 52,
+      "cellNote": "Layout box 428x52, RENDER bounds 431.03x52 — an export of this cell is 431.03x52, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "table": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:650",
+      "cellName": "Size=Medium",
+      "setNodeId": "21:744",
+      "cellW": 688,
+      "cellH": 447.8
     },
     "tabs": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:787",
+      "cellName": "Text color=Inherit, Indicator color=Primary",
+      "setNodeId": "21:807",
+      "cellW": 288,
+      "cellH": 48
     },
     "text-field": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "84:2143",
+      "cellName": "Variant=Outlined, Size=Medium",
+      "setNodeId": "84:2480",
+      "cellW": 252.97,
+      "cellH": 78.91,
+      "cellNote": "Layout box 252.97x78.91, RENDER bounds 252.97x93 — an export of this cell is 252.97x93, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "tooltip": {
-      "cellPending": {
-        "reason": "MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge in this session (figma_list_open_files reported only GnQnjSNBXtgtd2Ht0Hs1C8, BMjUA2ue5CaZXU4kufxL0z and HherkaLt11JSCFJVAoyWlO). cellW/cellH must come from the live canvas and must never be back-derived from the committed PNG \u2014 that would make C1 restate the artifact it exists to check \u2014 so C1 is unasserted here. C2/C3/C3b/C4 need no bridge and DO run. UNBLOCK: the REST lane already reaches this file. Every scorecard under parity/receipts/console-loop/visual-truth/mui/ carries the live cellNodeId and cellName for its stem (fileVersion 2384477865735882405), and the node cache under extract/figma/visual-parity/out/visual-truth-cache/ carries box sizes, so a REST-minted C1 is one fetch away. It was NOT minted this round because the cached box for 5 of the 31 stems disagrees with the committed shot by more than the margin guard (fab 8x36 vs shot 44x72, linear-progress 288x4 vs 461x4, select 74x56 vs 99x61, snackbar 288x49 vs 324x85, text-field 253x79 vs 253x93) and it is not yet established whether those are genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds (strokes/shadows expand an export). Pinning them either way would be a guess, and C1 is never waivable \u2014 so it must be right the first time. Resolve by re-fetching those five nodes with absoluteRenderBounds and comparing both boxes before minting."
-      }
+      "cellNodeId": "21:810",
+      "cellName": "Tooltip",
+      "cellW": 72.58,
+      "cellH": 21
     }
   }
 }

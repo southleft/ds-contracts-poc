@@ -17,19 +17,22 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:744).",
       "Table COMPONENT_SET 21:744: 2 variant(s), 1 prop def(s). Structure looks sane; slot placeholders OK.",
       "2026-08-08 STRICT-LANE CONVERSION: pixel scorecard PASS on both instruments — lane scorer pctAAMasked=2.08 (scores/table.json, headless REST cell at scale 1 vs committed developed ref mui/refs/table.png) and headless visual-truth card agrees; bar pctAAMasked<=5 AND compositionOk.",
-      "FC-REF-STALE-COPY CLOSED ( reference audit 2026-08-08): the committed refs/ copy had the same dimensions as the gate-shot its referenceSource names but different bytes — the source had been re-rendered (Roboto cfg.fonts substrate) underneath it, so the scored PNG was not the artifact the provenance line claimed. Copy re-synced from source. "
+      "FC-REF-STALE-COPY CLOSED ( reference audit 2026-08-08): the committed refs/ copy had the same dimensions as the gate-shot its referenceSource names but different bytes — the source had been re-rendered (Roboto cfg.fonts substrate) underneath it, so the scored PNG was not the artifact the provenance line claimed. Copy re-synced from source. ",
+      "2026-08-10 PASS WITHDRAWN — THE SHOT WAS STALE AND THE STALENESS WAS THE PASS. Turning on capture-framing C1 for this lane (fileKey 59mLQlOMiD5w5za6SUcoO5 reachable from the Desktop Bridge this session) pinned the live cell 21:650 \"Size=Medium\" at 688x447.8. The committed shot was 688x188 — it did not depict that cell and had not for some time. Re-shot from the live canvas at 688x448 and rescored: the pass became a fail. The 1.49% that stood here measured a capture, not the canvas."
     ],
-    "defects": [],
+    "defects": [
+      "FC-ABS-SIZE: the canvas Table cell renders a 688x429 ink box against the real MUI Table reference's 688x168 (scaleRatio 2.55, inkCanvas 49.1% vs inkReal 16.5%) — the width is exact and the HEIGHT is 2.55x the library's. Row height, not table width, is the defect. It was invisible while the committed shot was 688x188, which happened to sit near the reference and scored 1.49%."
+    ],
     "reference": "extract/computed/out/mui/table/orig-shots/medium__default.png",
     "referenceSource": "extract/computed/out/mui/table/orig-shots/medium__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/table.png — a byte-identical copy of mui/table/gate-shots/medium__default.png)): parity/receipts/console-loop/mui/refs/table.png [declared source: extract/computed/out/mui/table/gate-shots/medium__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/table-cell.png",
-    "matchDeveloped": true,
-    "status": "scored-pass",
+    "matchDeveloped": false,
+    "status": "fail-closed",
     "scorecard": "parity/receipts/console-loop/mui/scores/table.json",
     "matchDevelopedReason": "scorer pctAAMasked=1.49 compositionOk against the REAL LIBRARY RENDER (extract/computed/out/mui/table/orig-shots/medium__default.png) — 2026-08-08 REFERENCE-TRUTH re-measure",
     "matchedAt": "2026-08-09T03:34:07.029Z"
@@ -92,6 +95,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": true
+    "visualMatchDeveloped": false
   }
 }
