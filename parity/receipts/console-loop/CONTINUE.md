@@ -230,7 +230,7 @@ probe+pin. Where each residual stands as of this handoff:
    · the 6 capture-framing C1 violations — each carries an FC code, a probe
      (what was read on the live canvas) and a pin (both boxes). FIVE of the six
      are C1's OWN semantics, not canvas defects.
-   · FC-BASE-EQUAL-GEOMETRY-DROPPED — 15 findings, probe is
+   · FC-GEOMETRY-EXCLUDED — 15 findings, probe is
      `node scripts/base-equal-geometry-sweep.mjs`, pin is the committed
      BASE-EQUAL-GEOMETRY-SWEEP.json.
    · the 4 pre-existing suite failures — named above, one PROVEN pre-existing
@@ -249,7 +249,8 @@ probe+pin. Where each residual stands as of this handoff:
      genuine silent geometry loss and an allowance there would hide the very
      defect the gate should find. It is DIAGNOSED (below) but the fact is still
      neither carried nor ledgered, so it is not yet a named refusal. Fixing
-     FC-BASE-EQUAL-GEOMETRY-DROPPED in fuse closes this AND the 15.
+     FC-GEOMETRY-EXCLUDED would close this AND the 15 — but ONLY by ledgering the
+     silence; Option B forbids relaxing the fuse exclusion (see the top of this file).
 
 ## NEXT 3 STEPS
 
@@ -344,7 +345,7 @@ probe+pin. Where each residual stands as of this handoff:
      keys are line-height and min-height. width/height appear in no ledger, no
      codeOnly, no receipt. Must end CARRIED or LEDGERED — silent is the one
      outcome that is not allowed.
-     **FC-BASE-EQUAL-GEOMETRY-DROPPED — 15 silent geometry losses across
+     **FC-GEOMETRY-EXCLUDED (was: FC-BASE-EQUAL-GEOMETRY-DROPPED, superseded) — 15 losses across
      10 stems in 6 libraries; fab is the exemplar, not the exception.**
      PROBE: `node scripts/base-equal-geometry-sweep.mjs`. PIN: the committed
      receipt BASE-EQUAL-GEOMETRY-SWEEP.json carries, per finding, the observed
@@ -384,7 +385,7 @@ probe+pin. Where each residual stands as of this handoff:
      declaring a loss unreceipted.
      WHAT SURVIVES AND IS STILL NEW: the sweep extends the known class from 4
      mui stems to 15 findings across 10 stems in 6 libraries
-     (BASE-EQUAL-GEOMETRY-SWEEP.json). Treat FC-BASE-EQUAL-GEOMETRY-DROPPED as
+     (BASE-EQUAL-GEOMETRY-SWEEP.json). Treat the retired name as
      an ALIAS of FC-GEOMETRY-EXCLUDED — same cause, wider census — and prefer
      the older name.
 
@@ -424,7 +425,8 @@ probe+pin. Where each residual stands as of this handoff:
      meant to derive from layout + min/max constraints rather than be pinned?
      If YES, the defect is that the exclusion is SILENT — it must produce a
      codeOnly/ledger entry naming the drop, which today it does not, and that
-     alone would close FC-BASE-EQUAL-GEOMETRY-DROPPED honestly.
+     alone would close FC-GEOMETRY-EXCLUDED honestly — and it is the ONLY sanctioned
+     route under Option B.
      If NO, adding width/height to TOKEN_CHANNELS is the fix — and then the
      PRECEDENCE POST-PASS recorded below is required, because that is exactly
      what starts producing binding+literal collisions (polaris.tag "link").
