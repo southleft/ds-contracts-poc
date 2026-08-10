@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/mui/tabs/orig-shots/inherit.primary__default.png",
   "referenceSha256": "fbaba92b7aaaed1ec357f5b12a7a2d7d16bc24acb2a88164a4516693ea548e77",
   "canvasShot": "parity/receipts/console-loop/mui/shots/tabs-cell.png",
-  "canvasShotSha256": "0bca1e2b0fc4105d33e519418da235376d43f6436d302f5e1b7cc6684f162eb5",
+  "canvasShotSha256": "69d14dd0f505b2ffa45150bc9738e88c0fe68fb828bd74d03aa01539eacd0061",
   "diff": "parity/receipts/console-loop/mui/scores/tabs.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/tabs.json",
@@ -33,5 +33,5 @@
   "dprNormalized": true,
   "sizeNormalized": true,
   "note": "pixel bar missed (pctAAMasked=11.74 > 5)",
-  "recordedAt": "2026-08-09T03:33:19.474Z"
+  "recordedAt": "2026-08-10T18:40:55.974Z"
 }

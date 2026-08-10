@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 52.511961722488046,
-    "pctAAUnmasked": 10.885167464114833,
-    "pctAAMasked": 10.885167464114833,
+    "pctExactUnmasked": 53.110047846889955,
+    "pctAAUnmasked": 13.038277511961722,
+    "pctAAMasked": 13.038277511961722,
     "maskCoveragePct": 0,
-    "canvasPx": "37x22",
+    "canvasPx": "38x22",
     "realPx": "38x19",
-    "inkCanvasPct": 36.124401913875595,
+    "inkCanvasPct": 38.038277511961724,
     "inkRealPct": 36.124401913875595
   },
   "reference": "extract/computed/out/mui/switch/orig-shots/default.medium.checked.enabled__default.png",
   "referenceSha256": "5c1f496eef13d44db39c3a76241c9c4679a27ebc3fb492ce5c2dde376833ec7e",
   "canvasShot": "parity/receipts/console-loop/mui/shots/switch-cell.png",
-  "canvasShotSha256": "238d069e11e2764091637f57dfa76684ae470e7c42c8b6dc62026858dd053cd2",
+  "canvasShotSha256": "a40c1cd6a057fd7e099c41f017e77acc9a116e0b5e3e10485177e5b59a1c515b",
   "diff": "parity/receipts/console-loop/mui/scores/switch.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/switch.json",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1.1578947368421053,
-  "inkDelta": 0,
+  "inkDelta": 1.913875598086129,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=10.89 > 5)",
-  "recordedAt": "2026-08-09T05:45:21.104Z"
+  "note": "pixel bar missed (pctAAMasked=13.04 > 5)",
+  "recordedAt": "2026-08-10T18:40:56.822Z"
 }

@@ -10002,7 +10002,14 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // them is NOT bookkeeping: nobody rebuilt those canvases, so a probe
       // could surface real DRIFT — which throws unconditionally above. That is
       // a rebuild-then-pin round, one stem at a time.
-      const wantUnmeasured = ['mui/checkbox', 'mui/divider', 'mui/linear-progress'];
+      // 2026-08-10 rebuild-then-pin wave: autocomplete JOINED the pass set
+      // (8.93 -> 3.87 after its cell was rebuilt from the committed rt12
+      // script). It is un-probed for the same reason the others are — no
+      // LIVE-SNAPSHOT entry yet. NOTE checkbox and autocomplete were both
+      // rebuilt from their OWN committed scripts this round, so when a
+      // snapshot is taken they should read in-sync BY CONSTRUCTION, exactly
+      // as radio did; that is a snapshot round, not a re-measurement.
+      const wantUnmeasured = ['mui/autocomplete', 'mui/checkbox', 'mui/divider', 'mui/linear-progress'];
       if (unmeasuredPasses.sort().join(',') !== wantUnmeasured.join(',')) {
         throw new Error(
           `expected exactly mui's ${wantUnmeasured.length} un-probed passes [${wantUnmeasured.join(', ')}], got [${unmeasuredPasses.join(', ')}]`,

@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/mui/slider/orig-shots/error.medium__default.png",
   "referenceSha256": "ad209ebd841e80c3652fd5e18e78660803aa083a7d080ea37f434d4169e4cf72",
   "canvasShot": "parity/receipts/console-loop/mui/shots/slider-cell.png",
-  "canvasShotSha256": "55111fd1d62d2e48a5f20e758f66f3c8113fa6d632f2f8e5961979f0982df077",
+  "canvasShotSha256": "51607ba1794e42f5e0559f9f60f890736fbf64e018a688394ffa7407057a8e28",
   "diff": "parity/receipts/console-loop/mui/scores/slider.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/slider.json",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar missed (pctAAMasked=7.96 > 5)",
-  "recordedAt": "2026-08-09T03:33:17.921Z"
+  "recordedAt": "2026-08-10T18:40:56.245Z"
 }

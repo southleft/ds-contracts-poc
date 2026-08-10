@@ -53,7 +53,7 @@ for (const lib of readdirSync(OUT).filter((d) => !d.startsWith('.'))) {
       const inLedger = extTxt.includes(`"${g}"`);
       if (inContract || inLedger) continue; // carried or named — fine
       findings.push({
-        fc: 'FC-BASE-EQUAL-GEOMETRY-DROPPED',
+        fc: 'FC-GEOMETRY-EXCLUDED',
         lib, stem, channel: g,
         observedOn: seen.map((a) => `${a}=${byAxis[a][g]}`).join(' '),
         missingOn: missing.join(','),
@@ -64,7 +64,7 @@ for (const lib of readdirSync(OUT).filter((d) => !d.startsWith('.'))) {
 }
 findings.sort((a, b) => (a.lib + a.stem).localeCompare(b.lib + b.stem));
 console.log(JSON.stringify({
-  fc: 'FC-BASE-EQUAL-GEOMETRY-DROPPED',
+  fc: 'FC-GEOMETRY-EXCLUDED',
   what: 'A geometry channel OBSERVED on some axis values, ABSENT on at least one other '
       + '(typically the value that equals BASE, which therefore contributes no delta), and present in '
       + 'NEITHER the shipped contract NOR the extension ledger. Captured, carried nowhere, named nowhere.',

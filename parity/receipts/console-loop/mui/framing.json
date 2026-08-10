@@ -84,7 +84,13 @@
       "cellName": "Size=Medium",
       "setNodeId": "21:134",
       "cellW": 288,
-      "cellH": 56
+      "cellH": 56,
+      "cellOverhang": {
+        "fc": "FC-OVERFLOW-NOT-DECLARED",
+        "renderW": 288,
+        "renderH": 61,
+        "why": "same cause as mui/select, and measured on the live cell: the child `outlinedinput-notchedoutline` is 288x61 at y=-5 with layoutPositioning ABSOLUTE \u2014 real MUI draws the notched outline 5px ABOVE the input box (the label notch), and the contract root declares no overflow, so the canvas correctly does not clip it. Hides nothing: the stem's scorecard PASSES at 3.87 on the ink boxes (canvas 144x28 vs real 144x28, compositionOk true), so the overhang is not standing in for an unmeasured defect."
+      }
     },
     "avatar": {
       "cellNodeId": "83:1632",
