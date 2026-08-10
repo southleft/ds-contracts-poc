@@ -310,9 +310,19 @@ probe+pin. Where each residual stands as of this handoff:
          determine what it does with a channel absent from the delta — whether
          it merges base, or leaves the key unset. That is where the fact is
          lost, and it is one level below anything measured so far.
-         INSTRUMENT IT (log the resolved style for fab root across the three
-         sizes). Do not reason from the call site — this is the third
-         hypothesis in a row about this bug that measurement has overturned.
+         NARROWED ONE MORE LEVEL: `getAligned` (fuse.ts:128) does nothing but
+         return `union.alignedByKey.get(key)` — no resolution of its own. The
+         aligned elements come from `buildUnion(captures, base, classPrefix)`
+         (fuse.ts:101), and each carries `node: e.rep`. So `.node.style` is
+         whatever buildUnion puts in `rep`, and THAT is the last unexamined
+         layer between a capture that holds 56x56 and a loop that reads
+         undefined. START THERE.
+         INSTRUMENT IT (log the resolved style for the fab root across the
+         three sizes). Do not reason from the call site — this is the third
+         hypothesis in a row about this bug that measurement has overturned,
+         and the pattern IS the finding: every layer here synthesises something
+         for the layer above, so the altitude a fact dies at is never where
+         reading the code suggests.
 
      **THE FIRST ATTEMPT AND ITS REVERT — and the attempt found the next
      obstacle, which is worth more than the hypothesis below.** The one-line
