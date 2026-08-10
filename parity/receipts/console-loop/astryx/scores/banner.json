@@ -8,30 +8,32 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 66.4501953125,
-    "pctAAUnmasked": 58.4130859375,
-    "pctAAMasked": 58.4130859375,
+    "pctExactUnmasked": 17.32421875,
+    "pctAAUnmasked": 8.125,
+    "pctAAMasked": 8.125,
     "maskCoveragePct": 0,
-    "canvasPx": "320x64",
-    "realPx": "320x64",
-    "inkCanvasPct": 99.7265625,
+    "canvasPx": "160x32",
+    "realPx": "160x32",
+    "inkCanvasPct": 99.70703125,
     "inkRealPct": 99.55078125
   },
   "reference": "extract/computed/out/astryx/banner/orig-shots/info.card__default.png",
   "referenceSha256": "9b64fd410da678de7ff7abee930875180358c6599eaca7d6c859cbeb26d0dcad",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/banner-cell.png",
-  "canvasShotSha256": "5f6692d41ac9413bb47e87d0dc17b821a517b456e733a3030d59bf8220f90e79",
+  "canvasShotSha256": "95fd7081ee374081bb46e658e80c3372e423806352d74f1e07f548a381093d24",
   "diff": "parity/receipts/console-loop/astryx/scores/banner.diff.png",
-  "fc": [],
+  "fc": [
+    "FC-SCOPED-VAR-OVERRIDE"
+  ],
   "receipt": "parity/receipts/console-loop/astryx/components/banner.json",
   "compositionOk": true,
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 0.17578125,
-  "dprNormalized": false,
+  "inkDelta": 0.15625,
+  "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=58.41 > 5)",
-  "recordedAt": "2026-08-09T13:01:56.953Z"
+  "note": "pixel bar missed (pctAAMasked=8.13 > 5)",
+  "recordedAt": "2026-08-10T00:52:20.741Z"
 }
