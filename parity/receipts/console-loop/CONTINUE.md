@@ -271,7 +271,25 @@ probe+pin. Where each residual stands as of this handoff:
      NOTE altitude/heading and altitude/link are already on the caveated-pass
      list below — a silent height loss is a candidate explanation for both, so
      fix this before re-examining them.
-     **STOP — THE BASE-EQUAL-DELTA THEORY IS PROBABLY WRONG. READ THIS FIRST.**
+     **STOP — THE BASE-EQUAL-DELTA THEORY IS DEAD. CONFIRMED BY REPLAY, NOT
+     INFERRED.** Ran `reconstructCaptures()` over fab's captured-truth and
+     printed the RESOLVED root style. It carries all three sizes:
+         56px x 56px  |  40px x 40px  |  48px x 48px
+     So width/height ARE present, with three distinct values on the size axis,
+     at the exact point the fuse mint loop reads them. Nothing is missing at
+     observation. `replay.ts:148` seeds each combo from
+     `structuredClone(truth.base.root)` and applies deltas on top (`:156`), so
+     a channel absent from a delta simply KEEPS THE BASE VALUE.
+     THEREFORE THE DROP IS AT THE MINT/CARRY DECISION. width/height are
+     observed exactly as border-radius is — same part, same size axis, three
+     values each — and border-radius CARRIES (as tokensByProp small 20 /
+     medium 24 / large 28) while width/height carry nowhere and are named
+     nowhere. That contrast, on one part in one contract, is the whole lever:
+     diff the two channels' path through the mint and find what declines
+     width/height. Probe: `npx tsx` a script importing `reconstructCaptures`
+     (see the commit for the exact 15-line version).
+     The old reasoning is kept below ONLY as a record of three dead
+     hypotheses; do not act on any of it.
      `extract/computed/replay.ts:148` starts each combo from
      `structuredClone(truth.base.root)` and then applies that combo's deltas on
      top (`:156`, `node.style[k] = v`). So a channel ABSENT from a delta
