@@ -310,6 +310,19 @@ probe+pin. Where each residual stands as of this handoff:
          determine what it does with a channel absent from the delta — whether
          it merges base, or leaves the key unset. That is where the fact is
          lost, and it is one level below anything measured so far.
+         NARROWED TO THE LAST UNKNOWN: `buildUnion` (anatomy.ts:922) sets
+         `rep: node` — the captured node itself — and `alignedByKey` holds one
+         FlatEl per union entry per capture, whose `.node` is THAT CAPTURE's
+         node. So `el.node.style` is the aligned capture's own style object.
+         But raw captured-truth elements carry `delta` and NO `style` at all
+         (measured: styleHasW is 0 for every size). Therefore something in the
+         CAPTURE LOADER expands `delta` into `style` before buildUnion ever
+         sees it. THAT loader is the last unexamined layer and the only place
+         left where fab's 56x56 can be going missing. Find where a Capture is
+         read off disk and how it materialises `style` from `delta` + base.
+         The decisive experiment is one log line: for the fab root, print
+         `el.node.style.width` for a small, a medium and a large combo.
+
          NARROWED ONE MORE LEVEL: `getAligned` (fuse.ts:128) does nothing but
          return `union.alignedByKey.get(key)` — no resolution of its own. The
          aligned elements come from `buildUnion(captures, base, classPrefix)`
