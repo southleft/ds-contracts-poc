@@ -203,6 +203,19 @@ export function createFigmaMock() {
         this._w = 100;
         this._h = 100;
       }
+      if (type === 'FRAME' || type === 'COMPONENT') {
+        // THE BIRTH BOX WAS NEVER A SLOT FACT. Measured live 2026-08-10 on MUI
+        // Divider (set 83:1610) — a plain COMPONENT with zero children, zero
+        // padding, layoutSizingVertical 'HUG': it measured 288×100 where the
+        // library divider is 288×1. Modeling this ONLY on SLOT made this mock
+        // structurally unable to see the divider defect, so the amend-path hole
+        // below could not have been caught here — the same "kinder than Figma"
+        // alibi that shipped the 320×142 card. The box is honored only while
+        // the axis reports HUG (a FILL or FIXED axis is driven by the parent or
+        // by an explicit resize, and neither consults it) and it is dissolved
+        // by the first relayout: an appended child or a resize.
+        this._birthBox = { w: true, h: true };
+      }
     }
 
     // --- NATIVE SLOTS (Figma Schema 2025) ----------------------------------
@@ -281,6 +294,10 @@ export function createFigmaMock() {
       }
       node.parent = this;
       this.children.push(node);
+      // FC-SLOT-BIRTH-BOX: a node with children HAS relaid out — that is
+      // precisely why the box only ever survives on childless nodes, and why
+      // the emitter's repair is scoped to `children.length === 0`.
+      if (this._birthBox) this._birthBox = { w: false, h: false };
       // GRID auto-slot (P3): children appended to a MANUAL grid slot into the
       // first free cell in row-major order — deterministic. Overflow is
       // absorbed by GROWING the explicit row count (P9: append of a 5th child
@@ -766,9 +783,11 @@ export function createFigmaMock() {
     }
 
     get width() {
-      // FC-SLOT-BIRTH-BOX: while the birth box stands, the slot measures 100
-      // no matter what its sizing modes claim. See the SLOT constructor.
-      if (this._birthBox?.w) return this._w;
+      // FC-SLOT-BIRTH-BOX: while the birth box stands, the node measures 100
+      // no matter what HUG claims. See the constructor. Gated on HUG: a FILL
+      // axis is measured by the parent and a FIXED axis by its own resize, and
+      // neither reads the stale box.
+      if (this._birthBox?.w && this._lsH === 'HUG') return this._w;
       // REAL-FIGMA CONTRACT (round 6, live Dialog finding): an ABSOLUTELY
       // POSITIONED child is OUT of the auto-layout flow — FILL sizing does
       // not apply to it (Figma converts the sizing back to FIXED the moment
@@ -801,8 +820,8 @@ export function createFigmaMock() {
     }
 
     get height() {
-      // FC-SLOT-BIRTH-BOX: see the width getter and the SLOT constructor.
-      if (this._birthBox?.h) return this._h;
+      // FC-SLOT-BIRTH-BOX: see the width getter and the constructor.
+      if (this._birthBox?.h && this._lsV === 'HUG') return this._h;
       // See the width getter: ABSOLUTE children never FILL (round 6).
       if (
         this.layoutSizingVertical === 'FILL' &&

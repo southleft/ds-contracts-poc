@@ -5228,7 +5228,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -6859,7 +6859,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -9831,7 +9831,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -12671,9 +12671,15 @@ async function buildNode(spec, registry) {
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -12879,7 +12885,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -13007,6 +13013,20 @@ async function amendSet(set, C) {
     applyInsetOverlay(comp, childNode, childSpec);
       }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -13179,6 +13199,20 @@ async function amendComponent(comp, C) {
     applyInsetOverlay(comp, childNode, childSpec);
   }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -18685,9 +18719,15 @@ async function buildNode(spec, registry) {
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -18893,7 +18933,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -19021,6 +19061,20 @@ async function amendSet(set, C) {
     applyInsetOverlay(comp, childNode, childSpec);
       }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -19193,6 +19247,20 @@ async function amendComponent(comp, C) {
     applyInsetOverlay(comp, childNode, childSpec);
   }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -21498,9 +21566,15 @@ async function buildNode(spec, registry) {
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -21706,7 +21780,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -21834,6 +21908,20 @@ async function amendSet(set, C) {
     applyInsetOverlay(comp, childNode, childSpec);
       }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -22006,6 +22094,20 @@ async function amendComponent(comp, C) {
     applyInsetOverlay(comp, childNode, childSpec);
   }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -24029,7 +24131,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -26331,7 +26433,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -28298,9 +28400,15 @@ async function buildNode(spec, registry) {
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -28506,7 +28614,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -28635,6 +28743,20 @@ async function amendSet(set, C) {
     applyMarginBox(comp, childNode, childSpec, registry);
       }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -28807,6 +28929,20 @@ async function amendComponent(comp, C) {
     applyInsetOverlay(comp, childNode, childSpec);
   }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -29983,7 +30119,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -33102,7 +33238,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -34678,9 +34814,15 @@ async function buildNode(spec, registry) {
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -34886,7 +35028,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -35015,6 +35157,20 @@ async function amendSet(set, C) {
     applyMarginBox(comp, childNode, childSpec, registry);
       }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -35187,6 +35343,20 @@ async function amendComponent(comp, C) {
     applyInsetOverlay(comp, childNode, childSpec);
   }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -36426,7 +36596,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -37806,9 +37976,15 @@ async function buildNode(spec, registry) {
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -38014,7 +38190,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -38143,6 +38319,20 @@ async function amendSet(set, C) {
     applyMarginBox(comp, childNode, childSpec, registry);
       }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -38315,6 +38505,20 @@ async function amendComponent(comp, C) {
     applyInsetOverlay(comp, childNode, childSpec);
   }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -39453,7 +39657,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -41952,9 +42156,15 @@ async function buildNode(spec, registry) {
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -42160,7 +42370,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -42289,6 +42499,20 @@ async function amendSet(set, C) {
     applyMarginBox(comp, childNode, childSpec, registry);
       }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -42461,6 +42685,20 @@ async function amendComponent(comp, C) {
     applyInsetOverlay(comp, childNode, childSpec);
   }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -43601,7 +43839,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -45711,7 +45949,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -47353,7 +47591,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -48687,7 +48925,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -50021,9 +50259,15 @@ async function buildNode(spec, registry) {
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -50229,7 +50473,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -50357,6 +50601,20 @@ async function amendSet(set, C) {
     applyInsetOverlay(comp, childNode, childSpec);
       }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -50529,6 +50787,20 @@ async function amendComponent(comp, C) {
     applyInsetOverlay(comp, childNode, childSpec);
   }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -52670,7 +52942,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -55127,9 +55399,15 @@ async function buildNode(spec, registry) {
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -55335,7 +55613,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -55464,6 +55742,20 @@ async function amendSet(set, C) {
     applyInsetOverlay(comp, childNode, childSpec);
       }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -55637,6 +55929,20 @@ async function amendComponent(comp, C) {
     applyInsetOverlay(comp, childNode, childSpec);
   }
   resizeOutOfFlow(comp, built);
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }
@@ -56555,9 +56861,15 @@ async function buildNode(spec, registry) {
   }
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -56763,7 +57075,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -56889,6 +57201,20 @@ async function amendSet(set, C) {
         }
     applyMarginBox(comp, childNode, childSpec, registry);
       }
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -57057,6 +57383,20 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
+  }
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -59443,7 +59783,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -61198,7 +61538,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -62682,7 +63022,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -63907,9 +64247,15 @@ async function buildNode(spec, registry) {
   }
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children already relaid out — and GRID is
-  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
   }
@@ -64115,7 +64461,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -64240,6 +64586,20 @@ async function amendSet(set, C) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
       }
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -64408,6 +64768,20 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
+  }
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children has already relaid out — and GRID
+  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  // `children` IS the container test, and it has to be explicit: a TEXT node
+  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
+  // and has no children array at all, so relaxing the layout guard above
+  // reached every leaf and threw on the first MUI text node. Only FRAME /
+  // COMPONENT / SLOT carry a birth box; a text or vector leaf measures itself.
+  if ((v.spec.layout || { mode: 'HORIZONTAL' }).mode !== 'GRID' &&
+      'layoutSizingVertical' in comp && comp.children &&
+      (v.spec.type === 'slot' || comp.children.length === 0)) {
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -66515,7 +66889,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -68282,7 +68656,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -69947,7 +70321,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
+const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;

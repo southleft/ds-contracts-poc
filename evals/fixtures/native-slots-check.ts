@@ -71,6 +71,34 @@ const leaf = (): Contract =>
     anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalSlotLeaf' } },
   }) as Contract;
 
+/** A CHILDLESS ROOT with a variant axis — the MUI Divider shape. No parts, so
+ *  every variant COMPONENT is itself the childless node that keeps the birth
+ *  box. This is the shape the slot fixture below cannot express. */
+const childlessRoot = (opts: { version?: string } = {}): Contract =>
+  ContractSchema.parse({
+    id: 'ds.eval-childless-root',
+    name: 'EvalChildlessRoot',
+    version: opts.version ?? '0.1.0',
+    status: 'draft',
+    description: 'childless-root fixture (divider shape)',
+    semantics: { element: 'hr' },
+    props: [
+      {
+        name: 'variant',
+        description: 'Inset scale.',
+        type: { enum: ['fullWidth', 'inset'] },
+        default: 'fullWidth',
+        bindings: {
+          figma: { kind: 'VARIANT', property: 'Variant', values: { fullWidth: 'FullWidth', inset: 'Inset' } },
+          code: { prop: 'variant' },
+        },
+      },
+    ],
+    states: [],
+    anatomy: { root: { declared: { display: 'block', 'border-bottom-style': 'solid' } } },
+    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalChildlessRoot' } },
+  }) as Contract;
+
 /** Two variants (Size=Sm/Lg) so the unification trap is live, plus one slot. */
 const host = (opts: { version?: string; slot?: Record<string, unknown>; partExtras?: Record<string, unknown> } = {}): Contract =>
   ContractSchema.parse({
@@ -481,4 +509,109 @@ console.log("\n7. FC-SLOT-BIRTH-BOX — an empty slot measures its content, not 
   ok(`red test: stripping remeasureBirthBox leaves the slot at ${redSlot.width}×${redSlot.height} — the trap is real and the pin bites`);
 }
 
-console.log('\n✔ native-slots ok: native SLOT emission, ONE unified set-level property, amend survival (red-tested), migration reported by name, every API refusal named, the slot reads back, and an empty slot hugs (FC-SLOT-BIRTH-BOX, red-tested).');
+console.log("\n8. FC-SLOT-BIRTH-BOX ON AMEND — a variant COMPONENT root the emitter did not create");
+{
+  // Measured live 2026-08-10 on MUI Divider (set 83:1610). The rt9 rebuild
+  // reported `amended: true, rebuiltVariants: 3` and Inset was STILL 216×100
+  // and Middle STILL 256×100 — because the AMEND path preserves the existing
+  // variant COMPONENT and rebuilds only its interior, so buildNode (which held
+  // the only call site) never ran on the root. Modeled here as it happened on
+  // canvas: a set built by an OLDER generation, then amended by today's.
+  const emitOf = (c: Contract): string => {
+    const byId = new Map<string, Contract>([[c.id, c]]);
+    return emitFigmaScript(c, { tokens: TOKENS, icons: new Map(), contracts: byId } as never);
+  };
+  // Every call site stripped = the pre-fix emitter that built the canvas set.
+  const strip = (s: string) => s.replace(/remeasureBirthBox\((?:node|comp), [^;]*\);/g, '');
+  const OLD = strip(emitOf(childlessRoot()));
+  if (OLD === emitOf(childlessRoot())) fail('the §8 strip matched nothing — the pins below are vacuous');
+
+  const mock = createFigmaMock();
+  await runIn(mock, OLD);
+  const setOf = (m: Mock) => findAll(m, (n) => n.type === 'COMPONENT_SET' && n.name === 'EvalChildlessRoot')[0];
+  const roots = (m: Mock) => setOf(m).children;
+  for (const r of roots(mock)) {
+    if (r.children.length) fail(`§8 fixture is wrong: variant ${r.name} has children, so it is not the childless-root shape`);
+    if (r.height !== 100) {
+      fail(
+        `§8 SETUP DID NOT GO RED: the pre-fix emitter left variant ${r.name} at height ${r.height}, not 100 — ` +
+          'this mock is not modeling the birth box on a plain COMPONENT, so the pin below is an alibi ' +
+          '(exactly how MUI Divider scored a PASSING 0.00 while the canvas held 216×100)',
+      );
+    }
+  }
+  ok(`pre-fix: both variant roots stand at ${roots(mock)[0].width}×${roots(mock)[0].height} — the canvas state that scored a fake PASS`);
+
+  // Today's emitter, version bumped so the specHash differs and it AMENDS
+  // rather than skipping as unchanged.
+  const report = await runFor(mock, emitOf(childlessRoot({ version: '0.2.0' })));
+  if (!(report as any)?.amended && !((report as any)?.results ?? []).some((r: any) => r.amended)) {
+    fail(`§8 did not exercise the AMEND path — report was ${JSON.stringify(report).slice(0, 300)}`);
+  }
+  for (const r of roots(mock)) {
+    if (r.height === 100) {
+      fail(
+        `variant ${r.name} STILL measures 100 tall after an amend — the birth-box re-measure does not reach ` +
+          'COMPONENT roots on the amend path (FC-SLOT-BIRTH-BOX). buildNode is not the only call site.',
+      );
+    }
+  }
+  ok(`amend re-measures the root: both variants left the birth box (now ${roots(mock)[0].width}×${roots(mock)[0].height})`);
+
+  // RED TEST — the same amend with the call stripped must stay at 100, or the
+  // pass above came from something other than the fix.
+  const red = createFigmaMock();
+  await runIn(red, OLD);
+  await runIn(red, strip(emitOf(childlessRoot({ version: '0.2.0' }))));
+  const stuck = roots(red).filter((r: any) => r.height === 100);
+  if (stuck.length !== roots(red).length) {
+    fail(
+      `RED TEST DID NOT GO RED: with the call stripped ${roots(red).length - stuck.length} root(s) left the birth ` +
+        'box anyway — something other than remeasureBirthBox is doing the work and §8 proves nothing',
+    );
+  }
+  ok(`red test: stripping the amend-path call leaves every root at ${roots(red)[0].height} — the pin bites`);
+
+  // LEAF GUARD. Relaxing the layout guard (spec.layout && … → the applyFrameSpec
+  // default) widened the re-measure onto nodes that DECLARE no layout — which
+  // includes every TEXT leaf, because a text node answers
+  // `'layoutSizingVertical' in node` exactly as truthfully as a frame and has
+  // no children array at all. First run after the relaxation threw
+  // `Cannot read properties of undefined (reading 'length')` on the first MUI
+  // text node and took four genesis batches down. `children` is the container
+  // test and it must stay explicit.
+  const withText = ContractSchema.parse({
+    id: 'ds.eval-text-leaf-host',
+    name: 'EvalTextLeafHost',
+    version: '0.1.0',
+    status: 'draft',
+    description: 'a text leaf under a root — the shape the leaf guard protects',
+    semantics: { element: 'div' },
+    props: [
+      {
+        name: 'children',
+        type: 'text',
+        default: 'Label',
+        description: 'The text leaf whose content this part renders.',
+        bindings: { figma: { kind: 'TEXT', property: 'Content' }, code: { prop: 'children' } },
+      },
+    ],
+    states: [],
+    anatomy: { root: { parts: { label: { content: { prop: 'children' }, declared: { display: 'block' } } } } },
+    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalTextLeafHost' } },
+  }) as Contract;
+  const leafMock = createFigmaMock();
+  try {
+    await runIn(leafMock, emitOf(withText));
+  } catch (e) {
+    fail(
+      `a TEXT leaf threw during the birth-box re-measure: ${(e as Error).message} — the guard lost its ` +
+        'container test (node.children), so every text node now takes the frame path',
+    );
+  }
+  const textNodes = findAll(leafMock, (n: any) => n.type === 'TEXT');
+  if (!textNodes.length) fail('the leaf-guard fixture built no TEXT node — it is not exercising the guard');
+  ok(`leaf guard: ${textNodes.length} TEXT leaf/leaves built without entering the frame-only re-measure`);
+}
+
+console.log('\n✔ native-slots ok: native SLOT emission, ONE unified set-level property, amend survival (red-tested), migration reported by name, every API refusal named, the slot reads back, and an empty slot hugs — as does a childless COMPONENT root reached only by the amend path (FC-SLOT-BIRTH-BOX, both red-tested).');
