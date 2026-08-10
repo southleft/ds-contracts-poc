@@ -271,7 +271,37 @@ probe+pin. Where each residual stands as of this handoff:
      NOTE altitude/heading and altitude/link are already on the caveated-pass
      list below — a silent height loss is a candidate explanation for both, so
      fix this before re-examining them.
-     **THE FIX WAS ATTEMPTED AND REVERTED — and the attempt found the next
+     **SECOND ATTEMPT — THE PRECEDENCE OBSTACLE IS SOLVED, AND THE REAL GATE
+     IS ONE LINE EARLIER THAN I THOUGHT.** Two findings, both reverted only
+     because the third step is unfinished, not because they are wrong:
+      1. PRECEDENCE IS SOLVED. Guarding at the literal's write site does NOT
+         work — the token binding is minted AFTER the literal, so at write time
+         there is nothing to detect. It must be a POST-PASS over
+         `walkAnatomy(enriched)` just before fuse returns: for each part, drop
+         `literals[ch]` when the same channel is carried in `tokens` or any
+         `tokensByProp` map, and receipt the yield. The BINDING wins (named,
+         themeable, per-variant); the literal is a base-plane fallback.
+         With that, `npx tsx extract/computed/regate.ts` runs CLEAN across every
+         library — polaris.tag no longer refuses — and computed-equal goes UP
+         81.969% -> 82.189% (33968/41440 -> 34480/41952). More facts carried,
+         nothing refused. This part is ready to re-apply.
+      2. THE BASE FALLBACK STILL DOES NOT REACH FAB, and the reason is exact:
+         `fuse.ts:1719` does `const el = a.getAligned(...)[pi]; if (!el)
+         continue;` BEFORE any value inspection. For the axis value that equals
+         base there is no aligned ELEMENT at all — not merely a missing value —
+         so the loop skips the combo entirely and never reaches the
+         `v === undefined` guard where a value-level fallback would live.
+         Re-measured after the change: fab's enriched contract still has ZERO
+         width/height and the sweep still reports 15.
+         SO THE FIX BELONGS AT THE ELEMENT LEVEL, not the value level: when a
+         combo has no aligned element for a part, fall back to the BASE
+         combo's element for BASE_FALLBACK_CHANNELS. Verify first whether "no
+         aligned element" can also mean the part genuinely does not exist in
+         that combo (union-aligned parts under states do exactly that) — if so
+         the fallback must distinguish the two, and conflating them would
+         invent geometry for a part that is absent.
+
+     **THE FIRST ATTEMPT AND ITS REVERT — and the attempt found the next
      obstacle, which is worth more than the hypothesis below.** The one-line
      change is exactly what you would expect: at fuse.ts ~1784, before
      `if (v === undefined) { unk ??= ...; continue; }`, fall back to the BASE
