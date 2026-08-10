@@ -271,6 +271,25 @@ probe+pin. Where each residual stands as of this handoff:
      NOTE altitude/heading and altitude/link are already on the caveated-pass
      list below — a silent height loss is a candidate explanation for both, so
      fix this before re-examining them.
+     **THE FIX WAS ATTEMPTED AND REVERTED — and the attempt found the next
+     obstacle, which is worth more than the hypothesis below.** The one-line
+     change is exactly what you would expect: at fuse.ts ~1784, before
+     `if (v === undefined) { unk ??= ...; continue; }`, fall back to the BASE
+     capture's value when the channel is in BASE_FALLBACK_CHANNELS —
+     `a.getAligned(space.baseComboKey + '__default')[pi]` — because an absent
+     delta MEANS "same as base". It typechecks and it is the right semantic
+     (scoped to the NON-INHERITED box-geometry channels only; an inherited
+     channel must never do this).
+     IT DOES NOT SURVIVE `npx tsx extract/computed/regate.ts`:
+       polaris.tag: part "link" carries channel "width" as BOTH a token
+       binding and a literal — ambiguous, refused by name
+     So filling the gap creates a SECOND fact for a part that already had one,
+     and the mint path has no precedence rule between a base-derived value and
+     an existing binding/literal. THAT is the real work: decide precedence
+     (existing binding wins? base fallback only when the channel is otherwise
+     absent for that part?) and re-run regate across ALL libraries, not just
+     mui. Reverted rather than shipped half-exercised.
+
      **HYPOTHESIS FOR THE FIX, NOT YET VERIFIED — instrument fuse before
      trusting it.** There are two doors and width appears to fall between them.
      fuse.ts:2390 (`b.ref === null`, UNCORRELATED) carries a BASE-PLANE LITERAL
