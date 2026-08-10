@@ -293,13 +293,26 @@ probe+pin. Where each residual stands as of this handoff:
          `v === undefined` guard where a value-level fallback would live.
          Re-measured after the change: fab's enriched contract still has ZERO
          width/height and the sweep still reports 15.
-         SO THE FIX BELONGS AT THE ELEMENT LEVEL, not the value level: when a
-         combo has no aligned element for a part, fall back to the BASE
-         combo's element for BASE_FALLBACK_CHANNELS. Verify first whether "no
-         aligned element" can also mean the part genuinely does not exist in
-         that combo (union-aligned parts under states do exactly that) — if so
-         the fallback must distinguish the two, and conflating them would
-         invent geometry for a part that is absent.
+      3. **CORRECTION TO (2) — MEASURED, DO NOT ACT ON THE "ELEMENT LEVEL"
+         CONCLUSION.** I checked whether the large combos lack the ELEMENT or
+         only the VALUE. They lack only the value:
+             small  24 captures · elements[0] present · delta.width present
+             medium 24 captures · elements[0] present · delta.width present
+             large  23 captures · elements[0] present · delta.width UNDEFINED (23/23)
+         So `if (!el) continue;` is NOT the gate and the fallback does NOT
+         belong at the element level. The value-level fallback I wrote should
+         have fired — and did not.
+         THE REMAINING UNKNOWN, and the exact next question: the loop reads
+         `el.node.style[channel]`, NOT `delta`. Raw captured-truth elements
+         carry `delta` and no `style` at all (styleHasW is 0 for EVERY size,
+         including the ones that carry a delta), so `a.getAligned()` is
+         synthesising `.node.style` somewhere. FIND THAT RESOLUTION STEP and
+         determine what it does with a channel absent from the delta — whether
+         it merges base, or leaves the key unset. That is where the fact is
+         lost, and it is one level below anything measured so far.
+         INSTRUMENT IT (log the resolved style for fab root across the three
+         sizes). Do not reason from the call site — this is the third
+         hypothesis in a row about this bug that measurement has overturned.
 
      **THE FIRST ATTEMPT AND ITS REVERT — and the attempt found the next
      obstacle, which is worth more than the hypothesis below.** The one-line
