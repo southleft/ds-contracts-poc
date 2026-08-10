@@ -4,11 +4,11 @@
   "lane": "mui",
   "fileKey": "59mLQlOMiD5w5za6SUcoO5",
   "fileName": "MUI (console-loop)",
-  "note": "CAPTURE-FRAMING PIN. cellW/cellH are the LIVE Figma VARIANT-cell dimensions, minted from the Desktop Bridge (figma-console figma_execute, fileKey pinned) — NOT derived from the committed PNGs. scripts/console-loop-capture-framing-check.mjs asserts that every committed canvas shot is that cell plus ONE uniform margin, and that the reference the scorer resolves is comparable, in-library, provenance-resolvable and not flush against its harness stage edge. THIS LANE IS CELL-PENDING: see stems[].cellPending.reason — the reference half (C2/C3/C3b/C4) is fully checked, the canvas half (C1) is not.",
+  "note": "CAPTURE-FRAMING PIN. cellW/cellH are the LIVE Figma VARIANT-cell dimensions, minted from the Desktop Bridge (figma-console figma_execute, fileKey pinned) \u2014 NOT derived from the committed PNGs. scripts/console-loop-capture-framing-check.mjs asserts that every committed canvas shot is that cell plus ONE uniform margin, and that the reference the scorer resolves is comparable, in-library, provenance-resolvable and not flush against its harness stage edge. THIS LANE IS CELL-PENDING: see stems[].cellPending.reason \u2014 the reference half (C2/C3/C3b/C4) is fully checked, the canvas half (C1) is not.",
   "mintedFrom": {
     "bridge": "figma-console MCP figma_execute (Desktop Bridge, websocket :9223)",
     "mintedAt": "2026-08-10",
-    "method": "getNodeByIdAsync on each stem's cellNodeId (taken from parity/receipts/console-loop/visual-truth/mui/<stem>.json); cellW/cellH = node.width/node.height — the CELL BOX, the same method every other lane's mint used. fileKey 59mLQlOMiD5w5za6SUcoO5 (\"MUI Test 1\") was connected to the Desktop Bridge this session, which is the condition the 2026-08-08 cellPending reason named as its unblock.",
+    "method": "getNodeByIdAsync on each stem's cellNodeId (taken from parity/receipts/console-loop/visual-truth/mui/<stem>.json); cellW/cellH = node.width/node.height \u2014 the CELL BOX, the same method every other lane's mint used. fileKey 59mLQlOMiD5w5za6SUcoO5 (\"MUI Test 1\") was connected to the Desktop Bridge this session, which is the condition the 2026-08-08 cellPending reason named as its unblock.",
     "boxNotRenderBounds": "The 2026-08-08 cellPending reason left one question open: whether the five stems whose cached box disagreed with the committed shot were genuine FC-CELL-FRAMING violations or an artifact of reading box size rather than render bounds. MEASURED THIS SESSION, and it is the latter for the disagreement and the former for the pin: exportAsync at scale 1 returned EXACTLY absoluteRenderBounds for all five (fab 44x72, linear-progress 328x4, select 75x61, snackbar 324x85, text-field 253x93), so a shot is always the RENDER box while cellW/cellH is the LAYOUT box. C1 is pinned to the LAYOUT box deliberately: pinning render bounds would make C1 compare the export to itself, and it is exactly the box-vs-ink gap that let MUI Divider ship a 288x100 transparent birth box behind a 288x1 strip of ink and score a PASSING 0.00. Where the two diverge the stem carries a cellNote with both numbers."
   },
   "guard": {
@@ -49,7 +49,8 @@
     "referenceToneCheck": true,
     "toneTVMaxPct": 25,
     "toneAAMaxPct": 10,
-    "contentCausesNote": "C5 (referenceSweepCheck) ranks the canvas shot against every sibling __default gate-shot in the directory this stem’s own referenceSource names, using an 8x8x8 colour-histogram total-variation distance; it fires only on a decisive margin (pinned>=sweepPinnedMinPct AND gap>=sweepGapMinPct) and is waived on a fail-closed receipt by FC-REF-WRONG-VARIANT (retarget accepted) or FC-REF-SWEEP-DECOY (retarget examined and refused: the canvas, not the reference, is what is wrong). C6 (referenceToneCheck) applies the same distance to the pinned pair, but only in the band where the AA number is claiming closeness (pass claim, or scorecard pctAAMasked<=toneAAMaxPct) — pixelmatch at threshold 0.1 compares YIQ against a 352 cutoff, so a whole-component tone swap sits under it (measured: #F0F0F0 cell vs #D5EBFF reference, YIQ delta 158, 94.43% of pixels differing per channel, AA 7.13). Thresholds calibrated 2026-08-08 against five measured wrong-reference pairs (tv 20.6-97.3) and every committed pair in-tree (highest non-firing sweep gap 10.1pt; highest in-band tone distance 17.3%)."
+    "contentCausesNote": "C5 (referenceSweepCheck) ranks the canvas shot against every sibling __default gate-shot in the directory this stem\u2019s own referenceSource names, using an 8x8x8 colour-histogram total-variation distance; it fires only on a decisive margin (pinned>=sweepPinnedMinPct AND gap>=sweepGapMinPct) and is waived on a fail-closed receipt by FC-REF-WRONG-VARIANT (retarget accepted) or FC-REF-SWEEP-DECOY (retarget examined and refused: the canvas, not the reference, is what is wrong). C6 (referenceToneCheck) applies the same distance to the pinned pair, but only in the band where the AA number is claiming closeness (pass claim, or scorecard pctAAMasked<=toneAAMaxPct) \u2014 pixelmatch at threshold 0.1 compares YIQ against a 352 cutoff, so a whole-component tone swap sits under it (measured: #F0F0F0 cell vs #D5EBFF reference, YIQ delta 158, 94.43% of pixels differing per channel, AA 7.13). Thresholds calibrated 2026-08-08 against five measured wrong-reference pairs (tv 20.6-97.3) and every committed pair in-tree (highest non-firing sweep gap 10.1pt; highest in-band tone distance 17.3%).",
+    "cellOverhangNote": "C1 accepts a NAMED overhang only when the committed shot equals the stem's independently-measured absoluteRenderBounds AND the entry carries an FC-* code and a reason. It cannot launder a wrong-cell or whole-set shot \u2014 those match neither the layout box plus a uniform margin nor the render box. mui/fab is deliberately NOT given one: its 8x36 box for a Size=Large FAB is a genuine silent geometry loss (FC-BASE-EQUAL-GEOMETRY-DROPPED), so it must stay a hard C1 violation."
   },
   "refAllow": [
     "parity/receipts/console-loop/mui/refs/",
@@ -63,7 +64,13 @@
       "setNodeId": "21:79",
       "cellW": 288,
       "cellH": 48,
-      "cellNote": "Layout box 288x48, RENDER bounds 354x114 — an export of this cell is 354x114, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
+      "cellNote": "Layout box 288x48, RENDER bounds 354x114 \u2014 an export of this cell is 354x114, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds).",
+      "cellOverhang": {
+        "fc": "FC-DECLARED-BY-PROP-MISSING",
+        "renderW": 354,
+        "renderH": 114,
+        "why": "the real component's overflow VARIES on the `expanded` enum, so fuse sent it to the sidecar as non-uniform and no overflow reached the contract; carrying it needs `declaredByProp` vocabulary the schema does not have \u2014 a named schema gap, not a canvas defect"
+      }
     },
     "alert": {
       "cellNodeId": "84:2009",
@@ -105,7 +112,7 @@
       "setNodeId": "21:287",
       "cellW": 103,
       "cellH": 34,
-      "cellNote": "Layout box 103x34, RENDER bounds 113x44 — an export of this cell is 113x44, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
+      "cellNote": "Layout box 103x34, RENDER bounds 113x44 \u2014 an export of this cell is 113x44, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "card": {
       "cellNodeId": "21:299",
@@ -162,7 +169,7 @@
       "setNodeId": "84:1743",
       "cellW": 8,
       "cellH": 36,
-      "cellNote": "Layout box 8x36, RENDER bounds 44x72 — an export of this cell is 44x72, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
+      "cellNote": "Layout box 8x36, RENDER bounds 44x72 \u2014 an export of this cell is 44x72, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "icon-button": {
       "cellNodeId": "83:1702",
@@ -184,7 +191,7 @@
       "setNodeId": "83:1655",
       "cellW": 288,
       "cellH": 4,
-      "cellNote": "Layout box 288x4, RENDER bounds 328x4 — an export of this cell is 328x4, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
+      "cellNote": "Layout box 288x4, RENDER bounds 328x4 \u2014 an export of this cell is 328x4, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "link": {
       "cellNodeId": "84:1764",
@@ -198,7 +205,7 @@
       "cellName": "Menu",
       "cellW": 114.77,
       "cellH": 124,
-      "cellNote": "Layout box 114.77x124, RENDER bounds 146.77x156 — an export of this cell is 146.77x156, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
+      "cellNote": "Layout box 114.77x124, RENDER bounds 146.77x156 \u2014 an export of this cell is 146.77x156, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
     },
     "paper": {
       "cellNodeId": "83:1617",
@@ -213,7 +220,7 @@
       "cellName": "Color=Default, Checked=Checked",
       "cellW": 42,
       "cellH": 42,
-      "pinnedNote": "PINNED 2026-08-09, the first mui cell ever pinned. The cellPending reason every other stem still carries — \"MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge\" — is no longer true. This cell is in-sync BY CONSTRUCTION: radio.figma.js was fetched over the bridge and evalled into this file minutes before these numbers were read, so the canvas IS what the emit script builds. cellW/cellH come from the live canvas via getNodeByIdAsync, never back-derived from the committed PNG. The other 30 stems stay pending on purpose: pinning a cell nobody rebuilt could reveal real DRIFT, and a drifted scored pass throws unconditionally — that is a rebuild-then-pin round, not a bookkeeping edit."
+      "pinnedNote": "PINNED 2026-08-09, the first mui cell ever pinned. The cellPending reason every other stem still carries \u2014 \"MUI lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge\" \u2014 is no longer true. This cell is in-sync BY CONSTRUCTION: radio.figma.js was fetched over the bridge and evalled into this file minutes before these numbers were read, so the canvas IS what the emit script builds. cellW/cellH come from the live canvas via getNodeByIdAsync, never back-derived from the committed PNG. The other 30 stems stay pending on purpose: pinning a cell nobody rebuilt could reveal real DRIFT, and a drifted scored pass throws unconditionally \u2014 that is a rebuild-then-pin round, not a bookkeeping edit."
     },
     "select": {
       "cellNodeId": "84:2107",
@@ -221,7 +228,13 @@
       "setNodeId": "84:2125",
       "cellW": 73.94,
       "cellH": 56,
-      "cellNote": "Layout box 73.94x56, RENDER bounds 75x61 — an export of this cell is 75x61, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
+      "cellNote": "Layout box 73.94x56, RENDER bounds 75x61 \u2014 an export of this cell is 75x61, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds).",
+      "cellOverhang": {
+        "fc": "FC-OVERFLOW-NOT-DECLARED",
+        "renderW": 75,
+        "renderH": 61,
+        "why": "the contract ROOT declares no overflow (only label / select-nativeinput / icon / outlinedinput-notchedoutline do) and the child outlinedinput-notchedoutline is 74x61 \u2014 the notched outline renders above the box in real MUI too (inset:-5px), so nothing was dropped and forcing a clip here would make the canvas lie"
+      }
     },
     "slider": {
       "cellNodeId": "21:477",
@@ -236,7 +249,13 @@
       "setNodeId": "84:2140",
       "cellW": 288,
       "cellH": 49,
-      "cellNote": "Layout box 288x49, RENDER bounds 324x85 — an export of this cell is 324x85, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
+      "cellNote": "Layout box 288x49, RENDER bounds 324x85 \u2014 an export of this cell is 324x85, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds).",
+      "cellOverhang": {
+        "fc": "FC-EFFECT-BLEED",
+        "renderW": 324,
+        "renderH": 85,
+        "why": "root declares no overflow and the cell carries a drop shadow; the overhang is a UNIFORM 18px margin, 1px over C1's 17px marginMaxPx \u2014 the guard's tolerance is marginally tight for a shadow, not a geometry fault"
+      }
     },
     "switch": {
       "cellNodeId": "21:612",
@@ -250,7 +269,13 @@
       "cellName": "TablePagination",
       "cellW": 428,
       "cellH": 52,
-      "cellNote": "Layout box 428x52, RENDER bounds 431.03x52 — an export of this cell is 431.03x52, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
+      "cellNote": "Layout box 428x52, RENDER bounds 431.03x52 \u2014 an export of this cell is 431.03x52, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds).",
+      "cellOverhang": {
+        "fc": "FC-SCROLL-UNSUPPORTED",
+        "renderW": 431.03,
+        "renderH": 52,
+        "why": "the ROOT declares overflow: auto/auto, which DeclaredChannelSpec.drawExcept holds off canvas on purpose because Figma has no scroll container (matrix row 'overflow: scroll/auto', CARRY-CODE-ONLY) \u2014 so the root correctly does not clip"
+      }
     },
     "table": {
       "cellNodeId": "21:650",
@@ -272,7 +297,13 @@
       "setNodeId": "84:2480",
       "cellW": 252.97,
       "cellH": 78.91,
-      "cellNote": "Layout box 252.97x78.91, RENDER bounds 252.97x93 — an export of this cell is 252.97x93, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds)."
+      "cellNote": "Layout box 252.97x78.91, RENDER bounds 252.97x93 \u2014 an export of this cell is 252.97x93, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds).",
+      "cellOverhang": {
+        "fc": "FC-AMBIGUOUS-IDENTITY",
+        "renderW": 252.97,
+        "renderH": 93,
+        "why": "the stem cannot be rebuilt on canvas at all: the emitter REFUSES BY NAME with 'duplicate ds_contracts/contractId mui.text-field on 3 component targets \u2014 refusing ambiguous identity'; the duplicates must be cleaned up in MUI Test 1 first"
+      }
     },
     "tooltip": {
       "cellNodeId": "21:810",

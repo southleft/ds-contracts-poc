@@ -437,7 +437,32 @@ for (const lane of lanes) {
       const dH = shotPng.height - s.cellH;
       const skew = Math.abs(dW - dH);
       const margin = (dW + dH) / 4;
-      if (skew > skewMax || margin < marginMin || margin > marginMax) {
+      // A cell can LEGITIMATELY render outside its layout box, and C1 had no
+      // vocabulary for it. A shot is always absoluteRenderBounds (measured:
+      // exportAsync at scale 1 returns exactly that, five for five), while
+      // cellW/cellH is the LAYOUT box — so a drop shadow, or a child the real
+      // component also draws outside its parent (MUI Select's notched outline
+      // at inset:-5px), fails a check that is otherwise about "is this shot
+      // that cell at all".
+      // `cellOverhang` names ONE such case per stem and is accepted ONLY when
+      // the shot equals that INDEPENDENTLY-measured render box. It cannot
+      // launder a wrong-cell or whole-set shot: those match neither the
+      // box+margin above nor the render box here. It requires an FC code and a
+      // reason, so the residual stays a NAMED refusal rather than a pass.
+      const oh = s.cellOverhang;
+      const ohFits = oh &&
+        Math.abs(shotPng.width - oh.renderW) <= 1 && Math.abs(shotPng.height - oh.renderH) <= 1;
+      if ((skew > skewMax || margin < marginMin || margin > marginMax) && ohFits) {
+        if (!oh.fc || !String(oh.fc).startsWith('FC-') || !oh.why) {
+          errors.push(`${tag}: cellOverhang without an FC-* code and a reason — an accepted overhang must name itself`);
+          continue;
+        }
+        cellPinned += 1;
+        open.push(
+          `${tag}: C1 NAMED OVERHANG ${oh.fc} — shot ${shotPng.width}x${shotPng.height} is the cell's RENDER box ` +
+            `(${oh.renderW}x${oh.renderH}) not its LAYOUT box (${s.cellW}x${s.cellH}); ${oh.why}`,
+        );
+      } else if (skew > skewMax || margin < marginMin || margin > marginMax) {
         raise(
           CAUSE_CELL,
           `committed shot ${rel(shotPath)} is ${shotPng.width}x${shotPng.height} but the pinned 1x VARIANT cell ${s.cellNodeId} "${s.cellName}" is ${s.cellW}x${s.cellH} ` +
