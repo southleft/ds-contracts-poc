@@ -1,37 +1,37 @@
 {
   "version": 3,
-  "status": "fail",
+  "status": "pass",
   "matchDeveloped": false,
-  "recommendMatchDeveloped": false,
+  "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 18.597560975609756,
-    "pctAAUnmasked": 17.98780487804878,
-    "pctAAMasked": 17.98780487804878,
+    "pctExactUnmasked": 0.3472222222222222,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
     "maskCoveragePct": 0,
-    "canvasPx": "328x4",
+    "canvasPx": "288x4",
     "realPx": "288x4",
     "inkCanvasPct": 100,
-    "inkRealPct": 87.8048780487805
+    "inkRealPct": 100
   },
   "reference": "extract/computed/out/mui/linearprogress/orig-shots/determinate__default.png",
   "referenceSha256": "505a15de567dbb526e5431732550386172c25a0ec254bd76c76ab380492ca3d1",
   "canvasShot": "parity/receipts/console-loop/mui/shots/linear-progress-cell.png",
-  "canvasShotSha256": "27908a3597db77bda9c416854f063d277bf829fac6ba5ec3a8b02c229710f4a7",
+  "canvasShotSha256": "89339f07f5d9d8740eb11fb4b7dbd7d093691602985f2c49fe447ae91e39d9bf",
   "diff": "parity/receipts/console-loop/mui/scores/linear-progress.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/linear-progress.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.1388888888888888,
-  "inkDelta": 12.195121951219505,
+  "scaleRatio": 1,
+  "inkDelta": 0,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=17.99 > 5)",
-  "recordedAt": "2026-08-10T13:44:40.684Z"
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-10T13:59:59.185Z"
 }

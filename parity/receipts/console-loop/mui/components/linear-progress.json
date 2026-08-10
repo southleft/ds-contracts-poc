@@ -33,21 +33,18 @@
     }
   },
   "visual": {
-    "ok": false,
+    "ok": true,
     "notes": [
       "Structure/variants reviewed via inspect (83:1655, page LinearProgress); visual OK — slot placeholders acceptable.",
-      "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page LinearProgress)."
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 2 variants on page LinearProgress).",
+      "2026-08-10 FC-ABS-SIZE CLOSED BY FC-OVERFLOW-CLIP-LOST — and the two were the same defect. The named-open finding read \"the canvas cell draws the bar 461px wide against a 288x4 reference, a 1.60 scale on the long axis with the hairline height matching exactly\". It was never a WIDTH defect: the root box was 288x4 the whole time and the BAR CHILD overhung it, because the contract declares overflow hidden on the root and the canvas emitter dropped that fact into applyDeclared's unreceipted default case. A height that matches exactly while one axis overruns is what an unclipped overflow looks like, not a scale. With clipsContent drawn (rt11) the live cell measures render 288x4 == box 288x4 (was render 328x4), and the re-shot cell scores pctAAMasked 0.00, compositionOk true. Also re-shot because the committed PNG was 461x4 while the live cell was 328x4 — a stale capture, caught by capture-framing C1 the same session."
     ],
-    "defects": [
-      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=56.18 (bar 5), compositionOk=false",
-      "pixel scorecard fail: pctAAMasked=56.18% (bar 5), compositionOk=false — see parity/receipts/console-loop/mui/scores/linear-progress.json",
-      "FC-ABS-SIZE (named-open by reference audit 2026-08-08, CANVAS-SIDE): the reference is the correct variant (determinate, ink 288x4) but the canvas cell draws the bar 461px wide (ink 461x4) — a 1.60 scale on the long axis with the hairline height matching exactly. The indeterminate sibling is worse (81.34), so this is not a variant mismatch; it is the canvas baking an absolute track width."
-    ],
+    "defects": [],
     "reference": "extract/computed/out/mui/linearprogress/orig-shots/determinate__default.png",
     "referenceSource": "extract/computed/out/mui/linearprogress/orig-shots/determinate__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/linear-progress.png — a byte-identical copy of mui/linearprogress/gate-shots/determinate__default.png)): parity/receipts/console-loop/mui/refs/linear-progress.png [declared source: extract/computed/out/mui/linearprogress/gate-shots/determinate__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/linear-progress-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed",
+    "matchDeveloped": true,
+    "status": "scored-pass",
     "scorecard": "parity/receipts/console-loop/mui/scores/linear-progress.json"
   },
   "fingerprint": {
@@ -130,6 +127,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": false
+    "visualMatchDeveloped": true
   }
 }
