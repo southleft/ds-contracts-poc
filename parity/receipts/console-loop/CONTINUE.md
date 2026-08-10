@@ -65,6 +65,12 @@ restating them:
     checkbox/divider/linear-progress/radio, of which radio is the probed
     in-sync one — so the un-probed three ARE `wantUnmeasured`.
 RUN THE FULL SUITE FIRST and confirm 220/224.
+CAVEAT ON THAT RUN: the suite in flight at handoff STARTED BEFORE the C1
+named-overhang change, so its capture-framing result will not reflect it.
+Expect `console-loop-capture-framing-pin` and
+`console-loop-reference-content-checks` to STILL be red afterwards regardless —
+they are red on pre-existing astryx FC-REF-FRAMING entries, which this change
+does not touch. Re-run once more to see the mui half settle.
 
 ## CLOSED THIS SESSION
 
@@ -127,17 +133,20 @@ probe+pin. Where each residual stands as of this handoff:
    · the 4 pre-existing suite failures — named above, one PROVEN pre-existing
      by checking out this session's own start commit.
 
-  NOT YET NAMED — the honest gap, and the first thing to do after the suite:
-   · C1 has no VOCABULARY for a named overhang, so those five sit in the gate
-     as hard violations even though they are now diagnosed. The fix is a
-     per-stem `cellOverhang: {fc, renderW, renderH, why}` in framing.json that
-     C1 accepts ONLY when the shot equals that independently-measured render
-     box, keeping the never-waivable bite for wrong-cell/whole-set shots
-     (which match neither the box+margin nor the named render box).
-     DO NOT instead force clipsContent onto roots the contract never clipped —
-     that makes the canvas lie to satisfy a gate.
-   · mui/fab's silent geometry loss is DIAGNOSED but neither carried nor
-     ledgered, so it is not yet a named refusal either.
+   · C1's named-overhang vocabulary — DONE. `cellOverhang: {fc, renderW,
+     renderH, why}` is accepted ONLY when the shot equals that
+     independently-measured render box AND carries an FC code and a reason; it
+     reports "open (named)", never a clean pass, and cannot launder a
+     wrong-cell/whole-set shot (those match neither the box+margin nor the
+     render box). mui C1 violations 6 -> 1.
+
+  NOT YET NAMED — the one honest gap left:
+   · **mui/fab.** It deliberately has NO cellOverhang entry and stays a HARD
+     FC-CELL-FRAMING violation, because its 8x36 box for a Size=LARGE FAB is a
+     genuine silent geometry loss and an allowance there would hide the very
+     defect the gate should find. It is DIAGNOSED (below) but the fact is still
+     neither carried nor ledgered, so it is not yet a named refusal. Fixing
+     FC-BASE-EQUAL-GEOMETRY-DROPPED in fuse closes this AND the 15.
 
 ## NEXT 3 STEPS
 
