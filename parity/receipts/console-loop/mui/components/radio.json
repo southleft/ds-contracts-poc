@@ -34,21 +34,21 @@
     }
   },
   "visual": {
-    "ok": false,
+    "ok": true,
     "notes": [
       "Screenshot reviewed on section/node 84:1934; structure/variants look sane (slot placeholders OK).",
-      "Structure/variants reviewed via inspect (COMPONENT_SET, 14 variants on page Radio)."
+      "Structure/variants reviewed via inspect (COMPONENT_SET, 14 variants on page Radio).",
+      "2026-08-09 canvas resync: MUI Test 1 (59mLQlOMiD5w5za6SUcoO5) was connected to the Desktop Bridge for the first time in this lane's history \u2014 LEDGER.md:124 had recorded it as un-probed and NOT connected. Re-ran 00-tokens.figma.js (0 created / 2136 updated) then radio.figma.js (14 variants rebuilt), exported Color=Default,Checked=Checked at scale 1, and scored against the committed orig-shot. Flipped on the SCORECARD (recommendMatchDeveloped: true), not on inspection.",
+      "RESOLVED 2026-08-09 (cf7d9027 + canvas resync): pctAAMasked 38.50 -> 3.75, PASS. compositionOk true, strictCompositionOk true, scaleRatio 1, inkDelta 0, reliedOnFramingTolerant false. Canvas 20x20 == real 20x20 and inkCanvasPct 61.0 == inkRealPct 61.0 \u2014 previously 36.0 vs 61.0, and that 25-point ink gap WAS the defect.",
+      "CAUSE (was mis-attributed to anatomy, and was not): both radio halves are real committed SVG assets and the shipped anatomy already matched the capture. core/emit-figma-script.ts handled `part.icon` FIRST and returned early for a boxless icon BEFORE the inset/absolute lowering, so icon-2's declared position:absolute + four inset-0 channels were dropped in SILENCE \u2014 no refusal, no log. Both icons carried `grow`, so they became two in-flow children of a 24px HORIZONTAL frame and split it 50/50: a squashed ring with the dot BESIDE it. Read back off the rebuilt canvas: part-1 24x24, icon (0,0) 24x24 AUTO, icon-2 (0,0) 24x24 ABSOLUTE \u2014 concentric.",
+      "STILL OPEN, and this pass does not cover it: the UNCHECKED cells draw the dot too. MUI hides the checked glyph with `transform: scale(0)`, and no `scale(` appears anywhere in extract/computed/out/mui/radio/enriched.extension.json \u2014 the capture never carried it. The scored cell is Color=Default/Checked=Checked, so that gap is untouched by this measurement and needs its own reviewed channel."
     ],
-    "defects": [
-      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=38.50 (bar 5), compositionOk=true",
-      "pixel scorecard fail: pctAAMasked=38.50% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/radio.json",
-      "REAL (CANVAS-SIDE), not reference-side (reference audit 2026-08-08): all 28 sibling gate-shots score IDENTICALLY at 38.50 — checked and unchecked, enabled and disabled — so no retarget can move this number and the reference is not the variable. The canvas cell draws an ellipse outline with a detached dot instead of MUI's concentric circles; ink boxes agree exactly (20x20 vs 20x20) and inkRealPct 61.0 vs inkCanvasPct 36.0 is the missing fill."
-    ],
+    "defects": [],
     "reference": "extract/computed/out/mui/radio/orig-shots/default.checked.enabled__default.png",
-    "referenceSource": "extract/computed/out/mui/radio/orig-shots/default.checked.enabled__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/radio.png — a byte-identical copy of mui/radio/gate-shots/default.checked.enabled__default.png)): parity/receipts/console-loop/mui/refs/radio.png [declared source: extract/computed/out/mui/radio/gate-shots/default.checked.enabled__default.png].",
+    "referenceSource": "extract/computed/out/mui/radio/orig-shots/default.checked.enabled__default.png \u2014 REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/radio.png \u2014 a byte-identical copy of mui/radio/gate-shots/default.checked.enabled__default.png)): parity/receipts/console-loop/mui/refs/radio.png [declared source: extract/computed/out/mui/radio/gate-shots/default.checked.enabled__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/radio-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed",
+    "matchDeveloped": true,
+    "status": "scored-pass",
     "scorecard": "parity/receipts/console-loop/mui/scores/radio.json"
   },
   "fingerprint": {
@@ -58,7 +58,7 @@
       ":COMPONENT_SET/Radio|fill|[]",
       ":COMPONENT_SET/Radio|radius|5,5,5,5",
       ":COMPONENT_SET/Radio|sizing|FIXED/FIXED AUTO",
-      ":COMPONENT_SET/Radio|description|Radio â generated from contract mui.radio v0.2.0 â",
+      ":COMPONENT_SET/Radio|description|Radio \u00e2\u0080\u0094 generated from contract mui.radio v0.2.0 \u00e2\u0080",
       ":COMPONENT_SET/Radio|propdef|Checked:VARIANT=Unchecked",
       ":COMPONENT_SET/Radio|propdef|Color:VARIANT=Primary",
       "/0:COMPONENT/Color=Primary, Checked=Unchecked|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
@@ -83,8 +83,8 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Color enum → Primary/Secondary/Error/Info/Success/Warning/Default",
-      "Checked enum → Unchecked/Checked"
+      "Color enum \u2192 Primary/Secondary/Error/Info/Success/Warning/Default",
+      "Checked enum \u2192 Unchecked/Checked"
     ],
     "observed": {
       "type": "COMPONENT_SET",
@@ -165,6 +165,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": false
+    "visualMatchDeveloped": true
   }
 }

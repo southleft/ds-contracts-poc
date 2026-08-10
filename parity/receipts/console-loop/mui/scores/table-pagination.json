@@ -14,13 +14,13 @@
     "maskCoveragePct": 0,
     "canvasPx": "161x7",
     "realPx": "161x7",
-    "inkCanvasPct": 20.319432120674357,
+    "inkCanvasPct": 20.851818988464952,
     "inkRealPct": 21.73913043478261
   },
   "reference": "extract/computed/out/mui/pagination/orig-shots/__default.png",
   "referenceSha256": "d6deac8f001cdc4ea23ac09f3e984899514c4dffe285f45892a6cfcec25f9a20",
   "canvasShot": "parity/receipts/console-loop/mui/shots/table-pagination-cell.png",
-  "canvasShotSha256": "f4d8451d9160f247ccc3a18de303ffbbf0de255014ef38743724fa675ad909af",
+  "canvasShotSha256": "2ea3d6fadae7de931c76fb9a00d369b1fb45f270084fa72fe9c467a0478939b0",
   "diff": "parity/receipts/console-loop/mui/scores/table-pagination.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/table-pagination.json",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 1.4196983141082526,
+  "inkDelta": 0.887311446317657,
   "dprNormalized": true,
   "sizeNormalized": true,
   "note": "pixel bar missed (pctAAMasked=11.62 > 5)",
-  "recordedAt": "2026-08-09T03:33:18.837Z"
+  "recordedAt": "2026-08-10T02:24:25.851Z"
 }

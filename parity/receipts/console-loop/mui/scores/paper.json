@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/mui/paper/orig-shots/0.elevation__default.png",
   "referenceSha256": "d7161916c56b9221649d9c3b4888b0c338f71046035119afe0cd59d2222389b9",
   "canvasShot": "parity/receipts/console-loop/mui/shots/paper-cell.png",
-  "canvasShotSha256": "27fc6fc0c0ba1630910491f4b25a1b1da49e248c5319c8c5eccc81b479116c58",
+  "canvasShotSha256": "a04ac5aa0cf93108d09e4c1b3c5fc269735da4106e05868abde9531ac5dadc5a",
   "diff": "parity/receipts/console-loop/mui/scores/paper.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/paper.json",
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar missed (pctAAMasked=25.94 > 5)",
-  "recordedAt": "2026-08-09T03:33:17.056Z"
+  "recordedAt": "2026-08-10T02:25:23.071Z"
 }

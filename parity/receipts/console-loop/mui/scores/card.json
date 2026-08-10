@@ -9,8 +9,8 @@
   },
   "metrics": {
     "pctExactUnmasked": 61.53846153846154,
-    "pctAAUnmasked": 31.475667189952905,
-    "pctAAMasked": 31.475667189952905,
+    "pctAAUnmasked": 31.868131868131865,
+    "pctAAMasked": 31.868131868131865,
     "maskCoveragePct": 0,
     "canvasPx": "98x13",
     "realPx": "83x13",
@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/mui/card/orig-shots/0__default.png",
   "referenceSha256": "a4bbc4138a6174039b1f1f2d9882430f129ab6d220c4fd57da3e21f7dc29e34c",
   "canvasShot": "parity/receipts/console-loop/mui/shots/card-cell.png",
-  "canvasShotSha256": "5bcd01ebf0c43ea5ad8fbc2fc8862040c2e00d2dd5ad3a7a2bcb0e48cef14c68",
+  "canvasShotSha256": "c46554712a53cdfd7a4c24306e11bd5c2e4d4f5d75959878eb43a00eb513fd39",
   "diff": "parity/receipts/console-loop/mui/scores/card.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/card.json",
@@ -32,6 +32,6 @@
   "inkDelta": 4.709576138147568,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=31.48 > 5)",
-  "recordedAt": "2026-08-09T03:33:13.066Z"
+  "note": "pixel bar missed (pctAAMasked=31.87 > 5)",
+  "recordedAt": "2026-08-10T02:25:22.878Z"
 }

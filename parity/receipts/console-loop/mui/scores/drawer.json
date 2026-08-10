@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 84.44796898405146,
-    "pctAAUnmasked": 31.44770464358093,
-    "pctAAMasked": 31.44770464358093,
+    "pctExactUnmasked": 85.87540752489205,
+    "pctAAUnmasked": 22.195788175169618,
+    "pctAAMasked": 22.195788175169618,
     "maskCoveragePct": 0,
     "canvasPx": "117x97",
     "realPx": "113x97",
-    "inkCanvasPct": 76.98475636619968,
+    "inkCanvasPct": 89.1179839633448,
     "inkRealPct": 88.9417569829941
   },
   "reference": "extract/computed/out/mui/drawer/orig-shots/temporary__default.png",
   "referenceSha256": "c34cf8f4c904f64427ff2fef6c451b8e4305dd4c32cf45b6317ae2ec6e009f5e",
   "canvasShot": "parity/receipts/console-loop/mui/shots/drawer-cell.png",
-  "canvasShotSha256": "86f84f6f5f67886049ecb7d03e10551855ab89d97e59edf8cb9e616bf1ad1647",
+  "canvasShotSha256": "0c48a2b071915d5f0b5a299b1bfe261ed5dc9ae644d145e542c7c9499e135a6d",
   "diff": "parity/receipts/console-loop/mui/scores/drawer.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/drawer.json",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1.0353982300884956,
-  "inkDelta": 11.957000616794417,
+  "inkDelta": 0.17622698035070528,
   "dprNormalized": false,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=31.45 > 5)",
-  "recordedAt": "2026-08-09T03:33:14.964Z"
+  "note": "pixel bar missed (pctAAMasked=22.20 > 5)",
+  "recordedAt": "2026-08-10T02:24:26.343Z"
 }

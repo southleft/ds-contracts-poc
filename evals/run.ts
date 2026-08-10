@@ -9957,7 +9957,20 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           `SCORED-PASS ON A DRIFTED CANVAS: ${driftedPasses.join(', ')} — the score is measuring a build its own emit script would not produce`,
         );
       }
-      const wantUnmeasured = ['mui/accordion', 'mui/checkbox', 'mui/divider', 'mui/table'];
+      // mui/radio JOINED THIS LIST BY EARNING A PASS, not by regressing.
+      // Every mui pass is drift-unmeasured for one reason: `mui/framing.json`
+      // records 0 of 31 `cellNodeId`s, so there is no pinned cell to compare a
+      // live canvas against. That is the gap `mui/LEDGER.md:124` already names.
+      //
+      // The blocker recorded IN that framing file — "MUI lives on fileKey
+      // 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge"
+      // — is no longer true as of 2026-08-09: the file is connected, radio's
+      // canvas was rebuilt from its own emit script over the bridge, and its
+      // 3.75% pass was scored off that rebuild. So the pins are now OBTAINABLE
+      // and this list should SHRINK next round rather than grow. It is a
+      // named, closable hole, not a standing exemption — and note what it does
+      // NOT permit: a DRIFTED pass still throws above, unconditionally.
+      const wantUnmeasured = ['mui/accordion', 'mui/checkbox', 'mui/divider', 'mui/radio', 'mui/table'];
       if (unmeasuredPasses.sort().join(',') !== wantUnmeasured.join(',')) {
         throw new Error(
           `expected exactly mui's 4 passes to be un-probed for drift, got [${unmeasuredPasses.join(', ')}]`,

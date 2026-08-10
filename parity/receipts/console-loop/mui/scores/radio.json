@@ -1,37 +1,37 @@
 {
   "version": 3,
-  "status": "fail",
+  "status": "pass",
   "matchDeveloped": false,
-  "recommendMatchDeveloped": false,
+  "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 70.25,
-    "pctAAUnmasked": 38.5,
-    "pctAAMasked": 38.5,
+    "pctExactUnmasked": 28.249999999999996,
+    "pctAAUnmasked": 3.75,
+    "pctAAMasked": 3.75,
     "maskCoveragePct": 0,
     "canvasPx": "20x20",
     "realPx": "20x20",
-    "inkCanvasPct": 36,
+    "inkCanvasPct": 61,
     "inkRealPct": 61
   },
   "reference": "extract/computed/out/mui/radio/orig-shots/default.checked.enabled__default.png",
   "referenceSha256": "3bd96f03ccf997d787e9084546ef760675b2453fc34f971f09a1ff3a4260c5ea",
   "canvasShot": "parity/receipts/console-loop/mui/shots/radio-cell.png",
-  "canvasShotSha256": "4458850b2b5c2b4d79bef887877115cc9cd6a05a8230978f4358499d19f07400",
+  "canvasShotSha256": "30b60bb3b0161966081280965bc956f99b0fd85668984c49716e275f8d3a164f",
   "diff": "parity/receipts/console-loop/mui/scores/radio.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/radio.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 25,
+  "inkDelta": 0,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=38.50 > 5)",
-  "recordedAt": "2026-08-09T03:33:17.344Z"
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-10T01:21:42.371Z"
 }
