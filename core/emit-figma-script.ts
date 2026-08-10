@@ -36,6 +36,7 @@
  */
 import {
   DECLARED_CHANNELS,
+  channelDraws,
   TOKEN_CHANNELS,
   gridAxisSizing,
   STATE_PREVIEW_DEFAULT,
@@ -613,7 +614,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
+export const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
@@ -2540,6 +2541,16 @@ function applyStyling(
     if (li.width !== undefined) li.width += (li.paddingLeft ?? 0) + (li.paddingRight ?? 0);
   }
   const d = applyDeclared(part.declared, l);
+  // FC-OVERFLOW-CLIP-LOST: declared overflow hidden/clip draws natively as
+  // clipsContent. It is set HERE, beside the other spec-level declared reads,
+  // and not in applyDeclared — that function returns a TextCtx, has no `spec`
+  // to write to, and its `default: break` was the unreceipted sink that ate
+  // all 102 parts. auto|scroll are excluded by the registry's drawExcept, so
+  // they still take the annotate path: Figma has no scroll container.
+  for (const axis of ['overflow-x', 'overflow-y'] as const) {
+    const v = part.declared?.[axis];
+    if (v !== undefined && channelDraws(axis, v)) spec.clipsContent = true;
+  }
   // Round 4: declared aspect-ratio draws natively — height follows the bound
   // width when the contract carries no height channel (Avatar/Thumbnail
   // squares whose real height rides a pseudo-element padding hack).
@@ -4397,8 +4408,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     const note = (channel: string, value: string, state?: string) => {
       const reg = DECLARED_CHANNELS[channel];
       if (!reg) return; // refused upstream by validateContract
-      const drawn =
-        reg.canvas === 'draw' && !state && !(channel === 'text-decoration-line' && value === 'overline');
+      // channelDraws owns the per-value exceptions (drawExcept) that used to
+      // be spelled out here — overflow-x/y auto|scroll annotate while
+      // hidden|clip draw, and text-decoration-line/overline annotates.
+      const drawn = channelDraws(channel, value) && !state;
       if (drawn) return;
       // Part D (owner directive, 2026-07-19): the annotation COPY no longer
       // lands on the canvas (it lives in repo receipts) — the set only feeds
@@ -5391,7 +5404,9 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
     // grandparent track that still defaults to clipsContent:true.
     for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
       if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+      if (dsDeclaredClipStops(n)) break;
       n.clipsContent = false;
+      dsOverhangUnclip.add(n.id);
     }
     childNode.layoutPositioning = 'ABSOLUTE';
     const a = childSpec.absolute;
@@ -5459,7 +5474,9 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     // (Astryx Slider semi-circle residual under default clipsContent:true).
     for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
       if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+      if (dsDeclaredClipStops(n)) break;
       n.clipsContent = false;
+      dsOverhangUnclip.add(n.id);
     }
     // Round 5f (B5E finding 3): only a childless BACKDROP overlay (an
     // inset:0 fill layer — TextField's backdrop) lowers BEHIND the in-flow
@@ -5570,15 +5587,31 @@ const outOfFlowResizeCall = (has: boolean, args: string): string =>
 
 /** Nested absolute/inset unclip runs inside buildNode BEFORE the parent
  *  frame is appended to ITS parent — so a grandparent track (Slider) would
- *  still clip. After append, propagate clipsContent:false upward. */
+ *  still clip. After append, propagate clipsContent:false upward.
+ *
+ *  ONLY for a child an OVERHANG actually unclipped. The trigger used to be
+ *  `childNode.clipsContent === false`, which is true of very nearly every
+ *  frame — CSS overflow defaults to visible, so applyFrameSpec writes
+ *  clipsContent=false on all of them — meaning this walked to the root and
+ *  unclipped every ancestor for any ordinary child, in any contract that
+ *  carried a single absolute or inset overlay anywhere. That is far wider than
+ *  the comment above claims, and it is why the first FC-OVERFLOW-CLIP-LOST
+ *  build refused on MUI Checkbox: nothing overhung the clip-declaring node,
+ *  an ordinary unclipped child simply walked past it. dsOverhangUnclip records
+ *  the ancestors applyShapeAbsolute/applyInsetOverlay actually unclipped, so
+ *  the propagation carries the overhang fact instead of re-deriving it from a
+ *  default. */
 const overflowPropagateRuntime = (has: boolean): string =>
   has
     ? `
 function propagateOverflowVisible(childNode, parent) {
   if (!childNode || !('clipsContent' in childNode) || childNode.clipsContent !== false) return;
+  if (!dsOverhangUnclip.has(childNode.id)) return;
   for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
     if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+    if (dsDeclaredClipStops(n)) break;
     n.clipsContent = false;
+    dsOverhangUnclip.add(n.id);
   }
 }
 `
@@ -6099,6 +6132,37 @@ function ensureHostSection(page, target, displayName) {
 }
 
 ${slotRuntime(hasSlot)}${birthBoxRuntime(hasChildlessBox)}
+// FC-OVERFLOW-CLIP-LOST: node ids whose clip the CONTRACT declared
+// (overflow-x/y hidden|clip). The unclip walks consult this so a declared clip
+// can never be reverted silently by an overhanging descendant.
+const dsDeclaredClip = new Set();
+// Ancestors an OVERHANG (absolute / inset overlay) actually unclipped — see
+// propagateOverflowVisible. Distinguishes "unclipped because something hangs
+// out of it" from "unclipped because CSS overflow defaults to visible".
+const dsOverhangUnclip = new Set();
+/** Does a DECLARED clip stop the unclip walk at this node? See the body — the
+ *  contract's captured overflow outranks the emitter's out-of-flow heuristic,
+ *  and the walk ends rather than reverting a fact the contract stated. */
+function dsDeclaredClipStops(n) {
+  // A DECLARED clip beats the unclip heuristic, and the walk STOPS here.
+  //
+  // The heuristic is broader than CSS: it unclips every ancestor of any
+  // out-of-flow child, but position:absolute does not ask its ancestors to
+  // stop clipping — an absolutely positioned child inside overflow:hidden is
+  // clipped, normally and correctly. The rule exists for one real case (a
+  // Slider thumb at left:-10 genuinely hanging outside its track), and it was
+  // reading "is out of flow" as if it meant "hangs outside the box".
+  //
+  // Fluent Spinner is the counter-example that made this visible: its root
+  // declares overflow hidden (captured from the real component) and its
+  // spinnerTail declares position:absolute INSIDE that root. Nothing overhangs.
+  // The heuristic would have silently thrown the captured clip away.
+  //
+  // A captured fact outranks an inference about one. Stopping is also
+  // sufficient: content clipped at this boundary cannot be revealed by
+  // unclipping anything above it.
+  return dsDeclaredClip.has(n.id);
+}
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };${hasGrid ? `
   // A2 grid: GRID frames take the declaration path — the flex fields below
@@ -6115,6 +6179,16 @@ function applyFrameSpec(node, spec) {
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
   // Unclip unless the contract explicitly asks for canvas clip.
   node.clipsContent = spec.clipsContent === true;
+  // FC-OVERFLOW-CLIP-LOST: remember WHO asked for the clip. Three runtime
+  // loops (applyShapeAbsolute / applyInsetOverlay / propagateOverflowVisible)
+  // walk every ancestor setting clipsContent=false for an overhanging child,
+  // and they would silently revert a clip the contract declared — last write
+  // wins and nothing reports it. Measured across the whole corpus: NO
+  // clip-declaring part has an absolute/insetOverlay/overlay descendant, so
+  // this never fires today. It is recorded rather than trusted, because the
+  // collision is one contract away and a silent revert is indistinguishable
+  // from the fact never having been carried.
+  if (spec.clipsContent === true) dsDeclaredClip.add(node.id);
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));

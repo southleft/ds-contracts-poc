@@ -82,6 +82,11 @@ const CHANNEL_TO_FIGMA: Record<string, ChannelMap> = {
   // 1,521 phantom records. Structural: the fact rides the height channel.
   'aspect-ratio': { properties: ['height'], structural: 'lowered by BAKING a height from the ratio; read back as the captured height, never as a Figma ratio field' },
   'text-overflow': { properties: ['textTruncation', 'maxLines'], degradation: 'text-channel-unsupported' },
+  // FC-OVERFLOW-CLIP-LOST: hidden/clip IS clipsContent. auto/scroll are NOT —
+  // Figma has no scroll container — and the registry's drawExcept keeps them
+  // on the annotate path, so this mapping describes the drawable half only.
+  'overflow-x': { properties: ['clipsContent'], degradation: 'scroll-unsupported' },
+  'overflow-y': { properties: ['clipsContent'], degradation: 'scroll-unsupported' },
   'text-transform': { properties: ['textCase'], degradation: 'text-channel-unsupported' },
   'text-decoration-line': { properties: ['textDecoration'], degradation: 'text-channel-unsupported' },
   'text-align': { properties: ['textAlignHorizontal', 'textAlignVertical'], degradation: 'text-channel-unsupported' },

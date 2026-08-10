@@ -645,9 +645,33 @@ export interface DeclaredChannelSpec {
   /** Canvas verdict per the capability matrix: 'draw' = a native node field
    *  expresses it; 'annotate' = declared-not-drawn (CARRY-CODE-ONLY). */
   canvas: "draw" | "annotate";
+  /** Values within a 'draw' channel that DO NOT draw — the rest annotate.
+   *
+   *  The verdict was per-CHANNEL only, and for two channels that is a lie
+   *  either way. `overflow-x/y` is the clear case: hidden|clip IS a native
+   *  field (clipsContent) and auto|scroll is scrolling, which the canvas has
+   *  no spelling for at all. Marking the channel 'annotate' drops 182 clip
+   *  facts the canvas can draw; marking it 'draw' claims 22 `auto` entries
+   *  reach a canvas that cannot scroll. Neither is true, so the registry now
+   *  carries the split instead of the consumers guessing it — emit-figma-
+   *  script already hardcoded exactly one such carve-out
+   *  (text-decoration-line/overline), which now lives here.
+   *
+   *  Absent = the whole channel follows `canvas`. Only meaningful on 'draw'. */
+  drawExcept?: RegExp;
   /** Plain-language annotation copy (matrix §b) for the canvas description. */
   note: string;
 }
+
+/** Does this channel DRAW at this value? The one place the per-channel verdict
+ *  and its per-value exceptions are combined — consumers must not re-derive
+ *  it, because a consumer that reads `canvas` alone silently reclassifies
+ *  every `drawExcept` value. */
+export const channelDraws = (channel: string, value: string): boolean => {
+  const reg = DECLARED_CHANNELS[channel];
+  if (!reg || reg.canvas !== "draw") return false;
+  return !(reg.drawExcept?.test(value) ?? false);
+};
 
 const kw = (...words: string[]) => new RegExp(`^(${words.join("|")})$`);
 
@@ -823,15 +847,24 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
     canvas: "annotate",
     note: "Line-breaking rules differ: Figma wraps by box width only.",
   },
+  // FC-OVERFLOW-CLIP-LOST. `hidden`/`clip` IS a native canvas field —
+  // clipsContent — and 182 of the 204 declared overflow values in tree are one
+  // of the two (162 hidden, 20 clip, across 102 parts / 34 stems). They were
+  // routed to the description footnote by an 'annotate' verdict and never
+  // reached a node field. `auto`/`scroll` (22) stay annotate: Figma has no
+  // scroll container, so promoting them would claim a canvas capability that
+  // does not exist. `visible` is the CSS default and is unrepresented in tree.
   "overflow-x": {
     value: kw("visible", "hidden", "clip", "auto", "scroll"),
-    canvas: "annotate",
-    note: "Scrolling behavior and overflow clipping on this axis exist only in code.",
+    canvas: "draw", // clipsContent = true (matrix §91)
+    drawExcept: kw("auto", "scroll", "visible"),
+    note: "hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
   },
   "overflow-y": {
     value: kw("visible", "hidden", "clip", "auto", "scroll"),
-    canvas: "annotate",
-    note: "Scrolling behavior and overflow clipping on this axis exist only in code.",
+    canvas: "draw", // clipsContent = true (matrix §91)
+    drawExcept: kw("auto", "scroll", "visible"),
+    note: "hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
   },
   "text-overflow": {
     value: kw("clip", "ellipsis"),
@@ -846,7 +879,11 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
   },
   "text-decoration-line": {
     value: kw("none", "underline", "line-through", "overline"),
-    canvas: "draw", // textDecoration: UNDERLINE | STRIKETHROUGH; overline has no enum value — annotated when observed
+    canvas: "draw", // textDecoration: UNDERLINE | STRIKETHROUGH
+    // `overline` has no textDecoration enum value. This exception was
+    // hardcoded at the emit-figma-script consumer; it belongs here, where
+    // every consumer sees it.
+    drawExcept: kw("overline"),
     note: "Underline/strikethrough render natively (textDecoration); overline exists only in code.",
   },
   "text-decoration-style": {

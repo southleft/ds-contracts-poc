@@ -614,4 +614,71 @@ console.log("\n8. FC-SLOT-BIRTH-BOX ON AMEND — a variant COMPONENT root the em
   ok(`leaf guard: ${textNodes.length} TEXT leaf/leaves built without entering the frame-only re-measure`);
 }
 
+console.log('\n9. FC-OVERFLOW-CLIP-LOST — declared overflow hidden/clip draws as clipsContent, auto/scroll does not');
+{
+  // 102 parts across 34 stems in tree ship declared overflow (162 hidden,
+  // 20 clip, 22 auto). The fact reached the contract and emit-react rendered
+  // it; the CANVAS emitter routed the whole channel to the description
+  // footnote on an 'annotate' verdict and applyDeclared's `default: break`
+  // swallowed every one of them.
+  const overflowContract = (v: string): Contract =>
+    ContractSchema.parse({
+      id: 'ds.eval-overflow',
+      name: 'EvalOverflow',
+      version: '0.1.0',
+      status: 'draft',
+      description: 'overflow carriage fixture',
+      semantics: { element: 'div' },
+      props: [],
+      states: [],
+      anatomy: { root: { declared: { display: 'block', 'overflow-x': v, 'overflow-y': v } } },
+      anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalOverflow' } },
+    }) as Contract;
+  const emitOne = (c: Contract): string =>
+    emitFigmaScript(c, { tokens: TOKENS, icons: new Map(), contracts: new Map([[c.id, c]]) } as never);
+  const rootOf = (m: Mock) => findAll(m, (n: any) => n.type === 'COMPONENT' && n.name === 'EvalOverflow')[0];
+
+  for (const v of ['hidden', 'clip']) {
+    const m = createFigmaMock();
+    await runIn(m, emitOne(overflowContract(v)));
+    const root = rootOf(m);
+    if (!root) fail(`overflow fixture (${v}) built no component`);
+    if (root.clipsContent !== true) {
+      fail(
+        `declared overflow "${v}" did not reach the canvas: clipsContent=${root.clipsContent}. It is a native ` +
+          'field and 182 declared values in tree depend on it — FC-OVERFLOW-CLIP-LOST',
+      );
+    }
+  }
+  ok('declared overflow hidden AND clip both reach the node as clipsContent=true');
+
+  // The per-VALUE half. The registry verdict is per CHANNEL, so flipping
+  // overflow to "draw" would have claimed 22 `auto` entries reach a canvas
+  // that has no scroll container at all. drawExcept keeps them annotate.
+  for (const v of ['auto', 'scroll']) {
+    const m = createFigmaMock();
+    await runIn(m, emitOne(overflowContract(v)));
+    if (rootOf(m).clipsContent === true) {
+      fail(
+        `declared overflow "${v}" set clipsContent — scrolling has NO canvas spelling, and clipping is not ` +
+          'scrolling. The channel verdict must stay per-VALUE (drawExcept)',
+      );
+    }
+  }
+  ok('auto and scroll stay OFF the canvas — clipping is not scrolling, and the registry says so per value');
+
+  // RED TEST — strip the emitter's clipsContent write and the fact must vanish.
+  const stripped = emitOne(overflowContract('hidden')).replace(/"clipsContent": true,?/g, '');
+  if (stripped === emitOne(overflowContract('hidden'))) fail('the §9 red test stripped nothing — the pin is vacuous');
+  const red = createFigmaMock();
+  await runIn(red, stripped);
+  if (rootOf(red).clipsContent !== false) {
+    fail(
+      `RED TEST DID NOT GO RED: with clipsContent stripped from the spec the node still reports ` +
+        `${rootOf(red).clipsContent} — something other than the declared fact is clipping, and §9 proves nothing`,
+    );
+  }
+  ok('red test: stripping clipsContent from the compiled spec leaves the node unclipped — the pin bites');
+}
+
 console.log('\n✔ native-slots ok: native SLOT emission, ONE unified set-level property, amend survival (red-tested), migration reported by name, every API refusal named, the slot reads back, and an empty slot hugs — as does a childless COMPONENT root reached only by the amend path (FC-SLOT-BIRTH-BOX, both red-tested).');

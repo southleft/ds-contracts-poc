@@ -337,6 +337,7 @@ const COMPONENTS = [
                             "px": 36,
                             "varName": "imported/text-field/input/height/medium"
                           },
+                          "clipsContent": true,
                           "children": [
                             {
                               "type": "text",
@@ -642,6 +643,7 @@ const COMPONENTS = [
                             "px": 28,
                             "varName": "imported/text-field/input/height/slim"
                           },
+                          "clipsContent": true,
                           "children": [
                             {
                               "type": "text",
@@ -949,6 +951,7 @@ const COMPONENTS = [
                             "px": 36,
                             "varName": "imported/text-field/input/height/medium"
                           },
+                          "clipsContent": true,
                           "children": [
                             {
                               "type": "text",
@@ -1255,6 +1258,7 @@ const COMPONENTS = [
                             "px": 28,
                             "varName": "imported/text-field/input/height/slim"
                           },
+                          "clipsContent": true,
                           "children": [
                             {
                               "type": "text",
@@ -1566,6 +1570,7 @@ const COMPONENTS = [
                             "px": 36,
                             "varName": "imported/text-field/input/height/medium"
                           },
+                          "clipsContent": true,
                           "children": [
                             {
                               "type": "text",
@@ -1871,6 +1876,7 @@ const COMPONENTS = [
                             "px": 36,
                             "varName": "imported/text-field/input/height/medium"
                           },
+                          "clipsContent": true,
                           "children": [
                             {
                               "type": "text",
@@ -2176,6 +2182,7 @@ const COMPONENTS = [
                             "px": 36,
                             "varName": "imported/text-field/input/height/medium"
                           },
+                          "clipsContent": true,
                           "children": [
                             {
                               "type": "text",
@@ -2481,6 +2488,7 @@ const COMPONENTS = [
                             "px": 36,
                             "varName": "imported/text-field/input/height/medium"
                           },
+                          "clipsContent": true,
                           "children": [
                             {
                               "type": "text",
@@ -2987,6 +2995,37 @@ function remeasureBirthBox(node, label) {
   }
 }
 
+// FC-OVERFLOW-CLIP-LOST: node ids whose clip the CONTRACT declared
+// (overflow-x/y hidden|clip). The unclip walks consult this so a declared clip
+// can never be reverted silently by an overhanging descendant.
+const dsDeclaredClip = new Set();
+// Ancestors an OVERHANG (absolute / inset overlay) actually unclipped — see
+// propagateOverflowVisible. Distinguishes "unclipped because something hangs
+// out of it" from "unclipped because CSS overflow defaults to visible".
+const dsOverhangUnclip = new Set();
+/** Does a DECLARED clip stop the unclip walk at this node? See the body — the
+ *  contract's captured overflow outranks the emitter's out-of-flow heuristic,
+ *  and the walk ends rather than reverting a fact the contract stated. */
+function dsDeclaredClipStops(n) {
+  // A DECLARED clip beats the unclip heuristic, and the walk STOPS here.
+  //
+  // The heuristic is broader than CSS: it unclips every ancestor of any
+  // out-of-flow child, but position:absolute does not ask its ancestors to
+  // stop clipping — an absolutely positioned child inside overflow:hidden is
+  // clipped, normally and correctly. The rule exists for one real case (a
+  // Slider thumb at left:-10 genuinely hanging outside its track), and it was
+  // reading "is out of flow" as if it meant "hangs outside the box".
+  //
+  // Fluent Spinner is the counter-example that made this visible: its root
+  // declares overflow hidden (captured from the real component) and its
+  // spinnerTail declares position:absolute INSIDE that root. Nothing overhangs.
+  // The heuristic would have silently thrown the captured clip away.
+  //
+  // A captured fact outranks an inference about one. Stopping is also
+  // sufficient: content clipped at this boundary cannot be revealed by
+  // unclipping anything above it.
+  return dsDeclaredClip.has(n.id);
+}
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
@@ -2999,6 +3038,16 @@ function applyFrameSpec(node, spec) {
   // font) truncates trailing glyphs (Carbon Tabs "Settings" → "Setting").
   // Unclip unless the contract explicitly asks for canvas clip.
   node.clipsContent = spec.clipsContent === true;
+  // FC-OVERFLOW-CLIP-LOST: remember WHO asked for the clip. Three runtime
+  // loops (applyShapeAbsolute / applyInsetOverlay / propagateOverflowVisible)
+  // walk every ancestor setting clipsContent=false for an overhanging child,
+  // and they would silently revert a clip the contract declared — last write
+  // wins and nothing reports it. Measured across the whole corpus: NO
+  // clip-declaring part has an absolute/insetOverlay/overlay descendant, so
+  // this never fires today. It is recorded rather than trusted, because the
+  // collision is one contract away and a silent revert is indistinguishable
+  // from the fact never having been carried.
+  if (spec.clipsContent === true) dsDeclaredClip.add(node.id);
   if (node.type === 'FRAME') node.fills = [];
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -3111,7 +3160,9 @@ function applyInsetOverlay(parent, childNode, childSpec) {
     // (Astryx Slider semi-circle residual under default clipsContent:true).
     for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
       if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+      if (dsDeclaredClipStops(n)) break;
       n.clipsContent = false;
+      dsOverhangUnclip.add(n.id);
     }
     // Round 5f (B5E finding 3): only a childless BACKDROP overlay (an
     // inset:0 fill layer — TextField's backdrop) lowers BEHIND the in-flow
@@ -3193,9 +3244,12 @@ function resizeOutOfFlow(parent, built) {
 
 function propagateOverflowVisible(childNode, parent) {
   if (!childNode || !('clipsContent' in childNode) || childNode.clipsContent !== false) return;
+  if (!dsOverhangUnclip.has(childNode.id)) return;
   for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
     if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+    if (dsDeclaredClipStops(n)) break;
     n.clipsContent = false;
+    dsOverhangUnclip.add(n.id);
   }
 }
 
@@ -3632,7 +3686,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt10-birth-box-amend-roots';
+const RUNTIME_EMIT_REV = 'rt11-overflow-clip-drawn';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;

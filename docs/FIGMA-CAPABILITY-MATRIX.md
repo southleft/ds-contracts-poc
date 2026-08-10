@@ -88,7 +88,7 @@ Repo references: [R1] `docs/STYLE-FIDELITY.md` · [R2] `scripts/contract-schema.
 | `z-index` | **approx** — child order + `itemReverseZIndex` [S1] | — | whitelisted (code) | CARRY-WITH-NAMED-LIMIT |
 | `display: grid` + fixed templates | **native** — `layoutMode: 'GRID'` + `gridRowCount/gridColumnCount/gridRowSizes/gridColumnSizes/gridAutoTracks` [S1][S8] | `gridRowGap`, `gridColumnGap` (FLOAT) [S5] | absent | CARRY-BOTH (bounded template subset) |
 | grid areas, `minmax()`, `auto-fit/fill`, subgrid | **no** — no responsive track functions | — | named-gap-adjacent (B10 class) | CARRY-CODE-ONLY |
-| `overflow: hidden \| visible` | **native** — `clipsContent` [S1] | — | A25 named (frames default clip) [R1] | CARRY-BOTH (trivial add) |
+| `overflow: hidden \| visible` | **native** — `clipsContent` [S1] | — | CARRIED 2026-08-10 (FC-OVERFLOW-CLIP-LOST) | CARRY-BOTH |
 | `overflow: scroll/auto` | **no** static equivalent (prototype scrolling is a presentation setting, not a rendered fact) | — | whitelisted (code) | CARRY-CODE-ONLY |
 | `box-sizing` | **approx** — Figma sizes as border-box only when `strokeAlign: INSIDE` (the emitter's standing choice [R3]) or `strokesIncludedInLayout: true` [S1] | — | implicit (emitter forces INSIDE) | CARRY-WITH-NAMED-LIMIT (document the mapping) |
 
@@ -326,8 +326,16 @@ Fidelity raisers available today, unused by `core/emit-figma-script.ts`:
    re-bound; importing via `createNodeFromSvg` and binding fills on the
    resulting vector children would make glyph color token-driven [R4].
 10. **`textTruncation`/`maxLines`, granular `textDecoration*`, `textCase`** [S2].
-11. **`clipsContent` as an explicit channel** — currently an unexamined frame
-    default (A25).
+11. ~~**`clipsContent` as an explicit channel**~~ — DONE 2026-08-10
+    (FC-OVERFLOW-CLIP-LOST). `overflow-x/y` had the registry verdict
+    `annotate`, so 102 parts across 34 stems (162 `hidden`, 20 `clip`) reached
+    the contract, rendered in emit-react, and then died in the canvas emitter
+    at `applyDeclared`'s unreceipted `default: break`. They now draw as
+    `clipsContent`. `auto`/`scroll` (22) deliberately do NOT: the verdict was
+    per-CHANNEL and flipping it wholesale would have claimed a scroll container
+    Figma does not have, so `DeclaredChannelSpec.drawExcept` now carries the
+    per-VALUE split (and absorbed the one such carve-out that was hardcoded at
+    the consumer, `text-decoration-line`/`overline`).
 12. **Variable scopes** (`FILL_COLOR`, `STROKE_COLOR`, `FONT_SIZE`, …) [S8] —
     minted variables ship unscoped; scoping them makes the Figma pickers show
     the right tokens in the right fields (kit hygiene, zero render change).
