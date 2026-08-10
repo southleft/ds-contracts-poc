@@ -73,10 +73,30 @@ the rt10/rt11 re-emissions (59 figma-sync files).
      It is not a general fuse limitation — `width`/`height` are in
      LITERAL_CHANNELS and 12+ sibling mui contracts carry them (accordion 20
      occurrences, autocomplete 31). FAB is the outlier.
-     NEXT: find where fuse drops root width/height for this shape (suspect the
-     interaction between a `content: {prop: children}` root, `min-height`, and
-     the size axis) and make it either CARRY or LEDGER. A silent geometry drop
-     is the exact defect class this project exists to eliminate.
+     **ROOT CAUSE FOUND (mechanism, not yet fixed).** Grouped the 71 captures
+     by size (`captured-truth.json` capture `key` prefix):
+         small  -> 40px x 40px
+         medium -> 48px x 48px
+         large  -> ABSENT
+         base   -> 56px x 56px
+     `large` has NO delta because the deltas record only what differs from
+     BASE, and the base capture IS the large FAB. So the per-size map for
+     width/height never completes and the channel is dropped, while
+     border-radius — which has the SAME base-equal-large shape (20/24/28, and
+     28 is the base) — carried all three. Both channels are in
+     BASE_FALLBACK_CHANNELS *and* LITERAL_CHANNELS (fuse.ts:1435), so the
+     base-fallback machinery exists and radius reaches it. Find why
+     width/height do not take that path (start at fuse.ts:1828 `skipFolds &&
+     BASE_FALLBACK_CHANNELS.has(channel) && LITERAL_CHANNELS.has(channel)` and
+     the tokensByProp mint that radius went down instead).
+     CONFIRMED SILENT: fab.extension.json `codeOnlyChannels` has exactly TWO
+     entries (transition-behavior, vertical-align); the only minted geometry
+     keys are line-height and min-height. width/height appear in no ledger, no
+     codeOnly, no receipt. Must end CARRIED or LEDGERED — silent is the one
+     outcome that is not allowed.
+     Expect other stems with a base-equal extreme on a size axis to have the
+     same hole; a corpus sweep for "axis value whose delta is absent because it
+     equals base" is the general form of this bug.
    - **select / table-pagination DO declare overflow** and the clip landed on
      inner parts, not the cell ROOT, so render is unchanged. Find why the root
      part does not carry it.
