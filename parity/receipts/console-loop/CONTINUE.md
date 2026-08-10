@@ -1,43 +1,88 @@
 # CONTINUE — freeze-board fidelity, feat/beta-rounds
 
-## BLOCKED ON ONE MEASURED FUSE DECISION — NEEDS A HUMAN FORK
+## DECIDED — OPTION B IS LOCKED. THE GEOMETRY EXCLUSION STAYS.
 
-Claimed passes moved 17 -> 19 this wave (mui 3 -> 5: checkbox re-earned,
-autocomplete 8.93 -> 3.87), both by rebuild-then-pin, both flipped on a
-scorecard. That lever is now EXHAUSTED for mui: six more stems rebuilt, zero
-flipped, and the reason is measured rather than assumed (see below).
+**`FC-GEOMETRY-EXCLUDED` (extract/computed/fuse.ts:555-565) is KEPT. Do not
+relax width/height carriage. This is settled, not open.**
 
-**THE FORK.** Further foreign-board movement runs into ONE decision, already
-localised, at `extract/computed/fuse.ts:555-565`. It excludes geometry channels
-(width/height/insets) from fusion as environment-dependent, admitting them only
-for absolute-cluster parts, table cells and the block-root/overlay doors. It is
-a DELIBERATE refusal, named FC-GEOMETRY-EXCLUDED on 2026-08-09 in
-`mui/components/fab.json`, and the census is 15 findings across 10 stems in 6
-libraries (BASE-EQUAL-GEOMETRY-SWEEP.json — name now retired to
-FC-GEOMETRY-EXCLUDED per instruction).
+fuse excludes geometry channels (width/height/insets) from fusion as
+environment-dependent, admitting them only for absolute-cluster parts, table
+cells and the block-root/overlay doors. That exclusion is DELIBERATE and it
+stays. The rejected alternative is on the record: relaxing it is the change that
+previously minted the capture WINDOW as tokens in four of six libraries, and no
+board movement is worth re-opening that regression class.
 
-  Option A — RELAX the exclusion so roots carry their captured box.
-    Unblocks chip (0.61 pctAA, failing ONLY on compositionOk 51x20 vs 50x32),
-    fab, avatar, icon-button and the wider 15.
-    HAZARD, and it is why this is a human call: relaxing this exclusion is the
-    change that previously minted the capture WINDOW as tokens in four of six
-    libraries. It must be done with `viewportDerivedRefusals` held, in its own
-    round, with a full suite.
-  Option B — KEEP the exclusion and make it LOUD. It is currently silent for 14
-    of the 15 (only fab's receipt names it). Emitting a codeOnly/ledger entry
-    per drop closes the honesty gap, changes NO geometry, and is safe.
-    It will NOT move the board.
+WHAT THIS DECISION OBLIGES. The exclusion must be LEDGERED, NOT FIXED. It is
+currently SILENT for 14 of its 15 census entries — only `mui/fab`'s component
+receipt names it. The remaining honest work is to emit a codeOnly/ledger entry
+naming each drop. That changes NO geometry, moves NO board number, and closes
+the honesty gap. Anyone who "fixes" this by touching the fuse exclusion is
+undoing a decision, not finishing one.
 
-A raises claimed passes and risks a known regression class; B moves nothing and
-is safe. That trade is not mine to pick.
+TAXONOMY: `FC-BASE-EQUAL-GEOMETRY-DROPPED` is SUPERSEDED and stays superseded.
+One cause, one name, and the 2026-08-09 name wins. The census lives in
+`BASE-EQUAL-GEOMETRY-SWEEP.json` (15 findings / 10 stems / 6 libraries) and now
+carries `FC-GEOMETRY-EXCLUDED` throughout. Its original base-equal-delta
+explanation was killed by measurement (replay.ts:148 seeds each combo from base,
+so an absent delta keeps the base value) — keep the findings, not that story.
 
-**ALSO BLOCKING, and not an emitter defect:** mui/alert, mui/badge and
-mui/text-field CANNOT BE REBUILT on MUI Test 1 — each refuses by name with
-"duplicate ds_contracts/contractId on N component targets — refusing ambiguous
-identity". Canvas hygiene: de-duplicate those component targets in the file and
-three more stems become measurable.
+## HANDOFF FOR THE NEXT BRANCH
 
+**BOARD (from the artifacts, this wave): claimed 19/77 · scorecard 20/77.**
+    mui 5/31 · carbon 3/10 · tailwind 3/5 · astryx 0/11 · polaris 4/12 · altitude 4/8
+Claimed moved 17 -> 19: `mui/checkbox` (withdrawn pass re-earned, 0.00) and
+`mui/autocomplete` (8.93 -> 3.87), both by rebuild-then-pin from the stem's own
+committed rt12 script, both flipped ON THE SCORECARD.
+The 1-stem claimed/scorecard gap is `astryx/badge` and it is CORRECT: its
+scorecard passes at 4.88 while its own defects name FC-REF-SWEEP-DECOY and
+FC-REF-TONE-SWAP — the cell is 83.8% colour-distant from the library's
+Variant=Blue badge and 6.9% from its NEUTRAL one, a whole-component tone swap
+sitting under pixelmatch's YIQ cutoff. DO NOT FLIP IT.
 
+**SUITE STEADY STATE: expect 222/224.** Two reds remain, both PRE-EXISTING:
+  · `mui-figma-genesis` — switch-track pin expects 34x14, gets 1x1. PROVEN
+    pre-existing by checking out this session's own start commit (db4c90ae) and
+    reproducing it there.
+  · `child-wider-ratchet-and-script-freshness` — astryx textCaused 33, the
+    corpus-wide text-wrapping gap (docs/22).
+Everything else measured green this wave (--only): golden-generated-output,
+capability-report-is-fresh, console-loop-capture-framing-pin,
+console-loop-reference-content-checks, console-loop-canvas-drift-probe,
+console-loop-mui-evidence-receipt. capture-framing is at ZERO unnamed/hard
+violations across all 79 pinned stems.
+
+**REAL BOARD MOVERS THAT DO NOT TOUCH THE FUSE GEOMETRY EXCLUSION:**
+ 1. **De-duplicate contractIds in MUI Test 1 (59mLQlOMiD5w5za6SUcoO5).** Three
+    mui stems CANNOT BE REBUILT AT ALL — the emitter refuses by name:
+        mui/alert       "duplicate ds_contracts/contractId mui.alert on 2 component targets"
+        mui/badge       "... mui.badge on 3 component targets"
+        mui/text-field  "... mui.text-field on 3 component targets"
+    This is CANVAS HYGIENE, not an emitter defect, and the refusal is correct —
+    an ambiguous identity must not be guessed. Removing the stray duplicate
+    components makes three stems measurable, and alert was 7.03 (boxes already
+    identical at 144x24) so it is a live candidate. HIGHEST VALUE, LOWEST RISK.
+ 2. **Rebuild-then-pin the OTHER lanes.** Only mui was rebuilt this wave, and it
+    yielded 2 flips from stems whose canvases predated the rt10-rt12 emitter
+    fixes. carbon/tailwind/polaris/altitude/astryx scorecards are mostly dated
+    2026-08-08/09 — same staleness class, untested. Their canvases live on other
+    fileKeys; check bridge connectivity first.
+ 3. **Ledger the FC-GEOMETRY-EXCLUDED silence** (14 of 15 entries). Honesty, not
+    board movement — but it is the obligation Option B creates.
+ 4. **mui snapshot round.** `checkbox` and `autocomplete` were rebuilt from
+    their own committed scripts, so a LIVE-SNAPSHOT entry would read in-sync BY
+    CONSTRUCTION, exactly as radio did. That is a snapshot round, not a
+    re-measurement. It moves `wantUnmeasured` in evals/run.ts, not the board.
+
+**MERGE NOTES.** RUNTIME_EMIT_REV is `rt12-birthbox-declared-layout-only`; all
+figma artifacts re-emitted at it, figma-scripts-fresh 8/8, 7/7 genesis batches
+mock-proven, plugin-engine-check green, golden manifest current. RATCHET floors
+moved this session: mui 4 -> 3 -> 4 -> 5 (each move justified in RATCHET.json's
+own note). Three C1 mechanisms are new and load-bearing: `cellOverhang` (a named
+overhang must carry an FC code, a reason, and match independently-measured
+render bounds; it reports "open (named)", never a pass), the mui C1 mint (31/31
+cells pinned live), and `DeclaredChannelSpec.drawExcept` (per-VALUE canvas
+verdicts, which is what keeps overflow `auto`/`scroll` off a canvas that has no
+scroll container).
 
 BOARD — RE-DERIVED FROM THE ARTIFACTS, AND "18/77" WAS NEITHER OF THE TWO REAL
 NUMBERS. It was inherited, I repeated it, and counting the files says:
