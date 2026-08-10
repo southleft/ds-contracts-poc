@@ -48,6 +48,17 @@ EXPECTED STEADY STATE: 4 failures, all pre-existing and named
 reference-content-checks). If anything OTHER than those 4 is red, it is new and
 belongs to this handoff.
 
+VERIFIED BY TARGETED RUN (`npx tsx evals/run.ts --only <ids>` — use this; the
+full suite cannot finish inside one turn in this environment and every
+background attempt was killed at a turn boundary):
+  ✔ capability-report-is-fresh
+  ✔ console-loop-canvas-drift-probe
+  ✖ console-loop-capture-framing-pin       1 unnamed/hard violation — mui/fab
+  ✖ console-loop-reference-content-checks  same single cause
+capture-framing hard violations went 8 -> 1 this session. THE ONLY ONE LEFT IS
+mui/fab, and it is hard ON PURPOSE (see the residual status above). Every other
+framing residual on all 79 pinned stems is now an "open (named)" FC-* refusal.
+
 VERIFICATION STATUS, STATED PLAINLY. The last COMPLETE `npx tsx evals/run.ts`
 was 218/224, taken BEFORE the last two eval-expectation fixes. Three attempts to
 re-run it to completion afterwards were each killed by the environment at 139,
