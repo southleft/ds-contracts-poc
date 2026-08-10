@@ -66,4 +66,33 @@ for (const { key, mod } of modules) {
   );
 }
 
+// ONE EXTRA HOST, MOUNTED FROM A REAL STORY.
+//
+// The token spot-check used to take the Playground button (whose meta args pin
+// `variant: 'secondary'`) and REWRITE its className to `variant-primary`, then
+// read the computed background in the SAME TASK. That silently stopped
+// measuring what it claimed: the emitted `.root` now carries
+// `transition-duration: 0.175s` on `background-color`, so a synchronous read
+// after a class swap returns the colour the button is transitioning FROM — the
+// secondary value. It reported the right answer for one commit only because the
+// generated CSS carried no transition when the receipt was first shot.
+//
+// `Button.stories.tsx` already exports `Primary` with `args: { variant:
+// 'primary' }`. Mounting it is simpler and honest: no string munging, no
+// dependence on a hashed class name surviving a regex, and nothing to go stale
+// when the emitter changes how variants are spelled.
+const primaryStory = (button as unknown as Module)['Primary'];
+if (button.default?.component && primaryStory) {
+  const host = document.createElement('div');
+  host.id = 'host-button-primary';
+  host.setAttribute('data-component', 'button-primary');
+  document.body.appendChild(host);
+  createRoot(host).render(
+    createElement(button.default.component as never, {
+      ...(button.default.args ?? {}),
+      ...(primaryStory.args ?? {}),
+    }),
+  );
+}
+
 (window as unknown as { __ASTRYX_CSF__: unknown }).__ASTRYX_CSF__ = csf;

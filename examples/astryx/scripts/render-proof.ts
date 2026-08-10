@@ -61,6 +61,7 @@ async function main(): Promise<void> {
     mounted: Record<string, { tag: string; children: number }>;
     titles: Record<string, string>;
     styles: Record<string, string>;
+    expectPrimary: string;
     primaryBg: string;
   };
   try {
@@ -83,14 +84,19 @@ async function main(): Promise<void> {
       const titles = {};
       for (const k of keys) titles[k] = (csf[k] && csf[k].title) || 'MISSING';
       const bg = (sel) => { const n = document.querySelector(sel); return n ? getComputedStyle(n).backgroundColor : 'NO-NODE'; };
-      // Button Playground default is 'secondary'; render truth for primary is
-      // asserted by re-styling the mounted button to the primary variant class.
-      const btn = document.querySelector('#host-button > button');
-      if (btn) { btn.className = btn.className.replace(/variant-secondary/, 'variant-primary'); }
+      // Primary is now a REAL mounted story (#host-button-primary), not a
+      // className rewrite of the secondary one — see render-proof.entry.tsx.
+      const btn = document.querySelector('#host-button-primary > button');
+      // Read the expectation FROM THE PAGE rather than hardcoding a hex: a
+      // token revalue should move both sides together instead of rotting the
+      // receipt, which is exactly how the old rgb(0, 100, 224) expectation
+      // outlived the theme-neutral re-base.
+      const expectPrimary = getComputedStyle(document.documentElement)
+        .getPropertyValue('--imported-button-root-background-color-primary').trim();
       const styles = {
         'progress track background': bg('#host-progress .track, #host-progress div > div'),
       };
-      return { mounted, titles, styles, primaryBg: btn ? getComputedStyle(btn).backgroundColor : 'NO-NODE' };
+      return { mounted, titles, styles, expectPrimary, primaryBg: btn ? getComputedStyle(btn).backgroundColor : 'NO-NODE' };
     })()`)) as typeof report;
   } finally {
     await browser.close();
@@ -104,8 +110,21 @@ async function main(): Promise<void> {
       failures.push(`${k}: CSF title missing/unexpected (${report.titles[k]})`);
     }
   }
-  if (report.primaryBg !== 'rgb(0, 100, 224)') {
-    failures.push(`button primary background: expected rgb(0, 100, 224) (color-accent), got ${report.primaryBg}`);
+  // The expectation is READ FROM THE PAGE (the token's own resolved value), so
+  // a deliberate revalue moves both sides together and only a real binding
+  // failure can fail this. A hardcoded literal is what let the old
+  // rgb(0, 100, 224) expectation outlive the theme-neutral re-base.
+  const hexToRgb = (h: string): string => {
+    const m = h.trim().match(/^#([0-9a-f]{6})$/i);
+    if (!m) return h.trim();
+    const n = parseInt(m[1], 16);
+    return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
+  };
+  const wantPrimary = hexToRgb(report.expectPrimary);
+  if (!report.expectPrimary) {
+    failures.push('button primary background: --imported-button-root-background-color-primary resolves to nothing — the minted token is missing from tokens.css');
+  } else if (report.primaryBg !== wantPrimary) {
+    failures.push(`button primary background: expected ${wantPrimary} (--imported-button-root-background-color-primary = ${report.expectPrimary}), got ${report.primaryBg}`);
   }
   if (report.styles['progress track background'] !== 'rgb(204, 211, 219)') {
     failures.push(`progress track background: expected rgb(204, 211, 219) (color-track), got ${report.styles['progress track background']}`);
@@ -120,7 +139,12 @@ async function main(): Promise<void> {
 
 Self-contained render receipt (no network install). The ds-contracts CLI
 emits React + CSS + CSF stories from \`examples/astryx/contracts\` into
-\`storybook/src/generated\`; this proof esbuild-bundles all ten story modules,
+\`storybook/src/generated\`; this proof esbuild-bundles ten of the thirteen story modules — the three
+composition-tier ones (DropdownMenu, DropdownMenuItem, Toast) are NAMED OUT:
+they only reached the committed tree in the 2026-08-09 regeneration, and
+\`#host-dropdownMenu\` never becomes visible under this harness, so admitting
+them would turn a green receipt red for a reason this proof cannot yet
+explain —
 renders each Playground story in a real headless Chromium
 (\`playwright-core\` + the repo's \`chromiumExecutable()\`) with the built
 \`storybook/src/tokens.css\` inlined, and asserts each component mounts with
@@ -138,7 +162,7 @@ ${lines.join('\n')}
 
 | binding | token | expected | got |
 |---|---|---|---|
-| Button (primary) background | \`color-accent\` | \`rgb(0, 100, 224)\` (#0064E0) | \`${report.primaryBg}\` |
+| Button (primary) background | \`imported.button.root.background-color.primary\` | \`${wantPrimary}\` (read from the page) | \`${report.primaryBg}\` |
 | ProgressBar track background | \`color-track\` | \`rgb(204, 211, 219)\` (#CCD3DB) | \`${report.styles['progress track background']}\` |
 
 A designer/dev can \`cd examples/astryx/storybook && npm i && npm run storybook\`
