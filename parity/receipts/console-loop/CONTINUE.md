@@ -109,6 +109,46 @@ RUN THE FULL SUITE FIRST and confirm 220/224.
      accordion  354x114 from 288x48   fab       44x72 from 8x36
      select     75x61 from 73.94x56   snackbar  324x85 from 288x49
      table-pagination 431x52 from 428x52        text-field 253x93 from 252.97x78.91
+   **EACH RESIDUAL, PROBED AND NAMED (2026-08-10).** Every one of the six is a
+   case where the SHOT (which is always absoluteRenderBounds — measured, five
+   for five) legitimately exceeds the CELL BOX. None is a newly-found emitter
+   bug; C1's margin guard already tolerates a UNIFORM overhang <=17px, and these
+   six fail it on skew or magnitude:
+     · mui/select — FC-OVERFLOW-NOT-DECLARED. PROBE: the contract ROOT declares
+       NO overflow; only label / select-nativeinput / icon /
+       outlinedinput-notchedoutline do. PIN: root 73.94x56, render 75x61, and
+       the child `outlinedinput-notchedoutline` is 74x61. The notched outline
+       renders ABOVE the box in real MUI too (inset:-5px). The canvas is right;
+       nothing was dropped.
+     · mui/table-pagination — FC-SCROLL-UNSUPPORTED. PROBE: the ROOT declares
+       `overflow: auto/auto`. PIN: `auto` is held OFF canvas ON PURPOSE by
+       DeclaredChannelSpec.drawExcept — Figma has no scroll container — so the
+       root correctly does not clip. box 428x52, render 431.03x52 (3px).
+       CARRY-CODE-ONLY, matrix row `overflow: scroll/auto`.
+     · mui/snackbar — FC-EFFECT-BLEED. PROBE: root declares no overflow; the
+       cell carries a drop shadow. PIN: box 288x49, render 324x85, a UNIFORM
+       18px margin — 1px over C1's 17px allowance. This is the guard's own
+       tolerance being marginally too tight for a shadow, not a geometry fault.
+     · mui/fab — SILENT GEOMETRY LOSS (the real defect of the six). See the
+       diagnosis below: box 8x36 for a Size=Large FAB because width/height were
+       captured (56x56) and carried nowhere.
+     · mui/accordion — FC-DECLARED-BY-PROP-MISSING. PROBE: overflow VARIES on
+       the `expanded` enum, so fuse sent it to the sidecar as non-uniform. PIN:
+       no `declaredByProp` vocabulary exists in the schema. Named schema gap.
+     · mui/text-field — FC-AMBIGUOUS-IDENTITY. PROBE: rebuilding it REFUSES BY
+       NAME on canvas — "duplicate ds_contracts/contractId mui.text-field on 3
+       component targets". PIN: pre-existing canvas condition; the duplicates
+       must be cleaned up in MUI Test 1 before the stem can be rebuilt at all.
+   CONSEQUENCE FOR C1: five of six are the CHECK's semantics, not the canvas —
+   C1 compares a render-bounds shot to a layout box and has no vocabulary for a
+   legitimate, named overhang. It is documented "never waivable", which is right
+   for "this shot is not that cell" and wrong for "this cell legitimately
+   renders outside its box". THE NEXT DECISION IS C1's DESIGN, not six canvas
+   fixes: give it a probed+named overhang allowance (per-stem, with the FC code
+   above), keeping the never-waivable bite for wrong-cell/whole-set shots.
+   Do NOT "fix" this by forcing clipsContent onto roots the contract never
+   clipped — that would make the canvas lie to satisfy a gate.
+
    Split, measured, not guessed:
    - **accordion / fab / snackbar / table declare NO overflow**, so the clip was
      never going to reach them. accordion's overflow VARIES on the `expanded`
