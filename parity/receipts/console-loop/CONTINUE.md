@@ -6,7 +6,7 @@ one is now backed by an emitter-built node and a CURRENT capture — the fake
 divider pass and the stale-shot table pass are both gone, and divider +
 linear-progress replaced them honestly.
 
-HEAD: 3c745d20. RUNTIME_EMIT_REV rt11-overflow-clip-drawn.
+HEAD: d4dbc91b. RUNTIME_EMIT_REV rt12-birthbox-declared-layout-only.
 Gates: plugin-engine-check GREEN, figma-scripts-fresh 8/8, 7/7 genesis batches
 mock-proven, console-loop-mui-evidence-check GREEN (31/31, ratchet 4).
 FULL SUITE: 218/224 measured this session. `npm run golden:update` and
@@ -60,14 +60,32 @@ RUN THE FULL SUITE FIRST and confirm 220/224.
   rebuild only its interior, so the root kept Figma's 100px box forever. Three
   call sites now (one `birthBoxCall` helper). Proven on canvas: MUI Divider
   Inset 216x100 -> 216x1, Middle 256x100 -> 256x1, FullWidth now emitter-built
-  rather than the hand-probe it was. The layout guard also mirrors
-  applyFrameSpec's default now (it had skipped every layout-less root), and
-  `node.children` is an explicit container test — relaxing the guard first
-  reached TEXT leaves and took down four genesis batches.
+  rather than the hand-probe it was. `node.children` is an explicit container
+  test — relaxing the guard first reached TEXT leaves and took down four
+  genesis batches.
+
+  **WHAT I ASSERTED WITHOUT MEASURING, and reverted (rt12).** Two claims in the
+  rt10/rt11 commits were speculation stated as findings. Both are now reverted
+  and the canvas is the reason:
+   · The birth-box guard was relaxed from `spec.layout &&` to applyFrameSpec's
+     default, described as closing "a latent hole". No such hole was measured —
+     every divider root declares layout. MUI Switch's `switch-track` is a
+     childless FRAME with NO declared layout measuring 34x14 FIXED live
+     (21:612); a node the contract gave no layout is not one this repair
+     understands. Guard restored.
+   · The mock was taught the birth box for FRAME as well as COMPONENT. The
+     evidence only ever covered a childless COMPONENT (Divider) and a SLOT;
+     Switch's childless FRAME children measure 34x14 and 20x20 live, not
+     100x100. Scoped back to COMPONENT. §8 still goes red-then-green, because
+     the case it models is a COMPONENT root.
+  I found both while hunting a "regression" (switch-track 1x1) that turned out
+  to be RED AT db4c90ae, this session's own starting commit.
 - **THE MOCK MODELED THE BIRTH BOX ONLY ON SLOT NODES** and was therefore
   structurally unable to see the divider defect (a plain COMPONENT). FRAME and
   COMPONENT now carry it, honored only while the axis reports HUG and dissolved
   by the first relayout. native-slots-check §8 red-tests both directions.
+  CORRECTED LATER THE SAME SESSION: COMPONENT only, NOT plain FRAME — see
+  "WHAT I ASSERTED WITHOUT MEASURING" below.
 - **capture-framing C1 minted for the mui lane** (31/31, 0 cellPending). The
   open question in the old cellPending reason is MEASURED: `exportAsync` at
   scale 1 returns EXACTLY `absoluteRenderBounds`, five for five. C1 stays
@@ -83,8 +101,9 @@ RUN THE FULL SUITE FIRST and confirm 220/224.
 
 ## NEXT 3 STEPS
 
-1. **Verify the full suite** (`npx tsx evals/run.ts`) — it was mid-run at
-   handoff. Everything else here is gate-verified; this is not.
+1. **Verify the full suite** (`npx tsx evals/run.ts`) — see VERIFICATION STATUS
+   above. Expect 220/224 with the 4 named pre-existing failures; anything else
+   red is new. Everything else in this file is gate-verified; this is not.
 2. **The 6 remaining C1 violations, which are the honest next FC.** All are
    "content RENDERS OUTSIDE its layout box":
      accordion  354x114 from 288x48   fab       44x72 from 8x36
