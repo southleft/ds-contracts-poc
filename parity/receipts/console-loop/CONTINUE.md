@@ -57,9 +57,26 @@ the rt10/rt11 re-emissions (59 figma-sync files).
      enum, so fuse.ts:1842 sent it to the sidecar as non-uniform; carrying it
      needs `declaredByProp` vocabulary that the schema does not have. That is a
      schema addition, scoped OUT here.
-   - **fab's box is 8x36 for a Size=Large FAB** (render 44x72). A Large FAB is
-     ~56x56. This looks like a genuine geometry defect independent of overflow
-     and nothing has diagnosed it yet — likely the highest-value single stem.
+   - **fab: DIAGNOSED — a SILENT geometry loss, and it is the real find of the
+     session.** The cell box is 8x36 for a Size=Large FAB (render 44x72). The
+     root hugs its label because the contract carries NO width and NO height at
+     all — only `min-width: {imported.shared.size-0}` (zero) and a uniform
+     `min-height: 36px`. The `size` tokensByProp map carries ONLY the four
+     border-radii.
+     The capture SAW the geometry: `extract/computed/out/mui/fab/
+     captured-truth.json` holds `/base/root/style` = **56px x 56px** and
+     per-variant deltas of 40x40. The radii that DID carry prove it too —
+     small 20 / medium 24 / large 28 are the radii of 40 / 48 / 56 circles.
+     So the fact was captured, was dropped between capture and contract, and
+     NOTHING NAMED THE LOSS: `fab.extension.json` mentions width/height ZERO
+     times and the lane LEDGER.md has no entry.
+     It is not a general fuse limitation — `width`/`height` are in
+     LITERAL_CHANNELS and 12+ sibling mui contracts carry them (accordion 20
+     occurrences, autocomplete 31). FAB is the outlier.
+     NEXT: find where fuse drops root width/height for this shape (suspect the
+     interaction between a `content: {prop: children}` root, `min-height`, and
+     the size axis) and make it either CARRY or LEDGER. A silent geometry drop
+     is the exact defect class this project exists to eliminate.
    - **select / table-pagination DO declare overflow** and the clip landed on
      inner parts, not the cell ROOT, so render is unchanged. Find why the root
      part does not carry it.
