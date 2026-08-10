@@ -28,8 +28,13 @@ THE 6 SUITE FAILURES, triaged — MOST ARE NOT FROM THIS SESSION:
   cell-pending", which encoded the blindness C1 just ended. The 30 did not
   become clean, they moved to SNAPSHOT-pending (cell pinned, no LIVE-SNAPSHOT
   entry). Expectation re-derived to 0 with that written down.
-A `npx tsx evals/run.ts` was RUNNING at handoff to confirm the last two fixes —
-its result is UNVERIFIED, run it first.
+- `golden-generated-output` — was mine each time core changed; FIXED by
+  `npm run golden:update` (run it after ANY re-emission).
+EXPECTED STEADY STATE: 4 failures, all pre-existing and named
+(mui-figma-genesis, child-wider-ratchet, capture-framing-pin,
+reference-content-checks). A `npx tsx evals/run.ts` was RUNNING at handoff to
+confirm that — its result is UNVERIFIED, run it first. If anything OTHER than
+those 4 is red, it is new and belongs to this handoff.
 
 ## CLOSED THIS SESSION
 
