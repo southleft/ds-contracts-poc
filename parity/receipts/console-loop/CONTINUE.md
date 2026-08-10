@@ -94,9 +94,21 @@ the rt10/rt11 re-emissions (59 figma-sync files).
      keys are line-height and min-height. width/height appear in no ledger, no
      codeOnly, no receipt. Must end CARRIED or LEDGERED — silent is the one
      outcome that is not allowed.
-     Expect other stems with a base-equal extreme on a size axis to have the
-     same hole; a corpus sweep for "axis value whose delta is absent because it
-     equals base" is the general form of this bug.
+     **THE SWEEP IS DONE AND FAB IS NOT ALONE: 15 silent geometry losses across
+     10 stems in 6 libraries.** `node scripts/base-equal-geometry-sweep.mjs`
+     (receipt committed at BASE-EQUAL-GEOMETRY-SWEEP.json). It reports a
+     geometry channel that is observed on SOME axis values, absent on at least
+     one other, and present in NEITHER the contract NOR the extension ledger:
+         altitude/button  width,height    altitude/chip     width,height
+         altitude/heading height          altitude/iconclose height
+         altitude/link    width,height    astryx/token      height
+         carbon/button    width           fluent/dialog     width,height
+         mui/fab          width,height    shadcn/card       height
+     altitude/iconclose is the least deniable: height is observed as
+     8/12/20/24/32/36/40 across xs..xxxl and carried NOWHERE.
+     NOTE altitude/heading and altitude/link are already on the caveated-pass
+     list below — a silent height loss is a candidate explanation for both, so
+     fix this before re-examining them.
    - **select / table-pagination DO declare overflow** and the clip landed on
      inner parts, not the cell ROOT, so render is unchanged. Find why the root
      part does not carry it.

@@ -1,0 +1,125 @@
+{
+ "count": 15,
+ "findings": [
+  {
+   "lib": "altitude",
+   "stem": "button",
+   "channel": "width",
+   "observedOn": "tertiary__default=85.5312px tertiary__hover=85.5312px tertiary__focus-visible=85.5312px tertiary__active=85.5312px",
+   "missingOn": "unset__hover,unset__focus-visible,unset__active,secondary__default,secondary__hover,secondary__focus-visible,secondary__active,bare__default,bare__hover,bare__focus-visible,bare__active,danger__default,danger__hover,danger__focus-visible,danger__active",
+   "base": "83.5312px"
+  },
+  {
+   "lib": "altitude",
+   "stem": "button",
+   "channel": "height",
+   "observedOn": "tertiary__default=42px tertiary__hover=42px tertiary__focus-visible=42px tertiary__active=42px",
+   "missingOn": "unset__hover,unset__focus-visible,unset__active,secondary__default,secondary__hover,secondary__focus-visible,secondary__active,bare__default,bare__hover,bare__focus-visible,bare__active,danger__default,danger__hover,danger__focus-visible,danger__active",
+   "base": "40px"
+  },
+  {
+   "lib": "altitude",
+   "stem": "chip",
+   "channel": "width",
+   "observedOn": "secondary=54.7969px",
+   "missingOn": "unset,info,success,warning,danger",
+   "base": "52.7969px"
+  },
+  {
+   "lib": "altitude",
+   "stem": "chip",
+   "channel": "height",
+   "observedOn": "secondary=30px",
+   "missingOn": "unset,info,success,warning,danger",
+   "base": "28px"
+  },
+  {
+   "lib": "altitude",
+   "stem": "heading",
+   "channel": "height",
+   "observedOn": "display-lg=52px display-md=44px display-sm=40px lg=36px md=32px",
+   "missingOn": "unset,sm",
+   "base": "28px"
+  },
+  {
+   "lib": "altitude",
+   "stem": "iconclose",
+   "channel": "height",
+   "observedOn": "xs__default=8px xs__hover=8px xs__focus-visible=8px xs__active=8px sm__default=12px sm__hover=12px sm__focus-visible=12px sm__active=12px md__default=20px md__hover=20px md__focus-visible=20px md__active=20px lg__default=24px lg__hover=24px lg__focus-visible=24px lg__active=24px xl__default=32px xl__hover=32px xl__focus-visible=32px xl__active=32px xxl__default=36px xxl__hover=36px xxl__focus-visible=36px xxl__active=36px xxxl__default=40px xxxl__hover=40px xxxl__focus-visible=40px xxxl__active=40px",
+   "missingOn": "unset__hover,unset__focus-visible,unset__active",
+   "base": "16px"
+  },
+  {
+   "lib": "altitude",
+   "stem": "link",
+   "channel": "width",
+   "observedOn": "xs__default=22.0156px xs__hover=22.0156px xs__focus-visible=22.0156px xs__active=22.0156px sm__default=25.6875px sm__hover=25.6875px sm__focus-visible=25.6875px sm__active=25.6875px lg__default=33.0312px lg__hover=33.0312px lg__focus-visible=33.0312px lg__active=33.0312px",
+   "missingOn": "unset__hover,unset__focus-visible,unset__active",
+   "base": "29.3594px"
+  },
+  {
+   "lib": "altitude",
+   "stem": "link",
+   "channel": "height",
+   "observedOn": "xs__default=20px xs__hover=20px xs__focus-visible=20px xs__active=20px sm__default=20px sm__hover=20px sm__focus-visible=20px sm__active=20px lg__default=28px lg__hover=28px lg__focus-visible=28px lg__active=28px",
+   "missingOn": "unset__hover,unset__focus-visible,unset__active",
+   "base": "24px"
+  },
+  {
+   "lib": "astryx",
+   "stem": "token",
+   "channel": "height",
+   "observedOn": "sm=20px lg=28px",
+   "missingOn": "md",
+   "base": "24px"
+  },
+  {
+   "lib": "carbon",
+   "stem": "button",
+   "channel": "width",
+   "observedOn": "ghost=75.5px danger--primary=121.5px danger--ghost=75.5px",
+   "missingOn": "primary,secondary,tertiary,danger,danger--tertiary",
+   "base": "123.5px"
+  },
+  {
+   "lib": "fluent",
+   "stem": "dialog",
+   "channel": "width",
+   "observedOn": "non-modal__default=600px",
+   "missingOn": "alert__default",
+   "base": "1100px"
+  },
+  {
+   "lib": "fluent",
+   "stem": "dialog",
+   "channel": "height",
+   "observedOn": "non-modal__default=154px",
+   "missingOn": "alert__default",
+   "base": "0px"
+  },
+  {
+   "lib": "mui",
+   "stem": "fab",
+   "channel": "width",
+   "observedOn": "small=40px medium=48px",
+   "missingOn": "large",
+   "base": "56px"
+  },
+  {
+   "lib": "mui",
+   "stem": "fab",
+   "channel": "height",
+   "observedOn": "small=40px medium=48px",
+   "missingOn": "large",
+   "base": "56px"
+  },
+  {
+   "lib": "shadcn",
+   "stem": "card",
+   "channel": "height",
+   "observedOn": "sm__default=133px sm__hover=133px sm__focus-visible=133px sm__active=133px",
+   "missingOn": "default__hover,default__focus-visible,default__active",
+   "base": "160px"
+  }
+ ]
+}
