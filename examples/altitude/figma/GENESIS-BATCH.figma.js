@@ -1226,7 +1226,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
+const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2359,6 +2359,26 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
+function remeasureBirthBox(node, label) {
+  for (const axis of ['Vertical', 'Horizontal']) {
+    const prop = 'layoutSizing' + axis;
+    let mode;
+    try { mode = node[prop]; } catch (e) { continue; }
+    if (mode !== 'HUG') continue;
+    try {
+      node[prop] = 'FIXED';
+      node.resize(axis === 'Horizontal' ? 1 : node.width, axis === 'Vertical' ? 1 : node.height);
+      node[prop] = 'HUG';
+    } catch (e) {
+      throw new Error(
+        '"' + label + '": ' + axis.toLowerCase() + " axis reports HUG but kept Figma's 100px " +
+        'birth box, and the FIXED round-trip that forces the re-measure was refused (' +
+        e.message + ') — FC-SLOT-BIRTH-BOX',
+      );
+    }
+  }
+}
+
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
@@ -2641,6 +2661,14 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
   }
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children already relaid out — and GRID is
+  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+      (spec.type === 'slot' || node.children.length === 0)) {
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+  }
   return node;
 }
 
@@ -2843,7 +2871,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
+const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -4816,7 +4844,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
+const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -6645,7 +6673,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
+const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -7543,6 +7571,26 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
+function remeasureBirthBox(node, label) {
+  for (const axis of ['Vertical', 'Horizontal']) {
+    const prop = 'layoutSizing' + axis;
+    let mode;
+    try { mode = node[prop]; } catch (e) { continue; }
+    if (mode !== 'HUG') continue;
+    try {
+      node[prop] = 'FIXED';
+      node.resize(axis === 'Horizontal' ? 1 : node.width, axis === 'Vertical' ? 1 : node.height);
+      node[prop] = 'HUG';
+    } catch (e) {
+      throw new Error(
+        '"' + label + '": ' + axis.toLowerCase() + " axis reports HUG but kept Figma's 100px " +
+        'birth box, and the FIXED round-trip that forces the re-measure was refused (' +
+        e.message + ') — FC-SLOT-BIRTH-BOX',
+      );
+    }
+  }
+}
+
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
@@ -7828,6 +7876,14 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
   }
+  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
+  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
+  // childless is affected — one with children already relaid out — and GRID is
+  // excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
+  if (spec.layout && spec.layout.mode !== 'GRID' && 'layoutSizingVertical' in node &&
+      (spec.type === 'slot' || node.children.length === 0)) {
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+  }
   return node;
 }
 
@@ -8030,7 +8086,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
+const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -9828,7 +9884,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
+const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -11344,7 +11400,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
+const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -13025,7 +13081,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt7-font-style-per-family';
+const RUNTIME_EMIT_REV = 'rt9-birth-box-general';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;

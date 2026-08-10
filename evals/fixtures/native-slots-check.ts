@@ -453,7 +453,7 @@ console.log("\n7. FC-SLOT-BIRTH-BOX — an empty slot measures its content, not 
         fail(
           `variant ${variant.name}: the slot reports ${axis} HUG and still measures 100 — ` +
             "createSlot's BIRTH BOX outlived the sizing writes (FC-SLOT-BIRTH-BOX). " +
-            'The emitter must force the FIXED resize round-trip (remeasureSlotBox).',
+            'The emitter must force the FIXED resize round-trip (remeasureBirthBox).',
         );
       }
     }
@@ -464,21 +464,21 @@ console.log("\n7. FC-SLOT-BIRTH-BOX — an empty slot measures its content, not 
   // still hugs, the mock is kinder than Figma and the pin above proves nothing
   // (which is exactly how the 320×142 card passed headlessly for two days).
   const stripped = emit(host()).replace(
-    /if \(spec\.type === 'slot'\) remeasureSlotBox\(node, spec\.slotProperty\);/g,
+    /remeasureBirthBox\(node, spec\.type === 'slot' \? spec\.slotProperty : spec\.name\);/g,
     '',
   );
-  if (stripped === emit(host())) fail('the red test could not strip remeasureSlotBox — the pin below is vacuous');
+  if (stripped === emit(host())) fail('the red test could not strip remeasureBirthBox — the pin below is vacuous');
   const red = createFigmaMock();
   await runIn(red, emit(leaf()));
   await runIn(red, stripped);
   const redSlot = (theSet(red).children[0].children ?? []).find((c: any) => c.type === 'SLOT');
   if (!redSlot || redSlot.height !== 100) {
     fail(
-      `RED TEST DID NOT GO RED: with remeasureSlotBox stripped the slot measured ${redSlot?.height} — ` +
+      `RED TEST DID NOT GO RED: with remeasureBirthBox stripped the slot measured ${redSlot?.height} — ` +
         'the mock is not modeling createSlot\'s 100×100 birth box, so §7 above is an alibi',
     );
   }
-  ok(`red test: stripping remeasureSlotBox leaves the slot at ${redSlot.width}×${redSlot.height} — the trap is real and the pin bites`);
+  ok(`red test: stripping remeasureBirthBox leaves the slot at ${redSlot.width}×${redSlot.height} — the trap is real and the pin bites`);
 }
 
 console.log('\n✔ native-slots ok: native SLOT emission, ONE unified set-level property, amend survival (red-tested), migration reported by name, every API refusal named, the slot reads back, and an empty slot hugs (FC-SLOT-BIRTH-BOX, red-tested).');
