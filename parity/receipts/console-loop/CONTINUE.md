@@ -128,6 +128,14 @@ does not touch. Re-run once more to see the mui half settle.
   (auto/scroll stay off-canvas — Figma has no scroll container) and absorbed
   the overline carve-out that was hardcoded at the consumer.
   native-slots-check §9 red-tests it.
+  **CARRIAGE VERIFIED COMPLETE, counted from the emitted artifacts:** 206
+  overflow declarations across 52 stems now produce 1,289 `clipsContent` facts
+  in 46 emitted scripts. The handoff's "103 parts / 52 stems" understated the
+  declarations and named the stem count exactly; this step is CLOSED, not
+  partial. The remaining overflow-adjacent residual is a SCHEMA gap, not
+  carriage: MUI Accordion's overflow varies on the `expanded` enum and there is
+  no `declaredByProp` vocabulary (FC-DECLARED-BY-PROP-MISSING, named in the
+  gate).
 
 ## RESIDUAL STATUS vs THE FREEZE-BOARD BAR
 
