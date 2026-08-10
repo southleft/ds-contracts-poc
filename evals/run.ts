@@ -9882,7 +9882,12 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         // MUI's file was never reached by the bridge: framing.json records 0 of 31
         // cellNodeIds. Asserted so the un-probed lane stays VISIBLE rather than
         // being quietly counted as clean.
-        mui: { sync: 0, drift: [], cellPending: 31 },
+        // 0 -> 1 in-sync, 31 -> 30 cell-pending: mui/radio is the FIRST mui cell
+        // ever pinned and probed. Its canvas was rebuilt from radio.figma.js over
+        // the Desktop Bridge before the capture, so in-sync is by construction, not
+        // luck. The remaining 30 stay pending until each is rebuilt the same way —
+        // pinning an unrebuilt cell could surface real drift, which throws.
+        mui: { sync: 1, drift: [], cellPending: 30 },
       };
       const probe = (lane: string): DriftRow[] => {
         const r = spawnSync(
@@ -9957,20 +9962,21 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           `SCORED-PASS ON A DRIFTED CANVAS: ${driftedPasses.join(', ')} — the score is measuring a build its own emit script would not produce`,
         );
       }
-      // mui/radio JOINED THIS LIST BY EARNING A PASS, not by regressing.
-      // Every mui pass is drift-unmeasured for one reason: `mui/framing.json`
-      // records 0 of 31 `cellNodeId`s, so there is no pinned cell to compare a
-      // live canvas against. That is the gap `mui/LEDGER.md:124` already names.
+      // THIS LIST SHRANK, and that is the only direction it should ever move
+      // without a reviewed reason. mui/radio was on it for exactly one commit:
+      // it earned a pass (3.75%) while every mui stem was drift-unmeasured,
+      // because `mui/framing.json` pinned 0 of 31 `cellNodeId`s — the gap
+      // `mui/LEDGER.md:124` names. The blocker that framing file recorded ("MUI
+      // lives on fileKey 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the
+      // Desktop Bridge") stopped being true, so radio's cell is now pinned and
+      // probed IN-SYNC against its own emit script — the canvas was rebuilt
+      // from that script before the capture, so it is in-sync by construction.
       //
-      // The blocker recorded IN that framing file — "MUI lives on fileKey
-      // 59mLQlOMiD5w5za6SUcoO5, which was NOT connected to the Desktop Bridge"
-      // — is no longer true as of 2026-08-09: the file is connected, radio's
-      // canvas was rebuilt from its own emit script over the bridge, and its
-      // 3.75% pass was scored off that rebuild. So the pins are now OBTAINABLE
-      // and this list should SHRINK next round rather than grow. It is a
-      // named, closable hole, not a standing exemption — and note what it does
-      // NOT permit: a DRIFTED pass still throws above, unconditionally.
-      const wantUnmeasured = ['mui/accordion', 'mui/checkbox', 'mui/divider', 'mui/radio', 'mui/table'];
+      // The remaining four are still cell-pending, and pinning them is NOT
+      // bookkeeping: nobody rebuilt those canvases, so a pin could surface real
+      // DRIFT — which throws unconditionally above. That is a
+      // rebuild-then-pin round, one stem at a time.
+      const wantUnmeasured = ['mui/accordion', 'mui/checkbox', 'mui/divider', 'mui/table'];
       if (unmeasuredPasses.sort().join(',') !== wantUnmeasured.join(',')) {
         throw new Error(
           `expected exactly mui's 4 passes to be un-probed for drift, got [${unmeasuredPasses.join(', ')}]`,

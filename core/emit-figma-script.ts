@@ -3411,12 +3411,18 @@ function partToSpecInner(
       // exactly (20×20 both) — the reference was already falsified as the
       // cause (all 28 sibling gate-shots score identically).
       //
-      // Applied HERE, inside the boxless branch, and not above the
-      // `iconPartHasBox()` test: a box-carrying icon builds a frame that
-      // reaches the general lowering on its own, and applying it in both
-      // places would double it. An icon part declaring no position and no
-      // insets is byte-unchanged, which is every icon part in the corpus bar
-      // four.
+      // Applied to the BARE SVG here, and to the box-carrying FRAME below —
+      // both, because each `if (part.icon)` branch RETURNS. The first cut of
+      // this fix said the opposite in a comment ("a box-carrying icon builds a
+      // frame that reaches the general lowering on its own"), and that was
+      // FALSE: the frame branch does `applyVisibleWhen(frame, …); return frame`
+      // ~15 lines below, while the general lowering lives ~250 lines further
+      // on, unreachable from either. A confident sentence about control flow is
+      // still a guess until the `return` between the two points is looked at.
+      //
+      // An icon part declaring no position and no insets is byte-unchanged on
+      // both branches, so this is inert for every icon part in the corpus that
+      // does not ask for placement.
       const io = insetOverlayOffsets(part, subst);
       if (io) {
         spec.insetOverlay = true;
@@ -3439,6 +3445,24 @@ function partToSpecInner(
       children: [{ ...spec, name: `${name}-icon`, grow: undefined }],
     };
     applyStyling(frame, part, subst, ctx);
+    // THE SAME LOWERING THE BARE-SVG BRANCH GETS. A box-carrying icon part can
+    // declare placement too — carbon's `inline-notification__close-button`
+    // carries `top`/`right` alongside a background, four paddings and four
+    // border widths — and this branch dropped it with nothing refused and
+    // nothing logged, exactly like the boxless one did before cf7d9027.
+    //
+    // Nine icon parts across five libraries reach here with a position or
+    // insets declared. All nine currently declare `position: relative`, which
+    // `insetOverlayOffsets` early-returns null on and `isAbsoluteThisCombo`
+    // rejects, so this is BYTE-NEUTRAL today — it closes the door before the
+    // first part walks through it, rather than after.
+    const frameIo = insetOverlayOffsets(part, subst);
+    if (frameIo) {
+      frame.insetOverlay = true;
+      if (frameIo.top !== 0 || frameIo.right !== 0 || frameIo.bottom !== 0 || frameIo.left !== 0) frame.insetOffsets = frameIo;
+    } else {
+      applyAbsoluteThisCombo(frame, part, subst);
+    }
     applyVisibleWhen(frame, part, contract);
     return frame;
   }

@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "kind": "console-loop-canvas-drift-live-snapshot",
+  "lane": "mui",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileName": "MUI Test 1",
+  "mintedAt": "2026-08-09",
+  "mintedFrom": "scripts/console-loop-canvas-drift-capture.mjs mui radio -> figma_execute(fileKey=59mLQlOMiD5w5za6SUcoO5) over the Desktop Bridge",
+  "why": "FIRST mui cell ever probed for canvas drift. mui/LEDGER.md:124 recorded this lane as wholly un-probed, and mui/framing.json pinned 0 of 31 cellNodeIds, because 59mLQlOMiD5w5za6SUcoO5 was not connected to the Desktop Bridge. It is connected now. ONLY radio is here, and deliberately: its canvas was rebuilt from its own radio.figma.js over the bridge minutes before this capture, so it is in-sync BY CONSTRUCTION. The other 30 stems are NOT pinned, because pinning a cell nobody rebuilt could surface real DRIFT \u2014 and a drifted scored pass throws unconditionally in console-loop-canvas-drift-probe. That is a rebuild-then-pin round, not a bookkeeping edit. Every value here is read live via getNodeByIdAsync and getVariableByIdAsync; nothing is back-derived from a committed PNG, which is the refusal the capture generator exists to keep.",
+  "stems": {
+    "radio": {
+      "cellNodeId": "84:1927",
+      "name": "Color=Default, Checked=Checked",
+      "type": "COMPONENT",
+      "w": 42,
+      "h": 42,
+      "pl": 9,
+      "pr": 9,
+      "pt": 9,
+      "pb": 9,
+      "gap": 0,
+      "sizingH": "FIXED",
+      "sizingV": "FIXED",
+      "bound": {
+        "paddingLeft": {
+          "name": "imported/shared/size-9",
+          "coll": "MUI",
+          "val": 9
+        },
+        "paddingTop": {
+          "name": "imported/shared/size-9",
+          "coll": "MUI",
+          "val": 9
+        },
+        "paddingRight": {
+          "name": "imported/shared/size-9",
+          "coll": "MUI",
+          "val": 9
+        },
+        "paddingBottom": {
+          "name": "imported/shared/size-9",
+          "coll": "MUI",
+          "val": 9
+        },
+        "width": {
+          "name": "imported/shared/size-42",
+          "coll": "MUI",
+          "val": 42
+        },
+        "height": {
+          "name": "imported/shared/size-42",
+          "coll": "MUI",
+          "val": 42
+        },
+        "topLeftRadius": {
+          "name": "imported/shared/size-21",
+          "coll": "MUI",
+          "val": 21
+        },
+        "topRightRadius": {
+          "name": "imported/shared/size-21",
+          "coll": "MUI",
+          "val": 21
+        },
+        "bottomLeftRadius": {
+          "name": "imported/shared/size-21",
+          "coll": "MUI",
+          "val": 21
+        },
+        "bottomRightRadius": {
+          "name": "imported/shared/size-21",
+          "coll": "MUI",
+          "val": 21
+        }
+      },
+      "descendantBound": {
+        "part-1.width": {
+          "name": "imported/shared/size-24",
+          "coll": "MUI",
+          "val": 24
+        },
+        "part-1.height": {
+          "name": "imported/shared/size-24",
+          "coll": "MUI",
+          "val": 24
+        },
+        "part-1.icon.Vector.fills": {
+          "name": "imported/radio/icon/fill/default/checked",
+          "coll": "MUI",
+          "val": "rgba(0,0,0,0.6)"
+        },
+        "part-1.icon-2.Vector.fills": {
+          "name": "imported/radio/icon-2/fill/default/checked",
+          "coll": "MUI",
+          "val": "rgba(0,0,0,0.6)"
+        }
+      },
+      "fonts": [],
+      "fontsNote": "no TEXT node within the depth-3 walk"
+    }
+  }
+}
