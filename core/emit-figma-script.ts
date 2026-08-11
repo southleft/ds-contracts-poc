@@ -2192,6 +2192,25 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
         if (lh !== undefined) next.lineHeight = lh;
         break;
       }
+      case 'box-shadow': {
+        // v17 (mui/slider coincident-shadow fold). The literal path projects
+        // a shadow through the SAME two grammars the token path uses above
+        // (single DROP_SHADOW first, so existing emissions stay byte-equal;
+        // then the full multi-layer/inset stack). Reached because a
+        // shadow-only pseudo that is coincident with its host now folds onto
+        // the host as a literal — see pseudoDecorParts in
+        // extract/computed/anatomy.ts. `none` parses to an EMPTY stack, which
+        // CLEARS the node's effects: that is the spelling MUI's `size=small`
+        // thumb needs, since only `medium` carries the elevation.
+        const shadow = parseBoxShadow(value);
+        if (shadow) spec.dropShadow = shadow;
+        else {
+          const stack = parseShadowStack(value);
+          if (stack) spec.effectStack = stack;
+          else spec.shadowMiss = value.slice(0, 60);
+        }
+        break;
+      }
       default:
         break;
     }

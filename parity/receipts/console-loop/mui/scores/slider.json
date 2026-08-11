@@ -1,37 +1,37 @@
 {
   "version": 3,
-  "status": "fail",
+  "status": "pass",
   "matchDeveloped": false,
-  "recommendMatchDeveloped": false,
+  "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 12.557870370370368,
-    "pctAAUnmasked": 7.957175925925926,
-    "pctAAMasked": 7.957175925925926,
+    "pctExactUnmasked": 3.986111111111111,
+    "pctAAUnmasked": 0.5694444444444444,
+    "pctAAMasked": 0.5694444444444444,
     "maskCoveragePct": 0,
-    "canvasPx": "288x20",
+    "canvasPx": "288x25",
     "realPx": "288x24",
-    "inkCanvasPct": 23.408564814814813,
-    "inkRealPct": 24.609375
+    "inkCanvasPct": 23.805555555555554,
+    "inkRealPct": 23.625
   },
   "reference": "extract/computed/out/mui/slider/orig-shots/error.medium__default.png",
   "referenceSha256": "ad209ebd841e80c3652fd5e18e78660803aa083a7d080ea37f434d4169e4cf72",
   "canvasShot": "parity/receipts/console-loop/mui/shots/slider-cell.png",
-  "canvasShotSha256": "51607ba1794e42f5e0559f9f60f890736fbf64e018a688394ffa7407057a8e28",
+  "canvasShotSha256": "749aa0df424751d291f87c2cee20995f5f6b3596a1d86a82bcfaf0d853e6db7d",
   "diff": "parity/receipts/console-loop/mui/scores/slider.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/slider.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.2,
-  "inkDelta": 1.200810185185187,
+  "scaleRatio": 1.0416666666666667,
+  "inkDelta": 0.18055555555555358,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=7.96 > 5)",
-  "recordedAt": "2026-08-11T14:26:11.811Z"
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-11T15:40:14.616Z"
 }

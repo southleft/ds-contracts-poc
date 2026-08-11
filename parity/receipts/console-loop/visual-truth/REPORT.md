@@ -2,18 +2,18 @@
 
 Source: `rest-images-api` (Figma REST renders at scale 1 — like-for-like with the bridge lane's scale-1 cell exports; no desktop app, no plugin bridge), scored under the one bar (`pctAAMasked <= 5` AND `compositionOk`) with the developed-score normalization policy. Written by `scripts/visual-truth-report.mjs`; regenerate with `npm run visual-truth:report`.
 
-generatedFrom: sha256:8d9ad269e2ef8a496f59ce7ed78ad9df47d54caf7b556b0b80f74eb3b53f5df7 (133 scorecards)
+generatedFrom: sha256:6dd41b2cc42e22f78809b410e032321fb01f173df1ea978bfa85ffc1b63cddf5 (133 scorecards)
 
 ## Summary
 
-**30 pass / 65 fail / 38 skip / 0 error** across 133 stems.
+**31 pass / 64 fail / 38 skip / 0 error** across 133 stems.
 
 ## Per-lane pass counts vs RATCHET floors
 
 | lane | scored | headless pass | ratchet floor | meets floor |
 |---|---:|---:|---:|---|
 | first-party | 18/54 | 10 | 10 | yes |
-| mui | 31/31 | 6 | 5 | yes |
+| mui | 31/31 | 7 | 7 | yes |
 | tailwind | 5/5 | 4 | 4 | yes |
 | altitude | 8/8 | 4 | 4 | yes |
 | astryx | 11/13 | 0 | 1 | **NO** |
@@ -69,7 +69,6 @@ generatedFrom: sha256:8d9ad269e2ef8a496f59ce7ed78ad9df47d54caf7b556b0b80f74eb3b5
 | carbon | accordion | 9.23% | true | fail |
 | mui | autocomplete | 8.93% | true | fail |
 | mui | alert | 8.25% | true | fail |
-| mui | slider | 7.96% | true | fail |
 | polaris | radio-button | 7.85% | true | fail |
 | polaris | text | 7.77% | true | fail |
 | mui | table-pagination | 7.64% | true | fail |
@@ -110,6 +109,7 @@ generatedFrom: sha256:8d9ad269e2ef8a496f59ce7ed78ad9df47d54caf7b556b0b80f74eb3b5
 | mui | input-adornment | 0.69% | true | pass |
 | altitude | chip | 0.67% | true | pass |
 | first-party | two-column | 0.63% | true | pass |
+| mui | slider | 0.56% | true | pass |
 | first-party | grid-gallery | 0.34% | true | pass |
 | mui | switch | 0.28% | true | pass |
 | first-party | bento-grid | 0.10% | true | pass |

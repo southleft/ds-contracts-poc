@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "@mui/material@9.2.0",
   "browser": "149.0.7827.55",
   "mintedTokens": {
@@ -1107,7 +1107,7 @@
     {
       "part": "part-2-0",
       "channel": "clip",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "rect(0px, 0px, 0px, 0px)",
       "distinctValues": 1
     }
@@ -1155,7 +1155,7 @@
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
     "findings": [
       {
-        "combo": "primary.small",
+        "combo": "primary.medium",
         "interaction": "default",
         "part": "slider-thumb",
         "pseudo": "::before",
@@ -1164,7 +1164,7 @@
         }
       },
       {
-        "combo": "primary.small",
+        "combo": "primary.medium",
         "interaction": "default",
         "part": "slider-thumb",
         "pseudo": "::after",
@@ -1173,7 +1173,7 @@
         }
       },
       {
-        "combo": "primary.medium",
+        "combo": "primary.small",
         "interaction": "default",
         "part": "slider-thumb",
         "pseudo": "::before",
@@ -1182,7 +1182,7 @@
         }
       },
       {
-        "combo": "primary.medium",
+        "combo": "primary.small",
         "interaction": "default",
         "part": "slider-thumb",
         "pseudo": "::after",
@@ -1267,6 +1267,8 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
@@ -1336,7 +1338,7 @@
       "sr-only-carried-as-hidden: part-2-0 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
     ],
     "refusals": [
-      "pseudo-decor-outside-grammar: slider-thumb::before is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
+      "pseudo-decor-shadow-folded: slider-thumb::before is a coincident box that paints ONLY box-shadow — folded onto slider-thumb as a literal rather than promoted as its own part, because a Figma node casts a shadow from its OWN alpha and a transparent one renders nothing (probed live). Carried per size (small: none, medium: shadow) over 12/12 default combos",
       "pseudo-decor-outside-grammar: slider-thumb::after occupies 42x42 at position:absolute but paints nothing the grammar reads (background-color rgba(0, 0, 0, 0), border 0px rgba(46, 125, 50, 1)) — NOT promoted"
     ]
   },
@@ -1361,8 +1363,8 @@
     "declared fact carried: part-2-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-2-0.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-2-0.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-2-0.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-2-0.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-2-0.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-2-0.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-2-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-2-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [focus-visible] part-2-0.outline-style = auto (v15 declared vocabulary)"

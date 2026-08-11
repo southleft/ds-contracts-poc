@@ -152,6 +152,42 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 3,
+                  "radius": 1,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.2
+                  },
+                  "spread": -2
+                },
+                {
+                  "x": 0,
+                  "y": 2,
+                  "radius": 2,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.14
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 1,
+                  "radius": 5,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.12
+                  }
+                }
+              ],
               "children": []
             }
           ]
@@ -289,6 +325,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
+              "effectStack": [],
               "children": []
             }
           ]
@@ -426,6 +463,42 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 3,
+                  "radius": 1,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.2
+                  },
+                  "spread": -2
+                },
+                {
+                  "x": 0,
+                  "y": 2,
+                  "radius": 2,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.14
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 1,
+                  "radius": 5,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.12
+                  }
+                }
+              ],
               "children": []
             }
           ]
@@ -563,6 +636,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
+              "effectStack": [],
               "children": []
             }
           ]
@@ -700,6 +774,42 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 3,
+                  "radius": 1,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.2
+                  },
+                  "spread": -2
+                },
+                {
+                  "x": 0,
+                  "y": 2,
+                  "radius": 2,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.14
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 1,
+                  "radius": 5,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.12
+                  }
+                }
+              ],
               "children": []
             }
           ]
@@ -837,6 +947,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
+              "effectStack": [],
               "children": []
             }
           ]
@@ -974,6 +1085,42 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 3,
+                  "radius": 1,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.2
+                  },
+                  "spread": -2
+                },
+                {
+                  "x": 0,
+                  "y": 2,
+                  "radius": 2,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.14
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 1,
+                  "radius": 5,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.12
+                  }
+                }
+              ],
               "children": []
             }
           ]
@@ -1111,6 +1258,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
+              "effectStack": [],
               "children": []
             }
           ]
@@ -1248,6 +1396,42 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 3,
+                  "radius": 1,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.2
+                  },
+                  "spread": -2
+                },
+                {
+                  "x": 0,
+                  "y": 2,
+                  "radius": 2,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.14
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 1,
+                  "radius": 5,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.12
+                  }
+                }
+              ],
               "children": []
             }
           ]
@@ -1385,6 +1569,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
+              "effectStack": [],
               "children": []
             }
           ]
@@ -1522,6 +1707,42 @@ const COMPONENTS = [
                 "px": 20,
                 "varName": "imported/slider/slider-thumb/width/medium"
               },
+              "effectStack": [
+                {
+                  "x": 0,
+                  "y": 3,
+                  "radius": 1,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.2
+                  },
+                  "spread": -2
+                },
+                {
+                  "x": 0,
+                  "y": 2,
+                  "radius": 2,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.14
+                  }
+                },
+                {
+                  "x": 0,
+                  "y": 1,
+                  "radius": 5,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0.12
+                  }
+                }
+              ],
               "children": []
             }
           ]
@@ -1659,6 +1880,7 @@ const COMPONENTS = [
                 "px": 12,
                 "varName": "imported/slider/slider-thumb/width/small"
               },
+              "effectStack": [],
               "children": []
             }
           ]
@@ -2063,6 +2285,18 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+  }
+  if (spec.effectStack) {
+    // v15: full box-shadow stack — multi-layer + inset as native effects.
+    node.effects = spec.effectStack.map((e) => ({
+      type: e.inner ? 'INNER_SHADOW' : 'DROP_SHADOW',
+      color: { r: e.color.r, g: e.color.g, b: e.color.b, a: e.color.a === undefined ? 1 : e.color.a },
+      offset: { x: e.x, y: e.y },
+      radius: e.radius,
+      spread: e.spread || 0,
+      visible: true,
+      blendMode: 'NORMAL',
+    }));
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;

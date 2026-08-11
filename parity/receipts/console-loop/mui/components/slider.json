@@ -17,22 +17,37 @@
     "result": {}
   },
   "visual": {
-    "ok": false,
+    "ok": true,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:509).",
-      "Slider COMPONENT_SET 21:509: 12 variant(s), 3 prop def(s). Structure looks sane; slot placeholders OK."
+      "Slider COMPONENT_SET 21:509: 12 variant(s), 3 prop def(s). Structure looks sane; slot placeholders OK.",
+      "2026-08-11 COINCIDENT-SHADOW FOLD: 7.96 -> 0.57 (bridge, parity/receipts/console-loop/mui/scores/slider.json) and 7.96 -> 0.56 (headless REST, parity/receipts/console-loop/visual-truth/mui/slider.json), cell 21:477 \"Color=Error, Size=Medium\", compositionOk true on both. EARNED BY A CONTRACT+EMITTER FIX, not by a re-read: MuiSlider-thumb::before is a coincident 20x20 transparent circle carrying Material elevation-2, and the pseudo-decor grammar refused it as \"painted by a mechanism the grammar cannot read\". It now FOLDS onto the host part (extract/computed/anatomy.ts pseudoDecorParts) because a Figma node casts a shadow from its OWN alpha — a transparent decor part would have carried the fact and rendered nothing (probed live on canvas). Carried per the __TEXT\t__DATA\t__OBJC\tothers\tdec\thex axis: small has no elevation, medium does."
     ],
-    "defects": [
-      "FC-REF-CONTRACT-RENDER: prior pass was scored against a CONTRACT RENDER; against the real library render pctAAMasked=7.96 (bar 5), compositionOk=true",
-      "pixel scorecard fail: pctAAMasked=48.16% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/slider.json",
-      "REAL (CANVAS-SIDE), not reference-side (reference audit 2026-08-08): the pinned reference error.medium is the correct colour and size step and its ink matches the canvas exactly (288x20 vs 288x20, scaleRatio 1.00, inkDelta <1). The 48.16 is thumb/track placement inside an identically-framed box, not a reference defect. The best sibling (error.small, 34.20) only wins by shrinking the stage."
-    ],
+    "defects": [],
     "reference": "extract/computed/out/mui/slider/orig-shots/error.medium__default.png",
     "referenceSource": "extract/computed/out/mui/slider/orig-shots/error.medium__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/slider.png — a byte-identical copy of mui/slider/gate-shots/error.medium__default.png)): parity/receipts/console-loop/mui/refs/slider.png [declared source: extract/computed/out/mui/slider/gate-shots/error.medium__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/slider-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed",
-    "scorecard": "parity/receipts/console-loop/mui/scores/slider.json"
+    "matchDeveloped": true,
+    "status": "scored-pass",
+    "scorecard": "parity/receipts/console-loop/mui/scores/slider.json",
+    "retiredDefects": {
+      "at": "2026-08-11T00:00:00.000Z",
+      "by": "coincident-shadow fold (extract/computed/anatomy.ts + core/emit-figma-script.ts) -> promote-floor -> re-emit -> canvas rebuild (12 variants) -> reshoot -> rescore on BOTH instruments",
+      "reason": "The pixel bar is met against the real @mui/material render at 0.57 bridge / 0.56 headless, compositionOk true, 288x25 v 288x24, scaleRatio 1.04.",
+      "retired": [
+        "FC-REF-CONTRACT-RENDER (7.96 against the real library render) — the number no longer exists; the same real library render now scores 0.57.",
+        "pixel scorecard fail 48.16% — superseded twice over (48.16 -> 7.96 on the reference re-pin, 7.96 -> 0.57 here)."
+      ],
+      "refuted": [
+        "The 2026-08-08 reference audit said the residual was \"thumb/track PLACEMENT inside an identically-framed box\". It was not placement: the thumb sat at the right x and the rail matched to the pixel. It was the thumb's MISSING ELEVATION SHADOW, which is also why that audit measured the two boxes as \"288x20 vs 288x20, scaleRatio 1.00\" — the reference's shadow ink was being cropped away on the transparent-backed export until the composite-over-white round made it visible, at which point the reference re-measured 288x24 and the scorer began rescaling the canvas by 1.2 to fit. The CANVAS-SIDE half of that entry stands and is now closed; the placement diagnosis is withdrawn.",
+        "A pure-shift check (every failing pixel finding its own colour one pixel away: 7.96% -> 0.09% at r=1) is what separated this stem from the rest of the near-bar tier, where the residual survives a 1px search at 2.5-4.3% and is genuine glyph raster."
+      ]
+    },
+    "unmeasured": [
+      "FC-STATE-PLANE-ABSENT: the pass covers the BASE state plane only. mui.slider figmaStatePreviews is REFUSED by the promote referee (state \"focus-visible\" declares no token overrides), so no cell in the set is hovered/focused — and the capture DOES hold thumb hover/focus rings (box-shadow 0 0 0 8px / 14px per colour) that no canvas cell can express. Same cause and same evidence as mui/checkbox and mui/switch.",
+      "ONE CELL of twelve: Color=Error, Size=Medium. The  half of the folded shadow (box-shadow: none) is carried in the contract as literalsByProp but is NOT the scored cell.",
+      "pseudo-decor-outside-grammar for slider-thumb::after (42x42, paints nothing the grammar reads) is UNCHANGED and still named in extract/computed/out/mui/slider/enriched.extension.json."
+    ]
   },
   "fingerprint": {
     "v6": "v6:1845442048",
@@ -113,6 +128,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": false
+    "visualMatchDeveloped": true
   }
 }

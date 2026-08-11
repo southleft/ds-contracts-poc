@@ -287,7 +287,7 @@
       ]
     ],
     "namedLosses": [
-      "promotion: pseudo-decor-outside-grammar: slider-thumb::before is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
+      "promotion: pseudo-decor-shadow-folded: slider-thumb::before is a coincident box that paints ONLY box-shadow — folded onto slider-thumb as a literal rather than promoted as its own part, because a Figma node casts a shadow from its OWN alpha and a transparent one renders nothing (probed live). Carried per size (small: none, medium: shadow) over 12/12 default combos",
       "promotion: pseudo-decor-outside-grammar: slider-thumb::after occupies 42x42 at position:absolute but paints nothing the grammar reads (background-color rgba(0, 0, 0, 0), border 0px rgba(46, 125, 50, 1)) — NOT promoted",
       "overflow: slider-thumb.box-shadow [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: slider-thumb.z-index [active] — v13 Part.states carries plain color-kind refs only on non-root parts",

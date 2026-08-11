@@ -554,8 +554,88 @@ export const StatesByPropSchema = z.strictObject({
  *  rectangle). `fit-content` is the exact CSS twin of Figma HUG, and it is
  *  the one sizing keyword this grammar admits: `auto`/`max-content`/
  *  `stretch` are NOT synonyms for HUG in a flex context and stay out. */
+/** v17 (mui/slider coincident-shadow fold): a BOX-SHADOW STACK is the one
+ *  multi-token literal this grammar admits, and only on the `box-shadow`
+ *  channel (see SHADOW_LITERAL_CHANNELS). It is admitted because the value is
+ *  never invented: it is the browser's own serialization of a captured
+ *  computed style, and emit already compiles exactly this spelling into
+ *  native Figma DROP_SHADOW/INNER_SHADOW effects (parseBoxShadow /
+ *  parseShadowStack in core/emit-figma-script.ts). `none` is a legal value —
+ *  a per-axis map needs a spelling for "this variant has no elevation". */
+const SHADOW_TOKEN = "(?:-?\\d+(?:\\.\\d+)?(?:px|rem|em)|inset|#[0-9a-fA-F]{3,8}|rgba?\\([\\d ,./%]+\\))";
+export const SHADOW_LITERAL_VALUE_RE = new RegExp(
+  `^(?:none|${SHADOW_TOKEN}(?:[ ,]+${SHADOW_TOKEN})*)$`,
+);
+/** The channels on which SHADOW_LITERAL_VALUE_RE is accepted in place of the
+ *  scalar grammar. Everything else keeps the scalar bound exactly. */
+export const SHADOW_LITERAL_CHANNELS = new Set(["box-shadow"]);
 export const LITERAL_VALUE_RE =
   /^(-?\d+(\.\d+)?(px|rem|em|%)?|transparent|inherit|currentColor|fit-content|#[0-9a-fA-F]{3,8}|rgba?\([\d ,./%]+\))$/;
+/** Split a CSS value list on TOP-LEVEL commas — commas inside `rgba(…)` do
+ *  not split a shadow stack into layers. */
+const splitShadowLayers = (value: string): string[] => {
+  const out: string[] = [];
+  let depth = 0;
+  let cur = "";
+  for (const ch of value) {
+    if (ch === "(") depth++;
+    if (ch === ")") depth--;
+    if (ch === "," && depth === 0) {
+      out.push(cur.trim());
+      cur = "";
+    } else cur += ch;
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out;
+};
+
+const SHADOW_LENGTH_RE = /^-?\d+(?:\.\d+)?(?:px|rem|em)$/;
+const SHADOW_COLOR_RE = /^(?:#[0-9a-fA-F]{3,8}|rgba?\([\d ,./%]+\))$/;
+
+/** A single shadow LAYER is well-formed when every token is a length, a
+ *  colour or `inset`, AND it carries the two offsets CSS requires. The
+ *  offset rule is what keeps a bare scalar out: `16px` matches the token
+ *  grammar but is not a shadow, and every other literal channel would have
+ *  taken it — so without this the widening would quietly swallow scalars. */
+const shadowLayerOk = (layer: string): boolean => {
+  // Paren-aware: `rgba(0, 0, 0, 0.2)` carries SPACES, so a bare /\s+/ split
+  // shreds the colour into four junk tokens and refuses every real
+  // browser-serialized stack (measured — that is exactly what the first cut
+  // did).
+  const tokens: string[] = [];
+  let depth = 0;
+  let cur = "";
+  for (const ch of layer) {
+    if (ch === "(") depth++;
+    if (ch === ")") depth--;
+    if (/\s/.test(ch) && depth === 0) {
+      if (cur) tokens.push(cur);
+      cur = "";
+    } else cur += ch;
+  }
+  if (cur) tokens.push(cur);
+  if (tokens.length === 0) return false;
+  let lengths = 0;
+  let colors = 0;
+  for (const t of tokens) {
+    if (t === "inset") continue;
+    if (SHADOW_LENGTH_RE.test(t)) { lengths++; continue; }
+    if (SHADOW_COLOR_RE.test(t)) { colors++; continue; }
+    return false;
+  }
+  return lengths >= 2 && lengths <= 4 && colors <= 1;
+};
+
+/** The value grammar for a literal on `channel`: the scalar bound, widened to
+ *  the shadow-stack bound on the shadow channels only. */
+export const literalValueOk = (channel: string, value: string): boolean => {
+  if (!SHADOW_LITERAL_CHANNELS.has(channel)) return LITERAL_VALUE_RE.test(value);
+  const v = value.trim();
+  if (v === "none") return true;
+  if (!SHADOW_LITERAL_VALUE_RE.test(v)) return false;
+  const layers = splitShadowLayers(v);
+  return layers.length > 0 && layers.every(shadowLayerOk);
+};
 export const LiteralValueSchema = z
   .string()
   .regex(
@@ -618,14 +698,34 @@ export const LITERAL_CHANNELS = new Set([
   "border-right-color",
   "border-bottom-color",
   "border-left-color",
+  // v17 (mui/slider coincident-shadow fold): a shadow-only pseudo box that is
+  // COINCIDENT with its host folds onto the host as a literal — promoting it
+  // as its own transparent part would carry the fact and render nothing,
+  // because a Figma node casts a shadow from its own alpha.
+  "box-shadow",
 ]);
+
+/** A literals record whose value grammar is CHANNEL-AWARE — the scalar bound
+ *  everywhere, widened to the shadow-stack bound on `box-shadow` only. */
+export const LiteralsRecordSchema = z.record(z.string(), z.string()).superRefine((rec, ctx) => {
+  for (const [channel, value] of Object.entries(rec)) {
+    if (literalValueOk(channel, value)) continue;
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: [channel],
+      message: SHADOW_LITERAL_CHANNELS.has(channel)
+        ? "box-shadow literal must be `none` or a CSS shadow stack (lengths in px/rem/em, hex or rgb()/rgba() colors, optional `inset`)"
+        : "Literal value must be a px/rem/em/%/number, hex or rgb()/rgba() color, fit-content, or transparent/inherit/currentColor",
+    });
+  }
+});
 
 /** v14: per-enum-value literal overrides — the literals sibling of
  *  TokensByProp (ProgressBar's per-size `--pc-*` pixel heights, Avatar's
  *  per-size widths). Array-ordered exactly like tokensByProp entries. */
 export const LiteralsByPropSchema = z.strictObject({
   prop: z.string(),
-  map: z.record(z.string(), z.record(z.string(), LiteralValueSchema)),
+  map: z.record(z.string(), LiteralsRecordSchema),
 });
 
 /** v15 (S4 channel lifts — round 1 of the north-star push): a DECLARED FACT
@@ -2045,7 +2145,7 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** v14: single entry OR ordered array of entries (see TokensByPropFieldSchema). */
     tokensByProp: TokensByPropFieldSchema.optional(),
     /** v14: bounded literal styling values with promotion-time provenance. */
-    literals: z.record(z.string(), LiteralValueSchema).optional(),
+    literals: LiteralsRecordSchema.optional(),
     /** v14: ordered per-enum-value literal overrides. */
     literalsByProp: z.array(LiteralsByPropSchema).min(1).optional(),
     /** v15 (S4): declared facts — DECLARED_CHANNELS registry channels. */

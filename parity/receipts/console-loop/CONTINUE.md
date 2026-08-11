@@ -53,6 +53,167 @@ defect.** Measured, in order:
    `imported.badge.label.color.none` is already the correct **#616161**, and
    `imported.badge.root.color.none` is `{p.color-text-secondary}`.
 
+## WAVE 3 — ONE PASS EARNED (mui/slider), AND THE REST OF THE NEAR-BAR TIER IS NOT A REBUILD PROBLEM
+
+**mui/slider 7.96 -> 0.57 bridge / 7.96 -> 0.56 headless, both instruments,
+compositionOk true.** Earned by a contract + emitter fix, not by re-reading a
+receipt. It is the wave's only earn and the rest of this section says why.
+
+### THE FIX: A COINCIDENT SHADOW-ONLY PSEUDO NOW FOLDS ONTO ITS HOST
+
+`.MuiSlider-thumb` is a 20x20 circle with `box-shadow: none`. Its `::before` is
+a COINCIDENT 20x20 transparent circle (position absolute, top/left 0, same
+`border-radius: 50%`, no background, no border) whose only paint is Material
+elevation-2. The pseudo-decor grammar refused it by name —
+`pseudo-decor-outside-grammar: … painted by a mechanism the grammar cannot
+read` — so the shadow never reached the canvas.
+
+**PROMOTING IT AS ITS OWN DECOR PART WOULD HAVE BEEN A SILENT LOSS, AND THAT
+WAS MEASURED BEFORE THE FIX WAS WRITTEN.** A Figma node casts a shadow from its
+OWN alpha. Probed live on the canvas with three real DROP_SHADOW effects on
+three 20x20 ellipses: solid drew a shadow, `opacity: 0` fill drew nothing,
+`fills: []` drew nothing. A transparent decor part would have carried the fact
+into the contract and rendered zero pixels. The only honest carriage is to fold
+the shadow onto the HOST, which is legitimate *because* the box is coincident.
+
+Where it lives: `pseudoDecorParts` in `extract/computed/anatomy.ts` (fold +
+named receipt), `applyLiterals` in `core/emit-figma-script.ts` (the literal
+path now projects a shadow through the same `parseBoxShadow` /
+`parseShadowStack` grammars the token path already used), and `box-shadow`
+joins `LITERAL_CHANNELS` with a channel-aware value grammar in
+`packages/schema/src/contract-schema.ts` (`SHADOW_LITERAL_VALUE_RE`, admitted
+on the shadow channels ONLY — the scalar bound is unchanged everywhere else).
+
+**IT FACTORS PER AXIS, AND THE FIRST CUT WAS WRONG ABOUT THAT.** The first
+version required one uniform value across the domain and did not fire. The
+reason is a real MUI fact: `size=small`'s thumb::before is `box-shadow: none`
+and only `medium` carries the elevation. The fold now uses the SAME
+one-enum-axis rule the paint/size/geometry factoring already uses, so the
+contract carries `literalsByProp` on `size` (`small: none`, `medium: <stack>`)
+and `none` compiles to an empty effect stack that CLEARS the node's effects.
+
+**THE BOUND IS WHAT KEEPS IT FROM ADDING WRONG INK, and it was sized from a
+census, not a guess.** The corpus holds 8 shadow-only pseudo refusals. Seven
+draw nothing — six are focus rings spelled `0 0 0 -1px` / `-2px` / `-3px`
+(negative spread never escapes the box) and one is a 4-layer `inset` hairline.
+Requiring a NON-INSET layer that actually draws (blur, positive spread, or an
+offset) leaves exactly ONE fold corpus-wide, which is what happened: only
+`examples/mui/figma/slider.figma.js` changed out of 31 re-emitted MUI scripts.
+
+**NO OTHER LANE MOVED, VERIFIED BY A/B.** A regate sweep re-ran every lane and
+every lane's re-run number differs from its committed number — but the SAME
+drift appears with the change stashed (carbon/Toggle: 84.302 committed /
+85.119 re-run, byte-identical with and without). That drift is pre-existing
+re-run drift and none of those scorecards were committed with this wave.
+mui/slider's own gate is unmoved at 89.448% computed-equal before and after.
+
+Gates re-run green: `console-loop:all:evidence:check` 8/8 lanes,
+`figma-scripts-fresh` 8/8, `plugin-engine-check` all flows, engine receipt
+re-recorded (core changed), MUI GENESIS-BATCH rebuilt.
+**RATCHET: mui 5 -> 7**, pinned at the HEADLESS count (the binding instrument),
+matching every other lane. The bridge count is 8 because mui/autocomplete
+passes the lane scorer at 3.87 and FAILS headlessly at 8.93 — see the open item
+at the end of this section.
+
+### WHY THE OTHER SIX NEAR-BAR STEMS DID NOT FLIP: THE REBUILD THEORY IS DEAD
+
+Every stem on the near-bar list was rebuilt from its OWN committed script on
+its connected file, and the sweep went wider than the list:
+
+    skipped / "unchanged"   tailwind/toggle-switch · carbon/toggle ·
+                            polaris/badge · mui/alert · mui/text-field ·
+                            mui/tabs · carbon/accordion · mui/slider (pre-fix)
+    amended, rescored       astryx/banner   8 variants → 8.13, IDENTICAL
+                            mui/table-pagination  → 11.62, IDENTICAL
+
+**The canvas was never stale.** Not one rebuild moved a number. Anything that
+says "rebuild it and it will flip" has now been measured and refuted — the one
+stem that DID move needed a contract change first, and then the rebuild carried
+it. (mui/text-field is worth a line of its own: CONTINUE previously recorded it
+as un-rebuildable, "REFUSES BY NAME … duplicate ds_contracts/contractId
+mui.text-field on 3 component targets". It rebuilt cleanly this round as
+`skipped: unchanged`, so that blocker is gone and its 7.74 is not a canvas
+question. astryx/text-input was NOT rebuilt — its script times out the 30s
+bridge ceiling — and at 11.2/11.4 it sits outside this tier anyway.)
+
+**WHAT THE RESIDUAL ACTUALLY IS — a decomposition, not an impression.** Every
+failing pixel was classified by the reference's local gradient (edge vs flat
+fill) and then re-tested with a radius-1 colour search:
+
+    stem                     AA      flat-fill   survives r=1
+    first-party/checkbox     5.16%   0.00%       2.60%
+    first-party/text-field   5.84%   0.00%       2.96%
+    tailwind/toggle-switch   6.15%   0.00%       2.64%
+    carbon/toggle            6.73%   0.00%       2.91%
+    first-party/button       7.30%   0.00%       3.31%
+    mui/text-field           7.74%   0.00%       4.30%
+    mui/slider               7.96%   0.00%       0.09%   <- THE OUTLIER
+    mui/table-pagination     5.74%   0.00%       3.36%
+    carbon/accordion         7.47%   0.00%       4.01%
+    mui/tabs                 5.04%   0.00%       2.50%
+
+`flat = 0.00%` on all of them: **not one fill, paint, border or colour is
+wrong on any of these stems.** Every failing pixel sits on an antialias
+boundary. And mui/slider is the one stem whose failures all find their own
+colour ONE PIXEL away — a pure shift, which is what a missing 4px of shadow ink
+plus the scorer's compensating 1.2x rescale produces. The other nine hold
+2.5–4.3% under the same search, which is a genuine raster disagreement: the
+same glyph, drawn by two rasterizers that place stems at different subpixel
+phases. polaris/badge is the clean specimen — 61x20 both sides, text #303030
+both sides, background #f0f0f0 both sides, total ink within 1.1%, and the
+column profile shows the reference smearing a stem across two columns
+(136,139) where Figma snaps it to one (198,72).
+
+**NAMED, with why each cannot flip by rebuild or emit:**
+
+  · `FC-GLYPH-RASTER-PHASE` — first-party/checkbox, first-party/text-field,
+    first-party/button, tailwind/toggle-switch, carbon/toggle, carbon/accordion,
+    mui/text-field, mui/table-pagination, mui/tabs, polaris/badge. Edge-only
+    residual that survives a 1px search. No contract, token or emitter change
+    can move it; the two rasterizers are the cause.
+  · `FC-REF-STAGE-WIDTH` — mui/alert. **The reference's width IS THE CAPTURE
+    WINDOW, and the arithmetic is exact.** mui's config declares
+    `stage: {width: 320, padding: 16}` and Alert carries `blockStage: true`;
+    320 − 2×16 = **288**, which is the pinned reference's ink width to the
+    pixel. A block element fills its stage, so 288 is a fact about the harness,
+    not about Alert. The contract render made by the SAME harness in the same
+    run hugs at 257x48 and the canvas cell hugs at 258x49 — agreement to 1px.
+    **The text is PIXEL-IDENTICAL in all three**: 25 glyph clusters, the first
+    at x=[50,57], the last ending at x=239, a 190px span. The only difference
+    is the empty red gap after the text — 48px in the reference, 17px in the
+    contract render, 18px on canvas. Every one of the 7.20% failing pixels is
+    the scorer stretching 258→288 to align two boxes that differ ONLY in
+    trailing background, which throws the glyphs 12% out of register.
+    IT CANNOT BE FLIPPED HONESTLY. Widening the canvas to 288 would mint the
+    capture window as a component fact — the exact regression class Option B
+    settled and `FC-GEOMETRY-EXCLUDED` exists to prevent — and teaching the
+    scorer to ignore trailing background is an instrument relaxation. The
+    only clean close is a reference re-rendered at the hug width, and none is
+    on disk.
+    A FIRST READ OF THIS STEM WAS WRONG AND IS WITHDRAWN: measuring to the box
+    edge (which includes the rounded-corner antialias) made the reference's
+    text look 222px wide against the canvas's 192px, and suggested a lost
+    `font-weight: 500`. Measuring the glyph clusters instead killed it — the
+    weight is carried, the advance widths match exactly, and 25 clusters land
+    on the same columns on both sides.
+    The `blockStage` census, since this cause is structural: mui 13 components,
+    carbon 4, astryx 4, altitude 2, fluent 1. Of the near-bar tier only
+    mui/alert's reference actually sits at its stage's content width; the rest
+    hug well inside it.
+  · astryx/banner — rebuilt, rescored, unchanged at 8.13. Its residual is 27%
+    flat-fill mass, which is a DIFFERENT and larger problem than the near-bar
+    tier; it does not belong on this list and needs its own round.
+
+### OPEN, AND NOT CLOSED HERE
+
+**mui/autocomplete is claimed on ONE instrument.** Its receipt says
+`scored-pass`; the lane scorer says 3.87 and the headless REST card says 8.93.
+That is the SAME shape as astryx/badge, which is correctly HELD unclaimed for
+exactly this reason. Either the both-instruments discipline applies to both
+stems or to neither. It is named here rather than silently resolved, because
+un-claiming it lowers the board and that is the owner's call, not a side effect
+of a wave that was chasing the opposite direction.
+
 ## CLAIMED BOARD 19/79 -> 22/79 (2026-08-11, wave 2 step 2) — THREE UNDER-CLAIMS CLOSED, NOTHING NEW EARNED
 
 The composite-over-white round left FOUR stems with a PASSING scorecard and no

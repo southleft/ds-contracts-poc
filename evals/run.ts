@@ -4128,12 +4128,54 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (!errs3.some((e) => e.includes('conflicting channel+prop pair'))) {
         throw new Error(`token/literal same prop+channel must refuse by name; got: ${errs3.join('; ') || '(none)'}`);
       }
-      // Literal channel whitelist — box-shadow is not a literal channel.
-      const badChannel = mk({ literals: { 'box-shadow': '0px' } });
+      // Literal channel whitelist — text-transform is not a literal channel.
+      //
+      // This pin used to spell its off-whitelist example `box-shadow`, which
+      // stopped being off-whitelist in the coincident-shadow-fold round
+      // (2026-08-11): a shadow-only pseudo that is COINCIDENT with its host
+      // folds onto the host as a `box-shadow` literal, because a transparent
+      // Figma node casts no shadow and promoting it as its own decor part
+      // would carry the fact and render nothing. The whitelist itself is what
+      // this line pins, so it now names a channel that is genuinely still out.
+      const badChannel = mk({ literals: { 'text-transform': '16px' } });
       const errs4: string[] = [];
       coreValidateContract(badChannel, new Map([[badChannel.id, badChannel]]), errs4, new Map());
       if (!errs4.some((e) => e.includes('not a literal channel'))) {
         throw new Error(`non-whitelisted literal channel must refuse by name; got: ${errs4.join('; ') || '(none)'}`);
+      }
+      // …and the WIDENING is pinned in both directions, so it cannot grow in
+      // silence. `box-shadow` is now carried, but only on its own value
+      // grammar: a real browser-serialized stack (and the keyword `none`, the
+      // spelling a per-axis map needs for a variant with no elevation) is
+      // accepted, while a scalar that any OTHER literal channel would take is
+      // refused on this one.
+      // The value bound is enforced in the SCHEMA (ContractSchema.parse, which
+      // `mk` runs), so a value outside it refuses by throwing there — one
+      // altitude above the whitelist check just above, which is core's.
+      for (const good of [
+        'none',
+        'rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px',
+        '#00000029 0px 2px 4px inset',
+      ]) {
+        const ok = mk({ literals: { 'box-shadow': good } });
+        const errsOk: string[] = [];
+        coreValidateContract(ok, new Map([[ok.id, ok]]), errsOk, new Map());
+        if (errsOk.length > 0) {
+          throw new Error(`box-shadow literal "${good}" must be carried; got: ${errsOk.join('; ')}`);
+        }
+      }
+      for (const bad of ['16px', 'transparent', 'drop-shadow(0 2px 4px black)', '#fff']) {
+        let refused = '';
+        try {
+          mk({ literals: { 'box-shadow': bad } });
+        } catch (e) {
+          refused = e instanceof Error ? e.message : String(e);
+        }
+        if (!refused.includes('CSS shadow stack')) {
+          throw new Error(
+            `box-shadow literal "${bad}" is outside the shadow grammar and must refuse BY NAME; got: ${refused || '(carried)'}`,
+          );
+        }
       }
       // Token + literal on the SAME base channel — ambiguous, refused.
       const dupBase = mk({
@@ -10051,12 +10093,25 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // rebuilt from their own scripts, whereas these two passed because the
       // INSTRUMENT changed under an unchanged canvas. A probe could still
       // surface real drift, which throws unconditionally above.
+      // 2026-08-11 coincident-shadow-fold round: mui/slider JOINED the pass set
+      // (7.96 -> 0.57 bridge / 0.56 headless) when MuiSlider-thumb::before's
+      // Material elevation-2 — a coincident shadow-only pseudo the decor
+      // grammar had refused by name — was folded onto the host part. It is
+      // un-probed because the mui lane has NO snapshot at all (canvas-drift/
+      // LIVE-SNAPSHOT.json covers first-party only), not because this stem was
+      // skipped. Its status matches autocomplete/checkbox rather than
+      // input-adornment/switch: the cell was REBUILT from its own committed
+      // examples/mui/figma/slider.figma.js this round (12 variants amended),
+      // so when an mui snapshot is minted it should read in-sync BY
+      // CONSTRUCTION. A probe could still surface real drift, which throws
+      // unconditionally above.
       const wantUnmeasured = [
         'mui/autocomplete',
         'mui/checkbox',
         'mui/divider',
         'mui/input-adornment',
         'mui/linear-progress',
+        'mui/slider',
         'mui/switch',
       ];
       if (unmeasuredPasses.sort().join(',') !== wantUnmeasured.join(',')) {

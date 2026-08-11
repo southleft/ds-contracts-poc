@@ -1316,6 +1316,24 @@ export const SVG_NONPAINTING = new Set(['title', 'desc', 'metadata']);
 /** The four border sides, in CSS order. */
 const BORDER_SIDES = ['top', 'right', 'bottom', 'left'] as const;
 
+/** Split a CSS value list on TOP-LEVEL commas — the commas inside `rgba(…)`
+ *  do not split. Browser-serialized box-shadow stacks are full of them. */
+function splitTopLevelCommas(value: string): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let cur = '';
+  for (const ch of value) {
+    if (ch === '(') depth++;
+    if (ch === ')') depth--;
+    if (ch === ',' && depth === 0) {
+      out.push(cur.trim());
+      cur = '';
+    } else cur += ch;
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out;
+}
+
 /** CARBON LIVE-DEFECT ROUND (D2) — a PERCENTAGE corner radius resolved
  *  against the box. `border-radius: 50%` is how most libraries spell a
  *  circle, and computed style keeps it as a percentage: the px regex missed
@@ -2004,7 +2022,12 @@ export function promoteAnatomy(
    *  parent, offsets folded with the host's border widths, guarded by a
    *  geometry assertion: the parent's content box must equal the host's
    *  border box (else named refusal). */
-  const pseudoDecorParts = (e: UnionNode, i: number, hostIsShapeLeaf: boolean): Array<[string, Part]> => {
+  const pseudoDecorParts = (
+    e: UnionNode,
+    i: number,
+    hostIsShapeLeaf: boolean,
+    hostPart: Part | null = null,
+  ): Array<[string, Part]> => {
     const out: Array<[string, Part]> = [];
     const px = (v: string | undefined): number | null => {
       const m = /^(-?\d+(?:\.\d+)?)px$/.exec(v ?? '');
@@ -2019,6 +2042,132 @@ export function promoteAnatomy(
       // planes included — a disabled checked Radio keeps its dot; an
       // enabled-only domain would fabricate a hidden-when-disabled fact).
       const domain = allDefaultCombos.filter((combo) => union.alignedByKey.get(`${combo.key}__default`)![i]);
+      // COINCIDENT-SHADOW FOLD (mui/slider live-canvas round, 2026-08-11).
+      //
+      // A pseudo whose ONLY paint is a box-shadow was refused by name
+      // ("painted by a mechanism the grammar cannot read") and the shadow
+      // never reached the canvas. MUI's Slider thumb is exactly that shape:
+      // `.MuiSlider-thumb` is a 20x20 blue circle with `box-shadow: none`,
+      // and its ::before is a COINCIDENT 20x20 transparent circle carrying
+      // Material elevation-2. The reference render's ink box is 24px tall
+      // where the canvas draws 20 — the whole 4px is that shadow — and the
+      // scorer then rescales by 1.2 to align, which blurs every edge and
+      // costs the stem its pass on a fact the capture already holds.
+      //
+      // PROMOTING IT AS ITS OWN DECOR PART WOULD BE A SILENT LOSS, MEASURED:
+      // a Figma node casts a shadow from its own alpha, so a transparent
+      // ellipse with three DROP_SHADOW effects renders NOTHING (probed live
+      // on the canvas — solid drew, transparent and fill-less drew nothing).
+      // The only honest carriage is to FOLD the shadow onto the HOST part,
+      // which is legitimate precisely because the box is coincident: same
+      // size, same corner spelling, at 0,0, painting nothing else.
+      //
+      // BOUNDED, and the bound is what keeps it from adding wrong ink. Seven
+      // of the corpus's eight shadow-only pseudo refusals are focus rings
+      // spelled `0 0 0 -1px` (negative spread draws nothing) or `inset`
+      // hairlines; requiring a NON-INSET layer that actually draws leaves
+      // exactly one fold corpus-wide. A host that already carries its own
+      // box-shadow is never overwritten.
+      //
+      // THE SHADOW FACTORS LIKE EVERY OTHER DECOR CHANNEL — measured, not
+      // assumed. The first cut required one uniform value across the domain
+      // and did not fire, because `size=small`'s thumb::before is
+      // `box-shadow: none` and only `medium` carries the elevation. That is a
+      // real MUI fact, so the fold uses the SAME one-enum-axis rule the
+      // paint/size/geometry factoring already uses: uniform, or a function of
+      // exactly ONE enum axis (then `literalsByProp`). At least one value must
+      // actually draw, or there is nothing to carry.
+      if (hostPart) {
+        const drawsShadow = (v: string): boolean =>
+          splitTopLevelCommas(v).some((layer) => {
+            if (/(^| )inset( |$)/.test(layer)) return false;
+            const lens = [...layer.matchAll(/(-?[\d.]+)px/g)].map((m) => Number(m[1]));
+            const [x = 0, y = 0, blur = 0, spread = 0] = lens;
+            // A layer draws when it escapes its own box: blur or a positive
+            // spread or an offset. `0 0 0 -1px` shrinks and shows nothing.
+            return blur > 0 || spread > 0 || x !== 0 || y !== 0;
+          });
+        const foldRows: Array<{ combo: Combo; sh: string }> = [];
+        let foldable = domain.length > 0;
+        for (const combo of domain) {
+          const els = union.alignedByKey.get(`${combo.key}__default`)!;
+          const host = els[i];
+          const st = host?.node.pseudo[pe];
+          if (!st) continue;
+          const hs = host!.node.style;
+          const sh = st['box-shadow'] ?? 'none';
+          const t = st['transform'] ?? 'none';
+          const idTranslate =
+            t === 'none' ||
+            /^matrix\(1, 0, 0, 1, 0, 0\)$/.test(t);
+          const hostW = px(hs['width']);
+          const hostH = px(hs['height']);
+          const w = px(st['width']);
+          const h = px(st['height']);
+          const ok =
+            st['content'] === '""' &&
+            st['position'] === 'absolute' &&
+            (px(st['top']) ?? NaN) === 0 &&
+            (px(st['left']) ?? NaN) === 0 &&
+            idTranslate &&
+            Number(st['opacity'] ?? '1') > 0.05 &&
+            w !== null && h !== null && hostW !== null && hostH !== null &&
+            Math.abs(w - hostW) <= 0.6 && Math.abs(h - hostH) <= 0.6 &&
+            st['border-top-left-radius'] === hs['border-top-left-radius'] &&
+            alphaOf(st['background-color']) === 0 &&
+            Math.max(...BORDER_SIDES.map((s) => px(st[`border-${s}-width`]) ?? 0)) === 0 &&
+            (hs['box-shadow'] ?? 'none') === 'none' &&
+            // `none` is a legal VALUE here (MUI's small thumb has no
+            // elevation); what disqualifies the fold is a shadow the bound
+            // says draws nothing, because carrying it would add wrong ink.
+            (sh === 'none' || drawsShadow(sh));
+          if (!ok) { foldable = false; break; }
+          foldRows.push({ combo, sh });
+        }
+        const foldAxes = space.axes.filter(
+          (a) => !presenceProps.has(a.prop) && !stateProps.includes(a.prop) && contract.props.some((p) => p.name === a.prop),
+        );
+        /** Uniform, or a function of exactly ONE enum axis. null = neither. */
+        const factorShadow = (): { kind: 'uniform'; value: string } | { kind: 'axis'; prop: string; map: Map<string, string> } | null => {
+          const vals = foldRows.map((r) => r.sh);
+          if (new Set(vals).size === 1) return { kind: 'uniform', value: vals[0] };
+          for (const ax of foldAxes) {
+            const byVal = new Map<string, string>();
+            let ok = true;
+            for (const r of foldRows) {
+              const v = r.combo.axisValues[ax.prop];
+              if (v === undefined) { ok = false; break; }
+              const prev = byVal.get(v);
+              if (prev === undefined) byVal.set(v, r.sh);
+              else if (prev !== r.sh) { ok = false; break; }
+            }
+            if (ok && new Set(byVal.values()).size > 1) return { kind: 'axis', prop: ax.prop, map: byVal };
+          }
+          return null;
+        };
+        const fact = foldable && foldRows.length > 0 ? factorShadow() : null;
+        if (fact && foldRows.some((r) => r.sh !== 'none')) {
+          const baseShadow = (() => {
+            if (fact.kind === 'uniform') return fact.value;
+            const ax = space.axes.find((a) => a.prop === fact.prop)!;
+            const decl = contract.props.find((p) => p.name === fact.prop)?.default;
+            const baseVal = decl !== undefined ? String(decl) : (ax.values.find((v) => v !== ax.unset) ?? ax.values[0]);
+            return fact.map.get(baseVal) ?? [...fact.map.values()].find((v) => v !== 'none') ?? [...fact.map.values()][0];
+          })();
+          hostPart.literals = { ...(hostPart.literals ?? {}), 'box-shadow': baseShadow };
+          if (fact.kind === 'axis') {
+            const byProp = (hostPart.literalsByProp ??= []);
+            const entry = byProp.find((b) => b.prop === fact.prop);
+            const map = Object.fromEntries([...fact.map].map(([v, sh]) => [v, { 'box-shadow': sh }]));
+            if (entry) for (const [v, m] of Object.entries(map)) entry.map[v] = { ...entry.map[v], ...m };
+            else byProp.push({ prop: fact.prop, map });
+          }
+          refusals.push(
+            `pseudo-decor-shadow-folded: ${e.partName}${pe} is a coincident box that paints ONLY box-shadow — folded onto ${e.partName} as a literal rather than promoted as its own part, because a Figma node casts a shadow from its OWN alpha and a transparent one renders nothing (probed live). Carried ${fact.kind === 'uniform' ? `uniform (${fact.value})` : `per ${fact.prop} (${[...fact.map].map(([v, sh]) => `${v}: ${sh === 'none' ? 'none' : 'shadow'}`).join(', ')})`} over ${foldRows.length}/${domain.length} default combos`,
+          );
+          continue;
+        }
+      }
       const drawnRows: Array<{ combo: Combo; st: Record<string, string> }> = [];
       // SILENT-LOSS ROUND (task #33, fix 2) — THE TWO BARE `continue`s.
       //
@@ -2980,12 +3129,12 @@ export function promoteAnatomy(
       // Round 5c — S5 bubbling: a shape-leaf child's drawn pseudo decor
       // cannot nest inside it — it joins THIS part's children instead.
       if (cp?.shape) {
-        for (const [decorName, decor] of pseudoDecorParts(c, idxOf.get(c.id)!, true)) childParts[decorName] = decor;
+        for (const [decorName, decor] of pseudoDecorParts(c, idxOf.get(c.id)!, true, cp)) childParts[decorName] = decor;
       }
     }
     // Round 5c — S5: drawn pseudo-element decor boxes join as child parts.
     if (!part.shape) {
-      for (const [decorName, decor] of pseudoDecorParts(e, i, false)) childParts[decorName] = decor;
+      for (const [decorName, decor] of pseudoDecorParts(e, i, false, part)) childParts[decorName] = decor;
     }
     if (Object.keys(childParts).length > 0) part.parts = childParts;
     // A2 — resolve the deferred display:grid fact now that children exist:
@@ -3144,10 +3293,10 @@ export function promoteAnatomy(
   // for the root's own shape-leaf children.
   for (const c of rootEntry.children) {
     if (rootChildren[c.partName]?.shape) {
-      for (const [decorName, decor] of pseudoDecorParts(c, idxOf.get(c.id)!, true)) rootChildren[decorName] = decor;
+      for (const [decorName, decor] of pseudoDecorParts(c, idxOf.get(c.id)!, true, rootChildren[c.partName] ?? null)) rootChildren[decorName] = decor;
     }
   }
-  for (const [decorName, decor] of pseudoDecorParts(rootEntry, idxOf.get(rootEntry.id)!, false)) rootChildren[decorName] = decor;
+  for (const [decorName, decor] of pseudoDecorParts(rootEntry, idxOf.get(rootEntry.id)!, false, newRoot)) rootChildren[decorName] = decor;
   if (Object.keys(rootChildren).length > 0) newRoot.parts = rootChildren;
   // A2 — resolve the root's deferred display:grid fact (see buildPart's
   // twin block): structured promotion first, the named fallback on abandon.
