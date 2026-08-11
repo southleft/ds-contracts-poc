@@ -53,6 +53,68 @@ defect.** Measured, in order:
    `imported.badge.label.color.none` is already the correct **#616161**, and
    `imported.badge.root.color.none` is `{p.color-text-secondary}`.
 
+## WHERE WAVE 3 STOPPED, AND THE FORK IT LEAVES
+
+**+1 EARNED, NOT +2, AND THE SECOND ONE IS NOT AVAILABLE WITHOUT AN OWNER
+DECISION.** mui/slider is the wave's only new pass. Two real defects were
+closed (`pseudo-decor-outside-grammar` for a coincident shadow-only pseudo, and
+`FC-AMEND-CANNOT-CLEAR`); only the first produced a pass, and the second made
+its stem's number worse while making its canvas correct.
+
+**EVERY NEAR-BAR STEM IS NOW REBUILT, RESCORED AND NAMED.** Eleven stems were
+rebuilt from their own committed scripts. Not one number moved on a rebuild
+alone. Each residual carries a cause:
+
+    FC-GLYPH-RASTER-PHASE   first-party/checkbox · first-party/text-field ·
+                            first-party/button · tailwind/toggle-switch ·
+                            carbon/toggle · carbon/accordion · mui/text-field ·
+                            mui/table-pagination · mui/tabs · polaris/badge
+    FC-REF-STAGE-WIDTH      mui/alert · astryx/banner
+    FC-SCRIPT-FILEKEY-PIN   first-party/checkbox · text-field · button
+                            (cannot be rebuilt at all)
+
+None of the three is closeable by an emitter or contract change, and each is
+unclosable for a DIFFERENT reason, which is why no further wave of the same
+shape will move them:
+
+  · glyph-raster phase is two rasterizers disagreeing about the same geometry.
+    Verified by a radius-1 colour search: these hold 2.5–4.3% where a real
+    1px shift collapses to 0.09%. Closing it needs the instrument, not the
+    canvas — and relaxing the instrument is forbidden.
+  · stage width is the harness window in the reference. Closing it needs a
+    reference RE-RENDERED at the hug width, which means turning `blockStage`
+    off for those components and RE-CAPTURING — a corpus-wide change to what
+    the captured truth measures. Widening the canvas instead would mint the
+    capture window as a component fact: the exact regression Option B settled.
+  · the fileKey pin needs the anchored file opened on the bridge, or the
+    first-party anchors re-pointed at the playground files.
+
+**THE FORK, MEASURED.** Three decisions are the owner's, and all three are
+blocked on something this loop must not do unilaterally:
+
+  1. **first-party anchors.** `contracts/*.contract.json` anchor
+     `8nim1d0IPnehMxA7B7SYxC`; every first-party scorecard was shot on
+     `BMjUA2ue5CaZXU4kufxL0z` / `GnQnjSNBXtgtd2Ht0Hs1C8`. Open the anchored
+     file, or re-point the anchors. Until then the lane with the LARGEST
+     ratchet floor (10) has no script-level reproducibility, and the three
+     stems closest to the bar anywhere on the board sit inside it.
+  2. **blockStage references.** mui 13 components, carbon 4, astryx 4,
+     altitude 2, fluent 1 render their reference at the stage content box. Two
+     near-bar stems are already known to be scored against a window rather
+     than a component. Re-capturing changes numbers corpus-wide.
+  3. **mui/autocomplete's one-instrument claim.** `scored-pass` on a 3.87 lane
+     scorer and 8.93 headless. Identical in shape to astryx/badge, which is
+     correctly HELD unclaimed. Either the both-instruments discipline applies
+     to both or to neither; un-claiming lowers the board, so it is named here
+     rather than done.
+
+**WHAT A NEXT WAVE SHOULD NOT DO.** Not another rebuild round — that question
+is now answered with eleven measurements. Not a scorer tolerance for glyph AA;
+that is the instrument rewarding itself. The remaining honest moves are all
+upstream of the canvas: re-render references at the hug width, or re-point the
+first-party anchors, or accept the tier as named and go after stems that are
+NOT in it.
+
 ## WAVE 3b — FC-AMEND-CANNOT-CLEAR: THE AMEND PATH COULD NEVER REMOVE A FACT THE CONTRACT DROPPED, AND A WRONG CANVAS WAS SCORING BETTER THAN A RIGHT ONE
 
 astryx/banner's cell was **331x88 against a reference and a contract render
