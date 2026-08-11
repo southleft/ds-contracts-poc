@@ -53,7 +53,30 @@ defect.** Measured, in order:
    `imported.badge.label.color.none` is already the correct **#616161**, and
    `imported.badge.root.color.none` is `{p.color-text-secondary}`.
 
-**THE FIX (not applied — context exhausted, and it must not be guessed):**
+**RETRACTED — THERE IS NO COLOUR DEFECT. THE TOKEN IS FAITHFUL.** I claimed
+above that the mint mis-aliased tone.enabled. That was wrong, and the check that
+killed it is one line: group the captures by tone and print each colour delta.
+
+    base                rgba(97, 97, 97)   <- what I mistook for `enabled`
+    none / new / read-only   NO-DELTA (= base)
+    enabled             rgba(48, 48, 48)   <- enabled HAS its own delta
+
+`enabled` is NOT the base. It carries its own captured colour #303030, which is
+exactly what `{p.color-text}` resolves to and exactly what the canvas paints.
+The mint, the token and the emitter are all correct. I inferred "enabled must be
+the base" from the base colour matching `label.color.none`, and never printed
+the per-tone deltas that would have shown `enabled` among them — the same
+reason-from-a-neighbour error that produced the TOKEN_CHANNELS false positive.
+
+SO polaris/badge's 32.98 is STILL UNEXPLAINED, and the remaining candidate is
+the INSTRUMENT, not the canvas: the canvas export is transparent-backed while
+the reference render is composited over white, so a 6%-alpha background is ink
+on one side and trimmed on the other. That is FC-WHITE-ON-WHITE, already an
+allowed code for this lane and already on the caveated list in this file.
+NEXT: print the two PNGs' actual ink boxes and alpha channels side by side
+before touching anything. Do NOT change the token — it matches the capture.
+
+**THE SUPERSEDED (WRONG) FIX PROPOSAL, kept as a record:**
 `imported.badge.root.color.enabled` should resolve to the BASE capture colour
 #616161 / `{p.color-text-secondary}`, not `{p.color-text}`. This is a MINT
 aliasing defect on the default tone, not a geometry issue, so it is fully
