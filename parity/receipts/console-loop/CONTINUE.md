@@ -53,6 +53,67 @@ defect.** Measured, in order:
    `imported.badge.label.color.none` is already the correct **#616161**, and
    `imported.badge.root.color.none` is `{p.color-text-secondary}`.
 
+## CLAIMED BOARD 19/79 -> 22/79 (2026-08-11, wave 2 step 2) — THREE UNDER-CLAIMS CLOSED, NOTHING NEW EARNED
+
+The composite-over-white round left FOUR stems with a PASSING scorecard and no
+claim on their receipt. Three of them pass on BOTH instruments and are now
+claimed; the fourth is held. **No canvas, contract, token or reference was
+edited to produce this — the receipts had simply not been re-read since the
+instrument was fixed.**
+
+    tailwind/card         1.22 bridge · 3.38 headless   claimed
+    mui/input-adornment   0.69 bridge · 0.69 headless   claimed
+    mui/switch            2.50 bridge · 0.28 headless   claimed
+    astryx/badge          4.88 bridge · 5.36 headless   HELD — bridge only
+
+astryx/badge is NOT claimed and must not be: it fails headlessly, and claiming
+it would contradict the same both-instruments discipline the held astryx ratchet
+floor rests on. Claiming it is also exactly how that red would disappear without
+being earned.
+
+**WHAT THE FLIPS COST, because a flip is not free.** The evidence gate requires
+`visual.defects` EMPTY for a pass-claim, so every named defect on those three had
+to be either RETIRED WITH ITS MEASUREMENT or MOVED to `visual.unmeasured` as a
+live scope limit. Nothing was deleted. Retired: five entries whose numbers no
+longer exist (6.05 / 20.83 twice / 10.89 / 8.01). Kept as scope limits:
+mui/switch's **FC-STATE-PLANE-ABSENT** — the pass covers the BASE state plane
+only, because the contract binds `disabled` as a Figma BOOLEAN so no cell in the
+set is disabled; same cause and same evidence as mui/checkbox's entry — and
+tailwind/card's **FC-FONT-SUBSTRATE**, since flowbite ships no webfont and its
+glyph raster is therefore compared across two different faces, so the pass
+covers box, fills, border and shadow but NOT typography; plus the fact that its
+node is a COMPONENT, one cell, no variant axis exercised.
+
+**FOUR CLAIMS THE OLD NUMBERS MADE WERE REFUTED, NOT MERELY SUPERSEDED:**
+
+  · tailwind/card's "border/shadow aesthetic not match to Flowbite card pairs" —
+    measurement says they match, at 1.22 against the real Flowbite render with
+    capture-framing's colour histogram clean. That claim was written while
+    scoring against a CONTRACT render at 8.01.
+  · tailwind/card's FC-FONT-SUBSTRATE predicted that glyph-dominated diffs
+    "cannot converge below the 5% bar". They converged, to 1.22.
+  · mui/switch's "the residual is track/thumb geometry and paint inside a
+    correctly-identified variant". It was neither — the canvas measured 37x22
+    against the library's 38x19 because the track's translucent edge was cropped
+    away on the transparent-backed export and kept on the opaque reference.
+    Composited: 38x20 v 38x19, 2.50. The CROSS-PLANE half of that entry STANDS
+    and was not withdrawn.
+  · mui/input-adornment's residual was "not the harness font substrate; per-stem
+    geometry/color/raster causes stay open", and its stated support was that
+    both instruments agreed at 20.83/20.83. They were not corroborating a real
+    residual — they were sharing one crop defect. **INSTRUMENT AGREEMENT IS NOT
+    INDEPENDENCE WHEN BOTH INSTRUMENTS RUN THE SAME CODE.** The bridge scorer
+    and the headless REST lane deliberately duplicate one pipeline, so they
+    agree on its bugs by construction. Two-instrument agreement is evidence
+    about the CANVAS, never about the SCORER.
+
+**NEXT, AND NOT DONE HERE.** Composition-clean fails nearest the bar, bridge |
+headless: tailwind/toggle-switch 6.15|6.19 · carbon/toggle 6.73|6.51 · mui/alert
+7.20|8.25 · polaris/badge 7.21|5.74 · mui/text-field 7.74|7.61 · mui/slider
+7.96|7.96 · astryx/banner 8.13|9.90. NONE of these is an under-claim; each needs
+a real fix, and by the lesson directly above their two-instrument agreement is
+weak evidence rather than strong.
+
 ## RESOLVED 2026-08-11 — THE FORK IS CLOSED. OPTION 1 WAS TAKEN: BOTH SIDES ARE COMPOSITED OVER WHITE.
 
 The fork recorded below ("composite the canvas before ink-cropping and re-number
@@ -172,7 +233,17 @@ are what the gates read):
                           unverifiable because run.ts quarantines it.
     altitude     HELD 4 · carbon HELD 2 (the documented text-input split)
 
-**ONE OPEN DECISION — ASTRYX FLOOR 1, OWNER SIGN-OFF NEEDED, AND
+**DECIDED 2026-08-11 BY THE OWNER — HOLD THE ASTRYX FLOOR AT 1. DO NOT LOWER IT
+TO GO GREEN.** `visual-truth:check` reports exactly ONE error, the astryx floor,
+and that red is DELIBERATE and stays. Lowering the floor to 0 would make the
+gate green by moving the bar to wherever the board already is, which is the one
+thing a ratchet exists to prevent. astryx/badge reads 4.88 on the bridge and
+5.36 headless; the lane earns its floor back when badge clears 5 on BOTH. If you
+find this gate red, read this paragraph and `RATCHET.json → decided` — do not
+"fix" it. The measurement the decision rests on is the section immediately
+below, kept verbatim.
+
+**~~ONE OPEN DECISION~~ [RESOLVED — SEE ABOVE] — ASTRYX FLOOR 1, AND
 `visual-truth:check` IS RED ON IT (1 error).** The astryx headless pass-count is
 0 and the BOTH-instrument set is 0; only the bridge reads 1 (badge, 4.88). The
 0->1 raise of 2026-08-09 was taken from the bridge alone, in violation of the

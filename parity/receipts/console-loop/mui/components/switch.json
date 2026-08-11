@@ -17,21 +17,18 @@
     "result": {}
   },
   "visual": {
-    "ok": false,
+    "ok": true,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:624).",
       "Switch COMPONENT_SET 21:624: 28 variant(s), 5 prop def(s). Structure looks sane; slot placeholders OK.",
       "2026-08-09 CROSS-PLANE ROUND: reference re-pinned to the base state plane; 23.44 → 10.89 pctAAMasked on BOTH instruments (lane scorer scores/switch.json and headless REST visual-truth/mui/switch.json, cell 21:612, fileVersion 2384477865735882405). Still an honest fail — the bar is 5."
     ],
-    "defects": [
-      "pixel scorecard fail: pctAAMasked=10.89% (bar 5), compositionOk=true — see parity/receipts/console-loop/mui/scores/switch.json. MEASURED AGAINST THE REAL LIBRARY RENDER on the BASE state plane (default.medium.checked.enabled__default) after scripts/console-loop-ref-plane-probe.mts --repin moved the pin off the unexpressible `disabled` plane; the prior 23.44 was a cross-plane number and is void. Canvas cell 21:612 \"Color=Default, Size=Medium, Checked=Checked\" is 37x22, the library is 38x19 — the residual is track/thumb geometry and paint inside a correctly-identified variant, NOT the state plane.",
-      "FC-STATE-PLANE-ABSENT (disabled): unchanged by this round and carried as a named refusal — the contract binds `disabled` as a Figma BOOLEAN property with no figmaStatePreviews, so the set has no disabled cell. gate-shots *.enabled__default.png and *.disabled__default.png are byte-identical by sha256 (the contract render does not paint it either) while the library orig-shots pair differs. RETRACTED: the receipt previously said the enabled/disabled token \"carries no information here\" — that is TRUE of the contract renders and FALSE of the library renders, and the old basis could not tell the difference."
-    ],
+    "defects": [],
     "reference": "extract/computed/out/mui/switch/orig-shots/default.medium.checked.enabled__default.png",
     "referenceSource": "extract/computed/out/mui/switch/orig-shots/default.medium.checked.enabled__default.png — REAL LIBRARY RENDER, BASE STATE PLANE. Re-pinned by scripts/console-loop-ref-plane-probe.mts --repin: the prior pin (extract/computed/out/mui/switch/orig-shots/default.medium.checked.disabled__default.png) named the `disabled` value of the `disabled` state plane, which this canvas set cannot express (figma binding BOOLEAN) — no cell anywhere in the set is disabled, so the scorer's chosen cell \"Color=Default, Size=Medium, Checked=Checked\" and that reference named different points in prop space. The `disabled` plane is now UNMEASURED and named as such (FC-STATE-PLANE-ABSENT).",
     "canvasShot": "parity/receipts/console-loop/mui/shots/switch-cell.png",
-    "matchDeveloped": false,
-    "status": "fail-closed",
+    "matchDeveloped": true,
+    "status": "scored-pass",
     "scorecard": "parity/receipts/console-loop/mui/scores/switch.json",
     "crossPlaneRepin": {
       "at": "2026-08-09T05:45:17.157Z",
@@ -45,7 +42,19 @@
       },
       "cellName": "Color=Default, Size=Medium, Checked=Checked",
       "rule": "reference must lie in the intersection of the canvas set's expressible prop space and the capture matrix"
-    }
+    },
+    "retiredDefects": {
+      "at": "2026-08-11T00:00:00.000Z",
+      "by": "composite-over-white re-score (scripts/console-loop-developed-score.mjs + visual-truth:run) — no canvas, contract, token or reference was edited; only the ink crop changed",
+      "reason": "The pixel bar is met against the real @mui/material render on the BASE state plane on BOTH instruments — 2.50 bridge / 0.28 headless, compositionOk true, 38x20 v 38x19 — after the composite-over-white crop. The prior 13.04/10.89 was measured with the canvas cropped to 38x22, two rows of the track's translucent edge on the canvas side being read as background while the opaque reference kept them.",
+      "was": [
+        "pixel scorecard fail: pctAAMasked=10.89% (bar 5), compositionOk=true — RETIRED. The cross-plane diagnosis in that entry stands and is not being withdrawn: the reference IS correctly pinned to default.medium.checked.enabled__default and the prior 23.44 WAS a void cross-plane number. What is withdrawn is its closing claim that 'the residual is track/thumb geometry and paint inside a correctly-identified variant'. It was neither: the canvas measured 37x22 against the library's 38x19 because the switch track's translucent edge was cropped away on the transparent-backed canvas export and kept on the opaque reference. Composited, the same cell measures 38x20 against 38x19 and scores 2.50."
+      ]
+    },
+    "unmeasured": [
+      "UNMEASURED BY NAME — FC-STATE-PLANE-ABSENT (disabled): this scored pass covers the BASE state plane only. Identical cause and identical evidence to mui/checkbox's entry: the capture matrix sweeps `disabled` as a state plane (extract/computed/configs/mui.json stateProps), but the contract binds `disabled` as a Figma BOOLEAN property with no figmaStatePreviews, so no cell anywhere in the emitted set is disabled and there is nothing to score the library's disabled render against. Evidence unchanged this round: gate-shots *.enabled__default.png and *.disabled__default.png are byte-identical by sha256 while the library's orig-shots pair DIFFERS, and core/emit-html.ts lowers states.disabled to a `:disabled` pseudo-class that can never match the emitted root. Carried forward, NOT excused — closing it needs a State= axis written to the canvas."
+    ],
+    "matchedAt": "2026-08-11T00:00:00.000Z"
   },
   "fingerprint": {
     "v6": "v6:2381775060",
@@ -143,6 +152,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": false
+    "visualMatchDeveloped": true
   }
 }
