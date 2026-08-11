@@ -26,6 +26,45 @@ carries `FC-GEOMETRY-EXCLUDED` throughout. Its original base-equal-delta
 explanation was killed by measurement (replay.ts:148 seeds each combo from base,
 so an absent delta keeps the base value) — keep the findings, not that story.
 
+## WAVE 3 STEP 1 — polaris/badge ROOT-CAUSED. IT WAS NEVER A REBUILD REGRESSION.
+
+**The rebuild did not break this stem; it stopped hiding a pre-existing colour
+defect.** Measured, in order:
+
+1. The live cell is unchanged in geometry: 61x20, label "Fulfilled" 45x16.
+2. Its background is `rgba(0,0,0,0.0588)` bound to
+   `imported/badge/root/background-color/enabled`, and the CAPTURE agrees:
+   `extract/computed/out/badge/captured-truth.json` base root
+   `background-color: rgba(0, 0, 0, 0.06)`. **The emitter is faithful.**
+3. That ~6% alpha is below the scorer's ink threshold, so the ink box collapses
+   to the TEXT alone (43x11). The pre-rebuild canvas had an opaque-ish
+   background giving a 61x20 ink box, which diluted the comparison. Restoring
+   the correct alpha made the measurement honest and the score went 7.21 ->
+   32.98. **The number got worse because the instrument got honest** — the same
+   pattern as the divider and table passes removed earlier.
+4. What the honest box then exposed is a REAL colour defect:
+       canvas label fill  rgb(48,48,48)  = #303030
+       library capture    rgba(97,97,97) = #616161
+   The cell is `Tone=enabled`; the contract maps tone.enabled ->
+   `{imported.badge.root.color.enabled}`, which the mint aliased to
+   `{p.color-text}` (#303030). But the capture has **NO `enabled` delta at all**
+   — deltas exist only for info/success/warning/critical/attention/magic — so
+   `enabled` IS the base, and the base colour is #616161. Note
+   `imported.badge.label.color.none` is already the correct **#616161**, and
+   `imported.badge.root.color.none` is `{p.color-text-secondary}`.
+
+**THE FIX (not applied — context exhausted, and it must not be guessed):**
+`imported.badge.root.color.enabled` should resolve to the BASE capture colour
+#616161 / `{p.color-text-secondary}`, not `{p.color-text}`. This is a MINT
+aliasing defect on the default tone, not a geometry issue, so it is fully
+inside Option B — no fuse change, no width/height relax.
+VERIFY FIRST whether other lanes' "enabled"/default tones were aliased the same
+way; if so this is a CROSS-LANE class (the goal's stated preference) rather than
+a one-off stem patch. Then re-mint -> re-emit -> rebuild -> rescore, and flip
+only if <=bar with compositionOk.
+DO NOT hand-patch the canvas fill; the canvas is currently a faithful render of
+a wrong token.
+
 ## WAVE 2 (feat/freeze-board-wave2, 2026-08-11) — HYGIENE DONE, ZERO FLIPS, ONE REGRESSION FOUND
 
 **Board UNCHANGED at claimed 19/77 · scorecard 20/77.** No stem earned a flip
