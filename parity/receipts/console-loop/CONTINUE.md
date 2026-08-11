@@ -26,6 +26,55 @@ carries `FC-GEOMETRY-EXCLUDED` throughout. Its original base-equal-delta
 explanation was killed by measurement (replay.ts:148 seeds each combo from base,
 so an absent delta keeps the base value) — keep the findings, not that story.
 
+## WAVE 2 (feat/freeze-board-wave2, 2026-08-11) — HYGIENE DONE, ZERO FLIPS, ONE REGRESSION FOUND
+
+**Board UNCHANGED at claimed 19/77 · scorecard 20/77.** No stem earned a flip
+this wave, and that is the result rather than a shortfall: seven stems were
+rebuilt from their own committed scripts and every one is honestly still short
+of the bar.
+
+**CANVAS HYGIENE — DONE, and it was real.** MUI Test 1 held FIVE redundant
+COMPONENT_SETs: mui.alert x2, mui.badge x3, mui.text-field x3. All had identical
+specHash, identical child counts, identical position, and ZERO instance uses;
+the pinned keepers (84:2264 / 84:2376 / 84:2480) were retained and the other
+five removed. The emitter's "duplicate ds_contracts/contractId — refusing
+ambiguous identity" refusal is GONE and all three stems now rebuild.
+Rescored after the unblock: alert 7.03 -> 7.20, badge -> 57.38,
+text-field 7.61 -> 7.74. Hygiene bought MEASURABILITY, not passes.
+mui/alert's C1 pin was re-pinned 255x49 -> 258x49 from the live canvas (the cell
+only got its true size once the emitter could run); mui/text-field's overhang
+entry was rewritten from the now-obsolete FC-AMBIGUOUS-IDENTITY to
+FC-OVERFLOW-NOT-DECLARED with re-measured render bounds.
+
+**FOREIGN LANES: ALL FIVE ARE CONNECTED — none are blocked.** carbon, altitude,
+polaris, tailwind and astryx all live on fileKey GnQnjSNBXtgtd2Ht0Hs1C8
+("DS Contracts Testing"). Four best candidates rebuilt: tailwind/card 6.05
+(unchanged), tailwind/toggle-switch 6.15 (unchanged), carbon/toggle 6.38 -> 6.73,
+polaris/badge 7.21 -> 32.98.
+
+**NEW FINDING — FC-REBUILD-REGRESSION on polaris/badge, named not chased.**
+Rebuilding it from its OWN byte-fresh committed script SHRANK the ink box from
+61x20 to 43x11 and moved the score 7.21 -> 32.98 against an unchanged reference.
+The canvas that scored 7.21 was built by an EARLIER emitter generation, so the
+current emitter draws materially less ink for this stem. The shot is kept
+CURRENT rather than reverted — a flattering stale capture is the exact class
+this lane has already removed twice — so 32.98 is the honest number and the
+regression is visible instead of hidden behind an old PNG. Also named
+FC-ABS-SIZE so the framing gate recognises it. NOT DIAGNOSED: which emitter
+change between the two generations caused it. That is the single highest-value
+lead for wave 3, and it needs no fuse geometry relax.
+
+**WHAT THIS WAVE PROVES ABOUT THE REBUILD LEVER.** It is now exhausted as a
+cheap source of flips: 13 stems rebuilt across two waves, 2 flipped (both in
+wave 1, both mui). Stems still under the bar are under it for real reasons —
+tone swaps, composition mismatches from FC-GEOMETRY-EXCLUDED, and genuine ink
+divergence — not stale captures. Wave 3 should target CAUSES, starting with the
+polaris regression above.
+
+TOUCHED EVALS 7/7 GREEN (--only): golden-generated-output,
+capability-report-is-fresh, capture-framing-pin, reference-content-checks,
+canvas-drift-probe, mui-evidence-receipt, tailwind-evidence-receipt.
+
 ## HANDOFF FOR THE NEXT BRANCH
 
 **BOARD (from the artifacts, this wave): claimed 19/77 · scorecard 20/77.**

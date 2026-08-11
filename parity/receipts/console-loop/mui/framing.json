@@ -76,8 +76,9 @@
       "cellNodeId": "84:2009",
       "cellName": "Severity=Error, Variant=Filled",
       "setNodeId": "84:2264",
-      "cellW": 255,
-      "cellH": 49
+      "cellW": 258,
+      "cellH": 49,
+      "cellNote": "RE-PINNED 2026-08-11 from the live canvas after the duplicate-contractId hygiene pass: the cell rebuilt at 258x49 (was pinned 255x49) once the emitter could run at all. render == box, so no overhang entry is needed."
     },
     "autocomplete": {
       "cellNodeId": "21:82",
@@ -317,10 +318,10 @@
       "cellH": 78.91,
       "cellNote": "Layout box 252.97x78.91, RENDER bounds 252.97x93 \u2014 an export of this cell is 252.97x93, not the box. C1 pins the BOX on purpose (see mintedFrom.boxNotRenderBounds).",
       "cellOverhang": {
-        "fc": "FC-AMBIGUOUS-IDENTITY",
-        "renderW": 252.97,
-        "renderH": 93,
-        "why": "the stem cannot be rebuilt on canvas at all: the emitter REFUSES BY NAME with 'duplicate ds_contracts/contractId mui.text-field on 3 component targets \u2014 refusing ambiguous identity'; the duplicates must be cleaned up in MUI Test 1 first"
+        "fc": "FC-OVERFLOW-NOT-DECLARED",
+        "renderW": 253.15,
+        "renderH": 101,
+        "why": "SUPERSEDES the earlier FC-AMBIGUOUS-IDENTITY entry, which named the duplicate-contractId rebuild refusal \u2014 that blocker was REMOVED by the 2026-08-11 hygiene pass and the stem now rebuilds. Re-measured live: layout box 252.97x78.91, render bounds 253.15x101. Same class as mui/select and mui/autocomplete \u2014 the outlined input's notch/label draws outside the box and the contract root declares no overflow, so the canvas correctly does not clip. Hides nothing: this stem's scorecard FAILS at 7.74 and its receipt is fail-closed."
       }
     },
     "tooltip": {

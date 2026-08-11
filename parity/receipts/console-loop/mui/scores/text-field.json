@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 13.547771568761075,
-    "pctAAUnmasked": 7.6143746308663856,
-    "pctAAMasked": 7.6143746308663856,
+    "pctExactUnmasked": 13.83694225721785,
+    "pctAAUnmasked": 7.742782152230972,
+    "pctAAMasked": 7.742782152230972,
     "maskCoveragePct": 0,
-    "canvasPx": "253x87",
+    "canvasPx": "254x96",
     "realPx": "251x78",
-    "inkCanvasPct": 6.646676661669165,
-    "inkRealPct": 7.414474580891373
+    "inkCanvasPct": 7.59514435695538,
+    "inkRealPct": 6.692913385826772
   },
   "reference": "extract/computed/out/mui/textfield/orig-shots/__default.png",
   "referenceSha256": "949354238f70f3faf55711b40e649812c865f3b701fafaeec628d86accf513f4",
   "canvasShot": "parity/receipts/console-loop/mui/shots/text-field-cell.png",
-  "canvasShotSha256": "3a8af4eb273b22bfbf2698fa13411639587be42a649af1a0dbe744500ff2d26f",
+  "canvasShotSha256": "1cddcd87e605793ef2bdcec9bb5907cf9a3dfd75b43df4acaa0849612e6eac24",
   "diff": "parity/receipts/console-loop/mui/scores/text-field.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/text-field.json",
@@ -28,10 +28,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.1153846153846154,
-  "inkDelta": 0.7677979192222075,
+  "scaleRatio": 1.2307692307692308,
+  "inkDelta": 0.9022309711286081,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=7.61 > 5)",
-  "recordedAt": "2026-08-09T03:33:19.771Z"
+  "note": "pixel bar missed (pctAAMasked=7.74 > 5)",
+  "recordedAt": "2026-08-11T13:21:48.066Z"
 }

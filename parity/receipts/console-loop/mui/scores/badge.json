@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 74.625,
-    "pctAAUnmasked": 64,
-    "pctAAMasked": 64,
+    "pctExactUnmasked": 69.4375,
+    "pctAAUnmasked": 57.375,
+    "pctAAMasked": 57.375,
     "maskCoveragePct": 0,
-    "canvasPx": "40x20",
-    "realPx": "20x20",
-    "inkCanvasPct": 95.75,
-    "inkRealPct": 39
+    "canvasPx": "14x20",
+    "realPx": "40x40",
+    "inkCanvasPct": 15.375,
+    "inkRealPct": 78.3125
   },
   "reference": "extract/computed/out/mui/badge/orig-shots/default.dot__default.png",
   "referenceSha256": "ed11fe7eaf22b9438f142dc7d7cf1f278df18e7252123220a140a88004745192",
   "canvasShot": "parity/receipts/console-loop/mui/shots/badge-cell.png",
-  "canvasShotSha256": "360d4c052cece40cbd3dec66d423aef3d1cc1752b922472b5f02aaebe955b737",
+  "canvasShotSha256": "9a5c22087cba1ddafc8272fbe0c61c13706cdef5c402829c432771f44052905f",
   "diff": "parity/receipts/console-loop/mui/scores/badge.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/badge.json",
@@ -28,10 +28,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 2,
-  "inkDelta": 56.75,
-  "dprNormalized": true,
+  "scaleRatio": 2.857142857142857,
+  "inkDelta": 62.9375,
+  "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=2.00, inkDelta=56.8) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-09T03:33:12.217Z"
+  "note": "composition mismatch (scaleRatio=2.86, inkDelta=62.9) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-11T13:21:47.528Z"
 }
