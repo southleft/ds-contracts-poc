@@ -20,7 +20,7 @@
   "reference": "extract/computed/out/radiobutton/orig-shots/unchecked.enabled__default.png",
   "referenceSha256": "c9fe951831d70bba3c19de1cf500977286f8d1a15bd2c17eb2ae751f94dd2336",
   "canvasShot": "parity/receipts/console-loop/polaris/shots/radio-button-cell.png",
-  "canvasShotSha256": "15ad8008208f7fddf6f978712129dce873895db199196d061ca9e32bd2e0eb39",
+  "canvasShotSha256": "efd8c9a92c6b978bf37df79b69bccdbe4567c9b3d3882251ce42fa21886f5675",
   "diff": "parity/receipts/console-loop/polaris/scores/radio-button.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/polaris/components/radio-button.json",
@@ -33,5 +33,5 @@
   "dprNormalized": true,
   "sizeNormalized": false,
   "note": "pixel bar missed (pctAAMasked=10.03 > 5)",
-  "recordedAt": "2026-08-11T14:26:02.310Z"
+  "recordedAt": "2026-08-11T17:31:12.304Z"
 }

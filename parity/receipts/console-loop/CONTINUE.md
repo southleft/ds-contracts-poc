@@ -204,6 +204,39 @@ column profile shows the reference smearing a stem across two columns
     flat-fill mass, which is a DIFFERENT and larger problem than the near-bar
     tier; it does not belong on this list and needs its own round.
 
+### THE FIRST-PARTY LANE CANNOT BE REBUILT FROM ITS OWN COMMITTED SCRIPTS
+
+Three near-bar first-party stems — checkbox (5.16), text-field (5.84) and
+button (7.30) — were the closest to the bar on the whole board and are the one
+part of the sweep that could NOT be executed. Their committed scripts refuse,
+by name, on the file their scorecards were measured on:
+
+    WRONG FILE: expected 8nim1d0IPnehMxA7B7SYxC, got BMjUA2ue5CaZXU4kufxL0z
+
+`FC-SCRIPT-FILEKEY-PIN`. All 55 `figma-sync/*.js` scripts carry
+`EXPECTED_FILE_KEY = "8nim1d0IPnehMxA7B7SYxC"`, which comes from
+`anchors.figma.fileKey` in the first-party contracts. Every first-party
+scorecard, though, was shot on the playground files —
+`BMjUA2ue5CaZXU4kufxL0z` (15 stems) and `GnQnjSNBXtgtd2Ht0Hs1C8` (3), per
+`canvas-drift/LIVE-SNAPSHOT.json`'s own `fileKeys` block. The anchored file is
+not open on the bridge. The example lanes do not hit this because their
+contracts anchor `fileKey: null`, which leaves the guard inert — that is why
+mui, polaris, carbon, tailwind and astryx all rebuilt without complaint.
+
+Neither side is wrong on its own: the scripts pin the file the contracts
+declare, and the canvases are real. They are simply NOT CONNECTED, so
+"rebuild it from its own committed script" — the move this whole wave rests on
+— is unavailable for the lane carrying the largest ratchet floor (10). The
+guard was NOT bypassed and must not be: overriding it would build a canvas the
+contract does not claim and then score it, which is the hand-patched-canvas
+failure mode. Closing this needs either the anchored file opened on the bridge
+or the first-party anchors re-pointed at the playground — an owner call, not a
+side effect.
+
+Note the drift probe does NOT cover this: it reports first-party 18/0 in-sync,
+but it compares live canvas facts against committed PNGs and framing, never
+against what the scripts would build. In-sync there does not mean reproducible.
+
 ### OPEN, AND NOT CLOSED HERE
 
 **mui/autocomplete is claimed on ONE instrument.** Its receipt says
