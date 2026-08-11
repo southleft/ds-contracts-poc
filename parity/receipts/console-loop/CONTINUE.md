@@ -53,6 +53,44 @@ defect.** Measured, in order:
    `imported.badge.label.color.none` is already the correct **#616161**, and
    `imported.badge.root.color.none` is `{p.color-text-secondary}`.
 
+## STOP — BLOCKED ON A MEASURED FORK: THE SCORER COMPARES TWO DIFFERENT ENCODINGS
+
+polaris/badge is root-caused, and the cause is the INSTRUMENT. Measured with a
+per-pixel alpha read of the two PNGs the scorer actually compares:
+
+    canvas shot   61x20    1141 of 1220 px SEMI-TRANSPARENT
+                           corner alpha 0 · mid-left rgba(0,0,0,15)
+    reference    640x192   FULLY OPAQUE · corner rgb(255,255,255)
+
+The canvas export carries the badge's `rgba(0,0,0,0.06)` background as ALPHA
+(15/255 over nothing). The reference render carries the SAME fact COMPOSITED
+OVER WHITE — 6% black over white is rgb(240), which is INK under the scorer's
+WHITE_TRIM=250. So one identical design fact is ink on one side and trimmed on
+the other, and the ink-box crop then compares two different regions. That is
+FC-WHITE-ON-WHITE, already an allowed code for this lane and already on the
+caveated-pass list below. (The reference is also 640x192 for a 61x20 cell — a
+DPR/stage-scaled render the scorer normalises separately.)
+
+**THE FORK — OWNER'S CALL, because it re-numbers every lane.**
+  Option 1: COMPOSITE the canvas export over white before ink-cropping, so both
+    sides encode translucency the same way. Correct in principle and it is a
+    CROSS-LANE class — every stem with a translucent background is mis-scored
+    today, not just this one.
+    RISK: it changes the number for EVERY stem in EVERY lane, including the 19
+    currently-claimed passes. It cannot be landed without a full re-score and a
+    re-derived ratchet, and a stem that passes today could fail tomorrow.
+  Option 2: leave the scorer alone and mark the affected stems FC-WHITE-ON-WHITE
+    (as this lane already does). Costs nothing, moves no board number, and keeps
+    a known blind spot.
+
+I am not choosing between "re-number the whole board" and "keep a known blind
+spot" unasked. Nothing here is blocked on more measurement — it is blocked on
+that decision.
+
+WHAT IS SETTLED: the polaris badge CONTRACT, TOKEN and EMITTER are all faithful
+(background matches the capture at rgba(0,0,0,0.06); `enabled`'s colour matches
+its own captured delta #303030). Do not change them.
+
 **RETRACTED — THERE IS NO COLOUR DEFECT. THE TOKEN IS FAITHFUL.** I claimed
 above that the mint mis-aliased tone.enabled. That was wrong, and the check that
 killed it is one line: group the captures by tone and print each colour delta.
