@@ -1,21 +1,21 @@
 {
   "version": 3,
   "status": "fail",
-  "matchDeveloped": true,
+  "matchDeveloped": false,
   "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 27.236719478098788,
-    "pctAAUnmasked": 17.45107176141659,
-    "pctAAMasked": 17.45107176141659,
+    "pctExactUnmasked": 80.32525510204081,
+    "pctAAUnmasked": 72.64030612244898,
+    "pctAAMasked": 72.64030612244898,
     "maskCoveragePct": 0,
-    "canvasPx": "148x29",
-    "realPx": "148x29",
-    "inkCanvasPct": 99.55731593662628,
-    "inkRealPct": 98.50885368126747
+    "canvasPx": "152x34",
+    "realPx": "320x49",
+    "inkCanvasPct": 31.269132653061227,
+    "inkRealPct": 98.67984693877551
   },
   "reference": "extract/computed/out/mui/snackbar/orig-shots/__default.png",
   "referenceSha256": "c8a7bbfe5b851dfee1526971bd589a3d23f5304e7c7d76b9486f02bb0638d101",
@@ -24,14 +24,14 @@
   "diff": "parity/receipts/console-loop/mui/scores/snackbar.diff.png",
   "fc": [],
   "receipt": "parity/receipts/console-loop/mui/components/snackbar.json",
-  "compositionOk": true,
-  "strictCompositionOk": true,
+  "compositionOk": false,
+  "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 1.0484622553588139,
+  "scaleRatio": 2.1052631578947367,
+  "inkDelta": 67.41071428571428,
   "dprNormalized": true,
-  "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=17.45 > 5)",
-  "recordedAt": "2026-08-09T03:33:18.223Z"
+  "sizeNormalized": false,
+  "note": "composition mismatch (scaleRatio=2.11, inkDelta=67.4) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-11T14:26:12.116Z"
 }

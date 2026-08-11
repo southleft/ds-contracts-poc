@@ -8,14 +8,14 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 39.68757627532341,
-    "pctAAUnmasked": 14.815718818647792,
-    "pctAAMasked": 14.815718818647792,
+    "pctExactUnmasked": 39.5478852698104,
+    "pctAAUnmasked": 14.730189596499757,
+    "pctAAMasked": 14.730189596499757,
     "maskCoveragePct": 0,
-    "canvasPx": "241x16",
+    "canvasPx": "242x16",
     "realPx": "241x17",
-    "inkCanvasPct": 29.924334879179888,
-    "inkRealPct": 32.8777154015133
+    "inkCanvasPct": 29.82498784637822,
+    "inkRealPct": 32.74185707340788
   },
   "reference": "extract/computed/out/mui/breadcrumbs/orig-shots/__default.png",
   "referenceSha256": "fe687ab8264d99101c319356db0e7d4f91494158fcb16e087e361587540de9a8",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1.0625,
-  "inkDelta": 2.9533805223334113,
+  "inkDelta": 2.9168692270296575,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=14.82 > 5)",
-  "recordedAt": "2026-08-09T03:33:12.498Z"
+  "note": "pixel bar missed (pctAAMasked=14.73 > 5)",
+  "recordedAt": "2026-08-11T14:26:06.670Z"
 }

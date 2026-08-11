@@ -1,20 +1,20 @@
 {
   "version": 3,
-  "status": "fail",
+  "status": "pass",
   "matchDeveloped": false,
-  "recommendMatchDeveloped": false,
+  "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 18.81756756756757,
-    "pctAAUnmasked": 6.047297297297297,
-    "pctAAMasked": 6.047297297297297,
+    "pctExactUnmasked": 15.54054054054054,
+    "pctAAUnmasked": 1.2162162162162162,
+    "pctAAMasked": 1.2162162162162162,
     "maskCoveragePct": 0,
     "canvasPx": "74x40",
     "realPx": "74x40",
-    "inkCanvasPct": 13.918918918918918,
+    "inkCanvasPct": 16.79054054054054,
     "inkRealPct": 18.14189189189189
   },
   "reference": "extract/computed/out/tailwind/card/orig-shots/__default.png",
@@ -26,12 +26,12 @@
   "receipt": "parity/receipts/console-loop/tailwind/components/card.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 4.222972972972974,
+  "inkDelta": 1.3513513513513509,
   "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "near-pass (pctAAMasked=6.05; likely font-AA) — NOT a pass; tighten emit (near-pass flips are dead)",
-  "recordedAt": "2026-08-11T13:23:04.772Z"
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-11T14:26:04.735Z"
 }

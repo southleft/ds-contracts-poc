@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "two-column",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/two-column.json",
+  "status": "pass",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "fileVersion": "2385620546078956186",
+  "setNodeId": "7:1625",
+  "cellNodeId": "7:1625",
+  "cellName": "TwoColumn",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 6.594389180730971,
+    "pctAAUnmasked": 0.6259081256287023,
+    "pctAAMasked": 0.6259081256287023,
+    "maskCoveragePct": 0,
+    "canvasPx": "389x23",
+    "realPx": "389x23",
+    "inkCanvasPct": 29.30591259640103,
+    "inkRealPct": 29.30591259640103
+  },
+  "reference": "parity/receipts/console-loop/refs/two-column.png",
+  "referenceSha256": "7e956f44aaa56d74842555ca1f9110503d6d561cd80cab400d40bdd97157921a",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/two-column.png",
+  "canvasShotSha256": "e6d99b1230eddcbf232ef13cd222a413bf2ad5d1c30b2e41f5d5b67731728a10",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/two-column.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

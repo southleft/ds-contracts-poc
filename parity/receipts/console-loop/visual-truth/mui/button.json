@@ -18,12 +18,12 @@
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 40.44505172750342,
-    "pctAAUnmasked": 16.923677532695685,
-    "pctAAMasked": 16.923677532695685,
+    "pctAAUnmasked": 18.797579543236385,
+    "pctAAMasked": 18.797579543236385,
     "maskCoveragePct": 0,
-    "canvasPx": "105x37",
+    "canvasPx": "107x39",
     "realPx": "109x47",
-    "inkCanvasPct": 73.57017372633223,
+    "inkCanvasPct": 78.43060706617216,
     "inkRealPct": 95.78372047628343
   },
   "reference": "extract/computed/out/mui/button/orig-shots/contained.error.large.enabled__default.png",
@@ -35,9 +35,9 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.2702702702702702,
-  "inkDelta": 22.213546749951206,
+  "scaleRatio": 1.205128205128205,
+  "inkDelta": 17.353113410111277,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=16.92 > 5)"
+  "note": "pixel bar missed (pctAAMasked=18.80 > 5)"
 }

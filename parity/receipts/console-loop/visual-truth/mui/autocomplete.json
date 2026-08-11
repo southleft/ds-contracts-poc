@@ -17,13 +17,13 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 16.083829365079367,
+    "pctExactUnmasked": 16.096230158730158,
     "pctAAUnmasked": 8.934771825396826,
     "pctAAMasked": 8.934771825396826,
     "maskCoveragePct": 0,
-    "canvasPx": "288x54",
+    "canvasPx": "288x55",
     "realPx": "288x56",
-    "inkCanvasPct": 29.55109126984127,
+    "inkCanvasPct": 29.563492063492063,
     "inkRealPct": 31.907242063492063
   },
   "reference": "extract/computed/out/mui/autocomplete/orig-shots/medium__default.png",
@@ -35,8 +35,8 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.037037037037037,
-  "inkDelta": 2.3561507936507944,
+  "scaleRatio": 1.018181818181818,
+  "inkDelta": 2.34375,
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar missed (pctAAMasked=8.93 > 5)"

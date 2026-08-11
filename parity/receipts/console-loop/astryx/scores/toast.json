@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 20.07089056269384,
-    "pctAAUnmasked": 6.468763845813026,
-    "pctAAMasked": 6.468763845813026,
+    "pctExactUnmasked": 20.056899004267425,
+    "pctAAUnmasked": 6.703413940256045,
+    "pctAAMasked": 6.703413940256045,
     "maskCoveragePct": 0,
-    "canvasPx": "305x17",
+    "canvasPx": "304x17",
     "realPx": "185x37",
-    "inkCanvasPct": 8.6929552503323,
-    "inkRealPct": 11.351351351351353
+    "inkCanvasPct": 8.659317211948792,
+    "inkRealPct": 11.388691322901849
   },
   "reference": "parity/receipts/console-loop/trap-corpus/refs/astryx/toast/default__default.png",
   "referenceSha256": "b52569d8cace895f3ac4bd0722b7406a986dd5af8378730a8b72c4e68c113894",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/toast-cell.png",
-  "canvasShotSha256": "60bd6c51c73eaeda13d076a6b0c9bc57759f1f585cc3eed5fe06fbaa4122527a",
+  "canvasShotSha256": "997ebc26c06caee1868113217c1aa341571884242361c905d04bdcd9a56f18d9",
   "diff": "parity/receipts/console-loop/astryx/scores/toast.diff.png",
   "fc": [
     "FC-LH-RATIO",
@@ -32,9 +32,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 2.176470588235294,
-  "inkDelta": 2.6583961010190524,
+  "inkDelta": 2.7293741109530565,
   "dprNormalized": true,
   "sizeNormalized": false,
   "note": "composition mismatch (scaleRatio=2.18, inkDelta=2.7) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-09T03:42:30.372Z"
+  "recordedAt": "2026-08-11T14:25:00.792Z"
 }

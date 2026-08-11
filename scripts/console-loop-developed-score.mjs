@@ -170,6 +170,45 @@ const alignPair =
 const scoreCell = scorer.scoreCell;
 
 const WHITE_TRIM = 250;
+
+/**
+ * Flatten onto an OPAQUE WHITE substrate before ANY ink decision. Canonical
+ * implementation + rationale: extract/figma/canvas-gate/score.ts
+ * (`compositeOverWhite`), preferred at runtime when the scorer module exports
+ * it; this local copy keeps the plain-node fallback path honest.
+ *
+ * A canvas export is transparent-backed — `rgba(0,0,0,0.06)` arrives as
+ * `(0,0,0,15)` — while the developed reference arrives opaque at `rgb(240)`.
+ * The raw ink test called the first invisible and the second ink, so one
+ * design fact produced two different crops. Idempotent on opaque input.
+ * See scripts/console-loop-alpha-composite-probe.mts.
+ */
+function compositeOverWhiteLocal(src, PNGCtor) {
+  const out = new PNGCtor({ width: src.width, height: src.height });
+  const total = src.width * src.height;
+  for (let p = 0; p < total; p++) {
+    const i = p * 4;
+    const a = src.data[i + 3] / 255;
+    if (a === 1) {
+      out.data[i] = src.data[i];
+      out.data[i + 1] = src.data[i + 1];
+      out.data[i + 2] = src.data[i + 2];
+    } else {
+      out.data[i] = Math.round(src.data[i] * a + 255 * (1 - a));
+      out.data[i + 1] = Math.round(src.data[i + 1] * a + 255 * (1 - a));
+      out.data[i + 2] = Math.round(src.data[i + 2] * a + 255 * (1 - a));
+    }
+    out.data[i + 3] = 255;
+  }
+  return out;
+}
+
+const { PNG: PNGCtor } = await import("pngjs");
+const compositeOverWhite =
+  typeof scorer.compositeOverWhite === "function"
+    ? scorer.compositeOverWhite
+    : (src) => compositeOverWhiteLocal(src, PNGCtor);
+
 function contentBoxOf(png) {
   let minX = png.width,
     minY = png.height,
@@ -278,8 +317,12 @@ for (const row of rows) {
   }
 
   try {
-    let canvasPng = readPngBuffer(readFileSync(canvasPath));
-    let refPng = readPngBuffer(readFileSync(refPath));
+    // Composite BOTH sides over opaque white BEFORE the DPR guard, the ink
+    // crop and size-normalize — otherwise a translucent fill is ink on the
+    // opaque reference and invisible on the transparent-backed canvas export,
+    // and every number below is measured across two different regions.
+    let canvasPng = compositeOverWhite(readPngBuffer(readFileSync(canvasPath)));
+    let refPng = compositeOverWhite(readPngBuffer(readFileSync(refPath)));
     // Figma exportAsync @2× vs gate-shots @1×: when content boxes are ~2×
     // apart, downscale the larger so compositionOk can measure real AA.
     const roughScale = Math.max(

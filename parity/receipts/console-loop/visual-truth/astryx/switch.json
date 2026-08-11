@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 42.25187265917603,
+    "pctExactUnmasked": 41.596441947565545,
     "pctAAUnmasked": 14.115168539325843,
     "pctAAMasked": 14.115168539325843,
     "maskCoveragePct": 0,
     "canvasPx": "178x24",
     "realPx": "173x24",
     "inkCanvasPct": 33.66104868913858,
-    "inkRealPct": 32.30337078651686
+    "inkRealPct": 31.296816479400746
   },
-  "reference": "extract/computed/out/astryx/switch/gate-shots/end.no-isDisabled__default.png",
-  "referenceSha256": "da343f5916eaf94017c48cf89a9ca81e6b52010145cbdcecba8dd455cb1d857d",
+  "reference": "extract/computed/out/astryx/switch/orig-shots/end.no-isDisabled__default.png",
+  "referenceSha256": "2d8ef36a3d999b1f5b062115f41fdea720775ee67c4b507e81204d887906d5e6",
   "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/switch.png",
   "canvasShotSha256": "d21fd258e62d98f3fd623e5e9c6340ac3565aef8185be048879e8b1fe7fb01d4",
   "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/switch.diff.png",
@@ -36,7 +36,7 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1.0289017341040463,
-  "inkDelta": 1.3576779026217238,
+  "inkDelta": 2.3642322097378354,
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar missed (pctAAMasked=14.12 > 5)"

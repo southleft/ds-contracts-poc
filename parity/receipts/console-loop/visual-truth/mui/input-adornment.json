@@ -8,7 +8,7 @@
     "compositionOk": true
   },
   "receipt": "parity/receipts/console-loop/mui/components/input-adornment.json",
-  "status": "fail",
+  "status": "pass",
   "fileKey": "59mLQlOMiD5w5za6SUcoO5",
   "fileVersion": "2384477865735882405",
   "setNodeId": "83:1687",
@@ -17,13 +17,13 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 66.66666666666666,
-    "pctAAUnmasked": 20.833333333333336,
-    "pctAAMasked": 20.833333333333336,
+    "pctExactUnmasked": 49.30555555555556,
+    "pctAAUnmasked": 0.6944444444444444,
+    "pctAAMasked": 0.6944444444444444,
     "maskCoveragePct": 0,
-    "canvasPx": "8x16",
+    "canvasPx": "9x16",
     "realPx": "9x16",
-    "inkCanvasPct": 51.388888888888886,
+    "inkCanvasPct": 52.77777777777778,
     "inkRealPct": 54.861111111111114
   },
   "reference": "extract/computed/out/mui/inputadornment/orig-shots/end__default.png",
@@ -33,11 +33,11 @@
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/input-adornment.diff.png",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.125,
-  "inkDelta": 3.4722222222222285,
+  "scaleRatio": 1,
+  "inkDelta": 2.0833333333333357,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=20.83 > 5)"
+  "note": "pixel bar met (headless REST render vs code reference)"
 }

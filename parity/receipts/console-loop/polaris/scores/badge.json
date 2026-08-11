@@ -8,14 +8,14 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 59.61945031712473,
-    "pctAAUnmasked": 32.98097251585624,
-    "pctAAMasked": 32.98097251585624,
+    "pctExactUnmasked": 25.245901639344265,
+    "pctAAUnmasked": 7.213114754098362,
+    "pctAAMasked": 7.213114754098362,
     "maskCoveragePct": 0,
-    "canvasPx": "43x11",
-    "realPx": "43x11",
-    "inkCanvasPct": 100,
-    "inkRealPct": 95.13742071881607
+    "canvasPx": "61x20",
+    "realPx": "61x20",
+    "inkCanvasPct": 96.06557377049181,
+    "inkRealPct": 95.65573770491802
   },
   "reference": "extract/computed/out/badge/orig-shots/enabled.none__default.png",
   "referenceSha256": "fd6724798410f257a5baf7fc6ea84748cfd19f2da4b47079178520036c683703",
@@ -29,9 +29,9 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 4.862579281183926,
-  "dprNormalized": false,
-  "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=32.98 > 5)",
-  "recordedAt": "2026-08-11T13:23:06.382Z"
+  "inkDelta": 0.40983606557378494,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=7.21 > 5)",
+  "recordedAt": "2026-08-11T14:26:00.909Z"
 }

@@ -10,7 +10,7 @@
   "receipt": "parity/receipts/console-loop/components/card.json",
   "status": "fail",
   "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
-  "fileVersion": "2385320129728545150",
+  "fileVersion": "2385620546078956186",
   "setNodeId": "4:543",
   "cellNodeId": "4:543",
   "cellName": "Card",
@@ -23,7 +23,7 @@
     "maskCoveragePct": 0,
     "canvasPx": "160x79",
     "realPx": "320x58",
-    "inkCanvasPct": 3.6471518987341773,
+    "inkCanvasPct": 3.615506329113924,
     "inkRealPct": 6.823575949367089
   },
   "reference": "parity/receipts/console-loop/refs/card.png",
@@ -36,7 +36,7 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 2,
-  "inkDelta": 3.1764240506329116,
+  "inkDelta": 3.208069620253165,
   "dprNormalized": true,
   "sizeNormalized": false,
   "note": "composition mismatch (scaleRatio=2.00, inkDelta=3.2)"

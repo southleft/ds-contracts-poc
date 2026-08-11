@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "grid-gallery",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/grid-gallery.json",
+  "status": "pass",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "fileVersion": "2385620546078956186",
+  "setNodeId": "7:1639",
+  "cellNodeId": "7:1639",
+  "cellName": "GridGallery",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 6.057275842006594,
+    "pctAAUnmasked": 0.3361561833344108,
+    "pctAAMasked": 0.3361561833344108,
+    "maskCoveragePct": 0,
+    "canvasPx": "499x62",
+    "realPx": "498x62",
+    "inkCanvasPct": 25.39918546770961,
+    "inkRealPct": 25.276359169952812
+  },
+  "reference": "parity/receipts/console-loop/refs/grid-gallery.png",
+  "referenceSha256": "859f58aee8278688306e1fc6e3057683bdfffd33024b475fb43f978c5fb030e9",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/grid-gallery.png",
+  "canvasShotSha256": "08b1bb526319738b6400cb083d97098acc020c77866a9f362341aca597104f71",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/grid-gallery.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.002008032128514,
+  "inkDelta": 0.12282629775679865,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "sidebar-layout",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/sidebar-layout.json",
+  "status": "pass",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "fileVersion": "2385620546078956186",
+  "setNodeId": "7:1632",
+  "cellNodeId": "7:1632",
+  "cellName": "SidebarLayout",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 7.892976588628763,
+    "pctAAUnmasked": 0.7491638795986623,
+    "pctAAMasked": 0.7491638795986623,
+    "maskCoveragePct": 0,
+    "canvasPx": "325x23",
+    "realPx": "325x23",
+    "inkCanvasPct": 35.07692307692308,
+    "inkRealPct": 35.07692307692308
+  },
+  "reference": "parity/receipts/console-loop/refs/sidebar-layout.png",
+  "referenceSha256": "3fe79f773e07f91933a62005cf5d50521d2c245544903929e97408379e476665",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/sidebar-layout.png",
+  "canvasShotSha256": "28c6058da7e3619dc7c10c178945fe3f9dfb8c9ef61763a942e1edba93a8cb3e",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/sidebar-layout.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

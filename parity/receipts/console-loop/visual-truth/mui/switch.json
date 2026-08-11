@@ -8,7 +8,7 @@
     "compositionOk": true
   },
   "receipt": "parity/receipts/console-loop/mui/components/switch.json",
-  "status": "fail",
+  "status": "pass",
   "fileKey": "59mLQlOMiD5w5za6SUcoO5",
   "fileVersion": "2384477865735882405",
   "setNodeId": "21:624",
@@ -17,14 +17,14 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 52.511961722488046,
-    "pctAAUnmasked": 10.885167464114833,
-    "pctAAMasked": 10.885167464114833,
+    "pctExactUnmasked": 44.04432132963989,
+    "pctAAUnmasked": 0.2770083102493075,
+    "pctAAMasked": 0.2770083102493075,
     "maskCoveragePct": 0,
-    "canvasPx": "37x22",
+    "canvasPx": "38x19",
     "realPx": "38x19",
-    "inkCanvasPct": 36.124401913875595,
-    "inkRealPct": 36.124401913875595
+    "inkCanvasPct": 42.93628808864266,
+    "inkRealPct": 41.82825484764543
   },
   "reference": "extract/computed/out/mui/switch/orig-shots/default.medium.checked.enabled__default.png",
   "referenceSha256": "5c1f496eef13d44db39c3a76241c9c4679a27ebc3fb492ce5c2dde376833ec7e",
@@ -33,11 +33,11 @@
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/switch.diff.png",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.1578947368421053,
-  "inkDelta": 0,
+  "scaleRatio": 1,
+  "inkDelta": 1.10803324099723,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=10.89 > 5)"
+  "note": "pixel bar met (headless REST render vs code reference)"
 }

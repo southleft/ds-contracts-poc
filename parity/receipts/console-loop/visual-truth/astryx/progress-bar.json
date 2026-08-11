@@ -14,20 +14,20 @@
   "setNodeId": "1:3900",
   "cellNodeId": "1:3880",
   "cellName": "Variant=Accent",
-  "cellPick": "first-cell",
+  "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 40.71078431372549,
-    "pctAAUnmasked": 30.343137254901958,
-    "pctAAMasked": 30.343137254901958,
+    "pctExactUnmasked": 39.86607142857143,
+    "pctAAUnmasked": 24.80654761904762,
+    "pctAAMasked": 24.80654761904762,
     "maskCoveragePct": 0,
-    "canvasPx": "240x17",
-    "realPx": "68x16",
-    "inkCanvasPct": 29.166666666666668,
-    "inkRealPct": 11.299019607843137
+    "canvasPx": "240x18",
+    "realPx": "240x28",
+    "inkCanvasPct": 17.72321428571429,
+    "inkRealPct": 33.839285714285715
   },
-  "reference": "parity/receipts/console-loop/astryx/refs/progress-bar.png",
-  "referenceSha256": "f4ba3e1d1a57fe7326eeffb0681ebe142e08ee4fa5d99399065877034f2234a0",
+  "reference": "extract/computed/out/astryx/progressbar/orig-shots/accent__default.png",
+  "referenceSha256": "cb19b269f0a2b42f2d37219d3332142b508e2f3d0fada10bc6f6b647df6759ea",
   "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/progress-bar.png",
   "canvasShotSha256": "888a3724d3128785546e618b360fe6514f46970971039e65ae01bfa63f993970",
   "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/progress-bar.diff.png",
@@ -35,9 +35,9 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 3.5294117647058822,
-  "inkDelta": 17.86764705882353,
+  "scaleRatio": 1.5555555555555556,
+  "inkDelta": 16.116071428571427,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=3.53, inkDelta=17.9)"
+  "note": "composition mismatch (scaleRatio=1.56, inkDelta=16.1)"
 }

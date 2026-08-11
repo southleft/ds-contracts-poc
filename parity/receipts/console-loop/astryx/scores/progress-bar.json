@@ -8,13 +8,13 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 43.125,
-    "pctAAUnmasked": 34.375,
-    "pctAAMasked": 34.375,
+    "pctExactUnmasked": 39.86607142857143,
+    "pctAAUnmasked": 28.82440476190476,
+    "pctAAMasked": 28.82440476190476,
     "maskCoveragePct": 0,
-    "canvasPx": "240x17",
+    "canvasPx": "240x18",
     "realPx": "240x28",
-    "inkCanvasPct": 17.708333333333336,
+    "inkCanvasPct": 17.72321428571429,
     "inkRealPct": 33.839285714285715
   },
   "reference": "extract/computed/out/astryx/progressbar/orig-shots/accent__default.png",
@@ -31,10 +31,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.6470588235294117,
-  "inkDelta": 16.13095238095238,
+  "scaleRatio": 1.5555555555555556,
+  "inkDelta": 16.116071428571427,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=1.65, inkDelta=16.1) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-09T13:01:58.496Z"
+  "note": "composition mismatch (scaleRatio=1.56, inkDelta=16.1) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-11T14:25:56.248Z"
 }

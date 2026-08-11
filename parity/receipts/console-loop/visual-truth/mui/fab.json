@@ -17,13 +17,13 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 92.0608108108108,
-    "pctAAUnmasked": 39.189189189189186,
-    "pctAAMasked": 39.189189189189186,
+    "pctExactUnmasked": 92.21096096096096,
+    "pctAAUnmasked": 34.75975975975976,
+    "pctAAMasked": 34.75975975975976,
     "maskCoveragePct": 0,
-    "canvasPx": "16x41",
+    "canvasPx": "22x45",
     "realPx": "72x74",
-    "inkCanvasPct": 11.74924924924925,
+    "inkCanvasPct": 14.677177177177178,
     "inkRealPct": 78.11561561561562
   },
   "reference": "extract/computed/out/mui/fab/orig-shots/large.default.enabled__default.png",
@@ -35,9 +35,9 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 4.5,
-  "inkDelta": 66.36636636636638,
+  "scaleRatio": 3.272727272727273,
+  "inkDelta": 63.438438438438446,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=4.50, inkDelta=66.4)"
+  "note": "composition mismatch (scaleRatio=3.27, inkDelta=63.4)"
 }

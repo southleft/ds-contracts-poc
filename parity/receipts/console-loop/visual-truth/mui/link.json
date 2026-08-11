@@ -18,8 +18,8 @@
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
     "pctExactUnmasked": 50.60483870967742,
-    "pctAAUnmasked": 29.63709677419355,
-    "pctAAMasked": 29.63709677419355,
+    "pctAAUnmasked": 29.435483870967744,
+    "pctAAMasked": 29.435483870967744,
     "maskCoveragePct": 0,
     "canvasPx": "11x16",
     "realPx": "31x14",

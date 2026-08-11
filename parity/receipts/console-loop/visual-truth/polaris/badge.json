@@ -17,14 +17,14 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 59.830866807610995,
-    "pctAAUnmasked": 33.192389006342495,
-    "pctAAMasked": 33.192389006342495,
+    "pctExactUnmasked": 29.426229508196723,
+    "pctAAUnmasked": 5.737704918032787,
+    "pctAAMasked": 5.737704918032787,
     "maskCoveragePct": 0,
-    "canvasPx": "43x11",
-    "realPx": "43x11",
-    "inkCanvasPct": 100,
-    "inkRealPct": 95.13742071881607
+    "canvasPx": "61x20",
+    "realPx": "61x20",
+    "inkCanvasPct": 93.27868852459017,
+    "inkRealPct": 96.06557377049181
   },
   "reference": "extract/computed/out/badge/orig-shots/enabled.none__default.png",
   "referenceSha256": "fd6724798410f257a5baf7fc6ea84748cfd19f2da4b47079178520036c683703",
@@ -36,8 +36,8 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 4.862579281183926,
-  "dprNormalized": false,
-  "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=33.19 > 5)"
+  "inkDelta": 2.7868852459016438,
+  "dprNormalized": true,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=5.74 > 5)"
 }

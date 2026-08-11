@@ -31,6 +31,55 @@ const MASK_INFLATE = 4;
 
 export const readPngBuffer = (buf: Buffer): PNG => PNG.sync.read(buf);
 
+/**
+ * Flatten an image onto an OPAQUE WHITE substrate. Every ink decision below
+ * runs on the result, so both sides of a pair encode translucency identically.
+ *
+ * WHY THIS EXISTS. A canvas export is transparent-backed: a `rgba(0,0,0,0.06)`
+ * surface arrives as the byte quadruple `(0,0,0,15)`. A library reference is
+ * rendered over the page and arrives OPAQUE: the same fact is `rgb(240)`. The
+ * ink test used to read RAW bytes with alpha as a visibility gate
+ * (`alpha > 16 && any channel < WHITE_TRIM`), so alpha 15 was invisible on the
+ * canvas side while 240 < 250 was ink on the reference side. ONE design fact
+ * was ink on one side and trimmed on the other, the content boxes then covered
+ * DIFFERENT REGIONS, and every number computed from them — scaleRatio, the
+ * 1.7–2.4 DPR downscale window, inkDelta, pctAAMasked — was measured across a
+ * mismatch the component never had. Measured on a synthetic 61x20 badge
+ * carrying exactly the polaris/badge fact: 43x11 against 61x20, which tripped
+ * the DPR halve AND size-normalize and landed at 70.32% pctAAMasked with
+ * compositionOk TRUE — an instrument artifact wearing a paint failure's
+ * clothes. See scripts/console-loop-alpha-composite-probe.mts.
+ *
+ * WHITE, not cream: the references are rendered on the libraries' own white
+ * page and `blitOnWhite`/`whiteCanvas` already pad with 255, so white is the
+ * substrate the rest of the pipeline is already built on. Any other choice
+ * would introduce a second, disagreeing background.
+ *
+ * IDEMPOTENT on already-opaque images (alpha 255 → the copy is exact), so the
+ * reference side is untouched and this cannot move a pair that never carried
+ * alpha. It is NOT a relaxation: a genuinely different translucent fill still
+ * composites to a different grey and still fails.
+ */
+export function compositeOverWhite(src: PNG): PNG {
+  const out = new PNG({ width: src.width, height: src.height });
+  const total = src.width * src.height;
+  for (let p = 0; p < total; p++) {
+    const i = p * 4;
+    const a = src.data[i + 3] / 255;
+    if (a === 1) {
+      out.data[i] = src.data[i];
+      out.data[i + 1] = src.data[i + 1];
+      out.data[i + 2] = src.data[i + 2];
+    } else {
+      out.data[i] = Math.round(src.data[i] * a + 255 * (1 - a));
+      out.data[i + 1] = Math.round(src.data[i + 1] * a + 255 * (1 - a));
+      out.data[i + 2] = Math.round(src.data[i + 2] * a + 255 * (1 - a));
+    }
+    out.data[i + 3] = 255;
+  }
+  return out;
+}
+
 interface Box {
   x: number;
   y: number;
@@ -96,7 +145,13 @@ const whiteCanvas = (width: number, height: number): PNG => {
   return png;
 };
 
-export function alignPair(canvasPng: PNG, realPng: PNG): Aligned {
+export function alignPair(canvasIn: PNG, realIn: PNG): Aligned {
+  // Composite BOTH sides before the ink crop — a transparent-backed canvas
+  // export and an opaque reference must encode the same translucent fill the
+  // same way or the two content boxes cover different regions. Idempotent when
+  // a caller has already composited.
+  const canvasPng = compositeOverWhite(canvasIn);
+  const realPng = compositeOverWhite(realIn);
   const boxA = contentBox(canvasPng);
   const boxB = contentBox(realPng);
   const width = Math.max(boxA.width, boxB.width);

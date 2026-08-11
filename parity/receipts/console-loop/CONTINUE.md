@@ -53,7 +53,161 @@ defect.** Measured, in order:
    `imported.badge.label.color.none` is already the correct **#616161**, and
    `imported.badge.root.color.none` is `{p.color-text-secondary}`.
 
-## STOP — BLOCKED ON A MEASURED FORK: THE SCORER COMPARES TWO DIFFERENT ENCODINGS
+## RESOLVED 2026-08-11 — THE FORK IS CLOSED. OPTION 1 WAS TAKEN: BOTH SIDES ARE COMPOSITED OVER WHITE.
+
+The fork recorded below ("composite the canvas before ink-cropping and re-number
+every lane" vs "leave the scorer alone and keep a known blind spot") was decided
+by the owner in favour of compositing. It is DONE, measured board-wide, and this
+section is the result. Everything under the old STOP heading is kept as the
+record of how the defect was found; it is no longer a blocker.
+
+**THE FIX.** Both sides are flattened onto an OPAQUE WHITE substrate before any
+ink crop, DPR halve or size-normalize. Canonical implementation and rationale:
+`compositeOverWhite` in `extract/figma/canvas-gate/score.ts`, applied inside
+`alignPair` so every consumer gets it, and duplicated into the three files that
+already duplicate this pipeline by policy — `visual-truth/score-policy.mjs`,
+`scripts/console-loop-developed-score.mjs`, and
+`scripts/console-loop-capture-framing-check.mjs` (whose C2 framing test and
+C5/C6 histogram read the same box). White, not cream: `blitOnWhite` and
+`whiteCanvas` already pad with 255, so any other substrate would introduce a
+second, disagreeing background.
+
+**IT IS NOT A RELAXATION AND THE BAR DID NOT MOVE.** Red-tested in BOTH
+directions in `scripts/console-loop-alpha-composite-probe.mts`
+(eval `console-loop-alpha-composite`), on a synthetic 61x20 badge carrying
+exactly the polaris fact:
+
+    same design fact, two encodings   70.32% AA, FAIL  ->  0.00% AA, PASS
+    different fact (alpha .06 vs .30) FAIL            ->  73.85% AA, still FAIL
+    the legacy raw-byte rule          43x11 vs 61x20  ->  still collapses (pinned)
+
+The third line matters: the probe recomputes the OLD rule in-process and asserts
+it still collapses, so the defect keeps its name and cannot silently return.
+
+**BOARD EFFECT — 97 bridge scorecards and 133 headless cards re-measured.**
+
+    ZERO passes lost on either instrument.
+
+That contradicts this round's own stated expectation. Going in, the prediction
+was that some claimed passes were trim artifacts and would correctly fall. None
+did. THREE were gained, each on BOTH instruments, and each because the crop now
+lands on the true painted extent rather than a shadow-blind or edge-clipped one:
+
+    tailwind/card         6.05 -> 1.22 bridge · 5.64 -> 3.38 headless
+    mui/input-adornment  20.83 -> 0.69 bridge · 20.83 -> 0.69 headless
+    mui/switch           13.04 -> 2.50 bridge · 10.89 -> 0.28 headless
+
+Ten more stems moved without flipping. The only one that got materially WORSE is
+mui/snackbar, 17.45 -> 72.64, and that is the correct loss of a FALSE number:
+its previously recorded "same 148x29 content box" was size-normalize squashing a
+320x49 OPAQUE reference down to match a canvas crop that had discarded 9,928
+semi-transparent shadow pixels. The two are simply framed differently (304x68 vs
+320x49); the receipt now says so under FC-REF-FRAMING and the dead "the residual
+is surface paint, not geometry" claim is withdrawn. It was a fail before and it
+is a fail after.
+
+**POLARIS/BADGE — HONESTLY SCORED, AND IT DOES NOT FLIP.**
+
+    bridge    32.98 -> 7.21     px 43x11 v 43x11 -> 61x20 v 61x20
+    headless  33.19 -> 5.74     compositionOk true · scaleRatio 1.00
+
+It is measured at its TRUE 61x20 geometry against a 61x20 reference on both
+instruments, and it still misses the 5 bar. It stays fail-closed. The receipt's
+`FC-REBUILD-REGRESSION` and `FC-ABS-SIZE` entries are RETRACTED: they blamed a
+rebuild for shrinking the ink box 61x20 -> 43x11 when the rebuild had RESTORED
+the correct `rgba(0,0,0,0.0588)` background and the SCORER could not see it. The
+`scaleRatio 3.64` that FC-ABS-SIZE named was the gap between two CROPS, not
+between two components. The 7.21 the "regression" was said to have replaced is
+the same 7.21 that returns once the instrument is honest, because it was always
+the score of the correct region.
+
+Its residual is now carried as `FC-PAINT-RESIDUAL` — open and undiagnosed. It is
+NOT FC-WHITE-ON-WHITE: that caveat covered this stem only while the two sides
+were cropped differently, and capture-framing now reports the stem clean at a
+7.2% colour-histogram distance against a 25% bar. NO new FC name was minted for
+a residual white-on-white class, because after the fix no stem needs one — the
+condition the name described was the instrument.
+
+**A SECOND INSTRUMENT DEFECT WAS SURFACED AND FIXED IN THE SAME PASS.**
+capture-framing's C5/C6 tone-swap detector quantised colour into hard 32-wide
+bins, so mui/switch — shot `#7f7f7f` against reference `#808080`, the SAME grey
+one byte apart, straddling the 128 boundary — measured a 25.9% histogram
+distance against a 25% bar and was reported as a whole-component
+FC-REF-TONE-SWAP while the two agree to 0.6 per channel on the mean. It was
+latent until compositing brought mui/switch's AA into the <=10 band where C5/C6
+looks. Fixed by soft (trilinear) assignment across the two nearest bin centres,
+WITHOUT touching the 25% bar. Controls, hard -> soft:
+
+    #F0F0F0 vs #D5EBFF  (the real swap it was tuned for)  100% -> 86.8%  caught
+    #7f7f7f vs #808080  (one byte apart)                  100% ->  4.7%  correctly not
+    mui/switch shot vs reference                         25.9% ->  4.2%  correctly not
+
+A bin-offset-shift alternative was tried FIRST and DISCARDED because its control
+collapsed to 0.0% — it would have destroyed the detection the detector exists
+for. Recorded because the wrong fix looked convincing until it was measured.
+
+**THE white-trim-reach PROBE WAS MEASURING ITSELF.** Its `contentBoxOf` mirrored
+the scorer's raw-byte rule while its `paintOutsideBox` judged visibility
+COMPOSITED — so it compared a crop taken under one rule against paint judged
+under another. Both now composite. Board sweep: **10 lossy crops -> 0**, and the
+`mui/accordion` 282px allowlist entry is moot. The repair its comment asked for
+("a shadow-aware content box, which re-crops and re-scores all 92 cells") is
+what landed, arriving as a side effect of the alpha fix rather than as a shadow
+rule — a drop shadow IS translucent paint, so once alpha stopped being a
+visibility gate the shadow fell inside the box on both sides. The probe's
+ORIGINAL question survives untouched and still measures: an OPAQUE pale surface
+at rgb(252) is still cropped as background.
+
+**RATCHET RE-DERIVED** (reasoning lives in `RATCHET.json`; floors, not prose,
+are what the gates read):
+
+    tailwind     3 -> 4   card, agreeing on BOTH instruments — a RAISE
+    first-party  5 -> 10  NOT this fix. The five composition stems finally have
+                          headless cards at all and all five pass, so the exact
+                          condition RATCHET.json recorded for this raise is met.
+    mui          HELD 5   bridge reads 7 and headless 6, but the BOTH-instrument
+                          set is only 4 — the instruments pass different
+                          memberships, and a floor moves only where both agree.
+    polaris      HELD 3   both read 4; the fourth is `tag`, already excluded as
+                          unverifiable because run.ts quarantines it.
+    altitude     HELD 4 · carbon HELD 2 (the documented text-input split)
+
+**ONE OPEN DECISION — ASTRYX FLOOR 1, OWNER SIGN-OFF NEEDED, AND
+`visual-truth:check` IS RED ON IT (1 error).** The astryx headless pass-count is
+0 and the BOTH-instrument set is 0; only the bridge reads 1 (badge, 4.88). The
+0->1 raise of 2026-08-09 was taken from the bridge alone, in violation of the
+both-instruments rule RATCHET.json states, so this floor has never been backed
+by its own rule. THIS IS NOT NEW AND NOT CAUSED BY THE COMPOSITE FIX:
+`visual-truth:check` was already red on the committed tree with THREE errors
+before this round (astryx 0<1, mui 4<5, and a stale-reference error naming nine
+astryx stems whose receipts had been repointed at real library renders while
+their headless cards still scored the old `refs/` copies). Re-running the
+headless lane took it to ONE. The composite fix moved astryx/badge headless
+12.62 -> 5.36 — closer to the bar, still over it. Options: (a) lower astryx to 0
+and record that the lane has no both-instrument pass, or (b) hold at 1 and leave
+the gate red until badge clears 5 headlessly. Lowering needs sign-off; holding
+keeps a gate red. That trade is the owner's, not a measurement's.
+
+**GATES AFTER THE ROUND.** `console-loop:all:evidence:check` all 8 lanes green ·
+`console-loop:capture-framing` green (79 pinned stems, 31 named-open findings) ·
+`visual-truth:check` 1 error, the astryx floor above · touched evals 7/7
+(`console-loop-alpha-composite`, `-white-trim-reach`, `-score-monotonicity`,
+`-capture-framing-pin`, `-canvas-drift-probe`, `visual-truth-report-is-fresh`,
+`canvas-pixel-gate-receipts`). Option B remains LOCKED — no fuse geometry was
+touched, and no contract, token or canvas was hand-edited for any of this.
+
+**WHAT THIS ROUND DID NOT DO.** It did not diagnose polaris/badge's remaining
+7.21/5.74. It did not probe the two newly-passing mui stems for canvas drift —
+input-adornment and switch passed because the INSTRUMENT changed under an
+unchanged canvas, so the question "is that canvas what its emit script would
+build today" is genuinely open for them in a way it is not for the rebuilt
+stems; both are pinned by name in the canvas-drift eval.
+
+---
+
+## HOW THE DEFECT WAS FOUND (superseded by the section above; kept as record)
+
+### [CLOSED 2026-08-11 — NOT A BLOCKER ANY MORE] THE MEASURED FORK: THE SCORER COMPARED TWO DIFFERENT ENCODINGS
 
 polaris/badge is root-caused, and the cause is the INSTRUMENT. Measured with a
 per-pixel alpha read of the two PNGs the scorer actually compares:

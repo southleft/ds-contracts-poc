@@ -178,7 +178,17 @@ const CAUSE_REF_SWEEP_DECOY = "FC-REF-SWEEP-DECOY";
 const CAUSE_REF_TONE_SWAP = "FC-REF-TONE-SWAP";
 
 const WHITE_TRIM = 250;
-/** Ink content box — same rule as console-loop-developed-score.mjs. */
+/**
+ * Ink content box — same rule as console-loop-developed-score.mjs, INCLUDING
+ * its composite-over-white step: the pixel is flattened onto opaque white
+ * before the trim test, so a translucent fill is measured as what a viewer
+ * sees. Without it a transparent-backed canvas export carries
+ * `rgba(0,0,0,0.06)` as `(0,0,0,15)` — invisible under an `alpha > 16` gate —
+ * while the opaque reference carries the same fact as `rgb(240)`, which IS
+ * ink, so C2's shot-vs-reference framing compared two different regions and
+ * the C5/C6 histogram was taken over them. Canonical implementation:
+ * extract/figma/canvas-gate/score.ts `compositeOverWhite`.
+ */
 function contentBox(png) {
   let minX = png.width;
   let minY = png.height;
@@ -187,11 +197,11 @@ function contentBox(png) {
   for (let y = 0; y < png.height; y += 1) {
     for (let x = 0; x < png.width; x += 1) {
       const i = (y * png.width + x) * 4;
+      const a = png.data[i + 3] / 255;
       const ink =
-        png.data[i + 3] > 16 &&
-        (png.data[i] < WHITE_TRIM ||
-          png.data[i + 1] < WHITE_TRIM ||
-          png.data[i + 2] < WHITE_TRIM);
+        png.data[i] * a + 255 * (1 - a) < WHITE_TRIM ||
+        png.data[i + 1] * a + 255 * (1 - a) < WHITE_TRIM ||
+        png.data[i + 2] * a + 255 * (1 - a) < WHITE_TRIM;
       if (ink) {
         if (x < minX) minX = x;
         if (x > maxX) maxX = x;
@@ -225,7 +235,42 @@ function contentBox(png) {
  *
  * 32-wide bins are the coarsest quantisation that still separates the measured
  * tone swap: #F0F0F0 -> (7,7,7) and #D5EBFF -> (6,7,7) land in different bins.
+ *
+ * SOFT (TRILINEAR) ASSIGNMENT, not hard bins. Each channel's mass is split
+ * between its two nearest bin CENTRES by distance, so a colour sitting on a bin
+ * boundary lands half in each rather than wholly in one. Hard bins made this
+ * detector unable to tell a 1-unit difference from a 27-unit one: measured on
+ * mui/switch, whose shot is #7f7f7f and whose reference is #808080 — the SAME
+ * grey, one byte apart, straddling the 128 boundary — the hard-bin distance was
+ * 25.9% against a 25% bar, i.e. a full-blown FC-REF-TONE-SWAP on two pictures
+ * that agree to within 0.6 per channel on the mean. Synthetic controls, hard
+ * bins -> soft:
+ *     #F0F0F0 vs #D5EBFF (the tuned real swap)  100% -> 86.8%   still caught
+ *     #7f7f7f vs #808080 (one byte apart)       100% ->  4.7%   correctly not
+ *     mui/switch shot vs reference               25.9% ->  4.2%  correctly not
+ * The 25% bar is UNCHANGED and this is not a relaxation — a one-byte colour
+ * difference scoring 100% "share almost no colour" was the detector being
+ * wrong, not being strict. It was latent until the composite-over-white fix
+ * brought mui/switch's pctAAMasked into the <=10 band where C5/C6 looks.
  */
+/** Split one 0..255 channel across its two nearest bin centres (centre = 32k+16). */
+function binSplit(v) {
+  const p = v / 32 - 0.5;
+  let lo = Math.floor(p);
+  let w = p - lo;
+  let hi = lo + 1;
+  if (lo < 0) {
+    lo = 0;
+    hi = 0;
+    w = 0;
+  }
+  if (hi > 7) {
+    hi = 7;
+    if (lo > 7) lo = 7;
+  }
+  return [lo, hi, w];
+}
+
 function contentHistogram(png, box) {
   const h = new Float64Array(512);
   let n = 0;
@@ -233,10 +278,19 @@ function contentHistogram(png, box) {
     for (let x = 0; x < box.width; x += 1) {
       const i = ((box.y + y) * png.width + (box.x + x)) * 4;
       const a = png.data[i + 3] / 255;
-      const r = Math.round(png.data[i] * a + 255 * (1 - a));
-      const g = Math.round(png.data[i + 1] * a + 255 * (1 - a));
-      const b = Math.round(png.data[i + 2] * a + 255 * (1 - a));
-      h[((r >> 5) << 6) | ((g >> 5) << 3) | (b >> 5)] += 1;
+      const [rl, rh, rw] = binSplit(png.data[i] * a + 255 * (1 - a));
+      const [gl, gh, gw] = binSplit(png.data[i + 1] * a + 255 * (1 - a));
+      const [bl, bh, bw] = binSplit(png.data[i + 2] * a + 255 * (1 - a));
+      for (const [ri, rmass] of [[rl, 1 - rw], [rh, rw]]) {
+        if (rmass === 0) continue;
+        for (const [gi, gmass] of [[gl, 1 - gw], [gh, gw]]) {
+          if (gmass === 0) continue;
+          for (const [bi, bmass] of [[bl, 1 - bw], [bh, bw]]) {
+            if (bmass === 0) continue;
+            h[(ri << 6) | (gi << 3) | bi] += rmass * gmass * bmass;
+          }
+        }
+      }
       n += 1;
     }
   }

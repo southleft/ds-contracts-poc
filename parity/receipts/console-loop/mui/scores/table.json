@@ -1,7 +1,7 @@
 {
   "version": 3,
   "status": "fail",
-  "matchDeveloped": true,
+  "matchDeveloped": false,
   "recommendMatchDeveloped": false,
   "passBar": {
     "pctAAMaskedMax": 5,
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "composition mismatch (scaleRatio=2.55, inkDelta=32.6) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-10T13:44:41.086Z"
+  "recordedAt": "2026-08-11T14:26:13.102Z"
 }

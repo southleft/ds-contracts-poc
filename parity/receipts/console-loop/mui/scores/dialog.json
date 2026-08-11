@@ -8,13 +8,13 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 98.23311111111111,
-    "pctAAUnmasked": 94.61411111111111,
-    "pctAAMasked": 94.61411111111111,
+    "pctExactUnmasked": 98.49733333333333,
+    "pctAAUnmasked": 94.88499999999999,
+    "pctAAMasked": 94.88499999999999,
     "maskCoveragePct": 0,
-    "canvasPx": "424x123",
+    "canvasPx": "424x135",
     "realPx": "900x1000",
-    "inkCanvasPct": 3.6227777777777774,
+    "inkCanvasPct": 3.9859999999999998,
     "inkRealPct": 98.1378888888889
   },
   "reference": "extract/computed/out/mui/dialog/orig-shots/lg__default.png",
@@ -28,10 +28,10 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 8.130081300813009,
-  "inkDelta": 94.51511111111111,
+  "scaleRatio": 7.407407407407407,
+  "inkDelta": 94.15188888888889,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "composition mismatch (scaleRatio=8.13, inkDelta=94.5) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
-  "recordedAt": "2026-08-10T18:45:03.432Z"
+  "note": "composition mismatch (scaleRatio=7.41, inkDelta=94.2) — use 1× VARIANT cell vs gate-shot (not set shot / not pair-- receipt)",
+  "recordedAt": "2026-08-11T14:26:08.418Z"
 }

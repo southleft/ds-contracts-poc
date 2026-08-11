@@ -3,9 +3,13 @@
  *
  * THE DEFECT, already named for ONE stem and never generalised. Before scoring,
  * both images are cropped to their "content box": the bounding box of pixels
- * whose alpha exceeds 16 AND at least one channel is under 250. Anything
- * lighter than 250 on every channel is treated as page background and cropped
- * away. A component whose design IS a light surface — a pale pill, a tinted
+ * that, COMPOSITED OVER WHITE, are under 250 on some channel. Anything lighter
+ * than 250 on every channel is treated as page background and cropped away.
+ * (Until 2026-08-11 the rule also gated on `alpha > 16` BEFORE compositing,
+ * which is a separate defect fixed in that round — see contentBoxOf below.
+ * That fix took this sweep from 10 lossy crops to 0; what remains measurable
+ * here is the ORIGINAL question, which the fix does not touch: an OPAQUE pale
+ * surface at, say, rgb(252) is still cropped as background.) A component whose design IS a light surface — a pale pill, a tinted
  * banner, a hairline border, a subtle fill — has that surface classified as
  * background, and the pixel bar then measures whatever ink survives.
  *
@@ -31,15 +35,28 @@ const WHITE_TRIM = 250; // must track extract's contentBoxOf / developed-score
 
 type Box = { x: number; y: number; width: number; height: number };
 
-/** The scorer's own rule, restated here so a change there shows up as a diff. */
+/** The scorer's own rule, restated here so a change there shows up as a diff.
+ *
+ *  2026-08-11: the scorer now COMPOSITES over opaque white before this test
+ *  (extract/figma/canvas-gate/score.ts `compositeOverWhite`), so this mirror
+ *  does too. It previously gated on `alpha > 16`, which made a translucent
+ *  fill invisible on a transparent-backed canvas export while the same fact
+ *  was ink on the opaque reference. That asymmetry ALSO lived inside this
+ *  probe and inverted its own verdict: the box was measured on RAW bytes while
+ *  `paintOutsideBox` below measured visibility COMPOSITED, so the probe was
+ *  comparing a crop taken under one rule against paint judged under another
+ *  and reported translucent-fill stems as discarding visible paint they in
+ *  fact keep. The two rules now agree. */
 function contentBoxOf(png: PNG): Box {
   let minX = png.width, minY = png.height, maxX = -1, maxY = -1;
   for (let y = 0; y < png.height; y++) {
     for (let x = 0; x < png.width; x++) {
       const i = (y * png.width + x) * 4;
+      const a = png.data[i + 3] / 255;
       const ink =
-        png.data[i + 3] > 16 &&
-        (png.data[i] < WHITE_TRIM || png.data[i + 1] < WHITE_TRIM || png.data[i + 2] < WHITE_TRIM);
+        png.data[i] * a + 255 * (1 - a) < WHITE_TRIM ||
+        png.data[i + 1] * a + 255 * (1 - a) < WHITE_TRIM ||
+        png.data[i + 2] * a + 255 * (1 - a) < WHITE_TRIM;
       if (ink) {
         if (x < minX) minX = x;
         if (x > maxX) maxX = x;
@@ -168,6 +185,14 @@ if (!process.argv.includes('--check')) {
 // pixel bar never compared. Named exceptions carry the measurement.
 if (process.argv.includes('--check')) {
   const NAMED: Record<string, string> = {
+    // MOOT SINCE 2026-08-11 — kept as the record of what closed it. This entry
+    // can no longer match: composited over white before the trim, mui/accordion
+    // discards nothing, and the sweep reports 0 lossy crops board-wide (was 10).
+    // The repair this comment asked for — "a shadow-aware content box, which
+    // re-crops and re-scores all 92 cells" — is exactly what landed, and it
+    // arrived as a side effect of fixing the alpha asymmetry rather than as a
+    // shadow rule: a drop shadow IS translucent paint, so once alpha stopped
+    // being a visibility gate the shadow fell inside the box on both sides.
     // MEASURED 2026-08-09. The only passing cell whose crop drops visible paint.
     // Both sides agree on a 290x50 content box — the accordion header, scored
     // whole — and what falls outside on the CANVAS side is the 2px bleed of the

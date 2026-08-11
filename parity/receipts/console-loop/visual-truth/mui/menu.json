@@ -17,14 +17,14 @@
   "cellPick": "standalone-node",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 96.57201795898555,
-    "pctAAUnmasked": 80.57881325081907,
-    "pctAAMasked": 80.57881325081907,
+    "pctExactUnmasked": 97.17288669064749,
+    "pctAAUnmasked": 78.92873201438849,
+    "pctAAMasked": 78.92873201438849,
     "maskCoveragePct": 0,
-    "canvasPx": "123x132",
-    "realPx": "123x134",
-    "inkCanvasPct": 20.252396553816286,
-    "inkRealPct": 96.29292561582332
+    "canvasPx": "128x139",
+    "realPx": "128x139",
+    "inkCanvasPct": 23.70166366906475,
+    "inkRealPct": 96.18367805755396
   },
   "reference": "extract/computed/out/mui/menu/orig-shots/__default.png",
   "referenceSha256": "fdc0a62785072cc10fdbc40b9a9a239b3efdd81eb649cfbb02a8a10c723cce8d",
@@ -35,9 +35,9 @@
   "strictCompositionOk": false,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.0151515151515151,
-  "inkDelta": 76.04052906200704,
+  "scaleRatio": 1,
+  "inkDelta": 72.4820143884892,
   "dprNormalized": false,
   "sizeNormalized": true,
-  "note": "composition mismatch (scaleRatio=1.02, inkDelta=76.0)"
+  "note": "composition mismatch (scaleRatio=1.00, inkDelta=72.5)"
 }

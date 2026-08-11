@@ -8,7 +8,7 @@
     "compositionOk": true
   },
   "receipt": "parity/receipts/console-loop/tailwind/components/card.json",
-  "status": "fail",
+  "status": "pass",
   "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
   "fileVersion": "2385245229284424737",
   "setNodeId": "1:2267",
@@ -17,13 +17,13 @@
   "cellPick": "standalone-node",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 25.91216216216216,
-    "pctAAUnmasked": 5.641891891891892,
-    "pctAAMasked": 5.641891891891892,
+    "pctExactUnmasked": 24.763513513513512,
+    "pctAAUnmasked": 3.3783783783783785,
+    "pctAAMasked": 3.3783783783783785,
     "maskCoveragePct": 0,
     "canvasPx": "74x40",
     "realPx": "74x40",
-    "inkCanvasPct": 13.85135135135135,
+    "inkCanvasPct": 16.925675675675674,
     "inkRealPct": 22.83783783783784
   },
   "reference": "extract/computed/out/tailwind/card/orig-shots/__default.png",
@@ -33,11 +33,11 @@
   "diff": "parity/receipts/console-loop/visual-truth/tailwind/diffs/card.diff.png",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 8.986486486486488,
+  "inkDelta": 5.912162162162165,
   "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=5.64 > 5)"
+  "note": "pixel bar met (headless REST render vs code reference)"
 }

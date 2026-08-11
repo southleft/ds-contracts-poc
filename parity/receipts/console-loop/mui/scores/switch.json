@@ -1,21 +1,21 @@
 {
   "version": 3,
-  "status": "fail",
+  "status": "pass",
   "matchDeveloped": false,
-  "recommendMatchDeveloped": false,
+  "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 53.110047846889955,
-    "pctAAUnmasked": 13.038277511961722,
-    "pctAAMasked": 13.038277511961722,
+    "pctExactUnmasked": 43.42105263157895,
+    "pctAAUnmasked": 2.5,
+    "pctAAMasked": 2.5,
     "maskCoveragePct": 0,
-    "canvasPx": "38x22",
+    "canvasPx": "38x20",
     "realPx": "38x19",
-    "inkCanvasPct": 38.038277511961724,
-    "inkRealPct": 36.124401913875595
+    "inkCanvasPct": 42.368421052631575,
+    "inkRealPct": 39.73684210526316
   },
   "reference": "extract/computed/out/mui/switch/orig-shots/default.medium.checked.enabled__default.png",
   "referenceSha256": "5c1f496eef13d44db39c3a76241c9c4679a27ebc3fb492ce5c2dde376833ec7e",
@@ -26,12 +26,12 @@
   "receipt": "parity/receipts/console-loop/mui/components/switch.json",
   "compositionOk": true,
   "strictCompositionOk": true,
-  "framingTolerant": false,
+  "framingTolerant": true,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.1578947368421053,
-  "inkDelta": 1.913875598086129,
+  "scaleRatio": 1.0526315789473684,
+  "inkDelta": 2.6315789473684177,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=13.04 > 5)",
-  "recordedAt": "2026-08-10T18:40:56.822Z"
+  "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
+  "recordedAt": "2026-08-11T14:26:12.446Z"
 }

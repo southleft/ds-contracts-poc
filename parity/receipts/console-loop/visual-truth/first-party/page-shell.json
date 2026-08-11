@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "page-shell",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/page-shell.json",
+  "status": "pass",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "fileVersion": "2385620546078956186",
+  "setNodeId": "7:1674",
+  "cellNodeId": "7:1674",
+  "cellName": "PageShell",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 0.8327511132753231,
+    "pctAAUnmasked": 0.07904078363291202,
+    "pctAAMasked": 0.07904078363291202,
+    "maskCoveragePct": 0,
+    "canvasPx": "317x447",
+    "realPx": "317x447",
+    "inkCanvasPct": 3.7008024050981305,
+    "inkRealPct": 3.7008024050981305
+  },
+  "reference": "parity/receipts/console-loop/refs/page-shell.png",
+  "referenceSha256": "8db0830a1c6d6e56fa385cab11b7acd2a610176cdc31830cadbc744920cc7491",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/page-shell.png",
+  "canvasShotSha256": "d1de0edd857911c56218849c48e5190322e5b684f9d3563c2d27b83a98c5d77a",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/page-shell.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}

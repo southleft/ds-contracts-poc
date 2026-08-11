@@ -9842,6 +9842,37 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // ALPHA-COMPOSITE: the ink crop that every board number is computed over
+    // used to read RAW bytes with alpha as a visibility gate, so a translucent
+    // fill was ink on the OPAQUE library reference (rgb(240) < WHITE_TRIM) and
+    // invisible on the TRANSPARENT-BACKED canvas export ((0,0,0,15), alpha not
+    // > 16). One design fact, two crops, and scaleRatio / the DPR halve /
+    // inkDelta / pctAAMasked were then all measured across a mismatch the
+    // component never had — polaris/badge's 43x11-vs-61x20 collapse and its
+    // withdrawn FC-REBUILD-REGRESSION.
+    //
+    // Pinned in BOTH directions, because a fix that only makes things pass is
+    // indistinguishable from deleting the bar: the same fact in two encodings
+    // must score as matching, a genuinely different translucent fill must
+    // STILL fail, and the legacy raw-byte rule must still collapse the box so
+    // the defect keeps its name. The bar itself is untouched at AA <= 5.
+    id: 'console-loop-alpha-composite',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(
+        TSX,
+        [path.join(ROOT, 'scripts', 'console-loop-alpha-composite-probe.mts'), '--check'],
+        { cwd: ROOT, encoding: 'utf8' },
+      );
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) throw new Error(`alpha-composite probe failed:\n${out}`);
+      if (!/ink-box collapse REPRODUCED/.test(out))
+        throw new Error(`the probe stopped reproducing the defect it pins:\n${out}`);
+      if (!/a real paint difference still fails/.test(out))
+        throw new Error(`the probe stopped red-testing the other direction:\n${out}`);
+    },
+  },
+  {
     // CANVAS-DRIFT: no other gate can ask whether a live cell is what its lane's
     // own committed emit script would build TODAY. A cell from an older revision
     // is perfectly self-consistent — right node id, right variant name, shot
@@ -10009,7 +10040,25 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // rebuilt from their OWN committed scripts this round, so when a
       // snapshot is taken they should read in-sync BY CONSTRUCTION, exactly
       // as radio did; that is a snapshot round, not a re-measurement.
-      const wantUnmeasured = ['mui/autocomplete', 'mui/checkbox', 'mui/divider', 'mui/linear-progress'];
+      // 2026-08-11 composite-over-white round: input-adornment and switch
+      // JOINED the pass set (20.83 -> 0.69 and 13.04 -> 2.50 on the bridge,
+      // 20.83 -> 0.69 and 10.89 -> 0.28 headless) when the ink crop started
+      // compositing both sides over opaque white before trimming. NEITHER was
+      // rebuilt and neither is probed, so both are pinned here for exactly the
+      // reason the others are — nobody has asked whether those canvases are
+      // what their emit scripts would build today. That question is OPEN for
+      // them in a way it is not for autocomplete/checkbox: those two were
+      // rebuilt from their own scripts, whereas these two passed because the
+      // INSTRUMENT changed under an unchanged canvas. A probe could still
+      // surface real drift, which throws unconditionally above.
+      const wantUnmeasured = [
+        'mui/autocomplete',
+        'mui/checkbox',
+        'mui/divider',
+        'mui/input-adornment',
+        'mui/linear-progress',
+        'mui/switch',
+      ];
       if (unmeasuredPasses.sort().join(',') !== wantUnmeasured.join(',')) {
         throw new Error(
           `expected exactly mui's ${wantUnmeasured.length} un-probed passes [${wantUnmeasured.join(', ')}], got [${unmeasuredPasses.join(', ')}]`,

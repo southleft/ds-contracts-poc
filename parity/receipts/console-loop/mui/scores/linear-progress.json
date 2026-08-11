@@ -1,7 +1,7 @@
 {
   "version": 3,
   "status": "pass",
-  "matchDeveloped": false,
+  "matchDeveloped": true,
   "recommendMatchDeveloped": true,
   "passBar": {
     "pctAAMaskedMax": 5,
@@ -33,5 +33,5 @@
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met — receipt may claim visual pass; the evidence gate verifies against this scorecard",
-  "recordedAt": "2026-08-10T13:59:59.185Z"
+  "recordedAt": "2026-08-11T14:26:10.076Z"
 }

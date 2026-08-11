@@ -17,6 +17,38 @@ import { PNG } from "pngjs";
 export const PASS_AA_MASKED = 5;
 const WHITE_TRIM = 250;
 
+/**
+ * Flatten onto an OPAQUE WHITE substrate — the canonical implementation and
+ * the full rationale live in extract/figma/canvas-gate/score.ts
+ * (`compositeOverWhite`); duplicated here for the same reason the rest of this
+ * module is, and it must stay byte-identical in behaviour.
+ *
+ * Applied to BOTH sides before ANY ink crop, DPR halve or size-normalize:
+ * a transparent-backed canvas export carries `rgba(0,0,0,0.06)` as `(0,0,0,15)`
+ * while the reference carries the same fact as opaque `rgb(240)`, and the raw
+ * ink test called the first invisible and the second ink. Idempotent on opaque
+ * input. See scripts/console-loop-alpha-composite-probe.mts.
+ */
+function compositeOverWhite(src) {
+  const out = new PNG({ width: src.width, height: src.height });
+  const total = src.width * src.height;
+  for (let p = 0; p < total; p++) {
+    const i = p * 4;
+    const a = src.data[i + 3] / 255;
+    if (a === 1) {
+      out.data[i] = src.data[i];
+      out.data[i + 1] = src.data[i + 1];
+      out.data[i + 2] = src.data[i + 2];
+    } else {
+      out.data[i] = Math.round(src.data[i] * a + 255 * (1 - a));
+      out.data[i + 1] = Math.round(src.data[i + 1] * a + 255 * (1 - a));
+      out.data[i + 2] = Math.round(src.data[i + 2] * a + 255 * (1 - a));
+    }
+    out.data[i + 3] = 255;
+  }
+  return out;
+}
+
 function contentBoxOf(png) {
   let minX = png.width,
     minY = png.height,
@@ -100,8 +132,11 @@ function downscale2x(src) {
  * injected so this module stays plain-node loadable.
  */
 export function scoreStemPair(canvasIn, refIn, { alignPair, scoreCell }) {
-  let canvasPng = canvasIn;
-  let refPng = refIn;
+  // Both sides onto an opaque white substrate FIRST — every measurement below
+  // (DPR window, content boxes, size-normalize, ink) then reads what a viewer
+  // would see rather than one side's encoding.
+  let canvasPng = compositeOverWhite(canvasIn);
+  let refPng = compositeOverWhite(refIn);
 
   // Whole-image DPR guard: normally both sides are @1× (REST scale=1 like the
   // bridge exports); a genuine 2×-vs-1× pair still gets halved here.

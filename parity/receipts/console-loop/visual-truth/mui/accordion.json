@@ -17,13 +17,13 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 7.944827586206897,
-    "pctAAUnmasked": 2.882758620689655,
-    "pctAAMasked": 2.882758620689655,
+    "pctExactUnmasked": 11.103448275862068,
+    "pctAAUnmasked": 4.544827586206897,
+    "pctAAMasked": 4.544827586206897,
     "maskCoveragePct": 0,
     "canvasPx": "290x50",
     "realPx": "290x50",
-    "inkCanvasPct": 7.813793103448276,
+    "inkCanvasPct": 9.758620689655173,
     "inkRealPct": 8.158620689655173
   },
   "reference": "extract/computed/out/mui/accordion/orig-shots/elevation.collapsed.enabled__default.png",
@@ -36,7 +36,7 @@
   "framingTolerant": true,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 0.3448275862068968,
+  "inkDelta": 1.5999999999999996,
   "dprNormalized": false,
   "sizeNormalized": false,
   "note": "pixel bar met (headless REST render vs code reference)"

@@ -17,17 +17,17 @@
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 33.57142857142857,
-    "pctAAUnmasked": 12.619047619047619,
-    "pctAAMasked": 12.619047619047619,
+    "pctExactUnmasked": 92.38095238095238,
+    "pctAAUnmasked": 5.357142857142857,
+    "pctAAMasked": 5.357142857142857,
     "maskCoveragePct": 0,
     "canvasPx": "42x20",
-    "realPx": "39x20",
+    "realPx": "41x20",
     "inkCanvasPct": 91.9047619047619,
-    "inkRealPct": 84.76190476190476
+    "inkRealPct": 89.52380952380953
   },
-  "reference": "parity/receipts/console-loop/astryx/refs/badge.png",
-  "referenceSha256": "acbe128253998d720301fac3c2f456b8d92e6a984fca3fff65411201059c9869",
+  "reference": "extract/computed/out/astryx/badge/orig-shots/blue__default.png",
+  "referenceSha256": "a131cbf8310103e3e8e48e997bf82e2a80404a5d792782f93d958ae9d87dbbb6",
   "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/badge.png",
   "canvasShotSha256": "d4424accf7a34b445a7d9621c30fff7a5c6ff25f112391e079d7758ca36ed33e",
   "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/badge.diff.png",
@@ -35,9 +35,9 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1.0769230769230769,
-  "inkDelta": 7.142857142857139,
+  "scaleRatio": 1.024390243902439,
+  "inkDelta": 2.3809523809523654,
   "dprNormalized": false,
   "sizeNormalized": false,
-  "note": "pixel bar missed (pctAAMasked=12.62 > 5)"
+  "note": "pixel bar missed (pctAAMasked=5.36 > 5)"
 }

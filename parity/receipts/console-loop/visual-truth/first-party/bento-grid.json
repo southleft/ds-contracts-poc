@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "source": "rest-images-api",
+  "lane": "first-party",
+  "stem": "bento-grid",
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "receipt": "parity/receipts/console-loop/components/bento-grid.json",
+  "status": "pass",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "fileVersion": "2385620546078956186",
+  "setNodeId": "7:1658",
+  "cellNodeId": "7:1658",
+  "cellName": "BentoGrid (ds.bento-grid)",
+  "cellPick": "standalone-node",
+  "referenceResolvedFrom": "receipt.visual.reference",
+  "metrics": {
+    "pctExactUnmasked": 1.027824426683019,
+    "pctAAUnmasked": 0.09755621676991366,
+    "pctAAMasked": 0.09755621676991366,
+    "maskCoveragePct": 0,
+    "canvasPx": "581x247",
+    "realPx": "581x247",
+    "inkCanvasPct": 4.567721435191315,
+    "inkRealPct": 4.567721435191315
+  },
+  "reference": "parity/receipts/console-loop/refs/bento-grid.png",
+  "referenceSha256": "429f5876a27db8aa6eabf29ff5d4eec0784be6b0558ebc7fc23ecefcc06fcb46",
+  "canvasShot": "parity/receipts/console-loop/visual-truth/first-party/shots/bento-grid.png",
+  "canvasShotSha256": "1ddfa2f89093a0d522cb955cada42abe1bb5c283200c0d1a6c4df7b5b3ee2632",
+  "diff": "parity/receipts/console-loop/visual-truth/first-party/diffs/bento-grid.diff.png",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": true,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1,
+  "inkDelta": 0,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar met (headless REST render vs code reference)"
+}
