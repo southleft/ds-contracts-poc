@@ -8,19 +8,19 @@
     "compositionOk": true
   },
   "metrics": {
-    "pctExactUnmasked": 17.32421875,
-    "pctAAUnmasked": 8.125,
-    "pctAAMasked": 8.125,
+    "pctExactUnmasked": 23.9794921875,
+    "pctAAUnmasked": 14.94140625,
+    "pctAAMasked": 14.94140625,
     "maskCoveragePct": 0,
-    "canvasPx": "160x32",
-    "realPx": "160x32",
-    "inkCanvasPct": 99.70703125,
+    "canvasPx": "299x64",
+    "realPx": "320x64",
+    "inkCanvasPct": 92.96875,
     "inkRealPct": 99.55078125
   },
   "reference": "extract/computed/out/astryx/banner/orig-shots/info.card__default.png",
   "referenceSha256": "9b64fd410da678de7ff7abee930875180358c6599eaca7d6c859cbeb26d0dcad",
   "canvasShot": "parity/receipts/console-loop/astryx/shots/banner-cell.png",
-  "canvasShotSha256": "95fd7081ee374081bb46e658e80c3372e423806352d74f1e07f548a381093d24",
+  "canvasShotSha256": "2a314b8fb9fcf2c497e47da22eb45090c55330579fba7874f4ff832b1177fa64",
   "diff": "parity/receipts/console-loop/astryx/scores/banner.diff.png",
   "fc": [
     "FC-SCOPED-VAR-OVERRIDE"
@@ -30,10 +30,10 @@
   "strictCompositionOk": true,
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
-  "scaleRatio": 1,
-  "inkDelta": 0.15625,
-  "dprNormalized": true,
-  "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=8.13 > 5)",
-  "recordedAt": "2026-08-11T15:15:55.322Z"
+  "scaleRatio": 1.0702341137123745,
+  "inkDelta": 6.58203125,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=14.94 > 5)",
+  "recordedAt": "2026-08-11T17:41:42.782Z"
 }

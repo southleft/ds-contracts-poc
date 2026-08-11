@@ -53,6 +53,62 @@ defect.** Measured, in order:
    `imported.badge.label.color.none` is already the correct **#616161**, and
    `imported.badge.root.color.none` is `{p.color-text-secondary}`.
 
+## WAVE 3b — FC-AMEND-CANNOT-CLEAR: THE AMEND PATH COULD NEVER REMOVE A FACT THE CONTRACT DROPPED, AND A WRONG CANVAS WAS SCORING BETTER THAN A RIGHT ONE
+
+astryx/banner's cell was **331x88 against a reference and a contract render
+that both measure 64 tall.** Its ROOT carried a bound 12/16 padding + gap 8
+that its committed spec does not declare — the header part's padding applied
+TWICE (header 299x64 → root 331x88).
+
+**THE CAUSE IS STRUCTURAL AND IT WAS INVISIBLE BY CONSTRUCTION.**
+`applyFrameSpec` only ever SET what the spec declares. On the CREATE path that
+is correct — a fresh `createComponent` starts at 0. On the AMEND path a
+spacing fact the contract had since DROPPED survived on the node forever, and
+the two paths silently disagreed. `specHash` matching then reported
+`skipped: unchanged` over the top of it, which is exactly what the wave-3
+rebuild sweep saw: astryx/banner rebuilt under rt12, all 8 variants, and came
+back byte-identically wrong at 8.13. **A rebuild cannot fix a value a rebuild
+cannot clear.**
+
+The fix resets undeclared `paddingTop/Right/Bottom/Left/itemSpacing` (and their
+bound variables) before applying the declared ones —
+`RUNTIME_EMIT_REV rt12-birthbox-declared-layout-only → rt13-amend-clears-undeclared-spacing`.
+Only the ROOT needs it: amend removes and rebuilds every child, so no
+descendant can hold stale state.
+
+**BLAST RADIUS MEASURED BEFORE THE CHANGE WAS WRITTEN, not after.** Every one
+of the 77 scored cells on both connected files was read live and compared
+against its own committed spec's root bindings/lits. 34 roots carry padding;
+33 of them DECLARE it. astryx/banner was the only root in the corpus carrying
+spacing its spec does not claim, so the reset changes exactly one scored cell.
+
+    astryx/banner   331x88 → 299x64,  root padding 12/16/12/16 → 0/0/0/0
+    height          88 vs ref 64      →  64 vs ref 64, EXACT
+
+**AND THE SCORE GOT WORSE: 8.60 → 14.94 bridge, 9.90 → 10.43 headless.** That
+is the finding worth keeping, not a regression. At the wrong 331x88 the scorer
+dpr-halved and size-normalized the pair into 160x32 and read 8.60; at the
+correct 299x64 it does neither — heights are identical — and the residual is
+now the honest one: **`FC-REF-STAGE-WIDTH`, the same cause as mui/alert.** 320
+is astryx's stage content box for this stem (352 file − 2×16 padding) and
+Banner is `blockStage: true`, so a block element FILLS it; 320 is a fact about
+the harness. The canvas hugs at 299, the contract render hugs at 284, and the
+scorer rescales 299→320 (1.07×). **A SIZE-NORMALIZED AA NUMBER CAN REWARD A
+WRONG BOX** — the normalization that makes two differently-sized boxes
+comparable also hid a 24px height error and punished its removal.
+
+The framing pin was re-recorded (astryx/framing.json, 331x88 → 299x64) with
+that reason attached; it is the pin that caught the change, correctly, as a
+hard C1 violation before anything else did.
+
+TWO THINGS THIS COSTS, both stated rather than absorbed:
+  · Every emitted script's `specHash` changed with the rev bump, so the
+    wave-3 sweep's `skipped: unchanged` results are historical facts about
+    rt12, not predictions about the next rebuild. They were true when measured.
+  · All 8 libraries were re-emitted and their GENESIS batches rebuilt; the
+    plugin engine receipt was re-recorded twice this session (once for the
+    shadow fold, once for this).
+
 ## WAVE 3 — ONE PASS EARNED (mui/slider), AND THE REST OF THE NEAR-BAR TIER IS NOT A REBUILD PROBLEM
 
 **mui/slider 7.96 -> 0.57 bridge / 7.96 -> 0.56 headless, both instruments,

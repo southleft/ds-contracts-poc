@@ -10,16 +10,16 @@
   "receipt": "parity/receipts/console-loop/astryx/components/banner.json",
   "status": "fail",
   "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
-  "fileVersion": "2385311290720626690",
+  "fileVersion": "2386522901510968529",
   "setNodeId": "1:3813",
   "cellNodeId": "1:3797",
   "cellName": "Status=Info, Container=Card",
   "cellPick": "variant-token-match",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 99.8046875,
-    "pctAAUnmasked": 9.90234375,
-    "pctAAMasked": 9.90234375,
+    "pctExactUnmasked": 21.6015625,
+    "pctAAUnmasked": 10.4296875,
+    "pctAAMasked": 10.4296875,
     "maskCoveragePct": 0,
     "canvasPx": "160x32",
     "realPx": "160x32",
@@ -29,7 +29,7 @@
   "reference": "extract/computed/out/astryx/banner/orig-shots/info.card__default.png",
   "referenceSha256": "9b64fd410da678de7ff7abee930875180358c6599eaca7d6c859cbeb26d0dcad",
   "canvasShot": "parity/receipts/console-loop/visual-truth/astryx/shots/banner.png",
-  "canvasShotSha256": "beacfb5d608954d1967b8fe124b5c4d5f2f5614f826a0569513f962f677e8d6d",
+  "canvasShotSha256": "88b064c8ca2e310e65ee2a11627c50efc28807a311e412b8cea170c5bc5abaf7",
   "diff": "parity/receipts/console-loop/visual-truth/astryx/diffs/banner.diff.png",
   "compositionOk": true,
   "strictCompositionOk": true,
@@ -39,5 +39,5 @@
   "inkDelta": 0.09765625,
   "dprNormalized": true,
   "sizeNormalized": true,
-  "note": "pixel bar missed (pctAAMasked=9.90 > 5)"
+  "note": "pixel bar missed (pctAAMasked=10.43 > 5)"
 }

@@ -1,5 +1,5 @@
 {
-  "passed": 223,
+  "passed": 222,
   "total": 225,
   "results": [
     {
@@ -625,7 +625,8 @@
     {
       "id": "capability-report-is-fresh",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: docs/24-what-works.md is STALE vs a rebuild from its committed sources:\nSTALE: docs/24-what-works.md does not match a rebuild from its committed sources.\nEvery number in it is READ from an artifact; one of those artifacts moved.\nRebuild it and commit:  npm run capability:report\n"
     },
     {
       "id": "generated-storybook-trees-are-fresh",

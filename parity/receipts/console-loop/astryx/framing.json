@@ -59,8 +59,10 @@
       "setNodeId": "1:3813",
       "cellNodeId": "1:3797",
       "cellName": "Status=Info, Container=Card",
-      "cellW": 331,
-      "cellH": 88
+      "cellW": 299,
+      "cellH": 64,
+      "repinnedAt": "2026-08-11",
+      "repinnedWhy": "FC-AMEND-CANNOT-CLEAR closed: the cell WAS 331x88 because its root carried a bound 12/16 padding + gap 8 that its committed spec does not declare — the header's padding applied twice (header 299x64 -> root 331x88). applyFrameSpec only ever SET what the spec declares, so the amend path could not remove a fact the contract had dropped, while a fresh build started at 0. The runtime now resets undeclared paddingTop/Right/Bottom/Left/itemSpacing before applying the declared ones (RUNTIME_EMIT_REV rt13). Rebuilt from the committed script: 299x64, root padding 0, and the height now matches the reference (64) and the contract render (64) EXACTLY."
     },
     "button": {
       "setNodeId": "1:3864",

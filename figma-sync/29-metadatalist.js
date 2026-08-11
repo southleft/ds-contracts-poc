@@ -638,6 +638,33 @@ function applyFrameSpec(node, spec) {
   // from the fact never having been carried.
   if (spec.clipsContent === true) dsDeclaredClip.add(node.id);
   if (node.type === 'FRAME') node.fills = [];
+  // FC-AMEND-CANNOT-CLEAR (astryx/banner live-canvas round, 2026-08-11).
+  //
+  // This function only ever SET what the spec declares, so on the AMEND path
+  // a spacing fact the contract has since DROPPED survived on the node
+  // forever. The create path never showed it — a fresh createComponent starts
+  // at 0 — so the two paths silently disagreed, and `specHash` matching made
+  // it invisible: the script reports "skipped: unchanged" while the canvas
+  // carries a value the contract does not claim.
+  //
+  // Measured: astryx/banner's root carried a bound 12/16 padding + gap 8 that
+  // its committed spec does not declare, applying the header's padding TWICE
+  // (header 299x64 → root 331x88) against a reference and a contract render
+  // that both measure 64 tall. Across all 77 scored cells on the two
+  // connected files it is the ONLY root in that state — every other root with
+  // padding declares it — so this reset changes exactly one scored cell.
+  //
+  // Only the ROOT needs it: amend removes and rebuilds every child, so no
+  // descendant can carry stale state. Reset to Figma's own defaults FIRST,
+  // then apply what the spec declares below.
+  for (const field of ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'itemSpacing']) {
+    if (spec.bindings && spec.bindings[field] !== undefined) continue;
+    if (spec.lits && spec.lits[field] !== undefined) continue;
+    try {
+      if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
+    } catch (e) { /* field not bindable on this node type */ }
+    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+  }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
   }
@@ -1134,7 +1161,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt12-birthbox-declared-layout-only';
+const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
