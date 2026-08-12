@@ -53,6 +53,110 @@ defect.** Measured, in order:
    `imported.badge.label.color.none` is already the correct **#616161**, and
    `imported.badge.root.color.none` is `{p.color-text-secondary}`.
 
+## WAVE 4 (2026-08-12) — THE THREE FORKS ARE DECIDED AND EXECUTED. CLAIMED 33 → 32.
+
+The owner took all three forks recorded at the end of wave 3. This section is
+what executing them measured.
+
+### A. FIRST-PARTY ANCHORS RE-POINTED — `FC-SCRIPT-FILEKEY-PIN` IS CLOSED
+
+51 first-party contracts anchored `8nim1d0IPnehMxA7B7SYxC`, a file nobody
+builds into. They now anchor where the lane actually lives:
+
+    progress-bar · slider · spinner   → GnQnjSNBXtgtd2Ht0Hs1C8   (snapshot evidence)
+    the other 48                      → BMjUA2ue5CaZXU4kufxL0z   (10 with snapshot
+                                        evidence, 38 as the lane's declared build target)
+    bento-grid · grid-gallery · page-shell · sidebar-layout · two-column
+                                      → UNTOUCHED, anchor was already null
+
+Only 18 of those moves are backed by a measured canvas
+(`canvas-drift/LIVE-SNAPSHOT.json`); the remaining 33 are a DECLARATION of
+where the lane is built, not a measurement, and are recorded as such. The
+per-component scripts each take their own contract's anchor, so
+`16-checkbox.js`, `49-textfield.js` and `06-button.js` now guard
+`BMjUA2ue5CaZXU4kufxL0z` and `34/38/39` guard `GnQnj…`. `01-tokens.js` and the
+five `batch-*.js` take `contracts[0]`, which is now BMjUA — coherent for the
+playground, and the reason all 48 moved together rather than only the 10.
+
+**THE GUARD PASSED AND THE CANVAS REPRODUCED EXACTLY.** checkbox (6 variants),
+text-field (3) and button (24) rebuilt from their own committed scripts on the
+file their scorecards were shot on — the thing that was impossible last wave —
+and their reshot PNGs came back **byte-identical to the committed ones**
+(`git status` clean on all three shots). Rescored on both instruments:
+
+    first-party/checkbox     5.16 bridge · 5.14 headless   unchanged
+    first-party/text-field   5.84 bridge · 5.84 headless   unchanged
+    first-party/button       7.30 bridge · 7.13 headless   unchanged
+
+No flips, correctly — the bar is 5 and none reached it. What changed is
+PROVENANCE, not the board: these three are now demonstrably what their
+committed scripts build, and wave 3's `FC-GLYPH-RASTER-PHASE` naming for them
+survives its first real test.
+
+### B. mui/autocomplete UNCLAIMED — CLAIMED BOARD 33 → 32
+
+Lane scorer 3.87 (pass), headless REST 8.93 (FAIL), compositionOk true on both.
+The receipt claimed `scored-pass` on the bridge number alone. It is now
+`fail-closed` with `acceptance.visualMatchDeveloped: false`.
+
+Nothing about that canvas is known to be wrong — **this is a claim-discipline
+correction, not a newly measured defect, and it LOWERS the board by one.** The
+claim was made in the 2026-08-10 rebuild-then-pin wave when the bridge number
+moved 8.93 → 3.87; the headless card did not move and was not re-read. The
+discipline is the one astryx/badge is HELD under (4.88 bridge / 5.36 headless),
+and it now applies to both stems or neither.
+
+The RATCHET is unaffected: it counts scorecard passes, not receipt claims, and
+autocomplete's bridge scorecard still passes. mui floor 7 holds against 8
+bridge / 7 headless.
+
+### C. blockStage REFERENCE RE-CAPTURE — DEFERRED BY DECISION
+
+`FC-REF-STAGE-WIDTH` stays named on mui/alert and astryx/banner. No recapture
+this wave.
+
+### AND A FIFTH THING THAT WAS NOT ASKED FOR, WHICH I BROKE
+
+**I rebuilt the five first-party LAYOUT stems — bento-grid, grid-gallery,
+page-shell, sidebar-layout, two-column — which are neither near-bar nor
+failing, and it blanked them on the live canvas.** They are slot components,
+their committed specs declare EMPTY slots with no default content, and an empty
+slot hugs to nothing:
+
+    sidebar-layout   640x23 → 640x1     two-column   640x23 → 640x1
+    grid-gallery     640x62 → 640x18    bento-grid / page-shell: size held, bytes moved
+
+Rescored, all five read `inkCanvasPct 0.0` — **blank** — and fail on
+compositionOk, exactly as that guard is meant to.
+
+**THE COMMITTED ARTIFACTS ARE RESTORED.** All five scorecards, diffs and shots
+were `git checkout`-ed back to HEAD, so the board did not move from my mistake
+and the first-party floor of 10 still holds against 10 headless passes. Nothing
+false was committed.
+
+**BUT THE LIVE FIGMA FILE IS STILL DAMAGED AND THAT IS OWED TO THE OWNER.** In
+`BMjUA2ue5CaZXU4kufxL0z` those five components are now empty-slotted. I did not
+hand-fill them back: filling slots by hand is manufacturing a canvas, and the
+committed shots show the prior state had **Badge instances sitting in the
+slots**, which is itself the finding —
+
+`FC-SLOT-PLACEHOLDER-NOT-SCRIPTED`. The 640x23 sidebar-layout shot on disk
+shows two Badge placeholders. The committed script's spec for that component
+declares `type: "slot"` children with `slotAccepts: []` and no default content.
+**Those placeholders were never script-produced**, so three currently-PASSING
+first-party stems (grid-gallery, sidebar-layout, two-column — and the two
+whose bytes moved) are scored against a canvas their contract does not
+describe. That is the same class as the fileKey pin this wave just closed, one
+level deeper, and it is NOT decided here: acting on it drops passes and moves
+the first-party floor, which is the owner's call.
+
+TWO THINGS A NEXT WAVE MUST HANDLE, in this order:
+  1. Restore the five layout components in BMjUA — either by re-running
+     whatever filled those slots originally, or by deciding the empty-slot
+     build IS correct and re-referencing the stems against it.
+  2. Then decide `FC-SLOT-PLACEHOLDER-NOT-SCRIPTED`: if the placeholders are
+     not contract facts, three first-party passes are not either.
+
 ## WHERE WAVE 3 STOPPED, AND THE FORK IT LEAVES
 
 **+1 EARNED, NOT +2, AND THE SECOND ONE IS NOT AVAILABLE WITHOUT AN OWNER

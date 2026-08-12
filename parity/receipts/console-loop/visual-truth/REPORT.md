@@ -2,7 +2,7 @@
 
 Source: `rest-images-api` (Figma REST renders at scale 1 — like-for-like with the bridge lane's scale-1 cell exports; no desktop app, no plugin bridge), scored under the one bar (`pctAAMasked <= 5` AND `compositionOk`) with the developed-score normalization policy. Written by `scripts/visual-truth-report.mjs`; regenerate with `npm run visual-truth:report`.
 
-generatedFrom: sha256:3cc85210ee3ef39d2d0fc76c0026efe1800f58dad30a5fcf8c9eae7b891b802c (133 scorecards)
+generatedFrom: sha256:b8c8b088c1ee84f3c04d3864ba68b159a4da40c1d197853c7671baf3d8fb63ca (133 scorecards)
 
 ## Summary
 

@@ -17,19 +17,24 @@
     "result": {}
   },
   "visual": {
-    "ok": true,
+    "ok": false,
     "notes": [
       "Existing on-canvas set inspected; structure/variants sane (21:134).",
       "Autocomplete COMPONENT_SET 21:134: 2 variant(s), 1 prop def(s). Structure looks sane; slot placeholders OK.",
-      "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts \u2014 Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine \u2014 the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot.",
-      "2026-08-10 REBUILD-THEN-PIN \u2014 8.93 -> 3.87, AND THE EMITTER IS WHAT MOVED IT. The prior fail-closed number (8.14/8.93 across instruments) was scored against a canvas built by an OLDER emitter generation. Rebuilt cell 21:82 from the committed examples/mui/figma/autocomplete.figma.js at rt12, re-shot at scale 1 and rescored against the SAME committed reference: pctAAMasked 3.87, compositionOk true, canvas 144x28 vs real 144x28. The FC-FONT-SUBSTRATE closure noted below already removed the reference-side variable; this round removed the canvas-side one. Flipped on the scorecard, not on the narrative."
+      "FC-FONT-SUBSTRATE CLOSED FOR MUI 2026-08-08 (font-substrate round): configs/mui.json gained cfg.fonts — Roboto 400/500/700 from @fontsource/roboto@5.3.0 (exact-pinned in examples/mui/.mui-sandbox), faces committed under extract/computed/fonts/roboto/ and inlined as data: URIs in the gate render. INSTRUMENT FINDING: the prior refs did not render the Helvetica fallback on the recording machine — the machine's ONLY local Roboto face is Roboto-Thin, so the 'Roboto' stack resolved to THIN glyphs (verified via CDP getPlatformFontsForNode); the committed @font-face now pins Regular/Medium/Bold hermetically on any machine. Reference re-pinned via offline regate; same canvas cell shot.",
+      "2026-08-10 REBUILD-THEN-PIN — 8.93 -> 3.87, AND THE EMITTER IS WHAT MOVED IT. The prior fail-closed number (8.14/8.93 across instruments) was scored against a canvas built by an OLDER emitter generation. Rebuilt cell 21:82 from the committed examples/mui/figma/autocomplete.figma.js at rt12, re-shot at scale 1 and rescored against the SAME committed reference: pctAAMasked 3.87, compositionOk true, canvas 144x28 vs real 144x28. The FC-FONT-SUBSTRATE closure noted below already removed the reference-side variable; this round removed the canvas-side one. Flipped on the scorecard, not on the narrative.",
+      "2026-08-12 UNCLAIMED. The claim was made in the 2026-08-10 rebuild-then-pin wave, when the cell was rebuilt from its committed rt12 script and the BRIDGE number moved 8.93 -> 3.87; the headless card did not move and was not re-read at claim time. Nothing about the canvas is known to be wrong — this is a claim-discipline correction, not a newly measured defect, and it LOWERS the board by one."
     ],
-    "defects": [],
+    "defects": [
+      "INSTRUMENT DISAGREEMENT — UNCLAIMED 2026-08-12 by owner decision. The lane scorer reads 3.87 (pass) and the headless REST card reads 8.93 (FAIL) on the same cell, and a pass must hold on BOTH instruments. This receipt claimed scored-pass on the bridge number alone.",
+      "The discipline is not new and it is not being applied selectively: astryx/badge is HELD unclaimed at 4.88 bridge / 5.36 headless for exactly this reason, and the astryx ratchet floor rests on that hold. One-instrument passes are not claims — for either stem.",
+      "pixel scorecard: parity/receipts/console-loop/mui/scores/autocomplete.json (3.87) and parity/receipts/console-loop/visual-truth/mui/autocomplete.json (8.93), compositionOk true on both. The stem stays fail-closed until the two instruments agree under 5."
+    ],
     "reference": "extract/computed/out/mui/autocomplete/orig-shots/medium__default.png",
-    "referenceSource": "extract/computed/out/mui/autocomplete/orig-shots/medium__default.png \u2014 REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/autocomplete.png \u2014 a byte-identical copy of mui/autocomplete/gate-shots/medium__default.png)): parity/receipts/console-loop/mui/refs/autocomplete.png [declared source: extract/computed/out/mui/autocomplete/gate-shots/medium__default.png].",
+    "referenceSource": "extract/computed/out/mui/autocomplete/orig-shots/medium__default.png — REAL LIBRARY RENDER: the npm-package screenshot, committed by extract/computed/run.ts --keep-originals (2026-08-08 REFERENCE-TRUTH round). PRIOR BASIS (CONTRACT RENDER (parity/receipts/console-loop/mui/refs/autocomplete.png — a byte-identical copy of mui/autocomplete/gate-shots/medium__default.png)): parity/receipts/console-loop/mui/refs/autocomplete.png [declared source: extract/computed/out/mui/autocomplete/gate-shots/medium__default.png].",
     "canvasShot": "parity/receipts/console-loop/mui/shots/autocomplete-cell.png",
-    "matchDeveloped": true,
-    "status": "scored-pass",
+    "matchDeveloped": false,
+    "status": "fail-closed",
     "scorecard": "parity/receipts/console-loop/mui/scores/autocomplete.json"
   },
   "fingerprint": {
@@ -45,7 +50,7 @@
       "canvas-absent: first variant root fill not variable-bound (may be literal/slot)"
     ],
     "matchedAxes": [
-      "Size enum \u2192 Medium/Small"
+      "Size enum → Medium/Small"
     ],
     "observed": {
       "type": "COMPONENT_SET",
@@ -89,6 +94,6 @@
     "generatedOrFound": true,
     "screenshotReviewed": true,
     "zeroMismatch": true,
-    "visualMatchDeveloped": true
+    "visualMatchDeveloped": false
   }
 }
