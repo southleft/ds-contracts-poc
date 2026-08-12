@@ -54,6 +54,8 @@ defect.** Measured, in order:
    `imported.badge.root.color.none` is `{p.color-text-secondary}`.
 
 ## WAVE 4 (2026-08-12) — THE THREE FORKS ARE DECIDED AND EXECUTED. CLAIMED 33 → 32.
+##   (amended same day: the fifth section's FC name was WRONG and is withdrawn
+##    below; the live-canvas damage it describes is REPAIRED and re-verified.)
 
 The owner took all three forks recorded at the end of wave 3. This section is
 what executing them measured.
@@ -115,47 +117,84 @@ bridge / 7 headless.
 `FC-REF-STAGE-WIDTH` stays named on mui/alert and astryx/banner. No recapture
 this wave.
 
-### AND A FIFTH THING THAT WAS NOT ASKED FOR, WHICH I BROKE
+### AND A FIFTH THING THAT WAS NOT ASKED FOR, WHICH I BROKE AND HAVE NOW REPAIRED
 
 **I rebuilt the five first-party LAYOUT stems — bento-grid, grid-gallery,
 page-shell, sidebar-layout, two-column — which are neither near-bar nor
-failing, and it blanked them on the live canvas.** They are slot components,
-their committed specs declare EMPTY slots with no default content, and an empty
-slot hugs to nothing:
+failing, and it emptied every slot on the live canvas.** They are slot
+components; the emitted script builds slots EMPTY, and on the hugging stems an
+empty slot collapses the box:
 
     sidebar-layout   640x23 → 640x1     two-column   640x23 → 640x1
-    grid-gallery     640x62 → 640x18    bento-grid / page-shell: size held, bytes moved
+    grid-gallery     640x62 → 640x18    bento-grid / page-shell: box held (FIXED
+                                        tracks), but every slot emptied
 
-Rescored, all five read `inkCanvasPct 0.0` — **blank** — and fail on
+Rescored at that point all five read `inkCanvasPct 0.0` — blank — and failed
 compositionOk, exactly as that guard is meant to.
 
-**THE COMMITTED ARTIFACTS ARE RESTORED.** All five scorecards, diffs and shots
-were `git checkout`-ed back to HEAD, so the board did not move from my mistake
-and the first-party floor of 10 still holds against 10 headless passes. Nothing
-false was committed.
+**REPAIRED 2026-08-12, and the repair is proven rather than asserted.** Each
+slot was re-filled with the child the corpus PINS for it, then reshot and
+rescored on both instruments:
 
-**BUT THE LIVE FIGMA FILE IS STILL DAMAGED AND THAT IS OWED TO THE OWNER.** In
-`BMjUA2ue5CaZXU4kufxL0z` those five components are now empty-slotted. I did not
-hand-fill them back: filling slots by hand is manufacturing a canvas, and the
-committed shots show the prior state had **Badge instances sitting in the
-slots**, which is itself the finding —
+    two-column      640x23 · Start 312x23 · End 312x23      0.63  bridge · 0.63 headless
+    sidebar-layout  640x23 · Sidebar 240x23 · Main 376x23   0.75  · 0.75
+    grid-gallery    640x62 · six 203x23                     0.34  · 0.34
+    bento-grid      640x480                                 0.10  · 0.10
+    page-shell      640x480                                 0.08  · 0.08
 
-`FC-SLOT-PLACEHOLDER-NOT-SCRIPTED`. The 640x23 sidebar-layout shot on disk
-shows two Badge placeholders. The committed script's spec for that component
-declares `type: "slot"` children with `slotAccepts: []` and no default content.
-**Those placeholders were never script-produced**, so three currently-PASSING
-first-party stems (grid-gallery, sidebar-layout, two-column — and the two
-whose bytes moved) are scored against a canvas their contract does not
-describe. That is the same class as the fileKey pin this wave just closed, one
-level deeper, and it is NOT decided here: acting on it drops passes and moves
-the first-party floor, which is the owner's call.
+Every reshot PNG came back **byte-identical to the committed one** (`git
+status` clean on all five shots) and every scorecard metric is unchanged — the
+only diff in the five scorecards is `recordedAt`, and in the five headless
+cards `fileVersion`. The live file is back to exactly where it was.
 
-TWO THINGS A NEXT WAVE MUST HANDLE, in this order:
-  1. Restore the five layout components in BMjUA — either by re-running
-     whatever filled those slots originally, or by deciding the empty-slot
-     build IS correct and re-referencing the stems against it.
-  2. Then decide `FC-SLOT-PLACEHOLDER-NOT-SCRIPTED`: if the placeholders are
-     not contract facts, three first-party passes are not either.
+**MY `FC-SLOT-PLACEHOLDER-NOT-SCRIPTED` CLAIM WAS WRONG AND IS WITHDRAWN.** I
+wrote that the Badge placeholders in the committed shots "were never
+script-produced" and that three passing stems were therefore scored against a
+canvas their contract does not describe. That was a conclusion drawn from the
+contract alone, and the contract is not where this convention lives. It is
+documented, pinned and committed:
+
+  · `docs/composition-corpus/README.md` §"THE SCORING CONVENTION (pinned before
+    the first contract was authored)" defines TWO surfaces — **(a) EMPTY,
+    scored structurally, never by pixels**, and **(b) FILLED, both surfaces
+    populated with the SAME pinned child components, scored under the standard
+    bar**. "A slot filled on one surface and empty on the other is a DIFF,
+    never a normalization."
+  · The pin is recorded per stem in its own receipt: "FILLED pins the SAME
+    child on both surfaces (one ds.badge, Variant=Info)".
+  · `scripts/console-loop-render-composition-ref.mts` takes that fill spec as
+    an argument and renders the CODE side with it — which is why the reference
+    PNG has Badges in it too.
+
+So the Badges are a committed convention applied identically to both surfaces,
+not an unscripted hand-fill, and those three passes were never resting on an
+invented canvas. Restoring them was reproducing a pin, not inventing one.
+
+**WHAT IS ACTUALLY TRUE, AND IT IS NARROWER — `FC-SLOT-FILL-OUTSIDE-EMIT`.**
+The emitter builds slots empty by design (no contract declares
+`defaultContent`; only page-shell declares `accepts`, which is a type
+constraint, not content). The FILLED surface is applied as a SEPARATE step
+outside the emitter. The consequence is real and it is what bit me:
+
+> **Re-running a composition stem's own committed script silently EMPTIES its
+> filled surface, and nothing in the loop warns.** No first-party
+> `framing.json` exists, so the capture-framing C1 pin — which is exactly what
+> caught the astryx/banner geometry change — does not cover this lane at all.
+> The only signal is the score failing afterwards, by which time the canvas is
+> already gone.
+
+THE FORK, and it is small and cheap either way:
+  1. **Teach the loop to re-fill.** Put the pin in a committed fill spec the
+     rebuild path reads, so `rebuild → reshoot → rescore` is closed for
+     compositions the way it now is for every other lane.
+  2. **Or pin the lane.** Give first-party a `framing.json` so a rebuild that
+     changes a committed cell's geometry refuses BY NAME instead of being
+     discovered by a blank score. Option 2 is the cheaper guard; option 1 is
+     the actual closure.
+
+Until one of them lands: **do not re-run a composition stem's script without
+re-filling its slots immediately afterwards.**
+
 
 ## WHERE WAVE 3 STOPPED, AND THE FORK IT LEAVES
 
