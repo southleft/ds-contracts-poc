@@ -177,23 +177,73 @@ constraint, not content). The FILLED surface is applied as a SEPARATE step
 outside the emitter. The consequence is real and it is what bit me:
 
 > **Re-running a composition stem's own committed script silently EMPTIES its
-> filled surface, and nothing in the loop warns.** No first-party
-> `framing.json` exists, so the capture-framing C1 pin — which is exactly what
-> caught the astryx/banner geometry change — does not cover this lane at all.
-> The only signal is the score failing afterwards, by which time the canvas is
-> already gone.
+> filled surface, and nothing in the loop warns.** (STATE AS FOUND — the guard
+> below has since closed the "nothing warns" half.) No first-party
+> `framing.json` existed, so the capture-framing C1 pin — which is exactly what
+> caught the astryx/banner geometry change — did not cover this lane at all.
+> The only signal was the score failing afterwards, by which time the canvas
+> was already gone.
 
-THE FORK, and it is small and cheap either way:
-  1. **Teach the loop to re-fill.** Put the pin in a committed fill spec the
-     rebuild path reads, so `rebuild → reshoot → rescore` is closed for
-     compositions the way it now is for every other lane.
-  2. **Or pin the lane.** Give first-party a `framing.json` so a rebuild that
-     changes a committed cell's geometry refuses BY NAME instead of being
-     discovered by a blank score. Option 2 is the cheaper guard; option 1 is
-     the actual closure.
+THE FORK WAS TAKEN — **OPTION 2 (THE GUARD) IS LANDED**; option 1 (emit carries
+the fill) is still open and is still the actual closure.
 
-Until one of them lands: **do not re-run a composition stem's script without
-re-filling its slots immediately afterwards.**
+### THE GUARD: first-party is pinned, and C1 grew the half it was missing
+
+`parity/receipts/console-loop/framing.json` now exists — the lane's first
+capture-framing pin. Cell dimensions are minted from the Desktop Bridge with
+every slot FILLED, immediately after the repair, and verified against the
+committed evidence: every reshot PNG was byte-identical and every scorecard
+metric unchanged, so the pin describes the same canvas the board was scored on.
+The checker learned two things:
+
+  · `laneRoot()` — the SAME rule the scorer uses. Every path in the checker was
+    `path.join(CL, lane, …)` and the lane list was six hard-coded FOREIGN
+    lanes, so first-party could not be pinned even in principle. That is the
+    mechanical reason this lane went unguarded while carrying the largest
+    ratchet floor.
+  · **C1b, `FC-CELL-INK-LOST`** — because C1 alone only half-closes this. C1 is
+    a BOX check, and the damage has TWO shapes:
+
+        HUG tracks    the cell COLLAPSES — sidebar-layout 640x23 → 640x1 —
+                      and C1's box comparison bites.
+        FIXED tracks  bento-grid and page-shell hold a perfectly correct
+                      640x480 and lose ONLY their content. C1 sees nothing.
+
+    Measured 2026-08-12: all five read `inkCanvasPct 0.0`, two of them at the
+    right box. C1b pins a per-stem ink floor well under the measured ink
+    (`inkMeasuredPct` is recorded beside it), counted with contentBox's own
+    composite-over-white rule so it agrees with the scorer. It cannot fire on
+    antialiasing; it fires on a surface that went blank.
+
+**RED-TESTED IN BOTH SHAPES, and both are now fixtures** in
+`console-loop-capture-framing-check.test.mjs` (18 → 20 tests, all green) so
+neither half can regress into silence again:
+
+    blank at the right box   first-party/page-shell     → FC-CELL-INK-LOST
+    collapsed cell           first-party/sidebar-layout → FC-CELL-FRAMING
+
+The committed tree is green: 84 pinned stems across 7 lanes (was 79 across 6),
+5 newly cell-pinned, 0 new open findings.
+
+**SCOPE, stated rather than silent.** The pin covers the five COMPOSITION stems
+only. The other ten first-party stems are not slot components, carry no filled
+surface, and checkbox/text-field/button each rebuilt byte-identically on
+2026-08-12 — so the hazard does not apply to them. Extending the pin to them is
+a separate cheap round.
+
+### WHAT THE GUARD DOES NOT DO
+
+It refuses a bad capture; it does not stop the canvas being emptied. Option 1
+remains the closure: teach the rebuild path to read a committed fill spec so
+`rebuild → reshoot → rescore` is closed for compositions the way it is for
+every other lane. Until that lands the operating rule is unchanged —
+
+**do not re-run a composition stem's script without re-applying its
+`docs/composition-corpus` fill pin immediately afterwards** (one `ds.badge`,
+Variant=Info, per slot; the per-stem pin is in each receipt's `visual.notes`).
+
+The difference is that forgetting is now caught at check time, by name, instead
+of surfacing as a blank score after the canvas is already gone.
 
 
 ## WHERE WAVE 3 STOPPED, AND THE FORK IT LEAVES

@@ -120,6 +120,7 @@
  *
  * Cause codes raised:
  *   FC-CELL-FRAMING              C1  — shot is not the pinned VARIANT cell (never waivable)
+ *   FC-CELL-INK-LOST             C1b — shot is the right box but went blank (never waivable)
  *   FC-REF-FRAMING               C2  — reference is not comparable to the cell
  *   FC-REF-CROSS-LIBRARY         C3  — reference belongs to another lane's library
  *   FC-REF-UNVERIFIABLE-PROVENANCE C3b — referenceSource names no repo path
@@ -143,6 +144,22 @@ import { PNG } from "pngjs";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CL = path.join(ROOT, "parity/receipts/console-loop");
 
+/**
+ * Lane root — the SAME rule console-loop-developed-score.mjs uses. The
+ * FIRST-PARTY lane lives at the console-loop ROOT (components/, shots/,
+ * refs/, scores/ directly under parity/receipts/console-loop); foreign lanes
+ * nest one directory deeper under their lib name.
+ *
+ * FC-SLOT-FILL-OUTSIDE-EMIT (2026-08-12): until this landed, every path here
+ * was `path.join(CL, lane, …)` and the lane list below was six hard-coded
+ * foreign lanes — so first-party could not be pinned even in principle. That
+ * is why re-running a composition stem's own script could EMPTY its slots and
+ * collapse the cell (sidebar-layout 640x23 -> 640x1) with nothing refusing:
+ * the C1 pin that catches exactly this class of change on every other lane
+ * did not cover the one lane carrying the largest ratchet floor.
+ */
+const laneRoot = (lane) => (lane === "first-party" ? CL : path.join(CL, lane));
+
 const argv = process.argv.slice(2);
 /** @type {Map<string,string>} `${lane}/${stem}` -> shot path override (red-test) */
 const redTest = new Map();
@@ -163,12 +180,15 @@ for (let i = 0; i < argv.length; i += 1) {
   }
 }
 if (!lanes.length) {
-  for (const lane of ["altitude", "astryx", "carbon", "mui", "polaris", "tailwind"]) {
-    if (existsSync(path.join(CL, lane, "framing.json"))) lanes.push(lane);
+  for (const lane of ["first-party", "altitude", "astryx", "carbon", "mui", "polaris", "tailwind"]) {
+    if (existsSync(path.join(laneRoot(lane), "framing.json"))) lanes.push(lane);
   }
 }
 
 const CAUSE_CELL = "FC-CELL-FRAMING";
+/** C1b — the shot is the right BOX but has lost its CONTENT (never waivable,
+ *  same standing as C1: a capture either depicts the surface or it does not). */
+const CAUSE_CELL_INK = "FC-CELL-INK-LOST";
 const CAUSE_REF_FRAMING = "FC-REF-FRAMING";
 const CAUSE_REF_CROSS = "FC-REF-CROSS-LIBRARY";
 const CAUSE_REF_PROVENANCE = "FC-REF-UNVERIFIABLE-PROVENANCE";
@@ -317,9 +337,9 @@ function histogramOf(absPath) {
 
 /** Mirror of console-loop-developed-score.mjs resolveCanvasShot (lane form). */
 function resolveShot(lane, stem, receipt) {
-  const cell = path.join(CL, lane, "shots", `${stem}-cell.png`);
+  const cell = path.join(laneRoot(lane), "shots", `${stem}-cell.png`);
   if (existsSync(cell)) return cell;
-  const set = path.join(CL, lane, "shots", `${stem}.png`);
+  const set = path.join(laneRoot(lane), "shots", `${stem}.png`);
   if (existsSync(set)) return set;
   const fromReceipt = receipt?.visual?.canvasShot;
   if (typeof fromReceipt === "string") {
@@ -363,7 +383,7 @@ let cellPinned = 0;
 let cellPending = 0;
 
 for (const lane of lanes) {
-  const pinPath = path.join(CL, lane, "framing.json");
+  const pinPath = path.join(laneRoot(lane), "framing.json");
   if (!existsSync(pinPath)) {
     errors.push(`${lane}: missing framing.json capture-framing pin`);
     continue;
@@ -403,7 +423,7 @@ for (const lane of lanes) {
     : [CAUSE_REF_FRAMING];
 
   // The pin must cover every stem the lane's evidence gate requires.
-  const manifestPath = path.join(CL, lane, "manifest.json");
+  const manifestPath = path.join(laneRoot(lane), "manifest.json");
   if (existsSync(manifestPath)) {
     try {
       const required = JSON.parse(readFileSync(manifestPath, "utf8")).required ?? [];
@@ -422,7 +442,7 @@ for (const lane of lanes) {
   for (const [stem, s] of Object.entries(pin.stems ?? {})) {
     const tag = `${lane}/${stem}`;
     checked += 1;
-    const receiptPath = path.join(CL, lane, "components", `${stem}.json`);
+    const receiptPath = path.join(laneRoot(lane), "components", `${stem}.json`);
     /** @type {any} */
     let receipt = null;
     if (existsSync(receiptPath)) {
@@ -525,6 +545,44 @@ for (const lane of lanes) {
         continue; // a shot that is not the cell makes C2 meaningless
       }
       cellPinned += 1;
+    }
+
+    // ---- C1b: the shot still carries INK -----------------------------------
+    // FC-SLOT-FILL-OUTSIDE-EMIT. C1 is a BOX check, and a box check only half
+    // closes this class. When a composition stem's slots are emptied, three of
+    // the five collapse (sidebar-layout 640x23 -> 640x1) and C1 bites — but
+    // bento-grid and page-shell hold 640x480 on their FIXED tracks and lose
+    // nothing but their CONTENT. Measured 2026-08-12: all five read
+    // inkCanvasPct 0.0 while two of them kept a perfectly correct box.
+    //
+    // So a stem may pin an ink floor. It is opt-in per stem (absent = not
+    // asserted, exactly like cellW/cellH) and deliberately generous: the point
+    // is to catch a surface that went BLANK or lost most of its content, not
+    // to re-litigate antialiasing. The ink rule is contentBox's — composite
+    // over white, then WHITE_TRIM — so it agrees with the scorer.
+    if (typeof s.inkMinPct === "number") {
+      let inkPx = 0;
+      for (let i = 0; i < shotPng.width * shotPng.height; i += 1) {
+        const o = i * 4;
+        const a = shotPng.data[o + 3] / 255;
+        if (
+          shotPng.data[o] * a + 255 * (1 - a) < WHITE_TRIM ||
+          shotPng.data[o + 1] * a + 255 * (1 - a) < WHITE_TRIM ||
+          shotPng.data[o + 2] * a + 255 * (1 - a) < WHITE_TRIM
+        ) inkPx += 1;
+      }
+      const inkPct = (100 * inkPx) / (shotPng.width * shotPng.height);
+      if (inkPct < s.inkMinPct) {
+        raise(
+          CAUSE_CELL_INK,
+          `committed shot ${rel(shotPath)} carries ${inkPct.toFixed(2)}% ink but this stem pins a floor of ${s.inkMinPct}% ` +
+            `(${inkPx} ink px in ${shotPng.width}x${shotPng.height})` +
+            (s.filledPin
+              ? ` — the scored surface is the FILLED one (${s.filledSlots} slot(s), ${s.filledPin}); an emptied slot renders a correct BOX with no CONTENT, which C1 cannot see`
+              : ""),
+        );
+        continue; // a blank shot makes C2's content-box comparison meaningless
+      }
     }
 
     // ---- C3: reference provenance ----------------------------------------
@@ -636,7 +694,7 @@ for (const lane of lanes) {
       // number is claiming closeness.
       if (referenceToneCheck) {
         let aa = null;
-        const scorePath = path.join(CL, lane, "scores", `${stem}.json`);
+        const scorePath = path.join(laneRoot(lane), "scores", `${stem}.json`);
         if (existsSync(scorePath)) {
           try {
             aa = JSON.parse(readFileSync(scorePath, "utf8"))?.metrics?.pctAAMasked ?? null;

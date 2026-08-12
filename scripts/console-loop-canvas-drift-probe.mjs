@@ -96,11 +96,22 @@ const framingPath = path.join(laneDir, "framing.json");
  *  (the five LAYOUT compositions, which have no headless card at all) still
  *  come through as CELL-PENDING, which is the honest answer for them. */
 function loadPins() {
-  if (existsSync(framingPath)) {
-    return JSON.parse(readFileSync(framingPath, "utf8")).stems ?? {};
-  }
+  /** framing.json pins, when the lane keeps one. For FOREIGN lanes this is the
+   *  whole answer and the behaviour is unchanged. */
+  const fromFraming = existsSync(framingPath)
+    ? JSON.parse(readFileSync(framingPath, "utf8")).stems ?? {}
+    : null;
+  // FIRST-PARTY MERGES RATHER THAN REPLACES (2026-08-12). The lane gained a
+  // framing.json covering the five COMPOSITION stems, and returning it alone
+  // would have SHRUNK this probe from 54 enumerated stems to 5 — trading the
+  // lane's breadth for one stronger pin. The two sources answer different
+  // questions and both are real: framing.json carries a bridge-minted cell for
+  // the stems it covers, the headless cards carry one for every stem that has
+  // a card. So framing.json OVERLAYS the card-derived set, per stem, and the
+  // probe keeps reporting on everything it reported on before.
+  if (fromFraming && lane !== "first-party") return fromFraming;
   const vt = path.join(CL, "visual-truth", lane);
-  if (!existsSync(vt)) return null;
+  if (!existsSync(vt)) return fromFraming;
   const stems = {};
   for (const f of readdirSync(vt).filter((x) => x.endsWith(".json"))) {
     const card = JSON.parse(readFileSync(path.join(vt, f), "utf8"));
@@ -136,6 +147,12 @@ function loadPins() {
         pinnedBy: `components/${f} (sole generated node — the script emits one standalone COMPONENT, not a set)`,
         fileKey: receipt.fileKey ?? null,
       };
+    }
+  }
+  // The bridge-minted pin wins per stem where it exists.
+  if (fromFraming) {
+    for (const [stem, pin] of Object.entries(fromFraming)) {
+      stems[stem] = { ...stems[stem], ...pin, pinnedBy: `framing.json (bridge-minted C1 pin)` };
     }
   }
   return stems;

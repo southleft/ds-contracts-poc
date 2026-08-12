@@ -14,6 +14,7 @@ import { spawnSync } from "node:child_process";
 import { copyFileSync, existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { PNG } from "pngjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SCRIPT = "scripts/console-loop-capture-framing-check.mjs";
@@ -61,6 +62,63 @@ for (const [lane, stem, setShot] of RED_CASES) {
     );
   });
 }
+
+/* ------------------------------------------------------------------------ *
+ * C1b — FC-SLOT-FILL-OUTSIDE-EMIT, both halves.
+ *
+ * The five first-party COMPOSITION stems are slot components whose scored
+ * surface is the FILLED one, applied OUTSIDE the emitter. Re-running such a
+ * stem's own committed script EMPTIES its slots, and the damage takes two
+ * shapes — which is why one check cannot cover it:
+ *
+ *   HUG tracks   the cell COLLAPSES (measured: sidebar-layout 640x23 -> 640x1)
+ *                and C1's box comparison bites.
+ *   FIXED tracks the cell holds a perfectly correct 640x480 and loses only its
+ *                CONTENT. C1 sees nothing. C1b's ink floor is the only guard.
+ *
+ * Both are pinned here so neither half can regress into silence again.
+ * ------------------------------------------------------------------------ */
+const SCRATCH_SHOTS = path.join(ROOT, "parity/receipts/console-loop/shots");
+
+test("red: a composition stem that went BLANK at the right box fails BY NAME (C1b)", () => {
+  // bento-grid and page-shell keep 640x480 on FIXED tracks when emptied, so
+  // this is the shape C1 provably cannot see.
+  const scratch = path.join(SCRATCH_SHOTS, "__c1b-blank-redtest.png");
+  const png = new PNG({ width: 640, height: 480 });
+  png.data.fill(255);
+  writeFileSync(scratch, PNG.sync.write(png));
+  try {
+    const r = run("first-party", "--red-test", `first-party/page-shell=${path.relative(ROOT, scratch)}`);
+    const out = outputOf(r);
+    assert.equal(r.status, 1, `a blank composition surface passed the pin:\n${out}`);
+    assert.ok(
+      out.includes("first-party/page-shell: FC-CELL-INK-LOST"),
+      `blank surface refused but did not name FC-CELL-INK-LOST:\n${out}`,
+    );
+    assert.match(out, /carries 0\.00% ink but this stem pins a floor of/);
+  } finally {
+    rmSync(scratch, { force: true });
+  }
+});
+
+test("red: a composition stem whose cell COLLAPSED fails BY NAME (C1)", () => {
+  // The HUG-track shape: sidebar-layout 640x23 -> 640x1, measured 2026-08-12.
+  const scratch = path.join(SCRATCH_SHOTS, "__c1-collapse-redtest.png");
+  const png = new PNG({ width: 640, height: 1 });
+  png.data.fill(255);
+  writeFileSync(scratch, PNG.sync.write(png));
+  try {
+    const r = run("first-party", "--red-test", `first-party/sidebar-layout=${path.relative(ROOT, scratch)}`);
+    const out = outputOf(r);
+    assert.equal(r.status, 1, `a collapsed composition cell passed the pin:\n${out}`);
+    assert.ok(
+      out.includes("first-party/sidebar-layout: FC-CELL-FRAMING"),
+      `collapsed cell refused but did not name FC-CELL-FRAMING:\n${out}`,
+    );
+  } finally {
+    rmSync(scratch, { force: true });
+  }
+});
 
 test("a hard cell-framing violation is NOT waivable by narration", () => {
   // FC-CELL-FRAMING must fail even though the receipts for these stems are

@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "kind": "console-loop-capture-framing-pin",
+  "lane": "first-party",
+  "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+  "fileName": "Latest DS Contracts Tests",
+  "note": "CAPTURE-FRAMING PIN for the FIRST-PARTY lane. cellW/cellH are the LIVE Figma dimensions, minted from the Desktop Bridge with the fileKey pinned — NOT derived from the committed PNGs. This lane keeps its receipts at the console-loop ROOT (components/, shots/, refs/, scores/ directly under parity/receipts/console-loop), so the checker resolves its paths through laneRoot() rather than <CL>/<lane>/.",
+  "why": "FC-SLOT-FILL-OUTSIDE-EMIT. The five COMPOSITION stems are slot components, and the emitter builds slots EMPTY by design — no contract declares defaultContent. Their scored surface is the FILLED one (docs/composition-corpus/README.md, scoring convention (b)), which is applied OUTSIDE the emitter with a per-stem pinned child (one ds.badge, Variant=Info, recorded in each receipt's visual.notes). So re-running a composition stem's own committed script EMPTIES its slots, and on the hugging stems that collapses the cell: measured 2026-08-12, sidebar-layout 640x23 -> 640x1, two-column 640x23 -> 640x1, grid-gallery 640x62 -> 640x18, with bento-grid and page-shell holding their box (FIXED tracks) while every slot emptied. Nothing refused: this lane had no framing.json, so the C1 pin that catches exactly this class of change on the other six lanes did not cover the lane carrying the largest ratchet floor. The only signal was the scorecards failing afterwards, by which time the canvas was already gone. C1 now refuses BY NAME instead.",
+  "mintedFrom": {
+    "bridge": "figma-console MCP figma_execute (Desktop Bridge)",
+    "mintedAt": "2026-08-12",
+    "method": "getNodeByIdAsync on each stem's pinned cellNodeId; cell dimensions read from node.width/node.height with every slot FILLED per the corpus convention",
+    "state": "Minted immediately after the 2026-08-12 repair, with each slot holding its pinned ds.badge (Variant=Info). Verified against the committed shots: every reshot PNG came back byte-identical and every scorecard metric unchanged, so these numbers describe the same canvas the committed evidence was scored on."
+  },
+  "guard": {
+    "marginMinPx": -1,
+    "marginMaxPx": 17,
+    "marginSkewMaxPx": 2,
+    "scaleRatioMax": 1.35,
+    "aspectRatioMax": 1.35,
+    "dprBand": [
+      1.7,
+      2.4
+    ],
+    "framingCauses": [
+      "FC-REF-FRAMING",
+      "FC-REF-WHOLE-PAGE",
+      "FC-REF-BROKEN-ASSET",
+      "FC-REF-CROSS-LIBRARY",
+      "FC-FONT-SUBSTRATE",
+      "FC-GRID-ROOT-VSIZE",
+      "FC-SLOT-FILL-OUTSIDE-EMIT"
+    ],
+    "framingCausesNote": "C2 is waived on a fail-closed receipt by naming any of these in visual.defects. The opt-in checks (C3b resolvable provenance, C4 stage clip, C5 reference sweep, C6 reference tone) are deliberately OFF for this lane: C5 ranks a shot against sibling __default gate-shots in a computed-output directory, and this lane's references are single per-stem renders under refs/ with no sibling set to rank against, so enabling it would compare a stem to unrelated components. C1 — the check this pin exists for — is always on.",
+    "requireResolvableProvenance": false,
+    "stageClipCheck": false,
+    "referenceSweepCheck": false,
+    "referenceToneCheck": false,
+    "inkFloorNote": "C1b (inkMinPct) is the half of FC-SLOT-FILL-OUTSIDE-EMIT that C1 cannot see. C1 is a BOX check: when a composition stem's slots are emptied, sidebar-layout/two-column/grid-gallery COLLAPSE and C1 bites, but bento-grid and page-shell hold a perfectly correct 640x480 on their FIXED tracks and lose only their CONTENT (measured 2026-08-12: all five read inkCanvasPct 0.0, two of them at the right box). Each floor sits well under its measured ink (inkMeasuredPct) so the check cannot fire on antialiasing — it fires on a surface that went blank or lost most of its content. Ink is counted with contentBox's rule: composite over white, then WHITE_TRIM."
+  },
+  "refAllow": [
+    "parity/receipts/console-loop/refs/",
+    "scripts/console-loop-render-composition-ref.mts",
+    "scripts/console-loop-render-ref.mts",
+    "src/components/"
+  ],
+  "stemsNote": "SCOPE: the five COMPOSITION stems only. The rest of the first-party lane (avatar, badge, banner, button, card, checkbox, divider, switch, text-field, token) is NOT pinned here yet — those are not slot components, they carry no filled surface, and checkbox/text-field/button were each rebuilt from their own committed scripts on 2026-08-12 and came back byte-identical, so the hazard this pin guards does not apply to them. Extending the pin to them is a separate, cheap round; leaving them unpinned is stated rather than silent.",
+  "stems": {
+    "bento-grid": {
+      "setNodeId": "7:1658",
+      "cellNodeId": "7:1658",
+      "cellName": "BentoGrid (ds.bento-grid)",
+      "cellW": 640,
+      "cellH": 480,
+      "filledSlots": 5,
+      "filledPin": "one ds.badge per slot",
+      "inkMinPct": 1.0,
+      "inkMeasuredPct": 2.13
+    },
+    "grid-gallery": {
+      "setNodeId": "7:1639",
+      "cellNodeId": "7:1639",
+      "cellName": "GridGallery",
+      "cellW": 640,
+      "cellH": 62,
+      "filledSlots": 6,
+      "filledPin": "one ds.badge, Variant=Info",
+      "inkMinPct": 10.0,
+      "inkMeasuredPct": 19.86
+    },
+    "page-shell": {
+      "setNodeId": "7:1674",
+      "cellNodeId": "7:1674",
+      "cellName": "PageShell",
+      "cellW": 640,
+      "cellH": 480,
+      "filledSlots": 4,
+      "filledPin": "one ds.badge per slot",
+      "inkMinPct": 0.8,
+      "inkMeasuredPct": 1.71
+    },
+    "sidebar-layout": {
+      "setNodeId": "7:1632",
+      "cellNodeId": "7:1632",
+      "cellName": "SidebarLayout",
+      "cellW": 640,
+      "cellH": 23,
+      "filledSlots": 2,
+      "filledPin": "one ds.badge, Variant=Info",
+      "inkMinPct": 8.0,
+      "inkMeasuredPct": 17.81
+    },
+    "two-column": {
+      "setNodeId": "7:1625",
+      "cellNodeId": "7:1625",
+      "cellName": "TwoColumn",
+      "cellW": 640,
+      "cellH": 23,
+      "filledSlots": 2,
+      "filledPin": "one ds.badge, Variant=Info",
+      "inkMinPct": 8.0,
+      "inkMeasuredPct": 17.81
+    }
+  }
+}
