@@ -172,7 +172,7 @@ rather than a hope.
     base        main
     status      SAFE TO MERGE — tree clean, full suite 222/225 with all three reds
                 named above (two pre-existing at branch HEAD, one closed).
-    HEAD        (stamped in the closeout commit; `git rev-parse HEAD` after it lands)
+    HEAD        72688bb284c35f088fddbf45facf762fbe0b7b87  (the closeout commit)
 
 **WHAT A HUMAN MUST DO — none of it is required to merge, all of it is required to
 CONTINUE the console-loop:**
