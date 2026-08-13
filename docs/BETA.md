@@ -49,6 +49,9 @@ npx tsx packages/cli/src/cli.ts figma bundle examples/tailwind/contracts \
   --icons examples/tailwind/assets/icons
 ```
 
+`flowbite.bundle.json` is a local build artifact — gitignored, and rebuilt
+byte-identically from the committed contracts whenever you need it.
+
 Then, in the Figma **desktop** app:
 
 1. **Plugins → Development → Import plugin from manifest…** and choose

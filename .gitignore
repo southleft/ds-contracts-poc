@@ -63,3 +63,8 @@ conformance/.sandbox/
 # should COMMIT lands under the library's own dirs, named by its ds-library.json.
 .ds-contracts/
 .env
+
+# The golden-path bundle docs/BETA.md tells a reader to build at the repo root.
+# It is a LOCAL BUILD ARTIFACT — a pure function of the committed contracts,
+# tokens and icons — so every stranger run would otherwise dirty `git status`.
+/flowbite.bundle.json
