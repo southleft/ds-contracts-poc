@@ -1,4 +1,213 @@
-# CONTINUE — freeze-board fidelity, feat/beta-rounds
+# CONTINUE — freeze-board fidelity, feat/freeze-board-wave2
+
+## PHASE CLOSED — FREEZE WAVE 2 (2026-08-13)
+
+**The freeze-board climb is PAUSED, not abandoned.** This branch is a closeout,
+not a checkpoint mid-climb: every number below is re-derived from the committed
+artifacts, every gate is green or NAMED, and the live canvas has been verified
+against its pins. The next track is public-beta-prep, and it starts only AFTER
+this merges to main.
+
+### THE BOARD, re-counted from artifacts at closeout (not from memory)
+
+    lane           bridge    headless   claimed
+    first-party    11/20     10/54      11
+    mui             8/31      7/31       7
+    tailwind         4/5       4/5        4
+    altitude         4/8       4/8        4
+    astryx          1/11      0/13        0
+    carbon          3/10      2/10        3
+    polaris         4/12      4/12        4
+    TOTAL          35/97    31/133       33      (133 receipts carry a visual block)
+
+    RATCHET floors: first-party 10 · mui 7 · tailwind 4 · altitude 4 ·
+                    astryx 1 · carbon 2 · polaris 3
+
+The three numbers mean different things and the difference is the point.
+**bridge/headless are SCORECARD passes** — recomputed from each scorecard's own
+metrics (`status pass && compositionOk && pctAAMasked <= 5`), never from a
+receipt boolean. **claimed is RECEIPT claims**, and it is 33 rather than 35
+because mui/autocomplete was UNCLAIMED this phase (3.87 bridge / 8.93 headless
+— a one-instrument pass is not a claim) and astryx/badge is HELD unclaimed for
+the same reason (4.88 / 5.36).
+
+**WHAT THIS PHASE EARNED: exactly one pass**, mui/slider 7.96 → 0.57 bridge /
+0.56 headless, by a contract + emitter fix (the coincident shadow-only pseudo
+fold). Everything else that moved was a correction, a repair, or a guard.
+
+### DECISIONS THAT ARE SETTLED — DO NOT REOPEN WITHOUT THE OWNER
+
+  · **OPTION B IS LOCKED.** `FC-GEOMETRY-EXCLUDED` (extract/computed/fuse.ts)
+    stays. Width/height carriage is NOT relaxed. Relaxing it is the change that
+    previously minted the capture WINDOW as tokens in four of six libraries.
+    The obligation it carries is to LEDGER the drop, never to fix it.
+  · **THE ASTRYX FLOOR IS HELD.** `visual-truth:check` reports
+    `astryx: headless pass-count 0 < RATCHET floor 1`. That red is EXPECTED,
+    pre-existing, and deliberately not cleared: clearing it means claiming
+    astryx/badge on one instrument, which is exactly the discipline
+    mui/autocomplete was just unclaimed under. **Do not make this green.**
+  · **The ONE bar is unchanged:** `pctAAMasked <= 5 && compositionOk`. No
+    scorer, ratchet or tolerance was relaxed in this phase.
+
+### DEFERRED — NAMED, MEASURED, AND NOT TO BE REOPENED WITHOUT THE OWNER
+
+  1. **blockStage reference re-capture** (`FC-REF-STAGE-WIDTH`). mui/alert and
+     astryx/banner are scored against a reference whose width IS the harness
+     stage content box (mui: stage 320 − 2×16 = 288, exactly the reference's
+     ink width; Alert is `blockStage: true`). The canvas hugs and is faithful
+     to its contract render to 1px. Closing it needs references re-rendered at
+     the hug width, i.e. turning `blockStage` off and RE-CAPTURING — which
+     changes what captured truth measures corpus-wide (mui 13 components,
+     carbon 4, astryx 4, altitude 2, fluent 1).
+  2. **Emit carrying the composition fill spec.** The real closure for
+     `FC-SLOT-FILL-OUTSIDE-EMIT`; the guard below is the cheap half.
+  3. **`FC-GEOMETRY-EXCLUDED` ledger silence.** 14 of its 15 census entries are
+     still silent (only mui/fab's receipt names it). Emitting a codeOnly entry
+     per drop changes no geometry and moves no number.
+  4. **Glyph-AA residue** (`FC-GLYPH-RASTER-PHASE`). Ten near-bar stems have
+     **0.00% flat-fill failing mass** — every failing pixel is an antialias
+     boundary, and the residual survives a radius-1 colour search at 2.5–4.3%
+     where a real 1px shift collapses to 0.09%. Two rasterizers disagreeing
+     about identical geometry. **No bar change. No tolerance. Not a climb.**
+
+### OPERATING RULE (the one that bit this phase)
+
+> **Never re-run a first-party COMPOSITION script without re-applying its
+> `docs/composition-corpus` fill pin immediately afterwards** — one `ds.badge`,
+> Variant=Info, per slot; the per-stem pin lives in each receipt's
+> `visual.notes`.
+
+The emitter builds slots EMPTY by design (no contract declares
+`defaultContent`), so a bare rebuild blanks the scored surface. This is not
+hypothetical: it happened in wave 4, out of scope, and blanked all five stems.
+It is repaired and re-verified. **Forgetting is now CAUGHT** — first-party is
+pinned (C1 box + C1b `FC-CELL-INK-LOST`), red-tested in both failure shapes,
+and both are fixtures in the framing test suite.
+
+Note the shape of the hole, because the same five stems sat in both halves of
+it: the composition stems are the ones whose contracts anchor `fileKey: null`
+(so their scripts carry NO file guard and will run anywhere) AND the ones whose
+scored surface is applied outside emit. Nothing pinned them; now something does.
+
+### SUITE AND GATES AT CLOSEOUT — what was run, and what is red on purpose
+
+**The FULL suite ran to completion; no `--only` matrix was needed.**
+`npx tsx evals/run.ts` → **222/225**. Three reds, all named:
+
+    mui-figma-genesis                     PRE-EXISTING at branch HEAD. switch.figma.js
+                                          headless execute: switch-track(medium) pin
+                                          expected 34x14, found 1x1. Untouched by this
+                                          branch.
+    child-wider-ratchet-and-script-freshness
+                                          PRE-EXISTING at branch HEAD. astryx/fluent
+                                          text-wrapping overflow ratchet (docs/22).
+                                          Untouched by this branch.
+    capability-report-is-fresh            CIRCULAR-BY-CONSTRUCTION and CLOSED. The report
+                                          reads evals/results.json, and a full run
+                                          rewrites it. Regenerated after the final run
+                                          (`npm run capability:report`) and re-verified
+                                          green; docs/24-what-works.md now reads 222/225.
+
+**A FULL-SUITE RUN IS WHAT CAUGHT THE ONE REAL REGRESSION THIS BRANCH HAD**, and it
+is worth recording why it hid for two waves: the anchor re-point landed in wave 4,
+but wave 4 only ran a four-eval `--only` subset. The last full run before this
+closeout predated the re-point. **A subset cannot find a cross-cutting regression.**
+
+    baseline-parity-clean · detect-stale-snapshot · promotion-converges ·
+    pending-first-sync-not-drift          RED after the anchor re-point, FIXED here.
+
+**THE CAUSE: `anchors.figma.fileKey` HAS TWO CONSUMERS THAT WANT DIFFERENT ANSWERS.**
+
+  · `parity/diff.ts:203` reads **`contracts[0]`** — one key, taken as "the Figma file
+    this design system is synced to" — and compares it against
+    `parity/snapshots/figma-components.json` / `figma-tokens.json`, which were
+    extracted from `8nim1d0IPnehMxA7B7SYxC` ("DS Contracts POC": 49 component sets,
+    3 variable collections, 282 variables).
+  · `scripts/generate-figma.ts` gives **each contract its own** anchor as the emitted
+    script's `EXPECTED_FILE_KEY` guard — which is what the console-loop rebuild needs.
+
+Wave 4 moved 48 contracts to the playground to satisfy the second consumer, which
+silently orphaned the first: `contracts[0]` (accordion-item, alphabetically first and
+NOT a console-loop stem) moved with them, so the parity spine started reporting that
+its snapshots describe a different file.
+
+**THE FIX WAS TO EXECUTE DECISION A AS WRITTEN RATHER THAN MORE BROADLY.** The
+decision named the stems with LIVE-SNAPSHOT evidence; the other 38 were my own
+declaration and are what broke parity. Anchors now:
+
+    8nim1d0IPnehMxA7B7SYxC   38  the DS file — parity spine, tokens + batch scripts
+    BMjUA2ue5CaZXU4kufxL0z   10  avatar badge banner button card checkbox divider
+                                 switch text-field token   (LIVE-SNAPSHOT evidence)
+    GnQnjSNBXtgtd2Ht0Hs1C8    3  progress-bar slider spinner  (LIVE-SNAPSHOT evidence)
+    (null)                    5  the composition stems, untouched
+
+Re-extracting the snapshots from the playground was considered and REJECTED: BMjUA
+is a scratch file with a fraction of the DS file's sets, so it would have degraded
+the parity baseline rather than fixed it. Both consumers are now green, and the
+per-stem console-loop guards are unchanged where they matter (16-checkbox,
+49-textfield, 06-button → BMjUA; 34/38/39 → GnQnj).
+
+**GATE BATTERY — all green or named:**
+
+    console-loop:all:evidence:check    8/8 lanes green
+    capture-framing                    87 pinned stems / 7 lanes, 0 new open findings
+    capture-framing test suite         20/20 (incl. both FC-SLOT-FILL red-tests)
+    canvas-drift probe                 all 7 lanes; first-party 18 in-sync / 0 drift
+    figma-scripts-fresh                8/8 byte-fresh
+    plugin-engine-check                all flows green (receipt re-recorded)
+    alpha-composite probe              green, legacy ink-box collapse still pinned
+    golden manifest                    291 files, re-recorded after the re-emit
+    visual-truth:check                 ✖ astryx floor — EXPECTED, see decisions above
+
+**LIVE CANVAS VERIFIED (read-only)** on `BMjUA2ue5CaZXU4kufxL0z`: all eight pinned
+stems PIN-OK against their committed cell dimensions, and every composition slot is
+FILLED (5/6/4/2/2). No blank slots. The pin was extended this round from the five
+composition stems to eight, adding checkbox/text-field/button — cheap precisely
+because their byte-identical rebuild is already measured, so the pin records a fact
+rather than a hope.
+
+### MERGE PREP
+
+    branch      feat/freeze-board-wave2
+    base        main
+    status      SAFE TO MERGE — tree clean, full suite 222/225 with all three reds
+                named above (two pre-existing at branch HEAD, one closed).
+    HEAD        (stamped in the closeout commit; `git rev-parse HEAD` after it lands)
+
+**WHAT A HUMAN MUST DO — none of it is required to merge, all of it is required to
+CONTINUE the console-loop:**
+
+  1. **Open the right Figma files on the Desktop Bridge before any rebuild round.**
+     `BMjUA2ue5CaZXU4kufxL0z` ("Latest DS Contracts Tests") — the first-party
+     playground, where the composition stems and the pinned first-party cells live.
+     `GnQnjSNBXtgtd2Ht0Hs1C8` ("DS Contracts Testing") — altitude/astryx/carbon/
+     polaris/tailwind, plus first-party progress-bar/slider/spinner.
+     `59mLQlOMiD5w5za6SUcoO5` ("MUI Test 1") — the mui lane.
+     `8nim1d0IPnehMxA7B7SYxC` ("DS Contracts POC") is the PARITY file: it is what the
+     committed snapshots describe and what the tokens/batch scripts guard. It does
+     NOT need to be open for console-loop work, and it was not reachable from the
+     bridge during this phase.
+  2. **Push.** Nothing was pushed in this phase and no PR was opened (by instruction).
+  3. **The stem-serve helper** (`node scripts/console-loop-stem-serve.mjs 9224`) is a
+     local dev process, not part of the branch; it must be running for any bridge
+     rebuild round.
+
+**THE ONE OPERATING RULE THAT SURVIVES THIS BRANCH** — repeated here because it is
+the thing most likely to be forgotten by whoever picks this up: never re-run a
+first-party COMPOSITION script without re-applying its `docs/composition-corpus`
+fill pin immediately afterwards. C1/C1b now refuses a forgotten fill by name, so the
+failure mode is a named check error rather than a silently blanked canvas.
+
+**NOTHING IN THIS PHASE OPENED A NEW CLIMB.** No BETA.md, no public-journey work, no
+new FC taxonomy round, no scorer or ratchet relaxed, no claimed pass hunted. The next
+track is public-beta-prep, after this merges.
+
+### NEXT TRACK
+
+**public-beta-prep — AFTER this branch merges to main.** Not started here, by
+instruction. No BETA.md, no public-journey work, no new climb was opened in
+this phase.
+
 
 ## DECIDED — OPTION B IS LOCKED. THE GEOMETRY EXCLUSION STAYS.
 
@@ -62,23 +271,33 @@ what executing them measured.
 
 ### A. FIRST-PARTY ANCHORS RE-POINTED — `FC-SCRIPT-FILEKEY-PIN` IS CLOSED
 
+**SUPERSEDED IN PART BY THE CLOSEOUT — read the "SUITE AND GATES" section at the
+top first.** The 48-contract move described below was TOO BROAD: it orphaned the
+parity snapshots (`anchors.figma.fileKey` has two consumers), reddened four
+parity evals, and was narrowed at closeout to the 13 stems decision A actually
+named. The paragraph below is kept as the record of what was done and why; the
+final anchor split is the one in the closeout section.
+
 51 first-party contracts anchored `8nim1d0IPnehMxA7B7SYxC`, a file nobody
 builds into. They now anchor where the lane actually lives:
 
     progress-bar · slider · spinner   → GnQnjSNBXtgtd2Ht0Hs1C8   (snapshot evidence)
     the other 48                      → BMjUA2ue5CaZXU4kufxL0z   (10 with snapshot
                                         evidence, 38 as the lane's declared build target)
+                                        ← THE 38 WERE REVERTED AT CLOSEOUT
     bento-grid · grid-gallery · page-shell · sidebar-layout · two-column
                                       → UNTOUCHED, anchor was already null
 
 Only 18 of those moves are backed by a measured canvas
 (`canvas-drift/LIVE-SNAPSHOT.json`); the remaining 33 are a DECLARATION of
-where the lane is built, not a measurement, and are recorded as such. The
-per-component scripts each take their own contract's anchor, so
-`16-checkbox.js`, `49-textfield.js` and `06-button.js` now guard
-`BMjUA2ue5CaZXU4kufxL0z` and `34/38/39` guard `GnQnj…`. `01-tokens.js` and the
-five `batch-*.js` take `contracts[0]`, which is now BMjUA — coherent for the
-playground, and the reason all 48 moved together rather than only the 10.
+where the lane is built, not a measurement, and are recorded as such. **That
+distinction turned out to be the whole defect: the declared 33 are exactly what
+broke the parity spine, and the measured 18 are exactly what survived the
+closeout.** The per-component scripts each take their own contract's anchor, so
+`16-checkbox.js`, `49-textfield.js` and `06-button.js` guard
+`BMjUA2ue5CaZXU4kufxL0z` and `34/38/39` guard `GnQnj…` — unchanged by the
+narrowing. `01-tokens.js` and the five `batch-*.js` take `contracts[0]`, which
+is BACK to the DS file, which is what the parity snapshots describe.
 
 **THE GUARD PASSED AND THE CANVAS REPRODUCED EXACTLY.** checkbox (6 variants),
 text-field (3) and button (24) rebuilt from their own committed scripts on the

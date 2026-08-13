@@ -10,7 +10,8 @@
     "bridge": "figma-console MCP figma_execute (Desktop Bridge)",
     "mintedAt": "2026-08-12",
     "method": "getNodeByIdAsync on each stem's pinned cellNodeId; cell dimensions read from node.width/node.height with every slot FILLED per the corpus convention",
-    "state": "Minted immediately after the 2026-08-12 repair, with each slot holding its pinned ds.badge (Variant=Info). Verified against the committed shots: every reshot PNG came back byte-identical and every scorecard metric unchanged, so these numbers describe the same canvas the committed evidence was scored on."
+    "state": "Minted immediately after the 2026-08-12 repair, with each slot holding its pinned ds.badge (Variant=Info). Verified against the committed shots: every reshot PNG came back byte-identical and every scorecard metric unchanged, so these numbers describe the same canvas the committed evidence was scored on.",
+    "remint": "2026-08-13 phase closeout: checkbox/text-field/button minted from the same bridge, same method, with the composition five re-verified unchanged (all five BOX-OK against their pins with every slot FILLED)."
   },
   "guard": {
     "marginMinPx": -1,
@@ -44,7 +45,7 @@
     "scripts/console-loop-render-ref.mts",
     "src/components/"
   ],
-  "stemsNote": "SCOPE: the five COMPOSITION stems only. The rest of the first-party lane (avatar, badge, banner, button, card, checkbox, divider, switch, text-field, token) is NOT pinned here yet — those are not slot components, they carry no filled surface, and checkbox/text-field/button were each rebuilt from their own committed scripts on 2026-08-12 and came back byte-identical, so the hazard this pin guards does not apply to them. Extending the pin to them is a separate, cheap round; leaving them unpinned is stated rather than silent.",
+  "stemsNote": "SCOPE: the five COMPOSITION stems plus the three NON-composition stems that were rebuilt from their own committed scripts on 2026-08-12 and came back BYTE-IDENTICAL (checkbox, text-field, button) — those three are cheap to pin precisely because their reproducibility is already measured, so the pin records a fact rather than a hope. The remaining first-party stems (avatar, badge, banner, card, divider, switch, token, and the reference-less ones) are NOT pinned here: their cells were not bridge-minted this round, and C1's whole value is that cellW/cellH is an INDEPENDENT fact — inventing one from the committed PNG would make the check circular. Extending the pin to them is a separate cheap round; leaving them unpinned is stated rather than silent.",
   "stems": {
     "bento-grid": {
       "setNodeId": "7:1658",
@@ -100,6 +101,33 @@
       "filledPin": "one ds.badge, Variant=Info",
       "inkMinPct": 8.0,
       "inkMeasuredPct": 17.81
+    },
+    "checkbox": {
+      "setNodeId": "4:594",
+      "cellNodeId": "4:556",
+      "cellName": "Value=Unchecked, Size=Medium",
+      "cellW": 242,
+      "cellH": 36,
+      "inkMinPct": 10.0,
+      "inkMeasuredPct": 20.15
+    },
+    "text-field": {
+      "setNodeId": "4:651",
+      "cellNodeId": "4:621",
+      "cellName": "Size=Medium",
+      "cellW": 320,
+      "cellH": 79,
+      "inkMinPct": 6.0,
+      "inkMeasuredPct": 11.95
+    },
+    "button": {
+      "setNodeId": "4:412",
+      "cellNodeId": "4:316",
+      "cellName": "Variant=Primary, Size=Medium, State=Default",
+      "cellW": 83,
+      "cellH": 35,
+      "inkMinPct": 50.0,
+      "inkMeasuredPct": 96.14
     }
   }
 }
