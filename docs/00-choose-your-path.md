@@ -5,6 +5,12 @@ document that mentions "the journeys" links here; if another page appears to
 disagree with this one about how many paths there are or what a path is
 called, this page wins and the other page has a bug — please report it.
 
+> **Beta note.** Of the three paths below, exactly ONE is supported
+> end-to-end for the beta by a documented, receipted, clean-machine
+> command list: **path B on the Flowbite lane**. See
+> [BETA.md](BETA.md) before you start. The other two paths are real and
+> they run, but they are not what the beta promises.
+
 Three situations bring people to this tool. They are genuinely different
 amounts of work, they run different verbs, and they end in different places.
 One rule spans all three: **the surfaces never sync side-to-side.** A

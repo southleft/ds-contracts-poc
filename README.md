@@ -9,6 +9,8 @@
 
 This repository is the working proof, and the candidate reference implementation for a vendor-neutral component contract specification. 56 component contracts and 282 DTCG tokens generate two surfaces — a typed React library and a native design-tool library — that are continuously proven to match the contracts by a three-way differ. Nothing is hand-maintained twice, and nothing pretends to be in sync when it isn't.
 
+**→ Just cloned this and want to see it work? Start with [docs/BETA.md](docs/BETA.md)** — the one journey that is supported end-to-end, with a command list that was run verbatim on a clean machine and a [receipt](parity/receipts/beta/GOLDEN-PATH-RECEIPT.md) showing the artifact reproduces byte-for-byte.
+
 **→ The spec site: [ds-contracts-spec.pages.dev](https://ds-contracts-spec.pages.dev)** · **The playground: [ds-contracts-playground.pages.dev](https://ds-contracts-playground.pages.dev)** · **New here? [Which journey are you on?](#which-journey-are-you-on)**
 
 ## Release-candidate status
