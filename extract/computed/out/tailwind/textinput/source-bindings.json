@@ -1,0 +1,315 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "TextInput",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "part-0-0",
+      "channel": "background-color",
+      "combo": "info.sm",
+      "axisValues": {
+        "color": "info",
+        "sizing": "sm"
+      },
+      "token": "color-cyan-50",
+      "varName": "--color-cyan-50",
+      "anchor": {
+        "selector": ".bg-cyan-50"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "background-color",
+      "combo": "info.md",
+      "axisValues": {
+        "color": "info",
+        "sizing": "md"
+      },
+      "token": "color-cyan-50",
+      "varName": "--color-cyan-50",
+      "anchor": {
+        "selector": ".bg-cyan-50"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "background-color",
+      "combo": "info.lg",
+      "axisValues": {
+        "color": "info",
+        "sizing": "lg"
+      },
+      "token": "color-cyan-50",
+      "varName": "--color-cyan-50",
+      "anchor": {
+        "selector": ".bg-cyan-50"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "info.sm",
+      "axisValues": {
+        "color": "info",
+        "sizing": "sm"
+      },
+      "token": "color-cyan-900",
+      "varName": "--color-cyan-900",
+      "anchor": {
+        "selector": ".text-cyan-900"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "info.md",
+      "axisValues": {
+        "color": "info",
+        "sizing": "md"
+      },
+      "token": "color-cyan-900",
+      "varName": "--color-cyan-900",
+      "anchor": {
+        "selector": ".text-cyan-900"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "color",
+      "combo": "info.lg",
+      "axisValues": {
+        "color": "info",
+        "sizing": "lg"
+      },
+      "token": "color-cyan-900",
+      "varName": "--color-cyan-900",
+      "anchor": {
+        "selector": ".text-cyan-900"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "info.sm",
+      "axisValues": {
+        "color": "info",
+        "sizing": "sm"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".sm\\:text-xs"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "info.md",
+      "axisValues": {
+        "color": "info",
+        "sizing": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "info.lg",
+      "axisValues": {
+        "color": "info",
+        "sizing": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".sm\\:text-base"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "failure.sm",
+      "axisValues": {
+        "color": "failure",
+        "sizing": "sm"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".sm\\:text-xs"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "failure.md",
+      "axisValues": {
+        "color": "failure",
+        "sizing": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "failure.lg",
+      "axisValues": {
+        "color": "failure",
+        "sizing": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".sm\\:text-base"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "success.sm",
+      "axisValues": {
+        "color": "success",
+        "sizing": "sm"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".sm\\:text-xs"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "success.md",
+      "axisValues": {
+        "color": "success",
+        "sizing": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "success.lg",
+      "axisValues": {
+        "color": "success",
+        "sizing": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".sm\\:text-base"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "warning.sm",
+      "axisValues": {
+        "color": "warning",
+        "sizing": "sm"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".sm\\:text-xs"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "warning.md",
+      "axisValues": {
+        "color": "warning",
+        "sizing": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "warning.lg",
+      "axisValues": {
+        "color": "warning",
+        "sizing": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".sm\\:text-base"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "gray.sm",
+      "axisValues": {
+        "color": "gray",
+        "sizing": "sm"
+      },
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".sm\\:text-xs"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "gray.md",
+      "axisValues": {
+        "color": "gray",
+        "sizing": "md"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "part-0-0",
+      "channel": "font-size",
+      "combo": "gray.lg",
+      "axisValues": {
+        "color": "gray",
+        "sizing": "lg"
+      },
+      "token": "text-base",
+      "varName": "--text-base",
+      "anchor": {
+        "selector": ".sm\\:text-base"
+      }
+    }
+  ],
+  "skips": [
+    "part-0-0.line-height: candidates --text-base--line-height → \"text-base--line-height\" = calc(1.5 / 1); --text-sm--line-height → \"text-sm--line-height\" = calc(1.25 / 0.875); --text-xs--line-height → \"text-xs--line-height\" = calc(1 / 0.75) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 4,
+  "shorthandSkips": [
+    "part-0-0.border-color: SHORTHAND carrying var(--color-cyan-400, --color-cyan-500) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "part-0-0.border-radius: SHORTHAND carrying var(--radius-lg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "part-0-0.border-style: SHORTHAND carrying var(--tw-border-style) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "part-0-0.padding: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

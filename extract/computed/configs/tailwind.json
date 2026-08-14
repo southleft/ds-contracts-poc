@@ -15,32 +15,55 @@
     "wrapperClose": "</>"
   },
   "tokens": {
-    "dtcg": ["examples/tailwind/tokens/tailwind.dtcg.json"],
+    "dtcg": [
+      "examples/tailwind/tokens/tailwind.dtcg.json"
+    ],
     "css": "examples/tailwind/tokens/tailwind.vars.css",
     "minted": "examples/tailwind/tokens/tailwind-minted.dtcg.json"
   },
   "browser": {
-    "viewport": { "width": 900, "height": 1000 },
+    "viewport": {
+      "width": 900,
+      "height": 1000
+    },
     "deviceScaleFactor": 1,
     "colorScheme": "light"
   },
-  "stage": { "width": 320, "height": 96, "padding": 16 },
-  "enumeration": { "cartesianLimit": 512, "unsetLabel": "__unset" },
+  "stage": {
+    "width": 320,
+    "height": 96,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "__unset"
+  },
   "components": [
     {
       "name": "Button",
       "importName": "Button",
       "contract": "examples/tailwind/contracts-seed/button.contract.json",
       "sampleText": "Button",
-      "axes": ["color", "size"],
-      "stateProps": [{ "prop": "disabled", "state": "disabled" }]
+      "axes": [
+        "color",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ]
     },
     {
       "name": "Badge",
       "importName": "Badge",
       "contract": "examples/tailwind/contracts-seed/badge.contract.json",
       "sampleText": "Badge",
-      "axes": ["color", "size"]
+      "axes": [
+        "color",
+        "size"
+      ]
     },
     {
       "name": "Card",
@@ -54,7 +77,9 @@
       "importName": "Alert",
       "contract": "examples/tailwind/contracts-seed/alert.contract.json",
       "sampleText": "Alert message",
-      "axes": ["color"]
+      "axes": [
+        "color"
+      ]
     },
     {
       "__note": "STATE-PLANE PROJECTION ROUND — `checked` RECLASSIFIED from a stateProp to a VARIANT AXIS (same class as MUI Switch). It is a prop-selected rendering, not a pseudo-class plane, and it was outside the closed state vocabulary — its captured track-color delta minted `background-color-state-checked`, a name nothing re-read and no emitter rendered.",
@@ -62,10 +87,44 @@
       "importName": "ToggleSwitch",
       "contract": "examples/tailwind/contracts-seed/toggleswitch.contract.json",
       "sampleText": "",
-      "axes": ["sizing", "checked"],
-      "axisValueMap": { "checked": { "unchecked": false, "checked": true } },
-      "fixedProps": { "label": "Toggle" },
-      "callbackProps": ["onChange"]
+      "axes": [
+        "sizing",
+        "checked"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true
+        }
+      },
+      "fixedProps": {
+        "label": "Toggle"
+      },
+      "callbackProps": [
+        "onChange"
+      ]
+    },
+    {
+      "__note": "KIT CLIMB 2026-08-14 — seed proposed by extract/computed/seed-gen.ts from the library's own .d.ts (DynamicStringEnumKeysOf<SpinnerColors>), reviewed, and committed. Not hand-authored.",
+      "name": "Spinner",
+      "importName": "Spinner",
+      "contract": "examples/tailwind/contracts-seed/spinner.contract.json",
+      "sampleText": "",
+      "axes": [
+        "color",
+        "size"
+      ]
+    },
+    {
+      "__note": "KIT CLIMB 2026-08-14 — seed proposed by seed-gen from the library's own .d.ts; defaults READ from TextInput.js (color=\"gray\", sizing=\"md\"), both of which ARE in the declared enums.",
+      "name": "TextInput",
+      "importName": "TextInput",
+      "contract": "examples/tailwind/contracts-seed/textinput.contract.json",
+      "sampleText": "",
+      "axes": [
+        "color",
+        "sizing"
+      ]
     }
   ]
 }

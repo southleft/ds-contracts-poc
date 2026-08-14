@@ -1,0 +1,1464 @@
+{
+  "component": "Spinner",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 40,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 0,
+    "cellsEqual": 0,
+    "pctEqual": 100,
+    "rowsFullyEqual": 0,
+    "rows": 160
+  },
+  "pixel": {
+    "pairs": 160,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 160,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 0.7558593749999998,
+    "meanAA": 0.1028645833333333,
+    "maxAA": 0.2506510416666667
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 6,
+    "mintedLeavesUnfolded": 6,
+    "baseBindings": 2,
+    "stateBindings": 0,
+    "codeOnlyChannels": 0,
+    "overflowBindings": 0,
+    "folds": 30
+  },
+  "worstRows": [
+    {
+      "key": "info.xl__default",
+      "pctAA": 0.2506510416666667,
+      "pctExact": 1.5852864583333333,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "info.xl__hover",
+      "pctAA": 0.2506510416666667,
+      "pctExact": 1.5852864583333333,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "info.xl__focus-visible",
+      "pctAA": 0.2506510416666667,
+      "pctExact": 1.5852864583333333,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "info.xl__active",
+      "pctAA": 0.2506510416666667,
+      "pctExact": 1.5852864583333333,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "failure.xl__default",
+      "pctAA": 0.2506510416666667,
+      "pctExact": 1.5852864583333333,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "failure.xl__hover",
+      "pctAA": 0.2506510416666667,
+      "pctExact": 1.5852864583333333,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "failure.xl__focus-visible",
+      "pctAA": 0.2506510416666667,
+      "pctExact": 1.5852864583333333,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "failure.xl__active",
+      "pctAA": 0.2506510416666667,
+      "pctExact": 1.5852864583333333,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [],
+  "namedLosses": [],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+    "leavesAdded": 236,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "info.xs__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "info.xs__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.xs__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "info.xs__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.sm__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "info.sm__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.sm__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "info.sm__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.md__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "info.md__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.md__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "info.md__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.lg__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "info.lg__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.lg__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "info.lg__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.xl__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "info.xl__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "info.xl__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "info.xl__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "failure.xs__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "failure.xs__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "failure.xs__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "failure.xs__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "failure.sm__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "failure.sm__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "failure.sm__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "failure.sm__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "failure.md__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "failure.md__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "failure.md__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "failure.md__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "failure.lg__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "failure.lg__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "failure.lg__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "failure.lg__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "failure.xl__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "failure.xl__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "failure.xl__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "failure.xl__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.xs__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "success.xs__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.xs__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "success.xs__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.sm__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "success.sm__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.sm__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "success.sm__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.md__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "success.md__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.md__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "success.md__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.lg__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "success.lg__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.lg__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "success.lg__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.xl__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "success.xl__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "success.xl__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "success.xl__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.xs__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "warning.xs__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.xs__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "warning.xs__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.sm__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "warning.sm__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.sm__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "warning.sm__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.md__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "warning.md__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.md__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "warning.md__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.lg__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "warning.lg__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.lg__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "warning.lg__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.xl__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "warning.xl__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "warning.xl__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "warning.xl__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "gray.xs__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "gray.xs__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "gray.xs__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "gray.xs__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "gray.sm__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "gray.sm__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "gray.sm__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "gray.sm__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "gray.md__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "gray.md__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "gray.md__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "gray.md__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "gray.lg__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "gray.lg__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "gray.lg__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "gray.lg__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "gray.xl__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "gray.xl__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "gray.xl__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "gray.xl__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "pink.xs__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "pink.xs__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "pink.xs__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "pink.xs__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "pink.sm__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "pink.sm__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "pink.sm__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "pink.sm__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "pink.md__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "pink.md__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "pink.md__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "pink.md__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "pink.lg__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "pink.lg__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "pink.lg__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "pink.lg__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "pink.xl__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "pink.xl__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "pink.xl__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "pink.xl__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "purple.xs__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "purple.xs__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "purple.xs__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "purple.xs__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "purple.sm__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "purple.sm__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "purple.sm__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "purple.sm__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "purple.md__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "purple.md__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "purple.md__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "purple.md__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "purple.lg__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "purple.lg__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "purple.lg__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "purple.lg__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "purple.xl__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "purple.xl__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "purple.xl__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "purple.xl__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "default.xs__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "default.xs__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "default.xs__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": []
+    },
+    {
+      "key": "default.xs__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.1953125,
+      "pctAA": 0.01953125,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "default.sm__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "default.sm__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "default.sm__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": []
+    },
+    {
+      "key": "default.sm__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.2897135416666667,
+      "pctAA": 0.029296875,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "default.md__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "default.md__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "default.md__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": []
+    },
+    {
+      "key": "default.md__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 0.6510416666666666,
+      "pctAA": 0.068359375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "default.lg__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "default.lg__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "default.lg__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": []
+    },
+    {
+      "key": "default.lg__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.0579427083333333,
+      "pctAA": 0.146484375,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "default.xl__default",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "default.xl__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+    },
+    {
+      "key": "default.xl__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": []
+    },
+    {
+      "key": "default.xl__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": 1.5852864583333333,
+      "pctAA": 0.2506510416666667,
+      "mismatches": [],
+      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+    }
+  ]
+}

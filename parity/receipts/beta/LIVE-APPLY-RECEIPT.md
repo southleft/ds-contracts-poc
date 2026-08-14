@@ -108,3 +108,10 @@ The bundle was applied through the engine over the Desktop Bridge, which is how
 the plugin applies it — but **a human pasting JSON into the plugin's Build tab
 was not performed here.** What is proven is that the planned steps land the
 documented artifacts in a blank file. The UI paste itself remains a human step.
+
+---
+
+**SHA SUPERSEDED 2026-08-14.** This receipt applied the FIVE-component bundle
+(`bb96f43e…`). The kit climb added a sixth (TextInput) and applied it to the
+same file as a NEW page, leaving these five untouched — verified before and
+after. The bundle is now `22d50bf1…`. See `KIT-CLIMB.md`.

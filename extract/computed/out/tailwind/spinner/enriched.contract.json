@@ -1,0 +1,125 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.spinner",
+  "name": "Spinner",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED seed — generated from flowbite-react's shipped .d.ts by extract/computed/seed-gen.ts. REVIEW BEFORE USE: the enum axes below are read from the library's type declarations, which is not the same as the axes a designer wants on the canvas. Prune what does not belong, and add any axis a human models out of booleans — the generator is silent there ON PURPOSE (see `--verify`). Anatomy is left empty because parts are promoted from captured DOM truth, never inferred from types (docs/21 step 4). Defaults are READ from the library's own runtime source (Spinner.js destructuring), not chosen. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "info",
+          "failure",
+          "success",
+          "warning",
+          "gray",
+          "pink",
+          "purple",
+          "default"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "info": "Info",
+            "failure": "Failure",
+            "success": "Success",
+            "warning": "Warning",
+            "gray": "Gray",
+            "pink": "Pink",
+            "purple": "Purple",
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
+      "default": "lg",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg",
+            "xl": "Xl"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block"
+      },
+      "parts": {},
+      "icon": {
+        "asset": "spinner-root",
+        "size": 12
+      },
+      "tokens": {
+        "color": "{imported.spinner.root.color}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "lg": {
+              "width": "{imported.spinner.root.width.lg}"
+            },
+            "md": {
+              "width": "{imported.spinner.root.width.md}"
+            },
+            "sm": {
+              "width": "{imported.spinner.root.width.sm}"
+            },
+            "xl": {
+              "width": "{imported.spinner.root.width.xl}"
+            },
+            "xs": {
+              "width": "{imported.spinner.root.width.xs}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Spinner"
+    }
+  }
+}

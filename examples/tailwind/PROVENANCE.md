@@ -164,9 +164,16 @@ Source facts bound: `text-sm`/`text-base`/`text-xs`, `font-weight-medium`,
 
 | committed contracts | pinned by the drift instrument | library size | **coverage** |
 |---|---|---|---|
-| 5 | 5 | 46 | **10.9%** |
+| 6 | 6 | 46 | **13.0%** |
 
 Library size: component directories in `flowbite-react@0.12.17/dist/components` (`.tw-sandbox`).
+
+2026-08-14 KIT CLIMB: **TextInput** joins the slice (5 -> 6). Its seed was
+PROPOSED by `extract/computed/seed-gen.ts` from the library's own `.d.ts`
+and its defaults READ from `TextInput.js` — not hand-authored. Spinner was
+captured in the same round at 100.000% gate computed equality and is NOT in
+this row: it emits an EMPTY component set (see
+`parity/receipts/beta/KIT-CLIMB.md`, FC-ROOT-ICON-NOT-EMITTED).
 
 Every per-component number in this file — floors, `pctEqual`, token counts,
 variant cells — is measured over that slice, and the slice was hand-picked for

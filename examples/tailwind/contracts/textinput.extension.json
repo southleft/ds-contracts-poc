@@ -1,0 +1,796 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "flowbite-react@0.12.17",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        }
+      },
+      "text-input": {
+        "part-0-0": {
+          "background-color": {
+            "info": {
+              "$value": "#ecfeff",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#fdf2f2",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#f3faf7",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#fdfdea",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#f9fafb",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color": {
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#d1d5db",
+              "$type": "color"
+            }
+          },
+          "border-left-color": {
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#d1d5db",
+              "$type": "color"
+            }
+          },
+          "border-right-color": {
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#d1d5db",
+              "$type": "color"
+            }
+          },
+          "border-top-color": {
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#d1d5db",
+              "$type": "color"
+            }
+          },
+          "color": {
+            "info": {
+              "$value": "#104e64",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#771d1d",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#014737",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#633112",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#111827",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "sm": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "line-height": {
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "outline-color": {
+            "info": {
+              "$value": "#104e64",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#771d1d",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#014737",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#633112",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#111827",
+              "$type": "color"
+            }
+          },
+          "padding-bottom": {
+            "sm": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "sm": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "sm": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "sm": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-color-state-active": {
+            "gray": {
+              "$value": "#3f83f8",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "border-left-color-state-active": {
+            "gray": {
+              "$value": "#3f83f8",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "border-right-color-state-active": {
+            "gray": {
+              "$value": "#3f83f8",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "border-top-color-state-active": {
+            "gray": {
+              "$value": "#3f83f8",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "box-shadow-state-active": {
+            "info": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.715 0.143 215.221) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            },
+            "failure": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(240, 82, 82, 1) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            },
+            "success": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(14, 159, 110, 1) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            },
+            "warning": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(194, 120, 3, 1) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            },
+            "gray": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(63, 131, 248, 1) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            }
+          },
+          "outline-color-state-active": {
+            "$value": "#005fcc",
+            "$type": "color"
+          },
+          "outline-width-state-active": {
+            "$value": "1px",
+            "$type": "dimension"
+          },
+          "border-bottom-color-state-focus-visible": {
+            "gray": {
+              "$value": "#3f83f8",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "border-left-color-state-focus-visible": {
+            "gray": {
+              "$value": "#3f83f8",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "border-right-color-state-focus-visible": {
+            "gray": {
+              "$value": "#3f83f8",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "border-top-color-state-focus-visible": {
+            "gray": {
+              "$value": "#3f83f8",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#f05252",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0e9f6e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            }
+          },
+          "box-shadow-state-focus-visible": {
+            "info": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.715 0.143 215.221) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            },
+            "failure": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(240, 82, 82, 1) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            },
+            "success": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(14, 159, 110, 1) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            },
+            "warning": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(194, 120, 3, 1) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            },
+            "gray": {
+              "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(63, 131, 248, 1) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+              "$type": "shadow"
+            }
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#005fcc",
+            "$type": "color"
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "1px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "part-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "part-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "overflow-y",
+        "value": "clip"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [],
+  "stateOverflow": [
+    {
+      "state": "active",
+      "part": "part-0-0",
+      "channel": "--tw-outline-style",
+      "sample": "none",
+      "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+    },
+    {
+      "state": "active",
+      "part": "part-0-0",
+      "channel": "--tw-ring-shadow",
+      "sample": "0 0 0 calc(1px + 0px) oklch(71.5% 0.143 215.221)",
+      "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0-0",
+      "channel": "--tw-outline-style",
+      "sample": "none",
+      "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-0-0",
+      "channel": "--tw-ring-shadow",
+      "sample": "0 0 0 calc(1px + 0px) oklch(71.5% 0.143 215.221)",
+      "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+    }
+  ],
+  "overflowBindings": [
+    {
+      "part": "part-0-0",
+      "channel": "border-bottom-color",
+      "state": "active",
+      "ref": "{imported.text-input.part-0-0.border-bottom-color-state-active.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-left-color",
+      "state": "active",
+      "ref": "{imported.text-input.part-0-0.border-left-color-state-active.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-right-color",
+      "state": "active",
+      "ref": "{imported.text-input.part-0-0.border-right-color-state-active.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-top-color",
+      "state": "active",
+      "ref": "{imported.text-input.part-0-0.border-top-color-state-active.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "box-shadow",
+      "state": "active",
+      "ref": "{imported.text-input.part-0-0.box-shadow-state-active.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "outline-color",
+      "state": "active",
+      "ref": "{imported.text-input.part-0-0.outline-color-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "outline-width",
+      "state": "active",
+      "ref": "{imported.text-input.part-0-0.outline-width-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-bottom-color",
+      "state": "focus-visible",
+      "ref": "{imported.text-input.part-0-0.border-bottom-color-state-focus-visible.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-left-color",
+      "state": "focus-visible",
+      "ref": "{imported.text-input.part-0-0.border-left-color-state-focus-visible.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-right-color",
+      "state": "focus-visible",
+      "ref": "{imported.text-input.part-0-0.border-right-color-state-focus-visible.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "border-top-color",
+      "state": "focus-visible",
+      "ref": "{imported.text-input.part-0-0.border-top-color-state-focus-visible.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "box-shadow",
+      "state": "focus-visible",
+      "ref": "{imported.text-input.part-0-0.box-shadow-state-focus-visible.{color}}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "outline-color",
+      "state": "focus-visible",
+      "ref": "{imported.text-input.part-0-0.outline-color-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "part-0-0",
+      "channel": "outline-width",
+      "state": "focus-visible",
+      "ref": "{imported.text-input.part-0-0.outline-width-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <input> — span control used (part part-0-0)",
+    "reset-supplied-border-style-admitted: part-0-0.border-bottom-style = solid — EQUAL to the <input> control, so the styled-channel door would normally drop it as \"not a fact of this component\". Admitted anyway because this part draws a real border (border-bottom-width = 1px) and the style comes from the library's GLOBAL CSS (Tailwind preflight's `* { border-style: solid }` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.",
+    "reset-supplied-border-style-admitted: part-0-0.border-left-style = solid — EQUAL to the <input> control, so the styled-channel door would normally drop it as \"not a fact of this component\". Admitted anyway because this part draws a real border (border-left-width = 1px) and the style comes from the library's GLOBAL CSS (Tailwind preflight's `* { border-style: solid }` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.",
+    "reset-supplied-border-style-admitted: part-0-0.border-right-style = solid — EQUAL to the <input> control, so the styled-channel door would normally drop it as \"not a fact of this component\". Admitted anyway because this part draws a real border (border-right-width = 1px) and the style comes from the library's GLOBAL CSS (Tailwind preflight's `* { border-style: solid }` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.",
+    "reset-supplied-border-style-admitted: part-0-0.border-top-style = solid — EQUAL to the <input> control, so the styled-channel door would normally drop it as \"not a fact of this component\". Admitted anyway because this part draws a real border (border-top-width = 1px) and the style comes from the library's GLOBAL CSS (Tailwind preflight's `* { border-style: solid }` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (part-0-0); -webkit-text-stroke-color (part-0-0)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: part-0-0.caret-color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-0.color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-0.font-size — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: part-0-0.line-height — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::placeholder (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "part-0-0"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "full-width-carried: part-0 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: part-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0.overflow-x = clip (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0.overflow-y = clip (v15 declared vocabulary — canvas-drawable)"
+  ]
+}

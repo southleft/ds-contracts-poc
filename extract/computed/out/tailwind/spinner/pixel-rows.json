@@ -1,0 +1,802 @@
+[
+  {
+    "key": "info.xs__default",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "info.xs__hover",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "info.xs__focus-visible",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "info.xs__active",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "info.sm__default",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "info.sm__hover",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "info.sm__focus-visible",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "info.sm__active",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "info.md__default",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "info.md__hover",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "info.md__focus-visible",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "info.md__active",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "info.lg__default",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "info.lg__hover",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "info.lg__focus-visible",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "info.lg__active",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "info.xl__default",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "info.xl__hover",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "info.xl__focus-visible",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "info.xl__active",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "failure.xs__default",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "failure.xs__hover",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "failure.xs__focus-visible",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "failure.xs__active",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "failure.sm__default",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "failure.sm__hover",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "failure.sm__focus-visible",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "failure.sm__active",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "failure.md__default",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "failure.md__hover",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "failure.md__focus-visible",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "failure.md__active",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "failure.lg__default",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "failure.lg__hover",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "failure.lg__focus-visible",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "failure.lg__active",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "failure.xl__default",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "failure.xl__hover",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "failure.xl__focus-visible",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "failure.xl__active",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "success.xs__default",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "success.xs__hover",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "success.xs__focus-visible",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "success.xs__active",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "success.sm__default",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "success.sm__hover",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "success.sm__focus-visible",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "success.sm__active",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "success.md__default",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "success.md__hover",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "success.md__focus-visible",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "success.md__active",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "success.lg__default",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "success.lg__hover",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "success.lg__focus-visible",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "success.lg__active",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "success.xl__default",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "success.xl__hover",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "success.xl__focus-visible",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "success.xl__active",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "warning.xs__default",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "warning.xs__hover",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "warning.xs__focus-visible",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "warning.xs__active",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "warning.sm__default",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "warning.sm__hover",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "warning.sm__focus-visible",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "warning.sm__active",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "warning.md__default",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "warning.md__hover",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "warning.md__focus-visible",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "warning.md__active",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "warning.lg__default",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "warning.lg__hover",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "warning.lg__focus-visible",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "warning.lg__active",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "warning.xl__default",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "warning.xl__hover",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "warning.xl__focus-visible",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "warning.xl__active",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "gray.xs__default",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "gray.xs__hover",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "gray.xs__focus-visible",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "gray.xs__active",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "gray.sm__default",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "gray.sm__hover",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "gray.sm__focus-visible",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "gray.sm__active",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "gray.md__default",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "gray.md__hover",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "gray.md__focus-visible",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "gray.md__active",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "gray.lg__default",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "gray.lg__hover",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "gray.lg__focus-visible",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "gray.lg__active",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "gray.xl__default",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "gray.xl__hover",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "gray.xl__focus-visible",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "gray.xl__active",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "pink.xs__default",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "pink.xs__hover",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "pink.xs__focus-visible",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "pink.xs__active",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "pink.sm__default",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "pink.sm__hover",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "pink.sm__focus-visible",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "pink.sm__active",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "pink.md__default",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "pink.md__hover",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "pink.md__focus-visible",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "pink.md__active",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "pink.lg__default",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "pink.lg__hover",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "pink.lg__focus-visible",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "pink.lg__active",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "pink.xl__default",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "pink.xl__hover",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "pink.xl__focus-visible",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "pink.xl__active",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "purple.xs__default",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "purple.xs__hover",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "purple.xs__focus-visible",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "purple.xs__active",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "purple.sm__default",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "purple.sm__hover",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "purple.sm__focus-visible",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "purple.sm__active",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "purple.md__default",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "purple.md__hover",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "purple.md__focus-visible",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "purple.md__active",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "purple.lg__default",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "purple.lg__hover",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "purple.lg__focus-visible",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "purple.lg__active",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "purple.xl__default",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "purple.xl__hover",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "purple.xl__focus-visible",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "purple.xl__active",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "default.xs__default",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.xs__hover",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.xs__focus-visible",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.xs__active",
+    "pctExact": 0.1953125,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.sm__default",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "default.sm__hover",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "default.sm__focus-visible",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "default.sm__active",
+    "pctExact": 0.2897135416666667,
+    "pctAA": 0.029296875
+  },
+  {
+    "key": "default.md__default",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "default.md__hover",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "default.md__focus-visible",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "default.md__active",
+    "pctExact": 0.6510416666666666,
+    "pctAA": 0.068359375
+  },
+  {
+    "key": "default.lg__default",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "default.lg__hover",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "default.lg__focus-visible",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "default.lg__active",
+    "pctExact": 1.0579427083333333,
+    "pctAA": 0.146484375
+  },
+  {
+    "key": "default.xl__default",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "default.xl__hover",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "default.xl__focus-visible",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  },
+  {
+    "key": "default.xl__active",
+    "pctExact": 1.5852864583333333,
+    "pctAA": 0.2506510416666667
+  }
+]

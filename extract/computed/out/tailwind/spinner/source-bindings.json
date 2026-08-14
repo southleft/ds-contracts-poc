@@ -1,0 +1,89 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Spinner",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "info.xs",
+      "axisValues": {
+        "color": "info",
+        "size": "xs"
+      },
+      "token": "color-cyan-600",
+      "varName": "--color-cyan-600",
+      "anchor": {
+        "selector": ".fill-cyan-600"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "info.sm",
+      "axisValues": {
+        "color": "info",
+        "size": "sm"
+      },
+      "token": "color-cyan-600",
+      "varName": "--color-cyan-600",
+      "anchor": {
+        "selector": ".fill-cyan-600"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "info.md",
+      "axisValues": {
+        "color": "info",
+        "size": "md"
+      },
+      "token": "color-cyan-600",
+      "varName": "--color-cyan-600",
+      "anchor": {
+        "selector": ".fill-cyan-600"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "info.lg",
+      "axisValues": {
+        "color": "info",
+        "size": "lg"
+      },
+      "token": "color-cyan-600",
+      "varName": "--color-cyan-600",
+      "anchor": {
+        "selector": ".fill-cyan-600"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "info.xl",
+      "axisValues": {
+        "color": "info",
+        "size": "xl"
+      },
+      "token": "color-cyan-600",
+      "varName": "--color-cyan-600",
+      "anchor": {
+        "selector": ".fill-cyan-600"
+      }
+    }
+  ],
+  "skips": [
+    "icon.height: source declares `calc(var(--spacing) * 10)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "icon.width: source declares `calc(var(--spacing) * 10)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "icon.animation: SHORTHAND carrying var(--animate-spin) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 2,
+  "calcCeiling": 2,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

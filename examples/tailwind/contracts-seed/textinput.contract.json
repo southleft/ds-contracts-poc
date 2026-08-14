@@ -1,0 +1,81 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.textinput",
+  "name": "TextInput",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED seed — generated from flowbite-react's shipped .d.ts by extract/computed/seed-gen.ts. REVIEW BEFORE USE: the enum axes below are read from the library's type declarations, which is not the same as the axes a designer wants on the canvas. Prune what does not belong, and add any axis a human models out of booleans — the generator is silent there ON PURPOSE (see `--verify`). Anatomy is left empty because parts are promoted from captured DOM truth, never inferred from types (docs/21 step 4). Defaults READ from TextInput.js (color=\"gray\", sizing=\"md\").",
+  "semantics": {
+    "element": "div"
+  },
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "TextInput"
+    }
+  },
+  "states": [],
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "info",
+          "failure",
+          "success",
+          "warning",
+          "gray"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "info": "Info",
+            "failure": "Failure",
+            "success": "Success",
+            "warning": "Warning",
+            "gray": "Gray"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      },
+      "default": "gray"
+    },
+    {
+      "name": "sizing",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Sizing",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "sizing"
+        }
+      },
+      "default": "md"
+    }
+  ]
+}
