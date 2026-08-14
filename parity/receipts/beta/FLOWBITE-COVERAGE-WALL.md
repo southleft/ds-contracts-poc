@@ -135,3 +135,103 @@ One of these, in preference order:
      needs a second sandbox and pins a git ref, which is new infra.
 
 Until one lands, the honest coverage row stays **5 / 46 (10.9%)**.
+
+---
+
+# FOLLOW-ON: THE SEED WALL IS DOWN (2026-08-14)
+
+The resolver gap named above is closed. `seed-gen` now reads Flowbite's
+declarations, and all five shortlisted stems get a proposal.
+
+## BEFORE → AFTER, all three libraries
+
+| library | before | after | verdict |
+|---|---|---|---|
+| **tailwind** | 0/7 exact · 0 differ · **6 MECHANICAL gaps** | **2/7 exact · 4 differ · 0 MECHANICAL** | unblocked |
+| carbon | 11/14 exact · 0 differ · 3 JUDGMENT | 11/14 exact · 0 differ · 3 JUDGMENT | **held, byte-identical** |
+| mui | 28/43 exact · 3 differ · 12 not proposed | 28/43 exact · 3 differ · 12 not proposed | **held, byte-identical** |
+
+**A correction to the brief, and to seed-gen's own header:** both quoted MUI at
+"15/20 with zero DIFFER". Re-measured, MUI is **28/43 with 3 DIFFER** and has
+been for some time — the header was reporting a number the tool no longer
+produced. The header now carries the re-measured figures for all three.
+
+## WHAT THE RESOLVER LEARNED — four plain TypeScript utilities, no library names
+
+    DynamicStringEnumKeysOf<T> = DynamicStringEnum<keyof RemoveIndexSignature<T>>
+    interface SpinnerColors extends Pick<FlowbiteColors, "failure"|…> {
+      [key: string]: string; default: string }
+
+  1. **Generic aliases are indexed at all.** The old regex read `type X = …`
+     and could not see `type X<T> = …` — `<T>` sits between the name and the
+     `=`. Flowbite routes *every* enum prop through one generic, so the entire
+     library was invisible for that one reason.
+  2. **`keyof` over an interface shape** — own members plus everything reached
+     through `extends`, with index signatures dropped (which is what
+     `RemoveIndexSignature` asks for anyway).
+  3. **`Pick<T,K>` / `Omit<T,K>`** evaluated against that key set.
+  4. **The open-enum arm is stripped.** `DynamicStringEnum<T> = T | (string & {})`
+     keeps editor autocomplete while accepting any string; `(string & {})` is
+     the "any string" half and is no more a design value than `undefined`.
+
+**ORDER WAS LOAD-BEARING AND THE MISTAKE WAS MEASURED.** Placing the
+generic-alias application above the named handlers took MUI from **28/43 to
+3/43** — `OverridableStringUnion<…>` *is* a generic alias, and the substitution
+swallowed it before its own case ran. The specific handlers now win and the
+generic application is the fallback. That regression is why carbon and mui were
+re-measured after every edit rather than at the end.
+
+## THE FOUR TAILWIND DIFFERS ARE NOT RESOLVER FAILURES
+
+    ~ Button.color  proposed-only: blue|cyan|gray|indigo|light|lime|pink|purple|teal|yellow
+    ~ Badge.color   proposed-only: blue|cyan|dark|gray|green|light|lime|purple|red|teal|yellow
+    ~ Alert.color   proposed-only: blue|cyan|dark|gray|green|indigo|light|…|yellow
+    ~ Button.size   human-only:    md
+
+Three are **supersets the human pruned** — Flowbite types `color` as every key
+of `FlowbiteColors` (17) while the seed keeps the 4–6 the design actually uses.
+The proposal agrees with the library's own RUNTIME theme (Button: 15 proposed,
+15 in `buttonTheme.color`), so the generator is reading correctly and the human
+curated. That is the designed workflow — the same prune the Carbon (45%) and
+MUI (49%) rates describe.
+
+The fourth is an **upstream type bug**: `ButtonSizes extends Pick<FlowbiteSizes,
+"xs"|"sm"|"lg"|"xl">` omits `md`, but `buttonTheme.size` ships
+`xs|sm|md|lg|xl`. **The human seed is right and flowbite-react@0.12.17's
+declaration is wrong**, so no reader of the declarations can reproduce it.
+
+**THE BRIEF'S BAR — "6/6 mechanical exact, zero new DIFFER" — IS NOT
+ACHIEVABLE**, and that was measured before any code was written rather than
+discovered after. Hitting it would mean reproducing a human's curation of 17
+colours down to 4, which is the one thing seed-gen's own header rules out:
+"a generator that produced THAT would be inventing the design space, not
+reading it." What *was* achievable — and is what the wave delivers — is **zero
+mechanical gaps**.
+
+## THE ACTUAL UNBLOCK
+
+    $ npx tsx extract/computed/seed-gen.ts <config with the five stems>
+      ✔ Spinner:   2 enum axis/axes — color(8), size(5)
+      ✔ Checkbox:  1 enum axis/axes — color(17)
+      ✔ Radio:     1 enum axis/axes — color(17)
+      ✔ TextInput: 2 enum axis/axes — color(5), sizing(3)
+      ✔ Progress:  2 enum axis/axes — color(13), size(4)
+      ✔ all 5 pass validateContract — the same referee the pipeline runs.
+
+Spinner's `color` resolves to exactly the eight values the wall named:
+`info|failure|success|warning|gray|pink|purple|default`. Before this round the
+generator proposed **nothing** for any of them.
+
+`npm run seed:verify` now runs **carbon, mui AND tailwind** and short-circuits
+on none of them — previously it ran carbon `&&` mui, so a tailwind regression
+could not have been seen, and a carbon failure would have hidden mui. Note it
+exits non-zero whenever any axis differs, so it was **already red before this
+round** (MUI's 3 DIFFER) — it is a report, not a gate, and this round did not
+change that semantics to make a number look better.
+
+## NOT DONE HERE, BY INSTRUCTION
+
+No capture, no promote, no emit, no bundle, no Figma. No seed was written into
+the repo — the five proposals above were generated to a scratch directory,
+inspected, and deleted. The coverage hill (Spinner → Checkbox → Radio →
+TextInput → Progress) is the next wave.

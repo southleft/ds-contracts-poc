@@ -29,8 +29,31 @@
  * AND IT IS MEASURED ON MORE THAN ONE LIBRARY, because one proved nothing.
  * Tuned on Carbon it scored 11/14 there and **0 of 20** on MUI — a hack fitted
  * to one library's type conventions, which a single-library number would have
- * reported as success. It now reads 11/14 and 15/20 with zero DIFFER on both.
- * Any figure here from a single library should be treated as unvalidated.
+ * reported as success. Any figure here from a single library should be treated
+ * as unvalidated, which is why `npm run seed:verify` now runs all three and
+ * short-circuits on none of them.
+ *
+ * CURRENT, re-measured 2026-08-14 (the prose above used to quote "11/14 and
+ * 15/20 with zero DIFFER on both" — MUI had grown to 43 axes and 3 DIFFER
+ * since, so the header was reporting a number the tool no longer produced):
+ *
+ *     carbon     11/14 exact ·  0 differ · 3 not proposed (3 JUDGMENT)
+ *     mui        28/43 exact ·  3 differ · 12 not proposed (8 JUDGMENT, 4 MECHANICAL)
+ *     tailwind    2/7  exact ·  4 differ · 1 not proposed (1 JUDGMENT, 0 MECHANICAL)
+ *
+ * TAILWIND WAS 0/7 WITH SIX MECHANICAL GAPS until the generic-alias/`keyof`
+ * walk below landed. Its four DIFFERs are not resolver failures and cannot be
+ * removed by reading harder:
+ *   · three are SUPERSETS the human pruned — Flowbite types `color` as every
+ *     key of `FlowbiteColors` (17) while the seed keeps the 4-6 the design
+ *     uses. The proposal agrees with the library's own RUNTIME theme (Button
+ *     color: 15 proposed, 15 in buttonTheme.color); the human curated it.
+ *   · one is an UPSTREAM TYPE BUG. `ButtonSizes extends Pick<FlowbiteSizes,
+ *     "xs"|"sm"|"lg"|"xl">` omits `md`, but `buttonTheme.size` ships
+ *     xs|sm|md|lg|xl. The human seed is right and the .d.ts is wrong, so no
+ *     reader of the declarations can reproduce it.
+ * `--verify` exits non-zero whenever ANY axis differs, so it has never been
+ * green (MUI's 3 predate this round) — it is a report, not a gate.
  */
 import { readdirSync, readFileSync, statSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
@@ -128,10 +151,36 @@ const constKeys = new Map<string, string[]>();
 const aliasBody = new Map<string, string>();
 /** `InterfaceName.propName` → its declared type, for indexed access. */
 const ifaceProps = new Map<string, string>();
+/**
+ * GENERIC alias name → its type parameters and raw body.
+ *
+ * The alias table above indexes `type X = …` only; its regex cannot even see
+ * `type X<T> = …` because `<T>` sits between the name and the `=`. That blind
+ * spot is why this generator scored 0/7 on Flowbite, which routes EVERY enum
+ * prop through one generic: `DynamicStringEnumKeysOf<T>`.
+ */
+const genericAlias = new Map<string, { params: string[]; body: string }>();
+/**
+ * Interface name → the shape a `keyof` needs: its own member names, the
+ * `extends` clauses it inherits from, and whether it declares a string index
+ * signature. Kept separate from `ifaceProps` (which is per-member, for indexed
+ * access) because `keyof` needs the WHOLE key set including inherited ones.
+ */
+const ifaceShape = new Map<string, { own: string[]; ext: string[]; indexSig: boolean }>();
 
 const LITERALS = /'([^']+)'(?:\s*\|\s*'([^']+)')+/;
 for (const f of dts) {
   const text = readFileSync(f, 'utf8');
+  for (const m of text.matchAll(/(?:export\s+)?(?:declare\s+)?type\s+(\w+)\s*<([^>]*)>\s*=\s*([\s\S]*?);\s*$/gm)) {
+    const [, name, params, body] = m;
+    if (!genericAlias.has(name)) {
+      genericAlias.set(name, {
+        // `T extends object` — the constraint is not part of the parameter name.
+        params: params.split(',').map((x) => x.trim().split(/\s+extends\s+/)[0].trim()).filter(Boolean),
+        body: body.trim(),
+      });
+    }
+  }
   for (const m of text.matchAll(/(?:export\s+)?(?:declare\s+)?type\s+(\w+)\s*=\s*([^;]+);/g)) {
     const [, name, body] = m;
     if (!aliasBody.has(name)) aliasBody.set(name, body.trim());
@@ -156,12 +205,32 @@ for (const f of dts) {
   // that misreads WHY it failed overstates its own ceiling.
   let current: string | null = null;
   for (const line of text.split('\n')) {
-    const open = /^\s*(?:export\s+)?(?:declare\s+)?interface\s+(\w+)/.exec(line);
-    if (open) { current = open[1]; continue; }
+    const open = /^\s*(?:export\s+)?(?:declare\s+)?interface\s+(\w+)(?:<[^>]*>)?(?:\s+extends\s+([^{]+))?/.exec(line);
+    if (open) {
+      current = open[1];
+      if (!ifaceShape.has(current)) {
+        ifaceShape.set(current, {
+          own: [],
+          // `extends A, Pick<B, 'x'>` — split on TOP-LEVEL commas so a generic
+          // argument list is not torn in half.
+          ext: open[2] ? genericArgs(open[2].trim()) : [],
+          indexSig: false,
+        });
+      }
+      continue;
+    }
     if (/^\}/.test(line)) { current = null; continue; }
     if (!current) continue;
-    const prop = /^\s{2,}(\w+)\??:\s*([^;\n]+);/.exec(line);
-    if (prop) ifaceProps.set(`${current}.${prop[1]}`, prop[2].trim());
+    const shape = ifaceShape.get(current);
+    // A STRING INDEX SIGNATURE IS EVIDENCE, NOT NOISE: `[key: string]: string`
+    // is the library saying the key set is OPEN. It is recorded (and stripped
+    // from the key list) rather than skipped silently.
+    if (shape && /^\s*\[\s*\w+\s*:\s*string\s*\]/.test(line)) { shape.indexSig = true; continue; }
+    const prop = /^\s{2,}'?([\w-]+)'?\??:\s*([^;\n]+);/.exec(line);
+    if (prop) {
+      ifaceProps.set(`${current}.${prop[1]}`, prop[2].trim());
+      if (shape && !shape.own.includes(prop[1])) shape.own.push(prop[1]);
+    }
   }
 }
 
@@ -223,6 +292,73 @@ function stripWrappingParens(t: string): string {
  * `seen` breaks alias cycles; without it a self-referential declaration in some
  * future library would hang the generator rather than decline the axis.
  */
+/**
+ * THE KEY SET OF AN INTERFACE-SHAPED TYPE EXPRESSION — what `keyof` needs.
+ *
+ * Flowbite routes every enum prop through `DynamicStringEnumKeysOf<T>`, whose
+ * body is `DynamicStringEnum<keyof RemoveIndexSignature<T>>`. Reading that
+ * needs four things this generator had none of: apply a GENERIC alias, take
+ * `keyof` an interface, evaluate `Pick`/`Omit` over it, and follow `extends`.
+ * All four are plain TypeScript utility types — nothing here knows the name
+ * "Flowbite", and the same walk answers `keyof Pick<Base, 'a'|'b'>` for any
+ * library that writes it.
+ *
+ * INDEX SIGNATURES ARE DROPPED, which is what `RemoveIndexSignature` asks for
+ * anyway: `[key: string]: string` contributes no NAME, so it cannot contribute
+ * a key. Whether its PRESENCE should also veto the proposal is a separate
+ * judgement, recorded at the call site rather than buried here.
+ */
+function keysOfType(expr: string, seen: Set<string> = new Set()): string[] | null {
+  const t = stripWrappingParens(expr.trim());
+
+  // Pick<T, K> / Omit<T, K> — the two that change a key set.
+  const pickOmit = /^(Pick|Omit)<([\s\S]+)>$/.exec(t);
+  if (pickOmit) {
+    const [, op, inner] = pickOmit;
+    const args = genericArgs(inner);
+    const base = keysOfType(args[0], seen);
+    if (!base || args[1] === undefined) return null;
+    // The key argument is a literal union, or `keyof Other`.
+    const keyArg = stripWrappingParens(args[1].trim());
+    const viaKeyof = /^keyof\s+([\s\S]+)$/.exec(keyArg);
+    const keys = viaKeyof
+      ? keysOfType(viaKeyof[1], seen)
+      : [...keyArg.matchAll(/'([^']+)'|"([^"]+)"/g)].map((m) => m[1] ?? m[2]);
+    if (!keys || keys.length === 0) return null;
+    return op === 'Pick' ? base.filter((k) => keys.includes(k)) : base.filter((k) => !keys.includes(k));
+  }
+
+  // A GENERIC alias in key position — e.g. RemoveIndexSignature<T>, whose
+  // mapped body re-keys T. Substituting and recursing keeps this generic:
+  // the key set of `{ [K in keyof T as …]: … }` is the key set of T, and the
+  // index signature this walk already drops is exactly what it removes.
+  const gen = /^(\w+)<([\s\S]+)>$/.exec(t);
+  if (gen && genericAlias.has(gen[1]) && !seen.has(gen[1])) {
+    const args = genericArgs(gen[2]);
+    const { params, body } = genericAlias.get(gen[1])!;
+    const mapped = /\[\s*\w+\s+in\s+keyof\s+(\w+)/.exec(body);
+    if (mapped) {
+      const i = params.indexOf(mapped[1]);
+      if (i >= 0 && args[i] !== undefined) return keysOfType(args[i], new Set([...seen, gen[1]]));
+    }
+    return null;
+  }
+
+  const named = /^(\w+)$/.exec(t);
+  if (named && ifaceShape.has(named[1]) && !seen.has(named[1])) {
+    const { own, ext } = ifaceShape.get(named[1])!;
+    const next = new Set([...seen, named[1]]);
+    const inherited: string[] = [];
+    for (const e of ext) {
+      const got = keysOfType(e, next);
+      if (!got) return null; // a base this walk cannot read = an unknown key set
+      inherited.push(...got);
+    }
+    return [...new Set([...inherited, ...own])];
+  }
+  return null;
+}
+
 function resolve(typeExpr: string, seen: Set<string> = new Set()): string[] | null {
   let t = stripWrappingParens(typeExpr.trim().replace(/;$/, ''));
 
@@ -233,6 +369,16 @@ function resolve(typeExpr: string, seen: Set<string> = new Set()): string[] | nu
   const live = splitUnion(t).filter((a) => !/^(undefined|null|never)$/.test(a));
   if (live.length === 0) return null;
   if (live.length < splitUnion(t).length) t = live.length === 1 ? stripWrappingParens(live[0]) : live.join(' | ');
+
+  // AN OPEN-ENUM ESCAPE HATCH IS NOT A MEMBER. Flowbite's
+  // `DynamicStringEnum<T> = T | (string & {})` keeps editor autocomplete while
+  // accepting any string; the `(string & {})` arm is the "any string" half and
+  // is no more a design value than `undefined` is. Same shape as the boolean
+  // sentinel handled below.
+  const openArm = splitUnion(t).filter((a) => !/^\(?\s*string\s*&\s*\{\s*\}\s*\)?$/.test(a));
+  if (openArm.length >= 1 && openArm.length < splitUnion(t).length) {
+    return resolve(openArm.length === 1 ? openArm[0] : openArm.join(' | '), seen);
+  }
 
   // `OverridableStringUnion<'a' | 'b', XPropsColorOverrides>` is MUI's idiom
   // for nearly every enum it ships, and the reason a Carbon-tuned resolver
@@ -314,6 +460,35 @@ function resolve(typeExpr: string, seen: Set<string> = new Set()): string[] | nu
 
   const arrIdx = /^\(?typeof\s+(\w+)\)?\[number\]$/.exec(t);
   if (arrIdx && unions.has(arrIdx[1])) return unions.get(arrIdx[1])!;
+
+  // ORDER IS LOAD-BEARING, and getting it wrong was measured: placing the
+  // generic-alias application ABOVE the named handlers took MUI from 28/43 to
+  // 3/43, because `OverridableStringUnion<…>` IS a generic alias and the
+  // substitution swallowed it before its own case could run. The specific
+  // handlers win; this is the fallback for a generic nobody has named.
+  // `keyof <interface-shaped type>` — see keysOfType.
+  const keyofType = /^keyof\s+([\s\S]+)$/.exec(t);
+  if (keyofType && !/^typeof\s/.test(keyofType[1].trim())) {
+    const keys = keysOfType(keyofType[1], new Set());
+    return keys && keys.length >= 2 ? keys : null;
+  }
+
+  // A GENERIC alias applied to arguments — substitute and resolve the body.
+  // This is the entry point for Flowbite's DynamicStringEnumKeysOf<T>, and it
+  // is written for the SHAPE (any `type X<P> = …`), not for that name.
+  const genApply = /^(\w+)<([\s\S]+)>$/.exec(t);
+  if (genApply && genericAlias.has(genApply[1]) && !seen.has(genApply[1])) {
+    const { params, body } = genericAlias.get(genApply[1])!;
+    const args = genericArgs(genApply[2]);
+    let substituted = body;
+    params.forEach((param, i) => {
+      if (args[i] === undefined) return;
+      substituted = substituted.replace(new RegExp(`\\b${param}\\b`, 'g'), args[i]);
+    });
+    if (substituted !== body || params.length === 0) {
+      return resolve(substituted, new Set([...seen, genApply[1]]));
+    }
+  }
 
   const alias = /^(\w+)$/.exec(t);
   if (alias) {
