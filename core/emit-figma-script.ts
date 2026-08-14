@@ -4229,7 +4229,34 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     ) {
       rootSpec.blockRoot = true;
     }
-    if (root.parts) {
+    if (root.icon && Object.keys(root.parts ?? {}).length === 0) {
+      // FC-ROOT-ICON-NOT-EMITTED (Flowbite Spinner, 2026-08-14).
+      //
+      // A contract may promote the icon onto the ROOT itself — Flowbite's
+      // Spinner is one `<svg>` and nothing else, so capture gives
+      // `anatomy.root = { icon: {...}, parts: {} }`. This branch did not
+      // exist: children came ONLY from `root.parts`, so the root's own icon
+      // was silently dropped and the emitted spec was `children: []`. On
+      // canvas that is a 32x1 empty box — measured, 40 variants of nothing,
+      // while capture had scored the stem at 100.000% computed equality.
+      //
+      // The glyph is projected through partToSpecs exactly as a CHILD icon
+      // part is: same iconSvg, same single-paint variable binding, same
+      // icon.size intrinsic sizing. Nothing bespoke is invented here — the
+      // root simply hosts the part it already declared. The root's own
+      // tokens ride along so the glyph keeps its paint (Spinner's root
+      // carries `color`, which IS the spinner's fill).
+      //
+      // The guard counts KEYS rather than testing `root.parts` for truth:
+      // promotion writes `parts: {}` on a part-less root, and `{}` is truthy,
+      // so a `!root.parts` guard never fires. Measured — the first cut of
+      // this fix emitted `children: []` exactly as before.
+      rootSpec.children = partToSpecs(
+        'icon',
+        { icon: root.icon, tokens: root.tokens, declared: root.declared } as Part,
+        contract, byId, ctx, subst,
+      );
+    } else if (root.parts) {
       rootSpec.children = variantParts(root.parts, subst).flatMap(([childName, child]) =>
         partToSpecs(childName, child, contract, byId, ctx, subst),
       );

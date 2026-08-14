@@ -122,3 +122,74 @@ grew, which is the pin working, not being worked around.
 `seed:verify` for tailwind also moved **2/7 → 6/11 exact**: the Spinner and
 TextInput seeds are now committed, and both reproduce their own proposals
 exactly (they ARE the proposals). carbon 11/14 and mui 28/43 unchanged.
+
+
+---
+
+# RESUME WAVE (2026-08-14) — WALL 1 IS CLOSED; SPINNER HIT A SECOND, DEEPER ONE
+
+    coverage  UNCHANGED at 6/46 (13.0%) — TextInput still the only new stem
+    canvas    Y8Jhw6R49wTLuXZ0is2GmV — six pages, unchanged from the last wave
+
+## PHASE 0 — `FC-ROOT-ICON-NOT-EMITTED` IS FIXED
+
+Red-tested, fixed, and proven byte-neutral:
+
+    RED    spinner root spec = { type:'root', layout, fixedWidth:32, children: [] }
+    FIX    core/emit-figma-script.ts — the single-root path now projects
+           `root.icon` through partToSpecs when the root declares no parts
+    GREEN  children: 1 · type=svg · iconSize=12 · svgPaintVar bound · svg 1107ch
+
+**The first cut of the fix did nothing, and the reason is worth keeping:** the
+guard was `root.icon && !root.parts`, but promotion writes `parts: {}` on a
+part-less root and **`{}` is truthy**, so the branch never ran and the emit was
+byte-identical to the red. The guard now counts KEYS.
+
+**BYTE-NEUTRAL, verified by re-emitting every lane** (mui, carbon, tailwind,
+astryx, shadcn, fluent, altitude, polaris, first-party): the only script that
+changed was the NEW `spinner.figma.js`. No existing emission moved.
+
+On canvas the fix is visible — 40 variants that were 32x1 empty boxes now draw
+glyphs.
+
+## AND SPINNER STILL CANNOT SHIP — `FC-ICON-ROOT-PAINT-AXIS` (new)
+
+With the icon emitted, two residuals remain, and only one of them is allowed
+to be fixed:
+
+**1. The colour axis is DEAD.** Measured on canvas: `Color=Default`,
+`Color=Failure` and `Color=Success` all render `Vector fill 0,0,0` — identical
+black. The contract's root carries ONE `color` token and no per-value
+`tokensByProp`, so 40 variants differ by NAME only across 8 colours. The
+capture is not at fault: it holds **280 elements carrying a colour/fill delta**.
+They live on the svg's INNER paths (`part-0-0`, `part-0-1` — Flowbite's spinner
+is a light track plus a coloured arc), and promoting the root to a single icon
+asset folds those paths into one glyph with one paint variable. **An
+icon-rooted component cannot express a per-variant paint axis** through the
+current icon projection: one asset, one `svgPaintVar`.
+
+**2. The box is 32x12 where the library renders 32x32** — and this one is NOT a
+defect to fix. The captured truth says the root is 32px x 32px; the contract
+carries `width` per size and no height, because **Option B
+(`FC-GEOMETRY-EXCLUDED`) deliberately excludes height as environment-dependent**.
+That is a settled, locked decision. The squashed ellipse is that decision made
+visible, and anyone "fixing" it is reopening Option B.
+
+Shipping a Spinner whose eight colours are one colour would be a worse lie than
+shipping nothing, so it is **held out again**: removed from `ds-library.json`,
+the genesis ORDER, the bundles and the canvas. **Its seed, capture and the
+Phase 0 engine fix are all KEPT** — the fix is correct and byte-neutral, and it
+will pay off for the next icon-rooted stem whose paint is uniform.
+
+## STOP
+
+The wave stopped on its own condition — **a NEW engine/FC wall**
+(`FC-ICON-ROOT-PAINT-AXIS`) — after closing the previous one. Progress and the
+rest of the screened shortlist were not attempted: the honest thing after
+finding a wall one layer beneath the one just fixed is to report it, not to
+keep drilling in the same wave.
+
+**Unblocking it** needs the icon projection to carry a per-variant paint —
+either a paint variable per svg path, or promoting an icon-rooted component's
+inner paths as real parts instead of folding them into one asset. Both are
+emitter changes.
