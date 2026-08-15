@@ -333,3 +333,82 @@ nothing to keep; the next round should start at capture, not at screening.
     holds ........................ TextInput (ship bar), Spinner (ship bar)
     refusals ..................... Progress (capture)
     blocked ...................... every step-3 apply/screenshot, bridge down
+
+
+---
+
+# BRIDGE WAVE (2026-08-15) — A DIFFERENT FIGMA TRANSPORT CAME BACK, NOT THE ONE THE APPLY PATH NEEDS
+
+    coverage      5/46 (10.9%) — unchanged
+    canvas        Y8Jhw6R49wTLuXZ0is2GmV — stale TextInput page REMOVED; file now
+                  matches the repo exactly (Page 1 + the five shipped sets)
+
+## WHAT CAME BACK, AND WHAT DID NOT
+
+`figma-console` — the Desktop Bridge with `figma_execute`, which the console-loop
+apply path is built on — is **still gone**. What is available is the **claude.ai
+Figma MCP** (`use_figma`, `get_screenshot`). It is a genuinely different
+transport and it closed two things:
+
+  · **TextInput's hold was re-verified from the canvas, not from memory.**
+    `get_screenshot` on the live node returned 234x530 and the picture is
+    fifteen vertical lozenges with no text — the ship bar's "text input" clause
+    fails on all three counts. The hold stands on fresh evidence.
+  · **The stale TextInput page is gone.** It was applied before the bar existed
+    and the repo had already stopped shipping it. Removed with a guarded
+    script (refuses unless page `19:158` is actually named `TextInput`), and the
+    file now holds exactly `Page 1 · Alert · Badge · Button · Card ·
+    ToggleSwitch`. The outstanding item from the previous wave is closed.
+
+**IT CANNOT RUN THE APPLY, and the reason is concrete rather than a guess:**
+
+    fetch inside use_figma ............ 'fetch' is not defined  (probed)
+    use_figma code cap ................ 50,000 chars
+    engine step sizes ................. tokens 52,982ch · component 72,113ch
+
+Both steps exceed the cap and there is no way to stream them in, so the engine's
+own generated scripts cannot reach the canvas through this transport. Writing a
+smaller bespoke apply instead was refused for the same reason it was refused in
+the LIVE-APPLY wave: it would not be the engine's output, so proving it proves
+nothing.
+
+## HelperText — PASSES EVERY OFFLINE GATE, HELD PENDING CANVAS
+
+The loop advanced to a new stem. TextInput taught the screen that found it:
+**its content is an ATTRIBUTE, so it can never show text — pick stems whose
+content is DOM CHILDREN.**
+
+    screen     js 3 · subs 1 · portal 0 · content = children
+               runtime default color="gray" ⊆ HelperColors
+               (Pick<FlowbiteColors, "gray"|"info"|"failure"|"warning"|"success">)
+    seed       PROPOSED by seed-gen — color(5); default READ from HelperText.js
+    extract    ✔ replay computed equality 100.000%
+                 gate computed 87.059% · pixel AA perfect 20/20 on BOTH
+    promote    ✔ CLEAN — 0 named refusals in the minted tree
+    emit       ✔ root child is `{ type: 'text', characters: 'Helper text' }`
+    contract render ✔ shows READABLE TEXT — the failure mode TextInput has
+    genesis    ✔ mock-proven, HelperText(5), 314 variables
+
+**It is still HELD.** The bar says a stem ships only if it looks like its class
+**on canvas, by screenshot** — and unverified is not the same as passed. Every
+offline signal is green and the only missing one is the one this transport
+cannot produce. It is first in line the moment `figma-console` returns:
+capture, promote and emit are all done and committed.
+
+Backing it out returned the lane byte-identical AGAIN — bundle sha back to
+`bb96f43e…`, compile receipt back to 5 scripts / 48 variants, genesis back to
+5 sets / 304 variables. That is the third add-then-remove round trip this climb
+has produced, and each one is a determinism result.
+
+## WHERE THE LOOP ACTUALLY STANDS
+
+    shipped ......... 5  (button, badge, card, alert, toggleswitch)
+    held on the bar . TextInput (empty pills) · Spinner (dead colour axis)
+    held on transport HelperText (everything green except the canvas screenshot)
+    refused ......... Progress (capture: first hover times out on an unstyled
+                      <div role="progressbar"> wrapper — a NEW wall, not root-caused)
+    parked .......... FC-ICON-ROOT-PAINT-AXIS · Option B height/width
+
+Three of the four blockers are now distinct and named, and none of them is
+"the tool does not work" — they are one upstream type bug class, one emitter
+projection gap, one capture-harness wrapper case, and one transport limit.

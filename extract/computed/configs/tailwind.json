@@ -139,6 +139,16 @@
       "fixedProps": {
         "progress": 50
       }
+    },
+    {
+      "__note": "KIT CLIMB 2026-08-15 — seed PROPOSED by seed-gen from the library's own .d.ts; default READ from HelperText.js (color=\"gray\"), which IS inside HelperColors (Pick<FlowbiteColors, gray|info|failure|warning|success>). Chosen because its content is DOM CHILDREN, not an attribute — the lesson TextInput taught, whose placeholder could never reach the canvas.",
+      "name": "HelperText",
+      "importName": "HelperText",
+      "contract": "examples/tailwind/contracts-seed/helpertext.contract.json",
+      "sampleText": "Helper text",
+      "axes": [
+        "color"
+      ]
     }
   ]
 }

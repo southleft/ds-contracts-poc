@@ -1,0 +1,108 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.helpertext",
+  "name": "HelperText",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED seed — generated from flowbite-react's shipped .d.ts by extract/computed/seed-gen.ts. REVIEW BEFORE USE: the enum axes below are read from the library's type declarations, which is not the same as the axes a designer wants on the canvas. Prune what does not belong, and add any axis a human models out of booleans — the generator is silent there ON PURPOSE (see `--verify`). Anatomy is left empty because parts are promoted from captured DOM truth, never inferred from types (docs/21 step 4). Default READ from HelperText.js (color=\"gray\"). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "info",
+          "failure",
+          "success",
+          "warning",
+          "gray"
+        ]
+      },
+      "default": "gray",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "info": "Info",
+            "failure": "Failure",
+            "success": "Success",
+            "warning": "Warning",
+            "gray": "Gray"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Helper text",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+      },
+      "content": {
+        "prop": "children"
+      },
+      "tokens": {
+        "font-size": "{imported.helper-text.root.font-size}",
+        "font-weight": "{imported.helper-text.root.font-weight}",
+        "line-height": "{imported.helper-text.root.line-height}",
+        "margin-top": "{imported.helper-text.root.margin-top}",
+        "width": "{imported.helper-text.root.width}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "failure": {
+              "color": "{imported.helper-text.root.color.failure}"
+            },
+            "gray": {
+              "color": "{imported.helper-text.root.color.gray}"
+            },
+            "info": {
+              "color": "{imported.helper-text.root.color.info}"
+            },
+            "success": {
+              "color": "{imported.helper-text.root.color.success}"
+            },
+            "warning": {
+              "color": "{imported.helper-text.root.color.warning}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "HelperText"
+    }
+  }
+}

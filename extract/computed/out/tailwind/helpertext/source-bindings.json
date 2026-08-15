@@ -1,0 +1,95 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "HelperText",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info",
+      "axisValues": {
+        "color": "info"
+      },
+      "token": "color-cyan-700",
+      "varName": "--color-cyan-700",
+      "anchor": {
+        "selector": ".text-cyan-700"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info",
+      "axisValues": {
+        "color": "info"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "failure",
+      "axisValues": {
+        "color": "failure"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success",
+      "axisValues": {
+        "color": "success"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning",
+      "axisValues": {
+        "color": "warning"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "gray",
+      "axisValues": {
+        "color": "gray"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    }
+  ],
+  "skips": [
+    "root.line-height: candidate --text-sm--line-height → \"text-sm--line-height\" = calc(1.25 / 0.875) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.margin-top: source declares `calc(var(--spacing) * 2)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 1,
+  "calcCeiling": 1,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}
