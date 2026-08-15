@@ -234,6 +234,75 @@ const EVENTZ_CONTRACTS = countContracts('examples/eventz-vars/contracts');
 const libContracts = Object.fromEntries(LIBRARIES.map((l) => [l.dir, countContracts(l.contracts)]));
 const FOREIGN_CONTRACTS = Object.values(libContracts).reduce((a, b) => a + b, 0);
 
+/* ---- FC-COVERAGE-COUNTS-CAPTURES ---------------------------------------
+ * A scorecard proves a component was MEASURED. It does not prove a contract
+ * was committed for it, and the two are not the same population: a stem can be
+ * captured with full receipts and then deliberately HELD (Flowbite's Blockquote,
+ * Spinner and TextInput all are). Counting scorecard directories as coverage
+ * therefore counts REFUSED stems as shipped ones — and because it once held for
+ * every library that measured == committed, the inversion stayed invisible until
+ * a lane carried holds, at which point Flowbite read 11-of-8 and 23.9%.
+ *
+ * The link from a scorecard back to a contract is not the directory name: MUI
+ * captures TablePagination under the display name "Pagination", so no filename
+ * or contract-name match can reach it. The authority is the capture config,
+ * which says which SEED each captured component came from; that seed's `id` is
+ * the same id the committed contract carries. Resolve through it, and fall back
+ * to a normalised contract-name match so a library with no config degrades to a
+ * weaker rule rather than silently reading zero. */
+const normId = (s) => String(s ?? '').replace(/[^a-z0-9]/gi, '').toLowerCase();
+const committedIdsByLib = {};
+const committedNamesByLib = {};
+const seedIdByDisplayName = {};
+for (const l of LIBRARIES) {
+  const abs = path.join(ROOT, l.contracts);
+  const ids = new Set();
+  const names = new Set();
+  if (existsSync(abs)) {
+    for (const f of readdirSync(abs).filter((n) => n.endsWith('.contract.json'))) {
+      try {
+        const c = JSON.parse(readFileSync(path.join(abs, f), 'utf8'));
+        if (c.id) ids.add(c.id);
+        if (c.name) names.add(normId(c.name));
+      } catch { /* a malformed contract is already reported by other sections */ }
+    }
+  }
+  committedIdsByLib[l.dir] = ids;
+  committedNamesByLib[l.dir] = names;
+
+  const map = {};
+  const cfgPath = path.join(ROOT, 'extract', 'computed', 'configs', `${l.dir}.json`);
+  if (existsSync(cfgPath)) {
+    try {
+      const cfg = JSON.parse(readFileSync(cfgPath, 'utf8'));
+      for (const c of cfg.components ?? []) {
+        if (!c?.name || !c?.contract) continue;
+        try {
+          const seed = JSON.parse(readFileSync(path.join(ROOT, c.contract), 'utf8'));
+          if (seed.id) map[normId(c.name)] = seed.id;
+        } catch { /* a seed that cannot be read simply does not resolve */ }
+      }
+    } catch { /* ditto for the config */ }
+  }
+  seedIdByDisplayName[l.dir] = map;
+}
+/** Does this scorecard correspond to a contract that is actually COMMITTED? */
+const hasCommittedContract = (corpus, displayName) => {
+  const key = normId(displayName);
+  const id = seedIdByDisplayName[corpus]?.[key];
+  if (id && committedIdsByLib[corpus]?.has(id)) return true;
+  return Boolean(committedNamesByLib[corpus]?.has(key));
+};
+/* The coverage population: measured AND committed. Every fidelity mean below
+ * still averages over `realCards` — those numbers legitimately describe what was
+ * measured — but COVERAGE answers a different question and uses this set. */
+const coveredCards = realCards.filter((s) => hasCommittedContract(s.corpus, s.v?.component));
+const COVERED_N = coveredCards.length;
+const HELD_CARDS = realCards
+  .filter((s) => !hasCommittedContract(s.corpus, s.v?.component))
+  .map((s) => `${s.corpus}/${s.v?.component ?? s.component}`)
+  .sort();
+
 /* ---- the coverage denominators, parsed out of docs/22 §8.3 -------------- */
 /* The library SIZE denominators are not in any JSON in this repo: they were
  * produced by one-off extractor runs and recorded in prose. Rather than retype
@@ -350,10 +419,10 @@ const check = (question, a, b, aSrc, bSrc) => {
   checks.push({ question, a, b, agree: String(a) === String(b), aSrc, bSrc });
 };
 check(
-  'components with a computed scorecard = components pinned by the drift instrument',
-  REAL_N,
+  'components measured AND backed by a committed contract = components pinned by the drift instrument',
+  COVERED_N,
   COV_TOTAL?.pinned ?? '(table did not parse)',
-  'extract/computed/out/**/scorecard.json',
+  'extract/computed/out/**/scorecard.json ∩ examples/*/contracts/*.contract.json',
   'docs/22-generality.md §8.3, "pinned" total',
 );
 check(
@@ -382,14 +451,17 @@ check('every round-trip execution reached the fact diff', RT.roundTripClosed, RT
 for (const lib of LIBRARIES) {
   const cov = coverage.get(lib.dir);
   if (!cov) continue;
-  const rows = realCards.filter((s) => s.corpus === lib.dir);
+  // FC-COVERAGE-COUNTS-CAPTURES: the §8.3 "pinned" column is scoped "OF THOSE
+  // [committed]", so the artifact side of this check must be scoped the same
+  // way. Comparing every scorecard against it counted HELD stems as pinned.
+  const rows = coveredCards.filter((s) => s.corpus === lib.dir);
   check(
     `${lib.label} — contracts on disk = the coverage table's committed column`,
     libContracts[lib.dir], cov.contracts,
     `${lib.contracts}/*.contract.json`, 'docs/22-generality.md §8.3',
   );
   check(
-    `${lib.label} — components with a scorecard = the coverage table's pinned column`,
+    `${lib.label} — components measured AND committed = the coverage table's pinned column`,
     rows.length, cov.pinned,
     // THE DIRECTORY THE FILES ARE ACTUALLY IN. Printing
     // `extract/computed/out/polaris/` here would be a receipt naming a
@@ -463,10 +535,10 @@ P(
 );
 if (covRows && COV_TOTAL) {
   P(...table(
-    ['library', 'contracts committed', 'measured (has a scorecard)', 'library size', '**coverage**', 'source of the size'],
+    ['library', 'contracts committed', 'measured AND committed', 'library size', '**coverage**', 'source of the size'],
     LIBRARIES.map((l) => {
       const cov = coverage.get(l.dir);
-      const measured = realCards.filter((s) => s.corpus === l.dir).length;
+      const measured = coveredCards.filter((s) => s.corpus === l.dir).length;
       return [
         `${l.label} (\`${l.pkg}\`)`,
         fmt(libContracts[l.dir]),
@@ -476,20 +548,31 @@ if (covRows && COV_TOTAL) {
         cov ? '`docs/22-generality.md` §8.3' : 'no row in §8.3 matched this package id',
       ];
     }).concat([[
-      '**total**', `**${fmt(FOREIGN_CONTRACTS)}**`, `**${fmt(REAL_N)}**`, `**${fmt(COV_TOTAL.size)}**`,
-      `**${f1(pct(REAL_N, COV_TOTAL.size))}%**`, '',
+      '**total**', `**${fmt(FOREIGN_CONTRACTS)}**`, `**${fmt(COVERED_N)}**`, `**${fmt(COV_TOTAL.size)}**`,
+      `**${f1(pct(COVERED_N, COV_TOTAL.size))}%**`, '',
     ]]),
   ));
   P(COVERAGE_CAVEAT);
   P(
     `**This table's coverage column is stricter than the one in docs/22 and docs/23, on purpose.**`,
     `Those two print ${fmt(COV_TOTAL.contracts)}/${fmt(COV_TOTAL.size)} = **${f1(pct(COV_TOTAL.contracts, COV_TOTAL.size))}%** — *contracts committed* over library size.`,
-    `This page prints ${fmt(REAL_N)}/${fmt(COV_TOTAL.size)} = **${f1(pct(REAL_N, COV_TOTAL.size))}%** — *components with a measured scorecard* over library size,`,
-    `because this is the document quoting the fidelity numbers and the only components`,
-    `those numbers describe are the measured ones. The ${fmt(COV_TOTAL.contracts - COV_TOTAL.pinned)}-contract gap is Astryx, whose other`,
-    `contracts came from the static path and carry no captured floor. A contract`,
-    `existing is not the same as a contract being measured; where the two differ this`,
-    `page uses the smaller number.`,
+    `This page prints ${fmt(COVERED_N)}/${fmt(COV_TOTAL.size)} = **${f1(pct(COVERED_N, COV_TOTAL.size))}%** — components that are *both* measured`,
+    `*and* backed by a committed contract, over library size, because this is the`,
+    `document quoting the fidelity numbers and a component only counts as covered`,
+    `when it was measured AND kept. A contract existing is not the same as a contract`,
+    `being measured, and a scorecard existing is not the same as a stem shipping;`,
+    `where these differ this page uses the smallest number.`,
+    ...(HELD_CARDS.length
+      ? [
+        ``,
+        `**${fmt(HELD_CARDS.length)} measured component(s) are deliberately excluded here**`,
+        `because they carry a scorecard but no committed contract — captured with full`,
+        `receipts and then HELD: ${HELD_CARDS.map((h) => `\`${h}\``).join(', ')}.`,
+        `Counting them would report refused stems as shipped ones`,
+        `(\`FC-COVERAGE-COUNTS-CAPTURES\`); their fidelity numbers still appear in §3,`,
+        `which averages over everything measured.`,
+      ]
+      : []),
   );
   P(
     '**The size denominators lean against us on purpose** and are the one set of',
@@ -866,7 +949,7 @@ if (process.argv.includes('--check')) {
 writeFileSync(OUT, rendered, 'utf8');
 console.log(
   `${OUT_NAME} — ${fmt(REAL_N)} measured components over ${fmt(LIBRARIES.length)} libraries ` +
-    `(mean ${f1(REAL_MEAN)}%, cell-weighted ${f1(REAL_WEIGHTED)}%, coverage ${COV_TOTAL ? f1(pct(REAL_N, COV_TOTAL.size)) : '?'}%), ` +
+    `(mean ${f1(REAL_MEAN)}%, cell-weighted ${f1(REAL_WEIGHTED)}%, coverage ${COV_TOTAL ? f1(pct(COVERED_N, COV_TOTAL.size)) : '?'}%), ` +
     `${fmt(fidScored.length)} scored canvas variants (${f2(FID_MEAN)}%), ` +
     `${fmt(evals.passed)}/${fmt(evals.total)} evals, ${fmt(DAGGER_TOTAL)} dropped-fact receipts, ` +
     `${fmt(checks.length)} cross-checks (${CHECKS_FAILED.length} disagreeing), ` +

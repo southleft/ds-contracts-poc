@@ -648,10 +648,39 @@ is in the instrument, not in the lane: a stem that was measured and REFUSED is
 being counted as a stem that shipped, which is the exact inversion this board
 exists to prevent.
 
-`docs/24-what-works.md` is therefore left at its committed state and
-`capability-report-is-fresh` is left RED. That red is CAUSED BY THIS ROUND and
-is NOT pre-existing — it is recorded here rather than cleared, because the only
+`docs/24-what-works.md` was therefore left at its committed state and
+`capability-report-is-fresh` was left RED. That red was CAUSED BY THIS ROUND and
+was NOT pre-existing — it was recorded rather than cleared, because the only
 available way to clear it was to publish a number 6.5 points too high.
+
+### CLOSED 2026-08-15 (housekeeping pass)
+
+The instrument was fixed rather than the number. `scripts/build-capability-report.mjs`
+now resolves each scorecard back to a COMMITTED contract before counting it:
+
+    capture config (display name -> seed path) -> seed `id` -> committed contract `id`
+
+The directory name could not do this — MUI captures TablePagination under the
+display name "Pagination", so no filename or contract-name match reaches it, and
+a naive basename join silently dropped 6 MUI, 3 astryx and 1 fluent component.
+The id route resolves **all 8 libraries exactly**, and the only cards it excludes
+are Flowbite's three HELD stems. A normalised contract-name match remains as a
+fallback so a library with no capture config degrades to a weaker rule instead of
+silently reading zero.
+
+    Flowbite / Tailwind   8 committed | 8 measured AND committed | 46 | 17.4%
+
+The report now also NAMES the excluded stems in §2 rather than merely omitting
+them (`tailwind/Blockquote`, `tailwind/Spinner`, `tailwind/TextInput`), so a
+reader sees that three measured components were deliberately not counted and
+why. `docs/22-generality.md` §8.3 was reconciled to 8/8 in the same pass, which
+returned all four cross-check disagreements to agreement (they were 0 at HEAD
+and 4 after this round's contracts landed — every one of them ours).
+
+Also closed here: the four `plugin-*` reds. The engine receipt was re-recorded
+(`75b9d8e8196d…` -> `518bd5fbeea0…`, 705,091 -> 705,234 bytes), which is the
+FC-ROOT-ICON-NOT-EMITTED emit revision landing in the bundle — not a surprise,
+and it had been stale since `e7a851e1`.
 
 ## WHERE THE LOOP ACTUALLY STANDS
 
