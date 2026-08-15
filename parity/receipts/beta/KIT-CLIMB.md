@@ -272,3 +272,64 @@ should delete that page; nothing else on that file changed this wave.
 Both keep their seeds, their captures and the engine fix that made Spinner draw
 at all. Neither counts. **The honest number is 5/46**, and it is the same number
 the beta shipped with.
+
+
+## THE LOOP RAN AS FAR AS THE BRIDGE ALLOWED — Progress refuses at CAPTURE
+
+With the Figma bridge still down, steps 1-2 (screen, seed, extract) need no
+canvas and were run; step 3 (apply + screenshot) does and was not.
+
+**SCREEN — Progress passes every criterion, in seconds:**
+
+    js files 3 · subs 1 · portal/Floating 0
+    runtime defaults: color="default", size="md"
+    ProgressColor  extends Pick<FlowbiteColors, 12 keys> + `default: string`   ✔ contains "default"
+    ProgressSizes  extends Pick<FlowbiteSizes, "sm"|"md"|"lg"|"xl">            ✔ contains "md"
+    not icon-root · not Checkbox/Radio
+
+This is the first stem to clear the `runtime default ⊆ declared enum` screen
+since TextInput, and it clears it on BOTH axes — `ProgressColor` declares
+`default` outright, which is exactly what `FlowbiteColors` does not do and why
+Checkbox and Radio are still parked.
+
+**SEED — accepted faithfully:** `color(13)`, `size(4)`, proposed by seed-gen
+from the library's `.d.ts`, defaults READ from `Progress.js`. `progress: 50`
+rides `fixedProps` as a REQUIRED numeric render value, the same role
+`label: "Toggle"` plays for ToggleSwitch — it is not an axis.
+
+**CAPTURE — REFUSED, and it is a NEW wall:**
+
+    Progress: 52 combos × 4 interactions
+    phase 1 — capture sweep…
+    locator.hover: Timeout 30000ms exceeded.
+      waiting for locator('[data-combo="Progress:blue.sm"] > *')
+        .filter({ visible: true }).first()
+
+It fails on the FIRST hover of the sweep, not part-way through. Progress's
+outermost element is an **unstyled `<div role="progressbar">`** whose children
+are a label row that renders `false` when no labels are set, and the track. So
+the element the harness reaches for — the combo's first visible child — is a
+wrapper with no styling of its own.
+
+**THE HARNESS IS NOT AT FAULT, and that was checked rather than assumed:** Card
+was re-captured through the same config and exited 0 (`gate computed 88.235%`,
+4/4 pixel pairs). The failure is Progress-specific. (That sanity run rewrote
+Card's committed capture artifacts, which the wave forbids — they were reverted
+immediately and the tree confirmed clean.)
+
+This is **NOT on the parked list**, so by the wave's own stop rule it ends here.
+It is also not yet root-caused beyond the measurement above — whether the wrapper
+is genuinely zero-box, or the interaction targeting needs a visible-root rule
+like the one the Tailwind round already added for Flowbite's sr-only input
+(PROVENANCE, "VISIBLE-ROOT capture"), is the next round's first question.
+
+**KEPT:** the Progress config entry and its seed. Both are correct and cost
+nothing to keep; the next round should start at capture, not at screening.
+
+## WAVE RESULT
+
+    stems shipped this wave ...... 0
+    honest coverage .............. 5/46 (10.9%), unchanged
+    holds ........................ TextInput (ship bar), Spinner (ship bar)
+    refusals ..................... Progress (capture)
+    blocked ...................... every step-3 apply/screenshot, bridge down

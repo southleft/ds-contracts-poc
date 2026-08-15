@@ -125,6 +125,20 @@
         "color",
         "sizing"
       ]
+    },
+    {
+      "__note": "KIT CLIMB 2026-08-15 — seed PROPOSED by seed-gen from the library's own .d.ts; defaults READ from Progress.js (color=\"default\", size=\"md\"), both inside their declared enums (ProgressColor declares `default`; ProgressSizes includes `md`). `progress` is a REQUIRED numeric prop, not an axis — 50 is a render value, the same role label=\"Toggle\" plays for ToggleSwitch.",
+      "name": "Progress",
+      "importName": "Progress",
+      "contract": "examples/tailwind/contracts-seed/progress.contract.json",
+      "sampleText": "",
+      "axes": [
+        "color",
+        "size"
+      ],
+      "fixedProps": {
+        "progress": 50
+      }
     }
   ]
 }

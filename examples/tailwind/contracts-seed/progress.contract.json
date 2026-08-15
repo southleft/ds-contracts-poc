@@ -1,0 +1,99 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.progress",
+  "name": "Progress",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED seed — generated from flowbite-react's shipped .d.ts by extract/computed/seed-gen.ts. REVIEW BEFORE USE: the enum axes below are read from the library's type declarations, which is not the same as the axes a designer wants on the canvas. Prune what does not belong, and add any axis a human models out of booleans — the generator is silent there ON PURPOSE (see `--verify`). Anatomy is left empty because parts are promoted from captured DOM truth, never inferred from types (docs/21 step 4). Defaults READ from Progress.js (color=\"default\", size=\"md\").",
+  "semantics": {
+    "element": "div"
+  },
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Progress"
+    }
+  },
+  "states": [],
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "blue",
+          "cyan",
+          "dark",
+          "gray",
+          "green",
+          "indigo",
+          "lime",
+          "pink",
+          "purple",
+          "red",
+          "teal",
+          "yellow",
+          "default"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "blue": "Blue",
+            "cyan": "Cyan",
+            "dark": "Dark",
+            "gray": "Gray",
+            "green": "Green",
+            "indigo": "Indigo",
+            "lime": "Lime",
+            "pink": "Pink",
+            "purple": "Purple",
+            "red": "Red",
+            "teal": "Teal",
+            "yellow": "Yellow",
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      },
+      "default": "default"
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "sm",
+          "md",
+          "lg",
+          "xl"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg",
+            "xl": "Xl"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      },
+      "default": "md"
+    }
+  ]
+}
