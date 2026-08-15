@@ -1,0 +1,78 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.kbd",
+  "name": "Kbd",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). AXIS-FREE BY MEASUREMENT, NOT BY OMISSION: seed-gen was run and proposed NOTHING here because KbdProps declares no enum prop at all (only `icon?: FC`), and kbdTheme.root carries a single `base` string with no colors/sizes map. `props: []` is therefore the same pure shell as the shipped card.contract.json — it invents no prop space. Root element READ from Kbd.js (<span>). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Ctrl",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+      },
+      "content": {
+        "prop": "children"
+      },
+      "tokens": {
+        "background-color": "{imported.kbd.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-e5e7eb}",
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-e5e7eb}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-e5e7eb}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-e5e7eb}",
+        "border-top-left-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "border-top-width": "{imported.shared.size-1}",
+        "color": "{imported.kbd.root.color}",
+        "font-size": "{imported.kbd.root.font-size}",
+        "font-weight": "{imported.kbd.root.font-weight}",
+        "line-height": "{imported.kbd.root.line-height}",
+        "padding-bottom": "{imported.kbd.root.padding-bottom}",
+        "padding-left": "{imported.shared.size-8}",
+        "padding-right": "{imported.shared.size-8}",
+        "padding-top": "{imported.kbd.root.padding-top}",
+        "width": "{imported.kbd.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Kbd"
+    }
+  }
+}

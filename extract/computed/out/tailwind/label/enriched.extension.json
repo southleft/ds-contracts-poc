@@ -1,0 +1,190 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "flowbite-react@0.12.17",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "label": {
+        "root": {
+          "color": {
+            "info": {
+              "$value": "#00b8db",
+              "$type": "color"
+            },
+            "failure": {
+              "$value": "#c81e1e",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#046c4e",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#c27803",
+              "$type": "color"
+            },
+            "default": {
+              "$value": "#111827",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "64.9531px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "block-root-width-source: root — the admitted width 64.9531px is NOT the stage content box (288px) and NOT the viewport (900px); this block root did not fill anything, it took its own intrinsic/shrink-to-fit size (a flex stage makes a block child a flex item). The admission stands — the number is the library's — but the sentence above names a container this measurement did not come from.",
+    "control-fallback: no control for <label> — span control used (part root)",
+    "text-part-typography-carried: root — font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-content-carried: the root holds direct text (\"Label text\") with no text-holder child part — bound to text prop \"children\" (MUI Card class)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\" (v15 declared vocabulary — canvas-drawable)"
+  ]
+}

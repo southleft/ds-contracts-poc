@@ -68,3 +68,8 @@ conformance/.sandbox/
 # It is a LOCAL BUILD ARTIFACT — a pure function of the committed contracts,
 # tokens and icons — so every stranger run would otherwise dirty `git status`.
 /flowbite.bundle.json
+
+# `seed-gen --write` dumps PROPOSED seeds here for review. They are a pure
+# function of the installed library's .d.ts, and the seeds a human actually
+# accepts are committed under examples/<lib>/contracts-seed/ instead.
+/examples/flowbite-react/

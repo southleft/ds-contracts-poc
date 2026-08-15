@@ -1443,6 +1443,130 @@
               "$type": "dimension"
             }
           }
+        },
+        "helper-text": {
+          "root": {
+            "color": {
+              "info": {
+                "$value": "{color-cyan-700}",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#e02424",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#057a55",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#c27803",
+                "$type": "color"
+              },
+              "gray": {
+                "$value": "#6b7280",
+                "$type": "color"
+              }
+            },
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "400",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "margin-top": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "width": {
+              "$value": "71.2344px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label": {
+          "root": {
+            "color": {
+              "info": {
+                "$value": "{color-cyan-500}",
+                "$type": "color"
+              },
+              "failure": {
+                "$value": "#c81e1e",
+                "$type": "color"
+              },
+              "success": {
+                "$value": "#046c4e",
+                "$type": "color"
+              },
+              "warning": {
+                "$value": "#c27803",
+                "$type": "color"
+              },
+              "default": {
+                "$value": "#111827",
+                "$type": "color"
+              }
+            },
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "{font-weight-medium}",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "width": {
+              "$value": "64.9531px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "kbd": {
+          "root": {
+            "background-color": {
+              "$value": "#f3f4f6",
+              "$type": "color"
+            },
+            "color": {
+              "$value": "#1f2937",
+              "$type": "color"
+            },
+            "font-size": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "{font-weight-semibold}",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "padding-bottom": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "padding-top": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "width": {
+              "$value": "39.9219px",
+              "$type": "dimension"
+            }
+          }
         }
       }
     }
@@ -2402,6 +2526,300 @@
         "code": {
           "importPath": "flowbite-react",
           "export": "Card"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "flowbite.helpertext",
+      "name": "HelperText",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "PROPOSED seed — generated from flowbite-react's shipped .d.ts by extract/computed/seed-gen.ts. REVIEW BEFORE USE: the enum axes below are read from the library's type declarations, which is not the same as the axes a designer wants on the canvas. Prune what does not belong, and add any axis a human models out of booleans — the generator is silent there ON PURPOSE (see `--verify`). Anatomy is left empty because parts are promoted from captured DOM truth, never inferred from types (docs/21 step 4). Default READ from HelperText.js (color=\"gray\"). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "color",
+          "type": {
+            "enum": [
+              "info",
+              "failure",
+              "success",
+              "warning",
+              "gray"
+            ]
+          },
+          "default": "gray",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Color",
+              "values": {
+                "info": "Info",
+                "failure": "Failure",
+                "success": "Success",
+                "warning": "Warning",
+                "gray": "Gray"
+              }
+            },
+            "code": {
+              "prop": "color"
+            }
+          }
+        },
+        {
+          "name": "children",
+          "type": "text",
+          "default": "Helper text",
+          "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Content"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "declared": {
+            "display": "block",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+          },
+          "content": {
+            "prop": "children"
+          },
+          "tokens": {
+            "font-size": "{imported.helper-text.root.font-size}",
+            "font-weight": "{imported.helper-text.root.font-weight}",
+            "line-height": "{imported.helper-text.root.line-height}",
+            "margin-top": "{imported.helper-text.root.margin-top}",
+            "width": "{imported.helper-text.root.width}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "failure": {
+                  "color": "{imported.helper-text.root.color.failure}"
+                },
+                "gray": {
+                  "color": "{imported.helper-text.root.color.gray}"
+                },
+                "info": {
+                  "color": "{imported.helper-text.root.color.info}"
+                },
+                "success": {
+                  "color": "{imported.helper-text.root.color.success}"
+                },
+                "warning": {
+                  "color": "{imported.helper-text.root.color.warning}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "flowbite-react",
+          "export": "HelperText"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "flowbite.kbd",
+      "name": "Kbd",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). AXIS-FREE BY MEASUREMENT, NOT BY OMISSION: seed-gen was run and proposed NOTHING here because KbdProps declares no enum prop at all (only `icon?: FC`), and kbdTheme.root carries a single `base` string with no colors/sizes map. `props: []` is therefore the same pure shell as the shipped card.contract.json — it invents no prop space. Root element READ from Kbd.js (<span>). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "children",
+          "type": "text",
+          "default": "Ctrl",
+          "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Content"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "declared": {
+            "display": "block",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+          },
+          "content": {
+            "prop": "children"
+          },
+          "tokens": {
+            "background-color": "{imported.kbd.root.background-color}",
+            "border-bottom-color": "{imported.shared.color-e5e7eb}",
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-e5e7eb}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-e5e7eb}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-e5e7eb}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "border-top-width": "{imported.shared.size-1}",
+            "color": "{imported.kbd.root.color}",
+            "font-size": "{imported.kbd.root.font-size}",
+            "font-weight": "{imported.kbd.root.font-weight}",
+            "line-height": "{imported.kbd.root.line-height}",
+            "padding-bottom": "{imported.kbd.root.padding-bottom}",
+            "padding-left": "{imported.shared.size-8}",
+            "padding-right": "{imported.shared.size-8}",
+            "padding-top": "{imported.kbd.root.padding-top}",
+            "width": "{imported.kbd.root.width}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "flowbite-react",
+          "export": "Kbd"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "flowbite.label",
+      "name": "Label",
+      "version": "0.2.0",
+      "status": "draft",
+      "description": "PROPOSED seed — generated from flowbite-react's shipped .d.ts by extract/computed/seed-gen.ts. REVIEW BEFORE USE: the enum axes below are read from the library's type declarations, which is not the same as the axes a designer wants on the canvas. Prune what does not belong, and add any axis a human models out of booleans — the generator is silent there ON PURPOSE (see `--verify`). Anatomy is left empty because parts are promoted from captured DOM truth, never inferred from types (docs/21 step 4). Default READ from Label.js (color=\"default\"); root element READ from the same file (<label>). The five declared keys are EXACTLY the five keys in labelTheme.root.colors — declared and themed agree, unlike Checkbox/Radio. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "semantics": {
+        "element": "label"
+      },
+      "props": [
+        {
+          "name": "color",
+          "type": {
+            "enum": [
+              "info",
+              "failure",
+              "success",
+              "warning",
+              "default"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "Color",
+              "values": {
+                "info": "Info",
+                "failure": "Failure",
+                "success": "Success",
+                "warning": "Warning",
+                "default": "Default"
+              }
+            },
+            "code": {
+              "prop": "color"
+            }
+          }
+        },
+        {
+          "name": "children",
+          "type": "text",
+          "default": "Label text",
+          "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "Content"
+            },
+            "code": {
+              "prop": "children"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "declared": {
+            "display": "block",
+            "cursor": "default",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+          },
+          "content": {
+            "prop": "children"
+          },
+          "tokens": {
+            "font-size": "{imported.label.root.font-size}",
+            "font-weight": "{imported.label.root.font-weight}",
+            "line-height": "{imported.label.root.line-height}",
+            "width": "{imported.label.root.width}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "default": {
+                  "color": "{imported.label.root.color.default}"
+                },
+                "failure": {
+                  "color": "{imported.label.root.color.failure}"
+                },
+                "info": {
+                  "color": "{imported.label.root.color.info}"
+                },
+                "success": {
+                  "color": "{imported.label.root.color.success}"
+                },
+                "warning": {
+                  "color": "{imported.label.root.color.warning}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": null,
+          "componentSetKey": null
+        },
+        "code": {
+          "importPath": "flowbite-react",
+          "export": "Label"
         }
       }
     },

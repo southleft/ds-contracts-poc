@@ -1,0 +1,57 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.blockquote",
+  "name": "Blockquote",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). AXIS-FREE BY MEASUREMENT: seed-gen was run and proposed nothing because BlockquoteProps declares no enum prop and blockquoteTheme.root carries a single `base` string. `props: []` is the same pure shell as the shipped card.contract.json — it invents no prop space. Root element READ from Blockquote.js (<blockquote>). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "blockquote"
+  },
+  "props": [
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Design is not just what it looks like.",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+      },
+      "content": {
+        "prop": "children"
+      },
+      "tokens": {
+        "color": "{imported.blockquote.root.color}",
+        "font-size": "{imported.blockquote.root.font-size}",
+        "font-weight": "{imported.blockquote.root.font-weight}",
+        "line-height": "{imported.blockquote.root.line-height}",
+        "width": "{imported.blockquote.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Blockquote"
+    }
+  }
+}

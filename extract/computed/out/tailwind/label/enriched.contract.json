@@ -1,0 +1,108 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.label",
+  "name": "Label",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED seed — generated from flowbite-react's shipped .d.ts by extract/computed/seed-gen.ts. REVIEW BEFORE USE: the enum axes below are read from the library's type declarations, which is not the same as the axes a designer wants on the canvas. Prune what does not belong, and add any axis a human models out of booleans — the generator is silent there ON PURPOSE (see `--verify`). Anatomy is left empty because parts are promoted from captured DOM truth, never inferred from types (docs/21 step 4). Default READ from Label.js (color=\"default\"); root element READ from the same file (<label>). The five declared keys are EXACTLY the five keys in labelTheme.root.colors — declared and themed agree, unlike Checkbox/Radio. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "label"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "info",
+          "failure",
+          "success",
+          "warning",
+          "default"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "info": "Info",
+            "failure": "Failure",
+            "success": "Success",
+            "warning": "Warning",
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Label text",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "cursor": "default",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+      },
+      "content": {
+        "prop": "children"
+      },
+      "tokens": {
+        "font-size": "{imported.label.root.font-size}",
+        "font-weight": "{imported.label.root.font-weight}",
+        "line-height": "{imported.label.root.line-height}",
+        "width": "{imported.label.root.width}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "default": {
+              "color": "{imported.label.root.color.default}"
+            },
+            "failure": {
+              "color": "{imported.label.root.color.failure}"
+            },
+            "info": {
+              "color": "{imported.label.root.color.info}"
+            },
+            "success": {
+              "color": "{imported.label.root.color.success}"
+            },
+            "warning": {
+              "color": "{imported.label.root.color.warning}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Label"
+    }
+  }
+}

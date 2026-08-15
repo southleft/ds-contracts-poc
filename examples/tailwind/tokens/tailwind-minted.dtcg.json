@@ -1069,6 +1069,130 @@
           "$type": "dimension"
         }
       }
+    },
+    "helper-text": {
+      "root": {
+        "color": {
+          "info": {
+            "$value": "{color-cyan-700}",
+            "$type": "color"
+          },
+          "failure": {
+            "$value": "#e02424",
+            "$type": "color"
+          },
+          "success": {
+            "$value": "#057a55",
+            "$type": "color"
+          },
+          "warning": {
+            "$value": "#c27803",
+            "$type": "color"
+          },
+          "gray": {
+            "$value": "#6b7280",
+            "$type": "color"
+          }
+        },
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "400",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "margin-top": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "width": {
+          "$value": "71.2344px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "label": {
+      "root": {
+        "color": {
+          "info": {
+            "$value": "{color-cyan-500}",
+            "$type": "color"
+          },
+          "failure": {
+            "$value": "#c81e1e",
+            "$type": "color"
+          },
+          "success": {
+            "$value": "#046c4e",
+            "$type": "color"
+          },
+          "warning": {
+            "$value": "#c27803",
+            "$type": "color"
+          },
+          "default": {
+            "$value": "#111827",
+            "$type": "color"
+          }
+        },
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "{font-weight-medium}",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "width": {
+          "$value": "64.9531px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "kbd": {
+      "root": {
+        "background-color": {
+          "$value": "#f3f4f6",
+          "$type": "color"
+        },
+        "color": {
+          "$value": "#1f2937",
+          "$type": "color"
+        },
+        "font-size": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "{font-weight-semibold}",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "padding-bottom": {
+          "$value": "6px",
+          "$type": "dimension"
+        },
+        "padding-top": {
+          "$value": "6px",
+          "$type": "dimension"
+        },
+        "width": {
+          "$value": "39.9219px",
+          "$type": "dimension"
+        }
+      }
     }
   }
 }

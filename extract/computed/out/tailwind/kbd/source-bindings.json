@@ -1,0 +1,43 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Kbd",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "",
+      "axisValues": {},
+      "token": "text-xs",
+      "varName": "--text-xs",
+      "anchor": {
+        "selector": ".text-xs"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "",
+      "axisValues": {},
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    }
+  ],
+  "skips": [
+    "root.line-height: candidate --text-xs--line-height → \"text-xs--line-height\" = calc(1 / 0.75) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 4,
+  "shorthandSkips": [
+    "root.border-radius: SHORTHAND carrying var(--radius-lg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-style: SHORTHAND carrying var(--tw-border-style) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding-block: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding-inline: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

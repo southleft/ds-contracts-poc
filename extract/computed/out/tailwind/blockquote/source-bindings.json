@@ -1,0 +1,39 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Blockquote",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "",
+      "axisValues": {},
+      "token": "text-xl",
+      "varName": "--text-xl",
+      "anchor": {
+        "selector": ".text-xl"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "",
+      "axisValues": {},
+      "token": "font-weight-semibold",
+      "varName": "--font-weight-semibold",
+      "anchor": {
+        "selector": ".font-semibold"
+      }
+    }
+  ],
+  "skips": [
+    "root.color: candidate --color-white → \"color-white\" = #fff names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.line-height: candidate --text-xl--line-height → \"text-xl--line-height\" = calc(1.75 / 1.25) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

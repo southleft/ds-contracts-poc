@@ -1,0 +1,207 @@
+{
+  "component": "Label",
+  "browser": "151.0.7922.34",
+  "captures": 20,
+  "combos": 5,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 567,
+  "elementsPerCapture": 1,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 17
+  },
+  "folds": {
+    "count": 10,
+    "receipts": [
+      {
+        "part": "root",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 59,
+    "mintedLeavesFolded": 9
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 9,
+    "baseBindings": 5,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 4,
+      "perAxis": 1,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 2,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 0,
+    "state": 0,
+    "overflowBindings": 0
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 1,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 11300,
+    "cellsMatched": 11260,
+    "pct": 99.64601769911505,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "inline-size",
+        20
+      ],
+      [
+        "width",
+        20
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 20,
+    "measured": 20,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
+    "exact": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 20
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 20
+    },
+    "worst": [
+      {
+        "key": "info__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "info__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "info__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "info__active",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "failure__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "failure__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "failure__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "failure__active",
+        "pctExact": 0,
+        "pctAA": 0
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 86.25,
+    "rowsFullyEqual": 16,
+    "rows": 20,
+    "pixelPerfectExact": 16,
+    "pixelPerfectAA": 20,
+    "pairs": 20
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 5
+}

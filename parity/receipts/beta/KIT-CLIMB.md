@@ -372,7 +372,7 @@ smaller bespoke apply instead was refused for the same reason it was refused in
 the LIVE-APPLY wave: it would not be the engine's output, so proving it proves
 nothing.
 
-## HelperText — PASSES EVERY OFFLINE GATE, HELD PENDING CANVAS
+## HelperText — SHIPPED. THE FIRST STEM TO PASS THE SHIP BAR ON CANVAS.
 
 The loop advanced to a new stem. TextInput taught the screen that found it:
 **its content is an ATTRIBUTE, so it can never show text — pick stems whose
@@ -389,26 +389,299 @@ content is DOM CHILDREN.**
     contract render ✔ shows READABLE TEXT — the failure mode TextInput has
     genesis    ✔ mock-proven, HelperText(5), 314 variables
 
-**It is still HELD.** The bar says a stem ships only if it looks like its class
-**on canvas, by screenshot** — and unverified is not the same as passed. Every
-offline signal is green and the only missing one is the one this transport
-cannot produce. It is first in line the moment `figma-console` returns:
-capture, promote and emit are all done and committed.
+**It shipped.** The bridge came back, the apply ran through the engine path
+(`DSC.parseIncomingText` -> `DSC.planGenerate` -> execute), and the screenshot
+answered the only question the offline gates could not:
 
-Backing it out returned the lane byte-identical AGAIN — bundle sha back to
-`bb96f43e…`, compile receipt back to 5 scripts / 48 variants, genesis back to
-5 sets / 304 variables. That is the third add-then-remove round trip this climb
-has produced, and each one is a determinism result.
+    apply      Y8Jhw6R49wTLuXZ0is2GmV, NEW page only — the five existing pages
+               (Alert, Badge, Button, Card, ToggleSwitch) were untouched
+    result     HelperText -> node 28:405, 5 variants, 151x340
+               tokens 314 (created 10, updated 304, aliased 22)
+    screenshot READ AGAINST THE BAR, NOT THE SCORECARD:
+                 promote clean ................ yes, 0 named refusals
+                 variants have ink ............ yes, all five
+                 colour axis VISIBLE .......... yes — gray, blue, red, green,
+                                                amber are five distinct paints,
+                                                not five names on one colour
+                 looks like its class ......... yes — "Helper text" is legible
+                                                at 2x in every variant
+
+That is every clause of the bar, met by the screenshot rather than argued from
+a scorecard. **Honest coverage 5/46 -> 6/46 (13.0%).**
+
+What made it the one that cleared: its content is DOM CHILDREN, so the emitter
+had something real to project (`{ type: 'text', characters: 'Helper text' }`),
+and its colour axis paints the ROOT's own text — no child part, no icon, none
+of the projection that FC-ICON-ROOT-PAINT-AXIS parks. TextInput failed the
+first condition (content is an attribute) and Spinner the second (the axis
+paints an SVG stroke the root never carries).
+
+One transport note worth keeping: the apply first failed `Failed to fetch`.
+The plugin allowlist is `localhost:9223-9232`, `localhost` resolves to IPv6,
+and stale `figma-console-mcp` instances were squatting `[::1]` on every port in
+that range. The bundle was fine; the port was. Killing the 2-day-old orphan
+(PID 16608) freed 9224 and the same script applied unchanged.
+
+A fourth add-then-remove round trip preceded this one and again returned the
+lane byte-identical (`bb96f43e...`). The lane now sits at `a3ff9bc0...` with
+HelperText in it — 6 scripts / 53 variants / 314 variables.
+
+## Label — SHIPPED. THE SHAPE HELD A SECOND TIME.
+
+HelperText did not just add a stem, it produced a SCREEN: **content in DOM
+children + an axis that paints the root itself.** Label was chosen by running
+that screen over the remaining 40, not by picking the next familiar name.
+
+    screen     content = children (a <label> wrapping text)
+               color axis paints the ROOT's own text — no child part, no icon,
+               so nothing depends on the projection FC-ICON-ROOT-PAINT-AXIS parks
+    types      RemoveIndexSignature<LabelColors> = default + FlowbiteStateColors
+               = {default, info, failure, success, warning} — EXACTLY the five
+               keys in labelTheme.root.colors. Declared and themed AGREE, which
+               is the trap that still blocks Checkbox and Radio.
+    seed       PROPOSED by seed-gen — color(5); default READ from Label.js
+               ("default"); root element READ from the same file (<label>)
+    extract    ✔ 20 captures · double-run byte-identity IDENTICAL
+                 replay computed equality 99.646% (HelperText was 100.000%)
+                 pixel AA perfect 20/20 on BOTH instruments
+                 gate computed 86.250% · gate pixel AA 20/20
+    promote    ✔ CLEAN — 1 part carried, 0 named refusals
+    emit       ✔ all five variants carry `"characters": "Label text"` + textFill
+    genesis    ✔ mock-proven, Label(5), 323 variables, 7 sets / 58 variants
+
+    apply      Y8Jhw6R49wTLuXZ0is2GmV, NEW page only — the six existing pages
+               were untouched. Label -> node 28:427, 5 variants, 145x340.
+    screenshot READ AGAINST THE BAR:
+                 promote clean ................ yes, 0 named refusals
+                 variants have ink ............ yes, all five
+                 colour axis VISIBLE .......... yes — near-black, cyan, red,
+                                                green, amber, and they match the
+                                                theme's gray-900 / cyan-500 /
+                                                red-700 / green-700 / yellow-500
+                 looks like its class ......... yes — "Label text" legible at 2x
+
+**Honest coverage 6/46 -> 7/46 (15.2%).**
+
+One number is worth stating rather than burying: replay computed equality is
+**99.646%, not 100%**. It is not a clause of the ship bar and every AA pair is
+perfect on both instruments, so it did not gate — but it is a real 0.354%
+difference from HelperText's clean 100.000% and it is recorded here rather than
+rounded away.
+
+## THE AXIS-BEARING FRONTIER IS EXHAUSTED — MEASURED, NOT ASSUMED
+
+Before picking a third stem the screen was run over ALL 46, mechanically, off
+the library's own `.js` + `.d.ts`. Result: **every remaining stem that declares
+a colour/size enum fails one of the two shipped clauses, and every one of those
+failures reduces to a blocker already named on this board.**
+
+    Textarea, FileInput, Select, RangeSlider, Checkbox, Radio
+        void / native root — content is an attribute .... the TextInput class
+    Rating
+        axis paints a child SVG star ................... the Spinner class
+                                                         (FC-ICON-ROOT-PAINT-AXIS, parked)
+    Modal ..... portal/overlay root
+    Avatar .... content is an image, not text
+    Progress .. capture refusal (hover timeout), still not root-caused
+
+That is a real boundary and it is worth stating plainly: **no NEW wall was
+found** — nothing here is outside the parked/named list — but the cheap
+colour-axis stems are gone. What remains that can ship are AXIS-FREE text
+stems, and Card has been proving since day one that those are legitimate.
+
+## Kbd — SHIPPED. THE FIRST AXIS-FREE STEM SINCE CARD.
+
+    screen     content = DOM children (a <span> wrapping text)
+               entire appearance painted on the ROOT's own class string:
+               rounded-lg + border + bg-gray-100 + text-gray-800
+    seed       seed-gen RUN and SILENT — KbdProps declares no enum prop at all
+               (only `icon?: FC`) and kbdTheme.root is a single `base` string.
+               `props: []` is the same pure shell as the shipped Card seed, so
+               NO prop space was invented. Root element READ from Kbd.js.
+    extract    ✔ 4 captures · replay computed equality 99.823%
+                 gate computed 100.000% · pixel AA perfect 4/4 on BOTH
+    promote    ✔ CLEAN — 1 part carried, 0 named refusals
+    emit       ✔ `"characters": "Ctrl"` + fill + stroke + textFill +
+                 cornerRadius + per-side strokeWeight — the SAME binding shape
+                 as the shipped Card, all token-bound rather than literal
+    genesis    ✔ mock-proven, Kbd(1), 331 variables, 8 scripts / 59 variants
+
+    apply      Y8Jhw6R49wTLuXZ0is2GmV, NEW page only — the eight existing pages
+               untouched. Kbd -> node 29:438, COMPONENT (1 variant), 40x30.
+    screenshot READ AGAINST THE BAR at 4x:
+                 promote clean ................ yes, 0 named refusals
+                 has ink ...................... yes
+                 axis visible ................. VACUOUS — no axis exists to
+                                                render, exactly as Card
+                 looks like its class ......... yes, and this is the strongest
+                                                one yet: "Ctrl" is legible
+                                                INSIDE a real bordered, filled,
+                                                rounded key cap. The box is the
+                                                thing TextInput could not draw.
+
+**Honest coverage 7/46 -> 8/46 (17.4%).**
+
+## Blockquote — HELD. **FC-FONT-SLANT-NOT-CARRIED** — A NEW WALL.
+
+This is the one that stopped the loop, and it stopped it for the right reason:
+the stem passed every instrument except the one that was looking at the thing
+that matters.
+
+    screen     PASSED — content = DOM children, single `base` string on the root
+    extract    ✔ 4 captures · double-run byte-identity IDENTICAL
+               ✔ replay computed equality 100.000%
+               ✔ replay pixel AA perfect 4/4
+    promote    ✔ CLEAN — 1 part carried, 0 named refusals
+    gate       ✖ **pixel AA perfect 0/4** — every capture differs
+               ✖ gate computed 94.118% — exactly one channel short of 17
+
+### The measured cause
+
+`font-style: italic` is in `captured-truth.json`. It is NOT in the enriched
+contract, which carries only:
+
+    declared: display, font-family
+    tokens  : color, font-size, font-weight, line-height, width
+
+while the capture enumerated `font-style` alongside 19 other text channels.
+`blockquoteTheme.root` is `text-xl font-semibold italic text-gray-900` — for a
+Blockquote the **italic IS the component**. Drop the slant and what reaches the
+canvas is upright text that is no longer the thing that was measured.
+
+### Scope: this is systemic, not a Blockquote quirk
+
+    grep -rl '"font-style"' examples/*/contracts/*.contract.json   ->  0 files
+
+**No contract anywhere in this repo carries `font-style`.** The emitter does
+have a `fontStyle`, but it is Figma's *weight name* ("Regular"/"Medium"), not
+CSS slant — so there is currently no path from an italic in the DOM to an
+italic on the canvas, for any library.
+
+### Why it is a NEW wall and not FC-FONT-SUBSTRATE
+
+It is the same CLASS as FC-FONT-SUBSTRATE — a text-identity channel that is
+captured and then never reaches the contract, so the canvas draws a substitute.
+It is a different CHANNEL (slant, not face), and the difference that matters is
+this: FC-FONT-SUBSTRATE has only ever been a reporting-only note that never
+fails CI, because for every stem shipped so far the face was incidental. Here
+the dropped channel is load-bearing, and it is the first time this class has
+actually BLOCKED a stem. That is a new wall, it is not on the parked list, and
+under the standing rule it stops the climb rather than being worked around.
+
+### What was NOT done
+
+Blockquote was not promoted, not added to `ds-library.json`, not added to the
+genesis ORDER, not bundled, and never applied to canvas. The lane still stands
+at exactly 8. Its capture output and seed are kept as the evidence behind this
+entry, the same way TextInput's and Spinner's are — a hold with receipts, not a
+deletion.
+
+**No workaround was attempted.** Declaring `font-style` by hand in the contract
+would have shipped a stem whose italic came from me rather than from the
+capture, which is the exact failure this board exists to prevent.
+
+## LIVE-FILE FINDING — **FC-APPLY-TOKENS-NOT-PRUNED**
+
+The post-apply inventory of Y8Jhw6R49wTLuXZ0is2GmV did not match the bundle,
+and the gap turned out to be exactly the held stems:
+
+    bundle token leaves ....................... 331
+    live `Tokens` collection .................. 444
+    difference ................................ 113
+
+    imported/text-input ....................... 107
+    imported/spinner .......................... 6
+                                                --- = 113
+
+TextInput and Spinner were applied to this file BEFORE they were judged against
+the ship bar and held. Holding them removed them from `ds-library.json`, the
+genesis ORDER and the bundle — but **the apply is additive**: the tokens step
+creates and updates, and never prunes. So their token subtrees are still in the
+live collection with nothing pointing at them.
+
+Verified dead rather than assumed dead:
+
+    suspect variables ......................... 113
+    referenced by any node on any page ........   0
+    aliased by any surviving variable .........   0
+
+So this is not a correctness bug in what shipped — every one of the 8 shipped
+components binds only to variables the bundle wrote, and the file renders
+correctly. It is a HYGIENE gap with a real consequence for a stranger: a file
+that has seen an experiment carries that experiment's tokens forever, and the
+variable picker shows 444 names for a 331-name library.
+
+**Nothing was deleted.** Pruning 113 variables out of a live file the owner is
+using is destructive and was not in scope; it is reported here with the exact
+query that found them so the decision belongs to the owner.
+
+## CLOSEOUT FINDING — **FC-COVERAGE-COUNTS-CAPTURES**
+
+The closeout suite turned `capability-report-is-fresh` red, which is correct —
+this round changed inputs that `docs/24-what-works.md` reads. The prescribed
+fix is `npm run capability:report`. **It was run, its output was read, and it
+was REVERTED**, because the rebuild does not tell the truth:
+
+    | library | contracts committed | OF THOSE, pinned by the drift instrument | size | coverage |
+    | Flowbite / Tailwind |  8  |  11  |  46  |  **23.9%**  |
+
+Eleven "of those" eight. The column's own header says the second number is a
+SUBSET of the first, and 11 > 8. The coverage percentage is then derived from
+the second column, so the document would have published **23.9%** for a lane
+whose honest, screenshot-verified figure is **17.4% (8/46)**.
+
+Measured cause:
+
+    extract/computed/out/tailwind/  ->  11 dirs
+      alert badge blockquote button card helpertext kbd label
+      spinner textinput toggleswitch
+    examples/tailwind/contracts/*.contract.json  ->  8
+
+The second column counts **capture output directories** (`scorecard.json`
+walks), not committed contracts. `blockquote`, `spinner` and `textinput` are
+HELD stems — captured with receipts, deliberately never promoted — and the
+report counts each one as coverage.
+
+This is invisible on every other library because captured == committed there.
+This lane is the first to carry holds, so it is the first to expose it. The bug
+is in the instrument, not in the lane: a stem that was measured and REFUSED is
+being counted as a stem that shipped, which is the exact inversion this board
+exists to prevent.
+
+`docs/24-what-works.md` is therefore left at its committed state and
+`capability-report-is-fresh` is left RED. That red is CAUSED BY THIS ROUND and
+is NOT pre-existing — it is recorded here rather than cleared, because the only
+available way to clear it was to publish a number 6.5 points too high.
 
 ## WHERE THE LOOP ACTUALLY STANDS
 
-    shipped ......... 5  (button, badge, card, alert, toggleswitch)
+    shipped ......... 8  (button, badge, card, alert, toggleswitch,
+                         helpertext, label, kbd)
+                         +3 this round — HelperText, Label and Kbd, ALL
+                         bar-passed on canvas by screenshot, not by scorecard
     held on the bar . TextInput (empty pills) · Spinner (dead colour axis)
-    held on transport HelperText (everything green except the canvas screenshot)
+    held: NEW WALL . Blockquote — FC-FONT-SLANT-NOT-CARRIED. Captured clean,
+                     gate pixel AA 0/4, because `font-style: italic` never
+                     reaches the contract. Systemic: 0 contracts in the repo
+                     carry that channel. THIS STOPPED THE LOOP.
     refused ......... Progress (capture: first hover times out on an unstyled
                       <div role="progressbar"> wrapper — a NEW wall, not root-caused)
     parked .......... FC-ICON-ROOT-PAINT-AXIS · Option B height/width
 
-Three of the four blockers are now distinct and named, and none of them is
-"the tool does not work" — they are one upstream type bug class, one emitter
-projection gap, one capture-harness wrapper case, and one transport limit.
+The transport blocker is GONE — it was a port, not a limit, and the receipt
+above says which one. What remains is three distinct named blockers, none of
+them "the tool does not work": one upstream type bug class (declared enum is a
+`Pick<>` subset of the themed keys), one emitter projection gap
+(FC-ICON-ROOT-PAINT-AXIS, parked), and one capture-harness wrapper case
+(Progress, not root-caused).
+
+The stems that clear this bar have a shape, and it is now measured rather than
+guessed: **content in DOM children + an axis that paints the root itself.**
+HelperText produced that screen and Label CONFIRMED it — the screen picked
+Label before any capture ran, and every stage came back clean in the order it
+predicted. Two for two is not proof, but it is the first time this climb chose
+a stem instead of discovering one.
+
+The same screen also explains the holds without appeal to luck: TextInput fails
+the first clause (content is an attribute), Spinner the second (the axis paints
+an SVG stroke the root never carries).

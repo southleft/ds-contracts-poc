@@ -1,0 +1,159 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Label",
+  "varPrefix": "--",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info",
+      "axisValues": {
+        "color": "info"
+      },
+      "token": "color-cyan-500",
+      "varName": "--color-cyan-500",
+      "anchor": {
+        "selector": ".text-cyan-500"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info",
+      "axisValues": {
+        "color": "info"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "failure",
+      "axisValues": {
+        "color": "failure"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success",
+      "axisValues": {
+        "color": "success"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning",
+      "axisValues": {
+        "color": "warning"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default",
+      "axisValues": {
+        "color": "default"
+      },
+      "token": "text-sm",
+      "varName": "--text-sm",
+      "anchor": {
+        "selector": ".text-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info",
+      "axisValues": {
+        "color": "info"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "failure",
+      "axisValues": {
+        "color": "failure"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success",
+      "axisValues": {
+        "color": "success"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning",
+      "axisValues": {
+        "color": "warning"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "default",
+      "axisValues": {
+        "color": "default"
+      },
+      "token": "font-weight-medium",
+      "varName": "--font-weight-medium",
+      "anchor": {
+        "selector": ".font-medium"
+      }
+    }
+  ],
+  "skips": [
+    "root.line-height: candidate --text-sm--line-height → \"text-sm--line-height\" = calc(1.25 / 0.875) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

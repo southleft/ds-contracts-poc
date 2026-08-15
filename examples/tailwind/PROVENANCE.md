@@ -164,13 +164,33 @@ Source facts bound: `text-sm`/`text-base`/`text-xs`, `font-weight-medium`,
 
 | committed contracts | pinned by the drift instrument | library size | **coverage** |
 |---|---|---|---|
-| 5 | 5 | 46 | **10.9%** |
+| 8 | 8 | 46 | **17.4%** |
 
 Library size: component directories in `flowbite-react@0.12.17/dist/components` (`.tw-sandbox`).
 
-2026-08-15 KIT CLIMB, HONEST ROW: this stayed **5**. TextInput and Spinner
-were both captured and promoted cleanly and BOTH ARE HELD — neither reaches the
-kit ship bar on canvas (TextInput renders as empty pills with no sample text;
+2026-08-15 KIT CLIMB: **HelperText, Label and Kbd** join the slice (5 -> 8) —
+the first stems to pass the kit SHIP BAR on canvas by screenshot rather than by
+scorecard. HelperText and Label show readable text in five genuinely distinct
+colours each (not a name-only axis); Kbd shows a readable "Ctrl" inside a real
+bordered, filled, rounded key cap. Both seeds were PROPOSED
+by `extract/computed/seed-gen.ts` from the library's own `.d.ts` and their
+defaults READ from the runtime source (`HelperText.js` color="gray",
+`Label.js` color="default") — neither was hand-authored.
+
+Kbd is AXIS-FREE BY MEASUREMENT, not by omission: seed-gen was run and proposed
+nothing, because `KbdProps` declares no enum prop and `kbdTheme.root` is a
+single `base` string. Its seed is therefore the same pure `props: []` shell as
+the already-shipped `card.contract.json` — it invents no prop space.
+
+Label was not a guess. It was picked by the shape HelperText MEASURED: content
+in DOM children + an axis that paints the root itself. Its five declared keys
+(`RemoveIndexSignature<LabelColors>`) are exactly the five keys in
+`labelTheme.root.colors`, so it also avoids the declared-subset-of-themed trap
+that still blocks Checkbox and Radio.
+
+TextInput and Spinner were also captured and promoted cleanly and BOTH ARE HELD:
+neither reaches the ship bar on canvas (TextInput renders as empty pills with no
+sample text — its placeholder is an ATTRIBUTE and cannot reach a contract;
 Spinner's eight colours all render black). A stem that promotes is not a stem
 that ships, and this row counts only what ships. Full account with the measured
 causes: `parity/receipts/beta/KIT-CLIMB.md`.

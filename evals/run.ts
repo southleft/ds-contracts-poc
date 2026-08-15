@@ -7883,12 +7883,12 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       });
       const receipt = run(process.execPath, ['examples/tailwind/scripts/figma-compile-receipt.mjs']);
       if (receipt.status !== 0) throw new Error(`tailwind figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
-      if (!receipt.out.includes('5 scripts, 48 variants')) {
-        throw new Error(`tailwind compile receipt missing the 5-scripts/48-variants line:\n${receipt.out.slice(0, 800)}`);
+      if (!receipt.out.includes('8 scripts, 59 variants')) {
+        throw new Error(`tailwind compile receipt missing the 8-scripts/59-variants line:\n${receipt.out.slice(0, 800)}`);
       }
       const batch = run(process.execPath, ['examples/tailwind/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`tailwind genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(5 sets: Alert\(4\), Badge\(24\), Button\(45\), Card\(1\), ToggleSwitch\(6\); 304 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(8 sets: Alert\(4\), Badge\(24\), Button\(45\), Card\(1\), HelperText\(5\), Kbd\(1\), Label\(5\), ToggleSwitch\(6\); 331 variables\)/.test(batch.out)) {
         throw new Error(`tailwind genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE freshness (single-mode variant — no modes dir):
@@ -7906,7 +7906,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const twRun = readFileSync(path.join(SCRATCH, 'examples/tailwind/figma/bundle-run.json'), 'utf8');
       const twCommitted = readFileSync(path.join(ROOT, 'examples/tailwind/figma/tailwind.bundle.json'), 'utf8');
       if (twRun !== twCommitted) throw new Error('committed examples/tailwind/figma/tailwind.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('tailwind-figma-genesis: 5/5 Tailwind-v4 scripts referee+execute headless (48 variants); reader bound the library\'s own utility tokens; one-paste batch mock-proven; committed tailwind.bundle.json fresh. TextInput was added on 2026-08-14 and HELD on 2026-08-15 for failing the kit ship bar (see KIT-CLIMB.md) — removing it returned this lane BYTE-IDENTICAL to its pre-climb state, bundle sha included');
+      console.log('tailwind-figma-genesis: 8/8 Tailwind-v4 scripts referee+execute headless (59 variants). HelperText, Label and Kbd all joined 2026-08-15 as the first stems to pass the kit SHIP BAR on canvas by SCREENSHOT — readable text, and for the two colour stems five distinct paints each. HelperText and Label were seeded by seed-gen from the library\'s own .d.ts; Kbd is AXIS-FREE by measurement (seed-gen proposed nothing because KbdProps declares no enum), so its seed is the same pure props:[] shell as the shipped Card. TextInput and Spinner remain HELD and are NOT in this lane (see KIT-CLIMB.md)');
     },
   },
   {

@@ -1,0 +1,56 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "flowbite.label",
+  "name": "Label",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED seed \u2014 generated from flowbite-react's shipped .d.ts by extract/computed/seed-gen.ts. REVIEW BEFORE USE: the enum axes below are read from the library's type declarations, which is not the same as the axes a designer wants on the canvas. Prune what does not belong, and add any axis a human models out of booleans \u2014 the generator is silent there ON PURPOSE (see `--verify`). Anatomy is left empty because parts are promoted from captured DOM truth, never inferred from types (docs/21 step 4). Default READ from Label.js (color=\"default\"); root element READ from the same file (<label>). The five declared keys are EXACTLY the five keys in labelTheme.root.colors \u2014 declared and themed agree, unlike Checkbox/Radio.",
+  "semantics": {
+    "element": "label"
+  },
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Label"
+    }
+  },
+  "states": [],
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "info",
+          "failure",
+          "success",
+          "warning",
+          "default"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "info": "Info",
+            "failure": "Failure",
+            "success": "Success",
+            "warning": "Warning",
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      },
+      "default": "default"
+    }
+  ]
+}

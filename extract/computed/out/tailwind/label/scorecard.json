@@ -1,0 +1,577 @@
+{
+  "component": "Label",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 5,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 320,
+    "cellsEqual": 276,
+    "pctEqual": 86.25,
+    "rowsFullyEqual": 16,
+    "rows": 20
+  },
+  "pixel": {
+    "pairs": 20,
+    "perfectExact": 16,
+    "perfectAA": 20,
+    "measured": 20,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 0.055989583333333336,
+    "meanAA": 0,
+    "maxAA": 0
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 9,
+    "mintedLeavesUnfolded": 59,
+    "baseBindings": 5,
+    "stateBindings": 0,
+    "codeOnlyChannels": 0,
+    "overflowBindings": 0,
+    "folds": 10
+  },
+  "worstRows": [
+    {
+      "key": "info__default",
+      "pctAA": 0,
+      "pctExact": 0.2799479166666667,
+      "channelsMismatched": 11
+    },
+    {
+      "key": "info__hover",
+      "pctAA": 0,
+      "pctExact": 0.2799479166666667,
+      "channelsMismatched": 11
+    },
+    {
+      "key": "info__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0.2799479166666667,
+      "channelsMismatched": 11
+    },
+    {
+      "key": "info__active",
+      "pctAA": 0,
+      "pctExact": 0.2799479166666667,
+      "channelsMismatched": 11
+    },
+    {
+      "key": "failure__default",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "failure__hover",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "failure__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "failure__active",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.border-bottom-color",
+      4
+    ],
+    [
+      "root.border-left-color",
+      4
+    ],
+    [
+      "root.border-right-color",
+      4
+    ],
+    [
+      "root.border-top-color",
+      4
+    ],
+    [
+      "root.caret-color",
+      4
+    ],
+    [
+      "root.color",
+      4
+    ],
+    [
+      "root.column-rule-color",
+      4
+    ],
+    [
+      "root.outline-color",
+      4
+    ],
+    [
+      "root.row-rule-color",
+      4
+    ],
+    [
+      "root.text-decoration-color",
+      4
+    ],
+    [
+      "root.text-emphasis-color",
+      4
+    ]
+  ],
+  "namedLosses": [],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+    "leavesAdded": 246,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "info__default",
+      "channelsCompared": 16,
+      "channelsEqual": 5,
+      "pctExact": 0.2799479166666667,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "caret-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        }
+      ]
+    },
+    {
+      "key": "info__hover",
+      "channelsCompared": 16,
+      "channelsEqual": 5,
+      "pctExact": 0.2799479166666667,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "caret-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        }
+      ]
+    },
+    {
+      "key": "info__focus-visible",
+      "channelsCompared": 16,
+      "channelsEqual": 5,
+      "pctExact": 0.2799479166666667,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "caret-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        }
+      ]
+    },
+    {
+      "key": "info__active",
+      "channelsCompared": 16,
+      "channelsEqual": 5,
+      "pctExact": 0.2799479166666667,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "caret-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        },
+        {
+          "part": "root",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 184, 219, 1)",
+          "theirs": "oklch(0.715 0.143 215.221)"
+        }
+      ]
+    },
+    {
+      "key": "failure__default",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "failure__hover",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "failure__focus-visible",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "failure__active",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "success__default",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "success__hover",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "success__focus-visible",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "success__active",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "warning__default",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "warning__hover",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "warning__focus-visible",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "warning__active",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "default__default",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "default__hover",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "default__focus-visible",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "default__active",
+      "channelsCompared": 16,
+      "channelsEqual": 16,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    }
+  ]
+}

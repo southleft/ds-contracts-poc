@@ -82,7 +82,7 @@
       ]
     },
     {
-      "__note": "STATE-PLANE PROJECTION ROUND — `checked` RECLASSIFIED from a stateProp to a VARIANT AXIS (same class as MUI Switch). It is a prop-selected rendering, not a pseudo-class plane, and it was outside the closed state vocabulary — its captured track-color delta minted `background-color-state-checked`, a name nothing re-read and no emitter rendered.",
+      "__note": "STATE-PLANE PROJECTION ROUND \u2014 `checked` RECLASSIFIED from a stateProp to a VARIANT AXIS (same class as MUI Switch). It is a prop-selected rendering, not a pseudo-class plane, and it was outside the closed state vocabulary \u2014 its captured track-color delta minted `background-color-state-checked`, a name nothing re-read and no emitter rendered.",
       "name": "ToggleSwitch",
       "importName": "ToggleSwitch",
       "contract": "examples/tailwind/contracts-seed/toggleswitch.contract.json",
@@ -105,7 +105,7 @@
       ]
     },
     {
-      "__note": "KIT CLIMB 2026-08-14 — seed proposed by extract/computed/seed-gen.ts from the library's own .d.ts (DynamicStringEnumKeysOf<SpinnerColors>), reviewed, and committed. Not hand-authored.",
+      "__note": "KIT CLIMB 2026-08-14 \u2014 seed proposed by extract/computed/seed-gen.ts from the library's own .d.ts (DynamicStringEnumKeysOf<SpinnerColors>), reviewed, and committed. Not hand-authored.",
       "name": "Spinner",
       "importName": "Spinner",
       "contract": "examples/tailwind/contracts-seed/spinner.contract.json",
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "__note": "KIT CLIMB 2026-08-14 — seed proposed by seed-gen from the library's own .d.ts; defaults READ from TextInput.js. PHASE 0 2026-08-15: a `placeholder` fixedProp was tried and REVERTED — the string never enters the capture (0 occurrences) because a placeholder is an ATTRIBUTE rendered by the browser through ::placeholder, not DOM text. Only its 60 ::placeholder STYLE rows are captured. There is nothing for the contract to carry, so no sample text can reach the canvas this way. See parity/receipts/beta/KIT-CLIMB.md.",
+      "__note": "KIT CLIMB 2026-08-14 \u2014 seed proposed by seed-gen from the library's own .d.ts; defaults READ from TextInput.js. PHASE 0 2026-08-15: a `placeholder` fixedProp was tried and REVERTED \u2014 the string never enters the capture (0 occurrences) because a placeholder is an ATTRIBUTE rendered by the browser through ::placeholder, not DOM text. Only its 60 ::placeholder STYLE rows are captured. There is nothing for the contract to carry, so no sample text can reach the canvas this way. See parity/receipts/beta/KIT-CLIMB.md.",
       "name": "TextInput",
       "importName": "TextInput",
       "contract": "examples/tailwind/contracts-seed/textinput.contract.json",
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "__note": "KIT CLIMB 2026-08-15 — seed PROPOSED by seed-gen from the library's own .d.ts; defaults READ from Progress.js (color=\"default\", size=\"md\"), both inside their declared enums (ProgressColor declares `default`; ProgressSizes includes `md`). `progress` is a REQUIRED numeric prop, not an axis — 50 is a render value, the same role label=\"Toggle\" plays for ToggleSwitch.",
+      "__note": "KIT CLIMB 2026-08-15 \u2014 seed PROPOSED by seed-gen from the library's own .d.ts; defaults READ from Progress.js (color=\"default\", size=\"md\"), both inside their declared enums (ProgressColor declares `default`; ProgressSizes includes `md`). `progress` is a REQUIRED numeric prop, not an axis \u2014 50 is a render value, the same role label=\"Toggle\" plays for ToggleSwitch.",
       "name": "Progress",
       "importName": "Progress",
       "contract": "examples/tailwind/contracts-seed/progress.contract.json",
@@ -141,7 +141,7 @@
       }
     },
     {
-      "__note": "KIT CLIMB 2026-08-15 — seed PROPOSED by seed-gen from the library's own .d.ts; default READ from HelperText.js (color=\"gray\"), which IS inside HelperColors (Pick<FlowbiteColors, gray|info|failure|warning|success>). Chosen because its content is DOM CHILDREN, not an attribute — the lesson TextInput taught, whose placeholder could never reach the canvas.",
+      "__note": "KIT CLIMB 2026-08-15 \u2014 seed PROPOSED by seed-gen from the library's own .d.ts; default READ from HelperText.js (color=\"gray\"), which IS inside HelperColors (Pick<FlowbiteColors, gray|info|failure|warning|success>). Chosen because its content is DOM CHILDREN, not an attribute \u2014 the lesson TextInput taught, whose placeholder could never reach the canvas.",
       "name": "HelperText",
       "importName": "HelperText",
       "contract": "examples/tailwind/contracts-seed/helpertext.contract.json",
@@ -149,6 +149,32 @@
       "axes": [
         "color"
       ]
+    },
+    {
+      "__note": "KIT CLIMB 2026-08-15 \u2014 the SECOND stem picked by the shape HelperText measured: content is DOM CHILDREN and the color axis paints the ROOT's own text (a <label>), so nothing depends on the child/icon projection that FC-ICON-ROOT-PAINT-AXIS parks. Declared keys (RemoveIndexSignature<LabelColors> = default + FlowbiteStateColors) are EXACTLY the five themed keys \u2014 no declared-subset-of-themed trap. Default color=\"default\" READ from Label.js.",
+      "name": "Label",
+      "importName": "Label",
+      "contract": "examples/tailwind/contracts-seed/label.contract.json",
+      "sampleText": "Label text",
+      "axes": [
+        "color"
+      ]
+    },
+    {
+      "__note": "KIT CLIMB 2026-08-15 \u2014 the axis-bearing frontier of this library is EXHAUSTED under the current emitter: every remaining stem with a color/size enum fails one of the two shipped clauses for an ALREADY-NAMED reason (void/native roots Textarea|FileInput|Select|RangeSlider|Checkbox|Radio = the TextInput class; child-SVG axes Rating = the Spinner class / parked FC-ICON-ROOT-PAINT-AXIS; Modal = portal; Avatar = image content; Progress = capture refusal). Kbd is the first AXIS-FREE candidate, which Card already proves can ship: content is DOM CHILDREN and its whole appearance (border + gray fill + rounded + text) is painted on the ROOT's own class string. No enum axis exists to propose, so seed-gen is silent here ON PURPOSE.",
+      "name": "Kbd",
+      "importName": "Kbd",
+      "contract": "examples/tailwind/contracts-seed/kbd.contract.json",
+      "sampleText": "Ctrl",
+      "axes": []
+    },
+    {
+      "__note": "KIT CLIMB 2026-08-15 \u2014 **HELD, and it is the stem that found a NEW WALL.** Screened in as the second axis-free candidate after Kbd (content = DOM children, single `base` string on the root) and it captured cleanly: 4/4 replay byte-equal, replay computed equality 100.000%, replay pixel AA perfect 4/4, promotion CLEAN with 0 named refusals. Then the GATE instrument scored it **pixel AA perfect 0/4** \u2014 every capture differs. Cause, measured not guessed: `font-style: italic` is present in captured-truth.json and ABSENT from the enriched contract, which carries only font-family/font-size/font-weight/line-height/color/width. blockquoteTheme.root is `text-xl font-semibold italic text-gray-900` \u2014 the italic IS the component's identity, so dropping it drops the whole stem. NOT shipped, NOT in ds-library.json, NOT in the genesis ORDER, NOT in the bundle. See FC-FONT-SLANT-NOT-CARRIED in parity/receipts/beta/KIT-CLIMB.md.",
+      "name": "Blockquote",
+      "importName": "Blockquote",
+      "contract": "examples/tailwind/contracts-seed/blockquote.contract.json",
+      "sampleText": "Design is not just what it looks like.",
+      "axes": []
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "id": "flowbite.kbd",
+  "name": "Kbd",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). AXIS-FREE BY MEASUREMENT, NOT BY OMISSION: seed-gen was run and proposed NOTHING here because KbdProps declares no enum prop at all (only `icon?: FC`), and kbdTheme.root carries a single `base` string with no colors/sizes map. `props: []` is therefore the same pure shell as the shipped card.contract.json — it invents no prop space. Root element READ from Kbd.js (<span>).",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "flowbite-react",
+      "export": "Kbd"
+    }
+  },
+  "states": []
+}
