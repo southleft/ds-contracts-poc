@@ -164,16 +164,16 @@ Source facts bound: `text-sm`/`text-base`/`text-xs`, `font-weight-medium`,
 
 | committed contracts | pinned by the drift instrument | library size | **coverage** |
 |---|---|---|---|
-| 6 | 6 | 46 | **13.0%** |
+| 5 | 5 | 46 | **10.9%** |
 
 Library size: component directories in `flowbite-react@0.12.17/dist/components` (`.tw-sandbox`).
 
-2026-08-14 KIT CLIMB: **TextInput** joins the slice (5 -> 6). Its seed was
-PROPOSED by `extract/computed/seed-gen.ts` from the library's own `.d.ts`
-and its defaults READ from `TextInput.js` — not hand-authored. Spinner was
-captured in the same round at 100.000% gate computed equality and is NOT in
-this row: it emits an EMPTY component set (see
-`parity/receipts/beta/KIT-CLIMB.md`, FC-ROOT-ICON-NOT-EMITTED).
+2026-08-15 KIT CLIMB, HONEST ROW: this stayed **5**. TextInput and Spinner
+were both captured and promoted cleanly and BOTH ARE HELD — neither reaches the
+kit ship bar on canvas (TextInput renders as empty pills with no sample text;
+Spinner's eight colours all render black). A stem that promotes is not a stem
+that ships, and this row counts only what ships. Full account with the measured
+causes: `parity/receipts/beta/KIT-CLIMB.md`.
 
 Every per-component number in this file — floors, `pctEqual`, token counts,
 variant cells — is measured over that slice, and the slice was hand-picked for

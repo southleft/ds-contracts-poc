@@ -111,7 +111,10 @@ documented artifacts in a blank file. The UI paste itself remains a human step.
 
 ---
 
-**SHA SUPERSEDED 2026-08-14.** This receipt applied the FIVE-component bundle
-(`bb96f43e…`). The kit climb added a sixth (TextInput) and applied it to the
-same file as a NEW page, leaving these five untouched — verified before and
-after. The bundle is now `22d50bf1…`. See `KIT-CLIMB.md`.
+**STILL THE SHIPPED SET, and the sha round-tripped.** The kit climb added a
+sixth (TextInput) as a NEW page, leaving these five untouched — verified before
+and after. TextInput was then HELD for failing the kit ship bar and removed
+from the shipped set, returning the bundle to the exact `bb96f43e…` this
+receipt applied. NOTE: the TextInput PAGE is still present in
+`Y8Jhw6R49wTLuXZ0is2GmV` — the Figma bridge disconnected before it could be
+removed. See `KIT-CLIMB.md`.

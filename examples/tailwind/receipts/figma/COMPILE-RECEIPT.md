@@ -7,15 +7,14 @@ examples/mui/tokens/tailwind.dtcg.json,examples/tailwind/tokens/tailwind-minted.
 
 | script | contract | variant axes | variants | headless execute |
 |---|---|---|---|---|
-| alert.figma.js | flowbite.alert | color(4) | 4 | tokens 411 (23 aliased) · 1 set(s) built |
-| badge.figma.js | flowbite.badge | color(6)×size(2) | 12 | tokens 411 (23 aliased) · 1 set(s) built |
-| button.figma.js | flowbite.button | color(5)×size(5) | 25 | tokens 411 (23 aliased) · 1 set(s) built |
-| card.figma.js | flowbite.card | standalone | 1 | tokens 411 (23 aliased) · 0 set(s) built |
-| text-input.figma.js | flowbite.textinput | color(5)×sizing(3) | 15 | tokens 411 (23 aliased) · 1 set(s) built |
-| toggle-switch.figma.js | flowbite.toggleswitch | sizing(3)×checked(2) | 6 | tokens 411 (23 aliased) · 1 set(s) built |
+| alert.figma.js | flowbite.alert | color(4) | 4 | tokens 304 (21 aliased) · 1 set(s) built |
+| badge.figma.js | flowbite.badge | color(6)×size(2) | 12 | tokens 304 (21 aliased) · 1 set(s) built |
+| button.figma.js | flowbite.button | color(5)×size(5) | 25 | tokens 304 (21 aliased) · 1 set(s) built |
+| card.figma.js | flowbite.card | standalone | 1 | tokens 304 (21 aliased) · 0 set(s) built |
+| toggle-switch.figma.js | flowbite.toggleswitch | sizing(3)×checked(2) | 6 | tokens 304 (21 aliased) · 1 set(s) built |
 
-**6 scripts · 63 variants total.** Each script ran to completion
-against the mocked Figma (00-tokens.figma.js first — 411 variables
+**5 scripts · 48 variants total.** Each script ran to completion
+against the mocked Figma (00-tokens.figma.js first — 304 variables
 including the Figma-native ALIAS pass for source-aliased minted leaves).
 
 **0 failures.**

@@ -193,3 +193,82 @@ keep drilling in the same wave.
 either a paint variable per svg path, or promoting an icon-rooted component's
 inner paths as real parts instead of folding them into one asset. Both are
 emitter changes.
+
+
+---
+
+# SHIP-BAR WAVE (2026-08-15) — THE CLIMB'S TWO "WINS" WERE NOT WINS. HONEST COVERAGE IS 5/46.
+
+A ship bar was introduced: promote clean · variants have ink · the axis is
+VISIBLE not name-only · **and it looks like its class on a screenshot**. Applied
+to what the climb had already banked, **both stems fail it**, so both are HELD
+and the coverage row goes back to where it started.
+
+    coverage   6/46 (13.0%)  →  **5/46 (10.9%)**  — a CORRECTION, not a regression
+    shipped    button · badge · card · alert · toggleswitch
+    held       TextInput (this wave) · Spinner (previous wave)
+
+## PHASE 0 — TextInput: the cheap fix was tried and it CANNOT work
+
+TextInput rendered as 15 empty pills. The proposed fix was to give it sample
+text via `placeholder`. Done, measured, reverted:
+
+    fixedProps: { placeholder: "name@flowbite.com" }  → re-captured
+
+    occurrences of "name@flowbite.com" in captured-truth.json ....... 0
+    ::placeholder STYLE rows captured ............................. 60
+    promoted contract mentions placeholder ................... false
+    contract render (gate-shot) .................. still an empty field
+
+**A placeholder is an ATTRIBUTE, not DOM content.** The browser paints it
+through the `::placeholder` pseudo-element, so the capture records sixty rows of
+its STYLE and not one character of its TEXT. There is no text part for the
+contract to carry, therefore none for the emitter to project, therefore no
+canvas can ever show it by this route. The gate's own pixel agreement got WORSE
+under the change (30/60 → 0/60 perfect pairs) because the real render gained
+text the contract render could not reproduce — the number moving the wrong way
+is the same finding stated numerically.
+
+The config change was reverted and the capture restored to its prior numbers
+(replay 100.000%, gate 30/60). **TextInput stays HELD.** Its pill shape has a
+second cause that is PARKED, not fixed: the root is a block element whose width
+is environment-dependent, so Option B (`FC-GEOMETRY-EXCLUDED`) excludes it and
+the canvas hugs to empty content. Reopening that is out of bounds.
+
+## WHAT THE HOLD COST — nothing, and that is itself the proof
+
+Backing TextInput out returned the lane **byte-identical to its pre-climb
+state**, verified file by file against the pre-climb commit:
+
+    00-tokens.figma.js · GENESIS-BATCH.figma.js · tailwind.bundle.json
+    COMPILE-RECEIPT.md · tailwind-minted.dtcg.json ......... ALL IDENTICAL
+    golden-path bundle sha ....... back to bb96f43e… (was 22d50bf1… at six)
+
+Add-then-remove producing the same bytes is a stronger determinism result than
+the original single build, and both beta receipts were corrected to say so
+rather than left claiming a superseded sha.
+
+## THE LOOP DID NOT RUN — the Figma bridge disconnected mid-wave
+
+The figma-console MCP dropped during Phase 0. **Every clause of the ship bar
+after "promote clean" requires a canvas screenshot**, so no new stem —
+Progress included — could have been judged, only applied blind. Screening
+Progress and capturing it would have produced artifacts nobody could accept or
+reject, which is the exact failure mode the ship bar exists to stop.
+
+**One thing is outstanding and cannot be done from here:** the TextInput PAGE
+is still present in `Y8Jhw6R49wTLuXZ0is2GmV`. The bundle no longer contains it
+and the repo no longer ships it, but the page was applied before the bar
+existed and the bridge went down before it could be removed. Whoever reconnects
+should delete that page; nothing else on that file changed this wave.
+
+## STATUS OF THE TWO HELD STEMS
+
+| stem | promote | ink | axis visible | looks like its class | cause |
+|---|---|---|---|---|---|
+| TextInput | ✔ clean | ✔ | ✔ colour borders differ | ✘ empty pills, no text | placeholder is an attribute (this wave) + Option B width (PARKED) |
+| Spinner | ✔ clean | ✔ (after the icon fix) | ✘ 8 colours all black | ✘ 32x12 ellipse | `FC-ICON-ROOT-PAINT-AXIS` (PARKED) + Option B height (PARKED) |
+
+Both keep their seeds, their captures and the engine fix that made Spinner draw
+at all. Neither counts. **The honest number is 5/46**, and it is the same number
+the beta shipped with.

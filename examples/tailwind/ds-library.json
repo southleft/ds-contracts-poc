@@ -11,8 +11,7 @@
     "badge",
     "card",
     "alert",
-    "toggleswitch",
-    "textinput"
+    "toggleswitch"
   ],
   "contractStem": {},
   "contractVersion": "0.2.0",

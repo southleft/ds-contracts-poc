@@ -121,8 +121,9 @@ source, which is a different and more useful warning.
 
 ---
 
-**SHA SUPERSEDED 2026-08-14.** The `bb96f43e…` bundle recorded above was the
-FIVE-component golden path. The kit climb added TextInput, so the bundle is now
-`22d50bf1…` at six components. Every method and every exit code above still
-holds; what changed is the input set, not the reproducibility this receipt
-pins. See `KIT-CLIMB.md`.
+**SHA UNCHANGED — and it round-tripped.** The kit climb briefly added a sixth
+component (TextInput, sha `22d50bf1…`) and then HELD it for failing the kit
+ship bar. Removing it returned the bundle to the exact `bb96f43e…` recorded
+above — add-then-remove is byte-identical, which is a stronger determinism
+proof than the original single build. Every method and exit code above stands.
+See `KIT-CLIMB.md`.

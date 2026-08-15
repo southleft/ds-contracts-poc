@@ -59,8 +59,8 @@ Then, in the Figma **desktop** app:
 2. Open a new Figma file and run **DS Contracts Sync Runner**.
 3. **Build** tab → paste the contents of `flowbite.bundle.json` → run it.
 
-You get six token-bound component sets (Alert, Badge, Button, Card,
-TextInput, ToggleSwitch) and a `Tokens` variable collection.
+You get five token-bound component sets (Alert, Badge, Button, Card,
+ToggleSwitch) and a `Tokens` variable collection with 68 base tokens.
 
 **The other direction**, contract → typed React + CSS Modules, from the same
 contracts:
@@ -84,9 +84,10 @@ with exit codes. The claim it exists to support:
 > the bundle a stranger builds is **byte-identical** to the one the
 > development tree builds.
 
-The sha moves whenever a component is added — it was `bb96f43e…` at five
-components and is `22d50bf1…` at six. What the receipts pin is the
-REPRODUCIBILITY, not the constant.
+The sha moves whenever the component set changes. It is `bb96f43e…` at these
+five. A sixth (TextInput) was added and then HELD for failing the kit ship bar,
+and removing it returned the bundle to this exact sha — add-then-remove is
+byte-identical. What the receipts pin is the REPRODUCIBILITY, not the constant.
 
 The bundle is a pure function of (contracts, tokens, icons) — no timestamp, no
 machine id, no ordering nondeterminism.

@@ -116,7 +116,7 @@
       ]
     },
     {
-      "__note": "KIT CLIMB 2026-08-14 — seed proposed by seed-gen from the library's own .d.ts; defaults READ from TextInput.js (color=\"gray\", sizing=\"md\"), both of which ARE in the declared enums.",
+      "__note": "KIT CLIMB 2026-08-14 — seed proposed by seed-gen from the library's own .d.ts; defaults READ from TextInput.js. PHASE 0 2026-08-15: a `placeholder` fixedProp was tried and REVERTED — the string never enters the capture (0 occurrences) because a placeholder is an ATTRIBUTE rendered by the browser through ::placeholder, not DOM text. Only its 60 ::placeholder STYLE rows are captured. There is nothing for the contract to carry, so no sample text can reach the canvas this way. See parity/receipts/beta/KIT-CLIMB.md.",
       "name": "TextInput",
       "importName": "TextInput",
       "contract": "examples/tailwind/contracts-seed/textinput.contract.json",
