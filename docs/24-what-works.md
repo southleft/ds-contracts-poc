@@ -529,7 +529,7 @@ npm run capability:fresh
 | artifact | sha256 (12) | bytes | what it supplied |
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `8231a2e8b195` | 76,456 | CSS/DOM frontier vocabulary |
-| `docs/22-generality.md` | `4865fb21e503` | 72,221 | coverage denominators (docs/22 §8.3 table) |
+| `docs/22-generality.md` | `b60f9260981b` | 72,249 | coverage denominators (docs/22 §8.3 table) |
 | `evals/golden.json` | `7d9230931936` | 32,157 | generated-source golden manifest |
 | `evals/results.json` | `aad18195a31a` | 26,003 | executable claim suite |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |

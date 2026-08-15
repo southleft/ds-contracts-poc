@@ -29,9 +29,9 @@ human clicking Apply.
 [24 — What Works](24-what-works.md) is what the path *delivers*, measured, with
 every number carrying the artifact it was read from.
 [23 — Known Limitations](23-known-limitations.md) is what it *costs*. They
-share one denominator — the 82 measured components are **8.7%** of the 943 in
-the six libraries they came from ([24 §2](24-what-works.md)) — so read every
-percentage on either page as *"on the easy 8.7%."*
+share one denominator — the 101 covered components are **10.7%** of the 943 in
+the seven libraries with a measured size ([24 §2](24-what-works.md)) — so read
+every percentage on either page as *"on the easy 10.7%."*
 
 ---
 
@@ -187,13 +187,13 @@ their component-property overrides.
 
 **Honest expectations.**
 
-- **What it delivers, measured** ([24 §3](24-what-works.md)): **87.1% mean
+- **What it delivers, measured** ([24 §3](24-what-works.md)): **86.6% mean
   computed-style equality** for a captured component, against the original npm
   package rendering in the same pinned Chromium — an exact string match over
   the browser's full longhand set, no tolerance, no whitelist, so a channel the
-  pipeline never opened still counts against it. 82 components across seven
-  libraries and six styling architectures: 87.7% cell-weighted over 432,724
-  cells, 41 of 82 at ≥90%, 65 of 82 at ≥80%. Every one of the 82 is listed
+  pipeline never opened still counts against it. 104 components across eight
+  libraries and six styling architectures: 86.1% cell-weighted over 583,950
+  cells, 52 of 104 at ≥90%, 81 of 104 at ≥80%. Every one of the 104 is listed
   worst-first in [24 §3.1](24-what-works.md) — the worst is 69.8%.
 - **What it costs** ([23](23-known-limitations.md)): hours of expert
   configuration per library (below), and breadth — see the coverage bullet.
@@ -218,7 +218,7 @@ their component-property overrides.
   any fidelity average, for exactly this reason). Data grid, tree, virtualized
   list, date picker, rich text and charts appear in **zero** committed
   contracts. Fidelity per *captured* component is high; breadth is the honest
-  limit, and the 87.1% above describes only the tractable 8.7%.
+  limit, and the 86.6% above describes only the tractable 10.7%.
 - **What will look broken but is a named limit:** text wrapping is not
   implemented (a hugging text node inside a narrower fixed ancestor clips);
   webfonts load only where the library's capture config declares them

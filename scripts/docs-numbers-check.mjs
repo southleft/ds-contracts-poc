@@ -116,7 +116,23 @@ const FID_CARRIAGE = FID_UNSCORED - FID_INTERACTION;
 // Derived from extract/computed/out/**/scorecard.json + the docs/22 §8.3
 // total row — NEVER from docs/24 itself, which is a generated consumer of the
 // same artifacts and would make the check circular.
-const LIB_DIRS = new Set(['altitude', 'astryx', 'carbon', 'mui', 'polaris', 'shadcn', 'tailwind']);
+//
+// THIS SET IS A DENOMINATOR AND IT ROTTED. It listed seven libraries and was
+// last touched in the shadcn round (7510916c); Fluent 2 was added to the
+// corpus afterwards (a0b8afcb) and this file never learned about it. The
+// effect was not a missing check — it was a WRONG one: this script derived 93
+// components / 87.1% / 451,524 cells and reported the generated, correct
+// docs/24 (104 / 86.6% / 583,950) as the stale party, for every one of those
+// claims. A checker that is confidently wrong is worse than one that is
+// silent.
+//
+// The list stays EXPLICIT — the same shape `build-capability-report.mjs`
+// keeps, and deliberately a SECOND, independent copy of it. Sharing one
+// module between the generator and its checker would mean a bug in that
+// module was invisible to both. What makes the duplicate safe is the stray
+// refusal below: a corpus this list has never heard of is a failure by name,
+// so the next library cannot be silently left out the way Fluent was.
+const LIB_DIRS = new Set(['altitude', 'astryx', 'carbon', 'fluent', 'mui', 'polaris', 'shadcn', 'tailwind']);
 const scorecards = (() => {
   const outDir = path.join(ROOT, 'extract/computed/out');
   const acc = [];
@@ -134,17 +150,85 @@ const scorecards = (() => {
       // three levels = <lib>/<comp>/scorecard.json; two = Polaris's flat layout
       const corpus = parts.length === 3 ? parts[0] : parts.length === 2 ? 'polaris' : '(unrecognised)';
       return { corpus, v: JSON.parse(readFileSync(abs, 'utf8')) };
-    })
-    .filter((s) => LIB_DIRS.has(s.corpus));
+    });
 })();
-const realPcts = scorecards.map((s) => s.v.computed.pctEqual);
-const REAL_N = scorecards.length;
+// The refusal that keeps the explicit list above honest. `conformance` is the
+// synthetic CSS/DOM frontier fixture and is deliberately not a library.
+for (const stray of new Set(
+  scorecards.filter((s) => !LIB_DIRS.has(s.corpus) && s.corpus !== 'conformance').map((s) => s.corpus),
+)) {
+  fail('extract/computed/out', `scorecards under "${stray}/" belong to no library this script knows — add it to LIB_DIRS (and to docs/22 §8.3) or every capture number below is measured over the wrong population`);
+}
+const realCards = scorecards.filter((s) => LIB_DIRS.has(s.corpus));
+const realPcts = realCards.map((s) => s.v.computed.pctEqual);
+const REAL_N = realCards.length;
 const REAL_MEAN = realPcts.reduce((a, b) => a + b, 0) / (REAL_N || 1);
 const REAL_GE90 = realPcts.filter((x) => x >= 90).length;
 const REAL_GE80 = realPcts.filter((x) => x >= 80).length;
-const REAL_CELLS = scorecards.reduce((a, s) => a + s.v.computed.cellsCompared, 0);
-const REAL_EQUAL = scorecards.reduce((a, s) => a + s.v.computed.cellsEqual, 0);
+const REAL_CELLS = realCards.reduce((a, s) => a + s.v.computed.cellsCompared, 0);
+const REAL_EQUAL = realCards.reduce((a, s) => a + s.v.computed.cellsEqual, 0);
 const REAL_WEIGHTED = REAL_CELLS ? (100 * REAL_EQUAL) / REAL_CELLS : 0;
+
+// ---- the COVERAGE population: measured AND committed --------------------
+// Measured is not covered. A component can carry a full scorecard and no
+// committed contract — captured with receipts and then deliberately HELD —
+// and counting those as coverage reports a refused stem as a shipped one
+// (`FC-COVERAGE-COUNTS-CAPTURES`). Every mean above legitimately averages
+// over what was MEASURED; the coverage fraction below answers a different
+// question and uses the smaller set. This mirrors the rule
+// build-capability-report.mjs applies to docs/24 §2, re-derived here rather
+// than read from it, because reading the generated document would make this
+// check circular.
+const normId = (s) => String(s ?? '').toLowerCase().replace(/[^a-z0-9]/g, '');
+const committed = (() => {
+  const byLib = {};
+  for (const dir of LIB_DIRS) {
+    const ids = new Set();
+    const names = new Set();
+    const cdir = path.join(ROOT, 'examples', dir, 'contracts');
+    if (existsSync(cdir)) {
+      for (const f of readdirSync(cdir).filter((n) => n.endsWith('.contract.json'))) {
+        try {
+          const c = JSON.parse(readFileSync(path.join(cdir, f), 'utf8'));
+          if (c.id) ids.add(c.id);
+          if (c.name) names.add(normId(c.name));
+        } catch { /* a malformed contract is reported by the schema evals, not here */ }
+      }
+    }
+    // A scorecard's display name is not always the contract's: MUI's capture
+    // config names the seed contract each component was captured from, so
+    // resolve through it first and fall back to a name match.
+    const seedId = {};
+    const cfg = path.join(ROOT, 'extract/computed/configs', `${dir}.json`);
+    if (existsSync(cfg)) {
+      try {
+        for (const c of (JSON.parse(readFileSync(cfg, 'utf8')).components ?? [])) {
+          if (!c?.name || !c?.contract) continue;
+          try {
+            const seed = JSON.parse(readFileSync(path.join(ROOT, c.contract), 'utf8'));
+            if (seed.id) seedId[normId(c.name)] = seed.id;
+          } catch { /* a seed that cannot be read simply does not resolve */ }
+        }
+      } catch { /* ditto for the config */ }
+    }
+    byLib[dir] = { ids, names, seedId };
+  }
+  return byLib;
+})();
+const isCommitted = (corpus, displayName) => {
+  const key = normId(displayName);
+  const lib = committed[corpus];
+  if (!lib) return false;
+  const id = lib.seedId[key];
+  if (id && lib.ids.has(id)) return true;
+  return lib.names.has(key);
+};
+const coveredCards = realCards.filter((s) => isCommitted(s.corpus, s.v?.component));
+const COVERED_N = coveredCards.length;
+const HELD_CARDS = realCards
+  .filter((s) => !isCommitted(s.corpus, s.v?.component))
+  .map((s) => `${s.corpus}/${s.v?.component}`)
+  .sort();
 
 // The library-size denominator (893) exists only in the docs/22 §8.3 table —
 // the same prose table capability:report parses. Parse its TOTAL row. On
@@ -160,8 +244,12 @@ const LIB_SIZE = (() => {
     const num = (s) => { const m = /(\d[\d,]*)/.exec(s.replace(/\*/g, '')); return m ? Number(m[1].replace(/,/g, '')) : null; };
     const pinned = num(cells[2] ?? '');
     const size = num(cells[3] ?? '');
-    if (pinned !== null && pinned !== REAL_N) {
-      fail('docs/22-generality.md', `§8.3 total row pins ${pinned} components but ${REAL_N} scorecards exist under extract/computed/out — reconcile before trusting any coverage claim`);
+    // §8.3's second column is "of those, pinned by the drift instrument" —
+    // measured AND committed, the same population as COVERED_N. It is NOT the
+    // scorecard count: comparing it against that counted the HELD Flowbite
+    // stems as pinned and reported a table that was right as wrong.
+    if (pinned !== null && pinned !== COVERED_N) {
+      fail('docs/22-generality.md', `§8.3 total row pins ${pinned} components but ${COVERED_N} are measured AND backed by a committed contract${HELD_CARDS.length ? ` (${REAL_N} scorecards exist; ${HELD_CARDS.length} are held with no committed contract: ${HELD_CARDS.join(', ')})` : ''} — reconcile before trusting any coverage claim`);
     }
     return size;
   }
@@ -170,7 +258,8 @@ const LIB_SIZE = (() => {
 if (LIB_SIZE === null) {
   fail('docs/22-generality.md', '§8.3 coverage table did not parse — the 893-component denominator is unavailable, so every doc coverage claim below is unverifiable. Fix the table (or this parser); this check refuses rather than skipping.');
 }
-const COV_PCT = LIB_SIZE ? (100 * REAL_N) / LIB_SIZE : null;
+// COVERED_N, not REAL_N: coverage counts stems that shipped, not captures.
+const COV_PCT = LIB_SIZE ? (100 * COVERED_N) / LIB_SIZE : null;
 
 // ---- registry truth (scripts/registry-truth.json — NEVER the network) ------
 const REGISTRY = JSON.parse(readFileSync(path.join(ROOT, 'scripts/registry-truth.json'), 'utf8')).packages;
@@ -268,12 +357,16 @@ const DERIVED_CLAIMS = [
   ['capture component count', /\b([\d,]+) components across six\s+libraries\b/g, () => [REAL_N]],
   ['capture component count', /lists all ([\d,]+) worst-first/g, () => [REAL_N]],
   ['capture component count', /\(all ([\d,]+), worst first\)/g, () => [REAL_N]],
+  // The NUMERATOR of a coverage fraction is COVERED_N (measured AND
+  // committed), never REAL_N (measured). The two differ by the held stems,
+  // and quoting the larger one over a library size is precisely the
+  // refused-stem-as-shipped-stem claim FC-COVERAGE-COUNTS-CAPTURES forbids.
   ['capture coverage', /those ([\d,]+) components are \*\*([\d.]+)% of the ([\d,]+)\*\*/g,
-    () => [REAL_N, COV_PCT === null ? null : { pct: COV_PCT }, LIB_SIZE]],
-  ['capture coverage', /the ([\d,]+) measured components are \*\*([\d.]+)%\*\* of the ([\d,]+) in/g,
-    () => [REAL_N, COV_PCT === null ? null : { pct: COV_PCT }, LIB_SIZE]],
+    () => [COVERED_N, COV_PCT === null ? null : { pct: COV_PCT }, LIB_SIZE]],
+  ['capture coverage', /the ([\d,]+) covered components are \*\*([\d.]+)%\*\* of the ([\d,]+) in/g,
+    () => [COVERED_N, COV_PCT === null ? null : { pct: COV_PCT }, LIB_SIZE]],
   ['capture coverage', /they are ([\d,]+) of ([\d,]+) components \(([\d.]+)%\)/g,
-    () => [REAL_N, LIB_SIZE, COV_PCT === null ? null : { pct: COV_PCT }]],
+    () => [COVERED_N, LIB_SIZE, COV_PCT === null ? null : { pct: COV_PCT }]],
   ['capture coverage', /the easy ([\d.]+)%/g, () => [COV_PCT === null ? null : { pct: COV_PCT }]],
   ['capture coverage', /the tractable ([\d.]+)%/g, () => [COV_PCT === null ? null : { pct: COV_PCT }]],
   ['capture cell count', /([\d.]+)% cell-weighted over ([\d,]+)/g, () => [{ pct: REAL_WEIGHTED }, REAL_CELLS]],
@@ -425,7 +518,8 @@ const derived = [
   `capture configs  ${CAPTURE_CONFIGS} (extract/computed/configs/*.json)`,
   `round trip       ${RT.matched}/${RT.diverged}/${RT.loss}/${RT.invented} m/d/l/i of ${RT_FACTS}, orig ${RT.originalFacts}, matched ${((100 * RT.matched) / RT_FACTS).toFixed(1)}% (extract/figma/roundtrip-uui/report.json)`,
   `fidelity         ${FID_SCORED}/${FID_TOTAL} scored, mean ${FID_MEAN.toFixed(2)}% (examples/untitled-ui/renders/fidelity.json)`,
-  `capture floor    ${REAL_N} components, ${REAL_CELLS.toLocaleString('en-US')} cells, mean ${REAL_MEAN.toFixed(1)}%, coverage ${COV_PCT === null ? 'UNAVAILABLE' : `${COV_PCT.toFixed(1)}% of ${LIB_SIZE}`} (extract/computed/out/** + docs/22 §8.3)`,
+  `capture floor    ${REAL_N} measured, ${REAL_CELLS.toLocaleString('en-US')} cells, mean ${REAL_MEAN.toFixed(1)}% (extract/computed/out/**, ${LIB_DIRS.size} libraries)`,
+  `capture coverage ${COVERED_N} measured AND committed = ${COV_PCT === null ? 'UNAVAILABLE' : `${COV_PCT.toFixed(1)}% of ${LIB_SIZE}`}${HELD_CARDS.length ? `; ${HELD_CARDS.length} held, uncounted: ${HELD_CARDS.join(', ')}` : ''} (+ docs/22 §8.3)`,
   `registry truth   ${Object.entries(REGISTRY).map(([k, v]) => `${k.replace('@ds-contracts/', '')} ${v.latest}/${v.next}`).join(' · ')} (scripts/registry-truth.json, no network)`,
 ];
 console.log(`docs:check — derived values\n  ${derived.join('\n  ')}\n  documents gated  ${DOCS.length}`);
