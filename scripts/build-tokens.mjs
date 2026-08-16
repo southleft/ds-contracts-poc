@@ -13,6 +13,7 @@
  * architecture. Unresolvable aliases fail the build.
  */
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
+import path from 'node:path';
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 
@@ -101,6 +102,34 @@ for (const [name, tokens] of brands) {
     if (!primitives.has(alias[1])) {
       throw new Error(`Brand token "${path}" (brand "${name}") references "{${alias[1]}}" which is not a primitive`);
     }
+  }
+}
+
+// FLAT MODE (opt-in, additive):
+//   node scripts/build-tokens.mjs --flat <a.dtcg.json,b.dtcg.json> --out <file.css>
+// Emits ONE :root block of custom properties from the given DTCG trees and
+// exits. The LIVE DEMO needs the Flowbite `imported.*` tokens as real CSS
+// variables so the components it inverts out of Figma render PAINTED in
+// Storybook rather than as unstyled text — the same DTCG→custom-property step
+// this file already performs for the repo's own tokens, pointed somewhere
+// else. Nothing below this block runs in flat mode, so the default build and
+// its committed outputs are untouched.
+{
+  const argv = process.argv.slice(2);
+  const flatIdx = argv.indexOf('--flat');
+  if (flatIdx >= 0) {
+    const trees = (argv[flatIdx + 1] ?? '').split(',').filter(Boolean);
+    const outIdx = argv.indexOf('--out');
+    const outPath = argv[outIdx + 1];
+    if (trees.length === 0 || outIdx < 0 || !outPath) {
+      throw new Error('build-tokens --flat <a.json,b.json> --out <file.css>');
+    }
+    const all = new Map();
+    for (const t of trees) for (const [k, v] of flatten(read(t))) all.set(k, v);
+    mkdirSync(path.dirname(outPath), { recursive: true });
+    writeFileSync(outPath, emit(':root', all, all));
+    console.log(`build-tokens --flat: ${all.size} custom properties → ${outPath}`);
+    process.exit(0);
   }
 }
 

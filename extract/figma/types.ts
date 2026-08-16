@@ -133,6 +133,18 @@ export interface DumpText {
    *  the style group's weight keeps its size token here instead. Absence in
    *  older dumps means not captured, never "no size token". */
   fontSizeVar?: string;
+  /** The weight TOKEN in slash-form (dump v1.22, additive), stamped by the
+   *  emitter rather than bound: Figma exposes no bindable font-weight field,
+   *  so the face name is all the node itself carries — and "Medium" is drawn
+   *  both by a contract declaring 500 and by one declaring nothing. Absence
+   *  means the set was not drawn by this pipeline (or predates v1.22), which
+   *  is exactly when no weight should be proposed. */
+  fontWeightVar?: string;
+  /** The line-height TOKEN in slash-form (dump v1.23, additive), stamped for
+   *  the same reason as fontWeightVar: Figma's lineHeight takes a value, not a
+   *  variable, so the resolved number cannot name its token and the reader
+   *  minted a second name for one the corpus already had. */
+  lineHeightVar?: string;
   /** Variable behind the text fill (slash-form), when bound. */
   fillVar?: string;
   /** Non-ORIGINAL text case (dump v1.16, additive) — the canvas fact behind
@@ -221,6 +233,23 @@ export interface DumpNode {
    *  Absence means legacy/not captured, never an empty tuple. */
   variantProperties?: Record<string, string>;
   layout?: DumpLayout;
+  /** clipsContent === true on a frame-like node (dump v1.20, additive) — the
+   *  canvas fact `core/emit-figma-script.ts` has written from a declared
+   *  `overflow-x`/`overflow-y` of hidden|clip since FC-OVERFLOW-CLIP-LOST,
+   *  and that NEITHER reader read back: the clip went to the canvas and died
+   *  there. Captured ONLY when true, mirroring `layout.wrap` — absence means
+   *  the node does not clip, which is CSS's own default (`visible`).
+   *
+   *  It is NOT inverted into a declared `overflow` by propose-figma, and that
+   *  is deliberate: Figma's own FrameNode default for this field is ALSO
+   *  true, so a drawn clip and a declared one are byte-identical on the
+   *  canvas. Measured on the committed REST fixtures, the true-valued nodes
+   *  are a COMPONENT_SET wrapper, a root COMPONENT and an INSTANCE — none of
+   *  which declares overflow in its contract, so a blanket inversion would
+   *  MINT three facts nobody wrote. The boolean is carried so the fact is
+   *  recoverable; deciding which clips were authored is a separate question
+   *  than reading them. */
+  clipsContent?: true;
   /** Literal corner radius when uniform and nonzero. Bound radii are in `bound`. */
   cornerRadius?: number;
   /** Bound variables: Plugin-API field name → variable name (slash-form),
@@ -449,6 +478,32 @@ export interface DumpSet {
    *  New exact consumers prefer this field. Absence means the producer did
    *  not capture structured metadata, so exactness is unverified. */
   propertyDefinitions?: Record<string, DumpPropertyDefinition>;
+  /** The emitter's DECLARED sparse State-preview matrix (dump v1.21,
+   *  additive), read from `ds_contracts/statePreviewAxis` on the set. A
+   *  figmaStatePreviews set draws Cartesian(axes)×{Default} PLUS one row per
+   *  state per primary value, so without this the exact reader held it to a
+   *  full cartesian and refused sets this repo itself drew. Absence means the
+   *  set was not drawn by this pipeline (or predates v1.21) and the full
+   *  cartesian remains the expectation. */
+  /** The contract's declared semantics (dump v1.24, additive), read from
+   *  `ds_contracts/semantics` on the set. Figma draws no element/role/ARIA, so
+   *  without this the reader guesses from a name/axis table — and a guess can
+   *  be WRONG, not merely absent. Absence means the set was not drawn by this
+   *  pipeline (or predates v1.24), which is when the inference is correct. */
+  semantics?: { element?: string; role?: string };
+  /** Figma property name → the contract's prop name (dump v1.25, additive).
+   *  The canvas carries only the design-facing spelling ("Content"), so
+   *  without this the reader canonicalises it and a contract's `children`
+   *  returns as `content`. Absence means the set was not drawn by this
+   *  pipeline (or predates v1.25). */
+  propNames?: Record<string, string>;
+  statePreviewAxis?: {
+    axis: string;
+    default: string;
+    states: string[];
+    primary: string | null;
+    pinned: Record<string, string>;
+  };
   /** INSTANCE_SWAP property definitions' preferredValues (dump v1.5,
    *  additive), keyed by property name with the "#id" suffix stripped —
    *  the same spelling propRefs.mainComponent carries. Absence in older

@@ -6,7 +6,9 @@
   "status": "draft",
   "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. STATE-PLANE PROJECTION round: `checked` is an ENUM VARIANT AXIS (unchecked|checked), not a boolean state. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
   "semantics": {
-    "element": "button"
+    "element": "button",
+    "role": "switch",
+    "roleException": "Flowbite ToggleSwitch is a <button role=\"switch\">; the library has no native checkbox in the DOM."
   },
   "props": [
     {
@@ -80,7 +82,8 @@
   "anatomy": {
     "root": {
       "layout": {
-        "display": "flex"
+        "display": "flex",
+        "align": "center"
       },
       "parts": {
         "part-0": {
@@ -265,6 +268,26 @@
       ]
     }
   },
+  "events": [
+    {
+      "name": "toggle",
+      "description": "Fires when the switch is activated. Uncontrolled instances flip checked themselves — the canvas cannot run this, so Figma shows both values as variants.",
+      "bindings": {
+        "code": {
+          "prop": "onToggle"
+        }
+      },
+      "trigger": "root",
+      "toggles": {
+        "prop": "checked",
+        "between": [
+          "unchecked",
+          "checked"
+        ],
+        "aria": "checked"
+      }
+    }
+  ],
   "anchors": {
     "figma": {
       "fileKey": null,

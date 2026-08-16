@@ -172,6 +172,10 @@ export interface RestNode {
   opacity?: number;
   children?: RestNode[];
   // HasFramePropertiesTrait
+  /** Whether the frame clips its content (dump v1.20). REST DOES return this
+   *  on frame-like nodes — verified against the committed fixtures — so it is
+   *  a real read on this route, not a REST_CAPTURE_GAPS entry. */
+  clipsContent?: boolean;
   layoutMode?: 'NONE' | 'HORIZONTAL' | 'VERTICAL' | 'GRID';
   primaryAxisAlignItems?: 'MIN' | 'CENTER' | 'MAX' | 'SPACE_BETWEEN';
   counterAxisAlignItems?: 'MIN' | 'CENTER' | 'MAX' | 'BASELINE';
@@ -720,6 +724,15 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
     ctx.report.notes.push(
       `${nodePath}: fontWeight ${s.fontWeight ?? '(absent)'} is outside the generator's weight table — fontStyle "${fontStyle}" passed through`,
     );
+  } else if (s.italic === true && !/\bItalic\b/.test(fontStyle)) {
+    // FC-FONT-SLANT-NOT-CARRIED, the RETURN leg. The Plugin API reader takes
+    // `fontName.style` verbatim, so it recovers "Semi Bold Italic" as written.
+    // REST does NOT report the face name here — it reports the weight NUMBER
+    // and a separate `italic` boolean, so deriving the face from the weight
+    // table alone throws the slant away and reports an italic node as upright.
+    // Composed in the emitter's own spelling (figmaFaceStyle): weight 400's
+    // italic is plain "Italic", not "Regular Italic".
+    fontStyle = fontStyle === 'Regular' ? 'Italic' : `${fontStyle} Italic`;
   }
   const text: DumpText = {
     characters: node.characters ?? '',
@@ -968,6 +981,14 @@ function mapNode(
   if (node.type === 'COMPONENT' && node.absoluteBoundingBox) {
     out.bbox = { width: round2(node.absoluteBoundingBox.width), height: round2(node.absoluteBoundingBox.height) };
   }
+
+  // dump v1.20: CLIPPING — the plugin route's clipsContent capture, mirrored.
+  // This one is NOT a REST_CAPTURE_GAPS entry: the REST payload carries the
+  // field on frame-like nodes (the committed badge/card fixtures show both
+  // polarities), so the route reads it as faithfully as the Plugin API does.
+  // Captured only when true, matching dump.plugin.js exactly — the two readers
+  // must not disagree about what an ABSENT field means.
+  if (node.clipsContent === true) out.clipsContent = true;
 
   const layout = mapLayout(node, ctx, nodePath);
   if (layout) out.layout = layout;

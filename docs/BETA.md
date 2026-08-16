@@ -2,6 +2,17 @@
 
 *Read this first if you just cloned the repo and want to see it work.*
 
+## What this product guarantees (and what it does not)
+
+Hold us to these five. Everything below is how to run them, not a second product.
+The live climb list is [NORTH-STAR.md](../parity/receipts/beta/NORTH-STAR.md).
+
+1. **The contract is the source of truth.** Eight Flowbite contracts in this repo are the design-system fact. Figma and React are projections of those files.
+2. **Code → Figma is the supported hop.** The same contracts produce one JSON bundle; paste it in Figma desktop; you get eight token-bound component sets (not hex-painted copies). Re-applying amends in place. Two builds from the same inputs are byte-identical.
+3. **Code → React is the supported development output.** `generate` from those **authored** contracts emits typed React + CSS Modules. Where the contract declares events (ToggleSwitch, Alert dismiss), that React is interactive. A dump-generated preview is not.
+4. **Figma → contract is recovery, not an app generator.** A set *this pipeline drew* can be dumped and proposed back. Recovered props, stamped tokens, and host element are the bar. Generated Storybook from a dump is a preview of that recovery. It will not click, toggle, or replace the library.
+5. **Coverage is 8 of 46 Flowbite components (17.4%), chosen because they were tractable.** We do not guarantee a fifty-component kit or lossless geometry. Events exist only when the authored contract declares them. Those are named limits, not unfinished work.
+
 This project has three adoption paths ([00 — Choose Your Path](00-choose-your-path.md)).
 **For the beta, exactly ONE of them is supported end-to-end by a documented,
 receipted, clean-machine command list: path B, code-first, on the Flowbite
@@ -20,6 +31,11 @@ Two citations carry the honest numbers and neither is optional:
 > work; read 28 to go looking for its edges. If the two disagree about a
 > command, this page was run more recently and its commands carry a receipt.
 
+A rehearsed command list for both hops (including dump → React as a
+*recovery* preview) lives at
+[parity/receipts/beta/LIVE-DEMO.md](../parity/receipts/beta/LIVE-DEMO.md).
+That page is not a second product. The guarantees above still win.
+
 ---
 
 ## THE GOLDEN PATH — contracts → one JSON → your Figma canvas
@@ -27,7 +43,7 @@ Two citations carry the honest numbers and neither is optional:
 **Why this lane.** It was chosen by measurement, not preference. Flowbite
 promotes with **zero named refusals** in its minted token tree (Carbon, the
 runner-up, has 14), it carries the highest visual pass rate of any foreign lane
-(4 of 5 stems), and it is five contracts rather than ten — small enough to read
+(4 of 5 stems), and it is eight contracts rather than ten — small enough to read
 in one sitting. Its full comparison is in the receipt below.
 
 **What you need.** Node ≥ 20, a Figma account, and the Figma **desktop** app
@@ -62,8 +78,8 @@ Then, in the Figma **desktop** app:
 You get eight token-bound components (Alert, Badge, Button, Card, HelperText,
 Kbd, Label, ToggleSwitch) and a `Tokens` variable collection.
 
-**The other direction**, contract → typed React + CSS Modules, from the same
-contracts:
+**The code guarantee** — same authored contracts → typed React + CSS Modules
+(this is *not* generate-from-a-Figma-dump):
 
 ```bash
 npx tsx packages/cli/src/cli.ts generate examples/tailwind/contracts \
@@ -84,9 +100,10 @@ with exit codes. The claim it exists to support:
 > the bundle a stranger builds is **byte-identical** to the one the
 > development tree builds.
 
-The sha moves whenever the component set changes — it is the value printed by
-the command above at these eight. What the receipts pin is the REPRODUCIBILITY, not the constant: during the
-kit climb components were added and removed three times and the bundle returned
+The sha moves whenever the component set changes. At the eight stems on this
+page it is `af0a5dee245f036c…` (108,557 bytes), re-run 2026-08-16. What the
+receipts pin is the REPRODUCIBILITY, not the constant: during the kit climb
+components were added and removed three times and the bundle returned
 byte-identical to `bb96f43e…` (the five-component set) every time.
 
 The bundle is a pure function of (contracts, tokens, icons) — no timestamp, no
@@ -104,12 +121,16 @@ being surprised by them is.
    `npx tsx packages/cli/src/cli.ts …`. There is *also* a published
    **`@ds-contracts/cli`**, currently **0.4.0**, while this source tree is
    `0.5.0-rc.2` — **the published CLI is behind the source.**
-   For the one command on this page that gap does not bite, and that was
-   checked rather than assumed: `npx @ds-contracts/cli@0.4.0 figma bundle …`
-   against these contracts produces a bundle **byte-identical** to the source
-   tree's (sha256 `bb96f43e…`, 92,764 bytes both ways). Pin the version if you
-   use it, and do not assume the same parity for other commands — the source is
-   ahead and nothing verifies the rest of that surface here.
+   For the one command on this page that gap did not bite when it was last
+   checked — and it was checked rather than assumed: `npx
+   @ds-contracts/cli@0.4.0 figma bundle …` produced a bundle **byte-identical**
+   to the source tree's, sha256 `bb96f43e…`, 92,764 bytes both ways. **That
+   check was made against the FIVE-stem set and has not been re-run at eight**,
+   because re-running it reaches the network for a published package, which is
+   a human step here (docs/27). Treat the parity as unverified at this set
+   size. Pin the version if you use it, and do not assume the same parity for
+   other commands — the source is ahead and nothing verifies the rest of that
+   surface here.
 2. **The plugin is not in the clone.** `playground/public/*.zip` and
    `figma-sync/plugin-dist/` are gitignored (`.gitignore:28,50`). You must run
    `npm run plugin:zip` before you have anything to import. A clean clone that
@@ -180,19 +201,16 @@ Forgetting is now caught by name (`FC-CELL-FRAMING` / `FC-CELL-INK-LOST`)
 rather than surfacing later as a blank score. This only matters if you are
 working on the internal loop; it does not affect the golden path.
 
-### Expected suite reds — three, and they are not regressions
+### The eval suite on this branch
 
-`npx tsx evals/run.ts` takes ~25 minutes and currently reports **222/225**.
-The three reds are known and named:
+`npx tsx evals/run.ts` takes ~25 minutes and currently reports **225/225**
+(`evals/results.json`). The two long-standing reds (`mui-figma-genesis`,
+`child-wider-ratchet-and-script-freshness`) were closed on 2026-08-16.
+`npm run visual-truth:check` still holds the astryx floor unclaimed on
+purpose — that is a visual-truth ratchet, not an eval-suite row.
 
-| eval | why it is red |
-|---|---|
-| `mui-figma-genesis` | Pre-existing. `switch.figma.js` headless execute: the `switch-track(medium)` pin expects 34x14 and finds 1x1. |
-| `child-wider-ratchet-and-script-freshness` | Pre-existing. The astryx/fluent text-wrapping overflow ratchet — the corpus-wide gap named in [22](22-generality.md). |
-| `astryx` floor in `npm run visual-truth:check` | **Deliberate.** The astryx lane has 0 headless passes against a ratchet floor of 1. Clearing it would mean claiming a stem that passes on one instrument and fails on the other — the exact discipline another stem was just *un*claimed under. It stays red on purpose. |
-| `npm run docs:check` | Pre-existing on a clean clone of `main`, and verified as such rather than assumed. Two generators disagree about the same numbers: `capability:report` writes `docs/24` (e.g. "10.4% coverage") while `docs-numbers-check` re-derives 9.2 from the artifacts. Neither is lying; they read different denominators. Not on the golden path, and not touched here. |
-
-A green suite is not the bar. A suite whose reds are all *named* is.
+A green suite is a guarantee that the *claims we make* still execute. It is
+not a guarantee that inverted Storybook is a shipping component library.
 
 ## Applying is additive — it never prunes
 
@@ -207,3 +225,40 @@ unreferenced — no node bound to them, no surviving variable aliased them — s
 nothing rendered wrong; the collection was just carrying history.
 
 Removing them is a manual step today (`FC-APPLY-TOKENS-NOT-PRUNED`).
+
+### Re-applying REWRITES a component you already have — unless you say otherwise
+
+Applying is additive across *different* components, but for the *same* one it
+is an **amend in place**. A set carrying this system's identity marker is
+reconciled — same node id, same key, same page — so a re-run keeps a designer's
+file in sync instead of littering it with copies. That is the intended
+behaviour and it is why the loop works at all.
+
+It also means **applying a bundle to a file that already carries these stems
+rewrites those pages.** If that is not what you want — a first look, a spare
+file, a run that must not touch shipped work — set the create-only flag before
+the script runs:
+
+```js
+globalThis.DS_CREATE_ONLY = true;
+```
+
+A component that already exists is then **refused by name** and nothing is
+written to it; components that do not exist yet are still created. So a
+half-populated file fills in its gaps and leaves everything else alone.
+
+Proven on `GnQnjSNBXtgtd2Ht0Hs1C8`, which already carried 5 of these 8 stems:
+Badge refused (`create-only apply: "Badge" already exists …`) with its node id,
+fingerprint, specHash and all 24 variants byte-identical afterwards, while
+Label created fresh on a new page — one run, one file, both halves.
+
+### Figma → contract is recovery
+
+`extract/figma/dump.plugin.js` → `npm run extract:figma -- <dump.json>`
+proposes contracts back from a set **this system drew**. The bar is recovered
+props, stamped token identity, and host element — not a working app. Until
+2026-08-16 that refused Badge and Button (`EXACT_MATRIX_RAGGED`); the emitter
+now stamps the sparse State matrix it actually drew, and the reader holds the
+dump to that declaration. A set nobody declared is still held to a full
+Cartesian. Generating React from that proposal is a preview of the recovery.
+The development output remains `generate` from the authored contracts above.

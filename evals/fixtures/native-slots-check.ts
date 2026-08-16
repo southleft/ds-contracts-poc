@@ -491,10 +491,12 @@ console.log("\n7. FC-SLOT-BIRTH-BOX — an empty slot measures its content, not 
   // RED TEST — without the round-trip the birth box MUST survive. If this
   // still hugs, the mock is kinder than Figma and the pin above proves nothing
   // (which is exactly how the 320×142 card passed headlessly for two days).
-  const stripped = emit(host()).replace(
-    /remeasureBirthBox\(node, spec\.type === 'slot' \? spec\.slotProperty : spec\.name\);/g,
-    '',
-  );
+  // ARGUMENT-AGNOSTIC ON PURPOSE. This used to match the call's exact argument
+  // text, so adding a parameter to remeasureBirthBox silently stopped the
+  // strip from matching — and a red test that strips nothing proves nothing.
+  // The guard below caught it (it compares against the unstripped source), but
+  // only because someone wrote that guard; match the CALL, not its arguments.
+  const stripped = emit(host()).replace(/remeasureBirthBox\([^;]*\);/g, '');
   if (stripped === emit(host())) fail('the red test could not strip remeasureBirthBox — the pin below is vacuous');
   const red = createFigmaMock();
   await runIn(red, emit(leaf()));

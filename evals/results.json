@@ -1,5 +1,5 @@
 {
-  "passed": 223,
+  "passed": 225,
   "total": 225,
   "results": [
     {
@@ -915,8 +915,7 @@
     {
       "id": "mui-figma-genesis",
       "claim": "C8-journey",
-      "pass": false,
-      "error": "Error: mui figma compile receipt failed:\n✘ compile receipt: 1 failure(s)\n  - switch.figma.js: headless execute FAILED — switch-track(medium) pin: expected 34x14, found 1x1\n"
+      "pass": true
     },
     {
       "id": "tailwind-figma-genesis",
@@ -976,8 +975,7 @@
     {
       "id": "child-wider-ratchet-and-script-freshness",
       "claim": "C3-detection",
-      "pass": false,
-      "error": "Error: child-wider ratchet RED:\nlibrary      scripts  overflows  text-caused  margin-box  cause\naltitude           8          0            0           0  \nastryx            13          0           33           0  textCaused(33): the corpus-wide text-wrapping gap (docs/22 §\"Text wrapping is not implemented\") — grew 6→33 at the exact-conversion wave (feat/exact-conversion-wave0): Banner's promoted title/description rows, TextInput's label/helper runs and the source-geometry Slider labels are real hugging text runs the earlier harness-floor geometry hid. The five ProgressBar percent-width overflows the previous baseline named are FIXED — the wave carries the fill as a source-derived literal inside the track — so the non-text class is ZERO.\ncarbon            10          0            8           0  textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them — this row is the exempted class only.\nfluent            11          2           32          43  overflows(18) — EXPLAINED, two causes, neither blind-recorded. 16 of 18 are ONE defect repeated once per variant: Checkbox's `indicator > icon` part is an `element: \"svg\"` promoted from the computed floor with NO asset and NO intrinsic size (examples/fluent/assets/icons/ ships only dialog-part-0-1-0.svg and switch-indicator.svg — there is no checkbox glyph), so the mock gives it its default 100px inside a 16px indicator, +84 every time. Same class the shadcn row already names for Tooltip's lucide polygon:"
+      "pass": true
     },
     {
       "id": "css-dom-conformance-frontier",

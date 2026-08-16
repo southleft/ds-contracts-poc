@@ -1010,6 +1010,37 @@ export function assertExactProjection<T extends ExactVerifiedStatus>(
   );
 }
 
+/** Read the set's declared sparse State-preview shape. Shape-checked here and
+ *  re-validated against the real axes by core/exact-projection.ts; anything
+ *  malformed reads as absent, so a bad marker can only make the pipeline
+ *  STRICTER (back to demanding a full cartesian), never looser. */
+function readDeclaredStatePreviewAxis(set: { statePreviewAxis?: unknown }): {
+  axis: string;
+  default: string;
+  states: readonly string[];
+  primary: string | null;
+  pinned: Readonly<Record<string, string>>;
+} | null {
+  const v = (set as { statePreviewAxis?: unknown }).statePreviewAxis;
+  if (v === null || typeof v !== 'object' || Array.isArray(v)) return null;
+  const r = v as Record<string, unknown>;
+  const pinned = r.pinned ?? {};
+  if (typeof r.axis !== 'string' || !r.axis) return null;
+  if (typeof r.default !== 'string' || !r.default) return null;
+  if (!Array.isArray(r.states) || r.states.length === 0) return null;
+  if (!r.states.every((s) => typeof s === 'string' && s)) return null;
+  if (r.primary !== null && r.primary !== undefined && typeof r.primary !== 'string') return null;
+  if (pinned === null || typeof pinned !== 'object' || Array.isArray(pinned)) return null;
+  if (!Object.values(pinned as Record<string, unknown>).every((x) => typeof x === 'string')) return null;
+  return {
+    axis: r.axis,
+    default: r.default,
+    states: r.states as string[],
+    primary: (r.primary as string | undefined) ?? null,
+    pinned: pinned as Record<string, string>,
+  };
+}
+
 const semanticProjectionRefusal = (
   projection: ExactProjectionResult,
   axis: Axis,
@@ -1024,7 +1055,16 @@ const semanticProjectionRefusal = (
 
 /** Reconstruct the rows the proposed contract would emit using only its
  *  Figma VARIANT bindings. This deliberately does not inspect variant names. */
-function exactRowsFromProposedContract(contract: Record<string, unknown>): ExactVariantRow[] {
+function exactRowsFromProposedContract(
+  contract: Record<string, unknown>,
+  descriptor?: {
+    axis: string;
+    default: string;
+    states: readonly string[];
+    primary: string | null;
+    pinned: Readonly<Record<string, string>>;
+  } | null,
+): ExactVariantRow[] {
   const props = Array.isArray(contract.props) ? contract.props : [];
   const axes: Array<{ property: string; values: string[] }> = [];
   for (const raw of props) {
@@ -1045,6 +1085,52 @@ function exactRowsFromProposedContract(contract: Record<string, unknown>): Exact
     tuples = tuples.flatMap((tuple) =>
       axis.values.map((value) => ({ ...tuple, [axis.property]: value })),
     );
+  }
+
+  // A promoted contract re-emits the STATE PREVIEW axis, so the rows it would
+  // draw are NOT this bare cartesian — they are the sparse matrix
+  // withStateAxis builds: this grid at State=Default, plus one row per state
+  // per PRIMARY value with every other axis pinned. Modelling the cartesian
+  // alone made a faithful promotion look like a 12-row answer to a 24-row
+  // set, which is the second half of the emitter/inverter disagreement.
+  //
+  // The shape comes from the SET's own declaration, and this expansion only
+  // runs when the proposed contract actually opted back in AND its promoted
+  // states match the declared ones — a proposal that drops a state falls
+  // through to the bare cartesian and is refused, never silently accepted.
+  const sparse = descriptor;
+  if (sparse && contract.figmaStatePreviews === true) {
+    const contractStates = Array.isArray(contract.states)
+      ? (contract.states as unknown[]).filter((s): s is string => typeof s === 'string')
+      : [];
+    const declared = [...sparse.states].sort();
+    const fromContract = contractStates.map((s) => statePreviewLabel(s)).sort();
+    const covers = declared.every((s) => fromContract.includes(s));
+    const primaryAxis = axes.find((a) => a.property === sparse.primary);
+    const pinnedOk = Object.entries(sparse.pinned).every(([property, value]) => {
+      const axis = axes.find((a) => a.property === property);
+      return axis ? axis.values.includes(value) : false;
+    });
+    if (covers && pinnedOk && (sparse.primary === null || primaryAxis)) {
+      const rows: Record<string, string>[] = tuples.map((t) => ({
+        ...t,
+        [sparse.axis]: sparse.default,
+      }));
+      const primaryValues = primaryAxis ? primaryAxis.values : [null];
+      for (const state of sparse.states) {
+        for (const value of primaryValues) {
+          const row: Record<string, string> = { [sparse.axis]: state };
+          for (const axis of axes) {
+            row[axis.property] =
+              primaryAxis && axis.property === primaryAxis.property
+                ? (value as string)
+                : sparse.pinned[axis.property]!;
+          }
+          rows.push(row);
+        }
+      }
+      return rows.map((variantProperties) => ({ variantProperties }));
+    }
   }
   return tuples.map((variantProperties) => ({ variantProperties }));
 }
@@ -1163,6 +1249,16 @@ interface Ctx {
    *  DIFFERENT parents — legal on the canvas, refused at emit. Seeded with
    *  'root' (the root is a walked part name too). */
   partNames: Set<string>;
+  /** TRUE when the set carries this pipeline's own stamps (dump v1.21+) — i.e.
+   *  we drew it. Drawn layer names are then OUR part names and are preserved
+   *  verbatim; on a foreign set the drawn names are arbitrary and must be
+   *  sanitised into identifiers. See partKey. */
+  drawnByThisPipeline?: boolean;
+  /** Figma property name → the CONTRACT's prop name, from the set's own stamp
+   *  (dump v1.25). Read in preference to canonicalising the design spelling —
+   *  see registerTextProp. Empty for a set this pipeline did not draw, which
+   *  is exactly when canonicalising is the right answer. */
+  propNames?: Record<string, string>;
   mint?: MintCapture;
   /** Exact fails closed on text-style identity gaps; reviewable notes. */
   projectionMode: 'exact' | 'reviewable-inversion';
@@ -1946,6 +2042,18 @@ function invertNodeTokens(
     else ctx.notes.push(`${where}: stroke weight bindings are not uniform — ${strokeWidthProp} not representable, review`);
   }
   carry('gap', f('itemSpacing'));
+  // The root's bound width comes back as max-width (a component's outer
+  // dimension is fluid-up-to in code; the canvas can only draw the max). The
+  // TOKEN is unchanged, so nothing is lost — but the CHANNEL changed, and the
+  // run said so nowhere. A reader diffing the proposal against the contract
+  // then sees `width` missing and `max-width` invented, and counts a
+  // translation as two losses. It cost exactly that once (TJ-TEST.md §A7
+  // listed Label's width as a silent loss; it never was). Receipt it.
+  if (isRoot && f('width') !== undefined) {
+    ctx.notes.push(
+      `${where}: root width binding ${f('width')} carries as **max-width**, not width — a component's outer size is fluid-up-to in code and the canvas draws the max. Same token, translated channel; nothing dropped`,
+    );
+  }
   carry(isRoot ? 'max-width' : 'width', f('width'));
   carry('height', f('height'));
   carry('min-width', f('minWidth'));
@@ -2868,6 +2976,21 @@ function carryAbsPlacement(
       symmetricText ? ' + text-align: center (horizontally symmetric text box — the center-preserving spelling)' : ''
     }${centered && !symmetricText ? ' (CENTER constraint carried as the exact drawn offset — center-tracking under parent resize is not carried, a declared limit)' : ''}; per-variant values classify through the standard mint machinery`,
   );
+  // WHAT THIS PLACEMENT COSTS, said out loud. The offsets above are read off
+  // the DRAWN BOX, so whatever CSS produced that box — `margin-*` on the
+  // child, or an inset quartet the contract bound to real tokens — arrives
+  // here already lowered to geometry and cannot be told apart from any other
+  // way of drawing the same rectangle. Those channels are NOT carried, and
+  // geometry is not read back (Option B, FC-GEOMETRY-EXCLUDED), so nothing
+  // below will recover them.
+  //
+  // The old note described only what WAS carried. A reader diffing the
+  // proposal against the contract then found `margin-left`, `margin-top` and
+  // `bottom` simply missing with no receipt anywhere — silent loss, and
+  // exactly the rows TJ-TEST.md §A7 had to list by hand.
+  ctx.notes.push(
+    `${where}: the CSS that PRODUCED this box is not recoverable from it — a child's \`margin-*\` (which the emitter lowers into a "(margin box)" wrapper) and a bound inset quartet (\`left\`/\`right\`/\`top\`/\`bottom\`) both draw as the same absolute rectangle. Those channels are NAMED here and NOT carried; the offsets above are the drawn geometry, not the authored spacing (Option B — geometry is not read back, \`FC-GEOMETRY-EXCLUDED\`); review`,
+  );
   return true;
 }
 
@@ -3029,6 +3152,16 @@ export function fontStyleWeight(fontStyle: string): { weight?: number; italic: b
   return { weight: FONT_WEIGHT_BY_STYLE_NAME[key], italic };
 }
 
+/** The stamped weight tokens across a merged part's text occurrences. One
+ *  distinct value is the binding; none means nothing was stamped (a set this
+ *  pipeline did not draw, or a contract that declares no weight); more than
+ *  one is a contradiction a single binding cannot express. */
+function textOccWeightVars(m: Merged): Array<string | undefined> {
+  return m.occ
+    .filter((o) => o.node.text !== undefined)
+    .map((o) => o.node.text!.fontWeightVar);
+}
+
 /** The corpus token that SPELLS an observed font weight — when exactly one
  *  does. The weight-name table turns the canvas's Inter style name into a
  *  number; the corpus's value index turns that number into the token(s) that
@@ -3077,7 +3210,22 @@ function mintTextChannels(
       ...(key !== undefined ? { styleKey: key } : {}),
     };
   };
-  if (opts.weight) {
+  // The stamped weight token outranks every inference below, in EVERY branch
+  // that reaches here — a node riding a text style, a node riding a size
+  // variable, a node riding neither. Reading it here rather than at one call
+  // site is what stops the answer depending on which carrier the node happened
+  // to use: Badge and Button recovered the weight's VALUE through the mint
+  // path while Label recovered its IDENTITY, for no reason a reader could see.
+  const stamped = [...new Set(textOcc.map((o) => o.node.text!.fontWeightVar))];
+  if (stamped.length === 1 && stamped[0] !== undefined) {
+    tokens['font-weight'] = ref(stamped[0]);
+  }
+  // >1 distinct stamp is a size-varying weight, not a contradiction — the
+  // contract binds a substituted ref and the canvas resolves it per variant.
+  // The mint machinery below rebuilds that substitution, so this falls through
+  // silently rather than reporting a healthy path as a problem.
+  const weightAlreadyBound = tokens['font-weight'] !== undefined;
+  if (opts.weight && !weightAlreadyBound) {
     const parsed = textOcc.map((o) => ({
       variant: o.variant,
       fontStyle: o.node.text!.fontStyle ?? 'Medium',
@@ -3107,6 +3255,24 @@ function mintTextChannels(
     }
   }
   // line-height (dump v1.3, PIXELS only — other units were receipted at capture).
+  // The STAMPED token wins, for the same reason it does for weight: 20px is not
+  // a unique fact, so minting from the number invented a SECOND name
+  // (`imported.label.label.line-height`) for a token the corpus already carried
+  // (`imported.label.root.line-height`). Value was never the problem; identity
+  // was. One distinct stamp binds; disagreeing stamps are NAMED, not picked
+  // between; no stamp falls through to the mint below, unchanged.
+  const stampedLh = [...new Set(textOcc.map((o) => o.node.text!.lineHeightVar))];
+  if (stampedLh.length === 1 && stampedLh[0] !== undefined) {
+    tokens['line-height'] = ref(stampedLh[0]);
+    return;
+  }
+  // MORE THAN ONE distinct stamp is the NORMAL case for a size-varying
+  // channel (Button carries five, one per size), not a contradiction: the
+  // contract binds a SUBSTITUTED ref and the canvas resolves it per variant.
+  // Falling through to the mint machinery is right — it already rebuilds the
+  // substitution, and measurement confirms Badge and Button were never among
+  // the reminted rows. No note: a receipt that fires on the healthy path is
+  // noise, and noise is how a report stops being read.
   const withLh = textOcc.filter((o) => typeof o.node.text!.lineHeight === 'number');
   if (withLh.length === 0) return;
   if (withLh.length !== textOcc.length) {
@@ -3286,6 +3452,24 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     // corpus token that spells it, or mints when the corpus cannot name it.
     const observed = t.fontStyle ?? 'Medium';
     let weightRef: string | undefined;
+    // The STAMPED weight token (dump v1.22) is read before any inference, for
+    // the same reason the size variable is: it names WHICH token was drawn,
+    // where the face name only names a shape. It also settles the case this
+    // branch used to drop in silence — 'Medium' is drawn both by a contract
+    // declaring 500 and by one declaring nothing, and only the stamp tells
+    // them apart. Recovering the original ref (not a fresh mint) is the whole
+    // point: the value survived either way, the IDENTITY only survives here.
+    const stampedWeight = [...new Set(textOccWeightVars(m))];
+    if (stampedWeight.length === 1 && stampedWeight[0] !== undefined) {
+      tokens['font-weight'] = ref(stampedWeight[0]);
+      mintTextChannels(m, tokens, ctx, where, { weight: false });
+      return tokens;
+    }
+    if (stampedWeight.length > 1) {
+      ctx.notes.push(
+        `${where}: the weight token differs across variants (${stampedWeight.map((w) => `"${w}"`).join(', ')}) — one text node carries one font-weight binding, so it is NAMED, not proposed; review`,
+      );
+    }
     if (observed !== 'Medium') {
       weightRef = weightTokenRef(ctx, observed);
       if (weightRef) tokens['font-weight'] = weightRef;
@@ -4921,7 +5105,32 @@ function partKey(name: string, ctx: Ctx, where: string, parentKey: string): stri
   // SENTENCE, commas and periods included) would leak an illegal identifier
   // into CSS selectors; strip everything outside [A-Za-z0-9] after cameling.
   const camelSafe = camel(name).replace(/[^A-Za-z0-9]/g, '');
-  let base = /^[A-Za-z][A-Za-z0-9]*$/.test(name)
+  // HYPHENS KEEP THEIR SPELLING. The old test demanded a JS identifier, so
+  // every kebab part name the canvas carries — and this repo's own contracts
+  // are written in kebab (`part-0`, `alert-icon`, `alert-icon-info`) — was
+  // cameled to `part0` / `alertIcon` on the way back. The names were never
+  // lost: the emitter writes them onto the nodes verbatim and the dump reads
+  // them verbatim. Only this line renamed them, so a contract round-tripped
+  // to a diff full of renames it never made.
+  //
+  // A hyphen is safe everywhere a part key lands: CSS class names take it
+  // natively, and emit-react already spells a non-identifier class as
+  // `styles["alert-icon"]` rather than dot access. Punctuation that is NOT
+  // safe (the owner's lorem-ipsum Dialog body, commas and periods included)
+  // still falls through to camelSafe exactly as before.
+  //
+  // AND ONLY FOR A SET WE DREW. A hyphen is safe in a CSS class and in
+  // `styles["alert-icon"]`, but a part key also becomes a SLOT/property name,
+  // and those must be identifiers. On a FOREIGN set the drawn names are
+  // arbitrary layer labels ("swap-slot-item-1", a lorem-ipsum sentence) and
+  // sanitising them is the whole point — the CBDS Dialog send pins exactly
+  // that. Widening the rule for everyone broke it. The stamp is the
+  // discriminator the rest of this wave already uses: our set keeps its own
+  // names, a foreign one is sanitised exactly as before.
+  const keepDrawnSpelling = ctx.drawnByThisPipeline === true
+    ? /^[A-Za-z][A-Za-z0-9-]*$/.test(name)
+    : /^[A-Za-z][A-Za-z0-9]*$/.test(name);
+  let base = keepDrawnSpelling
     ? name
     : /^[A-Za-z]/.test(camelSafe)
       ? camelSafe
@@ -4961,7 +5170,21 @@ function attachTokens(ctx: Ctx, holder: Record<string, unknown>, tokens: Record<
   if (Object.keys(tokens).length > 0) holder.tokens = tokens;
 }
 
-function registerTextProp(ctx: Ctx, property: string, characters: string, name = canonicalPropName(property)) {
+/** The prop name for a drawn Figma property: the CONTRACT's own name when the
+ *  set stamped one (dump v1.25), else the canonicalised design spelling. ONE
+ *  owner, because the name is used twice — to declare the prop and to bind a
+ *  part's content to it — and the two drifting apart emits a contract whose
+ *  own anatomy references a prop that does not exist. */
+function textPropName(ctx: Ctx, property: string): string {
+  return ctx.propNames?.[property] ?? canonicalPropName(property);
+}
+
+function registerTextProp(
+  ctx: Ctx,
+  property: string,
+  characters: string,
+  name = textPropName(ctx, property),
+) {
   if (ctx.textProps.some((p) => p.property === property)) return;
   ctx.textProps.push({ name, property, default: characters });
 }
@@ -5411,10 +5634,13 @@ function buildPart(
     const promoted = property ? undefined : ctx.textPromote?.get(where.slice(`${ctx.setName}:root/`.length));
     if (property) {
       registerTextProp(ctx, property, characters);
-      // The SAME canonical spelling registerTextProp names the prop with —
-      // camel() alone would leak illegal characters ("✏️text") into the
-      // content binding and break the prop↔content pairing.
-      part.content = { prop: canonicalPropName(property) };
+      // THE SAME name registerTextProp used — via the same function, not a
+      // second copy of the rule. This line used to re-derive it with
+      // canonicalPropName, so the moment the stamp renamed the prop to
+      // `children` the binding still said `content` and the emitter refused
+      // the contract by name: part "label" binds content to unknown text prop
+      // "content". A naming rule with two implementations has two answers.
+      part.content = { prop: textPropName(ctx, property) };
     } else if (promoted) {
       // The synthetic `property` is the node path: unique within the set (so
       // registerTextProp's dedup holds) and never emitted — a figmaless prop
@@ -7539,6 +7765,12 @@ export function proposeFromDump(
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
   const sourceProjection = validateExactVariantProjection(set);
+  /** The emitter's DECLARED sparse State matrix, carried by the dump (v1.21).
+   *  Present only for sets this pipeline drew with figmaStatePreviews on, and
+   *  only trusted where it agrees with the axes — see
+   *  core/exact-projection.ts. It is what makes promoting the State axis an
+   *  inversion of a declared rule instead of a guess about someone's API. */
+  const declaredSparseAxis = readDeclaredStatePreviewAxis(set);
   // Exact mode fails closed on unstructured/ragged variant matrices.
   // Reviewable-inversion may continue without structured definitions
   // (legacy name-based path) — but MUST still refuse when structured
@@ -7623,7 +7855,16 @@ export function proposeFromDump(
       );
       statePromo = null;
     } else {
-      if (projectionMode === 'exact') {
+      // Exact normally refuses to promote a variant axis to interaction-state
+      // semantics: it cannot tell a generator-emitted preview axis from a real
+      // API enum, and guessing changes the authoritative projection. When the
+      // SET declares this axis as its state-preview axis, that ambiguity is
+      // gone — the promotion is reading back a rule this pipeline wrote, and
+      // the returned rows are re-checked against the declared matrix below.
+      // An absent, malformed, or disagreeing marker leaves the refusal armed.
+      const declaredThisAxis =
+        declaredSparseAxis !== null && declaredSparseAxis.axis === promo.axis.property;
+      if (projectionMode === 'exact' && !declaredThisAxis) {
         semanticProjectionRefusal(sourceProjection, promo.axis, 'interaction-state');
       }
       const strip = (v: DumpNode): DumpNode => ({
@@ -7696,6 +7937,24 @@ export function proposeFromDump(
     flattenedVariants: new Set(),
     stubs: new Map(),
     partNames: new Set(['root']),
+    // The set's declared prop names, shape-checked: only string→string pairs
+    // survive, so a malformed stamp reads as absent and the canonicaliser runs
+    // exactly as before.
+    // A set this pipeline drew carries at least one of the v1.21+ stamps.
+    drawnByThisPipeline: Boolean(
+      (set as { propNames?: unknown }).propNames ||
+        (set as { semantics?: unknown }).semantics ||
+        (set as { statePreviewAxis?: unknown }).statePreviewAxis,
+    ),
+    ...(() => {
+      const raw = (set as { propNames?: unknown }).propNames;
+      if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return {};
+      const map: Record<string, string> = {};
+      for (const [k, v] of Object.entries(raw as Record<string, unknown>)) {
+        if (typeof k === 'string' && typeof v === 'string' && k && v) map[k] = v;
+      }
+      return Object.keys(map).length > 0 ? { propNames: map } : {};
+    })(),
     projectionMode,
     mint: opts.mintUnbound
       ? {
@@ -8092,6 +8351,24 @@ export function proposeFromDump(
     }
   }
 
+  /** The contract's own semantics, stamped on the set (dump v1.24). Shape-
+   *  checked here; anything malformed reads as absent, so a bad stamp can only
+   *  fall back to the inference, never assert a bogus element. */
+  const stampedSemantics = (() => {
+    const raw = (set as { semantics?: unknown }).semantics;
+    if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return null;
+    const r = raw as Record<string, unknown>;
+    const element = typeof r.element === 'string' && r.element ? r.element : undefined;
+    const role = typeof r.role === 'string' && r.role ? r.role : undefined;
+    if (!element && !role) return null;
+    return { element, role };
+  })();
+  if (stampedSemantics) {
+    preNotes.push(
+      `semantics: read from the set's own \`ds_contracts/semantics\` stamp (element "${stampedSemantics.element ?? 'div'}"${stampedSemantics.role ? `, role "${stampedSemantics.role}"` : ''}) — the contract's declared host element, not the name/axis inference`,
+    );
+  }
+
   // Deterministic semantics inference (name/axis table — zero AI, see
   // inferSemantics). A detected interaction-state axis is the structural
   // corroboration that the component is interactive.
@@ -8127,13 +8404,28 @@ export function proposeFromDump(
     version: '0.1.0',
     status: 'draft',
     description: `PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.`,
-    semantics: inferred
+    // THE STAMP OUTRANKS THE INFERENCE. Everything below it is a guess from a
+    // name/axis table, and a guess about the host element is not a small
+    // thing: it decides what the generated component IS. Unstamped, Label
+    // came back a `div` and Badge — a `span` that merely carries hover and
+    // active variants — came back a `button`, because an interaction-state
+    // axis reads as "interactive". Wrong is worse than missing.
+    //
+    // Read only what the contract actually declared (element, role). No stamp
+    // → the table runs exactly as before, so a set this pipeline did not draw
+    // is unaffected and nothing is invented for it.
+    semantics: stampedSemantics
       ? {
-          element: inferred.element,
-          ...(inferred.role ? { role: inferred.role } : {}),
-          ...(inferred.elementByProp ? { elementByProp: inferred.elementByProp } : {}),
+          element: stampedSemantics.element ?? 'div',
+          ...(stampedSemantics.role ? { role: stampedSemantics.role } : {}),
         }
-      : { element: 'div' },
+      : inferred
+        ? {
+            element: inferred.element,
+            ...(inferred.role ? { role: inferred.role } : {}),
+            ...(inferred.elementByProp ? { elementByProp: inferred.elementByProp } : {}),
+          }
+        : { element: 'div' },
     props,
     states: [],
     // §3: receipt-grade metadata — the promoted mode axis's values as mode
@@ -8473,13 +8765,13 @@ export function proposeFromDump(
   let projection: ExactProjectionResult;
   if (projectionMode === 'exact') {
     projection = assertExactProjection(
-      validateExactVariantProjection(set, exactRowsFromProposedContract(contract)),
+      validateExactVariantProjection(set, exactRowsFromProposedContract(contract, declaredSparseAxis)),
       'verified-exact',
     );
   } else if (sourceProjection.status === 'source-matrix-verified') {
     const returned = validateExactVariantProjection(
       set,
-      exactRowsFromProposedContract(contract),
+      exactRowsFromProposedContract(contract, declaredSparseAxis),
     );
     projection =
       returned.status === 'verified-exact'

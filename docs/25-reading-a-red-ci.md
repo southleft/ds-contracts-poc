@@ -110,6 +110,7 @@ lost its build step, not that the registry comparison found something.
 | `extract:computed:ceiling:check` | The computed reader stopped naming a stylesheet it could not read — the silent-`skips` defect. | `npm run extract:computed:ceiling:check` |
 | `extract:computed:portal:check` / `extract:computed:viewport:check` | Portal root selection regressed, or capture-window geometry leaked into a contract. | `npm run extract:computed:portal:check && npm run extract:computed:viewport:check` |
 | `ua-baseline:check` / `scrim-demotion:check` | A refusal overclaims what its control proves, or an overlay layer is again treated as the component box. | `npm run ua-baseline:check && npm run scrim-demotion:check` |
+| `extract:computed:font-slant:check` | An authored `font-style` stopped reaching `Part.declared`, or it reaches the contract and the canvas draws upright anyway (the FC-FONT-SLANT-NOT-CARRIED shape — the fact carried and the face lost). | `npm run extract:computed:font-slant:check` |
 | `extract:figma:*:check` | A canvas-to-contract behaviour or note taxonomy regressed. Each current member is a separate workflow step so one failure does not hide another. Run `npm run ci:lane full` to execute the exact current set. | `npm run ci:lane full` |
 
 ### Catalog-visual lane

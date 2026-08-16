@@ -311,6 +311,16 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:pseudo-decor-size:check
 
+      # FC-FONT-SLANT-NOT-CARRIED. Same lane and same reason as the two above:
+      # it re-fuses committed captured truth offline (no browser) and then
+      # emits one synthetic contract through the plugin's Figma mock. It pins
+      # BOTH halves, because either alone is a silent loss — the slant must
+      # reach `Part.declared`, and the canvas must draw it as the italic FACE
+      # rather than accepting the fact and rendering upright text.
+      - name: extract:computed:font-slant:check (an authored italic is carried AND drawn)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:font-slant:check
+
       # Full lane, not fast: it re-fuses all 54 committed captured-truth files
       # through the live engine (~40s, no browser). It pins that every "no
       # schema channel today" refusal states whether its baseline was the right

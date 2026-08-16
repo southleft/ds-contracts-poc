@@ -674,6 +674,27 @@ async function dumpNode(node, nodePath, parent) {
       }
     }
   }
+  // dump v1.20: CLIPPING. FC-OVERFLOW-CLIP-LOST closed the WRITE leg — a
+  // declared `overflow-x`/`overflow-y` of hidden|clip lowers to clipsContent
+  // (core/emit-figma-script.ts, red-tested in evals/fixtures/native-slots-check
+  // §9) — and left the READ leg open: NEITHER reader named clipsContent, so
+  // the clip reached the canvas and died there. Same shape as the v1.12
+  // layoutWrap hole directly above, found the same way.
+  //
+  // Captured ONLY when true, like `layout.wrap`: absence means the node does
+  // not clip, which is CSS's own default. It is NOT gated on layoutMode —
+  // clipping is a frame-box fact, and an absolutely-positioned or GRID frame
+  // clips exactly as a flex one does.
+  //
+  // What this does NOT do is decide that a clipping node DECLARED overflow.
+  // Figma's own FrameNode default for this field is true, so an authored clip
+  // and an untouched default are byte-identical here; propose-figma therefore
+  // does not invert it (see extract/figma/types.ts DumpNode.clipsContent).
+  // Reading the fact and attributing it are different jobs, and only the
+  // first one is honest from this side of the wire.
+  if ('clipsContent' in node && node.clipsContent === true) {
+    out.clipsContent = true;
+  }
   // dump v1.17: GRID-cell placement — captured on every IN-FLOW child of a
   // MANUAL GRID parent. Anchors are the read-only getters (P3), spans carry
   // only when > 1, aligns only when not AUTO (the API's MIN|CENTER|MAX —
@@ -873,6 +894,18 @@ async function dumpNode(node, nodePath, parent) {
     } else if (Array.isArray(fontSizeAlias) && fontSizeAlias.length > 1) {
       degrade('text-channel-unsupported', nodePath, 'fontSize is bound to ' + fontSizeAlias.length + ' variables across character ranges — dump v1 carries ONE size token per text node; omitted');
     }
+    // dump v1.22: the weight TOKEN, stamped by the emitter because Figma has
+    // no bindable font-weight field. The face name ("Medium") cannot say
+    // whether a weight was declared or defaulted, so without this the channel
+    // was dropped in silence (TJ-TEST.md §A7). Read like fontSizeVar; absent
+    // on any node this pipeline did not draw, which stays the old behaviour.
+    const weightVar = node.getSharedPluginData('ds_contracts', 'fontWeightVar');
+    if (weightVar) text.fontWeightVar = weightVar;
+    // dump v1.23: the line-height token, stamped for the same reason — Figma's
+    // lineHeight takes a value, not a variable, so the number on the node
+    // cannot name the token that produced it.
+    const lhVar = node.getSharedPluginData('ds_contracts', 'lineHeightVar');
+    if (lhVar) text.lineHeightVar = lhVar;
     const fill = await dumpPaint(node.fills, nodePath, 'fill', node);
     if (fill && fill.var) text.fillVar = fill.var;
     out.text = text;
@@ -1027,8 +1060,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.19) for design→contract proposal.',
-    dumpVersion: '1.19',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.25) for design→contract proposal.',
+    dumpVersion: '1.25',
   },
 };
 dumps._degradations = degradations;
@@ -1047,6 +1080,34 @@ for (const page of figma.root.children) {
     const defs = dumpPropertyDefinitions(node);
     dumps[node.name] = {
       setName: node.name,
+      // dump v1.21: the emitter's DECLARED sparse State matrix. A previews set
+      // draws Cartesian(axes)×{Default} PLUS one row per state per primary
+      // value, so holding it to a full Cartesian refused sets this repo drew
+      // itself (Badge 24 vs 36, Button 45 vs 125). Carried verbatim; the
+      // reader validates it against the axes and IGNORES a marker that does
+      // not agree, so this can never widen what counts as exact.
+      // dump v1.24: the contract's declared semantics. Figma draws no element,
+      // role or ARIA, so without this the reader guesses from a name/axis
+      // table — and a guess can be WRONG, not merely absent (a hover/active
+      // axis made Badge's <span> read as a <button>).
+      // dump v1.25: Figma property name -> the contract's prop name. The
+      // canvas carries only the design-facing spelling, so the reader had to
+      // canonicalise it and `children` came back as `content`.
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'propNames');
+        if (!raw) return {};
+        try { return { propNames: JSON.parse(raw) }; } catch (e) { return {}; }
+      })(),
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'semantics');
+        if (!raw) return {};
+        try { return { semantics: JSON.parse(raw) }; } catch (e) { return {}; }
+      })(),
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'statePreviewAxis');
+        if (!raw) return {};
+        try { return { statePreviewAxis: JSON.parse(raw) }; } catch (e) { return {}; }
+      })(),
       type: node.type,
       nodeId: node.id,
       key: node.key,

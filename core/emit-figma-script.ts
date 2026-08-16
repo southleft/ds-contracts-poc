@@ -393,6 +393,21 @@ export interface NodeSpec {
    *  .size.md and font.control.size.sm both resolve to it). Binding the
    *  variable puts the identity back where a reader can see it. */
   fontSizeVar?: string;
+  /** FC-WEIGHT-IDENTITY, second half. Figma has NO variable binding for font
+   *  weight — the face name is the only thing on the node — so a contract's
+   *  weight token used to die at emit: this file resolved it to "Medium" and
+   *  threw the identity away, and "Medium" is the same face a node with no
+   *  weight token at all draws. The inverter then could not tell a DECLARED
+   *  500 from the runtime default, so it proposed nothing and said nothing
+   *  (TJ-TEST.md §A7, the silent row). Stamped as plugin data instead, the
+   *  same way the size token rides `fontSizeVar` when no style can carry it. */
+  fontWeightVar?: string;
+  /** Same story as fontWeightVar, one channel over. Figma's lineHeight takes a
+   *  value, not a variable, so the contract's token resolved to a number here
+   *  and the identity was gone — the reader then MINTED a replacement
+   *  (`imported.label.label.line-height`) for a token the corpus already had
+   *  (`imported.label.root.line-height`). Stamped so the original binds back. */
+  lineHeightVar?: string;
   textFill?: string;
   contentProp?: string;
   // instance
@@ -448,6 +463,43 @@ export interface ComponentData {
    *  an explicit State=Default segment. Omitted entirely when the contract
    *  does not opt in, so unchanged contracts keep a stable specHash. */
   stateVariants?: VariantSpec[];
+  /** The DECLARED shape of the sparse State matrix, stamped onto the set as
+   *  `ds_contracts/statePreviewAxis` so the design→contract inverter can hold
+   *  the drawn rows to the matrix the emitter MEANT to draw.
+   *
+   *  Without it the inverter assumed a full Cartesian and refused every
+   *  previews set this emitter produced (EXACT_MATRIX_RAGGED — Badge draws 24
+   *  where the Cartesian is 36, Button 45 where it is 125), so Path A could
+   *  not invert the two most important Flowbite stems. `pinned` is carried
+   *  EXPLICITLY rather than re-derived because the emitter pins each
+   *  non-primary axis to its contract-declared first value while the reader
+   *  sorts options alphabetically. Omitted when the contract does not opt in,
+   *  so unchanged contracts keep a stable specHash. */
+  /** The contract's SEMANTICS, stamped so the inverter reads the host element
+   *  instead of guessing it. Figma draws no element, no role and no ARIA, so
+   *  the reader fell back to a name/axis table: Label came back a `div` and
+   *  Badge — a `span` whose only crime is carrying hover/active variants —
+   *  came back a `button`, because an interaction-state axis reads as
+   *  "interactive". A wrong element is worse than a missing one: it changes
+   *  what the generated component IS. Omitted when the contract declares no
+   *  semantics, so a set drawn elsewhere keeps the inference. */
+  semantics?: { element?: string; role?: string };
+  /** Figma property name → the CONTRACT's prop name for it. Figma carries the
+   *  design-facing spelling ("Content"), the contract carries the code-facing
+   *  one ("children"), and nothing on the canvas relates the two — so the
+   *  reader canonicalised the design name and Alert's `children` came back as
+   *  `content`. The reader was right to refuse to guess (renaming by
+   *  convention would break design-property fidelity); this gives it the
+   *  answer instead of a convention. Omitted when no prop declares a Figma
+   *  binding. */
+  propNames?: Record<string, string>;
+  statePreviewAxis?: {
+    axis: string;
+    default: string;
+    states: string[];
+    primary: string | null;
+    pinned: Record<string, string>;
+  };
   /** PROTOTYPE WIRING: deterministic Figma prototype reactions binding each
    *  base (State=Default) variant to its hover/active preview twin, so a
    *  generated set actually SWAPS in presentation mode. Names, never node
@@ -550,8 +602,17 @@ export interface FigmaScriptCtx extends FigmaEngineInput {
 const birthBoxRuntime = (has: boolean): string =>
   has
     ? `
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -611,7 +672,8 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
   if (${specExpr}.layout && ${specExpr}.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in ${nodeExpr} && ${nodeExpr}.children &&
       (${specExpr}.type === 'slot' || ${nodeExpr}.children.length === 0)) {
-    remeasureBirthBox(${nodeExpr}, ${specExpr}.type === 'slot' ? ${specExpr}.slotProperty : ${specExpr}.name);
+    remeasureBirthBox(${nodeExpr}, ${specExpr}.type === 'slot' ? ${specExpr}.slotProperty : ${specExpr}.name,
+      Boolean(${specExpr}.fixedWidth), Boolean(${specExpr}.fixedHeight));
   }`
     : '';
 
@@ -623,7 +685,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+export const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
@@ -1125,6 +1187,12 @@ interface TextCtx {
   /** The same token in Figma's slash spelling — bound to `fontSize` when the
    *  node cannot ride a style (see NodeSpec.fontSizeVar). */
   fontSizeVar?: string;
+  /** The weight token in Figma's slash spelling — stamped, never bound
+   *  (Figma cannot bind a variable to font weight). See NodeSpec.fontWeightVar. */
+  fontWeightVar?: string;
+  /** The line-height token in Figma's slash spelling — stamped, never bound.
+   *  See NodeSpec.lineHeightVar. */
+  lineHeightVar?: string;
   /** Resolved line height — see NodeSpec.lineHeight. */
   lineHeight?: number | { value: number; unit: 'PIXELS' | 'PERCENT' };
   /** v15: PIXEL letter spacing — resolved literal (lineHeight discipline). */
@@ -1136,7 +1204,25 @@ interface TextCtx {
   textAlignH?: NodeSpec['textAlignH'];
   fontFamily?: string;
   textTruncation?: boolean;
+  /** FC-FONT-SLANT-NOT-CARRIED: the declared `font-style` slant. It is kept
+   *  SEPARATE from `fontStyle` (which is Figma's WEIGHT name) rather than
+   *  baked into it, because the two arrive from different channels and in
+   *  either order — a child that binds its own `font-weight` token rewrites
+   *  `fontStyle` wholesale (applyTokens), which would silently erase a slant
+   *  inherited from its parent. Composed into the face name once, at the
+   *  spec boundary (figmaFaceStyle). */
+  fontItalic?: boolean;
 }
+
+/** TextCtx → the Figma face name. Inter spells the italic faces
+ *  "<Weight> Italic", except weight 400 whose italic is plain "Italic" (there
+ *  is no "Regular Italic"). Non-italic contexts return exactly what the
+ *  weight resolution produced, so slant-free corpora emit byte-identically. */
+const figmaFaceStyle = (ctx: TextCtx): string => {
+  const weight = ctx.fontStyle ?? 'Medium';
+  if (!ctx.fontItalic) return weight;
+  return weight === 'Regular' ? 'Italic' : `${weight} Italic`;
+};
 
 /** The dump v1.2 single-DROP_SHADOW box-shadow grammar
  *  ("0px 2px 4px [2px] #00000029") → the runtime effect struct. Anything
@@ -1635,6 +1721,9 @@ function applyTokens(
         break;
       case 'font-weight':
         next.fontStyle = FONT_STYLE_BY_WEIGHT[px(resolveLiteral(tokenPath))] ?? 'Medium';
+        // The face name alone is lossy — 'Medium' is also what a node with no
+        // weight token draws. Keep the token so the canvas can say WHICH.
+        next.fontWeightVar = varName;
         break;
       case 'font-family': {
         // v15 (S4/matrix a.6): the first font-family stack entry rides the
@@ -1964,6 +2053,10 @@ function applyTokens(
       case 'line-height':
         // dump v1.3 PIXELS + CSS unitless ratios → PERCENT (compileLineHeight).
         next.lineHeight = compileLineHeight(resolveLiteral(tokenPath));
+        // The resolved number cannot say WHICH token produced it, and 20px is
+        // not unique. Keep the token so the reader binds it instead of minting
+        // a second name for a token the corpus already carries.
+        next.lineHeightVar = varName;
         break;
       case 'letter-spacing': {
         // v15 (S4/matrix a.2): PIXEL letter spacing — literal on the text
@@ -1981,6 +2074,27 @@ function applyTokens(
         // it has NO canvas field at all. The second class is now named.
         const reg = TOKEN_CHANNELS[cssProp];
         if (reg && reg.canvas !== 'draw') miss(spec, cssProp, reg.note);
+        // SILENT-LOSS ROUND, the half that was left open. The comment above
+        // is right that top/right/bottom/left are lowered OUTSIDE this switch
+        // — but only for parts those paths actually claim (absolute,
+        // inset-overlay, full-bleed scrim). Bind an inset on an IN-FLOW box
+        // and no path claims it, `canvas: 'draw'` sends it down the silent
+        // branch, and the binding vanishes with no receipt anywhere. That is
+        // ToggleSwitch's `part-0`, which binds all four to size-0 under
+        // `position: relative` — TJ-TEST.md §A7 listed the `bottom` half of
+        // it as a silent loss and could not say where it went.
+        //
+        // Figma has no offset field for an in-flow child, so this cannot be
+        // drawn and must not be invented. Name it instead. Read from the
+        // part's DECLARED position (a contract fact) rather than from spec
+        // flags, which the placement passes have not set yet at this point.
+        else if (reg && INSET_CHANNELS.has(cssProp) && (declared?.position ?? 'static') !== 'absolute') {
+          miss(
+            spec,
+            cssProp,
+            `bound on an in-flow box (position: ${declared?.position ?? 'static'}) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back`,
+          );
+        }
         break;
       }
     }
@@ -2003,6 +2117,11 @@ function outlineRefusal(paints: boolean, borderWins: boolean, sibling: string): 
 
 /** SILENT-LOSS ROUND (task #33, fix 3): record a carried-but-undrawable
  *  channel on the spec. Deduplicated and sorted at collection time. */
+/** The CSS inset quartet. Lowered only by the absolute / inset-overlay /
+ *  full-bleed-scrim paths; on any other part there is no canvas field to
+ *  carry them, which is why the default branch names them. */
+const INSET_CHANNELS = new Set(['top', 'right', 'bottom', 'left']);
+
 function miss(spec: NodeSpec, cssProp: string, why: string): void {
   (spec.channelMiss ??= []).push(`${cssProp}: ${why}`);
 }
@@ -2542,6 +2661,15 @@ function applyDeclared(declared: Record<string, string> | undefined, ctx: TextCt
       case 'text-overflow':
         if (value === 'ellipsis') next.textTruncation = true;
         break;
+      // FC-FONT-SLANT-NOT-CARRIED: the slant selects a FACE, so it cannot be
+      // written here — the weight half of the same face name may not have
+      // been resolved yet, and a descendant may rebind it. The flag rides the
+      // context and figmaFaceStyle composes both halves at the spec boundary.
+      // `oblique` selects the same italic face Figma has (the synthesized
+      // angled form is outside the grammar and never reaches here).
+      case 'font-style':
+        next.fontItalic = value === 'italic' || value === 'oblique';
+        break;
       default:
         break; // annotate verdicts — description notes, not node fields
     }
@@ -2698,7 +2826,7 @@ function matchTextStyle(ctx: TextCtx): string | undefined {
   if (!ctx.fontSizePath) return undefined;
   const t = textStyleByTokenPath.get(ctx.fontSizePath);
   if (!t) return undefined;
-  if (t.fontSize !== ctx.fontSize || t.fontStyle !== (ctx.fontStyle ?? 'Medium')) return undefined;
+  if (t.fontSize !== ctx.fontSize || t.fontStyle !== figmaFaceStyle(ctx)) return undefined;
   return t.name;
 }
 
@@ -2712,10 +2840,20 @@ function matchTextStyle(ctx: TextCtx): string | undefined {
  *  the size VARIABLE, which is a canvas fact the inverter can read back to
  *  the token it came from. The two carriers are mutually exclusive by
  *  construction, so nothing double-declares. */
-function textIdentity(ctx: TextCtx): { textStyle?: string; fontSizeVar?: string } {
+function textIdentity(
+  ctx: TextCtx,
+): { textStyle?: string; fontSizeVar?: string; fontWeightVar?: string } {
+  // The weight token is ORTHOGONAL to the size/style carrier: a node riding a
+  // text style still gets it, because the style holds the weight only until
+  // someone overrides it, and the reader must not have to infer which case
+  // it is looking at.
+  const weight = {
+    ...(ctx.fontWeightVar !== undefined ? { fontWeightVar: ctx.fontWeightVar } : {}),
+    ...(ctx.lineHeightVar !== undefined ? { lineHeightVar: ctx.lineHeightVar } : {}),
+  };
   const textStyle = matchTextStyle(ctx);
-  if (textStyle !== undefined) return { textStyle };
-  return ctx.fontSizeVar !== undefined ? { fontSizeVar: ctx.fontSizeVar } : {};
+  if (textStyle !== undefined) return { textStyle, ...weight };
+  return ctx.fontSizeVar !== undefined ? { fontSizeVar: ctx.fontSizeVar, ...weight } : weight;
 }
 
 function applyTextIdentity(spec: NodeSpec, ctx: TextCtx): void {
@@ -2865,7 +3003,7 @@ function formControlSpec(
       name: 'placeholder',
       characters: placeholderCharacters,
       fontSize: childCtx.fontSize ?? 16,
-      fontStyle: childCtx.fontStyle ?? 'Medium',
+      fontStyle: figmaFaceStyle(childCtx),
       ...(childCtx.lineHeight !== undefined ? { lineHeight: childCtx.lineHeight } : {}),
       ...textExtras(childCtx),
       ...textIdentity(childCtx),
@@ -3726,7 +3864,7 @@ function partToSpecInner(
     const textCtx = applyStyling(frame, part, subst, ctx);
     textSpec.name = `${name}-text`;
     textSpec.fontSize = textCtx.fontSize ?? 14;
-    textSpec.fontStyle = textCtx.fontStyle ?? 'Medium';
+    textSpec.fontStyle = figmaFaceStyle(textCtx);
     applyTextIdentity(textSpec, textCtx);
     textSpec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) textSpec.lineHeight = textCtx.lineHeight;
@@ -3771,7 +3909,7 @@ function partToSpecInner(
     const textCtx = applyStyling(spec, part, subst, ctx);
     spec.characters = partText;
     spec.fontSize = textCtx.fontSize ?? 14;
-    spec.fontStyle = textCtx.fontStyle ?? 'Medium';
+    spec.fontStyle = figmaFaceStyle(textCtx);
     applyTextIdentity(spec, textCtx);
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
@@ -3819,7 +3957,7 @@ function partToSpecInner(
     const textCtx = applyStyling(spec, part, subst, ctx);
     spec.characters = characters;
     spec.fontSize = textCtx.fontSize ?? 16;
-    spec.fontStyle = textCtx.fontStyle ?? 'Medium';
+    spec.fontStyle = figmaFaceStyle(textCtx);
     applyTextIdentity(spec, textCtx);
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
@@ -4270,7 +4408,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           name: 'label',
           characters: label,
           fontSize: ctx.fontSize ?? 16,
-          fontStyle: ctx.fontStyle ?? 'Medium',
+          fontStyle: figmaFaceStyle(ctx),
           ...textIdentity(ctx),
           textFill: ctx.textFill,
           ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
@@ -4293,12 +4431,28 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // independent) is multiplied — every other axis sits at its default.
   // Button (4 variants × 3 sizes, 3 states): 12 base + 4×3 = 24, not 48.
   const stateVariants: VariantSpec[] = [];
+  let statePreviewAxis: ComponentData['statePreviewAxis'];
   if (contract.figmaStatePreviews && contract.states.length > 0) {
     const overrides = root.states ?? {};
     const substProps = statePreviewSubstProps(contract); // validated: ≤1
     const primaryIdx = Math.max(0, axes.findIndex((a) => substProps.includes(a.prop.name)));
     const primary = axes[primaryIdx] as (typeof axes)[number] | undefined;
     const primaryValues = primary ? primary.values : [null];
+    // The descriptor is written from the SAME primaryIdx/values[0] rule the
+    // loop below draws with, so the two can never disagree.
+    const figmaLabel = (a: (typeof axes)[number], value: string) =>
+      a.prop.bindings.figma.values?.[value] ?? value;
+    statePreviewAxis = {
+      axis: STATE_PREVIEW_PROPERTY,
+      default: STATE_PREVIEW_DEFAULT,
+      states: contract.states.map((s) => statePreviewLabel(s)),
+      primary: primary?.prop.bindings.figma.property ?? null,
+      pinned: Object.fromEntries(
+        axes
+          .filter((_, i) => i !== primaryIdx || !primary)
+          .map((a) => [a.prop.bindings.figma.property, figmaLabel(a, a.values[0]!)]),
+      ),
+    };
     // Base grid columns = ordered cartesian of axes 1..n; preview variants
     // occupy appended columns so the grid never collides.
     const baseColsN = axes.slice(1).reduce((n, a) => n * a.values.length, 1);
@@ -4374,7 +4528,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
               name: 'label',
               characters: label,
               fontSize: ctx.fontSize ?? 16,
-              fontStyle: ctx.fontStyle ?? 'Medium',
+              fontStyle: figmaFaceStyle(ctx),
               ...textIdentity(ctx),
               textFill: ctx.textFill,
               ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
@@ -4561,7 +4715,24 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     textProps: textOnlyProps,
     fontStyles: [...fontStyles],
     variants,
+    ...(() => {
+      const map: Record<string, string> = {};
+      for (const p of contract.props ?? []) {
+        const prop = p.bindings?.figma?.property;
+        if (typeof prop === 'string' && prop && p.name) map[prop] = p.name;
+      }
+      return Object.keys(map).length > 0 ? { propNames: map } : {};
+    })(),
+    ...(contract.semantics && (contract.semantics.element || contract.semantics.role)
+      ? {
+          semantics: {
+            ...(contract.semantics.element ? { element: contract.semantics.element } : {}),
+            ...(contract.semantics.role ? { role: contract.semantics.role } : {}),
+          },
+        }
+      : {}),
     ...(stateVariants.length > 0 ? { stateVariants } : {}),
+    ...(stateVariants.length > 0 && statePreviewAxis ? { statePreviewAxis } : {}),
     ...(stateReactions.length > 0 ? { stateReactions } : {}),
     colW: Math.max(
       380,
@@ -6357,6 +6528,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -6550,6 +6729,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -6778,6 +6967,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -6886,6 +7088,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -7008,6 +7240,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);

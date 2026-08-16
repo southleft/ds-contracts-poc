@@ -130,6 +130,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -176,6 +177,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -222,6 +224,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -268,6 +271,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/secondary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -314,6 +318,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/secondary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -360,6 +365,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/secondary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -406,6 +412,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/error",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -452,6 +459,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/error",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -498,6 +506,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/error",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -544,6 +553,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/success",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -590,6 +600,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/success",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -636,6 +647,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/success",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -682,6 +694,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/warning",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -728,6 +741,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/warning",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -774,6 +788,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/warning",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -820,6 +835,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/info",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -866,6 +882,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/info",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -912,6 +929,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/info",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -958,6 +976,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/inherit",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1004,6 +1023,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/inherit",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1050,6 +1070,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/inherit",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1131,6 +1152,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1212,6 +1234,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1293,6 +1316,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1374,6 +1398,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/secondary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1455,6 +1480,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/secondary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1536,6 +1562,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/secondary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1617,6 +1644,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/error",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1698,6 +1726,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/error",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1779,6 +1808,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/error",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1860,6 +1890,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/success",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -1941,6 +1972,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/success",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2022,6 +2054,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/success",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2103,6 +2136,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/warning",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2184,6 +2218,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/warning",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2265,6 +2300,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/warning",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2346,6 +2382,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/info",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2427,6 +2464,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/info",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2508,6 +2546,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/info",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2589,6 +2628,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/inherit",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2670,6 +2710,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/inherit",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2751,6 +2792,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/inherit",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2797,6 +2839,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2843,6 +2886,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2889,6 +2933,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2935,6 +2980,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/secondary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -2981,6 +3027,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/secondary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3027,6 +3074,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/secondary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3073,6 +3121,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/error",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3119,6 +3168,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/error",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3165,6 +3215,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/error",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3211,6 +3262,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/success",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3257,6 +3309,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/success",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3303,6 +3356,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/success",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3349,6 +3403,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/warning",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3395,6 +3450,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/warning",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3441,6 +3497,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/warning",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3487,6 +3544,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/info",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3533,6 +3591,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/info",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3579,6 +3638,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/info",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3625,6 +3685,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/inherit",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3671,6 +3732,7 @@ const COMPONENTS = [
               "fontSize": 13,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/small",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/inherit",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3717,6 +3779,7 @@ const COMPONENTS = [
               "fontSize": 15,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/large",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/inherit",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3726,6 +3789,16 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant",
+      "Color": "color",
+      "Size": "size",
+      "Disabled": "disabled",
+      "Label": "children"
+    },
+    "semantics": {
+      "element": "button"
+    },
     "stateVariants": [
       {
         "name": "Variant=Text, Color=Primary, Size=Medium, State=Disabled",
@@ -3765,6 +3838,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color-state-disabled",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3811,6 +3885,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color-state-disabled",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3857,6 +3932,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color-state-disabled",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3903,6 +3979,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -3986,6 +4063,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -4032,6 +4110,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -4078,6 +4157,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -4159,6 +4239,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -4205,6 +4286,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -4251,6 +4333,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/text/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -4332,6 +4415,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/contained/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -4378,6 +4462,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/medium",
+              "fontWeightVar": "imported/button/root/font-weight",
               "textFill": "imported/button/root/color/outlined/primary",
               "textCase": "UPPER",
               "fontFamily": "Roboto",
@@ -4387,6 +4472,21 @@ const COMPONENTS = [
         }
       }
     ],
+    "statePreviewAxis": {
+      "axis": "State",
+      "default": "Default",
+      "states": [
+        "Disabled",
+        "Active",
+        "Focus Visible",
+        "Hover"
+      ],
+      "primary": "Variant",
+      "pinned": {
+        "Color": "Primary",
+        "Size": "Medium"
+      }
+    },
     "stateReactions": [
       {
         "from": "Variant=Text, Color=Primary, Size=Medium, State=Default",
@@ -4962,6 +5062,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -5296,7 +5404,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -5314,6 +5422,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -5541,6 +5659,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -5648,6 +5779,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -5770,6 +5931,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -5895,6 +6062,7 @@ const COMPONENTS = [
                   "fontSize": 16,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-16",
+                  "fontWeightVar": "imported/card/label/font-weight",
                   "textFill": "imported/card/label/color"
                 }
               ],
@@ -5957,6 +6125,7 @@ const COMPONENTS = [
                   "fontSize": 16,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-16",
+                  "fontWeightVar": "imported/card/label/font-weight",
                   "textFill": "imported/card/label/color"
                 }
               ],
@@ -6054,6 +6223,7 @@ const COMPONENTS = [
                   "fontSize": 16,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-16",
+                  "fontWeightVar": "imported/card/label/font-weight",
                   "textFill": "imported/card/label/color"
                 }
               ],
@@ -6153,6 +6323,7 @@ const COMPONENTS = [
                   "fontSize": 16,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-16",
+                  "fontWeightVar": "imported/card/label/font-weight",
                   "textFill": "imported/card/label/color"
                 }
               ],
@@ -6170,6 +6341,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Elevation": "elevation",
+      "Content": "children"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -6665,6 +6843,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -6999,7 +7185,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -7017,6 +7203,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -7244,6 +7440,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -7351,6 +7560,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -7473,6 +7712,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -7559,6 +7804,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -7619,6 +7866,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -7679,6 +7928,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -7739,6 +7990,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -7799,6 +8052,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -7859,6 +8114,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -7919,6 +8176,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -7979,6 +8238,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -8039,6 +8300,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -8099,6 +8362,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -8159,6 +8424,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -8219,6 +8486,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -8279,6 +8548,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -8339,6 +8610,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -8399,6 +8672,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -8459,6 +8734,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -8519,6 +8796,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -8579,6 +8858,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -8639,6 +8920,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -8699,6 +8982,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -8759,6 +9044,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -8819,6 +9106,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -8879,6 +9168,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -8939,6 +9230,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -8999,6 +9292,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -9059,6 +9354,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -9119,6 +9416,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -9179,6 +9478,8 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -9198,6 +9499,15 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant",
+      "Color": "color",
+      "Size": "size",
+      "Label": "label"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -9733,6 +10043,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -10067,7 +10385,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -10085,6 +10403,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -10312,6 +10640,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -10419,6 +10760,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -10541,6 +10912,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -12456,6 +12833,14 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Color": "color",
+      "Size": "size",
+      "Disabled": "disabled"
+    },
+    "semantics": {
+      "element": "span"
+    },
     "colW": 380
   }
 ];
@@ -12773,8 +13158,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -13075,6 +13469,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -13233,7 +13635,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -13437,7 +13840,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -13455,6 +13858,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -13586,7 +13999,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -13708,6 +14122,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -13781,7 +14208,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -13841,6 +14269,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -13963,6 +14421,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -18632,6 +19096,15 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Color": "color",
+      "Size": "size",
+      "Checked": "checked",
+      "Disabled": "disabled"
+    },
+    "semantics": {
+      "element": "span"
+    },
     "colW": 380
   }
 ];
@@ -18949,8 +19422,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -19251,6 +19733,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -19409,7 +19899,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -19613,7 +20104,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -19631,6 +20122,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -19762,7 +20263,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -19884,6 +20386,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -19957,7 +20472,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -20017,6 +20533,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -20139,6 +20685,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -20262,6 +20814,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20305,6 +20859,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20349,6 +20905,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20493,6 +21051,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20536,6 +21096,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20580,6 +21142,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20724,6 +21288,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20767,6 +21333,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20811,6 +21379,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20955,6 +21525,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20998,6 +21570,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -21042,6 +21616,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -21186,6 +21762,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21229,6 +21807,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21273,6 +21853,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21417,6 +21999,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21460,6 +22044,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21504,6 +22090,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21569,6 +22157,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Text color": "textColor",
+      "Indicator color": "indicatorColor"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -21886,8 +22481,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -22228,6 +22832,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -22386,7 +22998,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -22590,7 +23203,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -22608,6 +23221,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -22739,7 +23362,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -22861,6 +23485,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -22934,7 +23571,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -22994,6 +23632,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -23116,6 +23784,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -23290,6 +23964,7 @@ const COMPONENTS = [
                       "fontSize": 13.3333,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/accordion/label/font-size",
+                      "fontWeightVar": "imported/accordion/label/font-weight",
                       "textFill": "imported/shared/color-000000de",
                       "fontFamily": "Arial",
                       "fillW": true,
@@ -23396,6 +24071,7 @@ const COMPONENTS = [
                                   "fontSize": 16,
                                   "fontStyle": "Regular",
                                   "fontSizeVar": "imported/shared/size-16",
+                                  "fontWeightVar": "imported/accordion/label-2/font-weight",
                                   "textFill": "imported/shared/color-000000de"
                                 }
                               ],
@@ -23544,6 +24220,7 @@ const COMPONENTS = [
                       "fontSize": 13.3333,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/accordion/label/font-size",
+                      "fontWeightVar": "imported/accordion/label/font-weight",
                       "textFill": "imported/shared/color-000000de",
                       "fontFamily": "Arial",
                       "fillW": true,
@@ -23650,6 +24327,7 @@ const COMPONENTS = [
                                   "fontSize": 16,
                                   "fontStyle": "Regular",
                                   "fontSizeVar": "imported/shared/size-16",
+                                  "fontWeightVar": "imported/accordion/label-2/font-weight",
                                   "textFill": "imported/shared/color-000000de"
                                 }
                               ],
@@ -23763,6 +24441,7 @@ const COMPONENTS = [
                       "fontSize": 13.3333,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/accordion/label/font-size",
+                      "fontWeightVar": "imported/accordion/label/font-weight",
                       "textFill": "imported/shared/color-000000de",
                       "fontFamily": "Arial",
                       "fillW": true,
@@ -23869,6 +24548,7 @@ const COMPONENTS = [
                                   "fontSize": 16,
                                   "fontStyle": "Regular",
                                   "fontSizeVar": "imported/shared/size-16",
+                                  "fontWeightVar": "imported/accordion/label-2/font-weight",
                                   "textFill": "imported/shared/color-000000de"
                                 }
                               ],
@@ -23982,6 +24662,7 @@ const COMPONENTS = [
                       "fontSize": 13.3333,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/accordion/label/font-size",
+                      "fontWeightVar": "imported/accordion/label/font-weight",
                       "textFill": "imported/shared/color-000000de",
                       "fontFamily": "Arial",
                       "fillW": true,
@@ -24088,6 +24769,7 @@ const COMPONENTS = [
                                   "fontSize": 16,
                                   "fontStyle": "Regular",
                                   "fontSizeVar": "imported/shared/size-16",
+                                  "fontWeightVar": "imported/accordion/label-2/font-weight",
                                   "textFill": "imported/shared/color-000000de"
                                 }
                               ],
@@ -24112,6 +24794,14 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant",
+      "Expanded": "expanded",
+      "Disabled": "disabled"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -24692,6 +25382,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -25027,7 +25725,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -25045,6 +25743,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -25273,6 +25981,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -25380,6 +26101,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -25502,6 +26253,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -25665,6 +26422,8 @@ const COMPONENTS = [
                               "fontSize": 13,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-13",
+                              "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-19-5",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 19.5,
@@ -25736,6 +26495,8 @@ const COMPONENTS = [
                               "fontSize": 13,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-13",
+                              "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-19-5",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 19.5,
@@ -25799,6 +26560,7 @@ const COMPONENTS = [
                           "letterSpacing": 0.15008,
                           "fontFamily": "Roboto",
                           "textTruncation": true,
+                          "lineHeightVar": "imported/shared/size-23",
                           "textFill": "imported/shared/color-000000de"
                         }
                       ]
@@ -25947,6 +26709,8 @@ const COMPONENTS = [
                               "fontSize": 16,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-16",
+                              "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-11",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 11,
@@ -26086,6 +26850,8 @@ const COMPONENTS = [
                               "fontSize": 13,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-13",
+                              "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-19-5",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 19.5,
@@ -26157,6 +26923,8 @@ const COMPONENTS = [
                               "fontSize": 13,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-13",
+                              "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-19-5",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 19.5,
@@ -26220,6 +26988,7 @@ const COMPONENTS = [
                           "letterSpacing": 0.15008,
                           "fontFamily": "Roboto",
                           "textTruncation": true,
+                          "lineHeightVar": "imported/shared/size-23",
                           "textFill": "imported/shared/color-000000de"
                         }
                       ]
@@ -26368,6 +27137,8 @@ const COMPONENTS = [
                               "fontSize": 16,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-16",
+                              "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-11",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 11,
@@ -26389,6 +27160,12 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Size": "size"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -27074,6 +27851,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -27412,7 +28197,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -27430,6 +28215,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -27661,6 +28456,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -27771,6 +28579,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -27893,6 +28731,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -28064,6 +28908,7 @@ const COMPONENTS = [
                           "fontSize": 16,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/dialog/label/font-size",
+                          "fontWeightVar": "imported/dialog/label/font-weight",
                           "textFill": "imported/dialog/label/color"
                         }
                       ],
@@ -28208,6 +29053,7 @@ const COMPONENTS = [
                           "fontSize": 16,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/dialog/label/font-size",
+                          "fontWeightVar": "imported/dialog/label/font-weight",
                           "textFill": "imported/dialog/label/color"
                         }
                       ],
@@ -28352,6 +29198,7 @@ const COMPONENTS = [
                           "fontSize": 16,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/dialog/label/font-size",
+                          "fontWeightVar": "imported/dialog/label/font-weight",
                           "textFill": "imported/dialog/label/color"
                         }
                       ],
@@ -28496,6 +29343,7 @@ const COMPONENTS = [
                           "fontSize": 16,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/dialog/label/font-size",
+                          "fontWeightVar": "imported/dialog/label/font-weight",
                           "textFill": "imported/dialog/label/color"
                         }
                       ],
@@ -28640,6 +29488,7 @@ const COMPONENTS = [
                           "fontSize": 16,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/dialog/label/font-size",
+                          "fontWeightVar": "imported/dialog/label/font-weight",
                           "textFill": "imported/dialog/label/color"
                         }
                       ],
@@ -28658,6 +29507,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Max width": "maxWidth",
+      "Content": "children"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -28975,8 +29831,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -29314,6 +30179,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -29471,7 +30344,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -29675,7 +30549,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -29693,6 +30567,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -29825,7 +30709,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -29947,6 +30832,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -30020,7 +30918,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -30080,6 +30979,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -30202,6 +31131,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -30443,6 +31378,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Checked": "checked",
+      "Disabled": "disabled"
+    },
+    "semantics": {
+      "element": "span"
+    },
     "colW": 380
   }
 ];
@@ -30935,6 +31877,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -31269,7 +32219,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -31287,6 +32237,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -31514,6 +32474,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -31621,6 +32594,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -31743,6 +32746,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -31940,6 +32949,8 @@ const COMPONENTS = [
                               "fontSize": 14,
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-14",
+                              "fontWeightVar": "imported/shared/num-500",
+                              "lineHeightVar": "imported/shared/size-24",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 24,
@@ -31980,6 +32991,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -32024,6 +33037,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -32068,6 +33083,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -32209,6 +33226,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -32253,6 +33272,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -32297,6 +33318,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -32367,6 +33390,8 @@ const COMPONENTS = [
                               "fontSize": 18,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-18",
+                              "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-20-02",
                               "textFill": "imported/table/label-8/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -32491,6 +33516,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -32535,6 +33562,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -32579,6 +33608,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -32649,6 +33680,8 @@ const COMPONENTS = [
                               "fontSize": 18,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-18",
+                              "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-20-02",
                               "textFill": "imported/table/label-12/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -32835,6 +33868,8 @@ const COMPONENTS = [
                               "fontSize": 14,
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-14",
+                              "fontWeightVar": "imported/shared/num-500",
+                              "lineHeightVar": "imported/shared/size-24",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 24,
@@ -32875,6 +33910,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -32919,6 +33956,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -32963,6 +34002,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -33104,6 +34145,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33148,6 +34191,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33192,6 +34237,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33262,6 +34309,8 @@ const COMPONENTS = [
                               "fontSize": 18,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-18",
+                              "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-20-02",
                               "textFill": "imported/table/label-8/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -33386,6 +34435,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33430,6 +34481,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33474,6 +34527,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33544,6 +34599,8 @@ const COMPONENTS = [
                               "fontSize": 18,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-18",
+                              "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-20-02",
                               "textFill": "imported/table/label-12/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -33578,6 +34635,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Size": "size"
+    },
+    "semantics": {
+      "element": "div",
+      "role": "table"
+    },
     "colW": 380
   }
 ];
@@ -34122,6 +35186,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -34456,7 +35528,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -34474,6 +35546,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -34701,6 +35783,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -34808,6 +35903,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -34930,6 +36055,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -35050,6 +36181,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
+                  "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/pagination/label/line-height",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 20.02,
@@ -35095,6 +36228,8 @@ const COMPONENTS = [
                           "fontSize": 14,
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
+                          "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-125",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.125,
@@ -35143,6 +36278,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
+                  "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/pagination/label-3/line-height",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 20.02,
@@ -35263,6 +36400,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "div"
+    },
     "colW": 488
   }
 ];
@@ -35580,8 +36720,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -35968,6 +37117,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -36125,7 +37282,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -36329,7 +37487,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -36347,6 +37505,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -36479,7 +37647,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -36601,6 +37770,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -36674,7 +37856,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -36734,6 +37917,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -36856,6 +38069,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -37008,6 +38227,8 @@ const COMPONENTS = [
                       "fontSize": 16,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
+                      "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 24,
@@ -37043,6 +38264,8 @@ const COMPONENTS = [
                       "fontSize": 16,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
+                      "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 24,
@@ -37078,6 +38301,8 @@ const COMPONENTS = [
                       "fontSize": 16,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
+                      "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 24,
@@ -37103,6 +38328,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -37650,6 +38878,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -37984,7 +39220,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -38002,6 +39238,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -38229,6 +39475,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -38336,6 +39595,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -38458,6 +39747,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -38544,6 +39839,7 @@ const COMPONENTS = [
                   "fontSize": 11,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-11",
+                  "fontWeightVar": "imported/tooltip/label/font-weight",
                   "textFill": "imported/tooltip/label/color",
                   "fontFamily": "Roboto"
                 },
@@ -38608,6 +39904,12 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Show Arrow": "arrow"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -38925,8 +40227,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -39300,6 +40611,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -39457,7 +40776,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -39661,7 +40981,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -39679,6 +40999,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -39811,7 +41141,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -39933,6 +41264,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -40006,7 +41350,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -40066,6 +41411,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -40188,6 +41563,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -40257,6 +41638,8 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/input-adornment/label/font-size",
+              "fontWeightVar": "imported/input-adornment/label/font-weight",
+              "lineHeightVar": "imported/input-adornment/label/line-height",
               "textFill": "imported/input-adornment/label/color",
               "lineHeight": {
                 "value": 24,
@@ -40294,6 +41677,8 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/input-adornment/label/font-size",
+              "fontWeightVar": "imported/input-adornment/label/font-weight",
+              "lineHeightVar": "imported/input-adornment/label/line-height",
               "textFill": "imported/input-adornment/label/color",
               "lineHeight": {
                 "value": 24,
@@ -40307,6 +41692,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Position": "position",
+      "Content": "children"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -40879,6 +42271,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -41214,7 +42614,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -41232,6 +42632,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -41460,6 +42870,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -41567,6 +42990,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -41689,6 +43142,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -41829,6 +43288,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -41897,6 +43357,8 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -41926,6 +43388,8 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -42035,6 +43499,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -42103,6 +43568,8 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -42132,6 +43599,8 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -42241,6 +43710,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -42309,6 +43779,8 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -42338,6 +43810,8 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -42447,6 +43921,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -42515,6 +43990,8 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -42544,6 +44021,8 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -42653,6 +44132,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -42721,6 +44201,8 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -42750,6 +44232,8 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -42859,6 +44343,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -42927,6 +44412,8 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -42956,6 +44443,8 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -42970,6 +44459,15 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant",
+      "Size": "size",
+      "Label": "label",
+      "Helper Text": "helperText"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -43287,8 +44785,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -43666,6 +45173,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -43823,7 +45338,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -44027,7 +45543,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -44045,6 +45561,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -44177,7 +45703,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -44299,6 +45826,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -44372,7 +45912,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -44432,6 +45973,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -44554,6 +46125,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -44626,6 +46203,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/root/font-size",
+              "fontWeightVar": "imported/avatar/root/font-weight",
+              "lineHeightVar": "imported/avatar/root/line-height",
               "textFill": "imported/avatar/root/color",
               "lineHeight": {
                 "value": 20,
@@ -44665,6 +46244,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/root/font-size",
+              "fontWeightVar": "imported/avatar/root/font-weight",
+              "lineHeightVar": "imported/avatar/root/line-height",
               "textFill": "imported/avatar/root/color",
               "lineHeight": {
                 "value": 20,
@@ -44704,6 +46285,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/root/font-size",
+              "fontWeightVar": "imported/avatar/root/font-weight",
+              "lineHeightVar": "imported/avatar/root/line-height",
               "textFill": "imported/avatar/root/color",
               "lineHeight": {
                 "value": 20,
@@ -44716,6 +46299,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant",
+      "Initials": "children"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -45251,6 +46841,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -45585,7 +47183,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -45603,6 +47201,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -45830,6 +47438,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -45937,6 +47558,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -46059,6 +47710,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -46180,6 +47837,8 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
+              "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/default",
               "lineHeight": {
                 "value": 24.5,
@@ -46266,6 +47925,8 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
+              "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/primary",
               "lineHeight": {
                 "value": 24.5,
@@ -46352,6 +48013,8 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
+              "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/secondary",
               "lineHeight": {
                 "value": 24.5,
@@ -46438,6 +48101,8 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
+              "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/default",
               "lineHeight": {
                 "value": 24.5,
@@ -46524,6 +48189,8 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
+              "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/primary",
               "lineHeight": {
                 "value": 24.5,
@@ -46610,6 +48277,8 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
+              "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/secondary",
               "lineHeight": {
                 "value": 24.5,
@@ -46696,6 +48365,8 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
+              "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/default",
               "lineHeight": {
                 "value": 24.5,
@@ -46782,6 +48453,8 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
+              "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/primary",
               "lineHeight": {
                 "value": 24.5,
@@ -46868,6 +48541,8 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
+              "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/secondary",
               "lineHeight": {
                 "value": 24.5,
@@ -46882,6 +48557,15 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Size": "size",
+      "Color": "color",
+      "Disabled": "disabled",
+      "Label": "children"
+    },
+    "semantics": {
+      "element": "button"
+    },
     "colW": 380
   }
 ];
@@ -47429,6 +49113,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -47763,7 +49455,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -47781,6 +49473,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -48008,6 +49710,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -48115,6 +49830,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -48237,6 +49982,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -48321,6 +50072,7 @@ const COMPONENTS = [
               "fontSize": 24,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/medium",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/default",
               "contentProp": "Icon"
             }
@@ -48362,6 +50114,7 @@ const COMPONENTS = [
               "fontSize": 24,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/medium",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/primary",
               "contentProp": "Icon"
             }
@@ -48403,6 +50156,7 @@ const COMPONENTS = [
               "fontSize": 24,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/medium",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/secondary",
               "contentProp": "Icon"
             }
@@ -48444,6 +50198,7 @@ const COMPONENTS = [
               "fontSize": 18,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/small",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/default",
               "contentProp": "Icon"
             }
@@ -48485,6 +50240,7 @@ const COMPONENTS = [
               "fontSize": 18,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/small",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/primary",
               "contentProp": "Icon"
             }
@@ -48526,6 +50282,7 @@ const COMPONENTS = [
               "fontSize": 18,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/small",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/secondary",
               "contentProp": "Icon"
             }
@@ -48567,6 +50324,7 @@ const COMPONENTS = [
               "fontSize": 28,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/large",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/default",
               "contentProp": "Icon"
             }
@@ -48608,6 +50366,7 @@ const COMPONENTS = [
               "fontSize": 28,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/large",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/primary",
               "contentProp": "Icon"
             }
@@ -48649,6 +50408,7 @@ const COMPONENTS = [
               "fontSize": 28,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/large",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/secondary",
               "contentProp": "Icon"
             }
@@ -48656,6 +50416,15 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Size": "size",
+      "Color": "color",
+      "Disabled": "disabled",
+      "Icon": "children"
+    },
+    "semantics": {
+      "element": "button"
+    },
     "colW": 380
   }
 ];
@@ -49139,6 +50908,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -49473,7 +51250,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -49491,6 +51268,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -49718,6 +51505,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -49825,6 +51625,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -49947,6 +51777,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -50049,6 +51885,12 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant"
+    },
+    "semantics": {
+      "element": "span"
+    },
     "colW": 380
   }
 ];
@@ -50541,6 +52383,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -50875,7 +52725,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -50893,6 +52743,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -51120,6 +52980,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -51227,6 +53100,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -51349,6 +53252,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -51540,6 +53449,12 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant"
+    },
+    "semantics": {
+      "element": "span"
+    },
     "colW": 380
   }
 ];
@@ -51857,8 +53772,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -52147,6 +54071,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -52303,7 +54235,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -52507,7 +54440,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -52525,6 +54458,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -52656,7 +54599,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -52778,6 +54722,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -52851,7 +54808,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -52911,6 +54869,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -53033,6 +55021,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -53151,6 +55145,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/standard",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/info/standard",
                   "lineHeight": {
                     "value": 20.02,
@@ -53243,6 +55239,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/filled",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/info/filled",
                   "lineHeight": {
                     "value": 20.02,
@@ -53335,6 +55333,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/outlined",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/info/outlined",
                   "lineHeight": {
                     "value": 20.02,
@@ -53427,6 +55427,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/standard",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/error/standard",
                   "lineHeight": {
                     "value": 20.02,
@@ -53519,6 +55521,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/filled",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/error/filled",
                   "lineHeight": {
                     "value": 20.02,
@@ -53611,6 +55615,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/outlined",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/error/outlined",
                   "lineHeight": {
                     "value": 20.02,
@@ -53703,6 +55709,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/standard",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/warning/standard",
                   "lineHeight": {
                     "value": 20.02,
@@ -53795,6 +55803,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/filled",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/warning/filled",
                   "lineHeight": {
                     "value": 20.02,
@@ -53887,6 +55897,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/outlined",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/warning/outlined",
                   "lineHeight": {
                     "value": 20.02,
@@ -53979,6 +55991,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/standard",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/success/standard",
                   "lineHeight": {
                     "value": 20.02,
@@ -54071,6 +56085,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/filled",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/success/filled",
                   "lineHeight": {
                     "value": 20.02,
@@ -54163,6 +56179,8 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
+                  "fontWeightVar": "imported/alert/label/font-weight/outlined",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/success/outlined",
                   "lineHeight": {
                     "value": 20.02,
@@ -54182,6 +56200,14 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Severity": "severity",
+      "Variant": "variant",
+      "Content": "children"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -54726,6 +56752,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -55062,7 +57096,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -55080,6 +57114,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -55307,6 +57351,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -55414,6 +57471,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -55536,6 +57623,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -55612,6 +57705,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -55635,6 +57730,8 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
+                  "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/default",
                   "lineHeight": {
                     "value": 12,
@@ -55705,6 +57802,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -55780,6 +57879,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -55803,6 +57904,8 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
+                  "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/primary",
                   "lineHeight": {
                     "value": 12,
@@ -55873,6 +57976,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -55948,6 +58053,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -55971,6 +58078,8 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
+                  "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/secondary",
                   "lineHeight": {
                     "value": 12,
@@ -56041,6 +58150,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -56116,6 +58227,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -56139,6 +58252,8 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
+                  "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/error",
                   "lineHeight": {
                     "value": 12,
@@ -56209,6 +58324,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -56284,6 +58401,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -56307,6 +58426,8 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
+                  "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/info",
                   "lineHeight": {
                     "value": 12,
@@ -56377,6 +58498,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -56452,6 +58575,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -56475,6 +58600,8 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
+                  "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/success",
                   "lineHeight": {
                     "value": 12,
@@ -56545,6 +58672,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -56620,6 +58749,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -56643,6 +58774,8 @@ const COMPONENTS = [
                   "fontSize": 12,
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
+                  "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/warning",
                   "lineHeight": {
                     "value": 12,
@@ -56713,6 +58846,8 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
+              "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -56757,6 +58892,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Color": "color",
+      "Variant": "variant"
+    },
+    "semantics": {
+      "element": "span"
+    },
     "colW": 380
   }
 ];
@@ -57074,8 +59216,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -57470,6 +59621,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -57627,7 +59786,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -57831,7 +59991,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -57849,6 +60009,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -57981,7 +60151,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -58103,6 +60274,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -58177,7 +60361,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -58237,6 +60422,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -58359,6 +60574,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -58493,6 +60714,12 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant"
+    },
+    "semantics": {
+      "element": "hr"
+    },
     "colW": 380
   }
 ];
@@ -58810,8 +61037,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -59033,6 +61269,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -59187,7 +61431,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -59391,7 +61636,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -59409,6 +61654,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -59538,7 +61793,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -59660,6 +61916,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -59730,7 +61999,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -59790,6 +62060,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -59912,6 +62212,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -59981,6 +62287,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
               "contentProp": "Label"
             }
@@ -60012,6 +62319,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
               "contentProp": "Label"
             }
@@ -60043,6 +62351,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
               "contentProp": "Label"
             }
@@ -60074,6 +62383,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
               "contentProp": "Label"
             }
@@ -60105,6 +62415,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
               "contentProp": "Label"
             }
@@ -60136,6 +62447,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
               "contentProp": "Label"
             }
@@ -60167,6 +62479,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
               "contentProp": "Label"
             }
@@ -60198,6 +62511,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
               "contentProp": "Label"
             }
@@ -60229,6 +62543,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
               "contentProp": "Label"
             }
@@ -60260,6 +62575,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
               "contentProp": "Label"
             }
@@ -60291,6 +62607,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
               "contentProp": "Label"
             }
@@ -60322,6 +62639,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
               "contentProp": "Label"
             }
@@ -60353,6 +62671,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
               "contentProp": "Label"
             }
@@ -60384,6 +62703,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
               "contentProp": "Label"
             }
@@ -60415,6 +62735,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
               "contentProp": "Label"
             }
@@ -60446,6 +62767,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
               "contentProp": "Label"
             }
@@ -60477,6 +62799,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
               "contentProp": "Label"
             }
@@ -60508,6 +62831,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
               "contentProp": "Label"
             }
@@ -60539,6 +62863,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
               "contentProp": "Label"
             }
@@ -60570,6 +62895,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
               "contentProp": "Label"
             }
@@ -60601,6 +62927,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
               "contentProp": "Label"
             }
@@ -60608,6 +62935,14 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Color": "color",
+      "Underline": "underline",
+      "Label": "children"
+    },
+    "semantics": {
+      "element": "a"
+    },
     "stateVariants": [
       {
         "name": "Color=Primary, Underline=Hover, State=Focus Visible",
@@ -60639,6 +62974,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
               "contentProp": "Label"
             }
@@ -60675,6 +63011,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
               "contentProp": "Label"
             }
@@ -60711,6 +63048,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
               "contentProp": "Label"
             }
@@ -60747,6 +63085,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
               "contentProp": "Label"
             }
@@ -60783,6 +63122,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
               "contentProp": "Label"
             }
@@ -60819,6 +63159,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
               "contentProp": "Label"
             }
@@ -60855,6 +63196,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
               "contentProp": "Label"
             }
@@ -60886,6 +63228,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
               "contentProp": "Label"
             }
@@ -60917,6 +63260,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
               "contentProp": "Label"
             }
@@ -60948,6 +63292,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
               "contentProp": "Label"
             }
@@ -60979,6 +63324,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
               "contentProp": "Label"
             }
@@ -61010,6 +63356,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
               "contentProp": "Label"
             }
@@ -61041,6 +63388,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
               "contentProp": "Label"
             }
@@ -61072,6 +63420,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
               "contentProp": "Label"
             }
@@ -61103,6 +63452,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/primary",
               "contentProp": "Label"
             }
@@ -61134,6 +63484,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/secondary",
               "contentProp": "Label"
             }
@@ -61165,6 +63516,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/error",
               "contentProp": "Label"
             }
@@ -61196,6 +63548,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/info",
               "contentProp": "Label"
             }
@@ -61227,6 +63580,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/success",
               "contentProp": "Label"
             }
@@ -61258,6 +63612,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/warning",
               "contentProp": "Label"
             }
@@ -61289,6 +63644,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size",
+              "fontWeightVar": "imported/link/root/font-weight",
               "textFill": "imported/link/root/color/inherit",
               "contentProp": "Label"
             }
@@ -61296,6 +63652,19 @@ const COMPONENTS = [
         }
       }
     ],
+    "statePreviewAxis": {
+      "axis": "State",
+      "default": "Default",
+      "states": [
+        "Focus Visible",
+        "Active",
+        "Hover"
+      ],
+      "primary": "Color",
+      "pinned": {
+        "Underline": "Hover"
+      }
+    },
     "stateReactions": [
       {
         "from": "Color=Primary, Underline=Hover, State=Default",
@@ -61851,6 +64220,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -62185,7 +64562,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -62203,6 +64580,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -62430,6 +64817,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -62537,6 +64937,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -62659,6 +65089,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -62778,6 +65214,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/paper/root/font-size",
+              "fontWeightVar": "imported/paper/root/font-weight",
               "textFill": "imported/paper/root/color",
               "contentProp": "Content"
             }
@@ -62824,6 +65261,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/paper/root/font-size",
+              "fontWeightVar": "imported/paper/root/font-weight",
               "textFill": "imported/paper/root/color",
               "contentProp": "Content"
             }
@@ -62870,6 +65308,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/paper/root/font-size",
+              "fontWeightVar": "imported/paper/root/font-weight",
               "textFill": "imported/paper/root/color",
               "contentProp": "Content"
             }
@@ -62916,6 +65355,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/paper/root/font-size",
+              "fontWeightVar": "imported/paper/root/font-weight",
               "textFill": "imported/paper/root/color",
               "contentProp": "Content"
             }
@@ -62997,6 +65437,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/paper/root/font-size",
+              "fontWeightVar": "imported/paper/root/font-weight",
               "textFill": "imported/paper/root/color",
               "contentProp": "Content"
             }
@@ -63043,6 +65484,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/paper/root/font-size",
+              "fontWeightVar": "imported/paper/root/font-weight",
               "textFill": "imported/paper/root/color",
               "contentProp": "Content"
             }
@@ -63126,6 +65568,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/paper/root/font-size",
+              "fontWeightVar": "imported/paper/root/font-weight",
               "textFill": "imported/paper/root/color",
               "contentProp": "Content"
             }
@@ -63172,6 +65615,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/paper/root/font-size",
+              "fontWeightVar": "imported/paper/root/font-weight",
               "textFill": "imported/paper/root/color",
               "contentProp": "Content"
             }
@@ -63179,6 +65623,14 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Elevation": "elevation",
+      "Variant": "variant",
+      "Content": "children"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -63674,6 +66126,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -64008,7 +66468,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -64026,6 +66486,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -64253,6 +66723,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -64360,6 +66843,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -64482,6 +66995,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -64582,6 +67101,8 @@ const COMPONENTS = [
                       "fontSize": 16,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
+                      "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-00000099",
                       "lineHeight": {
                         "value": 24,
@@ -64600,6 +67121,8 @@ const COMPONENTS = [
                   "fontSize": 16,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-16",
+                  "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-24",
                   "textFill": "imported/shared/color-00000099",
                   "lineHeight": {
                     "value": 24,
@@ -64628,6 +67151,8 @@ const COMPONENTS = [
                       "fontSize": 16,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
+                      "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-00000099",
                       "lineHeight": {
                         "value": 24,
@@ -64646,6 +67171,8 @@ const COMPONENTS = [
                   "fontSize": 16,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-16",
+                  "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-24",
                   "textFill": "imported/shared/color-00000099",
                   "lineHeight": {
                     "value": 24,
@@ -64674,6 +67201,8 @@ const COMPONENTS = [
                       "fontSize": 16,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
+                      "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-00000099",
                       "lineHeight": {
                         "value": 24,
@@ -64691,6 +67220,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "nav"
+    },
     "colW": 380
   }
 ];
@@ -65226,6 +67758,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -65560,7 +68100,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -65578,6 +68118,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -65805,6 +68355,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -65912,6 +68475,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -66034,6 +68627,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -66161,6 +68760,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/drawer/label/font-size",
+              "fontWeightVar": "imported/drawer/label/font-weight",
               "textFill": "imported/drawer/label/color",
               "contentProp": "Content"
             }
@@ -66197,6 +68797,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/drawer/label/font-size",
+              "fontWeightVar": "imported/drawer/label/font-weight",
               "textFill": "imported/drawer/label/color",
               "contentProp": "Content"
             }
@@ -66204,6 +68805,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant",
+      "Content": "children"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -66521,8 +69129,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -66719,6 +69336,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -66872,7 +69497,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -67076,7 +69702,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -67094,6 +69720,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -67222,7 +69858,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -67344,6 +69981,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -67414,7 +70064,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -67474,6 +70125,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -67596,6 +70277,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -68662,6 +71349,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Color": "color",
+      "Checked": "checked"
+    },
+    "semantics": {
+      "element": "span"
+    },
     "colW": 380
   }
 ];
@@ -69258,6 +71952,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -69595,7 +72297,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -69613,6 +72315,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -69843,6 +72555,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -69953,6 +72678,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -70075,6 +72830,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -70163,6 +72924,8 @@ const COMPONENTS = [
                   "fontSize": 16,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/select/label/font-size",
+                  "fontWeightVar": "imported/select/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-23",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 23,
@@ -70271,6 +73034,8 @@ const COMPONENTS = [
                       "fontSize": 16,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/select/label-2/font-size",
+                      "fontWeightVar": "imported/select/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-11",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 11,
@@ -70331,6 +73096,8 @@ const COMPONENTS = [
                   "fontSize": 16,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/select/label/font-size",
+                  "fontWeightVar": "imported/select/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-23",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 23,
@@ -70439,6 +73206,8 @@ const COMPONENTS = [
                       "fontSize": 16,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/select/label-2/font-size",
+                      "fontWeightVar": "imported/select/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-11",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 11,
@@ -70456,6 +73225,12 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Size": "size"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -71104,6 +73879,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -71441,7 +74224,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -71459,6 +74242,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -71689,6 +74482,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -71799,6 +74605,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -71921,6 +74757,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -72055,6 +74897,8 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/snackbar/label/font-size",
+                      "fontWeightVar": "imported/snackbar/label/font-weight",
+                      "lineHeightVar": "imported/snackbar/label/line-height",
                       "textFill": "imported/snackbar/label/color",
                       "lineHeight": {
                         "value": 20.02,
@@ -72164,6 +75008,8 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/snackbar/label/font-size",
+                      "fontWeightVar": "imported/snackbar/label/font-weight",
+                      "lineHeightVar": "imported/snackbar/label/line-height",
                       "textFill": "imported/snackbar/label/color",
                       "lineHeight": {
                         "value": 20.02,
@@ -72273,6 +75119,8 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/snackbar/label/font-size",
+                      "fontWeightVar": "imported/snackbar/label/font-weight",
+                      "lineHeightVar": "imported/snackbar/label/line-height",
                       "textFill": "imported/snackbar/label/color",
                       "lineHeight": {
                         "value": 20.02,
@@ -72293,6 +75141,12 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Position": "position"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -72840,6 +75694,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -73174,7 +76036,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -73192,6 +76054,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -73419,6 +76291,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -73526,6 +76411,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -73648,6 +76563,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
