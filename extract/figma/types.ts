@@ -221,6 +221,23 @@ export interface DumpNode {
    *  Absence means legacy/not captured, never an empty tuple. */
   variantProperties?: Record<string, string>;
   layout?: DumpLayout;
+  /** clipsContent === true on a frame-like node (dump v1.20, additive) — the
+   *  canvas fact `core/emit-figma-script.ts` has written from a declared
+   *  `overflow-x`/`overflow-y` of hidden|clip since FC-OVERFLOW-CLIP-LOST,
+   *  and that NEITHER reader read back: the clip went to the canvas and died
+   *  there. Captured ONLY when true, mirroring `layout.wrap` — absence means
+   *  the node does not clip, which is CSS's own default (`visible`).
+   *
+   *  It is NOT inverted into a declared `overflow` by propose-figma, and that
+   *  is deliberate: Figma's own FrameNode default for this field is ALSO
+   *  true, so a drawn clip and a declared one are byte-identical on the
+   *  canvas. Measured on the committed REST fixtures, the true-valued nodes
+   *  are a COMPONENT_SET wrapper, a root COMPONENT and an INSTANCE — none of
+   *  which declares overflow in its contract, so a blanket inversion would
+   *  MINT three facts nobody wrote. The boolean is carried so the fact is
+   *  recoverable; deciding which clips were authored is a separate question
+   *  than reading them. */
+  clipsContent?: true;
   /** Literal corner radius when uniform and nonzero. Bound radii are in `bound`. */
   cornerRadius?: number;
   /** Bound variables: Plugin-API field name → variable name (slash-form),

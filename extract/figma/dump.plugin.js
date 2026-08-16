@@ -674,6 +674,27 @@ async function dumpNode(node, nodePath, parent) {
       }
     }
   }
+  // dump v1.20: CLIPPING. FC-OVERFLOW-CLIP-LOST closed the WRITE leg — a
+  // declared `overflow-x`/`overflow-y` of hidden|clip lowers to clipsContent
+  // (core/emit-figma-script.ts, red-tested in evals/fixtures/native-slots-check
+  // §9) — and left the READ leg open: NEITHER reader named clipsContent, so
+  // the clip reached the canvas and died there. Same shape as the v1.12
+  // layoutWrap hole directly above, found the same way.
+  //
+  // Captured ONLY when true, like `layout.wrap`: absence means the node does
+  // not clip, which is CSS's own default. It is NOT gated on layoutMode —
+  // clipping is a frame-box fact, and an absolutely-positioned or GRID frame
+  // clips exactly as a flex one does.
+  //
+  // What this does NOT do is decide that a clipping node DECLARED overflow.
+  // Figma's own FrameNode default for this field is true, so an authored clip
+  // and an untouched default are byte-identical here; propose-figma therefore
+  // does not invert it (see extract/figma/types.ts DumpNode.clipsContent).
+  // Reading the fact and attributing it are different jobs, and only the
+  // first one is honest from this side of the wire.
+  if ('clipsContent' in node && node.clipsContent === true) {
+    out.clipsContent = true;
+  }
   // dump v1.17: GRID-cell placement — captured on every IN-FLOW child of a
   // MANUAL GRID parent. Anchors are the read-only getters (P3), spans carry
   // only when > 1, aligns only when not AUTO (the API's MIN|CENTER|MAX —
@@ -1027,8 +1048,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.19) for design→contract proposal.',
-    dumpVersion: '1.19',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.20) for design→contract proposal.',
+    dumpVersion: '1.20',
   },
 };
 dumps._degradations = degradations;

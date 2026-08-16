@@ -172,6 +172,10 @@ export interface RestNode {
   opacity?: number;
   children?: RestNode[];
   // HasFramePropertiesTrait
+  /** Whether the frame clips its content (dump v1.20). REST DOES return this
+   *  on frame-like nodes — verified against the committed fixtures — so it is
+   *  a real read on this route, not a REST_CAPTURE_GAPS entry. */
+  clipsContent?: boolean;
   layoutMode?: 'NONE' | 'HORIZONTAL' | 'VERTICAL' | 'GRID';
   primaryAxisAlignItems?: 'MIN' | 'CENTER' | 'MAX' | 'SPACE_BETWEEN';
   counterAxisAlignItems?: 'MIN' | 'CENTER' | 'MAX' | 'BASELINE';
@@ -977,6 +981,14 @@ function mapNode(
   if (node.type === 'COMPONENT' && node.absoluteBoundingBox) {
     out.bbox = { width: round2(node.absoluteBoundingBox.width), height: round2(node.absoluteBoundingBox.height) };
   }
+
+  // dump v1.20: CLIPPING — the plugin route's clipsContent capture, mirrored.
+  // This one is NOT a REST_CAPTURE_GAPS entry: the REST payload carries the
+  // field on frame-like nodes (the committed badge/card fixtures show both
+  // polarities), so the route reads it as faithfully as the Plugin API does.
+  // Captured only when true, matching dump.plugin.js exactly — the two readers
+  // must not disagree about what an ABSENT field means.
+  if (node.clipsContent === true) out.clipsContent = true;
 
   const layout = mapLayout(node, ctx, nodePath);
   if (layout) out.layout = layout;

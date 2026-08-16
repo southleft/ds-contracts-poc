@@ -82,11 +82,23 @@ const CHANNEL_TO_FIGMA: Record<string, ChannelMap> = {
   // 1,521 phantom records. Structural: the fact rides the height channel.
   'aspect-ratio': { properties: ['height'], structural: 'lowered by BAKING a height from the ratio; read back as the captured height, never as a Figma ratio field' },
   'text-overflow': { properties: ['textTruncation', 'maxLines'], degradation: 'text-channel-unsupported' },
-  // FC-OVERFLOW-CLIP-LOST: hidden/clip IS clipsContent. auto/scroll are NOT —
-  // Figma has no scroll container — and the registry's drawExcept keeps them
-  // on the annotate path, so this mapping describes the drawable half only.
-  'overflow-x': { properties: ['clipsContent'], degradation: 'scroll-unsupported' },
-  'overflow-y': { properties: ['clipsContent'], degradation: 'scroll-unsupported' },
+  // FC-OVERFLOW-CLIP-LOST, read leg. hidden/clip IS clipsContent, and BOTH
+  // readers now capture it (dump v1.20) — the write leg has lowered declared
+  // overflow to that field all along, red-tested in native-slots-check §9.
+  //
+  // These two entries used to claim `degradation: 'scroll-unsupported'`, and
+  // that claim was a CATEGORY ERROR this gate correctly refused to swallow:
+  // it named the loss of the values the canvas never draws (auto/scroll) as
+  // though it excused the value the canvas DOES draw (hidden/clip), which had
+  // no reader at all. Worse, no reader could ever have raised it. A reader
+  // sees a node, and a node cannot report "I was once `scroll`" — Figma has
+  // no scroll container, so the fact never arrives to be read. The refusal
+  // for auto/scroll belongs to the WRITE side, where the registry's
+  // `drawExcept` already keeps them on the annotate path and the adopter is
+  // told there. Naming a write-side refusal in a read-side gate bought two
+  // permanently SILENT rows and told nobody anything.
+  'overflow-x': { properties: ['clipsContent'] },
+  'overflow-y': { properties: ['clipsContent'] },
   'text-transform': { properties: ['textCase'], degradation: 'text-channel-unsupported' },
   'text-decoration-line': { properties: ['textDecoration'], degradation: 'text-channel-unsupported' },
   'text-align': { properties: ['textAlignHorizontal', 'textAlignVertical'], degradation: 'text-channel-unsupported' },
@@ -128,6 +140,29 @@ const mentions = (needle: string): string[] =>
   [...sources.entries()].filter(([, text]) => text.includes(needle)).map(([f]) => f);
 
 /**
+ * A TYPE DECLARATION IS NOT A READ.
+ *
+ * The comment-stripping probe above has a sibling this gate failed for its
+ * whole life, found by red-testing the `overflow-x`/`overflow-y` fix: adding
+ * `clipsContent?: boolean;` to the REST reader's `RestNode` interface — and
+ * NOTHING else — was enough to move both channels to READ. Deleting every
+ * executable line still left the gate printing "CLOSURE HOLDS", because an
+ * interface field survives comment stripping and mentions the property name.
+ *
+ * That is the documented defect one level up: the first version was satisfied
+ * by prose, this one by a TYPE. Declaring that a field exists is precisely
+ * what a reader does BEFORE it reads anything, so counting it as carriage
+ * lets a channel go green by describing the shape of a value nobody fetched.
+ *
+ * Matched shape is a property signature: `name?: T;` with no property access
+ * and no assignment. It fails OPEN on a function-typed member (`cb?: () =>
+ * void;` keeps its `=`), which is the safe direction — such a line is counted
+ * as a read and the gate stays strict where it is unsure.
+ */
+const isTypeDeclaration = (line: string): boolean =>
+  /^\s*(readonly\s+)?[A-Za-z_$][\w$]*\??\s*:\s*[^=.]*;\s*$/.test(line);
+
+/**
  * ACTUALLY READ — the property appears on at least one line that is not part of
  * a refusal. A property whose every occurrence sits inside `degrade(...)` or a
  * `channels.push(...)` that feeds one is NAMED, not carried, and the two must
@@ -138,7 +173,12 @@ const readsValue = (needle: string): string[] =>
     .filter(([, text]) =>
       text
         .split('\n')
-        .some((line) => line.includes(needle) && !/degrade\(|channels\.push\(/.test(line)),
+        .some(
+          (line) =>
+            line.includes(needle) &&
+            !/degrade\(|channels\.push\(/.test(line) &&
+            !isTypeDeclaration(line),
+        ),
     )
     .map(([f]) => f);
 

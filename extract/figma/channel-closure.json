@@ -3,25 +3,21 @@
   "rows": [
     {
       "channel": "aspect-ratio",
-      "verdict": "NAMED",
+      "verdict": "STRUCTURAL",
       "properties": [
-        "targetAspectRatio"
+        "height"
       ],
       "readBy": [],
-      "degradation": "aspect-ratio-unsupported",
-      "detail": "NOT carried — named by `aspect-ratio-unsupported`"
+      "detail": "lowered by BAKING a height from the ratio; read back as the captured height, never as a Figma ratio field"
     },
     {
       "channel": "box-sizing",
-      "verdict": "READ",
+      "verdict": "STRUCTURAL",
       "properties": [
         "strokeAlign"
       ],
-      "readBy": [
-        "extract/figma/dump.plugin.js",
-        "extract/figma/rest/map.ts"
-      ],
-      "detail": "read as strokeAlign"
+      "readBy": [],
+      "detail": "Figma has no box-sizing; strokeAlign carries the inside/outside distinction"
     },
     {
       "channel": "font-family",
@@ -33,6 +29,43 @@
         "extract/figma/dump.plugin.js"
       ],
       "detail": "read as fontName"
+    },
+    {
+      "channel": "font-style",
+      "verdict": "READ",
+      "properties": [
+        "fontName",
+        "italic"
+      ],
+      "readBy": [
+        "extract/figma/dump.plugin.js",
+        "extract/figma/rest/map.ts"
+      ],
+      "detail": "read as fontName / italic"
+    },
+    {
+      "channel": "overflow-x",
+      "verdict": "READ",
+      "properties": [
+        "clipsContent"
+      ],
+      "readBy": [
+        "extract/figma/dump.plugin.js",
+        "extract/figma/rest/map.ts"
+      ],
+      "detail": "read as clipsContent"
+    },
+    {
+      "channel": "overflow-y",
+      "verdict": "READ",
+      "properties": [
+        "clipsContent"
+      ],
+      "readBy": [
+        "extract/figma/dump.plugin.js",
+        "extract/figma/rest/map.ts"
+      ],
+      "detail": "read as clipsContent"
     },
     {
       "channel": "text-align",
@@ -78,33 +111,27 @@
     },
     {
       "channel": "transform",
-      "verdict": "READ",
+      "verdict": "STRUCTURAL",
       "properties": [
         "absoluteBoundingBox",
         "relativeTransform"
       ],
-      "readBy": [
-        "extract/figma/dump.plugin.js",
-        "extract/figma/rest/map.ts"
-      ],
-      "detail": "read as absoluteBoundingBox / relativeTransform"
+      "readBy": [],
+      "detail": "lowered into absolute x/y; read back as geometry"
     },
     {
       "channel": "translate",
-      "verdict": "READ",
+      "verdict": "STRUCTURAL",
       "properties": [
         "absoluteBoundingBox",
         "relativeTransform"
       ],
-      "readBy": [
-        "extract/figma/dump.plugin.js",
-        "extract/figma/rest/map.ts"
-      ],
-      "detail": "read as absoluteBoundingBox / relativeTransform"
+      "readBy": [],
+      "detail": "lowered into absolute x/y; read back as geometry"
     }
   ],
   "summary": {
-    "total": 9,
+    "total": 12,
     "silent": 0
   }
 }

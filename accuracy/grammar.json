@@ -55,7 +55,7 @@
     {
       "id": "draw-read-closure",
       "path": "extract/figma/channel-closure.json",
-      "count": 9,
+      "count": 12,
       "requiredSilent": 0
     }
   ],
