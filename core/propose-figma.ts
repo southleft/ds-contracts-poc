@@ -5095,7 +5095,20 @@ function partKey(name: string, ctx: Ctx, where: string, parentKey: string): stri
   // SENTENCE, commas and periods included) would leak an illegal identifier
   // into CSS selectors; strip everything outside [A-Za-z0-9] after cameling.
   const camelSafe = camel(name).replace(/[^A-Za-z0-9]/g, '');
-  let base = /^[A-Za-z][A-Za-z0-9]*$/.test(name)
+  // HYPHENS KEEP THEIR SPELLING. The old test demanded a JS identifier, so
+  // every kebab part name the canvas carries — and this repo's own contracts
+  // are written in kebab (`part-0`, `alert-icon`, `alert-icon-info`) — was
+  // cameled to `part0` / `alertIcon` on the way back. The names were never
+  // lost: the emitter writes them onto the nodes verbatim and the dump reads
+  // them verbatim. Only this line renamed them, so a contract round-tripped
+  // to a diff full of renames it never made.
+  //
+  // A hyphen is safe everywhere a part key lands: CSS class names take it
+  // natively, and emit-react already spells a non-identifier class as
+  // `styles["alert-icon"]` rather than dot access. Punctuation that is NOT
+  // safe (the owner's lorem-ipsum Dialog body, commas and periods included)
+  // still falls through to camelSafe exactly as before.
+  let base = /^[A-Za-z][A-Za-z0-9-]*$/.test(name)
     ? name
     : /^[A-Za-z]/.test(camelSafe)
       ? camelSafe
