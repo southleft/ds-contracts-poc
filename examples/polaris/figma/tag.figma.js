@@ -116,6 +116,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/tag/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -161,6 +162,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "p/text-body-sm-font-size",
                   "fontWeightVar": "p/text-body-sm-font-weight",
+                  "lineHeightVar": "p/font-line-height-500",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -301,6 +303,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/tag/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -346,6 +349,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "p/text-body-sm-font-size",
                   "fontWeightVar": "p/text-body-sm-font-weight",
+                  "lineHeightVar": "p/font-line-height-500",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -454,6 +458,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/tag/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -499,6 +504,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "p/text-body-sm-font-size",
                   "fontWeightVar": "p/text-body-sm-font-weight",
+                  "lineHeightVar": "p/font-line-height-500",
                   "textFill": "imported/shared/color-b5b5b5",
                   "lineHeight": {
                     "value": 20,
@@ -639,6 +645,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/tag/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -684,6 +691,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "p/text-body-sm-font-size",
                   "fontWeightVar": "p/text-body-sm-font-weight",
+                  "lineHeightVar": "p/font-line-height-500",
                   "textFill": "imported/shared/color-b5b5b5",
                   "lineHeight": {
                     "value": 20,
@@ -793,6 +801,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/tag/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -838,6 +847,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "p/text-body-sm-font-size",
                   "fontWeightVar": "p/text-body-sm-font-weight",
+                  "lineHeightVar": "p/font-line-height-500",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -981,6 +991,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/tag/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -1026,6 +1037,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "p/text-body-sm-font-size",
                   "fontWeightVar": "p/text-body-sm-font-weight",
+                  "lineHeightVar": "p/font-line-height-500",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -1135,6 +1147,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/tag/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -1180,6 +1193,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "p/text-body-sm-font-size",
                   "fontWeightVar": "p/text-body-sm-font-weight",
+                  "lineHeightVar": "p/font-line-height-500",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -1323,6 +1337,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/tag/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tag/link/color",
                       "lineHeight": {
                         "value": 20,
@@ -1368,6 +1383,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "p/text-body-sm-font-size",
                   "fontWeightVar": "p/text-body-sm-font-weight",
+                  "lineHeightVar": "p/font-line-height-500",
                   "textFill": "p/color-text",
                   "lineHeight": {
                     "value": 20,
@@ -2137,6 +2153,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

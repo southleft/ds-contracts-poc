@@ -2002,6 +2002,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -2941,6 +2942,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 16,
@@ -2989,6 +2991,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 4,
@@ -3037,6 +3040,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 6,
@@ -3085,6 +3089,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 14,
@@ -3133,6 +3138,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 16,
@@ -3181,6 +3187,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 16,
@@ -3229,6 +3236,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 16,
@@ -3277,6 +3285,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 4,
@@ -3325,6 +3334,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 6,
@@ -3373,6 +3383,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 14,
@@ -3421,6 +3432,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 16,
@@ -3469,6 +3481,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 16,
@@ -3517,6 +3530,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 16,
@@ -3565,6 +3579,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 4,
@@ -3613,6 +3628,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 6,
@@ -3661,6 +3677,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 14,
@@ -3709,6 +3726,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 16,
@@ -3757,6 +3775,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 16,
@@ -3805,6 +3824,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 16,
@@ -3853,6 +3873,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 4,
@@ -3901,6 +3922,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 6,
@@ -3949,6 +3971,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 14,
@@ -3997,6 +4020,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 16,
@@ -4045,6 +4069,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 16,
@@ -4093,6 +4118,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 16,
@@ -4141,6 +4167,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 4,
@@ -4189,6 +4216,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 6,
@@ -4237,6 +4265,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 14,
@@ -4285,6 +4314,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 16,
@@ -4333,6 +4363,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 16,
@@ -4381,6 +4412,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 16,
@@ -4429,6 +4461,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 4,
@@ -4477,6 +4510,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 6,
@@ -4525,6 +4559,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 14,
@@ -4573,6 +4608,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 16,
@@ -4621,6 +4657,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 16,
@@ -4669,6 +4706,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 16,
@@ -4717,6 +4755,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 4,
@@ -4765,6 +4804,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 6,
@@ -4813,6 +4853,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 14,
@@ -4861,6 +4902,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 16,
@@ -4909,6 +4951,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 16,
@@ -4957,6 +5000,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 16,
@@ -5005,6 +5049,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 4,
@@ -5053,6 +5098,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 6,
@@ -5101,6 +5147,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 14,
@@ -5149,6 +5196,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 16,
@@ -5197,6 +5245,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 16,
@@ -5245,6 +5294,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 16,
@@ -5293,6 +5343,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 4,
@@ -5341,6 +5392,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 6,
@@ -5389,6 +5441,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 14,
@@ -5437,6 +5490,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 16,
@@ -5485,6 +5539,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 16,
@@ -5533,6 +5588,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 16,
@@ -5581,6 +5637,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 4,
@@ -5629,6 +5686,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 6,
@@ -5677,6 +5735,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 14,
@@ -5725,6 +5784,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 16,
@@ -5773,6 +5833,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 16,
@@ -5821,6 +5882,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 16,
@@ -5869,6 +5931,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 4,
@@ -5917,6 +5980,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 6,
@@ -5965,6 +6029,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 14,
@@ -6013,6 +6078,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 16,
@@ -6061,6 +6127,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 16,
@@ -6109,6 +6176,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 16,
@@ -6157,6 +6225,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 4,
@@ -6205,6 +6274,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 6,
@@ -6253,6 +6323,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 14,
@@ -6301,6 +6372,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 16,
@@ -6349,6 +6421,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 16,
@@ -6397,6 +6470,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 16,
@@ -6445,6 +6519,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 4,
@@ -6493,6 +6568,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 6,
@@ -6541,6 +6617,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 14,
@@ -6589,6 +6666,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 16,
@@ -6637,6 +6715,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 16,
@@ -6685,6 +6764,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 16,
@@ -6733,6 +6813,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 4,
@@ -6781,6 +6862,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 6,
@@ -6829,6 +6911,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 14,
@@ -6877,6 +6960,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 16,
@@ -6925,6 +7009,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 16,
@@ -6973,6 +7058,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 16,
@@ -7021,6 +7107,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 4,
@@ -7069,6 +7156,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 6,
@@ -7117,6 +7205,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 14,
@@ -7165,6 +7254,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 16,
@@ -7213,6 +7303,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 16,
@@ -7261,6 +7352,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 16,
@@ -7309,6 +7401,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 4,
@@ -7357,6 +7450,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 6,
@@ -7405,6 +7499,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 14,
@@ -7453,6 +7548,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 16,
@@ -7501,6 +7597,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 16,
@@ -7549,6 +7646,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 16,
@@ -7597,6 +7695,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 4,
@@ -7645,6 +7744,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 6,
@@ -7693,6 +7793,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 14,
@@ -7741,6 +7842,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 16,
@@ -7789,6 +7891,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 16,
@@ -7837,6 +7940,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 16,
@@ -7885,6 +7989,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 4,
@@ -7933,6 +8038,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 6,
@@ -7981,6 +8087,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 14,
@@ -8029,6 +8136,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 16,
@@ -8077,6 +8185,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 16,
@@ -8125,6 +8234,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 16,
@@ -8173,6 +8283,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 4,
@@ -8221,6 +8332,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 6,
@@ -8269,6 +8381,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 14,
@@ -8317,6 +8430,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 16,
@@ -8365,6 +8479,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 16,
@@ -8413,6 +8528,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 16,
@@ -8461,6 +8577,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 4,
@@ -8509,6 +8626,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 6,
@@ -8557,6 +8675,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 14,
@@ -8605,6 +8724,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 16,
@@ -8653,6 +8773,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 16,
@@ -8701,6 +8822,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 16,
@@ -8749,6 +8871,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 4,
@@ -8797,6 +8920,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 6,
@@ -8845,6 +8969,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 14,
@@ -8893,6 +9018,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 16,
@@ -8941,6 +9067,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 16,
@@ -8989,6 +9116,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 16,
@@ -9037,6 +9165,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 4,
@@ -9085,6 +9214,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 6,
@@ -9133,6 +9263,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 14,
@@ -9181,6 +9312,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 16,
@@ -9229,6 +9361,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 16,
@@ -9277,6 +9410,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 16,
@@ -9325,6 +9459,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 4,
@@ -9373,6 +9508,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 6,
@@ -9421,6 +9557,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 14,
@@ -9469,6 +9606,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 16,
@@ -9517,6 +9655,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 16,
@@ -9565,6 +9704,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 16,
@@ -9613,6 +9753,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 4,
@@ -9661,6 +9802,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 6,
@@ -9709,6 +9851,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 14,
@@ -9757,6 +9900,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 16,
@@ -9805,6 +9949,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 16,
@@ -9853,6 +9998,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 16,
@@ -9901,6 +10047,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 4,
@@ -9949,6 +10096,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 6,
@@ -9997,6 +10145,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 14,
@@ -10045,6 +10194,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 16,
@@ -10093,6 +10243,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 16,
@@ -10141,6 +10292,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 16,
@@ -10189,6 +10341,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 4,
@@ -10237,6 +10390,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 6,
@@ -10285,6 +10439,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 14,
@@ -10333,6 +10488,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 16,
@@ -10381,6 +10537,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 16,
@@ -10429,6 +10586,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 16,
@@ -10477,6 +10635,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 4,
@@ -10525,6 +10684,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 6,
@@ -10573,6 +10733,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 14,
@@ -10621,6 +10782,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 16,
@@ -10669,6 +10831,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 16,
@@ -10717,6 +10880,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 16,
@@ -10765,6 +10929,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 4,
@@ -10813,6 +10978,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 6,
@@ -10861,6 +11027,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 14,
@@ -10909,6 +11076,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 16,
@@ -10957,6 +11125,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 16,
@@ -11005,6 +11174,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 16,
@@ -11053,6 +11223,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 4,
@@ -11101,6 +11272,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 6,
@@ -11149,6 +11321,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 14,
@@ -11197,6 +11370,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 16,
@@ -11245,6 +11419,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 16,
@@ -11293,6 +11468,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 16,
@@ -11341,6 +11517,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 4,
@@ -11389,6 +11566,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 6,
@@ -11437,6 +11615,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 14,
@@ -11485,6 +11664,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 16,
@@ -11533,6 +11713,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 16,
@@ -11581,6 +11762,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 16,
@@ -11629,6 +11811,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 4,
@@ -11677,6 +11860,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 6,
@@ -11725,6 +11909,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 14,
@@ -11773,6 +11958,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 16,
@@ -11821,6 +12007,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 16,
@@ -11869,6 +12056,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 16,
@@ -11917,6 +12105,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 4,
@@ -11965,6 +12154,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 6,
@@ -12013,6 +12203,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 14,
@@ -12061,6 +12252,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 16,
@@ -12109,6 +12301,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 16,
@@ -12614,6 +12807,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -13544,6 +13738,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -13594,6 +13789,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -13644,6 +13840,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -13694,6 +13891,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 16,
@@ -13744,6 +13942,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 16,
@@ -13794,6 +13993,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 16,
@@ -13844,6 +14044,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 22,
@@ -13894,6 +14095,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 22,
@@ -13944,6 +14146,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 22,
@@ -13994,6 +14197,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -14044,6 +14248,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -14094,6 +14299,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -14144,6 +14350,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 16,
@@ -14194,6 +14401,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 16,
@@ -14244,6 +14452,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 16,
@@ -14294,6 +14503,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -14344,6 +14554,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -14394,6 +14605,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -14444,6 +14656,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -14494,6 +14707,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -14544,6 +14758,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -14594,6 +14809,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -14644,6 +14860,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -14694,6 +14911,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -14744,6 +14962,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 22,
@@ -14794,6 +15013,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 22,
@@ -14844,6 +15064,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 22,
@@ -14894,6 +15115,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 20,
@@ -14944,6 +15166,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 20,
@@ -14994,6 +15217,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 20,
@@ -15044,6 +15268,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 16,
@@ -15094,6 +15319,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 16,
@@ -15144,6 +15370,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 16,
@@ -15194,6 +15421,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 22,
@@ -15244,6 +15472,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 22,
@@ -15294,6 +15523,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 22,
@@ -15344,6 +15574,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 20,
@@ -15394,6 +15625,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 20,
@@ -15444,6 +15676,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 20,
@@ -15494,6 +15727,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 16,
@@ -15544,6 +15778,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 16,
@@ -15594,6 +15829,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 16,
@@ -15644,6 +15880,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 22,
@@ -15694,6 +15931,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 22,
@@ -15744,6 +15982,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 22,
@@ -15796,6 +16035,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-active/secondary",
               "lineHeight": {
                 "value": 20,
@@ -15846,6 +16086,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-active/primary",
               "lineHeight": {
                 "value": 20,
@@ -15896,6 +16137,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-active/outline",
               "lineHeight": {
                 "value": 20,
@@ -15946,6 +16188,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-active/subtle",
               "lineHeight": {
                 "value": 20,
@@ -15996,6 +16239,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-active/transparent",
               "lineHeight": {
                 "value": 20,
@@ -16046,6 +16290,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-disabled",
               "lineHeight": {
                 "value": 20,
@@ -16096,6 +16341,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-disabled",
               "lineHeight": {
                 "value": 20,
@@ -16146,6 +16392,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-disabled",
               "lineHeight": {
                 "value": 20,
@@ -16196,6 +16443,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-disabled",
               "lineHeight": {
                 "value": 20,
@@ -16246,6 +16494,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-disabled",
               "lineHeight": {
                 "value": 20,
@@ -16313,6 +16562,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -16415,6 +16665,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -16482,6 +16733,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -16549,6 +16801,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 20,
@@ -16616,6 +16869,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 20,
@@ -16666,6 +16920,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-hover/secondary",
               "lineHeight": {
                 "value": 20,
@@ -16716,6 +16971,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-hover/primary",
               "lineHeight": {
                 "value": 20,
@@ -16766,6 +17022,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-hover/outline",
               "lineHeight": {
                 "value": 20,
@@ -16816,6 +17073,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-hover/subtle",
               "lineHeight": {
                 "value": 20,
@@ -16866,6 +17124,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-hover/transparent",
               "lineHeight": {
                 "value": 20,
@@ -17499,6 +17758,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -18463,6 +18723,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -18493,6 +18754,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -18506,6 +18768,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -18590,6 +18853,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -18620,6 +18884,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -18633,6 +18898,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -18717,6 +18983,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -18747,6 +19014,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -18760,6 +19028,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -18844,6 +19113,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -18874,6 +19144,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -18887,6 +19158,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -18971,6 +19243,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -19001,6 +19274,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19014,6 +19288,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19098,6 +19373,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -19128,6 +19404,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19141,6 +19418,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19225,6 +19503,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -19255,6 +19534,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19268,6 +19548,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19352,6 +19633,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -19382,6 +19664,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19395,6 +19678,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19479,6 +19763,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -19509,6 +19794,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19522,6 +19808,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19606,6 +19893,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -19636,6 +19924,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19649,6 +19938,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19733,6 +20023,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -19763,6 +20054,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19776,6 +20068,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19860,6 +20153,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -19890,6 +20184,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19903,6 +20198,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -19964,6 +20260,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -19994,6 +20291,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20007,6 +20305,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20068,6 +20367,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -20098,6 +20398,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20111,6 +20412,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20172,6 +20474,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -20202,6 +20505,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20215,6 +20519,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20276,6 +20581,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -20306,6 +20612,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20319,6 +20626,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20380,6 +20688,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -20410,6 +20719,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20423,6 +20733,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20484,6 +20795,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -20514,6 +20826,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20527,6 +20840,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20588,6 +20902,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -20618,6 +20933,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20631,6 +20947,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20692,6 +21009,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -20722,6 +21040,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20735,6 +21054,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20796,6 +21116,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -20826,6 +21147,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20839,6 +21161,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20900,6 +21223,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -20930,6 +21254,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -20943,6 +21268,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -21004,6 +21330,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -21034,6 +21361,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -21047,6 +21375,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -21108,6 +21437,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -21138,6 +21468,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -21151,6 +21482,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -21237,6 +21569,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/shared/color-bdbdbd",
               "lineHeight": {
                 "value": 20,
@@ -21268,6 +21601,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "textFill": "imported/shared/color-bdbdbd",
                   "lineHeight": {
                     "value": 20,
@@ -21282,6 +21616,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "textFill": "imported/shared/color-bdbdbd",
                   "lineHeight": {
                     "value": 20,
@@ -21367,6 +21702,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/shared/color-bdbdbd",
               "lineHeight": {
                 "value": 20,
@@ -21398,6 +21734,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "textFill": "imported/shared/color-bdbdbd",
                   "lineHeight": {
                     "value": 20,
@@ -21412,6 +21749,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "textFill": "imported/shared/color-bdbdbd",
                   "lineHeight": {
                     "value": 20,
@@ -21474,6 +21812,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/shared/color-bdbdbd",
               "lineHeight": {
                 "value": 20,
@@ -21505,6 +21844,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "textFill": "imported/shared/color-bdbdbd",
                   "lineHeight": {
                     "value": 20,
@@ -21519,6 +21859,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "textFill": "imported/shared/color-bdbdbd",
                   "lineHeight": {
                     "value": 20,
@@ -21604,6 +21945,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/shared/color-bdbdbd",
               "lineHeight": {
                 "value": 20,
@@ -21635,6 +21977,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "textFill": "imported/shared/color-bdbdbd",
                   "lineHeight": {
                     "value": 20,
@@ -21649,6 +21992,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "textFill": "imported/shared/color-bdbdbd",
                   "lineHeight": {
                     "value": 20,
@@ -21734,6 +22078,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -21764,6 +22109,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -21777,6 +22123,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -21861,6 +22208,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -21891,6 +22239,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -21904,6 +22253,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -21965,6 +22315,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -21995,6 +22346,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22008,6 +22360,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22069,6 +22422,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -22099,6 +22453,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22112,6 +22467,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22196,6 +22552,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -22226,6 +22583,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22239,6 +22597,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22323,6 +22682,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -22353,6 +22713,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22366,6 +22727,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22427,6 +22789,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -22457,6 +22820,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22470,6 +22834,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22531,6 +22896,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -22561,6 +22927,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22574,6 +22941,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22658,6 +23026,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -22688,6 +23057,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22701,6 +23071,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22785,6 +23156,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -22815,6 +23187,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22828,6 +23201,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22889,6 +23263,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -22919,6 +23294,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22932,6 +23308,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -22993,6 +23370,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -23023,6 +23401,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -23036,6 +23415,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -23647,6 +24027,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -24614,6 +24995,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -24713,6 +25095,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -24812,6 +25195,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -24911,6 +25295,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -25037,6 +25422,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -25163,6 +25549,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -25289,6 +25676,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -25415,6 +25803,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -25541,6 +25930,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -25667,6 +26057,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -25793,6 +26184,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -25919,6 +26311,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -26020,6 +26413,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -26146,6 +26540,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -26272,6 +26667,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -26371,6 +26767,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -26497,6 +26894,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -26623,6 +27021,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -26722,6 +27121,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -26848,6 +27248,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -26974,6 +27375,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -27073,6 +27475,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -27199,6 +27602,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -27325,6 +27729,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -27948,6 +28353,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -29045,6 +29451,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-20",
                       "fontWeightVar": "imported/shared/num-600",
+                      "lineHeightVar": "imported/dialog/label/line-height",
                       "lineHeight": {
                         "value": 28,
                         "unit": "PIXELS"
@@ -29067,6 +29474,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/dialog/label-2/font-weight",
+                          "lineHeightVar": "imported/shared/size-20",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
@@ -29118,6 +29526,7 @@ const COMPONENTS = [
                               "fontStyle": "Semi Bold",
                               "fontSizeVar": "imported/shared/size-14",
                               "fontWeightVar": "imported/shared/num-600",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-242424",
                               "lineHeight": {
                                 "value": 20,
@@ -29239,6 +29648,7 @@ const COMPONENTS = [
                   "fontStyle": "Semi Bold",
                   "fontSizeVar": "imported/shared/size-20",
                   "fontWeightVar": "imported/shared/num-600",
+                  "lineHeightVar": "imported/dialog/label-4/line-height",
                   "lineHeight": {
                     "value": 28,
                     "unit": "PIXELS"
@@ -29303,6 +29713,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/dialog/label-5/font-weight",
+                      "lineHeightVar": "imported/shared/size-20",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -29354,6 +29765,7 @@ const COMPONENTS = [
                           "fontStyle": "Semi Bold",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-600",
+                          "lineHeightVar": "imported/shared/size-20",
                           "textFill": "imported/shared/color-242424",
                           "lineHeight": {
                             "value": 20,
@@ -29523,6 +29935,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-20",
                       "fontWeightVar": "imported/shared/num-600",
+                      "lineHeightVar": "imported/dialog/label/line-height",
                       "lineHeight": {
                         "value": 28,
                         "unit": "PIXELS"
@@ -29545,6 +29958,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/dialog/label-2/font-weight",
+                          "lineHeightVar": "imported/shared/size-20",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
@@ -29596,6 +30010,7 @@ const COMPONENTS = [
                               "fontStyle": "Semi Bold",
                               "fontSizeVar": "imported/shared/size-14",
                               "fontWeightVar": "imported/shared/num-600",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-242424",
                               "lineHeight": {
                                 "value": 20,
@@ -30253,6 +30668,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -31281,7 +31697,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -31356,7 +31773,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -31431,7 +31849,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -31506,7 +31925,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -31581,7 +32001,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -31656,7 +32077,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -31732,7 +32154,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -31808,7 +32231,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -31884,7 +32308,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -31960,7 +32385,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -32036,7 +32462,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -32112,7 +32539,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -32211,7 +32639,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -32310,7 +32739,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -32409,7 +32839,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -32508,7 +32939,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -32607,7 +33039,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -32706,7 +33139,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -32786,7 +33220,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -32864,7 +33299,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -32942,7 +33378,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -33020,7 +33457,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -33121,7 +33559,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -33222,7 +33661,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -33298,6 +33738,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -33374,6 +33815,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -33451,6 +33893,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -33528,6 +33971,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -33628,6 +34072,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -33728,6 +34173,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -33806,7 +34252,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -33884,7 +34331,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -33962,7 +34410,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -34040,7 +34489,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -34141,7 +34591,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -34242,7 +34693,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -34317,7 +34769,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -34392,7 +34845,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -34468,7 +34922,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -34544,7 +34999,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -34643,7 +35099,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -34742,7 +35199,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -35380,6 +35838,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -36346,6 +36805,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -36430,6 +36890,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -36514,6 +36975,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -36598,6 +37060,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -36682,6 +37145,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -36766,6 +37230,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -36850,6 +37315,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -36934,6 +37400,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -37018,6 +37485,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -37102,6 +37570,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -37186,6 +37655,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -37270,6 +37740,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -37354,6 +37825,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -37438,6 +37910,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -37522,6 +37995,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -37606,6 +38080,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -37690,6 +38165,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -37774,6 +38250,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -37858,6 +38335,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -37942,6 +38420,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -38026,6 +38505,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -38110,6 +38590,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -38194,6 +38675,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -38278,6 +38760,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -38362,6 +38845,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -38446,6 +38930,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -38530,6 +39015,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -38614,6 +39100,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -38698,6 +39185,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -38782,6 +39270,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -38866,6 +39355,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -38950,6 +39440,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -39034,6 +39525,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -39118,6 +39610,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -39202,6 +39695,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -39286,6 +39780,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -39370,6 +39865,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -39454,6 +39950,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -39538,6 +40035,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -39622,6 +40120,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -39706,6 +40205,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -39790,6 +40290,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -39874,6 +40375,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -39958,6 +40460,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -40042,6 +40545,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -40126,6 +40630,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -40210,6 +40715,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -40294,6 +40800,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -40378,6 +40885,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -40462,6 +40970,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -40546,6 +41055,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -40630,6 +41140,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -40714,6 +41225,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -40798,6 +41310,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -40882,6 +41395,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -40966,6 +41480,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -41050,6 +41565,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 28,
@@ -41134,6 +41650,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 28,
@@ -41218,6 +41735,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 28,
@@ -41302,6 +41820,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 28,
@@ -41386,6 +41905,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 28,
@@ -41470,6 +41990,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 28,
@@ -41554,6 +42075,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 28,
@@ -41638,6 +42160,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 28,
@@ -42266,6 +42789,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -43311,6 +43835,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/switch/label/font-size",
                   "fontWeightVar": "imported/switch/label/font-weight",
+                  "lineHeightVar": "imported/switch/label/line-height",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -43407,6 +43932,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/switch/label/font-size",
                   "fontWeightVar": "imported/switch/label/font-weight",
+                  "lineHeightVar": "imported/switch/label/line-height",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -43503,6 +44029,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/switch/label/font-size",
                   "fontWeightVar": "imported/switch/label/font-weight",
+                  "lineHeightVar": "imported/switch/label/line-height",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -43599,6 +44126,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/switch/label/font-size",
                   "fontWeightVar": "imported/switch/label/font-weight",
+                  "lineHeightVar": "imported/switch/label/line-height",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -43695,6 +44223,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/switch/label/font-size",
                   "fontWeightVar": "imported/switch/label/font-weight",
+                  "lineHeightVar": "imported/switch/label/line-height",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -43791,6 +44320,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/switch/label/font-size",
                   "fontWeightVar": "imported/switch/label/font-weight",
+                  "lineHeightVar": "imported/switch/label/line-height",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -43889,6 +44419,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/switch/label/font-size",
                   "fontWeightVar": "imported/switch/label/font-weight",
+                  "lineHeightVar": "imported/switch/label/line-height",
                   "textFill": "imported/shared/color-bdbdbd",
                   "lineHeight": {
                     "value": 20,
@@ -43986,6 +44517,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/switch/label/font-size",
                   "fontWeightVar": "imported/switch/label/font-weight",
+                  "lineHeightVar": "imported/switch/label/line-height",
                   "textFill": "imported/shared/color-bdbdbd",
                   "lineHeight": {
                     "value": 20,
@@ -44083,6 +44615,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/switch/label/font-size",
                   "fontWeightVar": "imported/switch/label/font-weight",
+                  "lineHeightVar": "imported/switch/label/line-height",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -44179,6 +44712,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/switch/label/font-size",
                   "fontWeightVar": "imported/switch/label/font-weight",
+                  "lineHeightVar": "imported/switch/label/line-height",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -44751,6 +45285,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -45703,6 +46238,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 20,
@@ -45766,6 +46302,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -45845,6 +46382,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 20,
@@ -45908,6 +46446,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -45987,6 +46526,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 20,
@@ -46050,6 +46590,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -46129,6 +46670,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 20,
@@ -46192,6 +46734,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -46271,6 +46814,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 22,
@@ -46334,6 +46878,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -46413,6 +46958,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 22,
@@ -46476,6 +47022,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -46555,6 +47102,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 20,
@@ -46618,6 +47166,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -46697,6 +47246,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 20,
@@ -46760,6 +47310,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -46839,6 +47390,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 20,
@@ -46902,6 +47454,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -46981,6 +47534,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 20,
@@ -47044,6 +47598,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -47123,6 +47678,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 22,
@@ -47186,6 +47742,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -47265,6 +47822,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 22,
@@ -47328,6 +47886,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -47407,6 +47966,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 20,
@@ -47470,6 +48030,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -47549,6 +48110,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 20,
@@ -47612,6 +48174,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -47691,6 +48254,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 20,
@@ -47754,6 +48318,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -47833,6 +48398,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 20,
@@ -47896,6 +48462,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -47975,6 +48542,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 22,
@@ -48038,6 +48606,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -48117,6 +48686,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 22,
@@ -48180,6 +48750,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -48259,6 +48830,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 20,
@@ -48322,6 +48894,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -48401,6 +48974,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 20,
@@ -48464,6 +49038,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -48543,6 +49118,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 20,
@@ -48606,6 +49182,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -48685,6 +49262,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 20,
@@ -48748,6 +49326,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -48827,6 +49406,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 22,
@@ -48890,6 +49470,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -48969,6 +49550,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 22,
@@ -49032,6 +49614,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -49650,6 +50233,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -51305,6 +51889,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

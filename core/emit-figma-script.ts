@@ -402,6 +402,12 @@ export interface NodeSpec {
    *  (TJ-TEST.md §A7, the silent row). Stamped as plugin data instead, the
    *  same way the size token rides `fontSizeVar` when no style can carry it. */
   fontWeightVar?: string;
+  /** Same story as fontWeightVar, one channel over. Figma's lineHeight takes a
+   *  value, not a variable, so the contract's token resolved to a number here
+   *  and the identity was gone — the reader then MINTED a replacement
+   *  (`imported.label.label.line-height`) for a token the corpus already had
+   *  (`imported.label.root.line-height`). Stamped so the original binds back. */
+  lineHeightVar?: string;
   textFill?: string;
   contentProp?: string;
   // instance
@@ -1156,6 +1162,9 @@ interface TextCtx {
   /** The weight token in Figma's slash spelling — stamped, never bound
    *  (Figma cannot bind a variable to font weight). See NodeSpec.fontWeightVar. */
   fontWeightVar?: string;
+  /** The line-height token in Figma's slash spelling — stamped, never bound.
+   *  See NodeSpec.lineHeightVar. */
+  lineHeightVar?: string;
   /** Resolved line height — see NodeSpec.lineHeight. */
   lineHeight?: number | { value: number; unit: 'PIXELS' | 'PERCENT' };
   /** v15: PIXEL letter spacing — resolved literal (lineHeight discipline). */
@@ -2016,6 +2025,10 @@ function applyTokens(
       case 'line-height':
         // dump v1.3 PIXELS + CSS unitless ratios → PERCENT (compileLineHeight).
         next.lineHeight = compileLineHeight(resolveLiteral(tokenPath));
+        // The resolved number cannot say WHICH token produced it, and 20px is
+        // not unique. Keep the token so the reader binds it instead of minting
+        // a second name for a token the corpus already carries.
+        next.lineHeightVar = varName;
         break;
       case 'letter-spacing': {
         // v15 (S4/matrix a.2): PIXEL letter spacing — literal on the text
@@ -2806,7 +2819,10 @@ function textIdentity(
   // text style still gets it, because the style holds the weight only until
   // someone overrides it, and the reader must not have to infer which case
   // it is looking at.
-  const weight = ctx.fontWeightVar !== undefined ? { fontWeightVar: ctx.fontWeightVar } : {};
+  const weight = {
+    ...(ctx.fontWeightVar !== undefined ? { fontWeightVar: ctx.fontWeightVar } : {}),
+    ...(ctx.lineHeightVar !== undefined ? { lineHeightVar: ctx.lineHeightVar } : {}),
+  };
   const textStyle = matchTextStyle(ctx);
   if (textStyle !== undefined) return { textStyle, ...weight };
   return ctx.fontSizeVar !== undefined ? { fontSizeVar: ctx.fontSizeVar, ...weight } : weight;
@@ -6475,6 +6491,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

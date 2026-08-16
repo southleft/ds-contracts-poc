@@ -91,6 +91,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -190,6 +191,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -289,6 +291,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -388,6 +391,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -514,6 +518,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -640,6 +645,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -766,6 +772,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -892,6 +899,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -1018,6 +1026,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -1144,6 +1153,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -1270,6 +1280,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -1396,6 +1407,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -1497,6 +1509,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -1623,6 +1636,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -1749,6 +1763,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -1848,6 +1863,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -1974,6 +1990,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -2100,6 +2117,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -2199,6 +2217,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -2325,6 +2344,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -2451,6 +2471,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -2550,6 +2571,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/unchecked",
                   "lineHeight": {
                     "value": 20,
@@ -2676,6 +2698,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/checked",
                   "lineHeight": {
                     "value": 20,
@@ -2802,6 +2825,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/checkbox/label/font-size",
                   "fontWeightVar": "imported/checkbox/label/font-weight",
+                  "lineHeightVar": "imported/checkbox/label/line-height",
                   "textFill": "imported/checkbox/label/color/mixed",
                   "lineHeight": {
                     "value": 20,
@@ -3425,6 +3449,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

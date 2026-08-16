@@ -47,6 +47,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/heading/root/font-size/display-lg",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
+              "lineHeightVar": "imported/heading/root/line-height/display-lg",
               "lineHeight": {
                 "value": 52,
                 "unit": "PIXELS"
@@ -87,6 +88,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/heading/root/font-size/display-lg",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
+              "lineHeightVar": "imported/heading/root/line-height/display-lg",
               "lineHeight": {
                 "value": 52,
                 "unit": "PIXELS"
@@ -127,6 +129,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/heading/root/font-size/display-md",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
+              "lineHeightVar": "imported/heading/root/line-height/display-md",
               "lineHeight": {
                 "value": 44,
                 "unit": "PIXELS"
@@ -167,6 +170,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/heading/root/font-size/display-md",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
+              "lineHeightVar": "imported/heading/root/line-height/display-md",
               "lineHeight": {
                 "value": 44,
                 "unit": "PIXELS"
@@ -207,6 +211,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/heading/root/font-size/display-sm",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
+              "lineHeightVar": "imported/heading/root/line-height/display-sm",
               "lineHeight": {
                 "value": 40,
                 "unit": "PIXELS"
@@ -247,6 +252,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/heading/root/font-size/display-sm",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
+              "lineHeightVar": "imported/heading/root/line-height/display-sm",
               "lineHeight": {
                 "value": 40,
                 "unit": "PIXELS"
@@ -287,6 +293,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/heading/root/font-size/lg",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
+              "lineHeightVar": "imported/heading/root/line-height/lg",
               "lineHeight": {
                 "value": 36,
                 "unit": "PIXELS"
@@ -327,6 +334,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/heading/root/font-size/lg",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
+              "lineHeightVar": "imported/heading/root/line-height/lg",
               "lineHeight": {
                 "value": 36,
                 "unit": "PIXELS"
@@ -367,6 +375,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/heading/root/font-size/md",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
+              "lineHeightVar": "imported/heading/root/line-height/md",
               "lineHeight": {
                 "value": 32,
                 "unit": "PIXELS"
@@ -407,6 +416,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/heading/root/font-size/md",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
+              "lineHeightVar": "imported/heading/root/line-height/md",
               "lineHeight": {
                 "value": 32,
                 "unit": "PIXELS"
@@ -447,6 +457,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/heading/root/font-size/sm",
               "fontWeightVar": "imported/heading/root/font-weight/regular",
+              "lineHeightVar": "imported/heading/root/line-height/sm",
               "lineHeight": {
                 "value": 28,
                 "unit": "PIXELS"
@@ -487,6 +498,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/heading/root/font-size/sm",
               "fontWeightVar": "imported/heading/root/font-weight/bold",
+              "lineHeightVar": "imported/heading/root/line-height/sm",
               "lineHeight": {
                 "value": 28,
                 "unit": "PIXELS"
@@ -1049,6 +1061,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

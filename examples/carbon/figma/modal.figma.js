@@ -98,6 +98,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-16",
                       "textFill": "imported/modal/label-2/color",
                       "lineHeight": {
                         "value": 16,
@@ -122,6 +123,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/modal/label-3/font-size",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/modal/label-3/line-height",
                           "lineHeight": {
                             "value": 28,
                             "unit": "PIXELS"
@@ -260,6 +262,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/modal/label-5/line-height",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -312,6 +315,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-18-0001",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -355,6 +359,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-18-0001",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -481,6 +486,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-16",
                       "textFill": "imported/modal/label-2/color",
                       "lineHeight": {
                         "value": 16,
@@ -505,6 +511,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/modal/label-3/font-size",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/modal/label-3/line-height",
                           "lineHeight": {
                             "value": 28,
                             "unit": "PIXELS"
@@ -643,6 +650,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/modal/label-5/line-height",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -695,6 +703,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-18-0001",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -738,6 +747,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-18-0001",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -864,6 +874,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-16",
                       "textFill": "imported/modal/label-2/color",
                       "lineHeight": {
                         "value": 16,
@@ -888,6 +899,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/modal/label-3/font-size",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/modal/label-3/line-height",
                           "lineHeight": {
                             "value": 28,
                             "unit": "PIXELS"
@@ -1026,6 +1038,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/modal/label-5/line-height",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -1078,6 +1091,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-18-0001",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -1121,6 +1135,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-18-0001",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -1247,6 +1262,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-12",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-16",
                       "textFill": "imported/modal/label-2/color",
                       "lineHeight": {
                         "value": 16,
@@ -1271,6 +1287,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/modal/label-3/font-size",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/modal/label-3/line-height",
                           "lineHeight": {
                             "value": 28,
                             "unit": "PIXELS"
@@ -1409,6 +1426,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/modal/label-5/line-height",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
@@ -1461,6 +1479,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-18-0001",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -1504,6 +1523,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-18-0001",
                           "textFill": "imported/shared/color-ffffff",
                           "lineHeight": {
                             "value": 18.0001,
@@ -2253,6 +2273,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

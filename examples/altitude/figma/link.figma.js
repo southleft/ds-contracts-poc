@@ -42,6 +42,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size/xs",
               "fontWeightVar": "imported/link/root/font-weight",
+              "lineHeightVar": "imported/link/root/line-height/xs",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 20,
@@ -80,6 +81,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size/sm",
               "fontWeightVar": "imported/link/root/font-weight",
+              "lineHeightVar": "imported/link/root/line-height/sm",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 20,
@@ -118,6 +120,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size/lg",
               "fontWeightVar": "imported/link/root/font-weight",
+              "lineHeightVar": "imported/link/root/line-height/lg",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 28,
@@ -158,6 +161,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size/xs",
               "fontWeightVar": "imported/link/root/font-weight",
+              "lineHeightVar": "imported/link/root/line-height/xs",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 20,
@@ -196,6 +200,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size/sm",
               "fontWeightVar": "imported/link/root/font-weight",
+              "lineHeightVar": "imported/link/root/line-height/sm",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 20,
@@ -234,6 +239,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size/lg",
               "fontWeightVar": "imported/link/root/font-weight",
+              "lineHeightVar": "imported/link/root/line-height/lg",
               "textFill": "imported/link/root/color",
               "lineHeight": {
                 "value": 28,
@@ -272,6 +278,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size/xs",
               "fontWeightVar": "imported/link/root/font-weight",
+              "lineHeightVar": "imported/link/root/line-height/xs",
               "textFill": "imported/link/root/color-state-hover",
               "lineHeight": {
                 "value": 20,
@@ -310,6 +317,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size/sm",
               "fontWeightVar": "imported/link/root/font-weight",
+              "lineHeightVar": "imported/link/root/line-height/sm",
               "textFill": "imported/link/root/color-state-hover",
               "lineHeight": {
                 "value": 20,
@@ -348,6 +356,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/link/root/font-size/lg",
               "fontWeightVar": "imported/link/root/font-weight",
+              "lineHeightVar": "imported/link/root/line-height/lg",
               "textFill": "imported/link/root/color-state-hover",
               "lineHeight": {
                 "value": 28,
@@ -939,6 +948,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

@@ -56,6 +56,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/slider/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20-0004",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -224,6 +225,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-14",
                               "fontWeightVar": "imported/slider/label-2/font-weight",
+                              "lineHeightVar": "imported/shared/size-20-0004",
                               "textFill": "imported/slider/label-2/color",
                               "lineHeight": {
                                 "value": 20.0004,
@@ -282,6 +284,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/slider/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20-0004",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -413,6 +416,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/slider/label-3/font-weight",
+                  "lineHeightVar": "imported/slider/label-3/line-height",
                   "textFill": "imported/slider/label-3/color",
                   "lineHeight": {
                     "value": 21,
@@ -456,6 +460,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/slider/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20-0004",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -616,6 +621,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/slider/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20-0004",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -785,6 +791,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-14",
                               "fontWeightVar": "imported/slider/label-2/font-weight",
+                              "lineHeightVar": "imported/shared/size-20-0004",
                               "textFill": "imported/slider/label-2/color",
                               "lineHeight": {
                                 "value": 20.0004,
@@ -843,6 +850,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/slider/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20-0004",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -975,6 +983,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/slider/label-3/font-weight",
+                  "lineHeightVar": "imported/slider/label-3/line-height",
                   "textFill": "imported/slider/label-3/color",
                   "lineHeight": {
                     "value": 21,
@@ -1024,6 +1033,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/slider/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20-0004",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -1860,6 +1870,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

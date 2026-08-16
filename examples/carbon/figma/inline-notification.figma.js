@@ -98,6 +98,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -113,6 +114,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -243,6 +245,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -258,6 +261,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -387,6 +391,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -402,6 +407,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -531,6 +537,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -546,6 +553,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -675,6 +683,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -690,6 +699,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -819,6 +829,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -834,6 +845,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -963,6 +975,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -978,6 +991,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -1107,6 +1121,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -1122,6 +1137,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -1251,6 +1267,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -1266,6 +1283,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -1395,6 +1413,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -1410,6 +1429,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -1539,6 +1559,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -1554,6 +1575,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": {
                         "value": 18.0001,
@@ -1683,6 +1705,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label/line-height",
                       "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -1698,6 +1721,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/inline-notification/label-2/font-weight",
+                      "lineHeightVar": "imported/inline-notification/label-2/line-height",
                       "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": {
                         "value": 18.0001,
@@ -2336,6 +2360,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

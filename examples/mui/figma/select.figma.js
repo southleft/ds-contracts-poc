@@ -61,6 +61,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/select/label/font-size",
                   "fontWeightVar": "imported/select/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-23",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 23,
@@ -170,6 +171,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/select/label-2/font-size",
                       "fontWeightVar": "imported/select/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-11",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 11,
@@ -231,6 +233,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/select/label/font-size",
                   "fontWeightVar": "imported/select/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-23",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 23,
@@ -340,6 +343,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/select/label-2/font-size",
                       "fontWeightVar": "imported/select/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-11",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 11,
@@ -1012,6 +1016,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

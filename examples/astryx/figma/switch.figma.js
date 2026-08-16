@@ -163,6 +163,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/switch/label/font-size",
                       "fontWeightVar": "imported/switch/label/font-weight",
+                      "lineHeightVar": "imported/switch/label/line-height",
                       "textFill": "imported/switch/label/color",
                       "lineHeight": {
                         "value": 20.0004,
@@ -238,6 +239,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/switch/label-2/font-size",
                       "fontWeightVar": "imported/switch/label-2/font-weight",
+                      "lineHeightVar": "imported/switch/label-2/line-height",
                       "textFill": "imported/switch/label-2/color",
                       "lineHeight": {
                         "value": 20.0004,
@@ -468,6 +470,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/switch/label/font-size",
                       "fontWeightVar": "imported/switch/label/font-weight",
+                      "lineHeightVar": "imported/switch/label/line-height",
                       "textFill": "imported/switch/label/color",
                       "lineHeight": {
                         "value": 20.0004,
@@ -543,6 +546,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/switch/label-2/font-size",
                       "fontWeightVar": "imported/switch/label-2/font-weight",
+                      "lineHeightVar": "imported/switch/label-2/line-height",
                       "textFill": "imported/switch/label-2/color",
                       "lineHeight": {
                         "value": 20.0004,
@@ -1303,6 +1307,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

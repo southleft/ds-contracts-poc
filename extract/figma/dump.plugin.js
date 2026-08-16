@@ -901,6 +901,11 @@ async function dumpNode(node, nodePath, parent) {
     // on any node this pipeline did not draw, which stays the old behaviour.
     const weightVar = node.getSharedPluginData('ds_contracts', 'fontWeightVar');
     if (weightVar) text.fontWeightVar = weightVar;
+    // dump v1.23: the line-height token, stamped for the same reason — Figma's
+    // lineHeight takes a value, not a variable, so the number on the node
+    // cannot name the token that produced it.
+    const lhVar = node.getSharedPluginData('ds_contracts', 'lineHeightVar');
+    if (lhVar) text.lineHeightVar = lhVar;
     const fill = await dumpPaint(node.fills, nodePath, 'fill', node);
     if (fill && fill.var) text.fillVar = fill.var;
     out.text = text;
@@ -1055,8 +1060,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.22) for design→contract proposal.',
-    dumpVersion: '1.22',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.23) for design→contract proposal.',
+    dumpVersion: '1.23',
   },
 };
 dumps._degradations = degradations;

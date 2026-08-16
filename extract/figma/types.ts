@@ -140,6 +140,11 @@ export interface DumpText {
    *  means the set was not drawn by this pipeline (or predates v1.22), which
    *  is exactly when no weight should be proposed. */
   fontWeightVar?: string;
+  /** The line-height TOKEN in slash-form (dump v1.23, additive), stamped for
+   *  the same reason as fontWeightVar: Figma's lineHeight takes a value, not a
+   *  variable, so the resolved number cannot name its token and the reader
+   *  minted a second name for one the corpus already had. */
+  lineHeightVar?: string;
   /** Variable behind the text fill (slash-form), when bound. */
   fillVar?: string;
   /** Non-ORIGINAL text case (dump v1.16, additive) — the canvas fact behind

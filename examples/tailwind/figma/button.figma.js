@@ -53,6 +53,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -101,6 +102,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 16,
@@ -149,6 +151,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -197,6 +200,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 24,
@@ -245,6 +249,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xl",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xl",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 24,
@@ -293,6 +298,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 20,
@@ -341,6 +347,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 16,
@@ -389,6 +396,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 20,
@@ -437,6 +445,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 24,
@@ -485,6 +494,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xl",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xl",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 24,
@@ -533,6 +543,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 20,
@@ -581,6 +592,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 16,
@@ -629,6 +641,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 20,
@@ -677,6 +690,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 24,
@@ -725,6 +739,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xl",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xl",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 24,
@@ -773,6 +788,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 20,
@@ -821,6 +837,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 16,
@@ -869,6 +886,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 20,
@@ -917,6 +935,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 24,
@@ -965,6 +984,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xl",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xl",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 24,
@@ -1013,6 +1033,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 20,
@@ -1061,6 +1082,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 16,
@@ -1109,6 +1131,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 20,
@@ -1157,6 +1180,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 24,
@@ -1205,6 +1229,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xl",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xl",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 24,
@@ -1256,6 +1281,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -1305,6 +1331,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 20,
@@ -1354,6 +1381,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 20,
@@ -1403,6 +1431,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 20,
@@ -1452,6 +1481,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 20,
@@ -1558,6 +1588,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color-state-active/default",
               "lineHeight": {
                 "value": 20,
@@ -1664,6 +1695,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color-state-active/alternative",
               "lineHeight": {
                 "value": 20,
@@ -1770,6 +1802,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color-state-active/dark",
               "lineHeight": {
                 "value": 20,
@@ -1876,6 +1909,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color-state-active/green",
               "lineHeight": {
                 "value": 20,
@@ -1982,6 +2016,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color-state-active/red",
               "lineHeight": {
                 "value": 20,
@@ -2090,6 +2125,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -2198,6 +2234,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/alternative",
               "lineHeight": {
                 "value": 20,
@@ -2306,6 +2343,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/dark",
               "lineHeight": {
                 "value": 20,
@@ -2414,6 +2452,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/green",
               "lineHeight": {
                 "value": 20,
@@ -2522,6 +2561,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color/red",
               "lineHeight": {
                 "value": 20,
@@ -2570,6 +2610,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color-state-hover/default",
               "lineHeight": {
                 "value": 20,
@@ -2618,6 +2659,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color-state-hover/alternative",
               "lineHeight": {
                 "value": 20,
@@ -2666,6 +2708,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color-state-hover/dark",
               "lineHeight": {
                 "value": 20,
@@ -2714,6 +2757,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color-state-hover/green",
               "lineHeight": {
                 "value": 20,
@@ -2762,6 +2806,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/md",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/md",
               "textFill": "imported/button/root/color-state-hover/red",
               "lineHeight": {
                 "value": 20,
@@ -3400,6 +3445,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

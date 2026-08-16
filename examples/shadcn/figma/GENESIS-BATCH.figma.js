@@ -106,6 +106,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/alert/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/alert/label/color/default",
               "lineHeight": {
                 "value": 20,
@@ -121,6 +122,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/alert/label-2/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/alert/label-2/color/default",
               "lineHeight": {
                 "value": 20,
@@ -169,6 +171,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/alert/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/alert/label/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -184,6 +187,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/alert/label-2/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/alert/label-2/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -737,6 +741,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -1671,6 +1676,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/label/font-size/default",
               "fontWeightVar": "imported/avatar/label/font-weight",
+              "lineHeightVar": "imported/avatar/label/line-height/default",
               "textFill": "imported/avatar/label/color",
               "lineHeight": {
                 "value": 20,
@@ -1724,6 +1730,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/label/font-size/sm",
               "fontWeightVar": "imported/avatar/label/font-weight",
+              "lineHeightVar": "imported/avatar/label/line-height/sm",
               "textFill": "imported/avatar/label/color",
               "lineHeight": {
                 "value": 16,
@@ -1777,6 +1784,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/label/font-size/lg",
               "fontWeightVar": "imported/avatar/label/font-weight",
+              "lineHeightVar": "imported/avatar/label/line-height/lg",
               "textFill": "imported/avatar/label/color",
               "lineHeight": {
                 "value": 20,
@@ -2281,6 +2289,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -3214,6 +3223,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/default",
               "lineHeight": {
                 "value": 16,
@@ -3263,6 +3273,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/secondary",
               "lineHeight": {
                 "value": 16,
@@ -3312,6 +3323,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/destructive",
               "lineHeight": {
                 "value": 16,
@@ -3361,6 +3373,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -3410,6 +3423,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/ghost",
               "lineHeight": {
                 "value": 16,
@@ -3459,6 +3473,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/link",
               "lineHeight": {
                 "value": 16,
@@ -3510,6 +3525,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-active/default",
               "lineHeight": {
                 "value": 16,
@@ -3559,6 +3575,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-active/secondary",
               "lineHeight": {
                 "value": 16,
@@ -3608,6 +3625,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-active/destructive",
               "lineHeight": {
                 "value": 16,
@@ -3657,6 +3675,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-active/outline",
               "lineHeight": {
                 "value": 16,
@@ -3706,6 +3725,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-active/ghost",
               "lineHeight": {
                 "value": 16,
@@ -3755,6 +3775,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-active/link",
               "lineHeight": {
                 "value": 16,
@@ -3804,6 +3825,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-hover/default",
               "lineHeight": {
                 "value": 16,
@@ -3853,6 +3875,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-hover/secondary",
               "lineHeight": {
                 "value": 16,
@@ -3902,6 +3925,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-hover/destructive",
               "lineHeight": {
                 "value": 16,
@@ -3951,6 +3975,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-hover/outline",
               "lineHeight": {
                 "value": 16,
@@ -4000,6 +4025,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-hover/ghost",
               "lineHeight": {
                 "value": 16,
@@ -4049,6 +4075,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color-state-hover/link",
               "lineHeight": {
                 "value": 16,
@@ -4626,6 +4653,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -5556,6 +5584,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -5602,6 +5631,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 16,
@@ -5648,6 +5678,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -5694,6 +5725,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -5740,6 +5772,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -5786,6 +5819,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-xs",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -5832,6 +5866,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-sm",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -5878,6 +5913,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-lg",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -5980,6 +6016,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -6082,6 +6119,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -6184,6 +6222,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -6286,6 +6325,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -6388,6 +6428,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -6490,6 +6531,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-xs",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -6592,6 +6634,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-sm",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -6694,6 +6737,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-lg",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -6740,6 +6784,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -6786,6 +6831,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 16,
@@ -6832,6 +6878,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -6878,6 +6925,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -6924,6 +6972,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -6970,6 +7019,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-xs",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -7016,6 +7066,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-sm",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -7062,6 +7113,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-lg",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -7108,6 +7160,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -7154,6 +7207,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 16,
@@ -7200,6 +7254,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -7246,6 +7301,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -7292,6 +7348,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -7338,6 +7395,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-xs",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -7384,6 +7442,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-sm",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -7430,6 +7489,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-lg",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -7476,6 +7536,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -7522,6 +7583,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 16,
@@ -7568,6 +7630,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -7614,6 +7677,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -7660,6 +7724,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -7706,6 +7771,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-xs",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -7752,6 +7818,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-sm",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -7798,6 +7865,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-lg",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -7844,6 +7912,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -7890,6 +7959,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/xs",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 16,
@@ -7936,6 +8006,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/sm",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -7982,6 +8053,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/lg",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -8028,6 +8100,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -8074,6 +8147,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-xs",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-xs",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -8120,6 +8194,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-sm",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-sm",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -8166,6 +8241,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/icon-lg",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/icon-lg",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -8214,6 +8290,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -8316,6 +8393,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -8362,6 +8440,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -8408,6 +8487,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -8454,6 +8534,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -8500,6 +8581,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -8547,6 +8629,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -8650,6 +8733,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -8697,6 +8781,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -8744,6 +8829,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -8791,6 +8877,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -8838,6 +8925,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -8884,6 +8972,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -8986,6 +9075,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -9032,6 +9122,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -9078,6 +9169,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -9124,6 +9216,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -9170,6 +9263,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -9216,6 +9310,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/default",
               "lineHeight": {
                 "value": 20,
@@ -9318,6 +9413,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -9364,6 +9460,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -9410,6 +9507,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/ghost",
               "lineHeight": {
                 "value": 20,
@@ -9456,6 +9554,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/destructive",
               "lineHeight": {
                 "value": 20,
@@ -9502,6 +9601,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/button/root/font-size/default",
               "fontWeightVar": "imported/button/root/font-weight",
+              "lineHeightVar": "imported/button/root/line-height/default",
               "textFill": "imported/button/root/color/link",
               "lineHeight": {
                 "value": 20,
@@ -10095,6 +10195,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -11037,6 +11138,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/card/label/font-size/default",
                   "fontWeightVar": "imported/card/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -11050,6 +11152,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/card/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
                   "textFill": "imported/card/label-2/color",
                   "lineHeight": {
                     "value": 20,
@@ -11076,6 +11179,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/card/label-3/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -11141,6 +11245,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/card/label/font-size/sm",
                   "fontWeightVar": "imported/card/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -11154,6 +11259,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/card/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
                   "textFill": "imported/card/label-2/color",
                   "lineHeight": {
                     "value": 20,
@@ -11180,6 +11286,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/card/label-3/font-weight",
+                  "lineHeightVar": "imported/shared/size-20",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
@@ -11690,6 +11797,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -14002,6 +14110,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -15874,6 +15983,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -16932,6 +17042,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/select/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/shared/color-737373",
               "lineHeight": {
                 "value": 20,
@@ -17513,6 +17624,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -19885,6 +19997,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -20916,6 +21029,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/shared/num-500",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tabs/part-0/color",
                       "lineHeight": {
                         "value": 20,
@@ -21035,6 +21149,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/shared/num-500",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tabs/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -21084,6 +21199,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/shared/num-500",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tabs/label-3/color",
                       "lineHeight": {
                         "value": 20,
@@ -21126,6 +21242,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/tabs/label-4/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -21641,6 +21758,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -22570,6 +22688,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/tooltip/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-16",
                   "textFill": "imported/shared/color-ffffff",
                   "lineHeight": {
                     "value": 16,
@@ -23288,6 +23407,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

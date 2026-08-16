@@ -54,6 +54,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 16,
@@ -102,6 +103,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 4,
@@ -150,6 +152,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 6,
@@ -198,6 +201,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 14,
@@ -246,6 +250,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 16,
@@ -294,6 +299,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/brand",
               "lineHeight": {
                 "value": 16,
@@ -342,6 +348,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 16,
@@ -390,6 +397,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 4,
@@ -438,6 +446,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 6,
@@ -486,6 +495,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 14,
@@ -534,6 +544,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 16,
@@ -582,6 +593,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/danger",
               "lineHeight": {
                 "value": 16,
@@ -630,6 +642,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 16,
@@ -678,6 +691,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 4,
@@ -726,6 +740,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 6,
@@ -774,6 +789,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 14,
@@ -822,6 +838,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 16,
@@ -870,6 +887,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/important",
               "lineHeight": {
                 "value": 16,
@@ -918,6 +936,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 16,
@@ -966,6 +985,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 4,
@@ -1014,6 +1034,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 6,
@@ -1062,6 +1083,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 14,
@@ -1110,6 +1132,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 16,
@@ -1158,6 +1181,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/informative",
               "lineHeight": {
                 "value": 16,
@@ -1206,6 +1230,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 16,
@@ -1254,6 +1279,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 4,
@@ -1302,6 +1328,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 6,
@@ -1350,6 +1377,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 14,
@@ -1398,6 +1426,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 16,
@@ -1446,6 +1475,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/severe",
               "lineHeight": {
                 "value": 16,
@@ -1494,6 +1524,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 16,
@@ -1542,6 +1573,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 4,
@@ -1590,6 +1622,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 6,
@@ -1638,6 +1671,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 14,
@@ -1686,6 +1720,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 16,
@@ -1734,6 +1769,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/subtle",
               "lineHeight": {
                 "value": 16,
@@ -1782,6 +1818,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 16,
@@ -1830,6 +1867,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 4,
@@ -1878,6 +1916,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 6,
@@ -1926,6 +1965,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 14,
@@ -1974,6 +2014,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 16,
@@ -2022,6 +2063,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/success",
               "lineHeight": {
                 "value": 16,
@@ -2070,6 +2112,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 16,
@@ -2118,6 +2161,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 4,
@@ -2166,6 +2210,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 6,
@@ -2214,6 +2259,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 14,
@@ -2262,6 +2308,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 16,
@@ -2310,6 +2357,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/filled/warning",
               "lineHeight": {
                 "value": 16,
@@ -2358,6 +2406,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 16,
@@ -2406,6 +2455,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 4,
@@ -2454,6 +2504,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 6,
@@ -2502,6 +2553,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 14,
@@ -2550,6 +2602,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 16,
@@ -2598,6 +2651,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/brand",
               "lineHeight": {
                 "value": 16,
@@ -2646,6 +2700,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 16,
@@ -2694,6 +2749,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 4,
@@ -2742,6 +2798,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 6,
@@ -2790,6 +2847,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 14,
@@ -2838,6 +2896,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 16,
@@ -2886,6 +2945,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/danger",
               "lineHeight": {
                 "value": 16,
@@ -2934,6 +2994,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 16,
@@ -2982,6 +3043,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 4,
@@ -3030,6 +3092,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 6,
@@ -3078,6 +3141,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 14,
@@ -3126,6 +3190,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 16,
@@ -3174,6 +3239,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/important",
               "lineHeight": {
                 "value": 16,
@@ -3222,6 +3288,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 16,
@@ -3270,6 +3337,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 4,
@@ -3318,6 +3386,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 6,
@@ -3366,6 +3435,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 14,
@@ -3414,6 +3484,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 16,
@@ -3462,6 +3533,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/informative",
               "lineHeight": {
                 "value": 16,
@@ -3510,6 +3582,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 16,
@@ -3558,6 +3631,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 4,
@@ -3606,6 +3680,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 6,
@@ -3654,6 +3729,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 14,
@@ -3702,6 +3778,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 16,
@@ -3750,6 +3827,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/severe",
               "lineHeight": {
                 "value": 16,
@@ -3798,6 +3876,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 16,
@@ -3846,6 +3925,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 4,
@@ -3894,6 +3974,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 6,
@@ -3942,6 +4023,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 14,
@@ -3990,6 +4072,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 16,
@@ -4038,6 +4121,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/subtle",
               "lineHeight": {
                 "value": 16,
@@ -4086,6 +4170,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 16,
@@ -4134,6 +4219,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 4,
@@ -4182,6 +4268,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 6,
@@ -4230,6 +4317,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 14,
@@ -4278,6 +4366,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 16,
@@ -4326,6 +4415,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/success",
               "lineHeight": {
                 "value": 16,
@@ -4374,6 +4464,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 16,
@@ -4422,6 +4513,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 4,
@@ -4470,6 +4562,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 6,
@@ -4518,6 +4611,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 14,
@@ -4566,6 +4660,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 16,
@@ -4614,6 +4709,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/ghost/warning",
               "lineHeight": {
                 "value": 16,
@@ -4662,6 +4758,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 16,
@@ -4710,6 +4807,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 4,
@@ -4758,6 +4856,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 6,
@@ -4806,6 +4905,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 14,
@@ -4854,6 +4954,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 16,
@@ -4902,6 +5003,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/brand",
               "lineHeight": {
                 "value": 16,
@@ -4950,6 +5052,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 16,
@@ -4998,6 +5101,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 4,
@@ -5046,6 +5150,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 6,
@@ -5094,6 +5199,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 14,
@@ -5142,6 +5248,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 16,
@@ -5190,6 +5297,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/danger",
               "lineHeight": {
                 "value": 16,
@@ -5238,6 +5346,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 16,
@@ -5286,6 +5395,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 4,
@@ -5334,6 +5444,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 6,
@@ -5382,6 +5493,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 14,
@@ -5430,6 +5542,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 16,
@@ -5478,6 +5591,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/important",
               "lineHeight": {
                 "value": 16,
@@ -5526,6 +5640,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 16,
@@ -5574,6 +5689,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 4,
@@ -5622,6 +5738,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 6,
@@ -5670,6 +5787,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 14,
@@ -5718,6 +5836,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 16,
@@ -5766,6 +5885,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/informative",
               "lineHeight": {
                 "value": 16,
@@ -5814,6 +5934,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 16,
@@ -5862,6 +5983,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 4,
@@ -5910,6 +6032,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 6,
@@ -5958,6 +6081,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 14,
@@ -6006,6 +6130,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 16,
@@ -6054,6 +6179,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/severe",
               "lineHeight": {
                 "value": 16,
@@ -6102,6 +6228,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 16,
@@ -6150,6 +6277,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 4,
@@ -6198,6 +6326,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 6,
@@ -6246,6 +6375,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 14,
@@ -6294,6 +6424,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 16,
@@ -6342,6 +6473,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/subtle",
               "lineHeight": {
                 "value": 16,
@@ -6390,6 +6522,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 16,
@@ -6438,6 +6571,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 4,
@@ -6486,6 +6620,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 6,
@@ -6534,6 +6669,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 14,
@@ -6582,6 +6718,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 16,
@@ -6630,6 +6767,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/success",
               "lineHeight": {
                 "value": 16,
@@ -6678,6 +6816,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 16,
@@ -6726,6 +6865,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 4,
@@ -6774,6 +6914,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 6,
@@ -6822,6 +6963,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 14,
@@ -6870,6 +7012,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 16,
@@ -6918,6 +7061,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/outline/warning",
               "lineHeight": {
                 "value": 16,
@@ -6966,6 +7110,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 16,
@@ -7014,6 +7159,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 4,
@@ -7062,6 +7208,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 6,
@@ -7110,6 +7257,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 14,
@@ -7158,6 +7306,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 16,
@@ -7206,6 +7355,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/brand",
               "lineHeight": {
                 "value": 16,
@@ -7254,6 +7404,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 16,
@@ -7302,6 +7453,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 4,
@@ -7350,6 +7502,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 6,
@@ -7398,6 +7551,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 14,
@@ -7446,6 +7600,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 16,
@@ -7494,6 +7649,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/danger",
               "lineHeight": {
                 "value": 16,
@@ -7542,6 +7698,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 16,
@@ -7590,6 +7747,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 4,
@@ -7638,6 +7796,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 6,
@@ -7686,6 +7845,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 14,
@@ -7734,6 +7894,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 16,
@@ -7782,6 +7943,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/important",
               "lineHeight": {
                 "value": 16,
@@ -7830,6 +7992,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 16,
@@ -7878,6 +8041,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 4,
@@ -7926,6 +8090,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 6,
@@ -7974,6 +8139,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 14,
@@ -8022,6 +8188,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 16,
@@ -8070,6 +8237,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/informative",
               "lineHeight": {
                 "value": 16,
@@ -8118,6 +8286,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 16,
@@ -8166,6 +8335,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 4,
@@ -8214,6 +8384,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 6,
@@ -8262,6 +8433,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 14,
@@ -8310,6 +8482,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 16,
@@ -8358,6 +8531,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/severe",
               "lineHeight": {
                 "value": 16,
@@ -8406,6 +8580,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 16,
@@ -8454,6 +8629,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 4,
@@ -8502,6 +8678,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 6,
@@ -8550,6 +8727,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 14,
@@ -8598,6 +8776,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 16,
@@ -8646,6 +8825,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/subtle",
               "lineHeight": {
                 "value": 16,
@@ -8694,6 +8874,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 16,
@@ -8742,6 +8923,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 4,
@@ -8790,6 +8972,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 6,
@@ -8838,6 +9021,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 14,
@@ -8886,6 +9070,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 16,
@@ -8934,6 +9119,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/success",
               "lineHeight": {
                 "value": 16,
@@ -8982,6 +9168,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/medium",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/medium",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 16,
@@ -9030,6 +9217,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/tiny",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/tiny",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 4,
@@ -9078,6 +9266,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-small",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 6,
@@ -9126,6 +9315,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/small",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/small",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 14,
@@ -9174,6 +9364,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/large",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 16,
@@ -9222,6 +9413,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/badge/root/font-size/extra-large",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height/extra-large",
               "textFill": "imported/badge/root/color/tint/warning",
               "lineHeight": {
                 "value": 16,
@@ -9727,6 +9919,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

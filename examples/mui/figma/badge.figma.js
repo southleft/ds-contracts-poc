@@ -49,6 +49,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -73,6 +74,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/default",
                   "lineHeight": {
                     "value": 12,
@@ -144,6 +146,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -220,6 +223,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -244,6 +248,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/primary",
                   "lineHeight": {
                     "value": 12,
@@ -315,6 +320,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -391,6 +397,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -415,6 +422,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/secondary",
                   "lineHeight": {
                     "value": 12,
@@ -486,6 +494,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -562,6 +571,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -586,6 +596,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/error",
                   "lineHeight": {
                     "value": 12,
@@ -657,6 +668,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -733,6 +745,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -757,6 +770,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/info",
                   "lineHeight": {
                     "value": 12,
@@ -828,6 +842,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -904,6 +919,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -928,6 +944,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/success",
                   "lineHeight": {
                     "value": 12,
@@ -999,6 +1016,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -1075,6 +1093,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -1099,6 +1118,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/warning",
                   "lineHeight": {
                     "value": 12,
@@ -1170,6 +1190,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -1934,6 +1955,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

@@ -112,6 +112,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -181,6 +182,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -211,6 +213,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -320,6 +323,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -389,6 +393,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -419,6 +424,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -528,6 +534,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -597,6 +604,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -627,6 +635,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -736,6 +745,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -805,6 +815,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -835,6 +846,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -944,6 +956,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -1013,6 +1026,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -1043,6 +1057,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -1152,6 +1167,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -1221,6 +1237,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -1251,6 +1268,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -1968,6 +1986,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

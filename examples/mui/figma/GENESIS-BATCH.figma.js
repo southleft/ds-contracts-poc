@@ -5059,6 +5059,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -6811,6 +6812,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -7744,6 +7746,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -7805,6 +7808,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -7866,6 +7870,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -7927,6 +7932,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -7988,6 +7994,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -8049,6 +8056,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -8110,6 +8118,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -8171,6 +8180,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -8232,6 +8242,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -8293,6 +8304,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -8354,6 +8366,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -8415,6 +8428,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -8476,6 +8490,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -8537,6 +8552,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/filled/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -8598,6 +8614,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -8659,6 +8676,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -8720,6 +8738,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -8781,6 +8800,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -8842,6 +8862,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -8903,6 +8924,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -8964,6 +8986,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -9025,6 +9048,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -9086,6 +9110,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -9147,6 +9172,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -9208,6 +9234,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -9269,6 +9296,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -9330,6 +9358,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -9391,6 +9420,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
                   "fontWeightVar": "imported/chip/label/font-weight",
+                  "lineHeightVar": "imported/chip/label/line-height",
                   "textFill": "imported/chip/label/color/outlined/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -9952,6 +9982,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -13339,6 +13370,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -19560,6 +19592,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -20610,6 +20643,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20654,6 +20688,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20699,6 +20734,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20844,6 +20880,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20888,6 +20925,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -20933,6 +20971,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/primary",
                           "lineHeight": {
                             "value": 17.5,
@@ -21078,6 +21117,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -21122,6 +21162,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -21167,6 +21208,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -21312,6 +21354,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -21356,6 +21399,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -21401,6 +21445,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/secondary",
                           "lineHeight": {
                             "value": 17.5,
@@ -21546,6 +21591,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21590,6 +21636,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21635,6 +21682,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21780,6 +21828,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21824,6 +21873,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-2/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -21869,6 +21919,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-17-5",
                           "textFill": "imported/tabs/label-3/color/inherit",
                           "lineHeight": {
                             "value": 17.5,
@@ -22600,6 +22651,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -25117,6 +25169,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -26129,6 +26182,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-19-5",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 19.5,
@@ -26201,6 +26255,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-19-5",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 19.5,
@@ -26264,6 +26319,7 @@ const COMPONENTS = [
                           "letterSpacing": 0.15008,
                           "fontFamily": "Roboto",
                           "textTruncation": true,
+                          "lineHeightVar": "imported/shared/size-23",
                           "textFill": "imported/shared/color-000000de"
                         }
                       ]
@@ -26413,6 +26469,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-16",
                               "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-11",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 11,
@@ -26553,6 +26610,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-19-5",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 19.5,
@@ -26625,6 +26683,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-19-5",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 19.5,
@@ -26688,6 +26747,7 @@ const COMPONENTS = [
                           "letterSpacing": 0.15008,
                           "fontFamily": "Roboto",
                           "textTruncation": true,
+                          "lineHeightVar": "imported/shared/size-23",
                           "textFill": "imported/shared/color-000000de"
                         }
                       ]
@@ -26837,6 +26897,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-16",
                               "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-11",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 11,
@@ -27550,6 +27611,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -29840,6 +29902,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -31506,6 +31569,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -32550,6 +32614,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-14",
                               "fontWeightVar": "imported/shared/num-500",
+                              "lineHeightVar": "imported/shared/size-24",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 24,
@@ -32591,6 +32656,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -32636,6 +32702,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -32681,6 +32748,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -32823,6 +32891,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -32868,6 +32937,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -32913,6 +32983,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -32984,6 +33055,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-18",
                               "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-20-02",
                               "textFill": "imported/table/label-8/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -33109,6 +33181,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33154,6 +33227,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33199,6 +33273,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33270,6 +33345,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-18",
                               "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-20-02",
                               "textFill": "imported/table/label-12/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -33457,6 +33533,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-14",
                               "fontWeightVar": "imported/shared/num-500",
+                              "lineHeightVar": "imported/shared/size-24",
                               "textFill": "imported/shared/color-000000de",
                               "lineHeight": {
                                 "value": 24,
@@ -33498,6 +33575,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -33543,6 +33621,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -33588,6 +33667,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-500",
+                          "lineHeightVar": "imported/shared/size-24",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 24,
@@ -33730,6 +33810,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33775,6 +33856,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33820,6 +33902,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -33891,6 +33974,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-18",
                               "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-20-02",
                               "textFill": "imported/table/label-8/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -34016,6 +34100,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -34061,6 +34146,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -34106,6 +34192,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-02",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.02,
@@ -34177,6 +34264,7 @@ const COMPONENTS = [
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-18",
                               "fontWeightVar": "imported/shared/num-400",
+                              "lineHeightVar": "imported/shared/size-20-02",
                               "textFill": "imported/table/label-12/color",
                               "lineHeight": {
                                 "value": 20.02,
@@ -34762,6 +34850,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -35729,6 +35818,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/pagination/label/line-height",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 20.02,
@@ -35775,6 +35865,7 @@ const COMPONENTS = [
                           "fontStyle": "Regular",
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/shared/num-400",
+                          "lineHeightVar": "imported/shared/size-20-125",
                           "textFill": "imported/shared/color-000000de",
                           "lineHeight": {
                             "value": 20.125,
@@ -35824,6 +35915,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/pagination/label-3/line-height",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 20.02,
@@ -36656,6 +36748,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -37735,6 +37828,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 24,
@@ -37771,6 +37865,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 24,
@@ -37807,6 +37902,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 24,
@@ -38386,6 +38482,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -40082,6 +40179,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -41078,6 +41176,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/input-adornment/label/font-size",
               "fontWeightVar": "imported/input-adornment/label/font-weight",
+              "lineHeightVar": "imported/input-adornment/label/line-height",
               "textFill": "imported/input-adornment/label/color",
               "lineHeight": {
                 "value": 24,
@@ -41116,6 +41215,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/input-adornment/label/font-size",
               "fontWeightVar": "imported/input-adornment/label/font-weight",
+              "lineHeightVar": "imported/input-adornment/label/line-height",
               "textFill": "imported/input-adornment/label/color",
               "lineHeight": {
                 "value": 24,
@@ -41708,6 +41808,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -42696,6 +42797,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -42765,6 +42867,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -42795,6 +42898,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -42904,6 +43008,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -42973,6 +43078,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -43003,6 +43109,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -43112,6 +43219,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -43181,6 +43289,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -43211,6 +43320,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -43320,6 +43430,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -43389,6 +43500,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -43419,6 +43531,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -43528,6 +43641,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -43597,6 +43711,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -43627,6 +43742,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -43736,6 +43852,7 @@ const COMPONENTS = [
                       },
                       "letterSpacing": 0.15008,
                       "fontFamily": "Roboto",
+                      "lineHeightVar": "imported/shared/size-23",
                       "textFill": "imported/shared/color-000000de"
                     }
                   ]
@@ -43805,6 +43922,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/text-field/label-5/line-height",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -43835,6 +43953,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
               "fontWeightVar": "imported/shared/num-400",
+              "lineHeightVar": "imported/shared/size-23",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -44552,6 +44671,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -45551,6 +45671,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/root/font-size",
               "fontWeightVar": "imported/avatar/root/font-weight",
+              "lineHeightVar": "imported/avatar/root/line-height",
               "textFill": "imported/avatar/root/color",
               "lineHeight": {
                 "value": 20,
@@ -45591,6 +45712,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/root/font-size",
               "fontWeightVar": "imported/avatar/root/font-weight",
+              "lineHeightVar": "imported/avatar/root/line-height",
               "textFill": "imported/avatar/root/color",
               "lineHeight": {
                 "value": 20,
@@ -45631,6 +45753,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/root/font-size",
               "fontWeightVar": "imported/avatar/root/font-weight",
+              "lineHeightVar": "imported/avatar/root/line-height",
               "textFill": "imported/avatar/root/color",
               "lineHeight": {
                 "value": 20,
@@ -46185,6 +46308,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -47153,6 +47277,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/default",
               "lineHeight": {
                 "value": 24.5,
@@ -47240,6 +47365,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/primary",
               "lineHeight": {
                 "value": 24.5,
@@ -47327,6 +47453,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/secondary",
               "lineHeight": {
                 "value": 24.5,
@@ -47414,6 +47541,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/default",
               "lineHeight": {
                 "value": 24.5,
@@ -47501,6 +47629,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/primary",
               "lineHeight": {
                 "value": 24.5,
@@ -47588,6 +47717,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/secondary",
               "lineHeight": {
                 "value": 24.5,
@@ -47675,6 +47805,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/default",
               "lineHeight": {
                 "value": 24.5,
@@ -47762,6 +47893,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/primary",
               "lineHeight": {
                 "value": 24.5,
@@ -47849,6 +47981,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/secondary",
               "lineHeight": {
                 "value": 24.5,
@@ -48417,6 +48550,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -50181,6 +50315,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -51628,6 +51763,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -53279,6 +53415,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -54322,6 +54459,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/standard",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/info/standard",
                   "lineHeight": {
                     "value": 20.02,
@@ -54415,6 +54553,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/filled",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/info/filled",
                   "lineHeight": {
                     "value": 20.02,
@@ -54508,6 +54647,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/outlined",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/info/outlined",
                   "lineHeight": {
                     "value": 20.02,
@@ -54601,6 +54741,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/standard",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/error/standard",
                   "lineHeight": {
                     "value": 20.02,
@@ -54694,6 +54835,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/filled",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/error/filled",
                   "lineHeight": {
                     "value": 20.02,
@@ -54787,6 +54929,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/outlined",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/error/outlined",
                   "lineHeight": {
                     "value": 20.02,
@@ -54880,6 +55023,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/standard",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/warning/standard",
                   "lineHeight": {
                     "value": 20.02,
@@ -54973,6 +55117,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/filled",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/warning/filled",
                   "lineHeight": {
                     "value": 20.02,
@@ -55066,6 +55211,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/outlined",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/warning/outlined",
                   "lineHeight": {
                     "value": 20.02,
@@ -55159,6 +55305,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/standard",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/success/standard",
                   "lineHeight": {
                     "value": 20.02,
@@ -55252,6 +55399,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/filled",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/success/filled",
                   "lineHeight": {
                     "value": 20.02,
@@ -55345,6 +55493,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/alert/label/font-size",
                   "fontWeightVar": "imported/alert/label/font-weight/outlined",
+                  "lineHeightVar": "imported/alert/label/line-height",
                   "textFill": "imported/alert/label/color/success/outlined",
                   "lineHeight": {
                     "value": 20.02,
@@ -55915,6 +56064,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -56840,6 +56990,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -56864,6 +57015,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/default",
                   "lineHeight": {
                     "value": 12,
@@ -56935,6 +57087,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57011,6 +57164,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57035,6 +57189,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/primary",
                   "lineHeight": {
                     "value": 12,
@@ -57106,6 +57261,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57182,6 +57338,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57206,6 +57363,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/secondary",
                   "lineHeight": {
                     "value": 12,
@@ -57277,6 +57435,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57353,6 +57512,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57377,6 +57537,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/error",
                   "lineHeight": {
                     "value": 12,
@@ -57448,6 +57609,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57524,6 +57686,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57548,6 +57711,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/info",
                   "lineHeight": {
                     "value": 12,
@@ -57619,6 +57783,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57695,6 +57860,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57719,6 +57885,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/success",
                   "lineHeight": {
                     "value": 12,
@@ -57790,6 +57957,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57866,6 +58034,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -57890,6 +58059,7 @@ const COMPONENTS = [
                   "fontStyle": "Medium",
                   "fontSizeVar": "imported/shared/size-12",
                   "fontWeightVar": "imported/badge/label-2/font-weight",
+                  "lineHeightVar": "imported/shared/size-12",
                   "textFill": "imported/badge/label-2/color/warning",
                   "lineHeight": {
                     "value": 12,
@@ -57961,6 +58131,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-20",
               "fontWeightVar": "imported/badge/label/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "textFill": "imported/badge/label/color",
               "lineHeight": {
                 "value": 20,
@@ -58725,6 +58896,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -60333,6 +60505,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -63251,6 +63424,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -65127,6 +65301,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -66074,6 +66249,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-00000099",
                       "lineHeight": {
                         "value": 24,
@@ -66093,6 +66269,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-16",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-24",
                   "textFill": "imported/shared/color-00000099",
                   "lineHeight": {
                     "value": 24,
@@ -66122,6 +66299,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-00000099",
                       "lineHeight": {
                         "value": 24,
@@ -66141,6 +66319,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-16",
                   "fontWeightVar": "imported/shared/num-400",
+                  "lineHeightVar": "imported/shared/size-24",
                   "textFill": "imported/shared/color-00000099",
                   "lineHeight": {
                     "value": 24,
@@ -66170,6 +66349,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/shared/size-16",
                       "fontWeightVar": "imported/shared/num-400",
+                      "lineHeightVar": "imported/shared/size-24",
                       "textFill": "imported/shared/color-00000099",
                       "lineHeight": {
                         "value": 24,
@@ -66729,6 +66909,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -68269,6 +68450,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -70853,6 +71035,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -71797,6 +71980,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/select/label/font-size",
                   "fontWeightVar": "imported/select/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-23",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 23,
@@ -71906,6 +72090,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/select/label-2/font-size",
                       "fontWeightVar": "imported/select/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-11",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 11,
@@ -71967,6 +72152,7 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/select/label/font-size",
                   "fontWeightVar": "imported/select/label/font-weight",
+                  "lineHeightVar": "imported/shared/size-23",
                   "textFill": "imported/shared/color-000000de",
                   "lineHeight": {
                     "value": 23,
@@ -72076,6 +72262,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/select/label-2/font-size",
                       "fontWeightVar": "imported/select/label-2/font-weight",
+                      "lineHeightVar": "imported/shared/size-11",
                       "textFill": "imported/shared/color-000000de",
                       "lineHeight": {
                         "value": 11,
@@ -72748,6 +72935,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -73738,6 +73926,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/snackbar/label/font-size",
                       "fontWeightVar": "imported/snackbar/label/font-weight",
+                      "lineHeightVar": "imported/snackbar/label/line-height",
                       "textFill": "imported/snackbar/label/color",
                       "lineHeight": {
                         "value": 20.02,
@@ -73848,6 +74037,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/snackbar/label/font-size",
                       "fontWeightVar": "imported/snackbar/label/font-weight",
+                      "lineHeightVar": "imported/snackbar/label/line-height",
                       "textFill": "imported/snackbar/label/color",
                       "lineHeight": {
                         "value": 20.02,
@@ -73958,6 +74148,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/snackbar/label/font-size",
                       "fontWeightVar": "imported/snackbar/label/font-weight",
+                      "lineHeightVar": "imported/snackbar/label/line-height",
                       "textFill": "imported/snackbar/label/color",
                       "lineHeight": {
                         "value": 20.02,
@@ -74532,6 +74723,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

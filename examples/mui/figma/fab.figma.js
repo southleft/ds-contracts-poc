@@ -94,6 +94,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/default",
               "lineHeight": {
                 "value": 24.5,
@@ -181,6 +182,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/primary",
               "lineHeight": {
                 "value": 24.5,
@@ -268,6 +270,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/secondary",
               "lineHeight": {
                 "value": 24.5,
@@ -355,6 +358,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/default",
               "lineHeight": {
                 "value": 24.5,
@@ -442,6 +446,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/primary",
               "lineHeight": {
                 "value": 24.5,
@@ -529,6 +534,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/secondary",
               "lineHeight": {
                 "value": 24.5,
@@ -616,6 +622,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/default",
               "lineHeight": {
                 "value": 24.5,
@@ -703,6 +710,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/primary",
               "lineHeight": {
                 "value": 24.5,
@@ -790,6 +798,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/fab/root/font-size",
               "fontWeightVar": "imported/fab/root/font-weight",
+              "lineHeightVar": "imported/fab/root/line-height",
               "textFill": "imported/fab/root/color/secondary",
               "lineHeight": {
                 "value": 24.5,
@@ -1358,6 +1367,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

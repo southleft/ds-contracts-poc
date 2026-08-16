@@ -86,6 +86,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/shared/num-500",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tabs/part-0/color",
                       "lineHeight": {
                         "value": 20,
@@ -205,6 +206,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/shared/num-500",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tabs/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -254,6 +256,7 @@ const COMPONENTS = [
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/shared/num-500",
+                      "lineHeightVar": "imported/shared/size-20",
                       "textFill": "imported/tabs/label-3/color",
                       "lineHeight": {
                         "value": 20,
@@ -296,6 +299,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/tabs/label-4/font-weight",
+              "lineHeightVar": "imported/shared/size-20",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
@@ -811,6 +815,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

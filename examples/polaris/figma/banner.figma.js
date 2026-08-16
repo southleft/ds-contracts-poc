@@ -209,6 +209,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "p/text-heading-sm-font-size",
                                   "fontWeightVar": "p/text-heading-sm-font-weight",
+                                  "lineHeightVar": "p/text-heading-sm-font-line-height",
                                   "textFill": "imported/banner/title/color/info",
                                   "lineHeight": {
                                     "value": 20,
@@ -377,6 +378,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "imported/shared/size-13",
                                   "fontWeightVar": "imported/shared/num-450",
+                                  "lineHeightVar": "imported/shared/size-20",
                                   "textFill": "p/color-text",
                                   "lineHeight": {
                                     "value": 20,
@@ -511,6 +513,7 @@ const COMPONENTS = [
                                           "fontStyle": "Medium",
                                           "fontSizeVar": "imported/shared/size-12",
                                           "fontWeightVar": "imported/banner/label-3/font-weight",
+                                          "lineHeightVar": "imported/banner/label-3/line-height",
                                           "textFill": "imported/shared/color-303030",
                                           "lineHeight": {
                                             "value": 16,
@@ -720,6 +723,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "p/text-heading-sm-font-size",
                                   "fontWeightVar": "p/text-heading-sm-font-weight",
+                                  "lineHeightVar": "p/text-heading-sm-font-line-height",
                                   "textFill": "imported/banner/title/color/success",
                                   "lineHeight": {
                                     "value": 20,
@@ -888,6 +892,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "imported/shared/size-13",
                                   "fontWeightVar": "imported/shared/num-450",
+                                  "lineHeightVar": "imported/shared/size-20",
                                   "textFill": "p/color-text",
                                   "lineHeight": {
                                     "value": 20,
@@ -1022,6 +1027,7 @@ const COMPONENTS = [
                                           "fontStyle": "Medium",
                                           "fontSizeVar": "imported/shared/size-12",
                                           "fontWeightVar": "imported/banner/label-3/font-weight",
+                                          "lineHeightVar": "imported/banner/label-3/line-height",
                                           "textFill": "imported/shared/color-303030",
                                           "lineHeight": {
                                             "value": 16,
@@ -1231,6 +1237,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "p/text-heading-sm-font-size",
                                   "fontWeightVar": "p/text-heading-sm-font-weight",
+                                  "lineHeightVar": "p/text-heading-sm-font-line-height",
                                   "textFill": "imported/banner/title/color/warning",
                                   "lineHeight": {
                                     "value": 20,
@@ -1399,6 +1406,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "imported/shared/size-13",
                                   "fontWeightVar": "imported/shared/num-450",
+                                  "lineHeightVar": "imported/shared/size-20",
                                   "textFill": "p/color-text",
                                   "lineHeight": {
                                     "value": 20,
@@ -1533,6 +1541,7 @@ const COMPONENTS = [
                                           "fontStyle": "Medium",
                                           "fontSizeVar": "imported/shared/size-12",
                                           "fontWeightVar": "imported/banner/label-3/font-weight",
+                                          "lineHeightVar": "imported/banner/label-3/line-height",
                                           "textFill": "imported/shared/color-303030",
                                           "lineHeight": {
                                             "value": 16,
@@ -1742,6 +1751,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "p/text-heading-sm-font-size",
                                   "fontWeightVar": "p/text-heading-sm-font-weight",
+                                  "lineHeightVar": "p/text-heading-sm-font-line-height",
                                   "textFill": "imported/banner/title/color/critical",
                                   "lineHeight": {
                                     "value": 20,
@@ -1910,6 +1920,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "imported/shared/size-13",
                                   "fontWeightVar": "imported/shared/num-450",
+                                  "lineHeightVar": "imported/shared/size-20",
                                   "textFill": "p/color-text",
                                   "lineHeight": {
                                     "value": 20,
@@ -2044,6 +2055,7 @@ const COMPONENTS = [
                                           "fontStyle": "Medium",
                                           "fontSizeVar": "imported/shared/size-12",
                                           "fontWeightVar": "imported/banner/label-3/font-weight",
+                                          "lineHeightVar": "imported/banner/label-3/line-height",
                                           "textFill": "imported/shared/color-303030",
                                           "lineHeight": {
                                             "value": 16,
@@ -2258,6 +2270,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "p/text-heading-sm-font-size",
                                   "fontWeightVar": "p/text-heading-sm-font-weight",
+                                  "lineHeightVar": "p/text-heading-sm-font-line-height",
                                   "textFill": "imported/banner/title/color/info",
                                   "lineHeight": {
                                     "value": 20,
@@ -2426,6 +2439,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "imported/shared/size-13",
                                   "fontWeightVar": "imported/shared/num-450",
+                                  "lineHeightVar": "imported/shared/size-20",
                                   "textFill": "p/color-text",
                                   "lineHeight": {
                                     "value": 20,
@@ -2560,6 +2574,7 @@ const COMPONENTS = [
                                           "fontStyle": "Medium",
                                           "fontSizeVar": "imported/shared/size-12",
                                           "fontWeightVar": "imported/banner/label-3/font-weight",
+                                          "lineHeightVar": "imported/banner/label-3/line-height",
                                           "textFill": "imported/shared/color-303030",
                                           "lineHeight": {
                                             "value": 16,
@@ -2772,6 +2787,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "p/text-heading-sm-font-size",
                                   "fontWeightVar": "p/text-heading-sm-font-weight",
+                                  "lineHeightVar": "p/text-heading-sm-font-line-height",
                                   "textFill": "imported/banner/title/color/success",
                                   "lineHeight": {
                                     "value": 20,
@@ -2940,6 +2956,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "imported/shared/size-13",
                                   "fontWeightVar": "imported/shared/num-450",
+                                  "lineHeightVar": "imported/shared/size-20",
                                   "textFill": "p/color-text",
                                   "lineHeight": {
                                     "value": 20,
@@ -3074,6 +3091,7 @@ const COMPONENTS = [
                                           "fontStyle": "Medium",
                                           "fontSizeVar": "imported/shared/size-12",
                                           "fontWeightVar": "imported/banner/label-3/font-weight",
+                                          "lineHeightVar": "imported/banner/label-3/line-height",
                                           "textFill": "imported/shared/color-303030",
                                           "lineHeight": {
                                             "value": 16,
@@ -3286,6 +3304,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "p/text-heading-sm-font-size",
                                   "fontWeightVar": "p/text-heading-sm-font-weight",
+                                  "lineHeightVar": "p/text-heading-sm-font-line-height",
                                   "textFill": "imported/banner/title/color/warning",
                                   "lineHeight": {
                                     "value": 20,
@@ -3454,6 +3473,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "imported/shared/size-13",
                                   "fontWeightVar": "imported/shared/num-450",
+                                  "lineHeightVar": "imported/shared/size-20",
                                   "textFill": "p/color-text",
                                   "lineHeight": {
                                     "value": 20,
@@ -3588,6 +3608,7 @@ const COMPONENTS = [
                                           "fontStyle": "Medium",
                                           "fontSizeVar": "imported/shared/size-12",
                                           "fontWeightVar": "imported/banner/label-3/font-weight",
+                                          "lineHeightVar": "imported/banner/label-3/line-height",
                                           "textFill": "imported/shared/color-303030",
                                           "lineHeight": {
                                             "value": 16,
@@ -3800,6 +3821,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "p/text-heading-sm-font-size",
                                   "fontWeightVar": "p/text-heading-sm-font-weight",
+                                  "lineHeightVar": "p/text-heading-sm-font-line-height",
                                   "textFill": "imported/banner/title/color/critical",
                                   "lineHeight": {
                                     "value": 20,
@@ -3968,6 +3990,7 @@ const COMPONENTS = [
                                   "fontStyle": "Medium",
                                   "fontSizeVar": "imported/shared/size-13",
                                   "fontWeightVar": "imported/shared/num-450",
+                                  "lineHeightVar": "imported/shared/size-20",
                                   "textFill": "p/color-text",
                                   "lineHeight": {
                                     "value": 20,
@@ -4102,6 +4125,7 @@ const COMPONENTS = [
                                           "fontStyle": "Medium",
                                           "fontSizeVar": "imported/shared/size-12",
                                           "fontWeightVar": "imported/banner/label-3/font-weight",
+                                          "lineHeightVar": "imported/banner/label-3/line-height",
                                           "textFill": "imported/shared/color-303030",
                                           "lineHeight": {
                                             "value": 16,
@@ -4795,6 +4819,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

@@ -83,7 +83,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -158,7 +159,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -233,7 +235,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -308,7 +311,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -383,7 +387,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -458,7 +463,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -534,7 +540,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -610,7 +617,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -686,7 +694,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -762,7 +771,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -838,7 +848,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -914,7 +925,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -1013,7 +1025,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -1112,7 +1125,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -1211,7 +1225,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -1310,7 +1325,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -1409,7 +1425,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/small"
+                  "fontSizeVar": "imported/input/input/font-size/small",
+                  "lineHeightVar": "imported/input/input/line-height/small"
                 }
               ]
             }
@@ -1508,7 +1525,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/large"
+                  "fontSizeVar": "imported/input/input/font-size/large",
+                  "lineHeightVar": "imported/input/input/line-height/large"
                 }
               ]
             }
@@ -1588,7 +1606,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -1666,7 +1685,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -1744,7 +1764,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -1822,7 +1843,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -1923,7 +1945,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -2024,7 +2047,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -2100,6 +2124,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -2176,6 +2201,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -2253,6 +2279,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -2330,6 +2357,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -2430,6 +2458,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -2530,6 +2559,7 @@ const COMPONENTS = [
                   },
                   "textAlignH": "LEFT",
                   "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium",
                   "textFill": "imported/shared/color-bdbdbd"
                 }
               ]
@@ -2608,7 +2638,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -2686,7 +2717,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -2764,7 +2796,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -2842,7 +2875,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -2943,7 +2977,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -3044,7 +3079,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -3119,7 +3155,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -3194,7 +3231,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -3270,7 +3308,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -3346,7 +3385,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -3445,7 +3485,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -3544,7 +3585,8 @@ const COMPONENTS = [
                     "unit": "PIXELS"
                   },
                   "textAlignH": "LEFT",
-                  "fontSizeVar": "imported/input/input/font-size/medium"
+                  "fontSizeVar": "imported/input/input/font-size/medium",
+                  "lineHeightVar": "imported/input/input/line-height/medium"
                 }
               ]
             }
@@ -4182,6 +4224,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

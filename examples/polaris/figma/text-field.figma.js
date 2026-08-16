@@ -215,6 +215,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-13",
                           "fontWeightVar": "imported/shared/num-450",
+                          "lineHeightVar": "imported/shared/size-20",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
@@ -308,6 +309,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -353,6 +355,7 @@ const COMPONENTS = [
                               },
                               "fontSizeVar": "p/font-size-400",
                               "fontWeightVar": "p/font-weight-regular",
+                              "lineHeightVar": "p/font-line-height-600",
                               "textFill": "p/color-text",
                               "contentProp": "Placeholder"
                             }
@@ -387,6 +390,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -525,6 +529,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-13",
                           "fontWeightVar": "imported/shared/num-450",
+                          "lineHeightVar": "imported/shared/size-20",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
@@ -618,6 +623,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -663,6 +669,7 @@ const COMPONENTS = [
                               },
                               "fontSizeVar": "p/font-size-400",
                               "fontWeightVar": "p/font-weight-regular",
+                              "lineHeightVar": "p/font-line-height-600",
                               "textFill": "p/color-text",
                               "contentProp": "Placeholder"
                             }
@@ -697,6 +704,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -837,6 +845,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-13",
                           "fontWeightVar": "imported/shared/num-450",
+                          "lineHeightVar": "imported/shared/size-20",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
@@ -930,6 +939,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -975,6 +985,7 @@ const COMPONENTS = [
                               },
                               "fontSizeVar": "p/font-size-400",
                               "fontWeightVar": "p/font-weight-regular",
+                              "lineHeightVar": "p/font-line-height-600",
                               "textFill": "p/color-text",
                               "contentProp": "Placeholder"
                             }
@@ -1009,6 +1020,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -1148,6 +1160,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-13",
                           "fontWeightVar": "imported/shared/num-450",
+                          "lineHeightVar": "imported/shared/size-20",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
@@ -1241,6 +1254,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -1286,6 +1300,7 @@ const COMPONENTS = [
                               },
                               "fontSizeVar": "p/font-size-400",
                               "fontWeightVar": "p/font-weight-regular",
+                              "lineHeightVar": "p/font-line-height-600",
                               "textFill": "p/color-text",
                               "contentProp": "Placeholder"
                             }
@@ -1320,6 +1335,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -1463,6 +1479,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-13",
                           "fontWeightVar": "imported/shared/num-450",
+                          "lineHeightVar": "imported/shared/size-20",
                           "textFill": "imported/shared/color-b5b5b5",
                           "lineHeight": {
                             "value": 20,
@@ -1557,6 +1574,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -1602,6 +1620,7 @@ const COMPONENTS = [
                               },
                               "fontSizeVar": "p/font-size-400",
                               "fontWeightVar": "p/font-weight-regular",
+                              "lineHeightVar": "p/font-line-height-600",
                               "textFill": "p/color-text-disabled",
                               "contentProp": "Placeholder"
                             }
@@ -1636,6 +1655,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -1774,6 +1794,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-13",
                           "fontWeightVar": "imported/shared/num-450",
+                          "lineHeightVar": "imported/shared/size-20",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
@@ -1867,6 +1888,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -1912,6 +1934,7 @@ const COMPONENTS = [
                               },
                               "fontSizeVar": "p/font-size-400",
                               "fontWeightVar": "p/font-weight-regular",
+                              "lineHeightVar": "p/font-line-height-600",
                               "textFill": "p/color-text",
                               "contentProp": "Placeholder"
                             }
@@ -1946,6 +1969,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -2084,6 +2108,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-13",
                           "fontWeightVar": "imported/shared/num-450",
+                          "lineHeightVar": "imported/shared/size-20",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
@@ -2177,6 +2202,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -2222,6 +2248,7 @@ const COMPONENTS = [
                               },
                               "fontSizeVar": "p/font-size-400",
                               "fontWeightVar": "p/font-weight-regular",
+                              "lineHeightVar": "p/font-line-height-600",
                               "textFill": "p/color-text",
                               "contentProp": "Placeholder"
                             }
@@ -2256,6 +2283,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -2394,6 +2422,7 @@ const COMPONENTS = [
                           "fontStyle": "Medium",
                           "fontSizeVar": "imported/shared/size-13",
                           "fontWeightVar": "imported/shared/num-450",
+                          "lineHeightVar": "imported/shared/size-20",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
@@ -2487,6 +2516,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -2532,6 +2562,7 @@ const COMPONENTS = [
                               },
                               "fontSizeVar": "p/font-size-400",
                               "fontWeightVar": "p/font-weight-regular",
+                              "lineHeightVar": "p/font-line-height-600",
                               "textFill": "p/color-text",
                               "contentProp": "Placeholder"
                             }
@@ -2566,6 +2597,7 @@ const COMPONENTS = [
                               "fontStyle": "Medium",
                               "fontSizeVar": "imported/shared/size-13",
                               "fontWeightVar": "imported/shared/num-450",
+                              "lineHeightVar": "imported/shared/size-20",
                               "textFill": "imported/shared/color-616161",
                               "lineHeight": {
                                 "value": 20,
@@ -3417,6 +3449,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

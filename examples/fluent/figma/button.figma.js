@@ -56,6 +56,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -106,6 +107,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -156,6 +158,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -206,6 +209,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 16,
@@ -256,6 +260,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 16,
@@ -306,6 +311,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 16,
@@ -356,6 +362,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 22,
@@ -406,6 +413,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 22,
@@ -456,6 +464,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 22,
@@ -506,6 +515,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -556,6 +566,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -606,6 +617,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -656,6 +668,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 16,
@@ -706,6 +719,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 16,
@@ -756,6 +770,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 16,
@@ -806,6 +821,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -856,6 +872,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -906,6 +923,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -956,6 +974,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -1006,6 +1025,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -1056,6 +1076,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -1106,6 +1127,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -1156,6 +1178,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -1206,6 +1229,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -1256,6 +1280,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 22,
@@ -1306,6 +1331,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 22,
@@ -1356,6 +1382,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 22,
@@ -1406,6 +1433,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 20,
@@ -1456,6 +1484,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 20,
@@ -1506,6 +1535,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 20,
@@ -1556,6 +1586,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 16,
@@ -1606,6 +1637,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 16,
@@ -1656,6 +1688,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 16,
@@ -1706,6 +1739,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 22,
@@ -1756,6 +1790,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 22,
@@ -1806,6 +1841,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 22,
@@ -1856,6 +1892,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 20,
@@ -1906,6 +1943,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 20,
@@ -1956,6 +1994,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 20,
@@ -2006,6 +2045,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 16,
@@ -2056,6 +2096,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 16,
@@ -2106,6 +2147,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/button/root/font-size/small",
               "fontWeightVar": "imported/button/root/font-weight/small",
+              "lineHeightVar": "imported/button/root/line-height/small",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 16,
@@ -2156,6 +2198,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 22,
@@ -2206,6 +2249,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 22,
@@ -2256,6 +2300,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/large",
               "fontWeightVar": "imported/button/root/font-weight/large",
+              "lineHeightVar": "imported/button/root/line-height/large",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 22,
@@ -2308,6 +2353,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-active/secondary",
               "lineHeight": {
                 "value": 20,
@@ -2358,6 +2404,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-active/primary",
               "lineHeight": {
                 "value": 20,
@@ -2408,6 +2455,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-active/outline",
               "lineHeight": {
                 "value": 20,
@@ -2458,6 +2506,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-active/subtle",
               "lineHeight": {
                 "value": 20,
@@ -2508,6 +2557,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-active/transparent",
               "lineHeight": {
                 "value": 20,
@@ -2558,6 +2608,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-disabled",
               "lineHeight": {
                 "value": 20,
@@ -2608,6 +2659,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-disabled",
               "lineHeight": {
                 "value": 20,
@@ -2658,6 +2710,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-disabled",
               "lineHeight": {
                 "value": 20,
@@ -2708,6 +2761,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-disabled",
               "lineHeight": {
                 "value": 20,
@@ -2758,6 +2812,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-disabled",
               "lineHeight": {
                 "value": 20,
@@ -2825,6 +2880,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/secondary",
               "lineHeight": {
                 "value": 20,
@@ -2927,6 +2983,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -2994,6 +3051,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/outline",
               "lineHeight": {
                 "value": 20,
@@ -3061,6 +3119,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/subtle",
               "lineHeight": {
                 "value": 20,
@@ -3128,6 +3187,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color/transparent",
               "lineHeight": {
                 "value": 20,
@@ -3178,6 +3238,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-hover/secondary",
               "lineHeight": {
                 "value": 20,
@@ -3228,6 +3289,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-hover/primary",
               "lineHeight": {
                 "value": 20,
@@ -3278,6 +3340,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-hover/outline",
               "lineHeight": {
                 "value": 20,
@@ -3328,6 +3391,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-hover/subtle",
               "lineHeight": {
                 "value": 20,
@@ -3378,6 +3442,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/button/root/font-size/medium",
               "fontWeightVar": "imported/button/root/font-weight/medium",
+              "lineHeightVar": "imported/button/root/line-height/medium",
               "textFill": "imported/button/root/color-state-hover/transparent",
               "lineHeight": {
                 "value": 20,
@@ -4011,6 +4076,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

@@ -3209,13 +3209,11 @@ function mintTextChannels(
   const stamped = [...new Set(textOcc.map((o) => o.node.text!.fontWeightVar))];
   if (stamped.length === 1 && stamped[0] !== undefined) {
     tokens['font-weight'] = ref(stamped[0]);
-  } else if (stamped.length > 1) {
-    ctx.notes.push(
-      `${where}: the stamped weight token differs across variants (${stamped
-        .map((w) => (w === undefined ? '(none)' : `"${w}"`))
-        .join(', ')}) — one text node carries one font-weight binding, so it is NAMED, not proposed; review`,
-    );
   }
+  // >1 distinct stamp is a size-varying weight, not a contradiction — the
+  // contract binds a substituted ref and the canvas resolves it per variant.
+  // The mint machinery below rebuilds that substitution, so this falls through
+  // silently rather than reporting a healthy path as a problem.
   const weightAlreadyBound = tokens['font-weight'] !== undefined;
   if (opts.weight && !weightAlreadyBound) {
     const parsed = textOcc.map((o) => ({
@@ -3247,6 +3245,24 @@ function mintTextChannels(
     }
   }
   // line-height (dump v1.3, PIXELS only — other units were receipted at capture).
+  // The STAMPED token wins, for the same reason it does for weight: 20px is not
+  // a unique fact, so minting from the number invented a SECOND name
+  // (`imported.label.label.line-height`) for a token the corpus already carried
+  // (`imported.label.root.line-height`). Value was never the problem; identity
+  // was. One distinct stamp binds; disagreeing stamps are NAMED, not picked
+  // between; no stamp falls through to the mint below, unchanged.
+  const stampedLh = [...new Set(textOcc.map((o) => o.node.text!.lineHeightVar))];
+  if (stampedLh.length === 1 && stampedLh[0] !== undefined) {
+    tokens['line-height'] = ref(stampedLh[0]);
+    return;
+  }
+  // MORE THAN ONE distinct stamp is the NORMAL case for a size-varying
+  // channel (Button carries five, one per size), not a contradiction: the
+  // contract binds a SUBSTITUTED ref and the canvas resolves it per variant.
+  // Falling through to the mint machinery is right — it already rebuilds the
+  // substitution, and measurement confirms Badge and Button were never among
+  // the reminted rows. No note: a receipt that fires on the healthy path is
+  // noise, and noise is how a report stops being read.
   const withLh = textOcc.filter((o) => typeof o.node.text!.lineHeight === 'number');
   if (withLh.length === 0) return;
   if (withLh.length !== textOcc.length) {

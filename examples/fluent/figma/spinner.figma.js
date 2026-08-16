@@ -92,6 +92,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -176,6 +177,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -260,6 +262,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -344,6 +347,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -428,6 +432,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -512,6 +517,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -596,6 +602,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -680,6 +687,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/medium",
               "fontWeightVar": "imported/spinner/label/font-weight/medium",
+              "lineHeightVar": "imported/spinner/label/line-height/medium",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -764,6 +772,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -848,6 +857,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -932,6 +942,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -1016,6 +1027,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -1100,6 +1112,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -1184,6 +1197,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -1268,6 +1282,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -1352,6 +1367,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -1436,6 +1452,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -1520,6 +1537,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -1604,6 +1622,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -1688,6 +1707,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -1772,6 +1792,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -1856,6 +1877,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -1940,6 +1962,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -2024,6 +2047,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/tiny",
               "fontWeightVar": "imported/spinner/label/font-weight/tiny",
+              "lineHeightVar": "imported/spinner/label/line-height/tiny",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -2108,6 +2132,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -2192,6 +2217,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -2276,6 +2302,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -2360,6 +2387,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -2444,6 +2472,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -2528,6 +2557,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -2612,6 +2642,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -2696,6 +2727,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/extra-small",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-small",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -2780,6 +2812,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -2864,6 +2897,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -2948,6 +2982,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -3032,6 +3067,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 20,
@@ -3116,6 +3152,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -3200,6 +3237,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -3284,6 +3322,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -3368,6 +3407,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/spinner/label/font-size/small",
               "fontWeightVar": "imported/spinner/label/font-weight/small",
+              "lineHeightVar": "imported/spinner/label/line-height/small",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 20,
@@ -3452,6 +3492,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -3536,6 +3577,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -3620,6 +3662,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -3704,6 +3747,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -3788,6 +3832,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -3872,6 +3917,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -3956,6 +4002,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -4040,6 +4087,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/large",
               "fontWeightVar": "imported/spinner/label/font-weight/large",
+              "lineHeightVar": "imported/spinner/label/line-height/large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -4124,6 +4172,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -4208,6 +4257,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -4292,6 +4342,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -4376,6 +4427,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 22,
@@ -4460,6 +4512,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -4544,6 +4597,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -4628,6 +4682,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -4712,6 +4767,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/extra-large",
               "fontWeightVar": "imported/spinner/label/font-weight/extra-large",
+              "lineHeightVar": "imported/spinner/label/line-height/extra-large",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 22,
@@ -4796,6 +4852,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 28,
@@ -4880,6 +4937,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 28,
@@ -4964,6 +5022,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 28,
@@ -5048,6 +5107,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/primary",
               "lineHeight": {
                 "value": 28,
@@ -5132,6 +5192,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 28,
@@ -5216,6 +5277,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 28,
@@ -5300,6 +5362,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 28,
@@ -5384,6 +5447,7 @@ const COMPONENTS = [
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/spinner/label/font-size/huge",
               "fontWeightVar": "imported/spinner/label/font-weight/huge",
+              "lineHeightVar": "imported/spinner/label/line-height/huge",
               "textFill": "imported/spinner/label/color/inverted",
               "lineHeight": {
                 "value": 28,
@@ -6012,6 +6076,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

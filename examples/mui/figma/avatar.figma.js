@@ -45,6 +45,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/root/font-size",
               "fontWeightVar": "imported/avatar/root/font-weight",
+              "lineHeightVar": "imported/avatar/root/line-height",
               "textFill": "imported/avatar/root/color",
               "lineHeight": {
                 "value": 20,
@@ -85,6 +86,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/root/font-size",
               "fontWeightVar": "imported/avatar/root/font-weight",
+              "lineHeightVar": "imported/avatar/root/line-height",
               "textFill": "imported/avatar/root/color",
               "lineHeight": {
                 "value": 20,
@@ -125,6 +127,7 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "fontSizeVar": "imported/avatar/root/font-size",
               "fontWeightVar": "imported/avatar/root/font-weight",
+              "lineHeightVar": "imported/avatar/root/line-height",
               "textFill": "imported/avatar/root/color",
               "lineHeight": {
                 "value": 20,
@@ -679,6 +682,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

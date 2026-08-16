@@ -48,6 +48,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "color-text-primary",
               "lineHeight": {
                 "value": 20.0004,
@@ -91,6 +92,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/info",
               "lineHeight": {
                 "value": 20.0004,
@@ -134,6 +136,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/success",
               "lineHeight": {
                 "value": 20.0004,
@@ -177,6 +180,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/warning",
               "lineHeight": {
                 "value": 20.0004,
@@ -220,6 +224,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/error",
               "lineHeight": {
                 "value": 20.0004,
@@ -263,6 +268,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/blue",
               "lineHeight": {
                 "value": 20.0004,
@@ -306,6 +312,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/cyan",
               "lineHeight": {
                 "value": 20.0004,
@@ -349,6 +356,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/green",
               "lineHeight": {
                 "value": 20.0004,
@@ -392,6 +400,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/orange",
               "lineHeight": {
                 "value": 20.0004,
@@ -435,6 +444,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/pink",
               "lineHeight": {
                 "value": 20.0004,
@@ -478,6 +488,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/purple",
               "lineHeight": {
                 "value": 20.0004,
@@ -521,6 +532,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/red",
               "lineHeight": {
                 "value": 20.0004,
@@ -564,6 +576,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/teal",
               "lineHeight": {
                 "value": 20.0004,
@@ -607,6 +620,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
               "fontWeightVar": "imported/badge/root/font-weight",
+              "lineHeightVar": "imported/badge/root/line-height",
               "textFill": "imported/badge/root/color/yellow",
               "lineHeight": {
                 "value": 20.0004,
@@ -1112,6 +1126,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

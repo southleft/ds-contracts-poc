@@ -76,6 +76,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 20,
@@ -139,6 +140,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -218,6 +220,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 20,
@@ -281,6 +284,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -360,6 +364,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 20,
@@ -423,6 +428,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -502,6 +508,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 20,
@@ -565,6 +572,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -644,6 +652,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 22,
@@ -707,6 +716,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -786,6 +796,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/transparent",
                       "lineHeight": {
                         "value": 22,
@@ -849,6 +860,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -928,6 +940,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 20,
@@ -991,6 +1004,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -1070,6 +1084,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 20,
@@ -1133,6 +1148,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -1212,6 +1228,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 20,
@@ -1275,6 +1292,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -1354,6 +1372,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 20,
@@ -1417,6 +1436,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -1496,6 +1516,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 22,
@@ -1559,6 +1580,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -1638,6 +1660,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/subtle",
                       "lineHeight": {
                         "value": 22,
@@ -1701,6 +1724,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -1780,6 +1804,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 20,
@@ -1843,6 +1868,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -1922,6 +1948,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 20,
@@ -1985,6 +2012,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -2064,6 +2092,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 20,
@@ -2127,6 +2156,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -2206,6 +2236,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 20,
@@ -2269,6 +2300,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -2348,6 +2380,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 22,
@@ -2411,6 +2444,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -2490,6 +2524,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/subtle-circular",
                       "lineHeight": {
                         "value": 22,
@@ -2553,6 +2588,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -2632,6 +2668,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 20,
@@ -2695,6 +2732,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -2774,6 +2812,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/medium",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 20,
@@ -2837,6 +2876,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/medium",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/medium",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -2916,6 +2956,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 20,
@@ -2979,6 +3020,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -3058,6 +3100,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/small",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/small",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 20,
@@ -3121,6 +3164,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/small",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/small",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 20,
@@ -3200,6 +3244,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 22,
@@ -3263,6 +3308,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -3342,6 +3388,7 @@ const COMPONENTS = [
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "imported/tab-list/label/font-size/large",
                       "fontWeightVar": "imported/tab-list/label/font-weight",
+                      "lineHeightVar": "imported/tab-list/label/line-height/large",
                       "textFill": "imported/tab-list/label/color/filled-circular",
                       "lineHeight": {
                         "value": 22,
@@ -3405,6 +3452,7 @@ const COMPONENTS = [
                       "fontStyle": "Regular",
                       "fontSizeVar": "imported/tab-list/label-2/font-size/large",
                       "fontWeightVar": "imported/tab-list/label-2/font-weight",
+                      "lineHeightVar": "imported/tab-list/label-2/line-height/large",
                       "textFill": "imported/tab-list/label-2/color",
                       "lineHeight": {
                         "value": 22,
@@ -4023,6 +4071,7 @@ async function buildNode(spec, registry) {
     // (which deletes the key) when the contract binds no weight, so a node
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
