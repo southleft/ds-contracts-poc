@@ -27,7 +27,7 @@ Two citations carry the honest numbers and neither is optional:
 **Why this lane.** It was chosen by measurement, not preference. Flowbite
 promotes with **zero named refusals** in its minted token tree (Carbon, the
 runner-up, has 14), it carries the highest visual pass rate of any foreign lane
-(4 of 5 stems), and it is five contracts rather than ten — small enough to read
+(4 of 5 stems), and it is eight contracts rather than ten — small enough to read
 in one sitting. Its full comparison is in the receipt below.
 
 **What you need.** Node ≥ 20, a Figma account, and the Figma **desktop** app
@@ -84,9 +84,10 @@ with exit codes. The claim it exists to support:
 > the bundle a stranger builds is **byte-identical** to the one the
 > development tree builds.
 
-The sha moves whenever the component set changes — it is the value printed by
-the command above at these eight. What the receipts pin is the REPRODUCIBILITY, not the constant: during the
-kit climb components were added and removed three times and the bundle returned
+The sha moves whenever the component set changes. At the eight stems on this
+page it is `af0a5dee245f036c…` (108,557 bytes), re-run 2026-08-16. What the
+receipts pin is the REPRODUCIBILITY, not the constant: during the kit climb
+components were added and removed three times and the bundle returned
 byte-identical to `bb96f43e…` (the five-component set) every time.
 
 The bundle is a pure function of (contracts, tokens, icons) — no timestamp, no
@@ -104,12 +105,16 @@ being surprised by them is.
    `npx tsx packages/cli/src/cli.ts …`. There is *also* a published
    **`@ds-contracts/cli`**, currently **0.4.0**, while this source tree is
    `0.5.0-rc.2` — **the published CLI is behind the source.**
-   For the one command on this page that gap does not bite, and that was
-   checked rather than assumed: `npx @ds-contracts/cli@0.4.0 figma bundle …`
-   against these contracts produces a bundle **byte-identical** to the source
-   tree's (sha256 `bb96f43e…`, 92,764 bytes both ways). Pin the version if you
-   use it, and do not assume the same parity for other commands — the source is
-   ahead and nothing verifies the rest of that surface here.
+   For the one command on this page that gap did not bite when it was last
+   checked — and it was checked rather than assumed: `npx
+   @ds-contracts/cli@0.4.0 figma bundle …` produced a bundle **byte-identical**
+   to the source tree's, sha256 `bb96f43e…`, 92,764 bytes both ways. **That
+   check was made against the FIVE-stem set and has not been re-run at eight**,
+   because re-running it reaches the network for a published package, which is
+   a human step here (docs/27). Treat the parity as unverified at this set
+   size. Pin the version if you use it, and do not assume the same parity for
+   other commands — the source is ahead and nothing verifies the rest of that
+   surface here.
 2. **The plugin is not in the clone.** `playground/public/*.zip` and
    `figma-sync/plugin-dist/` are gitignored (`.gitignore:28,50`). You must run
    `npm run plugin:zip` before you have anything to import. A clean clone that
@@ -207,3 +212,45 @@ unreferenced — no node bound to them, no surviving variable aliased them — s
 nothing rendered wrong; the collection was just carrying history.
 
 Removing them is a manual step today (`FC-APPLY-TOKENS-NOT-PRUNED`).
+
+### Re-applying REWRITES a component you already have — unless you say otherwise
+
+Applying is additive across *different* components, but for the *same* one it
+is an **amend in place**. A set carrying this system's identity marker is
+reconciled — same node id, same key, same page — so a re-run keeps a designer's
+file in sync instead of littering it with copies. That is the intended
+behaviour and it is why the loop works at all.
+
+It also means **applying a bundle to a file that already carries these stems
+rewrites those pages.** If that is not what you want — a first look, a spare
+file, a run that must not touch shipped work — set the create-only flag before
+the script runs:
+
+```js
+globalThis.DS_CREATE_ONLY = true;
+```
+
+A component that already exists is then **refused by name** and nothing is
+written to it; components that do not exist yet are still created. So a
+half-populated file fills in its gaps and leaves everything else alone.
+
+Proven on `GnQnjSNBXtgtd2Ht0Hs1C8`, which already carried 5 of these 8 stems:
+Badge refused (`create-only apply: "Badge" already exists …`) with its node id,
+fingerprint, specHash and all 24 variants byte-identical afterwards, while
+Label created fresh on a new page — one run, one file, both halves.
+
+### Going the other way (canvas → code) needs a set this system drew
+
+`extract/figma/dump.plugin.js` → `npm run extract:figma -- <dump.json>` →
+`generate --target react --stories` inverts a drawn set back to a contract and
+then to code. Until 2026-08-16 that refused two of the eight stems outright:
+Badge and Button draw a **sparse** State matrix (24 rows where a full Cartesian
+is 36; 45 where it is 125, because interaction states are drawn only at the
+default size), and the reader demanded a Cartesian. The emitter now stamps the
+matrix shape it drew (`ds_contracts/statePreviewAxis`) and the reader validates
+against that declaration — still exactly, so a missing or extra row is still
+refused. Both stems now invert and generate.
+
+A set drawn by other means carries no such marker, is still held to a full
+Cartesian, and will still be refused if it is ragged. That refusal is correct:
+nothing here can invert a matrix nobody declared.

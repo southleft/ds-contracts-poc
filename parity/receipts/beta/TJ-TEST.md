@@ -261,3 +261,47 @@ correct and was left standing.
 5. No full suite was run this wave. `evals/results.json` still records the main
    run (223/225) and is untouched.
 6. Not merged, not pushed. `.agents/mailbox/` remains untracked.
+
+---
+
+## ADDENDUM 2026-08-16 — both walls above are now CLOSED
+
+The two walls this receipt named were product holes, not notes. They were
+closed after it was written; the run above is left exactly as it happened.
+
+**Wall 2 (Path A could not invert Badge or Button) — closed in `8f879e14`.**
+`State` is a Figma-surface projection of the contract's `states`, not a prop,
+and the emitter draws it SPARSELY: the base grid at `State=Default` plus one
+row per state per primary-axis value, every other axis pinned. Demanding a
+Cartesian was the reader asserting a shape the writer never claimed. The
+emitter now stamps `ds_contracts/statePreviewAxis` (the matrix it actually
+drew), dump v1.21 carries it, and exact-projection derives its expectation from
+that declaration — still requiring exact equality. `EXACT_MATRIX_RAGGED` was
+not weakened: a dropped row, an extra row, a wrong primary, a wrong pin, a
+malformed marker and an absent marker all still refuse.
+
+A second wall sat directly behind it and was closed in the same commit:
+`EXACT_SEMANTIC_PROJECTION_AMBIGUOUS` refused to promote the State axis at all.
+That refusal is right when the reader is guessing; it is not right when the set
+declares the axis itself. It now stands unless the descriptor names that exact
+axis.
+
+Re-run on sets applied for this purpose: Badge and Button both
+`propose` **exit 0** and `generate --target react --stories` **exit 0** (9
+files). Badge's proposed props are the source contract's props exactly.
+
+**Wall 1 (no non-destructive apply) — closed in `6bb874cb`.**
+`globalThis.DS_CREATE_ONLY = true` makes an already-identified set refuse by
+name instead of amending, while fresh stems still create. No second identity
+scheme — the same `resolveComponentIdentity` decides. Proven on
+`GnQnjSNBXtgtd2Ht0Hs1C8`: Badge refused with node `1:2149` byte-identical
+afterwards, Label created on a new page, 99 → 100 pages.
+
+`Y8Jhw6R49wTLuXZ0is2GmV` was still never written to.
+
+**What did NOT change.** The losses in A7 are unchanged and still real —
+`font-weight`, `width`, `margin-*` and `bottom` still do not survive the round
+trip, token identity is still destroyed where a value is re-minted, and
+`semantics.element` still collapses to `div`. Closing the two walls made the
+journey RUN on the stems it used to refuse; it did not make the inversion
+lossless.
