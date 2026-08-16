@@ -1249,6 +1249,11 @@ interface Ctx {
    *  DIFFERENT parents — legal on the canvas, refused at emit. Seeded with
    *  'root' (the root is a walked part name too). */
   partNames: Set<string>;
+  /** TRUE when the set carries this pipeline's own stamps (dump v1.21+) — i.e.
+   *  we drew it. Drawn layer names are then OUR part names and are preserved
+   *  verbatim; on a foreign set the drawn names are arbitrary and must be
+   *  sanitised into identifiers. See partKey. */
+  drawnByThisPipeline?: boolean;
   /** Figma property name → the CONTRACT's prop name, from the set's own stamp
    *  (dump v1.25). Read in preference to canonicalising the design spelling —
    *  see registerTextProp. Empty for a set this pipeline did not draw, which
@@ -5113,7 +5118,19 @@ function partKey(name: string, ctx: Ctx, where: string, parentKey: string): stri
   // `styles["alert-icon"]` rather than dot access. Punctuation that is NOT
   // safe (the owner's lorem-ipsum Dialog body, commas and periods included)
   // still falls through to camelSafe exactly as before.
-  let base = /^[A-Za-z][A-Za-z0-9-]*$/.test(name)
+  //
+  // AND ONLY FOR A SET WE DREW. A hyphen is safe in a CSS class and in
+  // `styles["alert-icon"]`, but a part key also becomes a SLOT/property name,
+  // and those must be identifiers. On a FOREIGN set the drawn names are
+  // arbitrary layer labels ("swap-slot-item-1", a lorem-ipsum sentence) and
+  // sanitising them is the whole point — the CBDS Dialog send pins exactly
+  // that. Widening the rule for everyone broke it. The stamp is the
+  // discriminator the rest of this wave already uses: our set keeps its own
+  // names, a foreign one is sanitised exactly as before.
+  const keepDrawnSpelling = ctx.drawnByThisPipeline === true
+    ? /^[A-Za-z][A-Za-z0-9-]*$/.test(name)
+    : /^[A-Za-z][A-Za-z0-9]*$/.test(name);
+  let base = keepDrawnSpelling
     ? name
     : /^[A-Za-z]/.test(camelSafe)
       ? camelSafe
@@ -7923,6 +7940,12 @@ export function proposeFromDump(
     // The set's declared prop names, shape-checked: only string→string pairs
     // survive, so a malformed stamp reads as absent and the canonicaliser runs
     // exactly as before.
+    // A set this pipeline drew carries at least one of the v1.21+ stamps.
+    drawnByThisPipeline: Boolean(
+      (set as { propNames?: unknown }).propNames ||
+        (set as { semantics?: unknown }).semantics ||
+        (set as { statePreviewAxis?: unknown }).statePreviewAxis,
+    ),
     ...(() => {
       const raw = (set as { propNames?: unknown }).propNames;
       if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return {};

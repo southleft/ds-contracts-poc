@@ -1317,7 +1317,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2512,8 +2512,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -2911,7 +2920,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -3115,7 +3125,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -3271,7 +3281,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -3463,7 +3474,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -5297,7 +5309,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -7276,7 +7288,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -8228,8 +8240,17 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -8630,7 +8651,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -8834,7 +8856,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -8990,7 +9012,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -9182,7 +9205,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -10832,7 +10856,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -12476,7 +12500,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -14314,7 +14338,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;

@@ -71,6 +71,7 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "textStyle": "control/sm",
+                  "fontWeightVar": "font/control/weight",
                   "textFill": "color/surface/foreground",
                   "fontFamily": "Inter",
                   "contentProp": "Title"
@@ -139,6 +140,7 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Medium",
                   "textStyle": "control/sm",
+                  "fontWeightVar": "font/control/weight",
                   "textFill": "color/surface/foreground",
                   "fontFamily": "Inter",
                   "contentProp": "Title"
@@ -169,6 +171,13 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "State": "state",
+      "Title": "title"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   },
   {
@@ -218,6 +227,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textStyle": "avatar/sm",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/identity/foreground",
               "fontFamily": "Inter",
               "contentProp": "Initials"
@@ -260,6 +270,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textStyle": "avatar/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/identity/foreground",
               "fontFamily": "Inter",
               "contentProp": "Initials"
@@ -268,6 +279,14 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Size": "size",
+      "Initials": "children"
+    },
+    "semantics": {
+      "element": "span",
+      "role": "img"
+    },
     "colW": 380
   },
   {
@@ -370,6 +389,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textStyle": "avatar/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/text/secondary",
               "fontFamily": "Inter",
               "contentProp": "Overflow"
@@ -378,6 +398,12 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Overflow": "overflowLabel"
+    },
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   },
   {
@@ -423,6 +449,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textStyle": "badge",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/feedback/info/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -461,6 +488,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textStyle": "badge",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/feedback/success/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -499,6 +527,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textStyle": "badge",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/feedback/warning/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -537,6 +566,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textStyle": "badge",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/feedback/danger/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -575,6 +605,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "textStyle": "badge",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/feedback/error/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -583,6 +614,14 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant",
+      "Label": "children"
+    },
+    "semantics": {
+      "element": "span",
+      "role": "status"
+    },
     "colW": 380
   },
   {
@@ -647,6 +686,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/primary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -695,6 +735,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textStyle": "control/sm",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/primary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -743,6 +784,7 @@ const COMPONENTS = [
               "fontSize": 18,
               "fontStyle": "Medium",
               "textStyle": "control/lg",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/primary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -791,6 +833,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/secondary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -839,6 +882,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textStyle": "control/sm",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/secondary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -887,6 +931,7 @@ const COMPONENTS = [
               "fontSize": 18,
               "fontStyle": "Medium",
               "textStyle": "control/lg",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/secondary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -935,6 +980,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/danger/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -983,6 +1029,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textStyle": "control/sm",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/danger/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1031,6 +1078,7 @@ const COMPONENTS = [
               "fontSize": 18,
               "fontStyle": "Medium",
               "textStyle": "control/lg",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/danger/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1079,6 +1127,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/ghost/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1127,6 +1176,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "textStyle": "control/sm",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/ghost/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1175,6 +1225,7 @@ const COMPONENTS = [
               "fontSize": 18,
               "fontStyle": "Medium",
               "textStyle": "control/lg",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/ghost/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1183,6 +1234,17 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant",
+      "Size": "size",
+      "Disabled": "disabled",
+      "Loading": "loading",
+      "Label": "children"
+    },
+    "semantics": {
+      "element": "button",
+      "role": "button"
+    },
     "stateVariants": [
       {
         "name": "Variant=Primary, Size=Medium, State=Hover",
@@ -1225,6 +1287,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/primary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1273,6 +1336,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/secondary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1321,6 +1385,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/danger/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1369,6 +1434,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/ghost/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1420,6 +1486,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/primary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1471,6 +1538,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/secondary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1522,6 +1590,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/danger/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1573,6 +1642,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/ghost/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1622,6 +1692,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/primary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1671,6 +1742,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/secondary/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1720,6 +1792,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/danger/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1769,6 +1842,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Medium",
               "textStyle": "control/md",
+              "fontWeightVar": "font/control/weight",
               "textFill": "color/action/ghost/foreground",
               "fontFamily": "Inter",
               "contentProp": "Label"
@@ -1777,6 +1851,19 @@ const COMPONENTS = [
         }
       }
     ],
+    "statePreviewAxis": {
+      "axis": "State",
+      "default": "Default",
+      "states": [
+        "Hover",
+        "Focus Visible",
+        "Disabled"
+      ],
+      "primary": "Variant",
+      "pinned": {
+        "Size": "Medium"
+      }
+    },
     "stateReactions": [
       {
         "from": "Variant=Primary, Size=Medium, State=Default",
@@ -2259,8 +2346,17 @@ function retireSlotUtility() {
   return { retired: true };
 }
 
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -2502,6 +2598,14 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
+    node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -2663,7 +2767,8 @@ async function buildNode(spec, registry) {
   if (spec.layout && spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in node && node.children &&
       (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name);
+    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
+      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
   }
   return node;
 }
@@ -2867,7 +2972,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2885,6 +2990,16 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -3014,7 +3129,8 @@ async function amendSet(set, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
       report.rebuiltVariants++;
     }
@@ -3207,7 +3323,8 @@ async function amendComponent(comp, C) {
   if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in comp && comp.children &&
       (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name);
+    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
+      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
@@ -3267,6 +3384,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -3389,6 +3536,12 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);

@@ -602,8 +602,17 @@ export interface FigmaScriptCtx extends FigmaEngineInput {
 const birthBoxRuntime = (has: boolean): string =>
   has
     ? `
-function remeasureBirthBox(node, label) {
+function remeasureBirthBox(node, label, hasW, hasH) {
   for (const axis of ['Vertical', 'Horizontal']) {
+    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
+    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
+    // — which is right for a node whose size is supposed to come from its
+    // content, and destructive for one the CONTRACT sized. A childless frame
+    // has nothing to re-measure against, so the axis hugs to 1 and stays
+    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
+    // this way (the compile receipt's pin caught it, and the pin was right).
+    if (axis === 'Horizontal' && hasW) continue;
+    if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
     try { mode = node[prop]; } catch (e) { continue; }
@@ -663,7 +672,8 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
   if (${specExpr}.layout && ${specExpr}.layout.mode !== 'GRID' &&
       'layoutSizingVertical' in ${nodeExpr} && ${nodeExpr}.children &&
       (${specExpr}.type === 'slot' || ${nodeExpr}.children.length === 0)) {
-    remeasureBirthBox(${nodeExpr}, ${specExpr}.type === 'slot' ? ${specExpr}.slotProperty : ${specExpr}.name);
+    remeasureBirthBox(${nodeExpr}, ${specExpr}.type === 'slot' ? ${specExpr}.slotProperty : ${specExpr}.name,
+      Boolean(${specExpr}.fixedWidth), Boolean(${specExpr}.fixedHeight));
   }`
     : '';
 
@@ -675,7 +685,7 @@ const birthBoxCall = (has: boolean, nodeExpr: string, specExpr: string): string 
  *  the exact-conversion wave introduced the salt in the emitted runtime only,
  *  and stored-vs-mirror equality (plugin-engine-check's own pin) failed by
  *  construction the moment the zip-stale failure in front of it was fixed. */
-export const RUNTIME_EMIT_REV = 'rt13-amend-clears-undeclared-spacing';
+export const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
 
 /** Contract → the single-component sync script text (pure). */
 export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string {
