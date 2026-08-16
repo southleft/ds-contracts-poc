@@ -335,3 +335,39 @@ still collapses to `div`, `children` still returns as `content`, `checked` is
 still an ENUM, part names are still positional, and the thumb's per-size
 20/16/24 still collapses. Those were named then and are named now; they are the
 next round, not this one.
+
+---
+
+## ADDENDUM 2026-08-16 (3) — the §A7 DECLARED table is closed
+
+The rows §A7 listed under "Declared, but still a loss" — honest, but the
+generated code was still wrong. Full working in
+[PATH-A-DECLARED.md](PATH-A-DECLARED.md).
+
+| §A7 declared row | verdict | commit |
+|---|---|---|
+| token identity remint | **RECOVERED** — `line-height` binds its source token; minted tokens 35 → 33 | `fe9249fd` |
+| part names are positional | **RECOVERED** — the names were never lost; one line in the reader renamed them | `6af78646` |
+| `semantics.element` → `div` | **RECOVERED** — Label is a `<label>`, ToggleSwitch a `<button>`, Badge a `<span>` | `91137a7a` |
+| `children` → `content` | **RECOVERED** — Alert only | `bbeeb85a` |
+| `checked` stays an ENUM | **NOT A LOSS** — the contract declares the enum | `bbeeb85a` |
+| thumb size collapsed | **NAMED** — per-variant geometry, Option B | `bbeeb85a` |
+
+Three more corrections to what §A7 claimed:
+
+- **Part names never died on the canvas.** The emitter writes `part-0`,
+  `alert-icon`, `dismiss-icon` onto the nodes and the dump reads them back
+  verbatim. `part-0` is the *contract's* own name, not a placeholder the
+  reader invented. Only `partKey` renamed them, by testing for a JS identifier
+  when the contract's rule is any string.
+- **`semantics.element` was not just defaulting, it was inventing.** Badge is a
+  `span` and came back a `button`, because a hover/active axis reads as
+  "interactive". Wrong is worse than missing.
+- **`checked` was never a loss.** The source contract declares
+  `{"enum": ["unchecked","checked"]}`; the generated union is that contract
+  rendered correctly.
+
+What did NOT change: D6 and the S3/S4 geometry rows stay named rather than
+recovered — reading per-variant geometry back is what Option B /
+`FC-GEOMETRY-EXCLUDED` excludes. Every stem still proposes and generates at
+exit 0, and `EXACT_MATRIX_RAGGED` still refuses all eight negative cases.
