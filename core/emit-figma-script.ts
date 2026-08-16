@@ -448,6 +448,25 @@ export interface ComponentData {
    *  an explicit State=Default segment. Omitted entirely when the contract
    *  does not opt in, so unchanged contracts keep a stable specHash. */
   stateVariants?: VariantSpec[];
+  /** The DECLARED shape of the sparse State matrix, stamped onto the set as
+   *  `ds_contracts/statePreviewAxis` so the design→contract inverter can hold
+   *  the drawn rows to the matrix the emitter MEANT to draw.
+   *
+   *  Without it the inverter assumed a full Cartesian and refused every
+   *  previews set this emitter produced (EXACT_MATRIX_RAGGED — Badge draws 24
+   *  where the Cartesian is 36, Button 45 where it is 125), so Path A could
+   *  not invert the two most important Flowbite stems. `pinned` is carried
+   *  EXPLICITLY rather than re-derived because the emitter pins each
+   *  non-primary axis to its contract-declared first value while the reader
+   *  sorts options alphabetically. Omitted when the contract does not opt in,
+   *  so unchanged contracts keep a stable specHash. */
+  statePreviewAxis?: {
+    axis: string;
+    default: string;
+    states: string[];
+    primary: string | null;
+    pinned: Record<string, string>;
+  };
   /** PROTOTYPE WIRING: deterministic Figma prototype reactions binding each
    *  base (State=Default) variant to its hover/active preview twin, so a
    *  generated set actually SWAPS in presentation mode. Names, never node
@@ -4320,12 +4339,28 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // independent) is multiplied — every other axis sits at its default.
   // Button (4 variants × 3 sizes, 3 states): 12 base + 4×3 = 24, not 48.
   const stateVariants: VariantSpec[] = [];
+  let statePreviewAxis: ComponentData['statePreviewAxis'];
   if (contract.figmaStatePreviews && contract.states.length > 0) {
     const overrides = root.states ?? {};
     const substProps = statePreviewSubstProps(contract); // validated: ≤1
     const primaryIdx = Math.max(0, axes.findIndex((a) => substProps.includes(a.prop.name)));
     const primary = axes[primaryIdx] as (typeof axes)[number] | undefined;
     const primaryValues = primary ? primary.values : [null];
+    // The descriptor is written from the SAME primaryIdx/values[0] rule the
+    // loop below draws with, so the two can never disagree.
+    const figmaLabel = (a: (typeof axes)[number], value: string) =>
+      a.prop.bindings.figma.values?.[value] ?? value;
+    statePreviewAxis = {
+      axis: STATE_PREVIEW_PROPERTY,
+      default: STATE_PREVIEW_DEFAULT,
+      states: contract.states.map((s) => statePreviewLabel(s)),
+      primary: primary?.prop.bindings.figma.property ?? null,
+      pinned: Object.fromEntries(
+        axes
+          .filter((_, i) => i !== primaryIdx || !primary)
+          .map((a) => [a.prop.bindings.figma.property, figmaLabel(a, a.values[0]!)]),
+      ),
+    };
     // Base grid columns = ordered cartesian of axes 1..n; preview variants
     // occupy appended columns so the grid never collides.
     const baseColsN = axes.slice(1).reduce((n, a) => n * a.values.length, 1);
@@ -4589,6 +4624,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     fontStyles: [...fontStyles],
     variants,
     ...(stateVariants.length > 0 ? { stateVariants } : {}),
+    ...(stateVariants.length > 0 && statePreviewAxis ? { statePreviewAxis } : {}),
     ...(stateReactions.length > 0 ? { stateReactions } : {}),
     colW: Math.max(
       380,
@@ -6577,6 +6613,12 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -7035,6 +7077,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);

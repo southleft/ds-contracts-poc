@@ -1319,6 +1319,12 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -1783,6 +1789,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -3047,6 +3055,12 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -3549,6 +3563,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -4216,6 +4232,16 @@ const COMPONENTS = [
         }
       }
     ],
+    "statePreviewAxis": {
+      "axis": "State",
+      "default": "Default",
+      "states": [
+        "Focus Visible",
+        "Hover"
+      ],
+      "primary": "Variant",
+      "pinned": {}
+    },
     "stateReactions": [
       {
         "from": "Variant=Secondary, State=Default",
@@ -5134,6 +5160,12 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -5590,6 +5622,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -7031,6 +7065,12 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -7487,6 +7527,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -8529,6 +8571,12 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -9031,6 +9079,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -10441,6 +10491,12 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -10897,6 +10953,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -12025,6 +12083,12 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -12481,6 +12545,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -12861,6 +12927,16 @@ const COMPONENTS = [
         }
       }
     ],
+    "statePreviewAxis": {
+      "axis": "State",
+      "default": "Default",
+      "states": [
+        "Focus Visible",
+        "Hover"
+      ],
+      "primary": "Variant",
+      "pinned": {}
+    },
     "stateReactions": [
       {
         "from": "Variant=Xs, State=Default",
@@ -13774,6 +13850,12 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
+  // return so a set that skips as unchanged still carries a current marker.
+  // Written as '' (which deletes the key) when the contract no longer opts
+  // into previews — a stale descriptor would describe a matrix nobody drew.
+  set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -14230,6 +14312,8 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);

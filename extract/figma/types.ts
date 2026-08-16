@@ -466,6 +466,20 @@ export interface DumpSet {
    *  New exact consumers prefer this field. Absence means the producer did
    *  not capture structured metadata, so exactness is unverified. */
   propertyDefinitions?: Record<string, DumpPropertyDefinition>;
+  /** The emitter's DECLARED sparse State-preview matrix (dump v1.21,
+   *  additive), read from `ds_contracts/statePreviewAxis` on the set. A
+   *  figmaStatePreviews set draws Cartesian(axes)×{Default} PLUS one row per
+   *  state per primary value, so without this the exact reader held it to a
+   *  full cartesian and refused sets this repo itself drew. Absence means the
+   *  set was not drawn by this pipeline (or predates v1.21) and the full
+   *  cartesian remains the expectation. */
+  statePreviewAxis?: {
+    axis: string;
+    default: string;
+    states: string[];
+    primary: string | null;
+    pinned: Record<string, string>;
+  };
   /** INSTANCE_SWAP property definitions' preferredValues (dump v1.5,
    *  additive), keyed by property name with the "#id" suffix stripped —
    *  the same spelling propRefs.mainComponent carries. Absence in older

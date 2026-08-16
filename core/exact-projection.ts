@@ -38,6 +38,10 @@ export interface ExactDumpSet {
     string,
     ExactPropertyDefinition | unknown
   > | null;
+  /** The emitter's DECLARED sparse state-preview shape, stamped on the set and
+   *  carried by the dump. Absent → the matrix is held to the full Cartesian.
+   *  See StatePreviewAxisDescriptor. */
+  statePreviewAxis?: unknown;
   variants: ExactVariantRow[];
 }
 
@@ -123,6 +127,141 @@ const cartesianTuples = (axes: readonly Axis[]): string[] => {
       ),
     )
     .sort();
+};
+
+/** THE SPARSE STATE-PREVIEW AXIS — why a full Cartesian is the WRONG expectation
+ *  for a set this repo's own emitter produced.
+ *
+ *  `figmaStatePreviews` sets carry a `State` axis that is NOT a contract prop:
+ *  it is a Figma-surface projection of the contract's `states`. The emitter
+ *  (core/emit-figma-script.ts, the `stateVariants` loop) draws
+ *
+ *      Cartesian(real axes) × {State=Default}                       the base grid
+ *    ∪ { primary=v, every other axis pinned to its FIRST value, State=s }
+ *
+ * — one preview row per state per PRIMARY-axis value, because a state override
+ *  only ever substitutes one enum prop (statePreviewSubstProps is validated at
+ *  ≤1). Badge draws 12 + 2×6 = 24 where the Cartesian is 6×2×3 = 36; Button
+ *  draws 25 + 4×5 = 45 where the Cartesian is 125.
+ *
+ *  So the matrix is sparse BY CONSTRUCTION, and demanding a Cartesian made the
+ *  emitter and the inverter disagree about sets the emitter itself had just
+ *  drawn — Path A refused Badge and Button outright.
+ *
+ *  This does NOT relax EXACT_MATRIX_RAGGED. The expectation becomes DECLARED
+ *  rather than assumed: the emitter stamps the descriptor below onto the set,
+ *  the dump carries it, and the matrix must still equal the derived set
+ *  EXACTLY — no missing row, no extra row. A set with no descriptor is still
+ *  held to the full Cartesian, and a descriptor that does not agree with the
+ *  axes it names is IGNORED (falling back to the Cartesian, which then refuses)
+ *  rather than trusted — a marker must never be able to invent a matrix. */
+export interface StatePreviewAxisDescriptor {
+  /** Figma property name of the preview axis (always "State" today). */
+  axis: string;
+  /** The value every base-grid row carries ("Default"). */
+  default: string;
+  /** The non-default preview values, i.e. the contract's states. */
+  states: readonly string[];
+  /** Figma property name of the axis preview rows multiply, or null when the
+   *  state overrides are variant-independent and previews attach to one cell. */
+  primary: string | null;
+  /** Every OTHER real axis, pinned to the value the emitter held it at. This
+   *  is carried explicitly and never re-derived: the emitter pins each axis to
+   *  its CONTRACT-DECLARED first value, while readAxes sorts options
+   *  alphabetically, so `options[0]` is a different value in general (Badge's
+   *  Size declares [Xs, Sm] and sorts to [Sm, Xs]). Guessing it here would
+   *  silently expect the wrong 12 rows. */
+  pinned: Readonly<Record<string, string>>;
+}
+
+const readStatePreviewAxis = (
+  value: unknown,
+): StatePreviewAxisDescriptor | null => {
+  if (!isRecord(value)) return null;
+  const axis = value.axis;
+  const dflt = value.default;
+  const states = value.states;
+  const primary = value.primary ?? null;
+  if (typeof axis !== "string" || axis.length === 0) return null;
+  if (typeof dflt !== "string" || dflt.length === 0) return null;
+  if (!Array.isArray(states) || states.length === 0) return null;
+  if (!states.every((s) => typeof s === "string" && s.length > 0)) return null;
+  if (primary !== null && typeof primary !== "string") return null;
+  const pinned = value.pinned ?? {};
+  if (!isRecord(pinned)) return null;
+  if (!Object.values(pinned).every((v) => typeof v === "string")) return null;
+  return {
+    axis,
+    default: dflt,
+    states: states as readonly string[],
+    primary: primary as string | null,
+    pinned: pinned as Record<string, string>,
+  };
+};
+
+/** Expected tuples for a DECLARED sparse state-preview matrix, or null when the
+ *  descriptor does not agree with the axes actually present (ignored, never
+ *  trusted). */
+const statePreviewTuples = (
+  axes: readonly Axis[],
+  d: StatePreviewAxisDescriptor,
+): string[] | null => {
+  const names = axes.map((a) => a.name);
+  const stateAxis = axes.find((a) => a.name === d.axis);
+  if (!stateAxis) return null;
+  const rest = axes.filter((a) => a.name !== d.axis);
+  // Every value the descriptor names must really be an option on that axis,
+  // and the axis must carry exactly default + the declared states.
+  const declared = [d.default, ...d.states];
+  if (stateAxis.options.length !== declared.length) return null;
+  if (!declared.every((v) => stateAxis.options.includes(v))) return null;
+  if (new Set(declared).size !== declared.length) return null;
+  const primaryAxis =
+    d.primary === null ? null : rest.find((a) => a.name === d.primary);
+  if (d.primary !== null && !primaryAxis) return null;
+  // `pinned` must name EXACTLY the non-primary real axes, each at a value that
+  // axis really offers. Anything else and the descriptor does not describe this
+  // set — ignore it rather than expect a matrix nobody drew.
+  const pinnable = rest
+    .filter((a) => !primaryAxis || a.name !== primaryAxis.name)
+    .map((a) => a.name)
+    .sort();
+  const pinnedKeys = Object.keys(d.pinned).sort();
+  if (pinnedKeys.length !== pinnable.length) return null;
+  if (!pinnedKeys.every((k, i) => k === pinnable[i])) return null;
+  for (const [name, value] of Object.entries(d.pinned)) {
+    const axis = rest.find((a) => a.name === name);
+    if (!axis || !axis.options.includes(value)) return null;
+  }
+
+  const out: string[] = [];
+  // 1. the base grid — the full Cartesian of the real axes at State=default
+  let base: Record<string, string>[] = [{}];
+  for (const axis of rest) {
+    base = base.flatMap((row) =>
+      axis.options.map((option) => ({ ...row, [axis.name]: option })),
+    );
+  }
+  for (const row of base) {
+    out.push(canonicalTuple(names, { ...row, [d.axis]: d.default }));
+  }
+  // 2. the preview rows — primary varies, every other real axis pinned FIRST
+  const primaryValues = primaryAxis ? primaryAxis.options : [null];
+  for (const state of d.states) {
+    for (const value of primaryValues) {
+      const row: Record<string, string> = { [d.axis]: state };
+      for (const axis of rest) {
+        row[axis.name] =
+          primaryAxis && axis.name === primaryAxis.name
+            ? (value as string)
+            : d.pinned[axis.name]!;
+      }
+      out.push(canonicalTuple(names, row));
+    }
+  }
+  // A descriptor that produces duplicate rows is self-contradictory: ignore it.
+  if (new Set(out).size !== out.length) return null;
+  return out.sort();
 };
 
 const definitionRefusal = (message: string): ExactProjectionRefusal => ({
@@ -392,7 +531,14 @@ export function validateExactVariantProjection(
     ]);
   }
 
-  const expectedTuples = cartesianTuples(axes);
+  // A DECLARED sparse matrix (figmaStatePreviews) is validated against the
+  // shape the emitter says it drew; everything else against the full Cartesian.
+  // An unreadable or disagreeing descriptor falls through to the Cartesian —
+  // fail-closed, so a marker can never widen what counts as exact.
+  const declaredSparse = readStatePreviewAxis(set.statePreviewAxis);
+  const expectedTuples =
+    (declaredSparse && statePreviewTuples(axes, declaredSparse)) ??
+    cartesianTuples(axes);
   const expectedSet = new Set(expectedTuples);
   const source = checkRows(set.variants, axes, "source", standaloneWithoutAxes);
   if (source.refusals.length > 0) return refused(source.refusals);

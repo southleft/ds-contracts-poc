@@ -1010,6 +1010,37 @@ export function assertExactProjection<T extends ExactVerifiedStatus>(
   );
 }
 
+/** Read the set's declared sparse State-preview shape. Shape-checked here and
+ *  re-validated against the real axes by core/exact-projection.ts; anything
+ *  malformed reads as absent, so a bad marker can only make the pipeline
+ *  STRICTER (back to demanding a full cartesian), never looser. */
+function readDeclaredStatePreviewAxis(set: { statePreviewAxis?: unknown }): {
+  axis: string;
+  default: string;
+  states: readonly string[];
+  primary: string | null;
+  pinned: Readonly<Record<string, string>>;
+} | null {
+  const v = (set as { statePreviewAxis?: unknown }).statePreviewAxis;
+  if (v === null || typeof v !== 'object' || Array.isArray(v)) return null;
+  const r = v as Record<string, unknown>;
+  const pinned = r.pinned ?? {};
+  if (typeof r.axis !== 'string' || !r.axis) return null;
+  if (typeof r.default !== 'string' || !r.default) return null;
+  if (!Array.isArray(r.states) || r.states.length === 0) return null;
+  if (!r.states.every((s) => typeof s === 'string' && s)) return null;
+  if (r.primary !== null && r.primary !== undefined && typeof r.primary !== 'string') return null;
+  if (pinned === null || typeof pinned !== 'object' || Array.isArray(pinned)) return null;
+  if (!Object.values(pinned as Record<string, unknown>).every((x) => typeof x === 'string')) return null;
+  return {
+    axis: r.axis,
+    default: r.default,
+    states: r.states as string[],
+    primary: (r.primary as string | undefined) ?? null,
+    pinned: pinned as Record<string, string>,
+  };
+}
+
 const semanticProjectionRefusal = (
   projection: ExactProjectionResult,
   axis: Axis,
@@ -1024,7 +1055,16 @@ const semanticProjectionRefusal = (
 
 /** Reconstruct the rows the proposed contract would emit using only its
  *  Figma VARIANT bindings. This deliberately does not inspect variant names. */
-function exactRowsFromProposedContract(contract: Record<string, unknown>): ExactVariantRow[] {
+function exactRowsFromProposedContract(
+  contract: Record<string, unknown>,
+  descriptor?: {
+    axis: string;
+    default: string;
+    states: readonly string[];
+    primary: string | null;
+    pinned: Readonly<Record<string, string>>;
+  } | null,
+): ExactVariantRow[] {
   const props = Array.isArray(contract.props) ? contract.props : [];
   const axes: Array<{ property: string; values: string[] }> = [];
   for (const raw of props) {
@@ -1045,6 +1085,52 @@ function exactRowsFromProposedContract(contract: Record<string, unknown>): Exact
     tuples = tuples.flatMap((tuple) =>
       axis.values.map((value) => ({ ...tuple, [axis.property]: value })),
     );
+  }
+
+  // A promoted contract re-emits the STATE PREVIEW axis, so the rows it would
+  // draw are NOT this bare cartesian — they are the sparse matrix
+  // withStateAxis builds: this grid at State=Default, plus one row per state
+  // per PRIMARY value with every other axis pinned. Modelling the cartesian
+  // alone made a faithful promotion look like a 12-row answer to a 24-row
+  // set, which is the second half of the emitter/inverter disagreement.
+  //
+  // The shape comes from the SET's own declaration, and this expansion only
+  // runs when the proposed contract actually opted back in AND its promoted
+  // states match the declared ones — a proposal that drops a state falls
+  // through to the bare cartesian and is refused, never silently accepted.
+  const sparse = descriptor;
+  if (sparse && contract.figmaStatePreviews === true) {
+    const contractStates = Array.isArray(contract.states)
+      ? (contract.states as unknown[]).filter((s): s is string => typeof s === 'string')
+      : [];
+    const declared = [...sparse.states].sort();
+    const fromContract = contractStates.map((s) => statePreviewLabel(s)).sort();
+    const covers = declared.every((s) => fromContract.includes(s));
+    const primaryAxis = axes.find((a) => a.property === sparse.primary);
+    const pinnedOk = Object.entries(sparse.pinned).every(([property, value]) => {
+      const axis = axes.find((a) => a.property === property);
+      return axis ? axis.values.includes(value) : false;
+    });
+    if (covers && pinnedOk && (sparse.primary === null || primaryAxis)) {
+      const rows: Record<string, string>[] = tuples.map((t) => ({
+        ...t,
+        [sparse.axis]: sparse.default,
+      }));
+      const primaryValues = primaryAxis ? primaryAxis.values : [null];
+      for (const state of sparse.states) {
+        for (const value of primaryValues) {
+          const row: Record<string, string> = { [sparse.axis]: state };
+          for (const axis of axes) {
+            row[axis.property] =
+              primaryAxis && axis.property === primaryAxis.property
+                ? (value as string)
+                : sparse.pinned[axis.property]!;
+          }
+          rows.push(row);
+        }
+      }
+      return rows.map((variantProperties) => ({ variantProperties }));
+    }
   }
   return tuples.map((variantProperties) => ({ variantProperties }));
 }
@@ -7539,6 +7625,12 @@ export function proposeFromDump(
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
   const sourceProjection = validateExactVariantProjection(set);
+  /** The emitter's DECLARED sparse State matrix, carried by the dump (v1.21).
+   *  Present only for sets this pipeline drew with figmaStatePreviews on, and
+   *  only trusted where it agrees with the axes — see
+   *  core/exact-projection.ts. It is what makes promoting the State axis an
+   *  inversion of a declared rule instead of a guess about someone's API. */
+  const declaredSparseAxis = readDeclaredStatePreviewAxis(set);
   // Exact mode fails closed on unstructured/ragged variant matrices.
   // Reviewable-inversion may continue without structured definitions
   // (legacy name-based path) — but MUST still refuse when structured
@@ -7623,7 +7715,16 @@ export function proposeFromDump(
       );
       statePromo = null;
     } else {
-      if (projectionMode === 'exact') {
+      // Exact normally refuses to promote a variant axis to interaction-state
+      // semantics: it cannot tell a generator-emitted preview axis from a real
+      // API enum, and guessing changes the authoritative projection. When the
+      // SET declares this axis as its state-preview axis, that ambiguity is
+      // gone — the promotion is reading back a rule this pipeline wrote, and
+      // the returned rows are re-checked against the declared matrix below.
+      // An absent, malformed, or disagreeing marker leaves the refusal armed.
+      const declaredThisAxis =
+        declaredSparseAxis !== null && declaredSparseAxis.axis === promo.axis.property;
+      if (projectionMode === 'exact' && !declaredThisAxis) {
         semanticProjectionRefusal(sourceProjection, promo.axis, 'interaction-state');
       }
       const strip = (v: DumpNode): DumpNode => ({
@@ -8473,13 +8574,13 @@ export function proposeFromDump(
   let projection: ExactProjectionResult;
   if (projectionMode === 'exact') {
     projection = assertExactProjection(
-      validateExactVariantProjection(set, exactRowsFromProposedContract(contract)),
+      validateExactVariantProjection(set, exactRowsFromProposedContract(contract, declaredSparseAxis)),
       'verified-exact',
     );
   } else if (sourceProjection.status === 'source-matrix-verified') {
     const returned = validateExactVariantProjection(
       set,
-      exactRowsFromProposedContract(contract),
+      exactRowsFromProposedContract(contract, declaredSparseAxis),
     );
     projection =
       returned.status === 'verified-exact'

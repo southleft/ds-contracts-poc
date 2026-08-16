@@ -1048,8 +1048,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.20) for design→contract proposal.',
-    dumpVersion: '1.20',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.21) for design→contract proposal.',
+    dumpVersion: '1.21',
   },
 };
 dumps._degradations = degradations;
@@ -1068,6 +1068,17 @@ for (const page of figma.root.children) {
     const defs = dumpPropertyDefinitions(node);
     dumps[node.name] = {
       setName: node.name,
+      // dump v1.21: the emitter's DECLARED sparse State matrix. A previews set
+      // draws Cartesian(axes)×{Default} PLUS one row per state per primary
+      // value, so holding it to a full Cartesian refused sets this repo drew
+      // itself (Badge 24 vs 36, Button 45 vs 125). Carried verbatim; the
+      // reader validates it against the axes and IGNORES a marker that does
+      // not agree, so this can never widen what counts as exact.
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'statePreviewAxis');
+        if (!raw) return {};
+        try { return { statePreviewAxis: JSON.parse(raw) }; } catch (e) { return {}; }
+      })(),
       type: node.type,
       nodeId: node.id,
       key: node.key,
