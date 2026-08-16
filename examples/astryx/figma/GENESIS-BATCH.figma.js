@@ -1835,6 +1835,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -4045,6 +4075,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -6125,6 +6185,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -8197,6 +8287,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -9804,6 +9924,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -11762,6 +11912,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -14529,6 +14709,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -16743,6 +16953,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -19012,6 +19252,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -21695,6 +21965,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -23128,6 +23428,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -24905,6 +25235,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
@@ -26391,6 +26751,36 @@ async function syncOne(C) {
     'Sync target "' + C.setName + '"',
     true,
   );
+  // CREATE-ONLY APPLY DOOR. Amend-in-place is the product — it is how a
+  // designer's file stays in sync without losing node ids or keys — but it
+  // means "apply this bundle" on a file that already carries these stems
+  // REWRITES them. A first look, a spare file, or any run that must not touch
+  // shipped pages needs a door that cannot write over existing work.
+  //
+  // Set globalThis.DS_CREATE_ONLY = true before running this script and an
+  // already-identified set is REFUSED BY NAME instead of amended: nothing is
+  // written to it, not even the identity re-stamp below. Fresh stems on the
+  // same file still create normally, so a partially-populated file fills in
+  // its gaps without disturbing what is already there.
+  //
+  // This deliberately adds NO second identity scheme: the same
+  // resolveComponentIdentity decides what "already exists" means, so the door
+  // can never adopt a node the amend path would have refused.
+  const DS_CREATE_ONLY =
+    typeof globalThis !== 'undefined' && globalThis.DS_CREATE_ONLY === true;
+  if (existing && DS_CREATE_ONLY) {
+    return {
+      name: C.setName,
+      contractId: C.contractId,
+      skipped: true,
+      createOnly: true,
+      reason: 'create-only apply: "' + C.setName + '" already exists on this file (' +
+        existing.type + ' ' + existing.id + ') — refusing to amend it. Re-run without ' +
+        'DS_CREATE_ONLY to sync it in place, or apply to a file that does not carry it.',
+      nodeId: existing.id,
+      key: existing.key,
+    };
+  }
   if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
